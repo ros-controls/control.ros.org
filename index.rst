@@ -59,12 +59,10 @@ The method can access the latest hardware states and enable the controller to wr
 User Interfaces
 ---------------
 Users interact with the ros2_control framework using `Controller Manager`_'s services.
-Those can be used directly or through the "cli"-interface (base command: ``ros2 control``).
-The "cli"-interface is more user-friendly for direct interaction, i.e., outside of a node.
-
 For a list of services and their definitions, check the ``srv`` folder in the `controller_manager_msgs`_ package.
 
-For the description of the "cli"-interface, see the ``README.md`` file of the `ros2controlcli`_ package.
+While service calls can be used directly from the command line or via nodes, there exists a user-friendly `Command Line Interface` (CLI) which integrates with the `ros2 cli`. This supports auto-complete and has a range of common commands available. The base command is ``ros2 control``.
+For the description of our CLI capabilities, see the ``README.md`` file of the `ros2controlcli`_ package.
 
 
 Hardware Components
@@ -228,11 +226,11 @@ RobotHardware to Components
    #. Define interfaces to and from your hardware using ``export_*_interfaces`` functions.
       The names are ``<joint>/<interface>`` (e.g., ``joint_a2/position``).
       This can be extracted from the `HardwareInfo`_ structure or be hard-coded if sensible.
-   #. Implement ``start`` and ``stop`` methods for your hardware.
+   #. Implement ``start()`` and ``stop()`` methods for your hardware.
       This usually includes changing the hardware state to receive commands or set it into a safe state before interrupting the command stream.
       It can also include starting and stopping communication.
-   #. Implement `read` and `write` methods to exchange commands with the hardware.
-      This method is equivalent to those from `RobotHW`-class in ROS1.
+   #. Implement ``read()`` and ``write()`` methods to exchange commands with the hardware.
+      This method is equivalent to those from ``RobotHW``-class in ROS1.
    #. Do not forget the ``PLUGINLIB_EXPORT_CLASS`` macro at the end of the .cpp file.
 #. Create .xml library description for the pluginlib, for example see `RRBotSystemPositionOnlyHardware <https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_hardware/ros2_control_demo_hardware.xml>`_.
 
@@ -245,8 +243,7 @@ The real-time critical methods are marked as such.
 #. Implement `ControllerInterface`_ class as follows:
 
    #. If there are any member variables, initialized those in the constructor.
-   #. In the ``init()`` method, first call ``ControllerInterface::init()`` to initialize lifecycle of the controller.
-      Then declare all parameters defining their default values.
+   #. In the ``init()`` method, first call ``ControllerInterface::init()`` to initialize the lifecycle of the controller. Following this, declare all parameters defining their default values.
    #. Implement the ``state_interface_configuration()`` and ``command_interface_configuration()`` methods.
    #. Design the ``update()`` function for the controller. (**real-time**)
    #. Add the required lifecycle management methods (others are optional):
