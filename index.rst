@@ -245,15 +245,15 @@ The real-time critical methods are marked as such.
 #. Implement `ControllerInterface`_ class as follows:
 
    #. If there are any member variables, initialized those in the constructor.
-   #. In the `init` method, first call ``ControllerInterface::init`` initialize lifecycle of the controller.
+   #. In the ``init()`` method, first call ``ControllerInterface::init()`` to initialize lifecycle of the controller.
       Then declare all parameters defining their default values.
    #. Implement the ``state_interface_configuration()`` and ``command_interface_configuration()`` methods.
-   #. Implement ``update()`` function for the controller. (**real-time**)
-   #. Then implement required lifecycle methods (others are optional):
-      * ``on_configure`` - reads parameters and configures controller.
-      * ``on_activate`` - called when controller is activated (started) (**real-time**)
-      * ``on_deactivate`` - called when controller is deactivated (stopped) (**real-time**)
-   #. Do not forget ``PLUGINLIB_EXPORT_CLASS`` macro at the end of the .cpp file.
+   #. Design the ``update()`` function for the controller. (**real-time**)
+   #. Add the required lifecycle management methods (others are optional):
+         * ``on_configure()`` - reads parameters and configures controller.
+         * ``on_activate()`` - called when controller is activated (started) (**real-time**)
+         * ``on_deactivate()`` - called when controller is deactivated (stopped) (**real-time**)
+   #. Finally, do not forget to add the ``PLUGINLIB_EXPORT_CLASS`` macro at the end of the .cpp file.
 #. Create .xml library description for the pluginlib, for example see `JointTrajectoryController <https://github.com/ros-controls/ros2_controllers/blob/master/joint_trajectory_controller/joint_trajectory_plugin.xml>`_.
 
 
