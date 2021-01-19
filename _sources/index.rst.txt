@@ -17,8 +17,8 @@ If you are not familiar with the control theory, please get some idea about it (
 
 Overview
 ========
-The ros2_control framework's source can be found in `ros-controlls/ros2_control`_ and `ros-controls/ros2_controllers`_ GitHub-repositories.
-The following figure shows the Architecture of the ros2_control framework.
+The ros2_control framework's source can be found in `ros2_control`_ and `ros2_controllers`_ GitHub-repositories.
+The following figure shows the architecture of the ros2_control framework.
 
 |ros2_control_architecture|
 
@@ -46,11 +46,12 @@ This abstraction provided by RM enables re-usability of implemented hardware com
 In the control loop execution, the RM's ``read()`` and ``write()`` methods deal with communication to the hardware components.
 
 .. _overview-controllers:
+
 Controllers
 -----------
 The controllers in the ros2_control framework have the same functionality as defined in the control theory. They compare the reference value with the measured output and, based on this error, calculate a system's input (for more details, visit `Wikipedia <https://en.wikipedia.org/wiki/Control_theory>`_).
-The controlles are objects derived from `ControllerInterface`_ (``controller_interface`` package in `ros-controls/ros2_control`_) and exported as plugins using ``pluginlib``-library.
-For example of on controller check `ForwardCommandController implementation`_ in the `ros-controls/ros2_controllers`_ repository.
+The controlles are objects derived from `ControllerInterface`_ (``controller_interface`` package in `ros2_control`_) and exported as plugins using ``pluginlib``-library.
+For example of on controller check `ForwardCommandController implementation`_ in the `ros2_controllers`_ repository.
 The controllers' lifecycle is based on the `LifecycleNode-Class`_ implementing the state machine as described in the `Node Lifecycle Design`_ document.
 
 When executing the control-loop ``update()`` method is called.
@@ -59,12 +60,10 @@ The method can access the latest hardware states and enable the controller to wr
 User Interfaces
 ---------------
 Users interact with the ros2_control framework using `Controller Manager`_'s services.
-Those can be used directly or through the "cli"-interface (base command: ``ros2 control``).
-The "cli"-interface is more user-friendly for direct interaction, i.e., outside of a node.
-
 For a list of services and their definitions, check the ``srv`` folder in the `controller_manager_msgs`_ package.
 
-For the description of the "cli"-interface, see the ``README.md`` file of the `ros2controlcli`_ package.
+While service calls can be used directly from the command line or via nodes, there exists a user-friendly ``Command Line Interface`` (CLI) which integrates with the ``ros2 cli``. This supports auto-complete and has a range of common commands available. The base command is ``ros2 control``.
+For the description of our CLI capabilities, see the ``README.md`` file of the `ros2controlcli`_ package.
 
 
 Hardware Components
@@ -100,7 +99,7 @@ Hardware Description in URDF
 The ros2_control framework uses the ``<ros2_control>``-tag in the robot's URDF file to describe its components, i.e., the hardware setup.
 The chosen structure enables tracking together multiple `xacro`-macros into one without any changes.
 The example hereunder shows a position-controlled robot with 2-DOF (RRBot), an external 1-DOF force-torque sensor, and an externally controlled 1-DOF parallel gripper as its end-effector.
-For more examples and detailed explanations, check `ros-controls/ros2_control_demos`_ repository and `ROS2 Control Components URDF Examples design document`_.
+For more examples and detailed explanations, check `ros2_control_demos`_ repository and `ROS2 Control Components URDF Examples design document`_.
 
 .. code:: xml
 
@@ -159,9 +158,9 @@ Running the Framework for Your Robot
 To run the ros2_control framework, do the following.
 The example files can be found in the `ros2_control_demos`_ repository.
 
-#. Create a YAML  file with the configuration of the controller manager and controllers. (`Example for RRBot <https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_robot/controllers/rrbot_forward_controller_position.yaml>`_)
+#. Create a YAML  file with the configuration of the controller manager and controllers. (`Example configuration for RRBot <https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_robot/controllers/rrbot_forward_controller_position.yaml>`_)
 #. Extend the robot's URDF description with needed ``<ros2_control>`` tags.
-   It is recommended to use macro files instead of pure URDF. (`Example for RRBot <https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_robot/description/rrbot_system_position_only.urdf.xacro>`_)
+   It is recommended to use macro files instead of pure URDF. (`Example URDF for RRBot <https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_robot/description/rrbot_system_position_only.urdf.xacro>`_)
 #. Create a launch file to start the node with `Controller Manager`_.
    You can use a default `ros2_control node`_ (recommended) or integrate the controller manager in your software stack.
    (`Example launch file for RRBot <https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_robot/launch/rrbot_system_position_only.launch.py>`_)
@@ -198,9 +197,9 @@ Section `Hardware Components <#hardware-components>`__ describes this in detail.
 Hardware Interfaces
 -------------------
 
-The ros_control allows only three types of interfaces (joints), i.e., ``position``, ``velocity``, and ``effort``. The ``RobotHW`` class makes it very hard to use any other data to control the robot.
+The ros_control framework allows only three types of interfaces (joints), i.e., ``position``, ``velocity``, and ``effort``. The ``RobotHW`` class makes it very hard to use any other data to control the robot.
 
-The ros2_control does not mandate a fixed set of interface types, but they are defined as strings in `hardware's description <#hardware-description-in-urdf>`__.
+The ros2_control approach does not enforce a fixed set of interface types, but they are defined as strings in `hardware's description <#hardware-description-in-urdf>`__.
 To ensure compatibility of standard controllers, standard interfaces are defined as constants in `hardware_interface package <https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/include/hardware_interface/types/hardware_interface_type_values.hpp>`__.
 
 Controller's Access to Hardware
@@ -218,7 +217,7 @@ Migration Guide to ros2_control
 RobotHardware to Components
 ---------------------------
 #. The implementation of ``RobotHW`` is not used anymore.
-   This should be migrated to SystemInterface`_ class or, for more granularity, `SensorInterface`_ and `ActuatorInterface`_.
+   This should be migrated to `SystemInterface`_ class or, for more granularity, `SensorInterface`_ and `ActuatorInterface`_.
    See the above description of "Hardware Components" to choose a suitable strategy.
 #. Decide which component type is suitable for your case. Maybe it makes sense to separate ``RobotHW`` into multiple components.
 #. Implement `ActuatorInterface`_, `SensorInterface`_ or `SystemInterface`_ classes as follows:
@@ -228,11 +227,11 @@ RobotHardware to Components
    #. Define interfaces to and from your hardware using ``export_*_interfaces`` functions.
       The names are ``<joint>/<interface>`` (e.g., ``joint_a2/position``).
       This can be extracted from the `HardwareInfo`_ structure or be hard-coded if sensible.
-   #. Implement ``start`` and ``stop`` methods for your hardware.
+   #. Implement ``start()`` and ``stop()`` methods for your hardware.
       This usually includes changing the hardware state to receive commands or set it into a safe state before interrupting the command stream.
       It can also include starting and stopping communication.
-   #. Implement `read` and `write` methods to exchange commands with the hardware.
-      This method is equivalent to those from `ŔobotHW`-class in ROS1.
+   #. Implement ``read()`` and ``write()`` methods to exchange commands with the hardware.
+      This method is equivalent to those from ``RobotHW``-class in ROS1.
    #. Do not forget the ``PLUGINLIB_EXPORT_CLASS`` macro at the end of the .cpp file.
 #. Create .xml library description for the pluginlib, for example see `RRBotSystemPositionOnlyHardware <https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_hardware/ros2_control_demo_hardware.xml>`_.
 
@@ -245,22 +244,21 @@ The real-time critical methods are marked as such.
 #. Implement `ControllerInterface`_ class as follows:
 
    #. If there are any member variables, initialized those in the constructor.
-   #. In the `init` method, first call ``ControllerInterface::init`` initialize lifecycle of the controller.
-      Then declare all parameters defining their default values.
+   #. In the ``init()`` method, first call ``ControllerInterface::init()`` to initialize the lifecycle of the controller. Following this, declare all parameters defining their default values.
    #. Implement the ``state_interface_configuration()`` and ``command_interface_configuration()`` methods.
-   #. Implement ``update()`` function for the controller. (**real-time**)
-   #. Then implement required lifecycle methods (others are optional):
-      * ``on_configure`` - reads parameters and configures controller.
-      * ``on_activate`` - called when controller is activated (started) (**real-time**)
-      * ``on_deactivate`` - called when controller is deactivated (stopped) (**real-time**)
-   #. Do not forget ``PLUGINLIB_EXPORT_CLASS`` macro at the end of the .cpp file.
-#. Create .xml library description for the pluginlib, for example see `JointTrajectoryController <https://github.com/ros-controls/ros2_controllers/blob/master/joint_trajectory_controller/joint_trajectory_plugin.xml>`_.
+   #. Design the ``update()`` function for the controller. (**real-time**)
+   #. Add the required lifecycle management methods (others are optional):
+         * ``on_configure()`` - reads parameters and configures controller.
+         * ``on_activate()`` - called when controller is activated (started) (**real-time**)
+         * ``on_deactivate()`` - called when controller is deactivated (stopped) (**real-time**)
+   #. Finally, do not forget to add the ``PLUGINLIB_EXPORT_CLASS`` macro at the end of the .cpp file.
+#. Create .xml library description for the pluginlib, for example see `joint_trajectory_plugin.xml <https://github.com/ros-controls/ros2_controllers/blob/master/joint_trajectory_controller/joint_trajectory_plugin.xml>`_.
 
 
 
-.. _ros-controls/ros2_control: https://github.com/ros-controls/ros2_control
-.. _ros-controls/ros2_controllers: https://github.com/ros-controls/ros2_controllers
-.. _ros-controls/ros2_control_demos: https://github.com/ros-controls/ros2_control_demos
+.. _ros2_control: https://github.com/ros-controls/ros2_control
+.. _ros2_controllers: https://github.com/ros-controls/ros2_controllers
+.. _ros2_control_demos: https://github.com/ros-controls/ros2_control_demos
 .. _controller_manager_msgs: https://github.com/ros-controls/ros2_control/tree/master/controller_manager_msgs
 .. _Controller Manager: https://github.com/ros-controls/ros2_control/blob/master/controller_manager/src/controller_manager.cpp
 .. _ControllerInterface: https://github.com/ros-controls/ros2_control/blob/master/controller_interface/include/controller_interface/controller_interface.hpp
@@ -282,4 +280,3 @@ The real-time critical methods are marked as such.
 
 .. |ros2_control_architecture| image:: images/components_architecture.png
    :alt: "ros2_control Architecture"
-
