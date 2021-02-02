@@ -109,7 +109,7 @@ html_context = {
     "github_user": "ros-controls",
     "github_repo": "ros.control.org",
     "github_version": "main",
-    "conf_py_path": "",
+    "conf_py_path": "/",
     "source_suffix": source_suffix,
     "css_files": ['_static/override.css'],
     "favicon": "images/logo_ros-controls.png",
