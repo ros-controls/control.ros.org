@@ -107,7 +107,7 @@ html_static_path = ['_static']
 html_context = {
     "display_github": True,
     "github_user": "ros-controls",
-    "github_repo": "ros.control.org",
+    "github_repo": "control.ros.org",
     "github_version": "main",
     "conf_py_path": "/",
     "source_suffix": source_suffix,
