@@ -59,7 +59,7 @@ General discussions
 Getting Started
 ================
 
-The ros2_control framework is released for ROS2 foxy.
+The ros2_control framework is released for ROS2 Foxy.
 To use it, you have to install ``ros-foxy-ros2-control`` and ``ros-foxy-ros2-controllers` packages.
 Other dependencies are installed automatically.
 
