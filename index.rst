@@ -36,7 +36,7 @@ Development Organisation and Communication
 
 WG Meeting
    Every second Wednesday there is a Working Group meeting.
-   To joint the meeting check the announcement on `ROS Discourse`_.
+   To join the meeting check the announcement on `ROS Discourse`_.
    You can joint the meeting through `google groups <https://groups.google.com/forum/#!forum/ros-control-working-group-invites>`_ or directly on Google Meet (check the announcement).
    To review, add disscusion points, and check older discussions and notes check `this document <https://docs.google.com/document/d/1818AoYucI2z82awL_-8sAA5pMCV_g_wXCJiM6SQmhSQ/edit?usp=sharing>`_.
 
