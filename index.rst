@@ -44,7 +44,10 @@ Projects
    GitHub `projects under ros-control organization <https://github.com/orgs/ros-controls/projects>`_ are used to track the work.
 
 Bug reports and feature requests
-   Use the issue tracker in the correspoding repository for this.
+   Use the issue tracker in the corresponding repository for this.
+   Give a short summary of the problem
+   Make sure to provide a minimal list of steps one can follow to reproduce the issue you found
+   Provide relevant information regarding the operating system, ROS distribution, etc.
 
 Questions 
    Please use `ROS Answers <https://answers.ros.org/>`_ and tag your questions with ``ros2_control``.
