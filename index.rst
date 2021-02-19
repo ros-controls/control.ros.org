@@ -16,7 +16,65 @@ If you are not familiar with the control theory, please get some idea about it (
    :depth: 2
 
 Overview
-========
+=========
+The ros2_control framework consists of the following packages:
+
+* `ros2_control`_ - core functionalities;
+* `ros2_controllers`_ - general controllers' implementations;
+* `control_toolbox`_ - usefull functionalities for controllers;
+* `realtime_tools`_ - usefull functionalities for realtime support, e.g., realtime buffers and publishers;
+* `control_msgs`_ - common messages.
+
+
+Additionally, there are following (unreleased) packages are relevant for getting-started and project management:
+
+* `ros2_control_demos`_ - example implementations of the framework;
+* `roadmap`_ - planning and design docs for the project.
+
+Development Organisation and Communication
+-------------------------------------------
+
+WG Meeting
+   Every second Wednesday there is a Working Group meeting.
+   To join the meeting check the announcement on `ROS Discourse`_.
+   You can joint the meeting through `google groups <https://groups.google.com/forum/#!forum/ros-control-working-group-invites>`_ or directly on Google Meet (check the announcement).
+   To propose new discussion points, or review notes from previous meetings, check `this document <https://docs.google.com/document/d/1818AoYucI2z82awL_-8sAA5pMCV_g_wXCJiM6SQmhSQ/edit?usp=sharing>`_.
+
+Projects
+   GitHub `projects under ros-control organization <https://github.com/orgs/ros-controls/projects>`_ are used to track the work.
+
+Bug reports and feature requests
+   Use the issue tracker in the corresponding repository for this.
+   Give a short summary of the problem
+   Make sure to provide a minimal list of steps one can follow to reproduce the issue you found
+   Provide relevant information regarding the operating system, ROS distribution, etc.
+
+Questions 
+   Please use `ROS Answers <https://answers.ros.org/>`_ and tag your questions with ``ros2_control``.
+
+General discussions
+   Please use `ROS Discourse`_.
+
+
+Getting Started
+================
+
+The ros2_control framework is released for ROS2 Foxy.
+To use it, you have to install ``ros-foxy-ros2-control`` and ``ros-foxy-ros2-controllers` packages.
+Other dependencies are installed automatically.
+
+Compiling
+----------
+
+If you want to install the framework from source use following commands in your worspace main folder:
+
+.. code:: bash
+
+   wget https://raw.githubusercontent.com/ros-controls/ros2_control/master/ros2_control/ros2_control.repos
+   vcs import src < ros2_control.repos
+
+Architecture
+=============
 The ros2_control framework's source can be found in `ros2_control`_ and `ros2_controllers`_ GitHub-repositories.
 The following figure shows the architecture of the ros2_control framework.
 
@@ -158,12 +216,14 @@ Running the Framework for Your Robot
 To run the ros2_control framework, do the following.
 The example files can be found in the `ros2_control_demos`_ repository.
 
-#. Create a YAML  file with the configuration of the controller manager and controllers. (`Example configuration for RRBot <https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_robot/controllers/rrbot_forward_controller_position.yaml>`_)
+#. Create a YAML file with the configuration of the controller manager and controllers. (`Example configuration for RRBot <https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_robot/controllers/rrbot_forward_controller_position.yaml>`_)
 #. Extend the robot's URDF description with needed ``<ros2_control>`` tags.
-   It is recommended to use macro files instead of pure URDF. (`Example URDF for RRBot <https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_robot/description/rrbot_system_position_only.urdf.xacro>`_)
+   It is recommended to use macro files (xacro) instead of pure URDF. (`Example URDF for RRBot <https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_robot/description/rrbot_system_position_only.urdf.xacro>`_)
 #. Create a launch file to start the node with `Controller Manager`_.
    You can use a default `ros2_control node`_ (recommended) or integrate the controller manager in your software stack.
    (`Example launch file for RRBot <https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_robot/launch/rrbot_system_position_only.launch.py>`_)
+   
+*NOTE:* You could alternatively use a script to create setup a `skeleton of the "hardware_interface" package by using the scripts <https://stoglrobotics.github.io/ros_team_workspace/use-cases/setup_robot_ros2_control_hardware.html>`_ provided by one of our maintainers.
 
 Repositories
 ============
@@ -258,6 +318,9 @@ The real-time critical methods are marked as such.
 
 .. _ros2_control: https://github.com/ros-controls/ros2_control
 .. _ros2_controllers: https://github.com/ros-controls/ros2_controllers
+.. _control_msgs: https://github.com/ros-controls/control_msgs
+.. _realtime_tools: https://github.com/ros-controls/realtime_tools
+.. _control_toolbox: https://github.com/ros-controls/control_toolbox
 .. _ros2_control_demos: https://github.com/ros-controls/ros2_control_demos
 .. _controller_manager_msgs: https://github.com/ros-controls/ros2_control/tree/master/controller_manager_msgs
 .. _Controller Manager: https://github.com/ros-controls/ros2_control/blob/master/controller_manager/src/controller_manager.cpp
@@ -271,6 +334,8 @@ The real-time critical methods are marked as such.
 .. _ros2controlcli: https://github.com/ros-controls/ros2_control/tree/master/ros2controlcli
 .. _Hardware Access through Controllers design document: https://github.com/ros-controls/roadmap/blob/master/design_drafts/hardware_access.md
 .. _ROS2 Control Components URDF Examples design document: https://github.com/ros-controls/roadmap/blob/master/design_drafts/components_architecture_and_urdf_examples.md
+.. _roadmap: https://github.com/ros-controls/roadmap
+.. _ROS Discourse: https://discourse.ros.org
 
 .. _ActuatorInterface: https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/include/hardware_interface/actuator_interface.hpp
 .. _SensorInterface: https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/include/hardware_interface/sensor_interface.hpp
