@@ -1,7 +1,7 @@
 .. _documentation_home:
 
-Welcome to ros2_control's documentation!
-===========================================
+Welcome to the ros2_control documentation!
+==========================================
 
 .. toctree::
    :hidden:

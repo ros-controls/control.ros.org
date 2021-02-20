@@ -1,4 +1,4 @@
-.. _documentation_home:
+.. _diff_to_ros1:
 
 Differences to ros_control (ROS1)
 =================================

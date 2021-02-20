@@ -1,4 +1,4 @@
-.. _documentation_home:
+.. _acknowledgements:
 
 Acknowledgements
 ================
