@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Welcome to ros2_control’s documentation! &mdash; control.ros.org  documentation</title>
+  <title>Welcome to the ros2_control documentation! &mdash; control.ros.org  documentation</title>
   
 
   
@@ -40,7 +40,8 @@
 
     
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Getting Started" href="getting_started.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -88,43 +89,15 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Welcome to ros2_control’s documentation!</a></li>
-<li><a class="reference internal" href="#overview">Overview</a><ul>
-<li><a class="reference internal" href="#development-organisation-and-communication">Development Organisation and Communication</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html#architecture">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html#hardware-components">Hardware Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="differences_to_ros1.html">Differences to ros_control (ROS1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="differences_to_ros1.html#migration-guide-to-ros2-control">Migration Guide to ros2_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acknowledgements.html">Acknowledgements</a></li>
 </ul>
-</li>
-<li><a class="reference internal" href="#getting-started">Getting Started</a><ul>
-<li><a class="reference internal" href="#compiling">Compiling</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#architecture">Architecture</a><ul>
-<li><a class="reference internal" href="#controller-manager">Controller Manager</a></li>
-<li><a class="reference internal" href="#resource-manager">Resource Manager</a></li>
-<li><a class="reference internal" href="#controllers">Controllers</a></li>
-<li><a class="reference internal" href="#user-interfaces">User Interfaces</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#hardware-components">Hardware Components</a><ul>
-<li><a class="reference internal" href="#hardware-description-in-urdf">Hardware Description in URDF</a></li>
-<li><a class="reference internal" href="#running-the-framework-for-your-robot">Running the Framework for Your Robot</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#repositories">Repositories</a></li>
-<li><a class="reference internal" href="#differences-to-ros-control-ros1">Differences to ros_control (ROS1)</a><ul>
-<li><a class="reference internal" href="#hardware-structures-classes">Hardware Structures - classes</a></li>
-<li><a class="reference internal" href="#hardware-interfaces">Hardware Interfaces</a></li>
-<li><a class="reference internal" href="#controller-s-access-to-hardware">Controller’s Access to Hardware</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#migration-guide-to-ros2-control">Migration Guide to ros2_control</a><ul>
-<li><a class="reference internal" href="#robothardware-to-components">RobotHardware to Components</a></li>
-<li><a class="reference internal" href="#controller-migration">Controller Migration</a></li>
-</ul>
-</li>
-</ul>
-</div>
+
             
           
         </div>
@@ -171,7 +144,7 @@
     
       <li><a href="#" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Welcome to ros2_control’s documentation!</li>
+      <li>Welcome to the ros2_control documentation!</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -192,76 +165,32 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="welcome-to-ros2-control-s-documentation">
-<h1><a class="toc-backref" href="#id7">Welcome to ros2_control’s documentation!</a><a class="headerlink" href="#welcome-to-ros2-control-s-documentation" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="welcome-to-the-ros2-control-documentation">
+<span id="documentation-home"></span><h1>Welcome to the ros2_control documentation!<a class="headerlink" href="#welcome-to-the-ros2-control-documentation" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
 <p>The ros2_control is a framework for (real-time) control of robots using (<a class="reference external" href="https://index.ros.org/doc/ros2/">ROS2</a>).
 Its packages are a rewrite of <a class="reference external" href="http://wiki.ros.org/ros_control">ros_control</a> packages used in <cite>ROS</cite> (<a class="reference external" href="https://wiki.ros.org">Robot Operating System</a>).
 ros2_control’s goal is to simplify integrating new hardware and overcome some drawbacks.</p>
 <p>If you are not familiar with the control theory, please get some idea about it (e.g., at <a class="reference external" href="https://en.wikipedia.org/wiki/Control_theory">Wikipedia</a>) to get familiar with the terms used in this manual.</p>
-<div class="contents topic" id="table-of-contents">
-<p class="topic-title">Table of Contents</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="#welcome-to-ros2-control-s-documentation" id="id7">Welcome to ros2_control’s documentation!</a></p></li>
-<li><p><a class="reference internal" href="#overview" id="id8">Overview</a></p>
-<ul>
-<li><p><a class="reference internal" href="#development-organisation-and-communication" id="id9">Development Organisation and Communication</a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#getting-started" id="id10">Getting Started</a></p>
-<ul>
-<li><p><a class="reference internal" href="#compiling" id="id11">Compiling</a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#architecture" id="id12">Architecture</a></p>
-<ul>
-<li><p><a class="reference internal" href="#controller-manager" id="id13">Controller Manager</a></p></li>
-<li><p><a class="reference internal" href="#resource-manager" id="id14">Resource Manager</a></p></li>
-<li><p><a class="reference internal" href="#controllers" id="id15">Controllers</a></p></li>
-<li><p><a class="reference internal" href="#user-interfaces" id="id16">User Interfaces</a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#hardware-components" id="id17">Hardware Components</a></p>
-<ul>
-<li><p><a class="reference internal" href="#hardware-description-in-urdf" id="id18">Hardware Description in URDF</a></p></li>
-<li><p><a class="reference internal" href="#running-the-framework-for-your-robot" id="id19">Running the Framework for Your Robot</a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#repositories" id="id20">Repositories</a></p></li>
-<li><p><a class="reference internal" href="#differences-to-ros-control-ros1" id="id21">Differences to ros_control (ROS1)</a></p>
-<ul>
-<li><p><a class="reference internal" href="#hardware-structures-classes" id="id22">Hardware Structures - classes</a></p></li>
-<li><p><a class="reference internal" href="#hardware-interfaces" id="id23">Hardware Interfaces</a></p></li>
-<li><p><a class="reference internal" href="#controller-s-access-to-hardware" id="id24">Controller’s Access to Hardware</a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#migration-guide-to-ros2-control" id="id25">Migration Guide to ros2_control</a></p>
-<ul>
-<li><p><a class="reference internal" href="#robothardware-to-components" id="id26">RobotHardware to Components</a></p></li>
-<li><p><a class="reference internal" href="#controller-migration" id="id27">Controller Migration</a></p></li>
-</ul>
-</li>
-</ul>
-</div>
 </div>
 <div class="section" id="overview">
-<h1><a class="toc-backref" href="#id8">Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
-<p>The ros2_control framework consists of the following packages:</p>
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+<p>The ros2_control framework consists of the following Github repositories:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://github.com/ros-controls/ros2_control">ros2_control</a> - core functionalities;</p></li>
-<li><p><a class="reference external" href="https://github.com/ros-controls/ros2_controllers">ros2_controllers</a> - general controllers’ implementations;</p></li>
-<li><p><a class="reference external" href="https://github.com/ros-controls/control_toolbox">control_toolbox</a> - usefull functionalities for controllers;</p></li>
-<li><p><a class="reference external" href="https://github.com/ros-controls/realtime_tools">realtime_tools</a> - usefull functionalities for realtime support, e.g., realtime buffers and publishers;</p></li>
+<li><p><a class="reference external" href="https://github.com/ros-controls/ros2_control">ros2_control</a> - the main interfaces and components of the framework;</p></li>
+<li><p><a class="reference external" href="https://github.com/ros-controls/ros2_controllers">ros2_controllers</a> - widely used controllers, such as forward command controller, joint trajectory controller, differential drive controller;</p></li>
+<li><p><a class="reference external" href="https://github.com/ros-controls/control_toolbox">control_toolbox</a> - some widely-used control theory implementations (e.g. PID) used by controllers;</p></li>
+<li><p><a class="reference external" href="https://github.com/ros-controls/realtime_tools">realtime_tools</a> - general toolkit for realtime support, e.g., realtime buffers and publishers;</p></li>
 <li><p><a class="reference external" href="https://github.com/ros-controls/control_msgs">control_msgs</a> - common messages.</p></li>
 </ul>
 <p>Additionally, there are following (unreleased) packages are relevant for getting-started and project management:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://github.com/ros-controls/ros2_control_demos">ros2_control_demos</a> - example implementations of the framework;</p></li>
+<li><p><a class="reference external" href="https://github.com/ros-controls/ros2_control_demos">ros2_control_demos</a> - examples implementations of common use-cases for a smooth start;</p></li>
 <li><p><a class="reference external" href="https://github.com/ros-controls/roadmap">roadmap</a> - planning and design docs for the project.</p></li>
 </ul>
 <div class="section" id="development-organisation-and-communication">
-<h2><a class="toc-backref" href="#id9">Development Organisation and Communication</a><a class="headerlink" href="#development-organisation-and-communication" title="Permalink to this headline">¶</a></h2>
+<h2>Development Organisation and Communication<a class="headerlink" href="#development-organisation-and-communication" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
 <dt>WG Meeting</dt><dd><p>Every second Wednesday there is a Working Group meeting.
 To join the meeting check the announcement on <a class="reference external" href="https://discourse.ros.org">ROS Discourse</a>.
@@ -280,250 +209,8 @@ Provide relevant information regarding the operating system, ROS distribution, e
 <dt>General discussions</dt><dd><p>Please use <a class="reference external" href="https://discourse.ros.org">ROS Discourse</a>.</p>
 </dd>
 </dl>
-</div>
-</div>
-<div class="section" id="getting-started">
-<h1><a class="toc-backref" href="#id10">Getting Started</a><a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
-<p>The ros2_control framework is released for ROS2 Foxy.
-To use it, you have to install <code class="docutils literal notranslate"><span class="pre">ros-foxy-ros2-control</span></code> and <a href="#id1"><span class="problematic" id="id2">``</span></a>ros-foxy-ros2-controllers` packages.
-Other dependencies are installed automatically.</p>
-<div class="section" id="compiling">
-<h2><a class="toc-backref" href="#id11">Compiling</a><a class="headerlink" href="#compiling" title="Permalink to this headline">¶</a></h2>
-<p>If you want to install the framework from source use following commands in your worspace main folder:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget https://raw.githubusercontent.com/ros-controls/ros2_control/master/ros2_control/ros2_control.repos
-vcs import src &lt; ros2_control.repos
-</pre></div>
-</div>
-</div>
-</div>
-<div class="section" id="architecture">
-<h1><a class="toc-backref" href="#id12">Architecture</a><a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h1>
-<p>The ros2_control framework’s source can be found in <a class="reference external" href="https://github.com/ros-controls/ros2_control">ros2_control</a> and <a class="reference external" href="https://github.com/ros-controls/ros2_controllers">ros2_controllers</a> GitHub-repositories.
-The following figure shows the architecture of the ros2_control framework.</p>
-<p><img alt="&quot;ros2_control Architecture&quot;" src="_images/components_architecture.png" /></p>
-<div class="section" id="controller-manager">
-<h2><a class="toc-backref" href="#id13">Controller Manager</a><a class="headerlink" href="#controller-manager" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/controller_manager/src/controller_manager.cpp">Controller Manager</a> (CM) connects the controllers’ and hardware-abstraction sides of the ros2_control framework.
-It also serves as the entry-point for users through ROS services.
-The CM implements a node without an executor so it can be integrated into a custom setup.
-Still, for a standard user, it is recommended to use the default node-setup implemented in <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/controller_manager/src/ros2_control_node.cpp">ros2_control_node</a> file from the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> package.
-This manual assumes that you use this default node-setup.</p>
-<p>On the one side, CM manages (e.g., loading, activating, deactivating, unloading) controllers and from them required interfaces.
-On the other side, it has access to the hardware components (through Resource Manager), i.e., their interfaces.
-The Controller Manager matches <em>required</em> and <em>provided</em> interfaces, gives controllers access to hardware when activated, or reports an error if there is an access conflict.</p>
-<p>The execution of the control-loop is managed by the CM’s <code class="docutils literal notranslate"><span class="pre">update()</span></code> method.
-The method reads data from the hardware components, updates outputs of all active controllers, and writes the result to the components.</p>
-</div>
-<div class="section" id="resource-manager">
-<h2><a class="toc-backref" href="#id14">Resource Manager</a><a class="headerlink" href="#resource-manager" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/src/resource_manager.cpp">Resource Manager</a> (RM) abstracts physical hardware and its drivers (called <em>hardware components</em>) for the ros2_control framework.
-The RM loads the components using <code class="docutils literal notranslate"><span class="pre">pluginlib</span></code>-library, manages their lifecycle and components’ state and command interfaces.
-This abstraction provided by RM enables re-usability of implemented hardware components, e.g., robot and gripper, without any implementation and flexible hardware application for state and command interfaces, e.g., separate hardware/communication libraries for motor control and encoder reading.</p>
-<p>In the control loop execution, the RM’s <code class="docutils literal notranslate"><span class="pre">read()</span></code> and <code class="docutils literal notranslate"><span class="pre">write()</span></code> methods deal with communication to the hardware components.</p>
-</div>
-<div class="section" id="controllers">
-<span id="overview-controllers"></span><h2><a class="toc-backref" href="#id15">Controllers</a><a class="headerlink" href="#controllers" title="Permalink to this headline">¶</a></h2>
-<p>The controllers in the ros2_control framework have the same functionality as defined in the control theory. They compare the reference value with the measured output and, based on this error, calculate a system’s input (for more details, visit <a class="reference external" href="https://en.wikipedia.org/wiki/Control_theory">Wikipedia</a>).
-The controlles are objects derived from <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/controller_interface/include/controller_interface/controller_interface.hpp">ControllerInterface</a> (<code class="docutils literal notranslate"><span class="pre">controller_interface</span></code> package in <a class="reference external" href="https://github.com/ros-controls/ros2_control">ros2_control</a>) and exported as plugins using <code class="docutils literal notranslate"><span class="pre">pluginlib</span></code>-library.
-For example of on controller check <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/master/forward_command_controller/src/forward_command_controller.cpp">ForwardCommandController implementation</a> in the <a class="reference external" href="https://github.com/ros-controls/ros2_controllers">ros2_controllers</a> repository.
-The controllers’ lifecycle is based on the <a class="reference external" href="https://github.com/ros2/rclcpp/blob/master/rclcpp_lifecycle/include/rclcpp_lifecycle/lifecycle_node.hpp">LifecycleNode-Class</a> implementing the state machine as described in the <a class="reference external" href="https://design.ros2.org/articles/node_lifecycle.html">Node Lifecycle Design</a> document.</p>
-<p>When executing the control-loop <code class="docutils literal notranslate"><span class="pre">update()</span></code> method is called.
-The method can access the latest hardware states and enable the controller to write the hardware’s command interfaces.</p>
-</div>
-<div class="section" id="user-interfaces">
-<h2><a class="toc-backref" href="#id16">User Interfaces</a><a class="headerlink" href="#user-interfaces" title="Permalink to this headline">¶</a></h2>
-<p>Users interact with the ros2_control framework using <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/controller_manager/src/controller_manager.cpp">Controller Manager</a>’s services.
-For a list of services and their definitions, check the <code class="docutils literal notranslate"><span class="pre">srv</span></code> folder in the <a class="reference external" href="https://github.com/ros-controls/ros2_control/tree/master/controller_manager_msgs">controller_manager_msgs</a> package.</p>
-<p>While service calls can be used directly from the command line or via nodes, there exists a user-friendly <code class="docutils literal notranslate"><span class="pre">Command</span> <span class="pre">Line</span> <span class="pre">Interface</span></code> (CLI) which integrates with the <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">cli</span></code>. This supports auto-complete and has a range of common commands available. The base command is <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">control</span></code>.
-For the description of our CLI capabilities, see the <code class="docutils literal notranslate"><span class="pre">README.md</span></code> file of the <a class="reference external" href="https://github.com/ros-controls/ros2_control/tree/master/ros2controlcli">ros2controlcli</a> package.</p>
-</div>
-</div>
-<div class="section" id="hardware-components">
-<h1><a class="toc-backref" href="#id17">Hardware Components</a><a class="headerlink" href="#hardware-components" title="Permalink to this headline">¶</a></h1>
-<p>The <em>hardware components</em> realize communication to physical hardware and represent its abstraction in the ros2_control framework.
-The components have to be exported as plugins using <code class="docutils literal notranslate"><span class="pre">pluginlib</span></code>-library.
-The <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/src/resource_manager.cpp">Resource Manager</a> dynamically loads those plugins and manages their lifecycle.</p>
-<p>There are three basic types of components:</p>
-<dl class="simple">
-<dt>System</dt><dd><p>Complex (multi-DOF) robotic hardware like industrial robots.
-The main difference between the <em>Actuator</em> component is the possibility to use complex transmissions like needed for humanoid robot’s hands.
-This component has reading and writing capabilities.
-It is used when the is only one logical communication channel to the hardware (e.g., KUKA-RSI).</p>
-</dd>
-<dt>Sensor</dt><dd><p>Robotic hardware is used for sensing its environment.
-A sensor component is related to a joint (e.g., encoder) or a link (e.g., force-torque sensor).
-This component type has only reading capabilities.</p>
-</dd>
-<dt>Actuator</dt><dd><p>Simple (1 DOF) robotic hardware like motors, valves, and similar.
-An actuator implementation is related to only one joint.
-This component type has reading and writing capabilities. Reading is not mandatory if not possible (e.g., DC motor control with Arduino board).
-The actuator type can also be used with a multi-DOF robot if its hardware enables modular design, e.g., CAN-communication with each motor independently.</p>
-</dd>
-</dl>
-<p>A detailed explanation of hardware components is given in the <a class="reference external" href="https://github.com/ros-controls/roadmap/blob/master/design_drafts/hardware_access.md">Hardware Access through Controllers design document</a>.</p>
-<div class="section" id="hardware-description-in-urdf">
-<h2><a class="toc-backref" href="#id18">Hardware Description in URDF</a><a class="headerlink" href="#hardware-description-in-urdf" title="Permalink to this headline">¶</a></h2>
-<p>The ros2_control framework uses the <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code>-tag in the robot’s URDF file to describe its components, i.e., the hardware setup.
-The chosen structure enables tracking together multiple <cite>xacro</cite>-macros into one without any changes.
-The example hereunder shows a position-controlled robot with 2-DOF (RRBot), an external 1-DOF force-torque sensor, and an externally controlled 1-DOF parallel gripper as its end-effector.
-For more examples and detailed explanations, check <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos">ros2_control_demos</a> repository and <a class="reference external" href="https://github.com/ros-controls/roadmap/blob/master/design_drafts/components_architecture_and_urdf_examples.md">ROS2 Control Components URDF Examples design document</a>.</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span> <span class="na">name=</span><span class="s">&quot;RRBotSystemPositionOnly&quot;</span> <span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
- <span class="nt">&lt;hardware&gt;</span>
-   <span class="nt">&lt;plugin&gt;</span>ros2_control_demo_hardware/RRBotSystemPositionOnlyHardware<span class="nt">&lt;/plugin&gt;</span>
-   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;example_param_write_for_sec&quot;</span><span class="nt">&gt;</span>2<span class="nt">&lt;/param&gt;</span>
-   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;example_param_read_for_sec&quot;</span><span class="nt">&gt;</span>2<span class="nt">&lt;/param&gt;</span>
- <span class="nt">&lt;/hardware&gt;</span>
- <span class="nt">&lt;joint</span> <span class="na">name=</span><span class="s">&quot;joint1&quot;</span><span class="nt">&gt;</span>
-   <span class="nt">&lt;command_interface</span> <span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
-     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;min&quot;</span><span class="nt">&gt;</span>-1<span class="nt">&lt;/param&gt;</span>
-     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;max&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/param&gt;</span>
-   <span class="nt">&lt;/command_interface&gt;</span>
-   <span class="nt">&lt;state_interface</span> <span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
- <span class="nt">&lt;/joint&gt;</span>
- <span class="nt">&lt;joint</span> <span class="na">name=</span><span class="s">&quot;joint2&quot;</span><span class="nt">&gt;</span>
-   <span class="nt">&lt;command_interface</span> <span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
-     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;min&quot;</span><span class="nt">&gt;</span>-1<span class="nt">&lt;/param&gt;</span>
-     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;max&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/param&gt;</span>
-   <span class="nt">&lt;/command_interface&gt;</span>
-   <span class="nt">&lt;state_interface</span> <span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
- <span class="nt">&lt;/joint&gt;</span>
-<span class="nt">&lt;/ros2_control&gt;</span>
-<span class="nt">&lt;ros2_control</span> <span class="na">name=</span><span class="s">&quot;RRBotForceTorqueSensor1D&quot;</span> <span class="na">type=</span><span class="s">&quot;sensor&quot;</span><span class="nt">&gt;</span>
- <span class="nt">&lt;hardware&gt;</span>
-   <span class="nt">&lt;plugin&gt;</span>ros2_control_demo_hardware/ForceTorqueSensor1DHardware<span class="nt">&lt;/plugin&gt;</span>
-   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;example_param_read_for_sec&quot;</span><span class="nt">&gt;</span>0.43<span class="nt">&lt;/param&gt;</span>
- <span class="nt">&lt;/hardware&gt;</span>
- <span class="nt">&lt;sensor</span> <span class="na">name=</span><span class="s">&quot;tcp_fts_sensor&quot;</span><span class="nt">&gt;</span>
-   <span class="nt">&lt;state_interface</span> <span class="na">name=</span><span class="s">&quot;force&quot;</span><span class="nt">/&gt;</span>
-   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;frame_id&quot;</span><span class="nt">&gt;</span>rrbot_tcp<span class="nt">&lt;/param&gt;</span>
-   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;min_force&quot;</span><span class="nt">&gt;</span>-100<span class="nt">&lt;/param&gt;</span>
-   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;max_force&quot;</span><span class="nt">&gt;</span>100<span class="nt">&lt;/param&gt;</span>
- <span class="nt">&lt;/sensor&gt;</span>
-<span class="nt">&lt;/ros2_control&gt;</span>
-<span class="nt">&lt;ros2_control</span> <span class="na">name=</span><span class="s">&quot;RRBotGripper&quot;</span> <span class="na">type=</span><span class="s">&quot;actuator&quot;</span><span class="nt">&gt;</span>
- <span class="nt">&lt;hardware&gt;</span>
-   <span class="nt">&lt;plugin&gt;</span>ros2_control_demo_hardware/PositionActuatorHardware<span class="nt">&lt;/plugin&gt;</span>
-   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;example_param_write_for_sec&quot;</span><span class="nt">&gt;</span>1.23<span class="nt">&lt;/param&gt;</span>
-   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;example_param_read_for_sec&quot;</span><span class="nt">&gt;</span>3<span class="nt">&lt;/param&gt;</span>
- <span class="nt">&lt;/hardware&gt;</span>
- <span class="nt">&lt;joint</span> <span class="na">name=</span><span class="s">&quot;gripper_joint &quot;</span><span class="nt">&gt;</span>
-   <span class="nt">&lt;command_interface</span> <span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
-     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;min&quot;</span><span class="nt">&gt;</span>0<span class="nt">&lt;/param&gt;</span>
-     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;max&quot;</span><span class="nt">&gt;</span>50<span class="nt">&lt;/param&gt;</span>
-   <span class="nt">&lt;/command_interface&gt;</span>
-   <span class="nt">&lt;state_interface</span> <span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
-   <span class="nt">&lt;state_interface</span> <span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
- <span class="nt">&lt;/joint&gt;</span>
-<span class="nt">&lt;/ros2_control&gt;</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="running-the-framework-for-your-robot">
-<h2><a class="toc-backref" href="#id19">Running the Framework for Your Robot</a><a class="headerlink" href="#running-the-framework-for-your-robot" title="Permalink to this headline">¶</a></h2>
-<p>To run the ros2_control framework, do the following.
-The example files can be found in the <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos">ros2_control_demos</a> repository.</p>
-<ol class="arabic simple">
-<li><p>Create a YAML file with the configuration of the controller manager and controllers. (<a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_robot/controllers/rrbot_forward_controller_position.yaml">Example configuration for RRBot</a>)</p></li>
-<li><p>Extend the robot’s URDF description with needed <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code> tags.
-It is recommended to use macro files (xacro) instead of pure URDF. (<a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_robot/description/rrbot_system_position_only.urdf.xacro">Example URDF for RRBot</a>)</p></li>
-<li><p>Create a launch file to start the node with <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/controller_manager/src/controller_manager.cpp">Controller Manager</a>.
-You can use a default <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/controller_manager/src/ros2_control_node.cpp">ros2_control node</a> (recommended) or integrate the controller manager in your software stack.
-(<a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_robot/launch/rrbot_system_position_only.launch.py">Example launch file for RRBot</a>)</p></li>
-</ol>
-<p><em>NOTE:</em> You could alternatively use a script to create setup a <a class="reference external" href="https://stoglrobotics.github.io/ros_team_workspace/use-cases/setup_robot_ros2_control_hardware.html">skeleton of the “hardware_interface” package by using the scripts</a> provided by one of our maintainers.</p>
-</div>
-</div>
-<div class="section" id="repositories">
-<h1><a class="toc-backref" href="#id20">Repositories</a><a class="headerlink" href="#repositories" title="Permalink to this headline">¶</a></h1>
-<p>The ros2_control framework consist of the following repositories:</p>
-<dl class="simple">
-<dt>ros2_control</dt><dd><p>The <a class="reference external" href="https://github.com/ros-controls/ros2_control">ros2_control</a> repository implements the main interfaces and components of the framework mentioned in the previous sections.</p>
-</dd>
-<dt>ros2_controllers</dt><dd><p>The <a class="reference external" href="https://github.com/ros-controls/ros2_controllers">ros2_controllers</a> repository implements widely used controllers, e.g., forward controller, joint trajectory controller, differential drive controller, etc.</p>
-</dd>
-<dt>ros2_control_demos</dt><dd><p>The <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos">ros2_control_demos</a> repository provides examples of using the framework and templates for a smooth start with it.</p>
-</dd>
-</dl>
-</div>
-<div class="section" id="differences-to-ros-control-ros1">
-<h1><a class="toc-backref" href="#id21">Differences to ros_control (ROS1)</a><a class="headerlink" href="#differences-to-ros-control-ros1" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="hardware-structures-classes">
-<h2><a class="toc-backref" href="#id22">Hardware Structures - classes</a><a class="headerlink" href="#hardware-structures-classes" title="Permalink to this headline">¶</a></h2>
-<p>The ros_control framework uses the <code class="docutils literal notranslate"><span class="pre">RobotHW</span></code> class as a rigid structure to handle any hardware.
-This makes it impossible to extend the existing robot with additional hardware, like sensors, actuators, and tools, without coding.
-The <code class="docutils literal notranslate"><span class="pre">CombinedRobotHardware</span></code> corrects this drawback.
-Still, this solution is not optimal, especially when combining robots with external sensors.</p>
-<p>The ros2_control framework defines three types of hardware <code class="docutils literal notranslate"><span class="pre">Actuator</span></code>, <code class="docutils literal notranslate"><span class="pre">Sensor</span></code> and <code class="docutils literal notranslate"><span class="pre">System</span></code>.
-Using a combination (composition) of those basic components, any physical robotic cell (robot and its surrounding) can be described.
-This also means that multi-robot, robot-sensor, robot-gripper combinations are supported out of the box.
-Section <a class="reference external" href="#hardware-components">Hardware Components</a> describes this in detail.</p>
-</div>
-<div class="section" id="hardware-interfaces">
-<h2><a class="toc-backref" href="#id23">Hardware Interfaces</a><a class="headerlink" href="#hardware-interfaces" title="Permalink to this headline">¶</a></h2>
-<p>The ros_control framework allows only three types of interfaces (joints), i.e., <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code>, and <code class="docutils literal notranslate"><span class="pre">effort</span></code>. The <code class="docutils literal notranslate"><span class="pre">RobotHW</span></code> class makes it very hard to use any other data to control the robot.</p>
-<p>The ros2_control approach does not enforce a fixed set of interface types, but they are defined as strings in <a class="reference external" href="#hardware-description-in-urdf">hardware’s description</a>.
-To ensure compatibility of standard controllers, standard interfaces are defined as constants in <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/include/hardware_interface/types/hardware_interface_type_values.hpp">hardware_interface package</a>.</p>
-</div>
-<div class="section" id="controller-s-access-to-hardware">
-<h2><a class="toc-backref" href="#id24">Controller’s Access to Hardware</a><a class="headerlink" href="#controller-s-access-to-hardware" title="Permalink to this headline">¶</a></h2>
-<p>In ros_control, the controllers had direct access to the <code class="docutils literal notranslate"><span class="pre">RobotHW</span></code> class requesting access to its interfaces (joints).
-The hardware itself then took care of registered interfaces and resource conflicts.</p>
-<p>In ros2_control, <code class="docutils literal notranslate"><span class="pre">ResourceManager</span></code> takes care of the state of available interfaces in the framework and enables controllers to access the hardware.
-Also, the controllers do not have direct access to hardware anymore, but they register their interfaces to the <cite>ControllerManager</cite>.</p>
-</div>
-</div>
-<div class="section" id="migration-guide-to-ros2-control">
-<h1><a class="toc-backref" href="#id25">Migration Guide to ros2_control</a><a class="headerlink" href="#migration-guide-to-ros2-control" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="robothardware-to-components">
-<h2><a class="toc-backref" href="#id26">RobotHardware to Components</a><a class="headerlink" href="#robothardware-to-components" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic simple">
-<li><p>The implementation of <code class="docutils literal notranslate"><span class="pre">RobotHW</span></code> is not used anymore.
-This should be migrated to <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/include/hardware_interface/system_interface.hpp">SystemInterface</a> class or, for more granularity, <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/include/hardware_interface/sensor_interface.hpp">SensorInterface</a> and <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/include/hardware_interface/actuator_interface.hpp">ActuatorInterface</a>.
-See the above description of “Hardware Components” to choose a suitable strategy.</p></li>
-<li><p>Decide which component type is suitable for your case. Maybe it makes sense to separate <code class="docutils literal notranslate"><span class="pre">RobotHW</span></code> into multiple components.</p></li>
-<li><p>Implement <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/include/hardware_interface/actuator_interface.hpp">ActuatorInterface</a>, <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/include/hardware_interface/sensor_interface.hpp">SensorInterface</a> or <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/include/hardware_interface/system_interface.hpp">SystemInterface</a> classes as follows:</p>
-<ol class="arabic simple">
-<li><p>In the constructor, initialize all variables needed for communication with your hardware or define the default one.</p></li>
-<li><p>In the configure function, read all the parameters your hardware needs from the parsed URDF snippet (i.e., from the <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/include/hardware_interface/hardware_info.hpp">HardwareInfo</a> structure). Here you can cross-check if all joints and interfaces in URDF have allowed values or a combination of values.</p></li>
-<li><p>Define interfaces to and from your hardware using <code class="docutils literal notranslate"><span class="pre">export_*_interfaces</span></code> functions.
-The names are <code class="docutils literal notranslate"><span class="pre">&lt;joint&gt;/&lt;interface&gt;</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">joint_a2/position</span></code>).
-This can be extracted from the <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/include/hardware_interface/hardware_info.hpp">HardwareInfo</a> structure or be hard-coded if sensible.</p></li>
-<li><p>Implement <code class="docutils literal notranslate"><span class="pre">start()</span></code> and <code class="docutils literal notranslate"><span class="pre">stop()</span></code> methods for your hardware.
-This usually includes changing the hardware state to receive commands or set it into a safe state before interrupting the command stream.
-It can also include starting and stopping communication.</p></li>
-<li><p>Implement <code class="docutils literal notranslate"><span class="pre">read()</span></code> and <code class="docutils literal notranslate"><span class="pre">write()</span></code> methods to exchange commands with the hardware.
-This method is equivalent to those from <code class="docutils literal notranslate"><span class="pre">RobotHW</span></code>-class in ROS1.</p></li>
-<li><p>Do not forget the <code class="docutils literal notranslate"><span class="pre">PLUGINLIB_EXPORT_CLASS</span></code> macro at the end of the .cpp file.</p></li>
-</ol>
-</li>
-<li><p>Create .xml library description for the pluginlib, for example see <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_hardware/ros2_control_demo_hardware.xml">RRBotSystemPositionOnlyHardware</a>.</p></li>
-</ol>
-</div>
-<div class="section" id="controller-migration">
-<h2><a class="toc-backref" href="#id27">Controller Migration</a><a class="headerlink" href="#controller-migration" title="Permalink to this headline">¶</a></h2>
-<p>An excellent example of a migrated controller is the <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/master/joint_trajectory_controller/src/joint_trajectory_controller.cpp">JointTrajectoryController</a>.
-The real-time critical methods are marked as such.</p>
-<ol class="arabic simple">
-<li><p>Implement <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/controller_interface/include/controller_interface/controller_interface.hpp">ControllerInterface</a> class as follows:</p>
-<ol class="arabic simple">
-<li><p>If there are any member variables, initialized those in the constructor.</p></li>
-<li><p>In the <code class="docutils literal notranslate"><span class="pre">init()</span></code> method, first call <code class="docutils literal notranslate"><span class="pre">ControllerInterface::init()</span></code> to initialize the lifecycle of the controller. Following this, declare all parameters defining their default values.</p></li>
-<li><p>Implement the <code class="docutils literal notranslate"><span class="pre">state_interface_configuration()</span></code> and <code class="docutils literal notranslate"><span class="pre">command_interface_configuration()</span></code> methods.</p></li>
-<li><p>Design the <code class="docutils literal notranslate"><span class="pre">update()</span></code> function for the controller. (<strong>real-time</strong>)</p></li>
-<li><dl class="simple">
-<dt>Add the required lifecycle management methods (others are optional):</dt><dd><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">on_configure()</span></code> - reads parameters and configures controller.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">on_activate()</span></code> - called when controller is activated (started) (<strong>real-time</strong>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">on_deactivate()</span></code> - called when controller is deactivated (stopped) (<strong>real-time</strong>)</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><p>Finally, do not forget to add the <code class="docutils literal notranslate"><span class="pre">PLUGINLIB_EXPORT_CLASS</span></code> macro at the end of the .cpp file.</p></li>
-</ol>
-</li>
-<li><p>Create .xml library description for the pluginlib, for example see <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/master/joint_trajectory_controller/joint_trajectory_plugin.xml">joint_trajectory_plugin.xml</a>.</p></li>
-</ol>
+<hr class="docutils" />
+<p>Built on 2021-02-20 at 19:12 GMT</p>
 </div>
 </div>
 
@@ -532,6 +219,9 @@ The real-time critical methods are marked as such.</p>
            
           </div>
           <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="getting_started.html" class="btn btn-neutral float-right" title="Getting Started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
