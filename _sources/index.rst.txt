@@ -7,6 +7,7 @@ Welcome to the ros2_control documentation!
    :hidden:
 
    getting_started.rst
+   ros2_controllers/doc/index.rst
    differences_to_ros1.rst
    acknowledgements.rst
 
