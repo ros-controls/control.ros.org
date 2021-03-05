@@ -1,0 +1,23 @@
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Changelog for package velocity_controllers
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+0.2.0 (2021-02-06)
+------------------
+* Use ros2 contol test assets (`#138 <https://github.com/ros-controls/ros2_controllers/issues/138>`_)
+  * Add description to test trajecotry_controller
+  * Use ros2_control_test_assets package
+  * Delete obsolete components plugin export
+* Contributors: Denis Štogl
+
+0.1.2 (2021-01-07)
+------------------
+
+0.1.1 (2021-01-06)
+------------------
+* Restore forward command derivatives (`#133 <https://github.com/ros-controls/ros2_controllers/issues/133>`_)
+* Contributors: Bence Magyar
+
+0.1.0 (2020-12-23)
+------------------
+
