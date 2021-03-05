@@ -14,6 +14,10 @@ The ros2_control is a framework for (real-time) control of robots using (`ROS2 <
 Its packages are a rewrite of `ros_control <http://wiki.ros.org/ros_control>`_ packages used in `ROS` (`Robot Operating System <https://wiki.ros.org>`_).
 ros2_control's goal is to simplify integrating new hardware and overcome some drawbacks.
 
+
+THIS IS A TEST
+^^^^^^^^^^^^^^
+
 If you are not familiar with the control theory, please get some idea about it (e.g., at `Wikipedia <https://en.wikipedia.org/wiki/Control_theory>`_) to get familiar with the terms used in this manual.
 
 
