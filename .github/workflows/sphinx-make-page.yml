@@ -3,9 +3,12 @@ on:
   push:
     branches:
       - master
+  schedule:
+   # Run every morning to ensure component documentation is up to date on deployment
+   - cron: '23 5 * * *'
 
 jobs:
-  build:
+  build-deploy:
     name: Push Sphinx Pages
     runs-on: ubuntu-latest
     steps:
