@@ -1,0 +1,15 @@
+name: "Pull Request Docs Check"
+on:
+  pull_request:
+
+
+jobs:
+  check-build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: bmagyar/sphinx-pages@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        create_readme: false
+        install_extensions: false
+        deploy: false
