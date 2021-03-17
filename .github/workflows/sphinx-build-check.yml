@@ -1,18 +1,12 @@
 name: "Pull Request Docs Check"
 on:
   pull_request:
-  push:
-    branches:
-      - master
-  schedule:
-    # Run every morning to detect flakiness and broken dependencies
-    - cron: '23 5 * * *'
+
 
 jobs:
-  docs:
+  check-build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - uses: ammaraskar/sphinx-action@master
+    - uses: bmagyar/sphinx-pages@master
       with:
-        docs-folder: "."
+        install_extensions: false
