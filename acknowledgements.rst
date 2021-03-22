@@ -5,17 +5,20 @@ Acknowledgements
 The project has received major contributions from the following companies and institutions.
 
 |palroboticslogo|
-|rosindustriallogo|
-|rosinlogo|
 
 .. |palroboticslogo| image:: images/palroboticslogo.png
     :width: 300
     :alt: "PAL Robotics"
 
-.. |rosindustriallogo| image:: images/rosindustriallogo.png
-    :width: 300
-    :alt: "ROS Industrial"
+|rosin_ack_logo_wide|
 
-.. |rosinlogo| image:: images/rosinlogo.png
-    :width: 300
+Supported by ROSIN - ROS-Industrial Quality-Assured Robot Software Components.
+More information: http://rosin-project.eu
+
+This project has received funding from the European Union’s Horizon 2020
+research and innovation programme under grant agreement no. 732287.
+
+.. |rosin_ack_logo_wide| image:: images/rosin_ack_logo_wide.png
+    :height: 60
     :alt: "ROSIN"
+
