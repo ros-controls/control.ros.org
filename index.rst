@@ -8,7 +8,9 @@ Welcome to the ros2_control documentation!
 
    getting_started.rst
    ros2_controllers/doc/controllers_index.rst
+   ros2_control/ros2controlcli/doc/index.rst
    differences_to_ros1.rst
+   ros2_control_demos/doc/index.rst
    acknowledgements.rst
 
 The ros2_control is a framework for (real-time) control of robots using (`ROS2 <https://index.ros.org/doc/ros2/>`_).
