@@ -1,3 +1,3 @@
 GitHub Pages of [ros-controls/control.ros.org](https://github.com/ros-controls/control.ros.org.git)
 ===
-Sphinx html documentation of [39c74442](https://github.com/ros-controls/control.ros.org/tree/39c74442fa42f6d9130253274aa366efb4922048)
+Sphinx html documentation of [9caf1262](https://github.com/ros-controls/control.ros.org/tree/9caf1262c2fa1b068836c4aef219bd3e48cdaf12)
