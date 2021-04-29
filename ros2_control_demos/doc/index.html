@@ -98,7 +98,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../ros2_control/ros2controlcli/doc/index.html">Command Line Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../differences_to_ros1.html">Differences to ros_control (ROS1)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../differences_to_ros1.html#migration-guide-to-ros2-control">Migration Guide to ros2_control</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Demos</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Demos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mode-switching-demo">Mode switching demo</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../acknowledgements.html">Acknowledgements</a></li>
 </ul>
 
@@ -172,6 +175,84 @@
   <div class="section" id="demos">
 <span id="ros2-control-demos"></span><h1>Demos<a class="headerlink" href="#demos" title="Permalink to this headline">¶</a></h1>
 <p>This repository provides templates for the development of ros2_control-enabled robots and a simple simulations to demonstrate and prove ros2_control concepts.</p>
+<div class="section" id="mode-switching-demo">
+<h2>Mode switching demo<a class="headerlink" href="#mode-switching-demo" title="Permalink to this headline">¶</a></h2>
+<p>Start up the multi interface rrbot system:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2 launch ros2_control_demo_robot rrbot_system_multi_interface.launch.py
+</pre></div>
+</div>
+<p>List the available interfaces</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ros2 control list_hardware_interfaces
+<span class="nb">command</span> interfaces
+    joint1/acceleration <span class="o">[</span>unclaimed<span class="o">]</span>
+    joint1/position <span class="o">[</span>unclaimed<span class="o">]</span>
+    joint1/velocity <span class="o">[</span>unclaimed<span class="o">]</span>
+    joint2/acceleration <span class="o">[</span>unclaimed<span class="o">]</span>
+    joint2/position <span class="o">[</span>unclaimed<span class="o">]</span>
+    joint2/velocity <span class="o">[</span>unclaimed<span class="o">]</span>
+state interfaces
+     joint1/acceleration
+     joint1/position
+     joint1/velocity
+     joint2/acceleration
+     joint2/position
+     joint2/velocity
+</pre></div>
+</div>
+<p>Load and configure all controllers</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2 control load_controller forward_command_controller_position --state configure
+ros2 control load_controller forward_command_controller_velocity --state configure
+ros2 control load_controller forward_command_controller_acceleration --state configure
+ros2 control load_controller forward_command_controller_illegal1 --state configure
+ros2 control load_controller forward_command_controller_illegal2 --state configure
+ros2 control load_controller joint_state_controller --state configure
+</pre></div>
+</div>
+<p>Start the position controller</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2 control set_controller_state forward_command_controller_position start
+</pre></div>
+</div>
+<p>Check the hardware interfaces, position interfaces should be claimed now</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ros2 control list_hardware_interfaces
+<span class="nb">command</span> interfaces
+    joint1/acceleration <span class="o">[</span>unclaimed<span class="o">]</span>
+    joint1/position <span class="o">[</span>claimed<span class="o">]</span>
+    joint1/velocity <span class="o">[</span>unclaimed<span class="o">]</span>
+    joint2/acceleration <span class="o">[</span>unclaimed<span class="o">]</span>
+    joint2/position <span class="o">[</span>claimed<span class="o">]</span>
+    joint2/velocity <span class="o">[</span>unclaimed<span class="o">]</span>
+state interfaces
+     joint1/acceleration
+     joint1/position
+     joint1/velocity
+     joint2/acceleration
+     joint2/position
+     joint2/velocity
+</pre></div>
+</div>
+<p>Let’s switch controllers now to velocity</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2 control switch_controllers --stop-controllers forward_command_controller_position --start-controllers forward_command_controller_velocity
+</pre></div>
+</div>
+<p>List hardware interfaces again to see that indeed position interfaces have been unclaimed while velocity is claimed now</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ros2 control list_hardware_interfaces
+<span class="nb">command</span> interfaces
+    joint1/acceleration <span class="o">[</span>unclaimed<span class="o">]</span>
+    joint1/position <span class="o">[</span>unclaimed<span class="o">]</span>
+    joint1/velocity <span class="o">[</span>claimed<span class="o">]</span>
+    joint2/acceleration <span class="o">[</span>unclaimed<span class="o">]</span>
+    joint2/position <span class="o">[</span>unclaimed<span class="o">]</span>
+    joint2/velocity <span class="o">[</span>claimed<span class="o">]</span>
+state interfaces
+     joint1/acceleration
+     joint1/position
+     joint1/velocity
+     joint2/acceleration
+     joint2/position
+     joint2/velocity
+</pre></div>
+</div>
+</div>
 </div>
 
 
