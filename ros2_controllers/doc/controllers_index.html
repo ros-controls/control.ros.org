@@ -42,7 +42,7 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Command Line Interface" href="../../ros2_control/ros2controlcli/doc/index.html" />
+    <link rel="next" title="diff_drive_controller" href="../diff_drive_controller/doc/userdoc.html" />
     <link rel="prev" title="Getting Started" href="../../getting_started.html" /> 
 </head>
 
@@ -98,15 +98,18 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">ros2_controllers</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#nomenclature">Nomenclature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id1">Controllers</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#controllers-user-documentation">Controllers user documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#guidelines-and-best-practices">Guidelines and Best Practices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#available-controllers">Available Controllers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../diff_drive_controller/doc/userdoc.html">Differential Drive</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../forward_command_controller/doc/userdoc.html">Forward Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../joint_trajectory_controller/doc/userdoc.html">Joint Trajectory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../position_controllers/doc/userdoc.html">Position Controllers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../velocity_controllers/doc/userdoc.html">Velocity Controllers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../effort_controllers/doc/userdoc.html">Effort Controllers</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#diff-drive-controller">diff_drive_controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#joint-trajectory-controller-userdoc">joint_trajectory_controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#forward-command-controller">forward_command_controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#position-controllers">position_controllers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#velocity-controllers">velocity_controllers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#effort-controllers">effort_controllers</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../ros2_control/ros2controlcli/doc/index.html">Command Line Interface</a></li>
@@ -209,118 +212,22 @@ The controllers’ namespaces are commanding the following command interface typ
 <li><p>… &lt;the list is not complete&gt; …</p></li>
 </ul>
 </div></blockquote>
-<div class="section" id="controllers-user-documentation">
-<h3>Controllers user documentation<a class="headerlink" href="#controllers-user-documentation" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="guidelines-and-best-practices">
+<h3>Guidelines and Best Practices<a class="headerlink" href="#guidelines-and-best-practices" title="Permalink to this headline">¶</a></h3>
 </div>
-</div>
-<div class="section" id="diff-drive-controller">
-<span id="diff-drive-controller-userdoc"></span><h2>diff_drive_controller<a class="headerlink" href="#diff-drive-controller" title="Permalink to this headline">¶</a></h2>
-<p>Controller for mobile robots with differential drive.
-Input for control are robot body velocity commands which are translated to wheel commands for the differential drive base.
-Odometry is computed from hardware feedback and published.</p>
-<p>The controller works with a velocity twist from which it extracts the x component of the linear velocity and the z component of the angular velocity. Velocities on other components are ignored.</p>
-<p>The controller works with wheel joints through a velocity interface.</p>
-<blockquote>
-<div><p>Realtime-safe implementation.
-Odometry publishing
-Task-space velocity, acceleration and jerk limits
-Automatic stop after command time-out</p>
-</div></blockquote>
-</div>
-<div class="section" id="joint-trajectory-controller-userdoc">
-<span id="id2"></span><h2>joint_trajectory_controller<a class="headerlink" href="#joint-trajectory-controller-userdoc" title="Permalink to this headline">¶</a></h2>
-<p>Controller for executing joint-space trajectories on a group of joints. Trajectories are specified as a set of waypoints to be reached at specific time instants, which the controller attempts to execute as well as the mechanism allows. Waypoints consist of positions, and optionally velocities and accelerations.</p>
-<p>The controller is templated to work with multiple trajectory representations. By default, a spline interpolator is provided, but it’s possible to support other representations. The spline interpolator uses the following interpolation strategies depending on the waypoint specification:</p>
-<blockquote>
-<div><p>Linear: Only position is specified. Guarantees continuity at the position level. Discouraged because it yields trajectories with discontinuous velocities at the waypoints.</p>
-<p>Cubic: Position and velocity are specified. Guarantees continuity at the velocity level.</p>
-<p>Quintic: Position, velocity and acceleration are specified: Guarantees continuity at the acceleration level.</p>
-</div></blockquote>
-<p>The controller is templated to work with multiple hardware interface types. Currently joints with position, velocity and effort interfaces are supported. For position-controlled joints, desired positions are simply forwarded to the joints; while for velocity (effort) joints, the position+velocity trajectory following error is mapped to velocity (effort) commands through a PID loop. Example controller configurations can be found here.</p>
-<p>Similarly to the trajectory representation case above, it’s possible to support new hardware interfaces, or alternative mappings to an already supported interface (eg. a proxy controller for generating effort commands).</p>
-<blockquote>
-<div><p>Realtime-safe implementation.</p>
-<p>Proper handling of wrapping (continuous) joints.</p>
-<p>Robust to system clock changes: Discontinuous system clock changes do not cause discontinuities in the execution of already queued trajectory segments.</p>
-</div></blockquote>
-<p>The controller expects at least position feedback from the hardware.
-Joint velocities and accelerations are optional.
-Currently the controller does not internally integrate velocity from acceleration and position from velocity.
-Therefore if the hardware provides only acceleration or velocity states they have to be integrated in the hardware-interface implementation of velocity and position to use these controllers.</p>
-<p>The generic version of Joint Trajectory controller is implemented in this package.
-A yaml file for using it could be:</p>
-<blockquote>
-<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">controller_manager</span><span class="p">:</span>
-  <span class="nt">ros__parameters</span><span class="p">:</span>
-    <span class="nt">joint_trajectory_controller</span><span class="p">:</span>
-    <span class="nt">type</span><span class="p">:</span> <span class="s">&quot;joint_trajectory_controller/JointTrajectoryController&quot;</span>
-
-<span class="nt">joint_trajectory_controller</span><span class="p">:</span>
-  <span class="nt">ros__parameters</span><span class="p">:</span>
-    <span class="nt">joints</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">joint0</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">joint1</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">joint2</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">joint3</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">joint4</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">joint5</span>
-
-    <span class="nt">command_interfaces</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">position</span>
-
-    <span class="nt">state_interfaces</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">position</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">velocity</span>
-
-    <span class="nt">state_publish_rate</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">50.0</span> <span class="c1"># Defaults to 50</span>
-    <span class="nt">action_monitor_rate</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">20.0</span> <span class="c1"># Defaults to 20</span>
-
-    <span class="nt">allow_partial_joints_goal</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span> <span class="c1"># Defaults to false</span>
-    <span class="nt">hardware_state_has_offset</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-    <span class="nt">deduce_states_from_derivatives</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-    <span class="nt">constraints</span><span class="p">:</span>
-      <span class="nt">stopped_velocity_tolerance</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.01</span> <span class="c1"># Defaults to 0.01</span>
-      <span class="nt">goal_time</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0</span> <span class="c1"># Defaults to 0.0 (start immediately)</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p>The controller types are placed into namespaces according to their command types for the hardware (see <a class="reference external" href="../../index.rst">general introduction into controllers</a>).</p>
-<p>The following version of the Joint Trajectory Controller are available mapping the following interfaces:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>position_controllers::JointTrajectoryController
-- Input: position, [velocity, [acceleration]]
-- Output: position</p></li>
-<li><p>position_velocity_controllers::JointTrajectoryController
-- Input: position, [velocity, [acceleration]]
-- Output: position and velocity</p></li>
-<li><p>position_velocity_acceleration_controllers::JointTrajectoryController
-- Input: position, [velocity, [acceleration]]
-- Output: position, velocity and acceleration</p></li>
+<div class="section" id="available-controllers">
+<h3>Available Controllers<a class="headerlink" href="#available-controllers" title="Permalink to this headline">¶</a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../diff_drive_controller/doc/userdoc.html">Differential Drive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forward_command_controller/doc/userdoc.html">Forward Command</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../joint_trajectory_controller/doc/userdoc.html">Joint Trajectory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../position_controllers/doc/userdoc.html">Position Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../velocity_controllers/doc/userdoc.html">Velocity Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../effort_controllers/doc/userdoc.html">Effort Controllers</a></li>
 </ul>
-</div></blockquote>
-<p>The controller uses <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/include/hardware_interface/types/hardware_interface_type_values.hpp">common hardware interface definitions</a>.</p>
-<p>(<em>Not implemented yet</em>) When using pure <code class="docutils literal notranslate"><span class="pre">velocity</span></code> or <code class="docutils literal notranslate"><span class="pre">effort</span></code> controllers a command is generated using the desired state and state error using a velocity feedforward term plus a corrective PID term. (#171)</p>
 </div>
-<div class="section" id="forward-command-controller">
-<span id="forward-command-controller-userdoc"></span><h2>forward_command_controller<a class="headerlink" href="#forward-command-controller" title="Permalink to this headline">¶</a></h2>
-<p>This is a collection of controllers that work using the “effort” joint command interface but may accept different joint-level commands at the controller level, e.g. controlling the effort on a certain joint to achieve a set position.</p>
-<p>These controllers work with joints using the “effort” command interface.</p>
 </div>
-<div class="section" id="position-controllers">
-<span id="position-controllers-userdoc"></span><h2>position_controllers<a class="headerlink" href="#position-controllers" title="Permalink to this headline">¶</a></h2>
-<p>This is a collection of controllers that work using the “position” joint command interface but may accept different joint-level commands at the controller level, e.g. controlling the position on a certain joint to achieve a set velocity.</p>
-<p>These controllers work with joints using the “position” command interface.</p>
-</div>
-<div class="section" id="velocity-controllers">
-<span id="velocity-controllers-userdoc"></span><h2>velocity_controllers<a class="headerlink" href="#velocity-controllers" title="Permalink to this headline">¶</a></h2>
-<p>This is a collection of controllers that work using the “velocity” joint command interface but may accept different joint-level commands at the controller level, e.g. controlling the velocity on a certain joint to achieve a set position.</p>
-<p>These controllers work with joints using the “velocity” command interface.</p>
-</div>
-<div class="section" id="effort-controllers">
-<span id="effort-controllers-userdoc"></span><h2>effort_controllers<a class="headerlink" href="#effort-controllers" title="Permalink to this headline">¶</a></h2>
-<p>This is a collection of controllers that work using the “effort” joint command interface but may accept different joint-level commands at the controller level, e.g. controlling the effort on a certain joint to achieve a set position.</p>
-<p>These controllers work with joints using the “effort” command interface.</p>
 </div>
 </div>
 
@@ -330,7 +237,7 @@ A yaml file for using it could be:</p>
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../../ros2_control/ros2controlcli/doc/index.html" class="btn btn-neutral float-right" title="Command Line Interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../diff_drive_controller/doc/userdoc.html" class="btn btn-neutral float-right" title="diff_drive_controller" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="../../getting_started.html" class="btn btn-neutral float-left" title="Getting Started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
