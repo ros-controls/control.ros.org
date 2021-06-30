@@ -1,3 +1,7 @@
+# Status
+
+[![Build & Deploy Page](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-make-page.yml/badge.svg)](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-make-page.yml)
+
 # control.ros.org
 https://control.ros.org/
 
