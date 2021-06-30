@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>forward_command_controller &mdash; control.ros.org  documentation</title>
+  <title>IMU Sensor Broadcaster &mdash; control.ros.org  documentation</title>
   
 
   
@@ -42,8 +42,8 @@
     
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="joint_trajectory_controller" href="../../joint_trajectory_controller/doc/userdoc.html" />
-    <link rel="prev" title="diff_drive_controller" href="../../diff_drive_controller/doc/userdoc.html" /> 
+    <link rel="next" title="Command Line Interface" href="../../../ros2_control/ros2controlcli/doc/index.html" />
+    <link rel="prev" title="joint_state_broadcaster" href="../../joint_state_broadcaster/doc/userdoc.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -99,16 +99,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#nomenclature">Nomenclature</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../doc/controllers_index.html#id1">Controllers</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../../doc/controllers_index.html#guidelines-and-best-practices">Guidelines and Best Practices</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="../../doc/controllers_index.html#available-controllers">Available Controllers</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="../../diff_drive_controller/doc/userdoc.html">Differential Drive</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">Forward Command</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../joint_trajectory_controller/doc/userdoc.html">Joint Trajectory</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../position_controllers/doc/userdoc.html">Position Controllers</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../velocity_controllers/doc/userdoc.html">Velocity Controllers</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../effort_controllers/doc/userdoc.html">Effort Controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../doc/controllers_index.html#available-controllers">Available Controllers</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../doc/controllers_index.html#available-broadcasters">Available Broadcasters</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../joint_state_broadcaster/doc/userdoc.html">Joint State Broadcaster</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Imu Sensor Broadcaster</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../../doc/controllers_index.html#available-broadcasters">Available Broadcasters</a></li>
 </ul>
 </li>
 </ul>
@@ -168,14 +164,14 @@
         
           <li><a href="../../doc/controllers_index.html">ros2_controllers</a> &raquo;</li>
         
-      <li>forward_command_controller</li>
+      <li>IMU Sensor Broadcaster</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
             
-              <a href="https://github.com/ros-controls/control.ros.org/blob/main/ros2_controllers/forward_command_controller/doc/userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/ros-controls/control.ros.org/blob/main/ros2_controllers/imu_sensor_broadcaster/doc/userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -189,12 +185,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="forward-command-controller">
-<span id="forward-command-controller-userdoc"></span><h1>forward_command_controller<a class="headerlink" href="#forward-command-controller" title="Permalink to this headline">¶</a></h1>
-<p>This is a collection of controllers that work using the “effort” joint command interface but may accept different joint-level commands at the controller level, e.g. controlling the effort on a certain joint to achieve a set position.</p>
-<div class="section" id="hardware-interface-type">
-<h2>Hardware interface type<a class="headerlink" href="#hardware-interface-type" title="Permalink to this headline">¶</a></h2>
-<p>These controllers work with joints using the “effort” command interface.</p>
+  <div class="section" id="imu-sensor-broadcaster">
+<span id="imu-sensor-broadcaster-userdoc"></span><h1>IMU Sensor Broadcaster<a class="headerlink" href="#imu-sensor-broadcaster" title="Permalink to this headline">¶</a></h1>
+<p>Broadcaster of messages from IMU sensor.
+The published message type is <code class="docutils literal notranslate"><span class="pre">sensor_msgs/msg/Imu</span></code>.</p>
+<p>The controller is a wrapper around <code class="docutils literal notranslate"><span class="pre">IMUSensor</span></code> semantic component (see <code class="docutils literal notranslate"><span class="pre">controller_interface</span></code> package).</p>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<dl class="simple">
+<dt>frame_id (mandatory)</dt><dd><p>Frame in which the output message will be published.</p>
+</dd>
+<dt>sensor_name (mandatory)</dt><dd><p>Defines sensor name used as prefix for its interfaces.
+Interface names are: &lt;sensor_name&gt;/orientation.x, …, &lt;sensor_name&gt;/angular_velocity.x, …,
+&lt;sensor_name&gt;/linear_acceleration.x.</p>
+</dd>
+</dl>
 </div>
 </div>
 
@@ -204,8 +209,8 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../../joint_trajectory_controller/doc/userdoc.html" class="btn btn-neutral float-right" title="joint_trajectory_controller" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../../diff_drive_controller/doc/userdoc.html" class="btn btn-neutral float-left" title="diff_drive_controller" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../../ros2_control/ros2controlcli/doc/index.html" class="btn btn-neutral float-right" title="Command Line Interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../../joint_state_broadcaster/doc/userdoc.html" class="btn btn-neutral float-left" title="joint_state_broadcaster" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

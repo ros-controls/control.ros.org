@@ -100,6 +100,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../differences_to_ros1.html">Differences to ros_control (ROS1)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../differences_to_ros1.html#migration-guide-to-ros2-control">Migration Guide to ros2_control</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Demos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#repository-organization">Repository organization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#mode-switching-demo">Mode switching demo</a></li>
 </ul>
 </li>
@@ -176,10 +177,22 @@
   <div class="section" id="demos">
 <span id="ros2-control-demos"></span><h1>Demos<a class="headerlink" href="#demos" title="Permalink to this headline">¶</a></h1>
 <p>This repository provides templates for the development of ros2_control-enabled robots and a simple simulations to demonstrate and prove ros2_control concepts.</p>
+<div class="section" id="repository-organization">
+<h2>Repository organization<a class="headerlink" href="#repository-organization" title="Permalink to this headline">¶</a></h2>
+<p><strong>Note:</strong> the following list is comprehensive.</p>
+<p>The repository is organized in the following packages:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ros2_control_demo_hardware</span></code> - implementation of example hardware interfaces,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ros2_control_demo_bringup</span></code> - nodes starting hardware interfaces, controllers and GUIs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ros2_control_test_node</span></code> - nodes for testing ros2_control-enabled robots and their integration in the framework.</p></li>
+</ul>
+</div></blockquote>
+</div>
 <div class="section" id="mode-switching-demo">
 <h2>Mode switching demo<a class="headerlink" href="#mode-switching-demo" title="Permalink to this headline">¶</a></h2>
 <p>Start up the multi interface rrbot system:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2 launch ros2_control_demo_robot rrbot_system_multi_interface.launch.py
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2 launch ros2_control_demo_bringup rrbot_system_multi_interface.launch.py
 </pre></div>
 </div>
 <p>List the available interfaces</p>
