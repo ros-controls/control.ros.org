@@ -112,12 +112,13 @@ html_context = {
     "conf_py_path": "/",
     "source_suffix": source_suffix,
     "css_files": ['_static/override.css'],
-    "favicon": "images/logo_ros-controls.png",
-    "logo": "images/logo_ros-controls.png"
+    "favicon": "favicon_ros-controls.ico",
+    "logo": "logo_ros-controls.png"
 }
 
 html_logo = "images/logo_ros-controls.png"
 logo_only = True
+html_favicon = "images/favicon_ros-controls.ico"
 
 github_url = "https://github.com/ros-controls/control.ros.org"
 
