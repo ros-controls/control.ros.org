@@ -21,7 +21,7 @@ import sphinx_rtd_theme
 
 # -- Project information -----------------------------------------------------
 
-project = 'ros-controls'
+project = 'control.ros.org'
 copyright = '2021, ros2_control Maintainers'
 author = 'ros2_control Maintainers'
 
