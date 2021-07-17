@@ -67,6 +67,7 @@ For a list of services and their definitions, check the ``srv`` folder in the `c
 While service calls can be used directly from the command line or via nodes, there exists a user-friendly ``Command Line Interface`` (CLI) which integrates with the ``ros2 cli``. This supports auto-complete and has a range of common commands available. The base command is ``ros2 control``.
 For the description of our CLI capabilities, see the ``README.md`` file of the `ros2controlcli`_ package.
 
+.. _overview_hardware_components:
 
 Hardware Components
 ===================

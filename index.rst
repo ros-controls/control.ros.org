@@ -7,8 +7,9 @@ Welcome to the ros2_control documentation!
    :hidden:
 
    getting_started.rst
+   ros2_control/doc/index.rst
    ros2_controllers/doc/controllers_index.rst
-   ros2_control/ros2controlcli/doc/index.rst
+   ros2_control/ros2controlcli/doc/userdoc.rst
    differences_to_ros1.rst
    ros2_control_demos/doc/index.rst
    contributing.rst

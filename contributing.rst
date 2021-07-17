@@ -4,7 +4,7 @@ To reduce the entropy of the universe and our vivid, open, and collaborative env
 
 
 Pull Requests
-===========
+==============
 
 Requirements for pull requests are as follows:
 
