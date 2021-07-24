@@ -98,8 +98,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html">Core functionalities</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../doc/controllers_index.html">ros2_controllers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#nomenclature">Nomenclature</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../../doc/controllers_index.html#id1">Controllers</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../../doc/controllers_index.html#guidelines-and-best-practices">Guidelines and Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#id1">Controllers</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/controllers_index.html#guidelines-and-best-practices">Guidelines and Best Practices</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../doc/writing_new_controller.html">Writing a new controller</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="../../doc/controllers_index.html#available-controllers">Available Controllers</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="../../diff_drive_controller/doc/userdoc.html">Differential Drive</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../forward_command_controller/doc/userdoc.html">Forward Command</a></li>
@@ -235,12 +236,12 @@ A yaml file for using it could be:</p>
 <span class="nt">joint_trajectory_controller</span><span class="p">:</span>
   <span class="nt">ros__parameters</span><span class="p">:</span>
     <span class="nt">joints</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">joint0</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">joint1</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">joint2</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">joint3</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">joint4</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">joint5</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">joint6</span>
 
     <span class="nt">command_interfaces</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">position</span>
@@ -249,18 +250,70 @@ A yaml file for using it could be:</p>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">position</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">velocity</span>
 
-    <span class="nt">state_publish_rate</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">50.0</span> <span class="c1"># Defaults to 50</span>
-    <span class="nt">action_monitor_rate</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">20.0</span> <span class="c1"># Defaults to 20</span>
+    <span class="nt">state_publish_rate</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">50.0</span>
+    <span class="nt">action_monitor_rate</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">20.0</span>
 
-    <span class="nt">allow_partial_joints_goal</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span> <span class="c1"># Defaults to false</span>
-    <span class="nt">hardware_state_has_offset</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-    <span class="nt">deduce_states_from_derivatives</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">allow_partial_joints_goal</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+    <span class="nt">open_loop_control</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
     <span class="nt">constraints</span><span class="p">:</span>
-      <span class="nt">stopped_velocity_tolerance</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.01</span> <span class="c1"># Defaults to 0.01</span>
-      <span class="nt">goal_time</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0</span> <span class="c1"># Defaults to 0.0 (start immediately)</span>
+      <span class="nt">stopped_velocity_tolerance</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.01</span>
+      <span class="nt">goal_time</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0</span>
+      <span class="nt">joint1</span><span class="p">:</span>
+        <span class="nt">trajectory</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.05</span>
+        <span class="nt">goal</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.03</span>
 </pre></div>
 </div>
 </div></blockquote>
+<div class="section" id="details-about-parameters">
+<h3>Details about parameters<a class="headerlink" href="#details-about-parameters" title="Permalink to this headline">¶</a></h3>
+<dl>
+<dt>joint (list(string)):</dt><dd><p>Joint names to control.</p>
+</dd>
+<dt>command_interface (list(string)):</dt><dd><p>Command interfaces provided by the hardware interface for all joints.</p>
+<p>Values: [position | velocity | acceleration] (multiple allowed)</p>
+</dd>
+<dt>state_interfaces (list(string)):</dt><dd><p>State interfaces provided by the hardware for all joints.</p>
+<p>Values: position (mandatory) [velocity, [acceleration]].
+Acceleration interface can only be used in combination with position and velocity.</p>
+<p>Default: 50.0</p>
+</dd>
+<dt>state_publish_rate (double):</dt><dd><p>Publish-rate of the controller’s “state” topic.</p>
+<p>Default: 20.0</p>
+</dd>
+<dt>action_monitor_rate (double):</dt><dd><p>Rate to monitor status changes when the controller is executing action (control_msgs::action::FollowJointTrajectory).</p>
+</dd>
+<dt>allow_partial_joints_goal (boolean):</dt><dd><p>Allow joint goals defining trajectory for only some joints.</p>
+</dd>
+<dt>open_loop_control (boolean):</dt><dd><p>Use controller in open-loop control mode using ignoring the states provided by hardware interface and using last commands as states in the next control step. This is useful if hardware states are not following commands, i.e., an offset between those (typical for hydraulic manipulators).</p>
+<p>If this flag is set, the controller tries to read the values from the command interfaces on starting. If they have real numeric values, those will be used instead of state interfaces. Therefore it is important set command interfaces to NaN (std::numeric_limits&lt;double&gt;::quiet_NaN()) or state values when the hardware is started.</p>
+</dd>
+<dt>constraints (structure)</dt><dd><p>Default values for tolerances if no explicit values are states in JointTrajectory message.</p>
+</dd>
+<dt>constraints.stopped_velocity_tolerance (double)</dt><dd><p>Default value for end velocity deviation.</p>
+<p>Default: 0.01</p>
+</dd>
+<dt>constraints.goal_time (double)</dt><dd><p>Maximally allowed tolerance for not reaching the end of the trajectory in a predefined time.</p>
+<p>Default: 0.0 (not checked)</p>
+</dd>
+<dt>constraints.&lt;joint_name&gt;.trajectory</dt><dd><p>Maximally allowed deviation from the target trajectory for a given joint.</p>
+<p>Default: 0.0 (tolerance is not enforced)</p>
+</dd>
+<dt>constraints.&lt;joint_name&gt;.goal</dt><dd><p>Maximally allowed deviation from the goal (end of the trajectory) for a given joint.</p>
+<p>Default: 0.0 (tolerance is not enforced)</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="ros2-interface-of-the-controller">
+<h3>ROS2 interface of the controller<a class="headerlink" href="#ros2-interface-of-the-controller" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt>~/joint_trajectory (input topic) [trajectory_msgs::msg::JointTrajectory]</dt><dd><p>Topic for commanding the controller.</p>
+</dd>
+<dt>~/state (output topic) [control_msgs::msg::JointTrajectoryControllerState]</dt><dd><p>Topic publishing internal states.</p>
+</dd>
+<dt>~/follow_joint_trajectory (action server) [control_msgs::action::FollowJointTrajectory]</dt><dd><p>Action server for commanding the controller.</p>
+</dd>
+</dl>
+</div>
 </div>
 <div class="section" id="specialized-versions-of-jointtrajectorycontroller-tbd-in">
 <h2>Specialized versions of JointTrajectoryController (TBD in …)<a class="headerlink" href="#specialized-versions-of-jointtrajectorycontroller-tbd-in" title="Permalink to this headline">¶</a></h2>
