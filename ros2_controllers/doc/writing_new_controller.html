@@ -198,7 +198,7 @@ The following is a step-by-step guide to create source files, basic tests, and c
 <p>If the package for the controller does not exist, then create it first.
 The package should have <code class="docutils literal notranslate"><span class="pre">ament_cmake</span></code> as a build type.
 The easiest way is to search online for the most recent manual.
-A helpful command to support this process is <cite>ros2 pkg create</cite>.
+A helpful command to support this process is <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">pkg</span> <span class="pre">create</span></code>.
 Use the <code class="docutils literal notranslate"><span class="pre">--help</span></code> flag for more information on how to use it.
 There is also an option to create library source files and compile rules to help you in the following steps.</p>
 </li>
@@ -210,18 +210,15 @@ Optionally add <code class="docutils literal notranslate"><span class="pre">visi
 You can copy this file from an existing controller package and change the name prefix to the <code class="docutils literal notranslate"><span class="pre">&lt;PACKAGE_NAME&gt;</span></code>.</p>
 </li>
 <li><p><strong>Adding declarations into header file (.hpp)</strong></p>
-<ol class="arabic">
+<ol class="arabic simple">
 <li><p>Take care that you use header guards. ROS2-style is using <code class="docutils literal notranslate"><span class="pre">#ifndef</span></code> and <code class="docutils literal notranslate"><span class="pre">#define</span></code> preprocessor directives. (For more information on this, a search engine is your friend :) ).</p></li>
 <li><p>include <code class="docutils literal notranslate"><span class="pre">&quot;controller_interface/controller_interface.hpp&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">visibility_control.h</span></code> if you are using one.</p></li>
 <li><p>Define a unique namespace for your controller. This is usually a package name written in <code class="docutils literal notranslate"><span class="pre">snake_case</span></code>.</p></li>
 <li><p>Define the class of the controller, extending <code class="docutils literal notranslate"><span class="pre">ControllerInterface</span></code>, e.g.,
-.. code:: c++</p>
-<blockquote>
-<div><p>class ControllerName : public controller_interface::ControllerInterface</p>
-</div></blockquote>
-</li>
+.. code:: c++
+class ControllerName : public controller_interface::ControllerInterface</p></li>
 <li><p>Add a constructor without parameters and the following public methods overriding the <code class="docutils literal notranslate"><span class="pre">ControllerInterface</span></code> definition: <code class="docutils literal notranslate"><span class="pre">init</span></code>, <code class="docutils literal notranslate"><span class="pre">command_interface_configuration</span></code>, <code class="docutils literal notranslate"><span class="pre">state_interface_configuration</span></code>, <code class="docutils literal notranslate"><span class="pre">on_configure</span></code>, <code class="docutils literal notranslate"><span class="pre">on_activate</span></code>, <code class="docutils literal notranslate"><span class="pre">on_deactivate</span></code>, <code class="docutils literal notranslate"><span class="pre">update</span></code>.
-For exact definitions check the <code class="docutils literal notranslate"><span class="pre">controller_interface/controller_interface.hpp</span></code> header or one of the controllers from <a href="#id1"><span class="problematic" id="id2">`</span></a>ros2_controllers &lt;<a class="reference external" href="https://github.com/ros-controls/ros2_controllers">https://github.com/ros-controls/ros2_controllers</a>&gt; <a href="#id3"><span class="problematic" id="id4">`</span></a>_.</p></li>
+For exact definitions check the <code class="docutils literal notranslate"><span class="pre">controller_interface/controller_interface.hpp</span></code> header or one of the controllers from <a class="reference external" href="https://github.com/ros-controls/ros2_controllers">ros2_controllers</a>.</p></li>
 <li><p>(optional) Often, controllers accept lists of joint names and interface names as parameters.
 If so, you can add two protected string vectors to store those values.</p></li>
 </ol>
@@ -253,7 +250,7 @@ As first parameters you should provide exact controller class, e.g., <code class
 <li><p><strong>Writing export definition for pluginlib</strong></p>
 <ol class="arabic simple">
 <li><p>Create the <code class="docutils literal notranslate"><span class="pre">&lt;controller_name&gt;.xml</span></code> file in the package and add a definition of the library and controller’s class which has to be visible for the pluginlib.
-The easiest way to do that is to check other controllers in the <a href="#id5"><span class="problematic" id="id6">`</span></a>ros2_controllers &lt;<a class="reference external" href="https://github.com/ros-controls/ros2_controllers">https://github.com/ros-controls/ros2_controllers</a>&gt; <a href="#id7"><span class="problematic" id="id8">`</span></a>_ package.</p></li>
+The easiest way to do that is to check other controllers in the <a class="reference external" href="https://github.com/ros-controls/ros2_controllers">ros2_controllers</a> package.</p></li>
 <li><p>Usually, the plugin name is defined by the package (namespace) and the class name, e.g.,
 <code class="docutils literal notranslate"><span class="pre">&lt;controller_name_package&gt;/&lt;ControllerName&gt;</span></code>.
 This name defines the controller’s type when the controller manager searches for it.
@@ -262,8 +259,8 @@ The other two files have to correspond to the definition done in macro at the bo
 </li>
 <li><p><strong>Writing simple test to check if the controller can be found and loaded</strong></p>
 <ol class="arabic simple">
-<li><p>Create the folder <code class="docutils literal notranslate"><span class="pre">test</span></code> in your package, if it does not exist already, and add a file named <a href="#id9"><span class="problematic" id="id10">``</span></a>test_load_&lt;controller_name&gt;.cpp&gt;.</p></li>
-<li><p>You can safely copy the file’s content for any controller defined in the <a href="#id11"><span class="problematic" id="id12">`</span></a>ros2_controllers &lt;<a class="reference external" href="https://github.com/ros-controls/ros2_controllers">https://github.com/ros-controls/ros2_controllers</a>&gt; <a href="#id13"><span class="problematic" id="id14">`</span></a>_ package.</p></li>
+<li><p>Create the folder <code class="docutils literal notranslate"><span class="pre">test</span></code> in your package, if it does not exist already, and add a file named <code class="docutils literal notranslate"><span class="pre">test_load_&lt;controller_name&gt;.cpp</span></code>.</p></li>
+<li><p>You can safely copy the file’s content for any controller defined in the <a class="reference external" href="https://github.com/ros-controls/ros2_controllers">ros2_controllers</a> package.</p></li>
 <li><p>Change the name of the copied test and in the last line, where controller type is specified put the name defined in <code class="docutils literal notranslate"><span class="pre">&lt;controller_name&gt;.xml</span></code> file, e.g., <code class="docutils literal notranslate"><span class="pre">&lt;controller_name_package&gt;/&lt;ControllerName&gt;</span></code>.</p></li>
 </ol>
 </li>
@@ -283,7 +280,7 @@ Those are at least: <code class="docutils literal notranslate"><span class="pre"
 <li><p>Add install directives for targets and include directory.</p></li>
 <li><p>In the test section add the following dependencies: <code class="docutils literal notranslate"><span class="pre">ament_cmake_gmock</span></code>, <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code>, <code class="docutils literal notranslate"><span class="pre">hardware_interface</span></code>, <code class="docutils literal notranslate"><span class="pre">ros2_control_test_assets</span></code>.</p></li>
 <li><p>Add compile definitions for the tests using the <code class="docutils literal notranslate"><span class="pre">ament_add_gmock</span></code> directive.
-For details, see how it is done for controllers in the <a href="#id15"><span class="problematic" id="id16">`</span></a>ros2_controllers &lt;<a class="reference external" href="https://github.com/ros-controls/ros2_controllers">https://github.com/ros-controls/ros2_controllers</a>&gt; <a href="#id17"><span class="problematic" id="id18">`</span></a>_ package.</p></li>
+For details, see how it is done for controllers in the <a class="reference external" href="https://github.com/ros-controls/ros2_controllers">ros2_controllers</a> package.</p></li>
 <li><p>(optional) Add your controller`s library into <code class="docutils literal notranslate"><span class="pre">ament_export_libraries</span></code> before <code class="docutils literal notranslate"><span class="pre">ament_package()</span></code>.</p></li>
 </ol>
 </li>
