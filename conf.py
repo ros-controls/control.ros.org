@@ -6,7 +6,8 @@
 # full list see the documentation:
 # http://www.sphinx-doc.org/en/master/config
 
-import sphinx_rtd_theme
+import shutil
+import subprocess
 
 # -- Path setup --------------------------------------------------------------
 
@@ -48,6 +49,7 @@ extensions = [
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
     'sphinx_rtd_theme',
+    'breathe',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -92,7 +94,7 @@ html_theme = 'sphinx_rtd_theme'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ['']
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
@@ -129,6 +131,14 @@ htmlhelp_basename = 'ros2ControlDocumentation'
 
 
 # -- Extension configuration -------------------------------------------------
+# copy transmission images to ros2_control/doc/_build/xml/ so that breathe picks them up as artifacts
+shutil.copytree("ros2_control/transmission_interface/images/", "ros2_control/doc/_build/xml/", dirs_exist_ok=True)
+subprocess.run(['doxygen', 'doc/Doxyfile'], cwd='ros2_control')
+breathe_projects = {
+	"C++ Sphinx Doxygen Breathe": "ros2_control/doc/_build/xml/"
+}
+breathe_default_project = "C++ Sphinx Doxygen Breathe"
+breathe_default_members = ('members', 'undoc-members')
 
 # -- Options for todo extension ----------------------------------------------
 

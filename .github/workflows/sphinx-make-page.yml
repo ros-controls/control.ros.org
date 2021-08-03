@@ -11,6 +11,11 @@ jobs:
   build-deploy:
     runs-on: ubuntu-latest
     steps:
+    - name: checkout ros2_control
+      uses: actions/checkout@v2
+      with:
+        repository: ros-controls/ros2_control
+        path: ros2_control
     - uses: ros-controls/control.ros.org-deployment-scripts@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
