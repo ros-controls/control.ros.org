@@ -70,7 +70,7 @@ We use the following naming conventions for branches.
 
 **Development branch**:
 
-  - Name: ``rolling``
+  - Name: ``master``
   - CI rule for merge:
     - must: ``semi-binary`` (working against development branch of ros2_control)
     - good: ``binary``      (working against the same stable branch of other ros2_control repositories)
