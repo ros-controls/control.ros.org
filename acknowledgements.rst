@@ -10,6 +10,12 @@ The project has received major contributions from the following companies and in
     :width: 300
     :alt: "PAL Robotics"
 
+|stoglroboticslogo|
+
+.. |stoglroboticslogo| image:: images/stoglroboticslogo.png
+    :width: 300
+    :alt: "Stogl Robotics Consulting"
+
 |rosin_ack_logo_wide|
 
 Supported by ROSIN - ROS-Industrial Quality-Assured Robot Software Components.
