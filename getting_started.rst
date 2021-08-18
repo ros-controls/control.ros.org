@@ -161,7 +161,7 @@ Running the Framework for Your Robot
 To run the ros2_control framework, do the following.
 The example files can be found in the `ros2_control_demos`_ repository.
 
-#. Create a YAML file with the configuration of the controller manager and controllers. (`Example configuration for RRBot <https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_bringup/config/rrbot_controllers.yaml>`_)
+#. Create a YAML file with the configuration of the controller manager and two controllers. (`Example configuration for RRBot <https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_bringup/config/rrbot_controllers.yaml>`_)
 #. Extend the robot's URDF description with needed ``<ros2_control>`` tags.
    It is recommended to use macro files (xacro) instead of pure URDF. (`Example URDF for RRBot <https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_description/rrbot_description/urdf/rrbot_system_position_only.urdf.xacro>`_)
 #. Create a launch file to start the node with `Controller Manager`_.
