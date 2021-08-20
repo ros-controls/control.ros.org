@@ -161,12 +161,12 @@ Running the Framework for Your Robot
 To run the ros2_control framework, do the following.
 The example files can be found in the `ros2_control_demos`_ repository.
 
-#. Create a YAML file with the configuration of the controller manager and controllers. (`Example configuration for RRBot <https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_robot/controllers/rrbot_forward_controller_position.yaml>`_)
+#. Create a YAML file with the configuration of the controller manager and two controllers. (`Example configuration for RRBot <https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_bringup/config/rrbot_controllers.yaml>`_)
 #. Extend the robot's URDF description with needed ``<ros2_control>`` tags.
-   It is recommended to use macro files (xacro) instead of pure URDF. (`Example URDF for RRBot <https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_robot/description/rrbot_system_position_only.urdf.xacro>`_)
+   It is recommended to use macro files (xacro) instead of pure URDF. (`Example URDF for RRBot <https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_description/rrbot_description/urdf/rrbot_system_position_only.urdf.xacro>`_)
 #. Create a launch file to start the node with `Controller Manager`_.
    You can use a default `ros2_control node`_ (recommended) or integrate the controller manager in your software stack.
-   (`Example launch file for RRBot <https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_robot/launch/rrbot_system_position_only.launch.py>`_)
+   (`Example launch file for RRBot <https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_bringup/launch/rrbot_system_position_only.launch.py>`_)
    
 *NOTE:* You could alternatively use a script to create setup a `skeleton of the "hardware_interface" package by using the scripts <https://stoglrobotics.github.io/ros_team_workspace/use-cases/setup_robot_ros2_control_hardware.html>`_ provided by one of our maintainers.
 
