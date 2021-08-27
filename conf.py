@@ -108,7 +108,7 @@ html_context = {
     "display_github": True,
     "github_user": "ros-controls",
     "github_repo": "control.ros.org",
-    "github_version": "main",
+    "github_version": "master",
     "conf_py_path": "/",
     "source_suffix": source_suffix,
     "css_files": ['_static/override.css'],
