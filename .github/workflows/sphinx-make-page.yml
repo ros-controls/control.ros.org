@@ -17,6 +17,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: ros-controls/ros2_control
+        ref: master
         path: ros2_control
     - name: checkout ros2_controllers
       uses: actions/checkout@v2
@@ -49,6 +50,7 @@ jobs:
         # The above command will fail if no changes were present, so we ignore
         # the return code.
     - name: Push changes
+      if: ${{ !env.ACT }}
       uses: ad-m/github-push-action@master
       with:
         branch: gh-pages
