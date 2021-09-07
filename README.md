@@ -10,7 +10,7 @@ This folder holds the source and configuration files used to generate the
 
 **NOTE**: Current test version of the documentation can be found [here](https://ros-controls.github.io/control.ros.org/).
 
-Build Instructions:
+# Build Instructions:
 1. If you are running inside a docker container, be sure to open a port so the website can be accessed.
 2. Checkout the relevant branches for control.ros.org and ros2_control.
     Note: Either checkout ros2_control inside control.ros.org or softlink it there.
@@ -22,6 +22,9 @@ Build Instructions:
 7. Open a browser to localhost:<port>
 
 Alternatively, follow the [Sphinx installation guide](https://www.sphinx-doc.org/en/master/usage/installation.html).
+# Testing GitHub workflows:
+If you want to modify or otherwise test the GitHub actions workflow locally without having to push everytime to see the result,
+you can use the [act](https://github.com/nektos/act) software package to run the workflows locally. You will need to use a GitHub token
+as the workflows pulls external repositories. You can create one with only repo:public_repo rights [here](https://github.com/settings/tokens). 
 
-Build the docs locally with `make html` and you'll find the built docs entry point in `_build/html/index.html`.
-
+Once you have installed act and obtained a token for your user, run from within a local copy of this repository `act -s GITHUB_TOKEN -j <build-deploy or check-build>` and enter your token in the prompt. Be sure to replace the `<>` with one of the two workflow names.
