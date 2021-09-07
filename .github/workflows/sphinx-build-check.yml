@@ -7,6 +7,26 @@ jobs:
   check-build:
     runs-on: ubuntu-latest
     steps:
-    - uses: ros-controls/control.ros.org-deployment-scripts@master
-      with:
-        install_extensions: false
+      - name: checkout control.ros.org
+        uses: actions/checkout@v2
+      - name: checkout ros2_control
+        uses: actions/checkout@v2
+        with:
+          repository: ros-controls/ros2_control
+          ref: master
+          path: ros2_control
+      - name: checkout ros2_controllers
+        uses: actions/checkout@v2
+        with:
+          repository: ros-controls/ros2_controllers
+          path: ros2_controllers
+      - name: checkout ros2_control_demos
+        uses: actions/checkout@v2
+        with:
+          repository: ros-controls/ros2_control_demos
+          path: ros2_control_demos
+      - name: build sphinx docs 
+        uses: ammaraskar/sphinx-action@master
+        with:
+          docs-folder: "."
+          pre-build-command: "apt-get update --allow-releaseinfo-change && apt-get install -y doxygen graphviz && pip3 install -r requirements.txt"
