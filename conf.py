@@ -6,7 +6,8 @@
 # full list see the documentation:
 # http://www.sphinx-doc.org/en/master/config
 
-import sphinx_rtd_theme
+import shutil
+import subprocess
 
 # -- Path setup --------------------------------------------------------------
 
@@ -129,6 +130,12 @@ htmlhelp_basename = 'ros2ControlDocumentation'
 
 
 # -- Extension configuration -------------------------------------------------
+# copy transmission images to ros2_control/doc/_build/xml/ so that breathe picks them up as artifacts
+shutil.copytree("ros2_control/transmission_interface/images/", "ros2_control/doc/_build/xml/", dirs_exist_ok=True)
+# generate doxygen documentation
+subprocess.run(['doxygen', 'doc/Doxyfile'], cwd='ros2_control')
+# copy doxygen documentation to api subfolder
+shutil.copytree("ros2_control/doc/_build/html", "_build/html/api")
 
 # -- Options for todo extension ----------------------------------------------
 
