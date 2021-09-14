@@ -186,9 +186,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="differences-to-ros-control-ros1">
-<span id="diff-to-ros1"></span><h1>Differences to ros_control (ROS1)<a class="headerlink" href="#differences-to-ros-control-ros1" title="Permalink to this headline">¶</a></h1>
+<span id="diff-to-ros1"></span><h1>Differences to ros_control (ROS1)<a class="headerlink" href="#differences-to-ros-control-ros1" title="Permalink to this headline"></a></h1>
 <div class="section" id="hardware-structures-classes">
-<h2>Hardware Structures - classes<a class="headerlink" href="#hardware-structures-classes" title="Permalink to this headline">¶</a></h2>
+<h2>Hardware Structures - classes<a class="headerlink" href="#hardware-structures-classes" title="Permalink to this headline"></a></h2>
 <p>The ros_control framework uses the <code class="docutils literal notranslate"><span class="pre">RobotHW</span></code> class as a rigid structure to handle any hardware.
 This makes it impossible to extend the existing robot with additional hardware, like sensors, actuators, and tools, without coding.
 The <code class="docutils literal notranslate"><span class="pre">CombinedRobotHardware</span></code> corrects this drawback.
@@ -199,13 +199,13 @@ This also means that multi-robot, robot-sensor, robot-gripper combinations are s
 Section <a class="reference external" href="#hardware-components">Hardware Components</a> describes this in detail.</p>
 </div>
 <div class="section" id="hardware-interfaces">
-<h2>Hardware Interfaces<a class="headerlink" href="#hardware-interfaces" title="Permalink to this headline">¶</a></h2>
+<h2>Hardware Interfaces<a class="headerlink" href="#hardware-interfaces" title="Permalink to this headline"></a></h2>
 <p>The ros_control framework allows only three types of interfaces (joints), i.e., <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code>, and <code class="docutils literal notranslate"><span class="pre">effort</span></code>. The <code class="docutils literal notranslate"><span class="pre">RobotHW</span></code> class makes it very hard to use any other data to control the robot.</p>
 <p>The ros2_control approach does not enforce a fixed set of interface types, but they are defined as strings in <a class="reference external" href="#hardware-description-in-urdf">hardware’s description</a>.
 To ensure compatibility of standard controllers, standard interfaces are defined as constants in <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/include/hardware_interface/types/hardware_interface_type_values.hpp">hardware_interface package</a>.</p>
 </div>
 <div class="section" id="controller-s-access-to-hardware">
-<h2>Controller’s Access to Hardware<a class="headerlink" href="#controller-s-access-to-hardware" title="Permalink to this headline">¶</a></h2>
+<h2>Controller’s Access to Hardware<a class="headerlink" href="#controller-s-access-to-hardware" title="Permalink to this headline"></a></h2>
 <p>In ros_control, the controllers had direct access to the <code class="docutils literal notranslate"><span class="pre">RobotHW</span></code> class requesting access to its interfaces (joints).
 The hardware itself then took care of registered interfaces and resource conflicts.</p>
 <p>In ros2_control, <code class="docutils literal notranslate"><span class="pre">ResourceManager</span></code> takes care of the state of available interfaces in the framework and enables controllers to access the hardware.
@@ -213,9 +213,9 @@ Also, the controllers do not have direct access to hardware anymore, but they re
 </div>
 </div>
 <div class="section" id="migration-guide-to-ros2-control">
-<h1>Migration Guide to ros2_control<a class="headerlink" href="#migration-guide-to-ros2-control" title="Permalink to this headline">¶</a></h1>
+<h1>Migration Guide to ros2_control<a class="headerlink" href="#migration-guide-to-ros2-control" title="Permalink to this headline"></a></h1>
 <div class="section" id="robothardware-to-components">
-<h2>RobotHardware to Components<a class="headerlink" href="#robothardware-to-components" title="Permalink to this headline">¶</a></h2>
+<h2>RobotHardware to Components<a class="headerlink" href="#robothardware-to-components" title="Permalink to this headline"></a></h2>
 <ol class="arabic simple">
 <li><p>The implementation of <code class="docutils literal notranslate"><span class="pre">RobotHW</span></code> is not used anymore.
 This should be migrated to <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/include/hardware_interface/system_interface.hpp">SystemInterface</a> class or, for more granularity, <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/include/hardware_interface/sensor_interface.hpp">SensorInterface</a> and <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/include/hardware_interface/actuator_interface.hpp">ActuatorInterface</a>.
@@ -240,7 +240,7 @@ This method is equivalent to those from <code class="docutils literal notranslat
 </ol>
 </div>
 <div class="section" id="controller-migration">
-<h2>Controller Migration<a class="headerlink" href="#controller-migration" title="Permalink to this headline">¶</a></h2>
+<h2>Controller Migration<a class="headerlink" href="#controller-migration" title="Permalink to this headline"></a></h2>
 <p>An excellent example of a migrated controller is the <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/master/joint_trajectory_controller/src/joint_trajectory_controller.cpp">JointTrajectoryController</a>.
 The real-time critical methods are marked as such.</p>
 <ol class="arabic simple">

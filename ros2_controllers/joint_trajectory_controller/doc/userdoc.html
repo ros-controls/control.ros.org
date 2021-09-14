@@ -197,10 +197,10 @@
            <div itemprop="articleBody">
             
   <div class="section" id="joint-trajectory-controller">
-<span id="joint-trajectory-controller-userdoc"></span><h1>joint_trajectory_controller<a class="headerlink" href="#joint-trajectory-controller" title="Permalink to this headline">¶</a></h1>
+<span id="joint-trajectory-controller-userdoc"></span><h1>joint_trajectory_controller<a class="headerlink" href="#joint-trajectory-controller" title="Permalink to this headline"></a></h1>
 <p>Controller for executing joint-space trajectories on a group of joints. Trajectories are specified as a set of waypoints to be reached at specific time instants, which the controller attempts to execute as well as the mechanism allows. Waypoints consist of positions, and optionally velocities and accelerations.</p>
 <div class="section" id="trajectory-representation">
-<h2>Trajectory representation<a class="headerlink" href="#trajectory-representation" title="Permalink to this headline">¶</a></h2>
+<h2>Trajectory representation<a class="headerlink" href="#trajectory-representation" title="Permalink to this headline"></a></h2>
 <p>The controller is templated to work with multiple trajectory representations. By default, a spline interpolator is provided, but it’s possible to support other representations. The spline interpolator uses the following interpolation strategies depending on the waypoint specification:</p>
 <blockquote>
 <div><p>Linear: Only position is specified. Guarantees continuity at the position level. Discouraged because it yields trajectories with discontinuous velocities at the waypoints.</p>
@@ -209,12 +209,12 @@
 </div></blockquote>
 </div>
 <div class="section" id="hardware-interface-type">
-<h2>Hardware interface type<a class="headerlink" href="#hardware-interface-type" title="Permalink to this headline">¶</a></h2>
+<h2>Hardware interface type<a class="headerlink" href="#hardware-interface-type" title="Permalink to this headline"></a></h2>
 <p>The controller is templated to work with multiple hardware interface types. Currently joints with position, velocity and effort interfaces are supported. For position-controlled joints, desired positions are simply forwarded to the joints; while for velocity (effort) joints, the position+velocity trajectory following error is mapped to velocity (effort) commands through a PID loop. Example controller configurations can be found here.</p>
 <p>Similarly to the trajectory representation case above, it’s possible to support new hardware interfaces, or alternative mappings to an already supported interface (eg. a proxy controller for generating effort commands).</p>
 </div>
 <div class="section" id="other-features">
-<h2>Other features<a class="headerlink" href="#other-features" title="Permalink to this headline">¶</a></h2>
+<h2>Other features<a class="headerlink" href="#other-features" title="Permalink to this headline"></a></h2>
 <blockquote>
 <div><p>Realtime-safe implementation.</p>
 <p>Proper handling of wrapping (continuous) joints.</p>
@@ -222,7 +222,7 @@
 </div></blockquote>
 </div>
 <div class="section" id="using-joint-trajectory-controller-s">
-<h2>Using Joint Trajectory Controller(s)<a class="headerlink" href="#using-joint-trajectory-controller-s" title="Permalink to this headline">¶</a></h2>
+<h2>Using Joint Trajectory Controller(s)<a class="headerlink" href="#using-joint-trajectory-controller-s" title="Permalink to this headline"></a></h2>
 <p>The controller expects at least position feedback from the hardware.
 Joint velocities and accelerations are optional.
 Currently the controller does not internally integrate velocity from acceleration and position from velocity.
@@ -267,7 +267,7 @@ A yaml file for using it could be:</p>
 </div>
 </div></blockquote>
 <div class="section" id="details-about-parameters">
-<h3>Details about parameters<a class="headerlink" href="#details-about-parameters" title="Permalink to this headline">¶</a></h3>
+<h3>Details about parameters<a class="headerlink" href="#details-about-parameters" title="Permalink to this headline"></a></h3>
 <dl>
 <dt>joint (list(string)):</dt><dd><p>Joint names to control.</p>
 </dd>
@@ -306,7 +306,7 @@ Acceleration interface can only be used in combination with position and velocit
 </dl>
 </div>
 <div class="section" id="ros2-interface-of-the-controller">
-<h3>ROS2 interface of the controller<a class="headerlink" href="#ros2-interface-of-the-controller" title="Permalink to this headline">¶</a></h3>
+<h3>ROS2 interface of the controller<a class="headerlink" href="#ros2-interface-of-the-controller" title="Permalink to this headline"></a></h3>
 <dl class="simple">
 <dt>~/joint_trajectory (input topic) [trajectory_msgs::msg::JointTrajectory]</dt><dd><p>Topic for commanding the controller.</p>
 </dd>
@@ -318,7 +318,7 @@ Acceleration interface can only be used in combination with position and velocit
 </div>
 </div>
 <div class="section" id="specialized-versions-of-jointtrajectorycontroller-tbd-in">
-<h2>Specialized versions of JointTrajectoryController (TBD in …)<a class="headerlink" href="#specialized-versions-of-jointtrajectorycontroller-tbd-in" title="Permalink to this headline">¶</a></h2>
+<h2>Specialized versions of JointTrajectoryController (TBD in …)<a class="headerlink" href="#specialized-versions-of-jointtrajectorycontroller-tbd-in" title="Permalink to this headline"></a></h2>
 <p>The controller types are placed into namespaces according to their command types for the hardware (see <a class="reference external" href="../../index.rst">general introduction into controllers</a>).</p>
 <p>The following version of the Joint Trajectory Controller are available mapping the following interfaces:</p>
 <blockquote>

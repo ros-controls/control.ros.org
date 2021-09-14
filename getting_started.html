@@ -190,12 +190,12 @@
            <div itemprop="articleBody">
             
   <div class="section" id="getting-started">
-<span id="id1"></span><h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<span id="id1"></span><h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline"></a></h1>
 <p>The ros2_control framework is released for ROS2 Foxy.
 To use it, you have to install <code class="docutils literal notranslate"><span class="pre">ros-foxy-ros2-control</span></code> and <code class="docutils literal notranslate"><span class="pre">ros-foxy-ros2-controllers</span></code> packages.
 Other dependencies are installed automatically.</p>
 <div class="section" id="compiling">
-<h2>Compiling<a class="headerlink" href="#compiling" title="Permalink to this headline">¶</a></h2>
+<h2>Compiling<a class="headerlink" href="#compiling" title="Permalink to this headline"></a></h2>
 <p>If you want to install the framework from source use following commands in your worspace main folder:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget https://raw.githubusercontent.com/ros-controls/ros2_control/master/ros2_control/ros2_control.repos
 vcs import src &lt; ros2_control.repos
@@ -204,12 +204,12 @@ vcs import src &lt; ros2_control.repos
 </div>
 </div>
 <div class="section" id="architecture">
-<h1>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h1>
+<h1>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline"></a></h1>
 <p>The ros2_control framework’s source can be found in <a class="reference external" href="https://github.com/ros-controls/ros2_control">ros2_control</a> and <a class="reference external" href="https://github.com/ros-controls/ros2_controllers">ros2_controllers</a> GitHub-repositories.
 The following figure shows the architecture of the ros2_control framework.</p>
 <p><img alt="&quot;ros2_control Architecture&quot;" src="_images/components_architecture.png" /></p>
 <div class="section" id="controller-manager">
-<h2>Controller Manager<a class="headerlink" href="#controller-manager" title="Permalink to this headline">¶</a></h2>
+<h2>Controller Manager<a class="headerlink" href="#controller-manager" title="Permalink to this headline"></a></h2>
 <p>The <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/controller_manager/src/controller_manager.cpp">Controller Manager</a> (CM) connects the controllers’ and hardware-abstraction sides of the ros2_control framework.
 It also serves as the entry-point for users through ROS services.
 The CM implements a node without an executor so it can be integrated into a custom setup.
@@ -222,14 +222,14 @@ The Controller Manager matches <em>required</em> and <em>provided</em> interface
 The method reads data from the hardware components, updates outputs of all active controllers, and writes the result to the components.</p>
 </div>
 <div class="section" id="resource-manager">
-<h2>Resource Manager<a class="headerlink" href="#resource-manager" title="Permalink to this headline">¶</a></h2>
+<h2>Resource Manager<a class="headerlink" href="#resource-manager" title="Permalink to this headline"></a></h2>
 <p>The <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/src/resource_manager.cpp">Resource Manager</a> (RM) abstracts physical hardware and its drivers (called <em>hardware components</em>) for the ros2_control framework.
 The RM loads the components using <code class="docutils literal notranslate"><span class="pre">pluginlib</span></code>-library, manages their lifecycle and components’ state and command interfaces.
 This abstraction provided by RM enables re-usability of implemented hardware components, e.g., robot and gripper, without any implementation and flexible hardware application for state and command interfaces, e.g., separate hardware/communication libraries for motor control and encoder reading.</p>
 <p>In the control loop execution, the RM’s <code class="docutils literal notranslate"><span class="pre">read()</span></code> and <code class="docutils literal notranslate"><span class="pre">write()</span></code> methods deal with communication to the hardware components.</p>
 </div>
 <div class="section" id="controllers">
-<span id="overview-controllers"></span><h2>Controllers<a class="headerlink" href="#controllers" title="Permalink to this headline">¶</a></h2>
+<span id="overview-controllers"></span><h2>Controllers<a class="headerlink" href="#controllers" title="Permalink to this headline"></a></h2>
 <p>The controllers in the ros2_control framework have the same functionality as defined in the control theory. They compare the reference value with the measured output and, based on this error, calculate a system’s input (for more details, visit <a class="reference external" href="https://en.wikipedia.org/wiki/Control_theory">Wikipedia</a>).
 The controlles are objects derived from <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/controller_interface/include/controller_interface/controller_interface.hpp">ControllerInterface</a> (<code class="docutils literal notranslate"><span class="pre">controller_interface</span></code> package in <a class="reference external" href="https://github.com/ros-controls/ros2_control">ros2_control</a>) and exported as plugins using <code class="docutils literal notranslate"><span class="pre">pluginlib</span></code>-library.
 For example of on controller check <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/master/forward_command_controller/src/forward_command_controller.cpp">ForwardCommandController implementation</a> in the <a class="reference external" href="https://github.com/ros-controls/ros2_controllers">ros2_controllers</a> repository.
@@ -238,7 +238,7 @@ The controllers’ lifecycle is based on the <a class="reference external" href=
 The method can access the latest hardware states and enable the controller to write the hardware’s command interfaces.</p>
 </div>
 <div class="section" id="user-interfaces">
-<h2>User Interfaces<a class="headerlink" href="#user-interfaces" title="Permalink to this headline">¶</a></h2>
+<h2>User Interfaces<a class="headerlink" href="#user-interfaces" title="Permalink to this headline"></a></h2>
 <p>Users interact with the ros2_control framework using <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/controller_manager/src/controller_manager.cpp">Controller Manager</a>’s services.
 For a list of services and their definitions, check the <code class="docutils literal notranslate"><span class="pre">srv</span></code> folder in the <a class="reference external" href="https://github.com/ros-controls/ros2_control/tree/master/controller_manager_msgs">controller_manager_msgs</a> package.</p>
 <p>While service calls can be used directly from the command line or via nodes, there exists a user-friendly <code class="docutils literal notranslate"><span class="pre">Command</span> <span class="pre">Line</span> <span class="pre">Interface</span></code> (CLI) which integrates with the <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">cli</span></code>. This supports auto-complete and has a range of common commands available. The base command is <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">control</span></code>.
@@ -246,7 +246,7 @@ For the description of our CLI capabilities, see the <code class="docutils liter
 </div>
 </div>
 <div class="section" id="hardware-components">
-<span id="overview-hardware-components"></span><h1>Hardware Components<a class="headerlink" href="#hardware-components" title="Permalink to this headline">¶</a></h1>
+<span id="overview-hardware-components"></span><h1>Hardware Components<a class="headerlink" href="#hardware-components" title="Permalink to this headline"></a></h1>
 <p>The <em>hardware components</em> realize communication to physical hardware and represent its abstraction in the ros2_control framework.
 The components have to be exported as plugins using <code class="docutils literal notranslate"><span class="pre">pluginlib</span></code>-library.
 The <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/src/resource_manager.cpp">Resource Manager</a> dynamically loads those plugins and manages their lifecycle.</p>
@@ -269,7 +269,7 @@ The actuator type can also be used with a multi-DOF robot if its hardware enable
 </dl>
 <p>A detailed explanation of hardware components is given in the <a class="reference external" href="https://github.com/ros-controls/roadmap/blob/master/design_drafts/hardware_access.md">Hardware Access through Controllers design document</a>.</p>
 <div class="section" id="hardware-description-in-urdf">
-<h2>Hardware Description in URDF<a class="headerlink" href="#hardware-description-in-urdf" title="Permalink to this headline">¶</a></h2>
+<h2>Hardware Description in URDF<a class="headerlink" href="#hardware-description-in-urdf" title="Permalink to this headline"></a></h2>
 <p>The ros2_control framework uses the <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code>-tag in the robot’s URDF file to describe its components, i.e., the hardware setup.
 The chosen structure enables tracking together multiple <cite>xacro</cite>-macros into one without any changes.
 The example hereunder shows a position-controlled robot with 2-DOF (RRBot), an external 1-DOF force-torque sensor, and an externally controlled 1-DOF parallel gripper as its end-effector.
@@ -326,7 +326,7 @@ For more examples and detailed explanations, check <a class="reference external"
 </div>
 </div>
 <div class="section" id="running-the-framework-for-your-robot">
-<h2>Running the Framework for Your Robot<a class="headerlink" href="#running-the-framework-for-your-robot" title="Permalink to this headline">¶</a></h2>
+<h2>Running the Framework for Your Robot<a class="headerlink" href="#running-the-framework-for-your-robot" title="Permalink to this headline"></a></h2>
 <p>To run the ros2_control framework, do the following.
 The example files can be found in the <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos">ros2_control_demos</a> repository.</p>
 <ol class="arabic simple">
