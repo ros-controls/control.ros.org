@@ -132,6 +132,8 @@ htmlhelp_basename = 'ros2ControlDocumentation'
 # -- Extension configuration -------------------------------------------------
 # copy transmission images to ros2_control/doc/_build/xml/ so that breathe picks them up as artifacts
 shutil.copytree("ros2_control/transmission_interface/images/", "ros2_control/doc/_build/xml/", dirs_exist_ok=True)
+# Copy resources folders
+shutil.copytree("resources/", "_build/html/resources/", dirs_exist_ok=True)
 # generate doxygen documentation
 subprocess.run(['doxygen', 'doc/Doxyfile'], cwd='ros2_control')
 # copy doxygen documentation to api subfolder

@@ -12,6 +12,7 @@ Welcome to the ros2_control documentation!
    ros2_control/ros2controlcli/doc/userdoc.rst
    differences_to_ros1.rst
    ros2_control_demos/doc/index.rst
+   resources/resources.rst
    contributing.rst
    acknowledgements.rst
 
