@@ -21,10 +21,10 @@ Presentations
 
   Recording: TBA
 
-  *Presenter: Bence Magyar*
+  *Presenter: Dr. Bence Magyar*
 
   Authors:
-    - Bence Magyar (FiveAI Ltd)
+    - Dr. Bence Magyar (FiveAI Ltd)
     - Denis Stogl (Stogl Robotics Consulting)
 
 
@@ -72,10 +72,10 @@ Presentations
 
 `Recording <https://www.youtube.com/watch?v=9AsDmPJWcnQ>`_
 
-  *Presenters: Bence Magyar and Denis Štogl*
+  *Presenters: Dr. Bence Magyar and Denis Štogl*
 
   Authors:
-    - Bence Magyar (FiveAI Ltd)
+    - Dr. Bence Magyar (FiveAI Ltd)
     - Denis Stogl (Stogl Robotics Consulting)
 
 
@@ -85,10 +85,10 @@ Presentations
 
 `Recording <https://www.youtube.com/watch?v=5OfOPcu8Erw>`_
 
-  *Presenters: Bence Magyar and Denis Štogl*
+  *Presenters: Dr. Bence Magyar and Denis Štogl*
 
   Authors:
-    - Bence Magyar (FiveAI Ltd)
+    - Dr. Bence Magyar (FiveAI Ltd)
     - Denis Stogl (Stogl Robotics Consulting)
 
 
