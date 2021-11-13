@@ -13,7 +13,6 @@ var searchData=
   ['configure',['configure',['../classcontroller__interface_1_1ControllerInterface.html#a1b89f8d45dad1e2c560a3e875d18ac9c',1,'controller_interface::ControllerInterface::configure()'],['../classtransmission__interface_1_1DifferentialTransmission.html#aae5b78c02291803ebac00f355a2fe166',1,'transmission_interface::DifferentialTransmission::configure()'],['../classtransmission__interface_1_1FourBarLinkageTransmission.html#afb91128be0fcc42bd06306e8400c1005',1,'transmission_interface::FourBarLinkageTransmission::configure()'],['../classtransmission__interface_1_1SimpleTransmission.html#aabc98c2501ba7536035de80e1ccf3390',1,'transmission_interface::SimpleTransmission::configure()']]],
   ['configure_5fcontroller',['configure_controller',['../classcontroller__manager_1_1ControllerManager.html#acca3477dbb98147fcaf361459305da51',1,'controller_manager::ControllerManager']]],
   ['controlcommand',['ControlCommand',['../classros2controlcli_1_1command_1_1control_1_1ControlCommand.html',1,'ros2controlcli::command::control']]],
-  ['controller_5finterface',['controller_interface',['../namespacecontroller__interface.html',1,'']]],
   ['controllerinfo',['ControllerInfo',['../structhardware__interface_1_1ControllerInfo.html',1,'hardware_interface']]],
   ['controllerinterface',['ControllerInterface',['../classcontroller__interface_1_1ControllerInterface.html',1,'controller_interface']]],
   ['controllermanager',['ControllerManager',['../classcontroller__manager_1_1ControllerManager.html',1,'controller_manager']]],

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['controller_5finterface',['controller_interface',['../namespacecontroller__interface.html',1,'']]]
+  ['hardware_5finterface',['hardware_interface',['../namespacehardware__interface.html',1,'']]]
 ];
