@@ -221,16 +221,16 @@ state interfaces
 </pre></div>
 </div>
 <p>Load and configure all controllers</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2 control load_controller forward_command_controller_position --set-state configure
-ros2 control load_controller forward_command_controller_velocity --set-state configure
-ros2 control load_controller forward_command_controller_acceleration --set-state configure
-ros2 control load_controller forward_command_controller_illegal1 --set-state configure
-ros2 control load_controller forward_command_controller_illegal2 --set-state configure
-ros2 control load_controller joint_state_controller --set-state configure
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2 control load_controller forward_position_controller --set-state configure
+ros2 control load_controller forward_velocity_controller --set-state configure
+ros2 control load_controller forward_acceleration_controller --set-state configure
+ros2 control load_controller forward_illegal1_controller--set-state configure
+ros2 control load_controller forward_illegal2_controller --set-state configure
+ros2 control load_controller joint_state_broadcaster --set-state configure
 </pre></div>
 </div>
 <p>Start the position controller</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2 control set_controller_state forward_command_controller_position start
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2 control set_controller_state forward_position_controller start
 </pre></div>
 </div>
 <p>Check the hardware interfaces, position interfaces should be claimed now</p>
@@ -252,7 +252,7 @@ state interfaces
 </pre></div>
 </div>
 <p>Let’s switch controllers now to velocity</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2 control switch_controllers --stop forward_command_controller_position --start forward_command_controller_velocity
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2 control switch_controllers --stop forward_position_controller --start forward_velocity_controller
 </pre></div>
 </div>
 <p>List hardware interfaces again to see that indeed position interfaces have been unclaimed while velocity is claimed now</p>
