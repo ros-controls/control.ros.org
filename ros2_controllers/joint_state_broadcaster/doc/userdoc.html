@@ -202,16 +202,32 @@
 </div>
 <div class="section" id="hardware-interface-type">
 <h2>Hardware interface type<a class="headerlink" href="#hardware-interface-type" title="Permalink to this headline"></a></h2>
-<p>All available <em>joint state interfaces</em> are used by this broadcaster.</p>
+<p>By default, all available <em>joint state interfaces</em> are used, unless configured otherwise.
+In the latter case, resulting interfaces is defined by a “matrix” of interfaces defined by the cross-product of the <code class="docutils literal notranslate"><span class="pre">joints</span></code> and <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> parameters.
+If some requested interfaces are missing, the controller will print a warning about that, but work for other interfaces.
+If none of the requested interface are not defined, the controller returns error on activation.</p>
 </div>
 <div class="section" id="parameters">
 <h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline"></a></h2>
-<dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">use_local_topics</span></code></dt><dd><p>Optional parameter (boolean; default: <code class="docutils literal notranslate"><span class="pre">False</span></code>) defining if <code class="docutils literal notranslate"><span class="pre">joint_states</span></code> and <code class="docutils literal notranslate"><span class="pre">dynamic_joint_states</span></code> messages should be published into local namespace, e.g., <code class="docutils literal notranslate"><span class="pre">/my_state_broadcaster/joint_states</span></code>.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">extra_joints</span></code></dt><dd><p>Optional parameter (string array) with names of extra joints to be added to <code class="docutils literal notranslate"><span class="pre">joint_states</span></code> and <code class="docutils literal notranslate"><span class="pre">dynamic_joint_states</span></code> with state set to 0.</p>
-</dd>
-</dl>
+<p><code class="docutils literal notranslate"><span class="pre">use_local_topics</span></code></p>
+<blockquote>
+<div><p>Optional parameter (boolean; default: <code class="docutils literal notranslate"><span class="pre">False</span></code>) defining if <code class="docutils literal notranslate"><span class="pre">joint_states</span></code> and <code class="docutils literal notranslate"><span class="pre">dynamic_joint_states</span></code> messages should be published into local namespace, e.g., <code class="docutils literal notranslate"><span class="pre">/my_state_broadcaster/joint_states</span></code>.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">joints</span></code></p>
+<blockquote>
+<div><p>Optional parameter (string array) to support broadcasting of only specific joints and interfaces.
+It has to be used in combination with the <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> parameter.
+Joint state broadcaster asks for access to all defined interfaces on all defined joints.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">interfaces</span></code></p>
+<blockquote>
+<div><p>Optional parameter (string array) to support broadcasting of only specific joints and interfaces.
+It has to be used in combination with the <code class="docutils literal notranslate"><span class="pre">joints</span></code> parameter.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">extra_joints</span></code></p>
+<blockquote>
+<div><p>Optional parameter (string array) with names of extra joints to be added to <code class="docutils literal notranslate"><span class="pre">joint_states</span></code> and <code class="docutils literal notranslate"><span class="pre">dynamic_joint_states</span></code> with state set to 0.</p>
+</div></blockquote>
 </div>
 </div>
 
