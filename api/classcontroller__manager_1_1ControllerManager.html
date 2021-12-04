@@ -96,6 +96,9 @@ CONTROLLER_MANAGER_PUBLIC&#160;</td><td class="memItemRight" valign="bottom"><b>
 <tr class="memitem:ab5a0483cb327b1b5c5add881a868d453"><td class="memItemLeft" align="right" valign="top"><a id="ab5a0483cb327b1b5c5add881a868d453"></a>
 CONTROLLER_MANAGER_PUBLIC&#160;</td><td class="memItemRight" valign="bottom"><b>ControllerManager</b> (std::shared_ptr&lt; rclcpp::Executor &gt; executor, const std::string &amp;manager_node_name=&quot;controller_manager&quot;, const std::string &amp;namespace_=&quot;&quot;)</td></tr>
 <tr class="separator:ab5a0483cb327b1b5c5add881a868d453"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7165ef61d349ca11256f4e1760552d10"><td class="memItemLeft" align="right" valign="top"><a id="a7165ef61d349ca11256f4e1760552d10"></a>
+CONTROLLER_MANAGER_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><b>init_resource_manager</b> (const std::string &amp;robot_description)</td></tr>
+<tr class="separator:a7165ef61d349ca11256f4e1760552d10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34b93035e191400e950520d96844cadb"><td class="memItemLeft" align="right" valign="top"><a id="a34b93035e191400e950520d96844cadb"></a>
 CONTROLLER_MANAGER_PUBLIC controller_interface::ControllerInterfaceSharedPtr&#160;</td><td class="memItemRight" valign="bottom"><b>load_controller</b> (const std::string &amp;controller_name, const std::string &amp;controller_type)</td></tr>
 <tr class="separator:a34b93035e191400e950520d96844cadb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -127,7 +130,7 @@ CONTROLLER_MANAGER_PUBLIC controller_interface::return_type&#160;</td><td class=
 <tr class="memitem:a230f0d40b5a619e28602ead8e81cf4fe"><td class="memItemLeft" align="right" valign="top"><a id="a230f0d40b5a619e28602ead8e81cf4fe"></a>
 CONTROLLER_MANAGER_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> ()</td></tr>
 <tr class="separator:a230f0d40b5a619e28602ead8e81cf4fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e52d7a474caec7ec1cbc2f65708c69b"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__manager_1_1ControllerManager.html#a6e52d7a474caec7ec1cbc2f65708c69b">get_update_rate</a> () const</td></tr>
+<tr class="memitem:a6e52d7a474caec7ec1cbc2f65708c69b"><td class="memItemLeft" align="right" valign="top">CONTROLLER_MANAGER_PUBLIC unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__manager_1_1ControllerManager.html#a6e52d7a474caec7ec1cbc2f65708c69b">get_update_rate</a> () const</td></tr>
 <tr class="memdesc:a6e52d7a474caec7ec1cbc2f65708c69b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deterministic (real-time safe) callback group, e.g., update function.  <a href="#a6e52d7a474caec7ec1cbc2f65708c69b">More...</a><br /></td></tr>
 <tr class="separator:a6e52d7a474caec7ec1cbc2f65708c69b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -163,9 +166,6 @@ CONTROLLER_MANAGER_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom
 <tr class="memitem:adf0d55bdeb824966b390462fab8f39ac"><td class="memItemLeft" align="right" valign="top"><a id="adf0d55bdeb824966b390462fab8f39ac"></a>
 CONTROLLER_MANAGER_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><b>list_controllers_srv_cb</b> (const std::shared_ptr&lt; controller_manager_msgs::srv::ListControllers::Request &gt; request, std::shared_ptr&lt; controller_manager_msgs::srv::ListControllers::Response &gt; response)</td></tr>
 <tr class="separator:adf0d55bdeb824966b390462fab8f39ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2f62a10660ea22540dbab52a793ac9f"><td class="memItemLeft" align="right" valign="top"><a id="af2f62a10660ea22540dbab52a793ac9f"></a>
-CONTROLLER_MANAGER_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><b>list_controller_types_srv_cb</b> (const std::shared_ptr&lt; controller_manager_msgs::srv::ListControllerTypes::Request &gt; request, std::shared_ptr&lt; controller_manager_msgs::srv::ListControllerTypes::Response &gt; response)</td></tr>
-<tr class="separator:af2f62a10660ea22540dbab52a793ac9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53ce3315c601883dfa274e2deb6448a1"><td class="memItemLeft" align="right" valign="top"><a id="a53ce3315c601883dfa274e2deb6448a1"></a>
 CONTROLLER_MANAGER_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><b>list_hardware_interfaces_srv_cb</b> (const std::shared_ptr&lt; controller_manager_msgs::srv::ListHardwareInterfaces::Request &gt; request, std::shared_ptr&lt; controller_manager_msgs::srv::ListHardwareInterfaces::Response &gt; response)</td></tr>
 <tr class="separator:a53ce3315c601883dfa274e2deb6448a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -193,6 +193,15 @@ CONTROLLER_MANAGER_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom
 <tr class="memitem:a56934ca52e796998abf41df9a588a299"><td class="memItemLeft" align="right" valign="top"><a id="a56934ca52e796998abf41df9a588a299"></a>
 CONTROLLER_MANAGER_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><b>unload_controller_service_cb</b> (const std::shared_ptr&lt; controller_manager_msgs::srv::UnloadController::Request &gt; request, std::shared_ptr&lt; controller_manager_msgs::srv::UnloadController::Response &gt; response)</td></tr>
 <tr class="separator:a56934ca52e796998abf41df9a588a299"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2f62a10660ea22540dbab52a793ac9f"><td class="memItemLeft" align="right" valign="top"><a id="af2f62a10660ea22540dbab52a793ac9f"></a>
+CONTROLLER_MANAGER_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><b>list_controller_types_srv_cb</b> (const std::shared_ptr&lt; controller_manager_msgs::srv::ListControllerTypes::Request &gt; request, std::shared_ptr&lt; controller_manager_msgs::srv::ListControllerTypes::Response &gt; response)</td></tr>
+<tr class="separator:af2f62a10660ea22540dbab52a793ac9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c51241f543fa82bd94f7cb4ad77311c"><td class="memItemLeft" align="right" valign="top"><a id="a2c51241f543fa82bd94f7cb4ad77311c"></a>
+CONTROLLER_MANAGER_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><b>list_hardware_components_srv_cb</b> (const std::shared_ptr&lt; controller_manager_msgs::srv::ListHardwareComponents::Request &gt; request, std::shared_ptr&lt; controller_manager_msgs::srv::ListHardwareComponents::Response &gt; response)</td></tr>
+<tr class="separator:a2c51241f543fa82bd94f7cb4ad77311c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a381042b03ff53e7103ed5fb44c550ea6"><td class="memItemLeft" align="right" valign="top"><a id="a381042b03ff53e7103ed5fb44c550ea6"></a>
+CONTROLLER_MANAGER_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><b>set_hardware_component_state_srv_cb</b> (const std::shared_ptr&lt; controller_manager_msgs::srv::SetHardwareComponentState::Request &gt; request, std::shared_ptr&lt; controller_manager_msgs::srv::SetHardwareComponentState::Response &gt; response)</td></tr>
+<tr class="separator:a381042b03ff53e7103ed5fb44c550ea6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
