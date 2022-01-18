@@ -42,7 +42,7 @@
     
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Fake Components" href="fake_components_userdoc.html" />
+    <link rel="next" title="Writing a new hardware interface" href="writing_new_hardware_interface.html" />
     <link rel="prev" title="Controller Manager" href="../../controller_manager/doc/userdoc.html" /> 
 </head>
 
@@ -101,8 +101,7 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../../doc/index.html#concepts">Concepts</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../../controller_manager/doc/userdoc.html">Controller Manager</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Hardware Components</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#handling-of-errors-that-happen-during-read-and-write-calls">Handling of errors that happen during read() and write() calls</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#migration-from-foxy-to-galactic">Migration from Foxy to Galactic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#guidelines-and-best-practices">Guidelines and Best Practices</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="fake_components_userdoc.html">Fake Components</a></li>
@@ -197,15 +196,22 @@
 <p>Hardware components represent abstraction of physical hardware in ros2_control framework.
 There are three types of hardware Actuator, Sensor and System.
 For details on each type check <a class="reference external" href="https://ros-controls.github.io/control.ros.org/getting_started.html#hardware-components">Hardware Components description</a>.</p>
+<div class="section" id="guidelines-and-best-practices">
+<h2>Guidelines and Best Practices<a class="headerlink" href="#guidelines-and-best-practices" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="writing_new_hardware_interface.html">Writing a Hardware Interface</a></li>
+</ul>
+</div>
 <div class="section" id="handling-of-errors-that-happen-during-read-and-write-calls">
-<h2>Handling of errors that happen during read() and write() calls<a class="headerlink" href="#handling-of-errors-that-happen-during-read-and-write-calls" title="Permalink to this headline"></a></h2>
+<h3>Handling of errors that happen during read() and write() calls<a class="headerlink" href="#handling-of-errors-that-happen-during-read-and-write-calls" title="Permalink to this headline"></a></h3>
 <p>If <code class="docutils literal notranslate"><span class="pre">hardware_interface::return_type::ERROR</span></code> is returned from <code class="docutils literal notranslate"><span class="pre">read()</span></code> or <code class="docutils literal notranslate"><span class="pre">write()</span></code> methods of a hardware interface, <code class="docutils literal notranslate"><span class="pre">on_error(previous_state)</span></code> method will be called to handle any error that happened.</p>
 <p>Error handling follows the <a class="reference external" href="https://design.ros2.org/articles/node_lifecycle.html">node lifecycle</a>.
 If successful <code class="docutils literal notranslate"><span class="pre">CallbackReturn::SUCCESS</span></code> is returned and hardware is again in <code class="docutils literal notranslate"><span class="pre">UNCONFIGURED</span></code>  state, if any <code class="docutils literal notranslate"><span class="pre">ERROR</span></code> or <code class="docutils literal notranslate"><span class="pre">FAILURE</span></code> happens the hardware ends in <code class="docutils literal notranslate"><span class="pre">FINALIZED</span></code> state and can not be recovered.
 The only option is to reload the complete plugin, but there is currently no service for this in the Controller Manager.</p>
 </div>
 <div class="section" id="migration-from-foxy-to-galactic">
-<h2>Migration from Foxy to Galactic<a class="headerlink" href="#migration-from-foxy-to-galactic" title="Permalink to this headline"></a></h2>
+<h3>Migration from Foxy to Galactic<a class="headerlink" href="#migration-from-foxy-to-galactic" title="Permalink to this headline"></a></h3>
 <p>Between Foxy and Galactic we made substantial changes to the interface of hardware components to enable management of their lifecycle.
 The following list shows a set of quick changes to port existing hardware components to Galactic:</p>
 <ol class="arabic simple">
@@ -237,6 +243,7 @@ The following list shows a set of quick changes to port existing hardware compon
 </ol>
 </div>
 </div>
+</div>
 
 
            </div>
@@ -244,7 +251,7 @@ The following list shows a set of quick changes to port existing hardware compon
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="fake_components_userdoc.html" class="btn btn-neutral float-right" title="Fake Components" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="writing_new_hardware_interface.html" class="btn btn-neutral float-right" title="Writing a new hardware interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="../../controller_manager/doc/userdoc.html" class="btn btn-neutral float-left" title="Controller Manager" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
