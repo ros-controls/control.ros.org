@@ -2,7 +2,7 @@ var searchData=
 [
   ['genericsystem',['GenericSystem',['../classfake__components_1_1GenericSystem.html',1,'fake_components']]],
   ['get_5fangular_5fvelocity',['get_angular_velocity',['../classsemantic__components_1_1IMUSensor.html#a4e246312866bd971e0814c5010313daf',1,'semantic_components::IMUSensor']]],
-  ['get_5fcomponents_5fstates',['get_components_states',['../classhardware__interface_1_1ResourceManager.html#aa2062150d4ed3d0529cb924920d1d5a9',1,'hardware_interface::ResourceManager']]],
+  ['get_5fcomponents_5fstatus',['get_components_status',['../classhardware__interface_1_1ResourceManager.html#a3ed4684c2857e7267a9527087d036fe9',1,'hardware_interface::ResourceManager']]],
   ['get_5fforces',['get_forces',['../classsemantic__components_1_1ForceTorqueSensor.html#a2372c33b565dfc1d0e151bf6bd29d264',1,'semantic_components::ForceTorqueSensor']]],
   ['get_5fhandles_5finfo',['get_handles_info',['../classtransmission__interface_1_1DifferentialTransmission.html#a9957a0673501e22500af946c86a66e86',1,'transmission_interface::DifferentialTransmission::get_handles_info()'],['../classtransmission__interface_1_1FourBarLinkageTransmission.html#af793cb439cc95ca4bba488a18108ea1a',1,'transmission_interface::FourBarLinkageTransmission::get_handles_info()']]],
   ['get_5flinear_5facceleration',['get_linear_acceleration',['../classsemantic__components_1_1IMUSensor.html#a0c0cc1ebca814f4d1c5380a589e48c59',1,'semantic_components::IMUSensor']]],

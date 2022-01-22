@@ -8,5 +8,8 @@ var searchData=
   ['actuatorinfo',['ActuatorInfo',['../structhardware__interface_1_1ActuatorInfo.html',1,'hardware_interface']]],
   ['actuatorinterface',['ActuatorInterface',['../classhardware__interface_1_1ActuatorInterface.html',1,'hardware_interface::ActuatorInterface'],['../classhardware__interface_1_1ActuatorInterface.html#ab9149fb2f589d13b0c670754ac6450d8',1,'hardware_interface::ActuatorInterface::ActuatorInterface()']]],
   ['assign_5floaned_5fstate_5finterfaces',['assign_loaned_state_interfaces',['../classsemantic__components_1_1SemanticComponentInterface.html#a8837bf9474bad044bab1e1e791b3be74',1,'semantic_components::SemanticComponentInterface']]],
-  ['auto_5fdeclare',['auto_declare',['../classcontroller__interface_1_1ControllerInterface.html#a3710da169b1e621e2a82c58ac575a63e',1,'controller_interface::ControllerInterface']]]
+  ['auto_5fdeclare',['auto_declare',['../classcontroller__interface_1_1ControllerInterface.html#a3710da169b1e621e2a82c58ac575a63e',1,'controller_interface::ControllerInterface']]],
+  ['available_5fcommand_5finterfaces',['available_command_interfaces',['../classhardware__interface_1_1ResourceManager.html#aa12aa4b0368fab0200703f879be6f9a2',1,'hardware_interface::ResourceManager']]],
+  ['available_5fstate_5finterfaces',['available_state_interfaces',['../classhardware__interface_1_1ResourceManager.html#acbf95e636f5534b884d49fdde504c16d',1,'hardware_interface::ResourceManager']]],
+  ['available_5fstate_5finterfaces_5f',['available_state_interfaces_',['../classhardware__interface_1_1ResourceStorage.html#a21fe95fdf58b2c51706f9bc347ab24f4',1,'hardware_interface::ResourceStorage']]]
 ];

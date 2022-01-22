@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['parameters',['parameters',['../structhardware__interface_1_1ComponentInfo.html#a6b610d31003a1c7fa214cecadfee9627',1,'hardware_interface::ComponentInfo::parameters()'],['../structhardware__interface_1_1TransmissionInfo.html#a31dccfe8a589b8886f2e79018804a84f',1,'hardware_interface::TransmissionInfo::parameters()']]]
+  ['other_5fcommands_5f',['other_commands_',['../classfake__components_1_1GenericSystem.html#a201c1bb8917c5425b2ec95985ddb9d2d',1,'fake_components::GenericSystem']]]
 ];
