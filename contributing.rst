@@ -88,7 +88,10 @@ We use the following naming conventions for branches.
 CI configuration
 ----------------
 Three build stages are checking the current and future compatibility of the framework.
+
 1. ``binary`` - against released packages (main and testing) in ROS distributions. This Shows that direct local build is possible.
+
 1. ``semi-binary`` - against released core ROS packages (main and testing), but the immediate dependencies are pulled from the source.
    This shows that local build with dependencies is possible, and if it fails there, we can expect that after the next package sync, we will not be able to build.
+
 1. ``source`` - also core ROS packages are build from source. It shows potential issues in the mid future.
