@@ -10,6 +10,7 @@ var searchData=
   ['simpletransmission',['SimpleTransmission',['../classtransmission__interface_1_1SimpleTransmission.html',1,'transmission_interface']]],
   ['softjointlimits',['SoftJointLimits',['../structjoint__limits__interface_1_1SoftJointLimits.html',1,'joint_limits_interface']]],
   ['stateinterface',['StateInterface',['../classhardware__interface_1_1StateInterface.html',1,'hardware_interface']]],
+  ['strictness',['Strictness',['../structStrictness.html',1,'']]],
   ['switchcontrollersverb',['SwitchControllersVerb',['../classros2controlcli_1_1verb_1_1switch__controllers_1_1SwitchControllersVerb.html',1,'ros2controlcli::verb::switch_controllers']]],
   ['switchtest',['SwitchTest',['../classSwitchTest.html',1,'']]],
   ['system',['System',['../classhardware__interface_1_1System.html',1,'hardware_interface']]],
