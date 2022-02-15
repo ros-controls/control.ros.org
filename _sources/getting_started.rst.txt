@@ -10,7 +10,7 @@ Other dependencies are installed automatically.
 Compiling
 ---------
 
-If you want to install the framework from source use following commands in your worspace main folder:
+If you want to install the framework from source use following commands in your workspace main folder:
 
 .. code:: bash
 
