@@ -8,6 +8,7 @@ var searchData=
   ['sensorinterface',['SensorInterface',['../classhardware__interface_1_1SensorInterface.html',1,'hardware_interface']]],
   ['setcontrollerstateverb',['SetControllerStateVerb',['../classros2controlcli_1_1verb_1_1set__controller__state_1_1SetControllerStateVerb.html',1,'ros2controlcli::verb::set_controller_state']]],
   ['simpletransmission',['SimpleTransmission',['../classtransmission__interface_1_1SimpleTransmission.html',1,'transmission_interface']]],
+  ['simpletransmissionloader',['SimpleTransmissionLoader',['../classtransmission__interface_1_1SimpleTransmissionLoader.html',1,'transmission_interface']]],
   ['softjointlimits',['SoftJointLimits',['../structjoint__limits__interface_1_1SoftJointLimits.html',1,'joint_limits_interface']]],
   ['stateinterface',['StateInterface',['../classhardware__interface_1_1StateInterface.html',1,'hardware_interface']]],
   ['strictness',['Strictness',['../structStrictness.html',1,'']]],

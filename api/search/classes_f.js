@@ -27,5 +27,8 @@ var searchData=
   ['testtwoloadedcontrollers',['TestTwoLoadedControllers',['../classTestTwoLoadedControllers.html',1,'']]],
   ['transmission',['Transmission',['../classtransmission__interface_1_1Transmission.html',1,'transmission_interface']]],
   ['transmissioninfo',['TransmissionInfo',['../structhardware__interface_1_1TransmissionInfo.html',1,'hardware_interface']]],
+  ['transmissioninterfaceexception',['TransmissionInterfaceException',['../classtransmission__interface_1_1TransmissionInterfaceException.html',1,'transmission_interface']]],
+  ['transmissionloader',['TransmissionLoader',['../classtransmission__interface_1_1TransmissionLoader.html',1,'transmission_interface']]],
+  ['transmissionpluginloader',['TransmissionPluginLoader',['../classTransmissionPluginLoader.html',1,'']]],
   ['transmissionsetup',['TransmissionSetup',['../classTransmissionSetup.html',1,'']]]
 ];
