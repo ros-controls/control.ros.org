@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Project Ideas &mdash; control.ros.org  documentation</title>
+  <title>Project Ideas for GSoC 2022 &mdash; control.ros.org  documentation</title>
   
 
   
@@ -107,10 +107,10 @@
 <li class="toctree-l1"><a class="reference internal" href="contributing.html#rules-for-the-repositories-and-process-of-merging-pull-requests">Rules for the repositories and process of merging pull requests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html#writing-documentation">Writing documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html#repository-structure-and-ci-configuration">Repository structure and CI configuration</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Project Ideas</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#asynchronous-components">Asynchronous Components</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Project Ideas for GSoC 2022</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#asynchronous-control-components">Asynchronous Control Components</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#tutorials-and-demos-for-ros2-control">Tutorials and Demos for ros2_control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#mission-control-for-ros2-control-ros2c">Mission-Control for ros2_control (ros2c)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mission-control-for-ros2-control">Mission-Control for ros2_control</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="acknowledgements.html">Acknowledgements</a></li>
@@ -162,7 +162,7 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Project Ideas</li>
+      <li>Project Ideas for GSoC 2022</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -183,36 +183,62 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="project-ideas">
-<span id="id1"></span><h1>Project Ideas<a class="headerlink" href="#project-ideas" title="Permalink to this headline"></a></h1>
-<div class="section" id="asynchronous-components">
-<h2>Asynchronous Components<a class="headerlink" href="#asynchronous-components" title="Permalink to this headline"></a></h2>
+  <div class="section" id="project-ideas-for-gsoc-2022">
+<span id="project-ideas"></span><h1>Project Ideas for GSoC 2022<a class="headerlink" href="#project-ideas-for-gsoc-2022" title="Permalink to this headline"></a></h1>
+<div class="section" id="asynchronous-control-components">
+<h2>Asynchronous Control Components<a class="headerlink" href="#asynchronous-control-components" title="Permalink to this headline"></a></h2>
 <p>This project orbits around everything asynchronous: hardware components and controllers.
-It is made up of 2 distinct parts mentioned above.
-This project is defined by but not limited to the relevant design drafts:
-- TBD</p>
+The goal is to support long-running controller tasks by providing a simple and clean interface for users implementing such controllers.
+This will include addition of multi-threading support with protected memory access, e.g., through buffers that are implemented in <a class="reference external" href="https://github.com/ros-controls/control_toolbox">control_toolbox repository</a>.</p>
+<p>The second part enables asynchronous access to hardware. This should address issues our users are having when hardware-communication frequency has to be stable at high rate, e.g. 1 kHz, or when they are running multi-hardware setup on various frequencies.
+Also, another use-case of this functionality is to enable update of different interfaces of the same hardware on variable rate. For example, “heartbeat” signal should be sent only once per second, but the robot’s motors should be controlled at 500 Hz.
+Related issues for this functionality should address are:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/UniversalRobots/Universal_Robots_ROS2_Driver/issues/210">Communication Failures with Universal Robots</a></p></li>
+<li><p><a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/649">Writing interfaces at different rates</a></p></li>
+</ul>
+<p>This project is defined by but not limited to the relevant design drafts:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/ros-controls/roadmap/blob/master/design_drafts/async_controller.md">Asynchronous Controllers</a></p></li>
+<li><p><a class="reference external" href="https://github.com/ros-controls/roadmap/pull/52">Asynchronous and Trigger Interfaces</a></p></li>
+</ul>
 </div>
 <div class="section" id="tutorials-and-demos-for-ros2-control">
 <h2>Tutorials and Demos for ros2_control<a class="headerlink" href="#tutorials-and-demos-for-ros2-control" title="Permalink to this headline"></a></h2>
-<p>This project is about extending our simulator integration, suite of implemented examples and demoing industrial use-cases.
-The main repo to work into will be <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/">https://github.com/ros-controls/ros2_control_demos/</a></p>
+<p>This project is about extending our tutorials and examples on how to use the ros2_control framework.
+Also, existing demos should be integrated with our documentation at <a class="reference external" href="https://control.ros.org">control.ros.org</a>.
+In general, the following tasks are envisioned:</p>
 <ul class="simple">
-<li><p>Simulators integration</p></li>
-<li><p>Implement examples from roadmap repo</p></li>
-<li><p>Multi-robot, Multi-controller manager simulation</p></li>
-<li><p>Use-cases: Error management</p></li>
-<li><p>Different Robot-Hardware Architectures</p></li>
+<li><p>Examples on simulators’ integration (Gazebo and Ignition) and their use;</p></li>
+<li><p>Showcase multi-robot and multi-controller manager use-case with examples and by using simulators</p></li>
+<li><p>Showcase: How to do Error Management with ros2_control (graceful error handling and degradation)</p></li>
+<li><p>Implementing different example robot-hardware architectures for industrial and service robotics</p></li>
+<li><p>Implementing use-cases from <a class="reference external" href="https://github.com/ros-controls/roadmap">roadmap</a> repository</p></li>
 </ul>
-<p>Related design drafts:
-- TBD</p>
+<p>The all code will be placed into our <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/">demo repository</a>.</p>
+<p>Related design drafts:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/ros-controls/roadmap/blob/master/design_drafts/components_architecture_and_urdf_examples.md">Robot-Hardware Architectures</a></p></li>
+<li><p><a class="reference external" href="https://github.com/ros-controls/roadmap/blob/master/design_drafts/non_joint_command_interfaces.md">GPIO Interfaces</a></p></li>
+<li><p><a class="reference external" href="https://github.com/ros-controls/roadmap/blob/master/design_drafts/mode_switching_and_conflict_check.md">Showcase mode-switching and conflict check</a></p></li>
+<li><p><a class="reference external" href="https://github.com/ros-controls/roadmap/pull/51">Movement-/Safety-critical Interfaces</a></p></li>
+</ul>
 </div>
-<div class="section" id="mission-control-for-ros2-control-ros2c">
-<h2>Mission-Control for ros2_control (ros2c)<a class="headerlink" href="#mission-control-for-ros2-control-ros2c" title="Permalink to this headline"></a></h2>
-<p>Main goals are
-- Should replace MoveIt “SimpleControllerManager”
-- Add topic of events to controller_manager
-- Report status of controller_manager internals
-- Allow defining presets of controllers for mode</p>
+<div class="section" id="mission-control-for-ros2-control">
+<h2>Mission-Control for ros2_control<a class="headerlink" href="#mission-control-for-ros2-control" title="Permalink to this headline"></a></h2>
+<p>The ros2_control framework focuses on direct management of hardware and their controllers to enable real-time capabilities with ROS.
+Although those interfaces are easy to use, they provide only “manual” control over the system’s state.
+Therefore, very often in more complex systems our users have to implement an external, state-machine like component that serves as an orchestrator for ros2_control.
+The main purpose of such a component is to serve as conductor of ros2_control by taking care of scenarios and making sure that at the appropriate moment the right controllers and hardware are in expected states.</p>
+<p>This functionality should replace some high-level components currently used, e.g., MoveIt2-“SimpleControllerManager”.</p>
+<p>The main functionalities for the components and goals of the project are:</p>
+<ul class="simple">
+<li><p>Defining a scenario in form of a multi-robot and multi-tool configuration and its behavior that serves as a benchmark.</p></li>
+<li><p>Extending controller_manager with status publisher, providing all needed data to a mission-control component.</p></li>
+<li><p>Adding status topics to all standard controllers.</p></li>
+<li><p>Defining format of a YAML file where users can configure controller presets.</p></li>
+<li><p>Implementing the mission-control module/script that sets the controller_manager, i.e., the ros2_control framework, in a specific configuration/state.</p></li>
+</ul>
 </div>
 </div>
 
