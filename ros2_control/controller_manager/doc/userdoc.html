@@ -100,6 +100,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#features">Features</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../doc/index.html#concepts">Concepts</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Controller Manager</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#helper-scripts">Helper scripts</a></li>
 </ul>
 </li>
@@ -196,6 +197,32 @@
 <span id="controller-manager-userdoc"></span><h1>Controller Manager<a class="headerlink" href="#controller-manager" title="Permalink to this headline"></a></h1>
 <p>Controller Manager is the main component in the ros2_control framework.
 It manages lifecycle of controllers, access to the hardware interfaces and offers services to the ROS-world.</p>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline"></a></h2>
+<dl class="simple">
+<dt>activate_components_on_start (optional; list&lt;string&gt;; default: empty)</dt><dd><p>Define which hardware components should be activated when controller manager is started.
+The names of the components are defined as attribute of <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code>-tag in <code class="docutils literal notranslate"><span class="pre">robot_description</span></code>.
+All other components will stay <code class="docutils literal notranslate"><span class="pre">UNCONFIGURED</span></code>.
+If this and <code class="docutils literal notranslate"><span class="pre">configure_components_on_start</span></code> are empty, all available components will be activated.
+If this or <code class="docutils literal notranslate"><span class="pre">configure_components_on_start</span></code> are not empty, any component not in either list will be in unconfigured state.</p>
+</dd>
+<dt>configure_components_on_start (optional; list&lt;string&gt;; default: empty)</dt><dd><p>Define which hardware components should be configured when controller manager is started.
+The names of the components are defined as attribute of <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code>-tag in <code class="docutils literal notranslate"><span class="pre">robot_description</span></code>.
+All other components will stay <code class="docutils literal notranslate"><span class="pre">UNCONFIGURED</span></code>.
+If this and <code class="docutils literal notranslate"><span class="pre">activate_components_on_start</span></code> are empty, all available components will be activated.
+If this or <code class="docutils literal notranslate"><span class="pre">activate_components_on_start</span></code> are not empty, any component not in either list will be in unconfigured state.</p>
+</dd>
+<dt>robot_description (mandatory; string)</dt><dd><p>String with the URDF string as robot description.
+This is usually result of the parsed description files by <code class="docutils literal notranslate"><span class="pre">xacro</span></code> command.</p>
+</dd>
+<dt>update_rate (mandatory; double)</dt><dd><p>The frequency of controller manager’s real-time update loop.
+This loop reads states from hardware, updates controller and writes commands to hardware.</p>
+</dd>
+<dt>&lt;controller_name&gt;.type</dt><dd><p>Name of a plugin exported using <code class="docutils literal notranslate"><span class="pre">pluginlib</span></code> for a controller.
+This is a class from which controller’s instance with name “<code class="docutils literal notranslate"><span class="pre">controller_name</span></code>” is created.</p>
+</dd>
+</dl>
+</div>
 <div class="section" id="helper-scripts">
 <h2>Helper scripts<a class="headerlink" href="#helper-scripts" title="Permalink to this headline"></a></h2>
 <p>There are two scripts to interact with controller manager from launch files:</p>

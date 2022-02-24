@@ -8,6 +8,8 @@ var searchData=
   ['testcontroller',['TestController',['../classtest__controller_1_1TestController.html',1,'test_controller']]],
   ['testcontrollerfailedinit',['TestControllerFailedInit',['../classtest__controller__failed__init_1_1TestControllerFailedInit.html',1,'test_controller_failed_init']]],
   ['testcontrollermanager',['TestControllerManager',['../classTestControllerManager.html',1,'']]],
+  ['testcontrollermanagerhwmanagementsrvs',['TestControllerManagerHWManagementSrvs',['../classTestControllerManagerHWManagementSrvs.html',1,'']]],
+  ['testcontrollermanagerhwmanagementsrvswithoutparams',['TestControllerManagerHWManagementSrvsWithoutParams',['../classTestControllerManagerHWManagementSrvsWithoutParams.html',1,'']]],
   ['testcontrollermanagersrvs',['TestControllerManagerSrvs',['../classTestControllerManagerSrvs.html',1,'']]],
   ['testcontrollerwithinterfaces',['TestControllerWithInterfaces',['../classtest__controller__with__interfaces_1_1TestControllerWithInterfaces.html',1,'test_controller_with_interfaces']]],
   ['testforcetorquesensor',['TestForceTorqueSensor',['../classtest__hardware__components_1_1TestForceTorqueSensor.html',1,'test_hardware_components']]],
