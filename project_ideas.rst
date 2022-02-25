@@ -21,13 +21,17 @@ This project is defined by but not limited to the relevant design drafts:
 - `Asynchronous Controllers <https://github.com/ros-controls/roadmap/blob/master/design_drafts/async_controller.md>`_
 - `Asynchronous and Trigger Interfaces <https://github.com/ros-controls/roadmap/pull/52>`_
 
+-----
+
 Skills required/preferred:
 
 - Good C++ skills
 - C++ asynchronous libraries / tricks
 
 Possible mentors: Bence Magyar, Denis Štogl 
+
 Expected size of project: 350 hours
+
 Difficulty: hard
 
 
@@ -53,6 +57,7 @@ Related design drafts:
 - `Showcase mode-switching and conflict check <https://github.com/ros-controls/roadmap/blob/master/design_drafts/mode_switching_and_conflict_check.md>`_
 - `Movement-/Safety-critical Interfaces <https://github.com/ros-controls/roadmap/pull/51>`_
 
+----
 
 Skills required/preferred:
 
@@ -61,7 +66,9 @@ Skills required/preferred:
 - Familiarity with the Gazebo simulator
 
 Possible mentors: Denis Štogl
+
 Expected size of project: 350 hours
+
 Difficulty: medium
 
 
@@ -83,13 +90,17 @@ The main functionalities for the components and goals of the project are:
 - Defining format of a YAML file where users can configure controller presets.
 - Implementing the mission-control module/script that sets the controller_manager, i.e., the ros2_control framework, in a specific configuration/state.
 
+----
+
 Skills required/preferred:
 
 - Good C++ skills
 - Basic understanding of ROS and/or ROS2
 
 Possible mentors: Bence Magyar, Denis Štogl
+
 Expected size of project: 350 hours
+
 Difficulty: medium
 
 
@@ -108,6 +119,8 @@ Related design document and code implementations:
 - [Few idea about Semantic Components for hardware](https://github.com/ros-controls/roadmap/pull/45)
 - [Semantic Components for Controllers](https://github.com/ros-controls/ros2_control/tree/master/controller_interface/include/semantic_components)
 
+----
+
 Skills required/preferred:
 
 - Good C++ skills
@@ -115,7 +128,9 @@ Skills required/preferred:
 - Basic understanding of the Gazebo simulator
 
 Possible mentors: Bence Magyar, Denis Štogl
+
 Expected size of project: 175 hours
+
 Difficulty: medium
 
 
@@ -135,6 +150,8 @@ Stretch goals:
 - https://github.com/ros-controls/realtime_tools/issues/81
 - https://github.com/ros-controls/ros2_controllers/issues/302
 
+----
+
 Skills required/preferred:
 
 - Good C++ skills
@@ -142,5 +159,7 @@ Skills required/preferred:
 - Basic understanding of unit testing with gmock
 
 Possible mentors: Bence Magyar
+
 Expected size of project: 350 hours
+
 Difficulty: medium
