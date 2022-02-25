@@ -101,10 +101,12 @@ The ros2_control framework relies on simple command and state interfaces in the 
 Earlier in the project, the concept of semantic components were introduced which essentially provides a grouping for these values and a semantic-specific API to use them. For instance, an IMU sensor will typically report 9 values, 3 values for each axis of the acelerometer, gyroscope and compass sensor parts respectively. Such values can be grouped and served through an API as a ROS IMU message or as a C++ struct for both input and output of these values while the ros2_control framework maintains it's low-profile communication interfaces internally.
 
 The goal of this project is to add semantic components that are relevant for hardware components.
-
-ADD DESCRIPTION HERE DENIS
-
 Additionally, this project includes extending the existing simulation tools with a set of common semantic components to support different sensors and actuators.
+
+Related design document and code implementations:
+
+- [Few idea about Semantic Components for hardware](https://github.com/ros-controls/roadmap/pull/45)
+- [Semantic Components for Controllers](https://github.com/ros-controls/ros2_control/tree/master/controller_interface/include/semantic_components)
 
 Skills required/preferred:
 
