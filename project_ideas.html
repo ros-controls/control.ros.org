@@ -111,6 +111,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#asynchronous-control-components">Asynchronous Control Components</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#tutorials-and-demos-for-ros2-control">Tutorials and Demos for ros2_control</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#mission-control-for-ros2-control">Mission-Control for ros2_control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#add-support-for-hardware-semantic-components">Add support for hardware semantic components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#feature-parity-for-controllers-from-ros1">Feature-parity for controllers from ROS1</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="acknowledgements.html">Acknowledgements</a></li>
@@ -202,6 +204,14 @@ Related issues for this functionality should address are:</p>
 <li><p><a class="reference external" href="https://github.com/ros-controls/roadmap/blob/master/design_drafts/async_controller.md">Asynchronous Controllers</a></p></li>
 <li><p><a class="reference external" href="https://github.com/ros-controls/roadmap/pull/52">Asynchronous and Trigger Interfaces</a></p></li>
 </ul>
+<p>Skills required/preferred:</p>
+<ul class="simple">
+<li><p>Good C++ skills</p></li>
+<li><p>C++ asynchronous libraries / tricks</p></li>
+</ul>
+<p>Possible mentors: Bence Magyar, Denis Štogl
+Expected size of project: 350 hours
+Difficulty: hard</p>
 </div>
 <div class="section" id="tutorials-and-demos-for-ros2-control">
 <h2>Tutorials and Demos for ros2_control<a class="headerlink" href="#tutorials-and-demos-for-ros2-control" title="Permalink to this headline"></a></h2>
@@ -223,6 +233,15 @@ In general, the following tasks are envisioned:</p>
 <li><p><a class="reference external" href="https://github.com/ros-controls/roadmap/blob/master/design_drafts/mode_switching_and_conflict_check.md">Showcase mode-switching and conflict check</a></p></li>
 <li><p><a class="reference external" href="https://github.com/ros-controls/roadmap/pull/51">Movement-/Safety-critical Interfaces</a></p></li>
 </ul>
+<p>Skills required/preferred:</p>
+<ul class="simple">
+<li><p>Good C++ skills</p></li>
+<li><p>Basic understanding of ROS and/or ROS2</p></li>
+<li><p>Familiarity with the Gazebo simulator</p></li>
+</ul>
+<p>Possible mentors: Denis Štogl
+Expected size of project: 350 hours
+Difficulty: medium</p>
 </div>
 <div class="section" id="mission-control-for-ros2-control">
 <h2>Mission-Control for ros2_control<a class="headerlink" href="#mission-control-for-ros2-control" title="Permalink to this headline"></a></h2>
@@ -239,6 +258,56 @@ The main purpose of such a component is to serve as conductor of ros2_control by
 <li><p>Defining format of a YAML file where users can configure controller presets.</p></li>
 <li><p>Implementing the mission-control module/script that sets the controller_manager, i.e., the ros2_control framework, in a specific configuration/state.</p></li>
 </ul>
+<p>Skills required/preferred:</p>
+<ul class="simple">
+<li><p>Good C++ skills</p></li>
+<li><p>Basic understanding of ROS and/or ROS2</p></li>
+</ul>
+<p>Possible mentors: Bence Magyar, Denis Štogl
+Expected size of project: 350 hours
+Difficulty: medium</p>
+</div>
+<div class="section" id="add-support-for-hardware-semantic-components">
+<h2>Add support for hardware semantic components<a class="headerlink" href="#add-support-for-hardware-semantic-components" title="Permalink to this headline"></a></h2>
+<p>The ros2_control framework relies on simple command and state interfaces in the form of double values to exchange data between hardware components and controllers. It is desired however to provide good C++ data structures both on the hardware component and the controller side which improves code readability and maintainability.</p>
+<p>Earlier in the project, the concept of semantic components were introduced which essentially provides a grouping for these values and a semantic-specific API to use them. For instance, an IMU sensor will typically report 9 values, 3 values for each axis of the acelerometer, gyroscope and compass sensor parts respectively. Such values can be grouped and served through an API as a ROS IMU message or as a C++ struct for both input and output of these values while the ros2_control framework maintains it’s low-profile communication interfaces internally.</p>
+<p>The goal of this project is to add semantic components that are relevant for hardware components.
+Additionally, this project includes extending the existing simulation tools with a set of common semantic components to support different sensors and actuators.</p>
+<p>Related design document and code implementations:</p>
+<ul class="simple">
+<li><p>[Few idea about Semantic Components for hardware](<a class="reference external" href="https://github.com/ros-controls/roadmap/pull/45">https://github.com/ros-controls/roadmap/pull/45</a>)</p></li>
+<li><p>[Semantic Components for Controllers](<a class="reference external" href="https://github.com/ros-controls/ros2_control/tree/master/controller_interface/include/semantic_components">https://github.com/ros-controls/ros2_control/tree/master/controller_interface/include/semantic_components</a>)</p></li>
+</ul>
+<p>Skills required/preferred:</p>
+<ul class="simple">
+<li><p>Good C++ skills</p></li>
+<li><p>Basic understanding of ROS and/or ROS2</p></li>
+<li><p>Basic understanding of the Gazebo simulator</p></li>
+</ul>
+<p>Possible mentors: Bence Magyar, Denis Štogl
+Expected size of project: 175 hours
+Difficulty: medium</p>
+</div>
+<div class="section" id="feature-parity-for-controllers-from-ros1">
+<h2>Feature-parity for controllers from ROS1<a class="headerlink" href="#feature-parity-for-controllers-from-ros1" title="Permalink to this headline"></a></h2>
+<p>The ros2_control framework in ROS2 is a rewrite of the ros_control framework from ROS1.
+Our rich set of standard controllers was one of the main motivations for users to adopt ros_control in ROS1 and while we ported most of them, there are quite a few features missing for the two main controllers of this set, the diff_drive_controller and the joint_trajectory_controller.</p>
+<p>This work will consist of reviewing the two versions of the two controllers and comparing for feature parity. Once the missing parts are identified, port them over from ROS1 with as much test support as possible.</p>
+<p>Related existing issues are:
+- <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/issues/303">https://github.com/ros-controls/ros2_controllers/issues/303</a>
+- <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/issues/304">https://github.com/ros-controls/ros2_controllers/issues/304</a></p>
+<p>Stretch goals:
+- <a class="reference external" href="https://github.com/ros-controls/realtime_tools/issues/81">https://github.com/ros-controls/realtime_tools/issues/81</a>
+- <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/issues/302">https://github.com/ros-controls/ros2_controllers/issues/302</a></p>
+<p>Skills required/preferred:</p>
+<ul class="simple">
+<li><p>Good C++ skills</p></li>
+<li><p>Basic understanding of ROS and/or ROS2</p></li>
+<li><p>Basic understanding of unit testing with gmock</p></li>
+</ul>
+<p>Possible mentors: Bence Magyar
+Expected size of project: 350 hours
+Difficulty: medium</p>
 </div>
 </div>
 
