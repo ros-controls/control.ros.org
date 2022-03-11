@@ -137,7 +137,7 @@ shutil.copytree("doc/resources/", "_build/html/resources/", dirs_exist_ok=True)
 # generate doxygen documentation
 subprocess.run(['doxygen', 'doc/Doxyfile'], cwd='doc/ros2_control')
 # copy doxygen documentation to api subfolder
-shutil.copytree("doc/ros2_control/doc/_build/html", "_build/html/api")
+shutil.copytree("doc/ros2_control/doc/_build/html", "_build/html/doc/api")
 
 # -- Options for todo extension ----------------------------------------------
 
