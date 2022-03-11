@@ -1,7 +1,8 @@
 .. _resources:
 
 Resources
-================
+=========
+
 The resources provided in the ``resources`` folder are available for use under CC-BY license |CC-BY|_.
 The original authors are named either in the documents or in the list down below.
 
@@ -19,7 +20,7 @@ Presentations
 
     Controllers expose ROS interfaces for 3rd party solutions to robotics problems like manipulation path planning (`moveit2`) and autonomous navigation (`nav2`). The modular design makes it ideal for both research and industrial use. A robot made up of a mobile base and an arm that supports ros2_control needs no extra code, only a few controller configuration files and it is ready to
 
-`Recording <https://vimeo.com/649654948>`_
+`Recording <https://vimeo.com/649654948>`__
 
   *Presenter: Dr. Bence Magyar*
 
@@ -33,7 +34,7 @@ Presentations
   Summary:
     With the release of ros2_control and MoveIt 2, ROS 2 Foxy finally has all the “ingredients” needed to power a robot with similar features as in ROS 1. We present the driver for Universal Robot’s manipulators as a real-world example of how robots can be run using ROS 2. We show how to realize multi-interface support for position and velocity commands in the driver and how to support scaling controllers while respecting factors set on the teach pendant. Finally, we show how this real-world example influences development of ros2_control to support non-joint related inputs and outputs in its real-time control loop.
 
-`Recording <https://vimeo.com/649651707/46a3be27ed>`_
+`Recording <https://vimeo.com/649651707/46a3be27ed>`__
 
   *Presenter: Denis Štogl*
 
@@ -50,7 +51,7 @@ Presentations
   Summary:
     One of the top reasons to upgrade from ROS1 to ROS2 is better suitability for realtime tasks. We discuss the development of a new ROS2 controller to handle realtime contact tasks such as tool insertion with industrial robots. The admittance controller handles trajectories and single-waypoint streaming commands, making it compatible with MoveIt and many teleoperation frameworks. Part of the work involved ensuring kinematic limits (position/velocity/acceleration/jerk) are obeyed while limiting interaction forces with the environment. Finally, we give practical recommendations and examples of the admittance controller. A live demo will be shown at our booth.
 
-`Recording <https://vimeo.com/649652452/682bd92e95>`_
+`Recording <https://vimeo.com/649652452/682bd92e95>`__
 
   *Presenter: Dr. Andy Zelenak*
 
@@ -70,7 +71,7 @@ Presentations
 
     In this talk, we will discuss concepts of ros2_control framework compared to ros(1)_control framework and show examples of their use in the wild.
 
-`Recording <https://www.youtube.com/watch?v=9AsDmPJWcnQ>`_
+`Recording <https://www.youtube.com/watch?v=9AsDmPJWcnQ>`__
 
   *Presenters: Dr. Bence Magyar and Denis Štogl*
 
