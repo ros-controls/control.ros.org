@@ -34,7 +34,7 @@ Presentations
   Summary:
     With the release of ros2_control and MoveIt 2, ROS 2 Foxy finally has all the “ingredients” needed to power a robot with similar features as in ROS 1. We present the driver for Universal Robot’s manipulators as a real-world example of how robots can be run using ROS 2. We show how to realize multi-interface support for position and velocity commands in the driver and how to support scaling controllers while respecting factors set on the teach pendant. Finally, we show how this real-world example influences development of ros2_control to support non-joint related inputs and outputs in its real-time control loop.
 
-`Recording <https://vimeo.com/649651707/46a3be27ed>`_
+`Recording <https://vimeo.com/649651707/46a3be27ed>`__
 
   *Presenter: Denis Štogl*
 
