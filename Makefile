@@ -17,7 +17,11 @@ help:
 	@echo "   specify RELEASE=name to publish as a tagged release version"
 	@echo "   and placed in a version subfolder.  Requires repo merge permission."
 
-.PHONY: help Makefile
+multiversion: Makefile
+	sphinx-multiversion $(SPHINXOPTS) "$(SOURCEDIR)" "$(BUILDDIR)/html"
+	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=add_multi_version/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
+
+.PHONY: help Makefile multiversion
 
 # TODO(denis): Enable this!
 # # # # Generate the doxygen xml (for Sphinx) and copy the doxygen html to the
