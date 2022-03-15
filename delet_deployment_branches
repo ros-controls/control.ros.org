@@ -9,5 +9,5 @@ git checkout "$base_branch" || { echo "Exiting!"; exit $ERRCODE; }
 # create temporary branches, clone subdirectories 
 for branch in "${!branch_version[@]}";
     do echo "Deletet temporary branch: $branch.";
-    git -D "$branch"
+    git branch -D "$branch"
 done
