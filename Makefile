@@ -54,11 +54,11 @@ multiversion-with-api: Makefile
 	doxygen doc/Doxyfile && mkdir -p ../../$(BUILDDIR)/html/galactic_deploy/doc/api/ && cp -r doc/_build/html/. ../../$(BUILDDIR)/html/galactic_deploy/doc/api/ &&  \
 	rm -rf doc/_build && cd ../../ 
 	@echo Step 6: Building API for rolling
-	if cd doc/ros2_control; then git checkout rolling && git pull; else echo "Submodules are not initialized correctly. Exiting!" && exit; fi && \
+	if cd doc/ros2_control; then git checkout master && git pull; else echo "Submodules are not initialized correctly. Exiting!" && exit; fi && \
 	doxygen doc/Doxyfile && mkdir -p ../../$(BUILDDIR)/html/rolling_deploy/doc/api/ && cp -r doc/_build/html/. ../../$(BUILDDIR)/html/rolling_deploy/doc/api/ &&  \
 	rm -rf doc/_build && cd ../../ 
 	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=rolling_deploy/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
-	
+
 .PHONY: help Makefile html-with-api multiversion html-with-api
 
 # TODO(denis): Enable this!
