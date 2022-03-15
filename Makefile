@@ -34,8 +34,8 @@ multiversion: Makefile
 	./create_deployment_branches
 	@echo Step 2: Build multi version documentation
 	sphinx-multiversion $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
-	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=rolling_deploy/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
 	./delet_deployment_branches
+	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=rolling_deploy/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
 
 multiversion-with-api: Makefile
 	@echo Building multi version documentation with API
@@ -43,7 +43,6 @@ multiversion-with-api: Makefile
 	./create_deployment_branches
 	@echo Step 2: Build multi version documentation
 	sphinx-multiversion $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
-	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=rolling_deploy/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
 	@echo Step 3: Deleting temporary deployment branches
 	./delet_deployment_branches
 	@echo Step 4: Building API for foxy
@@ -58,7 +57,8 @@ multiversion-with-api: Makefile
 	if cd doc/ros2_control; then git checkout rolling && git pull; else echo "Submodules are not initialized correctly. Exiting!" && exit; fi && \
 	doxygen doc/Doxyfile && mkdir -p ../../$(BUILDDIR)/html/rolling_deploy/doc/api/ && cp -r doc/_build/html/. ../../$(BUILDDIR)/html/rolling_deploy/doc/api/ &&  \
 	rm -rf doc/_build && cd ../../ 
-
+	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=rolling_deploy/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
+	
 .PHONY: help Makefile html-with-api multiversion html-with-api
 
 # TODO(denis): Enable this!
