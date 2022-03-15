@@ -3,26 +3,39 @@
 # shellckeck source=deploy_defines
 source deploy_defines
 
-# checkout a base from which deply branches are derived
-git checkout "$base_branch" || { echo "Exiting!"; exit "$ERRCODE"; }
+echo "Everything not commited so far is going to be commited to temporary branch. Make sure to commit everything before continue."
+echo "Continue?[yes/no]"
+read -r usr_input
+if [ -n "$usr_input" ] && [ "$usr_input" == "yes" ]
+then
+    create_deployment_branches
+else
+    echo "Exiting!"
+    exit
+fi
 
-# create temporary branches, clone subdirectories 
-for branch in "${!branch_version[@]}";
-    do echo "Create temporary changes for branch: $branch.  - With version:${branch_version[$branch]}";
-    git checkout -b "$branch"
-    # change .gitignore, needed to include submodules. sed matches doc/ros2_control*, so all submodules are excluded
-    sed -i "s/doc\/ros2_control/\#doc\/ros2_control/g" .gitignore
-    # make sure all submodules are inited
-    echo "Init submdules for $branch and checkout ${branch_version[$branch]}"
-    git submodule update --init --recusive
-    for submodule in "${submodules[@]}";
-        do echo "Create doc/$submodule";
-            cd doc/"$submodule" || { echo "Submodule $submodule does not seem to exist. Exiting!"; exit "$ERRCODE"; } 
-            git checkout "${branch_version[$branch]}"
-            git pull
-            cd ../../ 
+create_deployment_branches () {
+    # checkout a base from which deply branches are derived
+    git checkout "$base_branch" || { echo "Exiting!"; exit "$ERRCODE"; }
+
+    # create temporary branches, clone subdirectories 
+    for branch in "${!branch_version[@]}";
+        do echo "Create temporary changes for branch: $branch.  - With version:${branch_version[$branch]}";
+        git checkout -b "$branch"
+        # change .gitignore, needed to include submodules. sed matches doc/ros2_control*, so all submodules are excluded
+        sed -i "s/doc\/ros2_control/\#doc\/ros2_control/g" .gitignore
+        # make sure all submodules are inited
+        echo "Init submdules for $branch and checkout ${branch_version[$branch]}"
+        git submodule update --init --recursive 
+        for submodule in "${submodules[@]}";
+            do echo "Create doc/$submodule";
+                cd doc/"$submodule" || { echo "Submodule $submodule does not seem to exist. Exiting!"; exit "$ERRCODE"; } 
+                git checkout "${branch_version[$branch]}"
+                git pull
+                cd ../../ 
+        done
+        git add .
+        git commit -m "Add temporary changes for multi version"
+        git checkout "$base_branch"
     done
-    git add .
-    git commit -m "Add temporary changes for multi version"
-    git checkout "$base_branch"
-done
+}
