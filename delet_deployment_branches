@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# shellckeck source=deploy_defines
+source deploy_defines
+
+# checkout a base from which deply branches are derived
+git checkout "$base_branch" || { echo "Exiting!"; exit $ERRCODE; }
+
+# create temporary branches, clone subdirectories 
+for branch in "${!branch_version[@]}";
+    do echo "Deletet temporary branch: $branch.";
+    git -D "$branch"
+done

@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+# shellckeck source=deploy_defines
+source deploy_defines
+
+# checkout a base from which deply branches are derived
+git checkout "$base_branch" || { echo "Exiting!"; exit "$ERRCODE"; }
+
+# create temporary branches, clone subdirectories 
+for branch in "${!branch_version[@]}";
+    do echo "Create temporary changes for branch: $branch.  - With version:${branch_version[$branch]}";
+    git checkout -b "$branch"
+    # change .gitignore, needed to include submodules. sed matches doc/ros2_control*, so all submodules are excluded
+    sed -i "s/doc\/ros2_control/\#doc\/ros2_control/g" .gitignore
+    for submodule in "${submodules[@]}";
+        do echo "Create doc/$submodule";
+            echo "Init submdule for $submodule and checkout ${branch_version[$branch]}"
+            git submodule add https://github.com/ros-controls/"$submodule" doc/"$submodule"
+            cd doc/"$submodule" || exit 
+            git checkout "${branch_version[$branch]}"
+            cd ../../ 
+    done
+    git add .
+    git commit -m "Add temporary changes for multi version"
+    git checkout "$base_branch"
+done

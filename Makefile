@@ -18,8 +18,10 @@ help:
 	@echo "   and placed in a version subfolder.  Requires repo merge permission."
 
 multiversion: Makefile
+	./create_deployment_branches
 	sphinx-multiversion $(SPHINXOPTS) "$(SOURCEDIR)" "$(BUILDDIR)/html"
-	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=add_multi_version/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
+	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=rolling_deploy/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
+	./delet_deployment_branches
 
 .PHONY: help Makefile multiversion
 
