@@ -1,6 +1,7 @@
 var searchData=
 [
   ['contributing_20guidelines',['Contributing Guidelines',['../autotoc_md4.html',1,'']]],
+  ['callbackreturn',['CallbackReturn',['../namespacehardware__interface.html#af127ad1f7288042a450a4e783e44cf5c',1,'hardware_interface']]],
   ['claim_5fcommand_5finterface',['claim_command_interface',['../classhardware__interface_1_1ResourceManager.html#ae50232b53f388de3620f7e90889c48c3',1,'hardware_interface::ResourceManager']]],
   ['claim_5fstate_5finterface',['claim_state_interface',['../classhardware__interface_1_1ResourceManager.html#af19fb1fec871e9567cc9b84388f60a12',1,'hardware_interface::ResourceManager']]],
   ['claimed_5fcommand_5finterface_5fmap_5f',['claimed_command_interface_map_',['../classhardware__interface_1_1ResourceStorage.html#ab4afd858f3cd6e9d24b81836d003a6f7',1,'hardware_interface::ResourceStorage']]],
