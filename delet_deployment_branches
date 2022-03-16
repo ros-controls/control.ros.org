@@ -11,9 +11,3 @@ for branch in "${!branch_version[@]}";
     do echo "Deletet temporary branch: $branch.";
     git branch -D "$branch"
 done
-
-for submodule in "${submodules[@]}";
-    do cd doc/"$submodule" || { echo "Submodule $submodule does not seem to exist. Exiting!"; exit "$ERRCODE"; } 
-        git checkout master
-        cd ../../ 
-done
