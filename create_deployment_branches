@@ -14,18 +14,18 @@ create_deployment_branches () {
         # change .gitignore, needed to include submodules. sed matches doc/ros2_control*, so all submodules are excluded
         sed -i "s/doc\/ros2_control/\#doc\/ros2_control/g" .gitignore
         # make sure all submodules are inited
-        echo "Init submdules for $branch and checkout ${branch_version[$branch]}"
-        git submodule update --init --recursive 
+        echo "Clone repositories for $branch and checkout ${branch_version[$branch]}"
         for submodule in "${submodules[@]}";
             do echo "Create doc/$submodule";
+                git clone https://github.com/ros-controls/"$submodule" -b "${branch_version[$branch]}" doc/"$submodule"
                 cd doc/"$submodule" || { echo "Submodule $submodule does not seem to exist. Exiting!"; exit "$ERRCODE"; } 
-                git checkout "${branch_version[$branch]}"
-                git pull
+                rm -rf .git/
                 cd ../../ 
         done
         git add .
         git commit -m "Add temporary changes for multi version"
         git checkout "$base_branch"
+        rm -rf doc/"$submodule"
     done
 }
 
