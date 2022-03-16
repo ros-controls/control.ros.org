@@ -13,29 +13,21 @@ jobs:
   build-deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: checkout control.ros.org
-      uses: actions/checkout@v2
-    - name: checkout ros2_control
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
       with:
-        repository: ros-controls/ros2_control
-        ref: master
-        path: doc/ros2_control
-    - name: checkout ros2_controllers
-      uses: actions/checkout@v2
+        fetch-depth: 0
+    - uses: actions/setup-python@v2
       with:
-        repository: ros-controls/ros2_controllers
-        path: doc/ros2_controllers
-    - name: checkout ros2_control_demos
-      uses: actions/checkout@v2
-      with:
-        repository: ros-controls/ros2_control_demos
-        path: doc/ros2_control_demos
-    - name: build sphinx docs 
-      uses: ammaraskar/sphinx-action@master
-      with:
-        docs-folder: "."
-        pre-build-command: "apt-get update --allow-releaseinfo-change && apt-get install -y doxygen graphviz && pip3 install -r requirements.txt"
+        python-version: '3.8'
+        cache: 'pip'
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install --upgrade --requirement requirements.t
+    - name: Install doxygen and graphviz
+      run: sudo apt-get install -y doxygen graphviz
+    - name: Build multiversion with API
+      run: make multiversion-with-api
     - name: clone gh-pages branch
       uses: actions/checkout@v2
       if: github.event_name != 'pull_request'
