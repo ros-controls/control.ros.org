@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+# shellckeck source=deploy_defines
+source deploy_defines
+
+create_api () {
+    cd "$api_dir" || { echo "$api_dir does not exist. Exiting!"; exit "$ERRCODE"; }
+    git checkout "$api_branch";
+    git pull
+    doxygen doc/Doxyfile
+    mkdir -p ../../"$build_dir"/html/doc/api/
+    cp -r doc/_build/html/. ../../"$build_dir"/html/doc/api/
+    rm -rf doc/_build
+}
+
+cleanup() {
+    cd "$base_dir" || { echo "Changing back to basdir went wrong. You have to remove $api_dir yourself. Exiting!"; exit "$ERRCODE"; }
+    if [ -d "$api_dir" ];
+    then
+        rm -rf "$api_dir"
+    else
+        echo "Could not delet $api_dir. Something went wrong. You have to cleanup yourself. Exiting!"
+        exit
+    fi
+}
+
+if [ -d "$api_dir" ];
+then
+    create_api
+else
+    git clone https://github.com/ros-controls/"$api_repo" doc/"$api_repo" || { echo "Could not clone $api_repo. Exiting!"; exit "$ERRCODE"; }
+    create_api  
+fi

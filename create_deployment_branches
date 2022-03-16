@@ -18,7 +18,7 @@ create_deployment_branches () {
         for submodule in "${submodules[@]}";
             do echo "Create doc/$submodule";
                 git clone https://github.com/ros-controls/"$submodule" -b "${branch_version[$branch]}" doc/"$submodule"
-                cd doc/"$submodule" || { echo "Submodule $submodule does not seem to exist. Exiting!"; exit "$ERRCODE"; } 
+                cd doc/"$submodule" || { echo "Could not clone $submodule to doc/ directory. Exiting!"; exit "$ERRCODE"; } 
                 rm -rf .git/
                 cd ../../ 
         done

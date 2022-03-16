@@ -19,14 +19,10 @@ help:
 
 html-with-api: Makefile
 	@echo Single html file with API
-	@echo Step 1: Init submodules
-	git submodule update --init --recursive 
-	@echo Step 2: Creating html files
+	@echo Step 1: Creating html files
 	$(SPHINXBUILD) $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
 	@echo Step 3: Building API
-	if cd doc/ros2_control; then git checkout master && git pull; else echo "Submodules are not initialized correctly. Exiting!" && exit; fi && \
-		doxygen doc/Doxyfile && mkdir -p ../../$(BUILDDIR)/html/doc/api/ && cp -r doc/_build/html/. ../../$(BUILDDIR)/html/doc/api/ &&  \
-		rm -rf doc/_build && cd ../../ 
+	./create_api
 
 multiversion: Makefile
 	@echo Building multi version documentation without API
@@ -34,7 +30,9 @@ multiversion: Makefile
 	./create_deployment_branches
 	@echo Step 2: Build multi version documentation
 	sphinx-multiversion $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
+	@echo Step 3: Deleting temporary deployment branches
 	./delet_deployment_branches
+	@echo Step 4: Create correct index 
 	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=rolling_deploy/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
 
 multiversion-with-api: Makefile
@@ -45,18 +43,9 @@ multiversion-with-api: Makefile
 	sphinx-multiversion $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
 	@echo Step 3: Deleting temporary deployment branches
 	./delet_deployment_branches
-	@echo Step 4: Building API for foxy
-	if cd doc/ros2_control; then git checkout foxy && git pull; else echo "Submodules are not initialized correctly. Exiting!" && exit; fi && \
-	doxygen doc/Doxyfile && mkdir -p ../../$(BUILDDIR)/html/foxy_deploy/doc/api/ && cp -r doc/_build/html/. ../../$(BUILDDIR)/html/foxy_deploy/doc/api/ &&  \
-	rm -rf doc/_build && cd ../../ 
-	@echo Step 5: Building API for galactic
-	if cd doc/ros2_control; then git checkout galactic && git pull; else echo "Submodules are not initialized correctly. Exiting!" && exit; fi && \
-	doxygen doc/Doxyfile && mkdir -p ../../$(BUILDDIR)/html/galactic_deploy/doc/api/ && cp -r doc/_build/html/. ../../$(BUILDDIR)/html/galactic_deploy/doc/api/ &&  \
-	rm -rf doc/_build && cd ../../ 
-	@echo Step 6: Building API for rolling
-	if cd doc/ros2_control; then git checkout master && git pull; else echo "Submodules are not initialized correctly. Exiting!" && exit; fi && \
-	doxygen doc/Doxyfile && mkdir -p ../../$(BUILDDIR)/html/rolling_deploy/doc/api/ && cp -r doc/_build/html/. ../../$(BUILDDIR)/html/rolling_deploy/doc/api/ &&  \
-	rm -rf doc/_build && cd ../../ 
+	@echo Step 4: Building multiverison API
+	./create_api_multi_version
+	@echo Step 5: Create correct index 
 	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=rolling_deploy/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
 
 .PHONY: help Makefile html-with-api multiversion html-with-api

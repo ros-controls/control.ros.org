@@ -1,6 +1,15 @@
 #!/usr/bin/env bash
 
+api_repo="ros2_control"
+api_dir="doc/$api_repo"
+base_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+base_branch="add_multi_version_temp_branch"
+build_dir="_build"
+
+# definition single html
+api_branch="master"
+
+# definitions for multiversion
 # temporary branches which are used for deployment and corresponding branch which should be checked out in the submodule
 declare -A branch_version=( ["foxy_deploy"]="foxy" ["galactic_deploy"]="galactic" ["rolling_deploy"]="master")
 submodules=("ros2_control" "ros2_controllers" "ros2_control_demos")
-base_branch="add_multi_version_temp_branch"
