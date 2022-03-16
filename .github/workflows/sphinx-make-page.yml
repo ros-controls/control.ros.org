@@ -34,21 +34,9 @@ jobs:
       with:
         ref: gh-pages
         path: gh-pages
-    - name: Commit documentation changes
-      # if: github.event_name != 'pull_request'
-      run: |
-        cp -r _build/html/* gh-pages/
-        cd gh-pages
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add .
-        git commit -m "Update documentation" -a || true
-        # The above command will fail if no changes were present, so we ignore
-        # the return code.
-    - name: Push changes
-      # if: ${{ github.event_name != 'pull_request' && !env.ACT }}
-      uses: ad-m/github-push-action@master
+    - name: Deploy Pages
+      if: ${{ success() }}
+      uses: peaceiris/actions-gh-pages@v3
       with:
-        branch: gh-pages
-        directory: gh-pages
         github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs/_build/html
