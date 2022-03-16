@@ -27,7 +27,10 @@ jobs:
     - name: Install doxygen and graphviz
       run: sudo apt-get install -y doxygen graphviz
     - name: Build multiversion with API
-      run: make multiversion-with-api
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        make multiversion-with-api
     - name: clone gh-pages branch
       uses: actions/checkout@v2
       if: github.event_name != 'pull_request'
