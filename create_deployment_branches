@@ -29,13 +29,4 @@ create_deployment_branches () {
     done
 }
 
-echo "Everything not commited so far is going to be commited to temporary branch. Make sure to commit everything before continue."
-echo "Continue?[yes/no]"
-read -r usr_input
-if [ -n "$usr_input" ] && [ "$usr_input" == "yes" ]
-then
-    create_deployment_branches
-else
-    echo "Exiting!"
-    exit
-fi
+create_deployment_branches
