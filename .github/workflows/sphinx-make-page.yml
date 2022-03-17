@@ -33,12 +33,12 @@ jobs:
         make multiversion-with-api
     - name: clone gh-pages branch
       uses: actions/checkout@v2
-      if: github.event_name != 'pull_request'
+      if: ${{ success() && github.event_name != 'pull_request' && !env.ACT }}
       with:
         ref: gh-pages
         path: gh-pages
     - name: Deploy Pages
-      if: ${{ success() }}
+      if: ${{ success() && github.event_name != 'pull_request' && !env.ACT }}
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
