@@ -3,13 +3,17 @@
 api_repo="ros2_control"
 api_dir="doc/$api_repo"
 base_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+# branch from which temporary branches are derived
 base_branch="add_multi_version_temp_branch"
 build_dir="_build"
 
 # definition single html
+# the branch from which the api is checked out and builded
 api_branch="master"
 
 # definitions for multiversion
-# temporary branches which are used for deployment and corresponding branch which should be checked out in the submodule
+# temporary branches which are created for deployment and corresponding branch which should be checked out in the subrepos
+# ["temporary_branch"]="checkout_branch_for_all_sub_repos"
 declare -A branch_version=( ["foxy_deploy"]="foxy" ["galactic_deploy"]="galactic" ["rolling_deploy"]="master")
-submodules=("ros2_control" "ros2_controllers" "ros2_control_demos")
+# the subrepos which are cloned into the temporary deployment branch and their corresponding url
+declare -A subrepo_url=( ["ros2_control"]="https://github.com/ros-controls/ros2_control" ["ros2_controllers"]="https://github.com/ros-controls/ros2_controllers" ["ros2_control_demos"]="https://github.com/ros-controls/ros2_control_demos")

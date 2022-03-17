@@ -15,17 +15,17 @@ create_deployment_branches () {
         sed -i "s/doc\/ros2_control/\#doc\/ros2_control/g" .gitignore
         # make sure all submodules are inited
         echo "Clone repositories for $branch and checkout ${branch_version[$branch]}"
-        for submodule in "${submodules[@]}";
-            do echo "Create doc/$submodule";
-                git clone https://github.com/ros-controls/"$submodule" -b "${branch_version[$branch]}" doc/"$submodule"
-                cd doc/"$submodule" || { echo "Could not clone $submodule to doc/ directory. Exiting!"; exit "$ERRCODE"; } 
+        for repo_name in "${!subrepo_url[@]}";
+            do echo "Create doc/$repo_name";
+                git clone "${subrepo_url[$repo_name]}" -b "${branch_version[$branch]}" doc/"$repo_name"
+                cd doc/"$repo_name" || { echo "Could not clone $repo_name to doc/ directory. Exiting!"; exit "$ERRCODE"; } 
                 rm -rf .git/
                 cd ../../ 
         done
         git add .
         git commit -m "Add temporary changes for multi version"
         git checkout "$base_branch"
-        rm -rf doc/"$submodule"
+        rm -rf doc/"$repo_name"
     done
 }
 
