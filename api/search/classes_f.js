@@ -18,6 +18,7 @@ var searchData=
   ['testjointlimitinterfacetestaftershutdown',['TestJointLimitInterfaceTestAfterShutdown',['../classjoint__limits__rosparam_1_1TestJointLimitInterfaceTestAfterShutdown.html',1,'joint_limits_rosparam']]],
   ['testloadcontroller',['TestLoadController',['../classTestLoadController.html',1,'']]],
   ['testloadedcontroller',['TestLoadedController',['../classTestLoadedController.html',1,'']]],
+  ['testloadedcontrollerparametrized',['TestLoadedControllerParametrized',['../classTestLoadedControllerParametrized.html',1,'']]],
   ['testmacros',['TestMacros',['../classTestMacros.html',1,'']]],
   ['testreleaseinterfaces',['TestReleaseInterfaces',['../classTestReleaseInterfaces.html',1,'']]],
   ['testresourcemanager',['TestResourceManager',['../classTestResourceManager.html',1,'']]],

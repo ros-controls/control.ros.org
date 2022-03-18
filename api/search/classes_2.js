@@ -7,6 +7,7 @@ var searchData=
   ['controllerinterface',['ControllerInterface',['../classcontroller__interface_1_1ControllerInterface.html',1,'controller_interface']]],
   ['controllermanager',['ControllerManager',['../classcontroller__manager_1_1ControllerManager.html',1,'controller_manager']]],
   ['controllermanagerfixture',['ControllerManagerFixture',['../classControllerManagerFixture.html',1,'']]],
+  ['controllermanagerfixture_3c_20controller_5fmanager_3a_3acontrollermanager_20_3e',['ControllerManagerFixture&lt; controller_manager::ControllerManager &gt;',['../classControllerManagerFixture.html',1,'']]],
   ['controllermanagerrunner',['ControllerManagerRunner',['../classControllerManagerRunner.html',1,'']]],
   ['controllermock',['ControllerMock',['../classControllerMock.html',1,'']]],
   ['controllernamecompleter',['ControllerNameCompleter',['../classros2controlcli_1_1api_1_1ControllerNameCompleter.html',1,'ros2controlcli::api']]],
