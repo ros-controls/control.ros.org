@@ -27,7 +27,9 @@ cleanup() {
 if [ -d "$api_dir" ];
 then
     create_api
+    cleanup
 else
     git clone https://github.com/ros-controls/"$api_repo" doc/"$api_repo" || { echo "Could not clone $api_repo. Exiting!"; exit "$ERRCODE"; }
-    create_api  
+    create_api
+    cleanup  
 fi
