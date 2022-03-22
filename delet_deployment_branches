@@ -8,6 +8,8 @@ git checkout "$base_branch" || { echo "Exiting!"; exit $ERRCODE; }
 
 # create temporary branches, clone subdirectories 
 for branch in "${!branch_version[@]}";
-    do echo "Deletet temporary branch: $branch.";
-    git branch -D "$branch"
+    do echo "Revert to last changes before temporary multiversion commit on: $branch.";
+    git checkout "$branch"
+    git reset --hard HEAD~1
+    git checkout "$base_branch"
 done

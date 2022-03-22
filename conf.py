@@ -34,7 +34,7 @@ copyright = "{}, {}".format(time.strftime("%Y"), author)
 ros_distro = "rolling"
 distro_title = "Rolling"
 distro_title_full = "Rolling Ridley"
-repos_file_branch = "rolling_deploy"
+repos_file_branch = "rolling"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -178,10 +178,10 @@ html_sourcelink_suffix = ""
 
 
 # Add branches you want to whtielist here.
-smv_branch_whitelist = r"^(foxy_deploy|galactic_deploy|rolling_deploy)$"
-smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy_deploy|galactic_deploy|rolling_deploy).*$"
+smv_branch_whitelist = r"^(foxy|galactic|rolling)$"
+smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy|galactic|rolling).*$"
 smv_remote_whitelist = r"^(origin)$"
-smv_latest_version = "rolling"
+smv_latest_version = "galactic"
 smv_eol_versions = []
 
 distro_full_names = {
@@ -303,9 +303,9 @@ def smv_rewrite_configs(app, config):
     # to rewrite the various configuration items with the current version.
     if app.config.smv_current_version != "":
         branch_distro = {
-            "rolling_deploy": "rolling",
-            "foxy_deploy": "foxy",
-            "galactic_deploy": "galactic"
+            "rolling": "rolling",
+            "foxy": "foxy",
+            "galactic": "galactic"
         }
 
         # Override default values
