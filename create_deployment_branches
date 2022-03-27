@@ -25,6 +25,7 @@ create_deployment_branches () {
         git add .
         git commit -m "Add temporary changes for multi version"
         git checkout "$base_branch"
+        # remove left over folders if exisiting
         for repo_name in "${!subrepo_url[@]}";
             do rm -rf doc/"$repo_name";
         done
