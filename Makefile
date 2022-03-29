@@ -33,7 +33,7 @@ multiversion: Makefile
 	@echo Step 3: Deleting temporary deployment branches
 	./delet_deployment_branches
 	@echo Step 4: Create correct index 
-	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=rolling_deploy/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
+	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=rolling/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
 
 multiversion-with-api: Makefile
 	@echo Building multi version documentation with API
@@ -46,7 +46,7 @@ multiversion-with-api: Makefile
 	@echo Step 4: Building multiverison API
 	./create_api_multi_version
 	@echo Step 5: Create correct index 
-	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=rolling_deploy/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
+	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=rolling/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
 
 .PHONY: help Makefile html-with-api multiversion html-with-api
 
