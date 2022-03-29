@@ -46,22 +46,22 @@ html-all-subrepos-with-api: Makefile
 
 multiversion: Makefile
 	@echo Building multi version documentation without API
-	@echo Step 1: Creating temporary deployment branches
+	@echo Step 1: Creating temporary commits
 	./make_help_scripts/add_tmp_commits
 	@echo Step 2: Build multi version documentation
 	sphinx-multiversion $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
-	@echo Step 3: Deleting temporary deployment branches
+	@echo Step 3: Deleting temporary commits
 	./make_help_scripts/delete_tmp_commits
 	@echo Step 4: Create correct index 
 	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=rolling/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
 
 multiversion-with-api: Makefile
 	@echo Building multi version documentation with API
-	@echo Step 1: Creating temporary deployment branches
+	@echo Step 1: Creating temporary commits
 	./make_help_scripts/add_tmp_commits
 	@echo Step 2: Build multi version documentation
 	sphinx-multiversion $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
-	@echo Step 3: Deleting temporary deployment branches
+	@echo Step 3: Deleting temporary commits
 	./make_help_scripts/delete_tmp_commits
 	@echo Step 4: Building multiverison API
 	./make_help_scripts/create_api_multi_version
