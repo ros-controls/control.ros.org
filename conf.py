@@ -31,10 +31,10 @@ copyright = "{}, {}".format(time.strftime("%Y"), author)
 
 # Adjust those to change ros distribution
 # you might also need to white list branch
-ros_distro = "rolling"
-distro_title = "Rolling"
-distro_title_full = "Rolling Ridley"
-repos_file_branch = "rolling"
+ros_distro = "foxy"
+distro_title = "Foxy"
+distro_title_full = "Foxy Fitzroy"
+repos_file_branch = "foxy"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
