@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
+# This file includes all the definitions used in the other scripts 
 api_repo="ros2_control"
 api_dir="doc/$api_repo"
-base_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+script_base_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+base_dir="$(dirname "$script_base_dir")"
 # branch from which temporary branches are derived
 base_branch="add_multi_version_temp_branch"
 build_dir="_build"

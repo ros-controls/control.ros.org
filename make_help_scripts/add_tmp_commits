@@ -1,24 +1,29 @@
 #!/usr/bin/env bash
 
 # shellckeck source=deploy_defines
-source deploy_defines
+# source deploy_defines regardless of startingpoint
+DIR="${BASH_SOURCE%/*}"
+if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
+. "$DIR/deploy_defines" || { echo "Could not source deploy_defines script. This is needed for correct execution. Exiting!"; exit; }
 
-create_deployment_branches () {
-    # checkout a base from which deply branches are derived
+add_sub_repositories_and_commit () {
+    # checkout a base for defined starting point
+    cd "$base_dir" || { echo "Could not checkout base dir of control.ros.org. Exiting!"; exit "$ERRCODE"; }
     git checkout "$base_branch" || { echo "Exiting!"; exit "$ERRCODE"; }
 
-    # create temporary branches, clone subdirectories 
+    #  for each branch from multi version, checkout branch, clone sub repositories with docs add as tmp commit and remove
     for branch in "${!branch_version[@]}";
         do echo "Switch to branch: $branch.  - With version:${branch_version[$branch]}";
         git checkout "$branch"
-        # change .gitignore, needed to include submodules. sed matches doc/ros2_control*, so all submodules are excluded
+        # change .gitignore, needed to include subrepositorie. sed matches doc/ros2_control*, so all subrepositorie are excluded
         sed -i "s/doc\/ros2_control/\#doc\/ros2_control/g" .gitignore
-        # make sure all submodules are inited
+        # clone all subrepositorie and add as tmp commit to branch of multi version
         echo "Clone repositories for $branch and checkout ${branch_version[$branch]}"
         for repo_name in "${!subrepo_url[@]}";
             do echo "Create doc/$repo_name";
                 git clone "${subrepo_url[$repo_name]}" -b "${branch_version[$branch]}" doc/"$repo_name"
                 cd doc/"$repo_name" || { echo "Could not clone $repo_name to doc/ directory. Exiting!"; exit "$ERRCODE"; } 
+                # remove git repo so that doc files of subrepo can be added to tmp commit
                 rm -rf .git/
                 cd ../../ 
         done
@@ -32,4 +37,4 @@ create_deployment_branches () {
     done
 }
 
-create_deployment_branches
+add_sub_repositories_and_commit
