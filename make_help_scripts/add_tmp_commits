@@ -8,7 +8,7 @@ if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 
 add_sub_repositories_and_commit () {
     # checkout a base for defined starting point
-    cd "$base_dir" || { echo "Could not checkout base dir of control.ros.org. Exiting!"; exit "$ERRCODE"; }
+    cd "$base_dir" || { echo "Could not go to base dir of control.ros.org. Exiting!"; exit "$ERRCODE"; }
     git checkout "$base_branch" || { echo "Exiting!"; exit "$ERRCODE"; }
 
     #  for each branch from multi version, checkout branch, clone sub repositories with docs add as tmp commit and remove
