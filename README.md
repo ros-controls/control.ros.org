@@ -8,11 +8,11 @@ https://control.ros.org/
 
 This folder holds the source and configuration files used to generate the
 [ros2_control documentation](https://control.ros.org) web site. The current test version of the documentation can be found [here](https://ros-controls.github.io/control.ros.org/).  
-We use [sphinx](https://www.sphinx-doc.org/en/master/) for our single version [sphinx-multiversion](https://holzhaus.github.io/sphinx-multiversion/master/index.html#) for the multi version build of our documentaion. The doc files themself are written in [restructuredtext format](https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html) (*.rst).
+We use [sphinx](https://www.sphinx-doc.org/en/master/) for our single version [sphinx-multiversion](https://holzhaus.github.io/sphinx-multiversion/master/index.html#) for the multi version build of our documentation. The doc files themselves are written in [restructuredtext format](https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html) (*.rst).
 
 
 # Structure and build commands
-The documentation files for [ros2_control](https://github.com/ros-controls/ros2_control), [ros2_controllers](https://github.com/ros-controls/ros2_controllers) and [ros2_control_demos](https://github.com/ros-controls/ros2_control_demos) are located in the respective repositories themselves. They have to be included inside the `doc` folder. There are `make` commands available which automate the process of building and inclusion of the subrepositories for you.  
+The documentation files for [ros2_control](https://github.com/ros-controls/ros2_control), [ros2_controllers](https://github.com/ros-controls/ros2_controllers) and [ros2_control_demos](https://github.com/ros-controls/ros2_control_demos) are located in the respective repositories themselves (called subrepositories from now on). They have to be included inside the `doc` folder. There are `make` commands available which automate the process of building and inclusion of the subrepositories for you.  
 **NOTE**: In `spinx-multiverison` changes in the documentation are only visible after committing them. If you want to check them before committing, you can build a single version of the docs.   
 * ```make html``` - Builds a single version, changes are immediate visible. You have to include the subrepositories yourself.
 * ```make html-all-subrepos``` - Builds a single version, changes are immediate visible. All subrepositories are automatically included.
@@ -24,7 +24,7 @@ The documentation files for [ros2_control](https://github.com/ros-controls/ros2_
 1. If you are running inside a docker container, be sure to open a port so the website can be accessed.
 2. Install doxygen and graphviz: `sudo apt install doxygen graphviz`
 3. `python3 -m pip install -r requirements.txt`
-4. Building of the documentation. Depends on what you want to do. See either single version or multiversion bleow.
+4. Building of the documentation. Depends on what you want to do. See either single version or multiversion below.
  
 If you want to see results run: `python3 -m http.server --directory <path_to_control.ros.org>/_build/html <port>` and then open a browser to `localhost:<port>`   
  (Or just open `_build/html/index.html` in your browser.)
@@ -38,7 +38,25 @@ If you want to see results run: `python3 -m http.server --directory <path_to_con
 ### Multiversion
 4. Run `make multiversion` inside control.ros.org. 
 ##### A note on how it works:
+The building of multiversion consists of several steps. The scripts are located inside the `make_help_scripts` folder.
+1. First for each branch the subrepositories are cloned into the `doc/folder` and the corresponding branch is checked out and a temporary commit is created on the branch. This is needed, so that the documentation files located in the subrepositoies are visible to multiversion.
+2. Then the documentation is built using `sphinx-multiversion`
+3. After the creation, each branch is checked out again and the temporary commits are deleted.  
 
+For `make multiversion-with-api` additionally, the api repository (ros2_control) is pulled and the corresponding branch is checked out. Then the api is created with `doxygen` and copied to the build directory.   
+**Note:** If the building fails it is possible that the temporary commits are not deleted correctly. You then have to check the branches manually an possibly clean up by deleting the temporary commits. 
+##### How to change:
+If you want to change the deployed branches you have to change `conf.py` and `make_help_scripts/deploy_defines`. 
+#####
+conf.py
+* Change ros_distro, distro_title, distro_title_full and repos_file_branch.
+* Add/remove whitelisting: smv_branch_whitelist,smv_released_pattern, ...
+* possibly add your version/branch to: distro_full_names and branch_distro (in smv_rewrite_configs)
+####
+deploy_defines
+* Change branch_version
+
+To add subrepoositories chage subrepo_url
 
 # Testing GitHub workflows:
 If you want to modify or otherwise test the GitHub actions workflow locally without having to push every time to see the result,
