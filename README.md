@@ -13,7 +13,7 @@ This folder holds the source and configuration files used to generate the
 # Build Instructions:
 1. If you are running inside a docker container, be sure to open a port so the website can be accessed.
 2. Checkout the relevant branches for control.ros.org and ros2_control.
-    Note: Either checkout ros2_control inside `control.ros.org/doc/` or softlink it there.
+    Note: Either checkout ros2_control inside `control.ros.org/doc/` or symlink it there.
           The build will expect ros2_control to be found within `control.ros.org/doc/`.
           If you want to symlink it, clone it to any location you like. Make sure you
           are inside the `control.ros.org/doc/` folder and run `ln -s <path to ros2_control> .`
