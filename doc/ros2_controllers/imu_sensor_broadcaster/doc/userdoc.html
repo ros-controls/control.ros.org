@@ -1,0 +1,263 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>IMU Sensor Broadcaster &mdash; control.ros.org  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/override.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon_ros-controls.ico"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Command Line Interface" href="../../../ros2_control/ros2controlcli/doc/userdoc.html" />
+    <link rel="prev" title="joint_state_broadcaster" href="../../joint_state_broadcaster/doc/userdoc.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> control.ros.org
+          
+
+          
+            
+            <img src="../../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html#architecture">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html#hardware-components">Hardware Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html#core-functionalities">Core functionalities</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/controllers_index.html">ros2_controllers</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#nomenclature">Nomenclature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#id1">Controllers</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/controllers_index.html#guidelines-and-best-practices">Guidelines and Best Practices</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../doc/writing_new_controller.html">Writing a new controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../doc/controllers_index.html#available-controllers">Available Controllers</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../doc/controllers_index.html#available-broadcasters">Available Broadcasters</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../joint_state_broadcaster/doc/userdoc.html">Joint State Broadcaster</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Imu Sensor Broadcaster</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../differences_to_ros1/differences_to_ros1.html">Differences to ros_control (ROS1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../differences_to_ros1/differences_to_ros1.html#migration-guide-to-ros2-control">Migration Guide to ros2_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Pull Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html#rules-for-the-repositories-and-process-of-merging-pull-requests">Rules for the repositories and process of merging pull requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html#writing-documentation">Writing documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html#repository-structure-and-ci-configuration">Repository structure and CI configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../project_ideas.html">Project Ideas for GSoC 2022</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">control.ros.org</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../doc/controllers_index.html">ros2_controllers</a> &raquo;</li>
+        
+      <li>IMU Sensor Broadcaster</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/ros-controls/control.ros.org/blob/master/doc/ros2_controllers/imu_sensor_broadcaster/doc/userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="imu-sensor-broadcaster">
+<span id="imu-sensor-broadcaster-userdoc"></span><h1>IMU Sensor Broadcaster<a class="headerlink" href="#imu-sensor-broadcaster" title="Permalink to this headline"></a></h1>
+<p>Broadcaster of messages from IMU sensor.
+The published message type is <code class="docutils literal notranslate"><span class="pre">sensor_msgs/msg/Imu</span></code>.</p>
+<p>The controller is a wrapper around <code class="docutils literal notranslate"><span class="pre">IMUSensor</span></code> semantic component (see <code class="docutils literal notranslate"><span class="pre">controller_interface</span></code> package).</p>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline"></a></h2>
+<dl class="simple">
+<dt>frame_id (mandatory)</dt><dd><p>Frame in which the output message will be published.</p>
+</dd>
+<dt>sensor_name (mandatory)</dt><dd><p>Defines sensor name used as prefix for its interfaces.
+Interface names are: &lt;sensor_name&gt;/orientation.x, …, &lt;sensor_name&gt;/angular_velocity.x, …,
+&lt;sensor_name&gt;/linear_acceleration.x.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../../../ros2_control/ros2controlcli/doc/userdoc.html" class="btn btn-neutral float-right" title="Command Line Interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../../joint_state_broadcaster/doc/userdoc.html" class="btn btn-neutral float-left" title="joint_state_broadcaster" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, ros2_control Maintainers.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

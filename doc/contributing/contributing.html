@@ -1,0 +1,314 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Pull Requests &mdash; control.ros.org  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/override.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon_ros-controls.ico"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Project Ideas for GSoC 2022" href="../project_ideas.html" />
+    <link rel="prev" title="Resources" href="../resources/resources.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> control.ros.org
+          
+
+          
+            
+            <img src="../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_started.html#architecture">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_started.html#hardware-components">Hardware Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ros2_control/doc/index.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ros2_control/doc/index.html#core-functionalities">Core functionalities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ros2_control/ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differences_to_ros1/differences_to_ros1.html">Differences to ros_control (ROS1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../differences_to_ros1/differences_to_ros1.html#migration-guide-to-ros2-control">Migration Guide to ros2_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/resources.html">Resources</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Pull Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#rules-for-the-repositories-and-process-of-merging-pull-requests">Rules for the repositories and process of merging pull requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#writing-documentation">Writing documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#repository-structure-and-ci-configuration">Repository structure and CI configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ci-configuration">CI configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../project_ideas.html">Project Ideas for GSoC 2022</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">control.ros.org</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Pull Requests</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/ros-controls/control.ros.org/blob/master/doc/contributing/contributing.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p>First, thank you for considering contributing to the ros2_control project.
+As an open-source project, we welcome each contributor, regardless of their background and experience.
+To reduce the entropy of the universe and our vivid, open, and collaborative environment, we have set up some standards and methods for contributions.</p>
+<div class="section" id="pull-requests">
+<h1>Pull Requests<a class="headerlink" href="#pull-requests" title="Permalink to this headline"></a></h1>
+<p>Requirements for pull requests are as follows:</p>
+<ol class="arabic simple">
+<li><p>Limited scope. Your PR should do one thing or one set of things. Avoid adding “random fixes” to PRs. Put those on separate PRs.</p></li>
+<li><p>Give your PR a descriptive title. Add a short summary, if required.</p></li>
+<li><p>Make sure the pipeline is green.</p></li>
+<li><p>Don’t be afraid to request reviews from maintainers.</p></li>
+<li><p>New code = new tests. If you are adding new functionality, always make sure to add some tests exercising the code and serving as live documentation of your original intention.</p></li>
+</ol>
+</div>
+<div class="section" id="rules-for-the-repositories-and-process-of-merging-pull-requests">
+<h1>Rules for the repositories and process of merging pull requests<a class="headerlink" href="#rules-for-the-repositories-and-process-of-merging-pull-requests" title="Permalink to this headline"></a></h1>
+<p>This section targets maintainers, but you are also welcome to read it to understand the process of how we handle PRs in our organization.
+This guideline is especially applicable for the following repositories:</p>
+<ul class="simple">
+<li><p>ros2_control,</p></li>
+<li><p>ros2_controllers,</p></li>
+<li><p>ros2_control_demos.</p></li>
+</ul>
+<p>Please keep the following in mind:</p>
+<ol class="arabic">
+<li><p>Please work from your fork when submitting PR. That way, we are keeping the main repo clean from feature branches.</p></li>
+<li><p>Each PR should have all checks satisfied before they can be considered for merging.</p></li>
+<li><p>Each PR must be approved by two maintainers (explicitly, please!). Only exceptions are PR’s from other active maintainers in the repository, where one approval backed up with traceable discussion is sufficient.</p>
+<p><strong>NOTE</strong>: If you are not a maintainer, you are still encouraged to review pull requests. This helps us increase the review pace and increase code quality. Also, you are very likely to find some issues/limitations nobody else is seeing.</p>
+</li>
+<li><p>Always do “squash and merge” and clean a commit message from comments like “fixup linters”, “use pre-commit”, “correct header”, or “Address review comments” and similar. This means that each PR results in exactly one (1) commit on the main branch.</p></li>
+<li><p>Please do not do “cowboy-style” PR merges over the weekend. It doesn’t matter how trivial PR is. Give people a chance to do a proper review and comment on it.</p></li>
+<li><p>Be aware of the impact a PR has and give other maintainers and contributors sufficient time for the review proportional to its impact. Ping them if necessary, repeatedly if necessary.</p></li>
+</ol>
+</div>
+<div class="section" id="writing-documentation">
+<h1>Writing documentation<a class="headerlink" href="#writing-documentation" title="Permalink to this headline"></a></h1>
+<p>Each repository starts as a “part” of the documentation using <code class="docutils literal notranslate"><span class="pre">#</span></code>.
+For more details, see: <a class="reference external" href="https://thomas-cokelaer.info/tutorials/sphinx/rest_syntax.html#id8">https://thomas-cokelaer.info/tutorials/sphinx/rest_syntax.html#id8</a></p>
+</div>
+<div class="section" id="repository-structure-and-ci-configuration">
+<h1>Repository structure and CI configuration<a class="headerlink" href="#repository-structure-and-ci-configuration" title="Permalink to this headline"></a></h1>
+<p>Each repository has two types of branches, development, and stable.
+PR’s should always be submitted against the development branch.
+When PR is accepted, and there are no API and ABI changes to a stable branch, please open a new PR against the stable branch(es).
+We use the following naming conventions for branches.</p>
+<p><strong>Development branch</strong>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Name: <code class="docutils literal notranslate"><span class="pre">master</span></code></p></li>
+<li><p>CI rule for merge:
+- must: <code class="docutils literal notranslate"><span class="pre">semi-binary</span></code> (working against development branch of ros2_control)
+- good: <code class="docutils literal notranslate"><span class="pre">binary</span></code>      (working against the same stable branch of other ros2_control repositories)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">source</span></code> build each day check against master branches of ROS 2</p></li>
+</ul>
+</div></blockquote>
+<p><strong>Stable branches</strong>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Name: <code class="docutils literal notranslate"><span class="pre">&lt;ros_distro&gt;</span></code> (e.g., foxy, galactic)</p></li>
+<li><p>CI rule for merge:
+- must: <code class="docutils literal notranslate"><span class="pre">semi-binary</span></code> (working against the same stable branch of other ros2_control repositories)
+- must: <code class="docutils literal notranslate"><span class="pre">binary</span></code>    (working against released versions of ros2_control) - except for adding new non-braking features</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">source</span></code> build each day against distribution branches</p></li>
+</ul>
+</div></blockquote>
+<div class="section" id="ci-configuration">
+<h2>CI configuration<a class="headerlink" href="#ci-configuration" title="Permalink to this headline"></a></h2>
+<p>Three build stages are checking the current and future compatibility of the framework.</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">binary</span></code> - against released packages (main and testing) in ROS distributions. This Shows that direct local build is possible.</p></li>
+</ol>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">semi-binary</span></code> - against released core ROS packages (main and testing), but the immediate dependencies are pulled from the source.
+This shows that local build with dependencies is possible, and if it fails there, we can expect that after the next package sync, we will not be able to build.</p></li>
+</ol>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">source</span></code> - also core ROS packages are build from source. It shows potential issues in the mid future.</p></li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../project_ideas.html" class="btn btn-neutral float-right" title="Project Ideas for GSoC 2022" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../resources/resources.html" class="btn btn-neutral float-left" title="Resources" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, ros2_control Maintainers.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
