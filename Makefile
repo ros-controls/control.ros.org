@@ -4,7 +4,7 @@
 
 # You can set these variables from the command line.
 SPHINXOPTS    =
-SPHINXBUILD   = sphinx-build
+SPHINXBUILD   = python3 -m sphinx
 SOURCEDIR     = .
 BUILDDIR      = _build
 
@@ -27,8 +27,9 @@ help:
 # # # 	$(Q)$(SPHINXBUILD) -t $(DOC_TAG) -b html -d $(BUILDDIR)/doctrees $(SOURCEDIR) $(BUILDDIR)/html $(SPHINXOPTS) $(O)
 
 # Remove generated content (Sphinx and doxygen)
+# only remove html and doctrees directories since pip also uses _build for side-packages
 clean:
-	rm -fr $(BUILDDIR)
+	rm -fr $(BUILDDIR)/html $(BUILDDIR)/doctrees
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).

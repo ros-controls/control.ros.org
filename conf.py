@@ -93,7 +93,7 @@ html_theme = 'sphinx_rtd_theme'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+#html_static_path = ['_static']
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
@@ -131,13 +131,13 @@ htmlhelp_basename = 'ros2ControlDocumentation'
 
 # -- Extension configuration -------------------------------------------------
 # copy transmission images to ros2_control/doc/_build/xml/ so that breathe picks them up as artifacts
-shutil.copytree("ros2_control/transmission_interface/images/", "ros2_control/doc/_build/xml/", dirs_exist_ok=True)
+shutil.copytree("doc/ros2_control/transmission_interface/images/", "doc/ros2_control/doc/_build/xml/", dirs_exist_ok=True)
 # Copy resources folders
-shutil.copytree("resources/", "_build/html/resources/", dirs_exist_ok=True)
+shutil.copytree("doc/resources/", "_build/html/resources/", dirs_exist_ok=True)
 # generate doxygen documentation
-subprocess.run(['doxygen', 'doc/Doxyfile'], cwd='ros2_control')
+subprocess.run(['doxygen', 'doc/Doxyfile'], cwd='doc/ros2_control')
 # copy doxygen documentation to api subfolder
-shutil.copytree("ros2_control/doc/_build/html", "_build/html/api")
+shutil.copytree("doc/ros2_control/doc/_build/html", "_build/html/doc/api")
 
 # -- Options for todo extension ----------------------------------------------
 

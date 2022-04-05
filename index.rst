@@ -6,16 +6,16 @@ Welcome to the ros2_control documentation!
 .. toctree::
    :hidden:
 
-   getting_started.rst
-   ros2_control/doc/index.rst
-   ros2_controllers/doc/controllers_index.rst
-   ros2_control/ros2controlcli/doc/userdoc.rst
-   differences_to_ros1.rst
-   ros2_control_demos/doc/index.rst
-   resources/resources.rst
-   contributing.rst
-   project_ideas.rst
-   acknowledgements.rst
+   doc/getting_started/getting_started.rst
+   doc/ros2_control/doc/index.rst
+   doc/ros2_controllers/doc/controllers_index.rst
+   doc/ros2_control/ros2controlcli/doc/userdoc.rst
+   doc/differences_to_ros1/differences_to_ros1.rst
+   doc/ros2_control_demos/doc/index.rst
+   doc/resources/resources.rst
+   doc/contributing/contributing.rst
+   doc/project_ideas.rst
+   doc/acknowledgements/acknowledgements.rst
 
 The ros2_control is a framework for (real-time) control of robots using (`ROS2 <https://index.ros.org/doc/ros2/>`_).
 Its packages are a rewrite of `ros_control <http://wiki.ros.org/ros_control>`_ packages used in `ROS` (`Robot Operating System <https://wiki.ros.org>`_).
