@@ -1,5 +1,8 @@
 var searchData=
 [
+  ['testablecontrollerinterface',['TestableControllerInterface',['../classTestableControllerInterface.html',1,'']]],
+  ['testablecontrollerinterfaceiniterror',['TestableControllerInterfaceInitError',['../classTestableControllerInterfaceInitError.html',1,'']]],
+  ['testablecontrollerinterfaceinitfailure',['TestableControllerInterfaceInitFailure',['../classTestableControllerInterfaceInitFailure.html',1,'']]],
   ['testableforcetorquesensor',['TestableForceTorqueSensor',['../classTestableForceTorqueSensor.html',1,'']]],
   ['testableimusensor',['TestableIMUSensor',['../classTestableIMUSensor.html',1,'']]],
   ['testablesemanticcomponentinterface',['TestableSemanticComponentInterface',['../classTestableSemanticComponentInterface.html',1,'']]],
