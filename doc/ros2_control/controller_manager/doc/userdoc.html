@@ -102,6 +102,7 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Controller Manager</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#helper-scripts">Helper scripts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#concepts">Concepts</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../hardware_interface/doc/hardware_components_userdoc.html">Hardware Components</a></li>
@@ -273,6 +274,20 @@ This is a class from which controller’s instance with name “<code class="doc
 <span class="go">                        Name of the controller manager ROS node</span>
 </pre></div>
 </div>
+</div>
+</div>
+<div class="section" id="concepts">
+<h2>Concepts<a class="headerlink" href="#concepts" title="Permalink to this headline"></a></h2>
+<div class="section" id="restarting-all-controllers">
+<h3>Restarting all controllers<a class="headerlink" href="#restarting-all-controllers" title="Permalink to this headline"></a></h3>
+<p>The simplest way to restart all controllers is by using <code class="docutils literal notranslate"><span class="pre">switch_controllers</span></code> services or CLI and adding all controllers to <code class="docutils literal notranslate"><span class="pre">start</span></code> and <code class="docutils literal notranslate"><span class="pre">stop</span></code> lists.
+Note that not all controllers have to be restarted, e.g., broadcasters.</p>
+</div>
+<div class="section" id="restarting-hardware">
+<h3>Restarting hardware<a class="headerlink" href="#restarting-hardware" title="Permalink to this headline"></a></h3>
+<p>If hardware gets restarted then you should go through its lifecycle again.
+This can be simply achieved by returning <code class="docutils literal notranslate"><span class="pre">ERROR</span></code> from <code class="docutils literal notranslate"><span class="pre">write</span></code> and <code class="docutils literal notranslate"><span class="pre">read</span></code> methods of interface implementation.
+<strong>NOT IMPLEMENTED YET - PLEASE STOP/RESTART ALL CONTROLLERS MANUALLY FOR NOW</strong> The controller manager detects that and stops all the controllers that are commanding that hardware and restarts broadcasters that are listening to its states.</p>
 </div>
 </div>
 </div>
