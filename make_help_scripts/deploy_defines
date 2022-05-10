@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# This file includes all the definitions used in the other scripts 
+api_repo="ros2_control"
+api_dir="doc/$api_repo"
+script_base_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+# should by control.ros.org folder
+base_dir="$(dirname "$script_base_dir")"
+# branch from which is started to checkout other branches 
+base_branch="master"
+build_dir="_build"
+
+# definition single html
+# the branch from which the api is checked out and builded
+api_branch="master"
+
+# definitions for multiversion
+# branches on which the temporary commits are created and which branch should be checked out in the subrepositories
+# ["branch checked out for mutliversion"]="branch checked out for all subrepos"
+declare -A branch_version=( ["foxy"]="foxy" ["galactic"]="galactic" ["master"]="master") # master is rolling
+# the subrepos which are cloned into the branches and their corresponding url
+declare -A subrepo_url=( ["ros2_control"]="https://github.com/ros-controls/ros2_control" ["ros2_controllers"]="https://github.com/ros-controls/ros2_controllers" ["ros2_control_demos"]="https://github.com/ros-controls/ros2_control_demos")

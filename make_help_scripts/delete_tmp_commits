@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# shellckeck source=deploy_defines
+# source deploy_defines regardless of startingpoint
+DIR="${BASH_SOURCE%/*}"
+if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
+. "$DIR/deploy_defines" || { echo "Could not source deploy_defines script. This is needed for correct execution. Exiting!"; exit; }
+
+# checkout a base 
+cd "$base_dir" || { echo "Could not checkout base dir of control.ros.org. Exiting!"; exit "$ERRCODE"; }
+git checkout "$base_branch" || { echo "Exiting!"; exit $ERRCODE; }
+
+# delete temporary created commits
+for branch in "${!branch_version[@]}";
+    do echo "Revert to last changes before temporary multiversion commit on: $branch.";
+    git checkout "$branch"
+    git reset --hard HEAD~1
+    git checkout "$base_branch"
+done

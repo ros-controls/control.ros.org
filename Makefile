@@ -10,14 +10,65 @@ BUILDDIR      = _build
 
 # Put it first so that "make" without argument is like "make help".
 help:
-	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+	@$(SPHINXBUILD) -M help $(SOURCEDIR) $(BUILDDIR) $(SPHINXOPTS) $(O)
 	@echo ""
 	@echo "make publish"
 	@echo "   publish generated html to thesofproject.github.io site:"
 	@echo "   specify RELEASE=name to publish as a tagged release version"
 	@echo "   and placed in a version subfolder.  Requires repo merge permission."
 
-.PHONY: help Makefile
+html-with-api: Makefile
+	@echo Single html file with API
+	@echo Step 1: Creating html files
+	$(SPHINXBUILD) $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
+	@echo Step 2: Building API
+	./make_help_scripts/create_api
+
+html-all-subrepos: Makefile
+	@echo Single html file without API
+	@echo Step 1: Cloning all subrepositories
+	./make_help_scripts/add_sub_repos 
+	@echo Step 2: Building documentation
+	$(SPHINXBUILD) $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
+	@echo Step 3: Deleting subrepositories in doc/ folder
+	./make_help_scripts/delete_sub_repos
+
+html-all-subrepos-with-api: Makefile
+	@echo Single html file with API
+	@echo Step 1: Cloning all subrepositories
+	./make_help_scripts/add_sub_repos 
+	@echo Step 2: Building documentation
+	$(SPHINXBUILD) $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
+	@echo Step 3: Deleting subrepositories in doc/ folder
+	./make_help_scripts/delete_sub_repos
+	@echo Step 4: Building API
+	./make_help_scripts/create_api
+
+multiversion: Makefile
+	@echo Building multi version documentation without API
+	@echo Step 1: Creating temporary commits
+	./make_help_scripts/add_tmp_commits
+	@echo Step 2: Build multi version documentation
+	sphinx-multiversion $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
+	@echo Step 3: Deleting temporary commits
+	./make_help_scripts/delete_tmp_commits
+	@echo Step 4: Create correct index 
+	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=master/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
+
+multiversion-with-api: Makefile
+	@echo Building multi version documentation with API
+	@echo Step 1: Creating temporary commits
+	./make_help_scripts/add_tmp_commits
+	@echo Step 2: Build multi version documentation
+	sphinx-multiversion $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
+	@echo Step 3: Deleting temporary commits
+	./make_help_scripts/delete_tmp_commits
+	@echo Step 4: Building multiverison API
+	./make_help_scripts/create_api_multi_version
+	@echo Step 5: Create correct index 
+	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=master/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
+
+.PHONY: help Makefile html-with-api multiversion html-with-api
 
 # TODO(denis): Enable this!
 # # # # Generate the doxygen xml (for Sphinx) and copy the doxygen html to the
@@ -34,4 +85,4 @@ clean:
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
-	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+	@$(SPHINXBUILD) -M $@ $(SOURCEDIR) $(BUILDDIR) $(SPHINXOPTS) $(O)
