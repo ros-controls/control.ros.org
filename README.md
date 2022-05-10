@@ -8,11 +8,13 @@ https://control.ros.org/
 
 This folder holds the source and configuration files used to generate the
 [ros2_control documentation](https://control.ros.org) web site. The current test version of the documentation can be found [here](https://ros-controls.github.io/control.ros.org/).  
-We use [sphinx](https://www.sphinx-doc.org/en/master/) for our single version [sphinx-multiversion](https://holzhaus.github.io/sphinx-multiversion/master/index.html#) for the multi version build of our documentation. The doc files themselves are written in [restructuredtext format](https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html) (*.rst).
-
+We use [sphinx](https://www.sphinx-doc.org/en/master/) for single version and [sphinx-multiversion](https://holzhaus.github.io/sphinx-multiversion/master/index.html#) for the multi version build of our documentation. 
+The doc files themselves are written in [restructuredtext format](https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html) (*.rst).
 
 # Structure and build commands
-The documentation files for [ros2_control](https://github.com/ros-controls/ros2_control), [ros2_controllers](https://github.com/ros-controls/ros2_controllers) and [ros2_control_demos](https://github.com/ros-controls/ros2_control_demos) are located in the respective repositories themselves (called subrepositories from now on). They have to be included inside the `doc` folder. There are `make` commands available which automate the process of building and inclusion of the subrepositories for you.  
+The documentation files for [ros2_control](https://github.com/ros-controls/ros2_control), [ros2_controllers](https://github.com/ros-controls/ros2_controllers) and [ros2_control_demos](https://github.com/ros-controls/ros2_control_demos) are located in the respective repositories themselves (called subrepositories from now on).
+They have to be included inside the `doc` folder.
+There are `make` commands available which automate the process of building and inclusion of the subrepositories for you.  
 **NOTE**: In `spinx-multiverison` changes in the documentation are only visible after committing them. If you want to check them before committing, you can build a single version of the docs.   
 * ```make html``` - Builds a single version, changes are immediate visible. You have to include the subrepositories yourself.
 * ```make html-all-subrepos``` - Builds a single version, changes are immediate visible. All subrepositories are automatically included.
@@ -32,8 +34,10 @@ If you want to see results run: `python3 -m http.server --directory <path_to_con
 ### Single version
 4. a) Run `make html-all-subrepos` inside control.ros.org. 
 ###
-4. b) Checkout the relevant branches for control.ros.org and ros2_control. Either checkout ros2_control inside `control.ros.org/doc/` or softlink it there. If you want to symlink it, clone it to any location you like. Make sure you are inside the `control.ros.org/doc/` folder and run `ln -s <path to ros2_control> .`  
-5. Run `make html` inside control.ros.org.
+4. b) Checkout the relevant branches for control.ros.org and ros2_control.
+Either checkout ros2_control inside `control.ros.org/doc/` or softlink it there. If you want to symlink it, clone it to any location you like.
+Make sure you are inside the `control.ros.org/doc/` folder and run `ln -s <path to ros2_control> .`  
+6. Run `make html` inside control.ros.org.
 
 ### Multiversion
 4. Run `make multiversion` inside control.ros.org. 
