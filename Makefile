@@ -3,7 +3,7 @@
 # The file is inspired by the Makefile for the navigation.ros.org <https://github.com/ros-planning/navigation.ros.org>
 
 # You can set these variables from the command line.
-SPHINXOPTS    =
+SPHINXOPTS    = 
 SPHINXBUILD   = python3 -m sphinx
 SOURCEDIR     = .
 BUILDDIR      = _build
