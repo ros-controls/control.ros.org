@@ -119,12 +119,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac2723705913dcd8712549a2285cdf2d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5dacfeb086340ed13f2e52d33088adc"><td class="memItemLeft" align="right" valign="top">virtual return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ActuatorInterface.html#af5dacfeb086340ed13f2e52d33088adc">perform_command_mode_switch</a> (const std::vector&lt; std::string &gt; &amp;, const std::vector&lt; std::string &gt; &amp;)</td></tr>
 <tr class="separator:af5dacfeb086340ed13f2e52d33088adc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a137f074c64cbb57618c3ffe379c78275"><td class="memItemLeft" align="right" valign="top">virtual return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ActuatorInterface.html#a137f074c64cbb57618c3ffe379c78275">read</a> ()=0</td></tr>
-<tr class="memdesc:a137f074c64cbb57618c3ffe379c78275"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the current state values from the actuator.  <a href="classhardware__interface_1_1ActuatorInterface.html#a137f074c64cbb57618c3ffe379c78275">More...</a><br /></td></tr>
-<tr class="separator:a137f074c64cbb57618c3ffe379c78275"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4bbd05d8b3128c34ecbf8e5851352576"><td class="memItemLeft" align="right" valign="top">virtual return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ActuatorInterface.html#a4bbd05d8b3128c34ecbf8e5851352576">write</a> ()=0</td></tr>
-<tr class="memdesc:a4bbd05d8b3128c34ecbf8e5851352576"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write the current command values to the actuator.  <a href="classhardware__interface_1_1ActuatorInterface.html#a4bbd05d8b3128c34ecbf8e5851352576">More...</a><br /></td></tr>
-<tr class="separator:a4bbd05d8b3128c34ecbf8e5851352576"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08a9b354499c730d600d9e25cd2a212c"><td class="memItemLeft" align="right" valign="top">virtual return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ActuatorInterface.html#a08a9b354499c730d600d9e25cd2a212c">read</a> (const rclcpp::Time &amp;time, const rclcpp::Duration &amp;period)=0</td></tr>
+<tr class="memdesc:a08a9b354499c730d600d9e25cd2a212c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the current state values from the actuator.  <a href="classhardware__interface_1_1ActuatorInterface.html#a08a9b354499c730d600d9e25cd2a212c">More...</a><br /></td></tr>
+<tr class="separator:a08a9b354499c730d600d9e25cd2a212c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5637509fbe976e3e236d7baa1b91aa50"><td class="memItemLeft" align="right" valign="top">virtual return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ActuatorInterface.html#a5637509fbe976e3e236d7baa1b91aa50">write</a> (const rclcpp::Time &amp;time, const rclcpp::Duration &amp;period)=0</td></tr>
+<tr class="memdesc:a5637509fbe976e3e236d7baa1b91aa50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write the current command values to the actuator.  <a href="classhardware__interface_1_1ActuatorInterface.html#a5637509fbe976e3e236d7baa1b91aa50">More...</a><br /></td></tr>
+<tr class="separator:a5637509fbe976e3e236d7baa1b91aa50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4676f09c16e91102456e5cb1dffdb4af"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ActuatorInterface.html#a4676f09c16e91102456e5cb1dffdb4af">get_name</a> () const</td></tr>
 <tr class="memdesc:a4676f09c16e91102456e5cb1dffdb4af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get name of the actuator hardware.  <a href="classhardware__interface_1_1ActuatorInterface.html#a4676f09c16e91102456e5cb1dffdb4af">More...</a><br /></td></tr>
 <tr class="separator:a4676f09c16e91102456e5cb1dffdb4af"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -426,8 +426,8 @@ All starting and stopping interface keys are passed to all components, so the fu
 
 </div>
 </div>
-<a id="a137f074c64cbb57618c3ffe379c78275"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a137f074c64cbb57618c3ffe379c78275">&#9670;&nbsp;</a></span>read()</h2>
+<a id="a08a9b354499c730d600d9e25cd2a212c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08a9b354499c730d600d9e25cd2a212c">&#9670;&nbsp;</a></span>read()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -438,8 +438,19 @@ All starting and stopping interface keys are passed to all components, so the fu
         <tr>
           <td class="memname">virtual return_type hardware_interface::ActuatorInterface::read </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const rclcpp::Time &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const rclcpp::Duration &amp;&#160;</td>
+          <td class="paramname"><em>period</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -484,8 +495,8 @@ All starting and stopping interface keys are passed to all components, so the fu
 
 </div>
 </div>
-<a id="a4bbd05d8b3128c34ecbf8e5851352576"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4bbd05d8b3128c34ecbf8e5851352576">&#9670;&nbsp;</a></span>write()</h2>
+<a id="a5637509fbe976e3e236d7baa1b91aa50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5637509fbe976e3e236d7baa1b91aa50">&#9670;&nbsp;</a></span>write()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -496,8 +507,19 @@ All starting and stopping interface keys are passed to all components, so the fu
         <tr>
           <td class="memname">virtual return_type hardware_interface::ActuatorInterface::write </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const rclcpp::Time &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const rclcpp::Duration &amp;&#160;</td>
+          <td class="paramname"><em>period</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>

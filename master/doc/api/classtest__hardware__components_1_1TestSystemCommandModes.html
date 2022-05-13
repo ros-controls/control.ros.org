@@ -105,12 +105,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4e70d972bc6222b2390e201879f19745"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classhardware__interface_1_1CommandInterface.html">hardware_interface::CommandInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtest__hardware__components_1_1TestSystemCommandModes.html#a4e70d972bc6222b2390e201879f19745">export_command_interfaces</a> () override</td></tr>
 <tr class="memdesc:a4e70d972bc6222b2390e201879f19745"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exports all command interfaces for this hardware interface.  <a href="classtest__hardware__components_1_1TestSystemCommandModes.html#a4e70d972bc6222b2390e201879f19745">More...</a><br /></td></tr>
 <tr class="separator:a4e70d972bc6222b2390e201879f19745"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82de832f6b943cbb7a976d8dbc83f14c"><td class="memItemLeft" align="right" valign="top">hardware_interface::return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtest__hardware__components_1_1TestSystemCommandModes.html#a82de832f6b943cbb7a976d8dbc83f14c">read</a> () override</td></tr>
-<tr class="memdesc:a82de832f6b943cbb7a976d8dbc83f14c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the current state values from the actuator.  <a href="classtest__hardware__components_1_1TestSystemCommandModes.html#a82de832f6b943cbb7a976d8dbc83f14c">More...</a><br /></td></tr>
-<tr class="separator:a82de832f6b943cbb7a976d8dbc83f14c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa186904fb32f8ed91c178f7aae2882a3"><td class="memItemLeft" align="right" valign="top">hardware_interface::return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtest__hardware__components_1_1TestSystemCommandModes.html#aa186904fb32f8ed91c178f7aae2882a3">write</a> () override</td></tr>
-<tr class="memdesc:aa186904fb32f8ed91c178f7aae2882a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write the current command values to the actuator.  <a href="classtest__hardware__components_1_1TestSystemCommandModes.html#aa186904fb32f8ed91c178f7aae2882a3">More...</a><br /></td></tr>
-<tr class="separator:aa186904fb32f8ed91c178f7aae2882a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43bdd3ff87485ef1115ed0150cb408d9"><td class="memItemLeft" align="right" valign="top">hardware_interface::return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtest__hardware__components_1_1TestSystemCommandModes.html#a43bdd3ff87485ef1115ed0150cb408d9">read</a> (const rclcpp::Time &amp;, const rclcpp::Duration &amp;) override</td></tr>
+<tr class="memdesc:a43bdd3ff87485ef1115ed0150cb408d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the current state values from the actuator.  <a href="classtest__hardware__components_1_1TestSystemCommandModes.html#a43bdd3ff87485ef1115ed0150cb408d9">More...</a><br /></td></tr>
+<tr class="separator:a43bdd3ff87485ef1115ed0150cb408d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96c04507b63b7ef0aa7a2b6de3741588"><td class="memItemLeft" align="right" valign="top">hardware_interface::return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtest__hardware__components_1_1TestSystemCommandModes.html#a96c04507b63b7ef0aa7a2b6de3741588">write</a> (const rclcpp::Time &amp;, const rclcpp::Duration &amp;) override</td></tr>
+<tr class="memdesc:a96c04507b63b7ef0aa7a2b6de3741588"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write the current command values to the actuator.  <a href="classtest__hardware__components_1_1TestSystemCommandModes.html#a96c04507b63b7ef0aa7a2b6de3741588">More...</a><br /></td></tr>
+<tr class="separator:a96c04507b63b7ef0aa7a2b6de3741588"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63514531b5ca8cfe5305264a1d29d005"><td class="memItemLeft" align="right" valign="top">hardware_interface::return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtest__hardware__components_1_1TestSystemCommandModes.html#a63514531b5ca8cfe5305264a1d29d005">prepare_command_mode_switch</a> (const std::vector&lt; std::string &gt; &amp;start_interfaces, const std::vector&lt; std::string &gt; &amp;stop_interfaces) override</td></tr>
 <tr class="memdesc:a63514531b5ca8cfe5305264a1d29d005"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prepare for a new command interface switch.  <a href="classtest__hardware__components_1_1TestSystemCommandModes.html#a63514531b5ca8cfe5305264a1d29d005">More...</a><br /></td></tr>
 <tr class="separator:a63514531b5ca8cfe5305264a1d29d005"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -349,8 +349,8 @@ All starting and stopping interface keys are passed to all components, so the fu
 
 </div>
 </div>
-<a id="a82de832f6b943cbb7a976d8dbc83f14c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a82de832f6b943cbb7a976d8dbc83f14c">&#9670;&nbsp;</a></span>read()</h2>
+<a id="a43bdd3ff87485ef1115ed0150cb408d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43bdd3ff87485ef1115ed0150cb408d9">&#9670;&nbsp;</a></span>read()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -361,8 +361,19 @@ All starting and stopping interface keys are passed to all components, so the fu
         <tr>
           <td class="memname">hardware_interface::return_type test_hardware_components::TestSystemCommandModes::read </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const rclcpp::Time &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const rclcpp::Duration &amp;&#160;</td>
+          <td class="paramname"><em>period</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -376,12 +387,12 @@ All starting and stopping interface keys are passed to all components, so the fu
 <p>The data readings from the physical hardware has to be updated and reflected accordingly in the exported state interfaces. That is, the data pointed by the interfaces shall be updated.</p>
 <dl class="section return"><dt>Returns</dt><dd>return_type::OK if the read was successful, return_type::ERROR otherwise. </dd></dl>
 
-<p>Implements <a class="el" href="classhardware__interface_1_1SystemInterface.html#a7a3949a54c5ad48d2a684f733c978f76">hardware_interface::SystemInterface</a>.</p>
+<p>Implements <a class="el" href="classhardware__interface_1_1SystemInterface.html#ae48a70b6c631787f6891370dd40e018e">hardware_interface::SystemInterface</a>.</p>
 
 </div>
 </div>
-<a id="aa186904fb32f8ed91c178f7aae2882a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa186904fb32f8ed91c178f7aae2882a3">&#9670;&nbsp;</a></span>write()</h2>
+<a id="a96c04507b63b7ef0aa7a2b6de3741588"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96c04507b63b7ef0aa7a2b6de3741588">&#9670;&nbsp;</a></span>write()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -392,8 +403,19 @@ All starting and stopping interface keys are passed to all components, so the fu
         <tr>
           <td class="memname">hardware_interface::return_type test_hardware_components::TestSystemCommandModes::write </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const rclcpp::Time &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const rclcpp::Duration &amp;&#160;</td>
+          <td class="paramname"><em>period</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -407,7 +429,7 @@ All starting and stopping interface keys are passed to all components, so the fu
 <p>The physical hardware shall be updated with the latest value from the exported command interfaces.</p>
 <dl class="section return"><dt>Returns</dt><dd>return_type::OK if the read was successful, return_type::ERROR otherwise. </dd></dl>
 
-<p>Implements <a class="el" href="classhardware__interface_1_1SystemInterface.html#aff8e30ca00fed5a75720029248abfc4d">hardware_interface::SystemInterface</a>.</p>
+<p>Implements <a class="el" href="classhardware__interface_1_1SystemInterface.html#af50333e4b0b30c9a1d66f296a33a5d8d">hardware_interface::SystemInterface</a>.</p>
 
 </div>
 </div>

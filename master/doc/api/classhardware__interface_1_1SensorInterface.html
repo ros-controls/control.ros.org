@@ -110,9 +110,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a595e46ea8b86b6035b4e50c54636e582"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="classhardware__interface_1_1StateInterface.html">StateInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1SensorInterface.html#a595e46ea8b86b6035b4e50c54636e582">export_state_interfaces</a> ()=0</td></tr>
 <tr class="memdesc:a595e46ea8b86b6035b4e50c54636e582"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exports all state interfaces for this hardware interface.  <a href="classhardware__interface_1_1SensorInterface.html#a595e46ea8b86b6035b4e50c54636e582">More...</a><br /></td></tr>
 <tr class="separator:a595e46ea8b86b6035b4e50c54636e582"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a381f7398dbf6f46122c0857abf938d1c"><td class="memItemLeft" align="right" valign="top">virtual return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1SensorInterface.html#a381f7398dbf6f46122c0857abf938d1c">read</a> ()=0</td></tr>
-<tr class="memdesc:a381f7398dbf6f46122c0857abf938d1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the current state values from the actuator.  <a href="classhardware__interface_1_1SensorInterface.html#a381f7398dbf6f46122c0857abf938d1c">More...</a><br /></td></tr>
-<tr class="separator:a381f7398dbf6f46122c0857abf938d1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74dd627432dc5c4e9a2b393d82cdfe25"><td class="memItemLeft" align="right" valign="top">virtual return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1SensorInterface.html#a74dd627432dc5c4e9a2b393d82cdfe25">read</a> (const rclcpp::Time &amp;time, const rclcpp::Duration &amp;period)=0</td></tr>
+<tr class="memdesc:a74dd627432dc5c4e9a2b393d82cdfe25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the current state values from the actuator.  <a href="classhardware__interface_1_1SensorInterface.html#a74dd627432dc5c4e9a2b393d82cdfe25">More...</a><br /></td></tr>
+<tr class="separator:a74dd627432dc5c4e9a2b393d82cdfe25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add37c1580fd3b617db3422e1c4394246"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1SensorInterface.html#add37c1580fd3b617db3422e1c4394246">get_name</a> () const</td></tr>
 <tr class="memdesc:add37c1580fd3b617db3422e1c4394246"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get name of the actuator hardware.  <a href="classhardware__interface_1_1SensorInterface.html#add37c1580fd3b617db3422e1c4394246">More...</a><br /></td></tr>
 <tr class="separator:add37c1580fd3b617db3422e1c4394246"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -286,8 +286,8 @@ CallbackReturn::ERROR if any error happens or data are missing. </dd></dl>
 
 </div>
 </div>
-<a id="a381f7398dbf6f46122c0857abf938d1c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a381f7398dbf6f46122c0857abf938d1c">&#9670;&nbsp;</a></span>read()</h2>
+<a id="a74dd627432dc5c4e9a2b393d82cdfe25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74dd627432dc5c4e9a2b393d82cdfe25">&#9670;&nbsp;</a></span>read()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -298,8 +298,19 @@ CallbackReturn::ERROR if any error happens or data are missing. </dd></dl>
         <tr>
           <td class="memname">virtual return_type hardware_interface::SensorInterface::read </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const rclcpp::Time &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const rclcpp::Duration &amp;&#160;</td>
+          <td class="paramname"><em>period</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
