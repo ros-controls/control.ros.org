@@ -16,11 +16,11 @@
       <dt>ros2_control - Foxy and Galactic</dt>
       {%- for item in versions.releases|sort(reverse=True) %}
         {%- if item.name == latest_version.name %}
-        <dd><a href="{{ item.url }}">{{ item.name|title }} (recommended)</a></dd>
+        <dd><a href="{{ item.url }}">{{ item.name|title }} (recommended)</a></dd><br>
         {%- elif item.name in eol_versions %}
-        <dd><a href="{{ item.url }}">{{ item.name|title }} (EOL)</a></dd>
+        <dd><a href="{{ item.url }}">{{ item.name|title }} (EOL)</a></dd><br>
         {% else %}
-        <dd><a href="{{ item.url }}">{{ item.name|title }}</a></dd>
+        <dd><a href="{{ item.url }}">{{ item.name|title }}</a></dd><br>
         {%- endif %}
       {%- endfor %}
     </dl>
