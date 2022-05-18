@@ -80,18 +80,20 @@ Inheritance diagram for controller_interface::ControllerInterfaceBase:</div>
 <div class="dyncontent">
 <div class="center"><img src="classcontroller__interface_1_1ControllerInterfaceBase__inherit__graph.png" border="0" usemap="#controller__interface_1_1ControllerInterfaceBase_inherit__map" alt="Inheritance graph"/></div>
 <map name="controller__interface_1_1ControllerInterfaceBase_inherit__map" id="controller__interface_1_1ControllerInterfaceBase_inherit__map">
-<area shape="rect" title=" " alt="" coords="225,144,409,185"/>
-<area shape="rect" href="classcontroller__interface_1_1ControllerInterface.html" title=" " alt="" coords="457,144,609,185"/>
-<area shape="rect" title=" " alt="" coords="5,151,177,178"/>
-<area shape="rect" href="classcontroller__with__options_1_1ControllerWithOptions.html" title=" " alt="" coords="677,5,852,47"/>
-<area shape="rect" href="classControllerMock.html" title=" " alt="" coords="704,71,825,98"/>
-<area shape="rect" href="classtest__controller_1_1TestController.html" title=" " alt="" coords="657,122,872,149"/>
-<area shape="rect" href="classtest__controller__failed__init_1_1TestControllerFailedInit.html" title=" " alt="" coords="661,173,868,215"/>
-<area shape="rect" href="classtest__controller__with__interfaces_1_1TestControllerWithInterfaces.html" title=" " alt="" coords="669,239,861,295"/>
-<area shape="rect" href="classTestableControllerInterface.html" title=" " alt="" coords="665,319,864,346"/>
-<area shape="rect" href="classFriendControllerWithOptions.html" title=" " alt="" coords="920,13,1127,39"/>
-<area shape="rect" href="classTestableControllerInterfaceInitError.html" title=" " alt="" coords="924,279,1123,320"/>
-<area shape="rect" href="classTestableControllerInterfaceInitFailure.html" title=" " alt="" coords="924,344,1123,385"/>
+<area shape="rect" title=" " alt="" coords="225,148,409,189"/>
+<area shape="rect" href="classcontroller__interface_1_1ChainableControllerInterface.html" title=" " alt="" coords="457,60,675,101"/>
+<area shape="rect" href="classcontroller__interface_1_1ControllerInterface.html" title=" " alt="" coords="490,180,642,221"/>
+<area shape="rect" title=" " alt="" coords="5,155,177,182"/>
+<area shape="rect" href="classTestableChainableControllerInterface.html" title=" " alt="" coords="727,5,933,47"/>
+<area shape="rect" href="classcontroller__with__options_1_1ControllerWithOptions.html" title=" " alt="" coords="743,71,917,112"/>
+<area shape="rect" href="classControllerMock.html" title=" " alt="" coords="769,137,891,163"/>
+<area shape="rect" href="classtest__controller_1_1TestController.html" title=" " alt="" coords="723,187,937,214"/>
+<area shape="rect" href="classtest__controller__failed__init_1_1TestControllerFailedInit.html" title=" " alt="" coords="727,239,933,280"/>
+<area shape="rect" href="classtest__controller__with__interfaces_1_1TestControllerWithInterfaces.html" title=" " alt="" coords="734,305,926,361"/>
+<area shape="rect" href="classTestableControllerInterface.html" title=" " alt="" coords="731,385,929,411"/>
+<area shape="rect" href="classFriendControllerWithOptions.html" title=" " alt="" coords="985,78,1192,105"/>
+<area shape="rect" href="classTestableControllerInterfaceInitError.html" title=" " alt="" coords="989,344,1188,385"/>
+<area shape="rect" href="classTestableControllerInterfaceInitFailure.html" title=" " alt="" coords="989,409,1188,451"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -172,7 +174,7 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>update_rate_<
 <tr class="separator:a9f05708e13e7368b4cea7d9cbb57e920"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Base interface class for an controller. The interface may not be used to implement a controller. The class provides definitions for <code><a class="el" href="classcontroller__interface_1_1ControllerInterface.html">ControllerInterface</a></code> and <code>ChainableControllerInterface</code> that should be implemented and extended for a specific controller. </p>
+<div class="textblock"><p>Base interface class for an controller. The interface may not be used to implement a controller. The class provides definitions for <code><a class="el" href="classcontroller__interface_1_1ControllerInterface.html">ControllerInterface</a></code> and <code><a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html">ChainableControllerInterface</a></code> that should be implemented and extended for a specific controller. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a04df56d589677c015eb11930d66bbfe4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a04df56d589677c015eb11930d66bbfe4">&#9670;&nbsp;</a></span>auto_declare()</h2>
@@ -240,7 +242,7 @@ template&lt;typename ParameterT &gt; </div>
 <p>Export interfaces for a chainable controller that can be used as command interface of other controllers.</p>
 <dl class="section return"><dt>Returns</dt><dd>list of command interfaces for preceding controllers. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcontroller__interface_1_1ControllerInterface.html#aa318f32026cf1dd22733a0ac48c623c0">controller_interface::ControllerInterface</a>.</p>
+<p>Implemented in <a class="el" href="classcontroller__interface_1_1ControllerInterface.html#aa318f32026cf1dd22733a0ac48c623c0">controller_interface::ControllerInterface</a>, and <a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#aa82394dd8f431cc065b2d1081483499a">controller_interface::ChainableControllerInterface</a>.</p>
 
 </div>
 </div>
@@ -271,7 +273,7 @@ template&lt;typename ParameterT &gt; </div>
 <p>Get information if a controller is chainable.</p>
 <dl class="section return"><dt>Returns</dt><dd>true is controller is chainable and false if it is not. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcontroller__interface_1_1ControllerInterface.html#a8f9df0485b8a65363fecf5a3ccc9f51d">controller_interface::ControllerInterface</a>.</p>
+<p>Implemented in <a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#aca75cbab7693e216194b7c41aa12739d">controller_interface::ChainableControllerInterface</a>, and <a class="el" href="classcontroller__interface_1_1ControllerInterface.html#a8f9df0485b8a65363fecf5a3ccc9f51d">controller_interface::ControllerInterface</a>.</p>
 
 </div>
 </div>
@@ -302,7 +304,7 @@ template&lt;typename ParameterT &gt; </div>
 <p>Get information about controller if it is currently used in chained mode. In chained mode only internal interfaces are available and all subscribers are expected to be disabled. This prevents concurrent writing to controller's inputs from multiple sources.</p>
 <dl class="section return"><dt>Returns</dt><dd>true is controller is in chained mode and false if it is not. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcontroller__interface_1_1ControllerInterface.html#ac86232dee7173226b28b8ba5d0e2b44d">controller_interface::ControllerInterface</a>.</p>
+<p>Implemented in <a class="el" href="classcontroller__interface_1_1ControllerInterface.html#ac86232dee7173226b28b8ba5d0e2b44d">controller_interface::ControllerInterface</a>, and <a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#a5add6d3d59bdf470ac241e07c62f4852">controller_interface::ChainableControllerInterface</a>.</p>
 
 </div>
 </div>
@@ -332,7 +334,7 @@ template&lt;typename ParameterT &gt; </div>
 <p>Set chained mode of a chainable controller. This method triggers internal processes to switch a chainable controller to "chained" mode and vice-versa. Setting controller to "chained" mode usually involves disabling of subscribers and other external interfaces to avoid potential concurrency in input commands.</p>
 <dl class="section return"><dt>Returns</dt><dd>true if mode is switched successfully and false if not. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcontroller__interface_1_1ControllerInterface.html#a2000dfc59854737812ab54f0cfea8887">controller_interface::ControllerInterface</a>.</p>
+<p>Implemented in <a class="el" href="classcontroller__interface_1_1ControllerInterface.html#a2000dfc59854737812ab54f0cfea8887">controller_interface::ControllerInterface</a>, and <a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#ac53be760b72d721ef9528e0707ce1f4f">controller_interface::ChainableControllerInterface</a>.</p>
 
 </div>
 </div>
