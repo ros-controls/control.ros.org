@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['hardwarecomponentinfo_279',['HardwareComponentInfo',['../structhardware__interface_1_1HardwareComponentInfo.html',1,'hardware_interface']]],
-  ['hardwareinfo_280',['HardwareInfo',['../structhardware__interface_1_1HardwareInfo.html',1,'hardware_interface']]]
+  ['hardwarecomponentinfo_286',['HardwareComponentInfo',['../structhardware__interface_1_1HardwareComponentInfo.html',1,'hardware_interface']]],
+  ['hardwareinfo_287',['HardwareInfo',['../structhardware__interface_1_1HardwareInfo.html',1,'hardware_interface']]]
 ];

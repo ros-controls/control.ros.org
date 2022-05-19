@@ -8,9 +8,10 @@ var searchData=
   ['actuatorhandle_5',['ActuatorHandle',['../classtransmission__interface_1_1ActuatorHandle.html',1,'transmission_interface']]],
   ['actuatorinfo_6',['ActuatorInfo',['../structhardware__interface_1_1ActuatorInfo.html',1,'hardware_interface']]],
   ['actuatorinterface_7',['ActuatorInterface',['../classhardware__interface_1_1ActuatorInterface.html',1,'hardware_interface::ActuatorInterface'],['../classhardware__interface_1_1ActuatorInterface.html#ab9149fb2f589d13b0c670754ac6450d8',1,'hardware_interface::ActuatorInterface::ActuatorInterface()']]],
-  ['assign_5floaned_5fstate_5finterfaces_8',['assign_loaned_state_interfaces',['../classsemantic__components_1_1SemanticComponentInterface.html#a8837bf9474bad044bab1e1e791b3be74',1,'semantic_components::SemanticComponentInterface']]],
-  ['auto_5fdeclare_9',['auto_declare',['../classcontroller__interface_1_1ControllerInterfaceBase.html#a04df56d589677c015eb11930d66bbfe4',1,'controller_interface::ControllerInterfaceBase']]],
-  ['available_5fcommand_5finterfaces_10',['available_command_interfaces',['../classhardware__interface_1_1ResourceManager.html#aa12aa4b0368fab0200703f879be6f9a2',1,'hardware_interface::ResourceManager']]],
-  ['available_5fstate_5finterfaces_11',['available_state_interfaces',['../classhardware__interface_1_1ResourceManager.html#acbf95e636f5534b884d49fdde504c16d',1,'hardware_interface::ResourceManager']]],
-  ['available_5fstate_5finterfaces_5f_12',['available_state_interfaces_',['../classhardware__interface_1_1ResourceStorage.html#a21fe95fdf58b2c51706f9bc347ab24f4',1,'hardware_interface::ResourceStorage']]]
+  ['add_5fcommand_5finterfaces_8',['add_command_interfaces',['../classhardware__interface_1_1ResourceStorage.html#a7ac8a1c05b54ad71f7d0c62315756b4c',1,'hardware_interface::ResourceStorage']]],
+  ['assign_5floaned_5fstate_5finterfaces_9',['assign_loaned_state_interfaces',['../classsemantic__components_1_1SemanticComponentInterface.html#a8837bf9474bad044bab1e1e791b3be74',1,'semantic_components::SemanticComponentInterface']]],
+  ['auto_5fdeclare_10',['auto_declare',['../classcontroller__interface_1_1ControllerInterfaceBase.html#a04df56d589677c015eb11930d66bbfe4',1,'controller_interface::ControllerInterfaceBase']]],
+  ['available_5fcommand_5finterfaces_11',['available_command_interfaces',['../classhardware__interface_1_1ResourceManager.html#aa12aa4b0368fab0200703f879be6f9a2',1,'hardware_interface::ResourceManager']]],
+  ['available_5fstate_5finterfaces_12',['available_state_interfaces',['../classhardware__interface_1_1ResourceManager.html#acbf95e636f5534b884d49fdde504c16d',1,'hardware_interface::ResourceManager']]],
+  ['available_5fstate_5finterfaces_5f_13',['available_state_interfaces_',['../classhardware__interface_1_1ResourceStorage.html#a21fe95fdf58b2c51706f9bc347ab24f4',1,'hardware_interface::ResourceStorage']]]
 ];
