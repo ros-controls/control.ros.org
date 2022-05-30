@@ -37,6 +37,7 @@
         <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../../_static/doctools.js"></script>
         <script src="../../../../_static/clipboard.min.js"></script>
         <script src="../../../../_static/copybutton.js"></script>
@@ -208,11 +209,11 @@
            <div itemprop="articleBody">
             
   <section id="controller-manager">
-<span id="controller-manager-userdoc"></span><h1>Controller Manager<a class="headerlink" href="#controller-manager" title="Permalink to this headline"></a></h1>
+<span id="controller-manager-userdoc"></span><h1>Controller Manager<a class="headerlink" href="#controller-manager" title="Permalink to this heading"></a></h1>
 <p>Controller Manager is the main component in the ros2_control framework.
 It manages lifecycle of controllers, access to the hardware interfaces and offers services to the ROS-world.</p>
 <section id="parameters">
-<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline"></a></h2>
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>activate_components_on_start (optional; list&lt;string&gt;; default: empty)</dt><dd><p>Define which hardware components should be activated when controller manager is started.
 The names of the components are defined as attribute of <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code>-tag in <code class="docutils literal notranslate"><span class="pre">robot_description</span></code>.
@@ -238,7 +239,7 @@ This is a class from which controller’s instance with name “<code class="doc
 </dl>
 </section>
 <section id="helper-scripts">
-<h2>Helper scripts<a class="headerlink" href="#helper-scripts" title="Permalink to this headline"></a></h2>
+<h2>Helper scripts<a class="headerlink" href="#helper-scripts" title="Permalink to this heading"></a></h2>
 <p>There are two scripts to interact with controller manager from launch files:</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -247,7 +248,7 @@ This is a class from which controller’s instance with name “<code class="doc
 </ol>
 </div></blockquote>
 <section id="spawner">
-<h3><code class="docutils literal notranslate"><span class="pre">spawner</span></code><a class="headerlink" href="#spawner" title="Permalink to this headline"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">spawner</span></code><a class="headerlink" href="#spawner" title="Permalink to this heading"></a></h3>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2 run controller_manager spawner -h
 <span class="go">usage: spawner [-h] [-c CONTROLLER_MANAGER] [-p PARAM_FILE] [--load-only] [--stopped] [-t CONTROLLER_TYPE] [-u]</span>
 <span class="go">                  [--controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT]</span>
@@ -273,7 +274,7 @@ This is a class from which controller’s instance with name “<code class="doc
 </div>
 </section>
 <section id="unspawner">
-<h3><code class="docutils literal notranslate"><span class="pre">unspawner</span></code><a class="headerlink" href="#unspawner" title="Permalink to this headline"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">unspawner</span></code><a class="headerlink" href="#unspawner" title="Permalink to this heading"></a></h3>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2 run controller_manager unspawner -h
 <span class="go">usage: unspawner [-h] [-c CONTROLLER_MANAGER] controller_name</span>
 
@@ -289,14 +290,14 @@ This is a class from which controller’s instance with name “<code class="doc
 </section>
 </section>
 <section id="concepts">
-<h2>Concepts<a class="headerlink" href="#concepts" title="Permalink to this headline"></a></h2>
+<h2>Concepts<a class="headerlink" href="#concepts" title="Permalink to this heading"></a></h2>
 <section id="restarting-all-controllers">
-<h3>Restarting all controllers<a class="headerlink" href="#restarting-all-controllers" title="Permalink to this headline"></a></h3>
+<h3>Restarting all controllers<a class="headerlink" href="#restarting-all-controllers" title="Permalink to this heading"></a></h3>
 <p>The simplest way to restart all controllers is by using <code class="docutils literal notranslate"><span class="pre">switch_controllers</span></code> services or CLI and adding all controllers to <code class="docutils literal notranslate"><span class="pre">start</span></code> and <code class="docutils literal notranslate"><span class="pre">stop</span></code> lists.
 Note that not all controllers have to be restarted, e.g., broadcasters.</p>
 </section>
 <section id="restarting-hardware">
-<h3>Restarting hardware<a class="headerlink" href="#restarting-hardware" title="Permalink to this headline"></a></h3>
+<h3>Restarting hardware<a class="headerlink" href="#restarting-hardware" title="Permalink to this heading"></a></h3>
 <p>If hardware gets restarted then you should go through its lifecycle again.
 This can be simply achieved by returning <code class="docutils literal notranslate"><span class="pre">ERROR</span></code> from <code class="docutils literal notranslate"><span class="pre">write</span></code> and <code class="docutils literal notranslate"><span class="pre">read</span></code> methods of interface implementation.
 <strong>NOT IMPLEMENTED YET - PLEASE STOP/RESTART ALL CONTROLLERS MANUALLY FOR NOW</strong> The controller manager detects that and stops all the controllers that are commanding that hardware and restarts broadcasters that are listening to its states.</p>
