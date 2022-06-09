@@ -272,28 +272,29 @@ CallbackReturn::ERROR critical error has happened that should be managed in "on_
 <b>Initial value:</b><div class="fragment"><div class="line">=</div>
 <div class="line">  [](</div>
 <div class="line">    <span class="keyword">auto</span> transition, <span class="keyword">const</span> std::string transition_name, <span class="keyword">const</span> std::string &amp; hardware_name,</div>
-<div class="line">    <span class="keyword">const</span> lifecycle_msgs::msg::State::_id_type &amp; target_state) {</div>
+<div class="line">    <span class="keyword">const</span> lifecycle_msgs::msg::State::_id_type &amp; target_state)</div>
+<div class="line">{</div>
+<div class="line">  RCUTILS_LOG_INFO_NAMED(</div>
+<div class="line">    <span class="stringliteral">&quot;resource_manager&quot;</span>, <span class="stringliteral">&quot;&#39;%s&#39; hardware &#39;%s&#39; &quot;</span>, transition_name.c_str(), hardware_name.c_str());</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">const</span> rclcpp_lifecycle::State new_state = transition();</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordtype">bool</span> result = new_state.id() == target_state;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">if</span> (result)</div>
+<div class="line">  {</div>
 <div class="line">    RCUTILS_LOG_INFO_NAMED(</div>
-<div class="line">      <span class="stringliteral">&quot;resource_manager&quot;</span>, <span class="stringliteral">&quot;&#39;%s&#39; hardware &#39;%s&#39; &quot;</span>, transition_name.c_str(), hardware_name.c_str());</div>
-<div class="line"> </div>
-<div class="line">    <span class="keyword">const</span> rclcpp_lifecycle::State new_state = transition();</div>
-<div class="line"> </div>
-<div class="line">    <span class="keywordtype">bool</span> result = new_state.id() == target_state;</div>
-<div class="line"> </div>
-<div class="line">    <span class="keywordflow">if</span> (result)</div>
-<div class="line">    {</div>
-<div class="line">      RCUTILS_LOG_INFO_NAMED(</div>
-<div class="line">        <span class="stringliteral">&quot;resource_manager&quot;</span>, <span class="stringliteral">&quot;Successful &#39;%s&#39; of hardware &#39;%s&#39;&quot;</span>, transition_name.c_str(),</div>
-<div class="line">        hardware_name.c_str());</div>
-<div class="line">    }</div>
-<div class="line">    <span class="keywordflow">else</span></div>
-<div class="line">    {</div>
-<div class="line">      RCUTILS_LOG_INFO_NAMED(</div>
-<div class="line">        <span class="stringliteral">&quot;resource_manager&quot;</span>, <span class="stringliteral">&quot;Failed to &#39;%s&#39; hardware &#39;%s&#39;&quot;</span>, transition_name.c_str(),</div>
-<div class="line">        hardware_name.c_str());</div>
-<div class="line">    }</div>
-<div class="line">    <span class="keywordflow">return</span> result;</div>
+<div class="line">      <span class="stringliteral">&quot;resource_manager&quot;</span>, <span class="stringliteral">&quot;Successful &#39;%s&#39; of hardware &#39;%s&#39;&quot;</span>, transition_name.c_str(),</div>
+<div class="line">      hardware_name.c_str());</div>
 <div class="line">  }</div>
+<div class="line">  <span class="keywordflow">else</span></div>
+<div class="line">  {</div>
+<div class="line">    RCUTILS_LOG_INFO_NAMED(</div>
+<div class="line">      <span class="stringliteral">&quot;resource_manager&quot;</span>, <span class="stringliteral">&quot;Failed to &#39;%s&#39; hardware &#39;%s&#39;&quot;</span>, transition_name.c_str(),</div>
+<div class="line">      hardware_name.c_str());</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> result;</div>
+<div class="line">}</div>
 </div><!-- fragment -->
 </div>
 </div>
