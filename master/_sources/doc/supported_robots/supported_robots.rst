@@ -21,6 +21,7 @@ Unofficial (from the community):
 Non robot-devices:
 
 * `Force Dimension haptic devices <https://github.com/ICube-Robotics/forcedimension_ros2>`_
+* `ODrive Motor Controller <https://github.com/Factor-Robotics/odrive_ros2_control>`_
 
 Mobile manipulators:
 
