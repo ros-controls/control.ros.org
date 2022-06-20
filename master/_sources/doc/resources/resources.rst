@@ -13,7 +13,7 @@ Presentations
 
 2021-10 ROS World 2021
 ,,,,,,,,,,,,,,,,,,,,,,,,
-`Presentation: ros2_control - The future of ros_control <presentations/2021-10_ROS_World_2021-ros2_control_The_future_of_ros_control.pdf>`_
+`Presentation: ros2_control - The future of ros_control <https://raw.githubusercontent.com/ros-controls/control.ros.org/master/doc/resources/presentations/2021-10_ROS_World_2021-ros2_control_The_future_of_ros_control.pdf>`_
 
   Summary:
     ros2_control is a robot-agnostic control framework with a focus on both real-time performance and sharing of controllers. The framework offers controller lifecycle and hardware resource management, as well as abstractions on hardware interfaces.
@@ -29,7 +29,7 @@ Presentations
     - Denis Stogl (Stogl Robotics Consulting)
 
 
-`Presentation: Making a robot ROS 2 powered - a case study using the UR manipulators <presentations/2021-10_ROS_World-Making_a_robot_ROS_2_powered.pdf>`_
+`Presentation: Making a robot ROS 2 powered - a case study using the UR manipulators <https://raw.githubusercontent.com/ros-controls/control.ros.org/master/doc/resources/presentations/2021-10_ROS_World-Making_a_robot_ROS_2_powered.pdf>`_
 
   Summary:
     With the release of ros2_control and MoveIt 2, ROS 2 Foxy finally has all the “ingredients” needed to power a robot with similar features as in ROS 1. We present the driver for Universal Robot’s manipulators as a real-world example of how robots can be run using ROS 2. We show how to realize multi-interface support for position and velocity commands in the driver and how to support scaling controllers while respecting factors set on the teach pendant. Finally, we show how this real-world example influences development of ros2_control to support non-joint related inputs and outputs in its real-time control loop.
@@ -46,7 +46,7 @@ Presentations
     - Rune Søe-Knudsen (Universal Robots)
 
 
-`Presentation: Online Trajectory Generation and Admittance Control in ROS2 <presentations/2021-10_ROS_World-Admittance_Control_in_ROS2.pdf>`_
+`Presentation: Online Trajectory Generation and Admittance Control in ROS2 <https://raw.githubusercontent.com/ros-controls/control.ros.org/master/doc/resources/presentations/2021-10_ROS_World-Admittance_Control_in_ROS2.pdf>`_
 
   Summary:
     One of the top reasons to upgrade from ROS1 to ROS2 is better suitability for realtime tasks. We discuss the development of a new ROS2 controller to handle realtime contact tasks such as tool insertion with industrial robots. The admittance controller handles trajectories and single-waypoint streaming commands, making it compatible with MoveIt and many teleoperation frameworks. Part of the work involved ensuring kinematic limits (position/velocity/acceleration/jerk) are obeyed while limiting interaction forces with the environment. Finally, we give practical recommendations and examples of the admittance controller. A live demo will be shown at our booth.
@@ -62,7 +62,7 @@ Presentations
 
 2021-10-07 Weekly Robotics Meetup #13
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-`Presentation: Getting started with ros2_control <presentations/2021-1_WR_Meetup_Getting_started_with_ros2_control.pdf>`_
+`Presentation: Getting started with ros2_control <https://raw.githubusercontent.com/ros-controls/control.ros.org/master/doc/resources/presentations/2021-1_WR_Meetup_Getting_started_with_ros2_control.pdf>`_
 
   Summary:
     ros2_control is a robot-agnostic control framework with a focus on both real-time performance and sharing of controllers. The framework offers controller lifecycle and hardware-resource management, as well as abstractions on hardware interfaces.
