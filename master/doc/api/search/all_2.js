@@ -25,10 +25,11 @@ var searchData=
   ['controllermanager_38',['ControllerManager',['../classcontroller__manager_1_1ControllerManager.html',1,'controller_manager']]],
   ['controllermanagerfixture_39',['ControllerManagerFixture',['../classControllerManagerFixture.html',1,'']]],
   ['controllermanagerfixture_3c_20controller_5fmanager_3a_3acontrollermanager_20_3e_40',['ControllerManagerFixture&lt; controller_manager::ControllerManager &gt;',['../classControllerManagerFixture.html',1,'']]],
-  ['controllermanagerrunner_41',['ControllerManagerRunner',['../classControllerManagerRunner.html',1,'']]],
-  ['controllermock_42',['ControllerMock',['../classControllerMock.html',1,'']]],
-  ['controllernamecompleter_43',['ControllerNameCompleter',['../classros2controlcli_1_1api_1_1ControllerNameCompleter.html',1,'ros2controlcli::api']]],
-  ['controllerspec_44',['ControllerSpec',['../structcontroller__manager_1_1ControllerSpec.html',1,'controller_manager']]],
-  ['controllerwithoptions_45',['ControllerWithOptions',['../classcontroller__with__options_1_1ControllerWithOptions.html',1,'controller_with_options']]],
-  ['contributing_20guidelines_46',['Contributing Guidelines',['../md_CONTRIBUTING.html',1,'']]]
+  ['controllermanagerfixture_3c_20testablecontrollermanager_20_3e_41',['ControllerManagerFixture&lt; TestableControllerManager &gt;',['../classControllerManagerFixture.html',1,'']]],
+  ['controllermanagerrunner_42',['ControllerManagerRunner',['../classControllerManagerRunner.html',1,'']]],
+  ['controllermock_43',['ControllerMock',['../classControllerMock.html',1,'']]],
+  ['controllernamecompleter_44',['ControllerNameCompleter',['../classros2controlcli_1_1api_1_1ControllerNameCompleter.html',1,'ros2controlcli::api']]],
+  ['controllerspec_45',['ControllerSpec',['../structcontroller__manager_1_1ControllerSpec.html',1,'controller_manager']]],
+  ['controllerwithoptions_46',['ControllerWithOptions',['../classcontroller__with__options_1_1ControllerWithOptions.html',1,'controller_with_options']]],
+  ['contributing_20guidelines_47',['Contributing Guidelines',['../md_CONTRIBUTING.html',1,'']]]
 ];
