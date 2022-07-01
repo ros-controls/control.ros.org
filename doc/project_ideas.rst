@@ -62,7 +62,7 @@ Related design drafts:
 | Skills required/preferred:
 
 - Good C++ skills
-- Basic understanding of ROS and/or ROS2
+- Basic understanding of ROS and/or ROS 2
 - Familiarity with the Gazebo simulator
 
 | Possible mentors: Denis Štogl
@@ -94,7 +94,7 @@ The main functionalities for the components and goals of the project are:
 | Skills required/preferred:
 
 - Good C++ skills
-- Basic understanding of ROS and/or ROS2
+- Basic understanding of ROS and/or ROS 2
 
 | Possible mentors: Bence Magyar, Denis Štogl
 | Expected size of project: 350 hours
@@ -122,7 +122,7 @@ Related design document and code implementations:
 | Skills required/preferred:
 
 - Good C++ skills
-- Basic understanding of ROS and/or ROS2
+- Basic understanding of ROS and/or ROS 2
 - Basic understanding of the Gazebo simulator
 
 | Possible mentors: Bence Magyar, Denis Štogl
@@ -134,10 +134,10 @@ Related design document and code implementations:
 Feature-parity for controllers from ROS1
 ----------------------------------------
 
-The ros2_control framework in ROS2 is a rewrite of the ros_control framework from ROS1.
-Our rich set of standard controllers was one of the main motivations for users to adopt ros_control in ROS1 and while we ported most of them, there are quite a few features missing for the two main controllers of this set, the diff_drive_controller and the joint_trajectory_controller.
+The ros2_control framework in ROS 2 is a rewrite of the ros_control framework from ROS 1.
+Our rich set of standard controllers was one of the main motivations for users to adopt ros_control in ROS 1 and while we ported most of them, there are quite a few features missing for the two main controllers of this set, the diff_drive_controller and the joint_trajectory_controller.
 
-This work will consist of reviewing the two versions of the two controllers and comparing for feature parity. Once the missing parts are identified, port them over from ROS1 with as much test support as possible.
+This work will consist of reviewing the two versions of the two controllers and comparing for feature parity. Once the missing parts are identified, port them over from ROS 1 with as much test support as possible.
 
 Related existing issues are:
 
@@ -154,7 +154,7 @@ Stretch goals:
 | Skills required/preferred:
 
 - Good C++ skills
-- Basic understanding of ROS and/or ROS2
+- Basic understanding of ROS and/or ROS 2
 - Basic understanding of unit testing with gmock
 
 | Possible mentors: Bence Magyar
