@@ -14,7 +14,7 @@ If you want to install the framework from source use following commands in your 
 
 .. code:: bash
 
-   wget https://raw.githubusercontent.com/ros-controls/ros2_control/master/ros2_control/ros2_control.repos
+   wget https://raw.githubusercontent.com/ros-controls/ros2_control/master/ros2_control.rolling.repos
    vcs import src < ros2_control.repos
 
 Architecture
