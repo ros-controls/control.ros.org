@@ -47,7 +47,7 @@
     
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="Fake Components" href="fake_components_userdoc.html" />
+    <link rel="next" title="Mock Components" href="mock_components_userdoc.html" />
     <link rel="prev" title="Hardware Components" href="hardware_components_userdoc.html" /> 
 </head>
 
@@ -117,7 +117,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="fake_components_userdoc.html">Fake Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mock_components_userdoc.html">Mock Components</a></li>
 </ul>
 </li>
 </ul>
@@ -271,7 +271,7 @@ As first parameters you should provide exact hardware interface class, e.g., <co
 <li><p><strong>Writing export definition for pluginlib</strong></p>
 <ol class="arabic simple">
 <li><p>Create the <code class="docutils literal notranslate"><span class="pre">&lt;my_hardware_interface_package&gt;.xml</span></code> file in the package and add a definition of the library and hardware interface’s class which has to be visible for the pluginlib.
-The easiest way to do that is to check definition for fake components in the <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/fake_components_plugin_description.xml">hardware_interface fake_components</a> section.</p></li>
+The easiest way to do that is to check definition for mock components in the <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/mock_components_plugin_description.xml">hardware_interface mock_components</a> section.</p></li>
 <li><p>Usually, the plugin name is defined by the package (namespace) and the class name, e.g.,
 <code class="docutils literal notranslate"><span class="pre">&lt;my_hardware_interface_package&gt;/&lt;RobotHardwareInterfaceName&gt;</span></code>.
 This name defines the hardware interface’s type when the resource manager searches for it.
@@ -281,7 +281,7 @@ The other two parameters have to correspond to the definition done in the macro 
 <li><p><strong>Writing a simple test to check if the controller can be found and loaded</strong></p>
 <ol class="arabic simple">
 <li><p>Create the folder <code class="docutils literal notranslate"><span class="pre">test</span></code> in your package, if it does not exist already, and add a file named <code class="docutils literal notranslate"><span class="pre">test_load_&lt;robot_hardware_interface_name&gt;.cpp</span></code>.</p></li>
-<li><p>You can copy the <code class="docutils literal notranslate"><span class="pre">load_generic_system_2dof</span></code> content defined in the <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/test/fake_components/test_generic_system.cpp#L402-L407">test_generic_system.cpp</a> package.</p></li>
+<li><p>You can copy the <code class="docutils literal notranslate"><span class="pre">load_generic_system_2dof</span></code> content defined in the <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/test/mock_components/test_generic_system.cpp#L402-L407">test_generic_system.cpp</a> package.</p></li>
 <li><p>Change the name of the copied test and in the last line, where hardware interface type is specified put the name defined in <code class="docutils literal notranslate"><span class="pre">&lt;my_hardware_interface_package&gt;.xml</span></code> file, e.g., <code class="docutils literal notranslate"><span class="pre">&lt;my_hardware_interface_package&gt;/&lt;RobotHardwareInterfaceName&gt;</span></code>.</p></li>
 </ol>
 </li>
@@ -301,7 +301,7 @@ Those are at least: <code class="docutils literal notranslate"><span class="pre"
 <li><p>Add install directives for targets and include directory.</p></li>
 <li><p>In the test section add the following dependencies: <code class="docutils literal notranslate"><span class="pre">ament_cmake_gmock</span></code>, <code class="docutils literal notranslate"><span class="pre">hardware_interface</span></code>.</p></li>
 <li><p>Add compile definitions for the tests using the <code class="docutils literal notranslate"><span class="pre">ament_add_gmock</span></code> directive.
-For details, see how it is done for fake hardware in the <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/CMakeLists.txt">ros2_control</a> package.</p></li>
+For details, see how it is done for mock hardware in the <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/CMakeLists.txt">ros2_control</a> package.</p></li>
 <li><p>(optional) Add your hardware interface`s library into <code class="docutils literal notranslate"><span class="pre">ament_export_libraries</span></code> before <code class="docutils literal notranslate"><span class="pre">ament_package()</span></code>.</p></li>
 </ol>
 </li>
@@ -334,7 +334,7 @@ Remember to go into the root of your workspace before executing this command.</p
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="fake_components_userdoc.html" class="btn btn-neutral float-right" title="Fake Components" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="mock_components_userdoc.html" class="btn btn-neutral float-right" title="Mock Components" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="hardware_components_userdoc.html" class="btn btn-neutral float-left" title="Hardware Components" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 

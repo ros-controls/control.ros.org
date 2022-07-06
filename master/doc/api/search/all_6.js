@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['genericsystem_69',['GenericSystem',['../classfake__components_1_1GenericSystem.html',1,'fake_components']]],
+  ['genericsystem_69',['GenericSystem',['../classmock__components_1_1GenericSystem.html',1,'mock_components']]],
   ['get_5fangular_5fvelocity_70',['get_angular_velocity',['../classsemantic__components_1_1IMUSensor.html#a4e246312866bd971e0814c5010313daf',1,'semantic_components::IMUSensor']]],
   ['get_5fcomponents_5fstatus_71',['get_components_status',['../classhardware__interface_1_1ResourceManager.html#a3ed4684c2857e7267a9527087d036fe9',1,'hardware_interface::ResourceManager']]],
   ['get_5fcontroller_5freference_5finterface_5fnames_72',['get_controller_reference_interface_names',['../classhardware__interface_1_1ResourceManager.html#a616c7be6c65aa774fa4e65a76292dbd1',1,'hardware_interface::ResourceManager']]],
@@ -18,6 +18,6 @@ var searchData=
   ['get_5fvelocity_84',['get_velocity',['../classjoint__limits__interface_1_1JointLimitHandle.html#a36fc613c76e82c5d573885056295246d',1,'joint_limits_interface::JointLimitHandle']]],
   ['getjointlimits_85',['getJointLimits',['../namespacejoint__limits__interface.html#a026c8123918037f95525f7aba50695a3',1,'joint_limits_interface::getJointLimits(const std::string &amp;joint_name, const rclcpp::Node::SharedPtr &amp;node, JointLimits &amp;limits)'],['../namespacejoint__limits__interface.html#a9d24edbf1b558f47ac2c6e336a38bd4a',1,'joint_limits_interface::getJointLimits(urdf::JointConstSharedPtr urdf_joint, JointLimits &amp;limits)']]],
   ['getsoftjointlimits_86',['getSoftJointLimits',['../namespacejoint__limits__interface.html#af876fd63081614e248a4c692cb998009',1,'joint_limits_interface::getSoftJointLimits(const std::string &amp;joint_name, const rclcpp::Node::SharedPtr &amp;node, SoftJointLimits &amp;soft_limits)'],['../namespacejoint__limits__interface.html#a35e2e6ed69cf9f9952a51684e19be646',1,'joint_limits_interface::getSoftJointLimits(urdf::JointConstSharedPtr urdf_joint, SoftJointLimits &amp;soft_limits)']]],
-  ['gpio_5ffake_5fcommands_5f_87',['gpio_fake_commands_',['../classfake__components_1_1GenericSystem.html#a45d2971baee518104b0113c7fb8dfc4c',1,'fake_components::GenericSystem']]],
+  ['gpio_5ffake_5fcommands_5f_87',['gpio_fake_commands_',['../classmock__components_1_1GenericSystem.html#ac68c03e5ce605ab6dc0e3793326fb99a',1,'mock_components::GenericSystem']]],
   ['gpios_88',['gpios',['../structhardware__interface_1_1HardwareInfo.html#aaba1f315215e7425123b75ffcb87b5ce',1,'hardware_interface::HardwareInfo']]]
 ];
