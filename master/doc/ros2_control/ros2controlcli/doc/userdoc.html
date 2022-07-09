@@ -288,7 +288,7 @@
 <section id="load-controller">
 <h2>load_controller<a class="headerlink" href="#load-controller" title="Permalink to this heading"></a></h2>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2 control load_controller -h
-<span class="go">usage: ros2 control load_controller [-h] [--spin-time SPIN_TIME] [--set_state {configure,start}] [-c CONTROLLER_MANAGER] [--include-hidden-nodes] controller_name</span>
+<span class="go">usage: ros2 control load_controller [-h] [--spin-time SPIN_TIME] [--set_state {configure,activate}] [-c CONTROLLER_MANAGER] [--include-hidden-nodes] controller_name</span>
 
 <span class="go">Load a controller in a controller manager</span>
 
@@ -299,7 +299,7 @@
 <span class="go">  -h, --help            show this help message and exit</span>
 <span class="go">  --spin-time SPIN_TIME</span>
 <span class="go">                        Spin time in seconds to wait for discovery (only applies when not using an already running daemon)</span>
-<span class="go">  --set_state {configure,start}</span>
+<span class="go">  --set_state {configured,active}</span>
 <span class="go">                        Set the state of the loaded controller</span>
 <span class="go">  -c CONTROLLER_MANAGER, --controller-manager CONTROLLER_MANAGER</span>
 <span class="go">                        Name of the controller manager ROS node</span>
@@ -330,13 +330,13 @@
 <section id="set-controller-state">
 <h2>set_controller_state<a class="headerlink" href="#set-controller-state" title="Permalink to this heading"></a></h2>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2 control set_controller_state -h
-<span class="go">usage: ros2 control set_controller_state [-h] [--spin-time SPIN_TIME] [-c CONTROLLER_MANAGER] [--include-hidden-nodes] controller_name {configure,start,stop}</span>
+<span class="go">usage: ros2 control set_controller_state [-h] [--spin-time SPIN_TIME] [-c CONTROLLER_MANAGER] [--include-hidden-nodes] controller_name {inactive,active}</span>
 
 <span class="go">Adjust the state of the controller</span>
 
 <span class="go">positional arguments:</span>
 <span class="go">  controller_name       Name of the controller to be changed</span>
-<span class="go">  {configure,start,stop}</span>
+<span class="go">  {inactive,active}</span>
 <span class="go">                        State in which the controller should be changed to</span>
 
 <span class="go">optional arguments:</span>
@@ -353,7 +353,7 @@
 <section id="switch-controllers">
 <h2>switch_controllers<a class="headerlink" href="#switch-controllers" title="Permalink to this heading"></a></h2>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2 control switch_controllers -h
-<span class="go">usage: ros2 control switch_controllers [-h] [--spin-time SPIN_TIME] [--stop [STOP [STOP ...]]] [--start [START [START ...]]] [--strict] [--start-asap] [--switch-timeout SWITCH_TIMEOUT] [-c CONTROLLER_MANAGER]</span>
+<span class="go">usage: ros2 control switch_controllers [-h] [--spin-time SPIN_TIME] [--deactivate [CTRL1 [CTRL2 ...]]] [--activate [CTRL1 [CTRL2 ...]]] [--strict] [--activate-asap] [--switch-timeout SWITCH_TIMEOUT] [-c CONTROLLER_MANAGER]</span>
 <span class="go">                                      [--include-hidden-nodes]</span>
 
 <span class="go">Switch controllers in a controller manager</span>
@@ -362,12 +362,12 @@
 <span class="go">-h, --help            show this help message and exit</span>
 <span class="go">--spin-time SPIN_TIME</span>
 <span class="go">Spin time in seconds to wait for discovery (only applies when not using an already running daemon)</span>
-<span class="go">--stop [STOP [STOP ...]]</span>
-<span class="go">Name of the controllers to be stopped</span>
-<span class="go">--start [START [START ...]]</span>
-<span class="go">Name of the controllers to be started</span>
+<span class="go">--deactivate [CTRL1 [CTRL2 ...]]</span>
+<span class="go">Name of the controllers to be deactivate</span>
+<span class="go">--activate [CTRL1 [CTRL2 ...]]</span>
+<span class="go">Name of the controllers to be activated</span>
 <span class="go">--strict              Strict switch</span>
-<span class="go">--start-asap          Start asap controllers</span>
+<span class="go">--activate-asap       Activate asap controllers</span>
 <span class="go">--switch-timeout SWITCH_TIMEOUT</span>
 <span class="go">Timeout for switching controllers</span>
 <span class="go">-c CONTROLLER_MANAGER, --controller-manager CONTROLLER_MANAGER</span>

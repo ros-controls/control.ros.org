@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['velocityjointsaturationhandle_387',['VelocityJointSaturationHandle',['../classjoint__limits__interface_1_1VelocityJointSaturationHandle.html',1,'joint_limits_interface']]],
-  ['velocityjointsaturationhandletest_388',['VelocityJointSaturationHandleTest',['../classVelocityJointSaturationHandleTest.html',1,'']]],
-  ['velocityjointsoftlimitshandle_389',['VelocityJointSoftLimitsHandle',['../classjoint__limits__interface_1_1VelocityJointSoftLimitsHandle.html',1,'joint_limits_interface']]]
+  ['velocityjointsaturationhandle_385',['VelocityJointSaturationHandle',['../classjoint__limits__interface_1_1VelocityJointSaturationHandle.html',1,'joint_limits_interface']]],
+  ['velocityjointsoftlimitshandle_386',['VelocityJointSoftLimitsHandle',['../classjoint__limits__interface_1_1VelocityJointSoftLimitsHandle.html',1,'joint_limits_interface']]]
 ];
