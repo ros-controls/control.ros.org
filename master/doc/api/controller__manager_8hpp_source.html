@@ -186,10 +186,10 @@ $(function() {
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  CONTROLLER_MANAGER_PUBLIC</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;  controller_interface::return_type <a class="code" href="classcontroller__manager_1_1ControllerManager.html#aa45a4387609bfe9accbb6012faa088b9">switch_controller</a>(</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;  controller_interface::return_type <a class="code" href="classcontroller__manager_1_1ControllerManager.html#a675e8a25061a86a0f5a46c9e1a68fb86">switch_controller</a>(</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keyword">const</span> std::vector&lt;std::string&gt; &amp; start_controllers,</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <span class="keyword">const</span> std::vector&lt;std::string&gt; &amp; stop_controllers, <span class="keywordtype">int</span> strictness,</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <span class="keywordtype">bool</span> start_asap = kWaitForAllResources,</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <span class="keywordtype">bool</span> activate_asap = kWaitForAllResources,</div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keyword">const</span> rclcpp::Duration &amp; timeout = rclcpp::Duration::from_nanoseconds(kInfiniteTimeout));</div>
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;  CONTROLLER_MANAGER_PUBLIC</div>
@@ -223,17 +223,17 @@ $(function() {
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;  <span class="keywordtype">void</span> manage_switch();</div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;  CONTROLLER_MANAGER_PUBLIC</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;  <span class="keywordtype">void</span> stop_controllers();</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;  <span class="keywordtype">void</span> deactivate_controllers();</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;  CONTROLLER_MANAGER_PUBLIC</div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classcontroller__manager_1_1ControllerManager.html#a9990bd8fae1a09ca83420dcd84c5cf36">switch_chained_mode</a>(</div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="keyword">const</span> std::vector&lt;std::string&gt; &amp; chained_mode_switch_list, <span class="keywordtype">bool</span> to_chained_mode);</div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;  CONTROLLER_MANAGER_PUBLIC</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;  <span class="keywordtype">void</span> start_controllers();</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;  <span class="keywordtype">void</span> activate_controllers();</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;  CONTROLLER_MANAGER_PUBLIC</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;  <span class="keywordtype">void</span> start_controllers_asap();</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;  <span class="keywordtype">void</span> activate_controllers_asap();</div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;  CONTROLLER_MANAGER_PUBLIC</div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  <span class="keywordtype">void</span> list_controllers_srv_cb(</div>
@@ -376,37 +376,38 @@ $(function() {
 <div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;  rclcpp::Service&lt;controller_manager_msgs::srv::SetHardwareComponentState&gt;::SharedPtr</div>
 <div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;    set_hardware_component_state_service_;</div>
 <div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160; </div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;  std::vector&lt;std::string&gt; start_request_, stop_request_;</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;  std::vector&lt;std::string&gt; activate_request_, deactivate_request_;</div>
 <div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;  std::vector&lt;std::string&gt; to_chained_mode_request_, from_chained_mode_request_;</div>
-<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;  std::vector&lt;std::string&gt; start_command_interface_request_, stop_command_interface_request_;</div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160; </div>
-<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;  <span class="keyword">struct </span>SwitchParams</div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;  {</div>
-<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;    <span class="keywordtype">bool</span> do_switch = {<span class="keyword">false</span>};</div>
-<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;    <span class="keywordtype">bool</span> started = {<span class="keyword">false</span>};</div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;    rclcpp::Time init_time = {rclcpp::Time::max()};</div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160; </div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;    <span class="comment">// Switch options</span></div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;    <span class="keywordtype">int</span> strictness = {0};</div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;    <span class="keywordtype">bool</span> start_asap = {<span class="keyword">false</span>};</div>
-<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;    rclcpp::Duration timeout = rclcpp::Duration{0, 0};</div>
-<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;  };</div>
-<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160; </div>
-<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;  SwitchParams switch_params_;</div>
-<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;};</div>
-<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160; </div>
-<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;}  <span class="comment">// namespace controller_manager</span></div>
-<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160; </div>
-<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;<span class="preprocessor">#endif  // CONTROLLER_MANAGER__CONTROLLER_MANAGER_HPP_</span></div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;  std::vector&lt;std::string&gt; activate_command_interface_request_,</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;    deactivate_command_interface_request_;</div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160; </div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;  <span class="keyword">struct </span>SwitchParams</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;  {</div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;    <span class="keywordtype">bool</span> do_switch = {<span class="keyword">false</span>};</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;    <span class="keywordtype">bool</span> started = {<span class="keyword">false</span>};</div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;    rclcpp::Time init_time = {rclcpp::Time::max()};</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160; </div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;    <span class="comment">// Switch options</span></div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;    <span class="keywordtype">int</span> strictness = {0};</div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;    <span class="keywordtype">bool</span> activate_asap = {<span class="keyword">false</span>};</div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;    rclcpp::Duration timeout = rclcpp::Duration{0, 0};</div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;  };</div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160; </div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;  SwitchParams switch_params_;</div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;};</div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160; </div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;}  <span class="comment">// namespace controller_manager</span></div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160; </div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;<span class="preprocessor">#endif  // CONTROLLER_MANAGER__CONTROLLER_MANAGER_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclasscontroller__manager_1_1ControllerManager_html"><div class="ttname"><a href="classcontroller__manager_1_1ControllerManager.html">controller_manager::ControllerManager</a></div><div class="ttdef"><b>Definition:</b> controller_manager.hpp:57</div></div>
 <div class="ttc" id="aclasscontroller__manager_1_1ControllerManager_html_acca3477dbb98147fcaf361459305da51"><div class="ttname"><a href="classcontroller__manager_1_1ControllerManager.html#acca3477dbb98147fcaf361459305da51">controller_manager::ControllerManager::configure_controller</a></div><div class="ttdeci">CONTROLLER_MANAGER_PUBLIC controller_interface::return_type configure_controller(const std::string &amp;controller_name)</div><div class="ttdoc">configure_controller Configure controller by name calling their &quot;configure&quot; method.</div><div class="ttdef"><b>Definition:</b> controller_manager.cpp:401</div></div>
-<div class="ttc" id="aclasscontroller__manager_1_1ControllerManager_html_a9990bd8fae1a09ca83420dcd84c5cf36"><div class="ttname"><a href="classcontroller__manager_1_1ControllerManager.html#a9990bd8fae1a09ca83420dcd84c5cf36">controller_manager::ControllerManager::switch_chained_mode</a></div><div class="ttdeci">CONTROLLER_MANAGER_PUBLIC void switch_chained_mode(const std::vector&lt; std::string &gt; &amp;chained_mode_switch_list, bool to_chained_mode)</div><div class="ttdef"><b>Definition:</b> controller_manager.cpp:1028</div></div>
+<div class="ttc" id="aclasscontroller__manager_1_1ControllerManager_html_a9990bd8fae1a09ca83420dcd84c5cf36"><div class="ttname"><a href="classcontroller__manager_1_1ControllerManager.html#a9990bd8fae1a09ca83420dcd84c5cf36">controller_manager::ControllerManager::switch_chained_mode</a></div><div class="ttdeci">CONTROLLER_MANAGER_PUBLIC void switch_chained_mode(const std::vector&lt; std::string &gt; &amp;chained_mode_switch_list, bool to_chained_mode)</div><div class="ttdef"><b>Definition:</b> controller_manager.cpp:1032</div></div>
 <div class="ttc" id="astructcontroller__manager_1_1ControllerSpec_html"><div class="ttname"><a href="structcontroller__manager_1_1ControllerSpec.html">controller_manager::ControllerSpec</a></div><div class="ttdoc">Controller Specification.</div><div class="ttdef"><b>Definition:</b> controller_spec.hpp:36</div></div>
 <div class="ttc" id="astructhardware__interface_1_1ControllerInfo_html_a4ef630c5bfd994650861829629b11ab2"><div class="ttname"><a href="structhardware__interface_1_1ControllerInfo.html#a4ef630c5bfd994650861829629b11ab2">hardware_interface::ControllerInfo::type</a></div><div class="ttdeci">std::string type</div><div class="ttdoc">Controller type.</div><div class="ttdef"><b>Definition:</b> controller_info.hpp:33</div></div>
-<div class="ttc" id="aclasscontroller__manager_1_1ControllerManager_html_aa45a4387609bfe9accbb6012faa088b9"><div class="ttname"><a href="classcontroller__manager_1_1ControllerManager.html#aa45a4387609bfe9accbb6012faa088b9">controller_manager::ControllerManager::switch_controller</a></div><div class="ttdeci">CONTROLLER_MANAGER_PUBLIC controller_interface::return_type switch_controller(const std::vector&lt; std::string &gt; &amp;start_controllers, const std::vector&lt; std::string &gt; &amp;stop_controllers, int strictness, bool start_asap=kWaitForAllResources, const rclcpp::Duration &amp;timeout=rclcpp::Duration::from_nanoseconds(kInfiniteTimeout))</div><div class="ttdoc">switch_controller Stops some controllers and start others.</div><div class="ttdef"><b>Definition:</b> controller_manager.cpp:493</div></div>
 <div class="ttc" id="astructhardware__interface_1_1ControllerInfo_html_a8c6d7a1ca9302d58f55ae2ea1b365635"><div class="ttname"><a href="structhardware__interface_1_1ControllerInfo.html#a8c6d7a1ca9302d58f55ae2ea1b365635">hardware_interface::ControllerInfo::name</a></div><div class="ttdeci">std::string name</div><div class="ttdoc">Controller name.</div><div class="ttdef"><b>Definition:</b> controller_info.hpp:30</div></div>
-<div class="ttc" id="aclasscontroller__manager_1_1ControllerManager_html_a6e52d7a474caec7ec1cbc2f65708c69b"><div class="ttname"><a href="classcontroller__manager_1_1ControllerManager.html#a6e52d7a474caec7ec1cbc2f65708c69b">controller_manager::ControllerManager::get_update_rate</a></div><div class="ttdeci">CONTROLLER_MANAGER_PUBLIC unsigned int get_update_rate() const</div><div class="ttdoc">Deterministic (real-time safe) callback group, e.g., update function.</div><div class="ttdef"><b>Definition:</b> controller_manager.cpp:1715</div></div>
+<div class="ttc" id="aclasscontroller__manager_1_1ControllerManager_html_a675e8a25061a86a0f5a46c9e1a68fb86"><div class="ttname"><a href="classcontroller__manager_1_1ControllerManager.html#a675e8a25061a86a0f5a46c9e1a68fb86">controller_manager::ControllerManager::switch_controller</a></div><div class="ttdeci">CONTROLLER_MANAGER_PUBLIC controller_interface::return_type switch_controller(const std::vector&lt; std::string &gt; &amp;start_controllers, const std::vector&lt; std::string &gt; &amp;stop_controllers, int strictness, bool activate_asap=kWaitForAllResources, const rclcpp::Duration &amp;timeout=rclcpp::Duration::from_nanoseconds(kInfiniteTimeout))</div><div class="ttdoc">switch_controller Stops some controllers and start others.</div><div class="ttdef"><b>Definition:</b> controller_manager.cpp:493</div></div>
+<div class="ttc" id="aclasscontroller__manager_1_1ControllerManager_html_a6e52d7a474caec7ec1cbc2f65708c69b"><div class="ttname"><a href="classcontroller__manager_1_1ControllerManager.html#a6e52d7a474caec7ec1cbc2f65708c69b">controller_manager::ControllerManager::get_update_rate</a></div><div class="ttdeci">CONTROLLER_MANAGER_PUBLIC unsigned int get_update_rate() const</div><div class="ttdoc">Deterministic (real-time safe) callback group, e.g., update function.</div><div class="ttdef"><b>Definition:</b> controller_manager.cpp:1719</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

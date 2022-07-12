@@ -105,6 +105,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#features">Features</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../doc/index.html#concepts">Concepts</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Controller Manager</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#determinism">Determinism</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#helper-scripts">Helper scripts</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#spawner"><code class="docutils literal notranslate"><span class="pre">spawner</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#unspawner"><code class="docutils literal notranslate"><span class="pre">unspawner</span></code></a></li>
@@ -205,6 +206,14 @@
 <span id="controller-manager-userdoc"></span><h1>Controller Manager<a class="headerlink" href="#controller-manager" title="Permalink to this heading"></a></h1>
 <p>Controller Manager is the main component in the ros2_control framework.
 It manages lifecycle of controllers, access to the hardware interfaces and offers services to the ROS-world.</p>
+<section id="determinism">
+<h2>Determinism<a class="headerlink" href="#determinism" title="Permalink to this heading"></a></h2>
+<p>For best performance when controlling hardware you want the controller manager to have as little jitter as possible in the main control loop.
+The normal linux kernel is optimized for computational throughput and therefore is not well suited for hardware control.
+The main thread of Controller Manager attempts to configure <code class="docutils literal notranslate"><span class="pre">SCHED_FIFO</span></code> with a priority of <code class="docutils literal notranslate"><span class="pre">50</span></code>.
+To enable this functionality install a RT kernel and run the Controller Manager with permissions to make syscalls to set its thread priorities.
+The two easiest options for this are using the [Real-time Ubuntu 22.04 LTS Beta](<a class="reference external" href="https://ubuntu.com/blog/real-time-ubuntu-released">https://ubuntu.com/blog/real-time-ubuntu-released</a>) or [linux-image-rt-amd64](<a class="reference external" href="https://packages.debian.org/bullseye/linux-image-rt-amd64">https://packages.debian.org/bullseye/linux-image-rt-amd64</a>) on Debian Bullseye.</p>
+</section>
 <section id="helper-scripts">
 <h2>Helper scripts<a class="headerlink" href="#helper-scripts" title="Permalink to this heading"></a></h2>
 <p>There are two scripts to interact with controller manager from launch files:</p>
