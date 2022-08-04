@@ -114,8 +114,7 @@ controller_interface::return_type&#160;</td><td class="memItemRight" valign="bot
 <tr class="memitem:a84267b9c7c0e3f89bced0125785dad21"><td class="memItemLeft" align="right" valign="top"><a id="a84267b9c7c0e3f89bced0125785dad21"></a>
 <a class="el" href="structcontroller__interface_1_1InterfaceConfiguration.html">controller_interface::InterfaceConfiguration</a>&#160;</td><td class="memItemRight" valign="bottom"><b>state_interface_configuration</b> () const override</td></tr>
 <tr class="separator:a84267b9c7c0e3f89bced0125785dad21"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48085dbfd8217fd1c2e3855a655396ea"><td class="memItemLeft" align="right" valign="top"><a id="a48085dbfd8217fd1c2e3855a655396ea"></a>
-controller_interface::return_type&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> (const rclcpp::Time &amp;, const rclcpp::Duration &amp;) override</td></tr>
+<tr class="memitem:a48085dbfd8217fd1c2e3855a655396ea"><td class="memItemLeft" align="right" valign="top">controller_interface::return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__with__options_1_1ControllerWithOptions.html#a48085dbfd8217fd1c2e3855a655396ea">update</a> (const rclcpp::Time &amp;, const rclcpp::Duration &amp;) override</td></tr>
 <tr class="separator:a48085dbfd8217fd1c2e3855a655396ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classcontroller__interface_1_1ControllerInterface"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classcontroller__interface_1_1ControllerInterface')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classcontroller__interface_1_1ControllerInterface.html">controller_interface::ControllerInterface</a></td></tr>
 <tr class="memitem:a8f9df0485b8a65363fecf5a3ccc9f51d inherit pub_methods_classcontroller__interface_1_1ControllerInterface"><td class="memItemLeft" align="right" valign="top">CONTROLLER_INTERFACE_PUBLIC bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterface.html#a8f9df0485b8a65363fecf5a3ccc9f51d">is_chainable</a> () const final</td></tr>
@@ -175,7 +174,55 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>update_rate_<
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Example of Controller using the ControllerInterface::init(const std::string &amp;, rclcpp::NodeOptions &amp;) function. In this example, we set the node options so that parameters are automatically declared by overrides. This is a rare use case, but it can be useful in some situations. </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a48085dbfd8217fd1c2e3855a655396ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48085dbfd8217fd1c2e3855a655396ea">&#9670;&nbsp;</a></span>update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">controller_interface::return_type controller_with_options::ControllerWithOptions::update </td>
+          <td>(</td>
+          <td class="paramtype">const rclcpp::Time &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const rclcpp::Duration &amp;&#160;</td>
+          <td class="paramname"><em>period</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Control step update. Command interfaces are updated based on on reference inputs and current states. <b>The method called in the (real-time) control loop.</b></p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">time</td><td>The time at the start of this control loop iteration </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">period</td><td>The measured time taken by the last control loop iteration </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>return_type::OK if update is successfully, otherwise return_type::ERROR. </dd></dl>
+
+<p>Implements <a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#add1fed599ea8a49a696ea657bf6a02b1">controller_interface::ControllerInterfaceBase</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>controller_interface/test/<a class="el" href="test__controller__with__options_8hpp_source.html">test_controller_with_options.hpp</a></li>
 </ul>
 </div><!-- contents -->

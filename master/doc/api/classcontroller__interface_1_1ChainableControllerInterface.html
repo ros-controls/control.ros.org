@@ -102,8 +102,7 @@ Collaboration diagram for controller_interface::ChainableControllerInterface:</d
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7cc9715499c50020997f4d4f10f67d14"><td class="memItemLeft" align="right" valign="top"><a id="a7cc9715499c50020997f4d4f10f67d14"></a>
-CONTROLLER_INTERFACE_PUBLIC return_type&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> (const rclcpp::Time &amp;time, const rclcpp::Duration &amp;period) final</td></tr>
+<tr class="memitem:a7cc9715499c50020997f4d4f10f67d14"><td class="memItemLeft" align="right" valign="top">CONTROLLER_INTERFACE_PUBLIC return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#a7cc9715499c50020997f4d4f10f67d14">update</a> (const rclcpp::Time &amp;time, const rclcpp::Duration &amp;period) final</td></tr>
 <tr class="separator:a7cc9715499c50020997f4d4f10f67d14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca75cbab7693e216194b7c41aa12739d"><td class="memItemLeft" align="right" valign="top">CONTROLLER_INTERFACE_PUBLIC bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#aca75cbab7693e216194b7c41aa12739d">is_chainable</a> () const final</td></tr>
 <tr class="memdesc:aca75cbab7693e216194b7c41aa12739d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get information if a controller is chainable.  <a href="classcontroller__interface_1_1ChainableControllerInterface.html#aca75cbab7693e216194b7c41aa12739d">More...</a><br /></td></tr>
@@ -375,6 +374,53 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>update_rate_<
 <dl class="section return"><dt>Returns</dt><dd>true if mode is switched successfully and false if not. </dd></dl>
 
 <p>Implements <a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a56c8cc3ea5aaec0ca36d8aa8b20b433c">controller_interface::ControllerInterfaceBase</a>.</p>
+
+</div>
+</div>
+<a id="a7cc9715499c50020997f4d4f10f67d14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cc9715499c50020997f4d4f10f67d14">&#9670;&nbsp;</a></span>update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">return_type controller_interface::ChainableControllerInterface::update </td>
+          <td>(</td>
+          <td class="paramtype">const rclcpp::Time &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const rclcpp::Duration &amp;&#160;</td>
+          <td class="paramname"><em>period</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Control step update. Command interfaces are updated based on on reference inputs and current states. <b>The method called in the (real-time) control loop.</b></p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">time</td><td>The time at the start of this control loop iteration </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">period</td><td>The measured time taken by the last control loop iteration </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>return_type::OK if update is successfully, otherwise return_type::ERROR. </dd></dl>
+
+<p>Implements <a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#add1fed599ea8a49a696ea657bf6a02b1">controller_interface::ControllerInterfaceBase</a>.</p>
 
 </div>
 </div>

@@ -462,6 +462,13 @@ All starting and stopping interface keys are passed to all components, so the fu
 
 <p>Read the current state values from the actuator. </p>
 <p>The data readings from the physical hardware has to be updated and reflected accordingly in the exported state interfaces. That is, the data pointed by the interfaces shall be updated.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">time</td><td>The time at the start of this control loop iteration </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">period</td><td>The measured time taken by the last control loop iteration </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>return_type::OK if the read was successful, return_type::ERROR otherwise. </dd></dl>
 
 </div>
@@ -531,6 +538,13 @@ All starting and stopping interface keys are passed to all components, so the fu
 
 <p>Write the current command values to the actuator. </p>
 <p>The physical hardware shall be updated with the latest value from the exported command interfaces.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">time</td><td>The time at the start of this control loop iteration </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">period</td><td>The measured time taken by the last control loop iteration </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>return_type::OK if the read was successful, return_type::ERROR otherwise. </dd></dl>
 
 </div>
