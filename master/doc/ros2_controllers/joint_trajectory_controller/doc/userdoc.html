@@ -114,6 +114,12 @@
 <li class="toctree-l5"><a class="reference internal" href="#trajectory-representation">Trajectory representation</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#hardware-interface-type">Hardware interface type</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#other-features">Other features</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#ros2-control-interfaces">ros2_control interfaces</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#references">References</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#states">States</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#commands">Commands</a></li>
+</ul>
+</li>
 <li class="toctree-l5"><a class="reference internal" href="#using-joint-trajectory-controller-s">Using Joint Trajectory Controller(s)</a><ul>
 <li class="toctree-l6"><a class="reference internal" href="#details-about-parameters">Details about parameters</a></li>
 <li class="toctree-l6"><a class="reference internal" href="#ros2-interface-of-the-controller">ROS2 interface of the controller</a></li>
@@ -240,6 +246,26 @@
 <p>Robust to system clock changes: Discontinuous system clock changes do not cause discontinuities in the execution of already queued trajectory segments.</p>
 </div></blockquote>
 </section>
+<section id="ros2-control-interfaces">
+<h2>ros2_control interfaces<a class="headerlink" href="#ros2-control-interfaces" title="Permalink to this heading"></a></h2>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h3>
+<p>(the controller is not yet implemented as chainable controller)</p>
+</section>
+<section id="states">
+<h3>States<a class="headerlink" href="#states" title="Permalink to this heading"></a></h3>
+<p>The state interfaces are defined with <code class="docutils literal notranslate"><span class="pre">joints</span></code> and <code class="docutils literal notranslate"><span class="pre">state_interfaces</span></code> parameters as follows: <code class="docutils literal notranslate"><span class="pre">&lt;joint&gt;/&lt;state_interface&gt;</span></code>.
+Supported state interfaces are <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code>, <code class="docutils literal notranslate"><span class="pre">acceleration</span></code> and <code class="docutils literal notranslate"><span class="pre">effort</span></code> as defined in the [hardware_interface/hardware_interface_type_values.hpp](<a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/include/hardware_interface/types/hardware_interface_type_values.hpp">https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/include/hardware_interface/types/hardware_interface_type_values.hpp</a>).
+Legal combinations of state interfaces are:
+- <code class="docutils literal notranslate"><span class="pre">position</span></code>
+- <code class="docutils literal notranslate"><span class="pre">position</span></code> and <code class="docutils literal notranslate"><span class="pre">velocity</span></code>
+- <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code> and <code class="docutils literal notranslate"><span class="pre">acceleration</span></code>
+- <code class="docutils literal notranslate"><span class="pre">effort</span></code></p>
+</section>
+<section id="commands">
+<h3>Commands<a class="headerlink" href="#commands" title="Permalink to this heading"></a></h3>
+</section>
+</section>
 <section id="using-joint-trajectory-controller-s">
 <h2>Using Joint Trajectory Controller(s)<a class="headerlink" href="#using-joint-trajectory-controller-s" title="Permalink to this heading"></a></h2>
 <p>The controller expects at least position feedback from the hardware.
@@ -288,7 +314,9 @@ A yaml file for using it could be:</p>
 <section id="details-about-parameters">
 <h3>Details about parameters<a class="headerlink" href="#details-about-parameters" title="Permalink to this heading"></a></h3>
 <dl>
-<dt>joint (list(string)):</dt><dd><p>Joint names to control.</p>
+<dt>joints (list(string)):</dt><dd><p>Joint names to control and listen to.</p>
+</dd>
+<dt>command_joints (list(string)):</dt><dd><p>Joint names to control. This parameters is used if JTC is used in a controller chain where command and state interfaces don’t have same names.</p>
 </dd>
 <dt>command_interface (list(string)):</dt><dd><p>Command interfaces provided by the hardware interface for all joints.</p>
 <p>Values: [position | velocity | acceleration] (multiple allowed)</p>
