@@ -126,9 +126,9 @@ template&lt;typename T , typename std::enable_if&lt; std::is_convertible&lt; T *
 <tr class="memitem:acca3477dbb98147fcaf361459305da51"><td class="memItemLeft" align="right" valign="top">CONTROLLER_MANAGER_PUBLIC controller_interface::return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__manager_1_1ControllerManager.html#acca3477dbb98147fcaf361459305da51">configure_controller</a> (const std::string &amp;controller_name)</td></tr>
 <tr class="memdesc:acca3477dbb98147fcaf361459305da51"><td class="mdescLeft">&#160;</td><td class="mdescRight">configure_controller Configure controller by name calling their "configure" method.  <a href="classcontroller__manager_1_1ControllerManager.html#acca3477dbb98147fcaf361459305da51">More...</a><br /></td></tr>
 <tr class="separator:acca3477dbb98147fcaf361459305da51"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a675e8a25061a86a0f5a46c9e1a68fb86"><td class="memItemLeft" align="right" valign="top">CONTROLLER_MANAGER_PUBLIC controller_interface::return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__manager_1_1ControllerManager.html#a675e8a25061a86a0f5a46c9e1a68fb86">switch_controller</a> (const std::vector&lt; std::string &gt; &amp;start_controllers, const std::vector&lt; std::string &gt; &amp;stop_controllers, int strictness, bool activate_asap=kWaitForAllResources, const rclcpp::Duration &amp;timeout=rclcpp::Duration::from_nanoseconds(kInfiniteTimeout))</td></tr>
-<tr class="memdesc:a675e8a25061a86a0f5a46c9e1a68fb86"><td class="mdescLeft">&#160;</td><td class="mdescRight">switch_controller Stops some controllers and start others.  <a href="classcontroller__manager_1_1ControllerManager.html#a675e8a25061a86a0f5a46c9e1a68fb86">More...</a><br /></td></tr>
-<tr class="separator:a675e8a25061a86a0f5a46c9e1a68fb86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47ba7e385d13ad28a0ba067af28256b4"><td class="memItemLeft" align="right" valign="top">CONTROLLER_MANAGER_PUBLIC controller_interface::return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__manager_1_1ControllerManager.html#a47ba7e385d13ad28a0ba067af28256b4">switch_controller</a> (const std::vector&lt; std::string &gt; &amp;<a class="el" href="classcontroller__manager_1_1ControllerManager.html#aaf19f50a660d4991ac6701cd9ebd2cc8">activate_controllers</a>, const std::vector&lt; std::string &gt; &amp;<a class="el" href="classcontroller__manager_1_1ControllerManager.html#ad4fd0e0db5892d3016282044432bfabb">deactivate_controllers</a>, int strictness, bool activate_asap=kWaitForAllResources, const rclcpp::Duration &amp;timeout=rclcpp::Duration::from_nanoseconds(kInfiniteTimeout))</td></tr>
+<tr class="memdesc:a47ba7e385d13ad28a0ba067af28256b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">switch_controller Deactivates some controllers and activates others.  <a href="classcontroller__manager_1_1ControllerManager.html#a47ba7e385d13ad28a0ba067af28256b4">More...</a><br /></td></tr>
+<tr class="separator:a47ba7e385d13ad28a0ba067af28256b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2dde8f9e562489619acd121482a5d6a3"><td class="memItemLeft" align="right" valign="top">CONTROLLER_MANAGER_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__manager_1_1ControllerManager.html#a2dde8f9e562489619acd121482a5d6a3">read</a> (const rclcpp::Time &amp;time, const rclcpp::Duration &amp;period)</td></tr>
 <tr class="memdesc:a2dde8f9e562489619acd121482a5d6a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read values to state interfaces.  <a href="classcontroller__manager_1_1ControllerManager.html#a2dde8f9e562489619acd121482a5d6a3">More...</a><br /></td></tr>
 <tr class="separator:a2dde8f9e562489619acd121482a5d6a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -162,17 +162,17 @@ CONTROLLER_MANAGER_PUBLIC controller_interface::ControllerInterfaceBaseSharedPtr
 <tr class="memitem:a0d52940dffd529e0e041c1ca114cebe5"><td class="memItemLeft" align="right" valign="top"><a id="a0d52940dffd529e0e041c1ca114cebe5"></a>
 CONTROLLER_MANAGER_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><b>manage_switch</b> ()</td></tr>
 <tr class="separator:a0d52940dffd529e0e041c1ca114cebe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02ddf64906cf4e502222954994c61aac"><td class="memItemLeft" align="right" valign="top"><a id="a02ddf64906cf4e502222954994c61aac"></a>
-CONTROLLER_MANAGER_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><b>deactivate_controllers</b> ()</td></tr>
-<tr class="separator:a02ddf64906cf4e502222954994c61aac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4fd0e0db5892d3016282044432bfabb"><td class="memItemLeft" align="right" valign="top">CONTROLLER_MANAGER_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__manager_1_1ControllerManager.html#ad4fd0e0db5892d3016282044432bfabb">deactivate_controllers</a> (const std::vector&lt; <a class="el" href="structcontroller__manager_1_1ControllerSpec.html">ControllerSpec</a> &gt; &amp;rt_controller_list, const std::vector&lt; std::string &gt; controllers_to_deactivate)</td></tr>
+<tr class="memdesc:ad4fd0e0db5892d3016282044432bfabb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate chosen controllers from real-time controller list.  <a href="classcontroller__manager_1_1ControllerManager.html#ad4fd0e0db5892d3016282044432bfabb">More...</a><br /></td></tr>
+<tr class="separator:ad4fd0e0db5892d3016282044432bfabb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9990bd8fae1a09ca83420dcd84c5cf36"><td class="memItemLeft" align="right" valign="top">CONTROLLER_MANAGER_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__manager_1_1ControllerManager.html#a9990bd8fae1a09ca83420dcd84c5cf36">switch_chained_mode</a> (const std::vector&lt; std::string &gt; &amp;chained_mode_switch_list, bool to_chained_mode)</td></tr>
 <tr class="separator:a9990bd8fae1a09ca83420dcd84c5cf36"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a834bc805df49e35d5f00b273bce9f2e7"><td class="memItemLeft" align="right" valign="top"><a id="a834bc805df49e35d5f00b273bce9f2e7"></a>
-CONTROLLER_MANAGER_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><b>activate_controllers</b> ()</td></tr>
-<tr class="separator:a834bc805df49e35d5f00b273bce9f2e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a344a18b82eea4658a9fccf88a511be6a"><td class="memItemLeft" align="right" valign="top"><a id="a344a18b82eea4658a9fccf88a511be6a"></a>
-CONTROLLER_MANAGER_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><b>activate_controllers_asap</b> ()</td></tr>
-<tr class="separator:a344a18b82eea4658a9fccf88a511be6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf19f50a660d4991ac6701cd9ebd2cc8"><td class="memItemLeft" align="right" valign="top">CONTROLLER_MANAGER_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__manager_1_1ControllerManager.html#aaf19f50a660d4991ac6701cd9ebd2cc8">activate_controllers</a> (const std::vector&lt; <a class="el" href="structcontroller__manager_1_1ControllerSpec.html">ControllerSpec</a> &gt; &amp;rt_controller_list, const std::vector&lt; std::string &gt; controllers_to_activate)</td></tr>
+<tr class="memdesc:aaf19f50a660d4991ac6701cd9ebd2cc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activate chosen controllers from real-time controller list.  <a href="classcontroller__manager_1_1ControllerManager.html#aaf19f50a660d4991ac6701cd9ebd2cc8">More...</a><br /></td></tr>
+<tr class="separator:aaf19f50a660d4991ac6701cd9ebd2cc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22f921889074ba2d28060696e4afccc2"><td class="memItemLeft" align="right" valign="top">CONTROLLER_MANAGER_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__manager_1_1ControllerManager.html#a22f921889074ba2d28060696e4afccc2">activate_controllers_asap</a> (const std::vector&lt; <a class="el" href="structcontroller__manager_1_1ControllerSpec.html">ControllerSpec</a> &gt; &amp;rt_controller_list, const std::vector&lt; std::string &gt; controllers_to_activate)</td></tr>
+<tr class="memdesc:a22f921889074ba2d28060696e4afccc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activate chosen controllers from real-time controller list.  <a href="classcontroller__manager_1_1ControllerManager.html#a22f921889074ba2d28060696e4afccc2">More...</a><br /></td></tr>
+<tr class="separator:a22f921889074ba2d28060696e4afccc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf0d55bdeb824966b390462fab8f39ac"><td class="memItemLeft" align="right" valign="top"><a id="adf0d55bdeb824966b390462fab8f39ac"></a>
 CONTROLLER_MANAGER_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><b>list_controllers_srv_cb</b> (const std::shared_ptr&lt; controller_manager_msgs::srv::ListControllers::Request &gt; request, std::shared_ptr&lt; controller_manager_msgs::srv::ListControllers::Response &gt; response)</td></tr>
 <tr class="separator:adf0d55bdeb824966b390462fab8f39ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -220,6 +220,99 @@ std::unique_ptr&lt; <a class="el" href="classhardware__interface_1_1ResourceMana
 <tr class="separator:a53a7c597165182e3142440a2a37ed793"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="aaf19f50a660d4991ac6701cd9ebd2cc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf19f50a660d4991ac6701cd9ebd2cc8">&#9670;&nbsp;</a></span>activate_controllers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void controller_manager::ControllerManager::activate_controllers </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="structcontroller__manager_1_1ControllerSpec.html">ControllerSpec</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rt_controller_list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; std::string &gt;&#160;</td>
+          <td class="paramname"><em>controllers_to_activate</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Activate chosen controllers from real-time controller list. </p>
+<p>Activate controllers with names <code>controllers_to_activate</code> from list <code>rt_controller_list</code>. The controller list will be iterated as many times as there are controller names.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">rt_controller_list</td><td>controllers in the real-time list. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">controllers_to_activate</td><td>names of the controller that have to be activated. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a22f921889074ba2d28060696e4afccc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22f921889074ba2d28060696e4afccc2">&#9670;&nbsp;</a></span>activate_controllers_asap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void controller_manager::ControllerManager::activate_controllers_asap </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="structcontroller__manager_1_1ControllerSpec.html">ControllerSpec</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rt_controller_list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; std::string &gt;&#160;</td>
+          <td class="paramname"><em>controllers_to_activate</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Activate chosen controllers from real-time controller list. </p>
+<p>Activate controllers with names <code>controllers_to_activate</code> from list <code>rt_controller_list</code>. The controller list will be iterated as many times as there are controller names.</p>
+<p><em>NOTE</em>: There is currently not difference to <code>activate_controllers</code> method. Check <a href="https://github.com/ros-controls/ros2_control/issues/263">https://github.com/ros-controls/ros2_control/issues/263</a> for more information.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">rt_controller_list</td><td>controllers in the real-time list. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">controllers_to_activate</td><td>names of the controller that have to be activated. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="acca3477dbb98147fcaf361459305da51"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acca3477dbb98147fcaf361459305da51">&#9670;&nbsp;</a></span>configure_controller()</h2>
 
@@ -245,6 +338,52 @@ std::unique_ptr&lt; <a class="el" href="classhardware__interface_1_1ResourceMana
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>configure controller response </dd></dl>
 <dl class="section see"><dt>See also</dt><dd>Documentation in controller_manager_msgs/ConfigureController.srv </dd></dl>
+
+</div>
+</div>
+<a id="ad4fd0e0db5892d3016282044432bfabb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4fd0e0db5892d3016282044432bfabb">&#9670;&nbsp;</a></span>deactivate_controllers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void controller_manager::ControllerManager::deactivate_controllers </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="structcontroller__manager_1_1ControllerSpec.html">ControllerSpec</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rt_controller_list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; std::string &gt;&#160;</td>
+          <td class="paramname"><em>controllers_to_deactivate</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Deactivate chosen controllers from real-time controller list. </p>
+<p>Deactivate controllers with names <code>controllers_to_deactivate</code> from list <code>rt_controller_list</code>. The controller list will be iterated as many times as there are controller names.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">rt_controller_list</td><td>controllers in the real-time list. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">controllers_to_deactivate</td><td>names of the controller that have to be deactivated. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -381,8 +520,8 @@ std::unique_ptr&lt; <a class="el" href="classhardware__interface_1_1ResourceMana
 
 </div>
 </div>
-<a id="a675e8a25061a86a0f5a46c9e1a68fb86"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a675e8a25061a86a0f5a46c9e1a68fb86">&#9670;&nbsp;</a></span>switch_controller()</h2>
+<a id="a47ba7e385d13ad28a0ba067af28256b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47ba7e385d13ad28a0ba067af28256b4">&#9670;&nbsp;</a></span>switch_controller()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -391,13 +530,13 @@ std::unique_ptr&lt; <a class="el" href="classhardware__interface_1_1ResourceMana
           <td class="memname">controller_interface::return_type controller_manager::ControllerManager::switch_controller </td>
           <td>(</td>
           <td class="paramtype">const std::vector&lt; std::string &gt; &amp;&#160;</td>
-          <td class="paramname"><em>start_controllers</em>, </td>
+          <td class="paramname"><em>activate_controllers</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const std::vector&lt; std::string &gt; &amp;&#160;</td>
-          <td class="paramname"><em>stop_controllers</em>, </td>
+          <td class="paramname"><em>deactivate_controllers</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -425,11 +564,11 @@ std::unique_ptr&lt; <a class="el" href="classhardware__interface_1_1ResourceMana
       </table>
 </div><div class="memdoc">
 
-<p>switch_controller Stops some controllers and start others. </p>
+<p>switch_controller Deactivates some controllers and activates others. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">start_controllers</td><td>is a list of controllers to start </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">stop_controllers</td><td>is a list of controllers to stop </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">activate_controllers</td><td>is a list of controllers to activate. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deactivate_controllers</td><td>is a list of controllers to deactivate. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">set</td><td>level of strictness (BEST_EFFORT or STRICT) </td></tr>
   </table>
   </dd>

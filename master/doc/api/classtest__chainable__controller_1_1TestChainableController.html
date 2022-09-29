@@ -100,11 +100,11 @@ Collaboration diagram for test_chainable_controller::TestChainableController:</d
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:afde701a5ba62dc1583756a6597e2afef"><td class="memItemLeft" align="right" valign="top"><a id="afde701a5ba62dc1583756a6597e2afef"></a>
-<a class="el" href="structcontroller__interface_1_1InterfaceConfiguration.html">controller_interface::InterfaceConfiguration</a>&#160;</td><td class="memItemRight" valign="bottom"><b>command_interface_configuration</b> () const override</td></tr>
+<tr class="memitem:afde701a5ba62dc1583756a6597e2afef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcontroller__interface_1_1InterfaceConfiguration.html">controller_interface::InterfaceConfiguration</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtest__chainable__controller_1_1TestChainableController.html#afde701a5ba62dc1583756a6597e2afef">command_interface_configuration</a> () const override</td></tr>
+<tr class="memdesc:afde701a5ba62dc1583756a6597e2afef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get configuration for controller's required command interfaces.  <a href="classtest__chainable__controller_1_1TestChainableController.html#afde701a5ba62dc1583756a6597e2afef">More...</a><br /></td></tr>
 <tr class="separator:afde701a5ba62dc1583756a6597e2afef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a89cd47a8242f7b80148537f4bd3e00"><td class="memItemLeft" align="right" valign="top"><a id="a0a89cd47a8242f7b80148537f4bd3e00"></a>
-<a class="el" href="structcontroller__interface_1_1InterfaceConfiguration.html">controller_interface::InterfaceConfiguration</a>&#160;</td><td class="memItemRight" valign="bottom"><b>state_interface_configuration</b> () const override</td></tr>
+<tr class="memitem:a0a89cd47a8242f7b80148537f4bd3e00"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcontroller__interface_1_1InterfaceConfiguration.html">controller_interface::InterfaceConfiguration</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtest__chainable__controller_1_1TestChainableController.html#a0a89cd47a8242f7b80148537f4bd3e00">state_interface_configuration</a> () const override</td></tr>
+<tr class="memdesc:a0a89cd47a8242f7b80148537f4bd3e00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get configuration for controller's required state interfaces.  <a href="classtest__chainable__controller_1_1TestChainableController.html#a0a89cd47a8242f7b80148537f4bd3e00">More...</a><br /></td></tr>
 <tr class="separator:a0a89cd47a8242f7b80148537f4bd3e00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9f20eb411f7273e5bf9642111f33128"><td class="memItemLeft" align="right" valign="top"><a id="ad9f20eb411f7273e5bf9642111f33128"></a>
 CONTROLLER_MANAGER_PUBLIC CallbackReturn&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtest__chainable__controller_1_1TestChainableController.html#ad9f20eb411f7273e5bf9642111f33128">on_init</a> () override</td></tr>
@@ -224,6 +224,37 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>update_rate_<
 <tr class="separator:a9f05708e13e7368b4cea7d9cbb57e920 inherit pro_attribs_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="afde701a5ba62dc1583756a6597e2afef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afde701a5ba62dc1583756a6597e2afef">&#9670;&nbsp;</a></span>command_interface_configuration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcontroller__interface_1_1InterfaceConfiguration.html">controller_interface::InterfaceConfiguration</a> test_chainable_controller::TestChainableController::command_interface_configuration </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get configuration for controller's required command interfaces. </p>
+<p>Method used by the controller_manager to get the set of command interfaces used by the controller. Each controller can use individual method to determine interface names that in simples case have the following format: <code>&lt;joint&gt;/&lt;interface&gt;</code>. The method is called only in <code>inactive</code> or <code>active</code> state, i.e., <code>on_configure</code> has to be called first. The configuration is used to check if controller can be activated and to claim interfaces from hardware. The claimed interfaces are populated in the command_interfaces_ member.</p>
+<dl class="section return"><dt>Returns</dt><dd>configuration of command interfaces. </dd></dl>
+
+<p>Implements <a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a7241e933b6cb95b3304a49c8a6830aa6">controller_interface::ControllerInterfaceBase</a>.</p>
+
+</div>
+</div>
 <a id="ae0cf9e19dba7a4a298ed94dec7d92c93"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae0cf9e19dba7a4a298ed94dec7d92c93">&#9670;&nbsp;</a></span>on_export_reference_interfaces()</h2>
 
@@ -250,6 +281,37 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>update_rate_<
 <dl class="section return"><dt>Returns</dt><dd>list of CommandInterfaces that other controller can use as their outputs. </dd></dl>
 
 <p>Implements <a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#a0e7d22f3c410335ec57e725e30314b0d">controller_interface::ChainableControllerInterface</a>.</p>
+
+</div>
+</div>
+<a id="a0a89cd47a8242f7b80148537f4bd3e00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a89cd47a8242f7b80148537f4bd3e00">&#9670;&nbsp;</a></span>state_interface_configuration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcontroller__interface_1_1InterfaceConfiguration.html">controller_interface::InterfaceConfiguration</a> test_chainable_controller::TestChainableController::state_interface_configuration </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get configuration for controller's required state interfaces. </p>
+<p>Method used by the controller_manager to get the set of state interface used by the controller. Each controller can use individual method to determine interface names that in simples case have the following format: <code>&lt;joint&gt;/&lt;interface&gt;</code>. The method is called only in <code>inactive</code> or <code>active</code> state, i.e., <code>on_configure</code> has to be called first. The configuration is used to check if controller can be activated and to claim interfaces from hardware. The claimed interfaces are populated in the state_interface_ member.</p>
+<dl class="section return"><dt>Returns</dt><dd>configuration of state interfaces. </dd></dl>
+
+<p>Implements <a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a3417ed9b9990df177ab116f9a7147b74">controller_interface::ControllerInterfaceBase</a>.</p>
 
 </div>
 </div>

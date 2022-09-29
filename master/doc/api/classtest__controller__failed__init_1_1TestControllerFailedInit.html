@@ -100,11 +100,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a280a4b6e7c1bd7b6898522d4488a1343"><td class="memItemLeft" align="right" valign="top"><a id="a280a4b6e7c1bd7b6898522d4488a1343"></a>
 CONTROLLER_INTERFACE_PUBLIC controller_interface::return_type&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (const std::string &amp;controller_name, const std::string &amp;namespace_=&quot;&quot;, const rclcpp::NodeOptions &amp;node_options=rclcpp::NodeOptions() .allow_undeclared_parameters(true) .automatically_declare_parameters_from_overrides(true)) override</td></tr>
 <tr class="separator:a280a4b6e7c1bd7b6898522d4488a1343"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab94ecbf1899fe9ec5e24ec1c2d8ea6dd"><td class="memItemLeft" align="right" valign="top"><a id="ab94ecbf1899fe9ec5e24ec1c2d8ea6dd"></a>
-<a class="el" href="structcontroller__interface_1_1InterfaceConfiguration.html">controller_interface::InterfaceConfiguration</a>&#160;</td><td class="memItemRight" valign="bottom"><b>command_interface_configuration</b> () const override</td></tr>
+<tr class="memitem:ab94ecbf1899fe9ec5e24ec1c2d8ea6dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcontroller__interface_1_1InterfaceConfiguration.html">controller_interface::InterfaceConfiguration</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtest__controller__failed__init_1_1TestControllerFailedInit.html#ab94ecbf1899fe9ec5e24ec1c2d8ea6dd">command_interface_configuration</a> () const override</td></tr>
+<tr class="memdesc:ab94ecbf1899fe9ec5e24ec1c2d8ea6dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get configuration for controller's required command interfaces.  <a href="classtest__controller__failed__init_1_1TestControllerFailedInit.html#ab94ecbf1899fe9ec5e24ec1c2d8ea6dd">More...</a><br /></td></tr>
 <tr class="separator:ab94ecbf1899fe9ec5e24ec1c2d8ea6dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63f7d5f4d3ef5a4772cf698bdcf5a56d"><td class="memItemLeft" align="right" valign="top"><a id="a63f7d5f4d3ef5a4772cf698bdcf5a56d"></a>
-<a class="el" href="structcontroller__interface_1_1InterfaceConfiguration.html">controller_interface::InterfaceConfiguration</a>&#160;</td><td class="memItemRight" valign="bottom"><b>state_interface_configuration</b> () const override</td></tr>
+<tr class="memitem:a63f7d5f4d3ef5a4772cf698bdcf5a56d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcontroller__interface_1_1InterfaceConfiguration.html">controller_interface::InterfaceConfiguration</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtest__controller__failed__init_1_1TestControllerFailedInit.html#a63f7d5f4d3ef5a4772cf698bdcf5a56d">state_interface_configuration</a> () const override</td></tr>
+<tr class="memdesc:a63f7d5f4d3ef5a4772cf698bdcf5a56d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get configuration for controller's required state interfaces.  <a href="classtest__controller__failed__init_1_1TestControllerFailedInit.html#a63f7d5f4d3ef5a4772cf698bdcf5a56d">More...</a><br /></td></tr>
 <tr class="separator:a63f7d5f4d3ef5a4772cf698bdcf5a56d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87ad5ce8255316cfa888c7082d57e6ae"><td class="memItemLeft" align="right" valign="top">CONTROLLER_MANAGER_PUBLIC controller_interface::return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtest__controller__failed__init_1_1TestControllerFailedInit.html#a87ad5ce8255316cfa888c7082d57e6ae">update</a> (const rclcpp::Time &amp;time, const rclcpp::Duration &amp;period) override</td></tr>
 <tr class="separator:a87ad5ce8255316cfa888c7082d57e6ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -163,6 +163,68 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>update_rate_<
 <tr class="separator:a9f05708e13e7368b4cea7d9cbb57e920 inherit pro_attribs_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ab94ecbf1899fe9ec5e24ec1c2d8ea6dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab94ecbf1899fe9ec5e24ec1c2d8ea6dd">&#9670;&nbsp;</a></span>command_interface_configuration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcontroller__interface_1_1InterfaceConfiguration.html">controller_interface::InterfaceConfiguration</a> test_controller_failed_init::TestControllerFailedInit::command_interface_configuration </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get configuration for controller's required command interfaces. </p>
+<p>Method used by the controller_manager to get the set of command interfaces used by the controller. Each controller can use individual method to determine interface names that in simples case have the following format: <code>&lt;joint&gt;/&lt;interface&gt;</code>. The method is called only in <code>inactive</code> or <code>active</code> state, i.e., <code>on_configure</code> has to be called first. The configuration is used to check if controller can be activated and to claim interfaces from hardware. The claimed interfaces are populated in the command_interfaces_ member.</p>
+<dl class="section return"><dt>Returns</dt><dd>configuration of command interfaces. </dd></dl>
+
+<p>Implements <a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a7241e933b6cb95b3304a49c8a6830aa6">controller_interface::ControllerInterfaceBase</a>.</p>
+
+</div>
+</div>
+<a id="a63f7d5f4d3ef5a4772cf698bdcf5a56d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63f7d5f4d3ef5a4772cf698bdcf5a56d">&#9670;&nbsp;</a></span>state_interface_configuration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcontroller__interface_1_1InterfaceConfiguration.html">controller_interface::InterfaceConfiguration</a> test_controller_failed_init::TestControllerFailedInit::state_interface_configuration </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get configuration for controller's required state interfaces. </p>
+<p>Method used by the controller_manager to get the set of state interface used by the controller. Each controller can use individual method to determine interface names that in simples case have the following format: <code>&lt;joint&gt;/&lt;interface&gt;</code>. The method is called only in <code>inactive</code> or <code>active</code> state, i.e., <code>on_configure</code> has to be called first. The configuration is used to check if controller can be activated and to claim interfaces from hardware. The claimed interfaces are populated in the state_interface_ member.</p>
+<dl class="section return"><dt>Returns</dt><dd>configuration of state interfaces. </dd></dl>
+
+<p>Implements <a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a3417ed9b9990df177ab116f9a7147b74">controller_interface::ControllerInterfaceBase</a>.</p>
+
+</div>
+</div>
 <a id="a87ad5ce8255316cfa888c7082d57e6ae"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a87ad5ce8255316cfa888c7082d57e6ae">&#9670;&nbsp;</a></span>update()</h2>
 
