@@ -1,12 +1,8 @@
 
+## ros2_control Mobile Manipulator controllers
+
     controller_manager:
       update_rate: 500  # Hz
-
-      joint_state_broadcaster:
-        type: joint_state_broadcaster/JointStateBroadcaster
-
-      force_torque_sensor_broadcaster:
-        type: force_torque_sensor_broadcaster/ForceTorqueStateBroadcaster
 
       joint_trajectory_controller:
         type: joint_trajectory_controller/JointTrajectoryController
@@ -14,18 +10,23 @@
       forward_position_controller:
         type: position_controllers/JointGroupPositionController
 
+      joint_state_broadcaster:
+        type: joint_state_broadcaster/JointStateBroadcaster
 
-    force_torque_sensor_broadcaster:
-      sensor_name: tcp_fts_sensor
-      frame_id: tool0
-      topic_name: ft_data
+      force_torque_sensor_broadcaster:
+        type: force_torque_sensor_broadcaster/ForceTorqueStateBroadcaster
+
+      gripper_controller:
+        type: position_controllers/GripperActionController
+
+      diff_drive_controller:
+        type: diff_drive_controller/DiffDriveController
 
 
     joint_trajectory_controller:
       joints:
-        - shoulder_pan_joint
+        - joint1
         - ...
-        - wrist_3_joint
       command_interfaces:
         - position
       state_interfaces:
@@ -35,11 +36,197 @@
 
     forward_position_controller:
       joints:
-        - shoulder_pan_joint
+        - joint1
         - ...
-        - wrist_3_joint
+
+
+    force_torque_sensor_broadcaster:
+      sensor_name: tcp_fts_sensor
+      frame_id: tool0
+      topic_name: ft_data
+
+
+    gripper_controller:
+      joints:
+        - gripper_joint
+      command_interface: position
+
+
+    diff_drive_controller:
+      left_weel_names:
+        - left_wheel_1
+        ...
 
 
 
+## ros2_control Mobile Manipulator with Convoluted controllerss
 
+
+    controller_manager:
+      update_rate: 500  # Hz
+
+      admittance_controller:
+        type: ros2_control_mm/AdmittanceController
+
+      forward_position_controller:
+        type: position_controllers/JointGroupPositionController
+
+      joint_state_broadcaster:
+        type: joint_state_broadcaster/JointStateBroadcaster
+
+      force_torque_sensor_broadcaster:
+        type: force_torque_sensor_broadcaster/ForceTorqueStateBroadcaster
+
+      gripper_controller:
+        type: position_controllers/GripperActionController
+
+      base_controller:
+        type: ros2_control_mm/BaseControllers
+
+
+    admittance_controller:
+      joints:
+        - joint1
+        - ...
+      command_interfaces:
+        - position
+      state_interfaces:
+        - position
+        - velocity
+
+
+    forward_position_controller:
+      joints:
+        - joint1
+        - ...
+
+
+    force_torque_sensor_broadcaster:
+      sensor_name: tcp_fts_sensor
+      frame_id: tool0
+      topic_name: ft_data
+
+
+    gripper_controller:
+      joints:
+        - gripper_joint
+      command_interface: position
+
+
+    base_controller:
+      left_weel_names:
+        - left_wheel_1
+        ...
+
+
+
+## ros2_control Mobile Manipulator with Chaining controllers - Admittance Part
+
+
+    controller_manager:
+      update_rate: 500  # Hz
+
+      joint_trajectory_controller:
+        type: joint_trajectory_controller/JointTrajectoryController
+
+      admittance_controller:
+        type: admittance_controller/AdmittanceController
+
+      limiting_controller:
+        type: limiting_controllers/JointLimitingController
+
+
+    joint_trajectory_controller:
+      joints:
+        - joint1
+        - ...
+      command_joints:
+        - admittance_controller/joint1
+        - ...
+      command_interfaces:
+        - position
+      state_interfaces:
+        - position
+        - velocity
+
+    # export reference interfaces: "<controller_name>/<joint_name>/<interface_name>"
+    admittance_controller:
+      joints:
+        - joint1
+        - ...
+      command_joints:
+        - limiting_controller/joint1
+        - ...
+      command_interfaces:
+        - position
+      state_interfaces:
+        - position
+        - velocity
+
+
+    # export reference interfaces: "<controller_name>/<joint_name>/<interface_name>"
+    limiting_controller:
+      joints:
+        - joint1
+        - ...
+      interfaces:
+        - position
+    limiting_controller:
+      joints:
+        - joint1
+        - ...
+      interfaces:
+        - position
+
+
+## ros2_control Mobile Manipulator with Chaining controllers - Base Part
+
+
+    controller_manager:
+      update_rate: 500  # Hz
+
+      diff_drive_controller:
+        type: diff_drive_controller/DiffDriveController
+
+      limiting_controller:
+        type: limiting_controllers/JointLimitingController
+
+      pid_left_wheels:
+        type: pid_controllers/PIDController
+
+      pid_right_wheels:
+        type: pid_controllers/PIDController
+
+
+    diff_drive_controller:
+      left_weel_names:
+        - left_wheel_1
+        ...
+
+    # export reference interfaces: "<controller_name>/<joint_name>/<interface_name>"
+    limiting_controller:
+      joints:
+        - left_wheel_1
+        - ...
+      command_joints:
+        - pid_left_wheels/joint1/velocity
+        - ...
+        - pid_right_wheels/joint1/velocity
+        - ...
+      interfaces:
+        - velocity
+
+
+    # export reference interfaces: "<controller_name>/<joint_name>/<interface_name>"
+    pid_left_wheels:
+      joints:
+        - left_wheel_1
+        ...
+
+
+    # export reference interfaces: "<controller_name>/<joint_name>/<interface_name>"
+    pid_right_wheels:
+      joints:
+        - right_wheel_1
+        ...
 

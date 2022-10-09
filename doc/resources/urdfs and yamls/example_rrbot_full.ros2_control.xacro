@@ -89,8 +89,120 @@
   </ros2_control>
 
 
+## Modelling complex hardware – individual components
+
+  <ros2_control name="MobileBase" type="system">
+    <hardware>
+      <plugin>ros2_contro_robot/Mobile_Base</plugin>
+      ...
+    </hardware>
+    <joint name="wheel1_joint">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="status"/>
+    </joint>
+    ...
+  </ros2_control>
+
+  <ros2_control name="Arm" type="system">
+    <hardware>
+      <plugin>ros2_contro_robot/Arm</plugin>
+      ...
+    </hardware>
+    <joint name="joint1">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="status"/>
+    </joint>
+    ...
+  </ros2_control>
+
+  <ros2_control name="Gripper" type="actuator">
+    <hardware>
+      <plugin>ros2_contro_robot/Gripper</plugin>
+      ...
+    </hardware>
+    <joint name="gripper_joint">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="status"/>
+    </joint>
+    ...
+  </ros2_control>
 
 
+
+## Modelling complex hardware – “bus through arm” + base
+
+  <ros2_control name="MobileBase" type="system">
+    <hardware>
+      <plugin>ros2_contro_robot/Mobile_Base</plugin>
+      ...
+    </hardware>
+    <joint name="wheel1_joint">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="status"/>
+    </joint>
+    ...
+  </ros2_control>
+
+  <ros2_control name="ArmWithGripper" type="system">
+    <hardware>
+      <plugin>ros2_contro_robot/Arm_With_Gripper</plugin>
+      ...
+    </hardware>
+    <joint name="joint1">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="status"/>
+    </joint>
+    ...
+    <joint name="gripper_joint">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="status"/>
+    </joint>
+    ...
+  </ros2_control>
+
+
+
+## Modelling complex hardware – monolitic components
+
+  <ros2_control name="MobileManipulator" type="system">
+    <hardware>
+      <plugin>ros2_contro_robot/Full_Mobile_Manipulator</plugin>
+      ...
+    </hardware>
+    <joint name="wheel1_joint">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="status"/>
+    </joint>
+    ...
+    <joint name="joint1">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="status"/>
+    </joint>
+    ...
+    <joint name="gripper_joint">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="status"/>
+    </joint>
+    ...
+  </ros2_control>
 
 
 
