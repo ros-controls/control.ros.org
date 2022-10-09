@@ -11,6 +11,21 @@ Any files submitted to the documentation should be "licensed" by stating your na
 Presentations
 ---------------
 
+2022-06 ROSCon Fr 2022
+,,,,,,,,,,,,,,,,,,,,,,,
+`Presentation: What is new in the best (and only) control framework for ROS2 - ros2_control <presentations/2022-06_ROSConFr_What-is-new-in-ros2_control.pdf>`_
+
+  Summary:
+    ros2_control is a hardware-agnostic control framework with a focus on both real-time performance and sharing of controllers. The framework has become one of the main utilities for abstracting hardware and low-level control for 3rd party solutions like `MoveIt2` and `Nav2` systems.
+
+    The presentation provides practical tips to use ros2_control, from creating a robot description, writing hardware drivers to configuring standard controllers. Some hot-new features, like controller chaining, will be shown. Furthermore, you will get introduced to concepts like modular reuse of hardware drivers, multi-robot architectures and parameters injection for controllers.
+
+  *Presenter: Dr. Denis Stogl*
+
+  Authors:
+    - Dr. Denis Stogl (Stogl Robotics Consulting)
+
+
 2021-10 ROS World 2021
 ,,,,,,,,,,,,,,,,,,,,,,,,
 `Presentation: ros2_control - The future of ros_control <https://raw.githubusercontent.com/ros-controls/control.ros.org/master/doc/resources/presentations/2021-10_ROS_World_2021-ros2_control_The_future_of_ros_control.pdf>`_
@@ -114,6 +129,10 @@ Overview of ros2_control
   .. image:: images/ros2_control_overview.png
      :target: images/ros2_control_overview.png
 
+ros2_control robot integration with MoveIt2
+  .. image:: images/ros2_control_robot_integration_with_moveit2.png
+     :target: images/ros2_control_robot_integration_with_moveit2.png
+
 
 Architecture of complex controller and semantic components:
   .. image:: images/complex_controllers_and_semantic_components.png
@@ -134,7 +153,73 @@ ros2_control integration with MoveIt2
   .. image:: images/ros2_control_robot_integration_with_moveit2.png
      :target: images/ros2_control_robot_integration_with_moveit2.png
 
+Controllers architecture with chained controllers - admittance controller example
+  .. image:: images/ros2_control_mobile_manipulator_control_arch_admittance_chaining.png
+     :target: images/ros2_control_mobile_manipulator_control_arch_admittance_chaining.png
 
+Controllers architecture with chained controllers - admittance controller example (URDF)
+  .. image:: images/ros2_control_mobile_manipulator_controllers_admittance_chaining.png
+     :target: images/ros2_control_mobile_manipulator_controllers_admittance_chaining.png
+
+Controllers architecture without chained controllers - admittance controller example
+  .. image:: images/ros2_control_mobile_manipulator_control_arch_admittance_without_chaining.png
+     :target: images/ros2_control_mobile_manipulator_control_arch_admittance_without_chaining.png
+
+Controllers architecture with chained controllers - mobile base controller example
+  .. image:: images/ros2_control_mobile_manipulator_control_arch_base_chaining.png
+     :target: images/ros2_control_mobile_manipulator_control_arch_base_chaining.png
+
+Controllers architecture with chained controllers - mobile base controller example (URDF)
+  .. image:: images/ros2_control_mobile_manipulator_controllers_base_chaining.png
+     :target: images/ros2_control_mobile_manipulator_controllers_base_chaining.png
+
+Controllers architecture without chained controllers - admittance controller example
+  .. image:: images/ros2_control_mobile_manipulator_control_arch_base_without_chaining.png
+     :target: images/ros2_control_mobile_manipulator_control_arch_base_without_chaining.png
+
+Controllers architecture - overview
+  .. image:: images/ros2_control_mobile_manipulator_control_arch_convoluted_controllers.png
+     :target: images/ros2_control_mobile_manipulator_control_arch_convoluted_controllers.png
+
+Controllers architecture - URDF
+  .. image:: images/ros2_control_mobile_manipulator_controllers_convoluted_controllers.png
+     :target: images/ros2_control_mobile_manipulator_controllers_convoluted_controllers.png
+
+Hardware architecture - independent communication to the hardware (modular hardware)
+  .. image:: images/ros2_control_mobile_manipulator_control_arch_independent_hardware.png
+     :target: images/ros2_control_mobile_manipulator_control_arch_independent_hardware.png
+
+Hardware architecture - independent communication to the hardware (modular hardware) (URDF)
+  .. image:: images/ros2_control_mobile_manipulator_control_arch_independent_hardware_urdf.png
+     :target: images/ros2_control_mobile_manipulator_control_arch_independent_hardware_urdf.png
+
+Hardware architecture - gripper communication through Arm
+  .. image:: images/ros2_control_mobile_manipulator_control_arch_gripper_through_arm_comms.png
+     :target: images/ros2_control_mobile_manipulator_control_arch_gripper_through_arm_comms.png
+
+Hardware architecture - gripper communication through Arm (URDF)
+  .. image:: images/ros2_control_mobile_manipulator_control_arch_gripper_through_arm_comms_urdf.png
+     :target: images/ros2_control_mobile_manipulator_control_arch_gripper_through_arm_comms_urdf.png
+
+Hardware architecture - monolitic communication to hardware
+  .. image:: images/ros2_control_mobile_manipulator_control_arch_monolitic_hardware.png
+     :target: images/ros2_control_mobile_manipulator_control_arch_monolitic_hardware.png
+
+Hardware architecture - monolitic communication to hardware (URDF)
+  .. image:: images/ros2_control_mobile_manipulator_control_arch_monolitic_hardware_urdf.png
+     :target: images/ros2_control_mobile_manipulator_control_arch_monolitic_hardware_urdf.png
+
+Hardware architecture - multiple hardware in one controller manager
+  .. image:: images/ros2_control_mobile_manipulator_control_arch_multi_robots_in_one_controller_manager.png
+     :target: images/ros2_control_mobile_manipulator_control_arch_multi_robots_in_one_controller_manager.png
+
+Example files - ros2_control - "Controlko" mobile manipulator
+  .. image:: images/ros2_control_mobile_manipulator.png
+     :target: images/ros2_control_mobile_manipulator.png
+
+Example files - ros2_control - "Controlko" mobile manipulator (URDF)
+  .. image:: images/ros2_control_mobile_manipulator_controllers.png
+     :target: images/ros2_control_mobile_manipulator_controllers.png
 
 .. |CC-BY| image:: https://i.creativecommons.org/l/by/4.0/88x31.png
 .. _CC-BY: http://creativecommons.org/licenses/by/4.0/
