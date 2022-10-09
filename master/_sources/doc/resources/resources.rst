@@ -13,7 +13,7 @@ Presentations
 
 2022-06 ROSCon Fr 2022
 ,,,,,,,,,,,,,,,,,,,,,,,
-`Presentation: What is new in the best (and only) control framework for ROS2 - ros2_control <presentations/2022-06_ROSConFr_What-is-new-in-ros2_control.pdf>`_
+`Presentation: What is new in the best (and only) control framework for ROS2 - ros2_control <https://raw.githubusercontent.com/ros-controls/control.ros.org/master/doc/resources/presentations/2022-06_ROSConFr_What-is-new-in-ros2_control.pdf>`_
 
   Summary:
     ros2_control is a hardware-agnostic control framework with a focus on both real-time performance and sharing of controllers. The framework has become one of the main utilities for abstracting hardware and low-level control for 3rd party solutions like `MoveIt2` and `Nav2` systems.
