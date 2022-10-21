@@ -22,7 +22,8 @@ Non robot-devices:
 
 * `Force Dimension haptic devices <https://github.com/ICube-Robotics/forcedimension_ros2>`_
 * `ODrive Motor Controller <https://github.com/Factor-Robotics/odrive_ros2_control>`_
-
+* `ODRI Motor Controller <https://github.com/stack-of-tasks/ros2_hardware_interface_odri>`_
+  
 Mobile manipulators:
 
 * `Hello Robot - Stretch (for simple simulation with MoveIt2) <https://github.com/hello-robot/stretch_ros2/blob/galactic/stretch_moveit_config/README.md>`_
