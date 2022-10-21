@@ -160,27 +160,28 @@ $(function() {
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="keywordtype">void</span> initialize_storage_vectors(</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    std::vector&lt;std::vector&lt;double&gt;&gt; &amp; commands, std::vector&lt;std::vector&lt;double&gt;&gt; &amp; states,</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keyword">const</span> std::vector&lt;std::string&gt; &amp; interfaces);</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> InterfaceType&gt;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  <span class="keywordtype">bool</span> populate_interfaces(</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keyword">const</span> std::vector&lt;hardware_interface::ComponentInfo&gt; &amp; components,</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    std::vector&lt;std::string&gt; &amp; interfaces, std::vector&lt;std::vector&lt;double&gt;&gt; &amp; storage,</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    std::vector&lt;InterfaceType&gt; &amp; target_interfaces, <span class="keywordtype">bool</span> using_state_interfaces);</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  <span class="keywordtype">bool</span> use_fake_gpio_command_interfaces_;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  <span class="keywordtype">bool</span> use_mock_sensor_command_interfaces_;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <span class="keywordtype">double</span> position_state_following_offset_;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  std::string custom_interface_with_following_offset_;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <span class="keywordtype">size_t</span> index_custom_interface_with_following_offset_;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;};</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="keyword">typedef</span> <a class="code" href="classmock__components_1_1GenericSystem.html">GenericSystem</a> <a class="code" href="classmock__components_1_1GenericSystem.html">GenericRobot</a>;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;}  <span class="comment">// namespace mock_components</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="preprocessor">#endif  // MOCK_COMPONENTS__GENERIC_SYSTEM_HPP_</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keyword">const</span> std::vector&lt;std::string&gt; &amp; interfaces,</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keyword">const</span> std::vector&lt;hardware_interface::ComponentInfo&gt; &amp; component_infos);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> InterfaceType&gt;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  <span class="keywordtype">bool</span> populate_interfaces(</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keyword">const</span> std::vector&lt;hardware_interface::ComponentInfo&gt; &amp; components,</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    std::vector&lt;std::string&gt; &amp; interfaces, std::vector&lt;std::vector&lt;double&gt;&gt; &amp; storage,</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    std::vector&lt;InterfaceType&gt; &amp; target_interfaces, <span class="keywordtype">bool</span> using_state_interfaces);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  <span class="keywordtype">bool</span> use_fake_gpio_command_interfaces_;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  <span class="keywordtype">bool</span> use_mock_sensor_command_interfaces_;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  <span class="keywordtype">double</span> position_state_following_offset_;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  std::string custom_interface_with_following_offset_;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  <span class="keywordtype">size_t</span> index_custom_interface_with_following_offset_;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;};</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="keyword">typedef</span> <a class="code" href="classmock__components_1_1GenericSystem.html">GenericSystem</a> <a class="code" href="classmock__components_1_1GenericSystem.html">GenericRobot</a>;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;}  <span class="comment">// namespace mock_components</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="preprocessor">#endif  // MOCK_COMPONENTS__GENERIC_SYSTEM_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassmock__components_1_1GenericSystem_html_ab9850523086de0d92cbf5bf7186e5599"><div class="ttname"><a href="classmock__components_1_1GenericSystem.html#ab9850523086de0d92cbf5bf7186e5599">mock_components::GenericSystem::other_commands_</a></div><div class="ttdeci">std::vector&lt; std::vector&lt; double &gt; &gt; other_commands_</div><div class="ttdoc">The size of this vector is (other_interfaces_.size() x nr_joints)</div><div class="ttdef"><b>Definition:</b> generic_system.hpp:79</div></div>
 <div class="ttc" id="aclassmock__components_1_1GenericSystem_html_a9889bd21f48bb371d1bf175ab68804d8"><div class="ttname"><a href="classmock__components_1_1GenericSystem.html#a9889bd21f48bb371d1bf175ab68804d8">mock_components::GenericSystem::joint_commands_</a></div><div class="ttdeci">std::vector&lt; std::vector&lt; double &gt; &gt; joint_commands_</div><div class="ttdoc">The size of this vector is (standard_interfaces_.size() x nr_joints)</div><div class="ttdef"><b>Definition:</b> generic_system.hpp:74</div></div>
