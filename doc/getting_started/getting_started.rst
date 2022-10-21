@@ -52,7 +52,7 @@ In the control loop execution, the RM's ``read()`` and ``write()`` methods deal 
 Controllers
 -----------
 The controllers in the ros2_control framework have the same functionality as defined in the control theory. They compare the reference value with the measured output and, based on this error, calculate a system's input (for more details, visit `Wikipedia <https://en.wikipedia.org/wiki/Control_theory>`_).
-The controlles are objects derived from `ControllerInterface`_ (``controller_interface`` package in `ros2_control`_) and exported as plugins using ``pluginlib``-library.
+The controllers are objects derived from `ControllerInterface`_ (``controller_interface`` package in `ros2_control`_) and exported as plugins using ``pluginlib``-library.
 For example of on controller check `ForwardCommandController implementation`_ in the `ros2_controllers`_ repository.
 The controllers' lifecycle is based on the `LifecycleNode-Class`_ implementing the state machine as described in the `Node Lifecycle Design`_ document.
 
