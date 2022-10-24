@@ -109,6 +109,16 @@ Presentations
     - Dr. Bence Magyar (FiveAI Ltd)
     - Denis Stogl (Stogl Robotics Consulting)
 
+2021-05 ROSCon Fr 2021
+,,,,,,,,,,,,,,,,,,,,,,,
+`Presentation: Getting started with ros2_control <https://raw.githubusercontent.com/ros-controls/control.ros.org/master/doc/resources/presentations/2021-06_RosConFR_Getting_started_with_ros2_control.pdf>`_
+
+  Summary:
+    The presentation gives a quick overview on the basic concepts and some simple implementation examples. We show implementing a simple Hardware Abstraction Layer (aka SystemComponent) and a forwarding controller. Once done, we also look into modifying the controller with the example goal of changing the type of the command topic.
+    
+`Recording <https://peertube.laas.fr/w/sDPKwTWP6gAr5h1CcZPnbJ>`__
+
+  *Presenter: Dr. Bence Magyar*
 
 Diagrams
 ---------
