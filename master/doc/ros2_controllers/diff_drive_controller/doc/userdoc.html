@@ -111,6 +111,26 @@
 <li class="toctree-l4"><a class="reference internal" href="#velocity-commands">Velocity commands</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hardware-interface-type">Hardware interface type</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#other-features">Other features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ros2-control-interfaces">ros2_control Interfaces</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#references">References</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#states">States</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#commands">Commands</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#ros2-interfaces">ROS2 Interfaces</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#subscribers">Subscribers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#publishers">Publishers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#services">Services</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#wheels">Wheels</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#odometry">Odometry</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#id1">Commands</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../forward_command_controller/doc/userdoc.html">Forward Command</a></li>
@@ -227,6 +247,114 @@ Odometry publishing
 Task-space velocity, acceleration and jerk limits
 Automatic stop after command time-out</p>
 </div></blockquote>
+</section>
+<section id="ros2-control-interfaces">
+<h2>ros2_control Interfaces<a class="headerlink" href="#ros2-control-interfaces" title="Permalink to this heading"></a></h2>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h3>
+</section>
+<section id="states">
+<h3>States<a class="headerlink" href="#states" title="Permalink to this heading"></a></h3>
+</section>
+<section id="commands">
+<h3>Commands<a class="headerlink" href="#commands" title="Permalink to this heading"></a></h3>
+</section>
+</section>
+<section id="ros2-interfaces">
+<h2>ROS2 Interfaces<a class="headerlink" href="#ros2-interfaces" title="Permalink to this heading"></a></h2>
+<section id="subscribers">
+<h3>Subscribers<a class="headerlink" href="#subscribers" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>~/cmd_vel [geometry_msgs/msg/TwistStamped]</dt><dd><p>Velocity command for the controller.</p>
+</dd>
+</dl>
+<p>~/cmd_vel_unstamped [geometry_msgs::msg::Twist]</p>
+<p>~/cmd_vel_out []</p>
+</section>
+<section id="publishers">
+<h3>Publishers<a class="headerlink" href="#publishers" title="Permalink to this heading"></a></h3>
+<p>~/odom []</p>
+<p>/tf</p>
+</section>
+<section id="services">
+<h3>Services<a class="headerlink" href="#services" title="Permalink to this heading"></a></h3>
+</section>
+</section>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h2>
+<section id="wheels">
+<h3>Wheels<a class="headerlink" href="#wheels" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>left_wheel_names [array&lt;string&gt;]</dt><dd><p>Link names of the left side wheels.</p>
+</dd>
+<dt>right_wheel_names  [array&lt;string&gt;]</dt><dd><p>Link names of the right side wheels.</p>
+</dd>
+<dt>wheel_separation [double]</dt><dd><p>Shortest distance between the left and right wheels.
+If this parameter is wrong, the robot will not behave correctly in curves.</p>
+</dd>
+<dt>wheels_per_side [integer]</dt><dd><p>Number of wheels on each wide of the robot.
+This is important to take the wheels slip into account when multiple wheels on each side are present.
+If there are more wheels then control signals for each side, you should enter number or control signals.
+For example, Husky has two wheels on each side, but they use one control signal, in this case “1” is the correct value of the parameter.</p>
+</dd>
+<dt>wheel_radius [double]</dt><dd><p>Radius of a wheel, i.e., wheels size, used for transformation of linear velocity into wheel rotations.
+If this parameter is wrong the robot will move faster or slower then expected.</p>
+</dd>
+<dt>wheel_separation_multiplier [double]</dt><dd><p>Correction factor for wheel separation (TODO(destogl): Please help me describe this correctly)</p>
+</dd>
+<dt>left_wheel_radius_multiplier [double]</dt><dd><p>Correction factor when radius of left wheels differs from the nominal value in <code class="docutils literal notranslate"><span class="pre">wheel_radius</span></code> parameter.</p>
+</dd>
+<dt>right_wheel_radius_multiplier [double]</dt><dd><p>Correction factor when radius of right wheels differs from the nominal value in <code class="docutils literal notranslate"><span class="pre">wheel_radius</span></code> parameter.</p>
+</dd>
+</dl>
+</section>
+<section id="odometry">
+<h3>Odometry<a class="headerlink" href="#odometry" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>base_frame_id [string] (default: “base_link”)</dt><dd><p>Name of the frame for odometry.
+This frame is parent of <code class="docutils literal notranslate"><span class="pre">base_frame_id</span></code> when controller publishes odometry.</p>
+</dd>
+<dt>odom_frame_id [string] (default: “odom”)</dt><dd><p>Name of the robot’s base frame that is child of the odometry frame.</p>
+</dd>
+<dt>pose_covariance_diagonal [array&lt;double&gt;[6]] (default: “[0.0, 0.0, 0.0, 0.0, 0.0, 0.0]”)</dt><dd><p>Odometry covariance for the encoder output of the robot for the pose.
+These values should be tuned to your robot’s sample odometry data, but these values are a good place to start:
+<code class="docutils literal notranslate"><span class="pre">[0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.01]</span></code>.</p>
+</dd>
+<dt>twist_covariance_diagonal [array&lt;double&gt;[6]] (default: “[0.0, 0.0, 0.0, 0.0, 0.0, 0.0]”)</dt><dd><p>Odometry covariance for the encoder output of the robot for the speed.
+These values should be tuned to your robot’s sample odometry data, but these values are a good place to start:
+<code class="docutils literal notranslate"><span class="pre">[0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.01]</span></code>.</p>
+</dd>
+<dt>open_loop [bool] (default: “false”)</dt><dd><p>If set to false the odometry of the robot will be calculated from the commanded values and not from feedback.</p>
+</dd>
+<dt>position_feedback [bool] (default: “true”)</dt><dd><p>Is there position feedback from hardware.</p>
+</dd>
+<dt>enable_odom_tf [bool] (default: “true”)</dt><dd><p>Publish transformation between <code class="docutils literal notranslate"><span class="pre">odom_frame_id</span></code> and <code class="docutils literal notranslate"><span class="pre">base_frame_id</span></code>.</p>
+</dd>
+<dt>velocity_rolling_window_size [int] (default: “10”)</dt><dd><p>(TODO(destogl): Please help me describe this correctly)</p>
+</dd>
+</dl>
+<section id="id1">
+<h4>Commands<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>cmd_vel_timeout [double] (default: “0.5s”)</dt><dd><p>Timeout after which input command on <code class="docutils literal notranslate"><span class="pre">cmd_vel</span></code> topic is considered staled.</p>
+</dd>
+<dt>publish_limited_velocity [double] (default: “false”)</dt><dd><p>Publish limited velocity value.</p>
+</dd>
+<dt>use_stamped_vel [bool] (default: “true”)</dt><dd><p>Use stamp from input velocity message to calculate how old the command actually is.</p>
+</dd>
+<dt>linear.x [JointLimits structure]</dt><dd><p>Joint limits structure for the linear X-axis.
+The limiter ignores position limits.
+For details see <code class="docutils literal notranslate"><span class="pre">joint_limits</span></code> package from ros2_control repository.</p>
+</dd>
+<dt>angular.z [JointLimits structure]</dt><dd><p>Joint limits structure for the rotation about Z-axis.
+The limiter ignores position limits.
+For details see <code class="docutils literal notranslate"><span class="pre">joint_limits</span></code> package from ros2_control repository.</p>
+</dd>
+<dt>publish_rate [double] (default: “50.0”)</dt><dd><p>Publishing rate (Hz) of the odometry and TF messages.</p>
+</dd>
+</dl>
+</section>
+</section>
 </section>
 </section>
 
