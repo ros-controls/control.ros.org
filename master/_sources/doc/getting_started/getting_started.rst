@@ -81,7 +81,7 @@ System
   Complex (multi-DOF) robotic hardware like industrial robots.
   The main difference between the *Actuator* component is the possibility to use complex transmissions like needed for humanoid robot's hands.
   This component has reading and writing capabilities.
-  It is used when the is only one logical communication channel to the hardware (e.g., KUKA-RSI).
+  It is used when there is only one logical communication channel to the hardware (e.g., KUKA-RSI).
 
 Sensor
   Robotic hardware is used for sensing its environment.
