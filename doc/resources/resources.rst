@@ -11,6 +11,18 @@ Any files submitted to the documentation should be "licensed" by stating your na
 Presentations
 ---------------
 
+2022-10 ROSCon 2022
+,,,,,,,,,,,,,,,,,,,
+`Presentation: A practitioner's guide to ros2_control <https://raw.githubusercontent.com/ros-controls/control.ros.org/master/doc/resources/presentations/2022-10_ROSCon2022_A_practitioners_guide_to_ros2_control.pdf>`_
+
+  Summary:
+    ros2_control is a hardware-agnostic control framework focusing on the modular composition of control systems for robots, sharing of controllers as well as real-time performance. The framework provides controller-lifecycle and hardware management on top of abstractions of real or virtual hardware interfaces. 
+
+    This talk delves deeper into ros2_control, showcasing new features and what they could be used for, such as explicit lifecycle management, chaining controllers, emergency-stop handlers and mock components. Finally, we showcase different usages of ros2_control on openly accessible examples.
+
+  *Presenter: Dr. Bence Magyar*
+
+
 2022-06 ROSCon Fr 2022
 ,,,,,,,,,,,,,,,,,,,,,,,
 `Presentation: What is new in the best (and only) control framework for ROS2 - ros2_control <https://raw.githubusercontent.com/ros-controls/control.ros.org/master/doc/resources/presentations/2022-06_ROSConFr_What-is-new-in-ros2_control.pdf>`_
