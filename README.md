@@ -60,7 +60,7 @@ conf.py
 deploy_defines
 * Change branch_version
 
-To add subrepoositories chage subrepo_url
+To add subrepositories chage subrepo_url
 
 # Testing GitHub workflows:
 If you want to modify or otherwise test the GitHub actions workflow locally without having to push every time to see the result,
