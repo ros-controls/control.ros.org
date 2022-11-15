@@ -10,7 +10,7 @@ This project is about extending our tutorials and examples on how to use the ros
 Also, existing demos should be integrated with our documentation at `control.ros.org <https://control.ros.org>`_.
 In general, the following tasks are envisioned:
 
-- Examples on simulators' integration (Gazebo and Ignition) and their use; 
+- Examples on simulators' integration (Gazebo and Ignition) and their use;
 - Showcase multi-robot and multi-controller manager use-case with examples and by using simulators
 - Showcase: How to do Error Management with ros2_control (graceful error handling and degradation)
 - Implementing different example robot-hardware architectures for industrial and service robotics
@@ -73,7 +73,7 @@ The main functionalities for the components and goals of the project are:
 Add support for hardware semantic components
 --------------------------------------------
 
-The ros2_control framework relies on simple command and state interfaces in the form of double values to exchange data between hardware components and controllers. It is desired however to provide good C++ data structures both on the hardware component and the controller side which improves code readability and maintainability. 
+The ros2_control framework relies on simple command and state interfaces in the form of double values to exchange data between hardware components and controllers. It is desired however to provide good C++ data structures both on the hardware component and the controller side which improves code readability and maintainability.
 
 Earlier in the project, the concept of semantic components were introduced which essentially provides a grouping for these values and a semantic-specific API to use them. For instance, an IMU sensor will typically report 9 values, 3 values for each axis of the acelerometer, gyroscope and compass sensor parts respectively. Such values can be grouped and served through an API as a ROS IMU message or as a C++ struct for both input and output of these values while the ros2_control framework maintains it's low-profile communication interfaces internally.
 
