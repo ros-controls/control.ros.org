@@ -24,7 +24,7 @@ var searchData=
   ['controllerinfo_39',['ControllerInfo',['../structhardware__interface_1_1ControllerInfo.html',1,'hardware_interface']]],
   ['controllerinterface_40',['ControllerInterface',['../classcontroller__interface_1_1ControllerInterface.html',1,'controller_interface']]],
   ['controllerinterfacebase_41',['ControllerInterfaceBase',['../classcontroller__interface_1_1ControllerInterfaceBase.html',1,'controller_interface']]],
-  ['controllermanager_42',['ControllerManager',['../classcontroller__manager_1_1ControllerManager.html',1,'controller_manager']]],
+  ['controllermanager_42',['ControllerManager',['../classcontroller__manager_1_1ControllerManager.html',1,'controller_manager::ControllerManager'],['../classrqt__controller__manager_1_1controller__manager_1_1ControllerManager.html',1,'rqt_controller_manager.controller_manager.ControllerManager']]],
   ['controllermanagerfixture_43',['ControllerManagerFixture',['../classControllerManagerFixture.html',1,'']]],
   ['controllermanagerfixture_3c_20controller_5fmanager_3a_3acontrollermanager_20_3e_44',['ControllerManagerFixture&lt; controller_manager::ControllerManager &gt;',['../classControllerManagerFixture.html',1,'']]],
   ['controllermanagerfixture_3c_20testablecontrollermanager_20_3e_45',['ControllerManagerFixture&lt; TestableControllerManager &gt;',['../classControllerManagerFixture.html',1,'']]],
@@ -33,6 +33,7 @@ var searchData=
   ['controllernamecompleter_48',['ControllerNameCompleter',['../classros2controlcli_1_1api_1_1ControllerNameCompleter.html',1,'ros2controlcli::api']]],
   ['controllers_5freference_5finterfaces_5fmap_5f_49',['controllers_reference_interfaces_map_',['../classhardware__interface_1_1ResourceStorage.html#a840c73eab76dc2d641e11c8ff6c22331',1,'hardware_interface::ResourceStorage']]],
   ['controllerspec_50',['ControllerSpec',['../structcontroller__manager_1_1ControllerSpec.html',1,'controller_manager']]],
-  ['controllerwithoptions_51',['ControllerWithOptions',['../classcontroller__with__options_1_1ControllerWithOptions.html',1,'controller_with_options']]],
-  ['contributing_20guidelines_52',['Contributing Guidelines',['../md_CONTRIBUTING.html',1,'']]]
+  ['controllertable_51',['ControllerTable',['../classrqt__controller__manager_1_1controller__manager_1_1ControllerTable.html',1,'rqt_controller_manager::controller_manager']]],
+  ['controllerwithoptions_52',['ControllerWithOptions',['../classcontroller__with__options_1_1ControllerWithOptions.html',1,'controller_with_options']]],
+  ['contributing_20guidelines_53',['Contributing Guidelines',['../md_CONTRIBUTING.html',1,'']]]
 ];

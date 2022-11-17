@@ -4,7 +4,8 @@ var searchData=
   ['imusensor_81',['IMUSensor',['../classsemantic__components_1_1IMUSensor.html',1,'semantic_components']]],
   ['imusensortest_82',['IMUSensorTest',['../classIMUSensorTest.html',1,'']]],
   ['init_5fservices_83',['init_services',['../classcontroller__manager_1_1ControllerManager.html#a37f5d3d14109c2be5bb205ee45c825e9',1,'controller_manager::ControllerManager']]],
-  ['interface_5fconfiguration_5ftype_84',['interface_configuration_type',['../namespacecontroller__interface.html#a012ebb297433a480b9d5d6e926169187',1,'controller_interface']]],
-  ['interfaceconfiguration_85',['InterfaceConfiguration',['../structcontroller__interface_1_1InterfaceConfiguration.html',1,'controller_interface']]],
-  ['interfaceinfo_86',['InterfaceInfo',['../structhardware__interface_1_1InterfaceInfo.html',1,'hardware_interface']]]
+  ['initial_5fvalue_84',['initial_value',['../structhardware__interface_1_1InterfaceInfo.html#a1681ac364efe0a5961addbe90d10edfb',1,'hardware_interface::InterfaceInfo']]],
+  ['interface_5fconfiguration_5ftype_85',['interface_configuration_type',['../namespacecontroller__interface.html#a012ebb297433a480b9d5d6e926169187',1,'controller_interface']]],
+  ['interfaceconfiguration_86',['InterfaceConfiguration',['../structcontroller__interface_1_1InterfaceConfiguration.html',1,'controller_interface']]],
+  ['interfaceinfo_87',['InterfaceInfo',['../structhardware__interface_1_1InterfaceInfo.html',1,'hardware_interface']]]
 ];
