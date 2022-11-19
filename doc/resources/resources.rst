@@ -20,6 +20,8 @@ Presentations
 
     This talk delves deeper into ros2_control, showcasing new features and what they could be used for, such as explicit lifecycle management, chaining controllers, emergency-stop handlers and mock components. Finally, we showcase different usages of ros2_control on openly accessible examples.
 
+`Recording <https://vimeo.com/showcase/9954564/video/767139648>`__
+
   *Presenter: Dr. Bence Magyar*
 
 
