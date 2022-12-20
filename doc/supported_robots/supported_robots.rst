@@ -18,6 +18,10 @@ Unofficial (from the community):
 * `ABB - EGM interface <https://github.com/PickNikRobotics/abb_ros2>`_
 * `Mitsubishi RV1A <https://github.com/ICube-Robotics/mrv1a_ros2>`_
 
+End-effectors:
+
+* `Schunk SVH 5-finger Hand <https://github.com/fzi-forschungszentrum-informatik/schunk_svh_ros_driver/tree/ros2-foxy>`_
+
 Non robot-devices:
 
 * `Force Dimension haptic devices <https://github.com/ICube-Robotics/forcedimension_ros2>`_
