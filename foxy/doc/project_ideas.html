@@ -4,7 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
@@ -35,9 +35,6 @@
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/sphinx_highlight.js"></script>
         <script src="../_static/clipboard.min.js"></script>
@@ -192,9 +189,9 @@
            <div itemprop="articleBody">
             
   <section id="project-ideas-for-gsoc-2022">
-<span id="project-ideas"></span><h1>Project Ideas for GSoC 2022<a class="headerlink" href="#project-ideas-for-gsoc-2022" title="Permalink to this heading"></a></h1>
+<span id="project-ideas"></span><h1>Project Ideas for GSoC 2022<a class="headerlink" href="#project-ideas-for-gsoc-2022" title="Permalink to this heading">¶</a></h1>
 <section id="asynchronous-control-components">
-<h2>Asynchronous Control Components<a class="headerlink" href="#asynchronous-control-components" title="Permalink to this heading"></a></h2>
+<h2>Asynchronous Control Components<a class="headerlink" href="#asynchronous-control-components" title="Permalink to this heading">¶</a></h2>
 <p>This project orbits around everything asynchronous: hardware components and controllers.
 The goal is to support long-running controller tasks by providing a simple and clean interface for users implementing such controllers.
 This will include addition of multi-threading support with protected memory access, e.g., through buffers that are implemented in <a class="reference external" href="https://github.com/ros-controls/control_toolbox">control_toolbox repository</a>.</p>
@@ -226,7 +223,7 @@ Also, another use-case of this functionality is to enable update of different in
 </section>
 <hr class="docutils" />
 <section id="tutorials-and-demos-for-ros2-control">
-<h2>Tutorials and Demos for ros2_control<a class="headerlink" href="#tutorials-and-demos-for-ros2-control" title="Permalink to this heading"></a></h2>
+<h2>Tutorials and Demos for ros2_control<a class="headerlink" href="#tutorials-and-demos-for-ros2-control" title="Permalink to this heading">¶</a></h2>
 <p>This project is about extending our tutorials and examples on how to use the ros2_control framework.
 Also, existing demos should be integrated with our documentation at <a class="reference external" href="https://control.ros.org">control.ros.org</a>.
 In general, the following tasks are envisioned:</p>
@@ -262,7 +259,7 @@ In general, the following tasks are envisioned:</p>
 </section>
 <hr class="docutils" />
 <section id="mission-control-for-ros2-control">
-<h2>Mission-Control for ros2_control<a class="headerlink" href="#mission-control-for-ros2-control" title="Permalink to this heading"></a></h2>
+<h2>Mission-Control for ros2_control<a class="headerlink" href="#mission-control-for-ros2-control" title="Permalink to this heading">¶</a></h2>
 <p>The ros2_control framework focuses on direct management of hardware and their controllers to enable real-time capabilities with ROS.
 Although those interfaces are easy to use, they provide only “manual” control over the system’s state.
 Therefore, very often in more complex systems our users have to implement an external, state-machine like component that serves as an orchestrator for ros2_control.
@@ -292,7 +289,7 @@ The main purpose of such a component is to serve as conductor of ros2_control by
 </section>
 <hr class="docutils" />
 <section id="add-support-for-hardware-semantic-components">
-<h2>Add support for hardware semantic components<a class="headerlink" href="#add-support-for-hardware-semantic-components" title="Permalink to this heading"></a></h2>
+<h2>Add support for hardware semantic components<a class="headerlink" href="#add-support-for-hardware-semantic-components" title="Permalink to this heading">¶</a></h2>
 <p>The ros2_control framework relies on simple command and state interfaces in the form of double values to exchange data between hardware components and controllers. It is desired however to provide good C++ data structures both on the hardware component and the controller side which improves code readability and maintainability.</p>
 <p>Earlier in the project, the concept of semantic components were introduced which essentially provides a grouping for these values and a semantic-specific API to use them. For instance, an IMU sensor will typically report 9 values, 3 values for each axis of the acelerometer, gyroscope and compass sensor parts respectively. Such values can be grouped and served through an API as a ROS IMU message or as a C++ struct for both input and output of these values while the ros2_control framework maintains it’s low-profile communication interfaces internally.</p>
 <p>The goal of this project is to add semantic components that are relevant for hardware components.
@@ -319,7 +316,7 @@ Additionally, this project includes extending the existing simulation tools with
 </section>
 <hr class="docutils" />
 <section id="feature-parity-for-controllers-from-ros1">
-<h2>Feature-parity for controllers from ROS1<a class="headerlink" href="#feature-parity-for-controllers-from-ros1" title="Permalink to this heading"></a></h2>
+<h2>Feature-parity for controllers from ROS1<a class="headerlink" href="#feature-parity-for-controllers-from-ros1" title="Permalink to this heading">¶</a></h2>
 <p>The ros2_control framework in ROS2 is a rewrite of the ros_control framework from ROS1.
 Our rich set of standard controllers was one of the main motivations for users to adopt ros_control in ROS1 and while we ported most of them, there are quite a few features missing for the two main controllers of this set, the diff_drive_controller and the joint_trajectory_controller.</p>
 <p>This work will consist of reviewing the two versions of the two controllers and comparing for feature parity. Once the missing parts are identified, port them over from ROS1 with as much test support as possible.</p>
