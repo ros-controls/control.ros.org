@@ -234,10 +234,10 @@ The following list shows a set of quick changes to port existing hardware compon
 <li><p>Add include of header <code class="docutils literal notranslate"><span class="pre">rclcpp_lifecycle/state.hpp</span></code> although this may not be strictly necessary</p></li>
 <li><p>replace first three lines in <code class="docutils literal notranslate"><span class="pre">on_init</span></code> to:</p></li>
 </ol>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">hardware_interface</span><span class="o">::</span><span class="p">[</span><span class="n">Actuator</span><span class="o">|</span><span class="n">Sensor</span><span class="o">|</span><span class="n">System</span><span class="p">]</span><span class="n">Interface</span><span class="o">::</span><span class="n">on_init</span><span class="p">(</span><span class="n">info</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">CallbackReturn</span><span class="o">::</span><span class="n">SUCCESS</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">CallbackReturn</span><span class="o">::</span><span class="n">ERROR</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">hardware_interface</span><span class="o">::</span><span class="p">[</span><span class="n">Actuator</span><span class="o">|</span><span class="n">Sensor</span><span class="o">|</span><span class="n">System</span><span class="p">]</span><span class="n">Interface</span><span class="o">::</span><span class="n">on_init</span><span class="p">(</span><span class="n">info</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">CallbackReturn</span><span class="o">::</span><span class="n">SUCCESS</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">CallbackReturn</span><span class="o">::</span><span class="n">ERROR</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="6">

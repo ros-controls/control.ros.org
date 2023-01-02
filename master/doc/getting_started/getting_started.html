@@ -203,8 +203,8 @@ Other dependencies are installed automatically.</p>
 <section id="compiling">
 <h2>Compiling<a class="headerlink" href="#compiling" title="Permalink to this heading">¶</a></h2>
 <p>If you want to install the framework from source use following commands in your workspace main folder:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget https://raw.githubusercontent.com/ros-controls/ros2_control/master/ros2_control.rolling.repos
-vcs import src &lt; ros2_control.repos
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/ros-controls/ros2_control/master/ros2_control.rolling.repos
+vcs<span class="w"> </span>import<span class="w"> </span>src<span class="w"> </span>&lt;<span class="w"> </span>ros2_control.repos
 </pre></div>
 </div>
 </section>
@@ -280,53 +280,53 @@ The actuator type can also be used with a multi-DOF robot if its hardware enable
 The chosen structure enables tracking together multiple <cite>xacro</cite>-macros into one without any changes.
 The example hereunder shows a position-controlled robot with 2-DOF (RRBot), an external 1-DOF force-torque sensor, and an externally controlled 1-DOF parallel gripper as its end-effector.
 For more examples and detailed explanations, check <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos">ros2_control_demos</a> repository and <a class="reference external" href="https://github.com/ros-controls/roadmap/blob/master/design_drafts/components_architecture_and_urdf_examples.md">ROS 2 Control Components URDF Examples design document</a>.</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span> <span class="na">name=</span><span class="s">&quot;RRBotSystemPositionOnly&quot;</span> <span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
- <span class="nt">&lt;hardware&gt;</span>
-   <span class="nt">&lt;plugin&gt;</span>ros2_control_demo_hardware/RRBotSystemPositionOnlyHardware<span class="nt">&lt;/plugin&gt;</span>
-   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;example_param_write_for_sec&quot;</span><span class="nt">&gt;</span>2<span class="nt">&lt;/param&gt;</span>
-   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;example_param_read_for_sec&quot;</span><span class="nt">&gt;</span>2<span class="nt">&lt;/param&gt;</span>
- <span class="nt">&lt;/hardware&gt;</span>
- <span class="nt">&lt;joint</span> <span class="na">name=</span><span class="s">&quot;joint1&quot;</span><span class="nt">&gt;</span>
-   <span class="nt">&lt;command_interface</span> <span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
-     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;min&quot;</span><span class="nt">&gt;</span>-1<span class="nt">&lt;/param&gt;</span>
-     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;max&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/param&gt;</span>
-   <span class="nt">&lt;/command_interface&gt;</span>
-   <span class="nt">&lt;state_interface</span> <span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
- <span class="nt">&lt;/joint&gt;</span>
- <span class="nt">&lt;joint</span> <span class="na">name=</span><span class="s">&quot;joint2&quot;</span><span class="nt">&gt;</span>
-   <span class="nt">&lt;command_interface</span> <span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
-     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;min&quot;</span><span class="nt">&gt;</span>-1<span class="nt">&lt;/param&gt;</span>
-     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;max&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/param&gt;</span>
-   <span class="nt">&lt;/command_interface&gt;</span>
-   <span class="nt">&lt;state_interface</span> <span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
- <span class="nt">&lt;/joint&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;RRBotSystemPositionOnly&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<span class="w"> </span><span class="nt">&lt;hardware&gt;</span>
+<span class="w">   </span><span class="nt">&lt;plugin&gt;</span>ros2_control_demo_hardware/RRBotSystemPositionOnlyHardware<span class="nt">&lt;/plugin&gt;</span>
+<span class="w">   </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;example_param_write_for_sec&quot;</span><span class="nt">&gt;</span>2<span class="nt">&lt;/param&gt;</span>
+<span class="w">   </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;example_param_read_for_sec&quot;</span><span class="nt">&gt;</span>2<span class="nt">&lt;/param&gt;</span>
+<span class="w"> </span><span class="nt">&lt;/hardware&gt;</span>
+<span class="w"> </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint1&quot;</span><span class="nt">&gt;</span>
+<span class="w">   </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
+<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;min&quot;</span><span class="nt">&gt;</span>-1<span class="nt">&lt;/param&gt;</span>
+<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;max&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/param&gt;</span>
+<span class="w">   </span><span class="nt">&lt;/command_interface&gt;</span>
+<span class="w">   </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w"> </span><span class="nt">&lt;/joint&gt;</span>
+<span class="w"> </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint2&quot;</span><span class="nt">&gt;</span>
+<span class="w">   </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
+<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;min&quot;</span><span class="nt">&gt;</span>-1<span class="nt">&lt;/param&gt;</span>
+<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;max&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/param&gt;</span>
+<span class="w">   </span><span class="nt">&lt;/command_interface&gt;</span>
+<span class="w">   </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w"> </span><span class="nt">&lt;/joint&gt;</span>
 <span class="nt">&lt;/ros2_control&gt;</span>
-<span class="nt">&lt;ros2_control</span> <span class="na">name=</span><span class="s">&quot;RRBotForceTorqueSensor1D&quot;</span> <span class="na">type=</span><span class="s">&quot;sensor&quot;</span><span class="nt">&gt;</span>
- <span class="nt">&lt;hardware&gt;</span>
-   <span class="nt">&lt;plugin&gt;</span>ros2_control_demo_hardware/ForceTorqueSensor1DHardware<span class="nt">&lt;/plugin&gt;</span>
-   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;example_param_read_for_sec&quot;</span><span class="nt">&gt;</span>0.43<span class="nt">&lt;/param&gt;</span>
- <span class="nt">&lt;/hardware&gt;</span>
- <span class="nt">&lt;sensor</span> <span class="na">name=</span><span class="s">&quot;tcp_fts_sensor&quot;</span><span class="nt">&gt;</span>
-   <span class="nt">&lt;state_interface</span> <span class="na">name=</span><span class="s">&quot;force&quot;</span><span class="nt">/&gt;</span>
-   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;frame_id&quot;</span><span class="nt">&gt;</span>rrbot_tcp<span class="nt">&lt;/param&gt;</span>
-   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;min_force&quot;</span><span class="nt">&gt;</span>-100<span class="nt">&lt;/param&gt;</span>
-   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;max_force&quot;</span><span class="nt">&gt;</span>100<span class="nt">&lt;/param&gt;</span>
- <span class="nt">&lt;/sensor&gt;</span>
+<span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;RRBotForceTorqueSensor1D&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;sensor&quot;</span><span class="nt">&gt;</span>
+<span class="w"> </span><span class="nt">&lt;hardware&gt;</span>
+<span class="w">   </span><span class="nt">&lt;plugin&gt;</span>ros2_control_demo_hardware/ForceTorqueSensor1DHardware<span class="nt">&lt;/plugin&gt;</span>
+<span class="w">   </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;example_param_read_for_sec&quot;</span><span class="nt">&gt;</span>0.43<span class="nt">&lt;/param&gt;</span>
+<span class="w"> </span><span class="nt">&lt;/hardware&gt;</span>
+<span class="w"> </span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;tcp_fts_sensor&quot;</span><span class="nt">&gt;</span>
+<span class="w">   </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;force&quot;</span><span class="nt">/&gt;</span>
+<span class="w">   </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;frame_id&quot;</span><span class="nt">&gt;</span>rrbot_tcp<span class="nt">&lt;/param&gt;</span>
+<span class="w">   </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;min_force&quot;</span><span class="nt">&gt;</span>-100<span class="nt">&lt;/param&gt;</span>
+<span class="w">   </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;max_force&quot;</span><span class="nt">&gt;</span>100<span class="nt">&lt;/param&gt;</span>
+<span class="w"> </span><span class="nt">&lt;/sensor&gt;</span>
 <span class="nt">&lt;/ros2_control&gt;</span>
-<span class="nt">&lt;ros2_control</span> <span class="na">name=</span><span class="s">&quot;RRBotGripper&quot;</span> <span class="na">type=</span><span class="s">&quot;actuator&quot;</span><span class="nt">&gt;</span>
- <span class="nt">&lt;hardware&gt;</span>
-   <span class="nt">&lt;plugin&gt;</span>ros2_control_demo_hardware/PositionActuatorHardware<span class="nt">&lt;/plugin&gt;</span>
-   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;example_param_write_for_sec&quot;</span><span class="nt">&gt;</span>1.23<span class="nt">&lt;/param&gt;</span>
-   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;example_param_read_for_sec&quot;</span><span class="nt">&gt;</span>3<span class="nt">&lt;/param&gt;</span>
- <span class="nt">&lt;/hardware&gt;</span>
- <span class="nt">&lt;joint</span> <span class="na">name=</span><span class="s">&quot;gripper_joint &quot;</span><span class="nt">&gt;</span>
-   <span class="nt">&lt;command_interface</span> <span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
-     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;min&quot;</span><span class="nt">&gt;</span>0<span class="nt">&lt;/param&gt;</span>
-     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;max&quot;</span><span class="nt">&gt;</span>50<span class="nt">&lt;/param&gt;</span>
-   <span class="nt">&lt;/command_interface&gt;</span>
-   <span class="nt">&lt;state_interface</span> <span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
-   <span class="nt">&lt;state_interface</span> <span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
- <span class="nt">&lt;/joint&gt;</span>
+<span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;RRBotGripper&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;actuator&quot;</span><span class="nt">&gt;</span>
+<span class="w"> </span><span class="nt">&lt;hardware&gt;</span>
+<span class="w">   </span><span class="nt">&lt;plugin&gt;</span>ros2_control_demo_hardware/PositionActuatorHardware<span class="nt">&lt;/plugin&gt;</span>
+<span class="w">   </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;example_param_write_for_sec&quot;</span><span class="nt">&gt;</span>1.23<span class="nt">&lt;/param&gt;</span>
+<span class="w">   </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;example_param_read_for_sec&quot;</span><span class="nt">&gt;</span>3<span class="nt">&lt;/param&gt;</span>
+<span class="w"> </span><span class="nt">&lt;/hardware&gt;</span>
+<span class="w"> </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gripper_joint &quot;</span><span class="nt">&gt;</span>
+<span class="w">   </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
+<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;min&quot;</span><span class="nt">&gt;</span>0<span class="nt">&lt;/param&gt;</span>
+<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;max&quot;</span><span class="nt">&gt;</span>50<span class="nt">&lt;/param&gt;</span>
+<span class="w">   </span><span class="nt">&lt;/command_interface&gt;</span>
+<span class="w">   </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w">   </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
+<span class="w"> </span><span class="nt">&lt;/joint&gt;</span>
 <span class="nt">&lt;/ros2_control&gt;</span>
 </pre></div>
 </div>
