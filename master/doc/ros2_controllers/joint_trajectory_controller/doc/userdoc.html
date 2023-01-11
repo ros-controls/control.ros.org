@@ -39,6 +39,7 @@
         <script src="../../../../_static/sphinx_highlight.js"></script>
         <script src="../../../../_static/clipboard.min.js"></script>
         <script src="../../../../_static/copybutton.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
 
@@ -310,26 +311,26 @@ A yaml file for using it could be:</p>
 <section id="details-about-parameters">
 <h3>Details about parameters<a class="headerlink" href="#details-about-parameters" title="Permalink to this heading">¶</a></h3>
 <dl>
-<dt>joints (list(string)):</dt><dd><p>Joint names to control and listen to.</p>
+<dt>joints (list(string))</dt><dd><p>Joint names to control and listen to.</p>
 </dd>
-<dt>command_joints (list(string)):</dt><dd><p>Joint names to control. This parameters is used if JTC is used in a controller chain where command and state interfaces don’t have same names.</p>
+<dt>command_joints (list(string))</dt><dd><p>Joint names to control. This parameters is used if JTC is used in a controller chain where command and state interfaces don’t have same names.</p>
 </dd>
-<dt>command_interface (list(string)):</dt><dd><p>Command interfaces provided by the hardware interface for all joints.</p>
+<dt>command_interface (list(string))</dt><dd><p>Command interfaces provided by the hardware interface for all joints.</p>
 <p>Values: [position | velocity | acceleration] (multiple allowed)</p>
 </dd>
-<dt>state_interfaces (list(string)):</dt><dd><p>State interfaces provided by the hardware for all joints.</p>
+<dt>state_interfaces (list(string))</dt><dd><p>State interfaces provided by the hardware for all joints.</p>
 <p>Values: position (mandatory) [velocity, [acceleration]].
 Acceleration interface can only be used in combination with position and velocity.</p>
 </dd>
-<dt>state_publish_rate (double):</dt><dd><p>Publish-rate of the controller’s “state” topic.</p>
+<dt>state_publish_rate (double)</dt><dd><p>Publish-rate of the controller’s “state” topic.</p>
 <p>Default: 50.0</p>
 </dd>
-<dt>action_monitor_rate (double):</dt><dd><p>Rate to monitor status changes when the controller is executing action (control_msgs::action::FollowJointTrajectory).</p>
+<dt>action_monitor_rate (double)</dt><dd><p>Rate to monitor status changes when the controller is executing action (control_msgs::action::FollowJointTrajectory).</p>
 <p>Default: 20.0</p>
 </dd>
-<dt>allow_partial_joints_goal (boolean):</dt><dd><p>Allow joint goals defining trajectory for only some joints.</p>
+<dt>allow_partial_joints_goal (boolean)</dt><dd><p>Allow joint goals defining trajectory for only some joints.</p>
 </dd>
-<dt>open_loop_control (boolean):</dt><dd><p>Use controller in open-loop control mode using ignoring the states provided by hardware interface and using last commands as states in the next control step. This is useful if hardware states are not following commands, i.e., an offset between those (typical for hydraulic manipulators).</p>
+<dt>open_loop_control (boolean)</dt><dd><p>Use controller in open-loop control mode using ignoring the states provided by hardware interface and using last commands as states in the next control step. This is useful if hardware states are not following commands, i.e., an offset between those (typical for hydraulic manipulators).</p>
 <p>If this flag is set, the controller tries to read the values from the command interfaces on starting. If they have real numeric values, those will be used instead of state interfaces. Therefore it is important set command interfaces to NaN (std::numeric_limits&lt;double&gt;::quiet_NaN()) or state values when the hardware is started.</p>
 </dd>
 <dt>constraints (structure)</dt><dd><p>Default values for tolerances if no explicit values are states in JointTrajectory message.</p>
@@ -340,11 +341,33 @@ Acceleration interface can only be used in combination with position and velocit
 <dt>constraints.goal_time (double)</dt><dd><p>Maximally allowed tolerance for not reaching the end of the trajectory in a predefined time.</p>
 <p>Default: 0.0 (not checked)</p>
 </dd>
-<dt>constraints.&lt;joint_name&gt;.trajectory</dt><dd><p>Maximally allowed deviation from the target trajectory for a given joint.</p>
+<dt>constraints.&lt;joint_name&gt;.trajectory (double)</dt><dd><p>Maximally allowed deviation from the target trajectory for a given joint.</p>
 <p>Default: 0.0 (tolerance is not enforced)</p>
 </dd>
-<dt>constraints.&lt;joint_name&gt;.goal</dt><dd><p>Maximally allowed deviation from the goal (end of the trajectory) for a given joint.</p>
+<dt>constraints.&lt;joint_name&gt;.goal (double)</dt><dd><p>Maximally allowed deviation from the goal (end of the trajectory) for a given joint.</p>
 <p>Default: 0.0 (tolerance is not enforced)</p>
+</dd>
+<dt>gains (structure)</dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">velocity</span></code> is the only command interface for all joints or an <code class="docutils literal notranslate"><span class="pre">effort</span></code> command interface is configured, PID controllers are used for every joint. This structure contains the controller gains for every joint with the control law</p>
+<div class="math notranslate nohighlight">
+\[u = k_ff v_d + k_p (s_d - s) + k_i \sum(s_d - s) dt + k_d (v_d - v)\]</div>
+<p>with the desired velocity <span class="math notranslate nohighlight">\(v_d\)</span> and position <span class="math notranslate nohighlight">\(s_d\)</span>,
+the measured velocity <span class="math notranslate nohighlight">\(v\)</span> and position <span class="math notranslate nohighlight">\(s\)</span>, the controller period <span class="math notranslate nohighlight">\(dt\)</span>,
+and the <code class="docutils literal notranslate"><span class="pre">velocity</span></code> or <code class="docutils literal notranslate"><span class="pre">effort</span></code> setpoint <span class="math notranslate nohighlight">\(u\)</span>, respectively.</p>
+</dd>
+<dt>gains.&lt;joint_name&gt;.p (double)</dt><dd><p>Proportional gain <span class="math notranslate nohighlight">\(k_p\)</span> for PID</p>
+<p>Default: 0.0</p>
+</dd>
+<dt>gains.&lt;joint_name&gt;.i (double)</dt><dd><p>Integral gain <span class="math notranslate nohighlight">\(k_i\)</span> for PID</p>
+<p>Default: 0.0</p>
+</dd>
+<dt>gains.&lt;joint_name&gt;.d (double)</dt><dd><p>Derivative gain <span class="math notranslate nohighlight">\(k_d\)</span> for PID</p>
+<p>Default: 0.0</p>
+</dd>
+<dt>gains.&lt;joint_name&gt;.i_clamp (double)</dt><dd><p>Integral clamp. Symmetrical in both positive and negative direction.</p>
+<p>Default: 0.0</p>
+</dd>
+<dt>gains.&lt;joint_name&gt;.ff_velocity_scale (double)</dt><dd><p>Feed-forward scaling <span class="math notranslate nohighlight">\(k_ff\)</span> of velocity</p>
+<p>Default: 0.0</p>
 </dd>
 </dl>
 </section>
