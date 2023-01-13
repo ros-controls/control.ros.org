@@ -19,11 +19,14 @@ Unofficial (from the community):
 * `ABB - EGM interface <https://github.com/PickNikRobotics/abb_ros2>`_
 * `Mitsubishi RV1A <https://github.com/ICube-Robotics/mrv1a_ros2>`_
 
+<<<<<<< HEAD
 Communication protocols:
 
 * `Ethercat <https://github.com/ICube-Robotics/ethercat_driver_ros2>`_
 * `CanOpen <https://github.com/ros-industrial/ros2_canopen>`_
 
+=======
+>>>>>>> c71e159 (Add Schunk SVH 5-finger Hand into list of robots. (#68))
 End-effectors:
 
 * `Schunk SVH 5-finger Hand <https://github.com/fzi-forschungszentrum-informatik/schunk_svh_ros_driver/tree/ros2-foxy>`_
