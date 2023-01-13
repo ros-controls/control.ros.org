@@ -11,6 +11,21 @@ Any files submitted to the documentation should be "licensed" by stating your na
 Presentations
 ---------------
 
+2022-12 ROS-Industrial Conference 2022
+,,,,,,,,,,,,,,,,,,,
+`Presentation: A practitioner's guide to ros2_control <https://raw.githubusercontent.com/ros-controls/control.ros.org/master/doc/resources/presentations/2022-12_ROS-I_Conference-ros2_control_-_Kernel_for_ROS_2_controlled_robots>`_
+
+  Summary:
+    ros2_control is a hardware-agnostic control framework focusing on the modular composition of control systems for robots, sharing of controllers as well as real-time performance. The framework provides “kernel” functionality for robots by abstracting the hardware and doing heavy low-level management, for example, hardware lifecycle, communication and access control.
+
+`Recording <>`__
+
+  *Presenter: Dr. Denis Stogl*
+
+  Authors:
+    - Dr. Denis Stogl (Stogl Robotics Consulting)
+
+
 2022-10 ROSCon 2022
 ,,,,,,,,,,,,,,,,,,,
 `Presentation: A practitioner's guide to ros2_control <https://raw.githubusercontent.com/ros-controls/control.ros.org/master/doc/resources/presentations/2022-10_ROSCon2022_A_practitioners_guide_to_ros2_control.pdf>`_
@@ -23,6 +38,10 @@ Presentations
 `Recording <https://vimeo.com/showcase/9954564/video/767139648>`__
 
   *Presenter: Dr. Bence Magyar*
+
+  Authors:
+    - Dr. Bence Magyar (FiveAI Ltd)
+    - Dr. Denis Stogl (Stogl Robotics Consulting)
 
 
 2022-06 ROSCon Fr 2022
@@ -139,12 +158,15 @@ Diagrams
 Folder with diagrams and sources for the images.
 Simply use `diagrams.net <http://diagrams.net>`_ for editing.
 
-`ros2_control <diagrams/ros2_control.drawio>`_ - a collection of ``ros2_control``-related diagrams.
+`ros2_control <https://github.com/ros-controls/control.ros.org/blob/master/doc/resources/diagrams/ros2_control.drawio>`_ - a collection of ``ros2_control``-related diagrams.
 
   - overview diagrams
   - integration with MoveIt2
   - class diagrams
   - lifecycle diagrams
+  - command and state interfaces examples
+  - mobile manipulator architectures
+  - Force-Control architectures
 
 
 Images
@@ -153,99 +175,99 @@ Generated images for the presentation which can be useful also for the documenta
 
 Overview of ros2_control
   .. image:: images/ros2_control_overview.png
-     :target: images/ros2_control_overview.png
+     :target: ../_images/ros2_control_overview.png
 
 ros2_control robot integration with MoveIt2
   .. image:: images/ros2_control_robot_integration_with_moveit2.png
-     :target: images/ros2_control_robot_integration_with_moveit2.png
+     :target: ../_images/jros2_control_robot_integration_with_moveit2.png
 
 
 Architecture of complex controller and semantic components:
   .. image:: images/complex_controllers_and_semantic_components.png
-     :target: images/complex_controllers_and_semantic_components.png
+     :target: ../_images/jcomplex_controllers_and_semantic_components.png
 
 
 Architecture of command and state interfaces:
   .. image:: images/command_and_state_interfaces.png
-     :target: images/command_and_state_interfaces.png
+     :target: ../_images/jcommand_and_state_interfaces.png
 
 
 Lifecycle of hardware interfaces:
   .. image:: images/hardware_interface_lifecycle.png
-     :target: images/hardware_interface_lifecycle.png
+     :target: ../_images/jhardware_interface_lifecycle.png
 
 
 ros2_control integration with MoveIt2
   .. image:: images/ros2_control_robot_integration_with_moveit2.png
-     :target: images/ros2_control_robot_integration_with_moveit2.png
+     :target: ../_images/jros2_control_robot_integration_with_moveit2.png
 
 Controllers architecture with chained controllers - admittance controller example
   .. image:: images/ros2_control_mobile_manipulator_control_arch_admittance_chaining.png
-     :target: images/ros2_control_mobile_manipulator_control_arch_admittance_chaining.png
+     :target: ../_images/jros2_control_mobile_manipulator_control_arch_admittance_chaining.png
 
 Controllers architecture with chained controllers - admittance controller example (URDF)
   .. image:: images/ros2_control_mobile_manipulator_controllers_admittance_chaining.png
-     :target: images/ros2_control_mobile_manipulator_controllers_admittance_chaining.png
+     :target: ../_images/jros2_control_mobile_manipulator_controllers_admittance_chaining.png
 
 Controllers architecture without chained controllers - admittance controller example
   .. image:: images/ros2_control_mobile_manipulator_control_arch_admittance_without_chaining.png
-     :target: images/ros2_control_mobile_manipulator_control_arch_admittance_without_chaining.png
+     :target: ../_images/jros2_control_mobile_manipulator_control_arch_admittance_without_chaining.png
 
 Controllers architecture with chained controllers - mobile base controller example
   .. image:: images/ros2_control_mobile_manipulator_control_arch_base_chaining.png
-     :target: images/ros2_control_mobile_manipulator_control_arch_base_chaining.png
+     :target: ../_images/jros2_control_mobile_manipulator_control_arch_base_chaining.png
 
 Controllers architecture with chained controllers - mobile base controller example (URDF)
   .. image:: images/ros2_control_mobile_manipulator_controllers_base_chaining.png
-     :target: images/ros2_control_mobile_manipulator_controllers_base_chaining.png
+     :target: ../_images/jros2_control_mobile_manipulator_controllers_base_chaining.png
 
 Controllers architecture without chained controllers - admittance controller example
   .. image:: images/ros2_control_mobile_manipulator_control_arch_base_without_chaining.png
-     :target: images/ros2_control_mobile_manipulator_control_arch_base_without_chaining.png
+     :target: ../_images/jros2_control_mobile_manipulator_control_arch_base_without_chaining.png
 
 Controllers architecture - overview
   .. image:: images/ros2_control_mobile_manipulator_control_arch_convoluted_controllers.png
-     :target: images/ros2_control_mobile_manipulator_control_arch_convoluted_controllers.png
+     :target: ../_images/jros2_control_mobile_manipulator_control_arch_convoluted_controllers.png
 
 Controllers architecture - URDF
   .. image:: images/ros2_control_mobile_manipulator_controllers_convoluted_controllers.png
-     :target: images/ros2_control_mobile_manipulator_controllers_convoluted_controllers.png
+     :target: ../_images/jros2_control_mobile_manipulator_controllers_convoluted_controllers.png
 
 Hardware architecture - independent communication to the hardware (modular hardware)
   .. image:: images/ros2_control_mobile_manipulator_control_arch_independent_hardware.png
-     :target: images/ros2_control_mobile_manipulator_control_arch_independent_hardware.png
+     :target: ../_images/jros2_control_mobile_manipulator_control_arch_independent_hardware.png
 
 Hardware architecture - independent communication to the hardware (modular hardware) (URDF)
   .. image:: images/ros2_control_mobile_manipulator_control_arch_independent_hardware_urdf.png
-     :target: images/ros2_control_mobile_manipulator_control_arch_independent_hardware_urdf.png
+     :target: ../_images/jros2_control_mobile_manipulator_control_arch_independent_hardware_urdf.png
 
 Hardware architecture - gripper communication through Arm
   .. image:: images/ros2_control_mobile_manipulator_control_arch_gripper_through_arm_comms.png
-     :target: images/ros2_control_mobile_manipulator_control_arch_gripper_through_arm_comms.png
+     :target: ../_images/jros2_control_mobile_manipulator_control_arch_gripper_through_arm_comms.png
 
 Hardware architecture - gripper communication through Arm (URDF)
   .. image:: images/ros2_control_mobile_manipulator_control_arch_gripper_through_arm_comms_urdf.png
-     :target: images/ros2_control_mobile_manipulator_control_arch_gripper_through_arm_comms_urdf.png
+     :target: ../_images/jros2_control_mobile_manipulator_control_arch_gripper_through_arm_comms_urdf.png
 
 Hardware architecture - monolitic communication to hardware
   .. image:: images/ros2_control_mobile_manipulator_control_arch_monolitic_hardware.png
-     :target: images/ros2_control_mobile_manipulator_control_arch_monolitic_hardware.png
+     :target: ../_images/jros2_control_mobile_manipulator_control_arch_monolitic_hardware.png
 
 Hardware architecture - monolitic communication to hardware (URDF)
   .. image:: images/ros2_control_mobile_manipulator_control_arch_monolitic_hardware_urdf.png
-     :target: images/ros2_control_mobile_manipulator_control_arch_monolitic_hardware_urdf.png
+     :target: ../_images/jros2_control_mobile_manipulator_control_arch_monolitic_hardware_urdf.png
 
 Hardware architecture - multiple hardware in one controller manager
   .. image:: images/ros2_control_mobile_manipulator_control_arch_multi_robots_in_one_controller_manager.png
-     :target: images/ros2_control_mobile_manipulator_control_arch_multi_robots_in_one_controller_manager.png
+     :target: ../_images/jros2_control_mobile_manipulator_control_arch_multi_robots_in_one_controller_manager.png
 
 Example files - ros2_control - "Controlko" mobile manipulator
   .. image:: images/ros2_control_mobile_manipulator.png
-     :target: images/ros2_control_mobile_manipulator.png
+     :target: ../_images/jros2_control_mobile_manipulator.png
 
 Example files - ros2_control - "Controlko" mobile manipulator (URDF)
   .. image:: images/ros2_control_mobile_manipulator_controllers.png
-     :target: images/ros2_control_mobile_manipulator_controllers.png
+     :target: ../_images/jros2_control_mobile_manipulator_controllers.png
 
 .. |CC-BY| image:: https://i.creativecommons.org/l/by/4.0/88x31.png
 .. _CC-BY: http://creativecommons.org/licenses/by/4.0/
