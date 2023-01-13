@@ -3,38 +3,6 @@
 Project Ideas for GSoC 2022
 =============================
 
-Asynchronous Control Components
---------------------------------
-This project orbits around everything asynchronous: hardware components and controllers.
-The goal is to support long-running controller tasks by providing a simple and clean interface for users implementing such controllers.
-This will include addition of multi-threading support with protected memory access, e.g., through buffers that are implemented in `control_toolbox repository <https://github.com/ros-controls/control_toolbox>`_.
-
-The second part enables asynchronous access to hardware. This should address issues our users are having when hardware-communication frequency has to be stable at high rate, e.g. 1 kHz, or when they are running multi-hardware setup on various frequencies.
-Also, another use-case of this functionality is to enable update of different interfaces of the same hardware on variable rate. For example, "heartbeat" signal should be sent only once per second, but the robot's motors should be controlled at 500 Hz.
-
-Related issues for this functionality should address are:
-
-- `Communication Failures with Universal Robots <https://github.com/UniversalRobots/Universal_Robots_ROS2_Driver/issues/210>`_
-- `Writing interfaces at different rates <https://github.com/ros-controls/ros2_control/issues/649>`_
-
-This project is defined by but not limited to the relevant design drafts:
-
-- `Asynchronous Controllers <https://github.com/ros-controls/roadmap/blob/master/design_drafts/async_controller.md>`_
-- `Asynchronous and Trigger Interfaces <https://github.com/ros-controls/roadmap/pull/52>`_
-
------
-
-| Skills required/preferred:
-
-- Good C++ skills
-- C++ asynchronous libraries / tricks
-
-| Possible mentors: Bence Magyar, Denis Štogl 
-| Expected size of project: 350 hours
-| Difficulty: hard
-
------
-
 Tutorials and Demos for ros2_control
 ------------------------------------
 
