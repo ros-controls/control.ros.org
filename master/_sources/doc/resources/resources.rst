@@ -13,12 +13,12 @@ Presentations
 
 2022-12 ROS-Industrial Conference 2022
 ,,,,,,,,,,,,,,,,,,,
-`Presentation: A practitioner's guide to ros2_control <https://raw.githubusercontent.com/ros-controls/control.ros.org/master/doc/resources/presentations/2022-12_ROS-I_Conference-ros2_control_-_Kernel_for_ROS_2_controlled_robots>`_
+`Presentation: ros2_control - Kernel for ROS 2 controlled robots <https://raw.githubusercontent.com/ros-controls/control.ros.org/master/doc/resources/presentations/2022-12_ROS-I_Conference-ros2_control_-_Kernel_for_ROS_2_controlled_robots>`_
 
   Summary:
     ros2_control is a hardware-agnostic control framework focusing on the modular composition of control systems for robots, sharing of controllers as well as real-time performance. The framework provides “kernel” functionality for robots by abstracting the hardware and doing heavy low-level management, for example, hardware lifecycle, communication and access control.
 
-`Recording <>`__
+`Recording <>`__ - TBA
 
   *Presenter: Dr. Denis Stogl*
 
