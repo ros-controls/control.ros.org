@@ -7,6 +7,7 @@
   <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script defer data-domain="control.ros.org" src="https://plausible.io/js/script.js"></script>
   
   <title>Getting Started &mdash; ROS2_Control: Foxy Jan 2023 documentation</title>
   
@@ -46,7 +47,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="API Documentation" href="../ros2_control/doc/index.html" />
-    <link rel="prev" title="Welcome to the ros2_control documentation - Foxy!" href="../../index.html" /> 
+    <link rel="prev" title="Welcome to the ros2_control documentation!" href="../../index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -118,6 +119,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../differences_to_ros1/differences_to_ros1.html">Differences to ros_control (ROS1)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../differences_to_ros1/differences_to_ros1.html#migration-guide-to-ros2-control">Migration Guide to ros2_control</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supported_robots/supported_robots.html">Supported Robots</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../resources/resources.html">Resources</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing/contributing.html">Pull Requests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing/contributing.html#rules-for-the-repositories-and-process-of-merging-pull-requests">Rules for the repositories and process of merging pull requests</a></li>
@@ -196,13 +198,13 @@
             
   <section id="getting-started">
 <span id="id1"></span><h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this heading">¶</a></h1>
-<p>The ros2_control framework is released for ROS2 Foxy.
+<p>The ros2_control framework is released for ROS 2 Foxy.
 To use it, you have to install <code class="docutils literal notranslate"><span class="pre">ros-foxy-ros2-control</span></code> and <code class="docutils literal notranslate"><span class="pre">ros-foxy-ros2-controllers</span></code> packages.
 Other dependencies are installed automatically.</p>
 <section id="compiling">
 <h2>Compiling<a class="headerlink" href="#compiling" title="Permalink to this heading">¶</a></h2>
 <p>If you want to install the framework from source use following commands in your workspace main folder:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/ros-controls/ros2_control/master/ros2_control/ros2_control.repos
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/ros-controls/ros2_control/master/ros2_control.rolling.repos
 vcs<span class="w"> </span>import<span class="w"> </span>src<span class="w"> </span>&lt;<span class="w"> </span>ros2_control.repos
 </pre></div>
 </div>
@@ -236,7 +238,7 @@ This abstraction provided by RM enables re-usability of implemented hardware com
 <section id="controllers">
 <span id="overview-controllers"></span><h2>Controllers<a class="headerlink" href="#controllers" title="Permalink to this heading">¶</a></h2>
 <p>The controllers in the ros2_control framework have the same functionality as defined in the control theory. They compare the reference value with the measured output and, based on this error, calculate a system’s input (for more details, visit <a class="reference external" href="https://en.wikipedia.org/wiki/Control_theory">Wikipedia</a>).
-The controlles are objects derived from <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/controller_interface/include/controller_interface/controller_interface.hpp">ControllerInterface</a> (<code class="docutils literal notranslate"><span class="pre">controller_interface</span></code> package in <a class="reference external" href="https://github.com/ros-controls/ros2_control">ros2_control</a>) and exported as plugins using <code class="docutils literal notranslate"><span class="pre">pluginlib</span></code>-library.
+The controllers are objects derived from <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/controller_interface/include/controller_interface/controller_interface.hpp">ControllerInterface</a> (<code class="docutils literal notranslate"><span class="pre">controller_interface</span></code> package in <a class="reference external" href="https://github.com/ros-controls/ros2_control">ros2_control</a>) and exported as plugins using <code class="docutils literal notranslate"><span class="pre">pluginlib</span></code>-library.
 For example of on controller check <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/master/forward_command_controller/src/forward_command_controller.cpp">ForwardCommandController implementation</a> in the <a class="reference external" href="https://github.com/ros-controls/ros2_controllers">ros2_controllers</a> repository.
 The controllers’ lifecycle is based on the <a class="reference external" href="https://github.com/ros2/rclcpp/blob/master/rclcpp_lifecycle/include/rclcpp_lifecycle/lifecycle_node.hpp">LifecycleNode-Class</a> implementing the state machine as described in the <a class="reference external" href="https://design.ros2.org/articles/node_lifecycle.html">Node Lifecycle Design</a> document.</p>
 <p>When executing the control-loop <code class="docutils literal notranslate"><span class="pre">update()</span></code> method is called.
@@ -260,7 +262,7 @@ The <a class="reference external" href="https://github.com/ros-controls/ros2_con
 <dt>System</dt><dd><p>Complex (multi-DOF) robotic hardware like industrial robots.
 The main difference between the <em>Actuator</em> component is the possibility to use complex transmissions like needed for humanoid robot’s hands.
 This component has reading and writing capabilities.
-It is used when the is only one logical communication channel to the hardware (e.g., KUKA-RSI).</p>
+It is used when there is only one logical communication channel to the hardware (e.g., KUKA-RSI).</p>
 </dd>
 <dt>Sensor</dt><dd><p>Robotic hardware is used for sensing its environment.
 A sensor component is related to a joint (e.g., encoder) or a link (e.g., force-torque sensor).
@@ -278,7 +280,7 @@ The actuator type can also be used with a multi-DOF robot if its hardware enable
 <p>The ros2_control framework uses the <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code>-tag in the robot’s URDF file to describe its components, i.e., the hardware setup.
 The chosen structure enables tracking together multiple <cite>xacro</cite>-macros into one without any changes.
 The example hereunder shows a position-controlled robot with 2-DOF (RRBot), an external 1-DOF force-torque sensor, and an externally controlled 1-DOF parallel gripper as its end-effector.
-For more examples and detailed explanations, check <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos">ros2_control_demos</a> repository and <a class="reference external" href="https://github.com/ros-controls/roadmap/blob/master/design_drafts/components_architecture_and_urdf_examples.md">ROS2 Control Components URDF Examples design document</a>.</p>
+For more examples and detailed explanations, check <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos">ros2_control_demos</a> repository and <a class="reference external" href="https://github.com/ros-controls/roadmap/blob/master/design_drafts/components_architecture_and_urdf_examples.md">ROS 2 Control Components URDF Examples design document</a>.</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;RRBotSystemPositionOnly&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
 <span class="w"> </span><span class="nt">&lt;hardware&gt;</span>
 <span class="w">   </span><span class="nt">&lt;plugin&gt;</span>ros2_control_demo_hardware/RRBotSystemPositionOnlyHardware<span class="nt">&lt;/plugin&gt;</span>
@@ -342,7 +344,7 @@ It is recommended to use macro files (xacro) instead of pure URDF. (<a class="re
 You can use a default <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/controller_manager/src/ros2_control_node.cpp">ros2_control node</a> (recommended) or integrate the controller manager in your software stack.
 (<a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_bringup/launch/rrbot_system_position_only.launch.py">Example launch file for RRBot</a>)</p></li>
 </ol>
-<p><em>NOTE:</em> You could alternatively use a script to create setup a <a class="reference external" href="https://stoglrobotics.github.io/ros_team_workspace/use-cases/setup_robot_ros2_control_hardware.html">skeleton of the “hardware_interface” package by using the scripts</a> provided by one of our maintainers.</p>
+<p><em>NOTE:</em> You could alternatively use a script to create setup a <a class="reference external" href="https://stoglrobotics.github.io/ros_team_workspace/master/use-cases/ros2_control/setup_robot_hardware_interface.html">skeleton of the “hardware_interface” package by using the scripts</a> provided by one of our maintainers.</p>
 </section>
 </section>
 
@@ -353,7 +355,7 @@ You can use a default <a class="reference external" href="https://github.com/ros
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
         <a href="../ros2_control/doc/index.html" class="btn btn-neutral float-right" title="API Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../../index.html" class="btn btn-neutral float-left" title="Welcome to the ros2_control documentation - Foxy!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../index.html" class="btn btn-neutral float-left" title="Welcome to the ros2_control documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
@@ -390,7 +392,6 @@ You can use a default <a class="reference external" href="https://github.com/ros
   <div class="rst-other-versions">
     <dl>
       <dt>ros2_control - Rolling</dt>
-      <dd><a href="../../../master/doc/getting_started/getting_started.html">Master (latest)</a></dd>
     </dl>
     <dl>
       <dt>ros2_control - Foxy and Galactic</dt>

@@ -7,6 +7,7 @@
   <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script defer data-domain="control.ros.org" src="https://plausible.io/js/script.js"></script>
   
   <title>joint_trajectory_controller &mdash; ROS2_Control: Foxy Jan 2023 documentation</title>
   
@@ -39,6 +40,7 @@
         <script src="../../../../_static/sphinx_highlight.js"></script>
         <script src="../../../../_static/clipboard.min.js"></script>
         <script src="../../../../_static/copybutton.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
 
@@ -102,38 +104,41 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html#core-functionalities">Core functionalities</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../doc/controllers_index.html">ros2_controllers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#nomenclature">Nomenclature</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#id1">Controllers</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../../doc/controllers_index.html#guidelines-and-best-practices">Guidelines and Best Practices</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../../doc/writing_new_controller.html">Writing a new controller</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="../../doc/controllers_index.html#available-controllers">Available Controllers</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="../../diff_drive_controller/doc/userdoc.html">Differential Drive</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../forward_command_controller/doc/userdoc.html">Forward Command</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">Joint Trajectory</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#trajectory-representation">Trajectory representation</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#hardware-interface-type">Hardware interface type</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#other-features">Other features</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#using-joint-trajectory-controller-s">Using Joint Trajectory Controller(s)</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="#details-about-parameters">Details about parameters</a></li>
-<li class="toctree-l6"><a class="reference internal" href="#ros2-interface-of-the-controller">ROS2 interface of the controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#guidelines-and-best-practices">Guidelines and Best Practices</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/controllers_index.html#available-controllers">Available Controllers</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../diff_drive_controller/doc/userdoc.html">Differential Drive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../forward_command_controller/doc/userdoc.html">Forward Command</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Joint Trajectory</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#trajectory-representation">Trajectory representation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hardware-interface-type">Hardware interface type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#other-features">Other features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ros2-control-interfaces">ros2_control interfaces</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#references">References</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#states">States</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#commands">Commands</a></li>
 </ul>
 </li>
-<li class="toctree-l5"><a class="reference internal" href="#specialized-versions-of-jointtrajectorycontroller-tbd-in">Specialized versions of JointTrajectoryController (TBD in …)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-joint-trajectory-controller-s">Using Joint Trajectory Controller(s)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#details-about-parameters">Details about parameters</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#ros2-interface-of-the-controller">ROS2 interface of the controller</a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="../../position_controllers/doc/userdoc.html">Position Controllers</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../velocity_controllers/doc/userdoc.html">Velocity Controllers</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../effort_controllers/doc/userdoc.html">Effort Controllers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specialized-versions-of-jointtrajectorycontroller-tbd-in">Specialized versions of JointTrajectoryController (TBD in …)</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../../doc/controllers_index.html#available-broadcasters">Available Broadcasters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../position_controllers/doc/userdoc.html">Position Controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../velocity_controllers/doc/userdoc.html">Velocity Controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../effort_controllers/doc/userdoc.html">Effort Controllers</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#available-broadcasters">Available Broadcasters</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../differences_to_ros1/differences_to_ros1.html">Differences to ros_control (ROS1)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../differences_to_ros1/differences_to_ros1.html#migration-guide-to-ros2-control">Migration Guide to ros2_control</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Pull Requests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html#rules-for-the-repositories-and-process-of-merging-pull-requests">Rules for the repositories and process of merging pull requests</a></li>
@@ -237,6 +242,28 @@
 <p>Robust to system clock changes: Discontinuous system clock changes do not cause discontinuities in the execution of already queued trajectory segments.</p>
 </div></blockquote>
 </section>
+<section id="ros2-control-interfaces">
+<h2>ros2_control interfaces<a class="headerlink" href="#ros2-control-interfaces" title="Permalink to this heading">¶</a></h2>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h3>
+<p>(the controller is not yet implemented as chainable controller)</p>
+</section>
+<section id="states">
+<h3>States<a class="headerlink" href="#states" title="Permalink to this heading">¶</a></h3>
+<p>The state interfaces are defined with <code class="docutils literal notranslate"><span class="pre">joints</span></code> and <code class="docutils literal notranslate"><span class="pre">state_interfaces</span></code> parameters as follows: <code class="docutils literal notranslate"><span class="pre">&lt;joint&gt;/&lt;state_interface&gt;</span></code>.
+Supported state interfaces are <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code>, <code class="docutils literal notranslate"><span class="pre">acceleration</span></code> and <code class="docutils literal notranslate"><span class="pre">effort</span></code> as defined in the <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/include/hardware_interface/types/hardware_interface_type_values.hpp">hardware_interface/hardware_interface_type_values.hpp</a>.
+Legal combinations of state interfaces are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">position</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">position</span></code> and <code class="docutils literal notranslate"><span class="pre">velocity</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code> and <code class="docutils literal notranslate"><span class="pre">acceleration</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">effort</span></code></p></li>
+</ul>
+</section>
+<section id="commands">
+<h3>Commands<a class="headerlink" href="#commands" title="Permalink to this heading">¶</a></h3>
+</section>
+</section>
 <section id="using-joint-trajectory-controller-s">
 <h2>Using Joint Trajectory Controller(s)<a class="headerlink" href="#using-joint-trajectory-controller-s" title="Permalink to this heading">¶</a></h2>
 <p>The controller expects at least position feedback from the hardware.
@@ -285,24 +312,26 @@ A yaml file for using it could be:</p>
 <section id="details-about-parameters">
 <h3>Details about parameters<a class="headerlink" href="#details-about-parameters" title="Permalink to this heading">¶</a></h3>
 <dl>
-<dt>joint (list(string)):</dt><dd><p>Joint names to control.</p>
+<dt>joints (list(string))</dt><dd><p>Joint names to control and listen to.</p>
 </dd>
-<dt>command_interface (list(string)):</dt><dd><p>Command interfaces provided by the hardware interface for all joints.</p>
+<dt>command_joints (list(string))</dt><dd><p>Joint names to control. This parameters is used if JTC is used in a controller chain where command and state interfaces don’t have same names.</p>
+</dd>
+<dt>command_interface (list(string))</dt><dd><p>Command interfaces provided by the hardware interface for all joints.</p>
 <p>Values: [position | velocity | acceleration] (multiple allowed)</p>
 </dd>
-<dt>state_interfaces (list(string)):</dt><dd><p>State interfaces provided by the hardware for all joints.</p>
+<dt>state_interfaces (list(string))</dt><dd><p>State interfaces provided by the hardware for all joints.</p>
 <p>Values: position (mandatory) [velocity, [acceleration]].
 Acceleration interface can only be used in combination with position and velocity.</p>
+</dd>
+<dt>state_publish_rate (double)</dt><dd><p>Publish-rate of the controller’s “state” topic.</p>
 <p>Default: 50.0</p>
 </dd>
-<dt>state_publish_rate (double):</dt><dd><p>Publish-rate of the controller’s “state” topic.</p>
+<dt>action_monitor_rate (double)</dt><dd><p>Rate to monitor status changes when the controller is executing action (control_msgs::action::FollowJointTrajectory).</p>
 <p>Default: 20.0</p>
 </dd>
-<dt>action_monitor_rate (double):</dt><dd><p>Rate to monitor status changes when the controller is executing action (control_msgs::action::FollowJointTrajectory).</p>
+<dt>allow_partial_joints_goal (boolean)</dt><dd><p>Allow joint goals defining trajectory for only some joints.</p>
 </dd>
-<dt>allow_partial_joints_goal (boolean):</dt><dd><p>Allow joint goals defining trajectory for only some joints.</p>
-</dd>
-<dt>open_loop_control (boolean):</dt><dd><p>Use controller in open-loop control mode using ignoring the states provided by hardware interface and using last commands as states in the next control step. This is useful if hardware states are not following commands, i.e., an offset between those (typical for hydraulic manipulators).</p>
+<dt>open_loop_control (boolean)</dt><dd><p>Use controller in open-loop control mode using ignoring the states provided by hardware interface and using last commands as states in the next control step. This is useful if hardware states are not following commands, i.e., an offset between those (typical for hydraulic manipulators).</p>
 <p>If this flag is set, the controller tries to read the values from the command interfaces on starting. If they have real numeric values, those will be used instead of state interfaces. Therefore it is important set command interfaces to NaN (std::numeric_limits&lt;double&gt;::quiet_NaN()) or state values when the hardware is started.</p>
 </dd>
 <dt>constraints (structure)</dt><dd><p>Default values for tolerances if no explicit values are states in JointTrajectory message.</p>
@@ -313,11 +342,33 @@ Acceleration interface can only be used in combination with position and velocit
 <dt>constraints.goal_time (double)</dt><dd><p>Maximally allowed tolerance for not reaching the end of the trajectory in a predefined time.</p>
 <p>Default: 0.0 (not checked)</p>
 </dd>
-<dt>constraints.&lt;joint_name&gt;.trajectory</dt><dd><p>Maximally allowed deviation from the target trajectory for a given joint.</p>
+<dt>constraints.&lt;joint_name&gt;.trajectory (double)</dt><dd><p>Maximally allowed deviation from the target trajectory for a given joint.</p>
 <p>Default: 0.0 (tolerance is not enforced)</p>
 </dd>
-<dt>constraints.&lt;joint_name&gt;.goal</dt><dd><p>Maximally allowed deviation from the goal (end of the trajectory) for a given joint.</p>
+<dt>constraints.&lt;joint_name&gt;.goal (double)</dt><dd><p>Maximally allowed deviation from the goal (end of the trajectory) for a given joint.</p>
 <p>Default: 0.0 (tolerance is not enforced)</p>
+</dd>
+<dt>gains (structure)</dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">velocity</span></code> is the only command interface for all joints or an <code class="docutils literal notranslate"><span class="pre">effort</span></code> command interface is configured, PID controllers are used for every joint. This structure contains the controller gains for every joint with the control law</p>
+<div class="math notranslate nohighlight">
+\[u = k_ff v_d + k_p (s_d - s) + k_i \sum(s_d - s) dt + k_d (v_d - v)\]</div>
+<p>with the desired velocity <span class="math notranslate nohighlight">\(v_d\)</span> and position <span class="math notranslate nohighlight">\(s_d\)</span>,
+the measured velocity <span class="math notranslate nohighlight">\(v\)</span> and position <span class="math notranslate nohighlight">\(s\)</span>, the controller period <span class="math notranslate nohighlight">\(dt\)</span>,
+and the <code class="docutils literal notranslate"><span class="pre">velocity</span></code> or <code class="docutils literal notranslate"><span class="pre">effort</span></code> setpoint <span class="math notranslate nohighlight">\(u\)</span>, respectively.</p>
+</dd>
+<dt>gains.&lt;joint_name&gt;.p (double)</dt><dd><p>Proportional gain <span class="math notranslate nohighlight">\(k_p\)</span> for PID</p>
+<p>Default: 0.0</p>
+</dd>
+<dt>gains.&lt;joint_name&gt;.i (double)</dt><dd><p>Integral gain <span class="math notranslate nohighlight">\(k_i\)</span> for PID</p>
+<p>Default: 0.0</p>
+</dd>
+<dt>gains.&lt;joint_name&gt;.d (double)</dt><dd><p>Derivative gain <span class="math notranslate nohighlight">\(k_d\)</span> for PID</p>
+<p>Default: 0.0</p>
+</dd>
+<dt>gains.&lt;joint_name&gt;.i_clamp (double)</dt><dd><p>Integral clamp. Symmetrical in both positive and negative direction.</p>
+<p>Default: 0.0</p>
+</dd>
+<dt>gains.&lt;joint_name&gt;.ff_velocity_scale (double)</dt><dd><p>Feed-forward scaling <span class="math notranslate nohighlight">\(k_ff\)</span> of velocity</p>
+<p>Default: 0.0</p>
 </dd>
 </dl>
 </section>
@@ -398,11 +449,10 @@ Acceleration interface can only be used in combination with position and velocit
   <div class="rst-other-versions">
     <dl>
       <dt>ros2_control - Rolling</dt>
-      <dd><a href="../../../../../master/doc/ros2_controllers/joint_trajectory_controller/doc/userdoc.html">Master (latest)</a></dd>
     </dl>
     <dl>
       <dt>ros2_control - Foxy and Galactic</dt>
-        <dd><a href="../../../../../galactic/doc/ros2_controllers/joint_trajectory_controller/doc/userdoc.html">Galactic (recommended)</a></dd><br>
+        <dd><a href="../../../../../galactic/index.html">Galactic (recommended)</a></dd><br>
         <dd><a href="userdoc.html">Foxy</a></dd><br>
     </dl>
   </div>

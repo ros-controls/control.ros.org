@@ -25,4 +25,5 @@ Concepts
    :titlesonly:
 
    Controller Manager <../controller_manager/doc/userdoc.rst>
-   Fake Components <../hardware_interface/doc/fake_components_userdoc.rst>
+   Hardware Components <../hardware_interface/doc/hardware_components_userdoc.rst>
+   Mock Components <../hardware_interface/doc/mock_components_userdoc.rst>

@@ -7,6 +7,7 @@
   <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script defer data-domain="control.ros.org" src="https://plausible.io/js/script.js"></script>
   
   <title>Controller Manager &mdash; ROS2_Control: Foxy Jan 2023 documentation</title>
   
@@ -45,7 +46,7 @@
     
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="Fake Components" href="../../hardware_interface/doc/fake_components_userdoc.html" />
+    <link rel="next" title="Hardware Components" href="../../hardware_interface/doc/hardware_components_userdoc.html" />
     <link rel="prev" title="API Documentation" href="../../doc/index.html" /> 
 </head>
 
@@ -103,14 +104,22 @@
 <li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#features">Features</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../doc/index.html#concepts">Concepts</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Controller Manager</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#determinism">Determinism</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#helper-scripts">Helper scripts</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#spawner-py"><code class="docutils literal notranslate"><span class="pre">spawner.py</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="#unspawner-py"><code class="docutils literal notranslate"><span class="pre">unspawner.py</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#spawner"><code class="docutils literal notranslate"><span class="pre">spawner</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#unspawner"><code class="docutils literal notranslate"><span class="pre">unspawner</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#concepts">Concepts</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#restarting-all-controllers">Restarting all controllers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#restarting-hardware">Restarting hardware</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../../hardware_interface/doc/fake_components_userdoc.html">Fake Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../hardware_interface/doc/hardware_components_userdoc.html">Hardware Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../hardware_interface/doc/mock_components_userdoc.html">Mock Components</a></li>
 </ul>
 </li>
 </ul>
@@ -120,6 +129,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../differences_to_ros1/differences_to_ros1.html">Differences to ros_control (ROS1)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../differences_to_ros1/differences_to_ros1.html#migration-guide-to-ros2-control">Migration Guide to ros2_control</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Pull Requests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html#rules-for-the-repositories-and-process-of-merging-pull-requests">Rules for the repositories and process of merging pull requests</a></li>
@@ -202,19 +212,68 @@
 <span id="controller-manager-userdoc"></span><h1>Controller Manager<a class="headerlink" href="#controller-manager" title="Permalink to this heading">¶</a></h1>
 <p>Controller Manager is the main component in the ros2_control framework.
 It manages lifecycle of controllers, access to the hardware interfaces and offers services to the ROS-world.</p>
+<section id="determinism">
+<h2>Determinism<a class="headerlink" href="#determinism" title="Permalink to this heading">¶</a></h2>
+<p>For best performance when controlling hardware you want the controller manager to have as little jitter as possible in the main control loop.
+The normal linux kernel is optimized for computational throughput and therefore is not well suited for hardware control.
+The two easiest kernel options are the <a class="reference external" href="https://ubuntu.com/blog/real-time-ubuntu-released">Real-time Ubuntu 22.04 LTS Beta</a> or <a class="reference external" href="https://packages.debian.org/bullseye/linux-image-rt-amd64">linux-image-rt-amd64</a> on Debian Bullseye.</p>
+<p>If you have a realtime kernel installed, the main thread of Controller Manager attempts to configure <code class="docutils literal notranslate"><span class="pre">SCHED_FIFO</span></code> with a priority of <code class="docutils literal notranslate"><span class="pre">50</span></code>.
+By default, the user does not have permission to set such a high priority.
+To give the user such permissions, add a group named realtime and add the user controlling your robot to this group:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>addgroup<span class="w"> </span>realtime
+<span class="gp">$ </span>sudo<span class="w"> </span>usermod<span class="w"> </span>-a<span class="w"> </span>-G<span class="w"> </span>realtime<span class="w"> </span><span class="k">$(</span>whoami<span class="k">)</span>
+</pre></div>
+</div>
+<p>Afterwards, add the following limits to the realtime group in <code class="docutils literal notranslate"><span class="pre">/etc/security/limits.conf</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">@realtime soft rtprio 99</span>
+<span class="go">@realtime soft priority 99</span>
+<span class="go">@realtime soft memlock 102400</span>
+<span class="go">@realtime hard rtprio 99</span>
+<span class="go">@realtime hard priority 99</span>
+<span class="go">@realtime hard memlock 102400</span>
+</pre></div>
+</div>
+<p>The limits will be applied after you log out and in again.</p>
+</section>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>activate_components_on_start (optional; list&lt;string&gt;; default: empty)</dt><dd><p>Define which hardware components should be activated when controller manager is started.
+The names of the components are defined as attribute of <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code>-tag in <code class="docutils literal notranslate"><span class="pre">robot_description</span></code>.
+All other components will stay <code class="docutils literal notranslate"><span class="pre">UNCONFIGURED</span></code>.
+If this and <code class="docutils literal notranslate"><span class="pre">configure_components_on_start</span></code> are empty, all available components will be activated.
+If this or <code class="docutils literal notranslate"><span class="pre">configure_components_on_start</span></code> are not empty, any component not in either list will be in unconfigured state.</p>
+</dd>
+<dt>configure_components_on_start (optional; list&lt;string&gt;; default: empty)</dt><dd><p>Define which hardware components should be configured when controller manager is started.
+The names of the components are defined as attribute of <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code>-tag in <code class="docutils literal notranslate"><span class="pre">robot_description</span></code>.
+All other components will stay <code class="docutils literal notranslate"><span class="pre">UNCONFIGURED</span></code>.
+If this and <code class="docutils literal notranslate"><span class="pre">activate_components_on_start</span></code> are empty, all available components will be activated.
+If this or <code class="docutils literal notranslate"><span class="pre">activate_components_on_start</span></code> are not empty, any component not in either list will be in unconfigured state.</p>
+</dd>
+<dt>robot_description (mandatory; string)</dt><dd><p>String with the URDF string as robot description.
+This is usually result of the parsed description files by <code class="docutils literal notranslate"><span class="pre">xacro</span></code> command.</p>
+</dd>
+<dt>update_rate (mandatory; integer)</dt><dd><p>The frequency of controller manager’s real-time update loop.
+This loop reads states from hardware, updates controller and writes commands to hardware.</p>
+</dd>
+<dt>&lt;controller_name&gt;.type</dt><dd><p>Name of a plugin exported using <code class="docutils literal notranslate"><span class="pre">pluginlib</span></code> for a controller.
+This is a class from which controller’s instance with name “<code class="docutils literal notranslate"><span class="pre">controller_name</span></code>” is created.</p>
+</dd>
+</dl>
+</section>
 <section id="helper-scripts">
 <h2>Helper scripts<a class="headerlink" href="#helper-scripts" title="Permalink to this heading">¶</a></h2>
 <p>There are two scripts to interact with controller manager from launch files:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">spawner.py</span></code> - loads, configures and start a controller on startup.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">unspawner.py</span></code> - stops and unloads a controller.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spawner</span></code> - loads, configures and start a controller on startup.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unspawner</span></code> - stops and unloads a controller.</p></li>
 </ol>
 </div></blockquote>
-<section id="spawner-py">
-<h3><code class="docutils literal notranslate"><span class="pre">spawner.py</span></code><a class="headerlink" href="#spawner-py" title="Permalink to this heading">¶</a></h3>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>run<span class="w"> </span>controller_manager<span class="w"> </span>spawner.py<span class="w"> </span>-h
-<span class="go">usage: spawner.py [-h] [-c CONTROLLER_MANAGER] [-p PARAM_FILE] [--load-only] [--stopped] [-t CONTROLLER_TYPE] [-u]</span>
+<section id="spawner">
+<h3><code class="docutils literal notranslate"><span class="pre">spawner</span></code><a class="headerlink" href="#spawner" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>run<span class="w"> </span>controller_manager<span class="w"> </span>spawner<span class="w"> </span>-h
+<span class="go">usage: spawner [-h] [-c CONTROLLER_MANAGER] [-p PARAM_FILE] [--load-only] [--stopped] [-t CONTROLLER_TYPE] [-u]</span>
 <span class="go">                  [--controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT]</span>
 <span class="go">                  controller_name</span>
 
@@ -237,10 +296,10 @@ It manages lifecycle of controllers, access to the hardware interfaces and offer
 </pre></div>
 </div>
 </section>
-<section id="unspawner-py">
-<h3><code class="docutils literal notranslate"><span class="pre">unspawner.py</span></code><a class="headerlink" href="#unspawner-py" title="Permalink to this heading">¶</a></h3>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>run<span class="w"> </span>controller_manager<span class="w"> </span>unspawner.py<span class="w"> </span>-h
-<span class="go">usage: unspawner.py [-h] [-c CONTROLLER_MANAGER] controller_name</span>
+<section id="unspawner">
+<h3><code class="docutils literal notranslate"><span class="pre">unspawner</span></code><a class="headerlink" href="#unspawner" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>run<span class="w"> </span>controller_manager<span class="w"> </span>unspawner<span class="w"> </span>-h
+<span class="go">usage: unspawner [-h] [-c CONTROLLER_MANAGER] controller_name</span>
 
 <span class="go">positional arguments:</span>
 <span class="go">  controller_name       Name of the controller</span>
@@ -253,6 +312,20 @@ It manages lifecycle of controllers, access to the hardware interfaces and offer
 </div>
 </section>
 </section>
+<section id="concepts">
+<h2>Concepts<a class="headerlink" href="#concepts" title="Permalink to this heading">¶</a></h2>
+<section id="restarting-all-controllers">
+<h3>Restarting all controllers<a class="headerlink" href="#restarting-all-controllers" title="Permalink to this heading">¶</a></h3>
+<p>The simplest way to restart all controllers is by using <code class="docutils literal notranslate"><span class="pre">switch_controllers</span></code> services or CLI and adding all controllers to <code class="docutils literal notranslate"><span class="pre">start</span></code> and <code class="docutils literal notranslate"><span class="pre">stop</span></code> lists.
+Note that not all controllers have to be restarted, e.g., broadcasters.</p>
+</section>
+<section id="restarting-hardware">
+<h3>Restarting hardware<a class="headerlink" href="#restarting-hardware" title="Permalink to this heading">¶</a></h3>
+<p>If hardware gets restarted then you should go through its lifecycle again.
+This can be simply achieved by returning <code class="docutils literal notranslate"><span class="pre">ERROR</span></code> from <code class="docutils literal notranslate"><span class="pre">write</span></code> and <code class="docutils literal notranslate"><span class="pre">read</span></code> methods of interface implementation.
+<strong>NOT IMPLEMENTED YET - PLEASE STOP/RESTART ALL CONTROLLERS MANUALLY FOR NOW</strong> The controller manager detects that and stops all the controllers that are commanding that hardware and restarts broadcasters that are listening to its states.</p>
+</section>
+</section>
 </section>
 
 
@@ -261,7 +334,7 @@ It manages lifecycle of controllers, access to the hardware interfaces and offer
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../../hardware_interface/doc/fake_components_userdoc.html" class="btn btn-neutral float-right" title="Fake Components" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../../hardware_interface/doc/hardware_components_userdoc.html" class="btn btn-neutral float-right" title="Hardware Components" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="../../doc/index.html" class="btn btn-neutral float-left" title="API Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
@@ -299,11 +372,10 @@ It manages lifecycle of controllers, access to the hardware interfaces and offer
   <div class="rst-other-versions">
     <dl>
       <dt>ros2_control - Rolling</dt>
-      <dd><a href="../../../../../master/doc/ros2_control/controller_manager/doc/userdoc.html">Master (latest)</a></dd>
     </dl>
     <dl>
       <dt>ros2_control - Foxy and Galactic</dt>
-        <dd><a href="../../../../../galactic/doc/ros2_control/controller_manager/doc/userdoc.html">Galactic (recommended)</a></dd><br>
+        <dd><a href="../../../../../galactic/index.html">Galactic (recommended)</a></dd><br>
         <dd><a href="userdoc.html">Foxy</a></dd><br>
     </dl>
   </div>

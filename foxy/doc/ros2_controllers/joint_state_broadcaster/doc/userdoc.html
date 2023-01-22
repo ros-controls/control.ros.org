@@ -7,6 +7,7 @@
   <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script defer data-domain="control.ros.org" src="https://plausible.io/js/script.js"></script>
   
   <title>joint_state_broadcaster &mdash; ROS2_Control: Foxy Jan 2023 documentation</title>
   
@@ -102,20 +103,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html#core-functionalities">Core functionalities</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../doc/controllers_index.html">ros2_controllers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#nomenclature">Nomenclature</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#id1">Controllers</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../../doc/controllers_index.html#guidelines-and-best-practices">Guidelines and Best Practices</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../../doc/writing_new_controller.html">Writing a new controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../doc/controllers_index.html#available-controllers">Available Controllers</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="../../doc/controllers_index.html#available-broadcasters">Available Broadcasters</a><ul class="current">
-<li class="toctree-l4 current"><a class="current reference internal" href="#">Joint State Broadcaster</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#commands">Commands</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#hardware-interface-type">Hardware interface type</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#guidelines-and-best-practices">Guidelines and Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#available-controllers">Available Controllers</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/controllers_index.html#available-broadcasters">Available Broadcasters</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Joint State Broadcaster</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#commands">Commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hardware-interface-type">Hardware interface type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="../../imu_sensor_broadcaster/doc/userdoc.html">Imu Sensor Broadcaster</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="../../imu_sensor_broadcaster/doc/userdoc.html">Imu Sensor Broadcaster</a></li>
 </ul>
 </li>
 </ul>
@@ -124,6 +121,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../differences_to_ros1/differences_to_ros1.html">Differences to ros_control (ROS1)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../differences_to_ros1/differences_to_ros1.html#migration-guide-to-ros2-control">Migration Guide to ros2_control</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Pull Requests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html#rules-for-the-repositories-and-process-of-merging-pull-requests">Rules for the repositories and process of merging pull requests</a></li>
@@ -211,14 +209,64 @@
 </section>
 <section id="hardware-interface-type">
 <h2>Hardware interface type<a class="headerlink" href="#hardware-interface-type" title="Permalink to this heading">¶</a></h2>
-<p>All available <em>joint state interfaces</em> are used by this broadcaster.</p>
+<p>By default, all available <em>joint state interfaces</em> are used, unless configured otherwise.
+In the latter case, resulting interfaces is defined by a “matrix” of interfaces defined by the cross-product of the <code class="docutils literal notranslate"><span class="pre">joints</span></code> and <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> parameters.
+If some requested interfaces are missing, the controller will print a warning about that, but work for other interfaces.
+If none of the requested interface are not defined, the controller returns error on activation.</p>
 </section>
 <section id="parameters">
 <h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">¶</a></h2>
-<dl class="simple">
+<dl>
 <dt><code class="docutils literal notranslate"><span class="pre">use_local_topics</span></code></dt><dd><p>Optional parameter (boolean; default: <code class="docutils literal notranslate"><span class="pre">False</span></code>) defining if <code class="docutils literal notranslate"><span class="pre">joint_states</span></code> and <code class="docutils literal notranslate"><span class="pre">dynamic_joint_states</span></code> messages should be published into local namespace, e.g., <code class="docutils literal notranslate"><span class="pre">/my_state_broadcaster/joint_states</span></code>.</p>
 </dd>
+<dt><code class="docutils literal notranslate"><span class="pre">joints</span></code></dt><dd><p>Optional parameter (string array) to support broadcasting of only specific joints and interfaces.
+It has to be used in combination with the <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> parameter.
+Joint state broadcaster asks for access to all defined interfaces on all defined joints.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">interfaces</span></code></dt><dd><p>Optional parameter (string array) to support broadcasting of only specific joints and interfaces.
+It has to be used in combination with the <code class="docutils literal notranslate"><span class="pre">joints</span></code> parameter.</p>
+</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">extra_joints</span></code></dt><dd><p>Optional parameter (string array) with names of extra joints to be added to <code class="docutils literal notranslate"><span class="pre">joint_states</span></code> and <code class="docutils literal notranslate"><span class="pre">dynamic_joint_states</span></code> with state set to 0.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">map_interface_to_joint_state</span></code></dt><dd><p>Optional parameter (map) providing mapping between custom interface names to standard fields in <code class="docutils literal notranslate"><span class="pre">joint_states</span></code> message.
+Usecases:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Hydraulics robots where feedback and commanded values often have an offset and reliance on open-loop control is common.
+Typically one would map both values in separate interfaces in the framework.
+To visualize those data multiple joint_state_broadcaster instances and robot_state_publishers would be used to visualize both values in RViz.</p></li>
+</ol>
+<ol class="arabic simple">
+<li><p>A robot provides multiple measuring techniques for its joint values which results in slightly different values.
+Typically one would use separate interface for providing those values in the framework.
+Using multiple joint_state_broadcaster instances we could publish and show both in RViz.</p></li>
+</ol>
+</div></blockquote>
+<p>Format (each line is optional):</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">map_interface_to_joint_state</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;custom_interface&gt;</span>
+<span class="w">  </span><span class="nt">velocity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;custom_interface&gt;</span>
+<span class="w">  </span><span class="nt">effort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;custom_interface&gt;</span>
+</pre></div>
+</div>
+<p>Examples:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">map_interface_to_joint_state</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kf_estimated_position</span>
+</pre></div>
+</div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">map_interface_to_joint_state</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">velocity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">derived_velocity</span>
+<span class="w">  </span><span class="nt">effort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">derived_effort</span>
+</pre></div>
+</div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">map_interface_to_joint_state</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">effort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">torque_sensor</span>
+</pre></div>
+</div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">map_interface_to_joint_state</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">effort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">current_sensor</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </section>
@@ -268,11 +316,10 @@
   <div class="rst-other-versions">
     <dl>
       <dt>ros2_control - Rolling</dt>
-      <dd><a href="../../../../../master/doc/ros2_controllers/joint_state_broadcaster/doc/userdoc.html">Master (latest)</a></dd>
     </dl>
     <dl>
       <dt>ros2_control - Foxy and Galactic</dt>
-        <dd><a href="../../../../../galactic/doc/ros2_controllers/joint_state_broadcaster/doc/userdoc.html">Galactic (recommended)</a></dd><br>
+        <dd><a href="../../../../../galactic/index.html">Galactic (recommended)</a></dd><br>
         <dd><a href="userdoc.html">Foxy</a></dd><br>
     </dl>
   </div>
