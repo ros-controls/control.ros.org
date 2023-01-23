@@ -1,0 +1,312 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script defer data-domain="control.ros.org" src="https://plausible.io/js/script.js"></script>
+  
+  <title>Hardware Components &mdash; ROS2_Control: Galactic Jan 2023 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/override.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon_ros-controls.ico"/>
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="https://control.ros.org/rolling//galactic/doc/ros2_control/hardware_interface/doc/hardware_components_userdoc.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Fake Components" href="fake_components_userdoc.html" />
+    <link rel="prev" title="Controller Manager" href="../../controller_manager/doc/userdoc.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html">
+          
+
+          
+            
+            <img src="../../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html#architecture">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html#hardware-components">Hardware Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/index.html">API Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/index.html#core-functionalities">Core functionalities</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#features">Features</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/index.html#concepts">Concepts</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../controller_manager/doc/userdoc.html">Controller Manager</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Hardware Components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#handling-of-errors-that-happen-during-read-and-write-calls">Handling of errors that happen during read() and write() calls</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#migration-from-foxy-to-galactic">Migration from Foxy to Galactic</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="fake_components_userdoc.html">Fake Components</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../differences_to_ros1/differences_to_ros1.html">Differences to ros_control (ROS1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../differences_to_ros1/differences_to_ros1.html#migration-guide-to-ros2-control">Migration Guide to ros2_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Pull Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html#rules-for-the-repositories-and-process-of-merging-pull-requests">Rules for the repositories and process of merging pull requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html#writing-documentation">Writing documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html#repository-structure-and-ci-configuration">Repository structure and CI configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../project_ideas.html">Project Ideas for GSoC 2022</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ROS2_Control: Galactic</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../doc/index.html">API Documentation</a> &raquo;</li>
+        
+      <li>Hardware Components</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/ros-controls/control.ros.org/blob/galactic//doc/ros2_control/hardware_interface/doc/hardware_components_userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="hardware-components">
+<span id="hardware-components-userdoc"></span><h1>Hardware Components<a class="headerlink" href="#hardware-components" title="Permalink to this heading">¶</a></h1>
+<p>Hardware components represent abstraction of physical hardware in ros2_control framework.
+There are three types of hardware Actuator, Sensor and System.
+For details on each type check <a class="reference external" href="https://ros-controls.github.io/control.ros.org/getting_started.html#hardware-components">Hardware Components description</a>.</p>
+<section id="handling-of-errors-that-happen-during-read-and-write-calls">
+<h2>Handling of errors that happen during read() and write() calls<a class="headerlink" href="#handling-of-errors-that-happen-during-read-and-write-calls" title="Permalink to this heading">¶</a></h2>
+<p>If <code class="docutils literal notranslate"><span class="pre">hardware_interface::return_type::ERROR</span></code> is returned from <code class="docutils literal notranslate"><span class="pre">read()</span></code> or <code class="docutils literal notranslate"><span class="pre">write()</span></code> methods of a hardware interface, <code class="docutils literal notranslate"><span class="pre">on_error(previous_state)</span></code> method will be called to handle any error that happened.</p>
+<p>Error handling follows the <a class="reference external" href="https://design.ros2.org/articles/node_lifecycle.html">node lifecycle</a>.
+If successful <code class="docutils literal notranslate"><span class="pre">CallbackReturn::SUCCESS</span></code> is returned and hardware is again in <code class="docutils literal notranslate"><span class="pre">UNCONFIGURED</span></code>  state, if any <code class="docutils literal notranslate"><span class="pre">ERROR</span></code> or <code class="docutils literal notranslate"><span class="pre">FAILURE</span></code> happens the hardware ends in <code class="docutils literal notranslate"><span class="pre">FINALIZED</span></code> state and can not be recovered.
+The only option is to reload the complete plugin, but there is currently no service for this in the Controller Manager.</p>
+</section>
+<section id="migration-from-foxy-to-galactic">
+<h2>Migration from Foxy to Galactic<a class="headerlink" href="#migration-from-foxy-to-galactic" title="Permalink to this heading">¶</a></h2>
+<p>Between Foxy and Galactic we made substantial changes to the interface of hardware components to enable management of their lifecycle.
+The following list shows a set of quick changes to port existing hardware components to Galactic:</p>
+<ol class="arabic simple">
+<li><p>Rename <code class="docutils literal notranslate"><span class="pre">configure</span></code> to <code class="docutils literal notranslate"><span class="pre">on_init</span></code> and change return type to <code class="docutils literal notranslate"><span class="pre">CallbackReturn</span></code></p></li>
+<li><p>If using BaseInterface as base class then you should remove it. Specifically, change:</p></li>
+</ol>
+<p>hardware_interface::BaseInterface&lt;hardware_interface::[Actuator|Sensor|System]Interface&gt; to hardware_interface::[Actuator|Sensor|System]Interface</p>
+<ol class="arabic simple" start="3">
+<li><p>Remove include of headers <code class="docutils literal notranslate"><span class="pre">base_interface.hpp</span></code> and <code class="docutils literal notranslate"><span class="pre">hardware_interface_status_values.hpp</span></code></p></li>
+<li><p>Add include of header <code class="docutils literal notranslate"><span class="pre">rclcpp_lifecycle/state.hpp</span></code> although this may not be strictly necessary</p></li>
+<li><p>replace first three lines in <code class="docutils literal notranslate"><span class="pre">on_init</span></code> to:</p></li>
+</ol>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">hardware_interface</span><span class="o">::</span><span class="p">[</span><span class="n">Actuator</span><span class="o">|</span><span class="n">Sensor</span><span class="o">|</span><span class="n">System</span><span class="p">]</span><span class="n">Interface</span><span class="o">::</span><span class="n">on_init</span><span class="p">(</span><span class="n">info</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">CallbackReturn</span><span class="o">::</span><span class="n">SUCCESS</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">CallbackReturn</span><span class="o">::</span><span class="n">ERROR</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="6">
+<li><p>Change last return of <code class="docutils literal notranslate"><span class="pre">on_init</span></code> to <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">CallbackReturn::SUCCESS;</span></code></p></li>
+<li><p>Remove all lines with <code class="docutils literal notranslate"><span class="pre">status_</span> <span class="pre">=</span> <span class="pre">...</span></code> or <code class="docutils literal notranslate"><span class="pre">status::...</span></code></p></li>
+<li><p>Rename <code class="docutils literal notranslate"><span class="pre">start()</span></code> to <code class="docutils literal notranslate"><span class="pre">on_activate(const</span> <span class="pre">rclcpp_lifecycle::State</span> <span class="pre">&amp;</span> <span class="pre">previous_state)</span></code> and
+<code class="docutils literal notranslate"><span class="pre">stop()</span></code> to <code class="docutils literal notranslate"><span class="pre">on_deactivate(const</span> <span class="pre">rclcpp_lifecycle::State</span> <span class="pre">&amp;</span> <span class="pre">previous_state)</span></code></p></li>
+<li><p>Change return type of <code class="docutils literal notranslate"><span class="pre">on_activate</span></code> and <code class="docutils literal notranslate"><span class="pre">on_deactivate</span></code> to <code class="docutils literal notranslate"><span class="pre">CallbackReturn</span></code></p></li>
+<li><p>Change last return of <code class="docutils literal notranslate"><span class="pre">on_activate</span></code> and <code class="docutils literal notranslate"><span class="pre">on_deactivate</span></code> to <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">CallbackReturn::SUCCESS;</span></code></p></li>
+<li><p>If you have any <code class="docutils literal notranslate"><span class="pre">return_type::ERROR</span></code> in <code class="docutils literal notranslate"><span class="pre">on_init</span></code>, <code class="docutils literal notranslate"><span class="pre">on_activate</span></code>, or <code class="docutils literal notranslate"><span class="pre">in_deactivate</span></code> change to <code class="docutils literal notranslate"><span class="pre">CallbackReturn::ERROR</span></code></p></li>
+<li><p>If you get link errors with undefined refernences to symbols in <code class="docutils literal notranslate"><span class="pre">rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface</span></code>, then add
+<code class="docutils literal notranslate"><span class="pre">rclcpp_lifecyle</span></code> package dependency to <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> and <code class="docutils literal notranslate"><span class="pre">package.xml</span></code></p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="fake_components_userdoc.html" class="btn btn-neutral float-right" title="Fake Components" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../../controller_manager/doc/userdoc.html" class="btn btn-neutral float-left" title="Controller Manager" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2023, ros2_control Maintainers.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: galactic
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>ros2_control - Rolling</dt>
+      <dd><a href="../../../../../master/doc/ros2_control/hardware_interface/doc/hardware_components_userdoc.html">Master (latest)</a></dd>
+    </dl>
+    <dl>
+      <dt>ros2_control - Foxy and Galactic</dt>
+        <dd><a href="hardware_components_userdoc.html">Galactic (recommended)</a></dd><br>
+        <dd><a href="../../../../../foxy/index.html">Foxy</a></dd><br>
+    </dl>
+  </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

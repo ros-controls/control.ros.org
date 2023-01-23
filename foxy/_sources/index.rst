@@ -1,7 +1,7 @@
 .. _documentation_home:
 
-Welcome to the ros2_control documentation!
-==========================================
+Welcome to the ros2_control documentation - Foxy!
+=================================================
 
 .. toctree::
    :hidden:
@@ -12,13 +12,12 @@ Welcome to the ros2_control documentation!
    doc/ros2_control/ros2controlcli/doc/userdoc.rst
    doc/differences_to_ros1/differences_to_ros1.rst
    doc/ros2_control_demos/doc/index.rst
-   doc/supported_robots/supported_robots.rst
    doc/resources/resources.rst
    doc/contributing/contributing.rst
    doc/project_ideas.rst
    doc/acknowledgements/acknowledgements.rst
 
-The ros2_control is a framework for (real-time) control of robots using (`ROS 2 <https://docs.ros.org/en/rolling/>`_).
+The ros2_control is a framework for (real-time) control of robots using (`ROS2 <https://index.ros.org/doc/ros2/>`_).
 Its packages are a rewrite of `ros_control <http://wiki.ros.org/ros_control>`_ packages used in `ROS` (`Robot Operating System <https://wiki.ros.org>`_).
 ros2_control's goal is to simplify integrating new hardware and overcome some drawbacks.
 

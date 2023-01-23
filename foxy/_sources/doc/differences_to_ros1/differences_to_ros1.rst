@@ -53,7 +53,7 @@ RobotHardware to Components
       This usually includes changing the hardware state to receive commands or set it into a safe state before interrupting the command stream.
       It can also include starting and stopping communication.
    #. Implement ``read()`` and ``write()`` methods to exchange commands with the hardware.
-      This method is equivalent to those from ``RobotHW``-class in ROS 1.
+      This method is equivalent to those from ``RobotHW``-class in ROS1.
    #. Do not forget the ``PLUGINLIB_EXPORT_CLASS`` macro at the end of the .cpp file.
 #. Create .xml library description for the pluginlib, for example see `RRBotSystemPositionOnlyHardware <https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_hardware/ros2_control_demo_hardware.xml>`_.
 

@@ -3,6 +3,38 @@
 Project Ideas for GSoC 2022
 =============================
 
+Asynchronous Control Components
+--------------------------------
+This project orbits around everything asynchronous: hardware components and controllers.
+The goal is to support long-running controller tasks by providing a simple and clean interface for users implementing such controllers.
+This will include addition of multi-threading support with protected memory access, e.g., through buffers that are implemented in `control_toolbox repository <https://github.com/ros-controls/control_toolbox>`_.
+
+The second part enables asynchronous access to hardware. This should address issues our users are having when hardware-communication frequency has to be stable at high rate, e.g. 1 kHz, or when they are running multi-hardware setup on various frequencies.
+Also, another use-case of this functionality is to enable update of different interfaces of the same hardware on variable rate. For example, "heartbeat" signal should be sent only once per second, but the robot's motors should be controlled at 500 Hz.
+
+Related issues for this functionality should address are:
+
+- `Communication Failures with Universal Robots <https://github.com/UniversalRobots/Universal_Robots_ROS2_Driver/issues/210>`_
+- `Writing interfaces at different rates <https://github.com/ros-controls/ros2_control/issues/649>`_
+
+This project is defined by but not limited to the relevant design drafts:
+
+- `Asynchronous Controllers <https://github.com/ros-controls/roadmap/blob/master/design_drafts/async_controller.md>`_
+- `Asynchronous and Trigger Interfaces <https://github.com/ros-controls/roadmap/pull/52>`_
+
+-----
+
+| Skills required/preferred:
+
+- Good C++ skills
+- C++ asynchronous libraries / tricks
+
+| Possible mentors: Bence Magyar, Denis Štogl 
+| Expected size of project: 350 hours
+| Difficulty: hard
+
+-----
+
 Tutorials and Demos for ros2_control
 ------------------------------------
 
@@ -30,7 +62,7 @@ Related design drafts:
 | Skills required/preferred:
 
 - Good C++ skills
-- Basic understanding of ROS and/or ROS 2
+- Basic understanding of ROS and/or ROS2
 - Familiarity with the Gazebo simulator
 
 | Possible mentors: Denis Štogl
@@ -62,7 +94,7 @@ The main functionalities for the components and goals of the project are:
 | Skills required/preferred:
 
 - Good C++ skills
-- Basic understanding of ROS and/or ROS 2
+- Basic understanding of ROS and/or ROS2
 
 | Possible mentors: Bence Magyar, Denis Štogl
 | Expected size of project: 350 hours
@@ -90,7 +122,7 @@ Related design document and code implementations:
 | Skills required/preferred:
 
 - Good C++ skills
-- Basic understanding of ROS and/or ROS 2
+- Basic understanding of ROS and/or ROS2
 - Basic understanding of the Gazebo simulator
 
 | Possible mentors: Bence Magyar, Denis Štogl
@@ -102,10 +134,10 @@ Related design document and code implementations:
 Feature-parity for controllers from ROS1
 ----------------------------------------
 
-The ros2_control framework in ROS 2 is a rewrite of the ros_control framework from ROS 1.
-Our rich set of standard controllers was one of the main motivations for users to adopt ros_control in ROS 1 and while we ported most of them, there are quite a few features missing for the two main controllers of this set, the diff_drive_controller and the joint_trajectory_controller.
+The ros2_control framework in ROS2 is a rewrite of the ros_control framework from ROS1.
+Our rich set of standard controllers was one of the main motivations for users to adopt ros_control in ROS1 and while we ported most of them, there are quite a few features missing for the two main controllers of this set, the diff_drive_controller and the joint_trajectory_controller.
 
-This work will consist of reviewing the two versions of the two controllers and comparing for feature parity. Once the missing parts are identified, port them over from ROS 1 with as much test support as possible.
+This work will consist of reviewing the two versions of the two controllers and comparing for feature parity. Once the missing parts are identified, port them over from ROS1 with as much test support as possible.
 
 Related existing issues are:
 
@@ -122,7 +154,7 @@ Stretch goals:
 | Skills required/preferred:
 
 - Good C++ skills
-- Basic understanding of ROS and/or ROS 2
+- Basic understanding of ROS and/or ROS2
 - Basic understanding of unit testing with gmock
 
 | Possible mentors: Bence Magyar
