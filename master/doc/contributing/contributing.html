@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script defer data-domain="control.ros.org" src="https://plausible.io/js/script.js"></script>
   
-  <title>Pull Requests &mdash; ROS2_Control: Rolling Jan 2023 documentation</title>
+  <title>Contributing &mdash; ROS2_Control: Rolling Jan 2023 documentation</title>
   
 
   
@@ -108,11 +108,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../ros2_control_demos/doc/index.html">Demos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../supported_robots/supported_robots.html">Supported Robots</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../resources/resources.html">Resources</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Pull Requests</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#rules-for-the-repositories-and-process-of-merging-pull-requests">Rules for the repositories and process of merging pull requests</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#writing-documentation">Writing documentation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#repository-structure-and-ci-configuration">Repository structure and CI configuration</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pull-requests">Pull Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rules-for-the-repositories-and-process-of-merging-pull-requests">Rules for the repositories and process of merging pull requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#writing-documentation">Writing documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#repository-structure-and-ci-configuration">Repository structure and CI configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ci-configuration">CI configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#documentation-usage">Documentation Usage</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../project_ideas.html">Project Ideas for GSoC 2022</a></li>
@@ -165,7 +167,7 @@
     
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Pull Requests</li>
+      <li>Contributing</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -186,11 +188,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <p>First, thank you for considering contributing to the ros2_control project.
+  <section id="contributing">
+<h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this heading">¶</a></h1>
+<p>First, thank you for considering contributing to the ros2_control project.
 As an open-source project, we welcome each contributor, regardless of their background and experience.
 To reduce the entropy of the universe and our vivid, open, and collaborative environment, we have set up some standards and methods for contributions.</p>
 <section id="pull-requests">
-<h1>Pull Requests<a class="headerlink" href="#pull-requests" title="Permalink to this heading">¶</a></h1>
+<h2>Pull Requests<a class="headerlink" href="#pull-requests" title="Permalink to this heading">¶</a></h2>
 <p>Requirements for pull requests are as follows:</p>
 <ol class="arabic simple">
 <li><p>Limited scope. Your PR should do one thing or one set of things. Avoid adding “random fixes” to PRs. Put those on separate PRs.</p></li>
@@ -201,7 +205,7 @@ To reduce the entropy of the universe and our vivid, open, and collaborative env
 </ol>
 </section>
 <section id="rules-for-the-repositories-and-process-of-merging-pull-requests">
-<h1>Rules for the repositories and process of merging pull requests<a class="headerlink" href="#rules-for-the-repositories-and-process-of-merging-pull-requests" title="Permalink to this heading">¶</a></h1>
+<h2>Rules for the repositories and process of merging pull requests<a class="headerlink" href="#rules-for-the-repositories-and-process-of-merging-pull-requests" title="Permalink to this heading">¶</a></h2>
 <p>This section targets maintainers, but you are also welcome to read it to understand the process of how we handle PRs in our organization.
 This guideline is especially applicable for the following repositories:</p>
 <ul class="simple">
@@ -222,12 +226,12 @@ This guideline is especially applicable for the following repositories:</p>
 </ol>
 </section>
 <section id="writing-documentation">
-<h1>Writing documentation<a class="headerlink" href="#writing-documentation" title="Permalink to this heading">¶</a></h1>
+<h2>Writing documentation<a class="headerlink" href="#writing-documentation" title="Permalink to this heading">¶</a></h2>
 <p>Each repository starts as a “part” of the documentation using <code class="docutils literal notranslate"><span class="pre">#</span></code>.
 For more details, see: <a class="reference external" href="https://thomas-cokelaer.info/tutorials/sphinx/rest_syntax.html#id8">https://thomas-cokelaer.info/tutorials/sphinx/rest_syntax.html#id8</a></p>
 </section>
 <section id="repository-structure-and-ci-configuration">
-<h1>Repository structure and CI configuration<a class="headerlink" href="#repository-structure-and-ci-configuration" title="Permalink to this heading">¶</a></h1>
+<h2>Repository structure and CI configuration<a class="headerlink" href="#repository-structure-and-ci-configuration" title="Permalink to this heading">¶</a></h2>
 <p>Each repository has two types of branches, development, and stable.
 PR’s should always be submitted against the development branch.
 When PR is accepted, and there are no API and ABI changes to a stable branch, please open a new PR against the stable branch(es).
@@ -252,6 +256,7 @@ We use the following naming conventions for branches.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">source</span></code> build each day against distribution branches</p></li>
 </ul>
 </div></blockquote>
+</section>
 <section id="ci-configuration">
 <h2>CI configuration<a class="headerlink" href="#ci-configuration" title="Permalink to this heading">¶</a></h2>
 <p>Three build stages are checking the current and future compatibility of the framework.</p>
@@ -266,6 +271,11 @@ This shows that local build with dependencies is possible, and if it fails there
 <li><p><code class="docutils literal notranslate"><span class="pre">source</span></code> - also core ROS packages are build from source. It shows potential issues in the mid future.</p></li>
 </ol>
 </section>
+<section id="documentation-usage">
+<h2>Documentation Usage<a class="headerlink" href="#documentation-usage" title="Permalink to this heading">¶</a></h2>
+<iframe plausible-embed src="https://plausible.io/control.ros.org?embed=true&theme=system&background=transparent" scrolling="no" frameborder="0" loading="lazy" style="width: 1px; min-width: 100%; height: 1600px;"></iframe>
+<div style="font-size: 14px; padding-bottom: 14px;">Stats powered by <a target="_blank" style="color: #2c3953; text-decoration: underline;" href="https://plausible.io">Plausible Analytics</a></div>
+<script async src="https://plausible.io/js/embed.host.js"></script></section>
 </section>
 
 

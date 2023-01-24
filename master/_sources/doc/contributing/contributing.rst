@@ -1,10 +1,13 @@
+Contributing
+=============
+
 First, thank you for considering contributing to the ros2_control project.
 As an open-source project, we welcome each contributor, regardless of their background and experience.
 To reduce the entropy of the universe and our vivid, open, and collaborative environment, we have set up some standards and methods for contributions.
 
 
 Pull Requests
-==============
+-------------
 
 Requirements for pull requests are as follows:
 
@@ -20,7 +23,7 @@ Requirements for pull requests are as follows:
 
 
 Rules for the repositories and process of merging pull requests
-================================================================
+----------------------------------------------------------------
 
 This section targets maintainers, but you are also welcome to read it to understand the process of how we handle PRs in our organization.
 This guideline is especially applicable for the following repositories:
@@ -48,7 +51,7 @@ Please keep the following in mind:
 
 
 Writing documentation
-======================
+----------------------
 
 Each repository starts as a "part" of the documentation using ``#``.
 For more details, see: https://thomas-cokelaer.info/tutorials/sphinx/rest_syntax.html#id8
@@ -61,7 +64,7 @@ For more details, see: https://thomas-cokelaer.info/tutorials/sphinx/rest_syntax
 
 
 Repository structure and CI configuration
-=========================================
+------------------------------------------
 
 Each repository has two types of branches, development, and stable.
 PR's should always be submitted against the development branch.
@@ -95,3 +98,13 @@ Three build stages are checking the current and future compatibility of the fram
    This shows that local build with dependencies is possible, and if it fails there, we can expect that after the next package sync, we will not be able to build.
 
 1. ``source`` - also core ROS packages are build from source. It shows potential issues in the mid future.
+
+
+Documentation Usage
+--------------------
+
+.. raw:: html
+
+   <iframe plausible-embed src="https://plausible.io/control.ros.org?embed=true&theme=system&background=transparent" scrolling="no" frameborder="0" loading="lazy" style="width: 1px; min-width: 100%; height: 1600px;"></iframe>
+   <div style="font-size: 14px; padding-bottom: 14px;">Stats powered by <a target="_blank" style="color: #2c3953; text-decoration: underline;" href="https://plausible.io">Plausible Analytics</a></div>
+   <script async src="https://plausible.io/js/embed.host.js"></script>
