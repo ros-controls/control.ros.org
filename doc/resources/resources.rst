@@ -13,7 +13,7 @@ Presentations
 
 2023-02 ROS Meetup Munich #5
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-`Presentation: Tricycle Controller with ros2_control <https://github.com/ros-controls/control.ros.org/blob/master/doc/resources/presentations/2022-12_ROS-I_Conference-ros2_control_-_Kernel_for_ROS_2_controlled_robots.pdf>`_
+`Presentation: Tricycle Controller with ros2_control <https://github.com/ros-controls/control.ros.org/blob/master/doc/resources/presentations/pixel_robotics_tricycle_controller_with_ros2_control.pdf>`_
 
   Summary:
     In this presentation Pixel Robotics presents the contributed the Tricycle controller to ros2_controllers, prefaced by an introduction to ros2_control.
