@@ -4,7 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script defer data-domain="control.ros.org" src="https://plausible.io/js/script.js"></script>
@@ -35,6 +35,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/doctools.js"></script>
         <script src="../../../../_static/sphinx_highlight.js"></script>
@@ -215,20 +216,20 @@
            <div itemprop="articleBody">
             
   <section id="diff-drive-controller">
-<span id="diff-drive-controller-userdoc"></span><h1>diff_drive_controller<a class="headerlink" href="#diff-drive-controller" title="Permalink to this heading">¶</a></h1>
+<span id="diff-drive-controller-userdoc"></span><h1>diff_drive_controller<a class="headerlink" href="#diff-drive-controller" title="Permalink to this heading"></a></h1>
 <p>Controller for mobile robots with differential drive.
 Input for control are robot body velocity commands which are translated to wheel commands for the differential drive base.
 Odometry is computed from hardware feedback and published.</p>
 <section id="velocity-commands">
-<h2>Velocity commands<a class="headerlink" href="#velocity-commands" title="Permalink to this heading">¶</a></h2>
+<h2>Velocity commands<a class="headerlink" href="#velocity-commands" title="Permalink to this heading"></a></h2>
 <p>The controller works with a velocity twist from which it extracts the x component of the linear velocity and the z component of the angular velocity. Velocities on other components are ignored.</p>
 </section>
 <section id="hardware-interface-type">
-<h2>Hardware interface type<a class="headerlink" href="#hardware-interface-type" title="Permalink to this heading">¶</a></h2>
+<h2>Hardware interface type<a class="headerlink" href="#hardware-interface-type" title="Permalink to this heading"></a></h2>
 <p>The controller works with wheel joints through a velocity interface.</p>
 </section>
 <section id="other-features">
-<h2>Other features<a class="headerlink" href="#other-features" title="Permalink to this heading">¶</a></h2>
+<h2>Other features<a class="headerlink" href="#other-features" title="Permalink to this heading"></a></h2>
 <blockquote>
 <div><p>Realtime-safe implementation.
 Odometry publishing
@@ -237,21 +238,21 @@ Automatic stop after command time-out</p>
 </div></blockquote>
 </section>
 <section id="ros2-control-interfaces">
-<h2>ros2_control Interfaces<a class="headerlink" href="#ros2-control-interfaces" title="Permalink to this heading">¶</a></h2>
+<h2>ros2_control Interfaces<a class="headerlink" href="#ros2-control-interfaces" title="Permalink to this heading"></a></h2>
 <section id="references">
-<h3>References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h3>
+<h3>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h3>
 </section>
 <section id="states">
-<h3>States<a class="headerlink" href="#states" title="Permalink to this heading">¶</a></h3>
+<h3>States<a class="headerlink" href="#states" title="Permalink to this heading"></a></h3>
 </section>
 <section id="commands">
-<h3>Commands<a class="headerlink" href="#commands" title="Permalink to this heading">¶</a></h3>
+<h3>Commands<a class="headerlink" href="#commands" title="Permalink to this heading"></a></h3>
 </section>
 </section>
 <section id="ros2-interfaces">
-<h2>ROS2 Interfaces<a class="headerlink" href="#ros2-interfaces" title="Permalink to this heading">¶</a></h2>
+<h2>ROS2 Interfaces<a class="headerlink" href="#ros2-interfaces" title="Permalink to this heading"></a></h2>
 <section id="subscribers">
-<h3>Subscribers<a class="headerlink" href="#subscribers" title="Permalink to this heading">¶</a></h3>
+<h3>Subscribers<a class="headerlink" href="#subscribers" title="Permalink to this heading"></a></h3>
 <dl class="simple">
 <dt>~/cmd_vel [geometry_msgs/msg/TwistStamped]</dt><dd><p>Velocity command for the controller.</p>
 </dd>
@@ -260,16 +261,16 @@ Automatic stop after command time-out</p>
 <p>~/cmd_vel_out []</p>
 </section>
 <section id="publishers">
-<h3>Publishers<a class="headerlink" href="#publishers" title="Permalink to this heading">¶</a></h3>
+<h3>Publishers<a class="headerlink" href="#publishers" title="Permalink to this heading"></a></h3>
 <p>~/odom []</p>
 <p>/tf</p>
 </section>
 <section id="services">
-<h3>Services<a class="headerlink" href="#services" title="Permalink to this heading">¶</a></h3>
+<h3>Services<a class="headerlink" href="#services" title="Permalink to this heading"></a></h3>
 </section>
 </section>
 <section id="parameters">
-<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">¶</a></h2>
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h2>
 <p>Check <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/master/diff_drive_controller/src/diff_drive_controller_parameter.yaml">parameter definition file for details</a>.</p>
 <p>Note that the documentation on parameters for joint limits can be found in <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/joint_limits/include/joint_limits/joint_limits_rosparam.hpp#L56-L75">their header file</a>.
 Those parameters are:</p>
