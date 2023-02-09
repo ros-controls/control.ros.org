@@ -106,6 +106,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Command Line Interface</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#list-controllers">list_controllers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#list-controller-types">list_controller_types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#list-hardware-components">list_hardware_components</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#list-hardware-interfaces">list_hardware_interfaces</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#load-controller">load_controller</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#reload-controller-libraries">reload_controller_libraries</a></li>
@@ -200,6 +201,7 @@
 <div><ul class="simple">
 <li><p>ros2 control list_controllers</p></li>
 <li><p>ros2 control list_controller_types</p></li>
+<li><p>ros2 control list_hardware_components</p></li>
 <li><p>ros2 control list_hardware_interfaces</p></li>
 <li><p>ros2 control load_controller</p></li>
 <li><p>ros2 control reload_controller_libraries</p></li>
@@ -254,6 +256,35 @@
 <span class="go">diff_drive_controller/DiffDriveController                              controller_interface::ControllerInterface</span>
 <span class="go">joint_state_controller/JointStateController                            controller_interface::ControllerInterface</span>
 <span class="go">joint_trajectory_controller/JointTrajectoryController                  controller_interface::ControllerInterface</span>
+</pre></div>
+</div>
+</section>
+<section id="list-hardware-components">
+<h2>list_hardware_components<a class="headerlink" href="#list-hardware-components" title="Permalink to this heading"></a></h2>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_components<span class="w"> </span>-h
+<span class="go">usage: ros2 control list_hardware_components [-h] [--spin-time SPIN_TIME] [-s] [-c CONTROLLER_MANAGER] [--include-hidden-nodes]</span>
+
+<span class="go">Output the list of available hardware components</span>
+
+<span class="go">options:</span>
+<span class="go">-h, --help            show this help message and exit</span>
+<span class="go">--spin-time SPIN_TIME</span>
+<span class="go">                        Spin time in seconds to wait for discovery (only applies when not using an already running daemon)</span>
+<span class="go">-s, --use-sim-time    Enable ROS simulation time</span>
+<span class="go">--verbose, -v         List hardware components with command and state interfaces</span>
+<span class="go">-c CONTROLLER_MANAGER, --controller-manager CONTROLLER_MANAGER</span>
+<span class="go">                        Name of the controller manager ROS node</span>
+<span class="go">--include-hidden-nodes</span>
+<span class="go">                        Consider hidden nodes as well</span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_components
+<span class="go">Hardware Component 0</span>
+<span class="go">    name: RRBot</span>
+<span class="go">    type: system</span>
+<span class="go">    plugin name: ros2_control_demo_hardware/RRBotSystemPositionOnlyHardware</span>
+<span class="go">    state: id=3 label=active</span>
 </pre></div>
 </div>
 </section>
