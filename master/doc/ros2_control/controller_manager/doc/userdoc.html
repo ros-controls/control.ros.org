@@ -112,6 +112,7 @@
 <li class="toctree-l5"><a class="reference internal" href="#unspawner"><code class="docutils literal notranslate"><span class="pre">unspawner</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="#using-the-controller-manager-in-a-process">Using the Controller Manager in a Process</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#concepts">Concepts</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#restarting-all-controllers">Restarting all controllers</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#restarting-hardware">Restarting hardware</a></li>
@@ -309,6 +310,26 @@ This is a class from which controller’s instance with name “<code class="doc
 </pre></div>
 </div>
 </section>
+</section>
+<section id="using-the-controller-manager-in-a-process">
+<h2>Using the Controller Manager in a Process<a class="headerlink" href="#using-the-controller-manager-in-a-process" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">ControllerManager</span></code> may also be instantiated in a process as a class, but proper care must be taken when doing so.
+The reason for this is because the <code class="docutils literal notranslate"><span class="pre">ControllerManager</span></code> class inherits from <code class="docutils literal notranslate"><span class="pre">rclcpp::Node</span></code>.</p>
+<p>If there is more than one Node in the process, global node name remap rules can forcibly change the <code class="docutils literal notranslate"><span class="pre">ControllerManager's</span></code> node name as well, leading to duplicate node names.
+This occurs whether the Nodes are siblings or exist in a hierarchy.</p>
+<img alt="../../../../_images/global_general_remap.png" src="../../../../_images/global_general_remap.png" />
+<p>The workaround for this is to specify another node name remap rule in the <code class="docutils literal notranslate"><span class="pre">NodeOptions</span></code> passed to the <code class="docutils literal notranslate"><span class="pre">ControllerManager</span></code> node (causing it to ignore the global rule), or ensure that any remap rules are targeted to specific nodes.</p>
+<img alt="../../../../_images/global_specific_remap.png" src="../../../../_images/global_specific_remap.png" />
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller_manager</span><span class="o">::</span><span class="n">get_cm_node_options</span><span class="p">();</span>
+<span class="w">  </span><span class="n">options</span><span class="p">.</span><span class="n">arguments</span><span class="p">({</span>
+<span class="w">    </span><span class="s">&quot;--ros-args&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;--remap&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;_target_node_name:__node:=dst_node_name&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;--log-level&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;info&quot;</span><span class="p">});</span>
+
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">cm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">controller_manager</span><span class="o">::</span><span class="n">ControllerManager</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">    </span><span class="n">executor</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;_target_node_name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;some_optional_namespace&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">options</span><span class="p">);</span>
+</pre></div>
+</div>
 </section>
 <section id="concepts">
 <h2>Concepts<a class="headerlink" href="#concepts" title="Permalink to this heading"></a></h2>
