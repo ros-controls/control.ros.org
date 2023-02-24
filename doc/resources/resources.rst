@@ -11,6 +11,22 @@ Any files submitted to the documentation should be "licensed" by stating your na
 Presentations
 ---------------
 
+2023-02 ROS Meetup Munich #5
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+`Presentation: Tricycle Controller with ros2_control <https://github.com/ros-controls/control.ros.org/blob/master/doc/resources/presentations/pixel_robotics_tricycle_controller_with_ros2_control.pdf>`_
+
+`Meetup event link <https://www.meetup.com/robot-operating-system-ros/events/290966049/>`_
+  
+  Summary:
+    In this presentation Pixel Robotics presents the contributed the Tricycle controller to ros2_controllers, prefaced by an introduction to ros2_control.
+
+  *Presenters: Johannes Plapp & Tony Najjar*
+
+  Authors:
+    - Johannes Plapp (Pixel Robotics)
+    - Tony Najjar (Pixel Robotics)
+
+
 2022-12 ROS-Industrial Conference 2022
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 `Presentation: ros2_control - Kernel for ROS 2 controlled robots <https://github.com/ros-controls/control.ros.org/blob/master/doc/resources/presentations/2022-12_ROS-I_Conference-ros2_control_-_Kernel_for_ROS_2_controlled_robots.pdf>`_
