@@ -272,21 +272,23 @@ This is a class from which controller’s instance with name “<code class="doc
 <section id="spawner">
 <h3><code class="docutils literal notranslate"><span class="pre">spawner</span></code><a class="headerlink" href="#spawner" title="Permalink to this heading"></a></h3>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>run<span class="w"> </span>controller_manager<span class="w"> </span>spawner<span class="w"> </span>-h
-<span class="go">usage: spawner [-h] [-c CONTROLLER_MANAGER] [-p PARAM_FILE] [--load-only] [--stopped] [-t CONTROLLER_TYPE] [-u]</span>
+<span class="go">usage: spawner [-h] [-c CONTROLLER_MANAGER] [-p PARAM_FILE] [-n NAMESPACE] [--load-only] [--inactive] [-t CONTROLLER_TYPE] [-u]</span>
 <span class="go">                  [--controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT]</span>
 <span class="go">                  controller_name</span>
 
 <span class="go">positional arguments:</span>
 <span class="go">  controller_name       Name of the controller</span>
 
-<span class="go">optional arguments:</span>
+<span class="go">options:</span>
 <span class="go">  -h, --help            show this help message and exit</span>
 <span class="go">  -c CONTROLLER_MANAGER, --controller-manager CONTROLLER_MANAGER</span>
 <span class="go">                        Name of the controller manager ROS node</span>
 <span class="go">  -p PARAM_FILE, --param-file PARAM_FILE</span>
 <span class="go">                        Controller param file to be loaded into controller node before configure</span>
+<span class="go">  -n NAMESPACE, --namespace NAMESPACE</span>
+<span class="go">                        Namespace for the controller</span>
 <span class="go">  --load-only           Only load the controller and leave unconfigured.</span>
-<span class="go">  --stopped             Load and configure the controller, however do not start them</span>
+<span class="go">  --inactive            Load and configure the controller, however do not activate them</span>
 <span class="go">  -t CONTROLLER_TYPE, --controller-type CONTROLLER_TYPE</span>
 <span class="go">                        If not provided it should exist in the controller manager namespace</span>
 <span class="go">  -u, --unload-on-kill  Wait until this application is interrupted and unload controller</span>
