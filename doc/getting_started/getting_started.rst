@@ -24,6 +24,10 @@ The following figure shows the architecture of the ros2_control framework.
 
 |ros2_control_architecture|
 
+The following UML Class Diagram describes the internal implementation of ros2_control framework.
+
+|uml_class_diagram|
+
 Controller Manager
 ------------------
 The `Controller Manager`_ (CM) connects the controllers' and hardware-abstraction sides of the ros2_control framework.
@@ -195,3 +199,5 @@ The example files can be found in the `ros2_control_demos`_ repository.
 .. |ros2_control_architecture| image:: images/components_architecture.png
    :alt: "ros2_control Architecture"
 
+.. |uml_class_diagram| image:: images/uml_class_diagram.png 
+   :alt: "UML Class Diagram"
