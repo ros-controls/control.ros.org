@@ -31,10 +31,10 @@ copyright = "{}, {}".format(time.strftime("%Y"), author)
 
 # Adjust those to change ros distribution
 # you might also need to white list branch
-ros_distro = "rolling"
-distro_title = "Rolling"
-distro_title_full = "Rolling Ridley"
-repos_file_branch = "master"
+ros_distro = "humble"
+distro_title = "Humble"
+distro_title_full = "Humble Hawksbill"
+repos_file_branch = "humble"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -178,8 +178,8 @@ html_sourcelink_suffix = ""
 
 
 # Add branches you want to whtielist here.
-smv_branch_whitelist = r"^(foxy|galactic|humble|master)$"
-smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy|galactic|humble).*$"
+smv_branch_whitelist = r"^(foxy|galactic|humble|rolling)$"
+smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy|galactic|rolling).*$"
 smv_remote_whitelist = r"^(origin)$"
 smv_latest_version = "humble"
 smv_eol_versions = []
@@ -304,7 +304,7 @@ def smv_rewrite_configs(app, config):
     # to rewrite the various configuration items with the current version.
     if app.config.smv_current_version != "":
         branch_distro = {
-            "master": "rolling",
+            "rolling": "rolling",
             "humble": "humble",
             "foxy": "foxy",
             "galactic": "galactic"
