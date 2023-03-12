@@ -24,7 +24,7 @@ The following figure shows the architecture of the ros2_control framework.
 
 |ros2_control_architecture|
 
-The following UML Class Diagram describes the internal implementation of ros2_control framework.
+The following UML Class Diagram describes the internal implementation of the ros2_control framework.
 
 |uml_class_diagram|
 
