@@ -117,7 +117,7 @@ $(function() {
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  std::set&lt;std::string&gt; names;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  std::transform(</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    handles.cbegin(), handles.cend(), std::inserter(names, names.end()),</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    [](<span class="keyword">const</span> <span class="keyword">auto</span> &amp; handle) { return handle.get_name(); });</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    [](<span class="keyword">const</span> <span class="keyword">auto</span> &amp; handle) { return handle.get_prefix_name(); });</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keywordflow">return</span> std::vector&lt;std::string&gt;(names.begin(), names.end());</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;}</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
@@ -133,8 +133,8 @@ $(function() {
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      unordered_handles.cbegin(), unordered_handles.cend(), std::back_inserter(result),</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      [&amp;](<span class="keyword">const</span> <span class="keyword">auto</span> &amp; handle)</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;      {</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        return (handle.get_name() == name) &amp;&amp; (handle.get_interface_name() == interface_type) &amp;&amp;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;               handle;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        return (handle.get_prefix_name() == name) &amp;&amp;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;               (handle.get_interface_name() == interface_type) &amp;&amp; handle;</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;      });</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  }</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keywordflow">return</span> result;</div>
