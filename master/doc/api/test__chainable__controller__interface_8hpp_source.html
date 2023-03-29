@@ -157,64 +157,65 @@ $(function() {
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    }</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  }</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="classTestableChainableControllerInterface.html#aba1d0c7300e97da9544e32006a3fe40c">   89</a></span>&#160;  controller_interface::return_type <a class="code" href="classTestableChainableControllerInterface.html#aba1d0c7300e97da9544e32006a3fe40c">update_reference_from_subscribers</a>()<span class="keyword"> override</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keyword">  </span>{</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordflow">if</span> (reference_interface_value_ == INTERFACE_VALUE_SUBSCRIBER_ERROR)</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    {</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;      <span class="keywordflow">return</span> controller_interface::return_type::ERROR;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    }</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <a class="code" href="classcontroller__interface_1_1ChainableControllerInterface.html#a1d78ebc930aea2e27993c2233ac90f26">reference_interfaces_</a>[0] = reference_interface_value_;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordflow">return</span> controller_interface::return_type::OK;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  }</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="classTestableChainableControllerInterface.html#a4a8bcb88f3858465cd13bcdc564f70d4">  100</a></span>&#160;  controller_interface::return_type <a class="code" href="classTestableChainableControllerInterface.html#a4a8bcb88f3858465cd13bcdc564f70d4">update_and_write_commands</a>(</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keyword">const</span> rclcpp::Time &amp; <span class="comment">/*time*/</span>, <span class="keyword">const</span> rclcpp::Duration &amp; <span class="comment">/*period*/</span>)<span class="keyword"> override</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keyword">  </span>{</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classcontroller__interface_1_1ChainableControllerInterface.html#a1d78ebc930aea2e27993c2233ac90f26">reference_interfaces_</a>[0] == INTERFACE_VALUE_UPDATE_ERROR)</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    {</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;      <span class="keywordflow">return</span> controller_interface::return_type::ERROR;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    }</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <a class="code" href="classcontroller__interface_1_1ChainableControllerInterface.html#a1d78ebc930aea2e27993c2233ac90f26">reference_interfaces_</a>[0] -= 1;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordflow">return</span> controller_interface::return_type::OK;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  }</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <span class="keywordtype">void</span> set_name_prefix_of_reference_interfaces(<span class="keyword">const</span> std::string &amp; prefix)</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  {</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    name_prefix_of_reference_interfaces_ = prefix;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  }</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  <span class="keywordtype">void</span> set_new_reference_interface_value(<span class="keyword">const</span> <span class="keywordtype">double</span> ref_itf_value)</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  {</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    reference_interface_value_ = ref_itf_value;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  }</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  std::string name_prefix_of_reference_interfaces_;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  <span class="keywordtype">double</span> reference_interface_value_ = INTERFACE_VALUE_INITIAL_REF;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;};</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
-<div class="line"><a name="l00127"></a><span class="lineno"><a class="line" href="classChainableControllerInterfaceTest.html">  127</a></span>&#160;<span class="keyword">class </span><a class="code" href="classChainableControllerInterfaceTest.html">ChainableControllerInterfaceTest</a> : <span class="keyword">public</span> ::testing::Test</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;{</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">void</span> SetUpTestCase() { rclcpp::init(0, <span class="keyword">nullptr</span>); }</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">void</span> TearDownTestCase() { rclcpp::shutdown(); }</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;};</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// TEST_CHAINABLE_CONTROLLER_INTERFACE_HPP_</span></div>
-<div class="ttc" id="aclassChainableControllerInterfaceTest_html"><div class="ttname"><a href="classChainableControllerInterfaceTest.html">ChainableControllerInterfaceTest</a></div><div class="ttdef"><b>Definition:</b> test_chainable_controller_interface.hpp:128</div></div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="classTestableChainableControllerInterface.html#af94f6f6ea5162a7c2b03b9d49061317c">   89</a></span>&#160;  controller_interface::return_type <a class="code" href="classTestableChainableControllerInterface.html#af94f6f6ea5162a7c2b03b9d49061317c">update_reference_from_subscribers</a>(</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keyword">const</span> rclcpp::Time &amp; <span class="comment">/*time*/</span>, <span class="keyword">const</span> rclcpp::Duration &amp; <span class="comment">/*period*/</span>)<span class="keyword"> override</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keyword">  </span>{</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordflow">if</span> (reference_interface_value_ == INTERFACE_VALUE_SUBSCRIBER_ERROR)</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    {</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;      <span class="keywordflow">return</span> controller_interface::return_type::ERROR;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    }</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <a class="code" href="classcontroller__interface_1_1ChainableControllerInterface.html#a1d78ebc930aea2e27993c2233ac90f26">reference_interfaces_</a>[0] = reference_interface_value_;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordflow">return</span> controller_interface::return_type::OK;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  }</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="classTestableChainableControllerInterface.html#a4a8bcb88f3858465cd13bcdc564f70d4">  101</a></span>&#160;  controller_interface::return_type <a class="code" href="classTestableChainableControllerInterface.html#a4a8bcb88f3858465cd13bcdc564f70d4">update_and_write_commands</a>(</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keyword">const</span> rclcpp::Time &amp; <span class="comment">/*time*/</span>, <span class="keyword">const</span> rclcpp::Duration &amp; <span class="comment">/*period*/</span>)<span class="keyword"> override</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="keyword">  </span>{</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classcontroller__interface_1_1ChainableControllerInterface.html#a1d78ebc930aea2e27993c2233ac90f26">reference_interfaces_</a>[0] == INTERFACE_VALUE_UPDATE_ERROR)</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    {</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;      <span class="keywordflow">return</span> controller_interface::return_type::ERROR;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    }</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <a class="code" href="classcontroller__interface_1_1ChainableControllerInterface.html#a1d78ebc930aea2e27993c2233ac90f26">reference_interfaces_</a>[0] -= 1;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordflow">return</span> controller_interface::return_type::OK;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  }</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  <span class="keywordtype">void</span> set_name_prefix_of_reference_interfaces(<span class="keyword">const</span> std::string &amp; prefix)</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  {</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    name_prefix_of_reference_interfaces_ = prefix;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  }</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  <span class="keywordtype">void</span> set_new_reference_interface_value(<span class="keyword">const</span> <span class="keywordtype">double</span> ref_itf_value)</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  {</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    reference_interface_value_ = ref_itf_value;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  }</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  std::string name_prefix_of_reference_interfaces_;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  <span class="keywordtype">double</span> reference_interface_value_ = INTERFACE_VALUE_INITIAL_REF;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;};</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="classChainableControllerInterfaceTest.html">  128</a></span>&#160;<span class="keyword">class </span><a class="code" href="classChainableControllerInterfaceTest.html">ChainableControllerInterfaceTest</a> : <span class="keyword">public</span> ::testing::Test</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;{</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">void</span> SetUpTestCase() { rclcpp::init(0, <span class="keyword">nullptr</span>); }</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">void</span> TearDownTestCase() { rclcpp::shutdown(); }</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;};</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// TEST_CHAINABLE_CONTROLLER_INTERFACE_HPP_</span></div>
+<div class="ttc" id="aclassChainableControllerInterfaceTest_html"><div class="ttname"><a href="classChainableControllerInterfaceTest.html">ChainableControllerInterfaceTest</a></div><div class="ttdef"><b>Definition:</b> test_chainable_controller_interface.hpp:129</div></div>
 <div class="ttc" id="aclassTestableChainableControllerInterface_html"><div class="ttname"><a href="classTestableChainableControllerInterface.html">TestableChainableControllerInterface</a></div><div class="ttdef"><b>Definition:</b> test_chainable_controller_interface.hpp:35</div></div>
 <div class="ttc" id="aclassTestableChainableControllerInterface_html_a443d275d92ba4215c2e277e3410c3cc2"><div class="ttname"><a href="classTestableChainableControllerInterface.html#a443d275d92ba4215c2e277e3410c3cc2">TestableChainableControllerInterface::on_set_chained_mode</a></div><div class="ttdeci">bool on_set_chained_mode(bool) override</div><div class="ttdoc">Virtual method that each chainable controller should implement to switch chained mode.</div><div class="ttdef"><b>Definition:</b> test_chainable_controller_interface.hpp:77</div></div>
-<div class="ttc" id="aclassTestableChainableControllerInterface_html_a4a8bcb88f3858465cd13bcdc564f70d4"><div class="ttname"><a href="classTestableChainableControllerInterface.html#a4a8bcb88f3858465cd13bcdc564f70d4">TestableChainableControllerInterface::update_and_write_commands</a></div><div class="ttdeci">controller_interface::return_type update_and_write_commands(const rclcpp::Time &amp;, const rclcpp::Duration &amp;) override</div><div class="ttdoc">Execute calculations of the controller and update command interfaces.</div><div class="ttdef"><b>Definition:</b> test_chainable_controller_interface.hpp:100</div></div>
+<div class="ttc" id="aclassTestableChainableControllerInterface_html_a4a8bcb88f3858465cd13bcdc564f70d4"><div class="ttname"><a href="classTestableChainableControllerInterface.html#a4a8bcb88f3858465cd13bcdc564f70d4">TestableChainableControllerInterface::update_and_write_commands</a></div><div class="ttdeci">controller_interface::return_type update_and_write_commands(const rclcpp::Time &amp;, const rclcpp::Duration &amp;) override</div><div class="ttdoc">Execute calculations of the controller and update command interfaces.</div><div class="ttdef"><b>Definition:</b> test_chainable_controller_interface.hpp:101</div></div>
 <div class="ttc" id="aclassTestableChainableControllerInterface_html_a4ca8b19e3b4dcbbfb4c251523e713d1b"><div class="ttname"><a href="classTestableChainableControllerInterface.html#a4ca8b19e3b4dcbbfb4c251523e713d1b">TestableChainableControllerInterface::on_export_reference_interfaces</a></div><div class="ttdeci">std::vector&lt; hardware_interface::CommandInterface &gt; on_export_reference_interfaces() override</div><div class="ttdef"><b>Definition:</b> test_chainable_controller_interface.hpp:67</div></div>
 <div class="ttc" id="aclassTestableChainableControllerInterface_html_a5a72fd946c4335b16f3e6bfd4ca8a831"><div class="ttname"><a href="classTestableChainableControllerInterface.html#a5a72fd946c4335b16f3e6bfd4ca8a831">TestableChainableControllerInterface::on_init</a></div><div class="ttdeci">controller_interface::CallbackReturn on_init() override</div><div class="ttdoc">Extending interface with initialization method which is individual for each controller.</div><div class="ttdef"><b>Definition:</b> test_chainable_controller_interface.hpp:46</div></div>
 <div class="ttc" id="aclassTestableChainableControllerInterface_html_a91b3ac64958c9aa022b133a64e91b5ee"><div class="ttname"><a href="classTestableChainableControllerInterface.html#a91b3ac64958c9aa022b133a64e91b5ee">TestableChainableControllerInterface::command_interface_configuration</a></div><div class="ttdeci">controller_interface::InterfaceConfiguration command_interface_configuration() const override</div><div class="ttdoc">Get configuration for controller's required command interfaces.</div><div class="ttdef"><b>Definition:</b> test_chainable_controller_interface.hpp:54</div></div>
 <div class="ttc" id="aclassTestableChainableControllerInterface_html_ab32a75d516d8b7e7f8e1a5f6ef3d6c72"><div class="ttname"><a href="classTestableChainableControllerInterface.html#ab32a75d516d8b7e7f8e1a5f6ef3d6c72">TestableChainableControllerInterface::state_interface_configuration</a></div><div class="ttdeci">controller_interface::InterfaceConfiguration state_interface_configuration() const override</div><div class="ttdoc">Get configuration for controller's required state interfaces.</div><div class="ttdef"><b>Definition:</b> test_chainable_controller_interface.hpp:60</div></div>
-<div class="ttc" id="aclassTestableChainableControllerInterface_html_aba1d0c7300e97da9544e32006a3fe40c"><div class="ttname"><a href="classTestableChainableControllerInterface.html#aba1d0c7300e97da9544e32006a3fe40c">TestableChainableControllerInterface::update_reference_from_subscribers</a></div><div class="ttdeci">controller_interface::return_type update_reference_from_subscribers() override</div><div class="ttdoc">Update reference from input topics when not in chained mode.</div><div class="ttdef"><b>Definition:</b> test_chainable_controller_interface.hpp:89</div></div>
+<div class="ttc" id="aclassTestableChainableControllerInterface_html_af94f6f6ea5162a7c2b03b9d49061317c"><div class="ttname"><a href="classTestableChainableControllerInterface.html#af94f6f6ea5162a7c2b03b9d49061317c">TestableChainableControllerInterface::update_reference_from_subscribers</a></div><div class="ttdeci">controller_interface::return_type update_reference_from_subscribers(const rclcpp::Time &amp;, const rclcpp::Duration &amp;) override</div><div class="ttdoc">Update reference from input topics when not in chained mode.</div><div class="ttdef"><b>Definition:</b> test_chainable_controller_interface.hpp:89</div></div>
 <div class="ttc" id="aclasscontroller__interface_1_1ChainableControllerInterface_html"><div class="ttname"><a href="classcontroller__interface_1_1ChainableControllerInterface.html">controller_interface::ChainableControllerInterface</a></div><div class="ttdef"><b>Definition:</b> chainable_controller_interface.hpp:35</div></div>
-<div class="ttc" id="aclasscontroller__interface_1_1ChainableControllerInterface_html_a1d78ebc930aea2e27993c2233ac90f26"><div class="ttname"><a href="classcontroller__interface_1_1ChainableControllerInterface.html#a1d78ebc930aea2e27993c2233ac90f26">controller_interface::ChainableControllerInterface::reference_interfaces_</a></div><div class="ttdeci">std::vector&lt; double &gt; reference_interfaces_</div><div class="ttdoc">Storage of values for reference interfaces.</div><div class="ttdef"><b>Definition:</b> chainable_controller_interface.hpp:114</div></div>
+<div class="ttc" id="aclasscontroller__interface_1_1ChainableControllerInterface_html_a1d78ebc930aea2e27993c2233ac90f26"><div class="ttname"><a href="classcontroller__interface_1_1ChainableControllerInterface.html#a1d78ebc930aea2e27993c2233ac90f26">controller_interface::ChainableControllerInterface::reference_interfaces_</a></div><div class="ttdeci">std::vector&lt; double &gt; reference_interfaces_</div><div class="ttdoc">Storage of values for reference interfaces.</div><div class="ttdef"><b>Definition:</b> chainable_controller_interface.hpp:115</div></div>
 <div class="ttc" id="aclasshardware__interface_1_1CommandInterface_html"><div class="ttname"><a href="classhardware__interface_1_1CommandInterface.html">hardware_interface::CommandInterface</a></div><div class="ttdef"><b>Definition:</b> handle.hpp:127</div></div>
 <div class="ttc" id="astructcontroller__interface_1_1InterfaceConfiguration_html"><div class="ttname"><a href="structcontroller__interface_1_1InterfaceConfiguration.html">controller_interface::InterfaceConfiguration</a></div><div class="ttdoc">Configuring what command/state interfaces to claim.</div><div class="ttdef"><b>Definition:</b> controller_interface_base.hpp:56</div></div>
 </div><!-- fragment --></div><!-- contents -->

@@ -115,9 +115,9 @@ controller_interface::CallbackReturn&#160;</td><td class="memItemRight" valign="
 <tr class="memitem:a443d275d92ba4215c2e277e3410c3cc2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTestableChainableControllerInterface.html#a443d275d92ba4215c2e277e3410c3cc2">on_set_chained_mode</a> (bool) override</td></tr>
 <tr class="memdesc:a443d275d92ba4215c2e277e3410c3cc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual method that each chainable controller should implement to switch chained mode.  <a href="classTestableChainableControllerInterface.html#a443d275d92ba4215c2e277e3410c3cc2">More...</a><br /></td></tr>
 <tr class="separator:a443d275d92ba4215c2e277e3410c3cc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba1d0c7300e97da9544e32006a3fe40c"><td class="memItemLeft" align="right" valign="top">controller_interface::return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTestableChainableControllerInterface.html#aba1d0c7300e97da9544e32006a3fe40c">update_reference_from_subscribers</a> () override</td></tr>
-<tr class="memdesc:aba1d0c7300e97da9544e32006a3fe40c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update reference from input topics when not in chained mode.  <a href="classTestableChainableControllerInterface.html#aba1d0c7300e97da9544e32006a3fe40c">More...</a><br /></td></tr>
-<tr class="separator:aba1d0c7300e97da9544e32006a3fe40c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af94f6f6ea5162a7c2b03b9d49061317c"><td class="memItemLeft" align="right" valign="top">controller_interface::return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTestableChainableControllerInterface.html#af94f6f6ea5162a7c2b03b9d49061317c">update_reference_from_subscribers</a> (const rclcpp::Time &amp;, const rclcpp::Duration &amp;) override</td></tr>
+<tr class="memdesc:af94f6f6ea5162a7c2b03b9d49061317c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update reference from input topics when not in chained mode.  <a href="classTestableChainableControllerInterface.html#af94f6f6ea5162a7c2b03b9d49061317c">More...</a><br /></td></tr>
+<tr class="separator:af94f6f6ea5162a7c2b03b9d49061317c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a8bcb88f3858465cd13bcdc564f70d4"><td class="memItemLeft" align="right" valign="top">controller_interface::return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTestableChainableControllerInterface.html#a4a8bcb88f3858465cd13bcdc564f70d4">update_and_write_commands</a> (const rclcpp::Time &amp;, const rclcpp::Duration &amp;) override</td></tr>
 <tr class="memdesc:a4a8bcb88f3858465cd13bcdc564f70d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute calculations of the controller and update command interfaces.  <a href="classTestableChainableControllerInterface.html#a4a8bcb88f3858465cd13bcdc564f70d4">More...</a><br /></td></tr>
 <tr class="separator:a4a8bcb88f3858465cd13bcdc564f70d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -376,8 +376,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_async_</b> = false
 
 </div>
 </div>
-<a id="aba1d0c7300e97da9544e32006a3fe40c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aba1d0c7300e97da9544e32006a3fe40c">&#9670;&nbsp;</a></span>update_reference_from_subscribers()</h2>
+<a id="af94f6f6ea5162a7c2b03b9d49061317c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af94f6f6ea5162a7c2b03b9d49061317c">&#9670;&nbsp;</a></span>update_reference_from_subscribers()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -388,8 +388,19 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_async_</b> = false
         <tr>
           <td class="memname">controller_interface::return_type TestableChainableControllerInterface::update_reference_from_subscribers </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const rclcpp::Time &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const rclcpp::Duration &amp;&#160;</td>
+          <td class="paramname"><em>period</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -403,7 +414,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_async_</b> = false
 <p>Each chainable controller implements this method to update reference from subscribers when not in chained mode.</p>
 <dl class="section return"><dt>Returns</dt><dd>return_type::OK if update is successfully, otherwise return_type::ERROR. </dd></dl>
 
-<p>Implements <a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#a767f0c46e619f8a8e68a3c52cdde3e85">controller_interface::ChainableControllerInterface</a>.</p>
+<p>Implements <a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#a3dc205230566156f985e9ec669ce56d6">controller_interface::ChainableControllerInterface</a>.</p>
 
 </div>
 </div>
