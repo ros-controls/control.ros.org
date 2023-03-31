@@ -117,8 +117,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../../example_2/doc/userdoc.html">Example 2: DiffBot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../example_3/doc/userdoc.html">Example 3: RRBot with multiple interfaces</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Example 4: Industrial robot with integrated sensor</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#files-used-for-this-demo">Files used for this demo</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#controllers-from-this-demo">Controllers from this demo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tutorial-steps">Tutorial steps</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#files-used-for-this-demo">Files used for this demo</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#controllers-from-this-demo">Controllers from this demo</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../example_5/doc/userdoc.html">Example 5: Industrial Robots with externally connected sensor</a></li>
@@ -206,8 +209,17 @@
             
   <section id="example-4-industrial-robot-with-integrated-sensor">
 <span id="ros2-control-demos-example-4-userdoc"></span><h1>Example 4: Industrial robot with integrated sensor<a class="headerlink" href="#example-4-industrial-robot-with-integrated-sensor" title="Permalink to this heading"></a></h1>
-<p>This example shows how a sensor can be integrated in a hardware interface of system-type:
-A 2D Force-Torque Sensor (FTS) is simulated by generating random sensor readings.</p>
+<p>This example shows how a sensor can be integrated in a hardware interface:</p>
+<ul class="simple">
+<li><p>The communication is done using proprietary API to communicate with the robot control box.</p></li>
+<li><p>Data for all joints is exchanged at once.</p></li>
+<li><p>Sensor data are exchanged together with joint data</p></li>
+<li><p>Examples: KUKA RSI with sensor connected to KRC (KUKA control box) or a prototype robot (ODRI interface).</p></li>
+</ul>
+<p>A 2D Force-Torque Sensor (FTS) is simulated by generating random sensor readings via a hardware interface of
+type <code class="docutils literal notranslate"><span class="pre">hardware_interface::SystemInterface</span></code>.</p>
+<section id="tutorial-steps">
+<h2>Tutorial steps<a class="headerlink" href="#tutorial-steps" title="Permalink to this heading"></a></h2>
 <ol class="arabic">
 <li><p>To check that <em>RRBot</em> descriptions are working properly use following launch commands</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_4<span class="w"> </span>view_robot.launch.py
@@ -307,7 +319,7 @@ wrench:
 </li>
 </ol>
 <section id="files-used-for-this-demo">
-<h2>Files used for this demo<a class="headerlink" href="#files-used-for-this-demo" title="Permalink to this heading"></a></h2>
+<h3>Files used for this demo<a class="headerlink" href="#files-used-for-this-demo" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p>Launch file: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_4/bringup/launch/rrbot_system_with_sensor.launch.py">rrbot_system_with_sensor.launch.py</a></p></li>
 <li><p>Controllers yaml: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_4/bringup/config/rrbot_with_sensor_controllers.yaml">rrbot_with_sensor_controllers.yaml</a></p></li>
@@ -321,12 +333,13 @@ wrench:
 </ul>
 </section>
 <section id="controllers-from-this-demo">
-<h2>Controllers from this demo<a class="headerlink" href="#controllers-from-this-demo" title="Permalink to this heading"></a></h2>
+<h3>Controllers from this demo<a class="headerlink" href="#controllers-from-this-demo" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Joint</span> <span class="pre">State</span> <span class="pre">Broadcaster</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/tree/master/joint_state_broadcaster">ros2_controllers repository</a>): <a class="reference external" href="https://control.ros.org/master/doc/ros2_controllers/joint_state_broadcaster/doc/userdoc.html">doc</a></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Forward</span> <span class="pre">Command</span> <span class="pre">Controller</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/tree/master/forward_command_controller">ros2_controllers repository</a>): <a class="reference external" href="https://control.ros.org/master/doc/ros2_controllers/forward_command_controller/doc/userdoc.html">doc</a></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Force</span> <span class="pre">Torque</span> <span class="pre">Sensor</span> <span class="pre">Broadcaster</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/tree/master/force_torque_sensor_broadcaster">ros2_controllers repository</a>): <a class="reference external" href="https://control.ros.org/master/doc/ros2_controllers/force_torque_sensor_broadcaster/doc/userdoc.html">doc</a></p></li>
 </ul>
+</section>
 </section>
 </section>
 

@@ -114,6 +114,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#quick-hints">Quick Hints</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../doc/index.html#examples">Examples</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Example 1: RRBot</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tutorial-steps">Tutorial steps</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#files-used-for-this-demos">Files used for this demos</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#controllers-from-this-demo">Controllers from this demo</a></li>
 </ul>
@@ -206,9 +207,19 @@
             
   <section id="example-1-rrbot">
 <span id="ros2-control-demos-example-1-userdoc"></span><h1>Example 1: RRBot<a class="headerlink" href="#example-1-rrbot" title="Permalink to this heading"></a></h1>
-<p><em>RRBot</em>, or ‘’Revolute-Revolute Manipulator Robot’’, is a simple 3-linkage, 2-joint arm that we will use to demonstrate various features.
-It is essentially a double inverted pendulum and demonstrates some fun control concepts within a simulator and was originally introduced for Gazebo tutorials.
-The <em>RRBot</em> URDF files can be found in the <code class="docutils literal notranslate"><span class="pre">description/urdf</span></code> folder.</p>
+<p><em>RRBot</em>, or ‘’Revolute-Revolute Manipulator Robot’’, is a simple 3-linkage, 2-joint arm that we will
+use to demonstrate various features.</p>
+<p>It is essentially a double inverted pendulum and demonstrates some fun control concepts within a
+simulator and was originally introduced for Gazebo tutorials.</p>
+<p>For <em>example_1</em>, the hardware interface plugin is implemented having only one interface.</p>
+<ul class="simple">
+<li><p>The communication is done using proprietary API to communicate with the robot control box.</p></li>
+<li><p>Data for all joints is exchanged at once.</p></li>
+<li><p>Examples: KUKA RSI</p></li>
+</ul>
+<p>The <em>RRBot</em> URDF files can be found in the <code class="docutils literal notranslate"><span class="pre">description/urdf</span></code> folder.</p>
+<section id="tutorial-steps">
+<h2>Tutorial steps<a class="headerlink" href="#tutorial-steps" title="Permalink to this heading"></a></h2>
 <ol class="arabic">
 <li><p>To check that <em>RRBot</em> descriptions are working properly use following launch commands</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_1<span class="w"> </span>view_robot.launch.py
@@ -356,6 +367,7 @@ joint_trajectory_position_controller<span class="o">[</span>joint_trajectory_con
 <p>You can adjust the goals in <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_1/bringup/config/rrbot_joint_trajectory_publisher.yaml">rrbot_joint_trajectory_publisher</a>.</p>
 </li>
 </ol>
+</section>
 <section id="files-used-for-this-demos">
 <h2>Files used for this demos<a class="headerlink" href="#files-used-for-this-demos" title="Permalink to this heading"></a></h2>
 <ul class="simple">
