@@ -335,9 +335,21 @@ Acceleration interface can only be used in combination with position and velocit
 <dt>interpolation_method (string)</dt><dd><p>The type of interpolation to use, if any. Can be “splines” or “none”.</p>
 <p>Default: splines</p>
 </dd>
-<dt>open_loop_control (boolean)</dt><dd><p>Use controller in open-loop control mode using ignoring the states provided by hardware interface and using last commands as states in the next control step. This is useful if hardware states are not following commands, i.e., an offset between those (typical for hydraulic manipulators).</p>
+<dt>open_loop_control (boolean)</dt><dd><dl class="simple">
+<dt>Use controller in open-loop control mode:</dt><dd><ul class="simple">
+<li><p>The controller ignores the states provided by hardware interface but using last commands as states for starting the trajectory interpolation.</p></li>
+<li><p>It deactivates the feedback control, see the <code class="docutils literal notranslate"><span class="pre">gains</span></code> structure.</p></li>
+</ul>
+</dd>
+</dl>
+<p>This is useful if hardware states are not following commands, i.e., an offset between those (typical for hydraulic manipulators).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If this flag is set, the controller tries to read the values from the command interfaces on activation.
+If they have real numeric values, those will be used instead of state interfaces.
+Therefore it is important set command interfaces to NaN (i.e., <code class="docutils literal notranslate"><span class="pre">std::numeric_limits&lt;double&gt;::quiet_NaN()</span></code>) or state values when the hardware is started.</p>
+</div>
 <p>Default: false</p>
-<p>If this flag is set, the controller tries to read the values from the command interfaces on starting. If they have real numeric values, those will be used instead of state interfaces. Therefore it is important set command interfaces to NaN (std::numeric_limits&lt;double&gt;::quiet_NaN()) or state values when the hardware is started.</p>
 </dd>
 <dt>constraints (structure)</dt><dd><p>Default values for tolerances if no explicit values are states in JointTrajectory message.</p>
 </dd>
@@ -353,7 +365,9 @@ Acceleration interface can only be used in combination with position and velocit
 <dt>constraints.&lt;joint_name&gt;.goal (double)</dt><dd><p>Maximally allowed deviation from the goal (end of the trajectory) for a given joint.</p>
 <p>Default: 0.0 (tolerance is not enforced)</p>
 </dd>
-<dt>gains (structure)</dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">velocity</span></code> is the only command interface for all joints or an <code class="docutils literal notranslate"><span class="pre">effort</span></code> command interface is configured, PID controllers are used for every joint. This structure contains the controller gains for every joint with the control law</p>
+<dt>gains (structure)</dt><dd><p>Only relevant, if <code class="docutils literal notranslate"><span class="pre">open_loop_control</span></code> is not set.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">velocity</span></code> is the only command interface for all joints or an <code class="docutils literal notranslate"><span class="pre">effort</span></code> command interface is configured, PID controllers are used for every joint.
+This structure contains the controller gains for every joint with the control law</p>
 <div class="math notranslate nohighlight">
 \[u = k_{ff} v_d + k_p e + k_i \sum e dt + k_d (v_d - v)\]</div>
 <p>with the desired velocity <span class="math notranslate nohighlight">\(v_d\)</span>, the measured velocity <span class="math notranslate nohighlight">\(v\)</span>, the position error <span class="math notranslate nohighlight">\(e\)</span> (definition see below),
