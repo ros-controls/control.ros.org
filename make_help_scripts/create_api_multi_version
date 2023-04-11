@@ -24,7 +24,7 @@ cleanup() {
     then
         rm -rf "$api_dir"
     else
-        echo "Could not delet $api_dir. Something went wrong. You have to cleanup yourself. Exiting!"
+        echo "Could not delete $api_dir. Something went wrong. You have to cleanup yourself. Exiting!"
         exit
     fi
 }
@@ -37,5 +37,5 @@ then
 else
     git clone https://github.com/ros-controls/"$api_repo" doc/"$api_repo" || { echo "Could not clone $api_repo. Exiting!"; exit "$ERRCODE"; }
     create_apis
-    cleanup  
+    cleanup
 fi

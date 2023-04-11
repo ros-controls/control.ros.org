@@ -4,7 +4,6 @@ Supported Robots
 This page hosts a list of supported robots and references to them.
 To add your robot, submit a PR to this page on Github!
 
-.. * Use an unordered list
 Official (supported by robot manufacturer):
 
 * `Universal Robots <https://github.com/UniversalRobots/Universal_Robots_ROS2_Driver>`_
