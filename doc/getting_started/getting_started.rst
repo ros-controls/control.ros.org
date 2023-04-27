@@ -31,7 +31,7 @@ Controller Manager
 The `Controller Manager`_ (CM) connects the controllers and hardware-abstraction sides of the ros2_control framework.
 It also serves as the entry-point for users via ROS services.
 The CM implements a node without an executor so that it can be integrated into a custom setup.
-However, it's usally recommended to use the default node-setup implemented in `ros2_control_node <https://github.com/ros-controls/ros2_control/blob/master/controller_manager/src/ros2_control_node.cpp>`_ file from the ``controller_manager`` package.
+However, it's usually recommended to use the default node-setup implemented in `ros2_control_node <https://github.com/ros-controls/ros2_control/blob/master/controller_manager/src/ros2_control_node.cpp>`_ file from the ``controller_manager`` package.
 This manual assumes that you use this default node-setup.
 
 On the one hand, CM manages (e.g. loads, activates, deactivates, unloads) controllers and the interfaces they require.
