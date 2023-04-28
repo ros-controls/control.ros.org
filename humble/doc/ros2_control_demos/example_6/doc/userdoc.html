@@ -1,0 +1,384 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script defer data-domain="control.ros.org" src="https://plausible.io/js/script.js"></script>
+  
+  <title>Example 6: Modular Robots with separate communication to each actuator &mdash; ROS2_Control: Humble Apr 2023 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/override.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon_ros-controls.ico"/>
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="https://control.ros.org/rolling//humble/doc/ros2_control_demos/example_6/doc/userdoc.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Example 8: Industrial Robots with an exposed transmission interface" href="../../example_8/doc/userdoc.html" />
+    <link rel="prev" title="Example 5: Industrial robot with externally connected sensor" href="../../example_5/doc/userdoc.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html">
+          
+
+          
+            
+            <img src="../../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html#architecture">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html#hardware-components">Hardware Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html#core-functionalities">Core functionalities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../differences_to_ros1/differences_to_ros1.html">Differences to ros_control (ROS1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../differences_to_ros1/differences_to_ros1.html#migration-guide-to-ros2-control">Migration Guide to ros2_control</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/index.html">Demos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#what-you-can-find-in-this-repository">What you can find in this repository</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#goals">Goals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#example-overview">Example Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#quick-hints">Quick Hints</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/index.html#examples">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../example_1/doc/userdoc.html">Example 1: RRBot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_2/doc/userdoc.html">Example 2: DiffBot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_3/doc/userdoc.html">Example 3: RRBot with multiple interfaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_4/doc/userdoc.html">Example 4: Industrial robot with integrated sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_5/doc/userdoc.html">Example 5: Industrial Robots with externally connected sensor</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Example 6: Modular Robots with separate communication to each actuator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tutorial-steps">Tutorial steps</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#files-used-for-this-demos">Files used for this demos</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#controllers-from-this-demo">Controllers from this demo</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_8/doc/userdoc.html">Example 8: Using transmissions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../project_ideas.html">Project Ideas for GSoC 2022</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ROS2_Control: Humble</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../doc/index.html">Demos</a> &raquo;</li>
+        
+      <li>Example 6: Modular Robots with separate communication to each actuator</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/ros-controls/control.ros.org/blob/humble//doc/ros2_control_demos/example_6/doc/userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="example-6-modular-robots-with-separate-communication-to-each-actuator">
+<span id="ros2-control-demos-example-6-userdoc"></span><h1>Example 6: Modular Robots with separate communication to each actuator<a class="headerlink" href="#example-6-modular-robots-with-separate-communication-to-each-actuator" title="Permalink to this heading"></a></h1>
+<p>The example shows how to implement robot hardware with separate communication to each actuator:</p>
+<ul class="simple">
+<li><p>The communication is done on actuator level using proprietary or standardized API (e.g., canopen_402, Modbus, RS232, RS485).</p></li>
+<li><p>Data for all actuators is exchanged separately from each other.</p></li>
+<li><p>Examples: Mara, Arduino-based-robots</p></li>
+</ul>
+<p>This is implemented with a hardware interface of type <code class="docutils literal notranslate"><span class="pre">hardware_interface::ActuatorInterface</span></code>.</p>
+<section id="tutorial-steps">
+<h2>Tutorial steps<a class="headerlink" href="#tutorial-steps" title="Permalink to this heading"></a></h2>
+<ol class="arabic">
+<li><p>To check that <em>RRBot</em> descriptions are working properly use following launch commands</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_6<span class="w"> </span>view_robot.launch.py
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Getting the following output in terminal is OK: <code class="docutils literal notranslate"><span class="pre">Warning:</span> <span class="pre">Invalid</span> <span class="pre">frame</span> <span class="pre">ID</span> <span class="pre">&quot;odom&quot;</span> <span class="pre">passed</span> <span class="pre">to</span> <span class="pre">canTransform</span> <span class="pre">argument</span> <span class="pre">target_frame</span> <span class="pre">-</span> <span class="pre">frame</span> <span class="pre">does</span> <span class="pre">not</span> <span class="pre">exist</span></code>.
+This happens because <code class="docutils literal notranslate"><span class="pre">joint_state_publisher_gui</span></code> node need some time to start.
+The <code class="docutils literal notranslate"><span class="pre">joint_state_publisher_gui</span></code> provides a GUI to generate  a random configuration for rrbot. It is immediately displayed in <em>RViz</em>.</p>
+</div>
+</li>
+<li><p>To start <em>RRBot</em> example open a terminal, source your ROS2-workspace and execute its launch file with</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_6<span class="w"> </span>rrbot_modular_actuators.launch.py
+</pre></div>
+</div>
+<p>The launch file loads and starts the robot hardware, controllers and opens <em>RViz</em>.
+In starting terminal you will see a lot of output from the hardware implementation showing its internal states.
+This is only of exemplary purposes and should be avoided as much as possible in a hardware interface implementation.</p>
+<p>If you can see two orange and one yellow rectangle in in <em>RViz</em> everything has started properly.
+Still, to be sure, let’s introspect the control system before moving <em>RRBot</em>.</p>
+</li>
+<li><p>Check if the hardware interface loaded properly, by opening another terminal and executing</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_interfaces
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">command</span><span class="w"> </span>interfaces
+<span class="w">  </span>joint1/position<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+<span class="w">  </span>joint2/position<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+state<span class="w"> </span>interfaces
+<span class="w">  </span>joint1/position
+<span class="w">  </span>joint2/position
+</pre></div>
+</div>
+<p>Marker <code class="docutils literal notranslate"><span class="pre">[claimed]</span></code> by command interfaces means that a controller has access to command <em>RRBot</em>.</p>
+</li>
+<li><p>Check if controllers are running</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_controllers
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>forward_position_controller<span class="o">[</span>forward_command_controller/ForwardCommandController<span class="o">]</span>
+joint_state_broadcaster<span class="o">[</span>joint_state_broadcaster/JointStateBroadcaster<span class="o">]</span>
+</pre></div>
+</div>
+</li>
+<li><p>If you get output from above you can send commands to <em>Forward Command Controller</em>, either:</p>
+<ol class="arabic">
+<li><p>Manually using ROS 2 CLI interface.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/forward_position_controller/commands<span class="w"> </span>std_msgs/msg/Float64MultiArray<span class="w"> </span><span class="s2">&quot;data:</span>
+<span class="s2">- 0.5</span>
+<span class="s2">- 0.5&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Or you can start a demo node which sends two goals every 5 seconds in a loop</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_6<span class="w"> </span>test_forward_position_controller.launch.py
+</pre></div>
+</div>
+</li>
+</ol>
+<p>You should now see orange and yellow blocks moving in <em>RViz</em>.
+Also, you should see changing states in the terminal where launch file is started, e.g.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>RRBotModularJoint<span class="o">]</span>:<span class="w"> </span>Writing...please<span class="w"> </span>wait...
+<span class="o">[</span>RRBotModularJoint<span class="o">]</span>:<span class="w"> </span>Got<span class="w"> </span><span class="nb">command</span><span class="w"> </span><span class="m">0</span>.50000<span class="w"> </span><span class="k">for</span><span class="w"> </span>joint<span class="w"> </span><span class="s1">&#39;joint1&#39;</span>!
+<span class="o">[</span>RRBotModularJoint<span class="o">]</span>:<span class="w"> </span>Joints<span class="w"> </span>successfully<span class="w"> </span>written!
+<span class="o">[</span>RRBotModularJoint<span class="o">]</span>:<span class="w"> </span>Writing...please<span class="w"> </span>wait...
+<span class="o">[</span>RRBotModularJoint<span class="o">]</span>:<span class="w"> </span>Got<span class="w"> </span><span class="nb">command</span><span class="w"> </span><span class="m">0</span>.50000<span class="w"> </span><span class="k">for</span><span class="w"> </span>joint<span class="w"> </span><span class="s1">&#39;joint2&#39;</span>!
+<span class="o">[</span>RRBotModularJoint<span class="o">]</span>:<span class="w"> </span>Joints<span class="w"> </span>successfully<span class="w"> </span>written!
+</pre></div>
+</div>
+</li>
+</ol>
+<section id="files-used-for-this-demos">
+<h3>Files used for this demos<a class="headerlink" href="#files-used-for-this-demos" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Launch file: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_6/bringup/launch/rrbot_modular_actuators.launch.py">rrbot_modular_actuators.launch.py</a></p></li>
+<li><p>Controllers yaml: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_6/bringup/config/rrbot_modular_actuators.yaml">rrbot_modular_actuators.yaml</a></p></li>
+<li><p>URDF: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_6/description/urdf/rrbot_modular_actuators.urdf.xacro">rrbot_modular_actuators.urdf.xacro</a></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> URDF tag: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_6/description/ros2_control/rrbot_modular_actuators.ros2_control.xacro">rrbot_modular_actuators.ros2_control.xacro</a></p></li>
+</ul>
+</li>
+<li><p>RViz configuration: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_6/description/rviz/rrbot.rviz">rrbot.rviz</a></p></li>
+<li><p>Hardware interface plugin: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/blob/master/example_6/hardware/rrbot_actuator.cpp">rrbot_actuator.cpp</a></p></li>
+</ul>
+</section>
+<section id="controllers-from-this-demo">
+<h3>Controllers from this demo<a class="headerlink" href="#controllers-from-this-demo" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Joint</span> <span class="pre">State</span> <span class="pre">Broadcaster</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/tree/master/joint_state_broadcaster">ros2_controllers repository</a>): <a class="reference external" href="https://control.ros.org/master/doc/ros2_controllers/joint_state_broadcaster/doc/userdoc.html">doc</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Forward</span> <span class="pre">Command</span> <span class="pre">Controller</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/tree/master/forward_command_controller">ros2_controllers repository</a>): <a class="reference external" href="https://control.ros.org/master/doc/ros2_controllers/forward_command_controller/doc/userdoc.html">doc</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../../example_8/doc/userdoc.html" class="btn btn-neutral float-right" title="Example 8: Industrial Robots with an exposed transmission interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../../example_5/doc/userdoc.html" class="btn btn-neutral float-left" title="Example 5: Industrial robot with externally connected sensor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2023, ros2_control Maintainers.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: humble
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>ros2_control - Rolling</dt>
+      <dd><a href="../../../../../master/doc/ros2_control_demos/example_6/doc/userdoc.html">Master (latest)</a></dd>
+    </dl>
+    <dl>
+      <dt>ros2_control - Foxy, Galactic, and Humble</dt>
+        <dd><a href="userdoc.html">Humble (recommended)</a></dd><br>
+        <dd><a href="../../../../../galactic/index.html">Galactic</a></dd><br>
+        <dd><a href="../../../../../foxy/index.html">Foxy</a></dd><br>
+    </dl>
+  </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
