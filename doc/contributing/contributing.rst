@@ -75,20 +75,20 @@ We use the following naming conventions for branches.
 
 * Name: ``master``
 * CI rule for merge:
-  
+
   * must: ``semi-binary`` (working against development branch of ros2_control)
   * good: ``binary``      (working against the same stable branch of other ros2_control repositories)
-  
+
 * ``source`` build each day check against master branches of ROS 2
 
 **Stable branches**:
 
 * Name: ``<ros_distro>`` (e.g., foxy, galactic)
 * CI rule for merge:
-  
+
   * must: ``semi-binary`` (working against the same stable branch of other ros2_control repositories)
   * must: ``binary``    (working against released versions of ros2_control) - except for adding new non-braking features
-  
+
 * ``source`` build each day against distribution branches
 
 
