@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script defer data-domain="control.ros.org" src="https://plausible.io/js/script.js"></script>
   
-  <title>Project Ideas for GSoC 2022 &mdash; ROS2_Control: Rolling Apr 2023 documentation</title>
+  <title>Project Ideas for GSoC 2024 &mdash; ROS2_Control: Rolling Apr 2023 documentation</title>
   
 
   
@@ -99,10 +99,7 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="getting_started/getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started/getting_started.html#architecture">Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started/getting_started.html#hardware-components">Hardware Components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ros2_control/doc/index.html">API Documentation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ros2_control/doc/index.html#core-functionalities">Core functionalities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ros2_control/doc/index.html">ros2_control</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ros2_control/ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="differences_to_ros1/differences_to_ros1.html">Differences to ros_control (ROS1)</a></li>
@@ -111,7 +108,7 @@
 <li class="toctree-l1"><a class="reference internal" href="supported_robots/supported_robots.html">Supported Robots</a></li>
 <li class="toctree-l1"><a class="reference internal" href="resources/resources.html">Resources</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing/contributing.html">Contributing</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Project Ideas for GSoC 2022</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Project Ideas for GSoC 2024</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#tutorials-and-demos-for-ros2-control">Tutorials and Demos for ros2_control</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#mission-control-for-ros2-control">Mission-Control for ros2_control</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#add-support-for-hardware-semantic-components">Add support for hardware semantic components</a></li>
@@ -167,7 +164,7 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Project Ideas for GSoC 2022</li>
+      <li>Project Ideas for GSoC 2024</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -188,8 +185,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="project-ideas-for-gsoc-2022">
-<span id="project-ideas"></span><h1>Project Ideas for GSoC 2022<a class="headerlink" href="#project-ideas-for-gsoc-2022" title="Permalink to this heading"></a></h1>
+  <section id="project-ideas-for-gsoc-2024">
+<span id="project-ideas"></span><h1>Project Ideas for GSoC 2024<a class="headerlink" href="#project-ideas-for-gsoc-2024" title="Permalink to this heading"></a></h1>
 <section id="tutorials-and-demos-for-ros2-control">
 <h2>Tutorials and Demos for ros2_control<a class="headerlink" href="#tutorials-and-demos-for-ros2-control" title="Permalink to this heading"></a></h2>
 <p>This project is about extending our tutorials and examples on how to use the ros2_control framework.
@@ -259,13 +256,13 @@ The main purpose of such a component is to serve as conductor of ros2_control by
 <section id="add-support-for-hardware-semantic-components">
 <h2>Add support for hardware semantic components<a class="headerlink" href="#add-support-for-hardware-semantic-components" title="Permalink to this heading"></a></h2>
 <p>The ros2_control framework relies on simple command and state interfaces in the form of double values to exchange data between hardware components and controllers. It is desired however to provide good C++ data structures both on the hardware component and the controller side which improves code readability and maintainability.</p>
-<p>Earlier in the project, the concept of semantic components were introduced which essentially provides a grouping for these values and a semantic-specific API to use them. For instance, an IMU sensor will typically report 9 values, 3 values for each axis of the acelerometer, gyroscope and compass sensor parts respectively. Such values can be grouped and served through an API as a ROS IMU message or as a C++ struct for both input and output of these values while the ros2_control framework maintains it’s low-profile communication interfaces internally.</p>
+<p>Earlier in the project, the concept of semantic components were introduced which essentially provides a grouping for these values and a semantic-specific API to use them. For instance, an IMU sensor will typically report 9 values, 3 values for each axis of the accelerometer, gyroscope and compass sensor parts respectively. Such values can be grouped and served through an API as a ROS IMU message or as a C++ struct for both input and output of these values while the ros2_control framework maintains it’s low-profile communication interfaces internally.</p>
 <p>The goal of this project is to add semantic components that are relevant for hardware components.
 Additionally, this project includes extending the existing simulation tools with a set of common semantic components to support different sensors and actuators.</p>
 <p>Related design document and code implementations:</p>
 <ul class="simple">
-<li><p>[Few idea about Semantic Components for hardware](<a class="reference external" href="https://github.com/ros-controls/roadmap/pull/45">https://github.com/ros-controls/roadmap/pull/45</a>)</p></li>
-<li><p>[Semantic Components for Controllers](<a class="reference external" href="https://github.com/ros-controls/ros2_control/tree/master/controller_interface/include/semantic_components">https://github.com/ros-controls/ros2_control/tree/master/controller_interface/include/semantic_components</a>)</p></li>
+<li><p><a class="reference external" href="https://github.com/ros-controls/roadmap/pull/45">Few idea about Semantic Components for hardware</a></p></li>
+<li><p><a class="reference external" href="https://github.com/ros-controls/ros2_control/tree/master/controller_interface/include/semantic_components">Semantic Components for Controllers</a></p></li>
 </ul>
 <hr class="docutils" />
 <div class="line-block">
@@ -329,7 +326,7 @@ Our rich set of standard controllers was one of the main motivations for users t
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2023, ros2_control Maintainers.
+        &#169; Copyright 2023, ros2_control Development Team.
 
     </p>
   </div>
