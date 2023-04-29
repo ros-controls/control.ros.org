@@ -1,14 +1,25 @@
 .. _getting_started:
 
+#################
 Getting Started
-===============
+#################
 
+<<<<<<< HEAD
 The ros2_control framework is released for ROS 2 Foxy.
 To use it, you have to install ``ros-foxy-ros2-control`` and ``ros-foxy-ros2-controllers`` packages.
 Other dependencies are installed automatically.
+=======
+Installation
+============
+>>>>>>> 311a61a (Fix RTD theme and perform some cleanup (#82))
 
-Compiling
----------
+Binary packages
+------------------
+The ros2_control framework is released for ROS 2 rolling.
+To use it, you have to install ``ros-rolling-ros2-control`` and ``ros-rolling-ros2-controllers`` packages.
+
+Building from Source
+---------------------------
 
 If you want to install the framework from source use following commands in your workspace main folder:
 
