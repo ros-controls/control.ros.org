@@ -1,20 +1,25 @@
 .. _getting_started:
 
+#################
 Getting Started
-===============
+#################
 
-The ros2_control framework is released for ROS 2 Foxy.
-To use it, you have to install ``ros-foxy-ros2-control`` and ``ros-foxy-ros2-controllers`` packages.
-Other dependencies are installed automatically.
+Installation
+============
 
-Compiling
----------
+Binary packages
+------------------
+The ros2_control framework is released for ROS 2 humble.
+To use it, you have to install ``ros-humble-ros2-control`` and ``ros-humble-ros2-controllers`` packages.
+
+Building from Source
+---------------------------
 
 If you want to install the framework from source use following commands in your workspace main folder:
 
 .. code:: bash
 
-   wget https://raw.githubusercontent.com/ros-controls/ros2_control/master/ros2_control.rolling.repos
+   wget https://raw.githubusercontent.com/ros-controls/ros2_control/master/ros2_control.humble.repos
    vcs import src < ros2_control.repos
 
 Architecture

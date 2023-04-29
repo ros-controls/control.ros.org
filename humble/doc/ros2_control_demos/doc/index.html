@@ -99,10 +99,7 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html#architecture">Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html#hardware-components">Hardware Components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ros2_control/doc/index.html">API Documentation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ros2_control/doc/index.html#core-functionalities">Core functionalities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_control/doc/index.html">ros2_control</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ros2_control/ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../differences_to_ros1/differences_to_ros1.html">Differences to ros_control (ROS1)</a></li>
@@ -127,7 +124,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../supported_robots/supported_robots.html">Supported Robots</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../resources/resources.html">Resources</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../contributing/contributing.html">Contributing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../project_ideas.html">Project Ideas for GSoC 2022</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../project_ideas.html">Project Ideas for GSoC 2024</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
 </ul>
 
@@ -206,7 +203,8 @@ provides templates for the development of ros2_control-enabled robots and a simp
 <section id="what-you-can-find-in-this-repository">
 <h2>What you can find in this repository<a class="headerlink" href="#what-you-can-find-in-this-repository" title="Permalink to this heading"></a></h2>
 <p>This repository demonstrates the following <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> concepts:</p>
-<ul class="simple">
+<blockquote>
+<div><ul class="simple">
 <li><p>Creating a <code class="docutils literal notranslate"><span class="pre">HardwareInterface</span></code> for a System, Sensor, and Actuator.</p></li>
 <li><p>Creating a robot description in the form of URDF files.</p></li>
 <li><p>Loading the configuration and starting a robot using launch files.</p></li>
@@ -215,6 +213,7 @@ provides templates for the development of ros2_control-enabled robots and a simp
 <li><p>Implementing a controller switching strategy for a robot.</p></li>
 <li><p>Using joint limits and transmission concepts in <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code>.</p></li>
 </ul>
+</div></blockquote>
 </section>
 <section id="goals">
 <h2>Goals<a class="headerlink" href="#goals" title="Permalink to this heading"></a></h2>
@@ -226,49 +225,29 @@ provides templates for the development of ros2_control-enabled robots and a simp
 </section>
 <section id="example-overview">
 <h2>Example Overview<a class="headerlink" href="#example-overview" title="Permalink to this heading"></a></h2>
-<ul>
-<li><p>Example 1: RRBot</p>
-<blockquote>
-<div><p><em>RRBot</em> - or ‘’Revolute-Revolute Manipulator Robot’’ - a simple position controlled robot with one hardware interface. This example also demonstrates the switching between different controllers.</p>
-</div></blockquote>
-</li>
-<li><p>Example 2: DiffBot</p>
-<blockquote>
-<div><p><em>DiffBot</em>, or ‘’Differential Mobile Robot’’, is a simple mobile base with differential drive.
+<dl class="simple">
+<dt>Example 1: RRBot</dt><dd><p><em>RRBot</em> - or ‘’Revolute-Revolute Manipulator Robot’’ - a simple position controlled robot with one hardware interface. This example also demonstrates the switching between different controllers.</p>
+</dd>
+<dt>Example 2: DiffBot</dt><dd><p><em>DiffBot</em>, or ‘’Differential Mobile Robot’’, is a simple mobile base with differential drive.
 The robot is basically a box moving according to differential drive kinematics.</p>
-</div></blockquote>
-</li>
-<li><p>Example 3: “RRBot with multiple interfaces”</p>
-<blockquote>
-<div><p><em>RRBot</em> with multiple interfaces.</p>
-</div></blockquote>
-</li>
-<li><p>Example 4: “Industrial robot with integrated sensor”</p>
-<blockquote>
-<div><p><em>RRBot</em> with an integrated sensor.</p>
-</div></blockquote>
-</li>
-<li><p>Example 5: “Industrial Robots with externally connected sensor”</p>
-<blockquote>
-<div><p><em>RRBot</em> with an externally connected sensor.</p>
-</div></blockquote>
-</li>
-<li><p>Example 6: “Modular Robots with separate communication to each actuator”</p>
-<blockquote>
-<div><p>The example shows how to implement robot hardware with separate communication to each actuator.</p>
-</div></blockquote>
-</li>
-<li><p>Example 8: “Using transmissions”</p>
-<blockquote>
-<div><p><em>RRBot</em> with an exposed transmission interface.</p>
-</div></blockquote>
-</li>
-</ul>
+</dd>
+<dt>Example 3: “RRBot with multiple interfaces”</dt><dd><p><em>RRBot</em> with multiple interfaces.</p>
+</dd>
+<dt>Example 4: “Industrial robot with integrated sensor”</dt><dd><p><em>RRBot</em> with an integrated sensor.</p>
+</dd>
+<dt>Example 5: “Industrial Robots with externally connected sensor”</dt><dd><p><em>RRBot</em> with an externally connected sensor.</p>
+</dd>
+<dt>Example 6: “Modular Robots with separate communication to each actuator”</dt><dd><p>The example shows how to implement robot hardware with separate communication to each actuator.</p>
+</dd>
+<dt>Example 8: “Using transmissions”</dt><dd><p><em>RRBot</em> with an exposed transmission interface.</p>
+</dd>
+</dl>
 </section>
 <section id="quick-hints">
 <h2>Quick Hints<a class="headerlink" href="#quick-hints" title="Permalink to this heading"></a></h2>
 <p>These are some quick hints, especially for those coming from a ROS1 control background:</p>
-<ul class="simple">
+<blockquote>
+<div><ul class="simple">
 <li><p>There are now three categories of hardware components: <em>Sensor</em>, <em>Actuator</em>, and <em>System</em>.
 <em>Sensor</em> is for individual sensors; <em>Actuator</em> is for individual actuators; <em>System</em> is for any combination of multiple sensors/actuators.
 You could think of a Sensor as read-only.
@@ -281,6 +260,7 @@ The most common (position, velocity, acceleration, effort) are already defined a
 The ros2_control framework uses the <strong>&lt;ros2_control&gt;</strong> tag in the URDF.</p></li>
 <li><p>Joint names in &lt;ros2_control&gt; tags in the URDF must be compatible with the controller’s configuration.</p></li>
 </ul>
+</div></blockquote>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
@@ -312,7 +292,7 @@ The ros2_control framework uses the <strong>&lt;ros2_control&gt;</strong> tag in
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2023, ros2_control Development Team.
+        &#169; Copyright 2023, ros2_control Maintainers.
 
     </p>
   </div>

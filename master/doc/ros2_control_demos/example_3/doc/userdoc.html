@@ -99,6 +99,8 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html#architecture">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html#hardware-components">Hardware Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html">ros2_control</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
@@ -113,11 +115,9 @@
 <li class="toctree-l3"><a class="reference internal" href="../../example_1/doc/userdoc.html">Example 1: RRBot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../example_2/doc/userdoc.html">Example 2: DiffBot</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Example 3: RRBot with multiple interfaces</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#tutorial-steps">Tutorial steps</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#files-used-for-this-demos">Files used for this demos</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#controllers-from-this-demo">Controllers from this demo</a></li>
-</ul>
-</li>
+<li class="toctree-l4"><a class="reference internal" href="#tutorial-steps">Tutorial steps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#files-used-for-this-demos">Files used for this demos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#controllers-from-this-demo">Controllers from this demo</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../example_4/doc/userdoc.html">Example 4: Industrial robot with integrated sensor</a></li>
@@ -131,7 +131,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Contributing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../project_ideas.html">Project Ideas for GSoC 2024</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../project_ideas.html">Project Ideas for GSoC 2022</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
 </ul>
 
@@ -232,13 +232,11 @@ The <code class="docutils literal notranslate"><span class="pre">joint_state_pub
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_3<span class="w"> </span>rrbot_system_multi_interface.launch.py
 </pre></div>
 </div>
+<p>Useful launch-file options:</p>
 <dl class="simple">
-<dt>Useful launch-file options:</dt><dd><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">robot_controller:=forward_position_controller</span></code> - starts demo and spawns position controller.
-Robot can be then controlled using <code class="docutils literal notranslate"><span class="pre">forward_position_controller</span></code> as described below.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">robot_controller:=forward_acceleration_controller</span></code> - starts demo and spawns acceleration controller.
-Robot can be then controlled using <code class="docutils literal notranslate"><span class="pre">forward_acceleration_controller</span></code> as described below.</p></li>
-</ul>
+<dt><code class="docutils literal notranslate"><span class="pre">robot_controller:=forward_position_controller</span></code></dt><dd><p>starts demo and spawns position controller. Robot can be then controlled using <code class="docutils literal notranslate"><span class="pre">forward_position_controller</span></code> as described below.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">robot_controller:=forward_acceleration_controller</span></code></dt><dd><p>starts demo and spawns acceleration controller. Robot can be then controlled using <code class="docutils literal notranslate"><span class="pre">forward_acceleration_controller</span></code> as described below.</p>
 </dd>
 </dl>
 <p>The launch file loads and starts the robot hardware, controllers and opens <em>RViz</em>.
@@ -365,8 +363,9 @@ forward_illegal1_controller<span class="o">[</span>forward_command_controller/Fo
 </div>
 </li>
 </ol>
+</section>
 <section id="files-used-for-this-demos">
-<h3>Files used for this demos<a class="headerlink" href="#files-used-for-this-demos" title="Permalink to this heading"></a></h3>
+<h2>Files used for this demos<a class="headerlink" href="#files-used-for-this-demos" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p>Launch file: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_3/bringup/launch/rrbot_system_multi_interface.launch.py">rrbot_system_multi_interface.launch.py</a></p></li>
 <li><p>Controllers yaml: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_3/bringup/config/rrbot_multi_interface_forward_controllers.yaml">rrbot_multi_interface_forward_controllers.yaml</a></p></li>
@@ -380,12 +379,11 @@ forward_illegal1_controller<span class="o">[</span>forward_command_controller/Fo
 </ul>
 </section>
 <section id="controllers-from-this-demo">
-<h3>Controllers from this demo<a class="headerlink" href="#controllers-from-this-demo" title="Permalink to this heading"></a></h3>
+<h2>Controllers from this demo<a class="headerlink" href="#controllers-from-this-demo" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Joint</span> <span class="pre">State</span> <span class="pre">Broadcaster</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/tree/master/joint_state_broadcaster">ros2_controllers repository</a>): <a class="reference external" href="https://control.ros.org/master/doc/ros2_controllers/joint_state_broadcaster/doc/userdoc.html">doc</a></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Forward</span> <span class="pre">Command</span> <span class="pre">Controller</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/tree/master/forward_command_controller">ros2_controllers repository</a>): <a class="reference external" href="https://control.ros.org/master/doc/ros2_controllers/forward_command_controller/doc/userdoc.html">doc</a></p></li>
 </ul>
-</section>
 </section>
 </section>
 
@@ -403,7 +401,7 @@ forward_illegal1_controller<span class="o">[</span>forward_command_controller/Fo
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2023, ros2_control Development Team.
+        &#169; Copyright 2023, ros2_control Maintainers.
 
     </p>
   </div>

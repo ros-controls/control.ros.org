@@ -48,7 +48,7 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Project Ideas for GSoC 2022" href="../project_ideas.html" />
+    <link rel="next" title="Project Ideas for GSoC 2024" href="../project_ideas.html" />
     <link rel="prev" title="Resources" href="../resources/resources.html" /> 
 </head>
 
@@ -99,10 +99,7 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_started.html#architecture">Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_started.html#hardware-components">Hardware Components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../ros2_control/doc/index.html">API Documentation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../ros2_control/doc/index.html#core-functionalities">Core functionalities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ros2_control/doc/index.html">ros2_control</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ros2_control/ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../differences_to_ros1/differences_to_ros1.html">Differences to ros_control (ROS1)</a></li>
@@ -119,7 +116,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#documentation-usage">Documentation Usage</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../project_ideas.html">Project Ideas for GSoC 2022</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../project_ideas.html">Project Ideas for GSoC 2024</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
 </ul>
 
@@ -239,37 +236,35 @@ PR’s should always be submitted against the development branch.
 When PR is accepted, and there are no API and ABI changes to a stable branch, please open a new PR against the stable branch(es).
 We use the following naming conventions for branches.</p>
 <p><strong>Development branch</strong>:</p>
-<blockquote>
-<div><ul class="simple">
+<ul class="simple">
 <li><p>Name: <code class="docutils literal notranslate"><span class="pre">master</span></code></p></li>
-<li><p>CI rule for merge:
-- must: <code class="docutils literal notranslate"><span class="pre">semi-binary</span></code> (working against development branch of ros2_control)
-- good: <code class="docutils literal notranslate"><span class="pre">binary</span></code>      (working against the same stable branch of other ros2_control repositories)</p></li>
+<li><p>CI rule for merge:</p>
+<ul>
+<li><p>must: <code class="docutils literal notranslate"><span class="pre">semi-binary</span></code> (working against development branch of ros2_control)</p></li>
+<li><p>good: <code class="docutils literal notranslate"><span class="pre">binary</span></code>      (working against the same stable branch of other ros2_control repositories)</p></li>
+</ul>
+</li>
 <li><p><code class="docutils literal notranslate"><span class="pre">source</span></code> build each day check against master branches of ROS 2</p></li>
 </ul>
-</div></blockquote>
 <p><strong>Stable branches</strong>:</p>
-<blockquote>
-<div><ul class="simple">
+<ul class="simple">
 <li><p>Name: <code class="docutils literal notranslate"><span class="pre">&lt;ros_distro&gt;</span></code> (e.g., foxy, galactic)</p></li>
-<li><p>CI rule for merge:
-- must: <code class="docutils literal notranslate"><span class="pre">semi-binary</span></code> (working against the same stable branch of other ros2_control repositories)
-- must: <code class="docutils literal notranslate"><span class="pre">binary</span></code>    (working against released versions of ros2_control) - except for adding new non-braking features</p></li>
+<li><p>CI rule for merge:</p>
+<ul>
+<li><p>must: <code class="docutils literal notranslate"><span class="pre">semi-binary</span></code> (working against the same stable branch of other ros2_control repositories)</p></li>
+<li><p>must: <code class="docutils literal notranslate"><span class="pre">binary</span></code>    (working against released versions of ros2_control) - except for adding new non-braking features</p></li>
+</ul>
+</li>
 <li><p><code class="docutils literal notranslate"><span class="pre">source</span></code> build each day against distribution branches</p></li>
 </ul>
-</div></blockquote>
 </section>
 <section id="ci-configuration">
 <h2>CI configuration<a class="headerlink" href="#ci-configuration" title="Permalink to this heading"></a></h2>
 <p>Three build stages are checking the current and future compatibility of the framework.</p>
 <ol class="arabic simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">binary</span></code> - against released packages (main and testing) in ROS distributions. This Shows that direct local build is possible.</p></li>
-</ol>
-<ol class="arabic simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">semi-binary</span></code> - against released core ROS packages (main and testing), but the immediate dependencies are pulled from the source.
 This shows that local build with dependencies is possible, and if it fails there, we can expect that after the next package sync, we will not be able to build.</p></li>
-</ol>
-<ol class="arabic simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">source</span></code> - also core ROS packages are build from source. It shows potential issues in the mid future.</p></li>
 </ol>
 </section>
@@ -286,7 +281,7 @@ This shows that local build with dependencies is possible, and if it fails there
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../project_ideas.html" class="btn btn-neutral float-right" title="Project Ideas for GSoC 2022" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../project_ideas.html" class="btn btn-neutral float-right" title="Project Ideas for GSoC 2024" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="../resources/resources.html" class="btn btn-neutral float-left" title="Resources" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
@@ -294,7 +289,7 @@ This shows that local build with dependencies is possible, and if it fails there
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2023, ros2_control Development Team.
+        &#169; Copyright 2023, ros2_control Maintainers.
 
     </p>
   </div>

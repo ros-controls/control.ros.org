@@ -73,23 +73,19 @@ We use the following naming conventions for branches.
 
 **Development branch**:
 
-* Name: ``master``
-* CI rule for merge:
-
-  * must: ``semi-binary`` (working against development branch of ros2_control)
-  * good: ``binary``      (working against the same stable branch of other ros2_control repositories)
-
-* ``source`` build each day check against master branches of ROS 2
+  - Name: ``master``
+  - CI rule for merge:
+    - must: ``semi-binary`` (working against development branch of ros2_control)
+    - good: ``binary``      (working against the same stable branch of other ros2_control repositories)
+  - ``source`` build each day check against master branches of ROS 2
 
 **Stable branches**:
 
-* Name: ``<ros_distro>`` (e.g., foxy, galactic)
-* CI rule for merge:
-
-  * must: ``semi-binary`` (working against the same stable branch of other ros2_control repositories)
-  * must: ``binary``    (working against released versions of ros2_control) - except for adding new non-braking features
-
-* ``source`` build each day against distribution branches
+  - Name: ``<ros_distro>`` (e.g., foxy, galactic)
+  - CI rule for merge:
+    - must: ``semi-binary`` (working against the same stable branch of other ros2_control repositories)
+    - must: ``binary``    (working against released versions of ros2_control) - except for adding new non-braking features
+  - ``source`` build each day against distribution branches
 
 
 CI configuration
@@ -98,10 +94,10 @@ Three build stages are checking the current and future compatibility of the fram
 
 1. ``binary`` - against released packages (main and testing) in ROS distributions. This Shows that direct local build is possible.
 
-2. ``semi-binary`` - against released core ROS packages (main and testing), but the immediate dependencies are pulled from the source.
+1. ``semi-binary`` - against released core ROS packages (main and testing), but the immediate dependencies are pulled from the source.
    This shows that local build with dependencies is possible, and if it fails there, we can expect that after the next package sync, we will not be able to build.
 
-3. ``source`` - also core ROS packages are build from source. It shows potential issues in the mid future.
+1. ``source`` - also core ROS packages are build from source. It shows potential issues in the mid future.
 
 
 Documentation Usage
