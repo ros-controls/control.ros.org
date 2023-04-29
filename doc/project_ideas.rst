@@ -10,19 +10,11 @@ This project is about extending our tutorials and examples on how to use the ros
 Also, existing demos should be integrated with our documentation at `control.ros.org <https://control.ros.org>`_.
 In general, the following tasks are envisioned:
 
-<<<<<<< HEAD
-- Examples on simulators' integration (Gazebo and Ignition) and their use; 
-- Showcase multi-robot and multi-controller manager use-case with examples and by using simulators
-- Showcase: How to do Error Management with ros2_control (graceful error handling and degradation)
-- Implementing different example robot-hardware architectures for industrial and service robotics
-- Implementing use-cases from `roadmap <https://github.com/ros-controls/roadmap>`_ repository
-=======
 * Examples on simulators' integration (Gazebo and Ignition) and their use;
 * Showcase multi-robot and multi-controller manager use-case with examples and by using simulators
 * Showcase: How to do Error Management with ros2_control (graceful error handling and degradation)
 * Implementing different example robot-hardware architectures for industrial and service robotics
 * Implementing use-cases from `roadmap <https://github.com/ros-controls/roadmap>`_ repository
->>>>>>> 311a61a (Fix RTD theme and perform some cleanup (#82))
 
 The all code will be placed into our `demo repository <https://github.com/ros-controls/ros2_control_demos/>`_.
 
