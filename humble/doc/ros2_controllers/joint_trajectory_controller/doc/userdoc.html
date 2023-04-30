@@ -105,9 +105,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#nomenclature">Nomenclature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#guidelines-and-best-practices">Guidelines and Best Practices</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../doc/controllers_index.html#available-controllers">Available Controllers</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../../diff_drive_controller/doc/userdoc.html">Differential Drive</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../forward_command_controller/doc/userdoc.html">Forward Command</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Joint Trajectory</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../admittance_controller/doc/userdoc.html">Admittance Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../diff_drive_controller/doc/userdoc.html">Differential Drive Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../effort_controllers/doc/userdoc.html">Effort Controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../forward_command_controller/doc/userdoc.html">Forward Command Controller</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Joint Trajectory Controller</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#trajectory-representation">Trajectory representation</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hardware-interface-type">Hardware interface type</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#other-features">Other features</a></li>
@@ -126,8 +128,8 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../position_controllers/doc/userdoc.html">Position Controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tricycle_controller/doc/userdoc.html">Tricycle Controller</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../velocity_controllers/doc/userdoc.html">Velocity Controllers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../effort_controllers/doc/userdoc.html">Effort Controllers</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#available-broadcasters">Available Broadcasters</a></li>
@@ -219,11 +221,11 @@
 <section id="trajectory-representation">
 <h2>Trajectory representation<a class="headerlink" href="#trajectory-representation" title="Permalink to this heading"></a></h2>
 <p>The controller is templated to work with multiple trajectory representations. By default, a spline interpolator is provided, but it’s possible to support other representations. The spline interpolator uses the following interpolation strategies depending on the waypoint specification:</p>
-<blockquote>
-<div><p>Linear: Only position is specified. Guarantees continuity at the position level. Discouraged because it yields trajectories with discontinuous velocities at the waypoints.</p>
-<p>Cubic: Position and velocity are specified. Guarantees continuity at the velocity level.</p>
-<p>Quintic: Position, velocity and acceleration are specified: Guarantees continuity at the acceleration level.</p>
-</div></blockquote>
+<ul class="simple">
+<li><p>Linear: Only position is specified. Guarantees continuity at the position level. Discouraged because it yields trajectories with discontinuous velocities at the waypoints.</p></li>
+<li><p>Cubic: Position and velocity are specified. Guarantees continuity at the velocity level.</p></li>
+<li><p>Quintic: Position, velocity and acceleration are specified: Guarantees continuity at the acceleration level.</p></li>
+</ul>
 </section>
 <section id="hardware-interface-type">
 <h2>Hardware interface type<a class="headerlink" href="#hardware-interface-type" title="Permalink to this heading"></a></h2>
@@ -232,11 +234,11 @@
 </section>
 <section id="other-features">
 <h2>Other features<a class="headerlink" href="#other-features" title="Permalink to this heading"></a></h2>
-<blockquote>
-<div><p>Realtime-safe implementation.</p>
-<p>Proper handling of wrapping (continuous) joints.</p>
-<p>Robust to system clock changes: Discontinuous system clock changes do not cause discontinuities in the execution of already queued trajectory segments.</p>
-</div></blockquote>
+<ul class="simple">
+<li><p>Realtime-safe implementation.</p></li>
+<li><p>Proper handling of wrapping (continuous) joints.</p></li>
+<li><p>Robust to system clock changes: Discontinuous system clock changes do not cause discontinuities in the execution of already queued trajectory segments.</p></li>
+</ul>
 </section>
 <section id="ros2-control-interfaces">
 <h2>ros2_control interfaces<a class="headerlink" href="#ros2-control-interfaces" title="Permalink to this heading"></a></h2>
@@ -384,19 +386,26 @@ and the <code class="docutils literal notranslate"><span class="pre">velocity</s
 <h2>Specialized versions of JointTrajectoryController (TBD in …)<a class="headerlink" href="#specialized-versions-of-jointtrajectorycontroller-tbd-in" title="Permalink to this heading"></a></h2>
 <p>The controller types are placed into namespaces according to their command types for the hardware (see <a class="reference external" href="../../index.rst">general introduction into controllers</a>).</p>
 <p>The following version of the Joint Trajectory Controller are available mapping the following interfaces:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>position_controllers::JointTrajectoryController
-- Input: position, [velocity, [acceleration]]
-- Output: position</p></li>
-<li><p>position_velocity_controllers::JointTrajectoryController
-- Input: position, [velocity, [acceleration]]
-- Output: position and velocity</p></li>
-<li><p>position_velocity_acceleration_controllers::JointTrajectoryController
-- Input: position, [velocity, [acceleration]]
-- Output: position, velocity and acceleration</p></li>
+<ul class="simple">
+<li><p>position_controllers::JointTrajectoryController</p>
+<ul>
+<li><p>Input: position, [velocity, [acceleration]]</p></li>
+<li><p>Output: position</p></li>
 </ul>
-</div></blockquote>
+</li>
+<li><p>position_velocity_controllers::JointTrajectoryController</p>
+<ul>
+<li><p>Input: position, [velocity, [acceleration]]</p></li>
+<li><p>Output: position and velocity</p></li>
+</ul>
+</li>
+<li><p>position_velocity_acceleration_controllers::JointTrajectoryController</p>
+<ul>
+<li><p>Input: position, [velocity, [acceleration]]</p></li>
+<li><p>Output: position, velocity and acceleration</p></li>
+</ul>
+</li>
+</ul>
 <p>(<em>Not implemented yet</em>) When using pure <code class="docutils literal notranslate"><span class="pre">velocity</span></code> or <code class="docutils literal notranslate"><span class="pre">effort</span></code> controllers a command is generated using the desired state and state error using a velocity feedforward term plus a corrective PID term. (#171)</p>
 </section>
 </section>
@@ -415,7 +424,7 @@ and the <code class="docutils literal notranslate"><span class="pre">velocity</s
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2023, ros2_control Maintainers.
+        &#169; Copyright 2023, ros2_control Development Team.
 
     </p>
   </div>
