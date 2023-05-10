@@ -299,17 +299,17 @@ def smv_rewrite_configs(app, config):
     # external defines are setup, and environment variables aren't passed through to
     # conf.py).  Instead, hook into the 'config-inited' event which is late enough
     # to rewrite the various configuration items with the current version.
-    branch_distro = {
-        "master": "rolling",
-        "humble": "humble",
-        "foxy": "foxy",
-        "galactic": "galactic"
-    }
     if app.config.smv_current_version != "":
-        branch = app.config.smv_current_version
-        distro = branch_distro[branch]
+        branch_distro = {
+            "master": "rolling",
+            "humble": "humble",
+            "foxy": "foxy",
+            "galactic": "galactic"
+        }
 
         # Override default values
+        branch = app.config.smv_current_version
+        distro = branch_distro[branch]
         app.config.macros = {
             "DISTRO": distro,
             "DISTRO_TITLE": distro.title(),
