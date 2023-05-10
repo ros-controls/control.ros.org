@@ -88,6 +88,7 @@ extensions = [
     "sphinx.ext.ifconfig",
     "sphinx_copybutton",
     "sphinx.ext.viewcode",
+    "sphinxcontrib.globalsubs"
 ]
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
@@ -298,17 +299,17 @@ def smv_rewrite_configs(app, config):
     # external defines are setup, and environment variables aren't passed through to
     # conf.py).  Instead, hook into the 'config-inited' event which is late enough
     # to rewrite the various configuration items with the current version.
+    branch_distro = {
+        "master": "rolling",
+        "humble": "humble",
+        "foxy": "foxy",
+        "galactic": "galactic"
+    }
     if app.config.smv_current_version != "":
-        branch_distro = {
-            "master": "rolling",
-            "humble": "humble",
-            "foxy": "foxy",
-            "galactic": "galactic"
-        }
-
-        # Override default values
         branch = app.config.smv_current_version
         distro = branch_distro[branch]
+
+        # Override default values
         app.config.macros = {
             "DISTRO": distro,
             "DISTRO_TITLE": distro.title(),
@@ -318,9 +319,18 @@ def smv_rewrite_configs(app, config):
         app.config.html_baseurl = app.config.html_baseurl + "/" + distro + "/"
         app.config.project = "ROS2_Control: " + distro.title()
         app.config.html_logo = "images/logo_ros-controls.png"
+
+        # see https://github.com/missinglinkelectronics/sphinxcontrib-globalsubs
+        app.config.global_substitutions = {
+            'github_branch': branch,
+        }
     else:
         # If we are not building a multiversion build, default to the rolling logo
         app.config.html_logo = "images/logo_ros-controls.png"
+        # see https://github.com/missinglinkelectronics/sphinxcontrib-globalsubs
+        app.config.global_substitutions = {
+            'github_branch': 'master',
+        }
 
 
 def github_link_rewrite_branch(app, pagename, templatename, context, doctree):
