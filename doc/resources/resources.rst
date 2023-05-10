@@ -16,7 +16,7 @@ Presentations
 `Presentation: Tricycle Controller with ros2_control <https://github.com/ros-controls/control.ros.org/blob/master/doc/resources/presentations/pixel_robotics_tricycle_controller_with_ros2_control.pdf>`_
 
 `Meetup event link <https://www.meetup.com/robot-operating-system-ros/events/290966049/>`_
-  
+
   Summary:
     In this presentation Pixel Robotics presents the contributed the Tricycle controller to ros2_controllers, prefaced by an introduction to ros2_control.
 
@@ -45,7 +45,7 @@ Presentations
 `Presentation: A practitioner's guide to ros2_control <https://raw.githubusercontent.com/ros-controls/control.ros.org/master/doc/resources/presentations/2022-10_ROSCon2022_A_practitioners_guide_to_ros2_control.pdf>`_
 
   Summary:
-    ros2_control is a hardware-agnostic control framework focusing on the modular composition of control systems for robots, sharing of controllers as well as real-time performance. The framework provides controller-lifecycle and hardware management on top of abstractions of real or virtual hardware interfaces. 
+    ros2_control is a hardware-agnostic control framework focusing on the modular composition of control systems for robots, sharing of controllers as well as real-time performance. The framework provides controller-lifecycle and hardware management on top of abstractions of real or virtual hardware interfaces.
 
     This talk delves deeper into ros2_control, showcasing new features and what they could be used for, such as explicit lifecycle management, chaining controllers, emergency-stop handlers and mock components. Finally, we showcase different usages of ros2_control on openly accessible examples.
 
@@ -66,7 +66,7 @@ Presentations
     ros2_control is a hardware-agnostic control framework with a focus on both real-time performance and sharing of controllers. The framework has become one of the main utilities for abstracting hardware and low-level control for 3rd party solutions like `MoveIt2` and `Nav2` systems.
 
     The presentation provides practical tips to use ros2_control, from creating a robot description, writing hardware drivers to configuring standard controllers. Some hot-new features, like controller chaining, will be shown. Furthermore, you will get introduced to concepts like modular reuse of hardware drivers, multi-robot architectures and parameters injection for controllers.
-    
+
 `Recording <https://peertube.laas.fr/w/dAmVEo9GrJLrcwLpashtZe>`__
 
   *Presenter: Dr. Denis Stogl*
@@ -126,7 +126,7 @@ Presentations
 
 2021-10-07 Weekly Robotics Meetup #13
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-`Presentation: Getting started with ros2_control <https://raw.githubusercontent.com/ros-controls/control.ros.org/master/doc/resources/presentations/2021-1_WR_Meetup_Getting_started_with_ros2_control.pdf>`_
+`Meetup presentation: Getting started with ros2_control <https://raw.githubusercontent.com/ros-controls/control.ros.org/master/doc/resources/presentations/2021-1_WR_Meetup_Getting_started_with_ros2_control.pdf>`_
 
   Summary:
     ros2_control is a robot-agnostic control framework with a focus on both real-time performance and sharing of controllers. The framework offers controller lifecycle and hardware-resource management, as well as abstractions on hardware interfaces.
@@ -162,7 +162,7 @@ Presentations
 
   Summary:
     The presentation gives a quick overview on the basic concepts and some simple implementation examples. We show implementing a simple Hardware Abstraction Layer (aka SystemComponent) and a forwarding controller. Once done, we also look into modifying the controller with the example goal of changing the type of the command topic.
-    
+
 `Recording <https://peertube.laas.fr/w/sDPKwTWP6gAr5h1CcZPnbJ>`__
 
   *Presenter: Dr. Bence Magyar*

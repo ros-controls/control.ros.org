@@ -6,7 +6,7 @@ DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 . "$DIR/deploy_defines" || { echo "Could not source deploy_defines script. This is needed for correct execution. Exiting!"; exit; }
 
-# checkout a base 
+# checkout a base
 cd "$base_dir" || { echo "Could not checkout base dir of control.ros.org. Exiting!"; exit "$ERRCODE"; }
 git checkout "$base_branch" || { echo "Exiting!"; exit $ERRCODE; }
 

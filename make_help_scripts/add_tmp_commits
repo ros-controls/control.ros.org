@@ -22,15 +22,15 @@ add_sub_repositories_and_commit () {
         for repo_name in "${!subrepo_url[@]}";
             do echo "Create doc/$repo_name";
                 git clone "${subrepo_url[$repo_name]}" -b "${branch_version[$branch]}" doc/"$repo_name"
-                cd doc/"$repo_name" || { echo "Could not clone $repo_name to doc/ directory. Exiting!"; exit "$ERRCODE"; } 
+                cd doc/"$repo_name" || { echo "Could not clone $repo_name to doc/ directory. Exiting!"; exit "$ERRCODE"; }
                 # remove git repo so that doc files of subrepo can be added to tmp commit
                 rm -rf .git/
-                cd ../../ 
+                cd ../../
         done
         git add .
         git commit -m "Add temporary changes for multi version"
         git checkout "$base_branch"
-        # remove left over folders if exisiting
+        # remove left over folders if existing
         for repo_name in "${!subrepo_url[@]}";
             do rm -rf doc/"$repo_name";
         done
