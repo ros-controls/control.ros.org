@@ -33,4 +33,3 @@ research and innovation programme under grant agreement no. 732287.
 .. |rosin_ack_logo_wide| image:: images/rosin_ack_logo_wide.png
     :height: 60
     :alt: "ROSIN"
-

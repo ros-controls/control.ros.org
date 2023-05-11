@@ -27,7 +27,7 @@ html-with-api: Makefile
 html-all-subrepos: Makefile
 	@echo Single html file without API
 	@echo Step 1: Cloning all subrepositories
-	./make_help_scripts/add_sub_repos 
+	./make_help_scripts/add_sub_repos
 	@echo Step 2: Building documentation
 	$(SPHINXBUILD) $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
 	@echo Step 3: Deleting subrepositories in doc/ folder
@@ -36,7 +36,7 @@ html-all-subrepos: Makefile
 html-all-subrepos-with-api: Makefile
 	@echo Single html file with API
 	@echo Step 1: Cloning all subrepositories
-	./make_help_scripts/add_sub_repos 
+	./make_help_scripts/add_sub_repos
 	@echo Step 2: Building documentation
 	$(SPHINXBUILD) $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
 	@echo Step 3: Deleting subrepositories in doc/ folder
@@ -52,7 +52,7 @@ multiversion: Makefile
 	sphinx-multiversion $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
 	@echo Step 3: Deleting temporary commits
 	./make_help_scripts/delete_tmp_commits
-	@echo Step 4: Create correct index 
+	@echo Step 4: Create correct index
 	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=master/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
 
 multiversion-with-api: Makefile
@@ -65,7 +65,7 @@ multiversion-with-api: Makefile
 	./make_help_scripts/delete_tmp_commits
 	@echo Step 4: Building multiverison API
 	./make_help_scripts/create_api_multi_version
-	@echo Step 5: Create correct index 
+	@echo Step 5: Create correct index
 	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=master/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
 
 .PHONY: help Makefile html-with-api multiversion html-with-api
