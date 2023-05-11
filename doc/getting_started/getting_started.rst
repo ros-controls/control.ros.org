@@ -100,7 +100,7 @@ A detailed explanation of hardware components is given in the `Hardware Access t
 Hardware Description in URDF
 ----------------------------
 The ros2_control framework uses the ``<ros2_control>``-tag in the robot's URDF file to describe its components, i.e., the hardware setup.
-The chosen structure enables tracking together multiple `xacro`-macros into one without any changes.
+The chosen structure enables tracking together multiple ``xacro``-macros into one without any changes.
 The example hereunder shows a position-controlled robot with 2-DOF (RRBot), an external 1-DOF force-torque sensor, and an externally controlled 1-DOF parallel gripper as its end-effector.
 For more examples and detailed explanations, check `ros2_control_demos`_ repository and `ROS2 Control Components URDF Examples design document`_.
 
@@ -167,8 +167,8 @@ The example files can be found in the `ros2_control_demos`_ repository.
 #. Create a launch file to start the node with `Controller Manager`_.
    You can use a default `ros2_control node`_ (recommended) or integrate the controller manager in your software stack.
    (`Example launch file for RRBot <https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_bringup/launch/rrbot_system_position_only.launch.py>`_)
-   
-*NOTE:* You could alternatively use a script to create setup a `skeleton of the "hardware_interface" package by using the scripts <https://stoglrobotics.github.io/ros_team_workspace/use-cases/setup_robot_ros2_control_hardware.html>`_ provided by one of our maintainers.
+
+*NOTE:* You could alternatively use a script to create setup a `skeleton of the "hardware_interface" package by using the scripts <https://stoglrobotics.github.io/ros_team_workspace/master/use-cases/ros2_control/setup_robot_hardware_interface.html>`_ provided by one of our maintainers.
 
 
 .. _ros2_control: https://github.com/ros-controls/ros2_control
@@ -194,4 +194,3 @@ The example files can be found in the `ros2_control_demos`_ repository.
 
 .. |ros2_control_architecture| image:: images/components_architecture.png
    :alt: "ros2_control Architecture"
-
