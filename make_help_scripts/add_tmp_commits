@@ -45,7 +45,8 @@ add_sub_repositories_and_commit () {
                 cd ../../
         done
         git add .
-        git commit -m "Add temporary changes for multi version" 1> /dev/null
+        # we don't want to use-precommit to check if subrepos are correct
+        git commit -m "Add temporary changes for multi version" --no-verify 1> /dev/null
         git checkout "$base_branch"
         # remove left over folders if existing
         for repo_name in "${!subrepo_url[@]}";
