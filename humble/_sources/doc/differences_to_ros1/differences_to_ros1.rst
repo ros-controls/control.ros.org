@@ -31,7 +31,7 @@ In ros_control, the controllers had direct access to the ``RobotHW`` class reque
 The hardware itself then took care of registered interfaces and resource conflicts.
 
 In ros2_control, ``ResourceManager`` takes care of the state of available interfaces in the framework and enables controllers to access the hardware.
-Also, the controllers do not have direct access to hardware anymore, but they register their interfaces to the `ControllerManager`.
+Also, the controllers do not have direct access to hardware anymore, but they register their interfaces to the ``ControllerManager``.
 
 Migration Guide to ros2_control
 ===============================

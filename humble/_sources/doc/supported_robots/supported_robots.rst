@@ -4,7 +4,6 @@ Supported Robots
 This page hosts a list of supported robots and references to them.
 To add your robot, submit a PR to this page on Github!
 
-.. * Use an unordered list
 Official (supported by robot manufacturer):
 
 * `Universal Robots <https://github.com/UniversalRobots/Universal_Robots_ROS2_Driver>`_
@@ -27,7 +26,7 @@ Non robot-devices:
 * `Force Dimension haptic devices <https://github.com/ICube-Robotics/forcedimension_ros2>`_
 * `ODrive Motor Controller <https://github.com/Factor-Robotics/odrive_ros2_control>`_
 * `ODRI Motor Controller <https://github.com/stack-of-tasks/ros2_hardware_interface_odri>`_
-  
+
 Mobile manipulators:
 
 * `Hello Robot - Stretch (for simple simulation with MoveIt2) <https://github.com/hello-robot/stretch_ros2/blob/galactic/stretch_moveit_config/README.md>`_
