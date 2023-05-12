@@ -87,7 +87,11 @@ extensions = [
     "sphinx.ext.extlinks",
     "sphinx.ext.ifconfig",
     "sphinx_copybutton",
+<<<<<<< HEAD
     "sphinx.ext.viewcode",
+=======
+    "sphinxcontrib.globalsubs"
+>>>>>>> fed3b2a (Add global_substitutions to fix github links (#85))
 ]
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
@@ -318,9 +322,18 @@ def smv_rewrite_configs(app, config):
         app.config.html_baseurl = app.config.html_baseurl + "/" + distro + "/"
         app.config.project = "ROS2_Control: " + distro.title()
         app.config.html_logo = "images/logo_ros-controls.png"
+
+        # see https://github.com/missinglinkelectronics/sphinxcontrib-globalsubs
+        app.config.global_substitutions = {
+            'github_branch': branch,
+        }
     else:
         # If we are not building a multiversion build, default to the rolling logo
         app.config.html_logo = "images/logo_ros-controls.png"
+        # see https://github.com/missinglinkelectronics/sphinxcontrib-globalsubs
+        app.config.global_substitutions = {
+            'github_branch': 'master',
+        }
 
 
 def github_link_rewrite_branch(app, pagename, templatename, context, doctree):
