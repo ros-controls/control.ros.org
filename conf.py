@@ -76,18 +76,12 @@ pygments_style = "sphinx"
 # extensions coming with Sphinx (named "sphinx.ext.*") or your custom
 # ones.
 extensions = [
-    "sphinx.ext.autodoc",
-    "sphinx.ext.doctest",
     "sphinx.ext.intersphinx",
     "sphinx.ext.todo",
-    "sphinx.ext.coverage",
     "sphinx.ext.githubpages",
     "sphinx_rtd_theme",
     "sphinx_multiversion",
-    "sphinx.ext.extlinks",
-    "sphinx.ext.ifconfig",
     "sphinx_copybutton",
-    "sphinx.ext.viewcode",
 ]
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
@@ -99,7 +93,6 @@ html_baseurl = "https://control.ros.org/" + ros_distro + "/"
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme_path = ["_themes"]
 html_theme = "sphinx_rtd_theme"
 
 templates_path = [
@@ -110,7 +103,13 @@ templates_path = [
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-# html_theme_options = {}
+html_theme_options = {
+    "collapse_navigation": True,
+    "sticky_navigation": True,
+    "navigation_depth": -1,
+    # Only display the logo image, do not display the project name at the top of the sidebar
+    "logo_only": True,
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -134,7 +133,6 @@ html_context = {
     "github_version": repos_file_branch + "/",
     "conf_py_path": "/",
     "source_suffix": source_suffix,
-    "css_files": ["_static/override.css"],
     "favicon": "favicon_ros-controls.ico",
     "logo": "logo_ros-controls.png"
 }
@@ -142,13 +140,6 @@ html_context = {
 html_favicon = "images/favicon_ros-controls.ico"
 html_logo = "images/logo_ros-controls.png"
 
-html_theme_options = {
-    "collapse_navigation": True,
-    "sticky_navigation": True,
-    "navigation_depth": -1,
-    # Only display the logo image, do not display the project name at the top of the sidebar
-    "logo_only": True,
-}
 
 github_url = "https://github.com/ros-controls/control.ros.org"
 
