@@ -76,6 +76,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a39a8b61736e0258030b1dce00876cf4e"><td class="memItemLeft" align="right" valign="top"><a id="a39a8b61736e0258030b1dce00876cf4e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>ResourceStorage</b> (unsigned int update_rate=100, rclcpp::node_interfaces::NodeClockInterface::SharedPtr clock_interface=nullptr)</td></tr>
+<tr class="separator:a39a8b61736e0258030b1dce00876cf4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e6c5da63f0ae9c6f75c12c73d2d1448"><td class="memTemplParams" colspan="2"><a id="a1e6c5da63f0ae9c6f75c12c73d2d1448"></a>
 template&lt;class HardwareT , class HardwareInterfaceT &gt; </td></tr>
 <tr class="memitem:a1e6c5da63f0ae9c6f75c12c73d2d1448"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>load_hardware</b> (const <a class="el" href="structhardware__interface_1_1HardwareInfo.html">HardwareInfo</a> &amp;hardware_info, pluginlib::ClassLoader&lt; HardwareInterfaceT &gt; &amp;loader, std::vector&lt; HardwareT &gt; &amp;container)</td></tr>
@@ -167,6 +170,15 @@ std::vector&lt; <a class="el" href="classhardware__interface_1_1Sensor.html">Sen
 <tr class="memitem:a61e9dbb8b30fb553a0bdfd4830b42813"><td class="memItemLeft" align="right" valign="top"><a id="a61e9dbb8b30fb553a0bdfd4830b42813"></a>
 std::vector&lt; <a class="el" href="classhardware__interface_1_1System.html">System</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>systems_</b></td></tr>
 <tr class="separator:a61e9dbb8b30fb553a0bdfd4830b42813"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43d2799ec2f0d7d97766254cc5560539"><td class="memItemLeft" align="right" valign="top"><a id="a43d2799ec2f0d7d97766254cc5560539"></a>
+std::vector&lt; <a class="el" href="classhardware__interface_1_1Actuator.html">Actuator</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>async_actuators_</b></td></tr>
+<tr class="separator:a43d2799ec2f0d7d97766254cc5560539"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60e28039e873384fd0b96b99038819d8"><td class="memItemLeft" align="right" valign="top"><a id="a60e28039e873384fd0b96b99038819d8"></a>
+std::vector&lt; <a class="el" href="classhardware__interface_1_1Sensor.html">Sensor</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>async_sensors_</b></td></tr>
+<tr class="separator:a60e28039e873384fd0b96b99038819d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d98fa56178e95bcc1b4826bbcfb3ff5"><td class="memItemLeft" align="right" valign="top"><a id="a1d98fa56178e95bcc1b4826bbcfb3ff5"></a>
+std::vector&lt; <a class="el" href="classhardware__interface_1_1System.html">System</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>async_systems_</b></td></tr>
+<tr class="separator:a1d98fa56178e95bcc1b4826bbcfb3ff5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77ed3a0d08f1c7e9bda348dac01fc32e"><td class="memItemLeft" align="right" valign="top"><a id="a77ed3a0d08f1c7e9bda348dac01fc32e"></a>
 std::unordered_map&lt; std::string, <a class="el" href="structhardware__interface_1_1HardwareComponentInfo.html">HardwareComponentInfo</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>hardware_info_map_</b></td></tr>
 <tr class="separator:a77ed3a0d08f1c7e9bda348dac01fc32e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -197,6 +209,16 @@ std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bott
 std::unordered_map&lt; std::string, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceStorage.html#ab4afd858f3cd6e9d24b81836d003a6f7">claimed_command_interface_map_</a></td></tr>
 <tr class="memdesc:ab4afd858f3cd6e9d24b81836d003a6f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of all claimed command interfaces. <br /></td></tr>
 <tr class="separator:ab4afd858f3cd6e9d24b81836d003a6f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8728a75ff7a2d8506281c0b6a2d7c103"><td class="memItemLeft" align="right" valign="top"><a id="a8728a75ff7a2d8506281c0b6a2d7c103"></a>
+std::unordered_map&lt; std::string, <a class="el" href="classhardware__interface_1_1AsyncComponentThread.html">AsyncComponentThread</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceStorage.html#a8728a75ff7a2d8506281c0b6a2d7c103">async_component_threads_</a></td></tr>
+<tr class="memdesc:a8728a75ff7a2d8506281c0b6a2d7c103"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of async components by type. <br /></td></tr>
+<tr class="separator:a8728a75ff7a2d8506281c0b6a2d7c103"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e58949f99b563dfe04dbf939c7ab186"><td class="memItemLeft" align="right" valign="top"><a id="a9e58949f99b563dfe04dbf939c7ab186"></a>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>cm_update_rate_</b></td></tr>
+<tr class="separator:a9e58949f99b563dfe04dbf939c7ab186"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71c6e2540d55ee994d033de3566d9f1c"><td class="memItemLeft" align="right" valign="top"><a id="a71c6e2540d55ee994d033de3566d9f1c"></a>
+rclcpp::node_interfaces::NodeClockInterface::SharedPtr&#160;</td><td class="memItemRight" valign="bottom"><b>clock_interface_</b></td></tr>
+<tr class="separator:a71c6e2540d55ee994d033de3566d9f1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a7ac8a1c05b54ad71f7d0c62315756b4c"></a>
