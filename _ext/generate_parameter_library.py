@@ -18,7 +18,7 @@ class GeneraterParameterLibraryDetails(Directive):
         yaml_file = self.arguments[0]
         # cpp is used here because it the desired style of the markdown,
         # e.g. "false" for C++ instead of "False" for Python
-        gen_param_struct = GenerateCode("cpp")
+        gen_param_struct = GenerateCode("rst")
         gen_param_struct.parse(yaml_file, "")
 
         param_details = [
@@ -51,7 +51,7 @@ class GeneraterParameterLibraryDefaultConfig(Directive):
         yaml_file = self.arguments[0]
         # cpp is used here because it the desired style of the markdown,
         # e.g. "false" for C++ instead of "False" for Python
-        gen_param_struct = GenerateCode("cpp")
+        gen_param_struct = GenerateCode("rst")
         gen_param_struct.parse(yaml_file, "")
         auto_doc = DefaultConfigMarkdown(gen_param_struct)
         docs = str(auto_doc)
