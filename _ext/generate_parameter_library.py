@@ -1,5 +1,5 @@
 from docutils import nodes
-from docutils.parsers.rst import Directive
+from sphinx.util.docutils import SphinxDirective
 from sphinx.util.nodes import nested_parse_with_titles
 from docutils.statemachine import ViewList
 from generate_parameter_library_py.parse_yaml import (
@@ -10,14 +10,14 @@ from generate_parameter_library_py.generate_markdown import (
     ParameterDetailMarkdown
 )
 
-class GeneraterParameterLibraryDetails(Directive):
+class GeneraterParameterLibraryDetails(SphinxDirective):
     required_arguments = 1
     optional_arguments = 0
 
     def run(self):
-        yaml_file = self.arguments[0]
-        # cpp is used here because it the desired style of the markdown,
-        # e.g. "false" for C++ instead of "False" for Python
+        # get the absolute path from sphinx tree
+        yaml_file = self.env.relfn2path(self.arguments[0], self.env.docname)[0]
+
         gen_param_struct = GenerateCode("rst")
         gen_param_struct.parse(yaml_file, "")
 
@@ -43,14 +43,14 @@ class GeneraterParameterLibraryDetails(Directive):
 
         return node.children
 
-class GeneraterParameterLibraryDefaultConfig(Directive):
+class GeneraterParameterLibraryDefaultConfig(SphinxDirective):
     required_arguments = 1
     optional_arguments = 0
 
     def run(self):
-        yaml_file = self.arguments[0]
-        # cpp is used here because it the desired style of the markdown,
-        # e.g. "false" for C++ instead of "False" for Python
+        # get the absolute path from sphinx tree
+        yaml_file = self.env.relfn2path(self.arguments[0], self.env.docname)[0]
+
         gen_param_struct = GenerateCode("rst")
         gen_param_struct.parse(yaml_file, "")
         auto_doc = DefaultConfigMarkdown(gen_param_struct)
