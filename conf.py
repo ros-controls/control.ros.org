@@ -83,7 +83,7 @@ extensions = [
     "sphinx_rtd_theme",
     "sphinx_multiversion",
     "sphinx_copybutton",
-    "sphinxcontrib.globalsubs"
+    "sphinxcontrib.globalsubs",
     "generate_parameter_library"
 ]
 
