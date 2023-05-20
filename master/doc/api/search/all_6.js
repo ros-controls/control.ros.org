@@ -20,6 +20,6 @@ var searchData=
   ['get_5fvelocity_97',['get_velocity',['../classjoint__limits__interface_1_1JointLimitHandle.html#a36fc613c76e82c5d573885056295246d',1,'joint_limits_interface::JointLimitHandle']]],
   ['getjointlimits_98',['getJointLimits',['../namespacejoint__limits__interface.html#a9d24edbf1b558f47ac2c6e336a38bd4a',1,'joint_limits_interface']]],
   ['getsoftjointlimits_99',['getSoftJointLimits',['../namespacejoint__limits__interface.html#a35e2e6ed69cf9f9952a51684e19be646',1,'joint_limits_interface']]],
-  ['gpio_5ffake_5fcommands_5f_100',['gpio_fake_commands_',['../classmock__components_1_1GenericSystem.html#ac68c03e5ce605ab6dc0e3793326fb99a',1,'mock_components::GenericSystem']]],
+  ['gpio_5fmock_5fcommands_5f_100',['gpio_mock_commands_',['../classmock__components_1_1GenericSystem.html#abf862830f5caf481e76222b315c77aa2',1,'mock_components::GenericSystem']]],
   ['gpios_101',['gpios',['../structhardware__interface_1_1HardwareInfo.html#aaba1f315215e7425123b75ffcb87b5ce',1,'hardware_interface::HardwareInfo']]]
 ];
