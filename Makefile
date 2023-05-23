@@ -11,11 +11,11 @@ BUILDDIR      = _build
 # Put it first so that "make" without argument is like "make help".
 help:
 	@$(SPHINXBUILD) -M help $(SOURCEDIR) $(BUILDDIR) $(SPHINXOPTS) $(O)
-	@echo ""
-	@echo "make publish"
-	@echo "   publish generated html to thesofproject.github.io site:"
-	@echo "   specify RELEASE=name to publish as a tagged release version"
-	@echo "   and placed in a version subfolder.  Requires repo merge permission."
+	@echo "  html-with-api"
+	@echo "  html-all-subrepos"
+	@echo "  html-all-subrepos-with-api"
+	@echo "  multiversion"
+	@echo "  multiversion-with-api"
 
 html-with-api: Makefile
 	@echo Single html file with API
@@ -68,7 +68,7 @@ multiversion-with-api: Makefile
 	@echo Step 5: Create correct index
 	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=master/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
 
-.PHONY: help Makefile html-with-api multiversion html-with-api
+.PHONY: help Makefile html-with-api multiversion multiversion-with-api html-all-subrepos html-all-subrepos-with-api
 
 # TODO(denis): Enable this!
 # # # # Generate the doxygen xml (for Sphinx) and copy the doxygen html to the
