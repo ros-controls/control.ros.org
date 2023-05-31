@@ -11,8 +11,8 @@ on:
         required: false
         type: string
 
-      upstream_workspace:
-        description: 'UPSTREAM_WORKSPACE variable for industrial_ci. Usually path to local .repos file.'
+      target_workspace:
+        description: 'TARGET_WORKSPACE variable for industrial_ci. Usually path to local .repos file.'
         required: true
         type: string
       ros_distro:
@@ -29,8 +29,8 @@ on:
         default: ''
         required: false
         type: string
-      before_install_upstream_dependencies:
-        description: 'BEFORE_INSTALL_UPSTREAM_DEPENDENCIES variable for industrial_ci'
+      before_install_target_dependencies:
+        description: 'BEFORE_INSTALL_TARGET_DEPENDENCIES variable for industrial_ci'
         default: ''
         required: false
         type: string
@@ -54,7 +54,7 @@ jobs:
     env:
       CCACHE_DIR: ${{ github.workspace }}/${{ inputs.ccache_dir }}
       BASEDIR: ${{ github.workspace }}/${{ inputs.basedir }}
-      CACHE_PREFIX: ${{ inputs.ros_distro }}-${{ inputs.upstream_workspace }}-${{ inputs.ros_repo }}-${{ github.job }}
+      CACHE_PREFIX: ${{ inputs.ros_distro }}-${{ inputs.target_workspace }}-${{ inputs.ros_repo }}-${{ github.job }}
     steps:
       - name: Checkout ${{ inputs.ref }} when build is not scheduled
         if: ${{ github.event_name != 'schedule' }}
@@ -82,11 +82,11 @@ jobs:
             ccache-${{ env.CACHE_PREFIX }}
       - uses: 'ros-industrial/industrial_ci@master'
         env:
-          UPSTREAM_WORKSPACE: ${{ inputs.upstream_workspace }}
+          TARGET_WORKSPACE: ${{ inputs.target_workspace }}
           ROS_DISTRO: ${{ inputs.ros_distro }}
           ROS_REPO: ${{ inputs.ros_repo }}
           OS_CODE_NAME: ${{ inputs.os_code_name }}
-          BEFORE_INSTALL_UPSTREAM_DEPENDENCIES: ${{ inputs.before_install_upstream_dependencies }}
+          BEFORE_INSTALL_TARGET_DEPENDENCIES: ${{ inputs.before_install_target_dependencies }}
       - name: prepare target_ws for cache
         if: ${{ always() && ! matrix.env.CCOV }}
         run: |
