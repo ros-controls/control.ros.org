@@ -35,6 +35,12 @@ on:
         required: false
         type: string
 
+      gz_version:
+        description: 'gz version used to build gz_ros2_control'
+        default: 'fortress'
+        required: false
+        type: string
+
       ccache_dir:
         description: 'Local path to store cache (from "github.workspace"). For standard industrial_ci configuration do not have to be changed'
         default: '.ccache'
@@ -87,6 +93,7 @@ jobs:
           ROS_REPO: ${{ inputs.ros_repo }}
           OS_CODE_NAME: ${{ inputs.os_code_name }}
           BEFORE_INSTALL_TARGET_DEPENDENCIES: ${{ inputs.before_install_target_dependencies }}
+          DOCKER_RUN_OPTS: -e GZ_VERSION=${{ inputs.gz_version }}
       - name: prepare target_ws for cache
         if: ${{ always() && ! matrix.env.CCOV }}
         run: |
