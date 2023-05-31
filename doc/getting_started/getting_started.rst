@@ -20,7 +20,7 @@ If you want to install the framework from source, use the following commands in 
 .. code:: bash
 
    wget https://raw.githubusercontent.com/ros-controls/control.ros.org/master/ros_controls.rolling.repos
-   vcs import src < ros2_control.repos
+   vcs import src < ros_controls.rolling.repos
 
 Architecture
 ============
