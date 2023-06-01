@@ -20,7 +20,7 @@ If you want to install the framework from source use following commands in your 
 .. code:: bash
 
    wget https://raw.githubusercontent.com/ros-controls/ros2_control/master/ros2_control.humble.repos
-   vcs import src < ros2_control.repos
+   vcs import src < ros2_control.humble.repos
 
 Architecture
 ============
