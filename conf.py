@@ -19,6 +19,7 @@ import time
 
 from docutils.parsers.rst import Directive
 
+sys.path.append(os.path.abspath("./_ext"))
 sys.path.append(os.path.abspath("./sphinx-multiversion"))
 
 # -- General configuration -------------------------------------------------
@@ -82,7 +83,8 @@ extensions = [
     "sphinx_rtd_theme",
     "sphinx_multiversion",
     "sphinx_copybutton",
-    "sphinxcontrib.globalsubs"
+    "sphinxcontrib.globalsubs",
+    "generate_parameter_library"
 ]
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
