@@ -26,7 +26,7 @@ There are `make` commands available which automate the process of building and i
 1. If you are running inside a docker container, be sure to open a port so the website can be accessed.
 2. Install doxygen and graphviz: `sudo apt install doxygen graphviz`
 3. `python3 -m pip install -r requirements.txt`
-4. Install generate_parameter_library>0.3.3. If it is not installed as a ROS 2 package already, install it as python package from source
+4. Install generate_parameter_library>0.3.3. If it is not installed as a ROS 2 package already, install it as python module from source
 ```bash
 cd
 git clone https://github.com/PickNikRobotics/generate_parameter_library.git
