@@ -19,6 +19,7 @@ import time
 
 from docutils.parsers.rst import Directive
 
+sys.path.append(os.path.abspath("./_ext"))
 sys.path.append(os.path.abspath("./sphinx-multiversion"))
 
 # -- General configuration -------------------------------------------------
@@ -82,6 +83,7 @@ extensions = [
     "sphinx_rtd_theme",
     "sphinx_multiversion",
     "sphinx_copybutton",
+    "generate_parameter_library"
 ]
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
@@ -169,7 +171,7 @@ smv_branch_whitelist = r"^(foxy|galactic|humble|master)$"
 smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy|galactic|humble).*$"
 smv_remote_whitelist = r"^(origin)$"
 smv_latest_version = "humble"
-smv_eol_versions = []
+smv_eol_versions = ["foxy", "galactic"]
 
 distro_full_names = {
     "foxy": "Foxy Fitzroy",
