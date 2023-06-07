@@ -55,6 +55,17 @@ multiversion: Makefile
 	@echo Step 4: Create correct index
 	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=master/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
 
+multiversion-with-errors: Makefile
+	@echo Building multi version documentation without API
+	@echo Step 1: Creating temporary commits
+	./make_help_scripts/add_tmp_commits
+	@echo Step 2: Build multi version documentation
+	sphinx-multiversion $(SPHINXOPTS) -W --keep-going $(SOURCEDIR) $(BUILDDIR)/html
+	@echo Step 3: Deleting temporary commits
+	./make_help_scripts/delete_tmp_commits
+	@echo Step 4: Create correct index
+	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=master/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
+
 multiversion-with-api: Makefile
 	@echo Building multi version documentation with API
 	@echo Step 1: Creating temporary commits
