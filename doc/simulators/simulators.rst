@@ -10,8 +10,8 @@ Hosted by ros-controls
 .. toctree::
    :titlesonly:
 
-   Gazebo <gz_ros2_control/doc/index.rst>
-   Gazebo Classic <gazebo_ros2_control/doc/index.rst>
+   Gazebo <../gz_ros2_control/doc/index.rst>
+   Gazebo Classic <../gazebo_ros2_control/doc/index.rst>
 
 Community
 ---------------------------------------------
