@@ -32,8 +32,10 @@ add_sub_repositories_and_commit () {
     for branch in "${!branch_version[@]}";
         do echo "Switch to branch: $branch.  - With version:${branch_version[$branch]}";
         git checkout "$branch"
-        # change .gitignore, needed to include subrepositorie. sed matches doc/ros2_control*, so all subrepositorie are excluded
+        # change .gitignore, needed to include subrepositories. sed matches doc/ros2_control*, so all subrepositorie are excluded
         sed -i "s/doc\/ros2_control/\#doc\/ros2_control/g" .gitignore
+        sed -i "s/doc\/gz_ros2_control/\#doc\/gz_ros2_control/g" .gitignore
+        sed -i "s/doc\/gazebo_ros2_control/\#doc\/gazebo_ros2_control/g" .gitignore
         # clone all subrepositorie and add as tmp commit to branch of multi version
         echo "Clone repositories for $branch and checkout ${branch_version[$branch]}"
         for repo_name in "${!subrepo_url[@]}";
