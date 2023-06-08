@@ -133,7 +133,7 @@ vcs<span class="w"> </span>import<span class="w"> </span>src<span class="w"> </s
 <p><img alt="&quot;UML Class Diagram&quot;" src="../../_images/uml_class_diagram.png" /></p>
 <section id="controller-manager">
 <h3>Controller Manager<a class="headerlink" href="#controller-manager" title="Permalink to this heading"></a></h3>
-<p>The <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/controller_manager/src/controller_manager.cpp">Controller Manager</a> (CM) connects the controllers and hardware-abstraction sides of the ros2_control framework.
+<p>The <a class="reference internal" href="#controller-manager">Controller Manager</a> (CM) connects the controllers and hardware-abstraction sides of the ros2_control framework.
 It also serves as the entry-point for users via ROS services.
 The CM implements a node without an executor so that it can be integrated into a custom setup.
 However, it’s usually recommended to use the default node-setup implemented in <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/controller_manager/src/ros2_control_node.cpp">ros2_control_node</a> file from the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> package.
@@ -146,7 +146,7 @@ It reads data from the hardware components, updates outputs of all active contro
 </section>
 <section id="resource-manager">
 <h3>Resource Manager<a class="headerlink" href="#resource-manager" title="Permalink to this heading"></a></h3>
-<p>The <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/src/resource_manager.cpp">Resource Manager</a> (RM) abstracts physical hardware and its drivers (called <em>hardware components</em>) for the ros2_control framework.
+<p>The <a class="reference internal" href="#resource-manager">Resource Manager</a> (RM) abstracts physical hardware and its drivers (called <em>hardware components</em>) for the ros2_control framework.
 The RM loads the components using the <code class="docutils literal notranslate"><span class="pre">pluginlib</span></code>-library, manages their lifecycle and components’ state and command interfaces.
 The abstraction provided by RM allows reuse of implemented hardware components, e.g., robot and gripper, without any implementation, and flexible hardware application for state and command interfaces, e.g., separate hardware/communication libraries for motor control and encoder reading.</p>
 <p>In the control loop execution, the RM’s <code class="docutils literal notranslate"><span class="pre">read()</span></code> and <code class="docutils literal notranslate"><span class="pre">write()</span></code> methods handle the communication with the hardware components.</p>
@@ -162,7 +162,7 @@ This method can access the latest hardware state and enable the controller to wr
 </section>
 <section id="user-interfaces">
 <h3>User Interfaces<a class="headerlink" href="#user-interfaces" title="Permalink to this heading"></a></h3>
-<p>Users interact with the ros2_control framework using <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/controller_manager/src/controller_manager.cpp">Controller Manager</a>’s services.
+<p>Users interact with the ros2_control framework using <a class="reference internal" href="#controller-manager">Controller Manager</a>’s services.
 For a list of services and their definitions, check the <code class="docutils literal notranslate"><span class="pre">srv</span></code> folder in the <a class="reference external" href="https://github.com/ros-controls/ros2_control/tree/master/controller_manager_msgs">controller_manager_msgs</a> package.</p>
 <p>While service calls can be used directly from the command line or via nodes, there exists a user-friendly <code class="docutils literal notranslate"><span class="pre">Command</span> <span class="pre">Line</span> <span class="pre">Interface</span></code> (CLI) which integrates with the <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">cli</span></code>. This supports auto-complete and has a range of common commands available. The base command is <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">control</span></code>.
 For the description of our CLI capabilities, see the <code class="docutils literal notranslate"><span class="pre">README.md</span></code> file of the <a class="reference external" href="https://github.com/ros-controls/ros2_control/tree/master/ros2controlcli">ros2controlcli</a> package.</p>
@@ -172,7 +172,7 @@ For the description of our CLI capabilities, see the <code class="docutils liter
 <span id="overview-hardware-components"></span><h2>Hardware Components<a class="headerlink" href="#hardware-components" title="Permalink to this heading"></a></h2>
 <p>The <em>hardware components</em> realize communication to physical hardware and represent its abstraction in the ros2_control framework.
 The components have to be exported as plugins using <code class="docutils literal notranslate"><span class="pre">pluginlib</span></code>-library.
-The <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/src/resource_manager.cpp">Resource Manager</a> dynamically loads those plugins and manages their lifecycle.</p>
+The <a class="reference internal" href="#resource-manager">Resource Manager</a> dynamically loads those plugins and manages their lifecycle.</p>
 <p>There are three basic types of components:</p>
 <dl class="simple">
 <dt>System</dt><dd><p>Complex (multi-DOF) robotic hardware like industrial robots.
@@ -253,12 +253,12 @@ For more examples and detailed explanations, check <a class="reference external"
 <p>To run the ros2_control framework, do the following.
 The example files can be found in the <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos">ros2_control_demos</a> repository.</p>
 <ol class="arabic simple">
-<li><p>Create a YAML file with the configuration of the controller manager and two controllers. (<a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_bringup/config/rrbot_controllers.yaml">Example configuration for RRBot</a>)</p></li>
+<li><p>Create a YAML file with the configuration of the controller manager and two controllers. (<a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/blob/master/example_1/bringup/config/rrbot_controllers.yaml">Example configuration for RRBot</a>)</p></li>
 <li><p>Extend the robot’s URDF description with needed <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code> tags.
-It is recommended to use macro files (xacro) instead of pure URDF. (<a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_description/rrbot_description/urdf/rrbot_system_position_only.urdf.xacro">Example URDF for RRBot</a>)</p></li>
-<li><p>Create a launch file to start the node with <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/controller_manager/src/controller_manager.cpp">Controller Manager</a>.
+It is recommended to use macro files (xacro) instead of pure URDF. (<a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/blob/master/example_1/description/ros2_control/rrbot.ros2_control.xacro">Example URDF for RRBot</a>)</p></li>
+<li><p>Create a launch file to start the node with <a class="reference internal" href="#controller-manager">Controller Manager</a>.
 You can use a default <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/controller_manager/src/ros2_control_node.cpp">ros2_control node</a> (recommended) or integrate the controller manager in your software stack.
-(<a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_bringup/launch/rrbot_system_position_only.launch.py">Example launch file for RRBot</a>)</p></li>
+(<a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/blob/master/example_1/bringup/launch/rrbot.launch.py">Example launch file for RRBot</a>)</p></li>
 </ol>
 <p><em>NOTE:</em> You could alternatively use a script to create setup a <a class="reference external" href="https://stoglrobotics.github.io/ros_team_workspace/master/use-cases/ros2_control/setup_robot_hardware_interface.html">skeleton of the “hardware_interface” package by using the scripts</a> provided by one of our maintainers.</p>
 </section>
