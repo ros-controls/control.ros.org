@@ -17,6 +17,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: install-deps
     steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
     - name: Build multiversion considering warnings as errors
       run: |
         git config --local user.email "action@github.com"
