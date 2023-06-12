@@ -15,54 +15,54 @@ To use it, you have to install ``ros-humble-ros2-control`` and ``ros-humble-ros2
 Building from Source
 ---------------------------
 
-If you want to install the framework from source use following commands in your workspace main folder:
+If you want to install the framework from source, use the following commands in your workspace main folder:
 
 .. code:: bash
 
-   wget https://raw.githubusercontent.com/ros-controls/ros2_control/master/ros2_control.humble.repos
-   vcs import src < ros2_control.humble.repos
+   wget https://raw.githubusercontent.com/ros-controls/ros2_control/{REPOS_FILE_BRANCH}/ros2_control.{REPOS_FILE_BRANCH}.repos
+   vcs import src < ros2_control.{REPOS_FILE_BRANCH}.repos
 
 Architecture
 ============
-The ros2_control framework's source can be found in `ros2_control`_ and `ros2_controllers`_ GitHub-repositories.
-The following figure shows the architecture of the ros2_control framework.
+The source code for the ros2_control framework can be found in the `ros2_control`_ and `ros2_controllers`_ GitHub repositories.The following figure shows the architecture of the ros2_control framework.
 
 |ros2_control_architecture|
 
 Controller Manager
 ------------------
-The `Controller Manager`_ (CM) connects the controllers' and hardware-abstraction sides of the ros2_control framework.
-It also serves as the entry-point for users through ROS services.
-The CM implements a node without an executor so it can be integrated into a custom setup.
-Still, for a standard user, it is recommended to use the default node-setup implemented in `ros2_control_node <https://github.com/ros-controls/ros2_control/blob/master/controller_manager/src/ros2_control_node.cpp>`_ file from the ``controller_manager`` package.
+The `Controller Manager`_ (CM) connects the controllers and hardware-abstraction sides of the ros2_control framework.
+It also serves as the entry-point for users via ROS services.
+The CM implements a node without an executor so that it can be integrated into a custom setup.
+However, it's usually recommended to use the default node-setup implemented in `ros2_control_node <https://github.com/ros-controls/ros2_control/blob/{REPOS_FILE_BRANCH}/controller_manager/src/ros2_control_node.cpp>`_ file from the ``controller_manager`` package.
 This manual assumes that you use this default node-setup.
 
-On the one side, CM manages (e.g., loading, activating, deactivating, unloading) controllers and from them required interfaces.
-On the other side, it has access to the hardware components (through Resource Manager), i.e., their interfaces.
-The Controller Manager matches *required* and *provided* interfaces, gives controllers access to hardware when activated, or reports an error if there is an access conflict.
+On the one hand, CM manages (e.g. loads, activates, deactivates, unloads) controllers and the interfaces they require.
+On the other hand, it has access (via the Resource Manager) to the hardware components, i.e. their interfaces.
+The Controller Manager matches *required* and *provided* interfaces, granting controllers access to hardware when enabled, or reporting an error if there is an access conflict.
+
 
 The execution of the control-loop is managed by the CM's ``update()`` method.
-The method reads data from the hardware components, updates outputs of all active controllers, and writes the result to the components.
+It reads data from the hardware components, updates outputs of all active controllers, and writes the result to the components.
 
 Resource Manager
 ----------------
 The `Resource Manager`_ (RM) abstracts physical hardware and its drivers (called *hardware components*) for the ros2_control framework.
-The RM loads the components using ``pluginlib``-library, manages their lifecycle and components' state and command interfaces.
-This abstraction provided by RM enables re-usability of implemented hardware components, e.g., robot and gripper, without any implementation and flexible hardware application for state and command interfaces, e.g., separate hardware/communication libraries for motor control and encoder reading.
+The RM loads the components using the ``pluginlib``-library, manages their lifecycle and components' state and command interfaces.
+The abstraction provided by RM allows reuse of implemented hardware components, e.g., robot and gripper, without any implementation, and flexible hardware application for state and command interfaces, e.g., separate hardware/communication libraries for motor control and encoder reading.
 
-In the control loop execution, the RM's ``read()`` and ``write()`` methods deal with communication to the hardware components.
+In the control loop execution, the RM's ``read()`` and ``write()`` methods handle the communication with the hardware components.
 
 .. _overview-controllers:
 
 Controllers
 -----------
-The controllers in the ros2_control framework have the same functionality as defined in the control theory. They compare the reference value with the measured output and, based on this error, calculate a system's input (for more details, visit `Wikipedia <https://en.wikipedia.org/wiki/Control_theory>`_).
+The controllers in the ros2_control framework are based on control theory. They compare the reference value with the measured output and, based on this error, calculate a system's input.
 The controllers are objects derived from `ControllerInterface`_ (``controller_interface`` package in `ros2_control`_) and exported as plugins using ``pluginlib``-library.
-For example of on controller check `ForwardCommandController implementation`_ in the `ros2_controllers`_ repository.
-The controllers' lifecycle is based on the `LifecycleNode-Class`_ implementing the state machine as described in the `Node Lifecycle Design`_ document.
+For an example of a controller check the `ForwardCommandController implementation`_ in the `ros2_controllers`_ repository.
+The controller lifecycle is based on the LifecycleNode class, which implements the state machine described in the Node Lifecycle Design document.
 
-When executing the control-loop ``update()`` method is called.
-The method can access the latest hardware states and enable the controller to write the hardware's command interfaces.
+When the control-loop is executed, the ``update()`` method is called.
+This method can access the latest hardware state and enable the controller to write to the hardware command interfaces.
 
 User Interfaces
 ---------------
@@ -166,36 +166,26 @@ Running the Framework for Your Robot
 To run the ros2_control framework, do the following.
 The example files can be found in the `ros2_control_demos`_ repository.
 
-#. Create a YAML file with the configuration of the controller manager and two controllers. (`Example configuration for RRBot <https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_bringup/config/rrbot_controllers.yaml>`_)
+#. Create a YAML file with the configuration of the controller manager and two controllers. (`Example configuration for RRBot <https://github.com/ros-controls/ros2_control_demos/blob/{REPOS_FILE_BRANCH}/example_1/bringup/config/rrbot_controllers.yaml>`_)
 #. Extend the robot's URDF description with needed ``<ros2_control>`` tags.
-   It is recommended to use macro files (xacro) instead of pure URDF. (`Example URDF for RRBot <https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_description/rrbot_description/urdf/rrbot_system_position_only.urdf.xacro>`_)
+   It is recommended to use macro files (xacro) instead of pure URDF. (`Example URDF for RRBot <https://github.com/ros-controls/ros2_control_demos/blob/{REPOS_FILE_BRANCH}/example_1/description/ros2_control/rrbot.ros2_control.xacro>`_)
 #. Create a launch file to start the node with `Controller Manager`_.
    You can use a default `ros2_control node`_ (recommended) or integrate the controller manager in your software stack.
-   (`Example launch file for RRBot <https://github.com/ros-controls/ros2_control_demos/blob/master/ros2_control_demo_bringup/launch/rrbot_system_position_only.launch.py>`_)
+   (`Example launch file for RRBot <https://github.com/ros-controls/ros2_control_demos/blob/{REPOS_FILE_BRANCH}/example_1/bringup/launch/rrbot.launch.py>`_)
 
 *NOTE:* You could alternatively use a script to create setup a `skeleton of the "hardware_interface" package by using the scripts <https://stoglrobotics.github.io/ros_team_workspace/master/use-cases/ros2_control/setup_robot_hardware_interface.html>`_ provided by one of our maintainers.
 
 
 .. _ros2_control: https://github.com/ros-controls/ros2_control
 .. _ros2_controllers: https://github.com/ros-controls/ros2_controllers
-.. _control_msgs: https://github.com/ros-controls/control_msgs
-.. _realtime_tools: https://github.com/ros-controls/realtime_tools
-.. _control_toolbox: https://github.com/ros-controls/control_toolbox
 .. _ros2_control_demos: https://github.com/ros-controls/ros2_control_demos
 .. _controller_manager_msgs: https://github.com/ros-controls/ros2_control/tree/master/controller_manager_msgs
-.. _Controller Manager: https://github.com/ros-controls/ros2_control/blob/master/controller_manager/src/controller_manager.cpp
 .. _ControllerInterface: https://github.com/ros-controls/ros2_control/blob/master/controller_interface/include/controller_interface/controller_interface.hpp
 .. _ros2_control node: https://github.com/ros-controls/ros2_control/blob/master/controller_manager/src/ros2_control_node.cpp
 .. _ForwardCommandController implementation: https://github.com/ros-controls/ros2_controllers/blob/master/forward_command_controller/src/forward_command_controller.cpp
-.. _Resource Manager: https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/src/resource_manager.cpp
-.. _LifecycleNode-Class: https://github.com/ros2/rclcpp/blob/master/rclcpp_lifecycle/include/rclcpp_lifecycle/lifecycle_node.hpp
-.. _JointTrajectoryController: https://github.com/ros-controls/ros2_controllers/blob/master/joint_trajectory_controller/src/joint_trajectory_controller.cpp
-.. _Node Lifecycle Design: https://design.ros2.org/articles/node_lifecycle.html
 .. _ros2controlcli: https://github.com/ros-controls/ros2_control/tree/master/ros2controlcli
 .. _Hardware Access through Controllers design document: https://github.com/ros-controls/roadmap/blob/master/design_drafts/hardware_access.md
 .. _ROS 2 Control Components URDF Examples design document: https://github.com/ros-controls/roadmap/blob/master/design_drafts/components_architecture_and_urdf_examples.md
-.. _roadmap: https://github.com/ros-controls/roadmap
-.. _ROS Discourse: https://discourse.ros.org
 
 .. |ros2_control_architecture| image:: images/components_architecture.png
    :alt: "ros2_control Architecture"

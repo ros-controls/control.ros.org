@@ -24,7 +24,7 @@
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="joint_trajectory_controller" href="../../joint_trajectory_controller/doc/userdoc.html" />
+    <link rel="next" title="Gripper Action Controller" href="../../gripper_controllers/doc/userdoc.html" />
     <link rel="prev" title="effort_controllers" href="../../effort_controllers/doc/userdoc.html" /> 
 </head>
 
@@ -62,16 +62,20 @@
 <li class="toctree-l3"><a class="reference internal" href="../../effort_controllers/doc/userdoc.html">Effort Controllers</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Forward Command Controller</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#hardware-interface-type">Hardware interface type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#id1">forward_command_controller</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#multi-interface-forward-command-controller">multi_interface_forward_command_controller</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../gripper_controllers/doc/userdoc.html">Gripper Controller</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../joint_trajectory_controller/doc/userdoc.html">Joint Trajectory Controller</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../position_controllers/doc/userdoc.html">Position Controllers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../steering_controllers_library/doc/userdoc.html">Steering Controllers Library</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../tricycle_controller/doc/userdoc.html">Tricycle Controller</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../tricycle_steering_controller/doc/userdoc.html">Tricycle Steering Controller</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../velocity_controllers/doc/userdoc.html">Velocity Controllers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../effort_controllers/doc/userdoc.html">Effort Controllers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../steering_controllers_library/doc/userdoc.html">Steering Controllers Library</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#available-broadcasters">Available Broadcasters</a></li>
@@ -125,7 +129,33 @@
 </ul>
 <section id="hardware-interface-type">
 <h2>Hardware interface type<a class="headerlink" href="#hardware-interface-type" title="Permalink to this heading"></a></h2>
-<p>These controllers work with joints using the “effort” command interface.</p>
+<p>This controller can be used for every type of command interface.</p>
+</section>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h2>
+<p>This controller uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters.</p>
+<section id="id1">
+<h3>forward_command_controller<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<dl>
+<dt>joints (string_array)</dt><dd><p>Name of the joints to control</p>
+<p>Default:  {}</p>
+</dd>
+<dt>interface_name (string)</dt><dd><p>Name of the interface to command</p>
+<p>Default:  “”</p>
+</dd>
+</dl>
+</section>
+<section id="multi-interface-forward-command-controller">
+<h3>multi_interface_forward_command_controller<a class="headerlink" href="#multi-interface-forward-command-controller" title="Permalink to this heading"></a></h3>
+<dl>
+<dt>joint (string)</dt><dd><p>Name of the joint to control</p>
+<p>Default:  “”</p>
+</dd>
+<dt>interface_names (string_array)</dt><dd><p>Names of the interfaces to command</p>
+<p>Default:  {}</p>
+</dd>
+</dl>
+</section>
 </section>
 </section>
 
@@ -134,7 +164,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../../effort_controllers/doc/userdoc.html" class="btn btn-neutral float-left" title="effort_controllers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../../joint_trajectory_controller/doc/userdoc.html" class="btn btn-neutral float-right" title="joint_trajectory_controller" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../../gripper_controllers/doc/userdoc.html" class="btn btn-neutral float-right" title="Gripper Action Controller" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
