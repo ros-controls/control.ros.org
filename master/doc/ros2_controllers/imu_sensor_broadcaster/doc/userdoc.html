@@ -111,12 +111,40 @@ The published message type is <code class="docutils literal notranslate"><span c
 <p>The controller is a wrapper around <code class="docutils literal notranslate"><span class="pre">IMUSensor</span></code> semantic component (see <code class="docutils literal notranslate"><span class="pre">controller_interface</span></code> package).</p>
 <section id="parameters">
 <h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h2>
-<dl class="simple">
-<dt>frame_id (mandatory)</dt><dd><p>Frame in which the output message will be published.</p>
+<p>This controller uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters.</p>
+<dl>
+<dt>sensor_name (string)</dt><dd><p>Defines sensor name used as prefix for its interfaces. Interface names are: <code class="docutils literal notranslate"><span class="pre">&lt;sensor_name&gt;/orientation.x,</span> <span class="pre">...,</span> <span class="pre">&lt;sensor_name&gt;/angular_velocity.x,</span> <span class="pre">...,</span> <span class="pre">&lt;sensor_name&gt;/linear_acceleration.x.</span></code></p>
+<p>Default:  “”</p>
 </dd>
-<dt>sensor_name (mandatory)</dt><dd><p>Defines sensor name used as prefix for its interfaces.
-Interface names are: &lt;sensor_name&gt;/orientation.x, …, &lt;sensor_name&gt;/angular_velocity.x, …,
-&lt;sensor_name&gt;/linear_acceleration.x.</p>
+<dt>frame_id (string)</dt><dd><p>Sensor’s frame_id in which values are published.</p>
+<p>Default:  “”</p>
+</dd>
+<dt>static_covariance_orientation (double_array)</dt><dd><p>Static orientation covariance. Row major about x, y, z axes</p>
+<p>Default:  {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>length must be equal to 9</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>static_covariance_angular_velocity (double_array)</dt><dd><p>Static angular velocity covariance. Row major about x, y, z axes</p>
+<p>Default:  {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>length must be equal to 9</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>static_covariance_linear_acceleration (double_array)</dt><dd><p>Static linear acceleration covariance. Row major about x, y, z axes</p>
+<p>Default:  {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>length must be equal to 9</p></li>
+</ul>
+</div></blockquote>
 </dd>
 </dl>
 </section>

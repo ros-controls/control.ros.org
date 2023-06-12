@@ -61,6 +61,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../diff_drive_controller/doc/userdoc.html">Differential Drive Controller</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../effort_controllers/doc/userdoc.html">Effort Controllers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../forward_command_controller/doc/userdoc.html">Forward Command Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../gripper_controllers/doc/userdoc.html">Gripper Controller</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../joint_trajectory_controller/doc/userdoc.html">Joint Trajectory Controller</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../position_controllers/doc/userdoc.html">Position Controllers</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Steering Controllers Library</a><ul>
@@ -207,8 +208,83 @@ If parameter <code class="docutils literal notranslate"><span class="pre">use_st
 </section>
 <section id="parameters">
 <h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h3>
-<p>For list of parameters and their meaning YAML file in the <code class="docutils literal notranslate"><span class="pre">src</span></code> folder of the controller’s package.</p>
+<p>This controller uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters.</p>
 <p>For an exemplary parameterization see the <code class="docutils literal notranslate"><span class="pre">test</span></code> folder of the controller’s package.</p>
+<dl>
+<dt>reference_timeout (double)</dt><dd><p>Timeout for controller references after which they will be reset. This is especially useful for controllers that can cause unwanted and dangerous behaviour if reference is not reset, e.g., velocity controllers. If value is 0 the reference is reset after each run.</p>
+<p>Default:  1.0</p>
+</dd>
+<dt>front_steering (bool)</dt><dd><p>Is the steering on the front of the robot?</p>
+<p>Default:  true</p>
+</dd>
+<dt>rear_wheels_names (string_array)</dt><dd><p>Names of rear wheel joints.</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>length is less less 5</p></li>
+<li><p>contains no duplicates</p></li>
+<li><p>parameter is not empty</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>front_wheels_names (string_array)</dt><dd><p>Names of front wheel joints.</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>length is less less 5</p></li>
+<li><p>contains no duplicates</p></li>
+<li><p>parameter is not empty</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>rear_wheels_state_names (string_array)</dt><dd><p>(Optional) Names of rear wheel joints to read states from. If not set joint names from ‘rear_wheels_names’ will be used.</p>
+<p>Default:  {}</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>length is less less 5</p></li>
+<li><p>contains no duplicates</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>front_wheels_state_names (string_array)</dt><dd><p>(Optional) Names of front wheel joints to read states from. If not set joint names from ‘front_wheels_names’ will be used.</p>
+<p>Default:  {}</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>length is less less 5</p></li>
+<li><p>contains no duplicates</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>open_loop (bool)</dt><dd><p>bool parameter decides if open oop or not (feedback).</p>
+<p>Default:  false</p>
+</dd>
+<dt>velocity_rolling_window_size (int)</dt><dd><p>The number of velocity samples to average together to compute the odometry twist.linear.x and twist.angular.z velocities.</p>
+<p>Default:  10</p>
+</dd>
+<dt>base_frame_id (string)</dt><dd><p>Base frame_id set to value of base_frame_id.</p>
+<p>Default:  “base_link”</p>
+</dd>
+<dt>odom_frame_id (string)</dt><dd><p>Odometry frame_id set to value of odom_frame_id.</p>
+<p>Default:  “odom”</p>
+</dd>
+<dt>enable_odom_tf (bool)</dt><dd><p>Publishing to tf is enabled or disabled ?.</p>
+<p>Default:  true</p>
+</dd>
+<dt>twist_covariance_diagonal (double_array)</dt><dd><p>diagonal values of twist covariance matrix.</p>
+<p>Default:  {0.0, 7.0, 14.0, 21.0, 28.0, 35.0}</p>
+</dd>
+<dt>pose_covariance_diagonal (double_array)</dt><dd><p>diagonal values of pose covariance matrix.</p>
+<p>Default:  {0.0, 7.0, 14.0, 21.0, 28.0, 35.0}</p>
+</dd>
+<dt>position_feedback (bool)</dt><dd><p>Choice of feedback type, if position_feedback is false then HW_IF_VELOCITY is taken as interface type, if position_feedback is true then HW_IF_POSITION is taken as interface type</p>
+<p>Default:  false</p>
+</dd>
+<dt>use_stamped_vel (bool)</dt><dd><p>Choice of vel type, if use_stamped_vel is false then geometry_msgs::msg::Twist is taken as vel msg type, if use_stamped_vel is true then geometry_msgs::msg::TwistStamped is taken as vel msg type</p>
+<p>Default:  false</p>
+</dd>
+</dl>
 </section>
 </section>
 </section>
