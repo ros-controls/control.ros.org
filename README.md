@@ -1,6 +1,6 @@
 # Status
 
-[![Build & Deploy Page](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-make-page.yml/badge.svg)](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-make-page.yml)
+[![Build & Deploy Page](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-make-page.yml/badge.svg)](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-make-page.yml)[![Sphinx Warnings](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-check-warnings.yml/badge.svg?branch=master)](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-check-warnings.yml)
 
 
 # control.ros.org
