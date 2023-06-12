@@ -16,10 +16,8 @@ jobs:
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
-    - uses: ./.github/workflows/install-dependencies.yml
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
+    - name: Install dependencies
+      uses: ./.github/actions/install-dependencies
     - name: Build multiversion considering warnings as errors
       run: |
         git config --local user.email "action@github.com"
