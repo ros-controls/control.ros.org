@@ -15,7 +15,7 @@ add_sub_repositories () {
         if [ ! -z ${subrepo_pr[$repo_name]} ]; then
           echo "checkout PR: ${subrepo_pr[$repo_name]}"
           cd doc/"$repo_name"
-          git fetch origin pull/${subrepo_pr[$repo_name]}/head:PR
+          git fetch origin ${subrepo_pr[$repo_name]}:PR
           git checkout PR
           cd "$base_dir"
         fi
