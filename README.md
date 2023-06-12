@@ -43,7 +43,7 @@ Make sure you are inside the `control.ros.org/doc/` folder and run `ln -s <path 
 4. Run `make multiversion` inside control.ros.org.
 ##### A note on how it works:
 The building of multiversion consists of several steps. The scripts are located inside the `make_help_scripts` folder.
-1. First for each branch the subrepositories are cloned into the `doc/folder` and the corresponding branch is checked out and a temporary commit is created on the branch. This is needed, so that the documentation files located in the subrepositoies are visible to multiversion.
+1. First for each branch the subrepositories are cloned into the `doc/folder` and the corresponding branch is checked out and a temporary commit is created on the branch. This is needed, so that the documentation files located in the subrepositories are visible to multiversion.
 2. Then the documentation is built using `sphinx-multiversion`
 3. After the creation, each branch is checked out again and the temporary commits are deleted.
 
