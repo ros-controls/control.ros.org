@@ -22,7 +22,7 @@ jobs:
         repository: christophfroehlich/control.ros.org
         ref: reusable_wf
     - name: Install dependencies
-      uses: ./.github/actions/install-dependencies
+      uses: christophfroehlich/control.ros.org/.github/actions/install-dependencies@reusable_wf
     - name: Build single version with optional PRs' numbers considering warnings as errors
       env:
         ROS2_CONTROL_PR: ${{ inputs.ROS2_CONTROL_PR }}
