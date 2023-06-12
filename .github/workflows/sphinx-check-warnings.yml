@@ -1,0 +1,37 @@
+name: "Check Page for Warnings"
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+  schedule:
+  # Run every morning to ensure component documentation is up to date on deployment
+   - cron: '23 5 * * *'
+  pull_request: # only runs up through build of sphinx
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.8'
+        cache: 'pip'
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install --upgrade --requirement requirements.txt
+    - name: Install generate_parameter_library
+      run: |
+        cd
+        git clone https://github.com/PickNikRobotics/generate_parameter_library.git
+        cd generate_parameter_library/generate_parameter_library_py/
+        python -m pip install .
+    - name: Build multiversion considering warnings as errors
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        make multiversion-with-errors
