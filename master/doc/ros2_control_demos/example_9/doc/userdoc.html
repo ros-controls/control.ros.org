@@ -56,6 +56,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#what-you-can-find-in-this-repository">What you can find in this repository</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#goals">Goals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#example-overview">Example Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#quick-hints">Quick Hints</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../doc/index.html#examples">Examples</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../../example_1/doc/userdoc.html">Example 1: RRBot</a></li>
@@ -115,7 +116,29 @@
   <section id="example-9-simulation-with-rrbot">
 <span id="ros2-control-demos-example-9-userdoc"></span><h1>Example 9: Simulation with RRBot<a class="headerlink" href="#example-9-simulation-with-rrbot" title="Permalink to this heading"></a></h1>
 <p>With <em>example_9</em>, we demonstrate the interaction of simulators with ros2_control. More specifically,
-Gazebo Classic is used for this purpose. For details on the <code class="docutils literal notranslate"><span class="pre">gazebo_ros2_control</span></code> plugin, see <a class="reference internal" href="../../../gazebo_ros2_control/doc/index.html#gazebo-ros2-control"><span class="std std-ref">gazebo_ros2_control</span></a>.</p>
+Gazebo Classic is used for this purpose.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Follow the installation instructions on <a class="reference internal" href="../../doc/index.html#ros2-control-demos-install"><span class="std std-ref">Installation</span></a> how to install all dependencies,
+Gazebo Classic should be automatically installed.</p>
+<ul>
+<li><p>If you have installed and compiled this repository locally, you can directly use the commands below.</p></li>
+<li><p>If you have installed it via the provided docker image: To run the first two steps of this example (without Gazebo Classic), use the commands as described with <a class="reference internal" href="../../doc/index.html#ros2-control-demos-install"><span class="std std-ref">Installation</span></a>. To run the later steps using Gazebo Classic, execute</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">it</span> <span class="o">--</span><span class="n">rm</span> <span class="o">--</span><span class="n">name</span> <span class="n">ros2_control_demos</span> <span class="o">--</span><span class="n">net</span> <span class="n">host</span> <span class="n">ros2_control_demos</span> <span class="n">ros2</span> <span class="n">launch</span> <span class="n">ros2_control_demo_example_9</span> <span class="n">rrbot_gazebo_classic</span><span class="o">.</span><span class="n">launch</span><span class="o">.</span><span class="n">py</span> <span class="n">gui</span><span class="o">:=</span><span class="n">false</span>
+</pre></div>
+</div>
+<p>first. Then on your local machine you can run the Gazebo Classic client with</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>gzclient
+</pre></div>
+</div>
+<p>and/or <code class="docutils literal notranslate"><span class="pre">rviz2</span></code> with</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rviz2<span class="w"> </span>-d<span class="w"> </span>src/ros2_control_demos/example_9/description/rviz/rrbot.rviz
+</pre></div>
+</div>
+</li>
+</ul>
+<p>For details on the <code class="docutils literal notranslate"><span class="pre">gazebo_ros2_control</span></code> plugin, see <a class="reference internal" href="../../../gazebo_ros2_control/doc/index.html#gazebo-ros2-control"><span class="std std-ref">gazebo_ros2_control</span></a>.</p>
+</div>
 <section id="tutorial-steps">
 <h2>Tutorial steps<a class="headerlink" href="#tutorial-steps" title="Permalink to this heading"></a></h2>
 <ol class="arabic">

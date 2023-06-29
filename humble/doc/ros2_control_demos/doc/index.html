@@ -56,6 +56,19 @@
 <li class="toctree-l2"><a class="reference internal" href="#what-you-can-find-in-this-repository">What you can find in this repository</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#goals">Goals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#example-overview">Example Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#manual-install">Manual Install</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#build-from-debian-packages">Build from debian packages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-from-source">Build from source</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#using-docker">Using Docker</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#to-view-the-robot">To view the robot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#to-run-the-ros2-control-demos">To run the ros2_control demos</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#quick-hints">Quick Hints</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../example_1/doc/userdoc.html">Example 1: RRBot</a></li>
@@ -155,6 +168,128 @@ The robot is basically a box moving according to differential drive kinematics.<
 <dt>Example 9: “Gazebo Classic”</dt><dd><p>Demonstrates how to switch between simulation and hardware.</p>
 </dd>
 </dl>
+</section>
+<section id="installation">
+<span id="ros2-control-demos-install"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
+<p>You can install the demos manually or use the provided docker file.</p>
+<section id="manual-install">
+<h3>Manual Install<a class="headerlink" href="#manual-install" title="Permalink to this heading"></a></h3>
+<p>First, you have to install <a class="reference external" href="https://docs.ros.org/en/humble/Installation.html">ROS 2 on your computer</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> and <code class="docutils literal notranslate"><span class="pre">ros2_controllers</span></code> packages are released and can be installed using a package manager.
+We provide officially released and maintained debian packages, which can easily be installed via aptitude.
+However, there might be cases in which not-yet released demos or features are only available through a source build in your own workspace.</p>
+</div>
+<section id="build-from-debian-packages">
+<h4>Build from debian packages<a class="headerlink" href="#build-from-debian-packages" title="Permalink to this heading"></a></h4>
+<p>Download the <code class="docutils literal notranslate"><span class="pre">ros2_control_demos</span></code> repository and install its dependencies with</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/ros2_ws/src
+<span class="nb">cd</span><span class="w"> </span>~/ros2_ws/src
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ros-controls/ros2_control_demos
+<span class="nb">cd</span><span class="w"> </span>~/ros2_ws/
+rosdep<span class="w"> </span>update<span class="w"> </span>--rosdistro<span class="o">=</span><span class="nv">$ROS_DISTRO</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>rosdep<span class="w"> </span>install<span class="w"> </span>--from-paths<span class="w"> </span>./<span class="w"> </span>-i<span class="w"> </span>-y<span class="w"> </span>--rosdistro<span class="w"> </span><span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>
+</pre></div>
+</div>
+<p>Now you can build the repository (source your ROS 2 installation first)</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/ros2_ws/
+.<span class="w"> </span>/opt/ros/<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>/setup.sh
+colcon<span class="w"> </span>build<span class="w"> </span>--merge-install
+</pre></div>
+</div>
+</section>
+<section id="build-from-source">
+<h4>Build from source<a class="headerlink" href="#build-from-source" title="Permalink to this heading"></a></h4>
+<ul>
+<li><p>Download all repositories</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/ros2_ws/src
+<span class="nb">cd</span><span class="w"> </span>~/ros2_ws/src
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ros-controls/ros2_control_demos
+<span class="nb">cd</span><span class="w"> </span>~/ros2_ws/
+vcs<span class="w"> </span>import<span class="w"> </span>src<span class="w"> </span>&lt;<span class="w"> </span>src/ros2_control_demos/ros2_control_demos.<span class="nv">$ROS_DISTRO</span>.repos
+rosdep<span class="w"> </span>update<span class="w"> </span>--rosdistro<span class="o">=</span><span class="nv">$ROS_DISTRO</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+</pre></div>
+</div>
+</li>
+<li><p>Install dependencies:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rosdep<span class="w"> </span>install<span class="w"> </span>--from-paths<span class="w"> </span>src<span class="w"> </span>--ignore-src<span class="w"> </span>-r<span class="w"> </span>-y
+</pre></div>
+</div>
+</li>
+<li><p>Build everything, e.g. with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>.<span class="w"> </span>/opt/ros/<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>/setup.sh
+colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install
+</pre></div>
+</div>
+</li>
+<li><p>Do not forget to source <code class="docutils literal notranslate"><span class="pre">setup.bash</span></code> from the <code class="docutils literal notranslate"><span class="pre">install</span></code> folder!</p></li>
+</ul>
+</section>
+</section>
+<section id="using-docker">
+<h3>Using Docker<a class="headerlink" href="#using-docker" title="Permalink to this heading"></a></h3>
+<p>First, build the dockerfile with</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/ros2_ws/src
+<span class="nb">cd</span><span class="w"> </span>~/ros2_ws/src
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ros-controls/ros2_control_demos
+<span class="nb">cd</span><span class="w"> </span>ros2_control_demos
+docker<span class="w"> </span>build<span class="w"> </span>.<span class="w"> </span>-t<span class="w"> </span>ros2_control_demos<span class="w"> </span>-f<span class="w"> </span>Dockerfile/Dockerfile
+</pre></div>
+</div>
+<section id="to-view-the-robot">
+<h4>To view the robot<a class="headerlink" href="#to-view-the-robot" title="Permalink to this heading"></a></h4>
+<p>Docker now allows us to run the demo without the GUI if configured properly. Now we can view the robot by the following procedure:</p>
+<p>After having <a class="reference external" href="https://docs.ros.org/en/humble/Installation.html">ROS 2 installed</a> on your local system (not inside the docker),  we can use <code class="docutils literal notranslate"><span class="pre">rviz2</span></code> to visualize the robot state and <code class="docutils literal notranslate"><span class="pre">joint_state_publisher_gui</span></code> package to give manual joint values to the robot. To install the package you can run:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>ros-<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>-joint-state-publisher-gui<span class="w"> </span>ros-<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>-rviz2
+</pre></div>
+</div>
+<p>Then we are ready to bring up all the components to view the robot. Let’s start with the docker container by running the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>--name<span class="w"> </span>ros2_control_demos<span class="w"> </span>--net<span class="w"> </span>host<span class="w"> </span>ros2_control_demos<span class="w"> </span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demos_example_1<span class="w"> </span>view_robot.launch.py<span class="w"> </span>gui:<span class="o">=</span><span class="nb">false</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Depending on your machine settings, it might be possible that you have to omit <code class="docutils literal notranslate"><span class="pre">--net</span> <span class="pre">host</span></code>.</p>
+</div>
+<p>Now, we need to start <code class="docutils literal notranslate"><span class="pre">rviz2</span></code> to view the robot as well as <code class="docutils literal notranslate"><span class="pre">joint_state_publisher_gui</span></code>, each in their own terminals after sourcing our ROS 2  installation.</p>
+<p>Terminal 1:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>/setup.bash
+ros2<span class="w"> </span>run<span class="w"> </span>joint_state_publisher_gui<span class="w"> </span>joint_state_publisher_gui
+</pre></div>
+</div>
+<p>Terminal 2:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>/setup.bash
+<span class="nb">cd</span><span class="w"> </span>~/ros2_ws
+rviz2<span class="w"> </span>-d<span class="w"> </span>src/ros2_control_demos/example_1/description/rviz/rrbot.rviz
+</pre></div>
+</div>
+<p>Now, you can see the robot moving by changing the values of the joints by moving the sliders around in the <code class="docutils literal notranslate"><span class="pre">joint_state_publisher_gui</span></code>.</p>
+</section>
+<section id="to-run-the-ros2-control-demos">
+<h4>To run the ros2_control demos<a class="headerlink" href="#to-run-the-ros2-control-demos" title="Permalink to this heading"></a></h4>
+<p>The following command runs the demo without the GUI:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>--name<span class="w"> </span>ros2_control_demos<span class="w"> </span>--net<span class="w"> </span>host<span class="w"> </span>ros2_control_demos
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Depending on your machine settings, it might be possible that you have to omit <code class="docutils literal notranslate"><span class="pre">--net</span> <span class="pre">host</span></code>.</p>
+</div>
+<p>Then on your local machine, you can run rviz2 with the config file specified:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/ros2_ws
+<span class="nb">source</span><span class="w"> </span>/opt/ros/<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>/setup.sh
+rviz2<span class="w"> </span>-d<span class="w"> </span>src/ros2_control_demos/example_1/description/rviz/rrbot.rviz
+</pre></div>
+</div>
+<p>You can also run other commands or launch files from the docker, e.g.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>--name<span class="w"> </span>ros2_control_demos<span class="w"> </span>--net<span class="w"> </span>host<span class="w"> </span>ros2_control_demos<span class="w"> </span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_2<span class="w"> </span>diffbot.launch.py
+</pre></div>
+</div>
+</section>
+</section>
 </section>
 <section id="quick-hints">
 <h2>Quick Hints<a class="headerlink" href="#quick-hints" title="Permalink to this heading"></a></h2>
