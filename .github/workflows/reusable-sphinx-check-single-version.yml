@@ -19,11 +19,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       with:
-        repository: christophfroehlich/control.ros.org
-        ref: reusable_wf
+        repository: ros-controls/control.ros.org
+        ref: master
         fetch-depth: 0
     - name: Install dependencies
-      uses: christophfroehlich/control.ros.org/.github/actions/install-dependencies@reusable_wf
+      uses: ros-controls/control.ros.org/.github/actions/install-dependencies@master
     - name: Build single version with optional PRs' numbers considering warnings as errors
       env:
         ROS2_CONTROL_PR: ${{ inputs.ROS2_CONTROL_PR }}
