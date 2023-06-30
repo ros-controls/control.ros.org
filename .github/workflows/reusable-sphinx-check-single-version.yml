@@ -1,0 +1,34 @@
+name: "Reusable workflow to check a single version"
+on:
+  workflow_call:
+    inputs:
+      ROS2_CONTROL_PR:
+        type: string
+      ROS2_CONTROLLERS_PR:
+        type: string
+      ROS2_CONTROL_DEMOS_PR:
+        type: string
+      GAZEBO_ROS2_CONTROL_PR:
+        type: string
+      GZ_ROS2_CONTROL_PR:
+        type: string
+
+jobs:
+  build-single-version:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        repository: ros-controls/control.ros.org
+        ref: master
+        fetch-depth: 0
+    - name: Install dependencies
+      uses: ros-controls/control.ros.org/.github/actions/install-dependencies@master
+    - name: Build single version with optional PRs' numbers considering warnings as errors
+      env:
+        ROS2_CONTROL_PR: ${{ inputs.ROS2_CONTROL_PR }}
+        ROS2_CONTROLLERS_PR: ${{ inputs.ROS2_CONTROLLERS_PR }}
+        ROS2_CONTROL_DEMOS_PR: ${{ inputs.ROS2_CONTROL_DEMOS_PR }}
+        GAZEBO_ROS2_CONTROL_PR: ${{ inputs.GAZEBO_ROS2_CONTROL_PR }}
+        GZ_ROS2_CONTROL_PR: ${{ inputs.GZ_ROS2_CONTROL_PR }}
+      run: make html-all-subrepos-with-errors
