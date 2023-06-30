@@ -7,14 +7,22 @@ on:
   schedule:
   # Run every morning to ensure component documentation is up to date on deployment
    - cron: '23 5 * * *'
+<<<<<<< HEAD
 
 jobs:
   build-halt-on-warnings:
+=======
+  pull_request:
+
+jobs:
+  build-halt-on-errors:
+>>>>>>> e2a04ea (Create usable workflows (#125))
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
+<<<<<<< HEAD
     - uses: actions/setup-python@v4
       with:
         python-version: '3.10'
@@ -32,6 +40,11 @@ jobs:
         python -m pip install .
       shell: bash
     - name: Build single version considering warnings as errors
+=======
+    - name: Install dependencies
+      uses: ./.github/actions/install-dependencies
+    - name: Build multiversion considering warnings as errors
+>>>>>>> e2a04ea (Create usable workflows (#125))
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"

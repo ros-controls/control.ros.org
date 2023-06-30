@@ -18,7 +18,10 @@ help:
 	@echo "  multiversion"
 	@echo "  multiversion-with-api"
 	@echo "  multiversion-with-errors"
+<<<<<<< HEAD
 	@echo "  linkcheck-all-subrepos-with-api"
+=======
+>>>>>>> e2a04ea (Create usable workflows (#125))
 
 html-with-api: Makefile
 	@echo Single html file with API
@@ -104,7 +107,11 @@ multiversion-with-api: Makefile
 	@echo Step 5: Create correct index
 	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=master/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
 
+<<<<<<< HEAD
 .PHONY: help Makefile html-with-api multiversion multiversion-with-api multiversion-with-errors html-all-subrepos html-all-subrepos-with-api html-all-subrepos-with-errors linkcheck-all-subrepos-with-api
+=======
+.PHONY: help Makefile html-with-api multiversion multiversion-with-api multiversion-with-errors html-all-subrepos html-all-subrepos-with-api html-all-subrepos-with-errors
+>>>>>>> e2a04ea (Create usable workflows (#125))
 
 # TODO(denis): Enable this!
 # # # # Generate the doxygen xml (for Sphinx) and copy the doxygen html to the
