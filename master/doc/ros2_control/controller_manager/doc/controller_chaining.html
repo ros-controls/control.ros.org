@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Controller Chaining / Cascade Control &mdash; ROS2_Control: Rolling Jul 2023 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/copybutton.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//rolling/doc/ros2_control/controller_manager/doc/controller_chaining.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../_static/copybutton.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Hardware Components" href="../../hardware_interface/doc/hardware_components_userdoc.html" />
+    <link rel="prev" title="Controller Manager" href="userdoc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/index.html">ros2_control</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#api-documentation">API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#features">Features</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/index.html#concepts">Concepts</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="userdoc.html">Controller Manager</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Controller Chaining / Cascade Control</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#scope-of-the-document-and-background-knowledge">Scope of the Document and Background Knowledge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#motivation-purpose-and-use">Motivation, Purpose and Use</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementation">Implementation</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#a-controller-base-class-chainablecontroller">A Controller Base-Class: ChainableController</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#inner-resource-management">Inner Resource Management</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#activation-and-deactivation-chained-controllers">Activation and Deactivation Chained Controllers</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#debugging-outputs">Debugging outputs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#closing-remarks">Closing remarks</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../hardware_interface/doc/hardware_components_userdoc.html">Hardware Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../hardware_interface/doc/mock_components_userdoc.html">Mock Components</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../differences_to_ros1/differences_to_ros1.html">Differences to ros_control (ROS1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../differences_to_ros1/differences_to_ros1.html#migration-guide-to-ros2-control">Migration Guide to ros2_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../project_ideas.html">Project Ideas for GSoC 2024</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ROS2_Control: Rolling</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../doc/index.html">ros2_control</a></li>
+      <li class="breadcrumb-item active">Controller Chaining / Cascade Control</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ros-controls/ros2_control/blob/master/controller_manager/doc/controller_chaining.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="controller-chaining-cascade-control">
+<span id="controller-chaining"></span><h1>Controller Chaining / Cascade Control<a class="headerlink" href="#controller-chaining-cascade-control" title="Permalink to this heading"></a></h1>
+<p>This document proposes a minimal-viable-implementation of serial controller chaining as described in <a class="reference external" href="https://github.com/ros-controls/roadmap/blob/master/design_drafts/controller_chaining.md">Chaining Controllers design document</a>.
+Cascade control is a specific type of controller chaining.</p>
+<section id="scope-of-the-document-and-background-knowledge">
+<h2>Scope of the Document and Background Knowledge<a class="headerlink" href="#scope-of-the-document-and-background-knowledge" title="Permalink to this heading"></a></h2>
+<p>This approach focuses only on serial chaining of controllers and tries to reuse existing mechanisms for it.
+It focuses on <a class="reference external" href="https://github.com/ros-controls/roadmap/blob/master/design_drafts/controller_chaining.md#input--outputs-of-a-controller">inputs and outputs of a controller</a> and their management in the controller manager.
+The concept of <a class="reference external" href="https://github.com/ros-controls/roadmap/blob/master/design_drafts/controller_chaining.md#controller-group">controller groups</a> will be introduced only for clarity reasons, and its only meaning is that controllers in that group can be updated in arbitrary order.
+This doesn’t mean that the controller groups as described <a class="reference external" href="https://github.com/ros-controls/roadmap/blob/master/design_drafts/controller_chaining.md#controller-group">in the controller chaining document</a> will not be introduced and used in the future.
+Nevertheless, the author is convinced that this would add only unnecessary complexity at this stage, although in the long term they <em>could</em> provide clearer structure and interfaces.</p>
+</section>
+<section id="motivation-purpose-and-use">
+<h2>Motivation, Purpose and Use<a class="headerlink" href="#motivation-purpose-and-use" title="Permalink to this heading"></a></h2>
+<p>To describe the intent of this document, lets focus on the simple yet sufficient example <a class="reference external" href="https://github.com/ros-controls/roadmap/blob/master/design_drafts/controller_chaining.md#example-2">Example 2 from ‘controllers_chaining’ design docs</a>:</p>
+<img alt="Example2" src="../../../../_images/chaining_example2.png" />
+<p>In this example, we want to chain ‘position_tracking’ controller with ‘diff_drive_controller’ and two PID controllers.
+Let’s now imagine a use-case where we don’t only want to run all those controllers as a group, but also flexibly add preceding steps.
+This means the following:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>When a robot is started, we want to check if motor velocity control is working properly and therefore only PID controllers are activated.
+At this stage we can control the input of PID controller also externally using topics.
+However, these controllers also provide virtual interfaces, so we can chain them.</p></li>
+<li><p>Then “diff_drive_controller” is activated and attaches itself to the virtual input interfaces of PID controllers.
+PID controllers also get informed that they are working in chained mode and therefore disable their external interface through subscriber.
+Now we check if kinematics of differential robot is running properly.</p></li>
+<li><p>After that, “position_tracking” can be activated and attached to “diff_drive_controller” that disables its external interfaces.</p></li>
+<li><p>If any of the controllers is deactivated, also all preceding controllers are deactivated.</p></li>
+</ol>
+</div></blockquote>
+</section>
+<section id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading"></a></h2>
+<section id="a-controller-base-class-chainablecontroller">
+<h3>A Controller Base-Class: ChainableController<a class="headerlink" href="#a-controller-base-class-chainablecontroller" title="Permalink to this heading"></a></h3>
+<p>A <code class="docutils literal notranslate"><span class="pre">ChainableController</span></code> extends <code class="docutils literal notranslate"><span class="pre">ControllerInterface</span></code> class with <code class="docutils literal notranslate"><span class="pre">virtual</span> <span class="pre">InterfaceConfiguration</span> <span class="pre">input_interface_configuration()</span> <span class="pre">const</span> <span class="pre">=</span> <span class="pre">0</span></code> method.
+This method should implement for each controller that <strong>can be preceded</strong> by another controller exporting all the input interfaces.
+For simplicity reasons, it is assumed for now that controller’s all input interfaces are used.
+Therefore, do not try to implement any exclusive combinations of input interfaces, but rather write multiple controllers if you need exclusivity.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ChainableController</span></code> base class implements <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">set_chained_mode(bool</span> <span class="pre">activate)</span></code> that sets an internal flag that a controller is used by another controller (in chained mode) and calls <code class="docutils literal notranslate"><span class="pre">virtual</span> <span class="pre">void</span> <span class="pre">on_set_chained_mode(bool</span> <span class="pre">activate)</span> <span class="pre">=</span> <span class="pre">0</span></code> that implements controller’s specific actions when chained modes is activated or deactivated, e.g., deactivating subscribers.</p>
+<p>As an example, PID controllers export one virtual interface <code class="docutils literal notranslate"><span class="pre">pid_reference</span></code> and stop their subscriber <code class="docutils literal notranslate"><span class="pre">&lt;controller_name&gt;/pid_reference</span></code> when used in chained mode.  ‘diff_drive_controller’ controller exports list of virtual interfaces  <code class="docutils literal notranslate"><span class="pre">&lt;controller_name&gt;/v_x</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;controller_name&gt;/v_y</span></code>, and <code class="docutils literal notranslate"><span class="pre">&lt;controller_name&gt;/w_z</span></code>, and stops subscribers from topics <code class="docutils literal notranslate"><span class="pre">&lt;controller_name&gt;/cmd_vel</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;controller_name&gt;/cmd_vel_unstamped</span></code>. Its publishers can continue running.</p>
+</section>
+<section id="inner-resource-management">
+<h3>Inner Resource Management<a class="headerlink" href="#inner-resource-management" title="Permalink to this heading"></a></h3>
+<p>After configuring a chainable controller, controller manager calls <code class="docutils literal notranslate"><span class="pre">input_interface_configuration</span></code> method and takes ownership over controller’s input interfaces.
+This is the same process as done by <code class="docutils literal notranslate"><span class="pre">ResourceManager</span></code> and hardware interfaces.
+Controller manager maintains “claimed” status of interface in a vector (the same as done in <code class="docutils literal notranslate"><span class="pre">ResourceManager</span></code>).</p>
+</section>
+<section id="activation-and-deactivation-chained-controllers">
+<h3>Activation and Deactivation Chained Controllers<a class="headerlink" href="#activation-and-deactivation-chained-controllers" title="Permalink to this heading"></a></h3>
+<p>Controller Manager has an additional parameter that describes how controllers are chained.
+In the first version, the parameter-structure would have some semantic meaning embedded into it, as follows:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">controller_manager</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">chained_controllers</span><span class="p">:</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">parallel_group_1</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">controller1_1</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">controller1_2</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">parallel_group_2</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">controller2_1</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">parallel_group_3</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">controller3_1</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">controller3_2</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">controller3_3</span>
+
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">parallel_group_N</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">controllerN_1</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">controllerN_M</span>
+</pre></div>
+</div>
+<p>This structure is motivated by <code class="docutils literal notranslate"><span class="pre">filter_chain</span></code> structure from <a class="reference external" href="https://github.com/ros/filters/tree/ros2">ros/filters repository</a>, see <a class="reference external" href="https://github.com/ros/filters/blob/ros2/include/filters/filter_chain.hpp">this file for implementation</a>.</p>
+<p>This structure is stored internally by controller manager into an ordered map (<code class="docutils literal notranslate"><span class="pre">std::map&lt;std::string,</span> <span class="pre">std::vector&lt;std::string&gt;&gt;</span></code>) with group name as key.
+When a controller should be deactivated, the controller manager deactivates all the controllers in the preceding groups first.
+All other controllers from the group stay active, as well as all controllers in the following groups.
+NOTE: In the future this could be done more intelligently, i.e., deactivate only controllers in the preceding groups that actually precede the controller that should be deactivated.</p>
+<p>On the other hand, the controller should be manually activated in the reverse order, i.e., from the those closer to the hardware toward those preceding them.</p>
+</section>
+</section>
+<section id="debugging-outputs">
+<h2>Debugging outputs<a class="headerlink" href="#debugging-outputs" title="Permalink to this heading"></a></h2>
+<p>Flag <code class="docutils literal notranslate"><span class="pre">unavailable</span></code> on reference interface does not provide much information about anything at the moment. So don’t get confused by it. The reason we have it are internal implementation reasons irelevant for the usage.</p>
+</section>
+<section id="closing-remarks">
+<h2>Closing remarks<a class="headerlink" href="#closing-remarks" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Maybe addition of the new controller’s type <code class="docutils literal notranslate"><span class="pre">ChainableController</span></code> is not necessary. It would also be feasible to add implementation of <code class="docutils literal notranslate"><span class="pre">input_interface_configuration()</span></code> method into <code class="docutils literal notranslate"><span class="pre">ControllerInterface</span></code> class with default result <code class="docutils literal notranslate"><span class="pre">interface_configuration_type::NONE</span></code>.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="userdoc.html" class="btn btn-neutral float-left" title="Controller Manager" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../hardware_interface/doc/hardware_components_userdoc.html" class="btn btn-neutral float-right" title="Hardware Components" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: master
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="controller_chaining.html">Master (latest)</a></dd>
+    </dl>
+    <dl>
+      <dt>Releases</dt>
+        <dd><a href="../../../../../humble/index.html">Humble (recommended)</a></dd><br>
+        <dd><a href="../../../../../galactic/index.html">Galactic (EOL)</a></dd><br>
+        
+        <dd><a href="../../../../../foxy/index.html">Foxy (EOL)</a></dd><br>
+        
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
