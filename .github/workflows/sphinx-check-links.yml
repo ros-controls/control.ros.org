@@ -10,7 +10,7 @@ on:
   pull_request: # only runs up through build of sphinx
 
 jobs:
-  build-deploy:
+  check-links:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -20,9 +20,5 @@ jobs:
       uses: ./.github/actions/install-dependencies
     - name: Install doxygen and graphviz
       run: sudo apt-get install -y doxygen graphviz
-    - name: Run linkchecker
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        make html-all-subrepos-with-api
-        make linkcheck
+    - name: Build page with API and run linkchecker
+      run: linkcheck-all-subrepos-with-api
