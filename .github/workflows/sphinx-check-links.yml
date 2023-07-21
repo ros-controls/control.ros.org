@@ -21,4 +21,7 @@ jobs:
     - name: Install doxygen and graphviz
       run: sudo apt-get install -y doxygen graphviz
     - name: Build page with API and run linkchecker
-      run: make linkcheck-all-subrepos-with-api
+      run:  |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        make linkcheck-all-subrepos-with-api

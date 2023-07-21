@@ -57,7 +57,7 @@ html-all-subrepos-with-api: Makefile
 	./make_help_scripts/create_api
 
 linkcheck-all-subrepos-with-api: Makefile
-	@echo Single html file with API
+	@echo Single version html file with API and linkcheck
 	@echo Step 1: Cloning all subrepositories
 	./make_help_scripts/add_sub_repos
 	@echo Step 2: Building documentation
