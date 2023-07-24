@@ -38,4 +38,4 @@ Non robot-devices:
 
 Mobile manipulators:
 
-* `Hello Robot - Stretch (for simple simulation with MoveIt2) <https://github.com/hello-robot/stretch_ros2/blob/galactic/stretch_moveit_config/README.md>`_
+* `Hello Robot - Stretch (for simple simulation with MoveIt2) <https://github.com/hello-robot/stretch_ros2/blob/galactic/stretch_moveit2/README.md>`_
