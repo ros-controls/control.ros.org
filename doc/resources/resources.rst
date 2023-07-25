@@ -257,4 +257,4 @@ Example files - ros2_control - "Controlko" mobile manipulator (URDF)
   .. image:: images/ros2_control_mobile_manipulator_controllers.png
 
 .. |CC-BY| image:: https://i.creativecommons.org/l/by/4.0/88x31.png
-.. _CC-BY: http://creativecommons.org/licenses/by/4.0/
+.. _CC-BY: https://creativecommons.org/licenses/by/4.0/
