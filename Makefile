@@ -13,9 +13,12 @@ help:
 	@$(SPHINXBUILD) -M help $(SOURCEDIR) $(BUILDDIR) $(SPHINXOPTS) $(O)
 	@echo "  html-with-api"
 	@echo "  html-all-subrepos"
+	@echo "  html-all-subrepos-with-errors"
 	@echo "  html-all-subrepos-with-api"
 	@echo "  multiversion"
 	@echo "  multiversion-with-api"
+	@echo "  multiversion-with-errors"
+	@echo "  linkcheck-all-subrepos-with-api"
 
 html-with-api: Makefile
 	@echo Single html file with API
@@ -33,6 +36,15 @@ html-all-subrepos: Makefile
 	@echo Step 3: Deleting subrepositories in doc/ folder
 	./make_help_scripts/delete_sub_repos
 
+html-all-subrepos-with-errors: Makefile
+	@echo Single html file without API
+	@echo Step 1: Cloning all subrepositories
+	./make_help_scripts/add_sub_repos
+	@echo Step 2: Building documentation
+	$(SPHINXBUILD) $(SPHINXOPTS) -W --keep-going $(SOURCEDIR) $(BUILDDIR)/html
+	@echo Step 3: Deleting subrepositories in doc/ folder
+	./make_help_scripts/delete_sub_repos
+
 html-all-subrepos-with-api: Makefile
 	@echo Single html file with API
 	@echo Step 1: Cloning all subrepositories
@@ -44,12 +56,36 @@ html-all-subrepos-with-api: Makefile
 	@echo Step 4: Building API
 	./make_help_scripts/create_api
 
+linkcheck-all-subrepos-with-api: Makefile
+	@echo Single version html file with API and linkcheck
+	@echo Step 1: Cloning all subrepositories
+	./make_help_scripts/add_sub_repos
+	@echo Step 2: Building API
+	./make_help_scripts/create_api
+	@echo Step 3: Cloning all subrepositories again
+	./make_help_scripts/add_sub_repos
+	@echo Step 4: Check links
+	cp -r $(BUILDDIR)/html/doc/api/. doc/api/
+	make linkcheck
+	rm -rf doc/api/
+
 multiversion: Makefile
 	@echo Building multi version documentation without API
 	@echo Step 1: Creating temporary commits
 	./make_help_scripts/add_tmp_commits
 	@echo Step 2: Build multi version documentation
 	sphinx-multiversion $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
+	@echo Step 3: Deleting temporary commits
+	./make_help_scripts/delete_tmp_commits
+	@echo Step 4: Create correct index
+	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=master/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
+
+multiversion-with-errors: Makefile
+	@echo Building multi version documentation without API
+	@echo Step 1: Creating temporary commits
+	./make_help_scripts/add_tmp_commits
+	@echo Step 2: Build multi version documentation
+	sphinx-multiversion $(SPHINXOPTS) -W --keep-going $(SOURCEDIR) $(BUILDDIR)/html
 	@echo Step 3: Deleting temporary commits
 	./make_help_scripts/delete_tmp_commits
 	@echo Step 4: Create correct index
@@ -68,7 +104,7 @@ multiversion-with-api: Makefile
 	@echo Step 5: Create correct index
 	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=master/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
 
-.PHONY: help Makefile html-with-api multiversion multiversion-with-api html-all-subrepos html-all-subrepos-with-api
+.PHONY: help Makefile html-with-api multiversion multiversion-with-api multiversion-with-errors html-all-subrepos html-all-subrepos-with-api html-all-subrepos-with-errors linkcheck-all-subrepos-with-api
 
 # TODO(denis): Enable this!
 # # # # Generate the doxygen xml (for Sphinx) and copy the doxygen html to the

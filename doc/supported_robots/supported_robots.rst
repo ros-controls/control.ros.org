@@ -16,6 +16,7 @@ Unofficial (from the community):
 * `KUKA industrial robots (KUKA Robot Sensor Interface (RSI)) <https://github.com/dignakov/ros2_control_kuka_driver>`_
 * `KUKA IIWA (KUKA Fast Robot Interface (FRI)) <https://github.com/ICube-Robotics/iiwa_ros2>`_
 * `KUKA LBR and IIWA (KUKA Fast Robot Interface (FRI)) <https://github.com/KCL-BMEIS/lbr_fri_ros2_stack>`_
+* `KUKA All Robots (iiQKA-ECI, Sunrise-FRI, KSS-RSI) <https://github.com/kroshu/ros2_kuka_drivers>`_
 * `ABB - EGM interface <https://github.com/PickNikRobotics/abb_ros2>`_
 * `Mitsubishi RV1A <https://github.com/ICube-Robotics/mrv1a_ros2>`_
 
@@ -37,4 +38,4 @@ Non robot-devices:
 
 Mobile manipulators:
 
-* `Hello Robot - Stretch (for simple simulation with MoveIt2) <https://github.com/hello-robot/stretch_ros2/blob/galactic/stretch_moveit_config/README.md>`_
+* `Hello Robot - Stretch (for simple simulation with MoveIt2) <https://github.com/hello-robot/stretch_ros2/blob/galactic/stretch_moveit2/README.md>`_

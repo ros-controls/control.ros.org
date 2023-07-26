@@ -9,9 +9,10 @@ Welcome to the ros2_control documentation!
    doc/getting_started/getting_started.rst
    doc/ros2_control/doc/index.rst
    doc/ros2_controllers/doc/controllers_index.rst
-   doc/ros2_control/ros2controlcli/doc/userdoc.rst
-   doc/differences_to_ros1/differences_to_ros1.rst
    doc/ros2_control_demos/doc/index.rst
+   doc/ros2_control/ros2controlcli/doc/userdoc.rst
+   doc/simulators/simulators.rst
+   doc/differences_to_ros1/differences_to_ros1.rst
    doc/supported_robots/supported_robots.rst
    doc/resources/resources.rst
    doc/contributing/contributing.rst
@@ -72,15 +73,14 @@ General discussions
 .. _realtime_tools: https://github.com/ros-controls/realtime_tools
 .. _control_toolbox: https://github.com/ros-controls/control_toolbox
 .. _ros2_control_demos: https://github.com/ros-controls/ros2_control_demos
-.. _controller_manager_msgs: https://github.com/ros-controls/ros2_control/tree/master/controller_manager_msgs
-.. _Controller Manager: https://github.com/ros-controls/ros2_control/blob/master/controller_manager/src/controller_manager.cpp
-.. _ControllerInterface: https://github.com/ros-controls/ros2_control/blob/master/controller_interface/include/controller_interface/controller_interface.hpp
-.. _ros2_control node: https://github.com/ros-controls/ros2_control/blob/master/controller_manager/src/ros2_control_node.cpp
-.. _ForwardCommandController implementation: https://github.com/ros-controls/ros2_controllers/blob/master/forward_command_controller/src/forward_command_controller.cpp
-.. _Resource Manager: https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/src/resource_manager.cpp
-.. _JointTrajectoryController: https://github.com/ros-controls/ros2_controllers/blob/master/joint_trajectory_controller/src/joint_trajectory_controller.cpp
+.. _controller_manager_msgs: https://github.com/ros-controls/ros2_control/tree/{REPOS_FILE_BRANCH}/controller_manager_msgs
+.. _Controller Manager: https://github.com/ros-controls/ros2_control/blob/{REPOS_FILE_BRANCH}/controller_manager/src/controller_manager.cpp
+.. _ControllerInterface: https://github.com/ros-controls/ros2_control/blob/{REPOS_FILE_BRANCH}/controller_interface/include/controller_interface/controller_interface.hpp
+.. _ros2_control node: https://github.com/ros-controls/ros2_control/blob/{REPOS_FILE_BRANCH}/controller_manager/src/ros2_control_node.cpp
+
+.. _Resource Manager: https://github.com/ros-controls/ros2_control/blob/{REPOS_FILE_BRANCH}/hardware_interface/src/resource_manager.cpp
 .. _Node Lifecycle Design: https://design.ros2.org/articles/node_lifecycle.html
-.. _ros2controlcli: https://github.com/ros-controls/ros2_control/tree/master/ros2controlcli
+.. _ros2controlcli: https://github.com/ros-controls/ros2_control/tree/{REPOS_FILE_BRANCH}/ros2controlcli
 .. _Hardware Access through Controllers design document: https://github.com/ros-controls/roadmap/blob/master/design_drafts/hardware_access.md
 .. _ROS2 Control Components URDF Examples design document: https://github.com/ros-controls/roadmap/blob/master/design_drafts/components_architecture_and_urdf_examples.md
 .. _roadmap: https://github.com/ros-controls/roadmap

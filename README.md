@@ -1,6 +1,6 @@
 # Status
 
-[![Build & Deploy Page](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-make-page.yml/badge.svg)](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-make-page.yml)
+[![Build & Deploy Page](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-make-page.yml/badge.svg)](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-make-page.yml)[![Sphinx Warnings](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-check-warnings.yml/badge.svg?branch=master)](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-check-warnings.yml)[![Broken Links](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-check-links.yml/badge.svg?branch=master)](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-check-links.yml)
 
 
 # control.ros.org
@@ -26,7 +26,14 @@ There are `make` commands available which automate the process of building and i
 1. If you are running inside a docker container, be sure to open a port so the website can be accessed.
 2. Install doxygen and graphviz: `sudo apt install doxygen graphviz`
 3. `python3 -m pip install -r requirements.txt`
-4. Building of the documentation. Depends on what you want to do. See either single version or multiversion below.
+4. Install generate_parameter_library>0.3.3. If it is not installed as a ROS 2 package already, install it as python module from source
+```bash
+cd
+git clone https://github.com/PickNikRobotics/generate_parameter_library.git
+cd generate_parameter_library/generate_parameter_library_py/
+python3 -m pip install .
+```
+5. Building of the documentation. Depends on what you want to do. See either single version or multiversion below.
 
 If you want to see results run: `python3 -m http.server --directory <path_to_control.ros.org>/_build/html <port>` and then open a browser to `localhost:<port>`
  (Or just open `_build/html/index.html` in your browser.)

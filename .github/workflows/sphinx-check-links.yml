@@ -1,4 +1,4 @@
-name: "Build & Deploy Page"
+name: "Check Page for Broken Links"
 on:
   workflow_dispatch:
   push:
@@ -10,7 +10,7 @@ on:
   pull_request: # only runs up through build of sphinx
 
 jobs:
-  build-deploy:
+  check-links:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -20,21 +20,8 @@ jobs:
       uses: ./.github/actions/install-dependencies
     - name: Install doxygen and graphviz
       run: sudo apt-get install -y doxygen graphviz
-    - name: Build multiversion with API
-      run: |
+    - name: Build page with API and run linkchecker
+      run:  |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        make multiversion-with-api
-    - name: clone gh-pages branch
-      uses: actions/checkout@v3
-      if: ${{ success() && github.event_name != 'pull_request' && !env.ACT }}
-      with:
-        ref: gh-pages
-        path: gh-pages
-    - name: Deploy Pages
-      if: ${{ success() && github.event_name != 'pull_request' && !env.ACT }}
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./_build/html
-        cname: control.ros.org
+        make linkcheck-all-subrepos-with-api

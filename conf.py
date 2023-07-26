@@ -19,6 +19,7 @@ import time
 
 from docutils.parsers.rst import Directive
 
+sys.path.append(os.path.abspath("./_ext"))
 sys.path.append(os.path.abspath("./sphinx-multiversion"))
 
 # -- General configuration -------------------------------------------------
@@ -82,7 +83,7 @@ extensions = [
     "sphinx_rtd_theme",
     "sphinx_multiversion",
     "sphinx_copybutton",
-    "sphinxcontrib.globalsubs"
+    "generate_parameter_library"
 ]
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
@@ -170,7 +171,7 @@ smv_branch_whitelist = r"^(foxy|galactic|humble|master)$"
 smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy|galactic|humble).*$"
 smv_remote_whitelist = r"^(origin)$"
 smv_latest_version = "humble"
-smv_eol_versions = []
+smv_eol_versions = ["foxy", "galactic"]
 
 distro_full_names = {
     "foxy": "Foxy Fitzroy",
@@ -310,18 +311,9 @@ def smv_rewrite_configs(app, config):
         app.config.html_baseurl = app.config.html_baseurl + "/" + distro + "/"
         app.config.project = "ROS2_Control: " + distro.title()
         app.config.html_logo = "images/logo_ros-controls.png"
-
-        # see https://github.com/missinglinkelectronics/sphinxcontrib-globalsubs
-        app.config.global_substitutions = {
-            'github_branch': branch,
-        }
     else:
         # If we are not building a multiversion build, default to the rolling logo
         app.config.html_logo = "images/logo_ros-controls.png"
-        # see https://github.com/missinglinkelectronics/sphinxcontrib-globalsubs
-        app.config.global_substitutions = {
-            'github_branch': 'master',
-        }
 
 
 def github_link_rewrite_branch(app, pagename, templatename, context, doctree):

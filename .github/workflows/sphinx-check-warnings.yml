@@ -1,0 +1,25 @@
+name: "Check Page for Warnings"
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+  schedule:
+  # Run every morning to ensure component documentation is up to date on deployment
+   - cron: '23 5 * * *'
+  pull_request:
+
+jobs:
+  build-halt-on-errors:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Install dependencies
+      uses: ./.github/actions/install-dependencies
+    - name: Build multiversion considering warnings as errors
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        make multiversion-with-errors
