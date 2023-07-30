@@ -61,7 +61,7 @@ Bug reports and feature requests
    Provide relevant information regarding the operating system, ROS distribution, etc.
 
 Questions
-   Please use `ROS Answers <https://answers.ros.org/>`_ and tag your questions with ``ros2_control``.
+   Please use `ROS Answers <https://answers.ros.org/questions>`_ and tag your questions with ``ros2_control``.
 
 General discussions
    Please use `ROS Discourse`_.
