@@ -63,6 +63,12 @@ Bug reports and feature requests
    Make sure to provide a minimal list of steps one can follow to reproduce the issue you found
    Provide relevant information regarding the operating system, ROS distribution, etc.
 
+<<<<<<< HEAD
+=======
+Questions
+   Please use `ROS Answers <https://answers.ros.org/questions>`_ and tag your questions with ``ros2_control``.
+
+>>>>>>> f3f7f96 (Fix image targets and permanent redirections (#134))
 General discussions
    Please use `ROS Discourse`_.
 
