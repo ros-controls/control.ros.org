@@ -9,18 +9,45 @@ Installation
 
 Binary packages
 ------------------
-The ros2_control framework is released for ROS 2 rolling.
-To use it, you have to install ``ros-rolling-ros2-control`` and ``ros-rolling-ros2-controllers`` packages.
+The ros2_control framework is released for ROS 2 {DISTRO}.
+To use it, you have to install ``ros-{DISTRO}-ros2-control`` and ``ros-{DISTRO}-ros2-controllers`` packages.
 
 Building from Source
 ---------------------------
 
-If you want to install the framework from source, use the following commands in your workspace main folder:
+.. raw:: html
 
-.. code:: bash
+    <a href="https://github.com/ros-controls/control.ros.org/actions/workflows/{DISTRO}-binary-build-main.yml">
+        <img src="https://github.com/ros-controls/control.ros.org/actions/workflows/{DISTRO}g-binary-build-main.yml/badge.svg" alt="{DISTRO} Binary Build - main"/></a>
 
-   wget https://raw.githubusercontent.com/ros-controls/ros2_control/{REPOS_FILE_BRANCH}/ros2_control.rolling.repos
-   vcs import src < ros2_control.repos
+If you want to install the framework from source, e.g., for contributing to the framework, use the following commands:
+
+* Download all repositories
+
+  .. code-block:: shell
+
+    mkdir -p ~/ros2_ws/src
+    cd ~/ros2_ws/
+    wget https://raw.githubusercontent.com/ros-controls/control.ros.org/master/ros_controls.$ROS_DISTRO.repos
+    vcs import src < ros_controls.$ROS_DISTRO.repos
+
+* Install dependencies:
+
+  .. code-block:: shell
+
+    rosdep update --rosdistro=$ROS_DISTRO
+    sudo apt-get update
+    rosdep install --from-paths src --ignore-src -r -y
+
+* Build everything, e.g. with:
+
+  .. code-block:: shell
+
+    . /opt/ros/${ROS_DISTRO}/setup.sh
+    colcon build --symlink-install
+
+* Do not forget to source ``setup.bash`` from the ``install`` folder!
+
 
 Architecture
 ============
@@ -177,7 +204,7 @@ The example files can be found in the `ros2_control_demos`_ repository.
    You can use a default `ros2_control node`_ (recommended) or integrate the controller manager in your software stack.
    (`Example launch file for RRBot <https://github.com/ros-controls/ros2_control_demos/blob/{REPOS_FILE_BRANCH}/example_1/bringup/launch/rrbot.launch.py>`_)
 
-*NOTE:* You could alternatively use a script to create setup a `skeleton of the "hardware_interface" package by using the scripts <https://stoglrobotics.github.io/ros_team_workspace/master/use-cases/ros2_control/setup_robot_hardware_interface.html>`_ provided by one of our maintainers.
+*NOTE:* You could alternatively use a script to create setup a `skeleton of the "hardware_interface" package by using the scripts <https://rtw.stoglrobotics.de/master/use-cases/ros2_control/setup_robot_hardware_interface.html>`_ provided by one of our maintainers.
 
 
 .. _ros2_control: https://github.com/ros-controls/ros2_control
