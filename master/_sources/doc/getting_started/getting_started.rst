@@ -18,7 +18,7 @@ Building from Source
 .. raw:: html
 
     <a href="https://github.com/ros-controls/control.ros.org/actions/workflows/{DISTRO}-binary-build-main.yml">
-        <img src="https://github.com/ros-controls/control.ros.org/actions/workflows/{DISTRO}g-binary-build-main.yml/badge.svg" alt="{DISTRO} Binary Build - main"/></a>
+        <img src="https://github.com/ros-controls/control.ros.org/actions/workflows/{DISTRO}-binary-build-main.yml/badge.svg" alt="{DISTRO} Binary Build - main"/></a>
 
 If you want to install the framework from source, e.g., for contributing to the framework, use the following commands:
 
