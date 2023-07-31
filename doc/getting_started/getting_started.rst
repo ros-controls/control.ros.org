@@ -9,18 +9,45 @@ Installation
 
 Binary packages
 ------------------
-The ros2_control framework is released for ROS 2 humble.
-To use it, you have to install ``ros-humble-ros2-control`` and ``ros-humble-ros2-controllers`` packages.
+The ros2_control framework is released for ROS 2 {DISTRO}.
+To use it, you have to install ``ros-{DISTRO}-ros2-control`` and ``ros-{DISTRO}-ros2-controllers`` packages.
 
 Building from Source
 ---------------------------
 
-If you want to install the framework from source, use the following commands in your workspace main folder:
+.. raw:: html
 
-.. code:: bash
+    <a href="https://github.com/ros-controls/control.ros.org/actions/workflows/{DISTRO}-binary-build-main.yml">
+        <img src="https://github.com/ros-controls/control.ros.org/actions/workflows/{DISTRO}-binary-build-main.yml/badge.svg" alt="{DISTRO} Binary Build - main"/></a>
 
-   wget https://raw.githubusercontent.com/ros-controls/ros2_control/{REPOS_FILE_BRANCH}/ros2_control.{REPOS_FILE_BRANCH}.repos
-   vcs import src < ros2_control.{REPOS_FILE_BRANCH}.repos
+If you want to install the framework from source, e.g., for contributing to the framework, use the following commands:
+
+* Download all repositories
+
+  .. code-block:: shell
+
+    mkdir -p ~/ros2_ws/src
+    cd ~/ros2_ws/
+    wget https://raw.githubusercontent.com/ros-controls/control.ros.org/master/ros_controls.$ROS_DISTRO.repos
+    vcs import src < ros_controls.$ROS_DISTRO.repos
+
+* Install dependencies:
+
+  .. code-block:: shell
+
+    rosdep update --rosdistro=$ROS_DISTRO
+    sudo apt-get update
+    rosdep install --from-paths src --ignore-src -r -y
+
+* Build everything, e.g. with:
+
+  .. code-block:: shell
+
+    . /opt/ros/${ROS_DISTRO}/setup.sh
+    colcon build --symlink-install
+
+* Do not forget to source ``setup.bash`` from the ``install`` folder!
+
 
 Architecture
 ============
