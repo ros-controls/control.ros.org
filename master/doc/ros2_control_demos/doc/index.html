@@ -55,7 +55,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Demos</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#what-you-can-find-in-this-repository">What you can find in this repository</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#goals">Goals</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#example-overview">Example Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples-overview">Examples Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#manual-install">Manual Install</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#build-from-debian-packages">Build from debian packages</a></li>
@@ -75,10 +75,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../example_2/doc/userdoc.html">Example 2: DiffBot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../example_3/doc/userdoc.html">Example 3: RRBot with multiple interfaces</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../example_4/doc/userdoc.html">Example 4: Industrial robot with integrated sensor</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../example_5/doc/userdoc.html">Example 5: Industrial Robots with externally connected sensor</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../example_6/doc/userdoc.html">Example 6: Modular Robots with separate communication to each actuator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../example_5/doc/userdoc.html">Example 5: Industrial robots with externally connected sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../example_6/doc/userdoc.html">Example 6: Modular robots with separate communication to each actuator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../example_7/doc/userdoc.html">Example 7: Full tutorial with a 6DOF robot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../example_8/doc/userdoc.html">Example 8: Using transmissions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../example_9/doc/userdoc.html">Example 9: Gazebo Classic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../example_9/doc/userdoc.html">Example 9: Gazebo classic</a></li>
 </ul>
 </li>
 </ul>
@@ -122,7 +123,7 @@
   <section id="demos">
 <span id="ros2-control-demos"></span><h1>Demos<a class="headerlink" href="#demos" title="Permalink to this heading"></a></h1>
 <p>This <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos">GitHub Repository</a>
-provides templates for the development of ros2_control-enabled robots and a simple simulations to demonstrate and prove ros2_control concepts.</p>
+provides templates for the development of <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code>-enabled robots and simple simulations to demonstrate and prove <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> concepts.</p>
 <p>If you want to have a rather step by step manual how to do things with <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> checkout <a class="reference external" href="https://github.com/ros-controls/roscon2022_workshop">ros-control/roscon2022_workshop</a> repository.</p>
 <section id="what-you-can-find-in-this-repository">
 <h2>What you can find in this repository<a class="headerlink" href="#what-you-can-find-in-this-repository" title="Permalink to this heading"></a></h2>
@@ -134,6 +135,7 @@ provides templates for the development of ros2_control-enabled robots and a simp
 <li><p>Loading the configuration and starting a robot using launch files.</p></li>
 <li><p>Control of a differential mobile base <em>DiffBot</em>.</p></li>
 <li><p>Control of two joints of <em>RRBot</em>.</p></li>
+<li><p>Control of a 6-degrees-of-freedom robot.</p></li>
 <li><p>Implementing a controller switching strategy for a robot.</p></li>
 <li><p>Using joint limits and transmission concepts in <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code>.</p></li>
 </ul>
@@ -147,8 +149,8 @@ provides templates for the development of ros2_control-enabled robots and a simp
 <li><p>The repository is a validation environment for <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> concepts, which can only be tested during run-time (e.g., execution of controllers by the controller manager, communication between robot hardware and controllers).</p></li>
 </ol>
 </section>
-<section id="example-overview">
-<h2>Example Overview<a class="headerlink" href="#example-overview" title="Permalink to this heading"></a></h2>
+<section id="examples-overview">
+<h2>Examples Overview<a class="headerlink" href="#examples-overview" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>Example 1: RRBot</dt><dd><p><em>RRBot</em> - or ‘’Revolute-Revolute Manipulator Robot’’ - a simple position controlled robot with one hardware interface. This example also demonstrates the switching between different controllers.</p>
 </dd>
@@ -162,6 +164,8 @@ The robot is basically a box moving according to differential drive kinematics.<
 <dt>Example 5: “Industrial Robots with externally connected sensor”</dt><dd><p><em>RRBot</em> with an externally connected sensor.</p>
 </dd>
 <dt>Example 6: “Modular Robots with separate communication to each actuator”</dt><dd><p>The example shows how to implement robot hardware with separate communication to each actuator.</p>
+</dd>
+<dt>Example 7: “6-DOF robot”</dt><dd><p>A full tutorial for a 6 DOF robot for intermediate ROS 2 users.</p>
 </dd>
 <dt>Example 8: “Using transmissions”</dt><dd><p><em>RRBot</em> with an exposed transmission interface.</p>
 </dd>
@@ -318,10 +322,11 @@ The ros2_control framework uses the <strong>&lt;ros2_control&gt;</strong> tag in
 <li class="toctree-l1"><a class="reference internal" href="../example_2/doc/userdoc.html">Example 2: DiffBot</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../example_3/doc/userdoc.html">Example 3: RRBot with multiple interfaces</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../example_4/doc/userdoc.html">Example 4: Industrial robot with integrated sensor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../example_5/doc/userdoc.html">Example 5: Industrial Robots with externally connected sensor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../example_6/doc/userdoc.html">Example 6: Modular Robots with separate communication to each actuator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example_5/doc/userdoc.html">Example 5: Industrial robots with externally connected sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example_6/doc/userdoc.html">Example 6: Modular robots with separate communication to each actuator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example_7/doc/userdoc.html">Example 7: Full tutorial with a 6DOF robot</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../example_8/doc/userdoc.html">Example 8: Using transmissions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../example_9/doc/userdoc.html">Example 9: Gazebo Classic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example_9/doc/userdoc.html">Example 9: Gazebo classic</a></li>
 </ul>
 </div>
 </section>
