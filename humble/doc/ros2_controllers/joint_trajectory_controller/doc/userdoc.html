@@ -260,6 +260,9 @@ Acceleration interface can only be used in combination with position and velocit
 <dt>open_loop_control (boolean)</dt><dd><p>Use controller in open-loop control mode using ignoring the states provided by hardware interface and using last commands as states in the next control step. This is useful if hardware states are not following commands, i.e., an offset between those (typical for hydraulic manipulators).</p>
 <p>If this flag is set, the controller tries to read the values from the command interfaces on starting. If they have real numeric values, those will be used instead of state interfaces. Therefore it is important set command interfaces to NaN (std::numeric_limits&lt;double&gt;::quiet_NaN()) or state values when the hardware is started.</p>
 </dd>
+<dt>allow_nonzero_velocity_at_trajectory_end (boolean)</dt><dd><p>If false, the last velocity point has to be zero or the goal will be rejected.</p>
+<p>Default: true</p>
+</dd>
 <dt>constraints (structure)</dt><dd><p>Default values for tolerances if no explicit values are states in JointTrajectory message.</p>
 </dd>
 <dt>constraints.stopped_velocity_tolerance (double)</dt><dd><p>Default value for end velocity deviation.</p>
