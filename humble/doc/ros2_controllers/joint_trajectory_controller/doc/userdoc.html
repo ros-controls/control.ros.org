@@ -257,8 +257,21 @@ Acceleration interface can only be used in combination with position and velocit
 </dd>
 <dt>allow_partial_joints_goal (boolean)</dt><dd><p>Allow joint goals defining trajectory for only some joints.</p>
 </dd>
-<dt>open_loop_control (boolean)</dt><dd><p>Use controller in open-loop control mode using ignoring the states provided by hardware interface and using last commands as states in the next control step. This is useful if hardware states are not following commands, i.e., an offset between those (typical for hydraulic manipulators).</p>
-<p>If this flag is set, the controller tries to read the values from the command interfaces on starting. If they have real numeric values, those will be used instead of state interfaces. Therefore it is important set command interfaces to NaN (std::numeric_limits&lt;double&gt;::quiet_NaN()) or state values when the hardware is started.</p>
+<dt>open_loop_control (boolean)</dt><dd><dl class="simple">
+<dt>Use controller in open-loop control mode:</dt><dd><ul class="simple">
+<li><p>The controller ignores the states provided by hardware interface but using last commands as states for starting the trajectory interpolation.</p></li>
+<li><p>It deactivates the feedback control, see the <code class="docutils literal notranslate"><span class="pre">gains</span></code> structure.</p></li>
+</ul>
+</dd>
+</dl>
+<p>This is useful if hardware states are not following commands, i.e., an offset between those (typical for hydraulic manipulators).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If this flag is set, the controller tries to read the values from the command interfaces on activation.
+If they have real numeric values, those will be used instead of state interfaces.
+Therefore it is important set command interfaces to NaN (i.e., <code class="docutils literal notranslate"><span class="pre">std::numeric_limits&lt;double&gt;::quiet_NaN()</span></code>) or state values when the hardware is started.</p>
+</div>
+<p>Default: false</p>
 </dd>
 <dt>allow_nonzero_velocity_at_trajectory_end (boolean)</dt><dd><p>If false, the last velocity point has to be zero or the goal will be rejected.</p>
 <p>Default: true</p>
@@ -277,7 +290,9 @@ Acceleration interface can only be used in combination with position and velocit
 <dt>constraints.&lt;joint_name&gt;.goal (double)</dt><dd><p>Maximally allowed deviation from the goal (end of the trajectory) for a given joint.</p>
 <p>Default: 0.0 (tolerance is not enforced)</p>
 </dd>
-<dt>gains (structure)</dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">velocity</span></code> is the only command interface for all joints or an <code class="docutils literal notranslate"><span class="pre">effort</span></code> command interface is configured, PID controllers are used for every joint. This structure contains the controller gains for every joint with the control law</p>
+<dt>gains (structure)</dt><dd><p>Only relevant, if <code class="docutils literal notranslate"><span class="pre">open_loop_control</span></code> is not set.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">velocity</span></code> is the only command interface for all joints or an <code class="docutils literal notranslate"><span class="pre">effort</span></code> command interface is configured, PID controllers are used for every joint.
+This structure contains the controller gains for every joint with the control law</p>
 <div class="math notranslate nohighlight">
 \[u = k_ff v_d + k_p (s_d - s) + k_i \sum(s_d - s) dt + k_d (v_d - v)\]</div>
 <p>with the desired velocity <span class="math notranslate nohighlight">\(v_d\)</span> and position <span class="math notranslate nohighlight">\(s_d\)</span>,
