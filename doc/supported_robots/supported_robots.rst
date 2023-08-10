@@ -35,6 +35,7 @@ Non robot-devices:
 * `ODrive Motor Controller <https://github.com/Factor-Robotics/odrive_ros2_control>`_
 * `ODRI Motor Controller <https://github.com/stack-of-tasks/ros2_hardware_interface_odri>`_
 * `NDI measurement systems <https://github.com/ICube-Robotics/ndisys_ros2>`_
+* `Hoverboard motors <https://github.com/DataBot-Labs/hoverboard_ros2_control>`_
 
 Mobile manipulators:
 
