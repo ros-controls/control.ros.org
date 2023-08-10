@@ -26,6 +26,11 @@ Non robot-devices:
 * `Force Dimension haptic devices <https://github.com/ICube-Robotics/forcedimension_ros2>`_
 * `ODrive Motor Controller <https://github.com/Factor-Robotics/odrive_ros2_control>`_
 * `ODRI Motor Controller <https://github.com/stack-of-tasks/ros2_hardware_interface_odri>`_
+<<<<<<< HEAD
+=======
+* `NDI measurement systems <https://github.com/ICube-Robotics/ndisys_ros2>`_
+* `Hoverboard motors <https://github.com/DataBot-Labs/hoverboard_ros2_control>`_
+>>>>>>> b345145 (Add hoveboard ros2-control support in the list (#140))
 
 Mobile manipulators:
 
