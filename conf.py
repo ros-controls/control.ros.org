@@ -30,10 +30,10 @@ copyright = "{}, {}".format(time.strftime("%Y"), author)
 
 # Adjust those to change ros distribution
 # you might also need to white list branch
-ros_distro = "rolling"
-distro_title = "Rolling"
-distro_title_full = "Rolling Ridley"
-repos_file_branch = "master"
+ros_distro = "iron"
+distro_title = "Iron"
+distro_title_full = "Iron Irwini"
+repos_file_branch = "iron"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -167,16 +167,17 @@ html_sourcelink_suffix = ""
 
 
 # Add branches you want to whtielist here.
-smv_branch_whitelist = r"^(foxy|galactic|humble|master)$"
-smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy|galactic|humble).*$"
+smv_branch_whitelist = r"^(foxy|galactic|humble|iron|master)$"
+smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy|galactic|humble|iron).*$"
 smv_remote_whitelist = r"^(origin)$"
-smv_latest_version = "humble"
+smv_latest_version = "iron"
 smv_eol_versions = ["foxy", "galactic"]
 
 distro_full_names = {
     "foxy": "Foxy Fitzroy",
     "galactic": "Galactic Geochelone",
     "humble": "Humble Hawksbill",
+    "iron": "Iron Irwini",
     "rolling": "Rolling Ridley",
 }
 
