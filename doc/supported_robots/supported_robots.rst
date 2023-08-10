@@ -8,6 +8,7 @@ Official (supported by robot manufacturer):
 
 * `Universal Robots <https://github.com/UniversalRobots/Universal_Robots_ROS2_Driver>`_
 * `Franka Emika research robots <https://github.com/frankaemika/franka_ros2>`_
+* `xArm <https://github.com/xarm-Developer/xarm_ros2>`_
 * `Flexiv Robotics Rizon robots <https://github.com/flexivrobotics/flexiv_ros2>`_
 
 Unofficial (from the community):
@@ -18,6 +19,11 @@ Unofficial (from the community):
 * `ABB - EGM interface <https://github.com/PickNikRobotics/abb_ros2>`_
 * `Mitsubishi RV1A <https://github.com/ICube-Robotics/mrv1a_ros2>`_
 
+Communication protocols:
+
+* `Ethercat <https://github.com/ICube-Robotics/ethercat_driver_ros2>`_
+* `CanOpen <https://github.com/ros-industrial/ros2_canopen>`_
+
 End-effectors:
 
 * `Schunk SVH 5-finger Hand <https://github.com/fzi-forschungszentrum-informatik/schunk_svh_ros_driver/tree/ros2-foxy>`_
@@ -27,6 +33,7 @@ Non robot-devices:
 * `Force Dimension haptic devices <https://github.com/ICube-Robotics/forcedimension_ros2>`_
 * `ODrive Motor Controller <https://github.com/Factor-Robotics/odrive_ros2_control>`_
 * `ODRI Motor Controller <https://github.com/stack-of-tasks/ros2_hardware_interface_odri>`_
+* `NDI measurement systems <https://github.com/ICube-Robotics/ndisys_ros2>`_
 
 Mobile manipulators:
 
