@@ -67,7 +67,7 @@ linkcheck-all-subrepos-with-api: Makefile
 	@echo Step 4: Check links
 	cp -r $(BUILDDIR)/html/doc/api/. doc/api/
 	./make_help_scripts/check_links
-	rm -rf doc/api/
+	rm -rf doc/api/ linkcheck.log
 
 multiversion: Makefile
 	@echo Building multi version documentation without API
