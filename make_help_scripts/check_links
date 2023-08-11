@@ -3,12 +3,20 @@
 # due to a bug in the sphinx linkchecker, github anchors are false positives and
 # have to be explicitly ignored
 # https://github.com/sphinx-doc/sphinx/issues/9016
-make linkcheck > linkcheck.log
-if grep broken linkcheck.log | grep -v -E 'github.*Anchor'; then
-    num_broken=$(grep broken linkcheck.log | grep -v -E 'github.*Anchor' | wc -l)
+
+LOGFILE="linkcheck.log"
+cleanup () {
+  rm "$LOGFILE"
+	rm -rf doc/api/
+}
+
+cp -r $1/html/doc/api/. doc/api/
+make linkcheck > "$LOGFILE"
+if grep broken "$LOGFILE" | grep -v -E 'github.*Anchor'; then
+    num_broken=$(grep broken "$LOGFILE" | grep -v -E 'github.*Anchor' | wc -l)
     echo "Broken links found: $num_broken"
-    rm linkcheck.log
+    cleanup
     exit 1
 fi
-rm linkcheck.log
+cleanup
 exit 0
