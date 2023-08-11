@@ -6,6 +6,9 @@
 make linkcheck > linkcheck.log
 if grep broken linkcheck.log | grep -v -E 'github.*Anchor'; then
     num_broken=$(grep broken linkcheck.log | grep -v -E 'github.*Anchor' | wc -l)
-    echo "Broken links found in linkcheck.log: $num_broken"
+    echo "Broken links found: $num_broken"
+    rm linkcheck.log
     exit 1
 fi
+rm linkcheck.log
+exit 0
