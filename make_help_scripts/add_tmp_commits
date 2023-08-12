@@ -17,7 +17,13 @@ add_sub_repositories_and_commit () {
         git checkout "$branch"
         # change .gitignore, needed to include subrepositorie. sed matches doc/ros2_control*, so all subrepositorie are excluded
         sed -i "s/doc\/ros2_control/\#doc\/ros2_control/g" .gitignore
+<<<<<<< HEAD
         # clone all subrepositorie and add as tmp commit to branch of multi version
+=======
+        sed -i "s/doc\/gz_ros2_control/\#doc\/gz_ros2_control/g" .gitignore
+        sed -i "s/doc\/gazebo_ros2_control/\#doc\/gazebo_ros2_control/g" .gitignore
+        # clone all subrepositories and add as tmp commit to branch of multi version
+>>>>>>> 5dfd401 (Fix workflows for PRs (#135))
         echo "Clone repositories for $branch and checkout ${branch_version[$branch]}"
         for repo_name in "${!subrepo_url[@]}";
             do echo "Create doc/$repo_name";
