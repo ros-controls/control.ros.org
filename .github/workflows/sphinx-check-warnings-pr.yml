@@ -1,15 +1,10 @@
-name: "Check Page for Warnings"
+name: "Check Page for Warnings (PR)"
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - master
-  schedule:
-  # Run every morning to ensure component documentation is up to date on deployment
-   - cron: '23 5 * * *'
+  pull_request:
 
 jobs:
-  build-halt-on-warnings:
+  build-singleversion-halt-on-warnings:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
