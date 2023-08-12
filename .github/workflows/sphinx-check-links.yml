@@ -16,7 +16,6 @@ jobs:
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
-<<<<<<< HEAD:.github/workflows/sphinx-check-links.yml
     - uses: actions/setup-python@v4
       with:
         python-version: '3.10'
@@ -33,10 +32,6 @@ jobs:
         cd generate_parameter_library/generate_parameter_library_py/
         python -m pip install .
       shell: bash
-=======
-    - name: Install dependencies
-      uses: ./.github/actions/install-dependencies
->>>>>>> e2a04ea (Create usable workflows (#125)):.github/workflows/sphinx-make-page.yml
     - name: Install doxygen and graphviz
       run: sudo apt-get install -y doxygen graphviz
     - name: Build page with API and run linkchecker
