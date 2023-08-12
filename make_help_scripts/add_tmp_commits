@@ -6,6 +6,23 @@ DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 . "$DIR/deploy_defines" || { echo "Could not source deploy_defines script. This is needed for correct execution. Exiting!"; exit; }
 
+check_repositories () {
+  # checkout a base for defined starting point
+  cd "$base_dir" || { echo "Could not go to base dir of control.ros.org. Exiting!"; exit "$ERRCODE"; }
+  if [ -n "$(git status --porcelain)" ]; then
+    echo "control.ros.org repository has uncommitted changes, which will be deleted!"; exit 2;
+  fi
+  # check if subrepos do not exist and are no symlinks
+  for repo_name in "${!subrepo_url[@]}"; do
+    if [ -L doc/"$repo_name" ]; then
+      echo "$repo_name is a symlink, delete link or repository will be broken!"; exit 2;
+    fi
+    if [ -d doc/"$repo_name" ]; then
+      echo "$repo_name repository exists already, save your changes because it will be deleted!"; exit 2;
+    fi
+  done
+}
+
 add_sub_repositories_and_commit () {
     # checkout a base for defined starting point
     cd "$base_dir" || { echo "Could not go to base dir of control.ros.org. Exiting!"; exit "$ERRCODE"; }
@@ -15,7 +32,7 @@ add_sub_repositories_and_commit () {
     for branch in "${!branch_version[@]}";
         do echo "Switch to branch: $branch.  - With version:${branch_version[$branch]}";
         git checkout "$branch"
-        # change .gitignore, needed to include subrepositorie. sed matches doc/ros2_control*, so all subrepositorie are excluded
+        # change .gitignore, needed to include subrepositories. sed matches doc/ros2_control*, so all subrepositorie are excluded
         sed -i "s/doc\/ros2_control/\#doc\/ros2_control/g" .gitignore
         sed -i "s/doc\/gz_ros2_control/\#doc\/gz_ros2_control/g" .gitignore
         sed -i "s/doc\/gazebo_ros2_control/\#doc\/gazebo_ros2_control/g" .gitignore
@@ -23,14 +40,15 @@ add_sub_repositories_and_commit () {
         echo "Clone repositories for $branch and checkout ${branch_version[$branch]}"
         for repo_name in "${!subrepo_url[@]}";
             do echo "Create doc/$repo_name";
-                git clone "${subrepo_url[$repo_name]}" -b "${branch_version[$branch]}" doc/"$repo_name"
+                git clone "${subrepo_url[$repo_name]}" -b "${branch_version[$branch]}" doc/"$repo_name" 1> /dev/null
                 cd doc/"$repo_name" || { echo "Could not clone $repo_name to doc/ directory. Exiting!"; exit "$ERRCODE"; }
                 # remove git repo so that doc files of subrepo can be added to tmp commit
                 rm -rf .git/
                 cd ../../
         done
         git add .
-        git commit -m "Add temporary changes for multi version"
+        # we don't want to use-precommit to check if subrepos are correct
+        git commit -m "Add temporary changes for multi version" --no-verify 1> /dev/null
         git checkout "$base_branch"
         # remove left over folders if existing
         for repo_name in "${!subrepo_url[@]}";
@@ -39,4 +57,5 @@ add_sub_repositories_and_commit () {
     done
 }
 
+check_repositories
 add_sub_repositories_and_commit
