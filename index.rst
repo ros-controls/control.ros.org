@@ -63,12 +63,6 @@ Bug reports and feature requests
    Make sure to provide a minimal list of steps one can follow to reproduce the issue you found
    Provide relevant information regarding the operating system, ROS distribution, etc.
 
-<<<<<<< HEAD
-Questions
-   Please use `ROS Answers <https://answers.ros.org/>`_ and tag your questions with ``ros2_control``.
-
-=======
->>>>>>> 3a28bd8 (Link to SE and rephrase headings (#145))
 General discussions
    Please use `ROS Discourse`_.
 
