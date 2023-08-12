@@ -16,8 +16,22 @@ jobs:
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
-    - name: Install dependencies
-      uses: ./.github/actions/install-dependencies
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        cache: 'pip'
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install --upgrade --requirement requirements.txt
+      shell: bash
+    - name: Install generate_parameter_library
+      run: |
+        cd
+        git clone https://github.com/PickNikRobotics/generate_parameter_library.git
+        cd generate_parameter_library/generate_parameter_library_py/
+        python -m pip install .
+      shell: bash
     - name: Install doxygen and graphviz
       run: sudo apt-get install -y doxygen graphviz
     - name: Build page with API and run linkchecker

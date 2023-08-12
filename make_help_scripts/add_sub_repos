@@ -11,7 +11,7 @@ add_sub_repositories () {
     cd "$base_dir" || { echo "Could not checkout base dir of control.ros.org. Exiting!"; exit "$ERRCODE"; }
     for repo_name in "${!subrepo_url[@]}";
         do echo "Create doc/$repo_name"
-        git clone "${subrepo_url[$repo_name]}" -b master doc/"$repo_name"
+        git clone "${subrepo_url[$repo_name]}" -b "$base_branch" doc/"$repo_name"
         if [ ! -z ${subrepo_pr[$repo_name]} ]; then
           echo "checkout PR: ${subrepo_pr[$repo_name]}"
           cd doc/"$repo_name"
