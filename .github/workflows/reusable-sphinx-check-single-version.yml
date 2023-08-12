@@ -22,8 +22,22 @@ jobs:
         repository: ros-controls/control.ros.org
         ref: master
         fetch-depth: 0
-    - name: Install dependencies
-      uses: ros-controls/control.ros.org/.github/actions/install-dependencies@master
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        cache: 'pip'
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install --upgrade --requirement requirements.txt
+      shell: bash
+    - name: Install generate_parameter_library
+      run: |
+        cd
+        git clone https://github.com/PickNikRobotics/generate_parameter_library.git
+        cd generate_parameter_library/generate_parameter_library_py/
+        python -m pip install .
+      shell: bash
     - name: Build single version with optional PRs' numbers considering warnings as errors
       env:
         ROS2_CONTROL_PR: ${{ inputs.ROS2_CONTROL_PR }}
