@@ -26,8 +26,8 @@ ros2_control's goal is to simplify integrating new hardware and overcome some dr
 If you are not familiar with the control theory, please get some idea about it (e.g., at `Wikipedia <https://en.wikipedia.org/wiki/Control_theory>`_) to get familiar with the terms used in this manual.
 
 
-Overview
-=========
+``ros2_control`` Repositories
+-------------------------------------------
 The ros2_control framework consists of the following Github repositories:
 
 * `ros2_control`_ - the main interfaces and components of the framework;
@@ -45,6 +45,9 @@ Additionally, there are following (unreleased) packages are relevant for getting
 Development Organisation and Communication
 -------------------------------------------
 
+Questions
+   Please use `Robotics Stack Exchange <https://robotics.stackexchange.com>`_ and tag your questions with ``ros2_control``.
+
 WG Meeting
    Every second Wednesday there is a Working Group meeting.
    To join the meeting check the announcement on `ROS Discourse`_.
@@ -60,9 +63,12 @@ Bug reports and feature requests
    Make sure to provide a minimal list of steps one can follow to reproduce the issue you found
    Provide relevant information regarding the operating system, ROS distribution, etc.
 
+<<<<<<< HEAD
 Questions
    Please use `ROS Answers <https://answers.ros.org/>`_ and tag your questions with ``ros2_control``.
 
+=======
+>>>>>>> 3a28bd8 (Link to SE and rephrase headings (#145))
 General discussions
    Please use `ROS Discourse`_.
 
