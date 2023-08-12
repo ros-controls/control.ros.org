@@ -17,30 +17,20 @@ jobs:
         fetch-depth: 0
     - uses: actions/setup-python@v4
       with:
-<<<<<<< HEAD
-        python-version: '3.8'
-=======
         python-version: '3.10'
->>>>>>> 5dfd401 (Fix workflows for PRs (#135))
         cache: 'pip'
     - name: Install Python dependencies
       run: |
         python -m pip install --upgrade pip
         pip install --upgrade --requirement requirements.txt
-<<<<<<< HEAD
-=======
       shell: bash
->>>>>>> 5dfd401 (Fix workflows for PRs (#135))
     - name: Install generate_parameter_library
       run: |
         cd
         git clone https://github.com/PickNikRobotics/generate_parameter_library.git
         cd generate_parameter_library/generate_parameter_library_py/
         python -m pip install .
-<<<<<<< HEAD
-=======
       shell: bash
->>>>>>> 5dfd401 (Fix workflows for PRs (#135))
     - name: Install doxygen and graphviz
       run: sudo apt-get install -y doxygen graphviz
     - name: Build multiversion with API
