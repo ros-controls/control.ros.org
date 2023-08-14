@@ -84,12 +84,8 @@ extensions = [
     "sphinx_multiversion",
     "sphinx_copybutton",
     "generate_parameter_library",
-    'sphinx_tabs.tabs',
-    "sphinx.ext.autosectionlabel",
+    'sphinx_tabs.tabs'
 ]
-
-# Make sure the target is unique
-autosectionlabel_prefix_document = True
 
 # By default, tabs can be closed by selecting the open tab
 sphinx_tabs_disable_tab_closing = True
