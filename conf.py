@@ -83,8 +83,16 @@ extensions = [
     "sphinx_rtd_theme",
     "sphinx_multiversion",
     "sphinx_copybutton",
-    "generate_parameter_library"
+    "generate_parameter_library",
+    'sphinx_tabs.tabs',
+    "sphinx.ext.autosectionlabel",
 ]
+
+# Make sure the target is unique
+autosectionlabel_prefix_document = True
+
+# By default, tabs can be closed by selecting the open tab
+sphinx_tabs_disable_tab_closing = True
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
