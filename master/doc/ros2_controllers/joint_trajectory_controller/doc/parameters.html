@@ -68,7 +68,6 @@
 <li class="toctree-l4"><a class="reference internal" href="userdoc.html#hardware-interface-type">Hardware interface type </a></li>
 <li class="toctree-l4"><a class="reference internal" href="userdoc.html#other-features">Other features</a></li>
 <li class="toctree-l4"><a class="reference internal" href="userdoc.html#using-joint-trajectory-controller-s">Using Joint Trajectory Controller(s)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="userdoc.html#specialized-versions-of-jointtrajectorycontroller">Specialized versions of JointTrajectoryController</a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="userdoc.html#further-information">Further information</a><ul class="current">
 <li class="toctree-l5"><a class="reference internal" href="trajectory.html">Trajectory Representation</a></li>
 <li class="toctree-l5"><a class="reference internal" href="trajectory.html#trajectory-replacement">Trajectory Replacement</a></li>
@@ -165,6 +164,10 @@ If they have real numeric values, those will be used instead of state interfaces
 Therefore it is important set command interfaces to NaN (i.e., <code class="docutils literal notranslate"><span class="pre">std::numeric_limits&lt;double&gt;::quiet_NaN()</span></code>) or state values when the hardware is started.</p>
 </div>
 <p>Default: false</p>
+</dd>
+<dt>start_with_holding (bool)</dt><dd><p>If true, start with holding position after activation. Otherwise, no command will be sent until
+the first trajectory is received.</p>
+<p>Default: true</p>
 </dd>
 <dt>allow_nonzero_velocity_at_trajectory_end (boolean)</dt><dd><p>If false, the last velocity point has to be zero or the goal will be rejected.</p>
 <p>Default: true</p>

@@ -80,7 +80,6 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#specialized-versions-of-jointtrajectorycontroller">Specialized versions of JointTrajectoryController</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#further-information">Further information</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="trajectory.html">Trajectory Representation</a></li>
 <li class="toctree-l5"><a class="reference internal" href="trajectory.html#trajectory-replacement">Trajectory Replacement</a></li>
@@ -272,7 +271,7 @@ If tolerances are violated during trajectory execution, the action goal is abort
 </dd>
 </dl>
 <p>The topic interface is a fire-and-forget alternative. Use this interface if you don’t care about execution monitoring.
-The controller’s path and goal tolerance specification is not used in this case, as there is no mechanism to notify the sender about tolerance violations.
+The goal tolerance specification is not used in this case, as there is no mechanism to notify the sender about tolerance violations. If state tolerances are violated, the trajectory is aborted and the current position is held.
 Note that although some degree of monitoring is available through the <code class="docutils literal notranslate"><span class="pre">~/query_state</span></code> service and <code class="docutils literal notranslate"><span class="pre">~/state</span></code> topic it is much more cumbersome to realize than with the action interface.</p>
 </section>
 <section id="publishers">
@@ -290,15 +289,6 @@ Note that although some degree of monitoring is available through the <code clas
 </dl>
 </section>
 </section>
-</section>
-<section id="specialized-versions-of-jointtrajectorycontroller">
-<h2>Specialized versions of JointTrajectoryController<a class="headerlink" href="#specialized-versions-of-jointtrajectorycontroller" title="Permalink to this heading"></a></h2>
-<p>(TBD in …)</p>
-<p>The controller types are placed into namespaces according to their command types for the hardware (see <a class="reference internal" href="../../doc/controllers_index.html#controllers"><span class="std std-ref">ros2_controllers</span></a>).</p>
-<p>The following version of the Joint Trajectory Controller are available mapping the following interfaces:</p>
-<ul class="simple">
-<li><p>position_controllers::JointTrajectoryController</p></li>
-</ul>
 </section>
 <section id="further-information">
 <h2>Further information<a class="headerlink" href="#further-information" title="Permalink to this heading"></a></h2>
