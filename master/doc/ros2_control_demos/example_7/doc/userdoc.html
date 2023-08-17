@@ -74,13 +74,13 @@
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#writing-a-hardware-interface">Writing a hardware interface</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#plugin-description-file">Plugin description file</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#cmake-library">CMake library</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#plugin-description-file-hardware">Plugin description file (hardware)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cmake-library-hardware">CMake library (hardware)</a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#writing-a-controller">Writing a controller</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#id1">Plugin description file</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#id2">CMake library</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#plugin-description-file-controller">Plugin description file (controller)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cmake-library-controller">CMake library (controller)</a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#launching-the-example">Launching the example</a></li>
@@ -153,46 +153,46 @@
 <h3>Geometry<a class="headerlink" href="#geometry" title="Permalink to this heading"></a></h3>
 <p>Most commercial robots already have <code class="docutils literal notranslate"><span class="pre">robot_description</span></code> packages defined, see the <a class="reference external" href="https://github.com/UniversalRobots/Universal_Robots_ROS2_Description">Universal Robots</a> for an example. However, this tutorial will go through the details of creating one from scratch.</p>
 <p>First, we need a 3D model of our robot. For illustration, a generic 6 DOF robot manipulator will be used.</p>
-<figure class="align-center" id="id3">
+<figure class="align-center" id="id1">
 <a class="reference internal image-reference" href="../../../../_images/robot.png"><img alt="r6bot" src="../../../../_images/robot.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-text">a generic 6 DOF robot manipulator</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+<p><span class="caption-text">a generic 6 DOF robot manipulator</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>The robot’s 6 links each need to be processed and exported to their own <code class="docutils literal notranslate"><span class="pre">.stl</span></code> and <code class="docutils literal notranslate"><span class="pre">.dae</span></code> files. Generally, the <code class="docutils literal notranslate"><span class="pre">.stl</span></code> 3D model files are coarse meshes used for fast collision checking, while the <code class="docutils literal notranslate"><span class="pre">.dae</span></code> files are used for visualization purposed only. We will use the same mesh in our case for simplicity.</p>
 <p>By convention, each <code class="docutils literal notranslate"><span class="pre">.stl</span></code> file expresses the position its vertices in its own reference frame. Hence, we need to specify the linear transformation (rotation and translation) between each link to define the robot’s full geometry. The 3D model for each link should be adjusted such that the proximal joint axis (the axis that connects the link to its parent) is in the z-axis direction. The 3D model’s origin should also be adjusted such that the bottom face of the mesh is co-planer with the xy-plane. The following mesh illustrates this configuration.</p>
-<figure class="align-center" id="id4">
+<figure class="align-center" id="id2">
 <a class="reference internal image-reference" href="../../../../_images/link_1.png"><img alt="link_1" src="../../../../_images/link_1.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-text">Link 1</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Link 1</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<figure class="align-center" id="id5">
+<figure class="align-center" id="id3">
 <a class="reference internal image-reference" href="../../../../_images/link_2_aligned.png"><img alt="link_2_aligned" src="../../../../_images/link_2_aligned.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-text">Link 2 aligned</span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Link 2 aligned</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>Each mesh should be exported to its own file after processing them. <a class="reference external" href="https://www.blender.org/">Blender</a> is an open source 3D modeling software, which can import/export <code class="docutils literal notranslate"><span class="pre">.stl</span></code> and <code class="docutils literal notranslate"><span class="pre">.dae</span></code> files and manipulate their vertices. Blender was used to process the robot model in this tutorial.</p>
 <p>We can finally calculate the transforms between the robot’s joints and begin writing the URDF. First, apply a negative 90 degree roll to link 2 in its frame.</p>
-<figure class="align-center" id="id6">
+<figure class="align-center" id="id4">
 <a class="reference internal image-reference" href="../../../../_images/link_2_roll.png"><img alt="link_2_roll" src="../../../../_images/link_2_roll.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-text">Link 2 with -90 degree roll</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Link 2 with -90 degree roll</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>To keep the example simple, we will not apply a pitch now. Then, we apply a positive 90 degree yaw.</p>
-<figure class="align-center" id="id7">
+<figure class="align-center" id="id5">
 <a class="reference internal image-reference" href="../../../../_images/link_2_roll_yaw.png"><img alt="link_2_roll_yaw" src="../../../../_images/link_2_roll_yaw.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-text">Link 2 with -90 degree roll and 90 degree yaw</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Link 2 with -90 degree roll and 90 degree yaw</span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>Finally, we apply a translation of -0.1 meters in the x-axis and 0.18 meters in the z-axis between the link 2 and link 1 frame. The final result is shown below.</p>
-<figure class="align-center" id="id8">
+<figure class="align-center" id="id6">
 <a class="reference internal image-reference" href="../../../../_images/link_2_roll_yaw_trans.png"><img alt="link_2_roll_yaw_trans" src="../../../../_images/link_2_roll_yaw_trans.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-text">Link 2 with -90 degree roll, 90 degree yaw, and translation</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Link 2 with -90 degree roll, 90 degree yaw, and translation</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>The described process is then repeated for all links.</p>
@@ -366,8 +366,8 @@ urdf_to_graphviz<span class="w"> </span>r6bot.urdf<span class="w"> </span>r6bot
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">PLUGINLIB_EXPORT_CLASS</span></code> is a c++ macro creates a plugin library using <code class="docutils literal notranslate"><span class="pre">pluginlib</span></code>.</p>
-<section id="plugin-description-file">
-<h3>Plugin description file<a class="headerlink" href="#plugin-description-file" title="Permalink to this heading"></a></h3>
+<section id="plugin-description-file-hardware">
+<h3>Plugin description file (hardware)<a class="headerlink" href="#plugin-description-file-hardware" title="Permalink to this heading"></a></h3>
 <p>The plugin description file is a required XML file that describes a plugin’s library name, class type, namespace, description, and interface type. This file allows the ROS 2 to automatically discover and load plugins. It is formatted as follows.</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;library</span><span class="w"> </span><span class="na">path=</span><span class="s">&quot;{Library_Name}&quot;</span><span class="nt">&gt;</span>
 <span class="w">  </span><span class="nt">&lt;class</span>
@@ -383,8 +383,8 @@ urdf_to_graphviz<span class="w"> </span>r6bot.urdf<span class="w"> </span>r6bot
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">path</span></code> attribute of the <code class="docutils literal notranslate"><span class="pre">library</span></code> tags refers to the cmake library name of the user defined hardware plugin. See <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_7/ros2_control_demo_example_7.xml">here</a> for the complete XML file.</p>
 </section>
-<section id="cmake-library">
-<h3>CMake library<a class="headerlink" href="#cmake-library" title="Permalink to this heading"></a></h3>
+<section id="cmake-library-hardware">
+<h3>CMake library (hardware)<a class="headerlink" href="#cmake-library-hardware" title="Permalink to this heading"></a></h3>
 <p>The general CMake template to make a hardware plugin available in ros2_control is shown below. Notice that a library is created using the plugin source code just like any other  cmake library. In addition, an extra compile definition and cmake export macro (<code class="docutils literal notranslate"><span class="pre">pluginlib_export_plugin_description_file</span></code>) need to be added. See <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_7/CMakeLists.txt">here</a> for the complete <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file.</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">add_library</span><span class="p">(</span>
 <span class="w">    </span><span class="s">robot_6_dof_hardware</span>
@@ -522,8 +522,8 @@ urdf_to_graphviz<span class="w"> </span>r6bot.urdf<span class="w"> </span>r6bot
 <span class="p">}</span>
 </pre></div>
 </div>
-<section id="id1">
-<h3>Plugin description file<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<section id="plugin-description-file-controller">
+<h3>Plugin description file (controller)<a class="headerlink" href="#plugin-description-file-controller" title="Permalink to this heading"></a></h3>
 <p>The plugin description file is again required for the controller, since it is exported as a library. The controller plugin description file is formatted as follows. See <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_7/ros2_control_demo_example_7.xml">here</a> for the complete XML file.</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;library</span><span class="w"> </span><span class="na">path=</span><span class="s">&quot;{Library_Name}&quot;</span><span class="nt">&gt;</span>
 <span class="w">  </span><span class="nt">&lt;class</span>
@@ -538,8 +538,8 @@ urdf_to_graphviz<span class="w"> </span>r6bot.urdf<span class="w"> </span>r6bot
 </pre></div>
 </div>
 </section>
-<section id="id2">
-<h3>CMake library<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<section id="cmake-library-controller">
+<h3>CMake library (controller)<a class="headerlink" href="#cmake-library-controller" title="Permalink to this heading"></a></h3>
 <p>The plugin must be specified in the CMake file that builds the controller plugin. See <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_7/CMakeLists.txt">here</a> for the complete <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file.</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">add_library</span><span class="p">(</span>
 <span class="w">    </span><span class="s">r6bot_controller</span>
@@ -574,10 +574,10 @@ Open a terminal and launch the <code class="docutils literal notranslate"><span 
 </pre></div>
 </div>
 <p>You should see the tutorial robot making a circular motion in RViz.</p>
-<figure class="align-center" id="id9">
+<figure class="align-center" id="id7">
 <a class="reference internal image-reference" href="../../../../_images/trajectory.gif"><img alt="trajectory" src="../../../../_images/trajectory.gif" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-text">Trajectory following example.</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Trajectory following example.</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 </section>
