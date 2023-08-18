@@ -58,7 +58,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#goals">Goals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#examples-overview">Examples Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#manual-install">Manual Install</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#local-installation">Local installation</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#build-from-debian-packages">Build from debian packages</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#build-from-source">Build from source</a></li>
 </ul>
@@ -179,10 +179,11 @@ The robot is basically a box moving according to differential drive kinematics.<
 </section>
 <section id="installation">
 <span id="ros2-control-demos-install"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
-<p>You can install the demos manually or use the provided docker file.</p>
-<section id="manual-install">
-<h3>Manual Install<a class="headerlink" href="#manual-install" title="Permalink to this heading"></a></h3>
-<p>First, you have to install <a class="reference external" href="https://docs.ros.org/en/rolling/Installation.html">ROS 2 on your computer</a>.</p>
+<p>You can install the demos locally or use the provided docker file.</p>
+<section id="local-installation">
+<h3>Local installation<a class="headerlink" href="#local-installation" title="Permalink to this heading"></a></h3>
+<p>If you have ROS 2 installed already, choose the right version of this documentation and branch of the <code class="docutils literal notranslate"><span class="pre">ros2_control_demos</span></code> repository matching you ROS 2 distribution, see <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos#build-status">this table</a>.</p>
+<p>Otherwise, install <a class="reference external" href="https://docs.ros.org/en/rolling/Installation.html">ROS 2 rolling on your computer</a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> and <code class="docutils literal notranslate"><span class="pre">ros2_controllers</span></code> packages are released and can be installed using a package manager.
@@ -194,7 +195,7 @@ However, there might be cases in which not-yet released demos or features are on
 <p>Download the <code class="docutils literal notranslate"><span class="pre">ros2_control_demos</span></code> repository and install its dependencies with</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/ros2_ws/src
 <span class="nb">cd</span><span class="w"> </span>~/ros2_ws/src
-git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ros-controls/ros2_control_demos
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ros-controls/ros2_control_demos<span class="w"> </span>-b<span class="w"> </span>master
 <span class="nb">cd</span><span class="w"> </span>~/ros2_ws/
 rosdep<span class="w"> </span>update<span class="w"> </span>--rosdistro<span class="o">=</span><span class="nv">$ROS_DISTRO</span>
 sudo<span class="w"> </span>apt-get<span class="w"> </span>update
