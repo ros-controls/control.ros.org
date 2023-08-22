@@ -15,13 +15,13 @@
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../../../_static/jquery.js"></script>
-        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-        <script src="../../../../_static/doctools.js"></script>
-        <script src="../../../../_static/sphinx_highlight.js"></script>
-        <script src="../../../../_static/clipboard.min.js"></script>
-        <script src="../../../../_static/copybutton.js"></script>
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=144d94fb"></script>
+        <script src="../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -118,11 +118,11 @@
            <div itemprop="articleBody">
              
   <section id="controller-manager">
-<span id="controller-manager-userdoc"></span><h1>Controller Manager<a class="headerlink" href="#controller-manager" title="Permalink to this heading"></a></h1>
+<span id="controller-manager-userdoc"></span><h1>Controller Manager<a class="headerlink" href="#controller-manager" title="Link to this heading"></a></h1>
 <p>Controller Manager is the main component in the ros2_control framework.
 It manages lifecycle of controllers, access to the hardware interfaces and offers services to the ROS-world.</p>
 <section id="determinism">
-<h2>Determinism<a class="headerlink" href="#determinism" title="Permalink to this heading"></a></h2>
+<h2>Determinism<a class="headerlink" href="#determinism" title="Link to this heading"></a></h2>
 <p>For best performance when controlling hardware you want the controller manager to have as little jitter as possible in the main control loop.
 The normal linux kernel is optimized for computational throughput and therefore is not well suited for hardware control.
 The two easiest kernel options are the <a class="reference external" href="https://ubuntu.com/blog/real-time-ubuntu-released">Real-time Ubuntu 22.04 LTS Beta</a> or <a class="reference external" href="https://packages.debian.org/bullseye/linux-image-rt-amd64">linux-image-rt-amd64</a> on Debian Bullseye.</p>
@@ -145,7 +145,7 @@ To give the user such permissions, add a group named realtime and add the user c
 <p>The limits will be applied after you log out and in again.</p>
 </section>
 <section id="parameters">
-<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h2>
+<h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h2>
 <dl class="simple">
 <dt>hardware_components_initial_state</dt><dd><p>Map of parameters for controlled lifecycle management of hardware components.
 The names of the components are defined as attribute of <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code>-tag in <code class="docutils literal notranslate"><span class="pre">robot_description</span></code>.
@@ -179,7 +179,7 @@ This is a class from which controller’s instance with name “<code class="doc
 </dl>
 </section>
 <section id="helper-scripts">
-<h2>Helper scripts<a class="headerlink" href="#helper-scripts" title="Permalink to this heading"></a></h2>
+<h2>Helper scripts<a class="headerlink" href="#helper-scripts" title="Link to this heading"></a></h2>
 <p>There are two scripts to interact with controller manager from launch files:</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -188,7 +188,7 @@ This is a class from which controller’s instance with name “<code class="doc
 </ol>
 </div></blockquote>
 <section id="spawner">
-<h3><code class="docutils literal notranslate"><span class="pre">spawner</span></code><a class="headerlink" href="#spawner" title="Permalink to this heading"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">spawner</span></code><a class="headerlink" href="#spawner" title="Link to this heading"></a></h3>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>run<span class="w"> </span>controller_manager<span class="w"> </span>spawner<span class="w"> </span>-h
 <span class="go">usage: spawner [-h] [-c CONTROLLER_MANAGER] [-p PARAM_FILE] [-n NAMESPACE] [--load-only] [--inactive] [-t CONTROLLER_TYPE] [-u]</span>
 <span class="go">                  [--controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT]</span>
@@ -216,7 +216,7 @@ This is a class from which controller’s instance with name “<code class="doc
 </div>
 </section>
 <section id="unspawner">
-<h3><code class="docutils literal notranslate"><span class="pre">unspawner</span></code><a class="headerlink" href="#unspawner" title="Permalink to this heading"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">unspawner</span></code><a class="headerlink" href="#unspawner" title="Link to this heading"></a></h3>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>run<span class="w"> </span>controller_manager<span class="w"> </span>unspawner<span class="w"> </span>-h
 <span class="go">usage: unspawner [-h] [-c CONTROLLER_MANAGER] controller_name</span>
 
@@ -232,7 +232,7 @@ This is a class from which controller’s instance with name “<code class="doc
 </section>
 </section>
 <section id="using-the-controller-manager-in-a-process">
-<h2>Using the Controller Manager in a Process<a class="headerlink" href="#using-the-controller-manager-in-a-process" title="Permalink to this heading"></a></h2>
+<h2>Using the Controller Manager in a Process<a class="headerlink" href="#using-the-controller-manager-in-a-process" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">ControllerManager</span></code> may also be instantiated in a process as a class, but proper care must be taken when doing so.
 The reason for this is because the <code class="docutils literal notranslate"><span class="pre">ControllerManager</span></code> class inherits from <code class="docutils literal notranslate"><span class="pre">rclcpp::Node</span></code>.</p>
 <p>If there is more than one Node in the process, global node name remap rules can forcibly change the <code class="docutils literal notranslate"><span class="pre">ControllerManager's</span></code> node name as well, leading to duplicate node names.
@@ -252,14 +252,14 @@ This occurs whether the Nodes are siblings or exist in a hierarchy.</p>
 </div>
 </section>
 <section id="concepts">
-<h2>Concepts<a class="headerlink" href="#concepts" title="Permalink to this heading"></a></h2>
+<h2>Concepts<a class="headerlink" href="#concepts" title="Link to this heading"></a></h2>
 <section id="restarting-all-controllers">
-<h3>Restarting all controllers<a class="headerlink" href="#restarting-all-controllers" title="Permalink to this heading"></a></h3>
+<h3>Restarting all controllers<a class="headerlink" href="#restarting-all-controllers" title="Link to this heading"></a></h3>
 <p>The simplest way to restart all controllers is by using <code class="docutils literal notranslate"><span class="pre">switch_controllers</span></code> services or CLI and adding all controllers to <code class="docutils literal notranslate"><span class="pre">start</span></code> and <code class="docutils literal notranslate"><span class="pre">stop</span></code> lists.
 Note that not all controllers have to be restarted, e.g., broadcasters.</p>
 </section>
 <section id="restarting-hardware">
-<h3>Restarting hardware<a class="headerlink" href="#restarting-hardware" title="Permalink to this heading"></a></h3>
+<h3>Restarting hardware<a class="headerlink" href="#restarting-hardware" title="Link to this heading"></a></h3>
 <p>If hardware gets restarted then you should go through its lifecycle again.
 This can be simply achieved by returning <code class="docutils literal notranslate"><span class="pre">ERROR</span></code> from <code class="docutils literal notranslate"><span class="pre">write</span></code> and <code class="docutils literal notranslate"><span class="pre">read</span></code> methods of interface implementation.
 <strong>NOT IMPLEMENTED YET - PLEASE STOP/RESTART ALL CONTROLLERS MANUALLY FOR NOW</strong> The controller manager detects that and stops all the controllers that are commanding that hardware and restarts broadcasters that are listening to its states.</p>

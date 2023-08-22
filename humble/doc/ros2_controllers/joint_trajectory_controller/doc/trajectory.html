@@ -15,13 +15,13 @@
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../../../_static/jquery.js"></script>
-        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-        <script src="../../../../_static/doctools.js"></script>
-        <script src="../../../../_static/sphinx_highlight.js"></script>
-        <script src="../../../../_static/clipboard.min.js"></script>
-        <script src="../../../../_static/copybutton.js"></script>
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=144d94fb"></script>
+        <script src="../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -130,7 +130,7 @@
            <div itemprop="articleBody">
              
   <section id="trajectory-representation">
-<span id="joint-trajectory-controller-trajectory-representation"></span><h1>Trajectory Representation<a class="headerlink" href="#trajectory-representation" title="Permalink to this heading"></a></h1>
+<span id="joint-trajectory-controller-trajectory-representation"></span><h1>Trajectory Representation<a class="headerlink" href="#trajectory-representation" title="Link to this heading"></a></h1>
 <p>Trajectories are represented internally with <code class="docutils literal notranslate"><span class="pre">trajectory_msgs/msg/JointTrajectory</span></code> data structure.</p>
 <p>Currently, two interpolation methods are implemented: <code class="docutils literal notranslate"><span class="pre">none</span></code> and <code class="docutils literal notranslate"><span class="pre">spline</span></code>.
 By default, a spline interpolator is provided, but it’s possible to support other representations.</p>
@@ -141,7 +141,7 @@ by the controller’s setup of command interfaces and PID configuration. There i
 missing fields in the sampled trajectory might cause segmentation faults.</p>
 </div>
 <section id="interpolation-method-none">
-<h2>Interpolation Method <code class="docutils literal notranslate"><span class="pre">none</span></code><a class="headerlink" href="#interpolation-method-none" title="Permalink to this heading"></a></h2>
+<h2>Interpolation Method <code class="docutils literal notranslate"><span class="pre">none</span></code><a class="headerlink" href="#interpolation-method-none" title="Link to this heading"></a></h2>
 <p>It returns the initial point until the time for the first trajectory data point is reached. Then, it simply takes the next given datapoint.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -150,7 +150,7 @@ I.e., one has to provide position and its derivatives as needed.</p>
 </div>
 </section>
 <section id="interpolation-method-spline">
-<h2>Interpolation Method <code class="docutils literal notranslate"><span class="pre">spline</span></code><a class="headerlink" href="#interpolation-method-spline" title="Permalink to this heading"></a></h2>
+<h2>Interpolation Method <code class="docutils literal notranslate"><span class="pre">spline</span></code><a class="headerlink" href="#interpolation-method-spline" title="Link to this heading"></a></h2>
 <p>The spline interpolator uses the following interpolation strategies depending on the waypoint specification:</p>
 <ul class="simple">
 <li><p>Linear:</p>
@@ -179,7 +179,7 @@ I.e., one has to provide position and its derivatives as needed.</p>
 <p>Trajectories with velocity fields only, velocity and acceleration only, or acceleration fields only can be processed and are accepted, if <code class="docutils literal notranslate"><span class="pre">allow_integration_in_goal_trajectories</span></code> is true. Position (and velocity) is then integrated from velocity (or acceleration, respectively) by Heun’s method.</p>
 </section>
 <section id="visualized-examples">
-<h2>Visualized Examples<a class="headerlink" href="#visualized-examples" title="Permalink to this heading"></a></h2>
+<h2>Visualized Examples<a class="headerlink" href="#visualized-examples" title="Link to this heading"></a></h2>
 <p>To visualize the difference of the different interpolation methods and their inputs, different trajectories defined at a 0.5s grid and are sampled at a rate of 10ms.</p>
 <ul class="simple">
 <li><p>Sampled trajectory with linear spline if position is given only:</p></li>
@@ -232,7 +232,7 @@ I.e., one has to provide position and its derivatives as needed.</p>
 </section>
 </section>
 <section id="trajectory-replacement">
-<span id="joint-trajectory-controller-trajectory-replacement"></span><h1>Trajectory Replacement<a class="headerlink" href="#trajectory-replacement" title="Permalink to this heading"></a></h1>
+<span id="joint-trajectory-controller-trajectory-replacement"></span><h1>Trajectory Replacement<a class="headerlink" href="#trajectory-replacement" title="Link to this heading"></a></h1>
 <p><em>Parts of this documentation were originally published in the ROS 1 wiki under the</em> <a class="reference external" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0 license</a>. <a class="footnote-reference brackets" href="#f1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
 <p>Joint trajectory messages allow to specify the time at which a new trajectory should start executing by means of the header timestamp, where zero time (the default) means “start now”.</p>
 <p>The arrival of a new trajectory command does not necessarily mean that the controller will completely discard the currently running trajectory and substitute it with the new one.

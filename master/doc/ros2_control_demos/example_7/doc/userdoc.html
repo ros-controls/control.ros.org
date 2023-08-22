@@ -15,13 +15,13 @@
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../../../_static/jquery.js"></script>
-        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-        <script src="../../../../_static/doctools.js"></script>
-        <script src="../../../../_static/sphinx_highlight.js"></script>
-        <script src="../../../../_static/clipboard.min.js"></script>
-        <script src="../../../../_static/copybutton.js"></script>
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=144d94fb"></script>
+        <script src="../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -131,7 +131,7 @@
            <div itemprop="articleBody">
              
   <section id="example-7-full-tutorial-with-a-6dof-robot">
-<span id="ros2-control-demos-example-7-userdoc"></span><h1>Example 7: Full tutorial with a 6DOF robot<a class="headerlink" href="#example-7-full-tutorial-with-a-6dof-robot" title="Permalink to this heading"></a></h1>
+<span id="ros2-control-demos-example-7-userdoc"></span><h1>Example 7: Full tutorial with a 6DOF robot<a class="headerlink" href="#example-7-full-tutorial-with-a-6dof-robot" title="Link to this heading"></a></h1>
 <p>ros2_control is a realtime control framework designed for general robotics applications. Standard c++ interfaces exist for interacting with hardware and querying user defined controller commands. These interfaces enhance code modularity and robot agnostic design. Application specific details, e.g. what controller to use, how many joints a robot has and their kinematic structure, are specified via YAML parameter configuration files and a Universal Robot Description File (URDF). Finally, the ros2_control framework is deployed via ROS 2 launch a file.</p>
 <p>This tutorial will address each component of ros2_control in detail, namely:</p>
 <ol class="arabic simple">
@@ -141,22 +141,22 @@
 <li><p>Writing a controller</p></li>
 </ol>
 <section id="ros2-control-overview">
-<h2>ros2_control overview<a class="headerlink" href="#ros2-control-overview" title="Permalink to this heading"></a></h2>
+<h2>ros2_control overview<a class="headerlink" href="#ros2-control-overview" title="Link to this heading"></a></h2>
 <p>ros2_control introduces <code class="docutils literal notranslate"><span class="pre">state_interfaces</span></code> and <code class="docutils literal notranslate"><span class="pre">command_interfaces</span></code> to abstract hardware interfacing. The <code class="docutils literal notranslate"><span class="pre">state_interfaces</span></code> are read only data handles that generally represent sensors readings, e.g. joint encoder. The <code class="docutils literal notranslate"><span class="pre">command_interfaces</span></code> are read and write data handles that hardware commands, like setting a joint velocity reference. The <code class="docutils literal notranslate"><span class="pre">command_interfaces</span></code> are exclusively accessed, meaning if a controller has “claimed” an interface, it cannot be used by any other controller until it is released. Both interface types are uniquely designated with a name and type. The names and types for all available state and command interfaces are specified in a YAML configuration file and a URDF file.</p>
 <p>ros2_control provides the <code class="docutils literal notranslate"><span class="pre">ControllerInterface</span></code> and <code class="docutils literal notranslate"><span class="pre">HardwareInterface</span></code> classes for robot agnostic control. During initialization, controllers request <code class="docutils literal notranslate"><span class="pre">state_interfaces</span></code> and <code class="docutils literal notranslate"><span class="pre">command_interfaces</span></code> required for operation through the <code class="docutils literal notranslate"><span class="pre">ControllerInterface</span></code>. On the other hand, hardware drivers offer <code class="docutils literal notranslate"><span class="pre">state_interfaces</span></code> and <code class="docutils literal notranslate"><span class="pre">command_interfaces</span></code> via the <code class="docutils literal notranslate"><span class="pre">HardwareInterface</span></code>. ros2_control ensure all requested interfaces are available before starting the controllers. The interface pattern allows vendors to write hardware specific drivers that are loaded at runtime.</p>
 <p>The main program is a realtime read, update, write loop. During the  read call, hardware drivers that conform to <code class="docutils literal notranslate"><span class="pre">HardwareInterface</span></code> update their offered <code class="docutils literal notranslate"><span class="pre">state_interfaces</span></code> with the newest values received from the hardware. During the update call, controllers calculate commands from the updated <code class="docutils literal notranslate"><span class="pre">state_interfaces</span></code> and writes them into its <code class="docutils literal notranslate"><span class="pre">command_interfaces</span></code>. Finally, during to write call, the hardware drivers read values from their offer <code class="docutils literal notranslate"><span class="pre">command_interfaces</span></code> and send them to the hardware. The <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> node runs the main loop a realtime thread. The <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> node runs a second non-realtime thread to interact with ROS publishers, subscribers, and services.</p>
 </section>
 <section id="writing-a-urdf">
-<h2>Writing a URDF<a class="headerlink" href="#writing-a-urdf" title="Permalink to this heading"></a></h2>
+<h2>Writing a URDF<a class="headerlink" href="#writing-a-urdf" title="Link to this heading"></a></h2>
 <p>The URDF file is a standard XML based file used to describe characteristic of a robot. It can represent any robot with a tree structure, except those with cycles. Each link must have only one parent. For ros2_control, there are three primary tags: <code class="docutils literal notranslate"><span class="pre">link</span></code>, <code class="docutils literal notranslate"><span class="pre">joint</span></code>, and <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code>. The <code class="docutils literal notranslate"><span class="pre">joint</span></code> tag define the robot’s kinematic structure, while the <code class="docutils literal notranslate"><span class="pre">link</span></code> tag defines the dynamic properties and 3D geometry. The <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> defines the hardware and controller configuration.</p>
 <section id="geometry">
-<h3>Geometry<a class="headerlink" href="#geometry" title="Permalink to this heading"></a></h3>
+<h3>Geometry<a class="headerlink" href="#geometry" title="Link to this heading"></a></h3>
 <p>Most commercial robots already have <code class="docutils literal notranslate"><span class="pre">robot_description</span></code> packages defined, see the <a class="reference external" href="https://github.com/UniversalRobots/Universal_Robots_ROS2_Description">Universal Robots</a> for an example. However, this tutorial will go through the details of creating one from scratch.</p>
 <p>First, we need a 3D model of our robot. For illustration, a generic 6 DOF robot manipulator will be used.</p>
 <figure class="align-center" id="id1">
 <a class="reference internal image-reference" href="../../../../_images/robot.png"><img alt="r6bot" src="../../../../_images/robot.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-text">a generic 6 DOF robot manipulator</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+<p><span class="caption-text">a generic 6 DOF robot manipulator</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>The robot’s 6 links each need to be processed and exported to their own <code class="docutils literal notranslate"><span class="pre">.stl</span></code> and <code class="docutils literal notranslate"><span class="pre">.dae</span></code> files. Generally, the <code class="docutils literal notranslate"><span class="pre">.stl</span></code> 3D model files are coarse meshes used for fast collision checking, while the <code class="docutils literal notranslate"><span class="pre">.dae</span></code> files are used for visualization purposed only. We will use the same mesh in our case for simplicity.</p>
@@ -164,13 +164,13 @@
 <figure class="align-center" id="id2">
 <a class="reference internal image-reference" href="../../../../_images/link_1.png"><img alt="link_1" src="../../../../_images/link_1.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-text">Link 1</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Link 1</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <figure class="align-center" id="id3">
 <a class="reference internal image-reference" href="../../../../_images/link_2_aligned.png"><img alt="link_2_aligned" src="../../../../_images/link_2_aligned.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-text">Link 2 aligned</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Link 2 aligned</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>Each mesh should be exported to its own file after processing them. <a class="reference external" href="https://www.blender.org/">Blender</a> is an open source 3D modeling software, which can import/export <code class="docutils literal notranslate"><span class="pre">.stl</span></code> and <code class="docutils literal notranslate"><span class="pre">.dae</span></code> files and manipulate their vertices. Blender was used to process the robot model in this tutorial.</p>
@@ -178,27 +178,27 @@
 <figure class="align-center" id="id4">
 <a class="reference internal image-reference" href="../../../../_images/link_2_roll.png"><img alt="link_2_roll" src="../../../../_images/link_2_roll.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-text">Link 2 with -90 degree roll</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Link 2 with -90 degree roll</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>To keep the example simple, we will not apply a pitch now. Then, we apply a positive 90 degree yaw.</p>
 <figure class="align-center" id="id5">
 <a class="reference internal image-reference" href="../../../../_images/link_2_roll_yaw.png"><img alt="link_2_roll_yaw" src="../../../../_images/link_2_roll_yaw.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-text">Link 2 with -90 degree roll and 90 degree yaw</span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Link 2 with -90 degree roll and 90 degree yaw</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>Finally, we apply a translation of -0.1 meters in the x-axis and 0.18 meters in the z-axis between the link 2 and link 1 frame. The final result is shown below.</p>
 <figure class="align-center" id="id6">
 <a class="reference internal image-reference" href="../../../../_images/link_2_roll_yaw_trans.png"><img alt="link_2_roll_yaw_trans" src="../../../../_images/link_2_roll_yaw_trans.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-text">Link 2 with -90 degree roll, 90 degree yaw, and translation</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Link 2 with -90 degree roll, 90 degree yaw, and translation</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>The described process is then repeated for all links.</p>
 </section>
 <section id="urdf-file">
-<h3>URDF file<a class="headerlink" href="#urdf-file" title="Permalink to this heading"></a></h3>
+<h3>URDF file<a class="headerlink" href="#urdf-file" title="Link to this heading"></a></h3>
 <p>The URDF file is generally formatted according to the following template.</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;robot</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;robot_6_dof&quot;</span><span class="nt">&gt;</span>
 <span class="w">  </span><span class="cm">&lt;!-- create link fixed to the &quot;world&quot; --&gt;</span>
@@ -287,7 +287,7 @@ urdf_to_graphviz<span class="w"> </span>r6bot.urdf<span class="w"> </span>r6bot
 </section>
 </section>
 <section id="writing-a-hardware-interface">
-<h2>Writing a hardware interface<a class="headerlink" href="#writing-a-hardware-interface" title="Permalink to this heading"></a></h2>
+<h2>Writing a hardware interface<a class="headerlink" href="#writing-a-hardware-interface" title="Link to this heading"></a></h2>
 <p>In ros2_control, hardware system components are integrated via user defined driver plugins that conform to the <code class="docutils literal notranslate"><span class="pre">HardwareInterface</span></code> public interface. Hardware plugins specified in the URDF are dynamically loaded during initialization using the pluginlib interface. In order to run the <code class="docutils literal notranslate"><span class="pre">ros2_control_node</span></code>, a parameter named <code class="docutils literal notranslate"><span class="pre">robot_description</span></code> must be set. This normally done in the ros2_control launch file.</p>
 <p>The following code blocks will explain the requirements for writing a new hardware interface.</p>
 <p>The hardware plugin for the tutorial robot is a class called <code class="docutils literal notranslate"><span class="pre">RobotSystem</span></code> that inherits from  <code class="docutils literal notranslate"><span class="pre">hardware_interface::SystemInterface</span></code>. The <code class="docutils literal notranslate"><span class="pre">SystemInterface</span></code> is one of the offered hardware interfaces designed for a complete robot system. For example, The UR5 uses this interface. The <code class="docutils literal notranslate"><span class="pre">RobotSystem</span></code> must implement five public methods.</p>
@@ -367,7 +367,7 @@ urdf_to_graphviz<span class="w"> </span>r6bot.urdf<span class="w"> </span>r6bot
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">PLUGINLIB_EXPORT_CLASS</span></code> is a c++ macro creates a plugin library using <code class="docutils literal notranslate"><span class="pre">pluginlib</span></code>.</p>
 <section id="plugin-description-file-hardware">
-<h3>Plugin description file (hardware)<a class="headerlink" href="#plugin-description-file-hardware" title="Permalink to this heading"></a></h3>
+<h3>Plugin description file (hardware)<a class="headerlink" href="#plugin-description-file-hardware" title="Link to this heading"></a></h3>
 <p>The plugin description file is a required XML file that describes a plugin’s library name, class type, namespace, description, and interface type. This file allows the ROS 2 to automatically discover and load plugins. It is formatted as follows.</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;library</span><span class="w"> </span><span class="na">path=</span><span class="s">&quot;{Library_Name}&quot;</span><span class="nt">&gt;</span>
 <span class="w">  </span><span class="nt">&lt;class</span>
@@ -384,7 +384,7 @@ urdf_to_graphviz<span class="w"> </span>r6bot.urdf<span class="w"> </span>r6bot
 <p>The <code class="docutils literal notranslate"><span class="pre">path</span></code> attribute of the <code class="docutils literal notranslate"><span class="pre">library</span></code> tags refers to the cmake library name of the user defined hardware plugin. See <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_7/ros2_control_demo_example_7.xml">here</a> for the complete XML file.</p>
 </section>
 <section id="cmake-library-hardware">
-<h3>CMake library (hardware)<a class="headerlink" href="#cmake-library-hardware" title="Permalink to this heading"></a></h3>
+<h3>CMake library (hardware)<a class="headerlink" href="#cmake-library-hardware" title="Link to this heading"></a></h3>
 <p>The general CMake template to make a hardware plugin available in ros2_control is shown below. Notice that a library is created using the plugin source code just like any other  cmake library. In addition, an extra compile definition and cmake export macro (<code class="docutils literal notranslate"><span class="pre">pluginlib_export_plugin_description_file</span></code>) need to be added. See <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_7/CMakeLists.txt">here</a> for the complete <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file.</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">add_library</span><span class="p">(</span>
 <span class="w">    </span><span class="s">robot_6_dof_hardware</span>
@@ -396,7 +396,7 @@ urdf_to_graphviz<span class="w"> </span>r6bot.urdf<span class="w"> </span>r6bot
 </section>
 </section>
 <section id="writing-a-controller">
-<h2>Writing a controller<a class="headerlink" href="#writing-a-controller" title="Permalink to this heading"></a></h2>
+<h2>Writing a controller<a class="headerlink" href="#writing-a-controller" title="Link to this heading"></a></h2>
 <p>In ros2_control, controllers are implemented as plugins that conforms to the <code class="docutils literal notranslate"><span class="pre">ControllerInterface</span></code> public interface. Similar to the hardware interfaces, the controller plugins to load are specified using ROS parameters. This is normally  achieved by passing a YAML parameter file to the <code class="docutils literal notranslate"><span class="pre">ros2_control_node</span></code>. Unlike hardware interfaces, controllers exists in a finite set of states:</p>
 <ol class="arabic simple">
 <li><p>Unconfigured</p></li>
@@ -523,7 +523,7 @@ urdf_to_graphviz<span class="w"> </span>r6bot.urdf<span class="w"> </span>r6bot
 </pre></div>
 </div>
 <section id="plugin-description-file-controller">
-<h3>Plugin description file (controller)<a class="headerlink" href="#plugin-description-file-controller" title="Permalink to this heading"></a></h3>
+<h3>Plugin description file (controller)<a class="headerlink" href="#plugin-description-file-controller" title="Link to this heading"></a></h3>
 <p>The plugin description file is again required for the controller, since it is exported as a library. The controller plugin description file is formatted as follows. See <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_7/ros2_control_demo_example_7.xml">here</a> for the complete XML file.</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;library</span><span class="w"> </span><span class="na">path=</span><span class="s">&quot;{Library_Name}&quot;</span><span class="nt">&gt;</span>
 <span class="w">  </span><span class="nt">&lt;class</span>
@@ -539,7 +539,7 @@ urdf_to_graphviz<span class="w"> </span>r6bot.urdf<span class="w"> </span>r6bot
 </div>
 </section>
 <section id="cmake-library-controller">
-<h3>CMake library (controller)<a class="headerlink" href="#cmake-library-controller" title="Permalink to this heading"></a></h3>
+<h3>CMake library (controller)<a class="headerlink" href="#cmake-library-controller" title="Link to this heading"></a></h3>
 <p>The plugin must be specified in the CMake file that builds the controller plugin. See <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_7/CMakeLists.txt">here</a> for the complete <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file.</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">add_library</span><span class="p">(</span>
 <span class="w">    </span><span class="s">r6bot_controller</span>
@@ -551,7 +551,7 @@ urdf_to_graphviz<span class="w"> </span>r6bot.urdf<span class="w"> </span>r6bot
 </section>
 </section>
 <section id="launching-the-example">
-<h2>Launching the example<a class="headerlink" href="#launching-the-example" title="Permalink to this heading"></a></h2>
+<h2>Launching the example<a class="headerlink" href="#launching-the-example" title="Link to this heading"></a></h2>
 <p>The full tutorial example can be run by first building the workspace.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>-b<span class="w"> </span>master<span class="w"> </span>https://github.com/ros-controls/ros2_control_demos.git
 <span class="nb">cd</span><span class="w"> </span>ros2_control_demos
@@ -577,7 +577,7 @@ Open a terminal and launch the <code class="docutils literal notranslate"><span 
 <figure class="align-center" id="id7">
 <a class="reference internal image-reference" href="../../../../_images/trajectory.gif"><img alt="trajectory" src="../../../../_images/trajectory.gif" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-text">Trajectory following example.</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Trajectory following example.</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>

@@ -15,13 +15,13 @@
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../../../_static/jquery.js"></script>
-        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-        <script src="../../../../_static/doctools.js"></script>
-        <script src="../../../../_static/sphinx_highlight.js"></script>
-        <script src="../../../../_static/clipboard.min.js"></script>
-        <script src="../../../../_static/copybutton.js"></script>
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=144d94fb"></script>
+        <script src="../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -60,22 +60,19 @@
 <li class="toctree-l3"><a class="reference internal" href="../../admittance_controller/doc/userdoc.html">Admittance Controller</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../bicycle_steering_controller/doc/userdoc.html">Bicycle Steering Controller</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Differential Drive Controller</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#velocity-commands">Velocity commands</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#hardware-interface-type">Hardware interface type</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#other-features">Other features</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#ros2-control-interfaces">ros2_control Interfaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#description-of-controller-s-interfaces">Description of controller’s interfaces</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#references">References</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#states">States</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#commands">Commands</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#feedback">Feedback</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#output">Output</a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#ros2-interfaces">ROS2 Interfaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ros-2-interfaces">ROS 2 Interfaces</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#subscribers">Subscribers</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#publishers">Publishers</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#services">Services</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#parameters">Parameters</a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../effort_controllers/doc/userdoc.html">Effort Controllers</a></li>
@@ -131,61 +128,60 @@
            <div itemprop="articleBody">
              
   <section id="diff-drive-controller">
-<span id="diff-drive-controller-userdoc"></span><h1>diff_drive_controller<a class="headerlink" href="#diff-drive-controller" title="Permalink to this heading"></a></h1>
-<p>Controller for mobile robots with differential drive.
-Input for control are robot body velocity commands which are translated to wheel commands for the differential drive base.
-Odometry is computed from hardware feedback and published.</p>
-<section id="velocity-commands">
-<h2>Velocity commands<a class="headerlink" href="#velocity-commands" title="Permalink to this heading"></a></h2>
-<p>The controller works with a velocity twist from which it extracts the x component of the linear velocity and the z component of the angular velocity. Velocities on other components are ignored.</p>
-</section>
-<section id="hardware-interface-type">
-<h2>Hardware interface type<a class="headerlink" href="#hardware-interface-type" title="Permalink to this heading"></a></h2>
-<p>The controller works with wheel joints through a velocity interface.</p>
-</section>
+<span id="diff-drive-controller-userdoc"></span><h1>diff_drive_controller<a class="headerlink" href="#diff-drive-controller" title="Link to this heading"></a></h1>
+<p>Controller for mobile robots with differential drive.</p>
+<p>As input it takes velocity commands for the robot body, which are translated to wheel commands for the differential drive base.</p>
+<p>Odometry is computed from hardware feedback and published.</p>
 <section id="other-features">
-<h2>Other features<a class="headerlink" href="#other-features" title="Permalink to this heading"></a></h2>
+<h2>Other features<a class="headerlink" href="#other-features" title="Link to this heading"></a></h2>
 <blockquote>
-<div><p>Realtime-safe implementation.
-Odometry publishing
-Task-space velocity, acceleration and jerk limits
-Automatic stop after command time-out</p>
+<div><ul class="simple">
+<li><p>Realtime-safe implementation.</p></li>
+<li><p>Odometry publishing</p></li>
+<li><p>Task-space velocity, acceleration and jerk limits</p></li>
+<li><p>Automatic stop after command time-out</p></li>
+</ul>
 </div></blockquote>
 </section>
-<section id="ros2-control-interfaces">
-<h2>ros2_control Interfaces<a class="headerlink" href="#ros2-control-interfaces" title="Permalink to this heading"></a></h2>
+<section id="description-of-controller-s-interfaces">
+<h2>Description of controller’s interfaces<a class="headerlink" href="#description-of-controller-s-interfaces" title="Link to this heading"></a></h2>
 <section id="references">
-<h3>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h3>
+<h3>References<a class="headerlink" href="#references" title="Link to this heading"></a></h3>
+<p>(the controller is not yet implemented as chainable controller)</p>
 </section>
-<section id="states">
-<h3>States<a class="headerlink" href="#states" title="Permalink to this heading"></a></h3>
+<section id="feedback">
+<h3>Feedback<a class="headerlink" href="#feedback" title="Link to this heading"></a></h3>
+<p>As feedback interface type the joints’ position (<code class="docutils literal notranslate"><span class="pre">hardware_interface::HW_IF_POSITION</span></code>) or velocity (<code class="docutils literal notranslate"><span class="pre">hardware_interface::HW_IF_VELOCITY</span></code>,if parameter <code class="docutils literal notranslate"><span class="pre">position_feedback=false</span></code>) are used.</p>
 </section>
-<section id="commands">
-<h3>Commands<a class="headerlink" href="#commands" title="Permalink to this heading"></a></h3>
+<section id="output">
+<h3>Output<a class="headerlink" href="#output" title="Link to this heading"></a></h3>
+<p>Joints’ velocity (<code class="docutils literal notranslate"><span class="pre">hardware_interface::HW_IF_VELOCITY</span></code>) are used.</p>
 </section>
 </section>
-<section id="ros2-interfaces">
-<h2>ROS2 Interfaces<a class="headerlink" href="#ros2-interfaces" title="Permalink to this heading"></a></h2>
+<section id="ros-2-interfaces">
+<h2>ROS 2 Interfaces<a class="headerlink" href="#ros-2-interfaces" title="Link to this heading"></a></h2>
 <section id="subscribers">
-<h3>Subscribers<a class="headerlink" href="#subscribers" title="Permalink to this heading"></a></h3>
+<h3>Subscribers<a class="headerlink" href="#subscribers" title="Link to this heading"></a></h3>
 <dl class="simple">
-<dt>~/cmd_vel [geometry_msgs/msg/TwistStamped]</dt><dd><p>Velocity command for the controller.</p>
+<dt>~/cmd_vel [geometry_msgs/msg/TwistStamped]</dt><dd><p>Velocity command for the controller, if <code class="docutils literal notranslate"><span class="pre">use_stamped_vel=true</span></code>. The controller extracts the x component of the linear velocity and the z component of the angular velocity. Velocities on other components are ignored.</p>
+</dd>
+<dt>~/cmd_vel_unstamped [geometry_msgs::msg::Twist]</dt><dd><p>Velocity command for the controller, if <code class="docutils literal notranslate"><span class="pre">use_stamped_vel=false</span></code>. The controller extracts the x component of the linear velocity and the z component of the angular velocity. Velocities on other components are ignored.</p>
 </dd>
 </dl>
-<p>~/cmd_vel_unstamped [geometry_msgs::msg::Twist]</p>
-<p>~/cmd_vel_out []</p>
 </section>
 <section id="publishers">
-<h3>Publishers<a class="headerlink" href="#publishers" title="Permalink to this heading"></a></h3>
-<p>~/odom []</p>
-<p>/tf</p>
-</section>
-<section id="services">
-<h3>Services<a class="headerlink" href="#services" title="Permalink to this heading"></a></h3>
-</section>
+<h3>Publishers<a class="headerlink" href="#publishers" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>~/odom [nav_msgs::msg::Odometry]</dt><dd><p>This represents an estimate of the robot’s position and velocity in free space.</p>
+</dd>
+<dt>/tf [tf2_msgs::msg::TFMessage]</dt><dd><p>tf tree. Published only if <code class="docutils literal notranslate"><span class="pre">enable_odom_tf=true</span></code></p>
+</dd>
+<dt>~/cmd_vel_out [geometry_msgs/msg/TwistStamped]</dt><dd><p>Velocity command for the controller, where limits were applied. Published only if <code class="docutils literal notranslate"><span class="pre">publish_limited_velocity=true</span></code></p>
+</dd>
+</dl>
 </section>
 <section id="parameters">
-<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h2>
+<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
 <p>Check <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/master/diff_drive_controller/src/diff_drive_controller_parameter.yaml">parameter definition file for details</a>.</p>
 <p>Note that the documentation on parameters for joint limits can be found in <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/joint_limits/include/joint_limits/joint_limits_rosparam.hpp#L56-L75">their header file</a>.
 Those parameters are:</p>
@@ -199,6 +195,7 @@ The limiter ignores position limits.
 For details see <code class="docutils literal notranslate"><span class="pre">joint_limits</span></code> package from ros2_control repository.</p>
 </dd>
 </dl>
+</section>
 </section>
 </section>
 

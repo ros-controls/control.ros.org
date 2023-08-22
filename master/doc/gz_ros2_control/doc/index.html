@@ -15,13 +15,13 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/sphinx_highlight.js"></script>
-        <script src="../../../_static/clipboard.min.js"></script>
-        <script src="../../../_static/copybutton.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=144d94fb"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -119,22 +119,22 @@
            <div itemprop="articleBody">
              
   <section id="gz-ros2-control">
-<span id="id1"></span><h1>gz_ros2_control<a class="headerlink" href="#gz-ros2-control" title="Permalink to this heading"></a></h1>
+<span id="id1"></span><h1>gz_ros2_control<a class="headerlink" href="#gz-ros2-control" title="Link to this heading"></a></h1>
 <p>This is a ROS 2 package for integrating the <em>ros2_control</em> controller architecture with the <a class="reference external" href="https://gazebosim.org/home">Gazebo</a> simulator.</p>
 <p>This package provides a Gazebo-Sim system plugin which instantiates a <em>ros2_control</em> controller manager and connects it to a Gazebo model.</p>
 <img alt="Cart" src="../../../_images/gz_ros2_control.gif" />
 <img alt="DiffBot" src="../../../_images/diff_drive.gif" />
 <section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <section id="modifying-or-building-your-own">
-<h3>Modifying or building your own<a class="headerlink" href="#modifying-or-building-your-own" title="Permalink to this heading"></a></h3>
+<h3>Modifying or building your own<a class="headerlink" href="#modifying-or-building-your-own" title="Link to this heading"></a></h3>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>Dockerfile
 docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>gz_ros2_control<span class="w"> </span>.
 </pre></div>
 </div>
 </section>
 <section id="to-run-the-demo">
-<h3>To run the demo<a class="headerlink" href="#to-run-the-demo" title="Permalink to this heading"></a></h3>
+<h3>To run the demo<a class="headerlink" href="#to-run-the-demo" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p>Using Docker</p></li>
 </ol>
@@ -169,9 +169,9 @@ ros2<span class="w"> </span>run<span class="w"> </span>gz_ros2_control_demos<spa
 </section>
 </section>
 <section id="add-ros2-control-tag-to-a-urdf">
-<h2>Add ros2_control tag to a URDF<a class="headerlink" href="#add-ros2-control-tag-to-a-urdf" title="Permalink to this heading"></a></h2>
+<h2>Add ros2_control tag to a URDF<a class="headerlink" href="#add-ros2-control-tag-to-a-urdf" title="Link to this heading"></a></h2>
 <section id="simple-setup">
-<h3>Simple setup<a class="headerlink" href="#simple-setup" title="Permalink to this heading"></a></h3>
+<h3>Simple setup<a class="headerlink" href="#simple-setup" title="Link to this heading"></a></h3>
 <p>To use <em>ros2_control</em> with your robot, you need to add some additional elements to your URDF.
 You should include the tag <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code> to access and control the robot interfaces. We should
 include:</p>
@@ -199,7 +199,7 @@ include:</p>
 </div>
 </section>
 <section id="using-mimic-joints-in-simulation">
-<h3>Using mimic joints in simulation<a class="headerlink" href="#using-mimic-joints-in-simulation" title="Permalink to this heading"></a></h3>
+<h3>Using mimic joints in simulation<a class="headerlink" href="#using-mimic-joints-in-simulation" title="Link to this heading"></a></h3>
 <p>To use <code class="docutils literal notranslate"><span class="pre">mimic</span></code> joints in <em>gz_ros2_control</em> you should define its parameters to your URDF.
 We should include:</p>
 <ul class="simple">
@@ -229,7 +229,7 @@ We should include:</p>
 </section>
 </section>
 <section id="add-the-gz-ros2-control-plugin">
-<h2>Add the gz_ros2_control plugin<a class="headerlink" href="#add-the-gz-ros2-control-plugin" title="Permalink to this heading"></a></h2>
+<h2>Add the gz_ros2_control plugin<a class="headerlink" href="#add-the-gz-ros2-control-plugin" title="Link to this heading"></a></h2>
 <p>In addition to the <em>ros2_control</em> tags, a Gazebo plugin needs to be added to your URDF that
 actually parses the <em>ros2_control</em> tags and loads the appropriate hardware interfaces and
 controller manager. By default the <em>gz_ros2_control</em> plugin is very simple, though it is also
@@ -249,7 +249,7 @@ robot hardware interfaces between <em>ros2_control</em> and Gazebo.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">&lt;parameters&gt;</span></code>: YAML file with the configuration of the controllers</p></li>
 </ul>
 <section id="default-gz-ros2-control-behavior">
-<h3>Default gz_ros2_control Behavior<a class="headerlink" href="#default-gz-ros2-control-behavior" title="Permalink to this heading"></a></h3>
+<h3>Default gz_ros2_control Behavior<a class="headerlink" href="#default-gz-ros2-control-behavior" title="Link to this heading"></a></h3>
 <p>By default, without a <code class="docutils literal notranslate"><span class="pre">&lt;plugin&gt;</span></code> tag, <em>gz_ros2_control</em> will attempt to get all of the information it needs to interface with a ros2_control-based controller out of the URDF. This is sufficient for most cases, and good for at least getting started.</p>
 <p>The default behavior provides the following ros2_control interfaces:</p>
 <ul class="simple">
@@ -259,7 +259,7 @@ robot hardware interfaces between <em>ros2_control</em> and Gazebo.</p>
 </ul>
 </section>
 <section id="advanced-custom-gz-ros2-control-simulation-plugins">
-<h3>Advanced: custom gz_ros2_control Simulation Plugins<a class="headerlink" href="#advanced-custom-gz-ros2-control-simulation-plugins" title="Permalink to this heading"></a></h3>
+<h3>Advanced: custom gz_ros2_control Simulation Plugins<a class="headerlink" href="#advanced-custom-gz-ros2-control-simulation-plugins" title="Link to this heading"></a></h3>
 <p>The <em>gz_ros2_control</em> Gazebo plugin also provides a pluginlib-based interface to implement custom interfaces between Gazebo and <em>ros2_control</em> for simulating more complex mechanisms (nonlinear springs, linkages, etc).</p>
 <p>These plugins must inherit the <code class="docutils literal notranslate"><span class="pre">gz_ros2_control::GazeboSimSystemInterface</span></code>, which implements a simulated <em>ros2_control</em>
 <code class="docutils literal notranslate"><span class="pre">hardware_interface::SystemInterface</span></code>. SystemInterface provides API-level access to read and command joint properties.</p>
@@ -280,7 +280,7 @@ robot model is loaded. For example, the following XML will load the default plug
 </div>
 </section>
 <section id="set-up-controllers">
-<h3>Set up controllers<a class="headerlink" href="#set-up-controllers" title="Permalink to this heading"></a></h3>
+<h3>Set up controllers<a class="headerlink" href="#set-up-controllers" title="Link to this heading"></a></h3>
 <p>Use the tag <code class="docutils literal notranslate"><span class="pre">&lt;parameters&gt;</span></code> inside <code class="docutils literal notranslate"><span class="pre">&lt;plugin&gt;</span></code> to set the YAML file with the controller configuration
 and use the tag <code class="docutils literal notranslate"><span class="pre">&lt;controller_manager_prefix_node_name&gt;</span></code> to set the controller manager node name.</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo&gt;</span>
@@ -312,7 +312,7 @@ The following is a basic configuration of the controller.</p>
 </section>
 </section>
 <section id="gz-ros2-control-demos">
-<h2>gz_ros2_control_demos<a class="headerlink" href="#gz-ros2-control-demos" title="Permalink to this heading"></a></h2>
+<h2>gz_ros2_control_demos<a class="headerlink" href="#gz-ros2-control-demos" title="Link to this heading"></a></h2>
 <p>There are some examples in the <em>gz_ros2_control_demos</em> package. These examples allow to launch a cart in a 30 meter rail.</p>
 <p>You can run some of the example configurations by running the following commands:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>cart_example_position.launch.py

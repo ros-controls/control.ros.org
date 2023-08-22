@@ -15,13 +15,13 @@
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../../../_static/jquery.js"></script>
-        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-        <script src="../../../../_static/doctools.js"></script>
-        <script src="../../../../_static/sphinx_highlight.js"></script>
-        <script src="../../../../_static/clipboard.min.js"></script>
-        <script src="../../../../_static/copybutton.js"></script>
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=144d94fb"></script>
+        <script src="../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -126,20 +126,20 @@
            <div itemprop="articleBody">
              
   <section id="admittance-controller">
-<span id="admittance-controller-userdoc"></span><h1>Admittance Controller<a class="headerlink" href="#admittance-controller" title="Permalink to this heading"></a></h1>
+<span id="admittance-controller-userdoc"></span><h1>Admittance Controller<a class="headerlink" href="#admittance-controller" title="Link to this heading"></a></h1>
 <p>Admittance controller enables you do zero-force control from a force measured on your TCP.
 The controller implements <code class="docutils literal notranslate"><span class="pre">ChainedControllerInterface</span></code>, so it is possible to add another controllers in front of it, e.g., <code class="docutils literal notranslate"><span class="pre">JointTrajectoryController</span></code>.</p>
 <p>The controller requires an external kinematics plugin to function. The <a class="reference external" href="https://github.com/ros-controls/kinematics_interface">kinematics_interface</a> repository provides an interface and an implementation that the admittance controller can use.</p>
 <section id="ros2-interface-of-the-controller">
-<h2>ROS2 interface of the controller<a class="headerlink" href="#ros2-interface-of-the-controller" title="Permalink to this heading"></a></h2>
+<h2>ROS2 interface of the controller<a class="headerlink" href="#ros2-interface-of-the-controller" title="Link to this heading"></a></h2>
 <section id="parameters">
-<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h3>
+<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
 <p>The admittance controller’s uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters.
 The parameter <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/humble/admittance_controller/src/admittance_controller_parameters.yaml">definition file located in the src folder</a> contains descriptions for all the parameters used by the controller.
 An example parameter file can be found in the <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/humble/admittance_controller/test/test_params.yaml">test folder of the controller</a></p>
 </section>
 <section id="topics">
-<h3>Topics<a class="headerlink" href="#topics" title="Permalink to this heading"></a></h3>
+<h3>Topics<a class="headerlink" href="#topics" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>~/joint_references (input topic) [trajectory_msgs::msg::JointTrajectoryPoint]</dt><dd><p>Target joint commands when controller is not in chained mode.</p>
 </dd>
@@ -149,14 +149,14 @@ An example parameter file can be found in the <a class="reference external" href
 </section>
 </section>
 <section id="ros2-control-interfaces">
-<h2>ros2_control interfaces<a class="headerlink" href="#ros2-control-interfaces" title="Permalink to this heading"></a></h2>
+<h2>ros2_control interfaces<a class="headerlink" href="#ros2-control-interfaces" title="Link to this heading"></a></h2>
 <section id="references">
-<h3>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h3>
+<h3>References<a class="headerlink" href="#references" title="Link to this heading"></a></h3>
 <p>The controller has <code class="docutils literal notranslate"><span class="pre">position</span></code> and <code class="docutils literal notranslate"><span class="pre">velocity</span></code> reference interfaces exported in the format:
 <code class="docutils literal notranslate"><span class="pre">&lt;controller_name&gt;/&lt;joint_name&gt;/[position|velocity]</span></code></p>
 </section>
 <section id="states">
-<h3>States<a class="headerlink" href="#states" title="Permalink to this heading"></a></h3>
+<h3>States<a class="headerlink" href="#states" title="Link to this heading"></a></h3>
 <p>The state interfaces are defined with <code class="docutils literal notranslate"><span class="pre">joints</span></code> and <code class="docutils literal notranslate"><span class="pre">state_interfaces</span></code> parameters as follows: <code class="docutils literal notranslate"><span class="pre">&lt;joint&gt;/&lt;state_interface&gt;</span></code>.
 Supported state interfaces are <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code>, and <code class="docutils literal notranslate"><span class="pre">acceleration</span></code> as defined in the <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/humble/hardware_interface/include/hardware_interface/types/hardware_interface_type_values.hpp">hardware_interface/hardware_interface_type_values.hpp</a>.
 If some interface is not provided, the last commanded interface will be used for calculation.</p>
@@ -164,7 +164,7 @@ If some interface is not provided, the last commanded interface will be used for
 The interfaces have prefix <code class="docutils literal notranslate"><span class="pre">ft_sensor.name</span></code>, building the interfaces: <code class="docutils literal notranslate"><span class="pre">&lt;sensor_name&gt;/[force.x|force.y|force.z|torque.x|torque.y|torque.z]</span></code>.</p>
 </section>
 <section id="commands">
-<h3>Commands<a class="headerlink" href="#commands" title="Permalink to this heading"></a></h3>
+<h3>Commands<a class="headerlink" href="#commands" title="Link to this heading"></a></h3>
 <p>The command interfaces are defined with <code class="docutils literal notranslate"><span class="pre">joints</span></code> and <code class="docutils literal notranslate"><span class="pre">command_interfaces</span></code> parameters as follows: <code class="docutils literal notranslate"><span class="pre">&lt;joint&gt;/&lt;command_interface&gt;</span></code>.
 Supported state interfaces are <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code>, and <code class="docutils literal notranslate"><span class="pre">acceleration</span></code> as defined in the <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/humble/hardware_interface/include/hardware_interface/types/hardware_interface_type_values.hpp">hardware_interface/hardware_interface_type_values.hpp</a>.</p>
 </section>

@@ -15,13 +15,13 @@
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../../../_static/jquery.js"></script>
-        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-        <script src="../../../../_static/doctools.js"></script>
-        <script src="../../../../_static/sphinx_highlight.js"></script>
-        <script src="../../../../_static/clipboard.min.js"></script>
-        <script src="../../../../_static/copybutton.js"></script>
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=144d94fb"></script>
+        <script src="../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -125,12 +125,12 @@
            <div itemprop="articleBody">
              
   <section id="steering-controllers-library">
-<span id="steering-controllers-library-userdoc"></span><h1>steering_controllers_library<a class="headerlink" href="#steering-controllers-library" title="Permalink to this heading"></a></h1>
+<span id="steering-controllers-library-userdoc"></span><h1>steering_controllers_library<a class="headerlink" href="#steering-controllers-library" title="Link to this heading"></a></h1>
 <p>Library with shared functionalities for mobile robot controllers with steering drive (2 degrees of freedom).
 The library implements generic odometry and update methods and defines the main interfaces.</p>
 <p>Nomenclature used for the controller is used from <a class="reference external" href="https://en.wikipedia.org/wiki/Wheelbase">wikipedia</a>.</p>
 <section id="execution-logic-of-the-controller">
-<h2>Execution logic of the controller<a class="headerlink" href="#execution-logic-of-the-controller" title="Permalink to this heading"></a></h2>
+<h2>Execution logic of the controller<a class="headerlink" href="#execution-logic-of-the-controller" title="Link to this heading"></a></h2>
 <p>The controller uses velocity input, i.e., stamped or unstamped Twist messages where linear <code class="docutils literal notranslate"><span class="pre">x</span></code> and angular <code class="docutils literal notranslate"><span class="pre">z</span></code> components are used.
 Angular component under
 Values in other components are ignored.
@@ -150,16 +150,16 @@ Currently implemented kinematics in corresponding packages are:</p>
 </ul>
 </section>
 <section id="description-of-controller-s-interfaces">
-<h2>Description of controller’s interfaces<a class="headerlink" href="#description-of-controller-s-interfaces" title="Permalink to this heading"></a></h2>
+<h2>Description of controller’s interfaces<a class="headerlink" href="#description-of-controller-s-interfaces" title="Link to this heading"></a></h2>
 <section id="references-from-a-preceding-controller">
-<h3>References (from a preceding controller)<a class="headerlink" href="#references-from-a-preceding-controller" title="Permalink to this heading"></a></h3>
+<h3>References (from a preceding controller)<a class="headerlink" href="#references-from-a-preceding-controller" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>&lt;controller_name&gt;/linear/velocity      [double], in m/s</p></li>
 <li><p>&lt;controller_name&gt;/angular/position     [double]  # in [rad]</p></li>
 </ul>
 </section>
 <section id="commands">
-<h3>Commands<a class="headerlink" href="#commands" title="Permalink to this heading"></a></h3>
+<h3>Commands<a class="headerlink" href="#commands" title="Link to this heading"></a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">front_steering</span> <span class="pre">==</span> <span class="pre">true</span></code></p>
 <ul class="simple">
 <li><p>&lt;front_wheels_names[i]&gt;/position     [double]  # in [rad]</p></li>
@@ -172,7 +172,7 @@ Currently implemented kinematics in corresponding packages are:</p>
 </ul>
 </section>
 <section id="states">
-<h3>States<a class="headerlink" href="#states" title="Permalink to this heading"></a></h3>
+<h3>States<a class="headerlink" href="#states" title="Link to this heading"></a></h3>
 <p>Depending on the <code class="docutils literal notranslate"><span class="pre">position_feedback</span></code>, different feedback types are expected</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">position_feedback</span> <span class="pre">==</span> <span class="pre">true</span></code> –&gt; <code class="docutils literal notranslate"><span class="pre">TRACTION_FEEDBACK_TYPE</span> <span class="pre">=</span> <span class="pre">position</span></code></p></li>
@@ -190,7 +190,7 @@ Currently implemented kinematics in corresponding packages are:</p>
 </ul>
 </section>
 <section id="subscribers">
-<h3>Subscribers<a class="headerlink" href="#subscribers" title="Permalink to this heading"></a></h3>
+<h3>Subscribers<a class="headerlink" href="#subscribers" title="Link to this heading"></a></h3>
 <p>Used when controller is not in chained mode (<code class="docutils literal notranslate"><span class="pre">in_chained_mode</span> <span class="pre">==</span> <span class="pre">false</span></code>).</p>
 <ul class="simple">
 <li><p>&lt;controller_name&gt;/reference  [geometry_msgs/msg/TwistStamped]
@@ -200,7 +200,7 @@ If parameter <code class="docutils literal notranslate"><span class="pre">use_st
 </ul>
 </section>
 <section id="publishers">
-<h3>Publishers<a class="headerlink" href="#publishers" title="Permalink to this heading"></a></h3>
+<h3>Publishers<a class="headerlink" href="#publishers" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>&lt;controller_name&gt;/odometry          [nav_msgs/msg/Odometry]</p></li>
 <li><p>&lt;controller_name&gt;/tf_odometry       [tf2_msgs/msg/TFMessage]</p></li>
@@ -208,7 +208,7 @@ If parameter <code class="docutils literal notranslate"><span class="pre">use_st
 </ul>
 </section>
 <section id="parameters">
-<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h3>
+<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
 <p>This controller uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters.</p>
 <p>For an exemplary parameterization see the <code class="docutils literal notranslate"><span class="pre">test</span></code> folder of the controller’s package.</p>
 <dl>
