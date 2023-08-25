@@ -165,38 +165,10 @@ Controller manager maintains “claimed” status of interface in a vector (the 
 </section>
 <section id="activation-and-deactivation-chained-controllers">
 <h3>Activation and Deactivation Chained Controllers<a class="headerlink" href="#activation-and-deactivation-chained-controllers" title="Link to this heading"></a></h3>
-<p>Controller Manager has an additional parameter that describes how controllers are chained.
-In the first version, the parameter-structure would have some semantic meaning embedded into it, as follows:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">controller_manager</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">chained_controllers</span><span class="p">:</span>
-
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">parallel_group_1</span><span class="p">:</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">controller1_1</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">controller1_2</span>
-
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">parallel_group_2</span><span class="p">:</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">controller2_1</span>
-
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">parallel_group_3</span><span class="p">:</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">controller3_1</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">controller3_2</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">controller3_3</span>
-
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">...</span>
-
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">parallel_group_N</span><span class="p">:</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">controllerN_1</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">controllerN_M</span>
-</pre></div>
-</div>
-<p>This structure is motivated by <code class="docutils literal notranslate"><span class="pre">filter_chain</span></code> structure from <a class="reference external" href="https://github.com/ros/filters/tree/ros2">ros/filters repository</a>, see <a class="reference external" href="https://github.com/ros/filters/blob/ros2/include/filters/filter_chain.hpp">this file for implementation</a>.</p>
-<p>This structure is stored internally by controller manager into an ordered map (<code class="docutils literal notranslate"><span class="pre">std::map&lt;std::string,</span> <span class="pre">std::vector&lt;std::string&gt;&gt;</span></code>) with group name as key.
-When a controller should be deactivated, the controller manager deactivates all the controllers in the preceding groups first.
-All other controllers from the group stay active, as well as all controllers in the following groups.
-NOTE: In the future this could be done more intelligently, i.e., deactivate only controllers in the preceding groups that actually precede the controller that should be deactivated.</p>
-<p>On the other hand, the controller should be manually activated in the reverse order, i.e., from the those closer to the hardware toward those preceding them.</p>
+<p>Chained controllers must be activated and deactivated together or in the proper order.
+This means you must first activate all following controllers to have the preceding one activated.
+For the deactivation there is the inverse rule - all preceding controllers have to be deactivated before the following controller is deactivated.
+One can also think of it as an actual chain, you can not add a chain link or break the chain in the middle.</p>
 </section>
 </section>
 <section id="debugging-outputs">
