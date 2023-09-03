@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>steering_controllers_library &mdash; ROS2_Control: Iron Sep 2023 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/tabs.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//iron/doc/ros2_controllers/steering_controllers_library/doc/userdoc.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=a915bb22"></script>
+        <script src="../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="tricycle_controller" href="../../tricycle_controller/doc/userdoc.html" />
+    <link rel="prev" title="position_controllers" href="../../position_controllers/doc/userdoc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html">ros2_control</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/controllers_index.html">ros2_controllers</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#nomenclature">Nomenclature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#guidelines-and-best-practices">Guidelines and Best Practices</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/controllers_index.html#available-controllers">Available Controllers</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../ackermann_steering_controller/doc/userdoc.html">Ackermann Steering Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../admittance_controller/doc/userdoc.html">Admittance Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../bicycle_steering_controller/doc/userdoc.html">Bicycle Steering Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../diff_drive_controller/doc/userdoc.html">Differential Drive Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../effort_controllers/doc/userdoc.html">Effort Controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../forward_command_controller/doc/userdoc.html">Forward Command Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../gripper_controllers/doc/userdoc.html">Gripper Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../joint_trajectory_controller/doc/userdoc.html">Joint Trajectory Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../position_controllers/doc/userdoc.html">Position Controllers</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Steering Controllers Library</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#execution-logic-of-the-controller">Execution logic of the controller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#description-of-controller-s-interfaces">Description of controller’s interfaces</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#references-from-a-preceding-controller">References (from a preceding controller)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#commands">Commands</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#states">States</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#subscribers">Subscribers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#publishers">Publishers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#parameters">Parameters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tricycle_controller/doc/userdoc.html">Tricycle Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tricycle_steering_controller/doc/userdoc.html">Tricycle Steering Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../velocity_controllers/doc/userdoc.html">Velocity Controllers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#available-broadcasters">Available Broadcasters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../differences_to_ros1/differences_to_ros1.html">Differences to ros_control (ROS1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../differences_to_ros1/differences_to_ros1.html#migration-guide-to-ros2-control">Migration Guide to ros2_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../project_ideas.html">Project Ideas for GSoC 2024</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ROS2_Control: Iron</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../doc/controllers_index.html">ros2_controllers</a></li>
+      <li class="breadcrumb-item active">steering_controllers_library</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ros-controls/ros2_controllers/blob/iron/steering_controllers_library/doc/userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="steering-controllers-library">
+<span id="steering-controllers-library-userdoc"></span><h1>steering_controllers_library<a class="headerlink" href="#steering-controllers-library" title="Link to this heading"></a></h1>
+<p>Library with shared functionalities for mobile robot controllers with steering drive (2 degrees of freedom).
+The library implements generic odometry and update methods and defines the main interfaces.</p>
+<p>Nomenclature used for the controller is used from <a class="reference external" href="https://en.wikipedia.org/wiki/Wheelbase">wikipedia</a>.</p>
+<section id="execution-logic-of-the-controller">
+<h2>Execution logic of the controller<a class="headerlink" href="#execution-logic-of-the-controller" title="Link to this heading"></a></h2>
+<p>The controller uses velocity input, i.e., stamped or unstamped Twist messages where linear <code class="docutils literal notranslate"><span class="pre">x</span></code> and angular <code class="docutils literal notranslate"><span class="pre">z</span></code> components are used.
+Angular component under
+Values in other components are ignored.
+In the chain mode the controller provides two reference interfaces, one for linear velocity and one for steering angle position.
+Other relevant features are:</p>
+<ul class="simple">
+<li><p>support for front and rear steering configurations;</p></li>
+<li><p>odometry publishing as Odometry and TF message;</p></li>
+<li><p>input command timeout based on a parameter.</p></li>
+</ul>
+<p>The command for the wheels are calculated using <code class="docutils literal notranslate"><span class="pre">odometry</span></code> library where based on concrete kinematics traction and steering commands are calculated.
+Currently implemented kinematics in corresponding packages are:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../bicycle_steering_controller/doc/userdoc.html#bicycle-steering-controller-userdoc"><span class="std std-ref">Bicycle</span></a> - with one steering and one drive joints;</p></li>
+<li><p><a class="reference internal" href="../../tricycle_steering_controller/doc/userdoc.html#tricycle-steering-controller-userdoc"><span class="std std-ref">Tricylce</span></a> - with one steering and two drive joints;</p></li>
+<li><p><a class="reference internal" href="../../ackermann_steering_controller/doc/userdoc.html#ackermann-steering-controller-userdoc"><span class="std std-ref">Ackermann</span></a> - with two seering and two drive joints.</p></li>
+</ul>
+</section>
+<section id="description-of-controller-s-interfaces">
+<h2>Description of controller’s interfaces<a class="headerlink" href="#description-of-controller-s-interfaces" title="Link to this heading"></a></h2>
+<section id="references-from-a-preceding-controller">
+<h3>References (from a preceding controller)<a class="headerlink" href="#references-from-a-preceding-controller" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>&lt;controller_name&gt;/linear/velocity      [double], in m/s</p></li>
+<li><p>&lt;controller_name&gt;/angular/position     [double]  # in [rad]</p></li>
+</ul>
+</section>
+<section id="commands">
+<h3>Commands<a class="headerlink" href="#commands" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">front_steering</span> <span class="pre">==</span> <span class="pre">true</span></code></p>
+<ul class="simple">
+<li><p>&lt;front_wheels_names[i]&gt;/position     [double]  # in [rad]</p></li>
+<li><p>&lt;rear_wheels_names[i]&gt;/velocity      [double]  # in [m/s]</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">front_steering</span> <span class="pre">==</span> <span class="pre">false</span></code></p>
+<ul class="simple">
+<li><p>&lt;front_wheels_names[i]&gt;/velocity     [double]  # in [m/s]</p></li>
+<li><p>&lt;rear_wheels_names[i]&gt;/position      [double]  # in [rad]</p></li>
+</ul>
+</section>
+<section id="states">
+<h3>States<a class="headerlink" href="#states" title="Link to this heading"></a></h3>
+<p>Depending on the <code class="docutils literal notranslate"><span class="pre">position_feedback</span></code>, different feedback types are expected</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">position_feedback</span> <span class="pre">==</span> <span class="pre">true</span></code> –&gt; <code class="docutils literal notranslate"><span class="pre">TRACTION_FEEDBACK_TYPE</span> <span class="pre">=</span> <span class="pre">position</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">position_feedback</span> <span class="pre">==</span> <span class="pre">false</span></code> –&gt; <code class="docutils literal notranslate"><span class="pre">TRACTION_FEEDBACK_TYPE</span> <span class="pre">=</span> <span class="pre">velocity</span></code></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">front_steering</span> <span class="pre">==</span> <span class="pre">true</span></code></p>
+<ul class="simple">
+<li><p>&lt;front_wheels_names[i]&gt;/position                  [double]  # in [rad]</p></li>
+<li><p>&lt;rear_wheels_names[i]&gt;/&lt;TRACTION_FEEDBACK_TYPE&gt;   [double]  # in [m] or [m/s]</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">front_steering</span> <span class="pre">==</span> <span class="pre">false</span></code></p>
+<ul class="simple">
+<li><p>&lt;front_wheels_names[i]&gt;/&lt;TRACTION_FEEDBACK_TYPE&gt;  [double]  # [m] or [m/s]</p></li>
+<li><p>&lt;rear_wheels_names[i]&gt;/position                   [double]  # in [rad]</p></li>
+</ul>
+</section>
+<section id="subscribers">
+<h3>Subscribers<a class="headerlink" href="#subscribers" title="Link to this heading"></a></h3>
+<p>Used when controller is not in chained mode (<code class="docutils literal notranslate"><span class="pre">in_chained_mode</span> <span class="pre">==</span> <span class="pre">false</span></code>).</p>
+<ul class="simple">
+<li><p>&lt;controller_name&gt;/reference  [geometry_msgs/msg/TwistStamped]
+If parameter <code class="docutils literal notranslate"><span class="pre">use_stamped_vel</span></code> is <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
+<li><p>&lt;controller_name&gt;/reference_unstamped   [geometry_msgs/msg/Twist]
+If parameter <code class="docutils literal notranslate"><span class="pre">use_stamped_vel</span></code> is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+</ul>
+</section>
+<section id="publishers">
+<h3>Publishers<a class="headerlink" href="#publishers" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>&lt;controller_name&gt;/odometry          [nav_msgs/msg/Odometry]</p></li>
+<li><p>&lt;controller_name&gt;/tf_odometry       [tf2_msgs/msg/TFMessage]</p></li>
+<li><p>&lt;controller_name&gt;/controller_state  [control_msgs/msg/SteeringControllerStatus]</p></li>
+</ul>
+</section>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
+<p>This controller uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters.</p>
+<p>For an exemplary parameterization see the <code class="docutils literal notranslate"><span class="pre">test</span></code> folder of the controller’s package.</p>
+<dl>
+<dt>reference_timeout (double)</dt><dd><p>Timeout for controller references after which they will be reset. This is especially useful for controllers that can cause unwanted and dangerous behaviour if reference is not reset, e.g., velocity controllers. If value is 0 the reference is reset after each run.</p>
+<p>Default:  1.0</p>
+</dd>
+<dt>front_steering (bool)</dt><dd><p>Is the steering on the front of the robot?</p>
+<p>Default:  true</p>
+</dd>
+<dt>rear_wheels_names (string_array)</dt><dd><p>Names of rear wheel joints.</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>length is less less 5</p></li>
+<li><p>contains no duplicates</p></li>
+<li><p>parameter is not empty</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>front_wheels_names (string_array)</dt><dd><p>Names of front wheel joints.</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>length is less less 5</p></li>
+<li><p>contains no duplicates</p></li>
+<li><p>parameter is not empty</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>rear_wheels_state_names (string_array)</dt><dd><p>(Optional) Names of rear wheel joints to read states from. If not set joint names from ‘rear_wheels_names’ will be used.</p>
+<p>Default:  {}</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>length is less less 5</p></li>
+<li><p>contains no duplicates</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>front_wheels_state_names (string_array)</dt><dd><p>(Optional) Names of front wheel joints to read states from. If not set joint names from ‘front_wheels_names’ will be used.</p>
+<p>Default:  {}</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>length is less less 5</p></li>
+<li><p>contains no duplicates</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>open_loop (bool)</dt><dd><p>bool parameter decides if open oop or not (feedback).</p>
+<p>Default:  false</p>
+</dd>
+<dt>velocity_rolling_window_size (int)</dt><dd><p>The number of velocity samples to average together to compute the odometry twist.linear.x and twist.angular.z velocities.</p>
+<p>Default:  10</p>
+</dd>
+<dt>base_frame_id (string)</dt><dd><p>Base frame_id set to value of base_frame_id.</p>
+<p>Default:  “base_link”</p>
+</dd>
+<dt>odom_frame_id (string)</dt><dd><p>Odometry frame_id set to value of odom_frame_id.</p>
+<p>Default:  “odom”</p>
+</dd>
+<dt>enable_odom_tf (bool)</dt><dd><p>Publishing to tf is enabled or disabled ?.</p>
+<p>Default:  true</p>
+</dd>
+<dt>twist_covariance_diagonal (double_array)</dt><dd><p>diagonal values of twist covariance matrix.</p>
+<p>Default:  {0.0, 7.0, 14.0, 21.0, 28.0, 35.0}</p>
+</dd>
+<dt>pose_covariance_diagonal (double_array)</dt><dd><p>diagonal values of pose covariance matrix.</p>
+<p>Default:  {0.0, 7.0, 14.0, 21.0, 28.0, 35.0}</p>
+</dd>
+<dt>position_feedback (bool)</dt><dd><p>Choice of feedback type, if position_feedback is false then HW_IF_VELOCITY is taken as interface type, if position_feedback is true then HW_IF_POSITION is taken as interface type</p>
+<p>Default:  false</p>
+</dd>
+<dt>use_stamped_vel (bool)</dt><dd><p>Choice of vel type, if use_stamped_vel is false then geometry_msgs::msg::Twist is taken as vel msg type, if use_stamped_vel is true then geometry_msgs::msg::TwistStamped is taken as vel msg type</p>
+<p>Default:  false</p>
+</dd>
+</dl>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../position_controllers/doc/userdoc.html" class="btn btn-neutral float-left" title="position_controllers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../tricycle_controller/doc/userdoc.html" class="btn btn-neutral float-right" title="tricycle_controller" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: iron
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="../../../../../master/doc/ros2_controllers/steering_controllers_library/doc/userdoc.html">Master (latest)</a></dd>
+    </dl>
+    <dl>
+      <dt>Releases</dt>
+        <dd><a href="userdoc.html">Iron (recommended)</a></dd><br>
+        <dd><a href="../../../../../humble/doc/ros2_controllers/steering_controllers_library/doc/userdoc.html">Humble</a></dd><br>
+        <dd><a href="../../../../../galactic/index.html">Galactic (EOL)</a></dd><br>
+        
+        <dd><a href="../../../../../foxy/index.html">Foxy (EOL)</a></dd><br>
+        
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

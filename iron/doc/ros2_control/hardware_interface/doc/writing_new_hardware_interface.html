@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Writing a new hardware interface &mdash; ROS2_Control: Iron Sep 2023 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/tabs.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//iron/doc/ros2_control/hardware_interface/doc/writing_new_hardware_interface.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=a915bb22"></script>
+        <script src="../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Mock Components" href="mock_components_userdoc.html" />
+    <link rel="prev" title="Hardware Components" href="hardware_components_userdoc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/index.html">ros2_control</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#api-documentation">API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#features">Features</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/index.html#concepts">Concepts</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../controller_manager/doc/userdoc.html">Controller Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../controller_manager/doc/controller_chaining.html">Controller Chaining / Cascade Control</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="hardware_components_userdoc.html">Hardware Components</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="hardware_components_userdoc.html#guidelines-and-best-practices">Guidelines and Best Practices</a><ul class="current">
+<li class="toctree-l5 current"><a class="current reference internal" href="#">Writing a Hardware Interface</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#useful-external-references">Useful External References</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="hardware_components_userdoc.html#handling-of-errors-that-happen-during-read-and-write-calls">Handling of errors that happen during read() and write() calls</a></li>
+<li class="toctree-l5"><a class="reference internal" href="hardware_components_userdoc.html#migration-from-foxy-to-galactic">Migration from Foxy to Galactic</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mock_components_userdoc.html">Mock Components</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../differences_to_ros1/differences_to_ros1.html">Differences to ros_control (ROS1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../differences_to_ros1/differences_to_ros1.html#migration-guide-to-ros2-control">Migration Guide to ros2_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../project_ideas.html">Project Ideas for GSoC 2024</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ROS2_Control: Iron</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../doc/index.html">ros2_control</a></li>
+          <li class="breadcrumb-item"><a href="hardware_components_userdoc.html">Hardware Components</a></li>
+      <li class="breadcrumb-item active">Writing a new hardware interface</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ros-controls/ros2_control/blob/iron/hardware_interface/doc/writing_new_hardware_interface.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="writing-a-new-hardware-interface">
+<span id="writing-new-hardware-interface"></span><h1>Writing a new hardware interface<a class="headerlink" href="#writing-a-new-hardware-interface" title="Link to this heading"></a></h1>
+<p>In ros2_control hardware system components are libraries, dynamically loaded by the controller manager using the <a class="reference external" href="https://ros.org/wiki/pluginlib">pluginlib</a> interface.
+The following is a step-by-step guide to create source files, basic tests, and compile rules for a new hardware interface.</p>
+<ol class="arabic">
+<li><p><strong>Preparing package</strong></p>
+<p>If the package for the hardware interface does not exist, then create it first.
+The package should have <code class="docutils literal notranslate"><span class="pre">ament_cmake</span></code> as a build type.
+The easiest way is to search online for the most recent manual.
+A helpful command to support this process is <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">pkg</span> <span class="pre">create</span></code>.
+Use the <code class="docutils literal notranslate"><span class="pre">--help</span></code> flag for more information on how to use it.
+There is also an option to create library source files and compile rules to help you in the following steps.</p>
+</li>
+<li><p><strong>Preparing source files</strong></p>
+<p>After creating the package, you should have at least <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> and <code class="docutils literal notranslate"><span class="pre">package.xml</span></code> files in it.
+Create also <code class="docutils literal notranslate"><span class="pre">include/&lt;PACKAGE_NAME&gt;/</span></code> and <code class="docutils literal notranslate"><span class="pre">src</span></code> folders if they do not already exist.
+In <code class="docutils literal notranslate"><span class="pre">include/&lt;PACKAGE_NAME&gt;/</span></code> folder add <code class="docutils literal notranslate"><span class="pre">&lt;robot_hardware_interface_name&gt;.hpp</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;robot_hardware_interface_name&gt;.cpp</span></code> in the <code class="docutils literal notranslate"><span class="pre">src</span></code> folder.
+Optionally add <code class="docutils literal notranslate"><span class="pre">visibility_control.h</span></code> with the definition of export rules for Windows.
+You can copy this file from an existing controller package and change the name prefix to the <code class="docutils literal notranslate"><span class="pre">&lt;PACKAGE_NAME&gt;</span></code>.</p>
+</li>
+<li><p><strong>Adding declarations into header file (.hpp)</strong></p>
+<ol class="arabic simple">
+<li><p>Take care that you use header guards. ROS2-style is using <code class="docutils literal notranslate"><span class="pre">#ifndef</span></code> and <code class="docutils literal notranslate"><span class="pre">#define</span></code> preprocessor directives. (For more information on this, a search engine is your friend :) ).</p></li>
+<li><p>Include <code class="docutils literal notranslate"><span class="pre">&quot;hardware_interface/$interface_type$_interface.hpp&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">visibility_control.h</span></code> if you are using one.
+<code class="docutils literal notranslate"><span class="pre">$interface_type$</span></code> can be <code class="docutils literal notranslate"><span class="pre">Actuator</span></code>, <code class="docutils literal notranslate"><span class="pre">Sensor</span></code> or <code class="docutils literal notranslate"><span class="pre">System</span></code> depending on the type of hardware you are using. for more details about each type check <a class="reference internal" href="../../../getting_started/getting_started.html#overview-hardware-components"><span class="std std-ref">Hardware Components description</span></a>.</p></li>
+<li><p>Define a unique namespace for your hardware_interface. This is usually the package name written in <code class="docutils literal notranslate"><span class="pre">snake_case</span></code>.</p></li>
+<li><p>Define the class of the hardware_interface, extending <code class="docutils literal notranslate"><span class="pre">$InterfaceType$Interface</span></code>, e.g.,
+.. code:: c++
+class HardwareInterfaceName : public hardware_interface::$InterfaceType$Interface</p></li>
+</ol>
+<p>5. Add a constructor without parameters and the following public methods implementing <code class="docutils literal notranslate"><span class="pre">LifecycleNodeInterface</span></code>: <code class="docutils literal notranslate"><span class="pre">on_configure</span></code>, <code class="docutils literal notranslate"><span class="pre">on_cleanup</span></code>, <code class="docutils literal notranslate"><span class="pre">on_shutdown</span></code>, <code class="docutils literal notranslate"><span class="pre">on_activate</span></code>, <code class="docutils literal notranslate"><span class="pre">on_deactivate</span></code>, <code class="docutils literal notranslate"><span class="pre">on_error</span></code>; and overriding <code class="docutils literal notranslate"><span class="pre">$InterfaceType$Interface</span></code> definition: <code class="docutils literal notranslate"><span class="pre">on_init</span></code>, <code class="docutils literal notranslate"><span class="pre">export_state_interfaces</span></code>, <code class="docutils literal notranslate"><span class="pre">export_command_interfaces</span></code>, <code class="docutils literal notranslate"><span class="pre">prepare_command_mode_switch</span></code> (optional), <code class="docutils literal notranslate"><span class="pre">perform_command_mode_switch</span></code> (optional), <code class="docutils literal notranslate"><span class="pre">read</span></code>, <code class="docutils literal notranslate"><span class="pre">write</span></code>.
+For further explanation of hardware-lifecycle check the <a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/559/files#diff-2bd171d85b028c1b15b03b27d4e6dcbb87e52f705042bf111840e7a28ab268fc">pull request</a> and for exact definitions of methods check the <code class="docutils literal notranslate"><span class="pre">&quot;hardware_interface/$interface_type$_interface.hpp&quot;</span></code> header or <a class="reference external" href="https://control.ros.org/iron/doc/api/namespacehardware__interface.html">doxygen documentation</a> for <em>Actuator</em>, <em>Sensor</em> or <em>System</em>.</p>
+</li>
+<li><p><strong>Adding definitions into source file (.cpp)</strong></p>
+<ol class="arabic simple">
+<li><p>Include the header file of your hardware interface and add a namespace definition to simplify further development.</p></li>
+<li><p>Implement <code class="docutils literal notranslate"><span class="pre">on_init</span></code> method. Here, you should initialize all member variables and process the parameters from the <code class="docutils literal notranslate"><span class="pre">info</span></code> argument.
+In the first line usually the parents <code class="docutils literal notranslate"><span class="pre">on_init</span></code> is called to process standard values, like name. This is done using: <code class="docutils literal notranslate"><span class="pre">hardware_interface::(Actuator|Sensor|System)Interface::on_init(info)</span></code>.
+If all required parameters are set and valid and everything works fine return <code class="docutils literal notranslate"><span class="pre">CallbackReturn::SUCCESS</span></code> or <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">CallbackReturn::ERROR</span></code> otherwise.</p></li>
+</ol>
+<ol class="arabic simple" start="4">
+<li><p>Write the <code class="docutils literal notranslate"><span class="pre">on_configure</span></code> method where you usually setup the communication to the hardware and set everything up so that the hardware can be activated.</p></li>
+<li><p>Implement <code class="docutils literal notranslate"><span class="pre">on_cleanup</span></code> method, which does the opposite of <code class="docutils literal notranslate"><span class="pre">on_configure</span></code>.</p></li>
+<li><p>Implement <code class="docutils literal notranslate"><span class="pre">export_state_interfaces</span></code> and <code class="docutils literal notranslate"><span class="pre">export_command_interfaces</span></code> methods where interfaces that hardware offers are defined.
+For the <code class="docutils literal notranslate"><span class="pre">Sensor</span></code>-type hardware interface there is no <code class="docutils literal notranslate"><span class="pre">export_command_interfaces</span></code> method.
+As a reminder, the full interface names have structure <code class="docutils literal notranslate"><span class="pre">&lt;joint_name&gt;/&lt;interface_type&gt;</span></code>.</p></li>
+<li><p>(optional) For <em>Actuator</em> and <em>System</em> types of hardware interface implement <code class="docutils literal notranslate"><span class="pre">prepare_command_mode_switch</span></code> and <code class="docutils literal notranslate"><span class="pre">perform_command_mode_switch</span></code> if your hardware accepts multiple control modes.</p></li>
+<li><p>Implement the <code class="docutils literal notranslate"><span class="pre">on_activate</span></code> method where hardware “power” is enabled.</p></li>
+<li><p>Implement the <code class="docutils literal notranslate"><span class="pre">on_deactivate</span></code> method, which does the opposite of <code class="docutils literal notranslate"><span class="pre">on_activate</span></code>.</p></li>
+<li><p>Implement <code class="docutils literal notranslate"><span class="pre">on_shutdown</span></code> method where hardware is shutdown gracefully.</p></li>
+<li><p>Implement <code class="docutils literal notranslate"><span class="pre">on_error</span></code> method where different errors from all states are handled.</p></li>
+<li><p>Implement the <code class="docutils literal notranslate"><span class="pre">read</span></code> method getting the states from the hardware and storing them to internal variables defined in <code class="docutils literal notranslate"><span class="pre">export_state_interfaces</span></code>.</p></li>
+<li><p>Implement <code class="docutils literal notranslate"><span class="pre">write</span></code> method that commands the hardware based on the values stored in internal variables defined in <code class="docutils literal notranslate"><span class="pre">export_command_interfaces</span></code>.</p></li>
+<li><p>IMPORTANT: At the end of your file after the namespace is closed, add the <code class="docutils literal notranslate"><span class="pre">PLUGINLIB_EXPORT_CLASS</span></code> macro.</p></li>
+</ol>
+<blockquote>
+<div><p>For this you will need to include the <code class="docutils literal notranslate"><span class="pre">&quot;pluginlib/class_list_macros.hpp&quot;</span></code> header.
+As first parameters you should provide exact hardware interface class, e.g., <code class="docutils literal notranslate"><span class="pre">&lt;my_hardware_interface_package&gt;::&lt;RobotHardwareInterfaceName&gt;</span></code>, and as second the base class, i.e., <code class="docutils literal notranslate"><span class="pre">hardware_interface::(Actuator|Sensor|System)Interface</span></code>.</p>
+</div></blockquote>
+</li>
+<li><p><strong>Writing export definition for pluginlib</strong></p>
+<ol class="arabic simple">
+<li><p>Create the <code class="docutils literal notranslate"><span class="pre">&lt;my_hardware_interface_package&gt;.xml</span></code> file in the package and add a definition of the library and hardware interface’s class which has to be visible for the pluginlib.
+The easiest way to do that is to check definition for mock components in the <a class="reference internal" href="mock_components_userdoc.html#mock-components-userdoc"><span class="std std-ref">hardware_interface mock_components</span></a> section.</p></li>
+<li><p>Usually, the plugin name is defined by the package (namespace) and the class name, e.g.,
+<code class="docutils literal notranslate"><span class="pre">&lt;my_hardware_interface_package&gt;/&lt;RobotHardwareInterfaceName&gt;</span></code>.
+This name defines the hardware interface’s type when the resource manager searches for it.
+The other two parameters have to correspond to the definition done in the macro at the bottom of the <code class="docutils literal notranslate"><span class="pre">&lt;robot_hardware_interface_name&gt;.cpp</span></code> file.</p></li>
+</ol>
+</li>
+<li><p><strong>Writing a simple test to check if the controller can be found and loaded</strong></p>
+<ol class="arabic simple">
+<li><p>Create the folder <code class="docutils literal notranslate"><span class="pre">test</span></code> in your package, if it does not exist already, and add a file named <code class="docutils literal notranslate"><span class="pre">test_load_&lt;robot_hardware_interface_name&gt;.cpp</span></code>.</p></li>
+<li><p>You can copy the <code class="docutils literal notranslate"><span class="pre">load_generic_system_2dof</span></code> content defined in the <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/iron/hardware_interface/test/mock_components/test_generic_system.cpp#L402-L407">test_generic_system.cpp</a> package.</p></li>
+<li><p>Change the name of the copied test and in the last line, where hardware interface type is specified put the name defined in <code class="docutils literal notranslate"><span class="pre">&lt;my_hardware_interface_package&gt;.xml</span></code> file, e.g., <code class="docutils literal notranslate"><span class="pre">&lt;my_hardware_interface_package&gt;/&lt;RobotHardwareInterfaceName&gt;</span></code>.</p></li>
+</ol>
+</li>
+<li><p><strong>Add compile directives into ``CMakeLists.txt`` file</strong></p>
+<ol class="arabic">
+<li><p>Under the line <code class="docutils literal notranslate"><span class="pre">find_package(ament_cmake</span> <span class="pre">REQUIRED)</span></code> add further dependencies.
+Those are at least: <code class="docutils literal notranslate"><span class="pre">hardware_interface</span></code>, <code class="docutils literal notranslate"><span class="pre">pluginlib</span></code>, <code class="docutils literal notranslate"><span class="pre">rclcpp</span></code> and <code class="docutils literal notranslate"><span class="pre">rclcpp_lifecycle</span></code>.</p></li>
+<li><p>Add a compile directive for a shared library providing the <code class="docutils literal notranslate"><span class="pre">&lt;robot_hardware_interface_name&gt;.cpp</span></code> file as the source.</p></li>
+<li><p>Add targeted include directories for the library. This is usually only <code class="docutils literal notranslate"><span class="pre">include</span></code>.</p></li>
+<li><p>Add ament dependencies needed by the library. You should add at least those listed under 1.</p></li>
+<li><p>Export for pluginlib description file using the following command:
+.. code:: cmake</p>
+<blockquote>
+<div><p>pluginlib_export_plugin_description_file(hardware_interface &lt;my_hardware_interface_package&gt;.xml)</p>
+</div></blockquote>
+</li>
+<li><p>Add install directives for targets and include directory.</p></li>
+<li><p>In the test section add the following dependencies: <code class="docutils literal notranslate"><span class="pre">ament_cmake_gmock</span></code>, <code class="docutils literal notranslate"><span class="pre">hardware_interface</span></code>.</p></li>
+<li><p>Add compile definitions for the tests using the <code class="docutils literal notranslate"><span class="pre">ament_add_gmock</span></code> directive.
+For details, see how it is done for mock hardware in the <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/iron/hardware_interface/CMakeLists.txt">ros2_control</a> package.</p></li>
+<li><p>(optional) Add your hardware interface`s library into <code class="docutils literal notranslate"><span class="pre">ament_export_libraries</span></code> before <code class="docutils literal notranslate"><span class="pre">ament_package()</span></code>.</p></li>
+</ol>
+</li>
+<li><p><strong>Add dependencies into ``package.xml`` file</strong></p>
+<ol class="arabic simple">
+<li><p>Add at least the following packages into <code class="docutils literal notranslate"><span class="pre">&lt;depend&gt;</span></code> tag: <code class="docutils literal notranslate"><span class="pre">hardware_interface</span></code>, <code class="docutils literal notranslate"><span class="pre">pluginlib</span></code>, <code class="docutils literal notranslate"><span class="pre">rclcpp</span></code>, and <code class="docutils literal notranslate"><span class="pre">rclcpp_lifecycle</span></code>.</p></li>
+<li><p>Add at least the following package into <code class="docutils literal notranslate"><span class="pre">&lt;test_depend&gt;</span></code> tag: <code class="docutils literal notranslate"><span class="pre">ament_add_gmock</span></code> and <code class="docutils literal notranslate"><span class="pre">hardware_interface</span></code>.</p></li>
+</ol>
+</li>
+<li><p><strong>Compiling and testing the hardware component</strong></p>
+<ol class="arabic simple">
+<li><p>Now everything is ready to compile the hardware component using the <code class="docutils literal notranslate"><span class="pre">colcon</span> <span class="pre">build</span> <span class="pre">&lt;my_hardware_interface_package&gt;</span></code> command.
+Remember to go into the root of your workspace before executing this command.</p></li>
+<li><p>If compilation was successful, source the <code class="docutils literal notranslate"><span class="pre">setup.bash</span></code> file from the install folder and execute <code class="docutils literal notranslate"><span class="pre">colcon</span> <span class="pre">test</span> <span class="pre">&lt;my_hardware_interface_package&gt;</span></code> to check if the new controller can be found through <code class="docutils literal notranslate"><span class="pre">pluginlib</span></code> library and be loaded by the controller manager.</p></li>
+</ol>
+</li>
+</ol>
+<p>That’s it! Enjoy writing great controllers!</p>
+<section id="useful-external-references">
+<h2>Useful External References<a class="headerlink" href="#useful-external-references" title="Link to this heading"></a></h2>
+<ul>
+<li><p><a class="reference external" href="https://stoglrobotics.github.io/ros_team_workspace/master/use-cases/ros2_control/setup_robot_hardware_interface.html">Templates and scripts for generating controllers shell</a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The script is currently only recommended to use for Foxy, not compatible with the API from Galactic and onwards.</p>
+</div>
+</li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="hardware_components_userdoc.html" class="btn btn-neutral float-left" title="Hardware Components" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mock_components_userdoc.html" class="btn btn-neutral float-right" title="Mock Components" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: iron
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="../../../../../master/doc/ros2_control/hardware_interface/doc/writing_new_hardware_interface.html">Master (latest)</a></dd>
+    </dl>
+    <dl>
+      <dt>Releases</dt>
+        <dd><a href="writing_new_hardware_interface.html">Iron (recommended)</a></dd><br>
+        <dd><a href="../../../../../humble/doc/ros2_control/hardware_interface/doc/writing_new_hardware_interface.html">Humble</a></dd><br>
+        <dd><a href="../../../../../galactic/index.html">Galactic (EOL)</a></dd><br>
+        
+        <dd><a href="../../../../../foxy/index.html">Foxy (EOL)</a></dd><br>
+        
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

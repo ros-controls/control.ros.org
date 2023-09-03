@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Controller Manager &mdash; ROS2_Control: Iron Sep 2023 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/tabs.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//iron/doc/ros2_control/controller_manager/doc/userdoc.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=a915bb22"></script>
+        <script src="../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Controller Chaining / Cascade Control" href="controller_chaining.html" />
+    <link rel="prev" title="ros2_control" href="../../doc/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/index.html">ros2_control</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#api-documentation">API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#features">Features</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/index.html#concepts">Concepts</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Controller Manager</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#determinism">Determinism</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#helper-scripts">Helper scripts</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#spawner"><code class="docutils literal notranslate"><span class="pre">spawner</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#unspawner"><code class="docutils literal notranslate"><span class="pre">unspawner</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#using-the-controller-manager-in-a-process">Using the Controller Manager in a Process</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#concepts">Concepts</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#restarting-all-controllers">Restarting all controllers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#restarting-hardware">Restarting hardware</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="controller_chaining.html">Controller Chaining / Cascade Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../hardware_interface/doc/hardware_components_userdoc.html">Hardware Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../hardware_interface/doc/mock_components_userdoc.html">Mock Components</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../differences_to_ros1/differences_to_ros1.html">Differences to ros_control (ROS1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../differences_to_ros1/differences_to_ros1.html#migration-guide-to-ros2-control">Migration Guide to ros2_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../project_ideas.html">Project Ideas for GSoC 2024</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ROS2_Control: Iron</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../doc/index.html">ros2_control</a></li>
+      <li class="breadcrumb-item active">Controller Manager</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ros-controls/ros2_control/blob/iron/controller_manager/doc/userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="controller-manager">
+<span id="controller-manager-userdoc"></span><h1>Controller Manager<a class="headerlink" href="#controller-manager" title="Link to this heading"></a></h1>
+<p>Controller Manager is the main component in the ros2_control framework.
+It manages lifecycle of controllers, access to the hardware interfaces and offers services to the ROS-world.</p>
+<section id="determinism">
+<h2>Determinism<a class="headerlink" href="#determinism" title="Link to this heading"></a></h2>
+<p>For best performance when controlling hardware you want the controller manager to have as little jitter as possible in the main control loop.
+The normal linux kernel is optimized for computational throughput and therefore is not well suited for hardware control.
+The two easiest kernel options are the <a class="reference external" href="https://ubuntu.com/blog/real-time-ubuntu-released">Real-time Ubuntu 22.04 LTS Beta</a> or <a class="reference external" href="https://packages.debian.org/bullseye/linux-image-rt-amd64">linux-image-rt-amd64</a> on Debian Bullseye.</p>
+<p>If you have a realtime kernel installed, the main thread of Controller Manager attempts to configure <code class="docutils literal notranslate"><span class="pre">SCHED_FIFO</span></code> with a priority of <code class="docutils literal notranslate"><span class="pre">50</span></code>.
+By default, the user does not have permission to set such a high priority.
+To give the user such permissions, add a group named realtime and add the user controlling your robot to this group:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>addgroup<span class="w"> </span>realtime
+<span class="gp">$ </span>sudo<span class="w"> </span>usermod<span class="w"> </span>-a<span class="w"> </span>-G<span class="w"> </span>realtime<span class="w"> </span><span class="k">$(</span>whoami<span class="k">)</span>
+</pre></div>
+</div>
+<p>Afterwards, add the following limits to the realtime group in <code class="docutils literal notranslate"><span class="pre">/etc/security/limits.conf</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">@realtime soft rtprio 99</span>
+<span class="go">@realtime soft priority 99</span>
+<span class="go">@realtime soft memlock 102400</span>
+<span class="go">@realtime hard rtprio 99</span>
+<span class="go">@realtime hard priority 99</span>
+<span class="go">@realtime hard memlock 102400</span>
+</pre></div>
+</div>
+<p>The limits will be applied after you log out and in again.</p>
+</section>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>hardware_components_initial_state</dt><dd><p>Map of parameters for controlled lifecycle management of hardware components.
+The names of the components are defined as attribute of <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code>-tag in <code class="docutils literal notranslate"><span class="pre">robot_description</span></code>.
+Hardware components found in <code class="docutils literal notranslate"><span class="pre">robot_description</span></code>, but without explicit state definition will be immediately activated.
+Detailed explanation of each parameter is given below.
+The full structure of the map is given in the following example:</p>
+</dd>
+</dl>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">hardware_components_initial_state</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">unconfigured</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;arm1&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;arm2&quot;</span>
+<span class="w">  </span><span class="nt">inactive</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;base3&quot;</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>hardware_components_initial_state.unconfigured (optional; list&lt;string&gt;; default: empty)</dt><dd><p>Defines which hardware components will be only loaded immediately when controller manager is started.</p>
+</dd>
+<dt>hardware_components_initial_state.inactive (optional; list&lt;string&gt;; default: empty)</dt><dd><p>Defines which hardware components will be configured immediately when controller manager is started.</p>
+</dd>
+<dt>robot_description (mandatory; string)</dt><dd><p>String with the URDF string as robot description.
+This is usually result of the parsed description files by <code class="docutils literal notranslate"><span class="pre">xacro</span></code> command.</p>
+</dd>
+<dt>update_rate (mandatory; integer)</dt><dd><p>The frequency of controller manager’s real-time update loop.
+This loop reads states from hardware, updates controller and writes commands to hardware.</p>
+</dd>
+<dt>&lt;controller_name&gt;.type</dt><dd><p>Name of a plugin exported using <code class="docutils literal notranslate"><span class="pre">pluginlib</span></code> for a controller.
+This is a class from which controller’s instance with name “<code class="docutils literal notranslate"><span class="pre">controller_name</span></code>” is created.</p>
+</dd>
+</dl>
+</section>
+<section id="helper-scripts">
+<h2>Helper scripts<a class="headerlink" href="#helper-scripts" title="Link to this heading"></a></h2>
+<p>There are two scripts to interact with controller manager from launch files:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">spawner</span></code> - loads, configures and start a controller on startup.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unspawner</span></code> - stops and unloads a controller.</p></li>
+</ol>
+</div></blockquote>
+<section id="spawner">
+<h3><code class="docutils literal notranslate"><span class="pre">spawner</span></code><a class="headerlink" href="#spawner" title="Link to this heading"></a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>run<span class="w"> </span>controller_manager<span class="w"> </span>spawner<span class="w"> </span>-h
+<span class="go">usage: spawner [-h] [-c CONTROLLER_MANAGER] [-p PARAM_FILE] [-n NAMESPACE] [--load-only] [--inactive] [-t CONTROLLER_TYPE] [-u]</span>
+<span class="go">                  [--controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT]</span>
+<span class="go">                  controller_name</span>
+
+<span class="go">positional arguments:</span>
+<span class="go">  controller_name       Name of the controller</span>
+
+<span class="go">options:</span>
+<span class="go">  -h, --help            show this help message and exit</span>
+<span class="go">  -c CONTROLLER_MANAGER, --controller-manager CONTROLLER_MANAGER</span>
+<span class="go">                        Name of the controller manager ROS node</span>
+<span class="go">  -p PARAM_FILE, --param-file PARAM_FILE</span>
+<span class="go">                        Controller param file to be loaded into controller node before configure</span>
+<span class="go">  -n NAMESPACE, --namespace NAMESPACE</span>
+<span class="go">                        Namespace for the controller</span>
+<span class="go">  --load-only           Only load the controller and leave unconfigured.</span>
+<span class="go">  --inactive            Load and configure the controller, however do not activate them</span>
+<span class="go">  -t CONTROLLER_TYPE, --controller-type CONTROLLER_TYPE</span>
+<span class="go">                        If not provided it should exist in the controller manager namespace</span>
+<span class="go">  -u, --unload-on-kill  Wait until this application is interrupted and unload controller</span>
+<span class="go">  --controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT</span>
+<span class="go">                        Time to wait for the controller manager</span>
+</pre></div>
+</div>
+</section>
+<section id="unspawner">
+<h3><code class="docutils literal notranslate"><span class="pre">unspawner</span></code><a class="headerlink" href="#unspawner" title="Link to this heading"></a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>run<span class="w"> </span>controller_manager<span class="w"> </span>unspawner<span class="w"> </span>-h
+<span class="go">usage: unspawner [-h] [-c CONTROLLER_MANAGER] controller_name</span>
+
+<span class="go">positional arguments:</span>
+<span class="go">  controller_name       Name of the controller</span>
+
+<span class="go">optional arguments:</span>
+<span class="go">  -h, --help            show this help message and exit</span>
+<span class="go">  -c CONTROLLER_MANAGER, --controller-manager CONTROLLER_MANAGER</span>
+<span class="go">                        Name of the controller manager ROS node</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="using-the-controller-manager-in-a-process">
+<h2>Using the Controller Manager in a Process<a class="headerlink" href="#using-the-controller-manager-in-a-process" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">ControllerManager</span></code> may also be instantiated in a process as a class, but proper care must be taken when doing so.
+The reason for this is because the <code class="docutils literal notranslate"><span class="pre">ControllerManager</span></code> class inherits from <code class="docutils literal notranslate"><span class="pre">rclcpp::Node</span></code>.</p>
+<p>If there is more than one Node in the process, global node name remap rules can forcibly change the <code class="docutils literal notranslate"><span class="pre">ControllerManager's</span></code> node name as well, leading to duplicate node names.
+This occurs whether the Nodes are siblings or exist in a hierarchy.</p>
+<img alt="../../../../_images/global_general_remap.png" src="../../../../_images/global_general_remap.png" />
+<p>The workaround for this is to specify another node name remap rule in the <code class="docutils literal notranslate"><span class="pre">NodeOptions</span></code> passed to the <code class="docutils literal notranslate"><span class="pre">ControllerManager</span></code> node (causing it to ignore the global rule), or ensure that any remap rules are targeted to specific nodes.</p>
+<img alt="../../../../_images/global_specific_remap.png" src="../../../../_images/global_specific_remap.png" />
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller_manager</span><span class="o">::</span><span class="n">get_cm_node_options</span><span class="p">();</span>
+<span class="w">  </span><span class="n">options</span><span class="p">.</span><span class="n">arguments</span><span class="p">({</span>
+<span class="w">    </span><span class="s">&quot;--ros-args&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;--remap&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;_target_node_name:__node:=dst_node_name&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;--log-level&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;info&quot;</span><span class="p">});</span>
+
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">cm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">controller_manager</span><span class="o">::</span><span class="n">ControllerManager</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">    </span><span class="n">executor</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;_target_node_name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;some_optional_namespace&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">options</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="concepts">
+<h2>Concepts<a class="headerlink" href="#concepts" title="Link to this heading"></a></h2>
+<section id="restarting-all-controllers">
+<h3>Restarting all controllers<a class="headerlink" href="#restarting-all-controllers" title="Link to this heading"></a></h3>
+<p>The simplest way to restart all controllers is by using <code class="docutils literal notranslate"><span class="pre">switch_controllers</span></code> services or CLI and adding all controllers to <code class="docutils literal notranslate"><span class="pre">start</span></code> and <code class="docutils literal notranslate"><span class="pre">stop</span></code> lists.
+Note that not all controllers have to be restarted, e.g., broadcasters.</p>
+</section>
+<section id="restarting-hardware">
+<h3>Restarting hardware<a class="headerlink" href="#restarting-hardware" title="Link to this heading"></a></h3>
+<p>If hardware gets restarted then you should go through its lifecycle again.
+This can be simply achieved by returning <code class="docutils literal notranslate"><span class="pre">ERROR</span></code> from <code class="docutils literal notranslate"><span class="pre">write</span></code> and <code class="docutils literal notranslate"><span class="pre">read</span></code> methods of interface implementation.
+<strong>NOT IMPLEMENTED YET - PLEASE STOP/RESTART ALL CONTROLLERS MANUALLY FOR NOW</strong> The controller manager detects that and stops all the controllers that are commanding that hardware and restarts broadcasters that are listening to its states.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../doc/index.html" class="btn btn-neutral float-left" title="ros2_control" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="controller_chaining.html" class="btn btn-neutral float-right" title="Controller Chaining / Cascade Control" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: iron
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="../../../../../master/doc/ros2_control/controller_manager/doc/userdoc.html">Master (latest)</a></dd>
+    </dl>
+    <dl>
+      <dt>Releases</dt>
+        <dd><a href="userdoc.html">Iron (recommended)</a></dd><br>
+        <dd><a href="../../../../../humble/doc/ros2_control/controller_manager/doc/userdoc.html">Humble</a></dd><br>
+        <dd><a href="../../../../../galactic/doc/ros2_control/controller_manager/doc/userdoc.html">Galactic (EOL)</a></dd><br>
+        
+        <dd><a href="../../../../../foxy/doc/ros2_control/controller_manager/doc/userdoc.html">Foxy (EOL)</a></dd><br>
+        
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
