@@ -1,7 +1,7 @@
 .. _documentation_home:
 
-Welcome to the ros2_control documentation!
-==========================================
+Welcome to the ros2_control documentation - Iron!
+=================================================
 
 .. toctree::
    :hidden:
@@ -19,7 +19,7 @@ Welcome to the ros2_control documentation!
    doc/project_ideas.rst
    doc/acknowledgements/acknowledgements.rst
 
-The ros2_control is a framework for (real-time) control of robots using (`ROS 2 <https://docs.ros.org/en/rolling/>`_).
+The ros2_control is a framework for (real-time) control of robots using (`ROS 2 <https://docs.ros.org/en/iron/>`_).
 Its packages are a rewrite of `ros_control <http://wiki.ros.org/ros_control>`_ packages used in ``ROS`` (`Robot Operating System <https://wiki.ros.org>`_).
 ros2_control's goal is to simplify integrating new hardware and overcome some drawbacks.
 
