@@ -174,17 +174,18 @@ htmlhelp_basename = "ros2ControlDocumentation"
 html_sourcelink_suffix = ""
 
 
-# Add branches you want to whtielist here.
-smv_branch_whitelist = r"^(foxy|galactic|humble|master)$"
-smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy|galactic|humble).*$"
+# Add branches you want to whitelist here.
+smv_branch_whitelist = r"^(foxy|galactic|humble|iron|master)$"
+smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy|galactic|humble|iron).*$"
 smv_remote_whitelist = r"^(origin)$"
-smv_latest_version = "humble"
+smv_latest_version = "iron"
 smv_eol_versions = ["foxy", "galactic"]
 
 distro_full_names = {
     "foxy": "Foxy Fitzroy",
     "galactic": "Galactic Geochelone",
     "humble": "Humble Hawksbill",
+    "iron": "Iron Irwini",
     "rolling": "Rolling Ridley",
 }
 
@@ -302,6 +303,7 @@ def smv_rewrite_configs(app, config):
     if app.config.smv_current_version != "":
         branch_distro = {
             "master": "rolling",
+            "iron": "iron",
             "humble": "humble",
             "foxy": "foxy",
             "galactic": "galactic"
