@@ -51,7 +51,7 @@ If you want to install the framework from source, e.g., for contributing to the 
 
 Architecture
 ============
-The source code for the ros2_control framework can be found in the `ros2_control`_ and `ros2_controllers`_ GitHub repositories.The following figure shows the architecture of the ros2_control framework.
+The source code for the ros2_control framework can be found in the `ros2_control`_ and `ros2_controllers`_ GitHub repositories. The following figure shows the architecture of the ros2_control framework.
 
 |ros2_control_architecture|
 
@@ -97,7 +97,7 @@ Users interact with the ros2_control framework using `Controller Manager`_'s ser
 For a list of services and their definitions, check the ``srv`` folder in the `controller_manager_msgs`_ package.
 
 While service calls can be used directly from the command line or via nodes, there exists a user-friendly ``Command Line Interface`` (CLI) which integrates with the ``ros2 cli``. This supports auto-complete and has a range of common commands available. The base command is ``ros2 control``.
-For the description of our CLI capabilities, see the ``README.md`` file of the `ros2controlcli`_ package.
+For the description of our CLI capabilities, see the :ref:`Command Line Interface (CLI) documentation <ros2controlcli_userdoc>`.
 
 .. _overview_hardware_components:
 
@@ -134,7 +134,7 @@ Hardware Description in URDF
 The ros2_control framework uses the ``<ros2_control>``-tag in the robot's URDF file to describe its components, i.e., the hardware setup.
 The chosen structure enables tracking together multiple ``xacro``-macros into one without any changes.
 The example hereunder shows a position-controlled robot with 2-DOF (RRBot), an external 1-DOF force-torque sensor, and an externally controlled 1-DOF parallel gripper as its end-effector.
-For more examples and detailed explanations, check `ros2_control_demos`_ repository and `ROS 2 Control Components URDF Examples design document`_.
+For more examples and detailed explanations, check the :ref:`ros2_control_demos site <ros2_control_demos>` and `ROS 2 Control Components URDF Examples design document`_.
 
 .. code:: xml
 
