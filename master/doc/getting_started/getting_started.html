@@ -149,7 +149,7 @@ colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install
 </section>
 <section id="architecture">
 <h2>Architecture<a class="headerlink" href="#architecture" title="Link to this heading"></a></h2>
-<p>The source code for the ros2_control framework can be found in the <a class="reference external" href="https://github.com/ros-controls/ros2_control">ros2_control</a> and <a class="reference external" href="https://github.com/ros-controls/ros2_controllers">ros2_controllers</a> GitHub repositories.The following figure shows the architecture of the ros2_control framework.</p>
+<p>The source code for the ros2_control framework can be found in the <a class="reference external" href="https://github.com/ros-controls/ros2_control">ros2_control</a> and <a class="reference external" href="https://github.com/ros-controls/ros2_controllers">ros2_controllers</a> GitHub repositories. The following figure shows the architecture of the ros2_control framework.</p>
 <p><img alt="&quot;ros2_control Architecture&quot;" src="../../_images/components_architecture.png" /></p>
 <p>The following UML Class Diagram describes the internal implementation of the ros2_control framework.</p>
 <p><img alt="&quot;UML Class Diagram&quot;" src="../../_images/uml_class_diagram.png" /></p>
@@ -187,7 +187,7 @@ This method can access the latest hardware state and enable the controller to wr
 <p>Users interact with the ros2_control framework using <a class="reference internal" href="#controller-manager">Controller Manager</a>’s services.
 For a list of services and their definitions, check the <code class="docutils literal notranslate"><span class="pre">srv</span></code> folder in the <a class="reference external" href="https://github.com/ros-controls/ros2_control/tree/master/controller_manager_msgs">controller_manager_msgs</a> package.</p>
 <p>While service calls can be used directly from the command line or via nodes, there exists a user-friendly <code class="docutils literal notranslate"><span class="pre">Command</span> <span class="pre">Line</span> <span class="pre">Interface</span></code> (CLI) which integrates with the <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">cli</span></code>. This supports auto-complete and has a range of common commands available. The base command is <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">control</span></code>.
-For the description of our CLI capabilities, see the <code class="docutils literal notranslate"><span class="pre">README.md</span></code> file of the <a class="reference external" href="https://github.com/ros-controls/ros2_control/tree/master/ros2controlcli">ros2controlcli</a> package.</p>
+For the description of our CLI capabilities, see the <a class="reference internal" href="../ros2_control/ros2controlcli/doc/userdoc.html#ros2controlcli-userdoc"><span class="std std-ref">Command Line Interface (CLI) documentation</span></a>.</p>
 </section>
 </section>
 <section id="hardware-components">
@@ -218,7 +218,7 @@ The actuator type can also be used with a multi-DOF robot if its hardware enable
 <p>The ros2_control framework uses the <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code>-tag in the robot’s URDF file to describe its components, i.e., the hardware setup.
 The chosen structure enables tracking together multiple <code class="docutils literal notranslate"><span class="pre">xacro</span></code>-macros into one without any changes.
 The example hereunder shows a position-controlled robot with 2-DOF (RRBot), an external 1-DOF force-torque sensor, and an externally controlled 1-DOF parallel gripper as its end-effector.
-For more examples and detailed explanations, check <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos">ros2_control_demos</a> repository and <a class="reference external" href="https://github.com/ros-controls/roadmap/blob/master/design_drafts/components_architecture_and_urdf_examples.md">ROS 2 Control Components URDF Examples design document</a>.</p>
+For more examples and detailed explanations, check the <a class="reference internal" href="../ros2_control_demos/doc/index.html#ros2-control-demos"><span class="std std-ref">ros2_control_demos site</span></a> and <a class="reference external" href="https://github.com/ros-controls/roadmap/blob/master/design_drafts/components_architecture_and_urdf_examples.md">ROS 2 Control Components URDF Examples design document</a>.</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;RRBotSystemPositionOnly&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
 <span class="w"> </span><span class="nt">&lt;hardware&gt;</span>
 <span class="w">   </span><span class="nt">&lt;plugin&gt;</span>ros2_control_demo_hardware/RRBotSystemPositionOnlyHardware<span class="nt">&lt;/plugin&gt;</span>
