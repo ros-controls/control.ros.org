@@ -172,6 +172,13 @@ the first trajectory is received.</p>
 <dt>allow_nonzero_velocity_at_trajectory_end (boolean)</dt><dd><p>If false, the last velocity point has to be zero or the goal will be rejected.</p>
 <p>Default: true</p>
 </dd>
+<dt>cmd_timeout (double)</dt><dd><p>Timeout after which the input command is considered stale.
+Timeout is counted from the end of the trajectory (the last point).
+<code class="docutils literal notranslate"><span class="pre">cmd_timeout</span></code> must be greater than <code class="docutils literal notranslate"><span class="pre">constraints.goal_time</span></code>,
+otherwise ignored.</p>
+<p>If zero, timeout is deactivated”</p>
+<p>Default: 0.0</p>
+</dd>
 <dt>constraints (structure)</dt><dd><p>Default values for tolerances if no explicit values are states in JointTrajectory message.</p>
 </dd>
 <dt>constraints.stopped_velocity_tolerance (double)</dt><dd><p>Default value for end velocity deviation.</p>
