@@ -190,7 +190,7 @@ Therefore it is important set command interfaces to NaN (i.e., <code class="docu
 This structure contains the controller gains for every joint with the control law</p>
 <div class="math notranslate nohighlight">
 \[u = k_{ff} v_d + k_p e + k_i \sum e dt + k_d (v_d - v)\]</div>
-<p>with the desired velocity <span class="math notranslate nohighlight">\(v_d\)</span>, the measured velocity <span class="math notranslate nohighlight">\(v\)</span>, the position error <span class="math notranslate nohighlight">\(e\)</span> (definition see below),
+<p>with the desired velocity <span class="math notranslate nohighlight">\(v_d\)</span>, the measured velocity <span class="math notranslate nohighlight">\(v\)</span>, the position error <span class="math notranslate nohighlight">\(e\)</span> (definition see <code class="docutils literal notranslate"><span class="pre">angle_wraparound</span></code> below),
 the controller period <span class="math notranslate nohighlight">\(dt\)</span>, and the <code class="docutils literal notranslate"><span class="pre">velocity</span></code> or <code class="docutils literal notranslate"><span class="pre">effort</span></code> manipulated variable (control variable) <span class="math notranslate nohighlight">\(u\)</span>, respectively.</p>
 </dd>
 <dt>gains.&lt;joint_name&gt;.p (double)</dt><dd><p>Proportional gain <span class="math notranslate nohighlight">\(k_p\)</span> for PID</p>
@@ -208,10 +208,11 @@ the controller period <span class="math notranslate nohighlight">\(dt\)</span>, 
 <dt>gains.&lt;joint_name&gt;.ff_velocity_scale (double)</dt><dd><p>Feed-forward scaling <span class="math notranslate nohighlight">\(k_{ff}\)</span> of velocity</p>
 <p>Default: 0.0</p>
 </dd>
-<dt>gains.&lt;joint_name&gt;.normalize_error (bool)</dt><dd><p>If true, the position error <span class="math notranslate nohighlight">\(e = normalize(s_d - s)\)</span> is normalized between <span class="math notranslate nohighlight">\(-\pi, \pi\)</span>.
+<dt>gains.&lt;joint_name&gt;.angle_wraparound (bool)</dt><dd><p>For joints that wrap around (without end stop, ie. are continuous),
+where the shortest rotation to the target position is the desired motion.
+If true, the position error <span class="math notranslate nohighlight">\(e = normalize(s_d - s)\)</span> is normalized between <span class="math notranslate nohighlight">\(-\pi, \pi\)</span>.
 Otherwise  <span class="math notranslate nohighlight">\(e = s_d - s\)</span> is used, with the desired position <span class="math notranslate nohighlight">\(s_d\)</span> and the measured
-position <span class="math notranslate nohighlight">\(s\)</span> from the state interface. Use this for revolute joints without end stop,
-where the shortest rotation to the target position is the desired motion.</p>
+position <span class="math notranslate nohighlight">\(s\)</span> from the state interface.</p>
 <p>Default: false</p>
 </dd>
 </dl>
