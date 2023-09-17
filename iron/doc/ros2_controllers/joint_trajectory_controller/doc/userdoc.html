@@ -64,7 +64,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../forward_command_controller/doc/userdoc.html">Forward Command Controller</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../gripper_controllers/doc/userdoc.html">Gripper Controller</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Joint Trajectory Controller</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#hardware-interface-type">Hardware interface type </a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hardware-interface-types">Hardware interface types</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#other-features">Other features</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#using-joint-trajectory-controller-s">Using Joint Trajectory Controller(s)</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#preemption-policy">Preemption policy </a></li>
@@ -145,15 +145,23 @@ Trajectories are specified as a set of waypoints to be reached at specific time 
 which the controller attempts to execute as well as the mechanism allows.
 Waypoints consist of positions, and optionally velocities and accelerations.</p>
 <p><em>Parts of this documentation were originally published in the ROS 1 wiki under the</em> <a class="reference external" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0 license</a>. <em>Citations are given in the respective section, but were adapted for the ROS 2 implementation.</em> <a class="footnote-reference brackets" href="#f1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
-<section id="hardware-interface-type">
-<h2>Hardware interface type <a class="footnote-reference brackets" href="#f1" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a><a class="headerlink" href="#hardware-interface-type" title="Link to this heading"></a></h2>
-<p>Currently joints with position, velocity, acceleration, and effort interfaces are supported. The joints can have one or more command interfaces, where the following control laws are applied at the same time:</p>
+<section id="hardware-interface-types">
+<h2>Hardware interface types<a class="headerlink" href="#hardware-interface-types" title="Link to this heading"></a></h2>
+<p>Currently, joints with hardware interface types <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code>, <code class="docutils literal notranslate"><span class="pre">acceleration</span></code>, and <code class="docutils literal notranslate"><span class="pre">effort</span></code> (defined <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/iron/hardware_interface/include/hardware_interface/types/hardware_interface_type_values.hpp">here</a>) are supported in the following combinations:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">position</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code>, <code class="docutils literal notranslate"><span class="pre">acceleration</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">velocity</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">effort</span></code></p></li>
+</ul>
+<p>This means that the joints can have one or more command interfaces, where the following control laws are applied at the same time:</p>
 <ul class="simple">
 <li><p>For command interfaces <code class="docutils literal notranslate"><span class="pre">position</span></code>, the desired positions are simply forwarded to the joints,</p></li>
 <li><p>For command interfaces <code class="docutils literal notranslate"><span class="pre">acceleration</span></code>, desired accelerations are simply forwarded to the joints.</p></li>
-<li><p>For <code class="docutils literal notranslate"><span class="pre">velocity</span></code> (<code class="docutils literal notranslate"><span class="pre">effort</span></code>) command interfaces, the position+velocity trajectory following error is mapped to <code class="docutils literal notranslate"><span class="pre">velocity</span></code> (<code class="docutils literal notranslate"><span class="pre">effort</span></code>) commands through a PID loop (<a class="reference internal" href="parameters.html#parameters"><span class="std std-ref">Details about parameters</span></a>).</p></li>
+<li><p>For <code class="docutils literal notranslate"><span class="pre">velocity</span></code> (<code class="docutils literal notranslate"><span class="pre">effort</span></code>) command interfaces, the position+velocity trajectory following error is mapped to <code class="docutils literal notranslate"><span class="pre">velocity</span></code> (<code class="docutils literal notranslate"><span class="pre">effort</span></code>) commands through a PID loop if it is configured (<a class="reference internal" href="parameters.html#parameters"><span class="std std-ref">Details about parameters</span></a>).</p></li>
 </ul>
-<p>This leads to the the following allowed combinations of command and state interfaces:</p>
+<p>This leads to the following allowed combinations of command and state interfaces:</p>
 <ul class="simple">
 <li><p>With command interface <code class="docutils literal notranslate"><span class="pre">position</span></code>, there are no restrictions for state interfaces.</p></li>
 <li><p>With command interface <code class="docutils literal notranslate"><span class="pre">velocity</span></code>:</p>
@@ -163,10 +171,8 @@ Waypoints consist of positions, and optionally velocities and accelerations.</p>
 </ul>
 </li>
 <li><p>With command interface <code class="docutils literal notranslate"><span class="pre">effort</span></code>, state interfaces must include  <code class="docutils literal notranslate"><span class="pre">position,</span> <span class="pre">velocity</span></code>.</p></li>
-<li><p>With command interface <code class="docutils literal notranslate"><span class="pre">acceleration</span></code>, there are no restrictions for state interfaces.</p></li>
 </ul>
 <p>Example controller configurations can be found <a class="reference internal" href="#ros-2-interface"><span class="std std-ref">below</span></a>.</p>
-<p>Similarly to the trajectory representation case above, it’s possible to support new hardware interfaces, or alternative mappings to an already supported interface (eg. a proxy controller for generating effort commands).</p>
 </section>
 <section id="other-features">
 <h2>Other features<a class="headerlink" href="#other-features" title="Link to this heading"></a></h2>
@@ -221,7 +227,7 @@ A yaml file for using it could be:</p>
 </div>
 </div></blockquote>
 <section id="preemption-policy">
-<h3>Preemption policy <a class="footnote-reference brackets" href="#f1" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a><a class="headerlink" href="#preemption-policy" title="Link to this heading"></a></h3>
+<h3>Preemption policy <a class="footnote-reference brackets" href="#f1" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a><a class="headerlink" href="#preemption-policy" title="Link to this heading"></a></h3>
 <p>Only one action goal can be active at any moment, or none if the topic interface is used. Path and goal tolerances are checked only for the trajectory segments of the active goal.</p>
 <p>When an active action goal is preempted by another command coming from the action interface, the goal is canceled and the client is notified. The trajectory is replaced in a defined way, see <a class="reference internal" href="trajectory.html#joint-trajectory-controller-trajectory-replacement"><span class="std std-ref">trajectory replacement</span></a>.</p>
 <p>Sending an empty trajectory message from the topic interface (not the action interface) will override the current action goal and not abort the action.</p>
@@ -234,15 +240,8 @@ A yaml file for using it could be:</p>
 </section>
 <section id="states">
 <h4>States<a class="headerlink" href="#states" title="Link to this heading"></a></h4>
-<p>The state interfaces are defined with <code class="docutils literal notranslate"><span class="pre">joints</span></code> and <code class="docutils literal notranslate"><span class="pre">state_interfaces</span></code> parameters as follows: <code class="docutils literal notranslate"><span class="pre">&lt;joint&gt;/&lt;state_interface&gt;</span></code>.
-Supported state interfaces are <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code>, <code class="docutils literal notranslate"><span class="pre">acceleration</span></code> and <code class="docutils literal notranslate"><span class="pre">effort</span></code> as defined in the <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/iron/hardware_interface/include/hardware_interface/types/hardware_interface_type_values.hpp">hardware_interface/hardware_interface_type_values.hpp</a>.</p>
-<p>Legal combinations of state interfaces are:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">position</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">position</span></code> and <code class="docutils literal notranslate"><span class="pre">velocity</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code> and <code class="docutils literal notranslate"><span class="pre">acceleration</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">effort</span></code></p></li>
-</ul>
+<p>The state interfaces are defined with <code class="docutils literal notranslate"><span class="pre">joints</span></code> and <code class="docutils literal notranslate"><span class="pre">state_interfaces</span></code> parameters as follows: <code class="docutils literal notranslate"><span class="pre">&lt;joint&gt;/&lt;state_interface&gt;</span></code>.</p>
+<p>Legal combinations of state interfaces are given in section <a class="reference internal" href="#hardware-interface-types">Hardware Interface Types</a>.</p>
 </section>
 <section id="commands">
 <h4>Commands<a class="headerlink" href="#commands" title="Link to this heading"></a></h4>
@@ -254,7 +253,7 @@ Supported state interfaces are <code class="docutils literal notranslate"><span 
 <p>Both use the <code class="docutils literal notranslate"><span class="pre">trajectory_msgs/msg/JointTrajectory</span></code> message to specify trajectories, and require specifying values for all the controller joints (as opposed to only a subset) if <code class="docutils literal notranslate"><span class="pre">allow_partial_joints_goal</span></code> is not set to <code class="docutils literal notranslate"><span class="pre">True</span></code>. For further information on the message format, see <a class="reference internal" href="trajectory.html#joint-trajectory-controller-trajectory-representation"><span class="std std-ref">trajectory representation</span></a>.</p>
 </section>
 <section id="actions">
-<span id="id5"></span><h4>Actions  <a class="footnote-reference brackets" href="#f1" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a><a class="headerlink" href="#actions" title="Link to this heading"></a></h4>
+<span id="id4"></span><h4>Actions  <a class="footnote-reference brackets" href="#f1" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a><a class="headerlink" href="#actions" title="Link to this heading"></a></h4>
 <dl class="simple">
 <dt>&lt;controller_name&gt;/follow_joint_trajectory [control_msgs::action::FollowJointTrajectory]</dt><dd><p>Action server for commanding the controller</p>
 </dd>
@@ -265,7 +264,7 @@ When no tolerances are specified, the defaults given in the parameter interface 
 If tolerances are violated during trajectory execution, the action goal is aborted, the client is notified, and the current position is held.</p>
 </section>
 <section id="subscriber">
-<span id="id7"></span><h4>Subscriber <a class="footnote-reference brackets" href="#f1" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a><a class="headerlink" href="#subscriber" title="Link to this heading"></a></h4>
+<span id="id6"></span><h4>Subscriber <a class="footnote-reference brackets" href="#f1" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a><a class="headerlink" href="#subscriber" title="Link to this heading"></a></h4>
 <dl class="simple">
 <dt>&lt;controller_name&gt;/joint_trajectory [trajectory_msgs::msg::JointTrajectory]</dt><dd><p>Topic for commanding the controller</p>
 </dd>
@@ -303,7 +302,7 @@ Note that although some degree of monitoring is available through the <code clas
 <aside class="footnote-list brackets">
 <aside class="footnote brackets" id="f1" role="note">
 <span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
-<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id2">2</a>,<a role="doc-backlink" href="#id3">3</a>,<a role="doc-backlink" href="#id4">4</a>,<a role="doc-backlink" href="#id6">5</a>)</span>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id2">2</a>,<a role="doc-backlink" href="#id3">3</a>,<a role="doc-backlink" href="#id5">4</a>)</span>
 <p>Adolfo Rodriguez: <a class="reference external" href="http://wiki.ros.org/joint_trajectory_controller">joint_trajectory_controller</a></p>
 </aside>
 </aside>
