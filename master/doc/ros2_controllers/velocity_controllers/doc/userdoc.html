@@ -69,7 +69,14 @@
 <li class="toctree-l3"><a class="reference internal" href="../../tricycle_controller/doc/userdoc.html">Tricycle Controller</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../tricycle_steering_controller/doc/userdoc.html">Tricycle Steering Controller</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Velocity Controllers</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#hardware-interface-type">Hardware interface type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velocity-controllers-jointgroupvelocitycontroller">velocity_controllers/JointGroupVelocityController</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#ros-2-interface-of-the-controller">ROS 2 interface of the controller</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#topics">Topics</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#parameters">Parameters</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -118,9 +125,39 @@
   <section id="velocity-controllers">
 <span id="velocity-controllers-userdoc"></span><h1>velocity_controllers<a class="headerlink" href="#velocity-controllers" title="Link to this heading"></a></h1>
 <p>This is a collection of controllers that work using the “velocity” joint command interface but may accept different joint-level commands at the controller level, e.g. controlling the velocity on a certain joint to achieve a set position.</p>
-<section id="hardware-interface-type">
-<h2>Hardware interface type<a class="headerlink" href="#hardware-interface-type" title="Link to this heading"></a></h2>
-<p>These controllers work with joints using the “velocity” command interface.</p>
+<p>The package contains the following controllers:</p>
+<section id="velocity-controllers-jointgroupvelocitycontroller">
+<h2>velocity_controllers/JointGroupVelocityController<a class="headerlink" href="#velocity-controllers-jointgroupvelocitycontroller" title="Link to this heading"></a></h2>
+<p>This is specialization of the <a class="reference internal" href="../../forward_command_controller/doc/userdoc.html#forward-command-controller-userdoc"><span class="std std-ref">forward_command_controller</span></a> that works using the “velocity” joint interface.</p>
+<section id="ros-2-interface-of-the-controller">
+<h3>ROS 2 interface of the controller<a class="headerlink" href="#ros-2-interface-of-the-controller" title="Link to this heading"></a></h3>
+<section id="topics">
+<h4>Topics<a class="headerlink" href="#topics" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>~/commands (input topic) [std_msgs::msg::Float64MultiArray]</dt><dd><p>Joints’ velocity commands</p>
+</dd>
+</dl>
+</section>
+<section id="parameters">
+<h4>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h4>
+<p>This controller overrides the interface parameter from <a class="reference internal" href="../../forward_command_controller/doc/userdoc.html#forward-command-controller-userdoc"><span class="std std-ref">forward_command_controller</span></a>, and the
+<code class="docutils literal notranslate"><span class="pre">joints</span></code> parameter is the only one that is required.</p>
+<p>An example parameter file is given here</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">controller_manager</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">update_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span><span class="w">  </span><span class="c1"># Hz</span>
+
+<span class="w">    </span><span class="nt">velocity_controller</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">velocity_controllers/JointGroupVelocityController</span>
+
+<span class="nt">velocity_controller</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">joints</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">slider_to_cart</span>
+</pre></div>
+</div>
+</section>
+</section>
 </section>
 </section>
 
