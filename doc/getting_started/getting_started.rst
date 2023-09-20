@@ -133,7 +133,7 @@ Hardware Description in URDF
 ----------------------------
 The ros2_control framework uses the ``<ros2_control>``-tag in the robot's URDF file to describe its components, i.e., the hardware setup.
 The chosen structure enables tracking together multiple ``xacro``-macros into one without any changes.
-The example hereunder shows a position-controlled robot with 2-DOF (RRBot), an external 1-DOF force-torque sensor, and an externally controlled 1-DOF parallel gripper as its end-effector.
+The example here shows a position-controlled robot with 2-DOF (RRBot), an external 1-DOF force-torque sensor, and an externally controlled 1-DOF parallel gripper as its end-effector.
 For more examples and detailed explanations, check the :ref:`ros2_control_demos site <ros2_control_demos>` and `ROS 2 Control Components URDF Examples design document`_.
 
 .. code:: xml
