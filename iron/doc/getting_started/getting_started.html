@@ -158,7 +158,7 @@ colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install
 <p>The <a class="reference internal" href="#controller-manager">Controller Manager</a> (CM) connects the controllers and hardware-abstraction sides of the ros2_control framework.
 It also serves as the entry-point for users via ROS services.
 The CM implements a node without an executor so that it can be integrated into a custom setup.
-However, it’s usually recommended to use the default node-setup implemented in <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/iron/controller_manager/src/ros2_control_node.cpp">ros2_control_node</a> file from the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> package.
+However, it’s usually recommended to use the default node-setup implemented in <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/controller_manager/src/ros2_control_node.cpp">ros2_control_node</a> file from the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> package.
 This manual assumes that you use this default node-setup.</p>
 <p>On the one hand, CM manages (e.g. loads, activates, deactivates, unloads) controllers and the interfaces they require.
 On the other hand, it has access (via the Resource Manager) to the hardware components, i.e. their interfaces.
@@ -275,12 +275,12 @@ For more examples and detailed explanations, check the <a class="reference inter
 <p>To run the ros2_control framework, do the following.
 The example files can be found in the <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos">ros2_control_demos</a> repository.</p>
 <ol class="arabic simple">
-<li><p>Create a YAML file with the configuration of the controller manager and two controllers. (<a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/blob/iron/example_1/bringup/config/rrbot_controllers.yaml">Example configuration for RRBot</a>)</p></li>
+<li><p>Create a YAML file with the configuration of the controller manager and two controllers. (<a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/blob/master/example_1/bringup/config/rrbot_controllers.yaml">Example configuration for RRBot</a>)</p></li>
 <li><p>Extend the robot’s URDF description with needed <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code> tags.
-It is recommended to use macro files (xacro) instead of pure URDF. (<a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/blob/iron/example_1/description/ros2_control/rrbot.ros2_control.xacro">Example URDF for RRBot</a>)</p></li>
+It is recommended to use macro files (xacro) instead of pure URDF. (<a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/blob/master/example_1/description/ros2_control/rrbot.ros2_control.xacro">Example URDF for RRBot</a>)</p></li>
 <li><p>Create a launch file to start the node with <a class="reference internal" href="#controller-manager">Controller Manager</a>.
 You can use a default <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/controller_manager/src/ros2_control_node.cpp">ros2_control node</a> (recommended) or integrate the controller manager in your software stack.
-(<a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/blob/iron/example_1/bringup/launch/rrbot.launch.py">Example launch file for RRBot</a>)</p></li>
+(<a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/blob/master/example_1/bringup/launch/rrbot.launch.py">Example launch file for RRBot</a>)</p></li>
 </ol>
 <p><em>NOTE:</em> You could alternatively use a script to create setup a <a class="reference external" href="https://rtw.stoglrobotics.de/master/use-cases/ros2_control/setup_robot_hardware_interface.html">skeleton of the “hardware_interface” package by using the scripts</a> provided by one of our maintainers.</p>
 </section>

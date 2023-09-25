@@ -107,7 +107,7 @@
       <li class="breadcrumb-item active">Writing a Hardware Component</li>
       <li class="wy-breadcrumbs-aside">
               <!-- User defined GitHub URL -->
-              <a href="https://github.com/ros-controls/ros2_control/blob/iron/hardware_interface/doc/writing_new_hardware_component.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/doc/writing_new_hardware_component.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -146,7 +146,7 @@ You can copy this file from an existing controller package and change the name p
 class HardwareInterfaceName : public hardware_interface::$InterfaceType$Interface</p></li>
 </ol>
 <p>5. Add a constructor without parameters and the following public methods implementing <code class="docutils literal notranslate"><span class="pre">LifecycleNodeInterface</span></code>: <code class="docutils literal notranslate"><span class="pre">on_configure</span></code>, <code class="docutils literal notranslate"><span class="pre">on_cleanup</span></code>, <code class="docutils literal notranslate"><span class="pre">on_shutdown</span></code>, <code class="docutils literal notranslate"><span class="pre">on_activate</span></code>, <code class="docutils literal notranslate"><span class="pre">on_deactivate</span></code>, <code class="docutils literal notranslate"><span class="pre">on_error</span></code>; and overriding <code class="docutils literal notranslate"><span class="pre">$InterfaceType$Interface</span></code> definition: <code class="docutils literal notranslate"><span class="pre">on_init</span></code>, <code class="docutils literal notranslate"><span class="pre">export_state_interfaces</span></code>, <code class="docutils literal notranslate"><span class="pre">export_command_interfaces</span></code>, <code class="docutils literal notranslate"><span class="pre">prepare_command_mode_switch</span></code> (optional), <code class="docutils literal notranslate"><span class="pre">perform_command_mode_switch</span></code> (optional), <code class="docutils literal notranslate"><span class="pre">read</span></code>, <code class="docutils literal notranslate"><span class="pre">write</span></code>.
-For further explanation of hardware-lifecycle check the <a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/559/files#diff-2bd171d85b028c1b15b03b27d4e6dcbb87e52f705042bf111840e7a28ab268fc">pull request</a> and for exact definitions of methods check the <code class="docutils literal notranslate"><span class="pre">&quot;hardware_interface/$interface_type$_interface.hpp&quot;</span></code> header or <a class="reference external" href="https://control.ros.org/iron/doc/api/namespacehardware__interface.html">doxygen documentation</a> for <em>Actuator</em>, <em>Sensor</em> or <em>System</em>.</p>
+For further explanation of hardware-lifecycle check the <a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/559/files#diff-2bd171d85b028c1b15b03b27d4e6dcbb87e52f705042bf111840e7a28ab268fc">pull request</a> and for exact definitions of methods check the <code class="docutils literal notranslate"><span class="pre">&quot;hardware_interface/$interface_type$_interface.hpp&quot;</span></code> header or <a class="reference external" href="https://control.ros.org/master/doc/api/namespacehardware__interface.html">doxygen documentation</a> for <em>Actuator</em>, <em>Sensor</em> or <em>System</em>.</p>
 </li>
 <li><p><strong>Adding definitions into source file (.cpp)</strong></p>
 <ol class="arabic simple">
@@ -188,7 +188,7 @@ The other two parameters have to correspond to the definition done in the macro 
 <li><p><strong>Writing a simple test to check if the controller can be found and loaded</strong></p>
 <ol class="arabic simple">
 <li><p>Create the folder <code class="docutils literal notranslate"><span class="pre">test</span></code> in your package, if it does not exist already, and add a file named <code class="docutils literal notranslate"><span class="pre">test_load_&lt;robot_hardware_interface_name&gt;.cpp</span></code>.</p></li>
-<li><p>You can copy the <code class="docutils literal notranslate"><span class="pre">load_generic_system_2dof</span></code> content defined in the <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/iron/hardware_interface/test/mock_components/test_generic_system.cpp#L402-L407">test_generic_system.cpp</a> package.</p></li>
+<li><p>You can copy the <code class="docutils literal notranslate"><span class="pre">load_generic_system_2dof</span></code> content defined in the <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/test/mock_components/test_generic_system.cpp#L402-L407">test_generic_system.cpp</a> package.</p></li>
 <li><p>Change the name of the copied test and in the last line, where hardware interface type is specified put the name defined in <code class="docutils literal notranslate"><span class="pre">&lt;my_hardware_interface_package&gt;.xml</span></code> file, e.g., <code class="docutils literal notranslate"><span class="pre">&lt;my_hardware_interface_package&gt;/&lt;RobotHardwareInterfaceName&gt;</span></code>.</p></li>
 </ol>
 </li>
@@ -208,7 +208,7 @@ Those are at least: <code class="docutils literal notranslate"><span class="pre"
 <li><p>Add install directives for targets and include directory.</p></li>
 <li><p>In the test section add the following dependencies: <code class="docutils literal notranslate"><span class="pre">ament_cmake_gmock</span></code>, <code class="docutils literal notranslate"><span class="pre">hardware_interface</span></code>.</p></li>
 <li><p>Add compile definitions for the tests using the <code class="docutils literal notranslate"><span class="pre">ament_add_gmock</span></code> directive.
-For details, see how it is done for mock hardware in the <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/iron/hardware_interface/CMakeLists.txt">ros2_control</a> package.</p></li>
+For details, see how it is done for mock hardware in the <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/CMakeLists.txt">ros2_control</a> package.</p></li>
 <li><p>(optional) Add your hardware interface`s library into <code class="docutils literal notranslate"><span class="pre">ament_export_libraries</span></code> before <code class="docutils literal notranslate"><span class="pre">ament_package()</span></code>.</p></li>
 </ol>
 </li>
