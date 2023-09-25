@@ -1,7 +1,10 @@
 # Status
 
-[![Build & Deploy Page](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-make-page.yml/badge.svg)](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-make-page.yml)[![Sphinx Warnings](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-check-warnings.yml/badge.svg?branch=master)](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-check-warnings.yml)[![Broken Links](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-check-links.yml/badge.svg?branch=master)](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-check-links.yml)
+[![Build & Deploy Page](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-make-page.yml/badge.svg)](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-make-page.yml)[![Broken Links](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-check-links.yml/badge.svg?branch=master)](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-check-links.yml)
 
+[![Sphinx Warnings Rolling](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-check-warnings-rolling.yml/badge.svg?branch=master)](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-check-warnings-rolling.yml)
+[![Sphinx Warnings Iron](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-check-warnings-iron.yml/badge.svg?branch=master)](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-check-warnings-iron.yml)
+[![Sphinx Warnings Humble](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-check-warnings-humble.yml/badge.svg?branch=master)](https://github.com/ros-controls/control.ros.org/actions/workflows/sphinx-check-warnings-humble.yml)
 
 # control.ros.org
 https://control.ros.org/
