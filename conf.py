@@ -301,6 +301,7 @@ def smv_rewrite_configs(app, config):
     # conf.py).  Instead, hook into the 'config-inited' event which is late enough
     # to rewrite the various configuration items with the current version.
     if app.config.smv_current_version != "":
+        # this map is used to match branches of control.ros.org to ROS distros, e.g., DISTRO macro
         branch_distro = {
             "master": "rolling",
             "iron": "iron",
@@ -308,10 +309,18 @@ def smv_rewrite_configs(app, config):
             "foxy": "foxy",
             "galactic": "galactic"
         }
+        # this map is used to match branches of control.ros.org to REPOS_FILE_BRANCH macro
+        subrepo_branch = {
+            "master": "master",
+            "iron": "master",
+            "humble": "humble",
+            "foxy": "foxy",
+            "galactic": "galactic"
+        }
 
         # Override default values
-        branch = app.config.smv_current_version
-        distro = branch_distro[branch]
+        branch = subrepo_branch[app.config.smv_current_version]
+        distro = branch_distro[app.config.smv_current_version]
         app.config.macros = {
             "DISTRO": distro,
             "DISTRO_TITLE": distro.title(),
