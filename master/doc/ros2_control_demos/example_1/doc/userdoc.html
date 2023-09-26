@@ -74,6 +74,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../example_7/doc/userdoc.html">Example 7: Full tutorial with a 6DOF robot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../example_8/doc/userdoc.html">Example 8: Using transmissions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../example_9/doc/userdoc.html">Example 9: Gazebo classic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_10/doc/userdoc.html">Example 10: Industrial robot with GPIO interfaces</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../example_12/doc/userdoc.html">Example 12: Controller chaining</a></li>
 </ul>
 </li>
@@ -140,7 +141,7 @@ simulator and was originally introduced for Gazebo tutorials.</p>
 <section id="tutorial-steps">
 <h2>Tutorial steps<a class="headerlink" href="#tutorial-steps" title="Link to this heading"></a></h2>
 <ol class="arabic">
-<li><p>To check that <em>RRBot</em> descriptions are working properly use following launch commands</p>
+<li><p>(Optional) To check that <em>RRBot</em> descriptions are working properly use following launch commands</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_1<span class="w"> </span>view_robot.launch.py
 </pre></div>
 </div>
@@ -157,6 +158,8 @@ This happens because <code class="docutils literal notranslate"><span class="pre
 <li><p>Or you can simply open the configuration from <code class="docutils literal notranslate"><span class="pre">description/rviz</span></code> folder manually or directly by executing</p></li>
 </ul>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rviz2<span class="w"> </span>--display-config<span class="w"> </span><span class="sb">`</span>ros2<span class="w"> </span>pkg<span class="w"> </span>prefix<span class="w"> </span>ros2_control_demo_example_1<span class="sb">`</span>/share/ros2_control_demo_example_1/rviz/rrbot.rviz
+
+Once<span class="w"> </span>it<span class="w"> </span>is<span class="w"> </span>working<span class="w"> </span>you<span class="w"> </span>can<span class="w"> </span>stop<span class="w"> </span>rviz<span class="w"> </span>using<span class="w"> </span>CTRL+C<span class="w"> </span>as<span class="w"> </span>the<span class="w"> </span>next<span class="w"> </span>launch<span class="w"> </span>file<span class="w"> </span>is<span class="w"> </span>starting<span class="w"> </span>RViz.
 </pre></div>
 </div>
 </li>
@@ -167,7 +170,7 @@ This happens because <code class="docutils literal notranslate"><span class="pre
 <p>The launch file loads and starts the robot hardware, controllers and opens <em>RViz</em>.
 In starting terminal you will see a lot of output from the hardware implementation showing its internal states.
 This is only of exemplary purposes and should be avoided as much as possible in a hardware interface implementation.</p>
-<p>If you can see two orange and one yellow rectangle in in <em>RViz</em> everything has started properly.
+<p>If you can see two orange and one yellow rectangle in <em>RViz</em> everything has started properly.
 Still, to be sure, let’s introspect the control system before moving <em>RRBot</em>.</p>
 </li>
 <li><p>Check if the hardware interface loaded properly, by opening another terminal and executing</p>
