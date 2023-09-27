@@ -25,7 +25,7 @@
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="Writing a new hardware interface" href="writing_new_hardware_interface.html" />
+    <link rel="next" title="ros2_control hardware interface types" href="hardware_interface_types_userdoc.html" />
     <link rel="prev" title="Controller Manager" href="../../controller_manager/doc/userdoc.html" /> 
 </head>
 
@@ -58,9 +58,10 @@
 <li class="toctree-l3"><a class="reference internal" href="../../controller_manager/doc/userdoc.html">Controller Manager</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Hardware Components</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#guidelines-and-best-practices">Guidelines and Best Practices</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="writing_new_hardware_interface.html">Writing a Hardware Interface</a></li>
+<li class="toctree-l5"><a class="reference internal" href="hardware_interface_types_userdoc.html">Hardware Interface Types</a></li>
+<li class="toctree-l5"><a class="reference internal" href="writing_new_hardware_component.html">Writing a Hardware Component</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#handling-of-errors-that-happen-during-read-and-write-calls">Handling of errors that happen during read() and write() calls</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#migration-from-foxy-to-galactic">Migration from Foxy to Galactic</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#migration-from-foxy-to-newer-versions">Migration from Foxy to newer versions</a></li>
 </ul>
 </li>
 </ul>
@@ -118,36 +119,47 @@ For details on each type check <a class="reference internal" href="../../../gett
 <h2>Guidelines and Best Practices<a class="headerlink" href="#guidelines-and-best-practices" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="writing_new_hardware_interface.html">Writing a Hardware Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hardware_interface_types_userdoc.html">Hardware Interface Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing_new_hardware_component.html">Writing a Hardware Component</a></li>
 </ul>
 </div>
 <section id="handling-of-errors-that-happen-during-read-and-write-calls">
 <h3>Handling of errors that happen during read() and write() calls<a class="headerlink" href="#handling-of-errors-that-happen-during-read-and-write-calls" title="Link to this heading"></a></h3>
-<p>If <code class="docutils literal notranslate"><span class="pre">hardware_interface::return_type::ERROR</span></code> is returned from <code class="docutils literal notranslate"><span class="pre">read()</span></code> or <code class="docutils literal notranslate"><span class="pre">write()</span></code> methods of a hardware interface, <code class="docutils literal notranslate"><span class="pre">on_error(previous_state)</span></code> method will be called to handle any error that happened.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">hardware_interface::return_type::ERROR</span></code> is returned from <code class="docutils literal notranslate"><span class="pre">read()</span></code> or <code class="docutils literal notranslate"><span class="pre">write()</span></code> methods of a hardware_interface class, <code class="docutils literal notranslate"><span class="pre">on_error(previous_state)</span></code> method will be called to handle any error that happened.</p>
 <p>Error handling follows the <a class="reference external" href="https://design.ros2.org/articles/node_lifecycle.html">node lifecycle</a>.
 If successful <code class="docutils literal notranslate"><span class="pre">CallbackReturn::SUCCESS</span></code> is returned and hardware is again in <code class="docutils literal notranslate"><span class="pre">UNCONFIGURED</span></code>  state, if any <code class="docutils literal notranslate"><span class="pre">ERROR</span></code> or <code class="docutils literal notranslate"><span class="pre">FAILURE</span></code> happens the hardware ends in <code class="docutils literal notranslate"><span class="pre">FINALIZED</span></code> state and can not be recovered.
 The only option is to reload the complete plugin, but there is currently no service for this in the Controller Manager.</p>
 </section>
-<section id="migration-from-foxy-to-galactic">
-<h3>Migration from Foxy to Galactic<a class="headerlink" href="#migration-from-foxy-to-galactic" title="Link to this heading"></a></h3>
+<section id="migration-from-foxy-to-newer-versions">
+<h3>Migration from Foxy to newer versions<a class="headerlink" href="#migration-from-foxy-to-newer-versions" title="Link to this heading"></a></h3>
 <p>Between Foxy and Galactic we made substantial changes to the interface of hardware components to enable management of their lifecycle.
 The following list shows a set of quick changes to port existing hardware components to Galactic:</p>
 <ol class="arabic simple">
 <li><p>Rename <code class="docutils literal notranslate"><span class="pre">configure</span></code> to <code class="docutils literal notranslate"><span class="pre">on_init</span></code> and change return type to <code class="docutils literal notranslate"><span class="pre">CallbackReturn</span></code></p></li>
 <li><p>If using BaseInterface as base class then you should remove it. Specifically, change:</p></li>
 </ol>
-<p>hardware_interface::BaseInterface&lt;hardware_interface::[Actuator|Sensor|System]Interface&gt; to hardware_interface::[Actuator|Sensor|System]Interface</p>
+<blockquote>
+<div><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">BaseInterface</span><span class="o">&lt;</span><span class="n">hardware_interface</span><span class="o">::</span><span class="p">[</span><span class="n">Actuator</span><span class="o">|</span><span class="n">Sensor</span><span class="o">|</span><span class="n">System</span><span class="p">]</span><span class="n">Interface</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>to</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">hardware_interface</span><span class="o">::</span><span class="p">[</span><span class="n">Actuator</span><span class="o">|</span><span class="n">Sensor</span><span class="o">|</span><span class="n">System</span><span class="p">]</span><span class="n">Interface</span>
+</pre></div>
+</div>
+</div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>Remove include of headers <code class="docutils literal notranslate"><span class="pre">base_interface.hpp</span></code> and <code class="docutils literal notranslate"><span class="pre">hardware_interface_status_values.hpp</span></code></p></li>
 <li><p>Add include of header <code class="docutils literal notranslate"><span class="pre">rclcpp_lifecycle/state.hpp</span></code> although this may not be strictly necessary</p></li>
-<li><p>replace first three lines in <code class="docutils literal notranslate"><span class="pre">on_init</span></code> to:</p></li>
+<li><p>replace first three lines in <code class="docutils literal notranslate"><span class="pre">on_init</span></code> to</p></li>
 </ol>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">hardware_interface</span><span class="o">::</span><span class="p">[</span><span class="n">Actuator</span><span class="o">|</span><span class="n">Sensor</span><span class="o">|</span><span class="n">System</span><span class="p">]</span><span class="n">Interface</span><span class="o">::</span><span class="n">on_init</span><span class="p">(</span><span class="n">info</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">CallbackReturn</span><span class="o">::</span><span class="n">SUCCESS</span><span class="p">)</span>
+<blockquote>
+<div><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">hardware_interface</span><span class="o">::</span><span class="p">[</span><span class="n">Actuator</span><span class="o">|</span><span class="n">Sensor</span><span class="o">|</span><span class="n">System</span><span class="p">]</span><span class="n">Interface</span><span class="o">::</span><span class="n">on_init</span><span class="p">(</span><span class="n">info</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">CallbackReturn</span><span class="o">::</span><span class="n">SUCCESS</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">CallbackReturn</span><span class="o">::</span><span class="n">ERROR</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
+</div></blockquote>
 <ol class="arabic simple" start="6">
 <li><p>Change last return of <code class="docutils literal notranslate"><span class="pre">on_init</span></code> to <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">CallbackReturn::SUCCESS;</span></code></p></li>
 <li><p>Remove all lines with <code class="docutils literal notranslate"><span class="pre">status_</span> <span class="pre">=</span> <span class="pre">...</span></code> or <code class="docutils literal notranslate"><span class="pre">status::...</span></code></p></li>
@@ -168,7 +180,7 @@ The following list shows a set of quick changes to port existing hardware compon
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../../controller_manager/doc/userdoc.html" class="btn btn-neutral float-left" title="Controller Manager" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="writing_new_hardware_interface.html" class="btn btn-neutral float-right" title="Writing a new hardware interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="hardware_interface_types_userdoc.html" class="btn btn-neutral float-right" title="ros2_control hardware interface types" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

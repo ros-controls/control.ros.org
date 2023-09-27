@@ -22,6 +22,7 @@
         <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../../../_static/tabs.js?v=3030b3cb"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -132,19 +133,35 @@ simulator and was originally introduced for Gazebo tutorials.</p>
 <p>The <em>RRBot</em> URDF files can be found in the <code class="docutils literal notranslate"><span class="pre">description/urdf</span></code> folder.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The commands below are given for a local installation of this repository and its dependencies. If you use the provided docker container, add the prefix</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">it</span> <span class="o">--</span><span class="n">rm</span> <span class="o">--</span><span class="n">name</span> <span class="n">ros2_control_demos</span> <span class="o">--</span><span class="n">net</span> <span class="n">host</span> <span class="n">ros2_control_demos</span>
-</pre></div>
-</div>
-<p>to every command followed by a <code class="docutils literal notranslate"><span class="pre">gui:=false</span></code>. For more information on the docker usage see <a class="reference internal" href="../../doc/index.html#ros2-control-demos-install"><span class="std std-ref">Installation</span></a>.</p>
+<p>The commands below are given for a local installation of this repository and its dependencies as well as for running them from a docker container. For more information on the docker usage see <a class="reference internal" href="../../doc/index.html#using-docker"><span class="std std-ref">Using Docker</span></a>.</p>
 </div>
 <section id="tutorial-steps">
 <h2>Tutorial steps<a class="headerlink" href="#tutorial-steps" title="Link to this heading"></a></h2>
 <ol class="arabic">
 <li><p>(Optional) To check that <em>RRBot</em> descriptions are working properly use following launch commands</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_1<span class="w"> </span>view_robot.launch.py
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-TG9jYWw=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-TG9jYWw=" name="TG9jYWw=" role="tab" tabindex="0">Local</button><button aria-controls="panel-0-RG9ja2Vy" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-RG9ja2Vy" name="RG9ja2Vy" role="tab" tabindex="-1">Docker</button></div><div aria-labelledby="tab-0-TG9jYWw=" class="sphinx-tabs-panel group-tab" id="panel-0-TG9jYWw=" name="TG9jYWw=" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_1<span class="w"> </span>view_robot.launch.py
 </pre></div>
 </div>
+</div><div aria-labelledby="tab-0-RG9ja2Vy" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-RG9ja2Vy" name="RG9ja2Vy" role="tabpanel" tabindex="0"><p>Let’s start with the docker container by running the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>--name<span class="w"> </span>ros2_control_demos<span class="w"> </span>--net<span class="w"> </span>host<span class="w"> </span>ros2_control_demos<span class="w"> </span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_1<span class="w"> </span>view_robot.launch.py<span class="w"> </span>gui:<span class="o">=</span><span class="nb">false</span>
+</pre></div>
+</div>
+<p>Now, we need to start <code class="docutils literal notranslate"><span class="pre">joint_state_publisher_gui</span></code> as well as <code class="docutils literal notranslate"><span class="pre">rviz2</span></code> to view the robot, each in their own terminals after sourcing our ROS 2 installation.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>/setup.bash
+ros2<span class="w"> </span>run<span class="w"> </span>joint_state_publisher_gui<span class="w"> </span>joint_state_publisher_gui
+</pre></div>
+</div>
+<p>The <em>RViz</em> setup can be recreated following these steps:</p>
+<ul class="simple">
+<li><p>The robot models can be visualized using <code class="docutils literal notranslate"><span class="pre">RobotModel</span></code> display using <code class="docutils literal notranslate"><span class="pre">/robot_description</span></code> topic.</p></li>
+<li><p>Or you can simply open the configuration from <code class="docutils literal notranslate"><span class="pre">ros2_control_demo_description/rrbot/rviz</span></code> folder manually or directly by executing from another terminal</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>/setup.bash
+rviz2<span class="w"> </span>-d<span class="w"> </span>src/ros2_control_demos/ros2_control_demo_description/rrbot/rviz/rrbot.rviz
+</pre></div>
+</div>
+</div></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Getting the following output in terminal is OK: <code class="docutils literal notranslate"><span class="pre">Warning:</span> <span class="pre">Invalid</span> <span class="pre">frame</span> <span class="pre">ID</span> <span class="pre">&quot;odom&quot;</span> <span class="pre">passed</span> <span class="pre">to</span> <span class="pre">canTransform</span> <span class="pre">argument</span> <span class="pre">target_frame</span> <span class="pre">-</span> <span class="pre">frame</span> <span class="pre">does</span> <span class="pre">not</span> <span class="pre">exist</span></code>.
@@ -152,31 +169,40 @@ This happens because <code class="docutils literal notranslate"><span class="pre
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">joint_state_publisher_gui</span></code> provides a GUI to change the configuration for <em>RRbot</em>. It is immediately displayed in <em>RViz</em>.</p>
 <a class="reference internal image-reference" href="../../../../_images/rrbot.png"><img alt="Revolute-Revolute Manipulator Robot" src="../../../../_images/rrbot.png" style="width: 400px;" /></a>
-<p>The <em>RViz</em> setup can be recreated following these steps:</p>
-<ul class="simple">
-<li><p>The robot models can be visualized using <code class="docutils literal notranslate"><span class="pre">RobotModel</span></code> display using <code class="docutils literal notranslate"><span class="pre">/robot_description</span></code> topic.</p></li>
-<li><p>Or you can simply open the configuration from <code class="docutils literal notranslate"><span class="pre">description/rviz</span></code> folder manually or directly by executing</p></li>
-</ul>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rviz2<span class="w"> </span>--display-config<span class="w"> </span><span class="sb">`</span>ros2<span class="w"> </span>pkg<span class="w"> </span>prefix<span class="w"> </span>ros2_control_demo_example_1<span class="sb">`</span>/share/ros2_control_demo_example_1/rviz/rrbot.rviz
-
-Once<span class="w"> </span>it<span class="w"> </span>is<span class="w"> </span>working<span class="w"> </span>you<span class="w"> </span>can<span class="w"> </span>stop<span class="w"> </span>rviz<span class="w"> </span>using<span class="w"> </span>CTRL+C<span class="w"> </span>as<span class="w"> </span>the<span class="w"> </span>next<span class="w"> </span>launch<span class="w"> </span>file<span class="w"> </span>is<span class="w"> </span>starting<span class="w"> </span>RViz.
-</pre></div>
-</div>
+<p>Once it is working you can stop rviz using CTRL+C as the next launch file is starting RViz.</p>
 </li>
 <li><p>To start <em>RRBot</em> example open a terminal, source your ROS2-workspace and execute its launch file with</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_1<span class="w"> </span>rrbot.launch.py
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-TG9jYWw=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-1-TG9jYWw=" name="TG9jYWw=" role="tab" tabindex="0">Local</button><button aria-controls="panel-1-RG9ja2Vy" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-1-RG9ja2Vy" name="RG9ja2Vy" role="tab" tabindex="-1">Docker</button></div><div aria-labelledby="tab-1-TG9jYWw=" class="sphinx-tabs-panel group-tab" id="panel-1-TG9jYWw=" name="TG9jYWw=" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_1<span class="w"> </span>rrbot.launch.py
 </pre></div>
 </div>
-<p>The launch file loads and starts the robot hardware, controllers and opens <em>RViz</em>.
-In starting terminal you will see a lot of output from the hardware implementation showing its internal states.
+<p>The launch file loads and starts the robot hardware, controllers and opens <em>RViz</em>.</p>
+</div><div aria-labelledby="tab-1-RG9ja2Vy" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-1-RG9ja2Vy" name="RG9ja2Vy" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>--name<span class="w"> </span>ros2_control_demos<span class="w"> </span>--net<span class="w"> </span>host<span class="w"> </span>ros2_control_demos<span class="w"> </span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_1<span class="w"> </span>rrbot.launch.py<span class="w"> </span>gui:<span class="o">=</span><span class="nb">false</span>
+</pre></div>
+</div>
+<p>The launch file loads and starts the robot hardware and controllers. Open <em>RViz</em> in a new terminal
+as described above.</p>
+</div></div>
+<p>In starting terminal you will see a lot of output from the hardware implementation showing its internal states.
 This is only of exemplary purposes and should be avoided as much as possible in a hardware interface implementation.</p>
 <p>If you can see two orange and one yellow rectangle in <em>RViz</em> everything has started properly.
 Still, to be sure, let’s introspect the control system before moving <em>RRBot</em>.</p>
 </li>
 <li><p>Check if the hardware interface loaded properly, by opening another terminal and executing</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-TG9jYWw=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-2-TG9jYWw=" name="TG9jYWw=" role="tab" tabindex="0">Local</button><button aria-controls="panel-2-RG9ja2Vy" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-2-RG9ja2Vy" name="RG9ja2Vy" role="tab" tabindex="-1">Docker</button></div><div aria-labelledby="tab-2-TG9jYWw=" class="sphinx-tabs-panel group-tab" id="panel-2-TG9jYWw=" name="TG9jYWw=" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_interfaces
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-RG9ja2Vy" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-2-RG9ja2Vy" name="RG9ja2Vy" role="tabpanel" tabindex="0"><p>Open a bash terminal inside the already running docker container by</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>ros2_control_demos<span class="w"> </span>./entrypoint.sh<span class="w"> </span>bash
+</pre></div>
+</div>
+<p>and run the command</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_interfaces
 </pre></div>
 </div>
+</div></div>
+<p>If everything started nominally, you should see the output</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">command</span><span class="w"> </span>interfaces
 <span class="w">      </span>joint1/position<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
 <span class="w">      </span>joint2/position<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
@@ -188,9 +214,16 @@ state<span class="w"> </span>interfaces
 <p>Marker <code class="docutils literal notranslate"><span class="pre">[claimed]</span></code> by command interfaces means that a controller has access to command <em>RRBot</em>.</p>
 </li>
 <li><p>Check if controllers are running by</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-3-TG9jYWw=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-3-TG9jYWw=" name="TG9jYWw=" role="tab" tabindex="0">Local</button><button aria-controls="panel-3-RG9ja2Vy" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-3-RG9ja2Vy" name="RG9ja2Vy" role="tab" tabindex="-1">Docker</button></div><div aria-labelledby="tab-3-TG9jYWw=" class="sphinx-tabs-panel group-tab" id="panel-3-TG9jYWw=" name="TG9jYWw=" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_controllers
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-RG9ja2Vy" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-3-RG9ja2Vy" name="RG9ja2Vy" role="tabpanel" tabindex="0"><p>(from the docker terminal, see above)</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_controllers
 </pre></div>
 </div>
+</div></div>
+<p>You will see the two controllers in active state</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>joint_state_broadcaster<span class="o">[</span>joint_state_broadcaster/JointStateBroadcaster<span class="o">]</span><span class="w"> </span>active
 forward_position_controller<span class="o">[</span>forward_command_controller/ForwardCommandController<span class="o">]</span><span class="w"> </span>active
 </pre></div>
@@ -200,17 +233,31 @@ forward_position_controller<span class="o">[</span>forward_command_controller/Fo
 <ol class="loweralpha simple">
 <li><p>Manually using ROS 2 CLI interface:</p></li>
 </ol>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-4-TG9jYWw=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-4-TG9jYWw=" name="TG9jYWw=" role="tab" tabindex="0">Local</button><button aria-controls="panel-4-RG9ja2Vy" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-4-RG9ja2Vy" name="RG9ja2Vy" role="tab" tabindex="-1">Docker</button></div><div aria-labelledby="tab-4-TG9jYWw=" class="sphinx-tabs-panel group-tab" id="panel-4-TG9jYWw=" name="TG9jYWw=" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/forward_position_controller/commands<span class="w"> </span>std_msgs/msg/Float64MultiArray<span class="w"> </span><span class="s2">&quot;data:</span>
+<span class="s2">- 0.5</span>
+<span class="s2">- 0.5&quot;</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-4-RG9ja2Vy" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-4-RG9ja2Vy" name="RG9ja2Vy" role="tabpanel" tabindex="0"><p>Inside the docker terminal from above, run the command</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/forward_position_controller/commands<span class="w"> </span>std_msgs/msg/Float64MultiArray<span class="w"> </span><span class="s2">&quot;data:</span>
 <span class="s2">- 0.5</span>
 <span class="s2">- 0.5&quot;</span>
 </pre></div>
 </div>
+</div></div>
 <ol class="upperalpha simple" start="2">
-<li><p>Or you can start a demo node which sends two goals every 5 seconds in a loop</p></li>
+<li><p>Or you can start a demo node which sends two goals every 5 seconds in a loop:</p></li>
 </ol>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-5-TG9jYWw=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-5-TG9jYWw=" name="TG9jYWw=" role="tab" tabindex="0">Local</button><button aria-controls="panel-5-RG9ja2Vy" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-5-RG9ja2Vy" name="RG9ja2Vy" role="tab" tabindex="-1">Docker</button></div><div aria-labelledby="tab-5-TG9jYWw=" class="sphinx-tabs-panel group-tab" id="panel-5-TG9jYWw=" name="TG9jYWw=" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_1<span class="w"> </span>test_forward_position_controller.launch.py
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-5-RG9ja2Vy" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-5-RG9ja2Vy" name="RG9ja2Vy" role="tabpanel" tabindex="0"><p>Inside the docker terminal from above, run the command</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_1<span class="w"> </span>test_forward_position_controller.launch.py
 </pre></div>
 </div>
+</div></div>
 <p>You should now see orange and yellow blocks moving in <em>RViz</em>.
 Also, you should see changing states in the terminal where launch file is started, e.g.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>RRBotSystemPositionOnlyHardware<span class="o">]</span>:<span class="w"> </span>Got<span class="w"> </span><span class="nb">command</span><span class="w"> </span><span class="m">0</span>.50000<span class="w"> </span><span class="k">for</span><span class="w"> </span>joint<span class="w"> </span><span class="m">0</span>!
@@ -218,20 +265,39 @@ Also, you should see changing states in the terminal where launch file is starte
 </pre></div>
 </div>
 <p>If you echo the <code class="docutils literal notranslate"><span class="pre">/joint_states</span></code> or <code class="docutils literal notranslate"><span class="pre">/dynamic_joint_states</span></code> topics you should now get similar values, namely the simulated states of the robot</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-6-TG9jYWw=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-6-TG9jYWw=" name="TG9jYWw=" role="tab" tabindex="0">Local</button><button aria-controls="panel-6-RG9ja2Vy" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-6-RG9ja2Vy" name="RG9ja2Vy" role="tab" tabindex="-1">Docker</button></div><div aria-labelledby="tab-6-TG9jYWw=" class="sphinx-tabs-panel group-tab" id="panel-6-TG9jYWw=" name="TG9jYWw=" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/joint_states
+ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/dynamic_joint_states
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-6-RG9ja2Vy" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-6-RG9ja2Vy" name="RG9ja2Vy" role="tabpanel" tabindex="0"><p>Inside the docker terminal from above, run the command</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/joint_states
 ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/dynamic_joint_states
 </pre></div>
 </div>
+</div></div>
 </li>
 <li><p>Let’s switch to a different controller, the <code class="docutils literal notranslate"><span class="pre">Joint</span> <span class="pre">Trajectory</span> <span class="pre">Controller</span></code>.
 Load the controller manually by</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-7-TG9jYWw=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-7-TG9jYWw=" name="TG9jYWw=" role="tab" tabindex="0">Local</button><button aria-controls="panel-7-RG9ja2Vy" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-7-RG9ja2Vy" name="RG9ja2Vy" role="tab" tabindex="-1">Docker</button></div><div aria-labelledby="tab-7-TG9jYWw=" class="sphinx-tabs-panel group-tab" id="panel-7-TG9jYWw=" name="TG9jYWw=" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>load_controller<span class="w"> </span>joint_trajectory_position_controller
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-7-RG9ja2Vy" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-7-RG9ja2Vy" name="RG9ja2Vy" role="tabpanel" tabindex="0"><p>(from the docker terminal, see above)</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>load_controller<span class="w"> </span>joint_trajectory_position_controller
 </pre></div>
 </div>
-<p>what should return <code class="docutils literal notranslate"><span class="pre">Successfully</span> <span class="pre">loaded</span> <span class="pre">controller</span> <span class="pre">joint_trajectory_position_controller</span></code>. Check the status</p>
+</div></div>
+<p>what should return <code class="docutils literal notranslate"><span class="pre">Successfully</span> <span class="pre">loaded</span> <span class="pre">controller</span> <span class="pre">joint_trajectory_position_controller</span></code>. Check the status with</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-8-TG9jYWw=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-8-TG9jYWw=" name="TG9jYWw=" role="tab" tabindex="0">Local</button><button aria-controls="panel-8-RG9ja2Vy" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-8-RG9ja2Vy" name="RG9ja2Vy" role="tab" tabindex="-1">Docker</button></div><div aria-labelledby="tab-8-TG9jYWw=" class="sphinx-tabs-panel group-tab" id="panel-8-TG9jYWw=" name="TG9jYWw=" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_controllers
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-8-RG9ja2Vy" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-8-RG9ja2Vy" name="RG9ja2Vy" role="tabpanel" tabindex="0"><p>(from the docker terminal, see above)</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_controllers
 </pre></div>
 </div>
+</div></div>
 <p>what shows you that the controller is loaded but unconfigured.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>joint_state_broadcaster<span class="o">[</span>joint_state_broadcaster/JointStateBroadcaster<span class="o">]</span><span class="w"> </span>active
 forward_position_controller<span class="o">[</span>forward_command_controller/ForwardCommandController<span class="o">]</span><span class="w"> </span>active
@@ -239,24 +305,42 @@ joint_trajectory_position_controller<span class="o">[</span>joint_trajectory_con
 </pre></div>
 </div>
 <p>Configure the controller by setting it <code class="docutils literal notranslate"><span class="pre">inactive</span></code> by</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-9-TG9jYWw=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-9-TG9jYWw=" name="TG9jYWw=" role="tab" tabindex="0">Local</button><button aria-controls="panel-9-RG9ja2Vy" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-9-RG9ja2Vy" name="RG9ja2Vy" role="tab" tabindex="-1">Docker</button></div><div aria-labelledby="tab-9-TG9jYWw=" class="sphinx-tabs-panel group-tab" id="panel-9-TG9jYWw=" name="TG9jYWw=" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>set_controller_state<span class="w"> </span>joint_trajectory_position_controller<span class="w"> </span>inactive
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-9-RG9ja2Vy" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-9-RG9ja2Vy" name="RG9ja2Vy" role="tabpanel" tabindex="0"><p>(from the docker terminal, see above)</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>set_controller_state<span class="w"> </span>joint_trajectory_position_controller<span class="w"> </span>inactive
 </pre></div>
 </div>
+</div></div>
 <p>what should give <code class="docutils literal notranslate"><span class="pre">Successfully</span> <span class="pre">configured</span> <span class="pre">joint_trajectory_position_controller</span></code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The parameters are already set in <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_1/bringup/config/rrbot_controllers.yaml">rrbot_controllers.yaml</a>
 but the controller was not loaded from the <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_1/bringup/launch/rrbot.launch.py">launch file rrbot.launch.py</a> before.</p>
 </div>
-<p>As an alternative, you can load the controller directly in <code class="docutils literal notranslate"><span class="pre">inactive</span></code>-state by means of the option for <code class="docutils literal notranslate"><span class="pre">load_controller</span></code></p>
+<p>As an alternative, you can load the controller directly in <code class="docutils literal notranslate"><span class="pre">inactive</span></code>-state by means of the option for <code class="docutils literal notranslate"><span class="pre">load_controller</span></code> with</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-10-TG9jYWw=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-10-TG9jYWw=" name="TG9jYWw=" role="tab" tabindex="0">Local</button><button aria-controls="panel-10-RG9ja2Vy" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-10-RG9ja2Vy" name="RG9ja2Vy" role="tab" tabindex="-1">Docker</button></div><div aria-labelledby="tab-10-TG9jYWw=" class="sphinx-tabs-panel group-tab" id="panel-10-TG9jYWw=" name="TG9jYWw=" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>load_controller<span class="w"> </span>joint_trajectory_position_controller<span class="w"> </span>--set-state<span class="w"> </span>inactive
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-10-RG9ja2Vy" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-10-RG9ja2Vy" name="RG9ja2Vy" role="tabpanel" tabindex="0"><p>(from the docker terminal, see above)</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>load_controller<span class="w"> </span>joint_trajectory_position_controller<span class="w"> </span>--set-state<span class="w"> </span>inactive
 </pre></div>
 </div>
+</div></div>
 <p>You should get the result <code class="docutils literal notranslate"><span class="pre">Successfully</span> <span class="pre">loaded</span> <span class="pre">controller</span> <span class="pre">joint_trajectory_position_controller</span> <span class="pre">into</span> <span class="pre">state</span> <span class="pre">inactive</span></code>.</p>
 <p>See if it loaded properly with</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-11-TG9jYWw=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-11-TG9jYWw=" name="TG9jYWw=" role="tab" tabindex="0">Local</button><button aria-controls="panel-11-RG9ja2Vy" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-11-RG9ja2Vy" name="RG9ja2Vy" role="tab" tabindex="-1">Docker</button></div><div aria-labelledby="tab-11-TG9jYWw=" class="sphinx-tabs-panel group-tab" id="panel-11-TG9jYWw=" name="TG9jYWw=" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_controllers
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-11-RG9ja2Vy" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-11-RG9ja2Vy" name="RG9ja2Vy" role="tabpanel" tabindex="0"><p>(from the docker terminal, see above)</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_controllers
 </pre></div>
 </div>
+</div></div>
 <p>what should now return</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>joint_state_broadcaster<span class="o">[</span>joint_state_broadcaster/JointStateBroadcaster<span class="o">]</span><span class="w"> </span>active
 forward_position_controller<span class="o">[</span>forward_command_controller/ForwardCommandController<span class="o">]</span><span class="w"> </span>active
@@ -264,28 +348,53 @@ joint_trajectory_position_controller<span class="o">[</span>joint_trajectory_con
 </pre></div>
 </div>
 <p>Note that the controller is loaded but still <code class="docutils literal notranslate"><span class="pre">inactive</span></code>. Now you can switch the controller by</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-12-TG9jYWw=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-12-TG9jYWw=" name="TG9jYWw=" role="tab" tabindex="0">Local</button><button aria-controls="panel-12-RG9ja2Vy" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-12-RG9ja2Vy" name="RG9ja2Vy" role="tab" tabindex="-1">Docker</button></div><div aria-labelledby="tab-12-TG9jYWw=" class="sphinx-tabs-panel group-tab" id="panel-12-TG9jYWw=" name="TG9jYWw=" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>set_controller_state<span class="w"> </span>forward_position_controller<span class="w"> </span>inactive
+ros2<span class="w"> </span>control<span class="w"> </span>set_controller_state<span class="w"> </span>joint_trajectory_position_controller<span class="w"> </span>active
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-12-RG9ja2Vy" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-12-RG9ja2Vy" name="RG9ja2Vy" role="tabpanel" tabindex="0"><p>(from the docker terminal, see above)</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>set_controller_state<span class="w"> </span>forward_position_controller<span class="w"> </span>inactive
 ros2<span class="w"> </span>control<span class="w"> </span>set_controller_state<span class="w"> </span>joint_trajectory_position_controller<span class="w"> </span>active
 </pre></div>
 </div>
+</div></div>
 <p>or simply via this one-line command</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-13-TG9jYWw=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-13-TG9jYWw=" name="TG9jYWw=" role="tab" tabindex="0">Local</button><button aria-controls="panel-13-RG9ja2Vy" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-13-RG9ja2Vy" name="RG9ja2Vy" role="tab" tabindex="-1">Docker</button></div><div aria-labelledby="tab-13-TG9jYWw=" class="sphinx-tabs-panel group-tab" id="panel-13-TG9jYWw=" name="TG9jYWw=" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>switch_controllers<span class="w"> </span>--activate<span class="w"> </span>joint_trajectory_position_controller<span class="w"> </span>--deactivate<span class="w"> </span>forward_position_controller
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-13-RG9ja2Vy" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-13-RG9ja2Vy" name="RG9ja2Vy" role="tabpanel" tabindex="0"><p>(from the docker terminal, see above)</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>switch_controllers<span class="w"> </span>--activate<span class="w"> </span>joint_trajectory_position_controller<span class="w"> </span>--deactivate<span class="w"> </span>forward_position_controller
 </pre></div>
 </div>
+</div></div>
 <p>Again, check via</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-14-TG9jYWw=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-14-TG9jYWw=" name="TG9jYWw=" role="tab" tabindex="0">Local</button><button aria-controls="panel-14-RG9ja2Vy" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-14-RG9ja2Vy" name="RG9ja2Vy" role="tab" tabindex="-1">Docker</button></div><div aria-labelledby="tab-14-TG9jYWw=" class="sphinx-tabs-panel group-tab" id="panel-14-TG9jYWw=" name="TG9jYWw=" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_controllers
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-14-RG9ja2Vy" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-14-RG9ja2Vy" name="RG9ja2Vy" role="tabpanel" tabindex="0"><p>(from the docker terminal, see above)</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_controllers
 </pre></div>
 </div>
+</div></div>
 <p>what should now return</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>joint_state_broadcaster<span class="o">[</span>joint_state_broadcaster/JointStateBroadcaster<span class="o">]</span><span class="w"> </span>active
 forward_position_controller<span class="o">[</span>forward_command_controller/ForwardCommandController<span class="o">]</span><span class="w"> </span>inactive
 joint_trajectory_position_controller<span class="o">[</span>joint_trajectory_controller/JointTrajectoryController<span class="o">]</span><span class="w"> </span>active
 </pre></div>
 </div>
-<p>Send a command to the controller using demo node, which sends four goals every 6 seconds in a loop:</p>
+<p>Send a command to the controller using demo node, which sends four goals every 6 seconds in a loop with</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-15-TG9jYWw=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-15-TG9jYWw=" name="TG9jYWw=" role="tab" tabindex="0">Local</button><button aria-controls="panel-15-RG9ja2Vy" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-15-RG9ja2Vy" name="RG9ja2Vy" role="tab" tabindex="-1">Docker</button></div><div aria-labelledby="tab-15-TG9jYWw=" class="sphinx-tabs-panel group-tab" id="panel-15-TG9jYWw=" name="TG9jYWw=" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_1<span class="w"> </span>test_joint_trajectory_controller.launch.py
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-15-RG9ja2Vy" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-15-RG9ja2Vy" name="RG9ja2Vy" role="tabpanel" tabindex="0"><p>(from the docker terminal, see above)</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_1<span class="w"> </span>test_joint_trajectory_controller.launch.py
 </pre></div>
 </div>
+</div></div>
 <p>You can adjust the goals in <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_1/bringup/config/rrbot_joint_trajectory_publisher.yaml">rrbot_joint_trajectory_publisher</a>.</p>
 </li>
 </ol>
