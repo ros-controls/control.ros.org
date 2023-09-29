@@ -76,6 +76,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../example_9/doc/userdoc.html">Example 9: Gazebo classic</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../example_10/doc/userdoc.html">Example 10: Industrial robot with GPIO interfaces</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../example_12/doc/userdoc.html">Example 12: Controller chaining</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_14/doc/userdoc.html">Example 14: Modular robots with actuators not providing states</a></li>
 </ul>
 </li>
 </ul>
@@ -167,13 +168,34 @@ state<span class="w"> </span>interfaces
 </pre></div>
 </div>
 <p>Marker <code class="docutils literal notranslate"><span class="pre">[claimed]</span></code> by command interfaces means that a controller has access to command <em>RRBot</em>.</p>
+<p>Now, let’s introspect the hardware components with</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_components
+</pre></div>
+</div>
+<p>There are two hardware components, one for each actuator and one for each sensor:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>Hardware<span class="w"> </span>Component<span class="w"> </span><span class="m">1</span>
+<span class="w">        </span>name:<span class="w"> </span>RRBotModularJoint2
+<span class="w">        </span>type:<span class="w"> </span>actuator
+<span class="w">        </span>plugin<span class="w"> </span>name:<span class="w"> </span>ros2_control_demo_example_6/RRBotModularJoint
+<span class="w">        </span>state:<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="m">3</span><span class="w"> </span><span class="nv">label</span><span class="o">=</span>active
+<span class="w">        </span><span class="nb">command</span><span class="w"> </span>interfaces
+<span class="w">                </span>joint2/position<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+Hardware<span class="w"> </span>Component<span class="w"> </span><span class="m">2</span>
+<span class="w">        </span>name:<span class="w"> </span>RRBotModularJoint1
+<span class="w">        </span>type:<span class="w"> </span>actuator
+<span class="w">        </span>plugin<span class="w"> </span>name:<span class="w"> </span>ros2_control_demo_example_6/RRBotModularJoint
+<span class="w">        </span>state:<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="m">3</span><span class="w"> </span><span class="nv">label</span><span class="o">=</span>active
+<span class="w">        </span><span class="nb">command</span><span class="w"> </span>interfaces
+<span class="w">                </span>joint1/position<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+</pre></div>
+</div>
 </li>
 <li><p>Check if controllers are running</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_controllers
 </pre></div>
 </div>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>forward_position_controller<span class="o">[</span>forward_command_controller/ForwardCommandController<span class="o">]</span>
-joint_state_broadcaster<span class="o">[</span>joint_state_broadcaster/JointStateBroadcaster<span class="o">]</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>forward_position_controller<span class="o">[</span>forward_command_controller/ForwardCommandController<span class="o">]</span><span class="w"> </span>active
+joint_state_broadcaster<span class="o">[</span>joint_state_broadcaster/JointStateBroadcaster<span class="o">]</span><span class="w"> </span>active
 </pre></div>
 </div>
 </li>
