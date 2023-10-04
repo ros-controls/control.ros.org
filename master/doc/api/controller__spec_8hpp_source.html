@@ -91,23 +91,25 @@ $(function() {
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define CONTROLLER_MANAGER__CONTROLLER_SPEC_HPP_</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;controller_interface/controller_interface.hpp&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;hardware_interface/controller_info.hpp&quot;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">namespace </span>controller_manager</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="structcontroller__manager_1_1ControllerSpec.html">   36</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structcontroller__manager_1_1ControllerSpec.html">ControllerSpec</a></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <a class="code" href="structhardware__interface_1_1ControllerInfo.html">hardware_interface::ControllerInfo</a> info;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  controller_interface::ControllerInterfaceBaseSharedPtr c;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;};</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}  <span class="comment">// namespace controller_manager</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// CONTROLLER_MANAGER__CONTROLLER_SPEC_HPP_</span></div>
-<div class="ttc" id="astructcontroller__manager_1_1ControllerSpec_html"><div class="ttname"><a href="structcontroller__manager_1_1ControllerSpec.html">controller_manager::ControllerSpec</a></div><div class="ttdoc">Controller Specification.</div><div class="ttdef"><b>Definition:</b> controller_spec.hpp:37</div></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;controller_interface/controller_interface.hpp&quot;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;hardware_interface/controller_info.hpp&quot;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">namespace </span>controller_manager</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="structcontroller__manager_1_1ControllerSpec.html">   37</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structcontroller__manager_1_1ControllerSpec.html">ControllerSpec</a></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;{</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <a class="code" href="structhardware__interface_1_1ControllerInfo.html">hardware_interface::ControllerInfo</a> info;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  controller_interface::ControllerInterfaceBaseSharedPtr c;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  std::shared_ptr&lt;rclcpp::Time&gt; next_update_cycle_time;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;};</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}  <span class="comment">// namespace controller_manager</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// CONTROLLER_MANAGER__CONTROLLER_SPEC_HPP_</span></div>
+<div class="ttc" id="astructcontroller__manager_1_1ControllerSpec_html"><div class="ttname"><a href="structcontroller__manager_1_1ControllerSpec.html">controller_manager::ControllerSpec</a></div><div class="ttdoc">Controller Specification.</div><div class="ttdef"><b>Definition:</b> controller_spec.hpp:38</div></div>
 <div class="ttc" id="astructhardware__interface_1_1ControllerInfo_html"><div class="ttname"><a href="structhardware__interface_1_1ControllerInfo.html">hardware_interface::ControllerInfo</a></div><div class="ttdoc">Controller Information.</div><div class="ttdef"><b>Definition:</b> controller_info.hpp:28</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
