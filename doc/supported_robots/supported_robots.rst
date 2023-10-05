@@ -9,13 +9,10 @@ Official (supported by robot manufacturer):
 * `Universal Robots <https://github.com/UniversalRobots/Universal_Robots_ROS2_Driver>`_
 * `Franka Emika research robots <https://github.com/frankaemika/franka_ros2>`_
 * `xArm <https://github.com/xarm-Developer/xarm_ros2>`_
-<<<<<<< HEAD
 * `Flexiv Robotics Rizon robots <https://github.com/flexivrobotics/flexiv_ros2>`_
-=======
 * `igus/Commonplace Robotics <https://github.com/CommonplaceRobotics/iRC_ROS>`_
 * `Husarion ROSbot XL <https://github.com/husarion/rosbot_xl_ros>`_
 * `Husarion ROSbot 2R / 2 PRO <https://github.com/husarion/rosbot_ros>`_
->>>>>>> 7a435dd (Added info about Husarion robots powered by ros2_control (#179))
 
 Unofficial (from the community):
 
