@@ -10,6 +10,7 @@ Official (supported by robot manufacturer):
 * `Franka Emika research robots <https://github.com/frankaemika/franka_ros2>`_
 * `xArm <https://github.com/xarm-Developer/xarm_ros2>`_
 * `Flexiv Robotics Rizon robots <https://github.com/flexivrobotics/flexiv_ros2>`_
+* `igus/Commonplace Robotics <https://github.com/CommonplaceRobotics/iRC_ROS>`_
 * `Husarion ROSbot XL <https://github.com/husarion/rosbot_xl_ros>`_
 * `Husarion ROSbot 2R / 2 PRO <https://github.com/husarion/rosbot_ros>`_
 
@@ -18,6 +19,7 @@ Unofficial (from the community):
 * `KUKA industrial robots (KUKA Robot Sensor Interface (RSI)) <https://github.com/dignakov/ros2_control_kuka_driver>`_
 * `KUKA IIWA (KUKA Fast Robot Interface (FRI)) <https://github.com/ICube-Robotics/iiwa_ros2>`_
 * `KUKA LBR and IIWA (KUKA Fast Robot Interface (FRI)) <https://github.com/KCL-BMEIS/lbr_fri_ros2_stack>`_
+* `KUKA All Robots (iiQKA-ECI, Sunrise-FRI, KSS-RSI) <https://github.com/kroshu/ros2_kuka_drivers>`_
 * `ABB - EGM interface <https://github.com/PickNikRobotics/abb_ros2>`_
 * `Mitsubishi RV1A <https://github.com/ICube-Robotics/mrv1a_ros2>`_
 
