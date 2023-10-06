@@ -11,6 +11,8 @@ Official (supported by robot manufacturer):
 * `xArm <https://github.com/xarm-Developer/xarm_ros2>`_
 * `Flexiv Robotics Rizon robots <https://github.com/flexivrobotics/flexiv_ros2>`_
 * `igus/Commonplace Robotics <https://github.com/CommonplaceRobotics/iRC_ROS>`_
+* `Husarion ROSbot XL <https://github.com/husarion/rosbot_xl_ros>`_
+* `Husarion ROSbot 2R / 2 PRO <https://github.com/husarion/rosbot_ros>`_
 
 Unofficial (from the community):
 
@@ -42,3 +44,4 @@ Non robot-devices:
 Mobile manipulators:
 
 * `Hello Robot - Stretch (for simple simulation with MoveIt2) <https://github.com/hello-robot/stretch_ros2/blob/galactic/stretch_moveit2/README.md>`_
+* `Husarion ROSbot XL with OpenMANIPULATOR-X (including MoveIt2) <https://husarion.com/tutorials/ros-projects/rosbot-xl-openmanipulator-x/>`_
