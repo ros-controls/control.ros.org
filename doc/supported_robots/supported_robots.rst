@@ -13,6 +13,7 @@ Official (supported by robot manufacturer):
 * `igus/Commonplace Robotics <https://github.com/CommonplaceRobotics/iRC_ROS>`_
 * `Husarion ROSbot XL <https://github.com/husarion/rosbot_xl_ros>`_
 * `Husarion ROSbot 2R / 2 PRO <https://github.com/husarion/rosbot_ros>`_
+* `Husarion ROSbot XL with OpenMANIPULATOR-X (including MoveIt2) <https://husarion.com/tutorials/ros-projects/rosbot-xl-openmanipulator-x/>`_
 
 Unofficial (from the community):
 
@@ -40,8 +41,3 @@ Non robot-devices:
 * `NDI measurement systems <https://github.com/ICube-Robotics/ndisys_ros2>`_
 * `PCA9685 16-Channel 12-bit PWM/Servo Driver <https://github.com/rosblox/pca9685_ros2_control>`_
 * `Hoverboard motors <https://github.com/DataBot-Labs/hoverboard_ros2_control>`_
-
-Mobile manipulators:
-
-* `Hello Robot - Stretch (for simple simulation with MoveIt2) <https://github.com/hello-robot/stretch_ros2/blob/galactic/stretch_moveit2/README.md>`_
-* `Husarion ROSbot XL with OpenMANIPULATOR-X (including MoveIt2) <https://husarion.com/tutorials/ros-projects/rosbot-xl-openmanipulator-x/>`_
