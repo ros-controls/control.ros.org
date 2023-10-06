@@ -124,14 +124,16 @@ Optionally add <code class="docutils literal notranslate"><span class="pre">visi
 You can copy this file from an existing controller package and change the name prefix to the <code class="docutils literal notranslate"><span class="pre">&lt;PACKAGE_NAME&gt;</span></code>.</p>
 </li>
 <li><p><strong>Adding declarations into header file (.hpp)</strong></p>
-<ol class="arabic simple">
+<ol class="arabic">
 <li><p>Take care that you use header guards. ROS 2-style is using <code class="docutils literal notranslate"><span class="pre">#ifndef</span></code> and <code class="docutils literal notranslate"><span class="pre">#define</span></code> preprocessor directives. (For more information on this, a search engine is your friend :) ).</p></li>
 <li><p>include <code class="docutils literal notranslate"><span class="pre">&quot;controller_interface/controller_interface.hpp&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">visibility_control.h</span></code> if you are using one.</p></li>
 <li><p>Define a unique namespace for your controller. This is usually a package name written in <code class="docutils literal notranslate"><span class="pre">snake_case</span></code>.</p></li>
-<li><p>Define the class of the controller, extending <code class="docutils literal notranslate"><span class="pre">ControllerInterface</span></code>, e.g.,
-.. code:: c++
-class ControllerName : public controller_interface::ControllerInterface</p></li>
-<li><p>Add a constructor without parameters and the following public methods overriding the <code class="docutils literal notranslate"><span class="pre">ControllerInterface</span></code> definition: <code class="docutils literal notranslate"><span class="pre">init</span></code>, <code class="docutils literal notranslate"><span class="pre">command_interface_configuration</span></code>, <code class="docutils literal notranslate"><span class="pre">state_interface_configuration</span></code>, <code class="docutils literal notranslate"><span class="pre">on_configure</span></code>, <code class="docutils literal notranslate"><span class="pre">on_activate</span></code>, <code class="docutils literal notranslate"><span class="pre">on_deactivate</span></code>, <code class="docutils literal notranslate"><span class="pre">update</span></code>.
+<li><p>Define the class of the controller, extending <code class="docutils literal notranslate"><span class="pre">ControllerInterface</span></code>, e.g.,</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ControllerName</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">controller_interface</span><span class="o">::</span><span class="n">ControllerInterface</span>
+</pre></div>
+</div>
+</li>
+<li><p>Add a constructor without parameters and the following public methods overriding the <code class="docutils literal notranslate"><span class="pre">ControllerInterface</span></code> definition: <code class="docutils literal notranslate"><span class="pre">on_init</span></code>, <code class="docutils literal notranslate"><span class="pre">command_interface_configuration</span></code>, <code class="docutils literal notranslate"><span class="pre">state_interface_configuration</span></code>, <code class="docutils literal notranslate"><span class="pre">on_configure</span></code>, <code class="docutils literal notranslate"><span class="pre">on_activate</span></code>, <code class="docutils literal notranslate"><span class="pre">on_deactivate</span></code>, <code class="docutils literal notranslate"><span class="pre">update</span></code>.
 For exact definitions check the <code class="docutils literal notranslate"><span class="pre">controller_interface/controller_interface.hpp</span></code> header or one of the controllers from <a class="reference external" href="https://github.com/ros-controls/ros2_controllers">ros2_controllers</a>.</p></li>
 <li><p>(optional) Often, controllers accept lists of joint names and interface names as parameters.
 If so, you can add two protected string vectors to store those values.</p></li>
@@ -141,8 +143,8 @@ If so, you can add two protected string vectors to store those values.</p></li>
 <ol class="arabic simple">
 <li><p>Include the header file of your controller and add a namespace definition to simplify further development.</p></li>
 <li><p>(optional) Implement a constructor if needed. There, you could initialize member variables.
-This could also be done in the <code class="docutils literal notranslate"><span class="pre">init</span></code> method.</p></li>
-<li><p>Implement the <code class="docutils literal notranslate"><span class="pre">init</span></code> method. The first line usually calls the parent <code class="docutils literal notranslate"><span class="pre">init</span></code> method.
+This could also be done in the <code class="docutils literal notranslate"><span class="pre">on_init</span></code> method.</p></li>
+<li><p>Implement the <code class="docutils literal notranslate"><span class="pre">on_init</span></code> method. The first line usually calls the parent <code class="docutils literal notranslate"><span class="pre">on_init</span></code> method.
 Here is the best place to initialize the variables, reserve memory, and most importantly, declare node parameters used by the controller. If everything works fine return <code class="docutils literal notranslate"><span class="pre">controller_interface::return_type::OK</span></code> or <code class="docutils literal notranslate"><span class="pre">controller_interface::return_type::ERROR</span></code> otherwise.</p></li>
 <li><p>Write the <code class="docutils literal notranslate"><span class="pre">on_configure</span></code> method. Parameters are usually read here, and everything is prepared so that the controller can be started.</p></li>
 <li><p>Implement <code class="docutils literal notranslate"><span class="pre">command_interface_configuration</span></code> and <code class="docutils literal notranslate"><span class="pre">state_interface_configuration</span></code> where required interfaces are defined.
@@ -185,11 +187,10 @@ Those are at least: <code class="docutils literal notranslate"><span class="pre"
 <li><p>Add a compile directive for a shared library providing the <code class="docutils literal notranslate"><span class="pre">&lt;controller_name&gt;.cpp</span></code> file as the source.</p></li>
 <li><p>Add targeted include directories for the library. This is usually only <code class="docutils literal notranslate"><span class="pre">include</span></code>.</p></li>
 <li><p>Add ament dependencies needed by the library. You should add at least those listed under 1.</p></li>
-<li><p>Export for pluginlib description file using the following command:
-.. code:: cmake</p>
-<blockquote>
-<div><p>pluginlib_export_plugin_description_file(controller_interface &lt;controller_name&gt;.xml)</p>
-</div></blockquote>
+<li><p>Export for pluginlib description file using the following command:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">pluginlib_export_plugin_description_file</span><span class="p">(</span><span class="s">controller_interface</span><span class="w"> </span><span class="s">&lt;controller_name&gt;.xml</span><span class="p">)</span>
+</pre></div>
+</div>
 </li>
 <li><p>Add install directives for targets and include directory.</p></li>
 <li><p>In the test section add the following dependencies: <code class="docutils literal notranslate"><span class="pre">ament_cmake_gmock</span></code>, <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code>, <code class="docutils literal notranslate"><span class="pre">hardware_interface</span></code>, <code class="docutils literal notranslate"><span class="pre">ros2_control_test_assets</span></code>.</p></li>
