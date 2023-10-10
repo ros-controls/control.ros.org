@@ -172,6 +172,7 @@ state<span class="w"> </span>interfaces
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">[claimed]</span></code> marker on command interfaces means that a controller has access to command <em>DiffBot</em>.</p>
+<p>Furthermore, we can see that the command interface is of type <code class="docutils literal notranslate"><span class="pre">velocity</span></code>, which is typical for a differential drive robot.</p>
 </li>
 <li><p>Check if controllers are running</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_controllers
@@ -201,7 +202,58 @@ Also, you should see changing states in the terminal where launch file is starte
 </pre></div>
 </div>
 </li>
+<li><p>Let’s introspect the ros2_control hardware component. Calling</p></li>
 </ol>
+<blockquote>
+<div><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_components
+</pre></div>
+</div>
+<p>should give you</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>Hardware<span class="w"> </span>Component<span class="w"> </span><span class="m">1</span>
+<span class="w">        </span>name:<span class="w"> </span>DiffBot
+<span class="w">        </span>type:<span class="w"> </span>system
+<span class="w">        </span>plugin<span class="w"> </span>name:<span class="w"> </span>ros2_control_demo_example_2/DiffBotSystemHardware
+<span class="w">        </span>state:<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="m">3</span><span class="w"> </span><span class="nv">label</span><span class="o">=</span>active
+<span class="w">        </span><span class="nb">command</span><span class="w"> </span>interfaces
+<span class="w">                </span>left_wheel_joint/velocity<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+<span class="w">                </span>right_wheel_joint/velocity<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+</pre></div>
+</div>
+<p>This shows that the custom hardware interface plugin is loaded and running. If you work on a real
+robot and don’t have a simulator running, it is often faster to use the <code class="docutils literal notranslate"><span class="pre">mock_components/GenericSystem</span></code>
+hardware component instead of writing a custom one. Stop the launch file and start it again with
+an additional parameter</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_2<span class="w"> </span>diffbot.launch.py<span class="w"> </span>use_mock_hardware:<span class="o">=</span>True
+</pre></div>
+</div>
+<p>Calling</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_components
+</pre></div>
+</div>
+<p>now should give you</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>Hardware<span class="w"> </span>Component<span class="w"> </span><span class="m">1</span>
+<span class="w">    </span>name:<span class="w"> </span>DiffBot
+<span class="w">    </span>type:<span class="w"> </span>system
+<span class="w">    </span>plugin<span class="w"> </span>name:<span class="w"> </span>mock_components/GenericSystem
+<span class="w">    </span>state:<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="m">3</span><span class="w"> </span><span class="nv">label</span><span class="o">=</span>active
+<span class="w">    </span><span class="nb">command</span><span class="w"> </span>interfaces
+<span class="w">            </span>left_wheel_joint/velocity<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+<span class="w">            </span>right_wheel_joint/velocity<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+</pre></div>
+</div>
+<p>You see that a different plugin was loaded. Having a look into the <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/humble/example_2/description/ros2_control/diffbot.ros2_control.xacro">diffbot.ros2_control.xacro</a>, one can find the
+instructions to load this plugin together with the parameter <code class="docutils literal notranslate"><span class="pre">calculate_dynamics</span></code>.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;hardware&gt;</span>
+<span class="w">  </span><span class="nt">&lt;plugin&gt;</span>mock_components/GenericSystem<span class="nt">&lt;/plugin&gt;</span>
+<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;calculate_dynamics&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;/hardware&gt;</span>
+</pre></div>
+</div>
+<p>This enables the integration of the velocity commands to the position state interface, which can be
+checked by means of <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">topic</span> <span class="pre">echo</span> <span class="pre">/joint_states</span></code>: The position values are increasing over time if the robot is moving.
+You now can test the setup with the commands from above, it should work identically as the custom hardware component plugin.</p>
+<p>More information on mock_components can be found in the <a class="reference internal" href="../../../ros2_control/hardware_interface/doc/mock_components_userdoc.html#mock-components-userdoc"><span class="std std-ref">ros2_control documentation</span></a>.</p>
+</div></blockquote>
 </section>
 <section id="files-used-for-this-demos">
 <h2>Files used for this demos<a class="headerlink" href="#files-used-for-this-demos" title="Link to this heading"></a></h2>
