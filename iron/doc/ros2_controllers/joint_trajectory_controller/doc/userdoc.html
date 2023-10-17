@@ -147,7 +147,7 @@ Waypoints consist of positions, and optionally velocities and accelerations.</p>
 <p><em>Parts of this documentation were originally published in the ROS 1 wiki under the</em> <a class="reference external" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0 license</a>. <em>Citations are given in the respective section, but were adapted for the ROS 2 implementation.</em> <a class="footnote-reference brackets" href="#f1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
 <section id="hardware-interface-types">
 <h2>Hardware interface types<a class="headerlink" href="#hardware-interface-types" title="Link to this heading"></a></h2>
-<p>Currently, joints with hardware interface types <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code>, <code class="docutils literal notranslate"><span class="pre">acceleration</span></code>, and <code class="docutils literal notranslate"><span class="pre">effort</span></code> (defined <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/include/hardware_interface/types/hardware_interface_type_values.hpp">here</a>) are supported in the following combinations:</p>
+<p>Currently, joints with hardware interface types <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code>, <code class="docutils literal notranslate"><span class="pre">acceleration</span></code>, and <code class="docutils literal notranslate"><span class="pre">effort</span></code> (defined <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/include/hardware_interface/types/hardware_interface_type_values.hpp">here</a>) are supported in the following combinations as command interfaces:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">position</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code></p></li>
@@ -167,10 +167,15 @@ Waypoints consist of positions, and optionally velocities and accelerations.</p>
 <li><p>With command interface <code class="docutils literal notranslate"><span class="pre">velocity</span></code>:</p>
 <ul>
 <li><p>if command interface <code class="docutils literal notranslate"><span class="pre">velocity</span></code> is the only one, state interfaces must include  <code class="docutils literal notranslate"><span class="pre">position,</span> <span class="pre">velocity</span></code> .</p></li>
-<li><p>no restrictions otherwise.</p></li>
 </ul>
 </li>
 <li><p>With command interface <code class="docutils literal notranslate"><span class="pre">effort</span></code>, state interfaces must include  <code class="docutils literal notranslate"><span class="pre">position,</span> <span class="pre">velocity</span></code>.</p></li>
+<li><p>With command interface <code class="docutils literal notranslate"><span class="pre">acceleration</span></code>, state interfaces must include  <code class="docutils literal notranslate"><span class="pre">position,</span> <span class="pre">velocity</span></code>.</p></li>
+</ul>
+<p>Further restrictions of state interfaces exist:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">velocity</span></code> state interface cannot be used if <code class="docutils literal notranslate"><span class="pre">position</span></code> interface  is missing.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">acceleration</span></code> state interface cannot be used if <code class="docutils literal notranslate"><span class="pre">position</span></code> and <code class="docutils literal notranslate"><span class="pre">velocity</span></code> interfaces are not present.”</p></li>
 </ul>
 <p>Example controller configurations can be found <a class="reference internal" href="#ros-2-interface"><span class="std std-ref">below</span></a>.</p>
 </section>
