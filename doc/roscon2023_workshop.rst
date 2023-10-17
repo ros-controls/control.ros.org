@@ -34,6 +34,14 @@ Once done, grab the latest version of the workshop container by running:
 
 ``docker pull bmagyar/roscon2023_workshop:latest``
 
+Now, to set up a workspace, run the following commands where you want this to be placed:
+
+  .. code-block:: shell
+
+    mkdir -p ws/src
+    cd ws/src
+    git clone https://github.com/ros-controls/roscon2023_control_workshop
+    vcs import --input roscon2023_control_workshop/roscon2023_control_workshop.ci.repos .
 
 People
 ------
