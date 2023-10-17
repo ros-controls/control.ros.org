@@ -43,6 +43,18 @@ Now, to set up a workspace, run the following commands where you want this to be
     git clone https://github.com/ros-controls/roscon2023_control_workshop
     vcs import --input roscon2023_control_workshop/roscon2023_control_workshop.ci.repos .
 
+You can bring up a container with all dependencies & ready to compile the workspace. Using the same terminal as before (or a new one parked at `ws/src`) run:
+
+  .. code-block:: shell
+    docker compose -f roscon2023_control_workshop/docker/docker-compose.yaml run dev
+    tmux
+    source /opt/ros/rolling/setup.bash
+    colcon build --symlink-install
+    source install/setup.bash
+
+Open 2 more terminal in tmux by using CTRL+B and " and CTRL+B and %.
+You can navigate in tmux using CTRL+B and ARROW keys.
+
 People
 ------
 
