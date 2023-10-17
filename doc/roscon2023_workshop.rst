@@ -43,7 +43,9 @@ Now, to set up a workspace, run the following commands where you want this to be
     git clone https://github.com/ros-controls/roscon2023_control_workshop
     vcs import --input roscon2023_control_workshop/roscon2023_control_workshop.ci.repos .
 
-You can bring up a container with all dependencies & ready to compile the workspace. Using the same terminal as before (or a new one parked at `ws/src`) run:
+
+You can run things locally if you have all dependencies set up. 
+The alternative is using the container which includes all dependencies & comes ready to compile the workspace. Using the same terminal as before (or a new one parked at `ws/src`) run:
 
   .. code-block:: shell
     docker compose -f roscon2023_control_workshop/docker/docker-compose.yaml run dev
