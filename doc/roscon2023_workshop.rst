@@ -48,11 +48,13 @@ You can run things locally if you have all dependencies set up.
 The alternative is using the container which includes all dependencies & comes ready to compile the workspace. Using the same terminal as before (or a new one parked at `ws/src`) run:
 
   .. code-block:: shell
+
     docker compose -f roscon2023_control_workshop/docker/docker-compose.yaml run dev
     tmux
     source /opt/ros/rolling/setup.bash
     colcon build --symlink-install
     source install/setup.bash
+
 
 Open 2 more terminal in tmux by using CTRL+B and " and CTRL+B and %.
 You can navigate in tmux using CTRL+B and ARROW keys.
