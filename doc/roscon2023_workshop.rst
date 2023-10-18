@@ -26,9 +26,11 @@ Before coming to the conference
 Recommended system setup:
 
 * Ubuntu 20.04 or Ubuntu 22.04
-* docker engine installed
+* docker engine & docker compose installed
 
 If you don't have docker, follow `these instructions <https://docs.docker.com/engine/install/ubuntu>`_ to install it.
+
+If you don't have docker compose, run ``sudo apt-get install docker-compose-plugin`` or follow `these instructions <https://docs.docker.com/compose/install/linux/>`_ to install it.
 
 Once done, grab the latest version of the workshop container by running:
 
