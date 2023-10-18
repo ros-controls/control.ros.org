@@ -3,6 +3,10 @@
 ROSCon 2023 Workshop
 ====================
 
+Slides
+
+`Presentation: ros2_control - ros2_control on Steroids <https://github.com/ros-controls/control.ros.org/blob/master/doc/resources/ROSCon2023_Workshop_ros2_control_on_Steroids.pdf>`_
+
 **Location: Imperial 9**
 
 **Time: 13:00-17:00, 18. October 2023**
