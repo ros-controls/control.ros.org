@@ -34,6 +34,30 @@ Once done, grab the latest version of the workshop container by running:
 
 ``docker pull bmagyar/roscon2023_workshop:latest``
 
+Now, to set up a workspace, run the following commands where you want this to be placed:
+
+  .. code-block:: shell
+
+    mkdir -p ws/src
+    cd ws/src
+    git clone https://github.com/ros-controls/roscon2023_control_workshop
+    vcs import --input roscon2023_control_workshop/roscon2023_control_workshop.ci.repos .
+
+
+You can run things locally if you have all dependencies set up.
+The alternative is using the container which includes all dependencies & comes ready to compile the workspace. Using the same terminal as before (or a new one parked at ``ws/src``) run:
+
+  .. code-block:: shell
+
+    docker compose -f roscon2023_control_workshop/docker/docker-compose.yaml run dev
+    tmux
+    source /opt/ros/rolling/setup.bash
+    colcon build --symlink-install
+    source install/setup.bash
+
+
+Open 2 more terminal in tmux by using CTRL+B and " and CTRL+B and %.
+You can navigate in tmux using CTRL+B and ARROW keys.
 
 People
 ------
