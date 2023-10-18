@@ -45,7 +45,7 @@ Now, to set up a workspace, run the following commands where you want this to be
 
 
 You can run things locally if you have all dependencies set up.
-The alternative is using the container which includes all dependencies & comes ready to compile the workspace. Using the same terminal as before (or a new one parked at `ws/src`) run:
+The alternative is using the container which includes all dependencies & comes ready to compile the workspace. Using the same terminal as before (or a new one parked at ``ws/src``) run:
 
   .. code-block:: shell
 
