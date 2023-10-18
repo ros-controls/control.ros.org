@@ -58,8 +58,9 @@ The alternative is using the container which includes all dependencies & comes r
     source install/setup.bash
 
 
-Open 2 more terminal in tmux by using CTRL+B and " and CTRL+B and %.
-You can navigate in tmux using CTRL+B and ARROW keys.
+Open 2 more terminals in ``tmux`` by using ``CTRL+B`` and ``"`` and ``CTRL+B`` and ``%``.
+
+You can navigate in tmux using ``CTRL+B`` and ``ARROW`` keys.
 
 People
 ------
