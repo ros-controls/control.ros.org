@@ -24,7 +24,9 @@
         <script src="../../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../../search.html" /> 
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Hardware Components" href="../../hardware_interface/doc/hardware_components_userdoc.html" />
+    <link rel="prev" title="Controller Manager" href="userdoc.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -47,9 +49,32 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../doc/index.html">ros2_control</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/index.html">ros2_control</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#api-documentation">API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#features">Features</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/index.html#concepts">Concepts</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="userdoc.html">Controller Manager</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Controller Chaining / Cascade Control</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#scope-of-the-document-and-background-knowledge">Scope of the Document and Background Knowledge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#motivation-purpose-and-use">Motivation, Purpose and Use</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementation">Implementation</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#a-controller-base-class-chainablecontroller">A Controller Base-Class: ChainableController</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#inner-resource-management">Inner Resource Management</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#activation-and-deactivation-chained-controllers">Activation and Deactivation Chained Controllers</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#debugging-outputs">Debugging outputs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#closing-remarks">Closing remarks</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../hardware_interface/doc/hardware_components_userdoc.html">Hardware Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../hardware_interface/doc/mock_components_userdoc.html">Mock Components</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
@@ -77,6 +102,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../doc/index.html">ros2_control</a></li>
       <li class="breadcrumb-item active">Controller Chaining / Cascade Control</li>
       <li class="wy-breadcrumbs-aside">
               <!-- User defined GitHub URL -->
@@ -103,7 +129,7 @@ Nevertheless, the author is convinced that this would add only unnecessary compl
 <section id="motivation-purpose-and-use">
 <h2>Motivation, Purpose and Use<a class="headerlink" href="#motivation-purpose-and-use" title="Link to this heading"></a></h2>
 <p>To describe the intent of this document, lets focus on the simple yet sufficient example <a class="reference external" href="https://github.com/ros-controls/roadmap/blob/master/design_drafts/controller_chaining.md#example-2">Example 2 from ‘controllers_chaining’ design docs</a>:</p>
-<img alt="Example2" src="doc/ros2_control/controller_manager/doc/images/chaining_example2.png" />
+<img alt="Example2" src="../../../../_images/chaining_example2.png" />
 <p>In this example, we want to chain ‘position_tracking’ controller with ‘diff_drive_controller’ and two PID controllers.
 Let’s now imagine a use-case where we don’t only want to run all those controllers as a group, but also flexibly add preceding steps.
 This means the following:</p>
@@ -147,12 +173,12 @@ One can also think of it as an actual chain, you can not add a chain link or bre
 </section>
 <section id="debugging-outputs">
 <h2>Debugging outputs<a class="headerlink" href="#debugging-outputs" title="Link to this heading"></a></h2>
-<p>Flag <code class="docutils literal notranslate"><span class="pre">unavailable</span></code> on reference interface does not provide much information about anything at the moment. So don’t get confused by it. The reason we have it are internal implementation reasons irelevant for the usage.</p>
+<p>Flag <code class="docutils literal notranslate"><span class="pre">unavailable</span></code> if the reference interface does not provide much information about anything at the moment. So don’t get confused by it. The reason we have it are internal implementation reasons irelevant for the usage.</p>
 </section>
 <section id="closing-remarks">
 <h2>Closing remarks<a class="headerlink" href="#closing-remarks" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>Maybe addition of the new controller’s type <code class="docutils literal notranslate"><span class="pre">ChainableController</span></code> is not necessary. It would also be feasible to add implementation of <code class="docutils literal notranslate"><span class="pre">input_interface_configuration()</span></code> method into <code class="docutils literal notranslate"><span class="pre">ControllerInterface</span></code> class with default result <code class="docutils literal notranslate"><span class="pre">interface_configuration_type::NONE</span></code>.</p></li>
+<li><p>Maybe addition of the new controller’s type <code class="docutils literal notranslate"><span class="pre">ChainableController</span></code> is not necessary. It would also be feasible to add an implementation of <code class="docutils literal notranslate"><span class="pre">input_interface_configuration()</span></code> method into <code class="docutils literal notranslate"><span class="pre">ControllerInterface</span></code> class with default result <code class="docutils literal notranslate"><span class="pre">interface_configuration_type::NONE</span></code>.</p></li>
 </ul>
 </section>
 </section>
@@ -160,7 +186,10 @@ One can also think of it as an actual chain, you can not add a chain link or bre
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="userdoc.html" class="btn btn-neutral float-left" title="Controller Manager" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../hardware_interface/doc/hardware_components_userdoc.html" class="btn btn-neutral float-right" title="Hardware Components" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
