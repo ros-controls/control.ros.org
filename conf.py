@@ -175,8 +175,6 @@ html_sourcelink_suffix = ""
 
 
 <<<<<<< HEAD
-# Add branches you want to whtielist here.
-=======
 # Add branches you want to whitelist here.
 >>>>>>> e2b1e8a (Add iron to multiversion (#144))
 smv_branch_whitelist = r"^(foxy|galactic|humble|iron|master)$"
