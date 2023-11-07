@@ -105,9 +105,9 @@ Public Member Functions</h2></td></tr>
 LifecycleNodeInterface::CallbackReturn&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__with__options_1_1ControllerWithOptions.html#af3014c2b58fc34aea1733e16d80f1f64">on_init</a> () override</td></tr>
 <tr class="memdesc:af3014c2b58fc34aea1733e16d80f1f64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extending interface with initialization method which is individual for each controller. <br /></td></tr>
 <tr class="separator:af3014c2b58fc34aea1733e16d80f1f64"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ea78b0218d3c84c3271df959bc1746a"><td class="memItemLeft" align="right" valign="top"><a id="a7ea78b0218d3c84c3271df959bc1746a"></a>
-controller_interface::return_type&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (const std::string &amp;controller_name, const std::string &amp;namespace_=&quot;&quot;, const rclcpp::NodeOptions &amp;node_options=rclcpp::NodeOptions() .allow_undeclared_parameters(true) .automatically_declare_parameters_from_overrides(true)) override</td></tr>
-<tr class="separator:a7ea78b0218d3c84c3271df959bc1746a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc68856438dae96d091deac96cc2f19b"><td class="memItemLeft" align="right" valign="top"><a id="afc68856438dae96d091deac96cc2f19b"></a>
+controller_interface::return_type&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (const std::string &amp;controller_name, const std::string &amp;urdf, const std::string &amp;namespace_=&quot;&quot;, const rclcpp::NodeOptions &amp;node_options=rclcpp::NodeOptions() .allow_undeclared_parameters(true) .automatically_declare_parameters_from_overrides(true)) override</td></tr>
+<tr class="separator:afc68856438dae96d091deac96cc2f19b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a027b6a5015307af7a27481822fed59e0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcontroller__interface_1_1InterfaceConfiguration.html">controller_interface::InterfaceConfiguration</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__with__options_1_1ControllerWithOptions.html#a027b6a5015307af7a27481822fed59e0">command_interface_configuration</a> () const override</td></tr>
 <tr class="memdesc:a027b6a5015307af7a27481822fed59e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get configuration for controller's required command interfaces.  <a href="classcontroller__with__options_1_1ControllerWithOptions.html#a027b6a5015307af7a27481822fed59e0">More...</a><br /></td></tr>
 <tr class="separator:a027b6a5015307af7a27481822fed59e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -151,6 +151,9 @@ CONTROLLER_INTERFACE_PUBLIC unsigned int&#160;</td><td class="memItemRight" vali
 <tr class="memitem:aaf5ff957b5032efd5c13e0b209491399 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memItemLeft" align="right" valign="top"><a id="aaf5ff957b5032efd5c13e0b209491399"></a>
 CONTROLLER_INTERFACE_PUBLIC bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_async</b> () const</td></tr>
 <tr class="separator:aaf5ff957b5032efd5c13e0b209491399 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcf2ca1f97be0b2ec3a2b6f34c77ea9b inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memItemLeft" align="right" valign="top"><a id="abcf2ca1f97be0b2ec3a2b6f34c77ea9b"></a>
+CONTROLLER_INTERFACE_PUBLIC const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_robot_description</b> () const</td></tr>
+<tr class="separator:abcf2ca1f97be0b2ec3a2b6f34c77ea9b inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04df56d589677c015eb11930d66bbfe4 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memTemplParams" colspan="2">template&lt;typename ParameterT &gt; </td></tr>
 <tr class="memitem:a04df56d589677c015eb11930d66bbfe4 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a04df56d589677c015eb11930d66bbfe4">auto_declare</a> (const std::string &amp;name, const ParameterT &amp;default_value)</td></tr>
 <tr class="memdesc:a04df56d589677c015eb11930d66bbfe4 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Declare and initialize a parameter with a type.  <a href="classcontroller__interface_1_1ControllerInterfaceBase.html#a04df56d589677c015eb11930d66bbfe4">More...</a><br /></td></tr>
@@ -177,6 +180,9 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>update_rate_<
 <tr class="memitem:a5434bead46fcc26f537137e852fcb1fa inherit pro_attribs_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memItemLeft" align="right" valign="top"><a id="a5434bead46fcc26f537137e852fcb1fa"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_async_</b> = false</td></tr>
 <tr class="separator:a5434bead46fcc26f537137e852fcb1fa inherit pro_attribs_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd71a07209ec5754b89441499c6dbb4d inherit pro_attribs_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memItemLeft" align="right" valign="top"><a id="afd71a07209ec5754b89441499c6dbb4d"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>urdf_</b> = &quot;&quot;</td></tr>
+<tr class="separator:afd71a07209ec5754b89441499c6dbb4d inherit pro_attribs_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Example of Controller using the ControllerInterface::init(const std::string &amp;, rclcpp::NodeOptions &amp;) function. In this example, we set the node options so that parameters are automatically declared by overrides. This is a rare use case, but it can be useful in some situations. </p>

@@ -125,9 +125,9 @@ CONTROLLER_INTERFACE_PUBLIC void&#160;</td><td class="memItemRight" valign="bott
 <tr class="memitem:a78343670e39b1f1cc969c6decd9de637 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memItemLeft" align="right" valign="top"><a id="a78343670e39b1f1cc969c6decd9de637"></a>
 CONTROLLER_INTERFACE_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><b>release_interfaces</b> ()</td></tr>
 <tr class="separator:a78343670e39b1f1cc969c6decd9de637 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59e3a5ce549a8d69e860fe1cf5fb611d inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memItemLeft" align="right" valign="top"><a id="a59e3a5ce549a8d69e860fe1cf5fb611d"></a>
-virtual CONTROLLER_INTERFACE_PUBLIC return_type&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (const std::string &amp;controller_name, const std::string &amp;namespace_=&quot;&quot;, const rclcpp::NodeOptions &amp;node_options=rclcpp::NodeOptions().enable_logger_service(true))</td></tr>
-<tr class="separator:a59e3a5ce549a8d69e860fe1cf5fb611d inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83396564935d27718c11329c6e26331d inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memItemLeft" align="right" valign="top"><a id="a83396564935d27718c11329c6e26331d"></a>
+virtual CONTROLLER_INTERFACE_PUBLIC return_type&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (const std::string &amp;controller_name, const std::string &amp;urdf, const std::string &amp;namespace_=&quot;&quot;, const rclcpp::NodeOptions &amp;node_options=rclcpp::NodeOptions().enable_logger_service(true))</td></tr>
+<tr class="separator:a83396564935d27718c11329c6e26331d inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e7ab0f474471aaa0e931ea8fe840bcc inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memItemLeft" align="right" valign="top"><a id="a9e7ab0f474471aaa0e931ea8fe840bcc"></a>
 CONTROLLER_INTERFACE_PUBLIC const rclcpp_lifecycle::State &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a9e7ab0f474471aaa0e931ea8fe840bcc">configure</a> ()</td></tr>
 <tr class="memdesc:a9e7ab0f474471aaa0e931ea8fe840bcc inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Custom configure method to read additional parameters for controller-nodes. <br /></td></tr>
@@ -153,6 +153,9 @@ CONTROLLER_INTERFACE_PUBLIC unsigned int&#160;</td><td class="memItemRight" vali
 <tr class="memitem:aaf5ff957b5032efd5c13e0b209491399 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memItemLeft" align="right" valign="top"><a id="aaf5ff957b5032efd5c13e0b209491399"></a>
 CONTROLLER_INTERFACE_PUBLIC bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_async</b> () const</td></tr>
 <tr class="separator:aaf5ff957b5032efd5c13e0b209491399 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcf2ca1f97be0b2ec3a2b6f34c77ea9b inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memItemLeft" align="right" valign="top"><a id="abcf2ca1f97be0b2ec3a2b6f34c77ea9b"></a>
+CONTROLLER_INTERFACE_PUBLIC const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_robot_description</b> () const</td></tr>
+<tr class="separator:abcf2ca1f97be0b2ec3a2b6f34c77ea9b inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04df56d589677c015eb11930d66bbfe4 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memTemplParams" colspan="2">template&lt;typename ParameterT &gt; </td></tr>
 <tr class="memitem:a04df56d589677c015eb11930d66bbfe4 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a04df56d589677c015eb11930d66bbfe4">auto_declare</a> (const std::string &amp;name, const ParameterT &amp;default_value)</td></tr>
 <tr class="memdesc:a04df56d589677c015eb11930d66bbfe4 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Declare and initialize a parameter with a type.  <a href="classcontroller__interface_1_1ControllerInterfaceBase.html#a04df56d589677c015eb11930d66bbfe4">More...</a><br /></td></tr>
@@ -173,6 +176,9 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>update_rate_<
 <tr class="memitem:a5434bead46fcc26f537137e852fcb1fa inherit pro_attribs_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memItemLeft" align="right" valign="top"><a id="a5434bead46fcc26f537137e852fcb1fa"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_async_</b> = false</td></tr>
 <tr class="separator:a5434bead46fcc26f537137e852fcb1fa inherit pro_attribs_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd71a07209ec5754b89441499c6dbb4d inherit pro_attribs_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memItemLeft" align="right" valign="top"><a id="afd71a07209ec5754b89441499c6dbb4d"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>urdf_</b> = &quot;&quot;</td></tr>
+<tr class="separator:afd71a07209ec5754b89441499c6dbb4d inherit pro_attribs_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="aa318f32026cf1dd22733a0ac48c623c0"></a>
