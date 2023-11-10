@@ -23,7 +23,7 @@ You will get a practical overview of concepts like controller chaining, hardware
 Slides
 ------
 
-`Presentation: ros2_control - ros2_control on Steroids <https://github.com/ros-controls/control.ros.org/blob/master/doc/resources/ROSCon2023_Workshop_ros2_control_on_Steroids.pdf>`_
+:download:`Presentation: ros2_control - ros2_control on Steroids <presentations/ROSCon2023_Workshop_ros2_control_on_Steroids.pdf>`
 
 Before coming to the conference
 -------------------------------
