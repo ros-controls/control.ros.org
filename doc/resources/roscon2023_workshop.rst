@@ -3,10 +3,6 @@
 ROSCon 2023 Workshop
 ====================
 
-Slides
-
-`Presentation: ros2_control - ros2_control on Steroids <https://github.com/ros-controls/control.ros.org/blob/master/doc/resources/ROSCon2023_Workshop_ros2_control_on_Steroids.pdf>`_
-
 **Location: Imperial 9**
 
 **Time: 13:00-17:00, 18. October 2023**
@@ -14,7 +10,7 @@ Slides
 ros2_control on Steroids
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-  .. image:: ../images/ROSCon2023.jpg
+  .. image:: images/ROSCon2023.jpg
       :scale: 50%
 
 Summary
@@ -23,6 +19,11 @@ Summary
 If you already know that the ros2_control framework acts as a Kernel for ROS 2 robotics systems, you are using it but struggling with application complexity, then this workshop is for you. The workshop covers the use of ros2_control in products from various industries and shows solutions for all the little issues when running 24/7.
 
 You will get a practical overview of concepts like controller chaining, hardware modularization, multi-robot architectures, parameter injection, and debugging of complex systems. On top of showcasing these functionalities, we expect your involvement in the discussion by bringing your complex application and discussing existing and potentially missing tooling in ros2_control.
+
+Slides
+------
+
+`Presentation: ros2_control - ros2_control on Steroids <https://github.com/ros-controls/control.ros.org/blob/master/doc/resources/ROSCon2023_Workshop_ros2_control_on_Steroids.pdf>`_
 
 Before coming to the conference
 -------------------------------
