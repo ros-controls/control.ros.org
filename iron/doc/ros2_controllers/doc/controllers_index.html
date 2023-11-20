@@ -53,30 +53,32 @@
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ros2_control/doc/index.html">ros2_control</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">ros2_controllers</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#nomenclature">Nomenclature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#guidelines-and-best-practices">Guidelines and Best Practices</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="writing_new_controller.html">Writing a new controller</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#available-controllers">Available Controllers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#controllers-for-mobile-robots">Controllers for Mobile Robots</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ackermann_steering_controller/doc/userdoc.html">Ackermann Steering Controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../admittance_controller/doc/userdoc.html">Admittance Controller</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../bicycle_steering_controller/doc/userdoc.html">Bicycle Steering Controller</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../diff_drive_controller/doc/userdoc.html">Differential Drive Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../steering_controllers_library/doc/userdoc.html">Steering Controllers Library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tricycle_controller/doc/userdoc.html">Tricycle Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tricycle_steering_controller/doc/userdoc.html">Tricycle Steering Controller</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#controllers-for-manipulators-and-other-robots">Controllers for Manipulators and Other Robots</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../admittance_controller/doc/userdoc.html">Admittance Controller</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../effort_controllers/doc/userdoc.html">Effort Controllers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../forward_command_controller/doc/userdoc.html">Forward Command Controller</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../gripper_controllers/doc/userdoc.html">Gripper Controller</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../joint_trajectory_controller/doc/userdoc.html">Joint Trajectory Controller</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../position_controllers/doc/userdoc.html">Position Controllers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../steering_controllers_library/doc/userdoc.html">Steering Controllers Library</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tricycle_controller/doc/userdoc.html">Tricycle Controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tricycle_steering_controller/doc/userdoc.html">Tricycle Steering Controller</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../velocity_controllers/doc/userdoc.html">Velocity Controllers</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#available-broadcasters">Available Broadcasters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#broadcasters">Broadcasters</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../force_torque_sensor_broadcaster/doc/userdoc.html">Force Torque Sensor Broadcaster</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../imu_sensor_broadcaster/doc/userdoc.html">Imu Sensor Broadcaster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../imu_sensor_broadcaster/doc/userdoc.html">IMU Sensor Broadcaster</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../joint_state_broadcaster/doc/userdoc.html">Joint State Broadcaster</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../range_sensor_broadcaster/doc/userdoc.html">Range Sensor Broadcaster</a></li>
 </ul>
@@ -122,22 +124,8 @@
              
   <section id="ros2-controllers">
 <span id="controllers"></span><h1>ros2_controllers<a class="headerlink" href="#ros2-controllers" title="Link to this heading"></a></h1>
-<p><a class="reference external" href="https://github.com/ros-controls/ros2_controllers">GitHub Repository</a></p>
-<section id="nomenclature">
-<h2>Nomenclature<a class="headerlink" href="#nomenclature" title="Link to this heading"></a></h2>
-<p>The ros2_control framework uses namespaces to sort controller according to the type of command interface they are using.
-The controllers are using <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/include/hardware_interface/types/hardware_interface_type_values.hpp">common hardware interface definitions</a>.
-The controllers’ namespaces are commanding the following command interface types:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">position_controllers</span></code>: <code class="docutils literal notranslate"><span class="pre">hardware_interface::HW_IF_POSITION</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">velocity_controller</span></code>: <code class="docutils literal notranslate"><span class="pre">hardware_interface::HW_IF_VELOCITY</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">effort_controllers</span></code>: <code class="docutils literal notranslate"><span class="pre">hardware_interface::HW_IF_ACCELERATION</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">effort_controllers</span></code>: <code class="docutils literal notranslate"><span class="pre">hardware_interface::HW_IF_EFFORT</span></code></p></li>
-<li><p>…</p></li>
-</ul>
-</div></blockquote>
-</section>
+<p>Commonly used and generalized controllers for ros2_control framework that are ready to use with many robots, <a class="reference external" href="https://moveit.picknik.ai/main/index.html">MoveIt2</a> and <a class="reference external" href="https://navigation.ros.org/">Nav2</a>.</p>
+<p><a class="reference external" href="https://github.com/ros-controls/ros2_controllers">Link to GitHub Repository</a></p>
 <section id="guidelines-and-best-practices">
 <h2>Guidelines and Best Practices<a class="headerlink" href="#guidelines-and-best-practices" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -146,14 +134,33 @@ The controllers’ namespaces are commanding the following command interface typ
 </ul>
 </div>
 </section>
-<section id="available-controllers">
-<h2>Available Controllers<a class="headerlink" href="#available-controllers" title="Link to this heading"></a></h2>
+<section id="controllers-for-mobile-robots">
+<h2>Controllers for Mobile Robots<a class="headerlink" href="#controllers-for-mobile-robots" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../ackermann_steering_controller/doc/userdoc.html">Ackermann Steering Controller</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../admittance_controller/doc/userdoc.html">Admittance Controller</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../bicycle_steering_controller/doc/userdoc.html">Bicycle Steering Controller</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../diff_drive_controller/doc/userdoc.html">Differential Drive Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../steering_controllers_library/doc/userdoc.html">Steering Controllers Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tricycle_controller/doc/userdoc.html">Tricycle Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tricycle_steering_controller/doc/userdoc.html">Tricycle Steering Controller</a></li>
+</ul>
+</div>
+</section>
+<section id="controllers-for-manipulators-and-other-robots">
+<h2>Controllers for Manipulators and Other Robots<a class="headerlink" href="#controllers-for-manipulators-and-other-robots" title="Link to this heading"></a></h2>
+<p>The controllers are using <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/include/hardware_interface/types/hardware_interface_type_values.hpp">common hardware interface definitions</a>, and may use namespaces depending on the following command interface types:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">position_controllers</span></code>: <code class="docutils literal notranslate"><span class="pre">hardware_interface::HW_IF_POSITION</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">velocity_controller</span></code>: <code class="docutils literal notranslate"><span class="pre">hardware_interface::HW_IF_VELOCITY</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">effort_controllers</span></code>: <code class="docutils literal notranslate"><span class="pre">hardware_interface::HW_IF_ACCELERATION</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">effort_controllers</span></code>: <code class="docutils literal notranslate"><span class="pre">hardware_interface::HW_IF_EFFORT</span></code></p></li>
+</ul>
+</div></blockquote>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../admittance_controller/doc/userdoc.html">Admittance Controller</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../effort_controllers/doc/userdoc.html">Effort Controllers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../forward_command_controller/doc/userdoc.html">Forward Command Controller</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../gripper_controllers/doc/userdoc.html">Gripper Controller</a></li>
@@ -164,19 +171,18 @@ The controllers’ namespaces are commanding the following command interface typ
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../position_controllers/doc/userdoc.html">Position Controllers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../steering_controllers_library/doc/userdoc.html">Steering Controllers Library</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tricycle_controller/doc/userdoc.html">Tricycle Controller</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tricycle_steering_controller/doc/userdoc.html">Tricycle Steering Controller</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../velocity_controllers/doc/userdoc.html">Velocity Controllers</a></li>
 </ul>
 </div>
 </section>
-<section id="available-broadcasters">
-<h2>Available Broadcasters<a class="headerlink" href="#available-broadcasters" title="Link to this heading"></a></h2>
+<section id="broadcasters">
+<h2>Broadcasters<a class="headerlink" href="#broadcasters" title="Link to this heading"></a></h2>
+<p>Broadcasters are used to publish sensor data from hardware components to ROS topics.
+In the sense of ros2_control, broadcasters are still controllers using the same controller interface as the other controllers above.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../force_torque_sensor_broadcaster/doc/userdoc.html">Force Torque Sensor Broadcaster</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../imu_sensor_broadcaster/doc/userdoc.html">Imu Sensor Broadcaster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../imu_sensor_broadcaster/doc/userdoc.html">IMU Sensor Broadcaster</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../joint_state_broadcaster/doc/userdoc.html">Joint State Broadcaster</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../range_sensor_broadcaster/doc/userdoc.html">Range Sensor Broadcaster</a></li>
 </ul>
