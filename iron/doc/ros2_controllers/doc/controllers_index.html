@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ros2_controllers &mdash; ROS2_Control: Iron Nov 2023 documentation</title>
+  <title>ros2_controllers &mdash; ROS2_Control: Iron Dec 2023 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -19,7 +19,7 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=cbdb7d40"></script>
+        <script src="../../../_static/documentation_options.js?v=754da34c"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -85,6 +85,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../range_sensor_broadcaster/doc/userdoc.html">Range Sensor Broadcaster</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#common-controller-parameters">Common Controller Parameters</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../ros2_control_demos/doc/index.html">Demos</a></li>
@@ -189,6 +190,14 @@ In the sense of ros2_control, broadcasters are still controllers using the same 
 <li class="toctree-l1"><a class="reference internal" href="../range_sensor_broadcaster/doc/userdoc.html">Range Sensor Broadcaster</a></li>
 </ul>
 </div>
+</section>
+<section id="common-controller-parameters">
+<h2>Common Controller Parameters<a class="headerlink" href="#common-controller-parameters" title="Link to this heading"></a></h2>
+<p>Every controller and broadcaster has a few common parameters. They are optional, but if needed they have to be set before <code class="docutils literal notranslate"><span class="pre">onConfigure</span></code> transition to <code class="docutils literal notranslate"><span class="pre">inactive</span></code> state, see <a class="reference external" href="https://design.ros2.org/articles/node_lifecycle.html">lifecycle documents</a>. Once the controllers are already loaded, this transition is done using the service <code class="docutils literal notranslate"><span class="pre">configure_controller</span></code> of the controller_manager.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">update_rate</span></code>: An unsigned integer parameter representing the rate at which every controller/broadcaster runs its update cycle. When unspecified, they run at the same frequency as the controller_manager.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_async</span></code>: A boolean parameter that is needed to specify if the controller update needs to run asynchronously.</p></li>
+</ul>
 </section>
 </section>
 
