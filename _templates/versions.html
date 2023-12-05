@@ -7,21 +7,21 @@
   </span>
   <div class="rst-other-versions">
     <dl>
-      <dt>In Development</dt>
-      {%- for item in versions.in_development|sort(reverse=True) %}
-      <dd><a href="{{ item.url }}">{{ item.name|title }} (latest)</a></dd>
-      {%- endfor %}
-    </dl>
-    <dl>
       <dt>Releases</dt>
       {%- for item in versions.releases|sort(reverse=True) %}
         {%- if item.name == latest_version.name %}
-        <dd><a href="{{ item.url }}">{{ item.name|title }} (recommended)</a></dd><br>
+        <dd><a href="{{ item.url }}">{{ item.name|title }} (latest)</a></dd><br>
         {%- elif item.name in eol_versions %}
         <dd><a href="{{ item.url }}">{{ item.name|title }} (EOL)</a></dd><br>
         {% else %}
         <dd><a href="{{ item.url }}">{{ item.name|title }}</a></dd><br>
         {%- endif %}
+      {%- endfor %}
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      {%- for item in versions.in_development|sort(reverse=True) %}
+      <dd><a href="{{ item.url }}">{{ item.name|title }}</a></dd>
       {%- endfor %}
     </dl>
   </div>
