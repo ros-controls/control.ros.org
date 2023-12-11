@@ -235,13 +235,16 @@ reviewers_stats, ct_pulls = get_reviewers_stats(owner, repos, branches, formatte
 print(f"Reviewers' Stats from {ct_pulls} pull requests after {formatted_date}:")
 print("-----------------")
 for reviewer, stats in sorted(reviewers_stats.items(), key=lambda x: x[1]['finished_reviews'], reverse=True)[:10]:
-  print(f"Reviewer: {reviewer}, Assigned Reviews: {stats['assigned_reviews']}, Finished Reviews: {stats['finished_reviews']}, rate of finished: {stats['finished_reviews']/stats['assigned_reviews']}, Last Review Date: {stats['last_review_date']}")
+  print(f"Reviewer: {reviewer}, Assigned Reviews: {stats['assigned_reviews']}, Finished Reviews: {stats['finished_reviews']}, rate of finished: {stats['finished_reviews']/stats['assigned_reviews']:.2f}, Last Review Date: {stats['last_review_date']}")
 
 # Create the HTML content
 html_content_with_graph = create_reviewers_table_with_graph(reviewers_stats)
 
 # Save the HTML content to a file named "reviewers_stats_with_graph.html"
-with open('reviewers_stats_with_graph.html', 'w') as file:
+home_directory = os.path.expanduser( '~' )
+filename = os.path.join(home_directory, 'reviews', 'reviewers_stats_with_graph.html')
+os.makedirs(os.path.dirname(filename), exist_ok=True)
+with open(filename, 'w') as file:
     file.write(html_content_with_graph)
 
-print("HTML file 'reviewers_stats_with_graph.html' has been created.")
+print(f"HTML file {filename} has been created.")
