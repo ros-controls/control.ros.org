@@ -13,6 +13,7 @@ var searchData=
   ['reset_174',['reset',['../classjoint__limits__interface_1_1JointLimitHandle.html#a1304a3e3f9550831b61ddc9afe03160a',1,'joint_limits_interface::JointLimitHandle']]],
   ['resourcemanager_175',['ResourceManager',['../classhardware__interface_1_1ResourceManager.html',1,'hardware_interface::ResourceManager'],['../classhardware__interface_1_1ResourceManager.html#abeb416c9383d4d76db9f6a7a28741189',1,'hardware_interface::ResourceManager::ResourceManager()'],['../classhardware__interface_1_1ResourceManager.html#a7db16507671537bf1119c170b7ec39b7',1,'hardware_interface::ResourceManager::ResourceManager(const std::string &amp;urdf, bool validate_interfaces=true, bool activate_all=false)']]],
   ['resourcemanagertest_176',['ResourceManagerTest',['../classResourceManagerTest.html',1,'']]],
-  ['resourcestorage_177',['ResourceStorage',['../classhardware__interface_1_1ResourceStorage.html',1,'hardware_interface']]],
-  ['ros2_5fcontrol_178',['ros2_control',['../index.html',1,'']]]
+  ['resourcemanagertestreadwriteerror_177',['ResourceManagerTestReadWriteError',['../classResourceManagerTestReadWriteError.html',1,'']]],
+  ['resourcestorage_178',['ResourceStorage',['../classhardware__interface_1_1ResourceStorage.html',1,'hardware_interface']]],
+  ['ros2_5fcontrol_179',['ros2_control',['../index.html',1,'']]]
 ];
