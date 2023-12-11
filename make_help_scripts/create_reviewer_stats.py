@@ -1,5 +1,4 @@
 import requests
-import csv
 from datetime import datetime, timedelta
 
 def get_reviewers_stats(owner, repos, branches, earliest_date="0000-00-00T00:00:00Z"):
