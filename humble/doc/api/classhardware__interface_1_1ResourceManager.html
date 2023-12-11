@@ -130,6 +130,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa169723dd5cab86ea38e8eb08d5bec06"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceManager.html#aa169723dd5cab86ea38e8eb08d5bec06">remove_controller_reference_interfaces</a> (const std::string &amp;controller_name)</td></tr>
 <tr class="memdesc:aa169723dd5cab86ea38e8eb08d5bec06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove controllers reference interfaces from resource manager.  <a href="classhardware__interface_1_1ResourceManager.html#aa169723dd5cab86ea38e8eb08d5bec06">More...</a><br /></td></tr>
 <tr class="separator:aa169723dd5cab86ea38e8eb08d5bec06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebd2b8965df0a5eff2bac71ad80f1c22"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceManager.html#aebd2b8965df0a5eff2bac71ad80f1c22">cache_controller_to_hardware</a> (const std::string &amp;controller_name, const std::vector&lt; std::string &gt; &amp;interfaces)</td></tr>
+<tr class="memdesc:aebd2b8965df0a5eff2bac71ad80f1c22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cache mapping between hardware and controllers using it.  <a href="classhardware__interface_1_1ResourceManager.html#aebd2b8965df0a5eff2bac71ad80f1c22">More...</a><br /></td></tr>
+<tr class="separator:aebd2b8965df0a5eff2bac71ad80f1c22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74df02b374391ed286443e2f64f4e497"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceManager.html#a74df02b374391ed286443e2f64f4e497">get_cached_controllers_to_hardware</a> (const std::string &amp;hardware_name)</td></tr>
+<tr class="memdesc:a74df02b374391ed286443e2f64f4e497"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return cached controllers for a specific hardware.  <a href="classhardware__interface_1_1ResourceManager.html#a74df02b374391ed286443e2f64f4e497">More...</a><br /></td></tr>
+<tr class="separator:a74df02b374391ed286443e2f64f4e497"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ad7a585a53874e549bd8b252e5432f0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceManager.html#a1ad7a585a53874e549bd8b252e5432f0">command_interface_is_claimed</a> (const std::string &amp;key) const</td></tr>
 <tr class="memdesc:a1ad7a585a53874e549bd8b252e5432f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether a command interface is already claimed.  <a href="classhardware__interface_1_1ResourceManager.html#a1ad7a585a53874e549bd8b252e5432f0">More...</a><br /></td></tr>
 <tr class="separator:a1ad7a585a53874e549bd8b252e5432f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -178,12 +184,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a20d11cea529a849400a6a885fc9f8a64"><td class="memItemLeft" align="right" valign="top">return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceManager.html#a20d11cea529a849400a6a885fc9f8a64">set_component_state</a> (const std::string &amp;component_name, rclcpp_lifecycle::State &amp;target_state)</td></tr>
 <tr class="memdesc:a20d11cea529a849400a6a885fc9f8a64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets state of hardware component.  <a href="classhardware__interface_1_1ResourceManager.html#a20d11cea529a849400a6a885fc9f8a64">More...</a><br /></td></tr>
 <tr class="separator:a20d11cea529a849400a6a885fc9f8a64"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2131e0c03b7e0da2026712a765ee1718"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceManager.html#a2131e0c03b7e0da2026712a765ee1718">read</a> (const rclcpp::Time &amp;time, const rclcpp::Duration &amp;period)</td></tr>
-<tr class="memdesc:a2131e0c03b7e0da2026712a765ee1718"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads all loaded hardware components.  <a href="classhardware__interface_1_1ResourceManager.html#a2131e0c03b7e0da2026712a765ee1718">More...</a><br /></td></tr>
-<tr class="separator:a2131e0c03b7e0da2026712a765ee1718"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f5545956694ec7f4b7066cafb8088ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceManager.html#a6f5545956694ec7f4b7066cafb8088ee">write</a> (const rclcpp::Time &amp;time, const rclcpp::Duration &amp;period)</td></tr>
-<tr class="memdesc:a6f5545956694ec7f4b7066cafb8088ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write all loaded hardware components.  <a href="classhardware__interface_1_1ResourceManager.html#a6f5545956694ec7f4b7066cafb8088ee">More...</a><br /></td></tr>
-<tr class="separator:a6f5545956694ec7f4b7066cafb8088ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fe34534b983c80a80cb501d8ab837c7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structhardware__interface_1_1HardwareReadWriteStatus.html">HardwareReadWriteStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceManager.html#a9fe34534b983c80a80cb501d8ab837c7">read</a> (const rclcpp::Time &amp;time, const rclcpp::Duration &amp;period)</td></tr>
+<tr class="memdesc:a9fe34534b983c80a80cb501d8ab837c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads all loaded hardware components.  <a href="classhardware__interface_1_1ResourceManager.html#a9fe34534b983c80a80cb501d8ab837c7">More...</a><br /></td></tr>
+<tr class="separator:a9fe34534b983c80a80cb501d8ab837c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2cbef1c78b8b5357c0b8e8d97cb077e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structhardware__interface_1_1HardwareReadWriteStatus.html">HardwareReadWriteStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceManager.html#af2cbef1c78b8b5357c0b8e8d97cb077e">write</a> (const rclcpp::Time &amp;time, const rclcpp::Duration &amp;period)</td></tr>
+<tr class="memdesc:af2cbef1c78b8b5357c0b8e8d97cb077e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write all loaded hardware components.  <a href="classhardware__interface_1_1ResourceManager.html#af2cbef1c78b8b5357c0b8e8d97cb077e">More...</a><br /></td></tr>
+<tr class="separator:af2cbef1c78b8b5357c0b8e8d97cb077e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0a5f6f6e551369f782e1e3345f983f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceManager.html#ae0a5f6f6e551369f782e1e3345f983f9">activate_all_components</a> ()</td></tr>
 <tr class="memdesc:ae0a5f6f6e551369f782e1e3345f983f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activates all available hardware components in the system.  <a href="classhardware__interface_1_1ResourceManager.html#ae0a5f6f6e551369f782e1e3345f983f9">More...</a><br /></td></tr>
 <tr class="separator:ae0a5f6f6e551369f782e1e3345f983f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -321,6 +327,44 @@ Public Member Functions</h2></td></tr>
 
 <p>Returns all available state interfaces keys. </p>
 <p>The keys are collected from the available list. </p><dl class="section return"><dt>Returns</dt><dd>Vector of strings, containing all available state interface names. </dd></dl>
+
+</div>
+</div>
+<a id="aebd2b8965df0a5eff2bac71ad80f1c22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebd2b8965df0a5eff2bac71ad80f1c22">&#9670;&nbsp;</a></span>cache_controller_to_hardware()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void hardware_interface::ResourceManager::cache_controller_to_hardware </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>controller_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; std::string &gt; &amp;&#160;</td>
+          <td class="paramname"><em>interfaces</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Cache mapping between hardware and controllers using it. </p>
+<p>Find mapping between controller and hardware based on interfaces controller with <code>controller_name</code> is using and cache those for later usage.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">controller_name</td><td>name of the controller which interfaces are provided. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">interfaces</td><td>list of interfaces controller with <code>controller_name</code> is using. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -479,6 +523,34 @@ Public Member Functions</h2></td></tr>
 
 <p>Returns all registered command interfaces keys. </p>
 <p>The keys are collected from each loaded hardware component. </p><dl class="section return"><dt>Returns</dt><dd>vector of strings, containing all registered keys. </dd></dl>
+
+</div>
+</div>
+<a id="a74df02b374391ed286443e2f64f4e497"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74df02b374391ed286443e2f64f4e497">&#9670;&nbsp;</a></span>get_cached_controllers_to_hardware()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::string &gt; hardware_interface::ResourceManager::get_cached_controllers_to_hardware </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>hardware_name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return cached controllers for a specific hardware. </p>
+<p>Return list of cached controller names that use the hardware with name <code>hardware_name</code>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">hardware_name</td><td>the name of the hardware for which cached controllers should be returned. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>list of cached controller names that depend on hardware with name <code>hardware_name</code>. </dd></dl>
 
 </div>
 </div>
@@ -891,14 +963,14 @@ accept_command_resource_claim is called on all actuators and system components a
 
 </div>
 </div>
-<a id="a2131e0c03b7e0da2026712a765ee1718"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2131e0c03b7e0da2026712a765ee1718">&#9670;&nbsp;</a></span>read()</h2>
+<a id="a9fe34534b983c80a80cb501d8ab837c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fe34534b983c80a80cb501d8ab837c7">&#9670;&nbsp;</a></span>read()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void hardware_interface::ResourceManager::read </td>
+          <td class="memname"><a class="el" href="structhardware__interface_1_1HardwareReadWriteStatus.html">HardwareReadWriteStatus</a> hardware_interface::ResourceManager::read </td>
           <td>(</td>
           <td class="paramtype">const rclcpp::Time &amp;&#160;</td>
           <td class="paramname"><em>time</em>, </td>
@@ -1092,14 +1164,14 @@ accept_command_resource_claim is called on all actuators and system components a
 
 </div>
 </div>
-<a id="a6f5545956694ec7f4b7066cafb8088ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f5545956694ec7f4b7066cafb8088ee">&#9670;&nbsp;</a></span>write()</h2>
+<a id="af2cbef1c78b8b5357c0b8e8d97cb077e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2cbef1c78b8b5357c0b8e8d97cb077e">&#9670;&nbsp;</a></span>write()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void hardware_interface::ResourceManager::write </td>
+          <td class="memname"><a class="el" href="structhardware__interface_1_1HardwareReadWriteStatus.html">HardwareReadWriteStatus</a> hardware_interface::ResourceManager::write </td>
           <td>(</td>
           <td class="paramtype">const rclcpp::Time &amp;&#160;</td>
           <td class="paramname"><em>time</em>, </td>
