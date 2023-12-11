@@ -26,14 +26,14 @@ jobs:
         python -m pip install --upgrade pip
         pip install --upgrade --requirement requirements.txt
       shell: bash
-    - name: Cache stats
-      uses: actions/cache@v3
-      with:
-        key: reviewer-stats
-        path: ~/reviews
     - name: Get stats
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         python make_help_scripts/create_reviewer_stats.py
       shell: bash
+    - name: Cache stats
+      uses: actions/cache/save@v3
+      with:
+        key: reviewer-stats
+        path: ~/reviews

@@ -2,6 +2,10 @@
 
 Acknowledgements
 ================
+
+.. raw:: html
+   :file: reviewers_stats_with_graph.html
+
 The project has received major contributions from the following companies and institutions.
 
 |palroboticslogo|
