@@ -2,6 +2,16 @@ name: "Create Reviewer Stats"
 
 on:
   workflow_dispatch:
+  pull_request: # run if the file changed on a PR to master
+    branches:
+      - master
+    paths:
+    - 'make_help_scripts/create_reviewer_stats.py'
+  push: # run if the file changed by pushes to master
+    branches:
+      - master
+    paths:
+    - 'make_help_scripts/create_reviewer_stats.py'
   schedule:
   # Run every morning to ensure component documentation is up to date on deployment
    - cron: '23 3 * * *'
