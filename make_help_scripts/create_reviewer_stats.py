@@ -2,19 +2,41 @@ import requests
 import os
 from datetime import datetime, timedelta
 
-global_header = {
-  "Accept": "application/vnd.github.v3+json",
-  "Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}"
-}
-
-def get_user_name(user):
-  url = f"https://api.github.com/users/{user}"
+def get_api_response(url):
+  global_header = {
+    "Accept": "application/vnd.github.v3+json",
+    "Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}"
+  }
+  # TODO(anyone): add error handling
   response = requests.get(url, headers=global_header)
   if response.status_code != 200:
     print(f"Error: {response.json()['message']}")
+    return [], response
+  json = response.json()
+
+  return json, response
+
+def get_all_pages(url):
+    while url:
+        json, response = get_api_response(url)
+
+        yield json
+
+        if 'next' in response.links:
+            url = response.links['next']['url']
+        else:
+            url = None
+
+
+def get_user_name(user):
+  url = f"https://api.github.com/users/{user}"
+  json, response = get_api_response(url)
+
+  if json:
+    return json["name"]
+  else:
     return ""
-  user = response.json()
-  return user["name"]
+
 
 def get_reviewers_stats(owner, repos, branches, whitelist, earliest_date="0000-00-00T00:00:00Z"):
 
@@ -27,13 +49,7 @@ def get_reviewers_stats(owner, repos, branches, whitelist, earliest_date="0000-0
 
     url = f"https://api.github.com/repos/{owner}/{repo}/pulls?state=closed&base={branches[repo]}&per_page=100"
 
-    while url:
-      response = requests.get(url, headers=global_header)
-      if response.status_code != 200:
-        print(f"Error: {response.json()['message']}")
-        break
-
-      pulls = response.json()
+    for pulls in get_all_pages(url):
 
       for pull in pulls:
         if pull["created_at"] > earliest_date:
@@ -49,7 +65,6 @@ def get_reviewers_stats(owner, repos, branches, whitelist, earliest_date="0000-0
                 reviewers[reviewer_login]["assigned_reviews"] += 1
               else:
                 reviewers[reviewer_login] = {
-                  "name": get_user_name(reviewer_login),
                   "avatar_url": reviewer["avatar_url"],
                   "assigned_reviews": 1,
                   "finished_reviews": 0,
@@ -61,7 +76,6 @@ def get_reviewers_stats(owner, repos, branches, whitelist, earliest_date="0000-0
                 reviewers_whitelist[reviewer_login]["assigned_reviews"] += 1
               else:
                 reviewers_whitelist[reviewer_login] = {
-                  "name": get_user_name(reviewer_login),
                   "avatar_url": reviewer["avatar_url"],
                   "assigned_reviews": 1,
                   "finished_reviews": 0,
@@ -70,13 +84,9 @@ def get_reviewers_stats(owner, repos, branches, whitelist, earliest_date="0000-0
 
           # Get reviews for the pull request, but count only once per PR
           pull_reviews_url = pull["url"] + "/reviews"
-          pull_reviews_response = requests.get(pull_reviews_url, headers=global_header)
-          if pull_reviews_response.status_code != 200:
-            print(f"Error: {pull_reviews_response.json()['message']}")
-            break
-          pull_reviews = pull_reviews_response.json()
-
+          pull_reviews, _ = get_api_response(pull_reviews_url)
           local_reviewers = {} # prevent double counting
+
           for review in pull_reviews:
             reviewer_login = review["user"]["login"]
             date = review["submitted_at"]
@@ -91,7 +101,6 @@ def get_reviewers_stats(owner, repos, branches, whitelist, earliest_date="0000-0
                   reviewers[reviewer_login]["last_review_date"] = date
               else:
                 reviewers[reviewer_login] = {
-                  "name": get_user_name(reviewer_login),
                   "avatar_url": review["user"]["avatar_url"],
                   "assigned_reviews": 1,
                   "finished_reviews": 1,
@@ -109,7 +118,6 @@ def get_reviewers_stats(owner, repos, branches, whitelist, earliest_date="0000-0
                   reviewers_whitelist[reviewer_login]["last_review_date"] = date
               else:
                 reviewers_whitelist[reviewer_login] = {
-                  "name": get_user_name(reviewer_login),
                   "avatar_url": review["user"]["avatar_url"],
                   "assigned_reviews": 1,
                   "finished_reviews": 1,
@@ -117,21 +125,9 @@ def get_reviewers_stats(owner, repos, branches, whitelist, earliest_date="0000-0
                 }
                 local_reviewers[reviewer_login] = True
 
-      # Check if there are more pages
-      if "Link" in response.headers:
-        links = response.headers["Link"].split(", ")
-        for link in links:
-          if "rel=\"next\"" in link:
-            url = link[link.index("<") + 1 : link.index(">")]
-            break
-        else:
-          url = None
-      else:
-        url = None
-
   return reviewers, reviewers_whitelist, ct_pull
 
-def create_reviewers_table_with_graph(reviewers_stats, table_name):
+def create_reviewers_table_with_graph(reviewers_stats, user_names, table_name):
     """ style sheet for the table, copy into css file
         <style>
             table {{
@@ -233,7 +229,7 @@ def create_reviewers_table_with_graph(reviewers_stats, table_name):
                       </div>
                       <div>
                         <div>
-                          <b>{stats['name']}</b> <br>
+                          <b>{user_names[reviewer]}</b> <br>
                           <a href="https://github.com/{reviewer}" target="_blank"><img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" width="16" height="16" alt="{reviewer}">{reviewer}</a>
                         </div>
                       </div>
@@ -324,6 +320,21 @@ print("--------------------------")
 print(f"Fetch pull requests, all-time:")
 reviewers_stats, maintainers_stats, ct_pulls = get_reviewers_stats(owner, repos, branches, maintainers)
 
+print("--------------------------")
+print("-------- Get User --------")
+print("--------------------------")
+unique_reviewers = set(
+  list(reviewers_stats_recent.keys())
+  + list(maintainers_stats_recent.keys())
+  + list(reviewers_stats.keys())
+  + list(maintainers_stats.keys())
+  )
+user_names = {}
+for reviewer_login in unique_reviewers:
+    user_names[reviewer_login] = get_user_name(reviewer_login)
+
+print(f"Got {len(unique_reviewers)} user names")
+
 # Print the reviewers' stats in a nice format
 print("--------------------------")
 print("-------- Results ---------")
@@ -343,10 +354,10 @@ print("-------- not maintainers ---------")
 print_reviewers_stats(reviewers_stats)
 
 # Create the HTML content
-html_maintainers_stats_recent = create_reviewers_table_with_graph(maintainers_stats_recent, "maintainers_stats_recent")
-html_reviewers_stats_recent = create_reviewers_table_with_graph(reviewers_stats_recent, "reviewers_stats_recent")
-html_maintainers_stats = create_reviewers_table_with_graph(maintainers_stats, "maintainers_stats")
-html_reviewers_stats = create_reviewers_table_with_graph(reviewers_stats, "reviewers_stats")
+html_maintainers_stats_recent = create_reviewers_table_with_graph(maintainers_stats_recent, user_names, "maintainers_stats_recent")
+html_reviewers_stats_recent = create_reviewers_table_with_graph(reviewers_stats_recent, user_names, "reviewers_stats_recent")
+html_maintainers_stats = create_reviewers_table_with_graph(maintainers_stats, user_names, "maintainers_stats")
+html_reviewers_stats = create_reviewers_table_with_graph(reviewers_stats, user_names, "reviewers_stats")
 
 # Save the HTML content to a file named "reviewers_stats_with_graph.html"
 home_directory = os.path.expanduser( '~' )
