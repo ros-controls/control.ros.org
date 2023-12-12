@@ -3,12 +3,44 @@
 Acknowledgements
 ================
 
-Reviewers' Stats
+Maintainers
 ----------------
-The following people have contributed to the development of this project by giving valuable reviews of pull requests, see :ref:`doc/contributing/contributing:contributing` for more information.
+The following people were maintaining the ``ros2_control`` framework, showing their all-time review activity:
 
 .. raw:: html
-   :file: reviewers_stats_with_graph.html
+   :file: maintainers_stats.html
+
+Activity during the past 12 months:
+
+.. raw:: html
+  :file: maintainers_stats_recent.html
+
+Reviewers' Stats
+----------------
+The following people have contributed to the development of this project by giving valuable reviews for pull requests, see :ref:`doc/contributing/contributing:contributing` for more information.
+
+.. raw:: html
+  :file: reviewers_stats.html
+
+Activity during the past 12 months:
+
+.. raw:: html
+  :file: reviewers_stats_recent.html
+
+Contributors
+----------------
+
+The following links lists people who have contributed to the development of this project by submitting pull requests to the respective repository, see :ref:`doc/contributing/contributing:contributing` for more information.
+
+* `ros2_control <https://github.com/ros-controls/ros2_control/graphs/contributors>`_
+* `ros2_controllers <https://github.com/ros-controls/ros2_controllers/graphs/contributors>`_
+* `ros2_control_demos <https://github.com/ros-controls/ros2_control_demos/graphs/contributors>`_
+* `control_toolbox <https://github.com/ros-controls/control_toolbox/graphs/contributors>`_
+* `gazebo_ros2_control <https://github.com/ros-controls/gazebo_ros2_control/graphs/contributors>`_
+* `gz_ros2_control <https://github.com/ros-controls/gz_ros2_control/graphs/contributors>`_
+* `realtime_tools <https://github.com/ros-controls/realtime_tools/graphs/contributors>`_
+* `kinematics_interface <https://github.com/ros-controls/kinematics_interface/graphs/contributors>`_
+* `control_msgs <https://github.com/ros-controls/control_msgs/graphs/contributors>`_
 
 
 Companies and Institutions
