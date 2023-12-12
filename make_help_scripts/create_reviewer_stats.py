@@ -207,8 +207,7 @@ def create_reviewers_table_with_graph(reviewers_stats):
 
 # Replace with your GitHub repository owner and name
 owner = "ros-controls"
-# repos = ["ros2_control", "ros2_controllers", "ros2_control_demos", "control_toolbox", "realtime_tools", "control_msgs", "control.ros.org", "gazebo_ros2_control", "gz_ros2_control", "kinematics_interface"]
-repos = ["kinematics_interface"]
+repos = ["ros2_control", "ros2_controllers", "ros2_control_demos", "control_toolbox", "realtime_tools", "control_msgs", "control.ros.org", "gazebo_ros2_control", "gz_ros2_control", "kinematics_interface"]
 
 branches = {
   "ros2_control": "master",
