@@ -3,9 +3,16 @@
 Acknowledgements
 ================
 
+Reviewers' Stats
+----------------
+The following people have contributed to the development of this project by giving valuable reviews of pull requests, see :ref:`doc/contributing/contributing:contributing` for more information.
+
 .. raw:: html
    :file: reviewers_stats_with_graph.html
 
+
+Companies and Institutions
+--------------------------
 The project has received major contributions from the following companies and institutions.
 
 |palroboticslogo|
