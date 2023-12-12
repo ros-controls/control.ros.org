@@ -33,6 +33,11 @@ jobs:
       shell: bash
     - name: Install doxygen and graphviz
       run: sudo apt-get install -y doxygen graphviz
+    - name: Restore stats
+      uses: actions/cache/restore@v3
+      with:
+        key: reviewer-stats
+        path: ~/reviews
     - name: Build multiversion with API
       run: |
         git config --local user.email "action@github.com"

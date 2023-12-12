@@ -10,6 +10,21 @@ base_dir="$(dirname "$script_base_dir")"
 base_branch="master"
 build_dir="_build"
 
+# reviewer stats
+reviewer_stats_filename="reviewers_stats_with_graph.html"
+reviewer_stats_cache_folder="~/reviews"
+reviewer_stats_target_folder="./doc/acknowledgements"
+
+add_reviewer_stats_file () {
+  if [[ -f "${reviewer_stats_cache_folder}/${reviewer_stats_filename}" ]]; then
+    echo "Copy reviewer stats file to ${reviewer_stats_target_folder}"
+    cp ${reviewer_stats_cache_folder}/${reviewer_stats_filename} ${reviewer_stats_target_folder}
+  else
+    echo "Create empty reviewer stats file in ${reviewer_stats_target_folder}"
+    touch ${reviewer_stats_target_folder}/${reviewer_stats_filename}
+  fi
+}
+
 # definition single html
 # the branch from which the api is checked out and built
 api_branch="master"

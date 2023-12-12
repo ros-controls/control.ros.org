@@ -32,6 +32,11 @@ jobs:
         cd generate_parameter_library/generate_parameter_library_py/
         python -m pip install .
       shell: bash
+    - name: Restore stats
+      uses: actions/cache/restore@v3
+      with:
+        key: reviewer-stats
+        path: ~/reviews
     - name: Build single version considering warnings as errors
       run: |
         git config --local user.email "action@github.com"
