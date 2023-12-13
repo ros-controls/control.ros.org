@@ -1,8 +1,31 @@
+# Copyright (c) 2023 ros2_control maintainers
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import requests
 import os
 from datetime import datetime, timedelta
 
 def get_api_response(url):
+  """
+  Sends a GET request to the specified URL with the necessary headers and returns the JSON response.
+
+  Args:
+    url (str): The URL to send the GET request to.
+
+  Returns:
+    tuple: A tuple containing the JSON response as a dictionary and the response object.
+  """
   global_header = {
     "Accept": "application/vnd.github.v3+json",
     "Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}"
@@ -18,6 +41,12 @@ def get_api_response(url):
 
 
 def get_api_limit():
+  """
+  Retrieves the remaining API rate limit and reset time from the GitHub API.
+
+  Returns:
+    A tuple containing the remaining API rate limit and the reset time.
+  """
   url = "https://api.github.com/rate_limit"
   json, response = get_api_response(url)
 
@@ -28,18 +57,39 @@ def get_api_limit():
 
 
 def get_all_pages(url):
-    while url:
-        json, response = get_api_response(url)
+  """
+  Generator function, retrieves all pages of data from the given URL.
 
-        yield json
+  Args:
+    url (str): The URL to retrieve data from.
 
-        if 'next' in response.links:
-            url = response.links['next']['url']
-        else:
-            url = None
+  Yields:
+    dict: A JSON object representing a page of data.
+
+  Returns:
+    None
+  """
+  while url:
+    json, response = get_api_response(url)
+
+    yield json
+
+    if 'next' in response.links:
+      url = response.links['next']['url']
+    else:
+      url = None
 
 
 def get_user_name(user):
+  """
+  Retrieves the name of a GitHub user.
+
+  Args:
+    user (str): The GitHub login name.
+
+  Returns:
+    str: The name of the GitHub user, or an empty string if the name is not available.
+  """
   url = f"https://api.github.com/users/{user}"
   json, response = get_api_response(url)
 
@@ -50,6 +100,24 @@ def get_user_name(user):
 
 
 def get_reviewers_stats(owner, repos, branches, whitelist, earliest_date=""):
+  """
+  Retrieves statistics about reviewers' activity on pull requests.
+
+  Args:
+    owner (str): The owner of the repositories.
+    repos (list): The list of repositories.
+    branches (dict): The dictionary mapping repositories to their branches.
+    whitelist (list): The list of whitelisted reviewers.
+    earliest_date (str, optional): The earliest date to consider for reviews. Defaults to "".
+
+  Returns:
+    tuple: A tuple containing the following elements:
+      - reviewers (dict): A dictionary containing statistics for all reviewers not in whitelist.
+      - reviewers_whitelist (dict): A dictionary containing statistics for whitelisted reviewers.
+      - reviewers_filter (dict): A dictionary containing filtered statistics for all reviewers not in whitelist.
+      - reviewers_filter_whitelist (dict): A dictionary containing filtered statistics for whitelisted reviewers.
+      - ct_pull (int): The total number of pull requests processed.
+  """
 
   reviewers = {}
   reviewers_whitelist = {}
@@ -160,8 +228,27 @@ def get_reviewers_stats(owner, repos, branches, whitelist, earliest_date=""):
 
   return reviewers, reviewers_whitelist, reviewers_filter, reviewers_filter_whitelist, ct_pull
 
+
 def create_reviewers_table_with_graph(reviewers_stats, user_names, table_name):
-    """ style sheet for the table, copy into css file
+  """
+  Creates an HTML table with reviewer statistics and graphs.
+
+  Args:
+    reviewers_stats (dict): A dictionary containing reviewer statistics.
+      The keys are reviewer names and the values are dictionaries
+      containing the following keys:
+        - 'avatar_url' (str): The URL of the reviewer's avatar image.
+        - 'assigned_reviews' (int): The number of reviews assigned to the reviewer.
+        - 'finished_reviews' (int): The number of reviews finished by the reviewer.
+        - 'last_review_date' (str): The date of the last review by the reviewer.
+    user_names (dict): A dictionary mapping reviewer names to their corresponding user names.
+    table_name (str): The ID of the HTML table.
+
+  Returns:
+    str: The HTML content of the table with reviewer statistics and graphs.
+
+  style sheet for the table, copy into css file:
+
         <style>
             table {{
                 font-family: Arial, sans-serif;
@@ -204,106 +291,117 @@ def create_reviewers_table_with_graph(reviewers_stats, user_names, table_name):
                 border-radius: 5px;
             }}
         </style>
-    """
+  """
 
-    html_content = f"""
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Reviewers' Stats</title>
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-    </head>
-    <body>
-      <p>
-        <table id="{table_name}" class="display">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Reviewer</th>
-                    <th>Assigned</th>
-                    <th>Finished</th>
-                    <th>Rate</th>
-                    <!--<th>Last Review Date</th>-->
-                </tr>
-            </thead>
-            <tbody>
-    """
-    if reviewers_stats:
-      # Find the reviewer with the highest number of finished reviews
-      max_finished_reviews = max(stats['finished_reviews'] for stats in reviewers_stats.values())
-
-      # Sort reviewers by finished reviews
-      sorted_reviewers = sorted(reviewers_stats.items(), key=lambda x: x[1]['finished_reviews'], reverse=True)
-
-      for idx, (reviewer, stats) in enumerate(sorted_reviewers):
-          finished_reviews_bar_len = (stats['finished_reviews'] / max_finished_reviews) * 100
-          finished_reviews_ratio = stats['finished_reviews']/stats['assigned_reviews']
-          finished_reviews_ratio_bar_len = (finished_reviews_ratio) * 100
-
-          # Add emojis for the first three reviewers
-          medal = ""
-          if idx == 0:
-              medal = "🥇"
-          elif idx == 1:
-              medal = "🥈"
-          elif idx == 2:
-              medal = "🥉"
-
-          html_content += f"""
+  html_content = f"""
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>Reviewers' Stats</title>
+      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+  </head>
+  <body>
+    <p>
+      <table id="{table_name}" class="display">
+          <thead>
               <tr>
-                  <td style=" text-align: center;">{medal}</td>
-                  <td>
-                    <div style="display: flex; align-items: center;">
-                      <div style="width: 40px;">
-                        <img src="{stats['avatar_url']}" width="36" height="36" alt="{reviewer}" style="border-radius: 50%;">
-                      </div>
+                  <th></th>
+                  <th>Reviewer</th>
+                  <th>Assigned</th>
+                  <th>Finished</th>
+                  <th>Rate</th>
+                  <!--<th>Last Review Date</th>-->
+              </tr>
+          </thead>
+          <tbody>
+  """
+  if reviewers_stats:
+    # Find the reviewer with the highest number of finished reviews
+    max_finished_reviews = max(stats['finished_reviews'] for stats in reviewers_stats.values())
+
+    # Sort reviewers by finished reviews
+    sorted_reviewers = sorted(reviewers_stats.items(), key=lambda x: x[1]['finished_reviews'], reverse=True)
+
+    for idx, (reviewer, stats) in enumerate(sorted_reviewers):
+        finished_reviews_bar_len = (stats['finished_reviews'] / max_finished_reviews) * 100
+        finished_reviews_ratio = stats['finished_reviews']/stats['assigned_reviews']
+        finished_reviews_ratio_bar_len = (finished_reviews_ratio) * 100
+
+        # Add emojis for the first three reviewers
+        medal = ""
+        if idx == 0:
+            medal = "🥇"
+        elif idx == 1:
+            medal = "🥈"
+        elif idx == 2:
+            medal = "🥉"
+
+        html_content += f"""
+            <tr>
+                <td style=" text-align: center;">{medal}</td>
+                <td>
+                  <div style="display: flex; align-items: center;">
+                    <div style="width: 40px;">
+                      <img src="{stats['avatar_url']}" width="36" height="36" alt="{reviewer}" style="border-radius: 50%;">
+                    </div>
+                    <div>
                       <div>
-                        <div>
-                          <b>{user_names[reviewer]}</b> <br>
-                          <a href="https://github.com/{reviewer}" target="_blank"><img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" width="16" height="16" alt="{reviewer}">{reviewer}</a>
-                        </div>
+                        <b>{user_names[reviewer]}</b> <br>
+                        <a href="https://github.com/{reviewer}" target="_blank"><img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" width="16" height="16" alt="{reviewer}">{reviewer}</a>
                       </div>
                     </div>
-                  </td>
-                  <td>{stats['assigned_reviews']}</td>
-                  <td>{stats['finished_reviews']}
-                      <div class="progress-bar">
-                          <div class="progress-value-reviews" style="width: {finished_reviews_bar_len}%;"></div>
-                      </div>
-                  </td>
-                  <td>{finished_reviews_ratio:.2f}
-                      <div class="progress-bar">
-                          <div class="progress-value-ratio" style="width: {finished_reviews_ratio_bar_len}%;"></div>
-                      </div>
-                  </td>
-                  <!--<td>{stats['last_review_date']}</td>-->
-              </tr>
-          """
+                  </div>
+                </td>
+                <td>{stats['assigned_reviews']}</td>
+                <td>{stats['finished_reviews']}
+                    <div class="progress-bar">
+                        <div class="progress-value-reviews" style="width: {finished_reviews_bar_len}%;"></div>
+                    </div>
+                </td>
+                <td>{finished_reviews_ratio:.2f}
+                    <div class="progress-bar">
+                        <div class="progress-value-ratio" style="width: {finished_reviews_ratio_bar_len}%;"></div>
+                    </div>
+                </td>
+                <!--<td>{stats['last_review_date']}</td>-->
+            </tr>
+        """
 
-    html_content += f"""
-            </tbody>
-        </table>
-        Fetched on {current_date.strftime("%Y-%m-%d %H:%M:%S")} UTC
-      </p>
-    """
-    html_content +=f"""
-        <script>
-            $('#{table_name}').DataTable({{
-                "order": [[3, "desc"]]
-            }});
-        </script>
-    </body>
-    </html>
-    """
+  html_content += f"""
+          </tbody>
+      </table>
+      Fetched on {current_date.strftime("%Y-%m-%d %H:%M:%S")} UTC
+    </p>
+  """
+  html_content +=f"""
+      <script>
+          $('#{table_name}').DataTable({{
+              "order": [[3, "desc"]]
+          }});
+      </script>
+  </body>
+  </html>
+  """
 
-    return html_content
+  return html_content
+
 
 def print_reviewers_stats(reviewers_stats):
+  """
+  Prints the statistics of the reviewers.
+
+  Args:
+    reviewers_stats (dict): A dictionary containing the statistics of the reviewers.
+
+  Returns:
+    None
+  """
   for reviewer, stats in sorted(reviewers_stats.items(), key=lambda x: x[1]['finished_reviews'], reverse=True)[:10]:
     print(f"Reviewer: {reviewer}, Assigned Reviews: {stats['assigned_reviews']}, Finished Reviews: {stats['finished_reviews']}, rate of finished: {stats['finished_reviews']/stats['assigned_reviews']:.2f}, Last Review Date: {stats['last_review_date']}")
+
 
 # Replace with your GitHub repository owner and name
 owner = "ros-controls"
@@ -347,7 +445,7 @@ formatted_date = one_year_ago.strftime("%Y-%m-%dT%H:%M:%SZ")
 print("----------------------------------")
 print("------------  Start  -------------")
 limit, reset = get_api_limit();
-print(f"API limit: {limit}, reset: {datetime.fromtimestamp(reset)}")
+print(f"API limit: {limit}, next reset: {datetime.fromtimestamp(reset)}")
 print("----------------------------------")
 print(f"Fetch pull requests, all-time and after {formatted_date}:")
 reviewers_stats, maintainers_stats, reviewers_stats_recent, maintainers_stats_recent, ct_pulls = get_reviewers_stats(owner, repos, branches, maintainers, formatted_date)
@@ -385,7 +483,7 @@ print("-------- not maintainers ---------")
 print_reviewers_stats(reviewers_stats)
 print("----------------------------------")
 limit, reset = get_api_limit();
-print(f"API limit remaining: {limit}, reset: {datetime.fromtimestamp(reset)}")
+print(f"API limit remaining: {limit}, next reset: {datetime.fromtimestamp(reset)}")
 print("----------------------------------")
 print("--------------- END --------------")
 print("----------------------------------")
