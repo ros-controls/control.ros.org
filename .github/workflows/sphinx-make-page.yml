@@ -1,15 +1,15 @@
-name: "Check Page for Warnings"
+name: "Build & Deploy Page"
 on:
   workflow_dispatch:
   push:
     branches:
-      - iron
+      - master
   schedule:
   # Run every morning to ensure component documentation is up to date on deployment
    - cron: '23 5 * * *'
 
 jobs:
-  build-halt-on-warnings:
+  build-deploy:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -31,6 +31,8 @@ jobs:
         cd generate_parameter_library/generate_parameter_library_py/
         python -m pip install .
       shell: bash
+    - name: Install doxygen and graphviz
+      run: sudo apt-get install -y doxygen graphviz
     - name: Restore stats
       uses: actions/cache/restore@v3
       with:
@@ -38,8 +40,21 @@ jobs:
         restore-keys: |
           reviewer-stats
         path: ~/reviews
-    - name: Build single version considering warnings as errors
+    - name: Build multiversion with API
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        make html-all-subrepos-with-errors
+        make multiversion-with-api
+    - name: clone gh-pages branch
+      uses: actions/checkout@v4
+      if: ${{ success() && github.event_name != 'pull_request' && !env.ACT }}
+      with:
+        ref: gh-pages
+        path: gh-pages
+    - name: Deploy Pages
+      if: ${{ success() && github.event_name != 'pull_request' && !env.ACT }}
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./_build/html
+        cname: control.ros.org
