@@ -16,6 +16,17 @@ def get_api_response(url):
 
   return json, response
 
+
+def get_api_limit():
+  url = "https://api.github.com/rate_limit"
+  json, response = get_api_response(url)
+
+  if json:
+    return json["rate"]["remaining"], json["rate"]["reset"]
+  else:
+    return 0, 0
+
+
 def get_all_pages(url):
     while url:
         json, response = get_api_response(url)
@@ -38,10 +49,12 @@ def get_user_name(user):
     return ""
 
 
-def get_reviewers_stats(owner, repos, branches, whitelist, earliest_date="0000-00-00T00:00:00Z"):
+def get_reviewers_stats(owner, repos, branches, whitelist, earliest_date=""):
 
   reviewers = {}
   reviewers_whitelist = {}
+  reviewers_filter = {}
+  reviewers_filter_whitelist = {}
   ct_pull = 0
 
   for repo in repos:
@@ -52,7 +65,6 @@ def get_reviewers_stats(owner, repos, branches, whitelist, earliest_date="0000-0
     for pulls in get_all_pages(url):
 
       for pull in pulls:
-        if pull["created_at"] > earliest_date:
           ct_pull += 1
 
           # parse requested reviewers
@@ -75,10 +87,28 @@ def get_reviewers_stats(owner, repos, branches, whitelist, earliest_date="0000-0
                 "last_review_date": "0000-00-00T00:00:00Z"
               }
 
+            # if filter is set, only count reviews after earliest_date
+            if earliest_date and pull["created_at"] > earliest_date:
+              if reviewer_login in whitelist:
+                  current_dict = reviewers_filter_whitelist
+              else:
+                  current_dict = reviewers_filter
+
+              if reviewer_login in current_dict:
+                current_dict[reviewer_login]["assigned_reviews"] += 1
+              else:
+                current_dict[reviewer_login] = {
+                  "avatar_url": reviewer["avatar_url"],
+                  "assigned_reviews": 1,
+                  "finished_reviews": 0,
+                  "last_review_date": "0000-00-00T00:00:00Z"
+                }
+
           # Get reviews for the pull request, but count only once per PR
           pull_reviews_url = pull["url"] + "/reviews"
           pull_reviews, _ = get_api_response(pull_reviews_url)
           local_reviewers = {} # prevent double counting
+          local_reviewers_filter = {} # prevent double counting
 
           for review in pull_reviews:
             reviewer_login = review["user"]["login"]
@@ -105,7 +135,30 @@ def get_reviewers_stats(owner, repos, branches, whitelist, earliest_date="0000-0
               }
               local_reviewers[reviewer_login] = True
 
-  return reviewers, reviewers_whitelist, ct_pull
+            # if filter is set, only count reviews after earliest_date
+            if earliest_date and pull["created_at"] > earliest_date:
+              if reviewer_login in whitelist:
+                  current_dict = reviewers_filter_whitelist
+              else:
+                  current_dict = reviewers_filter
+
+              if reviewer_login in current_dict:
+                if reviewer_login not in local_reviewers_filter:
+                  current_dict[reviewer_login]["assigned_reviews"] += 1
+                  current_dict[reviewer_login]["finished_reviews"] += 1
+                  local_reviewers_filter[reviewer_login] = True
+                if date > current_dict[reviewer_login]["last_review_date"]:
+                  current_dict[reviewer_login]["last_review_date"] = date
+              else:
+                current_dict[reviewer_login] = {
+                  "avatar_url": review["user"]["avatar_url"],
+                  "assigned_reviews": 1,
+                  "finished_reviews": 1,
+                  "last_review_date": date
+                }
+                local_reviewers_filter[reviewer_login] = True
+
+  return reviewers, reviewers_whitelist, reviewers_filter, reviewers_filter_whitelist, ct_pull
 
 def create_reviewers_table_with_graph(reviewers_stats, user_names, table_name):
     """ style sheet for the table, copy into css file
@@ -291,18 +344,16 @@ one_year_ago = current_date - timedelta(days=365)
 # Format the date string as "YYYY-MM-DDTHH:MM:SSZ"
 formatted_date = one_year_ago.strftime("%Y-%m-%dT%H:%M:%SZ")
 
-print("--------------------------")
-print("--------  Start  ---------")
-print("--------------------------")
-print(f"Fetch pull requests after {formatted_date}:")
-reviewers_stats_recent, maintainers_stats_recent, ct_pulls_recent = get_reviewers_stats(owner, repos, branches, maintainers, formatted_date)
-print("--------------------------")
-print(f"Fetch pull requests, all-time:")
-reviewers_stats, maintainers_stats, ct_pulls = get_reviewers_stats(owner, repos, branches, maintainers)
-
-print("--------------------------")
-print("-------- Get User --------")
-print("--------------------------")
+print("----------------------------------")
+print("------------  Start  -------------")
+limit, reset = get_api_limit();
+print(f"API limit: {limit}, reset: {datetime.fromtimestamp(reset)}")
+print("----------------------------------")
+print(f"Fetch pull requests, all-time and after {formatted_date}:")
+reviewers_stats, maintainers_stats, reviewers_stats_recent, maintainers_stats_recent, ct_pulls = get_reviewers_stats(owner, repos, branches, maintainers, formatted_date)
+print("----------------------------------")
+print("------------ Get User ------------")
+print("----------------------------------")
 unique_reviewers = set(
   list(reviewers_stats_recent.keys())
   + list(maintainers_stats_recent.keys())
@@ -316,22 +367,28 @@ for reviewer_login in unique_reviewers:
 print(f"Got {len(unique_reviewers)} user names")
 
 # Print the reviewers' stats in a nice format
-print("--------------------------")
-print("-------- Results ---------")
-print("--------------------------")
-print(f"Reviewers' Stats from {ct_pulls_recent} pull requests after {formatted_date}:")
-print("-------- maintainers ---------")
+print(f"---------------------------------")
+print(f"------ Results from {ct_pulls} PRs ------")
+print(f"---------------------------------")
+print(f"Reviewers' Stats, after {formatted_date}:")
+print("---------- maintainers -----------")
 print_reviewers_stats(maintainers_stats_recent)
 
 print("-------- not maintainers ---------")
 print_reviewers_stats(reviewers_stats_recent)
 
-print(f"Reviewers' Stats from {ct_pulls} pull requests, all-time:")
-print("-------- maintainers ---------")
+print(f"Reviewers' Stats, all-time:")
+print("---------- maintainers -----------")
 print_reviewers_stats(maintainers_stats)
 
 print("-------- not maintainers ---------")
 print_reviewers_stats(reviewers_stats)
+print("----------------------------------")
+limit, reset = get_api_limit();
+print(f"API limit remaining: {limit}, reset: {datetime.fromtimestamp(reset)}")
+print("----------------------------------")
+print("--------------- END --------------")
+print("----------------------------------")
 
 # Create the HTML content
 html_maintainers_stats_recent = create_reviewers_table_with_graph(maintainers_stats_recent, user_names, "maintainers_stats_recent")
