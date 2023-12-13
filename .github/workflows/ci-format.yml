@@ -19,7 +19,9 @@ jobs:
     - name: Restore stats
       uses: actions/cache/restore@v3
       with:
-        key: reviewer-stats
+        key: reviewer-stats-${{ github.run_id }}
+        restore-keys: |
+          reviewer-stats
         path: ~/reviews
     - name: Copy stats
       run: ./make_help_scripts/add_review_stats
