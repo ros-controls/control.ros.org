@@ -15,6 +15,7 @@
 import requests
 import os
 from datetime import datetime, timedelta
+import time
 
 def get_api_response(url):
   """
@@ -33,12 +34,30 @@ def get_api_response(url):
   # TODO(anyone): add error handling
   response = requests.get(url, headers=global_header)
   if response.status_code != 200:
-    print(f"Error: {response.json()['message']}")
+    print(f"Error {response.status_code}: {response.json()['message']}")
     return [], response
   json = response.json()
 
   return json, response
 
+def get_api_response_wait(url):
+  """
+  Waits for the API rate limit reset if the remaining requests are zero,
+  then returns the API response for the given URL.
+
+  Args:
+    url (str): The URL to send the API request to.
+
+  Returns:
+    tuple: A tuple containing the JSON response as a dictionary and the response object.
+  """
+  remaining, reset = get_api_limit()
+  if remaining == 0:
+    wait_time = datetime.fromtimestamp(reset) - datetime.utcnow()
+    print(f"Waiting {wait_time.total_seconds()} seconds for API rate limit reset")
+    time.sleep(wait_time.total_seconds() + 60) # add 60 seconds to be sure
+
+  return get_api_response(url)
 
 def get_api_limit():
   """
@@ -70,7 +89,7 @@ def get_all_pages(url):
     None
   """
   while url:
-    json, response = get_api_response(url)
+    json, response = get_api_response_wait(url)
 
     yield json
 
@@ -91,7 +110,7 @@ def get_user_name(user):
     str: The name of the GitHub user, or an empty string if the name is not available.
   """
   url = f"https://api.github.com/users/{user}"
-  json, response = get_api_response(url)
+  json, response = get_api_response_wait(url)
 
   if json:
     return json["name"]
@@ -174,7 +193,7 @@ def get_reviewers_stats(owner, repos, branches, whitelist, earliest_date=""):
 
           # Get reviews for the pull request, but count only once per PR
           pull_reviews_url = pull["url"] + "/reviews"
-          pull_reviews, _ = get_api_response(pull_reviews_url)
+          pull_reviews, _ = get_api_response_wait(pull_reviews_url)
           local_reviewers = {} # prevent double counting
           local_reviewers_filter = {} # prevent double counting
 
