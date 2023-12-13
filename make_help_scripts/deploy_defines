@@ -10,6 +10,28 @@ base_dir="$(dirname "$script_base_dir")"
 base_branch="humble"
 build_dir="_build"
 
+# reviewer stats
+reviewer_stats_files=("maintainers_stats_recent.html"
+  "reviewers_stats_recent.html"
+  "maintainers_stats.html"
+  "reviewers_stats.html")
+reviewer_stats_cache_folder="reviews"
+reviewer_stats_target_folder="./doc/acknowledgements"
+
+add_reviewer_stats_file () {
+  for reviewer_stats_filename in "${reviewer_stats_files[@]}"; do
+    ORIGFILE="$HOME/$reviewer_stats_cache_folder/$reviewer_stats_filename"
+    # echo $ORIGFILE
+    if test -f "$ORIGFILE"; then
+      echo "Copy reviewer stats file '${reviewer_stats_filename}' to '${reviewer_stats_target_folder}'"
+      cp ${ORIGFILE} ${reviewer_stats_target_folder}
+    else
+      echo "Create empty reviewer stats file '${reviewer_stats_filename}' in '${reviewer_stats_target_folder}'"
+      echo "<i>No review statistics available yet.</i>" > ${reviewer_stats_target_folder}/${reviewer_stats_filename}
+    fi
+  done
+}
+
 # definition single html
 # the branch from which the api is checked out and built
 api_branch="humble"
