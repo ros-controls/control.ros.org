@@ -60,27 +60,20 @@ def get_reviewers_stats(owner, repos, branches, whitelist, earliest_date="0000-0
           for reviewer in reviewers_list:
             reviewer_login = reviewer["login"]
 
-            if reviewer_login not in whitelist:
-              if reviewer_login in reviewers:
-                reviewers[reviewer_login]["assigned_reviews"] += 1
-              else:
-                reviewers[reviewer_login] = {
-                  "avatar_url": reviewer["avatar_url"],
-                  "assigned_reviews": 1,
-                  "finished_reviews": 0,
-                  "last_review_date": "0000-00-00T00:00:00Z"
-                }
-
+            if reviewer_login in whitelist:
+                current_dict = reviewers_whitelist
             else:
-              if reviewer_login in reviewers_whitelist:
-                reviewers_whitelist[reviewer_login]["assigned_reviews"] += 1
-              else:
-                reviewers_whitelist[reviewer_login] = {
-                  "avatar_url": reviewer["avatar_url"],
-                  "assigned_reviews": 1,
-                  "finished_reviews": 0,
-                  "last_review_date": "0000-00-00T00:00:00Z"
-                }
+                current_dict = reviewers
+
+            if reviewer_login in current_dict:
+              current_dict[reviewer_login]["assigned_reviews"] += 1
+            else:
+              current_dict[reviewer_login] = {
+                "avatar_url": reviewer["avatar_url"],
+                "assigned_reviews": 1,
+                "finished_reviews": 0,
+                "last_review_date": "0000-00-00T00:00:00Z"
+              }
 
           # Get reviews for the pull request, but count only once per PR
           pull_reviews_url = pull["url"] + "/reviews"
@@ -91,39 +84,26 @@ def get_reviewers_stats(owner, repos, branches, whitelist, earliest_date="0000-0
             reviewer_login = review["user"]["login"]
             date = review["submitted_at"]
 
-            if reviewer_login not in whitelist:
-              if reviewer_login in reviewers:
-                if reviewer_login not in local_reviewers:
-                  reviewers[reviewer_login]["assigned_reviews"] += 1
-                  reviewers[reviewer_login]["finished_reviews"] += 1
-                  local_reviewers[reviewer_login] = True
-                if date > reviewers[reviewer_login]["last_review_date"]:
-                  reviewers[reviewer_login]["last_review_date"] = date
-              else:
-                reviewers[reviewer_login] = {
-                  "avatar_url": review["user"]["avatar_url"],
-                  "assigned_reviews": 1,
-                  "finished_reviews": 1,
-                  "last_review_date": date
-                }
-                local_reviewers[reviewer_login] = True
-
+            if reviewer_login in whitelist:
+                current_dict = reviewers_whitelist
             else:
-              if reviewer_login in reviewers_whitelist:
-                if reviewer_login not in local_reviewers:
-                  reviewers_whitelist[reviewer_login]["assigned_reviews"] += 1
-                  reviewers_whitelist[reviewer_login]["finished_reviews"] += 1
+                current_dict = reviewers
+
+            if reviewer_login in current_dict:
+              if reviewer_login not in local_reviewers:
+                current_dict[reviewer_login]["assigned_reviews"] += 1
+                current_dict[reviewer_login]["finished_reviews"] += 1
                 local_reviewers[reviewer_login] = True
-                if date > reviewers_whitelist[reviewer_login]["last_review_date"]:
-                  reviewers_whitelist[reviewer_login]["last_review_date"] = date
-              else:
-                reviewers_whitelist[reviewer_login] = {
-                  "avatar_url": review["user"]["avatar_url"],
-                  "assigned_reviews": 1,
-                  "finished_reviews": 1,
-                  "last_review_date": date
-                }
-                local_reviewers[reviewer_login] = True
+              if date > current_dict[reviewer_login]["last_review_date"]:
+                current_dict[reviewer_login]["last_review_date"] = date
+            else:
+              current_dict[reviewer_login] = {
+                "avatar_url": review["user"]["avatar_url"],
+                "assigned_reviews": 1,
+                "finished_reviews": 1,
+                "last_review_date": date
+              }
+              local_reviewers[reviewer_login] = True
 
   return reviewers, reviewers_whitelist, ct_pull
 
