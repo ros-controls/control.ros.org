@@ -24,6 +24,14 @@ There are `make` commands available which automate the process of building and i
 * ```make multiversion``` - Builds multiversion version, changes are only visible after commit. **Make sure to commit everything before running!**
 * For each command, a  ```make <command>-with-api``` exists, which in addition builds the `doxygen` api.
 
+# Fetch reviewer stats
+First, you need to fetch the reviewer stats from ros2_control org. To do so, you need to have a github token with the `repo` scope. Then run
+
+```bash
+export GITHUB_TOKEN=<your token>
+python3 ./make_help_scripts/create_reviewer_stats.py
+```
+which will create `~/reviews/reviewers_stats_with_graph.html`. Then you can build the documentation as usual, it will copy the file from this folder.
 
 # Build Instructions:
 1. If you are running inside a docker container, be sure to open a port so the website can be accessed.
