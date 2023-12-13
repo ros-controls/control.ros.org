@@ -1,9 +1,9 @@
-name: "Check Page for Warnings"
+name: "Check Page for Warnings Iron"
 on:
   workflow_dispatch:
   push:
     branches:
-      - humble
+      - iron
   schedule:
   # Run every morning to ensure component documentation is up to date on deployment
    - cron: '23 5 * * *'
@@ -14,6 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
+        ref: iron
         fetch-depth: 0
     - uses: actions/setup-python@v5
       with:
