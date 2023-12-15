@@ -1,4 +1,4 @@
-name: "Check Page for Warnings"
+name: "Check Page for Warnings Iron"
 on:
   workflow_dispatch:
   push:
@@ -12,10 +12,10 @@ jobs:
   build-halt-on-warnings:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 0
-    - uses: actions/setup-python@v4
+    - uses: actions/setup-python@v5
       with:
         python-version: '3.10'
         cache: 'pip'
@@ -31,6 +31,13 @@ jobs:
         cd generate_parameter_library/generate_parameter_library_py/
         python -m pip install .
       shell: bash
+    - name: Restore stats
+      uses: actions/cache/restore@v3
+      with:
+        key: reviewer-stats-${{ github.run_id }}
+        restore-keys: |
+          reviewer-stats
+        path: ~/reviews
     - name: Build single version considering warnings as errors
       run: |
         git config --local user.email "action@github.com"

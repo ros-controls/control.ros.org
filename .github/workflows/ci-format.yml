@@ -12,10 +12,19 @@ jobs:
     name: Format
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-python@v4.7.0
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
       with:
         python-version: '3.10'
+    - name: Restore stats
+      uses: actions/cache/restore@v3
+      with:
+        key: reviewer-stats-${{ github.run_id }}
+        restore-keys: |
+          reviewer-stats
+        path: ~/reviews
+    - name: Copy stats
+      run: ./make_help_scripts/add_review_stats
     - uses: pre-commit/action@v3.0.0
       with:
         extra_args: --all-files --hook-stage manual
