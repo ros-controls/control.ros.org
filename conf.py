@@ -322,7 +322,7 @@ def smv_rewrite_configs(app, config):
         # this map is used to match branches of control.ros.org to REPOS_FILE_BRANCH macro
         subrepo_branch = {
             "master": "master",
-            "iron": "master",
+            "iron": "iron",
             "humble": "humble",
             "foxy": "foxy",
             "galactic": "galactic"
