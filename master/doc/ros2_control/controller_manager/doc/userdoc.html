@@ -138,10 +138,9 @@
 It manages lifecycle of controllers, access to the hardware interfaces and offers services to the ROS-world.</p>
 <section id="determinism">
 <h2>Determinism<a class="headerlink" href="#determinism" title="Link to this heading"></a></h2>
-<p>For best performance when controlling hardware you want the controller manager to have as little jitter as possible in the main control loop.
-The normal linux kernel is optimized for computational throughput and therefore is not well suited for hardware control.
-The two easiest kernel options are the <a class="reference external" href="https://ubuntu.com/blog/real-time-ubuntu-released">Real-time Ubuntu 22.04 LTS Beta</a> or <a class="reference external" href="https://packages.debian.org/bullseye/linux-image-rt-amd64">linux-image-rt-amd64</a> on Debian Bullseye.</p>
-<p>If you have a realtime kernel installed, the main thread of Controller Manager attempts to configure <code class="docutils literal notranslate"><span class="pre">SCHED_FIFO</span></code> with a priority of <code class="docutils literal notranslate"><span class="pre">50</span></code>.
+<p>For best performance when controlling hardware you want the controller manager to have as little jitter as possible in the main control loop.</p>
+<p>Independent of the kernel installed, the main thread of Controller Manager attempts to
+configure <code class="docutils literal notranslate"><span class="pre">SCHED_FIFO</span></code> with a priority of <code class="docutils literal notranslate"><span class="pre">50</span></code>.
 By default, the user does not have permission to set such a high priority.
 To give the user such permissions, add a group named realtime and add the user controlling your robot to this group:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>addgroup<span class="w"> </span>realtime
@@ -158,6 +157,15 @@ To give the user such permissions, add a group named realtime and add the user c
 </pre></div>
 </div>
 <p>The limits will be applied after you log out and in again.</p>
+<p>The normal linux kernel is optimized for computational throughput and therefore is not well suited for hardware control.
+Alternatives to the standard kernel include</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://ubuntu.com/blog/real-time-ubuntu-released">Real-time Ubuntu 22.04 LTS Beta</a> on Ubuntu 22.04</p></li>
+<li><p><a class="reference external" href="https://packages.debian.org/bullseye/linux-image-rt-amd64">linux-image-rt-amd64</a> on Debian Bullseye</p></li>
+<li><p>lowlatency kernel (<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">linux-lowlatency</span></code>) on any ubuntu</p></li>
+</ul>
+<p>Though installing a realtime-kernel will definitely get the best results when it comes to low
+jitter, using a lowlatency kernel can improve things a lot with being really easy to install.</p>
 </section>
 <section id="parameters">
 <h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h2>
