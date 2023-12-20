@@ -7,7 +7,7 @@ script_base_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && p
 # should by control.ros.org folder
 base_dir="$(dirname "$script_base_dir")"
 # branch from which is started to checkout other branches
-base_branch="master"
+base_branch="iron"
 build_dir="_build"
 
 # reviewer stats
@@ -34,12 +34,13 @@ add_reviewer_stats_file () {
 
 # definition single html
 # the branch from which the api is checked out and built
-api_branch="master"
+api_branch="iron"
 
 # definitions for multiversion
 # branches on which the temporary commits are created and which branch should be checked out in the subrepositories
-# ["branch checked out for multiversion"]="branch checked out for all subrepos"
-declare -A branch_version=( ["foxy"]="foxy" ["galactic"]="galactic" ["humble"]="humble" ["iron"]="master" ["master"]="master") # master is rolling
+# ["branch checked out for mutliversion"]="branch checked out for all subrepos"
+declare -A branch_version=( ["foxy"]="foxy" ["galactic"]="galactic" ["humble"]="humble" ["iron"]="iron")
+
 
 # the subrepos which are cloned into the branches and, optionally, their corresponding PR for checkout
 declare -A subrepo_url=( ["ros2_control"]="https://github.com/ros-controls/ros2_control" ["ros2_controllers"]="https://github.com/ros-controls/ros2_controllers" ["ros2_control_demos"]="https://github.com/ros-controls/ros2_control_demos" ["gazebo_ros2_control"]="https://github.com/ros-controls/gazebo_ros2_control" ["gz_ros2_control"]="https://github.com/ros-controls/gz_ros2_control")
