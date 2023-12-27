@@ -7,7 +7,8 @@ from generate_parameter_library_py.parse_yaml import (
 )
 from generate_parameter_library_py.generate_markdown import (
     DefaultConfigMarkdown,
-    ParameterDetailMarkdown
+    ParameterDetailRst,
+    RuntimeParameterDetailRst
 )
 
 class GeneraterParameterLibraryDetails(SphinxDirective):
@@ -22,11 +23,20 @@ class GeneraterParameterLibraryDetails(SphinxDirective):
         gen_param_struct.parse(yaml_file, "")
 
         param_details = [
-            ParameterDetailMarkdown(param)
+            ParameterDetailRst(param)
             for param in gen_param_struct.declare_parameters
         ]
-        docs = "\n".join(str(val) for val in param_details)
-        # print(docs)
+        runtime_param_details = [
+            RuntimeParameterDetailRst(param)
+            for param in gen_param_struct.declare_dynamic_parameters
+        ]
+        param_strings_map = {detail.declare_parameters.parameter_name: str(detail) for detail in param_details}
+        param_strings_map.update({detail.declare_parameters.parameter_name: str(detail) for detail in runtime_param_details})
+
+        # Sort the keys hierarchically by splitting on '.' and sorting each level
+        sorted_keys = sorted(param_strings_map.keys(), key=lambda s: s.split('.'))
+
+        docs = "\n".join(param_strings_map[key] for key in sorted_keys)
 
         # Add the content one line at a time.
         # Second argument is the filename to report in any warnings
