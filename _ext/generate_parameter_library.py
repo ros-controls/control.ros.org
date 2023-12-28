@@ -41,12 +41,9 @@ class GeneraterParameterLibraryDetails(SphinxDirective):
         param_strings_map = {detail.declare_parameters.parameter_name: str(detail) for detail in param_details}
         param_strings_map.update({detail.declare_parameters.parameter_name: str(detail) for detail in runtime_param_details})
         # add optional context data from yaml. we don't use a jinja template here -> add the indent manually
-        param_strings_map.update({key: str(key) + "\n" + re.sub(
-                r'(?m)^(?!$)\s*',
-                '  ',
-                str(value),
-                flags=re.MULTILINE,
-            ) + "\n" for key, value in context_yaml_data.items()})
+        param_strings_map.update({key: str(key) + "\n" +
+                '\n'.join('  ' + line for line in str(value).replace('\\t', '  ').splitlines()) + "\n"
+                for key, value in context_yaml_data.items()})
 
         # Sort the keys hierarchically by splitting on '.' and sorting each level
         sorted_keys = sorted(param_strings_map.keys(), key=lambda s: s.split('.'))
