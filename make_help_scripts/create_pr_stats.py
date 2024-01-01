@@ -266,13 +266,13 @@ def get_pr_stats(owner, repos, branches, whitelist, earliest_date=""):
               current_dict = contributors
           if contributor_login in current_dict:
             current_dict[contributor_login]["total_changes"] += total_changes
-            current_dict[contributor_login]["ct_pull"] += 1
+            current_dict[contributor_login]["ct_pr"] += 1
             current_dict[contributor_login]["last_pr_date"] = pull["created_at"]
           else:
             current_dict[contributor_login] = {
               "avatar_url": pull_data['user']["avatar_url"],
               "total_changes": total_changes,
-              "ct_pull": 1,
+              "ct_pr": 1,
               "last_pr_date": pull["created_at"]
             }
           # if filter is set, only count reviews after earliest_date
@@ -284,13 +284,13 @@ def get_pr_stats(owner, repos, branches, whitelist, earliest_date=""):
 
             if contributor_login in current_dict:
               current_dict[contributor_login]["total_changes"] += total_changes
-              current_dict[contributor_login]["ct_pull"] += 1
+              current_dict[contributor_login]["ct_pr"] += 1
               current_dict[contributor_login]["last_pr_date"] = pull["created_at"]
             else:
               current_dict[contributor_login] = {
               "avatar_url": pull_data['user']["avatar_url"],
               "total_changes": total_changes,
-              "ct_pull": 1,
+              "ct_pr": 1,
               "last_pr_date": pull["created_at"]
               }
 
@@ -457,6 +457,163 @@ def create_reviewers_table_with_graph(reviewers_stats, user_names, table_name):
   return html_content
 
 
+def create_contributors_table_with_graph(contributors_stats, user_names, table_name):
+  """
+  Creates an HTML table with contributors statistics and graphs.
+
+  Args:
+    contributors_stats (dict): A dictionary containing contributors statistics.
+      The keys are contributors names and the values are dictionaries
+      containing the following keys:
+        - 'avatar_url' (str): The URL of the contributor's avatar image.
+        - 'total_changes' (int): The number of line changes by the contributor.
+        - 'ct_pr' (int): The number of reviews finished by the contributor.
+        - 'last_pr_date' (str): The date of the last pr by the contributor.
+    user_names (dict): A dictionary mapping contributors names to their corresponding user names.
+    table_name (str): The ID of the HTML table.
+
+  Returns:
+    str: The HTML content of the table with contributors statistics and graphs.
+
+  style sheet for the table, copy into css file:
+
+        <style>
+            table {{
+                font-family: Arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }}
+
+            th, td {{
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }}
+
+            tr:nth-child(even) {{
+                background-color: #f2f2f2;
+            }}
+
+            .progress-bar {{
+                width: 100%;
+                height: 20px;
+                margin: 0;
+                background-color: #ddd;
+                border-radius: 5px;
+                overflow: hidden;
+            }}
+
+            .progress-value-reviews {{
+                display: block;
+                height: 100%;
+                width: 0;
+                background-color: #2980b9;
+                border-radius: 5px;
+            }}
+
+            .progress-value-ratio {{
+                display: block;
+                height: 100%;
+                width: 0;
+                background-color: rgba(47, 64, 95, 0.5); /* Adjusted to 50% transparent */
+                border-radius: 5px;
+            }}
+        </style>
+  """
+
+  html_content = f"""
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>Contributors' Stats</title>
+      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+  </head>
+  <body>
+    <p>
+      <table id="{table_name}" class="display">
+          <thead>
+              <tr>
+                  <th></th>
+                  <th>Contributor</th>
+                  <th>PR Count</th>
+                  <th>Line Changes</th>
+                  <!--<th>Last Review Date</th>-->
+              </tr>
+          </thead>
+          <tbody>
+  """
+  if contributors_stats:
+    # Find the contributors with the highest number of line_changes
+    max_total_changes = max(stats['total_changes'] for stats in contributors_stats.values())
+    max_pr_count = max(stats['ct_pr'] for stats in contributors_stats.values())
+
+    # Sort contributors by total change
+    sorted_contributors = sorted(contributors_stats.items(), key=lambda x: x[1]['total_changes'], reverse=True)
+
+    for idx, (contributor, stats) in enumerate(sorted_contributors):
+        total_changes_bar_len = (stats['total_changes'] / max_total_changes) * 100
+        ct_pr_bar_len = (stats['ct_pr'] / max_pr_count) * 100
+
+        # Add emojis for the first three contributors
+        medal = ""
+        if idx == 0:
+            medal = "🥇"
+        elif idx == 1:
+            medal = "🥈"
+        elif idx == 2:
+            medal = "🥉"
+
+        html_content += f"""
+            <tr>
+                <td style=" text-align: center;">{medal}</td>
+                <td>
+                  <div style="display: flex; align-items: center;">
+                    <div style="width: 40px;">
+                      <img src="{stats['avatar_url']}" width="36" height="36" alt="{contributor}" style="border-radius: 50%;">
+                    </div>
+                    <div>
+                      <div>
+                        <b>{user_names[contributor]}</b> <br>
+                        <a href="https://github.com/{contributor}" target="_blank"><img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" width="16" height="16" alt="{contributor}">{contributor}</a>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td>{stats['ct_pr']}
+                    <div class="progress-bar">
+                        <div class="progress-value-reviews" style="width: {ct_pr_bar_len}%;"></div>
+                    </div>
+                <td>{stats['total_changes']}
+                    <div class="progress-bar">
+                        <div class="progress-value-reviews" style="width: {total_changes_bar_len}%;"></div>
+                    </div>
+                </td>
+                <!--<td>{stats['last_pr_date']}</td>-->
+            </tr>
+        """
+
+  html_content += f"""
+          </tbody>
+      </table>
+      Fetched on {current_date.strftime("%Y-%m-%d %H:%M:%S")} UTC
+    </p>
+  """
+  html_content +=f"""
+      <script>
+          $('#{table_name}').DataTable({{
+              "order": [[3, "desc"]]
+          }});
+      </script>
+  </body>
+  </html>
+  """
+
+  return html_content
+
+
 def print_reviewers_stats(reviewers_stats):
   """
   Prints the statistics of the reviewers.
@@ -481,7 +638,7 @@ def print_contributors_stats(contributors_stats):
     None
   """
   for contributor, stats in sorted(contributors_stats.items(), key=lambda x: x[1]['total_changes'], reverse=True)[:10]:
-    print(f"Contributor: {contributor}, Number of PRs: {stats['ct_pull']}, Total Line Change: {stats['total_changes']}, Last PR Date: {stats['last_pr_date']}")
+    print(f"Contributor: {contributor}, Number of PRs: {stats['ct_pr']}, Total Line Change: {stats['total_changes']}, Last PR Date: {stats['last_pr_date']}")
 
 
 # Replace with your GitHub repository owner and name
@@ -529,7 +686,7 @@ limit, reset = get_api_limit();
 print(f"API limit: {limit}, next reset: {datetime.fromtimestamp(reset)}")
 print("----------------------------------")
 print(f"Fetch pull requests, all-time and after {formatted_date}:")
-reviewers_stats, maintainers_stats, reviewers_stats_recent, maintainers_stats_recent, contributors_stats, contributor_maintainers_stats, contributors_stats_recent, contributor_maintainers_stats_recent, ct_pulls = get_pr_stats(owner, repos, branches, maintainers, formatted_date)
+reviewers_stats, maintainers_stats, reviewers_stats_recent, maintainers_stats_recent, contributors_stats, contributors_maintainers_stats, contributors_stats_recent, contributors_maintainers_stats_recent, ct_pulls = get_pr_stats(owner, repos, branches, maintainers, formatted_date)
 print("----------------------------------")
 print("------------ Get User ------------")
 print("----------------------------------")
@@ -539,7 +696,7 @@ unique_reviewers = set(
   + list(reviewers_stats.keys())
   + list(maintainers_stats.keys())
   + list(contributors_stats.keys())
-  + list(contributor_maintainers_stats.keys())
+  + list(contributors_maintainers_stats.keys())
   )
 user_names = {}
 for reviewer_login in unique_reviewers:
@@ -566,9 +723,16 @@ print("-------- not maintainers ---------")
 print_reviewers_stats(reviewers_stats)
 print("----------------------------------")
 
+print(f"Contributors' Stats, after {formatted_date}:")
+print("---------- maintainers -----------")
+print_contributors_stats(contributors_maintainers_stats_recent)
+
+print("-------- not maintainers ---------")
+print_contributors_stats(contributors_stats_recent)
+
 print(f"Contributors' Stats, all-time:")
 print("---------- maintainers -----------")
-print_contributors_stats(contributor_maintainers_stats)
+print_contributors_stats(contributors_maintainers_stats)
 
 print("-------- not maintainers ---------")
 print_contributors_stats(contributors_stats)
@@ -586,12 +750,21 @@ html_reviewers_stats_recent = create_reviewers_table_with_graph(reviewers_stats_
 html_maintainers_stats = create_reviewers_table_with_graph(maintainers_stats, user_names, "maintainers_stats")
 html_reviewers_stats = create_reviewers_table_with_graph(reviewers_stats, user_names, "reviewers_stats")
 
+html_contributors_maintainers_stats_recent = create_contributors_table_with_graph(contributors_maintainers_stats_recent, user_names, "contributors_maintainers_stats_recent")
+html_contributors_stats_recent = create_contributors_table_with_graph(contributors_stats_recent, user_names, "contributors_stats_recent")
+html_contributors_maintainers_stats = create_contributors_table_with_graph(contributors_maintainers_stats, user_names, "contributors_maintainers_stats")
+html_contributors_stats = create_contributors_table_with_graph(contributors_stats, user_names, "contributors_stats")
+
 # Save the HTML content to a file named "reviewers_stats_with_graph.html"
 home_directory = os.path.expanduser( '~' )
-filename_maintainers_stats_recent = os.path.join(home_directory, 'reviews', 'maintainers_stats_recent.html')
+filename_maintainers_stats_recent = os.path.join(home_directory, 'reviews', 'reviewers_maintainers_stats_recent.html')
 filename_reviewers_stats_recent = os.path.join(home_directory, 'reviews', 'reviewers_stats_recent.html')
-filename_maintainers_stats = os.path.join(home_directory, 'reviews', 'maintainers_stats.html')
+filename_maintainers_stats = os.path.join(home_directory, 'reviews', 'reviewers_maintainers_stats.html')
 filename_reviewers_stats = os.path.join(home_directory, 'reviews', 'reviewers_stats.html')
+filename_contributors_maintainers_stats_recent = os.path.join(home_directory, 'reviews', 'contributors_maintainers_stats_recent.html')
+filename_contributors_stats_recent = os.path.join(home_directory, 'reviews', 'contributors_stats_recent.html')
+filename_contributors_maintainers_stats = os.path.join(home_directory, 'reviews', 'contributors_maintainers_stats.html')
+filename_contributors_stats = os.path.join(home_directory, 'reviews', 'contributors_stats.html')
 os.makedirs(os.path.dirname(filename_maintainers_stats_recent), exist_ok=True)
 
 with open(filename_maintainers_stats_recent, 'w') as file:
@@ -609,3 +782,19 @@ print(f"HTML file {filename_maintainers_stats} has been created.")
 with open(filename_reviewers_stats, 'w') as file:
     file.write(html_reviewers_stats)
 print(f"HTML file {filename_reviewers_stats} has been created.")
+
+with open(filename_contributors_maintainers_stats_recent, 'w') as file:
+    file.write(html_contributors_maintainers_stats_recent)
+print(f"HTML file {filename_contributors_maintainers_stats_recent} has been created.")
+
+with open(filename_contributors_stats_recent, 'w') as file:
+    file.write(html_contributors_stats_recent)
+print(f"HTML file {filename_contributors_stats_recent} has been created.")
+
+with open(filename_contributors_maintainers_stats, 'w') as file:
+    file.write(html_contributors_maintainers_stats)
+print(f"HTML file {filename_contributors_maintainers_stats} has been created.")
+
+with open(filename_contributors_stats, 'w') as file:
+    file.write(html_contributors_stats)
+print(f"HTML file {filename_contributors_stats} has been created.")

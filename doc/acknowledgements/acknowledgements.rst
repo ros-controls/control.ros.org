@@ -8,12 +8,20 @@ Maintainers
 The following people were maintaining the ``ros2_control`` framework, showing their all-time review activity:
 
 .. raw:: html
-   :file: maintainers_stats.html
+   :file: reviewers_maintainers_stats.html
+
+and their all-time contributions:
+
+.. raw:: html
+   :file: contributors_maintainers_stats.html
 
 Activity during the past 12 months:
 
 .. raw:: html
-  :file: maintainers_stats_recent.html
+  :file: reviewers_maintainers_stats_recent.html
+
+.. raw:: html
+  :file: contributors_maintainers_stats_recent.html
 
 Reviewers' Stats
 ----------------
@@ -22,10 +30,18 @@ The following people have contributed to the development of this project by givi
 .. raw:: html
   :file: reviewers_stats.html
 
+and with their contributions:
+
+.. raw:: html
+  :file: contributors_stats.html
+
 Activity during the past 12 months:
 
 .. raw:: html
   :file: reviewers_stats_recent.html
+
+.. raw:: html
+  :file: contributors_stats_recent.html
 
 Contributors
 ----------------
