@@ -5,58 +5,55 @@ Acknowledgements
 
 Maintainers
 ----------------
-The following people were maintaining the ``ros2_control`` framework, showing their all-time review activity:
+The following people were maintaining the ``ros2_control`` framework, showing their review activity and contributions:
 
-.. raw:: html
-   :file: reviewers_maintainers_stats.html
+.. tabs::
 
-and their all-time contributions:
+  .. tab:: All-Time Reviews
 
-.. raw:: html
-   :file: contributors_maintainers_stats.html
+    .. raw:: html
+      :file: reviewers_maintainers_stats.html
 
-Activity during the past 12 months:
+  .. tab:: 12 Months
 
-.. raw:: html
-  :file: reviewers_maintainers_stats_recent.html
+    .. raw:: html
+      :file: reviewers_maintainers_stats_recent.html
 
-.. raw:: html
-  :file: contributors_maintainers_stats_recent.html
+  .. tab:: All-Time Contributions
 
-Reviewers' Stats
-----------------
-The following people have contributed to the development of this project by giving valuable reviews for pull requests, see :ref:`doc/contributing/contributing:contributing` for more information.
+    .. raw:: html
+      :file: contributors_maintainers_stats.html
 
-.. raw:: html
-  :file: reviewers_stats.html
+  .. tab:: 12 Months
 
-and with their contributions:
-
-.. raw:: html
-  :file: contributors_stats.html
-
-Activity during the past 12 months:
-
-.. raw:: html
-  :file: reviewers_stats_recent.html
-
-.. raw:: html
-  :file: contributors_stats_recent.html
+    .. raw:: html
+      :file: contributors_maintainers_stats_recent.html
 
 Contributors
 ----------------
+The following people have contributed to the development of this project by providing valuable reviews or by submitting pull requests, see :ref:`doc/contributing/contributing:contributing` for more information.
 
-The following links lists people who have contributed to the development of this project by submitting pull requests to the respective repository, see :ref:`doc/contributing/contributing:contributing` for more information.
+.. tabs::
 
-* `ros2_control <https://github.com/ros-controls/ros2_control/graphs/contributors>`_
-* `ros2_controllers <https://github.com/ros-controls/ros2_controllers/graphs/contributors>`_
-* `ros2_control_demos <https://github.com/ros-controls/ros2_control_demos/graphs/contributors>`_
-* `control_toolbox <https://github.com/ros-controls/control_toolbox/graphs/contributors>`_
-* `gazebo_ros2_control <https://github.com/ros-controls/gazebo_ros2_control/graphs/contributors>`_
-* `gz_ros2_control <https://github.com/ros-controls/gz_ros2_control/graphs/contributors>`_
-* `realtime_tools <https://github.com/ros-controls/realtime_tools/graphs/contributors>`_
-* `kinematics_interface <https://github.com/ros-controls/kinematics_interface/graphs/contributors>`_
-* `control_msgs <https://github.com/ros-controls/control_msgs/graphs/contributors>`_
+  .. tab:: All-Time Reviews
+
+    .. raw:: html
+      :file: reviewers_stats.html
+
+  .. tab:: 12 Months
+
+    .. raw:: html
+      :file: reviewers_stats_recent.html
+
+  .. tab:: All-Time Contributions
+
+    .. raw:: html
+      :file: contributors_stats.html
+
+  .. tab:: 12 Months
+
+    .. raw:: html
+      :file: contributors_stats_recent.html
 
 
 Companies and Institutions
