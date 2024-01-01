@@ -118,9 +118,9 @@ def get_user_name(user):
     return ""
 
 
-def get_reviewers_stats(owner, repos, branches, whitelist, earliest_date=""):
+def get_pr_stats(owner, repos, branches, whitelist, earliest_date=""):
   """
-  Retrieves statistics about reviewers' activity on pull requests.
+  Retrieves statistics about PRs: contributors' and reviewers' activity on pull requests.
 
   Args:
     owner (str): The owner of the repositories.
@@ -135,6 +135,10 @@ def get_reviewers_stats(owner, repos, branches, whitelist, earliest_date=""):
       - reviewers_whitelist (dict): A dictionary containing statistics for whitelisted reviewers.
       - reviewers_filter (dict): A dictionary containing filtered statistics for all reviewers not in whitelist.
       - reviewers_filter_whitelist (dict): A dictionary containing filtered statistics for whitelisted reviewers.
+      - contributors (dict): A dictionary containing statistics for all contributors not in whitelist.
+      - contributors_whitelist (dict): A dictionary containing statistics for whitelisted contributors.
+      - contributors_filter (dict): A dictionary containing filtered statistics for all contributors not in whitelist.
+      - contributors_filter_whitelist (dict): A dictionary containing filtered statistics for whitelisted contributors.
       - ct_pull (int): The total number of pull requests processed.
   """
 
@@ -142,6 +146,10 @@ def get_reviewers_stats(owner, repos, branches, whitelist, earliest_date=""):
   reviewers_whitelist = {}
   reviewers_filter = {}
   reviewers_filter_whitelist = {}
+  contributors = {}
+  contributors_whitelist = {}
+  contributors_filter = {}
+  contributors_filter_whitelist = {}
   ct_pull = 0
 
   for repo in repos:
@@ -245,7 +253,48 @@ def get_reviewers_stats(owner, repos, branches, whitelist, earliest_date=""):
                 }
                 local_reviewers_filter[reviewer_login] = True
 
-  return reviewers, reviewers_whitelist, reviewers_filter, reviewers_filter_whitelist, ct_pull
+          # parse line deletions and additions
+          pull_url = f"https://api.github.com/repos/{owner}/{repo}/pulls/{pull['number']}"
+          pull_data, _ = get_api_response_wait(pull_url)
+          additions = pull_data['additions']
+          deletions = pull_data['deletions']
+          total_changes = additions + deletions
+          contributor_login = pull_data['user']['login']
+          if contributor_login in whitelist:
+              current_dict = contributors_whitelist
+          else:
+              current_dict = contributors
+          if contributor_login in current_dict:
+            current_dict[contributor_login]["total_changes"] += total_changes
+            current_dict[contributor_login]["ct_pull"] += 1
+            current_dict[contributor_login]["last_pr_date"] = pull["created_at"]
+          else:
+            current_dict[contributor_login] = {
+              "avatar_url": pull_data['user']["avatar_url"],
+              "total_changes": total_changes,
+              "ct_pull": 1,
+              "last_pr_date": pull["created_at"]
+            }
+          # if filter is set, only count reviews after earliest_date
+          if earliest_date and pull["created_at"] > earliest_date:
+            if contributor_login in whitelist:
+                current_dict = contributors_filter_whitelist
+            else:
+                current_dict = contributors_filter
+
+            if contributor_login in current_dict:
+              current_dict[contributor_login]["total_changes"] += total_changes
+              current_dict[contributor_login]["ct_pull"] += 1
+              current_dict[contributor_login]["last_pr_date"] = pull["created_at"]
+            else:
+              current_dict[contributor_login] = {
+              "avatar_url": pull_data['user']["avatar_url"],
+              "total_changes": total_changes,
+              "ct_pull": 1,
+              "last_pr_date": pull["created_at"]
+              }
+
+  return reviewers, reviewers_whitelist, reviewers_filter, reviewers_filter_whitelist, contributors, contributors_whitelist, contributors_filter, contributors_filter_whitelist, ct_pull
 
 
 def create_reviewers_table_with_graph(reviewers_stats, user_names, table_name):
@@ -421,19 +470,32 @@ def print_reviewers_stats(reviewers_stats):
   for reviewer, stats in sorted(reviewers_stats.items(), key=lambda x: x[1]['finished_reviews'], reverse=True)[:10]:
     print(f"Reviewer: {reviewer}, Assigned Reviews: {stats['assigned_reviews']}, Finished Reviews: {stats['finished_reviews']}, rate of finished: {stats['finished_reviews']/stats['assigned_reviews']:.2f}, Last Review Date: {stats['last_review_date']}")
 
+def print_contributors_stats(contributors_stats):
+  """
+  Prints the statistics of the contributors.
+
+  Args:
+    contributors_stats (dict): A dictionary containing the statistics of the contributors.
+
+  Returns:
+    None
+  """
+  for contributor, stats in sorted(contributors_stats.items(), key=lambda x: x[1]['total_changes'], reverse=True)[:10]:
+    print(f"Contributor: {contributor}, Number of PRs: {stats['ct_pull']}, Total Line Change: {stats['total_changes']}, Last PR Date: {stats['last_pr_date']}")
+
 
 # Replace with your GitHub repository owner and name
 owner = "ros-controls"
 repos = [
-  "ros2_control",
-  "ros2_controllers",
-  "ros2_control_demos",
-  "control_toolbox",
-  "realtime_tools",
-  "control_msgs",
-  "control.ros.org",
-  "gazebo_ros2_control",
-  "gz_ros2_control",
+  # "ros2_control",
+  # "ros2_controllers",
+  # "ros2_control_demos",
+  # "control_toolbox",
+  # "realtime_tools",
+  # "control_msgs",
+  # "control.ros.org",
+  # "gazebo_ros2_control",
+  # "gz_ros2_control",
   "kinematics_interface"
 ]
 
@@ -467,7 +529,7 @@ limit, reset = get_api_limit();
 print(f"API limit: {limit}, next reset: {datetime.fromtimestamp(reset)}")
 print("----------------------------------")
 print(f"Fetch pull requests, all-time and after {formatted_date}:")
-reviewers_stats, maintainers_stats, reviewers_stats_recent, maintainers_stats_recent, ct_pulls = get_reviewers_stats(owner, repos, branches, maintainers, formatted_date)
+reviewers_stats, maintainers_stats, reviewers_stats_recent, maintainers_stats_recent, contributors_stats, contributor_maintainers_stats, contributors_stats_recent, contributor_maintainers_stats_recent, ct_pulls = get_pr_stats(owner, repos, branches, maintainers, formatted_date)
 print("----------------------------------")
 print("------------ Get User ------------")
 print("----------------------------------")
@@ -476,6 +538,8 @@ unique_reviewers = set(
   + list(maintainers_stats_recent.keys())
   + list(reviewers_stats.keys())
   + list(maintainers_stats.keys())
+  + list(contributors_stats.keys())
+  + list(contributor_maintainers_stats.keys())
   )
 user_names = {}
 for reviewer_login in unique_reviewers:
@@ -501,6 +565,15 @@ print_reviewers_stats(maintainers_stats)
 print("-------- not maintainers ---------")
 print_reviewers_stats(reviewers_stats)
 print("----------------------------------")
+
+print(f"Contributors' Stats, all-time:")
+print("---------- maintainers -----------")
+print_contributors_stats(contributor_maintainers_stats)
+
+print("-------- not maintainers ---------")
+print_contributors_stats(contributors_stats)
+print("----------------------------------")
+
 limit, reset = get_api_limit();
 print(f"API limit remaining: {limit}, next reset: {datetime.fromtimestamp(reset)}")
 print("----------------------------------")
