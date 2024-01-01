@@ -29,7 +29,7 @@ First, you need to fetch the reviewer stats from ros2_control org. To do so, you
 
 ```bash
 export GITHUB_TOKEN=<your token>
-python3 ./make_help_scripts/create_reviewer_stats.py
+python3 ./make_help_scripts/create_pr_stats.py
 ```
 which will create `~/reviews/reviewers_stats_with_graph.html`. Then you can build the documentation as usual, it will copy the file from this folder.
 
