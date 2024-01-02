@@ -9,25 +9,33 @@ The following people were maintaining the ``ros2_control`` framework, showing th
 
 .. tabs::
 
-  .. tab:: All-Time Reviews
+  .. tab:: Recent Contributions
+
+    Contributions during the past 12 months
 
     .. raw:: html
-      :file: reviewers_maintainers_stats.html
+      :file: contributors_maintainers_stats_recent.html
 
-  .. tab:: 12 Months
+  .. tab:: All-Time Contrib
 
-    .. raw:: html
-      :file: reviewers_maintainers_stats_recent.html
-
-  .. tab:: All-Time Contributions
+    All-time contributions
 
     .. raw:: html
       :file: contributors_maintainers_stats.html
 
-  .. tab:: 12 Months
+  .. tab:: Recent Reviews
+
+    Reviews during the past 12 months
 
     .. raw:: html
-      :file: contributors_maintainers_stats_recent.html
+      :file: reviewers_maintainers_stats_recent.html
+
+  .. tab:: All-Time Reviews
+
+    All-time reviews
+
+    .. raw:: html
+      :file: reviewers_maintainers_stats.html
 
 Contributors
 ----------------
@@ -35,25 +43,33 @@ The following people have contributed to the development of this project by prov
 
 .. tabs::
 
-  .. tab:: All-Time Reviews
+  .. tab:: Recent Contributions
+
+    Contributions during the past 12 months
 
     .. raw:: html
-      :file: reviewers_stats.html
+      :file: contributors_stats_recent.html
 
-  .. tab:: 12 Months
+  .. tab:: All-Time Contrib
 
-    .. raw:: html
-      :file: reviewers_stats_recent.html
-
-  .. tab:: All-Time Contributions
+    All-time contributions
 
     .. raw:: html
       :file: contributors_stats.html
 
-  .. tab:: 12 Months
+  .. tab:: Recent Reviews
+
+    Reviews during the past 12 months
 
     .. raw:: html
-      :file: contributors_stats_recent.html
+      :file: reviewers_stats_recent.html
+
+  .. tab:: All-Time Reviews
+
+    All-time reviews
+
+    .. raw:: html
+      :file: reviewers_stats.html
 
 
 Companies and Institutions

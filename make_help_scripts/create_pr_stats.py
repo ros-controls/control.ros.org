@@ -261,7 +261,7 @@ def get_pr_stats(owner, repos, branches, whitelist, blacklist, earliest_date="")
     for commits in get_all_pages(commits_url):
       for commit in commits:
         if commit['author'] is None:
-          print('No author in commit: ' + commit['url'])
+          # print('No author in commit: ' + commit['url'])
           continue
         contributor_login = commit['author']['login']
         if contributor_login in blacklist:
@@ -277,7 +277,7 @@ def get_pr_stats(owner, repos, branches, whitelist, blacklist, earliest_date="")
           deletions = commit_details['stats']['deletions']
           total_changes = additions + deletions
         else:
-          print('No stats in commit details: ' + commit['url'])
+          # print('No stats in commit details: ' + commit['url'])
           total_changes = 0
         date = commit_details['commit']['author']['date']
         if contributor_login in current_dict:
@@ -554,7 +554,7 @@ def create_contributors_table_with_graph(contributors_stats, user_details, table
               <tr>
                   <th></th>
                   <th>Contributor</th>
-                  <th>PR Count</th>
+                  <th>Commit Count</th>
                   <th>Line Changes</th>
                   <!--<th>Last Review Date</th>-->
               </tr>
@@ -660,15 +660,15 @@ def print_contributors_stats(contributors_stats):
 # Replace with your GitHub repository owner and name
 owner = "ros-controls"
 repos = [
-  "ros2_control",
-  "ros2_controllers",
-  "ros2_control_demos",
-  "control_toolbox",
-  "realtime_tools",
-  "control_msgs",
-  "control.ros.org",
-  "gazebo_ros2_control",
-  "gz_ros2_control",
+  # "ros2_control",
+  # "ros2_controllers",
+  # "ros2_control_demos",
+  # "control_toolbox",
+  # "realtime_tools",
+  # "control_msgs",
+  # "control.ros.org",
+  # "gazebo_ros2_control",
+  # "gz_ros2_control",
   "kinematics_interface"
 ]
 
