@@ -245,7 +245,7 @@ robot hardware interfaces between <em>ros2_control</em> and Gazebo Classic.</p>
 <span class="w">    </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgazebo_ros2_control.so&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gazebo_ros2_control&quot;</span><span class="nt">&gt;</span>
 <span class="w">      </span><span class="nt">&lt;robot_param&gt;</span>robot_description<span class="nt">&lt;/robot_param&gt;</span>
 <span class="w">      </span><span class="nt">&lt;robot_param_node&gt;</span>robot_state_publisher<span class="nt">&lt;/robot_param_node&gt;</span>
-<span class="w">      </span><span class="nt">&lt;parameters&gt;</span>$(find<span class="w"> </span>gazebo_ros2_control_demos)/config/cartpole_controller.yaml<span class="nt">&lt;/parameters&gt;</span>
+<span class="w">      </span><span class="nt">&lt;parameters&gt;</span>$(find<span class="w"> </span>gazebo_ros2_control_demos)/config/cart_controller.yaml<span class="nt">&lt;/parameters&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/plugin&gt;</span>
 <span class="nt">&lt;/gazebo&gt;</span>
 </pre></div>
@@ -292,27 +292,36 @@ robot model is loaded. For example, the following XML will load the default plug
 <p>Use the tag <code class="docutils literal notranslate"><span class="pre">&lt;parameters&gt;</span></code> inside <code class="docutils literal notranslate"><span class="pre">&lt;plugin&gt;</span></code> to set the YAML file with the controller configuration.</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo&gt;</span>
 <span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gazebo_ros2_control&quot;</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgazebo_ros2_control.so&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;parameters&gt;</span>$(find<span class="w"> </span>gazebo_ros2_control_demos)/config/cartpole_controller.yaml<span class="nt">&lt;/parameters&gt;</span>
+<span class="w">    </span><span class="nt">&lt;parameters&gt;</span>$(find<span class="w"> </span>gazebo_ros2_control_demos)/config/cart_controller.yaml<span class="nt">&lt;/parameters&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/plugin&gt;</span>
 <span class="nt">&lt;gazebo&gt;</span>
 </pre></div>
 </div>
-<p>This controller publishes the state of all resources registered to a
-<code class="docutils literal notranslate"><span class="pre">hardware_interface::StateInterface</span></code> to a topic of type <code class="docutils literal notranslate"><span class="pre">sensor_msgs/msg/JointState</span></code>.
-The following is a basic configuration of the controller.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">joint_state_controller</span><span class="p">:</span>
+<p>The following is a basic configuration of the controllers:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">joint_state_broadcaster</span></code>: This controller publishes the state of all resources registered to a <code class="docutils literal notranslate"><span class="pre">hardware_interface::StateInterface</span></code> to a topic of type <code class="docutils literal notranslate"><span class="pre">sensor_msgs/msg/JointState</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">joint_trajectory_controller</span></code>: This controller creates an action called <code class="docutils literal notranslate"><span class="pre">/joint_trajectory_controller/follow_joint_trajectory</span></code> of type <code class="docutils literal notranslate"><span class="pre">control_msgs::action::FollowJointTrajectory</span></code>.</p></li>
+</ul>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">controller_manager</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint_state_controller/JointStateController</span>
-</pre></div>
-</div>
-<p>This controller creates an action called <code class="docutils literal notranslate"><span class="pre">/cart_pole_controller/follow_joint_trajectory</span></code> of type <code class="docutils literal notranslate"><span class="pre">control_msgs::action::FollowJointTrajectory</span></code>.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">cart_pole_controller</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">update_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span><span class="w">  </span><span class="c1"># Hz</span>
+
+<span class="w">    </span><span class="nt">joint_trajectory_controller</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint_trajectory_controller/JointTrajectoryController</span>
+
+<span class="w">    </span><span class="nt">joint_state_broadcaster</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint_state_broadcaster/JointStateBroadcaster</span>
+
+<span class="nt">joint_trajectory_controller</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint_trajectory_controller/JointTrajectoryController</span>
 <span class="w">    </span><span class="nt">joints</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">slider_to_cart</span>
-<span class="w">    </span><span class="nt">write_op_modes</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">slider_to_cart</span>
+<span class="w">    </span><span class="nt">interface_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
+<span class="w">    </span><span class="nt">command_interfaces</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
+<span class="w">    </span><span class="nt">state_interfaces</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">velocity</span>
 </pre></div>
 </div>
 </section>
