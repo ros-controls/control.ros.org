@@ -99,7 +99,7 @@ def get_all_pages(url):
       url = None
 
 
-def get_user_name(user):
+def get_user_details(user):
   """
   Retrieves the name of a GitHub user.
 
@@ -108,17 +108,18 @@ def get_user_name(user):
 
   Returns:
     str: The name of the GitHub user, or an empty string if the name is not available.
+    avatar_url: The name of the GitHub user, or an empty string if the name is not available.
   """
   url = f"https://api.github.com/users/{user}"
-  json, response = get_api_response_wait(url)
+  json, _ = get_api_response_wait(url)
 
   if json:
-    return json["name"]
+    return json["name"], json["avatar_url"]
   else:
     return ""
 
 
-def get_pr_stats(owner, repos, branches, whitelist, earliest_date=""):
+def get_pr_stats(owner, repos, branches, whitelist, blacklist, earliest_date=""):
   """
   Retrieves statistics about PRs: contributors' and reviewers' activity on pull requests.
 
@@ -126,7 +127,8 @@ def get_pr_stats(owner, repos, branches, whitelist, earliest_date=""):
     owner (str): The owner of the repositories.
     repos (list): The list of repositories.
     branches (dict): The dictionary mapping repositories to their branches.
-    whitelist (list): The list of whitelisted reviewers.
+    whitelist (list): The list of whitelisted users.
+    blacklist (list): The list of blacklisted users.
     earliest_date (str, optional): The earliest date to consider for reviews. Defaults to "".
 
   Returns:
@@ -167,37 +169,36 @@ def get_pr_stats(owner, repos, branches, whitelist, earliest_date=""):
           for reviewer in reviewers_list:
             reviewer_login = reviewer["login"]
 
-            if reviewer_login in whitelist:
-                current_dict = reviewers_whitelist
-            else:
-                current_dict = reviewers
-
-            if reviewer_login in current_dict:
-              current_dict[reviewer_login]["assigned_reviews"] += 1
-            else:
-              current_dict[reviewer_login] = {
-                "avatar_url": reviewer["avatar_url"],
-                "assigned_reviews": 1,
-                "finished_reviews": 0,
-                "last_review_date": "0000-00-00T00:00:00Z"
-              }
-
-            # if filter is set, only count reviews after earliest_date
-            if earliest_date and pull["created_at"] > earliest_date:
+            if reviewer_login not in blacklist:
               if reviewer_login in whitelist:
-                  current_dict = reviewers_filter_whitelist
+                  current_dict = reviewers_whitelist
               else:
-                  current_dict = reviewers_filter
+                  current_dict = reviewers
 
               if reviewer_login in current_dict:
                 current_dict[reviewer_login]["assigned_reviews"] += 1
               else:
                 current_dict[reviewer_login] = {
-                  "avatar_url": reviewer["avatar_url"],
                   "assigned_reviews": 1,
                   "finished_reviews": 0,
                   "last_review_date": "0000-00-00T00:00:00Z"
                 }
+
+              # if filter is set, only count reviews after earliest_date
+              if earliest_date and pull["created_at"] > earliest_date:
+                if reviewer_login in whitelist:
+                    current_dict = reviewers_filter_whitelist
+                else:
+                    current_dict = reviewers_filter
+
+                if reviewer_login in current_dict:
+                  current_dict[reviewer_login]["assigned_reviews"] += 1
+                else:
+                  current_dict[reviewer_login] = {
+                    "assigned_reviews": 1,
+                    "finished_reviews": 0,
+                    "last_review_date": "0000-00-00T00:00:00Z"
+                  }
 
           # Get reviews for the pull request, but count only once per PR
           pull_reviews_url = pull["url"] + "/reviews"
@@ -209,6 +210,8 @@ def get_pr_stats(owner, repos, branches, whitelist, earliest_date=""):
             reviewer_login = review["user"]["login"]
             date = review["submitted_at"]
 
+            if reviewer_login in blacklist:
+              continue
             if reviewer_login in whitelist:
                 current_dict = reviewers_whitelist
             else:
@@ -223,7 +226,6 @@ def get_pr_stats(owner, repos, branches, whitelist, earliest_date=""):
                 current_dict[reviewer_login]["last_review_date"] = date
             else:
               current_dict[reviewer_login] = {
-                "avatar_url": review["user"]["avatar_url"],
                 "assigned_reviews": 1,
                 "finished_reviews": 1,
                 "last_review_date": date
@@ -246,58 +248,67 @@ def get_pr_stats(owner, repos, branches, whitelist, earliest_date=""):
                   current_dict[reviewer_login]["last_review_date"] = date
               else:
                 current_dict[reviewer_login] = {
-                  "avatar_url": review["user"]["avatar_url"],
                   "assigned_reviews": 1,
                   "finished_reviews": 1,
                   "last_review_date": date
                 }
                 local_reviewers_filter[reviewer_login] = True
 
-          # parse line deletions and additions
-          pull_url = f"https://api.github.com/repos/{owner}/{repo}/pulls/{pull['number']}"
-          pull_data, _ = get_api_response_wait(pull_url)
-          additions = pull_data['additions']
-          deletions = pull_data['deletions']
+    # parse line contributions from commits
+    print(f"Getting contributors' stats for {owner}/{repo} on branch {branches[repo]}")
+    commits_url = f"https://api.github.com/repos/{owner}/{repo}/commits?branch={branches[repo]}"
+
+    for commits in get_all_pages(commits_url):
+      for commit in commits:
+        contributor_login = commit['author']['login']
+        if contributor_login in blacklist:
+            continue
+        if contributor_login in whitelist:
+            current_dict = contributors_whitelist
+        else:
+            current_dict = contributors
+
+        commit_details, _ = get_api_response_wait(commit['url'])
+        if 'stats' in commit_details.keys():
+          additions = commit_details['stats']['additions']
+          deletions = commit_details['stats']['deletions']
           total_changes = additions + deletions
-          contributor_login = pull_data['user']['login']
+        else:
+          print('No stats in commit details: ' + commit['url'])
+          total_changes = 0
+        date = commit_details['commit']['author']['date']
+        if contributor_login in current_dict:
+          current_dict[contributor_login]["total_changes"] += total_changes
+          current_dict[contributor_login]["ct_commit"] += 1
+          current_dict[contributor_login]["last_commit_date"] = date
+        else:
+          current_dict[contributor_login] = {
+            "total_changes": total_changes,
+            "ct_commit": 1,
+            "last_commit_date": date
+          }
+        # if filter is set, only count reviews after earliest_date
+        if earliest_date and date > earliest_date:
           if contributor_login in whitelist:
-              current_dict = contributors_whitelist
+              current_dict = contributors_filter_whitelist
           else:
-              current_dict = contributors
+              current_dict = contributors_filter
+
           if contributor_login in current_dict:
             current_dict[contributor_login]["total_changes"] += total_changes
-            current_dict[contributor_login]["ct_pr"] += 1
-            current_dict[contributor_login]["last_pr_date"] = pull["created_at"]
+            current_dict[contributor_login]["ct_commit"] += 1
+            current_dict[contributor_login]["last_commit_date"] = date
           else:
             current_dict[contributor_login] = {
-              "avatar_url": pull_data['user']["avatar_url"],
-              "total_changes": total_changes,
-              "ct_pr": 1,
-              "last_pr_date": pull["created_at"]
+            "total_changes": total_changes,
+            "ct_commit": 1,
+            "last_commit_date": date
             }
-          # if filter is set, only count reviews after earliest_date
-          if earliest_date and pull["created_at"] > earliest_date:
-            if contributor_login in whitelist:
-                current_dict = contributors_filter_whitelist
-            else:
-                current_dict = contributors_filter
-
-            if contributor_login in current_dict:
-              current_dict[contributor_login]["total_changes"] += total_changes
-              current_dict[contributor_login]["ct_pr"] += 1
-              current_dict[contributor_login]["last_pr_date"] = pull["created_at"]
-            else:
-              current_dict[contributor_login] = {
-              "avatar_url": pull_data['user']["avatar_url"],
-              "total_changes": total_changes,
-              "ct_pr": 1,
-              "last_pr_date": pull["created_at"]
-              }
 
   return reviewers, reviewers_whitelist, reviewers_filter, reviewers_filter_whitelist, contributors, contributors_whitelist, contributors_filter, contributors_filter_whitelist, ct_pull
 
 
-def create_reviewers_table_with_graph(reviewers_stats, user_names, table_name):
+def create_reviewers_table_with_graph(reviewers_stats, user_details, table_name):
   """
   Creates an HTML table with reviewer statistics and graphs.
 
@@ -305,11 +316,12 @@ def create_reviewers_table_with_graph(reviewers_stats, user_names, table_name):
     reviewers_stats (dict): A dictionary containing reviewer statistics.
       The keys are reviewer names and the values are dictionaries
       containing the following keys:
-        - 'avatar_url' (str): The URL of the reviewer's avatar image.
         - 'assigned_reviews' (int): The number of reviews assigned to the reviewer.
         - 'finished_reviews' (int): The number of reviews finished by the reviewer.
         - 'last_review_date' (str): The date of the last review by the reviewer.
-    user_names (dict): A dictionary mapping reviewer names to their corresponding user names.
+    user_details (dict): A dictionary mapping login names to
+        - 'name' (str): The name of the reviewer.
+        - 'avatar_url' (str): The URL of the reviewer's avatar image.
     table_name (str): The ID of the HTML table.
 
   Returns:
@@ -413,11 +425,11 @@ def create_reviewers_table_with_graph(reviewers_stats, user_names, table_name):
                 <td>
                   <div style="display: flex; align-items: center;">
                     <div style="width: 40px;">
-                      <img src="{stats['avatar_url']}" width="36" height="36" alt="{reviewer}" style="border-radius: 50%;">
+                      <img src="{user_details[reviewer]['avatar_url']}" width="36" height="36" alt="{reviewer}" style="border-radius: 50%;">
                     </div>
                     <div>
                       <div>
-                        <b>{user_names[reviewer]}</b> <br>
+                        <b>{user_details[reviewer]['name']}</b> <br>
                         <a href="https://github.com/{reviewer}" target="_blank"><img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" width="16" height="16" alt="{reviewer}">{reviewer}</a>
                       </div>
                     </div>
@@ -457,7 +469,7 @@ def create_reviewers_table_with_graph(reviewers_stats, user_names, table_name):
   return html_content
 
 
-def create_contributors_table_with_graph(contributors_stats, user_names, table_name):
+def create_contributors_table_with_graph(contributors_stats, user_details, table_name):
   """
   Creates an HTML table with contributors statistics and graphs.
 
@@ -465,11 +477,12 @@ def create_contributors_table_with_graph(contributors_stats, user_names, table_n
     contributors_stats (dict): A dictionary containing contributors statistics.
       The keys are contributors names and the values are dictionaries
       containing the following keys:
-        - 'avatar_url' (str): The URL of the contributor's avatar image.
         - 'total_changes' (int): The number of line changes by the contributor.
-        - 'ct_pr' (int): The number of reviews finished by the contributor.
-        - 'last_pr_date' (str): The date of the last pr by the contributor.
-    user_names (dict): A dictionary mapping contributors names to their corresponding user names.
+        - 'ct_commit' (int): The number of reviews finished by the contributor.
+        - 'last_commit_date' (str): The date of the last pr by the contributor.
+    user_details (dict): A dictionary mapping login names to
+        - 'name' (str): The name of the reviewer.
+        - 'avatar_url' (str): The URL of the reviewer's avatar image.
     table_name (str): The ID of the HTML table.
 
   Returns:
@@ -548,14 +561,14 @@ def create_contributors_table_with_graph(contributors_stats, user_names, table_n
   if contributors_stats:
     # Find the contributors with the highest number of line_changes
     max_total_changes = max(stats['total_changes'] for stats in contributors_stats.values())
-    max_pr_count = max(stats['ct_pr'] for stats in contributors_stats.values())
+    max_pr_count = max(stats['ct_commit'] for stats in contributors_stats.values())
 
     # Sort contributors by total change
     sorted_contributors = sorted(contributors_stats.items(), key=lambda x: x[1]['total_changes'], reverse=True)
 
     for idx, (contributor, stats) in enumerate(sorted_contributors):
         total_changes_bar_len = (stats['total_changes'] / max_total_changes) * 100
-        ct_pr_bar_len = (stats['ct_pr'] / max_pr_count) * 100
+        ct_commit_bar_len = (stats['ct_commit'] / max_pr_count) * 100
 
         # Add emojis for the first three contributors
         medal = ""
@@ -572,26 +585,26 @@ def create_contributors_table_with_graph(contributors_stats, user_names, table_n
                 <td>
                   <div style="display: flex; align-items: center;">
                     <div style="width: 40px;">
-                      <img src="{stats['avatar_url']}" width="36" height="36" alt="{contributor}" style="border-radius: 50%;">
+                      <img src="{user_details[contributor]['avatar_url']}" width="36" height="36" alt="{contributor}" style="border-radius: 50%;">
                     </div>
                     <div>
                       <div>
-                        <b>{user_names[contributor]}</b> <br>
+                        <b>{user_details[contributor]['name']}</b> <br>
                         <a href="https://github.com/{contributor}" target="_blank"><img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" width="16" height="16" alt="{contributor}">{contributor}</a>
                       </div>
                     </div>
                   </div>
                 </td>
-                <td>{stats['ct_pr']}
+                <td>{stats['ct_commit']}
                     <div class="progress-bar">
-                        <div class="progress-value-reviews" style="width: {ct_pr_bar_len}%;"></div>
+                        <div class="progress-value-reviews" style="width: {ct_commit_bar_len}%;"></div>
                     </div>
                 <td>{stats['total_changes']}
                     <div class="progress-bar">
                         <div class="progress-value-reviews" style="width: {total_changes_bar_len}%;"></div>
                     </div>
                 </td>
-                <!--<td>{stats['last_pr_date']}</td>-->
+                <!--<td>{stats['last_commit_date']}</td>-->
             </tr>
         """
 
@@ -638,7 +651,7 @@ def print_contributors_stats(contributors_stats):
     None
   """
   for contributor, stats in sorted(contributors_stats.items(), key=lambda x: x[1]['total_changes'], reverse=True)[:10]:
-    print(f"Contributor: {contributor}, Number of PRs: {stats['ct_pr']}, Total Line Change: {stats['total_changes']}, Last PR Date: {stats['last_pr_date']}")
+    print(f"Contributor: {contributor}, Number of PRs: {stats['ct_commit']}, Total Line Change: {stats['total_changes']}, Last PR Date: {stats['last_commit_date']}")
 
 
 # Replace with your GitHub repository owner and name
@@ -670,6 +683,7 @@ branches = {
 }
 
 maintainers = ["bmagyar", "destogl", "christophfroehlich"]
+blacklist = ["dependabot[bot]", "mergify[bot]"]
 
 # Get the current date and time
 current_date = datetime.utcnow()
@@ -686,7 +700,7 @@ limit, reset = get_api_limit();
 print(f"API limit: {limit}, next reset: {datetime.fromtimestamp(reset)}")
 print("----------------------------------")
 print(f"Fetch pull requests, all-time and after {formatted_date}:")
-reviewers_stats, maintainers_stats, reviewers_stats_recent, maintainers_stats_recent, contributors_stats, contributors_maintainers_stats, contributors_stats_recent, contributors_maintainers_stats_recent, ct_pulls = get_pr_stats(owner, repos, branches, maintainers, formatted_date)
+reviewers_stats, maintainers_stats, reviewers_stats_recent, maintainers_stats_recent, contributors_stats, contributors_maintainers_stats, contributors_stats_recent, contributors_maintainers_stats_recent, ct_pulls = get_pr_stats(owner, repos, branches, maintainers, blacklist, formatted_date)
 print("----------------------------------")
 print("------------ Get User ------------")
 print("----------------------------------")
@@ -698,9 +712,14 @@ unique_reviewers = set(
   + list(contributors_stats.keys())
   + list(contributors_maintainers_stats.keys())
   )
-user_names = {}
+user_details = {}
 for reviewer_login in unique_reviewers:
-    user_names[reviewer_login] = get_user_name(reviewer_login)
+    name, avatar_url = get_user_details(reviewer_login)
+    user_details[reviewer_login] = {
+                  "name": name,
+                  "avatar_url": avatar_url
+                }
+
 
 print(f"Got {len(unique_reviewers)} user names")
 
@@ -745,15 +764,15 @@ print("--------------- END --------------")
 print("----------------------------------")
 
 # Create the HTML content
-html_maintainers_stats_recent = create_reviewers_table_with_graph(maintainers_stats_recent, user_names, "maintainers_stats_recent")
-html_reviewers_stats_recent = create_reviewers_table_with_graph(reviewers_stats_recent, user_names, "reviewers_stats_recent")
-html_maintainers_stats = create_reviewers_table_with_graph(maintainers_stats, user_names, "maintainers_stats")
-html_reviewers_stats = create_reviewers_table_with_graph(reviewers_stats, user_names, "reviewers_stats")
+html_maintainers_stats_recent = create_reviewers_table_with_graph(maintainers_stats_recent, user_details, "maintainers_stats_recent")
+html_reviewers_stats_recent = create_reviewers_table_with_graph(reviewers_stats_recent, user_details, "reviewers_stats_recent")
+html_maintainers_stats = create_reviewers_table_with_graph(maintainers_stats, user_details, "maintainers_stats")
+html_reviewers_stats = create_reviewers_table_with_graph(reviewers_stats, user_details, "reviewers_stats")
 
-html_contributors_maintainers_stats_recent = create_contributors_table_with_graph(contributors_maintainers_stats_recent, user_names, "contributors_maintainers_stats_recent")
-html_contributors_stats_recent = create_contributors_table_with_graph(contributors_stats_recent, user_names, "contributors_stats_recent")
-html_contributors_maintainers_stats = create_contributors_table_with_graph(contributors_maintainers_stats, user_names, "contributors_maintainers_stats")
-html_contributors_stats = create_contributors_table_with_graph(contributors_stats, user_names, "contributors_stats")
+html_contributors_maintainers_stats_recent = create_contributors_table_with_graph(contributors_maintainers_stats_recent, user_details, "contributors_maintainers_stats_recent")
+html_contributors_stats_recent = create_contributors_table_with_graph(contributors_stats_recent, user_details, "contributors_stats_recent")
+html_contributors_maintainers_stats = create_contributors_table_with_graph(contributors_maintainers_stats, user_details, "contributors_maintainers_stats")
+html_contributors_stats = create_contributors_table_with_graph(contributors_stats, user_details, "contributors_stats")
 
 # Save the HTML content to a file named "reviewers_stats_with_graph.html"
 home_directory = os.path.expanduser( '~' )
