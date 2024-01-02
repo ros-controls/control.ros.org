@@ -260,6 +260,9 @@ def get_pr_stats(owner, repos, branches, whitelist, blacklist, earliest_date="")
 
     for commits in get_all_pages(commits_url):
       for commit in commits:
+        if commit['author'] is None:
+          print('No author in commit: ' + commit['url'])
+          continue
         contributor_login = commit['author']['login']
         if contributor_login in blacklist:
             continue
