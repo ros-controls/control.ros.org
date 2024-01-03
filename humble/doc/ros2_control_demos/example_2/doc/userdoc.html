@@ -200,14 +200,16 @@ joint_state_broadcaster<span class="o">[</span>joint_state_broadcaster/JointStat
 </div>
 </li>
 <li><p>If everything is fine, now you can send a command to <em>Diff Drive Controller</em> using ROS 2 CLI interface:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>--rate<span class="w"> </span><span class="m">30</span><span class="w"> </span>/diffbot_base_controller/cmd_vel_unstamped<span class="w"> </span>geometry_msgs/msg/Twist<span class="w"> </span><span class="s2">&quot;linear:</span>
-<span class="s2">  x: 0.7</span>
-<span class="s2">  y: 0.0</span>
-<span class="s2">  z: 0.0</span>
-<span class="s2">angular:</span>
-<span class="s2">  x: 0.0</span>
-<span class="s2">  y: 0.0</span>
-<span class="s2">  z: 1.0&quot;</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>--rate<span class="w"> </span><span class="m">30</span><span class="w"> </span>/diffbot_base_controller/cmd_vel<span class="w"> </span>geometry_msgs/msg/TwistStamped<span class="w"> </span><span class="s2">&quot;</span>
+<span class="s2">twist:</span>
+<span class="s2">  linear:</span>
+<span class="s2">    x: 0.7</span>
+<span class="s2">    y: 0.0</span>
+<span class="s2">    z: 0.0</span>
+<span class="s2">  angular:</span>
+<span class="s2">    x: 0.0</span>
+<span class="s2">    y: 0.0</span>
+<span class="s2">    z: 1.0&quot;</span>
 </pre></div>
 </div>
 <p>You should now see an orange box circling in <em>RViz</em>.
