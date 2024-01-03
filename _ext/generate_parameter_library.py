@@ -13,6 +13,44 @@ from generate_parameter_library_py.generate_markdown import (
     RuntimeParameterDetailMarkdown
 )
 
+def insert_additional_parameters_after(items, keys, insert_map):
+  for key in insert_map.keys():
+      # Define the level you're looking for
+      level_to_find = key.split('.')[0]
+
+      # Reverse keys and find the index of the first occurrence of the level
+      reversed_keys = list(reversed(keys))
+      reversed_index = next((index for (index, item) in enumerate(reversed_keys) if item.split('.')[0] == level_to_find), None)
+
+      if reversed_index is not None:
+          # If the level is found, insert the runtime_param_item after it in the original list
+          index = len(keys) - 1 - reversed_index
+          items = items[:index+1] + [insert_map[key]] + items[index+1:]
+          keys = keys[:index+1] + [key] + keys[index+1:]
+      else:
+          # If the level is not found, append the runtime_param_item to the end of the list
+          items.append(insert_map[key])
+          keys.append(key)
+  return items, keys
+
+def insert_additional_parameters_before(items, keys, insert_map):
+  for key in insert_map.keys():
+      # Define the level you're looking for
+      level_to_find = key.split('.')[0]
+
+      # Find the index of the first occurrence of the level in items
+      index = next((index for (index, item) in enumerate(keys) if item.split('.')[0] == level_to_find), None)
+
+      if index is not None:
+          # If the level is found, insert the runtime_param_item after it
+          items = items[:index] + [insert_map[key]] + items[index:]
+          keys = keys[:index] + [key] + keys[index:]
+      else:
+          # If the level is not found, append the runtime_param_item to the end of the list
+          items.append(insert_map[key])
+          keys.append(key)
+  return items, keys
+
 class GeneraterParameterLibraryDetails(SphinxDirective):
     required_arguments = 1
     optional_arguments = 1 # context yaml file, "key: string"
@@ -30,25 +68,30 @@ class GeneraterParameterLibraryDetails(SphinxDirective):
         gen_param_struct = GenerateCode("rst")
         gen_param_struct.parse(yaml_file, "")
 
+        # general parameters
         param_details = [
             ParameterDetailMarkdown(param)
             for param in gen_param_struct.declare_parameters
         ]
+        # runtime parameters, i.e., such with a __map_ key
         runtime_param_details = [
             RuntimeParameterDetailMarkdown(param)
             for param in gen_param_struct.declare_dynamic_parameters
         ]
-        param_strings_map = {detail.declare_parameters.parameter_name: str(detail) for detail in param_details}
-        param_strings_map.update({detail.declare_parameters.parameter_name: str(detail) for detail in runtime_param_details})
+
+        param_strings_keys = [detail.declare_parameters.parameter_name  for detail in param_details]
+        param_items = [str(detail) for detail in param_details]
+        runtime_param_strings_map = {detail.declare_parameters.parameter_name: str(detail) for detail in runtime_param_details}
         # add optional context data from yaml. we don't use a jinja template here -> add the indent manually
-        param_strings_map.update({key: str(key) + "\n" +
-                '\n'.join('  ' + line for line in str(value).replace('\\t', '  ').splitlines()) + "\n"
-                for key, value in context_yaml_data.items()})
+        context_strings_map = {key: str(key) + "\n" +
+          '\n'.join('  ' + line for line in str(value).replace('\\t', '  ').splitlines()) + "\n"
+          for key, value in context_yaml_data.items()}
 
-        # Sort the keys hierarchically by splitting on '.' and sorting each level
-        sorted_keys = sorted(param_strings_map.keys(), key=lambda s: s.split('.'))
+        param_items, param_strings_keys = insert_additional_parameters_after(param_items, param_strings_keys, runtime_param_strings_map)
+        param_items, param_strings_keys = insert_additional_parameters_before(param_items, param_strings_keys, context_strings_map)
 
-        docs = "\n".join(param_strings_map[key] for key in sorted_keys)
+        docs = "\n".join(param_items)
+
         # print(docs)
 
         # Add the content one line at a time.
