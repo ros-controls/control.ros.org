@@ -10,24 +10,28 @@ base_dir="$(dirname "$script_base_dir")"
 base_branch="iron"
 build_dir="_build"
 
-# reviewer stats
-reviewer_stats_files=("maintainers_stats_recent.html"
+# pr stats
+pr_stats_files=("reviewers_maintainers_stats_recent.html"
   "reviewers_stats_recent.html"
-  "maintainers_stats.html"
-  "reviewers_stats.html")
-reviewer_stats_cache_folder="reviews"
-reviewer_stats_target_folder="./doc/acknowledgements"
+  "reviewers_maintainers_stats.html"
+  "reviewers_stats.html",
+  "contributors_maintainers_stats_recent.html"
+  "contributors_stats_recent.html"
+  "contributors_maintainers_stats.html"
+  "contributors_stats.html")
+pr_stats_cache_folder="reviews"
+pr_stats_target_folder="./doc/acknowledgements"
 
-add_reviewer_stats_file () {
-  for reviewer_stats_filename in "${reviewer_stats_files[@]}"; do
-    ORIGFILE="$HOME/$reviewer_stats_cache_folder/$reviewer_stats_filename"
+add_pr_stats_file () {
+  for pr_stats_filename in "${pr_stats_files[@]}"; do
+    ORIGFILE="$HOME/$pr_stats_cache_folder/$pr_stats_filename"
     # echo $ORIGFILE
     if test -f "$ORIGFILE"; then
-      echo "Copy reviewer stats file '${reviewer_stats_filename}' to '${reviewer_stats_target_folder}'"
-      cp ${ORIGFILE} ${reviewer_stats_target_folder}
+      echo "Copy PR stats file '${pr_stats_filename}' to '${pr_stats_target_folder}'"
+      cp ${ORIGFILE} ${pr_stats_target_folder}
     else
-      echo "Create empty reviewer stats file '${reviewer_stats_filename}' in '${reviewer_stats_target_folder}'"
-      echo "<i>No review statistics available yet.</i>" > ${reviewer_stats_target_folder}/${reviewer_stats_filename}
+      echo "Create empty PR stats file '${pr_stats_filename}' in '${pr_stats_target_folder}'"
+      echo "<i>No pr statistics available yet.</i>" > ${pr_stats_target_folder}/${pr_stats_filename}
     fi
   done
 }
