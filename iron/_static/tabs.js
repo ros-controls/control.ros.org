@@ -134,12 +134,14 @@ function selectNamedTabs(name, clickedId=null) {
     })
 }
 
-if (typeof exports === 'undefined') {
-  exports = {};
-}
+// TODO(christophfroehlich) this has to be uncommented for jQuery of our code to work on the same page
 
-exports.keyTabs = keyTabs;
-exports.changeTabs = changeTabs;
-exports.selectTab = selectTab;
-exports.deselectTabList = deselectTabList;
-exports.selectNamedTabs = selectNamedTabs;
+// if (typeof exports === 'undefined') {
+//   exports = {};
+// }
+
+// exports.keyTabs = keyTabs;
+// exports.changeTabs = changeTabs;
+// exports.selectTab = selectTab;
+// exports.deselectTabList = deselectTabList;
+// exports.selectNamedTabs = selectNamedTabs;
