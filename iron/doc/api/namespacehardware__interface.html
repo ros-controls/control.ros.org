@@ -149,8 +149,11 @@ Functions</h2></td></tr>
 <tr class="memitem:a52107baf3530625362458838d940b5e8"><td class="memItemLeft" align="right" valign="top">HARDWARE_INTERFACE_PUBLIC std::vector&lt; <a class="el" href="structhardware__interface_1_1HardwareInfo.html">HardwareInfo</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehardware__interface.html#a52107baf3530625362458838d940b5e8">parse_control_resources_from_urdf</a> (const std::string &amp;urdf)</td></tr>
 <tr class="memdesc:a52107baf3530625362458838d940b5e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search XML snippet from URDF for information about a control component.  <a href="namespacehardware__interface.html#a52107baf3530625362458838d940b5e8">More...</a><br /></td></tr>
 <tr class="separator:a52107baf3530625362458838d940b5e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa671d478597d51c09ea3a5ebad3da68c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehardware__interface.html#aa671d478597d51c09ea3a5ebad3da68c">stod</a> (const std::string &amp;s)</td></tr>
+<tr class="memdesc:aa671d478597d51c09ea3a5ebad3da68c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to convert a std::string to double in a locale-independent way.  <a href="namespacehardware__interface.html#aa671d478597d51c09ea3a5ebad3da68c">More...</a><br /></td></tr>
+<tr class="separator:aa671d478597d51c09ea3a5ebad3da68c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad28292f4a774ae437f32b27ffad9bdaa"><td class="memItemLeft" align="right" valign="top"><a id="ad28292f4a774ae437f32b27ffad9bdaa"></a>
-HARDWARE_INTERFACE_PUBLIC bool&#160;</td><td class="memItemRight" valign="bottom"><b>parse_bool</b> (const std::string &amp;bool_string)</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>parse_bool</b> (const std::string &amp;bool_string)</td></tr>
 <tr class="separator:ad28292f4a774ae437f32b27ffad9bdaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
@@ -259,6 +262,32 @@ CallbackReturn::ERROR critical error has happened that should be managed in "on_
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">std::runtime_error</td><td>if a robot attribute or tag is not found </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa671d478597d51c09ea3a5ebad3da68c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa671d478597d51c09ea3a5ebad3da68c">&#9670;&nbsp;</a></span>stod()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double hardware_interface::stod </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function to convert a std::string to double in a locale-independent way. </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::invalid_argument</td><td>if not a valid number from <a href="https://github.com/ros-planning/srdfdom/blob/ad17b8d25812f752c397a6011cec64aeff090c46/src/model.cpp#L53">https://github.com/ros-planning/srdfdom/blob/ad17b8d25812f752c397a6011cec64aeff090c46/src/model.cpp#L53</a> </td></tr>
   </table>
   </dd>
 </dl>
