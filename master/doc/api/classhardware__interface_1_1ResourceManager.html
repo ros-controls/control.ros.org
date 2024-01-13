@@ -896,7 +896,9 @@ false if resource manager's <a class="el" href="classhardware__interface_1_1Reso
 <p>Hardware components are asked to perform the command interface mode switching.</p>
 <dl class="section note"><dt>Note</dt><dd>this is intended for mode-switching when a hardware interface needs to change control mode depending on which command interface is claimed. </dd>
 <dd>
-this is for realtime switching of the command interface. </dd></dl>
+this is for realtime switching of the command interface. </dd>
+<dd>
+it is assumed that <code>prepare_command_mode_switch</code> is called just before this method with the same input arguments. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">start_interfaces</td><td>vector of string identifiers for the command interfaces starting. </td></tr>
@@ -948,7 +950,7 @@ accept_command_resource_claim is called on all actuators and system components a
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true if switch can be prepared, false if a component rejects switch request. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if switch can be prepared; false if a component rejects switch request, and if at least one of the input interfaces are not existing or not available (i.e., component is not in ACTIVE or INACTIVE state). </dd></dl>
 
 </div>
 </div>
