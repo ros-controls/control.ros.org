@@ -13,8 +13,9 @@ var searchData=
   ['remove_5fcontroller_5freference_5finterfaces_181',['remove_controller_reference_interfaces',['../classhardware__interface_1_1ResourceManager.html#aa169723dd5cab86ea38e8eb08d5bec06',1,'hardware_interface::ResourceManager']]],
   ['reset_182',['reset',['../classjoint__limits__interface_1_1JointLimitHandle.html#a1304a3e3f9550831b61ddc9afe03160a',1,'joint_limits_interface::JointLimitHandle']]],
   ['resourcemanager_183',['ResourceManager',['../classhardware__interface_1_1ResourceManager.html',1,'hardware_interface::ResourceManager'],['../classhardware__interface_1_1ResourceManager.html#aebaa550a8f7f82f4b3cc7db01f43892f',1,'hardware_interface::ResourceManager::ResourceManager(unsigned int update_rate=100, rclcpp::node_interfaces::NodeClockInterface::SharedPtr clock_interface=nullptr)'],['../classhardware__interface_1_1ResourceManager.html#a8f40951f122595801a68ea1858b09123',1,'hardware_interface::ResourceManager::ResourceManager(const std::string &amp;urdf, bool validate_interfaces=true, bool activate_all=false, unsigned int update_rate=100, rclcpp::node_interfaces::NodeClockInterface::SharedPtr clock_interface=nullptr)']]],
-  ['resourcemanagertest_184',['ResourceManagerTest',['../classResourceManagerTest.html',1,'']]],
-  ['resourcemanagertestreadwriteerror_185',['ResourceManagerTestReadWriteError',['../classResourceManagerTestReadWriteError.html',1,'']]],
-  ['resourcestorage_186',['ResourceStorage',['../classhardware__interface_1_1ResourceStorage.html',1,'hardware_interface']]],
-  ['ros2_5fcontrol_187',['ros2_control',['../index.html',1,'']]]
+  ['resourcemanagerprepareperformtest_184',['ResourceManagerPreparePerformTest',['../classResourceManagerPreparePerformTest.html',1,'']]],
+  ['resourcemanagertest_185',['ResourceManagerTest',['../classResourceManagerTest.html',1,'']]],
+  ['resourcemanagertestreadwriteerror_186',['ResourceManagerTestReadWriteError',['../classResourceManagerTestReadWriteError.html',1,'']]],
+  ['resourcestorage_187',['ResourceStorage',['../classhardware__interface_1_1ResourceStorage.html',1,'hardware_interface']]],
+  ['ros2_5fcontrol_188',['ros2_control',['../index.html',1,'']]]
 ];
