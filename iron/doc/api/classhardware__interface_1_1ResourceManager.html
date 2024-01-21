@@ -94,9 +94,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a01ac95fd198f60a0eb9f83c2fbcd2799"><td class="memItemLeft" align="right" valign="top"><a id="a01ac95fd198f60a0eb9f83c2fbcd2799"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>ResourceManager</b> (const <a class="el" href="classhardware__interface_1_1ResourceManager.html">ResourceManager</a> &amp;)=delete</td></tr>
 <tr class="separator:a01ac95fd198f60a0eb9f83c2fbcd2799"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b2178b1349277b3cce3805ff8ed2003"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceManager.html#a0b2178b1349277b3cce3805ff8ed2003">load_urdf</a> (const std::string &amp;urdf, bool validate_interfaces=true)</td></tr>
-<tr class="memdesc:a0b2178b1349277b3cce3805ff8ed2003"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load resources from on a given URDF.  <a href="classhardware__interface_1_1ResourceManager.html#a0b2178b1349277b3cce3805ff8ed2003">More...</a><br /></td></tr>
-<tr class="separator:a0b2178b1349277b3cce3805ff8ed2003"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a579073e542d995eae44b7a68eb842fca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceManager.html#a579073e542d995eae44b7a68eb842fca">load_urdf</a> (const std::string &amp;urdf, bool validate_interfaces=true, bool load_and_initialize_components=true)</td></tr>
+<tr class="memdesc:a579073e542d995eae44b7a68eb842fca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load resources from on a given URDF.  <a href="classhardware__interface_1_1ResourceManager.html#a579073e542d995eae44b7a68eb842fca">More...</a><br /></td></tr>
+<tr class="separator:a579073e542d995eae44b7a68eb842fca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b76be604d59853951423e77bf1ceea8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceManager.html#a5b76be604d59853951423e77bf1ceea8">is_urdf_already_loaded</a> () const</td></tr>
 <tr class="memdesc:a5b76be604d59853951423e77bf1ceea8"><td class="mdescLeft">&#160;</td><td class="mdescRight">if the resource manager load_urdf(...) function has been called this returns true. We want to permit to load the urdf later on but we currently don't want to permit multiple calls to load_urdf (reloading/loading different urdf).  <a href="classhardware__interface_1_1ResourceManager.html#a5b76be604d59853951423e77bf1ceea8">More...</a><br /></td></tr>
 <tr class="separator:a5b76be604d59853951423e77bf1ceea8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -768,14 +768,14 @@ given that no hardware_info is available, the component has to be configured ext
 </div><div class="memdoc">
 
 <p>if the resource manager load_urdf(...) function has been called this returns true. We want to permit to load the urdf later on but we currently don't want to permit multiple calls to load_urdf (reloading/loading different urdf). </p>
-<dl class="section return"><dt>Returns</dt><dd>true if resource manager's <a class="el" href="classhardware__interface_1_1ResourceManager.html#a0b2178b1349277b3cce3805ff8ed2003" title="Load resources from on a given URDF.">load_urdf()</a> has been already called. </dd>
+<dl class="section return"><dt>Returns</dt><dd>true if resource manager's <a class="el" href="classhardware__interface_1_1ResourceManager.html#a579073e542d995eae44b7a68eb842fca" title="Load resources from on a given URDF.">load_urdf()</a> has been already called. </dd>
 <dd>
-false if resource manager's <a class="el" href="classhardware__interface_1_1ResourceManager.html#a0b2178b1349277b3cce3805ff8ed2003" title="Load resources from on a given URDF.">load_urdf()</a> has not been yet called. </dd></dl>
+false if resource manager's <a class="el" href="classhardware__interface_1_1ResourceManager.html#a579073e542d995eae44b7a68eb842fca" title="Load resources from on a given URDF.">load_urdf()</a> has not been yet called. </dd></dl>
 
 </div>
 </div>
-<a id="a0b2178b1349277b3cce3805ff8ed2003"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0b2178b1349277b3cce3805ff8ed2003">&#9670;&nbsp;</a></span>load_urdf()</h2>
+<a id="a579073e542d995eae44b7a68eb842fca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a579073e542d995eae44b7a68eb842fca">&#9670;&nbsp;</a></span>load_urdf()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -790,7 +790,13 @@ false if resource manager's <a class="el" href="classhardware__interface_1_1Reso
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>validate_interfaces</em> = <code>true</code>&#160;</td>
+          <td class="paramname"><em>validate_interfaces</em> = <code>true</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>load_and_initialize_components</em> = <code>true</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -806,6 +812,7 @@ false if resource manager's <a class="el" href="classhardware__interface_1_1Reso
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">urdf</td><td>string containing the URDF. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">validate_interfaces</td><td>boolean argument indicating whether the exported interfaces ought to be validated. Defaults to true. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">load_and_initialize_components</td><td>boolean argument indicating whether to load and initialize the components present in the parsed URDF. Defaults to true. </td></tr>
   </table>
   </dd>
 </dl>
