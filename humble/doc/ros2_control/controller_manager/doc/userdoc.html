@@ -162,17 +162,25 @@ To give the user such permissions, add a group named realtime and add the user c
 <section id="parameters">
 <h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h2>
 <dl class="simple">
-<dt>activate_components_on_start (optional; list&lt;string&gt;; default: empty)</dt><dd><p>Define which hardware components should be activated when controller manager is started.
+<dt>hardware_components_initial_state</dt><dd><p>Map of parameters for controlled lifecycle management of hardware components.
 The names of the components are defined as attribute of <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code>-tag in <code class="docutils literal notranslate"><span class="pre">robot_description</span></code>.
-All other components will stay <code class="docutils literal notranslate"><span class="pre">UNCONFIGURED</span></code>.
-If this and <code class="docutils literal notranslate"><span class="pre">configure_components_on_start</span></code> are empty, all available components will be activated.
-If this or <code class="docutils literal notranslate"><span class="pre">configure_components_on_start</span></code> are not empty, any component not in either list will be in unconfigured state.</p>
+Hardware components found in <code class="docutils literal notranslate"><span class="pre">robot_description</span></code>, but without explicit state definition will be immediately activated.
+Detailed explanation of each parameter is given below.
+The full structure of the map is given in the following example:</p>
 </dd>
-<dt>configure_components_on_start (optional; list&lt;string&gt;; default: empty)</dt><dd><p>Define which hardware components should be configured when controller manager is started.
-The names of the components are defined as attribute of <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code>-tag in <code class="docutils literal notranslate"><span class="pre">robot_description</span></code>.
-All other components will stay <code class="docutils literal notranslate"><span class="pre">UNCONFIGURED</span></code>.
-If this and <code class="docutils literal notranslate"><span class="pre">activate_components_on_start</span></code> are empty, all available components will be activated.
-If this or <code class="docutils literal notranslate"><span class="pre">activate_components_on_start</span></code> are not empty, any component not in either list will be in unconfigured state.</p>
+</dl>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">hardware_components_initial_state</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">unconfigured</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;arm1&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;arm2&quot;</span>
+<span class="w">  </span><span class="nt">inactive</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;base3&quot;</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>hardware_components_initial_state.unconfigured (optional; list&lt;string&gt;; default: empty)</dt><dd><p>Defines which hardware components will be only loaded immediately when controller manager is started.</p>
+</dd>
+<dt>hardware_components_initial_state.inactive (optional; list&lt;string&gt;; default: empty)</dt><dd><p>Defines which hardware components will be configured immediately when controller manager is started.</p>
 </dd>
 <dt>robot_description (mandatory; string)</dt><dd><p>String with the URDF string as robot description.
 This is usually result of the parsed description files by <code class="docutils literal notranslate"><span class="pre">xacro</span></code> command.</p>
