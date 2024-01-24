@@ -98,6 +98,12 @@ Functions</h2></td></tr>
 <tr class="separator:a9f2bc1a3dc978f86b0dc6f4074d29d95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7a570c8077ec84667ed2950938fbc14"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#ab7a570c8077ec84667ed2950938fbc14">get_joint_limits</a> (const std::string &amp;joint_name, const rclcpp_lifecycle::LifecycleNode::SharedPtr &amp;lifecycle_node, <a class="el" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a> &amp;soft_limits)</td></tr>
 <tr class="separator:ab7a570c8077ec84667ed2950938fbc14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4ec546f55c4b897a491589567b0bee9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#ae4ec546f55c4b897a491589567b0bee9">getJointLimits</a> (urdf::JointConstSharedPtr urdf_joint, <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> &amp;limits)</td></tr>
+<tr class="memdesc:ae4ec546f55c4b897a491589567b0bee9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Populate a <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> instance from URDF joint data.  <a href="namespacejoint__limits.html#ae4ec546f55c4b897a491589567b0bee9">More...</a><br /></td></tr>
+<tr class="separator:ae4ec546f55c4b897a491589567b0bee9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab5823d51fe2a7c4f8980db0762fe9e4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#aab5823d51fe2a7c4f8980db0762fe9e4">getSoftJointLimits</a> (urdf::JointConstSharedPtr urdf_joint, <a class="el" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a> &amp;soft_limits)</td></tr>
+<tr class="memdesc:aab5823d51fe2a7c4f8980db0762fe9e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Populate a <a class="el" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a> instance from URDF joint data.  <a href="namespacejoint__limits.html#aab5823d51fe2a7c4f8980db0762fe9e4">More...</a><br /></td></tr>
+<tr class="separator:aab5823d51fe2a7c4f8980db0762fe9e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Adolfo Rodriguez Tsouroukdissian </dd></dl>
@@ -638,6 +644,98 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if a soft limits specification is found, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="ae4ec546f55c4b897a491589567b0bee9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4ec546f55c4b897a491589567b0bee9">&#9670;&nbsp;</a></span>getJointLimits()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool joint_limits::getJointLimits </td>
+          <td>(</td>
+          <td class="paramtype">urdf::JointConstSharedPtr&#160;</td>
+          <td class="paramname"><em>urdf_joint</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> &amp;&#160;</td>
+          <td class="paramname"><em>limits</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Populate a <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> instance from URDF joint data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">urdf_joint</td><td>URDF joint. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">limits</td><td>Where URDF joint limit data gets written into. Limits in <em>urdf_joint</em> will overwrite existing values. Values in <em>limits</em> not present in <em>urdf_joint</em> remain unchanged. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if <em>urdf_joint</em> has a valid limits specification, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="aab5823d51fe2a7c4f8980db0762fe9e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab5823d51fe2a7c4f8980db0762fe9e4">&#9670;&nbsp;</a></span>getSoftJointLimits()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool joint_limits::getSoftJointLimits </td>
+          <td>(</td>
+          <td class="paramtype">urdf::JointConstSharedPtr&#160;</td>
+          <td class="paramname"><em>urdf_joint</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a> &amp;&#160;</td>
+          <td class="paramname"><em>soft_limits</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Populate a <a class="el" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a> instance from URDF joint data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">urdf_joint</td><td>URDF joint. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">soft_limits</td><td>Where URDF soft joint limit data gets written into. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if <em>urdf_joint</em> has a valid soft limits specification, false otherwise. </dd></dl>
 
 </div>
 </div>
