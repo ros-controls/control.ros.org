@@ -123,9 +123,9 @@ CONTROLLER_INTERFACE_PUBLIC void&#160;</td><td class="memItemRight" valign="bott
 <tr class="memitem:a78343670e39b1f1cc969c6decd9de637"><td class="memItemLeft" align="right" valign="top"><a id="a78343670e39b1f1cc969c6decd9de637"></a>
 CONTROLLER_INTERFACE_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><b>release_interfaces</b> ()</td></tr>
 <tr class="separator:a78343670e39b1f1cc969c6decd9de637"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf2bb39c81e73b6f6062d9e62d621afb"><td class="memItemLeft" align="right" valign="top"><a id="adf2bb39c81e73b6f6062d9e62d621afb"></a>
-virtual CONTROLLER_INTERFACE_PUBLIC return_type&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (const std::string &amp;controller_name, const std::string &amp;urdf, unsigned int cm_update_rate, const std::string &amp;node_namespace=&quot;&quot;, const rclcpp::NodeOptions &amp;node_options=rclcpp::NodeOptions().enable_logger_service(true))</td></tr>
-<tr class="separator:adf2bb39c81e73b6f6062d9e62d621afb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a451d590f76ce6632b7715c4778fcc984"><td class="memItemLeft" align="right" valign="top"><a id="a451d590f76ce6632b7715c4778fcc984"></a>
+CONTROLLER_INTERFACE_PUBLIC return_type&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (const std::string &amp;controller_name, const std::string &amp;urdf, unsigned int cm_update_rate, const std::string &amp;node_namespace, const rclcpp::NodeOptions &amp;node_options)</td></tr>
+<tr class="separator:a451d590f76ce6632b7715c4778fcc984"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e7ab0f474471aaa0e931ea8fe840bcc"><td class="memItemLeft" align="right" valign="top"><a id="a9e7ab0f474471aaa0e931ea8fe840bcc"></a>
 CONTROLLER_INTERFACE_PUBLIC const rclcpp_lifecycle::State &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a9e7ab0f474471aaa0e931ea8fe840bcc">configure</a> ()</td></tr>
 <tr class="memdesc:a9e7ab0f474471aaa0e931ea8fe840bcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Custom configure method to read additional parameters for controller-nodes. <br /></td></tr>
@@ -154,6 +154,8 @@ CONTROLLER_INTERFACE_PUBLIC bool&#160;</td><td class="memItemRight" valign="bott
 <tr class="memitem:abcf2ca1f97be0b2ec3a2b6f34c77ea9b"><td class="memItemLeft" align="right" valign="top"><a id="abcf2ca1f97be0b2ec3a2b6f34c77ea9b"></a>
 CONTROLLER_INTERFACE_PUBLIC const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_robot_description</b> () const</td></tr>
 <tr class="separator:abcf2ca1f97be0b2ec3a2b6f34c77ea9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb88b7c61383d44faec66b74fad1193d"><td class="memItemLeft" align="right" valign="top">virtual CONTROLLER_INTERFACE_PUBLIC rclcpp::NodeOptions&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#aeb88b7c61383d44faec66b74fad1193d">define_custom_node_options</a> () const</td></tr>
+<tr class="separator:aeb88b7c61383d44faec66b74fad1193d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04df56d589677c015eb11930d66bbfe4"><td class="memTemplParams" colspan="2">template&lt;typename ParameterT &gt; </td></tr>
 <tr class="memitem:a04df56d589677c015eb11930d66bbfe4"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a04df56d589677c015eb11930d66bbfe4">auto_declare</a> (const std::string &amp;name, const ParameterT &amp;default_value)</td></tr>
 <tr class="memdesc:a04df56d589677c015eb11930d66bbfe4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Declare and initialize a parameter with a type.  <a href="classcontroller__interface_1_1ControllerInterfaceBase.html#a04df56d589677c015eb11930d66bbfe4">More...</a><br /></td></tr>
@@ -259,6 +261,36 @@ template&lt;typename ParameterT &gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>configuration of command interfaces. </dd></dl>
 
 <p>Implemented in <a class="el" href="classtest__controller__with__interfaces_1_1TestControllerWithInterfaces.html#aa794c152441a28f57486cbe1ff895a49">test_controller_with_interfaces::TestControllerWithInterfaces</a>, <a class="el" href="classtest__controller__failed__init_1_1TestControllerFailedInit.html#ab94ecbf1899fe9ec5e24ec1c2d8ea6dd">test_controller_failed_init::TestControllerFailedInit</a>, <a class="el" href="classtest__controller_1_1TestController.html#a4bf3edddf97444efffa4f233ebbb40d5">test_controller::TestController</a>, <a class="el" href="classtest__chainable__controller_1_1TestChainableController.html#afde701a5ba62dc1583756a6597e2afef">test_chainable_controller::TestChainableController</a>, <a class="el" href="classcontroller__with__options_1_1ControllerWithOptions.html#a027b6a5015307af7a27481822fed59e0">controller_with_options::ControllerWithOptions</a>, <a class="el" href="classTestableControllerInterface.html#af34083ca6ab5ee76beb1723fcd4b9f1f">TestableControllerInterface</a>, and <a class="el" href="classTestableChainableControllerInterface.html#a91b3ac64958c9aa022b133a64e91b5ee">TestableChainableControllerInterface</a>.</p>
+
+</div>
+</div>
+<a id="aeb88b7c61383d44faec66b74fad1193d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb88b7c61383d44faec66b74fad1193d">&#9670;&nbsp;</a></span>define_custom_node_options()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual CONTROLLER_INTERFACE_PUBLIC rclcpp::NodeOptions controller_interface::ControllerInterfaceBase::define_custom_node_options </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Method used by the controller_manager for base NodeOptions to instantiate the Lifecycle node of the controller upon loading the controller.</p>
+<dl class="section note"><dt>Note</dt><dd>The controller_manager will modify these NodeOptions in case a params file is passed by the spawner to load the controller parameters or when controllers are loaded in simulation (see ros2_control#1311, ros2_controllers#698 , ros2_controllers#795,ros2_controllers#966 for more details)</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>NodeOptions required for the configuration of the controller lifecycle node </dd></dl>
+
+<p>Reimplemented in <a class="el" href="classtest__controller__failed__init_1_1TestControllerFailedInit.html#ade9d3f777d75a5c043bdc5f126f964af">test_controller_failed_init::TestControllerFailedInit</a>, and <a class="el" href="classcontroller__with__options_1_1ControllerWithOptions.html#aad71eeba9a425e7446812f758f7c07d1">controller_with_options::ControllerWithOptions</a>.</p>
 
 </div>
 </div>

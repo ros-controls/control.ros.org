@@ -98,12 +98,11 @@ Collaboration diagram for test_controller_failed_init::TestControllerFailedInit:
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa789a284ff562c0bdd1166c8cdb761f2"><td class="memItemLeft" align="right" valign="top"><a id="aa789a284ff562c0bdd1166c8cdb761f2"></a>
-CONTROLLER_INTERFACE_PUBLIC controller_interface::return_type&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (const std::string &amp;controller_name, const std::string &amp;urdf, unsigned int cm_update_rate, const std::string &amp;node_namespace=&quot;&quot;, const rclcpp::NodeOptions &amp;node_options=rclcpp::NodeOptions() .allow_undeclared_parameters(true) .automatically_declare_parameters_from_overrides(true)) override</td></tr>
-<tr class="separator:aa789a284ff562c0bdd1166c8cdb761f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab94ecbf1899fe9ec5e24ec1c2d8ea6dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcontroller__interface_1_1InterfaceConfiguration.html">controller_interface::InterfaceConfiguration</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtest__controller__failed__init_1_1TestControllerFailedInit.html#ab94ecbf1899fe9ec5e24ec1c2d8ea6dd">command_interface_configuration</a> () const override</td></tr>
 <tr class="memdesc:ab94ecbf1899fe9ec5e24ec1c2d8ea6dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get configuration for controller's required command interfaces.  <a href="classtest__controller__failed__init_1_1TestControllerFailedInit.html#ab94ecbf1899fe9ec5e24ec1c2d8ea6dd">More...</a><br /></td></tr>
 <tr class="separator:ab94ecbf1899fe9ec5e24ec1c2d8ea6dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade9d3f777d75a5c043bdc5f126f964af"><td class="memItemLeft" align="right" valign="top">rclcpp::NodeOptions&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtest__controller__failed__init_1_1TestControllerFailedInit.html#ade9d3f777d75a5c043bdc5f126f964af">define_custom_node_options</a> () const override</td></tr>
+<tr class="separator:ade9d3f777d75a5c043bdc5f126f964af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63f7d5f4d3ef5a4772cf698bdcf5a56d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcontroller__interface_1_1InterfaceConfiguration.html">controller_interface::InterfaceConfiguration</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtest__controller__failed__init_1_1TestControllerFailedInit.html#a63f7d5f4d3ef5a4772cf698bdcf5a56d">state_interface_configuration</a> () const override</td></tr>
 <tr class="memdesc:a63f7d5f4d3ef5a4772cf698bdcf5a56d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get configuration for controller's required state interfaces.  <a href="classtest__controller__failed__init_1_1TestControllerFailedInit.html#a63f7d5f4d3ef5a4772cf698bdcf5a56d">More...</a><br /></td></tr>
 <tr class="separator:a63f7d5f4d3ef5a4772cf698bdcf5a56d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -129,6 +128,9 @@ CONTROLLER_INTERFACE_PUBLIC void&#160;</td><td class="memItemRight" valign="bott
 <tr class="memitem:a78343670e39b1f1cc969c6decd9de637 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memItemLeft" align="right" valign="top"><a id="a78343670e39b1f1cc969c6decd9de637"></a>
 CONTROLLER_INTERFACE_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><b>release_interfaces</b> ()</td></tr>
 <tr class="separator:a78343670e39b1f1cc969c6decd9de637 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a451d590f76ce6632b7715c4778fcc984 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memItemLeft" align="right" valign="top"><a id="a451d590f76ce6632b7715c4778fcc984"></a>
+CONTROLLER_INTERFACE_PUBLIC return_type&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (const std::string &amp;controller_name, const std::string &amp;urdf, unsigned int cm_update_rate, const std::string &amp;node_namespace, const rclcpp::NodeOptions &amp;node_options)</td></tr>
+<tr class="separator:a451d590f76ce6632b7715c4778fcc984 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e7ab0f474471aaa0e931ea8fe840bcc inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memItemLeft" align="right" valign="top"><a id="a9e7ab0f474471aaa0e931ea8fe840bcc"></a>
 CONTROLLER_INTERFACE_PUBLIC const rclcpp_lifecycle::State &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a9e7ab0f474471aaa0e931ea8fe840bcc">configure</a> ()</td></tr>
 <tr class="memdesc:a9e7ab0f474471aaa0e931ea8fe840bcc inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Custom configure method to read additional parameters for controller-nodes. <br /></td></tr>
@@ -204,6 +206,36 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>urdf_</b> = &q
 <dl class="section return"><dt>Returns</dt><dd>configuration of command interfaces. </dd></dl>
 
 <p>Implements <a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a7241e933b6cb95b3304a49c8a6830aa6">controller_interface::ControllerInterfaceBase</a>.</p>
+
+</div>
+</div>
+<a id="ade9d3f777d75a5c043bdc5f126f964af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade9d3f777d75a5c043bdc5f126f964af">&#9670;&nbsp;</a></span>define_custom_node_options()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">rclcpp::NodeOptions test_controller_failed_init::TestControllerFailedInit::define_custom_node_options </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Method used by the controller_manager for base NodeOptions to instantiate the Lifecycle node of the controller upon loading the controller.</p>
+<dl class="section note"><dt>Note</dt><dd>The controller_manager will modify these NodeOptions in case a params file is passed by the spawner to load the controller parameters or when controllers are loaded in simulation (see ros2_control#1311, ros2_controllers#698 , ros2_controllers#795,ros2_controllers#966 for more details)</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>NodeOptions required for the configuration of the controller lifecycle node </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#aeb88b7c61383d44faec66b74fad1193d">controller_interface::ControllerInterfaceBase</a>.</p>
 
 </div>
 </div>

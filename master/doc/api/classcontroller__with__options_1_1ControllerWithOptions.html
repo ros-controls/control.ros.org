@@ -106,9 +106,8 @@ Public Member Functions</h2></td></tr>
 LifecycleNodeInterface::CallbackReturn&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__with__options_1_1ControllerWithOptions.html#af3014c2b58fc34aea1733e16d80f1f64">on_init</a> () override</td></tr>
 <tr class="memdesc:af3014c2b58fc34aea1733e16d80f1f64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extending interface with initialization method which is individual for each controller. <br /></td></tr>
 <tr class="separator:af3014c2b58fc34aea1733e16d80f1f64"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a254b1841b89f96fc16b25bd5a5496ab5"><td class="memItemLeft" align="right" valign="top"><a id="a254b1841b89f96fc16b25bd5a5496ab5"></a>
-controller_interface::return_type&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (const std::string &amp;controller_name, const std::string &amp;urdf, unsigned int cm_update_rate, const std::string &amp;node_namespace=&quot;&quot;, const rclcpp::NodeOptions &amp;node_options=rclcpp::NodeOptions() .allow_undeclared_parameters(true) .automatically_declare_parameters_from_overrides(true)) override</td></tr>
-<tr class="separator:a254b1841b89f96fc16b25bd5a5496ab5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad71eeba9a425e7446812f758f7c07d1"><td class="memItemLeft" align="right" valign="top">rclcpp::NodeOptions&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__with__options_1_1ControllerWithOptions.html#aad71eeba9a425e7446812f758f7c07d1">define_custom_node_options</a> () const override</td></tr>
+<tr class="separator:aad71eeba9a425e7446812f758f7c07d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a027b6a5015307af7a27481822fed59e0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcontroller__interface_1_1InterfaceConfiguration.html">controller_interface::InterfaceConfiguration</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__with__options_1_1ControllerWithOptions.html#a027b6a5015307af7a27481822fed59e0">command_interface_configuration</a> () const override</td></tr>
 <tr class="memdesc:a027b6a5015307af7a27481822fed59e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get configuration for controller's required command interfaces.  <a href="classcontroller__with__options_1_1ControllerWithOptions.html#a027b6a5015307af7a27481822fed59e0">More...</a><br /></td></tr>
 <tr class="separator:a027b6a5015307af7a27481822fed59e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -133,6 +132,9 @@ CONTROLLER_INTERFACE_PUBLIC void&#160;</td><td class="memItemRight" valign="bott
 <tr class="memitem:a78343670e39b1f1cc969c6decd9de637 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memItemLeft" align="right" valign="top"><a id="a78343670e39b1f1cc969c6decd9de637"></a>
 CONTROLLER_INTERFACE_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><b>release_interfaces</b> ()</td></tr>
 <tr class="separator:a78343670e39b1f1cc969c6decd9de637 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a451d590f76ce6632b7715c4778fcc984 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memItemLeft" align="right" valign="top"><a id="a451d590f76ce6632b7715c4778fcc984"></a>
+CONTROLLER_INTERFACE_PUBLIC return_type&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (const std::string &amp;controller_name, const std::string &amp;urdf, unsigned int cm_update_rate, const std::string &amp;node_namespace, const rclcpp::NodeOptions &amp;node_options)</td></tr>
+<tr class="separator:a451d590f76ce6632b7715c4778fcc984 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e7ab0f474471aaa0e931ea8fe840bcc inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memItemLeft" align="right" valign="top"><a id="a9e7ab0f474471aaa0e931ea8fe840bcc"></a>
 CONTROLLER_INTERFACE_PUBLIC const rclcpp_lifecycle::State &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a9e7ab0f474471aaa0e931ea8fe840bcc">configure</a> ()</td></tr>
 <tr class="memdesc:a9e7ab0f474471aaa0e931ea8fe840bcc inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Custom configure method to read additional parameters for controller-nodes. <br /></td></tr>
@@ -216,6 +218,36 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>urdf_</b> = &q
 <dl class="section return"><dt>Returns</dt><dd>configuration of command interfaces. </dd></dl>
 
 <p>Implements <a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a7241e933b6cb95b3304a49c8a6830aa6">controller_interface::ControllerInterfaceBase</a>.</p>
+
+</div>
+</div>
+<a id="aad71eeba9a425e7446812f758f7c07d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad71eeba9a425e7446812f758f7c07d1">&#9670;&nbsp;</a></span>define_custom_node_options()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">rclcpp::NodeOptions controller_with_options::ControllerWithOptions::define_custom_node_options </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Method used by the controller_manager for base NodeOptions to instantiate the Lifecycle node of the controller upon loading the controller.</p>
+<dl class="section note"><dt>Note</dt><dd>The controller_manager will modify these NodeOptions in case a params file is passed by the spawner to load the controller parameters or when controllers are loaded in simulation (see ros2_control#1311, ros2_controllers#698 , ros2_controllers#795,ros2_controllers#966 for more details)</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>NodeOptions required for the configuration of the controller lifecycle node </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#aeb88b7c61383d44faec66b74fad1193d">controller_interface::ControllerInterfaceBase</a>.</p>
 
 </div>
 </div>

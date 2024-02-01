@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IMU Sensor Broadcaster &mdash; ROS2_Control: Rolling Jan 2024 documentation</title>
+  <title>IMU Sensor Broadcaster &mdash; ROS2_Control: Rolling Feb 2024 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
@@ -20,7 +20,7 @@
   
         <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../../_static/documentation_options.js?v=b8c47f83"></script>
+        <script src="../../../../_static/documentation_options.js?v=a11b89ed"></script>
         <script src="../../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -63,7 +63,11 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../../doc/controllers_index.html#broadcasters">Broadcasters</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../../force_torque_sensor_broadcaster/doc/userdoc.html">Force Torque Sensor Broadcaster</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">IMU Sensor Broadcaster</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#list-of-parameters">List of parameters</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#an-example-parameter-file">An example parameter file</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../joint_state_broadcaster/doc/userdoc.html">Joint State Broadcaster</a></li>
@@ -129,7 +133,9 @@ The published message type is <code class="docutils literal notranslate"><span c
 <p>The controller is a wrapper around <code class="docutils literal notranslate"><span class="pre">IMUSensor</span></code> semantic component (see <code class="docutils literal notranslate"><span class="pre">controller_interface</span></code> package).</p>
 <section id="parameters">
 <h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h2>
-<p>This controller uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters.</p>
+<p>This controller uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters. The parameter <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/master/imu_sensor_broadcaster/src/imu_sensor_broadcaster_parameters.yaml">definition file located in the src folder</a> contains descriptions for all the parameters used by the controller.</p>
+<section id="list-of-parameters">
+<h3>List of parameters<a class="headerlink" href="#list-of-parameters" title="Link to this heading"></a></h3>
 <dl>
 <dt>sensor_name (string)</dt><dd><p>Defines sensor name used as prefix for its interfaces. Interface names are: <code class="docutils literal notranslate"><span class="pre">&lt;sensor_name&gt;/orientation.x,</span> <span class="pre">...,</span> <span class="pre">&lt;sensor_name&gt;/angular_velocity.x,</span> <span class="pre">...,</span> <span class="pre">&lt;sensor_name&gt;/linear_acceleration.x.</span></code></p>
 <p>Default:  “”</p>
@@ -177,6 +183,18 @@ The published message type is <code class="docutils literal notranslate"><span c
 </div></blockquote>
 </dd>
 </dl>
+</section>
+<section id="an-example-parameter-file">
+<h3>An example parameter file<a class="headerlink" href="#an-example-parameter-file" title="Link to this heading"></a></h3>
+<p>An example parameter file for this controller can be found in <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/master/imu_sensor_broadcaster/test/imu_sensor_broadcaster_params.yaml">the test directory</a>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test_imu_sensor_broadcaster</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+
+<span class="w">    </span><span class="nt">sensor_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;imu_sensor&quot;</span>
+<span class="w">    </span><span class="nt">frame_id</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;imu_sensor_frame&quot;</span>
+</pre></div>
+</div>
+</section>
 </section>
 </section>
 

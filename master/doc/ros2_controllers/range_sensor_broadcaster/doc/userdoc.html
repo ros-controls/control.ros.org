@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Range Sensor Broadcaster &mdash; ROS2_Control: Rolling Jan 2024 documentation</title>
+  <title>Range Sensor Broadcaster &mdash; ROS2_Control: Rolling Feb 2024 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
@@ -20,7 +20,7 @@
   
         <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../../_static/documentation_options.js?v=b8c47f83"></script>
+        <script src="../../../../_static/documentation_options.js?v=a11b89ed"></script>
         <script src="../../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -65,7 +65,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../../imu_sensor_broadcaster/doc/userdoc.html">IMU Sensor Broadcaster</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../joint_state_broadcaster/doc/userdoc.html">Joint State Broadcaster</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Range Sensor Broadcaster</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#list-of-parameters">List of parameters</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#an-example-parameter-file">An example parameter file</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -129,6 +133,9 @@ The published message type is <code class="docutils literal notranslate"><span c
 <p>The controller is a wrapper around <code class="docutils literal notranslate"><span class="pre">RangeSensor</span></code> semantic component (see <code class="docutils literal notranslate"><span class="pre">controller_interface</span></code> package).</p>
 <section id="parameters">
 <h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h2>
+<p>The Range Sensor Broadcaster uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters. The parameter <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/master/range_sensor_broadcaster/src/range_sensor_broadcaster_parameters.yaml">definition file located in the src folder</a> contains descriptions for all the parameters used by the controller.</p>
+<section id="list-of-parameters">
+<h3>List of parameters<a class="headerlink" href="#list-of-parameters" title="Link to this heading"></a></h3>
 <dl>
 <dt>sensor_name (string)</dt><dd><p>Name of the sensor used as prefix for interfaces if there are no individual interface names defined.</p>
 <p>Default:  “”</p>
@@ -152,6 +159,36 @@ The published message type is <code class="docutils literal notranslate"><span c
 <p>Default:  0.0</p>
 </dd>
 </dl>
+</section>
+<section id="an-example-parameter-file">
+<h3>An example parameter file<a class="headerlink" href="#an-example-parameter-file" title="Link to this heading"></a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">range_sensor_broadcaster</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">field_of_view</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.52</span>
+<span class="w">    </span><span class="nt">frame_id</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w">    </span><span class="nt">max_range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4.0</span>
+<span class="w">    </span><span class="nt">min_range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.52</span>
+<span class="w">    </span><span class="nt">radiation_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">    </span><span class="nt">sensor_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w">    </span><span class="nt">variance</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+</pre></div>
+</div>
+<p>An example parameter file for this controller can be found in <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/master/range_sensor_broadcaster/test/range_sensor_broadcaster_params.yaml">the test directory</a>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test_range_sensor_broadcaster</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># Setting mendatory parameters</span>
+<span class="w">    </span><span class="nt">sensor_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;range_sensor&quot;</span>
+<span class="w">    </span><span class="nt">frame_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;range_sensor_frame&quot;</span>
+
+<span class="w">    </span><span class="c1"># Setting parameters with changed default value to check those are used</span>
+<span class="w">    </span><span class="nt">radiation_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">    </span><span class="nt">field_of_view</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span>
+<span class="w">    </span><span class="nt">min_range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.10</span>
+<span class="w">    </span><span class="nt">max_range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7.0</span>
+<span class="w">    </span><span class="nt">variance</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+</pre></div>
+</div>
+</section>
 </section>
 </section>
 
