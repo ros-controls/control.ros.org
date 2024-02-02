@@ -66,6 +66,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#generic-system">Generic System</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#parameters">Parameters</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#per-joint-parameters">Per-joint Parameters</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#per-interface-parameters">Per-interface Parameters</a></li>
 </ul>
 </li>
 </ul>
@@ -166,6 +167,21 @@ Those interfaces are usually used by a <a class="reference internal" href="../..
 <dt>mimic (optional; string)</dt><dd><p>Defined name of the joint to mimic. This is often used concept with parallel grippers. Example: <code class="docutils literal notranslate"><span class="pre">&lt;param</span> <span class="pre">name=&quot;mimic&quot;&gt;joint1&lt;/param&gt;</span></code>.</p>
 </dd>
 <dt>multiplier (optional; double; default: 1; used if mimic joint is defined)</dt><dd><p>Multiplier of values for mimicking joint defined in <code class="docutils literal notranslate"><span class="pre">mimic</span></code> parameter. Example: <code class="docutils literal notranslate"><span class="pre">&lt;param</span> <span class="pre">name=&quot;multiplier&quot;&gt;-2&lt;/param&gt;</span></code>.</p>
+</dd>
+</dl>
+</section>
+<section id="per-interface-parameters">
+<h3>Per-interface Parameters<a class="headerlink" href="#per-interface-parameters" title="Link to this heading"></a></h3>
+<dl>
+<dt>initial_value (optional; double)</dt><dd><p>Initial value of certain state interface directly after startup. Example:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;initial_value&quot;</span><span class="nt">&gt;</span>3.45<span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;/state_interface&gt;</span>
+</pre></div>
+</div>
+<p>Note: This parameter is shared with the gazebo and gazebo classic plugins for
+joint interfaces. For Mock components it is also possible to set initial
+values for gpio or sensor state interfaces.</p>
 </dd>
 </dl>
 </section>

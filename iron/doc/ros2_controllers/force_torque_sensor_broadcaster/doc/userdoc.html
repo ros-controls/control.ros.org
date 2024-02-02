@@ -120,26 +120,60 @@ The published message type is <code class="docutils literal notranslate"><span c
 <p>The controller is a wrapper around <code class="docutils literal notranslate"><span class="pre">ForceTorqueSensor</span></code> semantic component (see <code class="docutils literal notranslate"><span class="pre">controller_interface</span></code> package).</p>
 <section id="parameters">
 <h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h2>
-<p>The interfaces can be defined in two ways, using <code class="docutils literal notranslate"><span class="pre">sensor_name</span></code> or <code class="docutils literal notranslate"><span class="pre">interface_names</span></code> parameter.
-Those two parameters can not be defined at the same time</p>
+<p>This controller uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters. The parameter <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/iron/force_torque_sensor_broadcaster/src/force_torque_sensor_broadcaster_parameters.yaml">definition file located in the src folder</a> contains descriptions for all the parameters used by the controller.</p>
+<p>The interfaces can be defined in two ways, using the <code class="docutils literal notranslate"><span class="pre">sensor_name</span></code> or the <code class="docutils literal notranslate"><span class="pre">interface_names</span></code> parameter:
+Those two parameters cannot be defined at the same time.</p>
+<p>Full list of parameters:</p>
 <dl>
-<dt>frame_id (mandatory)</dt><dd><p>Frame in which the output message will be published.</p>
+<dt>frame_id (string)</dt><dd><p>Sensor’s frame_id in which values are published.</p>
+<p>Default:  “”</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>parameter is not empty</p></li>
+</ul>
+</div></blockquote>
 </dd>
-<dt>sensor_name (optional)</dt><dd><p>Defines sensor name used as prefix for its interfaces.
-If used standard interface names for a 6D FTS will be used: &lt;sensor_name&gt;/force.x, …, &lt;sensor_name&gt;/torque.z.</p>
+<dt>sensor_name (string)</dt><dd><p>Name of the sensor used as prefix for interfaces if there are no individual interface names defined. If used, standard interface names for a 6D FTS will be used: <code class="docutils literal notranslate"><span class="pre">&lt;sensor_name&gt;/force.x,</span> <span class="pre">...,</span> <span class="pre">&lt;sensor_name&gt;/torque.z</span></code></p>
+<p>Default:  “”</p>
 </dd>
-<dt>interface_names.[force|torque].[x|y|z] (optional)</dt><dd><p>Defines custom, per axis interface names.
+<dt>interface_names</dt><dd><p>(optional) Defines custom, per axis interface names.
 This is used if different prefixes, i.e., sensor name, or non-standard interface names are used.
 It is sufficient that only one <code class="docutils literal notranslate"><span class="pre">interface_name</span></code> is defined.
-This enables broadcaster use for force sensing cells with less then six measuring axes.
-Example definition is:</p>
+This enables the broadcaster to use force sensing cells with less than six measuring axes.
+An example definition is:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">interface_names</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">force</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">x</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">example_name/example_interface</span>
 </pre></div>
 </div>
 </dd>
+<dt>interface_names.force.x (string)</dt><dd><p>Name of the state interface with force values on ‘x’ axis.</p>
+<p>Default:  “”</p>
+</dd>
+<dt>interface_names.force.y (string)</dt><dd><p>Name of the state interface with force values on ‘y’ axis.</p>
+<p>Default:  “”</p>
+</dd>
+<dt>interface_names.force.z (string)</dt><dd><p>Name of the state interface with force values on ‘z’ axis.</p>
+<p>Default:  “”</p>
+</dd>
+<dt>interface_names.torque.x (string)</dt><dd><p>Name of the state interface with torque values around ‘x’ axis.</p>
+<p>Default:  “”</p>
+</dd>
+<dt>interface_names.torque.y (string)</dt><dd><p>Name of the state interface with torque values around ‘y’ axis.</p>
+<p>Default:  “”</p>
+</dd>
+<dt>interface_names.torque.z (string)</dt><dd><p>Name of the state interface with torque values around ‘z’ axis.</p>
+<p>Default:  “”</p>
+</dd>
 </dl>
+<p>An example parameter file for this controller can be found in <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/iron/force_torque_sensor_broadcaster/test/force_torque_sensor_broadcaster_params.yaml">the test directory</a>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test_force_torque_sensor_broadcaster</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+
+<span class="w">    </span><span class="nt">frame_id</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;fts_sensor_frame&quot;</span>
+</pre></div>
+</div>
 </section>
 </section>
 

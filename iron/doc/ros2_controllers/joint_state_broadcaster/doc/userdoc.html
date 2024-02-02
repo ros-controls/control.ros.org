@@ -66,7 +66,11 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Joint State Broadcaster</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#commands">Commands</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hardware-interface-type">Hardware interface type</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#list-of-parameters">List of parameters</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#an-example-parameter-file">An example parameter file</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../range_sensor_broadcaster/doc/userdoc.html">Range Sensor Broadcaster</a></li>
@@ -131,17 +135,21 @@ If none of the requested interface are not defined, the controller returns error
 </section>
 <section id="parameters">
 <h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h2>
+<p>This controller uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters. The parameter <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/iron/joint_state_broadcaster/src/joint_state_broadcaster_parameters.yaml">definition file located in the src folder</a> contains descriptions for all the parameters used by the controller.</p>
+<section id="list-of-parameters">
+<h3>List of parameters<a class="headerlink" href="#list-of-parameters" title="Link to this heading"></a></h3>
 <dl>
-<dt>use_local_topics</dt><dd><p>Optional parameter (boolean; default: <code class="docutils literal notranslate"><span class="pre">False</span></code>) defining if <code class="docutils literal notranslate"><span class="pre">joint_states</span></code> and <code class="docutils literal notranslate"><span class="pre">dynamic_joint_states</span></code> messages should be published into local namespace, e.g., <code class="docutils literal notranslate"><span class="pre">/my_state_broadcaster/joint_states</span></code>.</p>
+<dt>use_local_topics (bool)</dt><dd><p>Defining if <code class="docutils literal notranslate"><span class="pre">joint_states</span></code> and <code class="docutils literal notranslate"><span class="pre">dynamic_joint_states</span></code> messages should be published into local namespace, e.g., <code class="docutils literal notranslate"><span class="pre">/my_state_broadcaster/joint_states</span></code>.</p>
+<p>Default:  false</p>
 </dd>
-<dt>joints</dt><dd><p>Optional parameter (string array) to support broadcasting of only specific joints and interfaces.
-It has to be used in combination with the <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> parameter.
-Joint state broadcaster asks for access to all defined interfaces on all defined joints.</p>
+<dt>joints (string_array)</dt><dd><p>Parameter to support broadcasting of only specific joints and interfaces. It has to be used in combination with the <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> parameter. If either <code class="docutils literal notranslate"><span class="pre">joints</span></code> or <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> is left empty, all available state interfaces will be published. Joint state broadcaster asks for access to all defined interfaces on all defined joints.</p>
+<p>Default:  {}</p>
 </dd>
-<dt>interfaces</dt><dd><p>Optional parameter (string array) to support broadcasting of only specific joints and interfaces.
-It has to be used in combination with the <code class="docutils literal notranslate"><span class="pre">joints</span></code> parameter.</p>
+<dt>extra_joints (string_array)</dt><dd><p>Names of extra joints to be added to <code class="docutils literal notranslate"><span class="pre">joint_states</span></code> and <code class="docutils literal notranslate"><span class="pre">dynamic_joint_states</span></code> with state set to 0.</p>
+<p>Default:  {}</p>
 </dd>
-<dt>extra_joints</dt><dd><p>Optional parameter (string array) with names of extra joints to be added to <code class="docutils literal notranslate"><span class="pre">joint_states</span></code> and <code class="docutils literal notranslate"><span class="pre">dynamic_joint_states</span></code> with state set to 0.</p>
+<dt>interfaces (string_array)</dt><dd><p>Parameter to support broadcasting of only specific joints and interfaces. It has to be used in combination with the <code class="docutils literal notranslate"><span class="pre">joints</span></code> parameter. If either <code class="docutils literal notranslate"><span class="pre">joints</span></code> or <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> is left empty, all available state interfaces will be published.</p>
+<p>Default:  {}</p>
 </dd>
 <dt>map_interface_to_joint_state</dt><dd><p>Optional parameter (map) providing mapping between custom interface names to standard fields in <code class="docutils literal notranslate"><span class="pre">joint_states</span></code> message.
 Usecases:</p>
@@ -150,8 +158,6 @@ Usecases:</p>
 <li><p>Hydraulics robots where feedback and commanded values often have an offset and reliance on open-loop control is common.
 Typically one would map both values in separate interfaces in the framework.
 To visualize those data multiple joint_state_broadcaster instances and robot_state_publishers would be used to visualize both values in RViz.</p></li>
-</ol>
-<ol class="arabic simple">
 <li><p>A robot provides multiple measuring techniques for its joint values which results in slightly different values.
 Typically one would use separate interface for providing those values in the framework.
 Using multiple joint_state_broadcaster instances we could publish and show both in RViz.</p></li>
@@ -159,31 +165,53 @@ Using multiple joint_state_broadcaster instances we could publish and show both 
 </div></blockquote>
 <p>Format (each line is optional):</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">map_interface_to_joint_state</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;custom_interface&gt;</span>
-<span class="w">  </span><span class="nt">velocity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;custom_interface&gt;</span>
-<span class="w">  </span><span class="nt">effort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;custom_interface&gt;</span>
+<span class="w">    </span><span class="nt">position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;custom_interface&gt;</span>
+<span class="w">    </span><span class="nt">velocity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;custom_interface&gt;</span>
+<span class="w">    </span><span class="nt">effort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;custom_interface&gt;</span>
 </pre></div>
 </div>
 <p>Examples:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">map_interface_to_joint_state</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kf_estimated_position</span>
+<span class="w">    </span><span class="nt">position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kf_estimated_position</span>
 </pre></div>
 </div>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">map_interface_to_joint_state</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">velocity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">derived_velocity</span>
-<span class="w">  </span><span class="nt">effort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">derived_effort</span>
+<span class="w">    </span><span class="nt">velocity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">derived_velocity</span>
+<span class="w">    </span><span class="nt">effort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">derived_effort</span>
 </pre></div>
 </div>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">map_interface_to_joint_state</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">effort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">torque_sensor</span>
+<span class="w">    </span><span class="nt">effort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">torque_sensor</span>
 </pre></div>
 </div>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">map_interface_to_joint_state</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">effort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">current_sensor</span>
+<span class="w">    </span><span class="nt">effort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">current_sensor</span>
 </pre></div>
 </div>
 </dd>
+<dt>map_interface_to_joint_state.position (string)</dt><dd><p>Default:  “position”</p>
+</dd>
+<dt>map_interface_to_joint_state.velocity (string)</dt><dd><p>Default:  “velocity”</p>
+</dd>
+<dt>map_interface_to_joint_state.effort (string)</dt><dd><p>Default:  “effort”</p>
+</dd>
 </dl>
+</section>
+<section id="an-example-parameter-file">
+<h3>An example parameter file<a class="headerlink" href="#an-example-parameter-file" title="Link to this heading"></a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">joint_state_broadcaster</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">extra_joints</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{}&#39;</span>
+<span class="w">    </span><span class="nt">interfaces</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{}&#39;</span>
+<span class="w">    </span><span class="nt">joints</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{}&#39;</span>
+<span class="w">    </span><span class="nt">map_interface_to_joint_state</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">effort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">effort</span>
+<span class="w">      </span><span class="nt">position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
+<span class="w">      </span><span class="nt">velocity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">velocity</span>
+<span class="w">    </span><span class="nt">use_local_topics</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</pre></div>
+</div>
+</section>
 </section>
 </section>
 
