@@ -33,7 +33,7 @@ Communication protocols:
 
 End-effectors:
 
-* `Schunk SVH 5-finger Hand <https://github.com/fzi-forschungszentrum-informatik/schunk_svh_ros_driver/tree/ros2-foxy>`_
+* `Schunk SVH 5-finger Hand <https://github.com/SCHUNK-SE-Co-KG/schunk_svh_ros_driver/tree/ros2-humble>`_
 
 Non robot-devices:
 
