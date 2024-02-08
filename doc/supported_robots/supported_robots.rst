@@ -16,6 +16,7 @@ Official (supported by robot manufacturer):
 * `Husarion ROSbot XL with OpenMANIPULATOR-X (including MoveIt2) <https://husarion.com/tutorials/ros-projects/rosbot-xl-openmanipulator-x/>`_
 * `Clearpath Robotics Jackal J100 <https://docs.clearpathrobotics.com/docs/robots/outdoor_robots/jackal/user_manual_jackal/>`_
 * `Clearpath Robotics Husky A200 <https://docs.clearpathrobotics.com/docs/robots/outdoor_robots/husky/user_manual_husky>`_
+* `Clearpath Robotics Warthog W200 <https://docs.clearpathrobotics.com/docs/robots/outdoor_robots/warthog/user_manual_warthog>`_
 
 Unofficial (from the community):
 
