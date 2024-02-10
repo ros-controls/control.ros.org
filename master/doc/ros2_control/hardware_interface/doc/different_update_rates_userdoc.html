@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Different update rates for Hardware Components &mdash; ROS2_Control: Rolling Feb 2024 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/reviewer_stats.css?v=068b34ac" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//rolling/doc/ros2_control/hardware_interface/doc/different_update_rates_userdoc.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=a11b89ed"></script>
+        <script src="../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+        <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Mock Components" href="mock_components_userdoc.html" />
+    <link rel="prev" title="Writing a Hardware Component" href="writing_new_hardware_component.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/index.html">ros2_control</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#api-documentation">API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#features">Features</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/index.html#concepts">Concepts</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../controller_manager/doc/userdoc.html">Controller Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../controller_manager/doc/controller_chaining.html">Controller Chaining / Cascade Control</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="hardware_components_userdoc.html">Hardware Components</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="hardware_components_userdoc.html#guidelines-and-best-practices">Guidelines and Best Practices</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="hardware_interface_types_userdoc.html">Hardware Interface Types</a></li>
+<li class="toctree-l5"><a class="reference internal" href="writing_new_hardware_component.html">Writing a Hardware Component</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="#">Different Update Rates</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#by-counting-loops">By counting loops</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#by-measuring-elapsed-time">By measuring elapsed time</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="hardware_components_userdoc.html#handling-of-errors-that-happen-during-read-and-write-calls">Handling of errors that happen during read() and write() calls</a></li>
+<li class="toctree-l5"><a class="reference internal" href="hardware_components_userdoc.html#migration-from-foxy-to-newer-versions">Migration from Foxy to newer versions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mock_components_userdoc.html">Mock Components</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../differences_to_ros1/differences_to_ros1.html">Differences to ros_control (ROS1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../differences_to_ros1/differences_to_ros1.html#migration-guide-to-ros2-control">Migration Guide to ros2_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../project_ideas.html">Project Ideas for GSoC 2024</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ROS2_Control: Rolling</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../doc/index.html">ros2_control</a></li>
+          <li class="breadcrumb-item"><a href="hardware_components_userdoc.html">Hardware Components</a></li>
+      <li class="breadcrumb-item active">Different update rates for Hardware Components</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/doc/different_update_rates_userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for a development version.
+    For the latest released version, please have a look at <a href="../../../../../iron/index.html">Iron</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="different-update-rates-for-hardware-components">
+<span id="different-update-rates-userdoc"></span><h1>Different update rates for Hardware Components<a class="headerlink" href="#different-update-rates-for-hardware-components" title="Link to this heading"></a></h1>
+<p>In the following sections you can find some advice which will help you to implement Hardware
+Components with update rates different from the main control loop.</p>
+<section id="by-counting-loops">
+<h2>By counting loops<a class="headerlink" href="#by-counting-loops" title="Link to this heading"></a></h2>
+<p>Current implementation of
+<a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/controller_manager/src/ros2_control_node.cpp">ros2_control main node</a>
+has one update rate that controls the rate of the
+<a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/0bdcd414c7ab8091f3e1b8d9b73a91c778388e82/hardware_interface/include/hardware_interface/system_interface.hpp#L175">read(…)</a>
+and <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/fe462926416d527d1da163bc3eabd02ee1de9be9/hardware_interface/include/hardware_interface/system_interface.hpp#L178">write(…)</a>
+calls in <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/include/hardware_interface/system_interface.hpp">hardware_interface(s)</a>.
+To achieve different update rates for your hardware component you can use the following steps:</p>
+<ol class="arabic simple" id="step-1">
+<li><p>Add parameters of main control loop update rate and desired update rate for your hardware component</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="nt">&lt;robot</span><span class="w"> </span><span class="na">xmlns:xacro=</span><span class="s">&quot;http://www.ros.org/wiki/xacro&quot;</span><span class="nt">&gt;</span>
+
+<span class="w">  </span><span class="nt">&lt;xacro:macro</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;system_interface&quot;</span><span class="w"> </span><span class="na">params=</span><span class="s">&quot;name main_loop_update_rate desired_hw_update_rate&quot;</span><span class="nt">&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${name}&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;hardware&gt;</span>
+<span class="w">          </span><span class="nt">&lt;plugin&gt;</span>my_system_interface/MySystemHardware<span class="nt">&lt;/plugin&gt;</span>
+<span class="w">          </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;main_loop_update_rate&quot;</span><span class="nt">&gt;</span>${main_loop_update_rate}<span class="nt">&lt;/param&gt;</span>
+<span class="w">          </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;desired_hw_update_rate&quot;</span><span class="nt">&gt;</span>${desired_hw_update_rate}<span class="nt">&lt;/param&gt;</span>
+<span class="w">      </span><span class="nt">&lt;/hardware&gt;</span>
+<span class="w">      </span>...
+<span class="w">    </span><span class="nt">&lt;/ros2_control&gt;</span>
+
+<span class="w">  </span><span class="nt">&lt;/xacro:macro&gt;</span>
+
+<span class="nt">&lt;/robot&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" id="step-2" start="2">
+<li><p>In you <code class="docutils literal notranslate"><span class="pre">on_init()</span></code> specific implementation fetch the desired parameters</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="nn">my_system_interface</span>
+<span class="p">{</span>
+<span class="n">hardware_interface</span><span class="o">::</span><span class="n">CallbackReturn</span><span class="w"> </span><span class="nf">MySystemHardware::on_init</span><span class="p">(</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">HardwareInfo</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">info</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">SystemInterface</span><span class="o">::</span><span class="n">on_init</span><span class="p">(</span><span class="n">info</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span>
+<span class="w">    </span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">CallbackReturn</span><span class="o">::</span><span class="n">SUCCESS</span><span class="p">)</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">CallbackReturn</span><span class="o">::</span><span class="n">ERROR</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">//   declaration in *.hpp file --&gt; unsigned int main_loop_update_rate_, desired_hw_update_rate_ = 100 ;</span>
+<span class="w">  </span><span class="n">main_loop_update_rate_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stoi</span><span class="p">(</span><span class="n">info_</span><span class="p">.</span><span class="n">hardware_parameters</span><span class="p">[</span><span class="s">&quot;main_loop_update_rate&quot;</span><span class="p">]);</span>
+<span class="w">  </span><span class="n">desired_hw_update_rate_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stoi</span><span class="p">(</span><span class="n">info_</span><span class="p">.</span><span class="n">hardware_parameters</span><span class="p">[</span><span class="s">&quot;desired_hw_update_rate&quot;</span><span class="p">]);</span>
+
+<span class="w">  </span><span class="p">...</span>
+<span class="p">}</span>
+<span class="p">...</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// my_system_interface</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p>In your <code class="docutils literal notranslate"><span class="pre">on_activate</span></code> specific implementation reset internal loop counter</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">CallbackReturn</span><span class="w"> </span><span class="nf">MySystemHardware::on_activate</span><span class="p">(</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">rclcpp_lifecycle</span><span class="o">::</span><span class="n">State</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="cm">/*previous_state*/</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">//   declaration in *.hpp file --&gt; unsigned int update_loop_counter_ ;</span>
+<span class="w">    </span><span class="n">update_loop_counter_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li><p>In your <code class="docutils literal notranslate"><span class="pre">read(const</span> <span class="pre">rclcpp::Time</span> <span class="pre">&amp;</span> <span class="pre">time,</span> <span class="pre">const</span> <span class="pre">rclcpp::Duration</span> <span class="pre">&amp;</span> <span class="pre">period)</span></code>
+and/or <code class="docutils literal notranslate"><span class="pre">write(const</span> <span class="pre">rclcpp::Time</span> <span class="pre">&amp;</span> <span class="pre">time,</span> <span class="pre">const</span> <span class="pre">rclcpp::Duration</span> <span class="pre">&amp;</span> <span class="pre">period)</span></code>
+specific implementations decide if you should interfere with your hardware</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">return_type</span><span class="w"> </span><span class="nf">MySystemHardware::read</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Time</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Duration</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">period</span><span class="p">)</span>
+<span class="p">{</span>
+
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">hardware_go</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">main_loop_update_rate_</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w">  </span><span class="o">||</span>
+<span class="w">                    </span><span class="n">desired_hw_update_rate_</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span>
+<span class="w">                    </span><span class="p">((</span><span class="n">update_loop_counter_</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">desired_hw_update_rate_</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">hardware_go</span><span class="p">){</span>
+<span class="w">    </span><span class="c1">// hardware comms and operations</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="p">...</span>
+
+<span class="w">  </span><span class="c1">// update counter</span>
+<span class="w">  </span><span class="o">++</span><span class="n">update_loop_counter_</span><span class="p">;</span>
+<span class="w">  </span><span class="n">update_loop_counter_</span><span class="w"> </span><span class="o">%=</span><span class="w"> </span><span class="n">main_loop_update_rate_</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="by-measuring-elapsed-time">
+<h2>By measuring elapsed time<a class="headerlink" href="#by-measuring-elapsed-time" title="Link to this heading"></a></h2>
+<p>Another way to decide if hardware communication should be executed in the
+<code class="docutils literal notranslate"><span class="pre">read(const</span> <span class="pre">rclcpp::Time</span> <span class="pre">&amp;</span> <span class="pre">time,</span> <span class="pre">const</span> <span class="pre">rclcpp::Duration</span> <span class="pre">&amp;</span> <span class="pre">period)</span></code> and/or
+<code class="docutils literal notranslate"><span class="pre">write(const</span> <span class="pre">rclcpp::Time</span> <span class="pre">&amp;</span> <span class="pre">time,</span> <span class="pre">const</span> <span class="pre">rclcpp::Duration</span> <span class="pre">&amp;</span> <span class="pre">period)</span></code>
+implementations is to measure elapsed time since last pass:</p>
+<ol class="arabic simple">
+<li><p>In your <code class="docutils literal notranslate"><span class="pre">on_activate</span></code> specific implementation reset the flags that indicate
+that this is the first pass of the <code class="docutils literal notranslate"><span class="pre">read</span></code> and <code class="docutils literal notranslate"><span class="pre">write</span></code> methods</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">CallbackReturn</span><span class="w"> </span><span class="nf">MySystemHardware::on_activate</span><span class="p">(</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">rclcpp_lifecycle</span><span class="o">::</span><span class="n">State</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="cm">/*previous_state*/</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">//   declaration in *.hpp file --&gt; bool first_read_pass_, first_write_pass_ = true ;</span>
+<span class="w">    </span><span class="n">first_read_pass_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">first_write_pass_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic" start="2">
+<li><p>In your <code class="docutils literal notranslate"><span class="pre">read(const</span> <span class="pre">rclcpp::Time</span> <span class="pre">&amp;</span> <span class="pre">time,</span> <span class="pre">const</span> <span class="pre">rclcpp::Duration</span> <span class="pre">&amp;</span> <span class="pre">period)</span></code>
+and/or <code class="docutils literal notranslate"><span class="pre">write(const</span> <span class="pre">rclcpp::Time</span> <span class="pre">&amp;</span> <span class="pre">time,</span> <span class="pre">const</span> <span class="pre">rclcpp::Duration</span> <span class="pre">&amp;</span> <span class="pre">period)</span></code>
+specific implementations decide if you should interfere with your hardware</p>
+<blockquote>
+<div><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">return_type</span><span class="w"> </span><span class="nf">MySystemHardware::read</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Time</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Duration</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">period</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">first_read_pass_</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">time</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">last_read_time_</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">desired_hw_update_period_</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="n">first_read_pass_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">      </span><span class="c1">//   declaration in *.hpp file --&gt; rclcpp::Time last_read_time_ ;</span>
+<span class="w">      </span><span class="n">last_read_time_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">time</span><span class="p">;</span>
+<span class="w">      </span><span class="c1">// hardware comms and operations</span>
+<span class="w">      </span><span class="p">...</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">}</span>
+
+<span class="n">hardware_interface</span><span class="o">::</span><span class="n">return_type</span><span class="w"> </span><span class="nf">MySystemHardware::write</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Time</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Duration</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">period</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">first_write_pass_</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">time</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">last_write_time_</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">desired_hw_update_period_</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="n">first_write_pass_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">      </span><span class="c1">//   declaration in *.hpp file --&gt; rclcpp::Time last_write_time_ ;</span>
+<span class="w">      </span><span class="n">last_write_time_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">time</span><span class="p">;</span>
+<span class="w">      </span><span class="c1">// hardware comms and operations</span>
+<span class="w">      </span><span class="p">...</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The approach to get the desired update period value from the URDF and assign it to the variable
+<code class="docutils literal notranslate"><span class="pre">desired_hw_update_period_</span></code> is the same as in the previous section (<a class="reference internal" href="#step-1">step 1</a> and <a class="reference internal" href="#step-2">step 2</a>) but
+with a different parameter name.</p>
+</div>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="writing_new_hardware_component.html" class="btn btn-neutral float-left" title="Writing a Hardware Component" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mock_components_userdoc.html" class="btn btn-neutral float-right" title="Mock Components" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: master
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Releases</dt>
+        <dd><a href="../../../../../iron/index.html">Iron (latest)</a></dd><br>
+        <dd><a href="../../../../../humble/index.html">Humble</a></dd><br>
+        <dd><a href="../../../../../galactic/index.html">Galactic (EOL)</a></dd><br>
+        
+        <dd><a href="../../../../../foxy/index.html">Foxy (EOL)</a></dd><br>
+        
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="different_update_rates_userdoc.html">Master</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
