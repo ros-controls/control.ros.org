@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CarlikeBot &mdash; ROS2_Control: Rolling Feb 2024 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/reviewer_stats.css?v=068b34ac" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//rolling/doc/ros2_control_demos/example_11/doc/userdoc.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=a11b89ed"></script>
+        <script src="../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+        <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Example 12: Controller chaining with RRBot" href="../../example_12/doc/userdoc.html" />
+    <link rel="prev" title="Example 10: Industrial robot with GPIO interfaces" href="../../example_10/doc/userdoc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html">ros2_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/index.html">Demos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#what-you-can-find-in-this-repository">What you can find in this repository</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#goals">Goals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#examples-overview">Examples Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#quick-hints">Quick Hints</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/index.html#examples">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../example_1/doc/userdoc.html">Example 1: RRBot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_2/doc/userdoc.html">Example 2: DiffBot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_3/doc/userdoc.html">Example 3: RRBot with multiple interfaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_4/doc/userdoc.html">Example 4: Industrial robot with integrated sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_5/doc/userdoc.html">Example 5: Industrial robots with externally connected sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_6/doc/userdoc.html">Example 6: Modular robots with separate communication to each actuator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_7/doc/userdoc.html">Example 7: Full tutorial with a 6DOF robot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_8/doc/userdoc.html">Example 8: Using transmissions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_9/doc/userdoc.html">Example 9: Gazebo classic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_10/doc/userdoc.html">Example 10: Industrial robot with GPIO interfaces</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Example 11: CarlikeBot</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tutorial-steps">Tutorial steps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#files-used-for-this-demos">Files used for this demos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#controllers-from-this-demo">Controllers from this demo</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_12/doc/userdoc.html">Example 12: Controller chaining</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_14/doc/userdoc.html">Example 14: Modular robots with actuators not providing states</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../differences_to_ros1/differences_to_ros1.html">Differences to ros_control (ROS1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../differences_to_ros1/differences_to_ros1.html#migration-guide-to-ros2-control">Migration Guide to ros2_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../project_ideas.html">Project Ideas for GSoC 2024</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ROS2_Control: Rolling</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../doc/index.html">Demos</a></li>
+      <li class="breadcrumb-item active">CarlikeBot</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ros-controls/ros2_control_demos/blob/master/example_11/doc/userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for a development version.
+    For the latest released version, please have a look at <a href="../../../../../iron/doc/ros2_control_demos/example_11/doc/userdoc.html">Iron</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="carlikebot">
+<span id="ros2-control-demos-example-11-userdoc"></span><h1>CarlikeBot<a class="headerlink" href="#carlikebot" title="Link to this heading"></a></h1>
+<p><em>CarlikeBot</em> is a simple mobile base using bicycle model with 4 wheels.</p>
+<p>This example shows how to use the bicycle steering controller, which is a sub-design of the steering controller library.</p>
+<p>Even though the robot has 4 wheels with front steering, the vehicle dynamics of this robot is similar to a bicycle. There is a virtual front wheel joint that is used to control the steering angle of the front wheels and the front wheels on the robot mimic the steering angle of the virtual front wheel joint. Similarly the rear wheels are controlled by a virtual rear wheel joint.</p>
+<p>This example shows how to use the bicycle steering controller to control a carlike robot with 4 wheels but only 2 joints that can be controlled, one for steering and one for driving.</p>
+<ul class="simple">
+<li><p>The communication is done using proprietary API to communicate with the robot control box.</p></li>
+<li><p>Data for all joints is exchanged at once.</p></li>
+</ul>
+<p>The <em>CarlikeBot</em> URDF files can be found in <code class="docutils literal notranslate"><span class="pre">ros2_control_demo_description/carlikebot/urdf</span></code> folder.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The commands below are given for a local installation of this repository and its dependencies as well as for running them from a docker container. For more information on the docker usage see <a class="reference internal" href="../../doc/index.html#using-docker"><span class="std std-ref">Using Docker</span></a>.</p>
+</div>
+<section id="tutorial-steps">
+<h2>Tutorial steps<a class="headerlink" href="#tutorial-steps" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p>To check that <em>CarlikeBot</em> description is working properly use following launch commands</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_11<span class="w"> </span>view_robot.launch.py
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Getting the following output in terminal is OK: <code class="docutils literal notranslate"><span class="pre">Warning:</span> <span class="pre">Invalid</span> <span class="pre">frame</span> <span class="pre">ID</span> <span class="pre">&quot;odom&quot;</span> <span class="pre">passed</span> <span class="pre">to</span> <span class="pre">canTransform</span> <span class="pre">argument</span> <span class="pre">target_frame</span> <span class="pre">-</span> <span class="pre">frame</span> <span class="pre">does</span> <span class="pre">not</span> <span class="pre">exist</span></code>.
+This happens because <code class="docutils literal notranslate"><span class="pre">joint_state_publisher_gui</span></code> node needs some time to start.</p>
+</div>
+<a class="reference internal image-reference" href="../../../../_images/carlikebot.png"><img alt="Carlike Mobile Robot" src="../../../../_images/carlikebot.png" style="width: 400px;" /></a>
+</li>
+<li><p>To start <em>CarlikeBot</em> example open a terminal, source your ROS2-workspace and execute its launch file with</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_11<span class="w"> </span>carlikebot.launch.py<span class="w"> </span>remap_odometry_tf:<span class="o">=</span><span class="nb">true</span>
+</pre></div>
+</div>
+<p>The launch file loads and starts the robot hardware, controllers and opens <em>RViz</em>.
+In the starting terminal you will see a lot of output from the hardware implementation showing its internal states.
+This excessive printing is only added for demonstration. In general, printing to the terminal should be avoided as much as possible in a hardware interface implementation.</p>
+<p>If you can see an orange box with four wheels in <em>RViz</em> everything has started properly.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For robots being fixed to the world frame, like the RRbot examples of this repository, the <code class="docutils literal notranslate"><span class="pre">robot_state_publisher</span></code> subscribes to the <code class="docutils literal notranslate"><span class="pre">/joint_states</span></code> topic and creates the TF tree. For mobile robots, we need a node publishing the TF tree including the pose of the robot in the world coordinate systems. The most simple one is the odometry calculated by the <code class="docutils literal notranslate"><span class="pre">bicycle_steering_controller</span></code>.</p>
+</div>
+<p>By default, the controller publishes the odometry of the robot to the <code class="docutils literal notranslate"><span class="pre">~/tf_odometry</span></code> topic. The <code class="docutils literal notranslate"><span class="pre">remap_odometry_tf</span></code> argument is used to remap the odometry TF to the <code class="docutils literal notranslate"><span class="pre">/tf</span></code> topic. If you set this argument to <code class="docutils literal notranslate"><span class="pre">false</span></code> (or not set it at all) the TF tree will not be updated with the odometry data.</p>
+</li>
+<li><p>Now, let’s introspect the control system before moving <em>CarlikeBot</em>. Check if the hardware interface loaded properly, by opening another terminal and executing</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_interfaces
+</pre></div>
+</div>
+<p>You should get</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">command</span><span class="w"> </span>interfaces
+<span class="w">   </span>bicycle_steering_controller/angular/position<span class="w"> </span><span class="o">[</span>unavailable<span class="o">]</span><span class="w"> </span><span class="o">[</span>unclaimed<span class="o">]</span>
+<span class="w">   </span>bicycle_steering_controller/linear/velocity<span class="w"> </span><span class="o">[</span>unavailable<span class="o">]</span><span class="w"> </span><span class="o">[</span>unclaimed<span class="o">]</span>
+<span class="w">   </span>virtual_front_wheel_joint/position<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+<span class="w">   </span>virtual_rear_wheel_joint/velocity<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+state<span class="w"> </span>interfaces
+<span class="w">   </span>virtual_front_wheel_joint/position
+<span class="w">   </span>virtual_rear_wheel_joint/position
+<span class="w">   </span>virtual_rear_wheel_joint/velocity
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">[claimed]</span></code> marker on command interfaces means that a controller has access to command <em>CarlikeBot</em>.</p>
+</li>
+<li><p>Check if controllers are running</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_controllers
+</pre></div>
+</div>
+<p>You should get</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>joint_state_broadcaster<span class="o">[</span>joint_state_broadcaster/JointStateBroadcaster<span class="o">]</span><span class="w"> </span>active
+bicycle_steering_controller<span class="o">[</span>bicycle_steering_controller/BicycleSteeringController<span class="o">]</span><span class="w"> </span>active
+</pre></div>
+</div>
+</li>
+<li><p>If everything is fine, now you can send a command to <em>bicycle_steering_controller</em> using ROS 2 CLI:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>--rate<span class="w"> </span><span class="m">30</span><span class="w"> </span>/bicycle_steering_controller/reference<span class="w"> </span>geometry_msgs/msg/TwistStamped<span class="w"> </span><span class="s2">&quot;</span>
+<span class="s2">  twist:</span>
+<span class="s2">    linear:</span>
+<span class="s2">      x: 1.0</span>
+<span class="s2">      y: 0.0</span>
+<span class="s2">      z: 0.0</span>
+<span class="s2">    angular:</span>
+<span class="s2">      x: 0.0</span>
+<span class="s2">      y: 0.0</span>
+<span class="s2">      z: 0.1&quot;</span>
+</pre></div>
+</div>
+<p>You should now see an orange box circling in <em>RViz</em>.
+Also, you should see changing states in the terminal where launch file is started.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>CarlikeBotSystemHardware<span class="o">]</span>:<span class="w"> </span>Got<span class="w"> </span>position<span class="w"> </span>command:<span class="w"> </span><span class="m">0</span>.03<span class="w"> </span><span class="k">for</span><span class="w"> </span>joint<span class="w"> </span><span class="s1">&#39;virtual_front_wheel_joint&#39;</span>.
+<span class="o">[</span>CarlikeBotSystemHardware<span class="o">]</span>:<span class="w"> </span>Got<span class="w"> </span>velocity<span class="w"> </span>command:<span class="w"> </span><span class="m">20</span>.01<span class="w"> </span><span class="k">for</span><span class="w"> </span>joint<span class="w"> </span><span class="s1">&#39;virtual_rear_wheel_joint&#39;</span>.
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="files-used-for-this-demos">
+<h2>Files used for this demos<a class="headerlink" href="#files-used-for-this-demos" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Launch file: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_11/bringup/launch/carlikebot.launch.py">carlikebot.launch.py</a></p></li>
+<li><p>Controllers yaml: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_11/bringup/config/carlikebot_controllers.yaml">carlikebot_controllers.yaml</a></p></li>
+<li><p>URDF file: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_11/description/urdf/carlikebot.urdf.xacro">carlikebot.urdf.xacro</a></p>
+<ul>
+<li><p>Description: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_11/description/urdf/carlikebot_description.urdf.xacro">carlikebot_description.urdf.xacro</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> tag: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_11/description/ros2_control/carlikebot.ros2_control.xacro">carlikebot.ros2_control.xacro</a></p></li>
+</ul>
+</li>
+<li><p>RViz configuration: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_11/description/rviz/carlikebot.rviz">carlikebot.rviz</a></p></li>
+<li><p>Hardware interface plugin: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_11/hardware/carlikebot_system.cpp">carlikebot_system.cpp</a></p></li>
+</ul>
+</section>
+<section id="controllers-from-this-demo">
+<h2>Controllers from this demo<a class="headerlink" href="#controllers-from-this-demo" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Joint</span> <span class="pre">State</span> <span class="pre">Broadcaster</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/tree/master/joint_state_broadcaster">ros2_controllers repository</a>): <a class="reference external" href="https://control.ros.org/master/doc/ros2_controllers/joint_state_broadcaster/doc/userdoc.html">doc</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Bicycle</span> <span class="pre">Steering</span> <span class="pre">Controller</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/tree/master/bicycle_steering_controller">ros2_controllers repository</a>): <a class="reference external" href="https://control.ros.org/master/doc/ros2_controllers/bicycle_steering_controller/doc/userdoc.html">doc</a></p></li>
+</ul>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../example_10/doc/userdoc.html" class="btn btn-neutral float-left" title="Example 10: Industrial robot with GPIO interfaces" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../example_12/doc/userdoc.html" class="btn btn-neutral float-right" title="Example 12: Controller chaining with RRBot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: master
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Releases</dt>
+        <dd><a href="../../../../../iron/doc/ros2_control_demos/example_11/doc/userdoc.html">Iron (latest)</a></dd><br>
+        <dd><a href="../../../../../humble/doc/ros2_control_demos/example_11/doc/userdoc.html">Humble</a></dd><br>
+        <dd><a href="../../../../../galactic/index.html">Galactic (EOL)</a></dd><br>
+        
+        <dd><a href="../../../../../foxy/index.html">Foxy (EOL)</a></dd><br>
+        
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="userdoc.html">Master</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
