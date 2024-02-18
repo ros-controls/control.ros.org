@@ -669,7 +669,10 @@ repos = [
   "control.ros.org",
   "gazebo_ros2_control",
   "gz_ros2_control",
-  "kinematics_interface"
+  "kinematics_interface",
+  "ros2_control_ci",
+  "ros2_rhel",
+  "ros2_debian"
 ]
 
 branches = {
@@ -682,7 +685,10 @@ branches = {
   "control.ros.org": "master",
   "gazebo_ros2_control": "master",
   "gz_ros2_control": "master",
-  "kinematics_interface": "master"
+  "kinematics_interface": "master",
+  "ros2_control_ci": "master",
+  "ros2_rhel": "main",
+  "ros2_debian": "main"
 }
 
 maintainers = ["bmagyar", "destogl", "christophfroehlich"]
