@@ -64,7 +64,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../../effort_controllers/doc/userdoc.html">Effort Controllers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../forward_command_controller/doc/userdoc.html">Forward Command Controller</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Gripper Controller</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#list-of-parameters">List of parameters</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#an-example-parameter-file">An example parameter file</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../joint_trajectory_controller/doc/userdoc.html">Joint Trajectory Controller</a></li>
@@ -126,10 +130,16 @@
 
   <section id="gripper-action-controller">
 <span id="gripper-controllers-userdoc"></span><h1>Gripper Action Controller<a class="headerlink" href="#gripper-action-controller" title="Link to this heading"></a></h1>
-<p>Controller for executing a gripper command action for simple single-dof grippers.</p>
+<p>Controllers for executing a gripper command action for simple single-dof grippers:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">position_controllers/GripperActionController</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">effort_controllers/GripperActionController</span></code></p></li>
+</ul>
 <section id="parameters">
 <h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h2>
-<p>This controller uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters.</p>
+<p>These controllers use the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters. The parameter <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/humble/gripper_controllers/src/gripper_action_controller_parameters.yaml">definition file located in the src folder</a> contains descriptions for all the parameters used by the controller.</p>
+<section id="list-of-parameters">
+<h3>List of parameters<a class="headerlink" href="#list-of-parameters" title="Link to this heading"></a></h3>
 <dl>
 <dt>action_monitor_rate (double)</dt><dd><p>Hz</p>
 <p>Default:  20.0</p>
@@ -169,6 +179,21 @@
 <p>Default:  1.0</p>
 </dd>
 </dl>
+</section>
+<section id="an-example-parameter-file">
+<h3>An example parameter file<a class="headerlink" href="#an-example-parameter-file" title="Link to this heading"></a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">gripper_action_controller</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">action_monitor_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20.0</span>
+<span class="w">    </span><span class="nt">allow_stalling</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">goal_tolerance</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span>
+<span class="w">    </span><span class="nt">joint</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w">    </span><span class="nt">max_effort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">    </span><span class="nt">stall_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="w">    </span><span class="nt">stall_velocity_threshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.001</span>
+</pre></div>
+</div>
+</section>
 </section>
 </section>
 

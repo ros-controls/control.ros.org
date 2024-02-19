@@ -72,7 +72,11 @@
 <li class="toctree-l4 current"><a class="reference internal" href="userdoc.html#further-information">Further information</a><ul class="current">
 <li class="toctree-l5"><a class="reference internal" href="trajectory.html">Trajectory Representation</a></li>
 <li class="toctree-l5"><a class="reference internal" href="trajectory.html#trajectory-replacement">Trajectory Replacement</a></li>
-<li class="toctree-l5 current"><a class="current reference internal" href="#">joint_trajectory_controller Parameters</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="#">joint_trajectory_controller Parameters</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#list-of-parameters">List of parameters</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#an-example-parameter-file">An example parameter file</a></li>
+</ul>
+</li>
 <li class="toctree-l5"><a class="reference internal" href="../../rqt_joint_trajectory_controller/doc/userdoc.html">rqt_joint_trajectory_controller</a></li>
 </ul>
 </li>
@@ -137,77 +141,126 @@
 
   <section id="details-about-parameters">
 <span id="parameters"></span><h1>Details about parameters<a class="headerlink" href="#details-about-parameters" title="Link to this heading"></a></h1>
+<p>This controller uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters. The parameter <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/humble/joint_trajectory_controller/src/joint_trajectory_controller_parameters.yaml">definition file located in the src folder</a> contains descriptions for all the parameters used by the controller.</p>
+<section id="list-of-parameters">
+<h2>List of parameters<a class="headerlink" href="#list-of-parameters" title="Link to this heading"></a></h2>
 <dl>
-<dt>joints (list(string))</dt><dd><p>Joint names to control and listen to.</p>
+<dt>joints (string_array)</dt><dd><p>Joint names to control and listen to</p>
+<p>Read only: True</p>
+<p>Default:  {}</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>contains no duplicates</p></li>
+</ul>
+</div></blockquote>
 </dd>
-<dt>command_joints (list(string))</dt><dd><p>Joint names to control. This parameters is used if JTC is used in a controller chain where command and state interfaces don’t have same names.</p>
+<dt>command_joints (string_array)</dt><dd><p>Joint names to control. This parameters is used if JTC is used in a controller chain where command and state interfaces don’t have same names.</p>
+<p>Read only: True</p>
+<p>Default:  {}</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>contains no duplicates</p></li>
+</ul>
+</div></blockquote>
 </dd>
-<dt>command_interface (list(string))</dt><dd><p>Command interfaces provided by the hardware interface for all joints.</p>
-<p>Values: [position | velocity | acceleration] (multiple allowed)</p>
+<dt>command_interfaces (string_array)</dt><dd><p>Command interfaces provided by the hardware interface for all joints</p>
+<p>Read only: True</p>
+<p>Default:  {}</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>contains no duplicates</p></li>
+<li><p>every element is one of the list [‘position’, ‘velocity’, ‘acceleration’, ‘effort’]</p></li>
+<li><p>Custom validator: joint_trajectory_controller::command_interface_type_combinations</p></li>
+</ul>
+</div></blockquote>
 </dd>
-<dt>state_interfaces (list(string))</dt><dd><p>State interfaces provided by the hardware for all joints.</p>
-<p>Values: position (mandatory) [velocity, [acceleration]].
-Acceleration interface can only be used in combination with position and velocity.</p>
+<dt>state_interfaces (string_array)</dt><dd><p>State interfaces provided by the hardware for all joints.</p>
+<p>Read only: True</p>
+<p>Default:  {}</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>contains no duplicates</p></li>
+<li><p>every element is one of the list [‘position’, ‘velocity’, ‘acceleration’]</p></li>
+<li><p>Custom validator: joint_trajectory_controller::state_interface_type_combinations</p></li>
+</ul>
+</div></blockquote>
 </dd>
-<dt>state_publish_rate (double)</dt><dd><p>Publish-rate of the controller’s “state” topic.</p>
-<p>Default: 50.0</p>
+<dt>allow_partial_joints_goal (bool)</dt><dd><p>Allow joint goals defining trajectory for only some joints.</p>
+<p>Default:  false</p>
 </dd>
-<dt>action_monitor_rate (double)</dt><dd><p>Rate to monitor status changes when the controller is executing action (control_msgs::action::FollowJointTrajectory).</p>
-<p>Default: 20.0</p>
-</dd>
-<dt>allow_partial_joints_goal (boolean)</dt><dd><p>Allow joint goals defining trajectory for only some joints.</p>
-<p>Default: false</p>
-</dd>
-<dt>allow_integration_in_goal_trajectories (boolean)</dt><dd><p>Allow integration in goal trajectories to accept goals without position or velocity specified</p>
-<p>Default: false</p>
-</dd>
-<dt>interpolation_method (string)</dt><dd><p>The type of interpolation to use, if any. Can be “splines” or “none”.</p>
-<p>Default: splines</p>
-</dd>
-<dt>open_loop_control (boolean)</dt><dd><p>Use controller in open-loop control mode:</p>
+<dt>open_loop_control (bool)</dt><dd><p>Use controller in open-loop control mode</p>
 <ul class="simple">
 <li><p>The controller ignores the states provided by hardware interface but using last commands as states for starting the trajectory interpolation.</p></li>
 <li><p>It deactivates the feedback control, see the <code class="docutils literal notranslate"><span class="pre">gains</span></code> structure.</p></li>
 </ul>
 <p>This is useful if hardware states are not following commands, i.e., an offset between those (typical for hydraulic manipulators).</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If this flag is set, the controller tries to read the values from the command interfaces on activation.
-If they have real numeric values, those will be used instead of state interfaces.
-Therefore it is important set command interfaces to NaN (i.e., <code class="docutils literal notranslate"><span class="pre">std::numeric_limits&lt;double&gt;::quiet_NaN()</span></code>) or state values when the hardware is started.</p>
-</div>
-<p>Default: false</p>
+<p>If this flag is set, the controller tries to read the values from the command interfaces on activation. If they have real numeric values, those will be used instead of state interfaces. Therefore it is important set command interfaces to NaN (i.e., <code class="docutils literal notranslate"><span class="pre">std::numeric_limits&lt;double&gt;::quiet_NaN()</span></code>) or state values when the hardware is started.</p>
+<p>Read only: True</p>
+<p>Default:  false</p>
 </dd>
-<dt>start_with_holding (bool)</dt><dd><p>If true, start with holding position after activation. Otherwise, no command will be sent until
-the first trajectory is received.</p>
-<p>Default: true</p>
+<dt>allow_integration_in_goal_trajectories (bool)</dt><dd><p>Allow integration in goal trajectories to accept goals without position or velocity specified</p>
+<p>Default:  false</p>
 </dd>
-<dt>allow_nonzero_velocity_at_trajectory_end (boolean)</dt><dd><p>If false, the last velocity point has to be zero or the goal will be rejected.</p>
-<p>Default: true</p>
+<dt>state_publish_rate (double)</dt><dd><p>Rate controller state is published</p>
+<p>Default:  50.0</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than or equal to 0.1</p></li>
+</ul>
+</div></blockquote>
 </dd>
-<dt>cmd_timeout (double)</dt><dd><p>Timeout after which the input command is considered stale.
-Timeout is counted from the end of the trajectory (the last point).
-<code class="docutils literal notranslate"><span class="pre">cmd_timeout</span></code> must be greater than <code class="docutils literal notranslate"><span class="pre">constraints.goal_time</span></code>,
-otherwise ignored.</p>
-<p>If zero, timeout is deactivated”</p>
-<p>Default: 0.0</p>
+<dt>action_monitor_rate (double)</dt><dd><p>Rate to monitor status changes when the controller is executing action (control_msgs::action::FollowJointTrajectory)</p>
+<p>Read only: True</p>
+<p>Default:  20.0</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than or equal to 0.1</p></li>
+</ul>
+</div></blockquote>
 </dd>
-<dt>constraints (structure)</dt><dd><p>Default values for tolerances if no explicit values are states in JointTrajectory message.</p>
+<dt>interpolation_method (string)</dt><dd><p>The type of interpolation to use, if any</p>
+<p>Read only: True</p>
+<p>Default:  “splines”</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>one of the specified values: [‘splines’, ‘none’]</p></li>
+</ul>
+</div></blockquote>
 </dd>
-<dt>constraints.stopped_velocity_tolerance (double)</dt><dd><p>Default value for end velocity deviation.</p>
-<p>Default: 0.01</p>
+<dt>allow_nonzero_velocity_at_trajectory_end (bool)</dt><dd><p>If false, the last velocity point has to be zero or the goal will be rejected</p>
+<p>Default:  true</p>
 </dd>
-<dt>constraints.goal_time (double)</dt><dd><p>Maximally allowed tolerance for not reaching the end of the trajectory in a predefined time.
-If set to zero, the controller will wait a potentially infinite amount of time.</p>
-<p>Default: 0.0 (not checked)</p>
+<dt>cmd_timeout (double)</dt><dd><p>Timeout after which the input command is considered stale. Timeout is counted from the end of the trajectory (the last point). <code class="docutils literal notranslate"><span class="pre">cmd_timeout</span></code> must be greater than <code class="docutils literal notranslate"><span class="pre">constraints.goal_time</span></code>, otherwise ignored. If zero, timeout is deactivated</p>
+<p>Default:  0.0</p>
 </dd>
-<dt>constraints.&lt;joint_name&gt;.trajectory (double)</dt><dd><p>Maximally allowed deviation from the target trajectory for a given joint.</p>
-<p>Default: 0.0 (tolerance is not enforced)</p>
+<dt>constraints</dt><dd><p>Default values for tolerances if no explicit values are set in the <code class="docutils literal notranslate"><span class="pre">JointTrajectory</span></code> message.</p>
 </dd>
-<dt>constraints.&lt;joint_name&gt;.goal (double)</dt><dd><p>Maximally allowed deviation from the goal (end of the trajectory) for a given joint.</p>
-<p>Default: 0.0 (tolerance is not enforced)</p>
+<dt>constraints.stopped_velocity_tolerance (double)</dt><dd><p>Velocity tolerance for at the end of the trajectory that indicates that controlled system is stopped.</p>
+<p>Default:  0.01</p>
 </dd>
-<dt>gains (structure)</dt><dd><p>Only relevant, if <code class="docutils literal notranslate"><span class="pre">open_loop_control</span></code> is not set.</p>
+<dt>constraints.goal_time (double)</dt><dd><p>Time tolerance for achieving trajectory goal before or after commanded time. If set to zero, the controller will wait a potentially infinite amount of time.</p>
+<p>Default:  0.0</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than or equal to 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>constraints.&lt;joints&gt;.trajectory (double)</dt><dd><p>Per-joint trajectory offset tolerance during movement.</p>
+<p>Default:  0.0</p>
+</dd>
+<dt>constraints.&lt;joints&gt;.goal (double)</dt><dd><p>Per-joint trajectory offset tolerance at the goal position.</p>
+<p>Default:  0.0</p>
+</dd>
+<dt>gains</dt><dd><p>Only relevant, if <code class="docutils literal notranslate"><span class="pre">open_loop_control</span></code> is not set.</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">velocity</span></code> is the only command interface for all joints or an <code class="docutils literal notranslate"><span class="pre">effort</span></code> command interface is configured, PID controllers are used for every joint.
 This structure contains the controller gains for every joint with the control law</p>
 <div class="math notranslate nohighlight">
@@ -215,29 +268,63 @@ This structure contains the controller gains for every joint with the control la
 <p>with the desired velocity <span class="math notranslate nohighlight">\(v_d\)</span>, the measured velocity <span class="math notranslate nohighlight">\(v\)</span>, the position error <span class="math notranslate nohighlight">\(e\)</span> (definition see <code class="docutils literal notranslate"><span class="pre">angle_wraparound</span></code> below),
 the controller period <span class="math notranslate nohighlight">\(dt\)</span>, and the <code class="docutils literal notranslate"><span class="pre">velocity</span></code> or <code class="docutils literal notranslate"><span class="pre">effort</span></code> manipulated variable (control variable) <span class="math notranslate nohighlight">\(u\)</span>, respectively.</p>
 </dd>
-<dt>gains.&lt;joint_name&gt;.p (double)</dt><dd><p>Proportional gain <span class="math notranslate nohighlight">\(k_p\)</span> for PID</p>
-<p>Default: 0.0</p>
+<dt>gains.&lt;joints&gt;.p (double)</dt><dd><p>Proportional gain <span class="math notranslate nohighlight">\(k_p\)</span> for PID</p>
+<p>Default:  0.0</p>
 </dd>
-<dt>gains.&lt;joint_name&gt;.i (double)</dt><dd><p>Integral gain <span class="math notranslate nohighlight">\(k_i\)</span> for PID</p>
-<p>Default: 0.0</p>
+<dt>gains.&lt;joints&gt;.i (double)</dt><dd><p>Integral gain <span class="math notranslate nohighlight">\(k_i\)</span> for PID</p>
+<p>Default:  0.0</p>
 </dd>
-<dt>gains.&lt;joint_name&gt;.d (double)</dt><dd><p>Derivative gain <span class="math notranslate nohighlight">\(k_d\)</span> for PID</p>
-<p>Default: 0.0</p>
+<dt>gains.&lt;joints&gt;.d (double)</dt><dd><p>Derivative gain <span class="math notranslate nohighlight">\(k_d\)</span> for PID</p>
+<p>Default:  0.0</p>
 </dd>
-<dt>gains.&lt;joint_name&gt;.i_clamp (double)</dt><dd><p>Integral clamp. Symmetrical in both positive and negative direction.</p>
-<p>Default: 0.0</p>
+<dt>gains.&lt;joints&gt;.i_clamp (double)</dt><dd><p>Integral clamp. Symmetrical in both positive and negative direction.</p>
+<p>Default:  0.0</p>
 </dd>
-<dt>gains.&lt;joint_name&gt;.ff_velocity_scale (double)</dt><dd><p>Feed-forward scaling <span class="math notranslate nohighlight">\(k_{ff}\)</span> of velocity</p>
-<p>Default: 0.0</p>
+<dt>gains.&lt;joints&gt;.ff_velocity_scale (double)</dt><dd><p>Feed-forward scaling <span class="math notranslate nohighlight">\(k_{ff}\)</span> of velocity</p>
+<p>Default:  0.0</p>
 </dd>
-<dt>gains.&lt;joint_name&gt;.angle_wraparound (bool)</dt><dd><p>For joints that wrap around (without end stop, ie. are continuous),
-where the shortest rotation to the target position is the desired motion.
-If true, the position error <span class="math notranslate nohighlight">\(e = normalize(s_d - s)\)</span> is normalized between <span class="math notranslate nohighlight">\(-\pi, \pi\)</span>.
-Otherwise  <span class="math notranslate nohighlight">\(e = s_d - s\)</span> is used, with the desired position <span class="math notranslate nohighlight">\(s_d\)</span> and the measured
-position <span class="math notranslate nohighlight">\(s\)</span> from the state interface.</p>
-<p>Default: false</p>
+<dt>gains.&lt;joints&gt;.normalize_error (bool)</dt><dd><p>(Deprecated) Use position error normalization to -pi to pi.</p>
+<p>Default:  false</p>
+</dd>
+<dt>gains.&lt;joints&gt;.angle_wraparound (bool)</dt><dd><p>For joints that wrap around (without end stop, ie. are continuous), where the shortest rotation to the target position is the desired motion. If true, the position error <span class="math notranslate nohighlight">\(e = normalize(s_d - s)\)</span> is normalized between <span class="math notranslate nohighlight">\(-\pi, \pi\)</span>. Otherwise  <span class="math notranslate nohighlight">\(e = s_d - s\)</span> is used, with the desired position <span class="math notranslate nohighlight">\(s_d\)</span> and the measured position <span class="math notranslate nohighlight">\(s\)</span> from the state interface.</p>
+<p>Default:  false</p>
 </dd>
 </dl>
+</section>
+<section id="an-example-parameter-file">
+<h2>An example parameter file<a class="headerlink" href="#an-example-parameter-file" title="Link to this heading"></a></h2>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">joint_trajectory_controller</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">action_monitor_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20.0</span>
+<span class="w">    </span><span class="nt">allow_integration_in_goal_trajectories</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">allow_nonzero_velocity_at_trajectory_end</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">allow_partial_joints_goal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">cmd_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">    </span><span class="nt">command_interfaces</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{}&#39;</span>
+<span class="w">    </span><span class="nt">command_joints</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{}&#39;</span>
+<span class="w">    </span><span class="nt">constraints</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">&lt;joints&gt;</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">goal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">        </span><span class="nt">trajectory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">      </span><span class="nt">goal_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">      </span><span class="nt">stopped_velocity_tolerance</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span>
+<span class="w">    </span><span class="nt">gains</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">&lt;joints&gt;</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">angle_wraparound</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">        </span><span class="nt">d</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">        </span><span class="nt">ff_velocity_scale</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">        </span><span class="nt">i</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">        </span><span class="nt">i_clamp</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">        </span><span class="nt">normalize_error</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">        </span><span class="nt">p</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">    </span><span class="nt">interpolation_method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">splines</span>
+<span class="w">    </span><span class="nt">joints</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{}&#39;</span>
+<span class="w">    </span><span class="nt">open_loop_control</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">state_interfaces</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{}&#39;</span>
+<span class="w">    </span><span class="nt">state_publish_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50.0</span>
+</pre></div>
+</div>
+</section>
 </section>
 
 
