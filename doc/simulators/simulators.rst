@@ -22,3 +22,4 @@ To add your *ros2_control* integration, submit a PR to this page on Github!
 * `Webots <https://github.com/cyberbotics/webots_ros2/tree/master/webots_ros2_control>`__
 * Custom interfaces to simulators with a `Topic Based System <https://github.com/PickNikRobotics/topic_based_ros2_control>`__
 * `MuJoCo <https://github.com/fzi-forschungszentrum-informatik/cartesian_controllers/tree/ros2/cartesian_controller_simulation>`__
+* `Algoryx AGX Dynamic <https://github.com/Algoryx/agx-ros2-collection>`__
