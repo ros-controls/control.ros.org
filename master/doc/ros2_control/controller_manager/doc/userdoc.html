@@ -62,6 +62,10 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Controller Manager</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#determinism">Determinism</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#subscribers">Subscribers</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#handling-multiple-controller-managers">Handling Multiple Controller Managers</a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="#helper-scripts">Helper scripts</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#spawner"><code class="docutils literal notranslate"><span class="pre">spawner</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#unspawner"><code class="docutils literal notranslate"><span class="pre">unspawner</span></code></a></li>
@@ -190,9 +194,6 @@ The full structure of the map is given in the following example:</p>
 </dd>
 <dt>hardware_components_initial_state.inactive (optional; list&lt;string&gt;; default: empty)</dt><dd><p>Defines which hardware components will be configured immediately when controller manager is started.</p>
 </dd>
-<dt>robot_description (mandatory; string)</dt><dd><p>String with the URDF string as robot description.
-This is usually result of the parsed description files by <code class="docutils literal notranslate"><span class="pre">xacro</span></code> command.</p>
-</dd>
 <dt>update_rate (mandatory; integer)</dt><dd><p>The frequency of controller manager’s real-time update loop.
 This loop reads states from hardware, updates controller and writes commands to hardware.</p>
 </dd>
@@ -200,6 +201,56 @@ This loop reads states from hardware, updates controller and writes commands to 
 This is a class from which controller’s instance with name “<code class="docutils literal notranslate"><span class="pre">controller_name</span></code>” is created.</p>
 </dd>
 </dl>
+</section>
+<section id="subscribers">
+<h2>Subscribers<a class="headerlink" href="#subscribers" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>robot_description (std_msgs/msg/String)</dt><dd><p>The URDF string as robot description.
+This is usually published by the <code class="docutils literal notranslate"><span class="pre">robot_state_publisher</span></code> node.</p>
+</dd>
+</dl>
+<section id="handling-multiple-controller-managers">
+<h3>Handling Multiple Controller Managers<a class="headerlink" href="#handling-multiple-controller-managers" title="Link to this heading"></a></h3>
+<p>When dealing with multiple controller managers, you have two options for managing different robot descriptions:</p>
+<ol class="arabic simple">
+<li><p><strong>Using Namespaces:</strong> You can place both the <code class="docutils literal notranslate"><span class="pre">robot_state_publisher</span></code> and the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> nodes into the same namespace.</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">control_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
+    <span class="n">package</span><span class="o">=</span><span class="s2">&quot;controller_manager&quot;</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;ros2_control_node&quot;</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">robot_controllers</span><span class="p">],</span>
+    <span class="n">output</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span>
+    <span class="n">namespace</span><span class="o">=</span><span class="s2">&quot;rrbot&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">robot_state_pub_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
+    <span class="n">package</span><span class="o">=</span><span class="s2">&quot;robot_state_publisher&quot;</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;robot_state_publisher&quot;</span><span class="p">,</span>
+    <span class="n">output</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">robot_description</span><span class="p">],</span>
+    <span class="n">namespace</span><span class="o">=</span><span class="s2">&quot;rrbot&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Using Remappings:</strong> You can use remappings to handle different robot descriptions. This involves relaying topics using the <code class="docutils literal notranslate"><span class="pre">remappings</span></code> tag, allowing you to specify custom topics for each controller manager.</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">control_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
+    <span class="n">package</span><span class="o">=</span><span class="s2">&quot;controller_manager&quot;</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;ros2_control_node&quot;</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">robot_controllers</span><span class="p">],</span>
+    <span class="n">output</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span>
+    <span class="n">remappings</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;robot_description&#39;</span><span class="p">,</span> <span class="s1">&#39;/rrbot/robot_description&#39;</span><span class="p">)]</span>
+<span class="p">)</span>
+<span class="n">robot_state_pub_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
+    <span class="n">package</span><span class="o">=</span><span class="s2">&quot;robot_state_publisher&quot;</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;robot_state_publisher&quot;</span><span class="p">,</span>
+    <span class="n">output</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">robot_description</span><span class="p">],</span>
+    <span class="n">namespace</span><span class="o">=</span><span class="s2">&quot;rrbot&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="helper-scripts">
 <h2>Helper scripts<a class="headerlink" href="#helper-scripts" title="Link to this heading"></a></h2>
