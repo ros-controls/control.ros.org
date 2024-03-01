@@ -207,6 +207,8 @@ macros = {
     "REPOS_FILE_BRANCH": repos_file_branch,
 }
 
+# set a user_agent for link checking
+user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:123.0) Gecko/20100101 Firefox/123.0"
 
 # Add any paths that contain custom themes here, relative to this directory.
 class RedirectFrom(Directive):
