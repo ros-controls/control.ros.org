@@ -206,7 +206,88 @@ values:
 </pre></div>
 </div>
 </li>
+<li><p>Let’s introspect the ros2_control hardware component. Calling</p></li>
 </ol>
+<blockquote>
+<div><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_components
+</pre></div>
+</div>
+<p>should give you</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>Hardware<span class="w"> </span>Component<span class="w"> </span><span class="m">1</span>
+<span class="w">    </span>name:<span class="w"> </span>RRBot
+<span class="w">    </span>type:<span class="w"> </span>system
+<span class="w">    </span>plugin<span class="w"> </span>name:<span class="w"> </span>ros2_control_demo_example_10/RRBotSystemWithGPIOHardware
+<span class="w">    </span>state:<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="m">3</span><span class="w"> </span><span class="nv">label</span><span class="o">=</span>active
+<span class="w">    </span><span class="nb">command</span><span class="w"> </span>interfaces
+<span class="w">            </span>joint1/position<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+<span class="w">            </span>joint2/position<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+<span class="w">            </span>flange_analog_IOs/analog_output1<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+<span class="w">            </span>flange_vacuum/vacuum<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+</pre></div>
+</div>
+<p>This shows that the custom hardware interface plugin is loaded and running. If you work on a real
+robot and don’t have a simulator running, it is often faster to use the <code class="docutils literal notranslate"><span class="pre">mock_components/GenericSystem</span></code>
+hardware component instead of writing a custom one. Stop the launch file and start it again with
+an additional parameter</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_10<span class="w"> </span>rrbot.launch.py<span class="w"> </span>use_mock_hardware:<span class="o">=</span>True
+</pre></div>
+</div>
+<p>Calling <code class="docutils literal notranslate"><span class="pre">list_hardware_components</span></code> with the <code class="docutils literal notranslate"><span class="pre">-v</span></code> option</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_components<span class="w"> </span>-v
+</pre></div>
+</div>
+<p>now should give you</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>Hardware<span class="w"> </span>Component<span class="w"> </span><span class="m">1</span>
+<span class="w">    </span>name:<span class="w"> </span>RRBot
+<span class="w">    </span>type:<span class="w"> </span>system
+<span class="w">    </span>plugin<span class="w"> </span>name:<span class="w"> </span>mock_components/GenericSystem
+<span class="w">    </span>state:<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="m">3</span><span class="w"> </span><span class="nv">label</span><span class="o">=</span>active
+<span class="w">    </span><span class="nb">command</span><span class="w"> </span>interfaces
+<span class="w">            </span>joint1/position<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+<span class="w">            </span>joint2/position<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+<span class="w">            </span>flange_analog_IOs/analog_output1<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+<span class="w">            </span>flange_vacuum/vacuum<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+<span class="w">    </span>state<span class="w"> </span>interfaces
+<span class="w">            </span>joint1/position<span class="w"> </span><span class="o">[</span>available<span class="o">]</span>
+<span class="w">            </span>joint2/position<span class="w"> </span><span class="o">[</span>available<span class="o">]</span>
+<span class="w">            </span>flange_analog_IOs/analog_output1<span class="w"> </span><span class="o">[</span>available<span class="o">]</span>
+<span class="w">            </span>flange_analog_IOs/analog_input1<span class="w"> </span><span class="o">[</span>available<span class="o">]</span>
+<span class="w">            </span>flange_analog_IOs/analog_input2<span class="w"> </span><span class="o">[</span>available<span class="o">]</span>
+<span class="w">            </span>flange_vacuum/vacuum<span class="w"> </span><span class="o">[</span>available<span class="o">]</span>
+</pre></div>
+</div>
+<p>One can see that the plugin <code class="docutils literal notranslate"><span class="pre">mock_components/GenericSystem</span></code> was now loaded instead: It will mirror the command interfaces to state interfaces with identical name. Call</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/gpio_controller/inputs
+</pre></div>
+</div>
+<p>again and you should see that - unless commands are received - the values of the state interfaces are now <code class="docutils literal notranslate"><span class="pre">nan</span></code> except for the vacuum interface.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>interface_names:
+-<span class="w"> </span>flange_analog_IOs/analog_output1
+-<span class="w"> </span>flange_analog_IOs/analog_input1
+-<span class="w"> </span>flange_analog_IOs/analog_input2
+-<span class="w"> </span>flange_vacuum/vacuum
+values:
+-<span class="w"> </span>.nan
+-<span class="w"> </span>.nan
+-<span class="w"> </span>.nan
+-<span class="w"> </span><span class="m">1</span>.0
+</pre></div>
+</div>
+<p>This is, because for the vacuum interface an initial value of <code class="docutils literal notranslate"><span class="pre">1.0</span></code> is set in the URDF file.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gpio</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;flange_vacuum&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;vacuum&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;vacuum&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;initial_value&quot;</span><span class="nt">&gt;</span>1.0<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/state_interface&gt;</span>
+<span class="nt">&lt;/gpio&gt;</span>
+</pre></div>
+</div>
+<p>Call again</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/gpio_controller/commands<span class="w"> </span>std_msgs/msg/Float64MultiArray<span class="w"> </span><span class="s2">&quot;{data: [0.5,0.7]}&quot;</span>
+</pre></div>
+</div>
+<p>and you will see that the GPIO command interfaces will be mirrored to their respective state interfaces.</p>
+</div></blockquote>
 <section id="files-used-for-this-demos">
 <h2>Files used for this demos<a class="headerlink" href="#files-used-for-this-demos" title="Link to this heading"></a></h2>
 <ul class="simple">
@@ -219,7 +300,12 @@ values:
 </ul>
 </li>
 <li><p>RViz configuration: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/humble/ros2_control_demo_description/rrbot/rviz/rrbot.rviz">rrbot.rviz</a></p></li>
-<li><p>Hardware interface plugin: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/humble/example_10/hardware/rrbot.cpp">rrbot.cpp</a></p></li>
+<li><p>Hardware interface plugin:</p>
+<ul>
+<li><p><a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/humble/example_10/hardware/rrbot.cpp">rrbot.cpp</a></p></li>
+<li><p><a class="reference external" href="https://github.com/ros-controls/ros2_control/tree/humble/hardware_interface/src/mock_components/generic_system.cpp">generic_system.cpp</a></p></li>
+</ul>
+</li>
 <li><p>GPIO controller: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/humble/example_10/controllers/gpio_controller.cpp">gpio_controller.cpp</a></p></li>
 </ul>
 </section>
