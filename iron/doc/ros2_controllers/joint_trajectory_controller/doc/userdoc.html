@@ -265,10 +265,11 @@ A yaml file for using it could be:</p>
 <dt>&lt;controller_name&gt;/follow_joint_trajectory [control_msgs::action::FollowJointTrajectory]</dt><dd><p>Action server for commanding the controller</p>
 </dd>
 </dl>
-<p>The primary way to send trajectories is through the action interface, and should be favored when execution monitoring is desired.
-Action goals allow to specify not only the trajectory to execute, but also (optionally) path and goal tolerances.
+<p>The primary way to send trajectories is through the action interface, and should be favored when execution monitoring is desired.</p>
+<p>Action goals allow to specify not only the trajectory to execute, but also (optionally) path and goal tolerances.
 When no tolerances are specified, the defaults given in the parameter interface are used (see <a class="reference internal" href="parameters.html#parameters"><span class="std std-ref">Details about parameters</span></a>).
 If tolerances are violated during trajectory execution, the action goal is aborted, the client is notified, and the current position is held.</p>
+<p>The action server returns success to the client and continues with the last commanded point after the target is reached within the specified tolerances.</p>
 </section>
 <section id="subscriber">
 <span id="id6"></span><h4>Subscriber <a class="footnote-reference brackets" href="#f1" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a><a class="headerlink" href="#subscriber" title="Link to this heading"></a></h4>

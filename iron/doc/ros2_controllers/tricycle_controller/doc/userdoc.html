@@ -66,6 +66,7 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Tricycle Controller</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#velocity-commands">Velocity commands</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#other-features">Other features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../tricycle_steering_controller/doc/userdoc.html">Tricycle Steering Controller</a></li>
@@ -118,8 +119,8 @@
 
   <section id="tricycle-controller">
 <span id="tricycle-controller-userdoc"></span><h1>tricycle_controller<a class="headerlink" href="#tricycle-controller" title="Link to this heading"></a></h1>
-<p>Controller for mobile robots with tricycle drive.
-Input for control are robot base_link twist commands which are translated to traction and steering
+<p>Controller for mobile robots with a single double-actuated wheel, including traction and steering. An example is a tricycle robot with the actuated wheel in the front and two trailing wheels on the rear axle.</p>
+<p>Input for control are robot base_link twist commands which are translated to traction and steering
 commands for the tricycle drive base. Odometry is computed from hardware feedback and published.</p>
 <section id="velocity-commands">
 <h2>Velocity commands<a class="headerlink" href="#velocity-commands" title="Link to this heading"></a></h2>
@@ -135,6 +136,103 @@ Odometry publishing
 Velocity, acceleration and jerk limits
 Automatic stop after command timeout</p>
 </div></blockquote>
+</section>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h2>
+<p>This controller uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters.</p>
+<dl>
+<dt>traction_joint_name (string)</dt><dd><p>Name of the traction joint</p>
+<p>Default:  “”</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>parameter is not empty</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>steering_joint_name (string)</dt><dd><p>Name of the steering joint</p>
+<p>Default:  “”</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>parameter is not empty</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>wheelbase (double)</dt><dd><p>Shortest distance between the front wheel and the rear axle. If this parameter is wrong, the robot will not behave correctly in curves.</p>
+<p>Default:  0.0</p>
+</dd>
+<dt>wheel_radius (double)</dt><dd><p>Radius of a wheel, i.e., wheels size, used for transformation of linear velocity into wheel rotations. If this parameter is wrong the robot will move faster or slower then expected.</p>
+<p>Default:  0.0</p>
+</dd>
+<dt>odom_frame_id (string)</dt><dd><p>Name of the frame for odometry. This frame is parent of <code class="docutils literal notranslate"><span class="pre">base_frame_id</span></code> when controller publishes odometry.</p>
+<p>Default:  “odom”</p>
+</dd>
+<dt>base_frame_id (string)</dt><dd><p>Name of the robot’s base frame that is child of the odometry frame.</p>
+<p>Default:  “base_link”</p>
+</dd>
+<dt>pose_covariance_diagonal (double_array)</dt><dd><p>Odometry covariance for the encoder output of the robot for the pose. These values should be tuned to your robot’s sample odometry data, but these values are a good place to start: <code class="docutils literal notranslate"><span class="pre">[0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.01]</span></code>.</p>
+<p>Default:  {0.0, 0.0, 0.0, 0.0, 0.0, 0.0}</p>
+</dd>
+<dt>twist_covariance_diagonal (double_array)</dt><dd><p>Odometry covariance for the encoder output of the robot for the speed. These values should be tuned to your robot’s sample odometry data, but these values are a good place to start: <code class="docutils literal notranslate"><span class="pre">[0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.01]</span></code>.</p>
+<p>Default:  {0.0, 0.0, 0.0, 0.0, 0.0, 0.0}</p>
+</dd>
+<dt>open_loop (bool)</dt><dd><p>If set to true the odometry of the robot will be calculated from the commanded values and not from feedback.</p>
+<p>Default:  false</p>
+</dd>
+<dt>enable_odom_tf (bool)</dt><dd><p>Publish transformation between <code class="docutils literal notranslate"><span class="pre">odom_frame_id</span></code> and <code class="docutils literal notranslate"><span class="pre">base_frame_id</span></code>.</p>
+<p>Default:  false</p>
+</dd>
+<dt>odom_only_twist (bool)</dt><dd><p>for doing the pose integration in separate node.</p>
+<p>Default:  false</p>
+</dd>
+<dt>cmd_vel_timeout (int)</dt><dd><p>Timeout in milliseconds, after which input command on <code class="docutils literal notranslate"><span class="pre">cmd_vel</span></code> topic is considered staled.</p>
+<p>Default:  500</p>
+</dd>
+<dt>publish_ackermann_command (bool)</dt><dd><p>Publish limited commands.</p>
+<p>Default:  false</p>
+</dd>
+<dt>velocity_rolling_window_size (int)</dt><dd><p>Size of the rolling window for calculation of mean velocity use in odometry.</p>
+<p>Default:  10</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than 0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>use_stamped_vel (bool)</dt><dd><p>Use stamp from input velocity message to calculate how old the command actually is.</p>
+<p>Default:  true</p>
+</dd>
+<dt>traction.max_velocity (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+<dt>traction.min_velocity (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+<dt>traction.max_acceleration (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+<dt>traction.min_acceleration (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+<dt>traction.max_deceleration (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+<dt>traction.min_deceleration (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+<dt>traction.max_jerk (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+<dt>traction.min_jerk (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+<dt>steering.max_position (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+<dt>steering.min_position (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+<dt>steering.max_velocity (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+<dt>steering.min_velocity (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+<dt>steering.max_acceleration (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+<dt>steering.min_acceleration (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+</dl>
 </section>
 </section>
 
