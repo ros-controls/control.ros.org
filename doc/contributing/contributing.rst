@@ -53,13 +53,11 @@ Please keep the following in mind:
 Writing documentation
 ----------------------
 
-Each repository starts as a "part" of the documentation using ``#``.
-For more details, see: https://thomas-cokelaer.info/tutorials/sphinx/rest_syntax.html#id8
+We use Sphinx with `Read The Docs theme <https://docs.readthedocs.io/en/stable/index.html>`__ for documentation.
+
+General information is located in the `control.ros.org <https://github.com/ros-controls/ros2_control>`__ repository, while the documentation for the packages is written in the respective repositories.
 
 
-.. _ros2_control: https://github.com/ros-controls/ros2_control
-.. _ros2_controllers: https://github.com/ros-controls/ros2_controllers
-.. _ros2_control_demos: https://github.com/ros-controls/ros2_control_demos
 
 
 
