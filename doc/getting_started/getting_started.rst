@@ -15,21 +15,48 @@ To use it, you have to install ``ros-{DISTRO}-ros2-control`` and ``ros-{DISTRO}-
 Building from Source
 ---------------------------
 
-.. raw:: html
+To receive the latest features and bug fixes or if you want to contribute to the framework, you can build the framework from source.
 
-    <a href="https://github.com/ros-controls/ros2_control_ci/actions/workflows/{DISTRO}-binary-build.yml">
-        <img src="https://github.com/ros-controls/ros2_control_ci/actions/workflows/{DISTRO}-binary-build.yml/badge.svg" alt="{DISTRO} Binary Build"/></a>
+You can choose between the following options:
 
-If you want to install the framework from source, e.g., for contributing to the framework, use the following commands:
+   * Stable version: These branches will be released in the future in the respective ROS 2 distribution binaries.
 
-* Download all repositories
+    .. raw:: html
 
-  .. code-block:: shell
+        <a href="https://github.com/ros-controls/ros2_control_ci/actions/workflows/{DISTRO}-binary-build.yml">
+            <img src="https://github.com/ros-controls/ros2_control_ci/actions/workflows/{DISTRO}-binary-build.yml/badge.svg" alt="{DISTRO} Binary Build"/></a>
 
-    mkdir -p ~/ros2_ws/src
-    cd ~/ros2_ws/
-    wget https://raw.githubusercontent.com/ros-controls/control.ros.org/master/ros_controls.$ROS_DISTRO.repos
-    vcs import src < ros_controls.$ROS_DISTRO.repos
+   * Development version: We thrive to make the rolling development version (from the master branches) of the ros2_control stack compatible with earlier releases of ROS2. This is done by building the rolling version of the stack from source with the earlier releases of ROS2.
+
+    .. raw:: html
+
+        <a href="https://github.com/ros-controls/ros2_control_ci/actions/workflows/rolling-compatibility-{DISTRO}-binary-build.yml">
+            <img src="https://github.com/ros-controls/ros2_control_ci/actions/workflows/rolling-compatibility-{DISTRO}-binary-build.yml/badge.svg" alt="Rolling Compatibility {DISTRO}"/></a>
+
+   .. tabs::
+
+      .. group-tab:: Stable version
+
+
+        * Download all repositories
+
+          .. code-block:: shell
+
+            mkdir -p ~/ros2_ws/src
+            cd ~/ros2_ws/
+            wget https://raw.githubusercontent.com/ros-controls/ros2_control_ci/master/ros_controls.$ROS_DISTRO.repos
+            vcs import src < ros_controls.$ROS_DISTRO.repos
+
+      .. group-tab:: Development version
+
+        * Download all repositories
+
+          .. code-block:: shell
+
+            mkdir -p ~/ros2_ws/src
+            cd ~/ros2_ws/
+            wget https://raw.githubusercontent.com/ros-controls/ros2_control_ci/master/ros_controls.rolling-on-$ROS_DISTRO.repos.repos
+            vcs import src < ros_controls.$ROS_DISTRO.repos
 
 * Install dependencies:
 
