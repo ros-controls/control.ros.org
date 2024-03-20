@@ -28,7 +28,7 @@ If you want to install the framework from source, e.g., for contributing to the 
 
     mkdir -p ~/ros2_ws/src
     cd ~/ros2_ws/
-    wget https://raw.githubusercontent.com/ros-controls/control.ros.org/master/ros_controls.$ROS_DISTRO.repos
+    wget https://raw.githubusercontent.com/ros-controls/ros2_control_ci/master/ros_controls.$ROS_DISTRO.repos
     vcs import src < ros_controls.$ROS_DISTRO.repos
 
 * Install dependencies:
