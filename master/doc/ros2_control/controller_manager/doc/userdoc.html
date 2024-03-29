@@ -61,8 +61,8 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../../doc/index.html#concepts">Concepts</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Controller Manager</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#determinism">Determinism</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#subscribers">Subscribers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#subscribers">Subscribers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#handling-multiple-controller-managers">Handling Multiple Controller Managers</a></li>
 </ul>
 </li>
@@ -171,6 +171,15 @@ Alternatives to the standard kernel include</p>
 <p>Though installing a realtime-kernel will definitely get the best results when it comes to low
 jitter, using a lowlatency kernel can improve things a lot with being really easy to install.</p>
 </section>
+<section id="subscribers">
+<h2>Subscribers<a class="headerlink" href="#subscribers" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>~/robot_description [std_msgs::msg::String]</dt><dd><p>String with the URDF xml, e.g., from <code class="docutils literal notranslate"><span class="pre">robot_state_publisher</span></code>.
+Reloading of the URDF is not supported yet.
+All joints defined in the <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code>-tag have to be present in the URDF.</p>
+</dd>
+</dl>
+</section>
 <section id="parameters">
 <h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h2>
 <dl class="simple">
@@ -199,14 +208,6 @@ This loop reads states from hardware, updates controller and writes commands to 
 </dd>
 <dt>&lt;controller_name&gt;.type</dt><dd><p>Name of a plugin exported using <code class="docutils literal notranslate"><span class="pre">pluginlib</span></code> for a controller.
 This is a class from which controller’s instance with name “<code class="docutils literal notranslate"><span class="pre">controller_name</span></code>” is created.</p>
-</dd>
-</dl>
-</section>
-<section id="subscribers">
-<h2>Subscribers<a class="headerlink" href="#subscribers" title="Link to this heading"></a></h2>
-<dl class="simple">
-<dt>robot_description (std_msgs/msg/String)</dt><dd><p>The URDF string as robot description.
-This is usually published by the <code class="docutils literal notranslate"><span class="pre">robot_state_publisher</span></code> node.</p>
 </dd>
 </dl>
 <section id="handling-multiple-controller-managers">

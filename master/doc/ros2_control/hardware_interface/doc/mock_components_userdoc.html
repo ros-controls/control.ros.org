@@ -65,7 +65,6 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Mock Components</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#generic-system">Generic System</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#parameters">Parameters</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#per-joint-parameters">Per-joint Parameters</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#per-interface-parameters">Per-interface Parameters</a></li>
 </ul>
 </li>
@@ -140,9 +139,10 @@ For more information about hardware components check <a class="reference interna
 <p>Features:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>support for mimic joints</p></li>
+<li><p>support for mimic joints, which is parsed from the URDF (see the <a class="reference external" href="http://wiki.ros.org/urdf/XML/joint">URDF wiki</a>)</p></li>
 <li><p>mirroring commands to states with and without offset</p></li>
 <li><p>fake command interfaces for setting sensor data from an external node (combined with a <a class="reference internal" href="../../../ros2_controllers/forward_command_controller/doc/userdoc.html#forward-command-controller-userdoc"><span class="std std-ref">forward controller</span></a>)</p></li>
+<li><p>fake gpio interfaces for setting sensor data from an external node (combined with a <a class="reference internal" href="../../../ros2_controllers/forward_command_controller/doc/userdoc.html#forward-command-controller-userdoc"><span class="std std-ref">forward controller</span></a>)</p></li>
 </ul>
 </div></blockquote>
 <section id="parameters">
@@ -155,18 +155,12 @@ Or it can help you to test your setup when the hardware is running without feedb
 <dt>mock_sensor_commands (optional; boolean; default: false)</dt><dd><p>Creates fake command interfaces for faking sensor measurements with an external command.
 Those interfaces are usually used by a <a class="reference internal" href="../../../ros2_controllers/forward_command_controller/doc/userdoc.html#forward-command-controller-userdoc"><span class="std std-ref">forward controller</span></a> to provide access from ROS-world.</p>
 </dd>
+<dt>mock_gpio_commands (optional; boolean; default: false)</dt><dd><p>Creates fake command interfaces for faking GPIO states with an external command.
+Those interfaces are usually used by a <a class="reference internal" href="../../../ros2_controllers/forward_command_controller/doc/userdoc.html#forward-command-controller-userdoc"><span class="std std-ref">forward controller</span></a> to provide access from ROS-world.</p>
+</dd>
 <dt>position_state_following_offset (optional; double; default: 0.0)</dt><dd><p>Following offset added to the commanded values when mirrored to states.</p>
 </dd>
 <dt>custom_interface_with_following_offset (optional; string; default: “”)</dt><dd><p>Mapping of offsetted commands to a custom interface.</p>
-</dd>
-</dl>
-</section>
-<section id="per-joint-parameters">
-<h3>Per-joint Parameters<a class="headerlink" href="#per-joint-parameters" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>mimic (optional; string)</dt><dd><p>Defined name of the joint to mimic. This is often used concept with parallel grippers. Example: <code class="docutils literal notranslate"><span class="pre">&lt;param</span> <span class="pre">name=&quot;mimic&quot;&gt;joint1&lt;/param&gt;</span></code>.</p>
-</dd>
-<dt>multiplier (optional; double; default: 1; used if mimic joint is defined)</dt><dd><p>Multiplier of values for mimicking joint defined in <code class="docutils literal notranslate"><span class="pre">mimic</span></code> parameter. Example: <code class="docutils literal notranslate"><span class="pre">&lt;param</span> <span class="pre">name=&quot;multiplier&quot;&gt;-2&lt;/param&gt;</span></code>.</p>
 </dd>
 </dl>
 </section>

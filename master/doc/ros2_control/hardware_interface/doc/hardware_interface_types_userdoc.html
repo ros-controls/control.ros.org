@@ -73,7 +73,6 @@
 <li class="toctree-l5"><a class="reference internal" href="writing_new_hardware_component.html">Writing a Hardware Component</a></li>
 <li class="toctree-l5"><a class="reference internal" href="different_update_rates_userdoc.html">Different Update Rates</a></li>
 <li class="toctree-l5"><a class="reference internal" href="hardware_components_userdoc.html#handling-of-errors-that-happen-during-read-and-write-calls">Handling of errors that happen during read() and write() calls</a></li>
-<li class="toctree-l5"><a class="reference internal" href="hardware_components_userdoc.html#migration-from-foxy-to-newer-versions">Migration from Foxy to newer versions</a></li>
 </ul>
 </li>
 </ul>
@@ -143,6 +142,7 @@ The following sections describe the different hardware interface types and their
 <h2>Joints<a class="headerlink" href="#joints" title="Link to this heading"></a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">&lt;joint&gt;</span></code>-tag groups the interfaces associated with the joints of physical robots and actuators.
 They have command and state interfaces to set the goal values for hardware and read its current state.</p>
+<p>All joints defined in the <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code>-tag have to be present in the URDF received <a class="reference internal" href="../../controller_manager/doc/userdoc.html#subscribers"><span class="std std-ref">by the controller manager</span></a>.</p>
 <p>State interfaces of joints can be published as a ROS topic by means of the <a class="reference internal" href="../../../ros2_controllers/joint_state_broadcaster/doc/userdoc.html#joint-state-broadcaster-userdoc"><span class="std std-ref">joint_state_broadcaster</span></a></p>
 </section>
 <section id="sensors">
