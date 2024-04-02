@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['bcolors_298',['bcolors',['../classcontroller__manager_1_1hardware__spawner_1_1bcolors.html',1,'controller_manager.hardware_spawner.bcolors'],['../classcontroller__manager_1_1spawner_1_1bcolors.html',1,'controller_manager.spawner.bcolors']]],
-  ['blackboxtest_299',['BlackBoxTest',['../classBlackBoxTest.html',1,'']]]
+  ['bcolors_300',['bcolors',['../classcontroller__manager_1_1hardware__spawner_1_1bcolors.html',1,'controller_manager.hardware_spawner.bcolors'],['../classcontroller__manager_1_1spawner_1_1bcolors.html',1,'controller_manager.spawner.bcolors']]],
+  ['blackboxtest_301',['BlackBoxTest',['../classBlackBoxTest.html',1,'']]]
 ];

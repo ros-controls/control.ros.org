@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Differences to ros_control (ROS1) &mdash; ROS2_Control: Rolling Apr 2024 documentation</title>
+  <title>Differences to ros_control (ROS 1) &mdash; ROS2_Control: Rolling Apr 2024 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -13,7 +13,7 @@
 
   
     <link rel="shortcut icon" href="../../_static/favicon_ros-controls.ico"/>
-    <link rel="canonical" href="https://control.ros.org/rolling//rolling/doc/differences_to_ros1/differences_to_ros1.html" />
+    <link rel="canonical" href="https://control.ros.org/rolling//rolling/doc/migration/differences_to_ros1.html" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -29,8 +29,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Supported Robots" href="../supported_robots/supported_robots.html" />
-    <link rel="prev" title="gazebo_ros2_control" href="../gazebo_ros2_control/doc/index.html" /> 
+    <link rel="next" title="Foxy to Galactic" href="../ros2_control/doc/migration/Foxy.html" />
+    <link rel="prev" title="Migration Guides" href="migration.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -60,15 +60,22 @@
 <li class="toctree-l1"><a class="reference internal" href="../ros2_control_demos/doc/index.html">Demos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ros2_control/ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../simulators/simulators.html">Simulator Integrations</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Differences to ros_control (ROS1)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#hardware-structures-classes">Hardware Structures - classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#hardware-interfaces">Hardware Interfaces</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#controller-s-access-to-hardware">Controller’s Access to Hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="migration.html">Migration Guides</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="migration.html#coming-from-ros-control-ros-1">Coming from ros_control (ROS 1)</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Differences to ros_control (ROS 1)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#hardware-structures-classes">Hardware Structures - classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hardware-interfaces">Hardware Interfaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#controller-s-access-to-hardware">Controller’s Access to Hardware</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#migration-guide-to-ros2-control">Migration Guide to ros2_control</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#robothardware-to-components">RobotHardware to Components</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#controller-migration">Controller Migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#migration-guide-to-ros2-control">Migration Guide to ros2_control</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#robothardware-to-components">RobotHardware to Components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#controller-migration">Controller Migration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html#between-different-ros-2-distributions">Between different ROS 2 distributions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../supported_robots/supported_robots.html">Supported Robots</a></li>
@@ -92,9 +99,10 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Differences to ros_control (ROS1)</li>
+          <li class="breadcrumb-item"><a href="migration.html">Migration Guides</a></li>
+      <li class="breadcrumb-item active">Differences to ros_control (ROS 1)</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/ros-controls/control.ros.org/blob/master//doc/differences_to_ros1/differences_to_ros1.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/ros-controls/control.ros.org/blob/master//doc/migration/differences_to_ros1.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -107,14 +115,14 @@
   <strong>
     
     You're reading the documentation for a development version.
-    For the latest released version, please have a look at <a href="../../../iron/doc/differences_to_ros1/differences_to_ros1.html">Iron</a>.
+    For the latest released version, please have a look at <a href="../../../iron/index.html">Iron</a>.
     
   </strong>
 </p>
 
 
-  <section id="differences-to-ros-control-ros1">
-<span id="diff-to-ros1"></span><h1>Differences to ros_control (ROS1)<a class="headerlink" href="#differences-to-ros-control-ros1" title="Link to this heading"></a></h1>
+  <section id="differences-to-ros-control-ros-1">
+<span id="diff-to-ros1"></span><h1>Differences to ros_control (ROS 1)<a class="headerlink" href="#differences-to-ros-control-ros-1" title="Link to this heading"></a></h1>
 <section id="hardware-structures-classes">
 <h2>Hardware Structures - classes<a class="headerlink" href="#hardware-structures-classes" title="Link to this heading"></a></h2>
 <p>The ros_control framework uses the <code class="docutils literal notranslate"><span class="pre">RobotHW</span></code> class as a rigid structure to handle any hardware.
@@ -200,8 +208,8 @@ The real-time critical methods are marked as such.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../gazebo_ros2_control/doc/index.html" class="btn btn-neutral float-left" title="gazebo_ros2_control" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../supported_robots/supported_robots.html" class="btn btn-neutral float-right" title="Supported Robots" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="migration.html" class="btn btn-neutral float-left" title="Migration Guides" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../ros2_control/doc/migration/Foxy.html" class="btn btn-neutral float-right" title="Foxy to Galactic" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
@@ -230,11 +238,11 @@ The real-time critical methods are marked as such.</p>
   <div class="rst-other-versions">
     <dl>
       <dt>Releases</dt>
-        <dd><a href="../../../iron/doc/differences_to_ros1/differences_to_ros1.html">Iron (latest)</a></dd><br>
-        <dd><a href="../../../humble/doc/differences_to_ros1/differences_to_ros1.html">Humble</a></dd><br>
-        <dd><a href="../../../galactic/doc/differences_to_ros1/differences_to_ros1.html">Galactic (EOL)</a></dd><br>
+        <dd><a href="../../../iron/index.html">Iron (latest)</a></dd><br>
+        <dd><a href="../../../humble/index.html">Humble</a></dd><br>
+        <dd><a href="../../../galactic/index.html">Galactic (EOL)</a></dd><br>
         
-        <dd><a href="../../../foxy/doc/differences_to_ros1/differences_to_ros1.html">Foxy (EOL)</a></dd><br>
+        <dd><a href="../../../foxy/index.html">Foxy (EOL)</a></dd><br>
         
     </dl>
     <dl>

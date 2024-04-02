@@ -66,6 +66,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#load-controller">load_controller</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#reload-controller-libraries">reload_controller_libraries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#set-controller-state">set_controller_state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-hardware-component-state">set_hardware_component_state</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#switch-controllers">switch_controllers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#unload-controller">unload_controller</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#view-controller-chains">view_controller_chains</a></li>
@@ -121,6 +122,7 @@
 <li><p>ros2 control load_controller</p></li>
 <li><p>ros2 control reload_controller_libraries</p></li>
 <li><p>ros2 control set_controller_state</p></li>
+<li><p>ros2 control set_hardware_component_state</p></li>
 <li><p>ros2 control switch_controllers</p></li>
 <li><p>ros2 control unload_controller</p></li>
 <li><p>ros2 control view_controller_chains</p></li>
@@ -288,6 +290,32 @@
 <span class="go">  -h, --help            show this help message and exit</span>
 <span class="go">  --spin-time SPIN_TIME</span>
 <span class="go">                        Spin time in seconds to wait for discovery (only applies when not using an already running daemon)</span>
+<span class="go">  -c CONTROLLER_MANAGER, --controller-manager CONTROLLER_MANAGER</span>
+<span class="go">                        Name of the controller manager ROS node</span>
+<span class="go">  --include-hidden-nodes</span>
+<span class="go">                        Consider hidden nodes as well</span>
+</pre></div>
+</div>
+</section>
+<section id="set-hardware-component-state">
+<h2>set_hardware_component_state<a class="headerlink" href="#set-hardware-component-state" title="Link to this heading"></a></h2>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>control<span class="w"> </span>set_hardware_component_state<span class="w"> </span>-h
+<span class="go">usage: ros2 control set_hardware_component_state [-h] [--spin-time SPIN_TIME] [-s] [-c CONTROLLER_MANAGER] [--include-hidden-nodes]</span>
+<span class="go">                                                hardware_component_name {unconfigured,inactive,active}</span>
+
+<span class="go">Adjust the state of the hardware component</span>
+
+<span class="go">positional arguments:</span>
+<span class="go">  hardware_component_name</span>
+<span class="go">                        Name of the hardware_component to be changed</span>
+<span class="go">  {unconfigured,inactive,active}</span>
+<span class="go">                        State in which the hardware component should be changed to</span>
+
+<span class="go">options:</span>
+<span class="go">  -h, --help            show this help message and exit</span>
+<span class="go">  --spin-time SPIN_TIME</span>
+<span class="go">                        Spin time in seconds to wait for discovery (only applies when not using an already running daemon)</span>
+<span class="go">  -s, --use-sim-time    Enable ROS simulation time</span>
 <span class="go">  -c CONTROLLER_MANAGER, --controller-manager CONTROLLER_MANAGER</span>
 <span class="go">                        Name of the controller manager ROS node</span>
 <span class="go">  --include-hidden-nodes</span>
