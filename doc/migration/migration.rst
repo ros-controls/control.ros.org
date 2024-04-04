@@ -28,4 +28,7 @@ ros2_control
 ros2_controllers
 ----------------
 
-There are no migration notes yet.
+.. toctree::
+   :titlesonly:
+
+   Iron to Jazzy <../ros2_controllers/doc/migration/Iron.rst>
