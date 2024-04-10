@@ -86,6 +86,7 @@ extensions = [
     "generate_parameter_library",
     'sphinx_tabs.tabs',
     "sphinx.ext.autosectionlabel",
+    "breathe"
 ]
 
 # Make sure the target is unique
