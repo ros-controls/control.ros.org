@@ -7,15 +7,19 @@ on:
   schedule:
   # Run every morning to ensure component documentation is up to date on deployment
    - cron: '23 5 * * *'
-  pull_request: # only runs up through build of sphinx
 
 jobs:
   check-links:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        BRANCH: [humble, iron, master]
     steps:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0
+        ref: ${{ matrix.BRANCH }}
     - uses: actions/setup-python@v5
       with:
         python-version: '3.10'
