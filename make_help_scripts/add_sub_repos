@@ -9,9 +9,9 @@ if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 add_sub_repositories () {
     # checkout a base for defined starting point
     cd "$base_dir" || { echo "Could not checkout base dir of control.ros.org. Exiting!"; exit "$ERRCODE"; }
-    for repo_name in "${!subrepo_url[@]}";
+    for repo_name in "${!subrepo_url[@]}"; do
         if [ ! -d "doc/$repo_name" ]; then
-          do echo "Create doc/$repo_name and checkout $base_branch branch"
+          echo "Create doc/$repo_name and checkout $base_branch branch"
           git clone "${subrepo_url[$repo_name]}" -b "$base_branch" doc/"$repo_name"
         else
           echo "Update doc/$repo_name and checkout $base_branch branch"
