@@ -311,7 +311,7 @@ def smv_rewrite_configs(app, config):
     # to rewrite the various configuration items with the current version.
     if app.config.smv_current_version != "":
         branch_distro = {
-            "rolling": "rolling",
+            "master": "rolling",
             "humble": "humble",
             "foxy": "foxy",
             "galactic": "galactic"
