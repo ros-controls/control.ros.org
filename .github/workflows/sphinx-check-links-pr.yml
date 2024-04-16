@@ -1,15 +1,10 @@
-name: "Check Page for Warnings Rolling"
+name: "Check Page for Broken Links - PR"
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - master
-  schedule:
-  # Run every morning to ensure component documentation is up to date on deployment
-   - cron: '23 5 * * *'
+  pull_request:
 
 jobs:
-  build-halt-on-warnings:
+  check-links:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -31,6 +26,8 @@ jobs:
         cd generate_parameter_library/generate_parameter_library_py/
         python -m pip install .
       shell: bash
+    - name: Install doxygen and graphviz
+      run: sudo apt-get install -y doxygen graphviz
     - name: Restore stats
       uses: actions/cache/restore@v4
       with:
@@ -38,8 +35,8 @@ jobs:
         restore-keys: |
           reviewer-stats
         path: ~/reviews
-    - name: Build single version considering warnings as errors
-      run: |
+    - name: Build page with API and run linkchecker
+      run:  |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        make html-all-subrepos-with-errors
+        make linkcheck-all-subrepos-with-api
