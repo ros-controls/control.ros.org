@@ -33,7 +33,7 @@ copyright = "{}, {}".format(time.strftime("%Y"), author)
 ros_distro = "iron"
 distro_title = "Iron"
 distro_title_full = "Iron Irwini"
-repos_file_branch = "master"
+repos_file_branch = "iron"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -182,7 +182,7 @@ html_sourcelink_suffix = ""
 
 # Add branches you want to whitelist here.
 smv_branch_whitelist = r"^(foxy|galactic|humble|iron|master)$"
-smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy|galactic|humble|iron).*$"
+smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy|galactic|humble|iron|rolling).*$"
 smv_remote_whitelist = r"^(origin)$"
 smv_latest_version = "iron"
 smv_eol_versions = ["foxy", "galactic"]
