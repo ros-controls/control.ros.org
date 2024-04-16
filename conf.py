@@ -67,7 +67,11 @@ language = "en"
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "**/CHANGELOG.rst", "**/README.rst"]
+# exclude index.rst files for metapackages for rosdoc2
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store",
+                    "**/CHANGELOG.rst", "**/README.rst",
+                    "doc/ros2_control/ros2_control/**.rst",
+                    "doc/ros2_controllers/ros2_controllers/**.rst"]
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = "sphinx"
