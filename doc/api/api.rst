@@ -74,9 +74,6 @@ ros2_controllers
   * - joint_trajectory_controller
     - `API <http://docs.ros.org/en/{DISTRO}/p/joint_trajectory_controller/>`__
     - `ROS Index <https://index.ros.org/p/joint_trajectory_controller/>`__
-  * - pid_controller
-    - `API <http://docs.ros.org/en/{DISTRO}/p/pid_controller/>`__
-    - `ROS Index <https://index.ros.org/p/pid_controller/>`__
   * - position_controllers
     - `API <http://docs.ros.org/en/{DISTRO}/p/position_controllers/>`__
     - `ROS Index <https://index.ros.org/p/position_controllers/>`__
