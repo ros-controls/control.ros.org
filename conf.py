@@ -85,7 +85,7 @@ extensions = [
     "sphinx_copybutton",
     "generate_parameter_library",
     'sphinx_tabs.tabs',
-    "sphinx.ext.autosectionlabel",
+    "sphinx.ext.autosectionlabel"
 ]
 
 # Make sure the target is unique
