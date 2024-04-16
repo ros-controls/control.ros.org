@@ -12,12 +12,8 @@ Welcome to the ros2_control documentation - Iron!
    doc/ros2_control_demos/doc/index.rst
    doc/ros2_control/ros2controlcli/doc/userdoc.rst
    doc/simulators/simulators.rst
-<<<<<<< HEAD
    doc/differences_to_ros1/differences_to_ros1.rst
-=======
-   doc/migration/migration.rst
    doc/api/api.rst
->>>>>>> 159087e (Add API page (#268))
    doc/supported_robots/supported_robots.rst
    doc/resources/resources.rst
    doc/contributing/contributing.rst
