@@ -1,25 +1,15 @@
-name: "Check Page for Broken Links"
+name: "Check Page for Broken Links - PR"
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - humble
-  schedule:
-  # Run every morning to ensure component documentation is up to date on deployment
-   - cron: '23 5 * * *'
+  pull_request:
 
 jobs:
   check-links:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        BRANCH: [humble, iron, master]
     steps:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0
-        ref: ${{ matrix.BRANCH }}
     - uses: actions/setup-python@v5
       with:
         python-version: '3.10'
