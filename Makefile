@@ -12,6 +12,7 @@ BUILDDIR      = _build
 help:
 	@$(SPHINXBUILD) -M help $(SOURCEDIR) $(BUILDDIR) $(SPHINXOPTS) $(O)
 	@echo "  html-with-api"
+	@echo "  html-with-errors"
 	@echo "  html-all-subrepos"
 	@echo "  html-all-subrepos-with-errors"
 	@echo "  html-all-subrepos-with-api"
@@ -20,8 +21,12 @@ help:
 	@echo "  multiversion-with-errors"
 	@echo "  linkcheck-all-subrepos-with-api"
 
+html-with-errors: Makefile
+	@echo Single version without API, no checkout of sub_repos
+	$(SPHINXBUILD) $(SPHINXOPTS) -W --keep-going $(SOURCEDIR) $(BUILDDIR)/html
+
 html-with-api: Makefile
-	@echo Single html file with API
+	@echo Single version with API
 	@echo Step 1: Creating html files
 	$(SPHINXBUILD) $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
 	@echo Step 2: Building API
@@ -102,7 +107,7 @@ multiversion-with-api: Makefile
 	@echo Step 5: Create correct index
 	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=master/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
 
-.PHONY: help Makefile html-with-api multiversion multiversion-with-api multiversion-with-errors html-all-subrepos html-all-subrepos-with-api html-all-subrepos-with-errors linkcheck-all-subrepos-with-api
+.PHONY: help Makefile html-with-errors html-with-api multiversion multiversion-with-api multiversion-with-errors html-all-subrepos html-all-subrepos-with-api html-all-subrepos-with-errors linkcheck-all-subrepos-with-api
 
 # TODO(denis): Enable this!
 # # # # Generate the doxygen xml (for Sphinx) and copy the doxygen html to the
