@@ -13,6 +13,7 @@ Welcome to the ros2_control documentation - Humble!
    doc/ros2_control/ros2controlcli/doc/userdoc.rst
    doc/simulators/simulators.rst
    doc/differences_to_ros1/differences_to_ros1.rst
+   doc/api/api.rst
    doc/supported_robots/supported_robots.rst
    doc/resources/resources.rst
    doc/contributing/contributing.rst
@@ -35,6 +36,7 @@ The ros2_control framework consists of the following Github repositories:
 * `control_toolbox`_ - some widely-used control theory implementations (e.g. PID) used by controllers;
 * `realtime_tools`_ - general toolkit for realtime support, e.g., realtime buffers and publishers;
 * `control_msgs`_ - common messages.
+* `kinematics_interface`_ - for using C++ kinematics frameworks.
 
 
 Additionally, there are following (unreleased) packages are relevant for getting-started and project management:
@@ -72,6 +74,7 @@ General discussions
 .. _control_msgs: https://github.com/ros-controls/control_msgs
 .. _realtime_tools: https://github.com/ros-controls/realtime_tools
 .. _control_toolbox: https://github.com/ros-controls/control_toolbox
+.. _kinematics_interface: https://github.com/ros-controls/kinematics_interface
 .. _ros2_control_demos: https://github.com/ros-controls/ros2_control_demos
 .. _controller_manager_msgs: https://github.com/ros-controls/ros2_control/tree/{REPOS_FILE_BRANCH}/controller_manager_msgs
 .. _Controller Manager: https://github.com/ros-controls/ros2_control/blob/{REPOS_FILE_BRANCH}/controller_manager/src/controller_manager.cpp
