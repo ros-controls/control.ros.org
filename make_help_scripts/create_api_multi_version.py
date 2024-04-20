@@ -24,7 +24,7 @@ def create_apis():
         subprocess.run(["git", "checkout", branch], check=True)
         add_sub_repos.add_sub_repositories(branch)
         os.chdir("doc/")
-        subprocess.run(["doxygen", "Doxyfile"], check=True)
+        os.system(f"( cat Doxyfile ; echo \"PROJECT_NAME = ros2_control - {version}\" ) | doxygen -")
         api_output_dir = os.path.join(deploy_defines.base_dir, deploy_defines.build_dir, "html", branch, "doc", "api")
         os.makedirs(api_output_dir, exist_ok=True)
         shutil.copytree("tmp/html/", api_output_dir, dirs_exist_ok=True)

@@ -20,7 +20,8 @@ import deploy_defines
 
 def create_api():
     os.chdir(os.path.join(deploy_defines.base_dir, "doc"))
-    os.system("doxygen Doxyfile")
+    version = deploy_defines.branch_version[deploy_defines.base_branch]
+    os.system(f"( cat Doxyfile ; echo \"PROJECT_NAME = ros2_control - {version}\" ) | doxygen -")
     os.makedirs(os.path.join(deploy_defines.base_dir, deploy_defines.build_dir, "html/doc/api/"), exist_ok=True)
     shutil.copytree("tmp/html/", os.path.join(deploy_defines.base_dir, deploy_defines.build_dir, "html/doc/api/"), dirs_exist_ok=True)
     shutil.rmtree("tmp")
