@@ -17,12 +17,12 @@ import os
 import subprocess
 import deploy_defines
 
-def add_sub_repositories():
+def add_sub_repositories(base_branch):
     # checkout a base for defined starting point
     os.chdir(deploy_defines.base_dir)
     for repo_name, repo_details in deploy_defines.repos.items():
         repo_path = os.path.join("doc", repo_name)
-        branch = repo_details["branch_version"][deploy_defines.base_branch]
+        branch = repo_details["branch_version"][base_branch]
         if not os.path.isdir(repo_path):
             print(f"Create {repo_path} and checkout {branch} branch")
             subprocess.run(["git", "clone", "-b", branch, repo_details["url"], repo_path], check=True)
@@ -42,5 +42,5 @@ def add_sub_repositories():
             os.chdir(deploy_defines.base_dir)
 
 if __name__ == "__main__":
-    add_sub_repositories()
+    add_sub_repositories(deploy_defines.base_branch)
     deploy_defines.add_pr_stats_file()
