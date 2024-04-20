@@ -31,7 +31,7 @@ def check_repositories():
         if os.path.islink(repo_path):
             print(f"{repo_name} is a symlink, delete link or repository will be broken!")
             sys.exit(2)
-        if os.path.isdir(repo_path):
+        if os.path.isdir(repo_path) and subprocess.run(["git", "-C", repo_path, "status", "--porcelain"], capture_output=True, text=True).stdout.strip():
             print(f"{repo_name} repository exists already, save your changes because it will be deleted!")
             sys.exit(2)
 
