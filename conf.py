@@ -192,7 +192,17 @@ html_sourcelink_suffix = ""
 
 
 # Add branches you want to whitelist here.
-smv_branch_whitelist = r"^(foxy|galactic|humble|iron|master)$"
+
+# branch from which is started to checkout other branches
+if os.environ.get('BASE_BRANCH_PR') is not None:
+  base_branch = os.environ.get('BASE_BRANCH_PR')
+elif os.environ.get('BASE_BRANCH') is not None:
+  base_branch = os.environ.get('BASE_BRANCH')
+else:
+  base_branch = "master"
+print(f"Using base_branch: {base_branch}")
+
+smv_branch_whitelist = r"^(" + base_branch + r"|foxy|galactic|humble|iron)$"
 smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy|galactic|humble|iron).*$"
 smv_remote_whitelist = r"^(origin)$"
 smv_latest_version = "iron"
