@@ -1,4 +1,4 @@
-name: "Build Multiversion Page (PR)"
+name: "Build Multiversion Page"
 on:
   workflow_dispatch:
     inputs:
@@ -14,6 +14,9 @@ on:
   pull_request:
     branches:
       - master
+    paths:
+    - 'make_help_scripts/**'
+    - 'conf.py'
 
 jobs:
   build-multiversion:
