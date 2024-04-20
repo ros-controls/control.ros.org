@@ -3,12 +3,13 @@
 API Documentation
 =================
 
-Here you can find links to the API documentation published on docs.ros.org
+API documentation for the whole framework is parsed by doxygen and can be found `here <../api/index.html>`_.
+
+In the following, you can find links to the per-package API documentation published on docs.ros.org.
 
 ros2_control
 *************
 
-A documentation for the whole repository is parsed by doxygen and can be found `here <../api/index.html>`_
 
 .. list-table::
   :header-rows: 1
