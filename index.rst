@@ -13,7 +13,7 @@ Welcome to the ros2_control documentation - Iron!
    doc/ros2_control/ros2controlcli/doc/userdoc.rst
    doc/simulators/simulators.rst
    doc/differences_to_ros1/differences_to_ros1.rst
-   doc/api/api.rst
+   doc/api_list/api_list.rst
    doc/supported_robots/supported_robots.rst
    doc/resources/resources.rst
    doc/contributing/contributing.rst
