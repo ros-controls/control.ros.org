@@ -30,72 +30,72 @@ html-with-api: Makefile
 	@echo Step 1: Creating html files
 	$(SPHINXBUILD) $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
 	@echo Step 2: Building API
-	./make_help_scripts/create_api
+	./make_help_scripts/create_api.py
 
 html-all-subrepos: Makefile
 	@echo Single html file without API
 	@echo Step 1: Cloning all subrepositories
-	./make_help_scripts/add_sub_repos
+	./make_help_scripts/add_sub_repos.py
 	@echo Step 2: Building documentation
 	$(SPHINXBUILD) $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
 
 html-all-subrepos-with-errors: Makefile
 	@echo Single html file without API
 	@echo Step 1: Cloning all subrepositories
-	./make_help_scripts/add_sub_repos
+	./make_help_scripts/add_sub_repos.py
 	@echo Step 2: Building documentation
 	$(SPHINXBUILD) $(SPHINXOPTS) -W --keep-going $(SOURCEDIR) $(BUILDDIR)/html
 
 html-all-subrepos-with-api: Makefile
 	@echo Single html file with API
 	@echo Step 1: Cloning all subrepositories
-	./make_help_scripts/add_sub_repos
+	./make_help_scripts/add_sub_repos.py
 	@echo Step 2: Building documentation
 	$(SPHINXBUILD) $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
 	@echo Step 3: Building API
-	./make_help_scripts/create_api
+	./make_help_scripts/create_api.py
 
 linkcheck-all-subrepos-with-api: Makefile
 	@echo Single version html file with API and linkcheck
 	@echo Step 1: Cloning all subrepositories
-	./make_help_scripts/add_sub_repos
+	./make_help_scripts/add_sub_repos.py
 	@echo Step 2: Building API
-	./make_help_scripts/create_api
+	./make_help_scripts/create_api.py
 	@echo Step 3: Check links
-	./make_help_scripts/check_links $(BUILDDIR)
+	./make_help_scripts/check_links $(BUILDDIR).py
 
 multiversion: Makefile
 	@echo Building multi version documentation without API
 	@echo Step 1: Creating temporary commits
-	./make_help_scripts/add_tmp_commits
+	./make_help_scripts/add_tmp_commits.py
 	@echo Step 2: Build multi version documentation
 	sphinx-multiversion $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
 	@echo Step 3: Deleting temporary commits
-	./make_help_scripts/delete_tmp_commits
+	./make_help_scripts/delete_tmp_commits.py
 	@echo Step 4: Create correct index
 	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=master/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
 
 multiversion-with-errors: Makefile
 	@echo Building multi version documentation without API
 	@echo Step 1: Creating temporary commits
-	./make_help_scripts/add_tmp_commits
+	./make_help_scripts/add_tmp_commits.py
 	@echo Step 2: Build multi version documentation
 	sphinx-multiversion $(SPHINXOPTS) -W --keep-going $(SOURCEDIR) $(BUILDDIR)/html
 	@echo Step 3: Deleting temporary commits
-	./make_help_scripts/delete_tmp_commits
+	./make_help_scripts/delete_tmp_commits.py
 	@echo Step 4: Create correct index
 	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=master/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
 
 multiversion-with-api: Makefile
 	@echo Building multi version documentation with API
 	@echo Step 1: Creating temporary commits
-	./make_help_scripts/add_tmp_commits
+	./make_help_scripts/add_tmp_commits.py
 	@echo Step 2: Build multi version documentation
 	sphinx-multiversion $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
 	@echo Step 3: Deleting temporary commits
-	./make_help_scripts/delete_tmp_commits
+	./make_help_scripts/delete_tmp_commits.py
 	@echo Step 4: Building multiverison API
-	./make_help_scripts/create_api_multi_version
+	./make_help_scripts/create_api_multi_version.py
 	@echo Step 5: Create correct index
 	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=master/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
 
