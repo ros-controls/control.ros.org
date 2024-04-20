@@ -52,8 +52,10 @@ def add_sub_repositories_and_commit():
         # Clone all subrepositories and add as tmp commit to branch of multi version
         print(f"Clone repositories for {branch} and checkout branches for {version}")
         for repo_name, repo_details in deploy_defines.repos.items():
-            branch = repo_details["branch_version"][version]
             print(f"Create doc/{repo_name}")
+            # Remove leftover folders if existing
+            shutil.rmtree(f"doc/{repo_name}", ignore_errors=True)
+            branch = repo_details["branch_version"][version]
             subprocess.run(["git", "clone", "-b", branch, repo_details["url"], f"doc/{repo_name}"], check=True, stdout=subprocess.DEVNULL)
             os.chdir(f"doc/{repo_name}")
             # Remove git repo so that doc files of subrepo can be added to tmp commit
@@ -64,9 +66,6 @@ def add_sub_repositories_and_commit():
         # We don't want to use-precommit to check if subrepos are correct
         subprocess.run(["git", "commit", "-m", "Add temporary changes for multi version", "--no-verify"], check=True, stdout=subprocess.DEVNULL)
         subprocess.run(["git", "checkout", deploy_defines.base_branch], check=True)
-        # Remove leftover folders if existing
-        for repo_name in deploy_defines.repos.keys():
-            shutil.rmtree(f"doc/{repo_name}", ignore_errors=True)
     print("---------- end add_sub_repositories_and_commit ----------------")
 
 if __name__ == "__main__":
