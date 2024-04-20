@@ -41,7 +41,7 @@ jobs:
     - name: Build multiversion with API
       env:
         BASE_BRANCH: ${{ github.event.inputs.BASE_BRANCH }}
-        BASE_BRANCH_PR: ${{ github.ref }}
+        BASE_BRANCH_PR: ${{ github.event.pull_request.head.ref }}
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
