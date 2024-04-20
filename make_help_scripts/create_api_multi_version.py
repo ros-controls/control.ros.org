@@ -20,10 +20,10 @@ import deploy_defines
 import add_sub_repos
 
 def create_apis():
-    os.chdir("doc/")
     for branch, version in deploy_defines.branch_version.items():
-        subprocess.run(["git", "checkout", version], check=True)
+        subprocess.run(["git", "checkout", branch], check=True)
         add_sub_repos.add_sub_repositories(branch)
+        os.chdir("doc/")
         subprocess.run(["doxygen", "Doxyfile"], check=True)
         api_output_dir = os.path.join(deploy_defines.base_dir, deploy_defines.build_dir, "html", branch, "doc", "api")
         os.makedirs(api_output_dir, exist_ok=True)

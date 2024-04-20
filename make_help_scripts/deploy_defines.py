@@ -17,7 +17,7 @@ import shutil
 
 # This file includes all the definitions used in the other scripts
 script_base_dir = os.path.dirname(os.path.abspath(__file__))
-# should by control.ros.org folder
+# should be control.ros.org folder
 base_dir = os.path.dirname(script_base_dir)
 # branch from which is started to checkout other branches
 if os.environ.get('BASE_BRANCH_PR') is not None:
