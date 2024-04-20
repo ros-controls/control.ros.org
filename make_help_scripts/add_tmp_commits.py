@@ -24,6 +24,7 @@ def check_repositories():
     # Check for uncommitted changes in control.ros.org repository
     if subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True).stdout.strip():
         print("control.ros.org repository has uncommitted changes, which will be deleted!")
+        subprocess.run(["git", "status", "--porcelain"])
         sys.exit(2)
     # Check if subrepos exist or are symlinks
     for repo_name in deploy_defines.repos.keys():
