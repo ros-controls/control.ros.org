@@ -38,6 +38,8 @@ html-all-subrepos: Makefile
 	./make_help_scripts/add_sub_repos.py
 	@echo Step 2: Building documentation
 	$(SPHINXBUILD) $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
+	@echo Step 3: Deleting subrepositories in doc/ folder
+	./make_help_scripts/delete_sub_repos.py
 
 html-all-subrepos-with-errors: Makefile
 	@echo Single html file without API
@@ -45,6 +47,8 @@ html-all-subrepos-with-errors: Makefile
 	./make_help_scripts/add_sub_repos.py
 	@echo Step 2: Building documentation
 	$(SPHINXBUILD) $(SPHINXOPTS) -W --keep-going $(SOURCEDIR) $(BUILDDIR)/html
+	@echo Step 3: Deleting subrepositories in doc/ folder
+	./make_help_scripts/delete_sub_repos.py
 
 html-all-subrepos-with-api: Makefile
 	@echo Single html file with API
@@ -54,6 +58,8 @@ html-all-subrepos-with-api: Makefile
 	$(SPHINXBUILD) $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
 	@echo Step 3: Building API
 	./make_help_scripts/create_api.py
+	@echo Step 4: Deleting subrepositories in doc/ folder
+	./make_help_scripts/delete_sub_repos.py
 
 linkcheck-all-subrepos-with-api: Makefile
 	@echo Single version html file with API and linkcheck
@@ -63,6 +69,8 @@ linkcheck-all-subrepos-with-api: Makefile
 	./make_help_scripts/create_api.py
 	@echo Step 3: Check links
 	./make_help_scripts/check_links.py $(BUILDDIR)/html
+	@echo Step 4: Deleting subrepositories in doc/ folder
+	./make_help_scripts/delete_sub_repos.py
 
 multiversion: Makefile
 	@echo Building multi version documentation without API
