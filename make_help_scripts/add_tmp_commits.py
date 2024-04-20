@@ -42,7 +42,8 @@ def add_sub_repositories_and_commit():
     subprocess.run(["git", "checkout", deploy_defines.base_branch], check=True)
     # For each branch from multi version, checkout branch, clone sub repositories with docs add as tmp commit and remove
     for branch, version in deploy_defines.branch_version.items():
-        print(f"Switch to branch: {branch}. - With version: {version}")
+        print("----------------------------------------------------")
+        print(f"Switch to branch: {branch} with version: {version}")
         subprocess.run(["git", "checkout", branch], check=True)
         # Modify .gitignore to include subrepositories
         subprocess.run(["sed", "-i", "s/doc\/ros2_control/\#doc\/ros2_control/g", ".gitignore"], check=True)
@@ -66,6 +67,7 @@ def add_sub_repositories_and_commit():
         # Remove leftover folders if existing
         for repo_name in deploy_defines.repos.keys():
             shutil.rmtree(f"doc/{repo_name}", ignore_errors=True)
+    print("---------- end add_sub_repositories_and_commit ----------------")
 
 if __name__ == "__main__":
     check_repositories()
