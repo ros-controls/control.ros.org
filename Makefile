@@ -62,7 +62,7 @@ linkcheck-all-subrepos-with-api: Makefile
 	@echo Step 2: Building API
 	./make_help_scripts/create_api.py
 	@echo Step 3: Check links
-	./make_help_scripts/check_links $(BUILDDIR).py
+	./make_help_scripts/check_links.py $(BUILDDIR)/html
 
 multiversion: Makefile
 	@echo Building multi version documentation without API
