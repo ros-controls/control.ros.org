@@ -74,6 +74,7 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store",
                     "doc/realtime_tools/doc/**.rst",
                     "doc/control_msgs/doc/**.rst",
                     "doc/control_toolbox/doc/**.rst",
+                    "doc/kinematics_interface/**.rst",
                     "doc/ros2_controllers/ros2_controllers/**.rst"]
 
 # The name of the Pygments (syntax highlighting) style to use.
