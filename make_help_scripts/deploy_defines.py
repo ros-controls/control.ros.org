@@ -60,13 +60,13 @@ api_branch = "master"
 
 # definitions for multiversion
 # branches on which the temporary commits are created
-# {"branch checked out for multiversion": "branch checked out for all subrepos"}
+# {"branch checked out for multiversion": "branch checked out for all subrepos with maps below"}
 branch_version = {
     "foxy": "foxy",
     "galactic": "galactic",
     "humble": "humble",
     "iron": "iron",
-    base_branch: "master"  # master is rolling
+    base_branch: "rolling"  # master is rolling, PRs are tested on rolling
 }
 
 # the subrepos which are cloned into the branches and, optionally, their corresponding PR for checkout
@@ -80,7 +80,7 @@ repos = {
             "galactic": "galactic",
             "humble": "humble",
             "iron": "iron",
-            base_branch: "master"  # master is rolling
+            "rolling": "master"  # master is rolling
         },
         "pr": os.environ.get('ROS2_CONTROL_PR')
     },
@@ -91,7 +91,7 @@ repos = {
             "galactic": "galactic",
             "humble": "humble",
             "iron": "iron",
-            base_branch: "master"  # master is rolling
+            "rolling": "master"  # master is rolling
         },
         "pr": os.environ.get('ROS2_CONTROLLERS_PR')
     },
@@ -102,7 +102,7 @@ repos = {
             "galactic": "galactic",
             "humble": "humble",
             "iron": "iron",
-            base_branch: "master"  # master is rolling
+            "rolling": "master"  # master is rolling
         },
         "pr": os.environ.get('ROS2_CONTROL_DEMOS_PR')
     },
@@ -113,7 +113,7 @@ repos = {
             "galactic": "galactic",
             "humble": "humble",
             "iron": "iron",
-            base_branch: "master"  # master is rolling
+            "rolling": "master"  # master is rolling
         },
         "pr": os.environ.get('GAZEBO_ROS2_CONTROL_PR')
     },
@@ -124,7 +124,7 @@ repos = {
             "galactic": "galactic",
             "humble": "humble",
             "iron": "iron",
-            base_branch: "master"  # master is rolling
+            "rolling": "master"  # master is rolling
         },
         "pr": os.environ.get('GZ_ROS2_CONTROL_PR')
     },
@@ -135,7 +135,7 @@ repos = {
             "galactic": "ros2-master",
             "humble": "ros2-master",
             "iron": "ros2-master",
-            base_branch: "ros2-master"  # master is rolling
+            "rolling": "ros2-master"  # master is rolling
         },
         "pr": None
     },
@@ -146,7 +146,7 @@ repos = {
             "galactic": "galactic-devel",
             "humble": "humble",
             "iron": "master",
-            base_branch: "master"  # master is rolling
+            "rolling": "master"  # master is rolling
         },
         "pr": None
     },
@@ -157,7 +157,7 @@ repos = {
             "galactic": "master",
             "humble": "master",
             "iron": "master",
-            base_branch: "master"  # master is rolling
+            "rolling": "master"  # master is rolling
         },
         "pr": None
     },
@@ -168,7 +168,7 @@ repos = {
             "galactic": "humble",
             "humble": "humble",
             "iron": "master",
-            base_branch: "master"  # master is rolling
+            "rolling": "master"  # master is rolling
         },
         "pr": None
     }
