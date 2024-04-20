@@ -38,8 +38,6 @@ html-all-subrepos: Makefile
 	./make_help_scripts/add_sub_repos
 	@echo Step 2: Building documentation
 	$(SPHINXBUILD) $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
-	@echo Step 3: Deleting subrepositories in doc/ folder
-	./make_help_scripts/delete_sub_repos
 
 html-all-subrepos-with-errors: Makefile
 	@echo Single html file without API
@@ -47,8 +45,6 @@ html-all-subrepos-with-errors: Makefile
 	./make_help_scripts/add_sub_repos
 	@echo Step 2: Building documentation
 	$(SPHINXBUILD) $(SPHINXOPTS) -W --keep-going $(SOURCEDIR) $(BUILDDIR)/html
-	@echo Step 3: Deleting subrepositories in doc/ folder
-	./make_help_scripts/delete_sub_repos
 
 html-all-subrepos-with-api: Makefile
 	@echo Single html file with API
@@ -56,9 +52,7 @@ html-all-subrepos-with-api: Makefile
 	./make_help_scripts/add_sub_repos
 	@echo Step 2: Building documentation
 	$(SPHINXBUILD) $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
-	@echo Step 3: Deleting subrepositories in doc/ folder
-	./make_help_scripts/delete_sub_repos
-	@echo Step 4: Building API
+	@echo Step 3: Building API
 	./make_help_scripts/create_api
 
 linkcheck-all-subrepos-with-api: Makefile
@@ -67,9 +61,7 @@ linkcheck-all-subrepos-with-api: Makefile
 	./make_help_scripts/add_sub_repos
 	@echo Step 2: Building API
 	./make_help_scripts/create_api
-	@echo Step 3: Cloning all subrepositories again
-	./make_help_scripts/add_sub_repos
-	@echo Step 4: Check links
+	@echo Step 3: Check links
 	./make_help_scripts/check_links $(BUILDDIR)
 
 multiversion: Makefile
