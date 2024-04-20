@@ -53,7 +53,7 @@ def add_pr_stats_file():
 api_branch = "master"
 
 # definitions for multiversion
-# branches on which the temporary commits are created and which branch should be checked out in the subrepositories
+# branches on which the temporary commits are created
 # {"branch checked out for multiversion": "branch checked out for all subrepos"}
 branch_version = {
     "foxy": "foxy",
@@ -64,21 +64,106 @@ branch_version = {
 }
 
 # the subrepos which are cloned into the branches and, optionally, their corresponding PR for checkout
-subrepo_url = {
-    "ros2_control": "https://github.com/ros-controls/ros2_control",
-    "ros2_controllers": "https://github.com/ros-controls/ros2_controllers",
-    "ros2_control_demos": "https://github.com/ros-controls/ros2_control_demos",
-    "gazebo_ros2_control": "https://github.com/ros-controls/gazebo_ros2_control",
-    "gz_ros2_control": "https://github.com/ros-controls/gz_ros2_control",
-    "control_toolbox": "https://github.com/ros-controls/control_toolbox",
-    "control_msgs": "https://github.com/ros-controls/control_msgs",
-    "realtime_tools": "https://github.com/ros-controls/realtime_tools",
-    "kinematics_interface": "https://github.com/ros-controls/kinematics_interface"
-}
-subrepo_pr = {
-    "ros2_control": os.environ.get('ROS2_CONTROL_PR'),
-    "ros2_controllers": os.environ.get('ROS2_CONTROLLERS_PR'),
-    "ros2_control_demos": os.environ.get('ROS2_CONTROL_DEMOS_PR'),
-    "gazebo_ros2_control": os.environ.get('GAZEBO_ROS2_CONTROL_PR'),
-    "gz_ros2_control": os.environ.get('GZ_ROS2_CONTROL_PR')
+# and a dict, which branch should be checked out in the subrepositories
+
+repos = {
+    "ros2_control": {
+        "url": "https://github.com/ros-controls/ros2_control",
+        "branch_version": {
+            "foxy": "foxy",
+            "galactic": "galactic",
+            "humble": "humble",
+            "iron": "iron",
+            "master": "master"  # master is rolling
+        },
+        "pr": os.environ.get('ROS2_CONTROL_PR')
+    },
+    "ros2_controllers": {
+        "url": "https://github.com/ros-controls/ros2_controllers",
+        "branch_version": {
+            "foxy": "foxy",
+            "galactic": "galactic",
+            "humble": "humble",
+            "iron": "iron",
+            "master": "master"  # master is rolling
+        },
+        "pr": os.environ.get('ROS2_CONTROLLERS_PR')
+    },
+    "ros2_control_demos": {
+        "url": "https://github.com/ros-controls/ros2_control_demos",
+        "branch_version": {
+            "foxy": "foxy",
+            "galactic": "galactic",
+            "humble": "humble",
+            "iron": "iron",
+            "master": "master"  # master is rolling
+        },
+        "pr": os.environ.get('ROS2_CONTROL_DEMOS_PR')
+    },
+    "gazebo_ros2_control": {
+        "url": "https://github.com/ros-controls/gazebo_ros2_control",
+        "branch_version": {
+            "foxy": "foxy",
+            "galactic": "galactic",
+            "humble": "humble",
+            "iron": "iron",
+            "master": "master"  # master is rolling
+        },
+        "pr": os.environ.get('GAZEBO_ROS2_CONTROL_PR')
+    },
+    "gz_ros2_control": {
+        "url": "https://github.com/ros-controls/gz_ros2_control",
+        "branch_version": {
+            "foxy": "foxy",
+            "galactic": "galactic",
+            "humble": "humble",
+            "iron": "iron",
+            "master": "master"  # master is rolling
+        },
+        "pr": os.environ.get('GZ_ROS2_CONTROL_PR')
+    },
+    "control_toolbox": {
+        "url": "https://github.com/ros-controls/control_toolbox",
+        "branch_version": {
+            "foxy": "foxy",
+            "galactic": "ros2-master",
+            "humble": "ros2-master",
+            "iron": "ros2-master",
+            "master": "ros2-master"  # master is rolling
+        },
+        "pr": None
+    },
+    "control_msgs": {
+        "url": "https://github.com/ros-controls/control_msgs",
+        "branch_version": {
+            "foxy": "foxy-devel",
+            "galactic": "galactic-devel",
+            "humble": "humble",
+            "iron": "master",
+            "master": "master"  # master is rolling
+        },
+        "pr": None
+    },
+    "realtime_tools": {
+        "url": "https://github.com/ros-controls/realtime_tools",
+        "branch_version": {
+            "foxy": "foxy-devel",
+            "galactic": "master",
+            "humble": "master",
+            "iron": "master",
+            "master": "master"  # master is rolling
+        },
+        "pr": None
+    },
+    "kinematics_interface": {
+        "url": "https://github.com/ros-controls/kinematics_interface",
+        "branch_version": {
+            "foxy": "humble",
+            "galactic": "humble",
+            "humble": "humble",
+            "iron": "master",
+            "master": "master"  # master is rolling
+        },
+        "pr": None
+    }
 }

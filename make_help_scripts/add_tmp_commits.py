@@ -26,7 +26,7 @@ def check_repositories():
         print("control.ros.org repository has uncommitted changes, which will be deleted!")
         sys.exit(2)
     # Check if subrepos exist or are symlinks
-    for repo_name in deploy_defines.subrepo_url.keys():
+    for repo_name in deploy_defines.repos.keys():
         repo_path = os.path.join("doc", repo_name)
         if os.path.islink(repo_path):
             print(f"{repo_name} is a symlink, delete link or repository will be broken!")
@@ -48,10 +48,11 @@ def add_sub_repositories_and_commit():
         subprocess.run(["sed", "-i", "s/doc\/gz_ros2_control/\#doc\/gz_ros2_control/g", ".gitignore"], check=True)
         subprocess.run(["sed", "-i", "s/doc\/gazebo_ros2_control/\#doc\/gazebo_ros2_control/g", ".gitignore"], check=True)
         # Clone all subrepositories and add as tmp commit to branch of multi version
-        print(f"Clone repositories for {branch} and checkout {version}")
-        for repo_name, repo_url in deploy_defines.subrepo_url.items():
+        print(f"Clone repositories for {branch} and checkout branches for {version}")
+        for repo_name, repo_details in deploy_defines.repos.items():
+            branch = repo_details["branch_version"][version]
             print(f"Create doc/{repo_name}")
-            subprocess.run(["git", "clone", "-b", version, repo_url, f"doc/{repo_name}"], check=True, stdout=subprocess.DEVNULL)
+            subprocess.run(["git", "clone", "-b", branch, repo_details["url"], f"doc/{repo_name}"], check=True, stdout=subprocess.DEVNULL)
             os.chdir(f"doc/{repo_name}")
             # Remove git repo so that doc files of subrepo can be added to tmp commit
             shutil.rmtree(".git")
@@ -62,7 +63,7 @@ def add_sub_repositories_and_commit():
         subprocess.run(["git", "commit", "-m", "Add temporary changes for multi version", "--no-verify"], check=True, stdout=subprocess.DEVNULL)
         subprocess.run(["git", "checkout", deploy_defines.base_branch], check=True)
         # Remove leftover folders if existing
-        for repo_name in deploy_defines.subrepo_url.keys():
+        for repo_name in deploy_defines.repos.keys():
             shutil.rmtree(f"doc/{repo_name}", ignore_errors=True)
 
 if __name__ == "__main__":

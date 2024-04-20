@@ -20,22 +20,24 @@ import deploy_defines
 def add_sub_repositories():
     # checkout a base for defined starting point
     os.chdir(deploy_defines.base_dir)
-    for repo_name, repo_url in deploy_defines.subrepo_url.items():
+    for repo_name, repo_details in deploy_defines.repos.items():
         repo_path = os.path.join("doc", repo_name)
+        branch = repo_details["branch_version"][deploy_defines.base_branch]
         if not os.path.isdir(repo_path):
-            print(f"Create {repo_path} and checkout {deploy_defines.base_branch} branch")
-            subprocess.run(["git", "clone", "-b", deploy_defines.base_branch, repo_url, repo_path], check=True)
+            print(f"Create {repo_path} and checkout {branch} branch")
+            subprocess.run(["git", "clone", "-b", branch, repo_details["url"], repo_path], check=True)
         else:
-            print(f"Update {repo_path} and checkout {deploy_defines.base_branch} branch")
+            print(f"Update {repo_path} and checkout {branch} branch")
             os.chdir(repo_path)
             subprocess.run(["git", "fetch", "origin"], check=True)
-            subprocess.run(["git", "checkout", deploy_defines.base_branch], check=True)
+            subprocess.run(["git", "checkout", branch], check=True)
             subprocess.run(["git", "pull"], check=True)
             os.chdir(deploy_defines.base_dir)
-        if deploy_defines.subrepo_pr.get(repo_name):
-            print(f"checkout PR: {deploy_defines.subrepo_pr[repo_name]}")
+        if repo_details["pr"]:
+            PR = repo_details["pr"]
+            print(f"checkout PR: {PR}")
             os.chdir(repo_path)
-            subprocess.run(["git", "fetch", "origin", f"{deploy_defines.subrepo_pr[repo_name]}:PR"], check=True)
+            subprocess.run(["git", "fetch", "origin", f"{PR}:PR"], check=True)
             subprocess.run(["git", "checkout", "PR"], check=True)
             os.chdir(deploy_defines.base_dir)
 
