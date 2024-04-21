@@ -55,10 +55,6 @@ def add_pr_stats_file():
             with open(os.path.join(pr_stats_target_folder, pr_stats_filename), 'w') as f:
                 f.write("<i>No pr statistics available yet.</i>")
 
-# definition single html
-# the branch from which the api is checked out and built
-api_branch = "master"
-
 # definitions for multiversion
 # branches on which the temporary commits are created
 # {"branch checked out for multiversion": "branch checked out for all subrepos with maps below"}
