@@ -102,9 +102,11 @@ multiversion-with-api: Makefile
 	sphinx-multiversion $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
 	@echo Step 3: Deleting temporary commits
 	./make_help_scripts/delete_tmp_commits.py
-	@echo Step 4: Building multiverison API
+	@echo Step 4: Cleanup subrepos, just to be sure
+	./make_help_scripts/delete_sub_repos.py
+	@echo Step 5: Building multiversion API
 	./make_help_scripts/create_api_multi_version.py
-	@echo Step 5: Create correct index
+	@echo Step 6: Create correct index
 	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=master/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
 
 .PHONY: help Makefile html-with-errors html-with-api multiversion multiversion-with-api multiversion-with-errors html-all-subrepos html-all-subrepos-with-api html-all-subrepos-with-errors linkcheck-all-subrepos-with-api
