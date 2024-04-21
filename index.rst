@@ -35,13 +35,13 @@ The ros2_control framework consists of the following Github repositories:
 * `ros2_controllers`_ - widely used controllers, such as forward command controller, joint trajectory controller, differential drive controller;
 * `control_toolbox`_ - some widely-used control theory implementations (e.g. PID) used by controllers;
 * `realtime_tools`_ - general toolkit for realtime support, e.g., realtime buffers and publishers;
-* `control_msgs`_ - common messages.
-* `kinematics_interface`_ - for using C++ kinematics frameworks.
+* `control_msgs`_ - common messages;
+* `kinematics_interface`_ - for using C++ kinematics frameworks;
 
 
 Additionally, there are following (unreleased) packages are relevant for getting-started and project management:
 
-* `ros2_control_demos`_ - examples implementations of common use-cases for a smooth start;
+* `ros2_control_demos`_ - example implementations of common use-cases for a smooth start;
 * `roadmap`_ - planning and design docs for the project.
 
 Development Organisation and Communication
