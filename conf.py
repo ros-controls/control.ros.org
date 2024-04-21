@@ -71,6 +71,7 @@ language = "en"
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store",
                     "**/CHANGELOG.rst", "**/README.rst",
                     "doc/ros2_control/ros2_control/**.rst",
+                    "doc/ros2_control/transmission_interface/**.rst",
                     "doc/realtime_tools/doc/**.rst",
                     "doc/control_msgs/doc/**.rst",
                     "doc/control_toolbox/doc/**.rst",
