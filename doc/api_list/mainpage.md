@@ -2,7 +2,7 @@ This is the API documentation of the ros2_control framework including the follow
 
 * [ros2_control][ros2_control] - the main interfaces and components of the framework;
 * [ros2_controllers][ros2_controllers] - widely used controllers, such as forward command controller, joint trajectory controller, differential drive controller;
-* [ros2_control_demos][ros2_control_demos] - examples implementations of common use-cases for a smooth start;
+* [ros2_control_demos][ros2_control_demos] - example implementations of common use-cases for a smooth start;
 * [control_toolbox][control_toolbox] - some widely-used control theory implementations (e.g. PID) used by controllers;
 * [realtime_tools][realtime_tools] - general toolkit for realtime support, e.g., realtime buffers and publishers;
 * [control_msgs][control_msgs] - common messages.

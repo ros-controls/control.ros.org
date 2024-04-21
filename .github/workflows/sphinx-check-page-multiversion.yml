@@ -1,7 +1,22 @@
-name: "Build Multiversion Page (PR)"
+name: "Build Multiversion Page"
 on:
   workflow_dispatch:
+    inputs:
+      BASE_BRANCH:
+        description: 'Chose branch to run on'
+        required: true
+        default: 'master'
+        type: choice
+        options:
+        - humble
+        - iron
+        - master
   pull_request:
+    branches:
+      - master
+    paths:
+    - 'make_help_scripts/**'
+    - 'conf.py'
 
 jobs:
   build-multiversion:
@@ -29,6 +44,9 @@ jobs:
     - name: Install doxygen and graphviz
       run: sudo apt-get install -y doxygen graphviz
     - name: Build multiversion with API
+      env:
+        BASE_BRANCH: ${{ github.event.inputs.BASE_BRANCH }}
+        BASE_BRANCH_PR: ${{ github.event.pull_request.head.ref }}
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"

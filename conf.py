@@ -67,10 +67,14 @@ language = "en"
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-# exclude index.rst files for metapackages for rosdoc2
+# exclude index.rst files from packages/metapackages for rosdoc2
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store",
                     "**/CHANGELOG.rst", "**/README.rst",
                     "doc/ros2_control/ros2_control/**.rst",
+                    "doc/realtime_tools/doc/**.rst",
+                    "doc/control_msgs/doc/**.rst",
+                    "doc/control_toolbox/doc/**.rst",
+                    "doc/kinematics_interface/**.rst",
                     "doc/ros2_controllers/ros2_controllers/**.rst"]
 
 # The name of the Pygments (syntax highlighting) style to use.
@@ -187,9 +191,17 @@ htmlhelp_basename = "ros2ControlDocumentation"
 # Drop any source link suffix
 html_sourcelink_suffix = ""
 
+# branch from which is started to checkout other branches
+# TODO(anyone) use make_help_scripts/deploy_defines.py to set this variable
+if os.environ.get('BASE_BRANCH_PR') is not None:
+  base_branch = os.environ.get('BASE_BRANCH_PR')
+elif os.environ.get('BASE_BRANCH') is not None:
+  base_branch = os.environ.get('BASE_BRANCH')
+else:
+  base_branch = "master"
 
 # Add branches you want to whitelist here.
-smv_branch_whitelist = r"^(foxy|galactic|humble|iron|master)$"
+smv_branch_whitelist = r"^(foxy|galactic|humble|iron|"+ base_branch + r")$"
 smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy|galactic|humble|iron).*$"
 smv_remote_whitelist = r"^(origin)$"
 smv_latest_version = "iron"
@@ -317,7 +329,7 @@ def smv_rewrite_configs(app, config):
     if app.config.smv_current_version != "":
         # this map is used to match branches of control.ros.org to ROS distros, e.g., DISTRO macro
         branch_distro = {
-            "master": "rolling",
+            base_branch: "rolling",
             "iron": "iron",
             "humble": "humble",
             "foxy": "foxy",
@@ -325,7 +337,7 @@ def smv_rewrite_configs(app, config):
         }
         # this map is used to match branches of control.ros.org to REPOS_FILE_BRANCH macro
         subrepo_branch = {
-            "master": "master",
+            base_branch: "master",
             "iron": "iron",
             "humble": "humble",
             "foxy": "foxy",
