@@ -12,6 +12,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -94,13 +101,13 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Generates a sine sweep for frequency analysis of a joint. </p>
-<p>This class basically calculates the output for a sine sweep. Where the signal is a sine wave, whose frequency is exponentially increased from <img class="formulaInl" alt="$\omega_1$" src="form_17.png"/> to <img class="formulaInl" alt="$\omega_2$" src="form_18.png"/> over <img class="formulaInl" alt="$T$" src="form_19.png"/> seconds.<br  />
+<p>This class basically calculates the output for a sine sweep. Where the signal is a sine wave, whose frequency is exponentially increased from \(\omega_1\) to \(\omega_2\) over \(T\) seconds.<br  />
 </p>
-<p><img class="formulaInl" alt="$s(n) = A \sin [ K(e^{\delta t/L} - 1) ]$" src="form_20.png"/> <br  />
+<p>\(s(n) = A \sin [ K(e^{\delta t/L} - 1) ]\) <br  />
 </p>
 <p>where:<br  />
- <img class="formulaInl" alt="$K = \frac{\omega_1T}{\ln \frac{\omega_2}{\omega_1} }$" src="form_21.png"/><br  />
- <img class="formulaInl" alt="$L = \frac{T}{\ln \frac{\omega_2}{\omega_1} }$" src="form_22.png"/>.<br  />
+ \(K = \frac{\omega_1T}{\ln \frac{\omega_2}{\omega_1} }\)<br  />
+ \(L = \frac{T}{\ln \frac{\omega_2}{\omega_1} }\).<br  />
  </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a6c5e5561f9d12ddba66de436ddb0aa51"></a>
@@ -144,10 +151,10 @@ Public Member Functions</h2></td></tr>
 <p>Initializes everything and calculates the constants for the sweep. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">start_freq</td><td>Start frequency of the sweep, <img class="formulaInl" alt="$\omega_1$" src="form_17.png"/> . </td></tr>
-    <tr><td class="paramname">end_freq</td><td>End frequency of the sweep, <img class="formulaInl" alt="$\omega_2$" src="form_18.png"/>. </td></tr>
-    <tr><td class="paramname">duration</td><td>The duration of the sweep, <img class="formulaInl" alt="$T$" src="form_19.png"/>. </td></tr>
-    <tr><td class="paramname">amplitude</td><td>The amplitude of the sweep, <img class="formulaInl" alt="$A$" src="form_23.png"/>. </td></tr>
+    <tr><td class="paramname">start_freq</td><td>Start frequency of the sweep, \(\omega_1\) . </td></tr>
+    <tr><td class="paramname">end_freq</td><td>End frequency of the sweep, \(\omega_2\). </td></tr>
+    <tr><td class="paramname">duration</td><td>The duration of the sweep, \(T\). </td></tr>
+    <tr><td class="paramname">amplitude</td><td>The amplitude of the sweep, \(A\). </td></tr>
   </table>
   </dd>
 </dl>

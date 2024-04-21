@@ -12,6 +12,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -163,33 +170,33 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>jnt_offset_</b></td
 <th></th><th><center>Effort</center></th><th><center>Velocity</center></th><th><center>Position</center> </th></tr>
 <tr>
 <td><b> Actuator to joint </b>  </td><td><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ \tau_j = n \tau_a \]" src="form_46.png"/>
+\[ \tau_j = n \tau_a \]
 </p>
   </td><td><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ \dot{x}_j = \dot{x}_a / n \]" src="form_47.png"/>
+\[ \dot{x}_j = \dot{x}_a / n \]
 </p>
   </td><td><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ x_j = x_a / n + x_{off} \]" src="form_48.png"/>
+\[ x_j = x_a / n + x_{off} \]
 </p>
    </td></tr>
 <tr>
 <td><b> Joint to actuator </b>  </td><td><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ \tau_a = \tau_j / n\]" src="form_49.png"/>
+\[ \tau_a = \tau_j / n\]
 </p>
   </td><td><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ \dot{x}_a = n \dot{x}_j \]" src="form_50.png"/>
+\[ \dot{x}_a = n \dot{x}_j \]
 </p>
   </td><td><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ x_a = n (x_j - x_{off}) \]" src="form_51.png"/>
+\[ x_a = n (x_j - x_{off}) \]
 </p>
  </td></tr>
 </table>
 </center><p>where:</p><ul>
-<li><img class="formulaInl" alt="$ x $" src="form_32.png"/>, <img class="formulaInl" alt="$ \dot{x} $" src="form_33.png"/> and <img class="formulaInl" alt="$ \tau $" src="form_34.png"/> are position, velocity and effort variables, respectively.</li>
-<li>Subindices <img class="formulaInl" alt="$ _a $" src="form_35.png"/> and <img class="formulaInl" alt="$ _j $" src="form_36.png"/> are used to represent actuator-space and joint-space variables, respectively.</li>
-<li><img class="formulaInl" alt="$ x_{off}$" src="form_37.png"/> represents the offset between motor and joint zeros, expressed in joint position coordinates.</li>
-<li><img class="formulaInl" alt="$ n $" src="form_38.png"/> is the transmission ratio, and can be computed as the ratio between the output and input pulley radii for the timing belt; or the ratio between output and input teeth for the gear system. The transmission ratio can take any real value <em>except</em> zero. In particular:<ul>
-<li>If its absolute value is greater than one, it's a velocity reducer / effort amplifier, while if its absolute value lies in <img class="formulaInl" alt="$ (0, 1) $" src="form_39.png"/> it's a velocity amplifier / effort reducer.</li>
+<li>\( x \), \( \dot{x} \) and \( \tau \) are position, velocity and effort variables, respectively.</li>
+<li>Subindices \( _a \) and \( _j \) are used to represent actuator-space and joint-space variables, respectively.</li>
+<li>\( x_{off}\) represents the offset between motor and joint zeros, expressed in joint position coordinates.</li>
+<li>\( n \) is the transmission ratio, and can be computed as the ratio between the output and input pulley radii for the timing belt; or the ratio between output and input teeth for the gear system. The transmission ratio can take any real value <em>except</em> zero. In particular:<ul>
+<li>If its absolute value is greater than one, it's a velocity reducer / effort amplifier, while if its absolute value lies in \( (0, 1) \) it's a velocity amplifier / effort reducer.</li>
 <li>Negative values represent a direction flip, ie. actuator and joint move in opposite directions. For example, in timing belts actuator and joint move in the same direction, while in single-stage gear systems actuator and joint move in opposite directions. </li>
 </ul>
 </li>

@@ -12,6 +12,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -129,33 +136,33 @@ class control_filters::LowPassFilter&lt; T &gt;</h3>
 <p>A Low-pass filter class. </p>
 <p>This class implements a low-pass filter for various data types based on an Infinite Impulse Response Filter. For vector elements, the filtering is applied separately on each element of the vector.</p>
 <p>In particular, this class implements a simplified version of an IIR filter equation :</p>
-<p><img class="formulaInl" alt="$y(n) = b x(n-1) + a y(n-1)$" src="form_0.png"/></p>
+<p>\(y(n) = b x(n-1) + a y(n-1)\)</p>
 <p>where: <br  />
  </p><ul type="none">
 <li>
-<img class="formulaInl" alt="$ x(n)$" src="form_1.png"/> is the input signal </li>
+\( x(n)\) is the input signal </li>
 <li>
-<img class="formulaInl" alt="$ y(n)$" src="form_2.png"/> is the output signal (filtered) </li>
+\( y(n)\) is the output signal (filtered) </li>
 <li>
-<img class="formulaInl" alt="$ b $" src="form_3.png"/> is the feedforward filter coefficient </li>
+\( b \) is the feedforward filter coefficient </li>
 <li>
-<img class="formulaInl" alt="$ a $" src="form_4.png"/> is the feedback filter coefficient </li>
+\( a \) is the feedback filter coefficient </li>
 </ul>
 <p>and the Low-Pass coefficient equation: <br  />
  </p><ul type="none">
 <li>
-<img class="formulaInl" alt="$ a = e^{\frac{-1}{sf} \frac{2\pi df}{10^{\frac{di}{-10}}}} $" src="form_5.png"/> </li>
+\( a = e^{\frac{-1}{sf} \frac{2\pi df}{10^{\frac{di}{-10}}}} \) </li>
 <li>
-<img class="formulaInl" alt="$ b = 1 - a $" src="form_6.png"/> </li>
+\( b = 1 - a \) </li>
 </ul>
 <p>where: <br  />
  </p><ul type="none">
 <li>
-<img class="formulaInl" alt="$ sf $" src="form_7.png"/> is the sampling frequency </li>
+\( sf \) is the sampling frequency </li>
 <li>
-<img class="formulaInl" alt="$ df $" src="form_8.png"/> is the damping frequency </li>
+\( df \) is the damping frequency </li>
 <li>
-<img class="formulaInl" alt="$ di $" src="form_9.png"/> is the damping intensity (amplitude) </li>
+\( di \) is the damping intensity (amplitude) </li>
 </ul>
 <h1><a class="anchor" id="Usage"></a>
 Usage</h1>

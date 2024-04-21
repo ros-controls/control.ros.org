@@ -12,6 +12,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -178,29 +185,29 @@ Protected Attributes</h2></td></tr>
 <div class="textblock"><p>A basic pid class. </p>
 <p>This class implements a generic structure that can be used to create a wide range of pid controllers. It can function independently or be subclassed to provide more specific controls based on a particular control loop.</p>
 <p>In particular, this class implements the standard pid equation:</p>
-<p><img class="formulaInl" alt="$command = p_{term} + i_{term} + d_{term} $" src="form_10.png"/></p>
+<p>\(command = p_{term} + i_{term} + d_{term} \)</p>
 <p>where: <br  />
  </p><ul type="none">
 <li>
-<img class="formulaInl" alt="$ p_{term} = p_{gain} * p_{error} $" src="form_11.png"/> </li>
+\( p_{term} = p_{gain} * p_{error} \) </li>
 <li>
-<img class="formulaInl" alt="$ i_{term} = i_{term} + \int{i_{gain} * p_{error} * dt} $" src="form_12.png"/> </li>
+\( i_{term} = i_{term} + \int{i_{gain} * p_{error} * dt} \) </li>
 <li>
-<img class="formulaInl" alt="$ d_{term} = d_{gain} * d_{error} $" src="form_13.png"/> </li>
+\( d_{term} = d_{gain} * d_{error} \) </li>
 <li>
-<img class="formulaInl" alt="$ d_{error} = (p_{error} - p_{error last}) / dt $" src="form_14.png"/> </li>
+\( d_{error} = (p_{error} - p_{error last}) / dt \) </li>
 </ul>
 <p>given:<br  />
  </p><ul type="none">
 <li>
-<img class="formulaInl" alt="$ p_{error} = p_{desired} - p_{state} $" src="form_15.png"/>. </li>
+\( p_{error} = p_{desired} - p_{state} \). </li>
 </ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">p</td><td>Proportional gain</td></tr>
     <tr><td class="paramname">d</td><td>Derivative gain</td></tr>
     <tr><td class="paramname">i</td><td>Integral gain</td></tr>
-    <tr><td class="paramname">i_clamp</td><td>Min/max bounds for the integral windup, the clamp is applied to the <img class="formulaInl" alt="$i_{term}$" src="form_16.png"/></td></tr>
+    <tr><td class="paramname">i_clamp</td><td>Min/max bounds for the integral windup, the clamp is applied to the \(i_{term}\)</td></tr>
   </table>
   </dd>
 </dl>
