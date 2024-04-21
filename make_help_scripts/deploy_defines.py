@@ -66,8 +66,8 @@ branch_version = {
     "foxy": "foxy",
     "galactic": "galactic",
     "humble": "humble",
-    "iron": "iron",
-    base_branch: "rolling"  # master is rolling, PRs are tested on rolling
+    base_branch: "iron",
+    "master": "rolling"  # master is rolling, PRs are tested on rolling
 }
 
 # the subrepos which are cloned into the branches and, optionally, their corresponding PR for checkout
