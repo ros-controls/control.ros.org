@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ROS2 Control: transmission_interface::FourBarLinkageTransmission Class Reference</title>
+<title>ros2_control - foxy: transmission_interface::FourBarLinkageTransmission Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,8 +20,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo_ros-controls_small.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">ROS2 Control
+   <div id="projectname">ros2_control - foxy
    </div>
   </td>
  </tr>
@@ -167,33 +168,33 @@ std::vector&lt; <a class="el" href="classtransmission__interface_1_1ActuatorHand
 <th></th><th><center>Effort</center></th><th><center>Velocity</center></th><th><center>Position</center> </th></tr>
 <tr>
 <td><b> Actuator to joint </b>  </td><td><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} \tau_{j_1} &amp; = &amp; n_{j_1} n_{a_1} \tau_{a_1} \\ \tau_{j_2} &amp; = &amp; n_{j_2} (n_{a_2} \tau_{a_2} - n_{j_1} n_{a_1} \tau_{a_1}) \end{eqnarray*}" src="form_14.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} \tau_{j_1} &amp; = &amp; n_{j_1} n_{a_1} \tau_{a_1} \\ \tau_{j_2} &amp; = &amp; n_{j_2} (n_{a_2} \tau_{a_2} - n_{j_1} n_{a_1} \tau_{a_1}) \end{eqnarray*}" src="form_30.png"/>
 </p>
   </td><td><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} \dot{x}_{j_1} &amp; = &amp; \frac{ \dot{x}_{a_1} }{ n_{j_1} n_{a_1} } \\ \dot{x}_{j_2} &amp; = &amp; \frac{ \dot{x}_{a_2} / n_{a_2} - \dot{x}_{a_1} / (n_{j_1} n_{a_1}) }{ n_{j_2} } \end{eqnarray*}" src="form_15.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} \dot{x}_{j_1} &amp; = &amp; \frac{ \dot{x}_{a_1} }{ n_{j_1} n_{a_1} } \\ \dot{x}_{j_2} &amp; = &amp; \frac{ \dot{x}_{a_2} / n_{a_2} - \dot{x}_{a_1} / (n_{j_1} n_{a_1}) }{ n_{j_2} } \end{eqnarray*}" src="form_31.png"/>
 </p>
   </td><td><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} x_{j_1} &amp; = &amp; \frac{ x_{a_1} }{ n_{j_1} n_{a_1} } + x_{off_1} \\ x_{j_2} &amp; = &amp; \frac{ x_{a_2} / n_{a_2} - x_{a_1} / (n_{j_1} n_{a_1}) }{ n_{j_2} } + x_{off_2} \end{eqnarray*}" src="form_16.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} x_{j_1} &amp; = &amp; \frac{ x_{a_1} }{ n_{j_1} n_{a_1} } + x_{off_1} \\ x_{j_2} &amp; = &amp; \frac{ x_{a_2} / n_{a_2} - x_{a_1} / (n_{j_1} n_{a_1}) }{ n_{j_2} } + x_{off_2} \end{eqnarray*}" src="form_32.png"/>
 </p>
    </td></tr>
 <tr>
 <td><b> Joint to actuator </b>  </td><td><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} \tau_{a_1} &amp; = &amp; \tau_{j_1} / (n_{j_1} n_{a_1}) \\ \tau_{a_2} &amp; = &amp; \frac{ \tau_{j_1} + \tau_{j_2} / n_{j_2} }{ n_{a_2} } \end{eqnarray*}" src="form_17.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} \tau_{a_1} &amp; = &amp; \tau_{j_1} / (n_{j_1} n_{a_1}) \\ \tau_{a_2} &amp; = &amp; \frac{ \tau_{j_1} + \tau_{j_2} / n_{j_2} }{ n_{a_2} } \end{eqnarray*}" src="form_33.png"/>
 </p>
   </td><td><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} \dot{x}_{a_1} &amp; = &amp; n_{j_1} n_{a_1} \dot{x}_{j_1} \\ \dot{x}_{a_2} &amp; = &amp; n_{a_2} (\dot{x}_{j_1} + n_{j_2} \dot{x}_{j_2}) \end{eqnarray*}" src="form_18.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} \dot{x}_{a_1} &amp; = &amp; n_{j_1} n_{a_1} \dot{x}_{j_1} \\ \dot{x}_{a_2} &amp; = &amp; n_{a_2} (\dot{x}_{j_1} + n_{j_2} \dot{x}_{j_2}) \end{eqnarray*}" src="form_34.png"/>
 </p>
   </td><td><p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} x_{a_1} &amp; = &amp; n_{j_1} n_{a_1} (x_{j_1} - x_{off_1}) \\ x_{a_2} &amp; = &amp; n_{a_2} \left[(x_{j_1} - x_{off_1}) + n_{j_2} (x_{j_2} - x_{off_2})\right] \end{eqnarray*}" src="form_19.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} x_{a_1} &amp; = &amp; n_{j_1} n_{a_1} (x_{j_1} - x_{off_1}) \\ x_{a_2} &amp; = &amp; n_{a_2} \left[(x_{j_1} - x_{off_1}) + n_{j_2} (x_{j_2} - x_{off_2})\right] \end{eqnarray*}" src="form_35.png"/>
 </p>
  </td></tr>
 </table>
 </center><p>where:</p><ul>
-<li><img class="formulaInl" alt="$ x $" src="form_6.png"/>, <img class="formulaInl" alt="$ \dot{x} $" src="form_7.png"/> and <img class="formulaInl" alt="$ \tau $" src="form_8.png"/> are position, velocity and effort variables, respectively.</li>
-<li>Subindices <img class="formulaInl" alt="$ _a $" src="form_9.png"/> and <img class="formulaInl" alt="$ _j $" src="form_10.png"/> are used to represent actuator-space and joint-space variables, respectively.</li>
-<li><img class="formulaInl" alt="$ x_{off}$" src="form_11.png"/> represents the offset between motor and joint zeros, expressed in joint position coordinates. (cf. <a class="el" href="classtransmission__interface_1_1SimpleTransmission.html" title="Implementation of a simple reducer transmission.">SimpleTransmission</a> class documentation for a more detailed description of this variable).</li>
-<li><img class="formulaInl" alt="$ n $" src="form_12.png"/> represents a transmission ratio (reducers/amplifiers are depicted as timing belts in the figure). <a class="el" href="classA.html">A</a> transmission ratio can take any real value <em>except</em> zero. In particular:<ul>
-<li>If its absolute value is greater than one, it's a velocity reducer / effort amplifier, while if its absolute value lies in <img class="formulaInl" alt="$ (0, 1) $" src="form_13.png"/> it's a velocity amplifier / effort reducer.</li>
+<li><img class="formulaInl" alt="$ x $" src="form_22.png"/>, <img class="formulaInl" alt="$ \dot{x} $" src="form_23.png"/> and <img class="formulaInl" alt="$ \tau $" src="form_24.png"/> are position, velocity and effort variables, respectively.</li>
+<li>Subindices <img class="formulaInl" alt="$ _a $" src="form_25.png"/> and <img class="formulaInl" alt="$ _j $" src="form_26.png"/> are used to represent actuator-space and joint-space variables, respectively.</li>
+<li><img class="formulaInl" alt="$ x_{off}$" src="form_27.png"/> represents the offset between motor and joint zeros, expressed in joint position coordinates. (cf. <a class="el" href="classtransmission__interface_1_1SimpleTransmission.html" title="Implementation of a simple reducer transmission.">SimpleTransmission</a> class documentation for a more detailed description of this variable).</li>
+<li><img class="formulaInl" alt="$ n $" src="form_28.png"/> represents a transmission ratio (reducers/amplifiers are depicted as timing belts in the figure). A transmission ratio can take any real value <em>except</em> zero. In particular:<ul>
+<li>If its absolute value is greater than one, it's a velocity reducer / effort amplifier, while if its absolute value lies in <img class="formulaInl" alt="$ (0, 1) $" src="form_29.png"/> it's a velocity amplifier / effort reducer.</li>
 <li>Negative values represent a direction flip, ie. input and output move in opposite directions.</li>
 <li><b>Important:</b> Use transmission ratio signs to match this class' convention of positive actuator/joint directions with a given mechanical design, as they will in general not match. </li>
 </ul>
@@ -415,7 +416,7 @@ std::vector&lt; <a class="el" href="classtransmission__interface_1_1ActuatorHand
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>transmission_interface/include/transmission_interface/<a class="el" href="four__bar__linkage__transmission_8hpp_source.html">four_bar_linkage_transmission.hpp</a></li>
+<li>ros2_control/transmission_interface/include/transmission_interface/<a class="el" href="four__bar__linkage__transmission_8hpp_source.html">four_bar_linkage_transmission.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

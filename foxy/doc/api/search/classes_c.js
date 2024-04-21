@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['positionjointsaturationhandle_272',['PositionJointSaturationHandle',['../classjoint__limits__interface_1_1PositionJointSaturationHandle.html',1,'joint_limits_interface']]],
-  ['positionjointsoftlimitshandle_273',['PositionJointSoftLimitsHandle',['../classjoint__limits__interface_1_1PositionJointSoftLimitsHandle.html',1,'joint_limits_interface']]],
-  ['positionjointsoftlimitshandletest_274',['PositionJointSoftLimitsHandleTest',['../classPositionJointSoftLimitsHandleTest.html',1,'']]]
+  ['mimicjoint_418',['MimicJoint',['../structfake__components_1_1GenericSystem_1_1MimicJoint.html',1,'fake_components::GenericSystem::MimicJoint'],['../structMimicJoint.html',1,'MimicJoint']]]
 ];

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['make_5fcontroller_5freference_5finterfaces_5favailable_497',['make_controller_reference_interfaces_available',['../classhardware__interface_1_1ResourceManager.html#a03d241e770ccba51ce6599568cfc25ee',1,'hardware_interface::ResourceManager']]],
-  ['make_5fcontroller_5freference_5finterfaces_5funavailable_498',['make_controller_reference_interfaces_unavailable',['../classhardware__interface_1_1ResourceManager.html#a957c1ae8d36cda4631a5206ad5faff60',1,'hardware_interface::ResourceManager']]]
+  ['joint_5fto_5factuator_767',['joint_to_actuator',['../classtransmission__interface_1_1DifferentialTransmission.html#a8faf07b7693e2348bf1957cfb11687e5',1,'transmission_interface::DifferentialTransmission::joint_to_actuator()'],['../classtransmission__interface_1_1FourBarLinkageTransmission.html#a0c4e601b3454d8fb81d2628a083c2102',1,'transmission_interface::FourBarLinkageTransmission::joint_to_actuator()'],['../classtransmission__interface_1_1SimpleTransmission.html#a6a3c64607a39275b1b7c4c8563b4d9b7',1,'transmission_interface::SimpleTransmission::joint_to_actuator()'],['../classtransmission__interface_1_1Transmission.html#a9db9f1db17b49b442ae0044bdbe83933',1,'transmission_interface::Transmission::joint_to_actuator()']]]
 ];

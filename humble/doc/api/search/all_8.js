@@ -1,13 +1,19 @@
 var searchData=
 [
-  ['import_5fcomponent_109',['import_component',['../classhardware__interface_1_1ResourceManager.html#a3fe79c9a6d49491475723bd832513f8d',1,'hardware_interface::ResourceManager::import_component(std::unique_ptr&lt; ActuatorInterface &gt; actuator, const HardwareInfo &amp;hardware_info)'],['../classhardware__interface_1_1ResourceManager.html#a68f2e8d8fd1bfbd52ca5d14487e704cf',1,'hardware_interface::ResourceManager::import_component(std::unique_ptr&lt; SensorInterface &gt; sensor, const HardwareInfo &amp;hardware_info)'],['../classhardware__interface_1_1ResourceManager.html#aa6bc2b4c6b3e60bde2a5e5235e0a758a',1,'hardware_interface::ResourceManager::import_component(std::unique_ptr&lt; SystemInterface &gt; system, const HardwareInfo &amp;hardware_info)']]],
-  ['import_5fcontroller_5freference_5finterfaces_110',['import_controller_reference_interfaces',['../classhardware__interface_1_1ResourceManager.html#a73ce6015d9870f44dc62c94b729615de',1,'hardware_interface::ResourceManager']]],
-  ['imusensor_111',['IMUSensor',['../classsemantic__components_1_1IMUSensor.html',1,'semantic_components']]],
-  ['imusensortest_112',['IMUSensorTest',['../classIMUSensorTest.html',1,'']]],
-  ['initial_5fvalue_113',['initial_value',['../structhardware__interface_1_1InterfaceInfo.html#a1681ac364efe0a5961addbe90d10edfb',1,'hardware_interface::InterfaceInfo']]],
-  ['interfaceconfiguration_114',['InterfaceConfiguration',['../structcontroller__interface_1_1InterfaceConfiguration.html',1,'controller_interface']]],
-  ['interfaceinfo_115',['InterfaceInfo',['../structhardware__interface_1_1InterfaceInfo.html',1,'hardware_interface']]],
-  ['is_5fchainable_116',['is_chainable',['../classcontroller__interface_1_1ChainableControllerInterface.html#aca75cbab7693e216194b7c41aa12739d',1,'controller_interface::ChainableControllerInterface::is_chainable()'],['../classcontroller__interface_1_1ControllerInterface.html#a8f9df0485b8a65363fecf5a3ccc9f51d',1,'controller_interface::ControllerInterface::is_chainable()'],['../classcontroller__interface_1_1ControllerInterfaceBase.html#ad5ce72576b7d96af3909f385ccb9e8be',1,'controller_interface::ControllerInterfaceBase::is_chainable()']]],
-  ['is_5fin_5fchained_5fmode_117',['is_in_chained_mode',['../classcontroller__interface_1_1ChainableControllerInterface.html#a5add6d3d59bdf470ac241e07c62f4852',1,'controller_interface::ChainableControllerInterface::is_in_chained_mode()'],['../classcontroller__interface_1_1ControllerInterface.html#ac86232dee7173226b28b8ba5d0e2b44d',1,'controller_interface::ControllerInterface::is_in_chained_mode()'],['../classcontroller__interface_1_1ControllerInterfaceBase.html#a8d052e19a586221d71318391515a5714',1,'controller_interface::ControllerInterfaceBase::is_in_chained_mode()']]],
-  ['is_5furdf_5falready_5floaded_118',['is_urdf_already_loaded',['../classhardware__interface_1_1ResourceManager.html#a5b76be604d59853951423e77bf1ceea8',1,'hardware_interface::ResourceManager']]]
+  ['hardware_5fclass_5ftype_159',['hardware_class_type',['../structhardware__interface_1_1HardwareInfo.html#a76357655e4c3556419ab57137427d2cb',1,'hardware_interface::HardwareInfo']]],
+  ['hardware_5finterface_160',['hardware_interface',['../namespacehardware__interface.html',1,'']]],
+  ['hardware_5fparameters_161',['hardware_parameters',['../structhardware__interface_1_1HardwareInfo.html#a59a6f095aa4e32b9c0fb405cd87b6caa',1,'hardware_interface::HardwareInfo']]],
+  ['hardware_5fused_5fby_5fcontrollers_5f_162',['hardware_used_by_controllers_',['../classhardware__interface_1_1ResourceStorage.html#a0010cb00bf2535cedf08239b846e0fab',1,'hardware_interface::ResourceStorage']]],
+  ['hardwarecomponentinfo_163',['HardwareComponentInfo',['../structhardware__interface_1_1HardwareComponentInfo.html',1,'hardware_interface']]],
+  ['hardwareinfo_164',['HardwareInfo',['../structhardware__interface_1_1HardwareInfo.html',1,'hardware_interface']]],
+  ['hardwareinterfaceadapter_165',['HardwareInterfaceAdapter',['../classHardwareInterfaceAdapter.html',1,'']]],
+  ['hardwareinterfaceadapter_3c_20hardware_5finterface_3a_3ahw_5fif_5feffort_20_3e_166',['HardwareInterfaceAdapter&lt; hardware_interface::HW_IF_EFFORT &gt;',['../classHardwareInterfaceAdapter_3_01hardware__interface_1_1HW__IF__EFFORT_01_4.html',1,'']]],
+  ['hardwareinterfaceadapter_3c_20hardware_5finterface_3a_3ahw_5fif_5fposition_20_3e_167',['HardwareInterfaceAdapter&lt; hardware_interface::HW_IF_POSITION &gt;',['../classHardwareInterfaceAdapter_3_01hardware__interface_1_1HW__IF__POSITION_01_4.html',1,'']]],
+  ['hardwarereadwritestatus_168',['HardwareReadWriteStatus',['../structhardware__interface_1_1HardwareReadWriteStatus.html',1,'hardware_interface']]],
+  ['has_5frealtime_5fkernel_169',['has_realtime_kernel',['../namespacerealtime__tools.html#ad4cb60d6a9fea8090ae1fd793a2c4222',1,'realtime_tools']]],
+  ['hw_5fif_5facceleration_170',['HW_IF_ACCELERATION',['../namespacehardware__interface.html#ac2f4024766cc8e328cf568d30e5099c6',1,'hardware_interface']]],
+  ['hw_5fif_5feffort_171',['HW_IF_EFFORT',['../namespacehardware__interface.html#a51a32aa22fecafedbf00b6fddf4b2dd7',1,'hardware_interface']]],
+  ['hw_5fif_5fposition_172',['HW_IF_POSITION',['../namespacehardware__interface.html#adf4658e878804ad412a26773aa4705a6',1,'hardware_interface']]],
+  ['hw_5fif_5fvelocity_173',['HW_IF_VELOCITY',['../namespacehardware__interface.html#ac92e707f8d468092ae48031e87cacb11',1,'hardware_interface']]],
+  ['hw_5fiface_5fadapter_5f_174',['hw_iface_adapter_',['../classgripper__action__controller_1_1GripperActionController.html#a74a8b7866370f86483b750b4f8a0faa4',1,'gripper_action_controller::GripperActionController']]]
 ];

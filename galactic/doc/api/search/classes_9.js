@@ -1,14 +1,15 @@
 var searchData=
 [
-  ['jointhandle_240',['JointHandle',['../classtransmission__interface_1_1JointHandle.html',1,'transmission_interface']]],
-  ['jointinfo_241',['JointInfo',['../structhardware__interface_1_1JointInfo.html',1,'hardware_interface']]],
-  ['jointlimithandle_242',['JointLimitHandle',['../classjoint__limits__interface_1_1JointLimitHandle.html',1,'joint_limits_interface']]],
-  ['jointlimits_243',['JointLimits',['../structjoint__limits__interface_1_1JointLimits.html',1,'joint_limits_interface']]],
-  ['jointlimitshandletest_244',['JointLimitsHandleTest',['../classJointLimitsHandleTest.html',1,'']]],
-  ['jointlimitsinterfaceexception_245',['JointLimitsInterfaceException',['../classjoint__limits__interface_1_1JointLimitsInterfaceException.html',1,'joint_limits_interface']]],
-  ['jointlimitsinterfacetest_246',['JointLimitsInterfaceTest',['../classJointLimitsInterfaceTest.html',1,'']]],
-  ['jointlimitsrosparamtest_247',['JointLimitsRosParamTest',['../classJointLimitsRosParamTest.html',1,'']]],
-  ['jointlimitstest_248',['JointLimitsTest',['../classJointLimitsTest.html',1,'']]],
-  ['jointlimitsurdftest_249',['JointLimitsUrdfTest',['../classJointLimitsUrdfTest.html',1,'']]],
-  ['jointsoftlimitshandle_250',['JointSoftLimitsHandle',['../classjoint__limits__interface_1_1JointSoftLimitsHandle.html',1,'joint_limits_interface']]]
+  ['jointdata_394',['jointData',['../structjointData.html',1,'']]],
+  ['jointgroupeffortcontroller_395',['JointGroupEffortController',['../classeffort__controllers_1_1JointGroupEffortController.html',1,'effort_controllers']]],
+  ['jointgrouppositioncontroller_396',['JointGroupPositionController',['../classposition__controllers_1_1JointGroupPositionController.html',1,'position_controllers']]],
+  ['jointgroupvelocitycontroller_397',['JointGroupVelocityController',['../classvelocity__controllers_1_1JointGroupVelocityController.html',1,'velocity_controllers']]],
+  ['jointhandle_398',['JointHandle',['../classtransmission__interface_1_1JointHandle.html',1,'transmission_interface']]],
+  ['jointinfo_399',['JointInfo',['../structhardware__interface_1_1JointInfo.html',1,'hardware_interface']]],
+  ['jointlimithandle_400',['JointLimitHandle',['../classjoint__limits__interface_1_1JointLimitHandle.html',1,'joint_limits_interface']]],
+  ['jointlimits_401',['JointLimits',['../structjoint__limits__interface_1_1JointLimits.html',1,'joint_limits_interface']]],
+  ['jointlimitsinterfaceexception_402',['JointLimitsInterfaceException',['../classjoint__limits__interface_1_1JointLimitsInterfaceException.html',1,'joint_limits_interface']]],
+  ['jointsoftlimitshandle_403',['JointSoftLimitsHandle',['../classjoint__limits__interface_1_1JointSoftLimitsHandle.html',1,'joint_limits_interface']]],
+  ['jointstatebroadcaster_404',['JointStateBroadcaster',['../classjoint__state__broadcaster_1_1JointStateBroadcaster.html',1,'joint_state_broadcaster']]],
+  ['jointtrajectorycontroller_405',['JointTrajectoryController',['../classjoint__trajectory__controller_1_1JointTrajectoryController.html',1,'joint_trajectory_controller']]]
 ];

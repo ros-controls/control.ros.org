@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['transmissions_413',['transmissions',['../structhardware__interface_1_1HardwareInfo.html#afb616c30d8cbedf6d1bf9fb329adab03',1,'hardware_interface::HardwareInfo']]],
-  ['type_414',['type',['../structhardware__interface_1_1ControllerInfo.html#a4ef630c5bfd994650861829629b11ab2',1,'hardware_interface::ControllerInfo::type()'],['../structhardware__interface_1_1ComponentInfo.html#ae2438ed2cb6bf1d4e945d8c6fd94adaf',1,'hardware_interface::ComponentInfo::type()'],['../structhardware__interface_1_1HardwareInfo.html#a03c12a3c854fff917151439194213e78',1,'hardware_interface::HardwareInfo::type()']]]
+  ['open_5floop_5fcontrol_5f_671',['open_loop_control_',['../classjoint__trajectory__controller_1_1JointTrajectoryController.html#aa46e91692d3345efc3b520bfe2783c36',1,'joint_trajectory_controller::JointTrajectoryController']]],
+  ['other_5fcommands_5f_672',['other_commands_',['../classfake__components_1_1GenericSystem.html#a201c1bb8917c5425b2ec95985ddb9d2d',1,'fake_components::GenericSystem']]]
 ];

@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['joint_5fcommands_5f_397',['joint_commands_',['../classfake__components_1_1GenericSystem.html#a87a83c48cd98f8a595e4f6b10347b29c',1,'fake_components::GenericSystem']]],
-  ['joints_398',['joints',['../structhardware__interface_1_1HardwareInfo.html#aae96296c93cc6f15f923188ca8401b21',1,'hardware_interface::HardwareInfo']]]
+  ['goal_5fstate_5ftolerance_636',['goal_state_tolerance',['../structjoint__trajectory__controller_1_1SegmentTolerances.html#a19a6448780b5bd1caa06f2b717a4ee8b',1,'joint_trajectory_controller::SegmentTolerances']]],
+  ['goal_5ftime_5ftolerance_637',['goal_time_tolerance',['../structjoint__trajectory__controller_1_1SegmentTolerances.html#ae887dc9e130600f92664a40516c1d94f',1,'joint_trajectory_controller::SegmentTolerances']]],
+  ['gpio_5ffake_5fcommands_5f_638',['gpio_fake_commands_',['../classfake__components_1_1GenericSystem.html#a45d2971baee518104b0113c7fb8dfc4c',1,'fake_components::GenericSystem']]],
+  ['gpios_639',['gpios',['../structhardware__interface_1_1HardwareInfo.html#aaba1f315215e7425123b75ffcb87b5ce',1,'hardware_interface::HardwareInfo']]]
 ];

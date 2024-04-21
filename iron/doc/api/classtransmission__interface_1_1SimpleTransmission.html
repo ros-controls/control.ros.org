@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ROS2 Control: transmission_interface::SimpleTransmission Class Reference</title>
+<title>ros2_control - iron: transmission_interface::SimpleTransmission Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,8 +20,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo_ros-controls_small.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">ROS2 Control
+   <div id="projectname">ros2_control - iron
    </div>
   </td>
  </tr>
@@ -92,13 +93,12 @@ Collaboration diagram for transmission_interface::SimpleTransmission:</div>
 <div class="dyncontent">
 <div class="center"><img src="classtransmission__interface_1_1SimpleTransmission__coll__graph.png" border="0" usemap="#atransmission__interface_1_1SimpleTransmission_coll__map" alt="Collaboration graph"/></div>
 <map name="atransmission__interface_1_1SimpleTransmission_coll__map" id="atransmission__interface_1_1SimpleTransmission_coll__map">
-<area shape="rect" title="Implementation of a simple reducer transmission." alt="" coords="960,69,1131,111"/>
-<area shape="rect" href="classtransmission__interface_1_1Transmission.html" title="Abstract base class for representing mechanical transmissions." alt="" coords="620,5,791,47"/>
-<area shape="rect" href="classtransmission__interface_1_1JointHandle.html" title=" " alt="" coords="620,76,791,117"/>
-<area shape="rect" href="classhardware__interface_1_1ReadWriteHandle.html" title=" " alt="" coords="423,120,571,161"/>
-<area shape="rect" href="classtransmission__interface_1_1ActuatorHandle.html" title=" " alt="" coords="620,152,791,193"/>
-<area shape="rect" href="classhardware__interface_1_1ReadOnlyHandle.html" title="A handle used to get and set a value on a given interface." alt="" coords="225,120,373,161"/>
-<area shape="rect" title=" " alt="" coords="5,127,64,154"/>
+<area shape="rect" title="Implementation of a simple reducer transmission." alt="" coords="740,69,911,111"/>
+<area shape="rect" href="classtransmission__interface_1_1Transmission.html" title="Abstract base class for representing mechanical transmissions." alt="" coords="400,5,571,47"/>
+<area shape="rect" href="classtransmission__interface_1_1JointHandle.html" title=" " alt="" coords="400,76,571,117"/>
+<area shape="rect" href="classhardware__interface_1_1ReadWriteHandle.html" title=" " alt="" coords="203,120,351,161"/>
+<area shape="rect" href="classtransmission__interface_1_1ActuatorHandle.html" title=" " alt="" coords="400,152,571,193"/>
+<area shape="rect" href="classhardware__interface_1_1ReadOnlyHandle.html" title="A handle used to get and set a value on a given interface." alt="" coords="5,120,153,161"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -163,33 +163,33 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>jnt_offset_</b></td
 <th></th><th><center>Effort</center></th><th><center>Velocity</center></th><th><center>Position</center> </th></tr>
 <tr>
 <td><b> Actuator to joint </b>  </td><td><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ \tau_j = n \tau_a \]" src="form_20.png"/>
+<img class="formulaDsp" alt="\[ \tau_j = n \tau_a \]" src="form_46.png"/>
 </p>
   </td><td><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ \dot{x}_j = \dot{x}_a / n \]" src="form_21.png"/>
+<img class="formulaDsp" alt="\[ \dot{x}_j = \dot{x}_a / n \]" src="form_47.png"/>
 </p>
   </td><td><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ x_j = x_a / n + x_{off} \]" src="form_22.png"/>
+<img class="formulaDsp" alt="\[ x_j = x_a / n + x_{off} \]" src="form_48.png"/>
 </p>
    </td></tr>
 <tr>
 <td><b> Joint to actuator </b>  </td><td><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ \tau_a = \tau_j / n\]" src="form_23.png"/>
+<img class="formulaDsp" alt="\[ \tau_a = \tau_j / n\]" src="form_49.png"/>
 </p>
   </td><td><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ \dot{x}_a = n \dot{x}_j \]" src="form_24.png"/>
+<img class="formulaDsp" alt="\[ \dot{x}_a = n \dot{x}_j \]" src="form_50.png"/>
 </p>
   </td><td><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ x_a = n (x_j - x_{off}) \]" src="form_25.png"/>
+<img class="formulaDsp" alt="\[ x_a = n (x_j - x_{off}) \]" src="form_51.png"/>
 </p>
  </td></tr>
 </table>
 </center><p>where:</p><ul>
-<li><img class="formulaInl" alt="$ x $" src="form_6.png"/>, <img class="formulaInl" alt="$ \dot{x} $" src="form_7.png"/> and <img class="formulaInl" alt="$ \tau $" src="form_8.png"/> are position, velocity and effort variables, respectively.</li>
-<li>Subindices <img class="formulaInl" alt="$ _a $" src="form_9.png"/> and <img class="formulaInl" alt="$ _j $" src="form_10.png"/> are used to represent actuator-space and joint-space variables, respectively.</li>
-<li><img class="formulaInl" alt="$ x_{off}$" src="form_11.png"/> represents the offset between motor and joint zeros, expressed in joint position coordinates.</li>
-<li><img class="formulaInl" alt="$ n $" src="form_12.png"/> is the transmission ratio, and can be computed as the ratio between the output and input pulley radii for the timing belt; or the ratio between output and input teeth for the gear system. The transmission ratio can take any real value <em>except</em> zero. In particular:<ul>
-<li>If its absolute value is greater than one, it's a velocity reducer / effort amplifier, while if its absolute value lies in <img class="formulaInl" alt="$ (0, 1) $" src="form_13.png"/> it's a velocity amplifier / effort reducer.</li>
+<li><img class="formulaInl" alt="$ x $" src="form_32.png"/>, <img class="formulaInl" alt="$ \dot{x} $" src="form_33.png"/> and <img class="formulaInl" alt="$ \tau $" src="form_34.png"/> are position, velocity and effort variables, respectively.</li>
+<li>Subindices <img class="formulaInl" alt="$ _a $" src="form_35.png"/> and <img class="formulaInl" alt="$ _j $" src="form_36.png"/> are used to represent actuator-space and joint-space variables, respectively.</li>
+<li><img class="formulaInl" alt="$ x_{off}$" src="form_37.png"/> represents the offset between motor and joint zeros, expressed in joint position coordinates.</li>
+<li><img class="formulaInl" alt="$ n $" src="form_38.png"/> is the transmission ratio, and can be computed as the ratio between the output and input pulley radii for the timing belt; or the ratio between output and input teeth for the gear system. The transmission ratio can take any real value <em>except</em> zero. In particular:<ul>
+<li>If its absolute value is greater than one, it's a velocity reducer / effort amplifier, while if its absolute value lies in <img class="formulaInl" alt="$ (0, 1) $" src="form_39.png"/> it's a velocity amplifier / effort reducer.</li>
 <li>Negative values represent a direction flip, ie. actuator and joint move in opposite directions. For example, in timing belts actuator and joint move in the same direction, while in single-stage gear systems actuator and joint move in opposite directions. </li>
 </ul>
 </li>
@@ -407,7 +407,7 @@ Joint handles share the same joint name and actuator handles share the same actu
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>transmission_interface/include/transmission_interface/<a class="el" href="simple__transmission_8hpp_source.html">simple_transmission.hpp</a></li>
+<li>ros2_control/transmission_interface/include/transmission_interface/<a class="el" href="simple__transmission_8hpp_source.html">simple_transmission.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

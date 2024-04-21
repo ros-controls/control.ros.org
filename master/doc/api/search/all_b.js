@@ -1,11 +1,7 @@
 var searchData=
 [
-  ['make_5fcontroller_5freference_5finterfaces_5favailable_145',['make_controller_reference_interfaces_available',['../classhardware__interface_1_1ResourceManager.html#a03d241e770ccba51ce6599568cfc25ee',1,'hardware_interface::ResourceManager']]],
-  ['make_5fcontroller_5freference_5finterfaces_5funavailable_146',['make_controller_reference_interfaces_unavailable',['../classhardware__interface_1_1ResourceManager.html#a957c1ae8d36cda4631a5206ad5faff60',1,'hardware_interface::ResourceManager']]],
-  ['max_147',['max',['../structhardware__interface_1_1InterfaceInfo.html#a0a545a31d01268924814d6f1a8a0fc59',1,'hardware_interface::InterfaceInfo']]],
-  ['migration_20notes_148',['Migration Notes',['../md_MIGRATION.html',1,'']]],
-  ['mimic_5fjoints_149',['mimic_joints',['../structhardware__interface_1_1HardwareInfo.html#a359d379ddb9c5e26f80dc8ecfe38c4d5',1,'hardware_interface::HardwareInfo']]],
-  ['mimicattribute_150',['MimicAttribute',['../namespacehardware__interface.html#a1d0af6c20253fb8fd24cb0ba98daec58',1,'hardware_interface']]],
-  ['mimicjoint_151',['MimicJoint',['../structhardware__interface_1_1MimicJoint.html',1,'hardware_interface']]],
-  ['min_152',['min',['../structhardware__interface_1_1InterfaceInfo.html#a6d725b5d18b04284ce7966d6b4446a1c',1,'hardware_interface::InterfaceInfo']]]
+  ['kinematics_5finterface_243',['kinematics_interface',['../namespacekinematics__interface.html',1,'']]],
+  ['kinematics_5finterface_5fkdl_244',['kinematics_interface_kdl',['../namespacekinematics__interface__kdl.html',1,'']]],
+  ['kinematicsinterface_245',['KinematicsInterface',['../classkinematics__interface_1_1KinematicsInterface.html',1,'kinematics_interface']]],
+  ['kinematicsinterfacekdl_246',['KinematicsInterfaceKDL',['../classkinematics__interface__kdl_1_1KinematicsInterfaceKDL.html',1,'kinematics_interface_kdl']]]
 ];

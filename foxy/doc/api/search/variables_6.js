@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['joint_5fcommands_5f_401',['joint_commands_',['../classfake__components_1_1GenericSystem.html#a87a83c48cd98f8a595e4f6b10347b29c',1,'fake_components::GenericSystem']]],
-  ['joints_402',['joints',['../structhardware__interface_1_1HardwareInfo.html#aae96296c93cc6f15f923188ca8401b21',1,'hardware_interface::HardwareInfo']]]
+  ['hardware_5fclass_5ftype_634',['hardware_class_type',['../structhardware__interface_1_1HardwareInfo.html#a76357655e4c3556419ab57137427d2cb',1,'hardware_interface::HardwareInfo']]],
+  ['hardware_5fparameters_635',['hardware_parameters',['../structhardware__interface_1_1HardwareInfo.html#a59a6f095aa4e32b9c0fb405cd87b6caa',1,'hardware_interface::HardwareInfo']]]
 ];

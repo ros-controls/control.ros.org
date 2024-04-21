@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['load_5fcontroller_356',['load_controller',['../classcontroller__manager_1_1ControllerManager.html#a937d1b45f0e3874f08de67c5cd145910',1,'controller_manager::ControllerManager']]],
-  ['load_5furdf_357',['load_urdf',['../classhardware__interface_1_1ResourceManager.html#a0b2178b1349277b3cce3805ff8ed2003',1,'hardware_interface::ResourceManager']]]
+  ['joint_5fto_5factuator_552',['joint_to_actuator',['../classtransmission__interface_1_1DifferentialTransmission.html#a8faf07b7693e2348bf1957cfb11687e5',1,'transmission_interface::DifferentialTransmission::joint_to_actuator()'],['../classtransmission__interface_1_1FourBarLinkageTransmission.html#a0c4e601b3454d8fb81d2628a083c2102',1,'transmission_interface::FourBarLinkageTransmission::joint_to_actuator()'],['../classtransmission__interface_1_1SimpleTransmission.html#a6a3c64607a39275b1b7c4c8563b4d9b7',1,'transmission_interface::SimpleTransmission::joint_to_actuator()'],['../classtransmission__interface_1_1Transmission.html#a9db9f1db17b49b442ae0044bdbe83933',1,'transmission_interface::Transmission::joint_to_actuator()']]]
 ];
