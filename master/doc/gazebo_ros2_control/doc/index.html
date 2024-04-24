@@ -215,14 +215,16 @@ include</p>
 </section>
 <section id="using-mimic-joints-in-simulation">
 <h3>Using mimic joints in simulation<a class="headerlink" href="#using-mimic-joints-in-simulation" title="Link to this heading"></a></h3>
-<p>To use <code class="docutils literal notranslate"><span class="pre">mimic</span></code> joints in <em>gazebo_ros2_control</em> you should define its parameters to your URDF.
-We should include:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">&lt;mimic&gt;</span></code> tag to the mimicked joint <a class="reference external" href="https://wiki.ros.org/urdf/XML/joint">detailed manual</a></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mimic</span></code> and <code class="docutils literal notranslate"><span class="pre">multiplier</span></code> parameters to joint definition in <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code> tag</p></li>
-</ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;left_finger_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;prismatic&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;mimic</span><span class="w"> </span><span class="na">joint=</span><span class="s">&quot;right_finger_joint&quot;</span><span class="nt">/&gt;</span>
+<p>To use <code class="docutils literal notranslate"><span class="pre">mimic</span></code> joints in <em>gazebo_ros2_control</em> you should define its parameters in your URDF, i.e, set the <code class="docutils literal notranslate"><span class="pre">&lt;mimic&gt;</span></code> tag to the mimicked joint (see the <a class="reference external" href="https://wiki.ros.org/urdf/XML/joint">URDF specification</a>)</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;right_finger_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;prismatic&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;axis</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 1 0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0.0 -0.48 1&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0.0 0.0 0.0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;base&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;finger_right&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;limit</span><span class="w"> </span><span class="na">effort=</span><span class="s">&quot;1000.0&quot;</span><span class="w"> </span><span class="na">lower=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">upper=</span><span class="s">&quot;0.38&quot;</span><span class="w"> </span><span class="na">velocity=</span><span class="s">&quot;10&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/joint&gt;</span>
+<span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;left_finger_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;prismatic&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;mimic</span><span class="w"> </span><span class="na">joint=</span><span class="s">&quot;right_finger_joint&quot;</span><span class="w"> </span><span class="na">multiplier=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="na">offset=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;axis</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 1 0&quot;</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0.0 0.48 1&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0.0 0.0 3.1415926535&quot;</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;base&quot;</span><span class="nt">/&gt;</span>
@@ -231,15 +233,10 @@ We should include:</p>
 <span class="nt">&lt;/joint&gt;</span>
 </pre></div>
 </div>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;left_finger_joint&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mimic&quot;</span><span class="nt">&gt;</span>right_finger_joint<span class="nt">&lt;/param&gt;</span>
-<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;multiplier&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/param&gt;</span>
-<span class="w">  </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;effort&quot;</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;/joint&gt;</span>
-</pre></div>
+<p>The mimic joint must not have command interfaces configured in the <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code> tag, but state interfaces can be configured.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Independent of the interface type of the mimicked joint in the <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code> tag, the mimic joint will use the position interface of the gazebo classic physic engine to follow the position of the mimicked joint.</p>
 </div>
 </section>
 </section>
@@ -358,12 +355,18 @@ ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos
 ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_tricycle_drive
 </pre></div>
 </div>
-<p>The following example shows parallel gripper with mimic joint:</p>
-<img alt="Cart" src="../../../_images/gripper.gif" />
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>gripper_mimic_joint_example.launch.py
+<p>The following example shows a parallel gripper with a mimic joint:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>gripper_mimic_joint_example_position.launch.py
 </pre></div>
 </div>
-<p>Send example commands:</p>
+<img alt="Gripper" src="../../../_images/gripper.gif" />
+<p>To demonstrate the setup of the initial position and a position-mimicked joint in
+case of an effort command interface of the joint to be mimicked, run</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>gripper_mimic_joint_example_effort.launch.py
+</pre></div>
+</div>
+<p>instead.</p>
+<p>Send example commands with</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_gripper
 </pre></div>
 </div>
