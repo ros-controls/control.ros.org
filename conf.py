@@ -202,8 +202,8 @@ else:
   base_branch = "master"
 
 # Add branches you want to whitelist here.
-smv_branch_whitelist = r"^(foxy|galactic|humble|iron|"+ base_branch + r")$"
-smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy|galactic|humble|iron).*$"
+smv_branch_whitelist = r"^(foxy|galactic|humble|iron|jazzy|"+ base_branch + r")$"
+smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy|galactic|humble|iron|jazzy).*$"
 smv_remote_whitelist = r"^(origin)$"
 smv_latest_version = "iron"
 smv_eol_versions = ["foxy", "galactic"]
@@ -213,6 +213,7 @@ distro_full_names = {
     "galactic": "Galactic Geochelone",
     "humble": "Humble Hawksbill",
     "iron": "Iron Irwini",
+    "jazzy": "Jazzy Jalisco",
     "rolling": "Rolling Ridley",
 }
 
@@ -331,6 +332,7 @@ def smv_rewrite_configs(app, config):
         # this map is used to match branches of control.ros.org to ROS distros, e.g., DISTRO macro
         branch_distro = {
             base_branch: "rolling",
+            "jazzy": "jazzy",
             "iron": "iron",
             "humble": "humble",
             "foxy": "foxy",
@@ -339,6 +341,7 @@ def smv_rewrite_configs(app, config):
         # this map is used to match branches of control.ros.org to REPOS_FILE_BRANCH macro
         subrepo_branch = {
             base_branch: "master",
+            "jazzy": "jazzy",
             "iron": "iron",
             "humble": "humble",
             "foxy": "foxy",
