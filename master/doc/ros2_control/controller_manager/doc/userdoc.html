@@ -75,6 +75,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#concepts">Concepts</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#restarting-all-controllers">Restarting all controllers</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#restarting-hardware">Restarting hardware</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#hardware-and-controller-errors">Hardware and Controller Errors</a></li>
 </ul>
 </li>
 </ul>
@@ -335,9 +336,12 @@ Note that not all controllers have to be restarted, e.g., broadcasters.</p>
 </section>
 <section id="restarting-hardware">
 <h3>Restarting hardware<a class="headerlink" href="#restarting-hardware" title="Link to this heading"></a></h3>
-<p>If hardware gets restarted then you should go through its lifecycle again.
-This can be simply achieved by returning <code class="docutils literal notranslate"><span class="pre">ERROR</span></code> from <code class="docutils literal notranslate"><span class="pre">write</span></code> and <code class="docutils literal notranslate"><span class="pre">read</span></code> methods of interface implementation.
-<strong>NOT IMPLEMENTED YET - PLEASE STOP/RESTART ALL CONTROLLERS MANUALLY FOR NOW</strong> The controller manager detects that and stops all the controllers that are commanding that hardware and restarts broadcasters that are listening to its states.</p>
+<p>If hardware gets restarted then you should go through its lifecycle again in order to reconfigure and export the interfaces</p>
+</section>
+<section id="hardware-and-controller-errors">
+<h3>Hardware and Controller Errors<a class="headerlink" href="#hardware-and-controller-errors" title="Link to this heading"></a></h3>
+<p>If the hardware during it’s <code class="docutils literal notranslate"><span class="pre">read</span></code> or <code class="docutils literal notranslate"><span class="pre">write</span></code> method returns <code class="docutils literal notranslate"><span class="pre">return_type::ERROR</span></code>, the controller manager will stop all controllers that are using the hardware’s command and state interfaces.
+Likewise, if a controller returns <code class="docutils literal notranslate"><span class="pre">return_type::ERROR</span></code> from its <code class="docutils literal notranslate"><span class="pre">update</span></code> method, the controller manager will deactivate the respective controller. In future, the controller manager will try to start any fallback controllers if available.</p>
 </section>
 </section>
 </section>
