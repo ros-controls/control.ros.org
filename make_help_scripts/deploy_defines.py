@@ -138,7 +138,7 @@ repos = {
             "galactic": "ros2-master",
             "humble": "ros2-master",
             "iron": "ros2-master",
-            "jazzy": "master",
+            "jazzy": "ros2-master",
             "rolling": "ros2-master"  # master is rolling
         },
         "pr": None
