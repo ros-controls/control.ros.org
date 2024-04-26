@@ -78,7 +78,13 @@
 <li class="toctree-l5"><a class="reference internal" href="#set-up-controllers">Set up controllers</a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#gz-ros2-control-demos">gz_ros2_control_demos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gz-ros2-control-demos">gz_ros2_control_demos</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#cart-on-rail">Cart on rail</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#mobile-robots">Mobile robots</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#gripper">Gripper</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pendulum-with-passive-joints-cart-pole">Pendulum with passive joints (cart-pole)</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../gazebo_ros2_control/doc/index.html">Gazebo Classic</a></li>
@@ -137,8 +143,6 @@
 <span id="id1"></span><h1>gz_ros2_control<a class="headerlink" href="#gz-ros2-control" title="Link to this heading"></a></h1>
 <p>This is a ROS 2 package for integrating the <em>ros2_control</em> controller architecture with the <a class="reference external" href="https://gazebosim.org/home">Gazebo</a> simulator.</p>
 <p>This package provides a Gazebo-Sim system plugin which instantiates a <em>ros2_control</em> controller manager and connects it to a Gazebo model.</p>
-<img alt="Cart" src="../../../_images/gz_ros2_control.gif" />
-<img alt="DiffBot" src="../../../_images/diff_drive.gif" />
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <section id="modifying-or-building-your-own">
@@ -330,24 +334,41 @@ and use the tag <code class="docutils literal notranslate"><span class="pre">&lt
 </section>
 <section id="gz-ros2-control-demos">
 <h2>gz_ros2_control_demos<a class="headerlink" href="#gz-ros2-control-demos" title="Link to this heading"></a></h2>
-<p>There are some examples in the <em>gz_ros2_control_demos</em> package. These examples allow to launch a cart in a 30 meter rail.</p>
+<p>There are some examples in the <em>gz_ros2_control_demos</em> package.</p>
+<section id="cart-on-rail">
+<h3>Cart on rail<a class="headerlink" href="#cart-on-rail" title="Link to this heading"></a></h3>
+<p>These examples allow to launch a cart in a 30 meter rail.</p>
+<img alt="Cart" src="../../../_images/gz_ros2_control.gif" />
 <p>You can run some of the example configurations by running the following commands:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>cart_example_position.launch.py
 ros2<span class="w"> </span>launch<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>cart_example_velocity.launch.py
 ros2<span class="w"> </span>launch<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>cart_example_effort.launch.py
-ros2<span class="w"> </span>launch<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>diff_drive_example.launch.py
-ros2<span class="w"> </span>launch<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>tricycle_drive_example.launch.py
 </pre></div>
 </div>
 <p>When the Gazebo world is launched, you can run some of the following commands to move the cart.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>example_position
 ros2<span class="w"> </span>run<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>example_velocity
 ros2<span class="w"> </span>run<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>example_effort
-ros2<span class="w"> </span>run<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>example_diff_drive
+</pre></div>
+</div>
+</section>
+<section id="mobile-robots">
+<h3>Mobile robots<a class="headerlink" href="#mobile-robots" title="Link to this heading"></a></h3>
+<img alt="DiffBot" src="../../../_images/diff_drive.gif" />
+<p>You can run some of the mobile robots running the following commands:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>diff_drive_example.launch.py
+ros2<span class="w"> </span>launch<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>tricycle_drive_example.launch.py
+</pre></div>
+</div>
+<p>When the Gazebo world is launched you can run some of the following commands to move the robots.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>example_diff_drive
 ros2<span class="w"> </span>run<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>example_tricycle_drive
 </pre></div>
 </div>
-<p>The following example shows parallel gripper with mimic joint:</p>
+</section>
+<section id="gripper">
+<h3>Gripper<a class="headerlink" href="#gripper" title="Link to this heading"></a></h3>
+<p>The following example shows a parallel gripper with a mimic joint:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>gripper_mimic_joint_example_position.launch.py
 </pre></div>
 </div>
@@ -362,6 +383,20 @@ case of an effort command interface of the joint to be mimicked, run</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>example_gripper
 </pre></div>
 </div>
+</section>
+<section id="pendulum-with-passive-joints-cart-pole">
+<h3>Pendulum with passive joints (cart-pole)<a class="headerlink" href="#pendulum-with-passive-joints-cart-pole" title="Link to this heading"></a></h3>
+<p>The following example shows a cart with a pendulum arm:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>pendulum_example_effort.launch.py
+ros2<span class="w"> </span>run<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>example_effort
+</pre></div>
+</div>
+<p>This uses the effort command interface for the cart’s degree of freedom on the rail. To demonstrate that the physics of the passive joint of the pendulum is solved correctly even with the position command interface, run</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>pendulum_example_position.launch.py
+ros2<span class="w"> </span>run<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>example_position
+</pre></div>
+</div>
+</section>
 </section>
 </section>
 
