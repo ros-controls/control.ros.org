@@ -21,7 +21,7 @@ ros2_control
 .. toctree::
    :titlesonly:
 
-   Foxy to Galactic <../ros2_control/doc/migration/Foxy.rst>
+   Foxy to Galactic <../ros2_control/doc/migration/Galactic.rst>
    Iron to Jazzy <../ros2_control/doc/migration/Jazzy.rst>
 
 
