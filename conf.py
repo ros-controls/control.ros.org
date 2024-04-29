@@ -72,9 +72,9 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store",
                     "**/CHANGELOG.rst", "**/README.rst",
                     "doc/ros2_control/ros2_control/**.rst",
                     "doc/ros2_control/transmission_interface/**.rst",
-                    "doc/realtime_tools/doc/**.rst",
-                    "doc/control_msgs/doc/**.rst",
-                    "doc/control_toolbox/doc/**.rst",
+                    "doc/realtime_tools/**.rst",
+                    "doc/control_msgs/**.rst",
+                    "doc/control_toolbox/**.rst",
                     "doc/kinematics_interface/**.rst",
                     "doc/ros2_controllers/ros2_controllers/**.rst"]
 
