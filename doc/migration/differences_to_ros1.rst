@@ -1,7 +1,7 @@
 .. _diff_to_ros1:
 
-Differences to ros_control (ROS1)
-=================================
+Differences to ros_control (ROS 1)
+==================================
 
 Hardware Structures - classes
 -----------------------------
