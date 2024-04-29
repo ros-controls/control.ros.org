@@ -12,6 +12,7 @@ Welcome to the ros2_control documentation!
    doc/ros2_control_demos/doc/index.rst
    doc/ros2_control/ros2controlcli/doc/userdoc.rst
    doc/simulators/simulators.rst
+   doc/release_notes/release_notes.rst
    doc/migration/migration.rst
    doc/api_list/api_list.rst
    doc/supported_robots/supported_robots.rst
