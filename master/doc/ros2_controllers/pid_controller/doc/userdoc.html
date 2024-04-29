@@ -75,7 +75,11 @@
 <li class="toctree-l5"><a class="reference internal" href="#subscribers">Subscribers</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#services">Services</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#publishers">Publishers</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#parameters">Parameters</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#list-of-parameters">List of parameters</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#an-example-parameter-file">An example parameter file</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -218,6 +222,8 @@ Plugin name: pid_controller/PidController</p>
 <section id="parameters">
 <h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
 <p>The PID controller uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters.</p>
+<section id="list-of-parameters">
+<h4>List of parameters<a class="headerlink" href="#list-of-parameters" title="Link to this heading"></a></h4>
 <dl>
 <dt>dof_names (string_array)</dt><dd><p>Specifies dof_names or axes used by the controller. If ‘reference_and_state_dof_names’ parameter is defined, then only command dof names are defined with this parameter.</p>
 <p>Read only: True</p>
@@ -289,6 +295,38 @@ Plugin name: pid_controller/PidController</p>
 <p>Default:  false</p>
 </dd>
 </dl>
+</section>
+<section id="an-example-parameter-file">
+<h4>An example parameter file<a class="headerlink" href="#an-example-parameter-file" title="Link to this heading"></a></h4>
+<p>An example parameter file for this controller can be found in <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/master/pid_controller/test/pid_controller_params.yaml">the test folder (standalone)</a>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test_pid_controller</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">dof_names</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint1</span>
+
+<span class="w">    </span><span class="nt">command_interface</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
+
+<span class="w">    </span><span class="nt">reference_and_state_interfaces</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;position&quot;</span><span class="p p-Indicator">]</span>
+
+<span class="w">    </span><span class="nt">gains</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">joint1</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">p</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="nt"> i</span><span class="p">:</span><span class="w"> </span><span class="nv">2.0</span><span class="p p-Indicator">,</span><span class="nt"> d</span><span class="p">:</span><span class="w"> </span><span class="nv">10.0</span><span class="p p-Indicator">,</span><span class="nt"> i_clamp_max</span><span class="p">:</span><span class="w"> </span><span class="nv">5.0</span><span class="p p-Indicator">,</span><span class="nt"> i_clamp_min</span><span class="p">:</span><span class="w"> </span><span class="nv">-5.0</span><span class="p p-Indicator">}</span>
+</pre></div>
+</div>
+<p>or as <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/master/pid_controller/test/pid_controller_preceding_params.yaml">preceding controller</a>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test_pid_controller</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">dof_names</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint1</span>
+
+<span class="w">    </span><span class="nt">command_interface</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
+
+<span class="w">    </span><span class="nt">reference_and_state_interfaces</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;position&quot;</span><span class="p p-Indicator">]</span>
+
+<span class="w">    </span><span class="nt">reference_and_state_dof_names</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint1state</span>
+</pre></div>
+</div>
+</section>
 </section>
 </section>
 </section>
