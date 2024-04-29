@@ -21,7 +21,7 @@ ros2_control
 .. toctree::
    :titlesonly:
 
-   Foxy to Galactic <../ros2_control/doc/migration/Foxy.rst>
+   Foxy to Galactic <../ros2_control/doc/migration/Galactic.rst>
 
 
 ros2_controllers
