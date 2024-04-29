@@ -67,7 +67,6 @@
 <li class="toctree-l5"><a class="reference internal" href="writing_new_hardware_component.html">Writing a Hardware Component</a></li>
 <li class="toctree-l5"><a class="reference internal" href="different_update_rates_userdoc.html">Different Update Rates</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#handling-of-errors-that-happen-during-read-and-write-calls">Handling of errors that happen during read() and write() calls</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#migration-from-foxy-to-newer-versions">Migration from Foxy to newer versions</a></li>
 </ul>
 </li>
 </ul>
@@ -81,8 +80,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../simulators/simulators.html">Simulator Integrations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../differences_to_ros1/differences_to_ros1.html">Differences to ros_control (ROS1)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../differences_to_ros1/differences_to_ros1.html#migration-guide-to-ros2-control">Migration Guide to ros2_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../migration/migration.html">Migration Guides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api_list/api_list.html">API Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
@@ -148,48 +146,6 @@ For details on each type check <a class="reference internal" href="../../../gett
 <p>Error handling follows the <a class="reference external" href="https://design.ros2.org/articles/node_lifecycle.html">node lifecycle</a>.
 If successful <code class="docutils literal notranslate"><span class="pre">CallbackReturn::SUCCESS</span></code> is returned and hardware is again in <code class="docutils literal notranslate"><span class="pre">UNCONFIGURED</span></code>  state, if any <code class="docutils literal notranslate"><span class="pre">ERROR</span></code> or <code class="docutils literal notranslate"><span class="pre">FAILURE</span></code> happens the hardware ends in <code class="docutils literal notranslate"><span class="pre">FINALIZED</span></code> state and can not be recovered.
 The only option is to reload the complete plugin, but there is currently no service for this in the Controller Manager.</p>
-</section>
-<section id="migration-from-foxy-to-newer-versions">
-<h3>Migration from Foxy to newer versions<a class="headerlink" href="#migration-from-foxy-to-newer-versions" title="Link to this heading"></a></h3>
-<p>Between Foxy and Galactic we made substantial changes to the interface of hardware components to enable management of their lifecycle.
-The following list shows a set of quick changes to port existing hardware components to Galactic:</p>
-<ol class="arabic simple">
-<li><p>Rename <code class="docutils literal notranslate"><span class="pre">configure</span></code> to <code class="docutils literal notranslate"><span class="pre">on_init</span></code> and change return type to <code class="docutils literal notranslate"><span class="pre">CallbackReturn</span></code></p></li>
-<li><p>If using BaseInterface as base class then you should remove it. Specifically, change:</p></li>
-</ol>
-<blockquote>
-<div><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">BaseInterface</span><span class="o">&lt;</span><span class="n">hardware_interface</span><span class="o">::</span><span class="p">[</span><span class="n">Actuator</span><span class="o">|</span><span class="n">Sensor</span><span class="o">|</span><span class="n">System</span><span class="p">]</span><span class="n">Interface</span><span class="o">&gt;</span>
-</pre></div>
-</div>
-<p>to</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">hardware_interface</span><span class="o">::</span><span class="p">[</span><span class="n">Actuator</span><span class="o">|</span><span class="n">Sensor</span><span class="o">|</span><span class="n">System</span><span class="p">]</span><span class="n">Interface</span>
-</pre></div>
-</div>
-</div></blockquote>
-<ol class="arabic simple" start="3">
-<li><p>Remove include of headers <code class="docutils literal notranslate"><span class="pre">base_interface.hpp</span></code> and <code class="docutils literal notranslate"><span class="pre">hardware_interface_status_values.hpp</span></code></p></li>
-<li><p>Add include of header <code class="docutils literal notranslate"><span class="pre">rclcpp_lifecycle/state.hpp</span></code> although this may not be strictly necessary</p></li>
-<li><p>replace first three lines in <code class="docutils literal notranslate"><span class="pre">on_init</span></code> to</p></li>
-</ol>
-<blockquote>
-<div><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">hardware_interface</span><span class="o">::</span><span class="p">[</span><span class="n">Actuator</span><span class="o">|</span><span class="n">Sensor</span><span class="o">|</span><span class="n">System</span><span class="p">]</span><span class="n">Interface</span><span class="o">::</span><span class="n">on_init</span><span class="p">(</span><span class="n">info</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">CallbackReturn</span><span class="o">::</span><span class="n">SUCCESS</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">CallbackReturn</span><span class="o">::</span><span class="n">ERROR</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div></blockquote>
-<ol class="arabic simple" start="6">
-<li><p>Change last return of <code class="docutils literal notranslate"><span class="pre">on_init</span></code> to <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">CallbackReturn::SUCCESS;</span></code></p></li>
-<li><p>Remove all lines with <code class="docutils literal notranslate"><span class="pre">status_</span> <span class="pre">=</span> <span class="pre">...</span></code> or <code class="docutils literal notranslate"><span class="pre">status::...</span></code></p></li>
-<li><p>Rename <code class="docutils literal notranslate"><span class="pre">start()</span></code> to <code class="docutils literal notranslate"><span class="pre">on_activate(const</span> <span class="pre">rclcpp_lifecycle::State</span> <span class="pre">&amp;</span> <span class="pre">previous_state)</span></code> and
-<code class="docutils literal notranslate"><span class="pre">stop()</span></code> to <code class="docutils literal notranslate"><span class="pre">on_deactivate(const</span> <span class="pre">rclcpp_lifecycle::State</span> <span class="pre">&amp;</span> <span class="pre">previous_state)</span></code></p></li>
-<li><p>Change return type of <code class="docutils literal notranslate"><span class="pre">on_activate</span></code> and <code class="docutils literal notranslate"><span class="pre">on_deactivate</span></code> to <code class="docutils literal notranslate"><span class="pre">CallbackReturn</span></code></p></li>
-<li><p>Change last return of <code class="docutils literal notranslate"><span class="pre">on_activate</span></code> and <code class="docutils literal notranslate"><span class="pre">on_deactivate</span></code> to <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">CallbackReturn::SUCCESS;</span></code></p></li>
-<li><p>If you have any <code class="docutils literal notranslate"><span class="pre">return_type::ERROR</span></code> in <code class="docutils literal notranslate"><span class="pre">on_init</span></code>, <code class="docutils literal notranslate"><span class="pre">on_activate</span></code>, or <code class="docutils literal notranslate"><span class="pre">in_deactivate</span></code> change to <code class="docutils literal notranslate"><span class="pre">CallbackReturn::ERROR</span></code></p></li>
-<li><p>If you get link errors with undefined refernences to symbols in <code class="docutils literal notranslate"><span class="pre">rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface</span></code>, then add
-<code class="docutils literal notranslate"><span class="pre">rclcpp_lifecyle</span></code> package dependency to <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> and <code class="docutils literal notranslate"><span class="pre">package.xml</span></code></p></li>
-</ol>
 </section>
 </section>
 </section>

@@ -64,8 +64,12 @@
 <li class="toctree-l3"><a class="reference internal" href="hardware_components_userdoc.html">Hardware Components</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Mock Components</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#generic-system">Generic System</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#parameters">Parameters</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#component-parameters">Component Parameters</a></li>
+</ul>
+</li>
 <li class="toctree-l5"><a class="reference internal" href="#per-joint-parameters">Per-joint Parameters</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#per-interface-parameters">Per-interface Parameters</a></li>
 </ul>
 </li>
 </ul>
@@ -78,8 +82,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../simulators/simulators.html">Simulator Integrations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../differences_to_ros1/differences_to_ros1.html">Differences to ros_control (ROS1)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../differences_to_ros1/differences_to_ros1.html#migration-guide-to-ros2-control">Migration Guide to ros2_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../migration/migration.html">Migration Guides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api_list/api_list.html">API Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
@@ -147,23 +150,65 @@ For more information about hardware components check <a class="reference interna
 </div></blockquote>
 <section id="parameters">
 <h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
+<p>A full example including all optional parameters (with default values):</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;MockHardwareSystem&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;hardware&gt;</span>
+<span class="w">    </span><span class="nt">&lt;plugin&gt;</span>mock_components/GenericSystem<span class="nt">&lt;/plugin&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;calculate_dynamics&quot;</span><span class="nt">&gt;</span>false<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;custom_interface_with_following_offset&quot;</span><span class="nt">&gt;&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;disable_commands&quot;</span><span class="nt">&gt;</span>false<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mock_gpio_commands&quot;</span><span class="nt">&gt;</span>false<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mock_sensor_commands&quot;</span><span class="nt">&gt;</span>false<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position_state_following_offset&quot;</span><span class="nt">&gt;</span>0.0<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/hardware&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint1&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;initial_value&quot;</span><span class="nt">&gt;</span>3.45<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/state_interface&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;acceleration&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint2&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;acceleration&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;initial_value&quot;</span><span class="nt">&gt;</span>2.78<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/state_interface&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;acceleration&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
+<span class="w">  </span><span class="nt">&lt;gpio</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;flange_vacuum&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;vacuum&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;vacuum&quot;</span><span class="w"> </span><span class="na">data_type=</span><span class="s">&quot;double&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/gpio&gt;</span>
+<span class="nt">&lt;/ros2_control&gt;</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="../../../ros2_control_demos/example_2/doc/userdoc.html#ros2-control-demos-example-2-userdoc"><span class="std std-ref">example_2</span></a> for an example using <code class="docutils literal notranslate"><span class="pre">calculate_dynamics</span></code> or <a class="reference internal" href="../../../ros2_control_demos/example_10/doc/userdoc.html#ros2-control-demos-example-10-userdoc"><span class="std std-ref">example_10</span></a> for using in combination with GPIO interfaces.</p>
+<section id="component-parameters">
+<h4>Component Parameters<a class="headerlink" href="#component-parameters" title="Link to this heading"></a></h4>
 <dl class="simple">
+<dt>calculate_dynamics (optional; boolean; default: false)</dt><dd><p>Calculation of states from commands by using Euler-forward integration or finite differences.</p>
+</dd>
+<dt>custom_interface_with_following_offset (optional; string; default: “”)</dt><dd><p>Mapping of offsetted commands to a custom interface.</p>
+</dd>
 <dt>disable_commands (optional; boolean; default: false)</dt><dd><p>Disables mirroring commands to states.
 This option is helpful to simulate an erroneous connection to the hardware when nothing breaks, but suddenly there is no feedback from a hardware interface.
 Or it can help you to test your setup when the hardware is running without feedback, i.e., in open loop configuration.</p>
+</dd>
+<dt>mock_gpio_commands (optional; boolean; default: false)</dt><dd><p>Creates fake command interfaces for faking GPIO states with an external command.
+Those interfaces are usually used by a <a class="reference internal" href="../../../ros2_controllers/forward_command_controller/doc/userdoc.html#forward-command-controller-userdoc"><span class="std std-ref">forward controller</span></a> to provide access from ROS-world.</p>
 </dd>
 <dt>mock_sensor_commands (optional; boolean; default: false)</dt><dd><p>Creates fake command interfaces for faking sensor measurements with an external command.
 Those interfaces are usually used by a <a class="reference internal" href="../../../ros2_controllers/forward_command_controller/doc/userdoc.html#forward-command-controller-userdoc"><span class="std std-ref">forward controller</span></a> to provide access from ROS-world.</p>
 </dd>
-<dt>disable_commands (optional; boolean; default: false)</dt><dd><p>Disables mirroring commands to states.
-This option is helpful to simulate an erroneous connection to the hardware when nothing breaks, but suddenly there is no feedback from a hardware interface.
-Or it can help you to test your setup when the hardware is running without feedback, i.e., in open loop configuration.</p>
-</dd>
-<dt>position_state_following_offset (optional; double; default: 0.0)</dt><dd><p>Following offset added to the commanded values when mirrored to states.</p>
-</dd>
-<dt>custom_interface_with_following_offset (optional; string; default: “”)</dt><dd><p>Mapping of offsetted commands to a custom interface.</p>
+<dt>position_state_following_offset (optional; double; default: 0.0)</dt><dd><p>Following offset added to the commanded values when mirrored to states. Only applied, if <code class="docutils literal notranslate"><span class="pre">custom_interface_with_following_offset</span></code> is false.</p>
 </dd>
 </dl>
+</section>
 </section>
 <section id="per-joint-parameters">
 <h3>Per-joint Parameters<a class="headerlink" href="#per-joint-parameters" title="Link to this heading"></a></h3>
@@ -171,6 +216,21 @@ Or it can help you to test your setup when the hardware is running without feedb
 <dt>mimic (optional; string)</dt><dd><p>Defined name of the joint to mimic. This is often used concept with parallel grippers. Example: <code class="docutils literal notranslate"><span class="pre">&lt;param</span> <span class="pre">name=&quot;mimic&quot;&gt;joint1&lt;/param&gt;</span></code>.</p>
 </dd>
 <dt>multiplier (optional; double; default: 1; used if mimic joint is defined)</dt><dd><p>Multiplier of values for mimicking joint defined in <code class="docutils literal notranslate"><span class="pre">mimic</span></code> parameter. Example: <code class="docutils literal notranslate"><span class="pre">&lt;param</span> <span class="pre">name=&quot;multiplier&quot;&gt;-2&lt;/param&gt;</span></code>.</p>
+</dd>
+</dl>
+</section>
+<section id="per-interface-parameters">
+<h3>Per-interface Parameters<a class="headerlink" href="#per-interface-parameters" title="Link to this heading"></a></h3>
+<dl>
+<dt>initial_value (optional; double)</dt><dd><p>Initial value of certain state interface directly after startup. Example:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;initial_value&quot;</span><span class="nt">&gt;</span>3.45<span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;/state_interface&gt;</span>
+</pre></div>
+</div>
+<p>Note: This parameter is shared with the gazebo and gazebo classic plugins for
+joint interfaces. For Mock components it is also possible to set initial
+values for gpio or sensor state interfaces.</p>
 </dd>
 </dl>
 </section>
