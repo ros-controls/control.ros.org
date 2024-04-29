@@ -14,6 +14,7 @@ Coming from ros_control (ROS 1)
 Between different ROS 2 distributions
 **************************************
 
+These lists summarizes necessary changes to your code for a version update. For non-breaking updates, see the :ref:`release_notes`.
 
 ros2_control
 -------------
@@ -28,4 +29,7 @@ ros2_control
 ros2_controllers
 ----------------
 
-There are no migration notes yet.
+.. toctree::
+   :titlesonly:
+
+   Iron to Jazzy <../ros2_controllers/doc/migration/Jazzy.rst>
