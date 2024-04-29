@@ -22,7 +22,7 @@ ros2_control
    :titlesonly:
 
    Foxy to Galactic <../ros2_control/doc/migration/Foxy.rst>
-   Iron to Jazzy <../ros2_control/doc/migration/Iron.rst>
+   Iron to Jazzy <../ros2_control/doc/migration/Jazzy.rst>
 
 
 ros2_controllers
