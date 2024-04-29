@@ -32,4 +32,4 @@ ros2_controllers
 .. toctree::
    :titlesonly:
 
-   Iron to Jazzy <../ros2_controllers/doc/migration/Iron.rst>
+   Iron to Jazzy <../ros2_controllers/doc/migration/Jazzy.rst>
