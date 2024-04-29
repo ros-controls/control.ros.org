@@ -15,7 +15,7 @@ ros2_control
 .. toctree::
    :titlesonly:
 
-   Iron to Jazzy <../ros2_control/doc/release_notes/Iron.rst>
+   Iron to Jazzy <../ros2_control/doc/release_notes/Jazzy.rst>
 
 
 ros2_controllers
@@ -24,4 +24,4 @@ ros2_controllers
 .. toctree::
    :titlesonly:
 
-   Iron to Jazzy <../ros2_controllers/doc/release_notes/Iron.rst>
+   Iron to Jazzy <../ros2_controllers/doc/release_notes/Jazzy.rst>
