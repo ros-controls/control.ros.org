@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>gazebo_ros2_control &mdash; ROS2_Control: Iron Apr 2024 documentation</title>
+  <title>gazebo_ros2_control &mdash; ROS2_Control: Iron May 2024 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -20,7 +20,7 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=3a60ff46"></script>
+        <script src="../../../_static/documentation_options.js?v=dbc0e75d"></script>
         <script src="../../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -79,7 +79,13 @@
 <li class="toctree-l5"><a class="reference internal" href="#set-up-controllers">Set up controllers</a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#gazebo-ros2-control-demos">gazebo_ros2_control_demos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gazebo-ros2-control-demos">gazebo_ros2_control_demos</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#cart-on-rail">Cart on rail</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#mobile-robots">Mobile robots</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#gripper">Gripper</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pendulum-with-passive-joints">Pendulum with passive joints</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -328,25 +334,44 @@ robot model is loaded. For example, the following XML will load the default plug
 <section id="gazebo-ros2-control-demos">
 <h2>gazebo_ros2_control_demos<a class="headerlink" href="#gazebo-ros2-control-demos" title="Link to this heading"></a></h2>
 <p>This package contains the contents for testing gazebo_ros2_control. It is running Gazebo Classic and some other ROS 2 nodes.</p>
-<p>There are some examples in the <em>Gazebo_ros2_control_demos</em> package. These examples allow to launch a cart in a 30 meter rail.</p>
+<p>There are some examples in the <em>Gazebo_ros2_control_demos</em> package.</p>
+<section id="cart-on-rail">
+<h3>Cart on rail<a class="headerlink" href="#cart-on-rail" title="Link to this heading"></a></h3>
+<p>These examples allow to launch a cart in a 30 meter rail.</p>
 <img alt="Cart" src="../../../_images/cart.gif" />
 <p>You can run some of the configuration running the following commands:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>cart_example_position.launch.py
 ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>cart_example_velocity.launch.py
 ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>cart_example_effort.launch.py
-ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>diff_drive.launch.py
-ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>tricycle_drive.launch.py
 </pre></div>
 </div>
 <p>When the Gazebo world is launched you can run some of the following commands to move the cart.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_position
 ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_velocity
 ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_effort
-ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_diff_drive
+</pre></div>
+</div>
+</section>
+<section id="mobile-robots">
+<h3>Mobile robots<a class="headerlink" href="#mobile-robots" title="Link to this heading"></a></h3>
+<p>You can run some of the mobile robots running the following commands:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>diff_drive.launch.py
+ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>tricycle_drive.launch.py
+</pre></div>
+</div>
+<p>When the Gazebo world is launched you can run some of the following commands to move the robots.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_diff_drive
 ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_tricycle_drive
 </pre></div>
 </div>
-<p>The following example shows parallel gripper with mimic joint:</p>
+</section>
+<section id="gripper">
+<h3>Gripper<a class="headerlink" href="#gripper" title="Link to this heading"></a></h3>
+<p>The following example shows a parallel gripper with a mimic joint:</p>
+<img alt="Cart" src="../../../_images/gripper.gif" />
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>gripper_mimic_joint_example_position.launch.py
+</pre></div>
+</div>
 <img alt="Cart" src="../../../_images/gripper.gif" />
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>gripper_mimic_joint_example.launch.py
 </pre></div>
@@ -355,6 +380,24 @@ ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_gripper
 </pre></div>
 </div>
+</section>
+<section id="pendulum-with-passive-joints">
+<h3>Pendulum with passive joints<a class="headerlink" href="#pendulum-with-passive-joints" title="Link to this heading"></a></h3>
+<p>The following example shows a cart with a pendulum arm. This uses the effort command interface for the cart’s
+degree of freedom on the rail, and the physics of the passive joint of the pendulum is solved correctly.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>pendulum_example_effort.launch.py
+ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_effort
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the position command interface is used instead, the motion of the pendulum is not calculated correctly and does not move at all, see this <a class="reference external" href="https://github.com/ros-controls/gazebo_ros2_control/issues/240">PR</a>. This also holds true if a mimicked joint with position interface is used. To demonstrate this, run</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>pendulum_example_position.launch.py
+ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_position
+</pre></div>
+</div>
+</div>
+</section>
 </section>
 </section>
 
