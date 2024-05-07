@@ -71,6 +71,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#add-ros2-control-tag-to-a-urdf">Add ros2_control tag to a URDF</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#simple-setup">Simple setup</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#using-mimic-joints-in-simulation">Using mimic joints in simulation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#using-pid-control-joints">Using PID control joints</a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#add-the-gazebo-ros2-control-plugin">Add the gazebo_ros2_control plugin</a><ul>
@@ -84,6 +85,7 @@
 <li class="toctree-l5"><a class="reference internal" href="#mobile-robots">Mobile robots</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#gripper">Gripper</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#pendulum-with-passive-joints">Pendulum with passive joints</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pid-control-joints">PID control joints</a></li>
 </ul>
 </li>
 </ul>
@@ -248,6 +250,56 @@ We should include:</p>
 </pre></div>
 </div>
 </section>
+<section id="using-pid-control-joints">
+<h3>Using PID control joints<a class="headerlink" href="#using-pid-control-joints" title="Link to this heading"></a></h3>
+<p>To use PID control joints in gazebo_ros2_control, you should define their parameters inside the <code class="docutils literal notranslate"><span class="pre">&lt;joint&gt;</span></code> tag
+within the <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code> tag. These PID joints can be controlled either in position or velocity.</p>
+<ul class="simple">
+<li><p>To control a joint with velocity PID, simply set its <code class="docutils literal notranslate"><span class="pre">command_interface</span></code> to <code class="docutils literal notranslate"><span class="pre">velocity_PID</span></code>.</p></li>
+<li><p>To control a joint with position PID, set its <code class="docutils literal notranslate"><span class="pre">command_interface</span></code> to <code class="docutils literal notranslate"><span class="pre">position_PID</span></code>.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You cannot have both command interfaces set to position and position_PID for the same joint. The same restriction applies to velocity (and velocity_PID).</p>
+</div>
+<p>To create a system with one joint that can be controlled using both position_PID and velocity_PID, follow this example:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;GazeboSystem&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<span class="w">   </span><span class="nt">&lt;hardware&gt;</span>
+<span class="w">     </span><span class="nt">&lt;plugin&gt;</span>gazebo_ros2_control/GazeboSystem<span class="nt">&lt;/plugin&gt;</span>
+<span class="w">   </span><span class="nt">&lt;/hardware&gt;</span>
+<span class="w">   </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;slider_to_cart&quot;</span><span class="nt">&gt;</span>
+
+<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;pos_kp&quot;</span><span class="nt">&gt;</span>10<span class="nt">&lt;/param&gt;</span>
+<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;pos_ki&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/param&gt;</span>
+<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;pos_kd&quot;</span><span class="nt">&gt;</span>2<span class="nt">&lt;/param&gt;</span>
+<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;pos_max_integral_error&quot;</span><span class="nt">&gt;</span>10000<span class="nt">&lt;/param&gt;</span>
+
+<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;vel_kp&quot;</span><span class="nt">&gt;</span>10<span class="nt">&lt;/param&gt;</span>
+<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;vel_ki&quot;</span><span class="nt">&gt;</span>5<span class="nt">&lt;/param&gt;</span>
+<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;vel_kd&quot;</span><span class="nt">&gt;</span>2<span class="nt">&lt;/param&gt;</span>
+<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;vel_max_integral_error&quot;</span><span class="nt">&gt;</span>10000<span class="nt">&lt;/param&gt;</span>
+
+<span class="w">     </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position_PID&quot;</span><span class="nt">/&gt;</span>
+<span class="w">     </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity_PID&quot;</span><span class="nt">/&gt;</span>
+
+<span class="w">     </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
+<span class="w">       </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;initial_value&quot;</span><span class="nt">&gt;</span>1.0<span class="nt">&lt;/param&gt;</span>
+<span class="w">     </span><span class="nt">&lt;/state_interface&gt;</span>
+<span class="w">     </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
+<span class="w">     </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;effort&quot;</span><span class="nt">/&gt;</span>
+<span class="w">   </span><span class="nt">&lt;/joint&gt;</span>
+<span class="w"> </span><span class="nt">&lt;/ros2_control&gt;</span>
+</pre></div>
+</div>
+<p>Where the parameters are as follows:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pos_kp</span></code>: Proportional gain</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pos_ki</span></code>: Integral gain</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pos_kd</span></code>: Derivative gain</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pos_max_integral_error</span></code>: Maximum summation of the error</p></li>
+</ul>
+<p>The same definitions apply to the <code class="docutils literal notranslate"><span class="pre">vel_*</span></code> parameters.</p>
+</section>
 </section>
 <section id="add-the-gazebo-ros2-control-plugin">
 <h2>Add the gazebo_ros2_control plugin<a class="headerlink" href="#add-the-gazebo-ros2-control-plugin" title="Link to this heading"></a></h2>
@@ -356,6 +408,7 @@ ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_de
 </div>
 <p>When the Gazebo world is launched you can run some of the following commands to move the cart.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_position
+ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_position_pid
 ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_velocity
 ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_effort
 </pre></div>
@@ -405,6 +458,18 @@ ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos
 ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_position
 </pre></div>
 </div>
+</div>
+</section>
+<section id="pid-control-joints">
+<h3>PID control joints<a class="headerlink" href="#pid-control-joints" title="Link to this heading"></a></h3>
+<p>The following examples shows a vertical cart control by a PID joint using position and velocity cmd.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>vertical_cart_example_position_pid.launch.py
+ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>vertical_cart_example_velocity_pid.launch.py
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_position_pid
+ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_velocity
+</pre></div>
 </div>
 </section>
 </section>
