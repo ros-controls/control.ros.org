@@ -141,7 +141,7 @@ The library implements generic odometry and update methods and defines the main 
 <p>Nomenclature used for the controller is used from <a class="reference external" href="https://en.wikipedia.org/wiki/Wheelbase">wikipedia</a>.</p>
 <section id="execution-logic-of-the-controller">
 <h2>Execution logic of the controller<a class="headerlink" href="#execution-logic-of-the-controller" title="Link to this heading"></a></h2>
-<p>The controller uses velocity input, i.e., stamped or unstamped Twist messages where linear <code class="docutils literal notranslate"><span class="pre">x</span></code> and angular <code class="docutils literal notranslate"><span class="pre">z</span></code> components are used.
+<p>The controller uses velocity input, i.e., stamped Twist messages where linear <code class="docutils literal notranslate"><span class="pre">x</span></code> and angular <code class="docutils literal notranslate"><span class="pre">z</span></code> components are used.
 Angular component under
 Values in other components are ignored.
 In the chain mode the controller provides two reference interfaces, one for linear velocity and one for steering angle position.
@@ -203,10 +203,7 @@ Currently implemented kinematics in corresponding packages are:</p>
 <h3>Subscribers<a class="headerlink" href="#subscribers" title="Link to this heading"></a></h3>
 <p>Used when controller is not in chained mode (<code class="docutils literal notranslate"><span class="pre">in_chained_mode</span> <span class="pre">==</span> <span class="pre">false</span></code>).</p>
 <ul class="simple">
-<li><p>&lt;controller_name&gt;/reference  [geometry_msgs/msg/TwistStamped]
-If parameter <code class="docutils literal notranslate"><span class="pre">use_stamped_vel</span></code> is <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
-<li><p>&lt;controller_name&gt;/reference_unstamped   [geometry_msgs/msg/Twist]
-If parameter <code class="docutils literal notranslate"><span class="pre">use_stamped_vel</span></code> is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p>&lt;controller_name&gt;/reference  [geometry_msgs/msg/TwistStamped]</p></li>
 </ul>
 </section>
 <section id="publishers">
@@ -297,7 +294,7 @@ If parameter <code class="docutils literal notranslate"><span class="pre">use_st
 <dt>position_feedback (bool)</dt><dd><p>Choice of feedback type, if position_feedback is false then <code class="docutils literal notranslate"><span class="pre">HW_IF_VELOCITY</span></code> is taken as interface type, if position_feedback is true then <code class="docutils literal notranslate"><span class="pre">HW_IF_POSITION</span></code> is taken as interface type</p>
 <p>Default:  false</p>
 </dd>
-<dt>use_stamped_vel (bool)</dt><dd><p>Choice of vel type, if use_stamped_vel is false then <code class="docutils literal notranslate"><span class="pre">geometry_msgs::msg::Twist</span></code> is taken as vel msg type, if use_stamped_vel is true then <code class="docutils literal notranslate"><span class="pre">geometry_msgs::msg::TwistStamped</span></code> is taken as vel msg type</p>
+<dt>use_stamped_vel (bool)</dt><dd><p>(Deprecated) Choice of vel type, if use_stamped_vel is false then <code class="docutils literal notranslate"><span class="pre">geometry_msgs::msg::Twist</span></code> is taken as vel msg type, if use_stamped_vel is true then <code class="docutils literal notranslate"><span class="pre">geometry_msgs::msg::TwistStamped</span></code> is taken as vel msg type</p>
 <p>Default:  false</p>
 </dd>
 </dl>

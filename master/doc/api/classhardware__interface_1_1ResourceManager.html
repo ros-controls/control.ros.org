@@ -177,6 +177,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a20d11cea529a849400a6a885fc9f8a64"><td class="memItemLeft" align="right" valign="top">return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceManager.html#a20d11cea529a849400a6a885fc9f8a64">set_component_state</a> (const std::string &amp;component_name, rclcpp_lifecycle::State &amp;target_state)</td></tr>
 <tr class="memdesc:a20d11cea529a849400a6a885fc9f8a64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets state of hardware component.  <a href="classhardware__interface_1_1ResourceManager.html#a20d11cea529a849400a6a885fc9f8a64">More...</a><br /></td></tr>
 <tr class="separator:a20d11cea529a849400a6a885fc9f8a64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a282ed439caa61b262898b51681b68417"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceManager.html#a282ed439caa61b262898b51681b68417">shutdown_async_components</a> ()</td></tr>
+<tr class="memdesc:a282ed439caa61b262898b51681b68417"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes all async components from the resource storage.  <a href="classhardware__interface_1_1ResourceManager.html#a282ed439caa61b262898b51681b68417">More...</a><br /></td></tr>
+<tr class="separator:a282ed439caa61b262898b51681b68417"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9fe34534b983c80a80cb501d8ab837c7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structhardware__interface_1_1HardwareReadWriteStatus.html">HardwareReadWriteStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceManager.html#a9fe34534b983c80a80cb501d8ab837c7">read</a> (const rclcpp::Time &amp;time, const rclcpp::Duration &amp;period)</td></tr>
 <tr class="memdesc:a9fe34534b983c80a80cb501d8ab837c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads all loaded hardware components.  <a href="classhardware__interface_1_1ResourceManager.html#a9fe34534b983c80a80cb501d8ab837c7">More...</a><br /></td></tr>
 <tr class="separator:a9fe34534b983c80a80cb501d8ab837c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1076,6 +1079,26 @@ accept_command_resource_claim is called on all actuators and system components a
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>hardware_interface::retun_type::OK if component successfully switched its state and hardware_interface::return_type::ERROR any of state transitions has failed. </dd></dl>
+
+</div>
+</div>
+<a id="a282ed439caa61b262898b51681b68417"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a282ed439caa61b262898b51681b68417">&#9670;&nbsp;</a></span>shutdown_async_components()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void hardware_interface::ResourceManager::shutdown_async_components </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Deletes all async components from the resource storage. </p>
+<p>Needed to join the threads immediately after the control loop is ended. </p>
 
 </div>
 </div>

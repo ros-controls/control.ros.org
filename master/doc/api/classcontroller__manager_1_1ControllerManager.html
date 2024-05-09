@@ -151,6 +151,9 @@ template&lt;typename T , typename std::enable_if&lt; std::is_convertible&lt; T *
 <tr class="memitem:a6e52d7a474caec7ec1cbc2f65708c69b"><td class="memItemLeft" align="right" valign="top">CONTROLLER_MANAGER_PUBLIC unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__manager_1_1ControllerManager.html#a6e52d7a474caec7ec1cbc2f65708c69b">get_update_rate</a> () const</td></tr>
 <tr class="memdesc:a6e52d7a474caec7ec1cbc2f65708c69b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deterministic (real-time safe) callback group, e.g., update function.  <a href="classcontroller__manager_1_1ControllerManager.html#a6e52d7a474caec7ec1cbc2f65708c69b">More...</a><br /></td></tr>
 <tr class="separator:a6e52d7a474caec7ec1cbc2f65708c69b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35433516ff6439af7de41bc58f0e4aac"><td class="memItemLeft" align="right" valign="top">CONTROLLER_MANAGER_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__manager_1_1ControllerManager.html#a35433516ff6439af7de41bc58f0e4aac">shutdown_async_controllers_and_components</a> ()</td></tr>
+<tr class="memdesc:a35433516ff6439af7de41bc58f0e4aac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes all async controllers and components.  <a href="classcontroller__manager_1_1ControllerManager.html#a35433516ff6439af7de41bc58f0e4aac">More...</a><br /></td></tr>
+<tr class="separator:a35433516ff6439af7de41bc58f0e4aac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -480,6 +483,26 @@ std::unique_ptr&lt; <a class="el" href="classhardware__interface_1_1ResourceMana
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a35433516ff6439af7de41bc58f0e4aac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35433516ff6439af7de41bc58f0e4aac">&#9670;&nbsp;</a></span>shutdown_async_controllers_and_components()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void controller_manager::ControllerManager::shutdown_async_controllers_and_components </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Deletes all async controllers and components. </p>
+<p>Needed to join the threads immediately after the control loop is ended to avoid unnecessary iterations. Otherwise the threads will be joined only when the controller manager gets destroyed. </p>
 
 </div>
 </div>
