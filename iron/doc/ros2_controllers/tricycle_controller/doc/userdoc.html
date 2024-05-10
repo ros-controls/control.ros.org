@@ -64,8 +64,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../../diff_drive_controller/doc/userdoc.html">Differential Drive Controller</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../steering_controllers_library/doc/userdoc.html">Steering Controllers Library</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Tricycle Controller</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#velocity-commands">Velocity commands</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#other-features">Other features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ros-2-interfaces">ROS 2 Interfaces</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#subscribers">Subscribers</a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
 </ul>
 </li>
@@ -122,12 +125,6 @@
 <p>Controller for mobile robots with a single double-actuated wheel, including traction and steering. An example is a tricycle robot with the actuated wheel in the front and two trailing wheels on the rear axle.</p>
 <p>Input for control are robot base_link twist commands which are translated to traction and steering
 commands for the tricycle drive base. Odometry is computed from hardware feedback and published.</p>
-<section id="velocity-commands">
-<h2>Velocity commands<a class="headerlink" href="#velocity-commands" title="Link to this heading"></a></h2>
-<p>The controller works with a velocity twist from which it extracts
-the x component of the linear velocity and the z component of the angular velocity.
-Velocities on other components are ignored.</p>
-</section>
 <section id="other-features">
 <h2>Other features<a class="headerlink" href="#other-features" title="Link to this heading"></a></h2>
 <blockquote>
@@ -136,6 +133,16 @@ Odometry publishing
 Velocity, acceleration and jerk limits
 Automatic stop after command timeout</p>
 </div></blockquote>
+</section>
+<section id="ros-2-interfaces">
+<h2>ROS 2 Interfaces<a class="headerlink" href="#ros-2-interfaces" title="Link to this heading"></a></h2>
+<section id="subscribers">
+<h3>Subscribers<a class="headerlink" href="#subscribers" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>~/cmd_vel [geometry_msgs/msg/TwistStamped]</dt><dd><p>Velocity command for the controller. The controller extracts the x component of the linear velocity and the z component of the angular velocity. Velocities on other components are ignored.</p>
+</dd>
+</dl>
+</section>
 </section>
 <section id="parameters">
 <h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h2>
@@ -161,9 +168,21 @@ Automatic stop after command timeout</p>
 </dd>
 <dt>wheelbase (double)</dt><dd><p>Shortest distance between the front wheel and the rear axle. If this parameter is wrong, the robot will not behave correctly in curves.</p>
 <p>Default:  0.0</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than 0.0</p></li>
+</ul>
+</div></blockquote>
 </dd>
 <dt>wheel_radius (double)</dt><dd><p>Radius of a wheel, i.e., wheels size, used for transformation of linear velocity into wheel rotations. If this parameter is wrong the robot will move faster or slower then expected.</p>
 <p>Default:  0.0</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than 0.0</p></li>
+</ul>
+</div></blockquote>
 </dd>
 <dt>odom_frame_id (string)</dt><dd><p>Name of the frame for odometry. This frame is parent of <code class="docutils literal notranslate"><span class="pre">base_frame_id</span></code> when controller publishes odometry.</p>
 <p>Default:  “odom”</p>
@@ -201,7 +220,7 @@ Automatic stop after command timeout</p>
 </ul>
 </div></blockquote>
 </dd>
-<dt>use_stamped_vel (bool)</dt><dd><p>Use stamp from input velocity message to calculate how old the command actually is.</p>
+<dt>use_stamped_vel (bool)</dt><dd><p>(deprecated) Use stamp from input velocity message to calculate how old the command actually is.</p>
 <p>Default:  true</p>
 </dd>
 <dt>traction.max_velocity (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>

@@ -199,9 +199,32 @@ This should help avoiding extra legwork in controllers to get access to the <cod
 </section>
 <section id="hardware-interface">
 <h2>hardware_interface<a class="headerlink" href="#hardware-interface" title="Link to this heading"></a></h2>
-<ul class="simple">
+<ul>
 <li><p>A portable version for string-to-double conversion was added: <code class="docutils literal notranslate"><span class="pre">hardware_interface::stod</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1257">#1257</a>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">test_components</span></code> was moved to its own package (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1325">#1325</a>)</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> tag now supports parsing of the limits from the URDF into the <code class="docutils literal notranslate"><span class="pre">HardwareInfo</span></code> structure. More conservative limits can be defined using the <code class="docutils literal notranslate"><span class="pre">min</span></code> and <code class="docutils literal notranslate"><span class="pre">max</span></code> attributes per interface (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1472">#1472</a>)</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;RRBotSystemMutipleGPIOs&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;hardware&gt;</span>
+<span class="w">    </span><span class="nt">&lt;plugin&gt;</span>ros2_control_demo_hardware/RRBotSystemPositionOnlyHardware<span class="nt">&lt;/plugin&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;example_param_hw_start_duration_sec&quot;</span><span class="nt">&gt;</span>2.0<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;example_param_hw_stop_duration_sec&quot;</span><span class="nt">&gt;</span>3.0<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;example_param_hw_slowdown&quot;</span><span class="nt">&gt;</span>2.0<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/hardware&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint1&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;min&quot;</span><span class="nt">&gt;</span>-1<span class="nt">&lt;/param&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;max&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/command_interface&gt;</span>
+<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;limits</span><span class="w"> </span><span class="na">enable=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/command_interface&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
+<span class="nt">&lt;/ros2_control&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Soft limits are also parsed from the URDF into the <code class="docutils literal notranslate"><span class="pre">HardwareInfo</span></code> structure for the defined joints (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1488">#1488</a>)</p></li>
 </ul>
 </section>
 <section id="joint-limits">

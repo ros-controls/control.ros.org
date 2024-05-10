@@ -163,7 +163,7 @@
 <section id="subscribers">
 <h3>Subscribers<a class="headerlink" href="#subscribers" title="Link to this heading"></a></h3>
 <dl class="simple">
-<dt>~/cmd_vel [geometry_msgs/msg/TwistStamped]</dt><dd><p>Velocity command for the controller, if <code class="docutils literal notranslate"><span class="pre">use_stamped_vel=true</span></code>. The controller extracts the x component of the linear velocity and the z component of the angular velocity. Velocities on other components are ignored.</p>
+<dt>~/cmd_vel [geometry_msgs/msg/TwistStamped]</dt><dd><p>Velocity command for the controller. The controller extracts the x component of the linear velocity and the z component of the angular velocity. Velocities on other components are ignored.</p>
 </dd>
 <dt>~/cmd_vel_unstamped [geometry_msgs::msg::Twist]</dt><dd><p>Velocity command for the controller, if <code class="docutils literal notranslate"><span class="pre">use_stamped_vel=false</span></code>. The controller extracts the x component of the linear velocity and the z component of the angular velocity. Velocities on other components are ignored.</p>
 </dd>
@@ -204,9 +204,21 @@
 </dd>
 <dt>wheel_separation (double)</dt><dd><p>Shortest distance between the left and right wheels. If this parameter is wrong, the robot will not behave correctly in curves.</p>
 <p>Default:  0.0</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than 0.0</p></li>
+</ul>
+</div></blockquote>
 </dd>
 <dt>wheel_radius (double)</dt><dd><p>Radius of a wheel, i.e., wheels size, used for transformation of linear velocity into wheel rotations. If this parameter is wrong the robot will move faster or slower then expected.</p>
 <p>Default:  0.0</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than 0.0</p></li>
+</ul>
+</div></blockquote>
 </dd>
 <dt>wheel_separation_multiplier (double)</dt><dd><p>Correction factor for wheel separation (TODO(destogl): Please help me describe this correctly)</p>
 <p>Default:  1.0</p>
@@ -311,7 +323,6 @@ For details see <code class="docutils literal notranslate"><span class="pre">joi
 <span class="w">    </span><span class="nt">right_wheel_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;right_wheels&quot;</span><span class="p p-Indicator">]</span>
 
 <span class="w">    </span><span class="nt">wheel_separation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.40</span>
-<span class="w">    </span><span class="nt">wheels_per_side</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w">  </span><span class="c1"># actually 2, but both are controlled by 1 signal</span>
 <span class="w">    </span><span class="nt">wheel_radius</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.02</span>
 
 <span class="w">    </span><span class="nt">wheel_separation_multiplier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
