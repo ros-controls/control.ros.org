@@ -2,14 +2,14 @@ name: "Create PR Stats"
 
 on:
   workflow_dispatch:
-  pull_request: # run if the file changed on a PR to master
+  pull_request: # run if the file changed on a PR to rolling
     branches:
-      - master
+      - rolling
     paths:
     - 'make_help_scripts/create_pr_stats.py'
-  push: # run if the file changed by pushes to master
+  push: # run if the file changed by pushes to rolling
     branches:
-      - master
+      - rolling
     paths:
     - 'make_help_scripts/create_pr_stats.py'
   schedule:

@@ -80,8 +80,11 @@ multiversion: Makefile
 	sphinx-multiversion $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
 	@echo Step 3: Deleting temporary commits
 	./make_help_scripts/delete_tmp_commits.py
-	@echo Step 4: Create correct index
-	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=master/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
+	@echo Step 4: Create correct index + legacy master version
+	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=rolling/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
+# legacy, renamed Rolling version from "master" to "rolling"
+	@cp -r "$(BUILDDIR)"/html/rolling/ "$(BUILDDIR)"/html/master
+	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=../rolling/index.html\" /></head></html>" > "$(BUILDDIR)"/html/master/index.html
 
 multiversion-with-errors: Makefile
 	@echo Building multi version documentation without API
@@ -91,8 +94,11 @@ multiversion-with-errors: Makefile
 	sphinx-multiversion $(SPHINXOPTS) -W --keep-going $(SOURCEDIR) $(BUILDDIR)/html
 	@echo Step 3: Deleting temporary commits
 	./make_help_scripts/delete_tmp_commits.py
-	@echo Step 4: Create correct index
-	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=master/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
+	@echo Step 4: Create correct index + legacy master version
+	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=rolling/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
+# legacy, renamed Rolling version from "master" to "rolling"
+	@cp -r "$(BUILDDIR)"/html/rolling/ "$(BUILDDIR)"/html/master
+	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=../rolling/index.html\" /></head></html>" > "$(BUILDDIR)"/html/master/index.html
 
 multiversion-with-api: Makefile
 	@echo Building multi version documentation with API
@@ -106,8 +112,11 @@ multiversion-with-api: Makefile
 	./make_help_scripts/delete_sub_repos.py
 	@echo Step 5: Building multiversion API
 	./make_help_scripts/create_api_multi_version.py
-	@echo Step 6: Create correct index
-	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=master/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
+	@echo Step 6: Create correct index + legacy master version
+	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=rolling/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
+# legacy, renamed Rolling version from "master" to "rolling"
+	@cp -r "$(BUILDDIR)"/html/rolling/ "$(BUILDDIR)"/html/master
+	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=../rolling/index.html\" /></head></html>" > "$(BUILDDIR)"/html/master/index.html
 
 .PHONY: help Makefile html-with-errors html-with-api multiversion multiversion-with-api multiversion-with-errors html-all-subrepos html-all-subrepos-with-api html-all-subrepos-with-errors linkcheck-all-subrepos-with-api
 
