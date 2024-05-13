@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>gazebo_ros2_control &mdash; ROS2_Control: Jazzy May 2024 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/reviewer_stats.css?v=068b34ac" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//jazzy/doc/gazebo_ros2_control/doc/index.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=dbc0e75d"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+        <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Release Notes" href="../../release_notes/release_notes.html" />
+    <link rel="prev" title="gz_ros2_control" href="../../gz_ros2_control/doc/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_control/doc/index.html">ros2_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_control/ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../simulators/simulators.html">Simulator Integrations</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../simulators/simulators.html#hosted-by-ros-controls">Hosted by ros-controls</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../gz_ros2_control/doc/index.html">Gazebo</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Gazebo Classic</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#modifying-or-building-your-own">Modifying or building your own</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#to-run-the-demo">To run the demo</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#add-ros2-control-tag-to-a-urdf">Add ros2_control tag to a URDF</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#simple-setup">Simple setup</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#using-mimic-joints-in-simulation">Using mimic joints in simulation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#using-pid-control-joints">Using PID control joints</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#add-the-gazebo-ros2-control-plugin">Add the gazebo_ros2_control plugin</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#default-gazebo-ros2-control-behavior">Default gazebo_ros2_control Behavior</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#advanced-custom-gazebo-ros2-control-simulation-plugins">Advanced: custom gazebo_ros2_control Simulation Plugins</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#set-up-controllers">Set up controllers</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#gazebo-ros2-control-demos">gazebo_ros2_control_demos</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#cart-on-rail">Cart on rail</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#mobile-robots">Mobile robots</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#gripper">Gripper</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pendulum-with-passive-joints">Pendulum with passive joints</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pid-control-joints">PID control joints</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../simulators/simulators.html#community">Community</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes/release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration/migration.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_list/api_list.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../project_ideas.html">Project Ideas for GSoC 2024</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ROS2_Control: Jazzy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../simulators/simulators.html">Simulator Integrations</a></li>
+      <li class="breadcrumb-item active">gazebo_ros2_control</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ros-controls/gazebo_ros2_control/blob/jazzy/doc/index.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for a development version.
+    For the latest released version, please have a look at <a href="../../../../iron/doc/gazebo_ros2_control/doc/index.html">Iron</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="gazebo-ros2-control">
+<span id="id1"></span><h1>gazebo_ros2_control<a class="headerlink" href="#gazebo-ros2-control" title="Link to this heading"></a></h1>
+<p>This is a ROS 2 package for integrating the <em>ros2_control</em> controller architecture with the <a class="reference external" href="https://classic.gazebosim.org/">Gazebo Classic</a> simulator.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Gazebo Classic goes end-of-life in January of 2025. We strongly recommend all users migrate from Gazebo Classic (numbered releases) to modern Gazebo (formerly known as Ignition 3, lettered releases) before January 2025.</p>
+<p>Furthermore, Gazebo Classic is not released to Ubuntu Noble. As a consequence, gazebo_ros2_control won’t be released for Jazzy and Rolling anymore.</p>
+</div>
+<p>This package provides a Gazebo plugin which instantiates a <em>ros2_control</em> controller manager and connects it to a Gazebo model.</p>
+<img alt="Cart" src="../../../_images/gazebo_ros2_control_position.gif" />
+<img alt="DiffBot" src="../../../_images/gazebo_ros2_control_diff_drive.gif" />
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<section id="modifying-or-building-your-own">
+<h3>Modifying or building your own<a class="headerlink" href="#modifying-or-building-your-own" title="Link to this heading"></a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>Docker
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>gazebo_ros2_control<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+<section id="to-run-the-demo">
+<h3>To run the demo<a class="headerlink" href="#to-run-the-demo" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Using Docker</p></li>
+</ol>
+<blockquote>
+<div><p>Docker allows us to run the demo without GUI if we don’t configure it properly. The following command runs the demo without GUI:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>--name<span class="w"> </span>gazebo_ros2_control_demo<span class="w"> </span>--net<span class="w"> </span>host<span class="w"> </span>gazebo_ros2_control<span class="w"> </span>ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>cart_example_position.launch.py<span class="w"> </span>gui:<span class="o">=</span><span class="nb">false</span>
+</pre></div>
+</div>
+<p>The in your local machine you can run the Gazebo Classic client:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>gzclient
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>Using Rocker</p></li>
+</ol>
+<blockquote>
+<div><p>To run the demo with GUI we are going to use <a class="reference external" href="https://github.com/osrf/rocker/">rocker</a> which is a tool to run docker
+images with customized local support injected for things like nvidia support. And user id specific files for cleaner
+mounting file permissions. You can install this tool with the following <a class="reference external" href="https://github.com/osrf/rocker/#installation">instructions</a>.</p>
+<p>The following command will launch Gazebo Classic:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rocker<span class="w"> </span>--x11<span class="w"> </span>--nvidia<span class="w"> </span>--name<span class="w"> </span>gazebo_ros2_control_demo<span class="w"> </span>gazebo_ros2_control:latest
+</pre></div>
+</div>
+<p>The following commands allow to move the cart in the rail:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>gazebo_ros2_control_demo<span class="w"> </span>bash
+<span class="nb">source</span><span class="w"> </span>/home/ros2_ws/install/setup.bash
+ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_position
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+</section>
+<section id="add-ros2-control-tag-to-a-urdf">
+<h2>Add ros2_control tag to a URDF<a class="headerlink" href="#add-ros2-control-tag-to-a-urdf" title="Link to this heading"></a></h2>
+<section id="simple-setup">
+<h3>Simple setup<a class="headerlink" href="#simple-setup" title="Link to this heading"></a></h3>
+<p>To use <em>ros2_control</em> with your robot, you need to add some additional elements to your URDF.
+You should include the tag <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code> to access and control the robot interfaces. We should
+include</p>
+<ul class="simple">
+<li><p>a specific <code class="docutils literal notranslate"><span class="pre">&lt;plugin&gt;</span></code> for our robot</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;joint&gt;</span></code> tag including the robot controllers: commands and states.</p></li>
+</ul>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;GazeboSystem&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;hardware&gt;</span>
+<span class="w">    </span><span class="nt">&lt;plugin&gt;</span>gazebo_ros2_control/GazeboSystem<span class="nt">&lt;/plugin&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/hardware&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;slider_to_cart&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;effort&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;min&quot;</span><span class="nt">&gt;</span>-1000<span class="nt">&lt;/param&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;max&quot;</span><span class="nt">&gt;</span>1000<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/command_interface&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;initial_value&quot;</span><span class="nt">&gt;</span>1.0<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/state_interface&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;effort&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
+<span class="nt">&lt;/ros2_control&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="using-mimic-joints-in-simulation">
+<h3>Using mimic joints in simulation<a class="headerlink" href="#using-mimic-joints-in-simulation" title="Link to this heading"></a></h3>
+<p>To use <code class="docutils literal notranslate"><span class="pre">mimic</span></code> joints in <em>gazebo_ros2_control</em> you should define its parameters in your URDF, i.e, set the <code class="docutils literal notranslate"><span class="pre">&lt;mimic&gt;</span></code> tag to the mimicked joint (see the <a class="reference external" href="https://wiki.ros.org/urdf/XML/joint">URDF specification</a>)</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;right_finger_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;prismatic&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;axis</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 1 0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0.0 -0.48 1&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0.0 0.0 0.0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;base&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;finger_right&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;limit</span><span class="w"> </span><span class="na">effort=</span><span class="s">&quot;1000.0&quot;</span><span class="w"> </span><span class="na">lower=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">upper=</span><span class="s">&quot;0.38&quot;</span><span class="w"> </span><span class="na">velocity=</span><span class="s">&quot;10&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/joint&gt;</span>
+<span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;left_finger_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;prismatic&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;mimic</span><span class="w"> </span><span class="na">joint=</span><span class="s">&quot;right_finger_joint&quot;</span><span class="w"> </span><span class="na">multiplier=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="na">offset=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;axis</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 1 0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0.0 0.48 1&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0.0 0.0 3.1415926535&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;base&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;finger_left&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;limit</span><span class="w"> </span><span class="na">effort=</span><span class="s">&quot;1000.0&quot;</span><span class="w"> </span><span class="na">lower=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">upper=</span><span class="s">&quot;0.38&quot;</span><span class="w"> </span><span class="na">velocity=</span><span class="s">&quot;10&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/joint&gt;</span>
+</pre></div>
+</div>
+<p>The mimic joint must not have command interfaces configured in the <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code> tag, but state interfaces can be configured.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Independent of the interface type of the mimicked joint in the <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code> tag, the mimic joint will use the position interface of the gazebo classic physic engine to follow the position of the mimicked joint.</p>
+</div>
+</section>
+<section id="using-pid-control-joints">
+<h3>Using PID control joints<a class="headerlink" href="#using-pid-control-joints" title="Link to this heading"></a></h3>
+<p>To use PID control joints in gazebo_ros2_control, you should define their parameters inside the <code class="docutils literal notranslate"><span class="pre">&lt;joint&gt;</span></code> tag
+within the <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code> tag. These PID joints can be controlled either in position or velocity.</p>
+<ul class="simple">
+<li><p>To control a joint with velocity PID, simply set its <code class="docutils literal notranslate"><span class="pre">command_interface</span></code> to <code class="docutils literal notranslate"><span class="pre">velocity_PID</span></code>.</p></li>
+<li><p>To control a joint with position PID, set its <code class="docutils literal notranslate"><span class="pre">command_interface</span></code> to <code class="docutils literal notranslate"><span class="pre">position_PID</span></code>.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You cannot have both command interfaces set to position and position_PID for the same joint. The same restriction applies to velocity (and velocity_PID).</p>
+</div>
+<p>To create a system with one joint that can be controlled using both position_PID and velocity_PID, follow this example:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;GazeboSystem&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<span class="w">   </span><span class="nt">&lt;hardware&gt;</span>
+<span class="w">     </span><span class="nt">&lt;plugin&gt;</span>gazebo_ros2_control/GazeboSystem<span class="nt">&lt;/plugin&gt;</span>
+<span class="w">   </span><span class="nt">&lt;/hardware&gt;</span>
+<span class="w">   </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;slider_to_cart&quot;</span><span class="nt">&gt;</span>
+
+<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;pos_kp&quot;</span><span class="nt">&gt;</span>10<span class="nt">&lt;/param&gt;</span>
+<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;pos_ki&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/param&gt;</span>
+<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;pos_kd&quot;</span><span class="nt">&gt;</span>2<span class="nt">&lt;/param&gt;</span>
+<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;pos_max_integral_error&quot;</span><span class="nt">&gt;</span>10000<span class="nt">&lt;/param&gt;</span>
+
+<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;vel_kp&quot;</span><span class="nt">&gt;</span>10<span class="nt">&lt;/param&gt;</span>
+<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;vel_ki&quot;</span><span class="nt">&gt;</span>5<span class="nt">&lt;/param&gt;</span>
+<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;vel_kd&quot;</span><span class="nt">&gt;</span>2<span class="nt">&lt;/param&gt;</span>
+<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;vel_max_integral_error&quot;</span><span class="nt">&gt;</span>10000<span class="nt">&lt;/param&gt;</span>
+
+<span class="w">     </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position_PID&quot;</span><span class="nt">/&gt;</span>
+<span class="w">     </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity_PID&quot;</span><span class="nt">/&gt;</span>
+
+<span class="w">     </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
+<span class="w">       </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;initial_value&quot;</span><span class="nt">&gt;</span>1.0<span class="nt">&lt;/param&gt;</span>
+<span class="w">     </span><span class="nt">&lt;/state_interface&gt;</span>
+<span class="w">     </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
+<span class="w">     </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;effort&quot;</span><span class="nt">/&gt;</span>
+<span class="w">   </span><span class="nt">&lt;/joint&gt;</span>
+<span class="w"> </span><span class="nt">&lt;/ros2_control&gt;</span>
+</pre></div>
+</div>
+<p>Where the parameters are as follows:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pos_kp</span></code>: Proportional gain</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pos_ki</span></code>: Integral gain</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pos_kd</span></code>: Derivative gain</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pos_max_integral_error</span></code>: Maximum summation of the error</p></li>
+</ul>
+<p>The same definitions apply to the <code class="docutils literal notranslate"><span class="pre">vel_*</span></code> parameters.</p>
+</section>
+</section>
+<section id="add-the-gazebo-ros2-control-plugin">
+<h2>Add the gazebo_ros2_control plugin<a class="headerlink" href="#add-the-gazebo-ros2-control-plugin" title="Link to this heading"></a></h2>
+<p>In addition to the <em>ros2_control</em> tags, a Gazebo plugin needs to be added to your URDF that
+actually parses the <em>ros2_control</em> tags and loads the appropriate hardware interfaces and
+controller manager. By default the <em>gazebo_ros2_control</em> plugin is very simple, though it is also
+extensible via an additional plugin architecture to allow power users to create their own custom
+robot hardware interfaces between <em>ros2_control</em> and Gazebo Classic.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo&gt;</span>
+<span class="w">    </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgazebo_ros2_control.so&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gazebo_ros2_control&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;robot_param&gt;</span>robot_description<span class="nt">&lt;/robot_param&gt;</span>
+<span class="w">      </span><span class="nt">&lt;robot_param_node&gt;</span>robot_state_publisher<span class="nt">&lt;/robot_param_node&gt;</span>
+<span class="w">      </span><span class="nt">&lt;parameters&gt;</span>$(find<span class="w"> </span>gazebo_ros2_control_demos)/config/cart_controller.yaml<span class="nt">&lt;/parameters&gt;</span>
+<span class="w">      </span><span class="nt">&lt;controller_manager_name&gt;</span>simulation_controller_manager<span class="nt">&lt;/controller_manager_name&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/plugin&gt;</span>
+<span class="nt">&lt;/gazebo&gt;</span>
+</pre></div>
+</div>
+<p>The <em>gazebo_ros2_control</em> <code class="docutils literal notranslate"><span class="pre">&lt;plugin&gt;</span></code> tag also has the following optional child elements:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;robot_param&gt;</span></code>: The location of the <code class="docutils literal notranslate"><span class="pre">robot_description</span></code> (URDF) on the parameter server, defaults to <code class="docutils literal notranslate"><span class="pre">robot_description</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;robot_param_node&gt;</span></code>: Name of the node where the <code class="docutils literal notranslate"><span class="pre">robot_param</span></code> is located, defaults to <code class="docutils literal notranslate"><span class="pre">robot_state_publisher</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;parameters&gt;</span></code>: YAML file with the configuration of the controllers</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;hold_joints&gt;</span></code>: if set to true (default), it will hold the joints’ position if their interface was not claimed, e.g., the controller hasn’t been activated yet.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;controller_manager_name&gt;</span></code>: Set controller manager name (default: <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code>)</p></li>
+</ul>
+<section id="default-gazebo-ros2-control-behavior">
+<h3>Default gazebo_ros2_control Behavior<a class="headerlink" href="#default-gazebo-ros2-control-behavior" title="Link to this heading"></a></h3>
+<p>By default, without a <code class="docutils literal notranslate"><span class="pre">&lt;plugin&gt;</span></code> tag, <em>gazebo_ros2_control</em> will attempt to get all of the information it needs to interface with a ros2_control-based controller out of the URDF. This is sufficient for most cases, and good for at least getting started.</p>
+<p>The default behavior provides the following ros2_control interfaces:</p>
+<ul class="simple">
+<li><p>hardware_interface::JointStateInterface</p></li>
+<li><p>hardware_interface::EffortJointInterface</p></li>
+<li><p>hardware_interface::VelocityJointInterface</p></li>
+</ul>
+</section>
+<section id="advanced-custom-gazebo-ros2-control-simulation-plugins">
+<h3>Advanced: custom gazebo_ros2_control Simulation Plugins<a class="headerlink" href="#advanced-custom-gazebo-ros2-control-simulation-plugins" title="Link to this heading"></a></h3>
+<p>The <em>gazebo_ros2_control</em> Gazebo plugin also provides a pluginlib-based interface to implement custom interfaces between Gazebo Classic and <em>ros2_control</em> for simulating more complex mechanisms (nonlinear springs, linkages, etc).</p>
+<p>These plugins must inherit <code class="docutils literal notranslate"><span class="pre">gazebo_ros2_control::GazeboSystemInterface</span></code> which implements a simulated <em>ros2_control</em>
+<code class="docutils literal notranslate"><span class="pre">hardware_interface::SystemInterface</span></code>. SystemInterface provides API-level access to read and command joint properties.</p>
+<p>The respective GazeboSystemInterface sub-class is specified in a URDF model and is loaded when the
+robot model is loaded. For example, the following XML will load the default plugin:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;GazeboSystem&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;hardware&gt;</span>
+<span class="w">    </span><span class="nt">&lt;plugin&gt;</span>gazebo_ros2_control/GazeboSystem<span class="nt">&lt;/plugin&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/hardware&gt;</span>
+<span class="w">  </span>...
+<span class="nt">&lt;ros2_control&gt;</span>
+<span class="nt">&lt;gazebo&gt;</span>
+<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gazebo_ros2_control&quot;</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgazebo_ros2_control.so&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span>...
+<span class="w">  </span><span class="nt">&lt;/plugin&gt;</span>
+<span class="nt">&lt;/gazebo&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="set-up-controllers">
+<h3>Set up controllers<a class="headerlink" href="#set-up-controllers" title="Link to this heading"></a></h3>
+<p>Use the tag <code class="docutils literal notranslate"><span class="pre">&lt;parameters&gt;</span></code> inside <code class="docutils literal notranslate"><span class="pre">&lt;plugin&gt;</span></code> to set the YAML file with the controller configuration.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo&gt;</span>
+<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gazebo_ros2_control&quot;</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgazebo_ros2_control.so&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;parameters&gt;</span>$(find<span class="w"> </span>gazebo_ros2_control_demos)/config/cart_controller.yaml<span class="nt">&lt;/parameters&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/plugin&gt;</span>
+<span class="nt">&lt;gazebo&gt;</span>
+</pre></div>
+</div>
+<p>The following is a basic configuration of the controllers:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">joint_state_broadcaster</span></code>: This controller publishes the state of all resources registered to a <code class="docutils literal notranslate"><span class="pre">hardware_interface::StateInterface</span></code> to a topic of type <code class="docutils literal notranslate"><span class="pre">sensor_msgs/msg/JointState</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">joint_trajectory_controller</span></code>: This controller creates an action called <code class="docutils literal notranslate"><span class="pre">/joint_trajectory_controller/follow_joint_trajectory</span></code> of type <code class="docutils literal notranslate"><span class="pre">control_msgs::action::FollowJointTrajectory</span></code>.</p></li>
+</ul>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">controller_manager</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">update_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span><span class="w">  </span><span class="c1"># Hz</span>
+
+<span class="w">    </span><span class="nt">joint_trajectory_controller</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint_trajectory_controller/JointTrajectoryController</span>
+
+<span class="w">    </span><span class="nt">joint_state_broadcaster</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint_state_broadcaster/JointStateBroadcaster</span>
+
+<span class="nt">joint_trajectory_controller</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">joints</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">slider_to_cart</span>
+<span class="w">    </span><span class="nt">command_interfaces</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
+<span class="w">    </span><span class="nt">state_interfaces</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">velocity</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="gazebo-ros2-control-demos">
+<h2>gazebo_ros2_control_demos<a class="headerlink" href="#gazebo-ros2-control-demos" title="Link to this heading"></a></h2>
+<p>This package contains the contents for testing gazebo_ros2_control. It is running Gazebo Classic and some other ROS 2 nodes.</p>
+<p>There are some examples in the <em>Gazebo_ros2_control_demos</em> package.</p>
+<section id="cart-on-rail">
+<h3>Cart on rail<a class="headerlink" href="#cart-on-rail" title="Link to this heading"></a></h3>
+<p>These examples allow to launch a cart in a 30 meter rail.</p>
+<img alt="Cart" src="../../../_images/cart.gif" />
+<p>You can run some of the configuration running the following commands:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>cart_example_position.launch.py
+ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>cart_example_velocity.launch.py
+ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>cart_example_effort.launch.py
+</pre></div>
+</div>
+<p>When the Gazebo world is launched you can run some of the following commands to move the cart.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_position
+ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_position_pid
+ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_velocity
+ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_effort
+</pre></div>
+</div>
+</section>
+<section id="mobile-robots">
+<h3>Mobile robots<a class="headerlink" href="#mobile-robots" title="Link to this heading"></a></h3>
+<p>You can run some of the mobile robots running the following commands:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>diff_drive.launch.py
+ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>tricycle_drive.launch.py
+</pre></div>
+</div>
+<p>When the Gazebo world is launched you can run some of the following commands to move the robots.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_diff_drive
+ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_tricycle_drive
+</pre></div>
+</div>
+</section>
+<section id="gripper">
+<h3>Gripper<a class="headerlink" href="#gripper" title="Link to this heading"></a></h3>
+<p>The following example shows a parallel gripper with a mimic joint:</p>
+<img alt="Cart" src="../../../_images/gripper.gif" />
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>gripper_mimic_joint_example_position.launch.py
+</pre></div>
+</div>
+<img alt="Gripper" src="../../../_images/gripper.gif" />
+<p>To demonstrate the setup of the initial position and a position-mimicked joint in
+case of an effort command interface of the joint to be mimicked, run</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>gripper_mimic_joint_example_effort.launch.py
+</pre></div>
+</div>
+<p>instead.</p>
+<p>Send example commands with</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_gripper
+</pre></div>
+</div>
+</section>
+<section id="pendulum-with-passive-joints">
+<h3>Pendulum with passive joints<a class="headerlink" href="#pendulum-with-passive-joints" title="Link to this heading"></a></h3>
+<p>The following example shows a cart with a pendulum arm. This uses the effort command interface for the cart’s
+degree of freedom on the rail, and the physics of the passive joint of the pendulum is solved correctly.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>pendulum_example_effort.launch.py
+ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_effort
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the position command interface is used instead, the motion of the pendulum is not calculated correctly and does not move at all, see this <a class="reference external" href="https://github.com/ros-controls/gazebo_ros2_control/issues/240">PR</a>. This also holds true if a mimicked joint with position interface is used. To demonstrate this, run</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>pendulum_example_position.launch.py
+ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_position
+</pre></div>
+</div>
+</div>
+</section>
+<section id="pid-control-joints">
+<h3>PID control joints<a class="headerlink" href="#pid-control-joints" title="Link to this heading"></a></h3>
+<p>The following examples shows a vertical cart control by a PID joint using position and velocity cmd.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>vertical_cart_example_position_pid.launch.py
+ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>vertical_cart_example_velocity_pid.launch.py
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_position_pid
+ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_velocity
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../gz_ros2_control/doc/index.html" class="btn btn-neutral float-left" title="gz_ros2_control" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../release_notes/release_notes.html" class="btn btn-neutral float-right" title="Release Notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: jazzy
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Releases</dt>
+        <dd><a href="../../../../iron/doc/gazebo_ros2_control/doc/index.html">Iron (latest)</a></dd><br>
+        <dd><a href="../../../../humble/doc/gazebo_ros2_control/doc/index.html">Humble</a></dd><br>
+        <dd><a href="../../../../galactic/index.html">Galactic (EOL)</a></dd><br>
+        
+        <dd><a href="../../../../foxy/index.html">Foxy (EOL)</a></dd><br>
+        
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="../../../../rolling/doc/gazebo_ros2_control/doc/index.html">Rolling</a></dd>
+      <dd><a href="index.html">Jazzy</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

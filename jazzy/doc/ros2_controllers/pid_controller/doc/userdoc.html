@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PID Controller &mdash; ROS2_Control: Jazzy May 2024 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/reviewer_stats.css?v=068b34ac" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//jazzy/doc/ros2_controllers/pid_controller/doc/userdoc.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=dbc0e75d"></script>
+        <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+        <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="position_controllers" href="../../position_controllers/doc/userdoc.html" />
+    <link rel="prev" title="rqt_joint_trajectory_controller" href="../../rqt_joint_trajectory_controller/doc/userdoc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html">ros2_control</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/controllers_index.html">ros2_controllers</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#guidelines-and-best-practices">Guidelines and Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#controllers-for-mobile-robots">Controllers for Mobile Robots</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/controllers_index.html#controllers-for-manipulators-and-other-robots">Controllers for Manipulators and Other Robots</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../admittance_controller/doc/userdoc.html">Admittance Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../effort_controllers/doc/userdoc.html">Effort Controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../forward_command_controller/doc/userdoc.html">Forward Command Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../gripper_controllers/doc/userdoc.html">Gripper Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../joint_trajectory_controller/doc/userdoc.html">Joint Trajectory Controller</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">PID Controller</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#execution-logic-of-the-controller">Execution logic of the controller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-the-controller">Using the controller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#description-of-controller-s-interfaces">Description of controller’s interfaces</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#references-from-a-preceding-controller">References (from a preceding controller)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#commands">Commands</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#states">States</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#subscribers">Subscribers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#services">Services</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#publishers">Publishers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#parameters">Parameters</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#list-of-parameters">List of parameters</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#an-example-parameter-file">An example parameter file</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../position_controllers/doc/userdoc.html">Position Controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../velocity_controllers/doc/userdoc.html">Velocity Controllers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#broadcasters">Broadcasters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#common-controller-parameters">Common Controller Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes/release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../migration/migration.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_list/api_list.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../project_ideas.html">Project Ideas for GSoC 2024</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ROS2_Control: Jazzy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../doc/controllers_index.html">ros2_controllers</a></li>
+      <li class="breadcrumb-item active">PID Controller</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ros-controls/ros2_controllers/blob/jazzy/pid_controller/doc/userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for a development version.
+    For the latest released version, please have a look at <a href="../../../../../iron/index.html">Iron</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="pid-controller">
+<span id="pid-controller-userdoc"></span><h1>PID Controller<a class="headerlink" href="#pid-controller" title="Link to this heading"></a></h1>
+<p>PID Controller implementation that uses PidROS implementation from <a class="reference external" href="https://github.com/ros-controls/control_toolbox/">control_toolbox</a> package.
+The controller can be used directly by sending references through a topic or in a chain having preceding or following controllers.
+It also enables to use the first derivative of the reference and its feedback to have second-order PID control.</p>
+<p>Depending on the reference/state and command interface of the hardware a different parameter setup of PidROS should be used as for example:</p>
+<ul class="simple">
+<li><p>reference/state POSITION; command VELOCITY –&gt; PI CONTROLLER</p></li>
+<li><p>reference/state VELOCITY; command ACCELERATION –&gt; PI CONTROLLER</p></li>
+<li><p>reference/state VELOCITY; command POSITION –&gt; PD CONTROLLER</p></li>
+<li><p>reference/state ACCELERATION; command VELOCITY –&gt; PD CONTROLLER</p></li>
+<li><p>reference/state POSITION; command POSITION –&gt; PID CONTROLLER</p></li>
+<li><p>reference/state VELOCITY; command VELOCITY –&gt; PID CONTROLLER</p></li>
+<li><p>reference/state ACCELERATION; command ACCELERATION –&gt; PID CONTROLLER</p></li>
+<li><p>reference/state EFFORT; command EFFORT –&gt; PID CONTROLLER</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Theoretically one can misuse <a class="reference internal" href="../../joint_trajectory_controller/doc/userdoc.html#joint-trajectory-controller-userdoc"><span class="std std-ref">Joint Trajectory Controller (JTC)</span></a> for the same purpose by sending only one reference point into it.
+Nevertheless, this is not recommended. JTC should be used if you need to interpolate between trajectory points using linear, cubic or quintic interpolation. PID Controller doesn’t do that.
+PID term of JTC has different purpose - it enables commanding only <code class="docutils literal notranslate"><span class="pre">velocity</span></code> or <code class="docutils literal notranslate"><span class="pre">effort</span></code> interfaces to hardware.</p>
+</div>
+<section id="execution-logic-of-the-controller">
+<h2>Execution logic of the controller<a class="headerlink" href="#execution-logic-of-the-controller" title="Link to this heading"></a></h2>
+<p>The controller can be also used in “feed-forward” mode where feed-forward gain is used to increase controllers dynamics.
+If one type of the reference and state interfaces is used, only immediate error is used. If there are two, then the second interface type is considered to be the first derivative of the first type.
+For example a valid combination would be <code class="docutils literal notranslate"><span class="pre">position</span></code> and <code class="docutils literal notranslate"><span class="pre">velocity</span></code> interface types.</p>
+</section>
+<section id="using-the-controller">
+<h2>Using the controller<a class="headerlink" href="#using-the-controller" title="Link to this heading"></a></h2>
+<p>Pluginlib-Library: pid_controller
+Plugin name: pid_controller/PidController</p>
+</section>
+<section id="description-of-controller-s-interfaces">
+<h2>Description of controller’s interfaces<a class="headerlink" href="#description-of-controller-s-interfaces" title="Link to this heading"></a></h2>
+<section id="references-from-a-preceding-controller">
+<h3>References (from a preceding controller)<a class="headerlink" href="#references-from-a-preceding-controller" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>&lt;reference_and_state_dof_names[i]&gt;/&lt;reference_and_state_interfaces[j]&gt;  [double]
+<strong>NOTE</strong>: <code class="docutils literal notranslate"><span class="pre">reference_and_state_dof_names[i]</span></code> can be from <code class="docutils literal notranslate"><span class="pre">reference_and_state_dof_names</span></code> parameter, or if it is empty then <code class="docutils literal notranslate"><span class="pre">dof_names</span></code>.</p></li>
+</ul>
+</section>
+<section id="commands">
+<h3>Commands<a class="headerlink" href="#commands" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>&lt;dof_names[i]&gt;/&lt;command_interface&gt;  [double]</p></li>
+</ul>
+</section>
+<section id="states">
+<h3>States<a class="headerlink" href="#states" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>&lt;reference_and_state_dof_names[i]&gt;/&lt;reference_and_state_interfaces[j]&gt;  [double]
+<strong>NOTE</strong>: <code class="docutils literal notranslate"><span class="pre">reference_and_state_dof_names[i]</span></code> can be from <code class="docutils literal notranslate"><span class="pre">reference_and_state_dof_names</span></code> parameter, or if it is empty then <code class="docutils literal notranslate"><span class="pre">dof_names</span></code>.</p></li>
+</ul>
+</section>
+<section id="subscribers">
+<h3>Subscribers<a class="headerlink" href="#subscribers" title="Link to this heading"></a></h3>
+<p>If controller is not in chained mode (<code class="docutils literal notranslate"><span class="pre">in_chained_mode</span> <span class="pre">==</span> <span class="pre">false</span></code>):</p>
+<ul class="simple">
+<li><p>&lt;controller_name&gt;/reference  [control_msgs/msg/MultiDOFCommand]</p></li>
+</ul>
+<p>If controller parameter <code class="docutils literal notranslate"><span class="pre">use_external_measured_states</span></code> is true:</p>
+<ul class="simple">
+<li><p>&lt;controller_name&gt;/measured_state  [control_msgs/msg/MultiDOFCommand]</p></li>
+</ul>
+</section>
+<section id="services">
+<h3>Services<a class="headerlink" href="#services" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>&lt;controller_name&gt;/set_feedforward_control  [std_srvs/srv/SetBool]</p></li>
+</ul>
+</section>
+<section id="publishers">
+<h3>Publishers<a class="headerlink" href="#publishers" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>&lt;controller_name&gt;/controller_state  [control_msgs/msg/MultiDOFStateStamped]</p></li>
+</ul>
+</section>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
+<p>The PID controller uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters.</p>
+<section id="list-of-parameters">
+<h4>List of parameters<a class="headerlink" href="#list-of-parameters" title="Link to this heading"></a></h4>
+<dl>
+<dt>dof_names (string_array)</dt><dd><p>Specifies dof_names or axes used by the controller. If ‘reference_and_state_dof_names’ parameter is defined, then only command dof names are defined with this parameter.</p>
+<p>Read only: True</p>
+<p>Default:  {}</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>contains no duplicates</p></li>
+<li><p>parameter is not empty</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>reference_and_state_dof_names (string_array)</dt><dd><p>(optional) Specifies dof_names or axes for getting reference and reading states. This parameter is only relevant when state dof names are different then command dof names, i.e., when a following controller is used.</p>
+<p>Read only: True</p>
+<p>Default:  {}</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>contains no duplicates</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>command_interface (string)</dt><dd><p>Name of the interface used by the controller for writing commands to the hardware.</p>
+<p>Read only: True</p>
+<p>Default:  “”</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>parameter is not empty</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>reference_and_state_interfaces (string_array)</dt><dd><p>Name of the interfaces used by the controller getting hardware states and reference commands. The second interface should be the derivative of the first.</p>
+<p>Read only: True</p>
+<p>Default:  {}</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>parameter is not empty</p></li>
+<li><p>length is less than 3</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>use_external_measured_states (bool)</dt><dd><p>Use external states from a topic instead from state interfaces.</p>
+<p>Default:  false</p>
+</dd>
+<dt>gains.&lt;dof_names&gt;.p (double)</dt><dd><p>Proportional gain for PID</p>
+<p>Default:  0.0</p>
+</dd>
+<dt>gains.&lt;dof_names&gt;.i (double)</dt><dd><p>Integral gain for PID</p>
+<p>Default:  0.0</p>
+</dd>
+<dt>gains.&lt;dof_names&gt;.d (double)</dt><dd><p>Derivative gain for PID</p>
+<p>Default:  0.0</p>
+</dd>
+<dt>gains.&lt;dof_names&gt;.antiwindup (bool)</dt><dd><p>Antiwindup functionality.</p>
+<p>Default:  false</p>
+</dd>
+<dt>gains.&lt;dof_names&gt;.i_clamp_max (double)</dt><dd><p>Upper integral clamp. Only used if antiwindup is activated.</p>
+<p>Default:  0.0</p>
+</dd>
+<dt>gains.&lt;dof_names&gt;.i_clamp_min (double)</dt><dd><p>Lower integral clamp. Only used if antiwindup is activated.</p>
+<p>Default:  0.0</p>
+</dd>
+<dt>gains.&lt;dof_names&gt;.feedforward_gain (double)</dt><dd><p>Gain for the feed-forward part.</p>
+<p>Default:  0.0</p>
+</dd>
+<dt>gains.&lt;dof_names&gt;.angle_wraparound (bool)</dt><dd><p>For joints that wrap around (i.e., are continuous). Normalizes position-error to -pi to pi.</p>
+<p>Default:  false</p>
+</dd>
+</dl>
+</section>
+<section id="an-example-parameter-file">
+<h4>An example parameter file<a class="headerlink" href="#an-example-parameter-file" title="Link to this heading"></a></h4>
+<p>An example parameter file for this controller can be found in <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/jazzy/pid_controller/test/pid_controller_params.yaml">the test folder (standalone)</a>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test_pid_controller</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">dof_names</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint1</span>
+
+<span class="w">    </span><span class="nt">command_interface</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
+
+<span class="w">    </span><span class="nt">reference_and_state_interfaces</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;position&quot;</span><span class="p p-Indicator">]</span>
+
+<span class="w">    </span><span class="nt">gains</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">joint1</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">p</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="nt"> i</span><span class="p">:</span><span class="w"> </span><span class="nv">2.0</span><span class="p p-Indicator">,</span><span class="nt"> d</span><span class="p">:</span><span class="w"> </span><span class="nv">10.0</span><span class="p p-Indicator">,</span><span class="nt"> i_clamp_max</span><span class="p">:</span><span class="w"> </span><span class="nv">5.0</span><span class="p p-Indicator">,</span><span class="nt"> i_clamp_min</span><span class="p">:</span><span class="w"> </span><span class="nv">-5.0</span><span class="p p-Indicator">}</span>
+</pre></div>
+</div>
+<p>or as <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/jazzy/pid_controller/test/pid_controller_preceding_params.yaml">preceding controller</a>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test_pid_controller</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">dof_names</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint1</span>
+
+<span class="w">    </span><span class="nt">command_interface</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
+
+<span class="w">    </span><span class="nt">reference_and_state_interfaces</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;position&quot;</span><span class="p p-Indicator">]</span>
+
+<span class="w">    </span><span class="nt">reference_and_state_dof_names</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint1state</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../rqt_joint_trajectory_controller/doc/userdoc.html" class="btn btn-neutral float-left" title="rqt_joint_trajectory_controller" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../position_controllers/doc/userdoc.html" class="btn btn-neutral float-right" title="position_controllers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: jazzy
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Releases</dt>
+        <dd><a href="../../../../../iron/index.html">Iron (latest)</a></dd><br>
+        <dd><a href="../../../../../humble/index.html">Humble</a></dd><br>
+        <dd><a href="../../../../../galactic/index.html">Galactic (EOL)</a></dd><br>
+        
+        <dd><a href="../../../../../foxy/index.html">Foxy (EOL)</a></dd><br>
+        
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="../../../../../rolling/doc/ros2_controllers/pid_controller/doc/userdoc.html">Rolling</a></dd>
+      <dd><a href="userdoc.html">Jazzy</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

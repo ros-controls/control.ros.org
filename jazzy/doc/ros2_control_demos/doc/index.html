@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demos &mdash; ROS2_Control: Jazzy May 2024 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/reviewer_stats.css?v=068b34ac" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//jazzy/doc/ros2_control_demos/doc/index.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=dbc0e75d"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+        <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Example 1: RRBot" href="../example_1/doc/userdoc.html" />
+    <link rel="prev" title="Range Sensor Broadcaster" href="../../ros2_controllers/range_sensor_broadcaster/doc/userdoc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_control/doc/index.html">ros2_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Demos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-you-can-find-in-this-repository">What you can find in this repository</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#goals">Goals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples-overview">Examples Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#local-installation">Local installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#build-from-debian-packages">Build from debian packages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-from-source">Build from source</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#using-docker">Using Docker</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#to-view-the-robot">To view the robot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#to-run-the-ros2-control-demos">To run the ros2_control demos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#quick-hints">Quick Hints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../example_1/doc/userdoc.html">Example 1: RRBot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../example_2/doc/userdoc.html">Example 2: DiffBot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../example_3/doc/userdoc.html">Example 3: RRBot with multiple interfaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../example_4/doc/userdoc.html">Example 4: Industrial robot with integrated sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../example_5/doc/userdoc.html">Example 5: Industrial robots with externally connected sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../example_6/doc/userdoc.html">Example 6: Modular robots with separate communication to each actuator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../example_7/doc/userdoc.html">Example 7: Full tutorial with a 6DOF robot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../example_8/doc/userdoc.html">Example 8: Using transmissions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../example_9/doc/userdoc.html">Example 9: Gazebo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../example_10/doc/userdoc.html">Example 10: Industrial robot with GPIO interfaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../example_11/doc/userdoc.html">Example 11: CarlikeBot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../example_12/doc/userdoc.html">Example 12: Controller chaining</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../example_14/doc/userdoc.html">Example 14: Modular robots with actuators not providing states</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_control/ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes/release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration/migration.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_list/api_list.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../project_ideas.html">Project Ideas for GSoC 2024</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ROS2_Control: Jazzy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Demos</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ros-controls/ros2_control_demos/blob/jazzy/doc/index.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for a development version.
+    For the latest released version, please have a look at <a href="../../../../iron/doc/ros2_control_demos/doc/index.html">Iron</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="demos">
+<span id="ros2-control-demos"></span><h1>Demos<a class="headerlink" href="#demos" title="Link to this heading"></a></h1>
+<p>This <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos">GitHub Repository</a>
+provides templates for the development of <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code>-enabled robots and simple simulations to demonstrate and prove <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> concepts.</p>
+<p>If you want to have a rather step by step manual how to do things with <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> checkout <a class="reference external" href="https://github.com/ros-controls/roscon2022_workshop">ros-control/roscon2022_workshop</a> repository.</p>
+<section id="what-you-can-find-in-this-repository">
+<h2>What you can find in this repository<a class="headerlink" href="#what-you-can-find-in-this-repository" title="Link to this heading"></a></h2>
+<p>This repository demonstrates the following <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> concepts:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Creating a <code class="docutils literal notranslate"><span class="pre">HardwareInterface</span></code> for a System, Sensor, and Actuator.</p></li>
+<li><p>Creating a robot description in the form of URDF files.</p></li>
+<li><p>Loading the configuration and starting a robot using launch files.</p></li>
+<li><p>Control of a differential mobile base <em>DiffBot</em>.</p></li>
+<li><p>Control of two joints of <em>RRBot</em>.</p></li>
+<li><p>Control of a 6-degrees-of-freedom robot.</p></li>
+<li><p>Implementing a controller switching strategy for a robot.</p></li>
+<li><p>Using joint limits and transmission concepts in <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code>.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="goals">
+<h2>Goals<a class="headerlink" href="#goals" title="Link to this heading"></a></h2>
+<p>The repository has two other goals:</p>
+<ol class="arabic simple">
+<li><p>Implements the example configuration described in the <code class="docutils literal notranslate"><span class="pre">ros-controls/roadmap</span></code> repository file <a class="reference external" href="https://github.com/ros-controls/roadmap/blob/master/design_drafts/components_architecture_and_urdf_examples.md">components_architecture_and_urdf_examples</a>.</p></li>
+<li><p>The repository is a validation environment for <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> concepts, which can only be tested during run-time (e.g., execution of controllers by the controller manager, communication between robot hardware and controllers).</p></li>
+</ol>
+</section>
+<section id="examples-overview">
+<h2>Examples Overview<a class="headerlink" href="#examples-overview" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>Example 1: RRBot</dt><dd><p><em>RRBot</em> - or ‘’Revolute-Revolute Manipulator Robot’’ - a simple position controlled robot with one hardware interface. This example also demonstrates the switching between different controllers.</p>
+</dd>
+<dt>Example 2: DiffBot</dt><dd><p><em>DiffBot</em>, or ‘’Differential Mobile Robot’’, is a simple mobile base with differential drive.
+The robot is basically a box moving according to differential drive kinematics.</p>
+</dd>
+<dt>Example 3: “RRBot with multiple interfaces”</dt><dd><p><em>RRBot</em> with multiple interfaces.</p>
+</dd>
+<dt>Example 4: “Industrial robot with integrated sensor”</dt><dd><p><em>RRBot</em> with an integrated sensor.</p>
+</dd>
+<dt>Example 5: “Industrial robot with externally connected sensor”</dt><dd><p><em>RRBot</em> with an externally connected sensor.</p>
+</dd>
+<dt>Example 6: “Modular robot with separate communication to each actuator”</dt><dd><p>The example shows how to implement robot hardware with separate communication to each actuator.</p>
+</dd>
+<dt>Example 7: “6-DOF robot”</dt><dd><p>A full tutorial for a 6 DOF robot for intermediate ROS 2 users.</p>
+</dd>
+<dt>Example 8: “Using transmissions”</dt><dd><p><em>RRBot</em> with an exposed transmission interface.</p>
+</dd>
+<dt>Example 9: “Gazebo Classic”</dt><dd><p>Demonstrates how to switch between simulation and hardware.</p>
+</dd>
+<dt>Example 10: “GPIO interfaces”</dt><dd><p>Industrial robot with GPIO interfaces</p>
+</dd>
+<dt>Example 11: “CarlikeBot”</dt><dd><p><em>CarlikeBot</em> with a bicycle steering controller</p>
+</dd>
+<dt>Example 12: “Controller chaining”</dt><dd><p>The example shows a simple chainable controller and its integration to form a controller chain to control the joints of <em>RRBot</em>.</p>
+</dd>
+</dl>
+<p>Example 13: “Multi-robot example (tba.)”</p>
+<p>Example 14: “Modular robots with actuators not providing states and with additional sensors”</p>
+</section>
+<section id="installation">
+<span id="ros2-control-demos-install"></span><h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
+<p>You can install the demos locally or use the provided docker file.</p>
+<section id="local-installation">
+<h3>Local installation<a class="headerlink" href="#local-installation" title="Link to this heading"></a></h3>
+<p>If you have ROS 2 installed already, choose the right version of this documentation and branch of the <code class="docutils literal notranslate"><span class="pre">ros2_control_demos</span></code> repository matching you ROS 2 distribution, see <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos#build-status">this table</a>.</p>
+<p>Otherwise, install <a class="reference external" href="https://docs.ros.org/en/jazzy/Installation.html">ROS 2 jazzy on your computer</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> and <code class="docutils literal notranslate"><span class="pre">ros2_controllers</span></code> packages are released and can be installed using a package manager.
+We provide officially released and maintained debian packages, which can easily be installed via aptitude.
+However, there might be cases in which not-yet released demos or features are only available through a source build in your own workspace.</p>
+</div>
+<section id="build-from-debian-packages">
+<h4>Build from debian packages<a class="headerlink" href="#build-from-debian-packages" title="Link to this heading"></a></h4>
+<p>Download the <code class="docutils literal notranslate"><span class="pre">ros2_control_demos</span></code> repository and install its dependencies with</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/ros2_ws/src
+<span class="nb">cd</span><span class="w"> </span>~/ros2_ws/src
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ros-controls/ros2_control_demos<span class="w"> </span>-b<span class="w"> </span>jazzy
+<span class="nb">cd</span><span class="w"> </span>~/ros2_ws/
+rosdep<span class="w"> </span>update<span class="w"> </span>--rosdistro<span class="o">=</span><span class="nv">$ROS_DISTRO</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>rosdep<span class="w"> </span>install<span class="w"> </span>--from-paths<span class="w"> </span>./<span class="w"> </span>-i<span class="w"> </span>-y<span class="w"> </span>--rosdistro<span class="w"> </span><span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>
+</pre></div>
+</div>
+<p>Now you can build the repository (source your ROS 2 installation first)</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/ros2_ws/
+.<span class="w"> </span>/opt/ros/<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>/setup.sh
+colcon<span class="w"> </span>build<span class="w"> </span>--merge-install
+</pre></div>
+</div>
+</section>
+<section id="build-from-source">
+<h4>Build from source<a class="headerlink" href="#build-from-source" title="Link to this heading"></a></h4>
+<ul>
+<li><p>Download all repositories</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/ros2_ws/src
+<span class="nb">cd</span><span class="w"> </span>~/ros2_ws/src
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ros-controls/ros2_control_demos
+<span class="nb">cd</span><span class="w"> </span>~/ros2_ws/
+vcs<span class="w"> </span>import<span class="w"> </span>src<span class="w"> </span>&lt;<span class="w"> </span>src/ros2_control_demos/ros2_control_demos.<span class="nv">$ROS_DISTRO</span>.repos
+rosdep<span class="w"> </span>update<span class="w"> </span>--rosdistro<span class="o">=</span><span class="nv">$ROS_DISTRO</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+</pre></div>
+</div>
+</li>
+<li><p>Install dependencies:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rosdep<span class="w"> </span>install<span class="w"> </span>--from-paths<span class="w"> </span>src<span class="w"> </span>--ignore-src<span class="w"> </span>-r<span class="w"> </span>-y
+</pre></div>
+</div>
+</li>
+<li><p>Build everything, e.g. with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>.<span class="w"> </span>/opt/ros/<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>/setup.sh
+colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install
+</pre></div>
+</div>
+</li>
+<li><p>Do not forget to source <code class="docutils literal notranslate"><span class="pre">setup.bash</span></code> from the <code class="docutils literal notranslate"><span class="pre">install</span></code> folder!</p></li>
+</ul>
+</section>
+</section>
+<section id="using-docker">
+<h3>Using Docker<a class="headerlink" href="#using-docker" title="Link to this heading"></a></h3>
+<p>First, build the dockerfile with</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/ros2_ws/src
+<span class="nb">cd</span><span class="w"> </span>~/ros2_ws/src
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ros-controls/ros2_control_demos
+<span class="nb">cd</span><span class="w"> </span>ros2_control_demos
+docker<span class="w"> </span>build<span class="w"> </span>.<span class="w"> </span>-t<span class="w"> </span>ros2_control_demos<span class="w"> </span>-f<span class="w"> </span>Dockerfile/Dockerfile
+</pre></div>
+</div>
+<section id="to-view-the-robot">
+<h4>To view the robot<a class="headerlink" href="#to-view-the-robot" title="Link to this heading"></a></h4>
+<p>Docker now allows us to run the demo without the GUI if configured properly. Now we can view the robot by the following procedure:</p>
+<p>After having <a class="reference external" href="https://docs.ros.org/en/rolling/Installation.html">ROS 2 installed</a> on your local system (not inside the docker),  we can use <code class="docutils literal notranslate"><span class="pre">rviz2</span></code> to visualize the robot state and <code class="docutils literal notranslate"><span class="pre">joint_state_publisher_gui</span></code> package to give manual joint values to the robot. To install the package you can run:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>ros-<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>-joint-state-publisher-gui<span class="w"> </span>ros-<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>-rviz2
+</pre></div>
+</div>
+<p>Then we are ready to bring up all the components to view the robot. Let’s start with the docker container by running the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>--name<span class="w"> </span>ros2_control_demos<span class="w"> </span>--net<span class="w"> </span>host<span class="w"> </span>ros2_control_demos<span class="w"> </span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_1<span class="w"> </span>view_robot.launch.py<span class="w"> </span>gui:<span class="o">=</span><span class="nb">false</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Depending on your machine settings, it might be possible that you have to omit <code class="docutils literal notranslate"><span class="pre">--net</span> <span class="pre">host</span></code>.</p>
+</div>
+<p>Now, we need to start <code class="docutils literal notranslate"><span class="pre">rviz2</span></code> to view the robot as well as <code class="docutils literal notranslate"><span class="pre">joint_state_publisher_gui</span></code>, each in their own terminals after sourcing our ROS 2  installation.</p>
+<p>Terminal 1:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>/setup.bash
+ros2<span class="w"> </span>run<span class="w"> </span>joint_state_publisher_gui<span class="w"> </span>joint_state_publisher_gui
+</pre></div>
+</div>
+<p>Terminal 2:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>/setup.bash
+<span class="nb">cd</span><span class="w"> </span>~/ros2_ws
+rviz2<span class="w"> </span>-d<span class="w"> </span>src/ros2_control_demos/example_1/description/rviz/rrbot.rviz
+</pre></div>
+</div>
+<p>Now, you can see the robot moving by changing the values of the joints by moving the sliders around in the <code class="docutils literal notranslate"><span class="pre">joint_state_publisher_gui</span></code>.</p>
+</section>
+<section id="to-run-the-ros2-control-demos">
+<h4>To run the ros2_control demos<a class="headerlink" href="#to-run-the-ros2-control-demos" title="Link to this heading"></a></h4>
+<p>The following command runs the demo without the GUI:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>--name<span class="w"> </span>ros2_control_demos<span class="w"> </span>--net<span class="w"> </span>host<span class="w"> </span>ros2_control_demos
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Depending on your machine settings, it might be possible that you have to omit <code class="docutils literal notranslate"><span class="pre">--net</span> <span class="pre">host</span></code>.</p>
+</div>
+<p>Then on your local machine, you can run rviz2 with the config file specified:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/ros2_ws
+<span class="nb">source</span><span class="w"> </span>/opt/ros/<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>/setup.sh
+rviz2<span class="w"> </span>-d<span class="w"> </span>src/ros2_control_demos/example_1/description/rviz/rrbot.rviz
+</pre></div>
+</div>
+<p>You can also run other commands or launch files from the docker, e.g.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>--name<span class="w"> </span>ros2_control_demos<span class="w"> </span>--net<span class="w"> </span>host<span class="w"> </span>ros2_control_demos<span class="w"> </span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_2<span class="w"> </span>diffbot.launch.py
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="quick-hints">
+<h2>Quick Hints<a class="headerlink" href="#quick-hints" title="Link to this heading"></a></h2>
+<p>These are some quick hints, especially for those coming from a ROS1 control background:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>There are now three categories of hardware components: <em>Sensor</em>, <em>Actuator</em>, and <em>System</em>.
+<em>Sensor</em> is for individual sensors; <em>Actuator</em> is for individual actuators; <em>System</em> is for any combination of multiple sensors/actuators.
+You could think of a Sensor as read-only.
+All components are used as plugins and therefore exported using <code class="docutils literal notranslate"><span class="pre">PLUGINLIB_EXPORT_CLASS</span></code> macro.</p></li>
+<li><p><em>ros(1)_control</em> only allowed three hardware interface types: position, velocity, and effort.
+<em>ros2_control</em> allows you to create any interface type by defining a custom string. For example, you might define a <code class="docutils literal notranslate"><span class="pre">position_in_degrees</span></code> or a <code class="docutils literal notranslate"><span class="pre">temperature</span></code> interface.
+The most common (position, velocity, acceleration, effort) are already defined as constants in hardware_interface/types/hardware_interface_type_values.hpp.</p></li>
+<li><p>In ros2_control, all parameters for the driver are specified in the URDF.
+The ros2_control framework uses the <strong>&lt;ros2_control&gt;</strong> tag in the URDF.</p></li>
+<li><p>Joint names in &lt;ros2_control&gt; tags in the URDF must be compatible with the controller’s configuration.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../example_1/doc/userdoc.html">Example 1: RRBot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example_2/doc/userdoc.html">Example 2: DiffBot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example_3/doc/userdoc.html">Example 3: RRBot with multiple interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example_4/doc/userdoc.html">Example 4: Industrial robot with integrated sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example_5/doc/userdoc.html">Example 5: Industrial robots with externally connected sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example_6/doc/userdoc.html">Example 6: Modular robots with separate communication to each actuator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example_7/doc/userdoc.html">Example 7: Full tutorial with a 6DOF robot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example_8/doc/userdoc.html">Example 8: Using transmissions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example_9/doc/userdoc.html">Example 9: Gazebo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example_10/doc/userdoc.html">Example 10: Industrial robot with GPIO interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example_11/doc/userdoc.html">Example 11: CarlikeBot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example_12/doc/userdoc.html">Example 12: Controller chaining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example_14/doc/userdoc.html">Example 14: Modular robots with actuators not providing states</a></li>
+</ul>
+</div>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../ros2_controllers/range_sensor_broadcaster/doc/userdoc.html" class="btn btn-neutral float-left" title="Range Sensor Broadcaster" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../example_1/doc/userdoc.html" class="btn btn-neutral float-right" title="Example 1: RRBot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: jazzy
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Releases</dt>
+        <dd><a href="../../../../iron/doc/ros2_control_demos/doc/index.html">Iron (latest)</a></dd><br>
+        <dd><a href="../../../../humble/doc/ros2_control_demos/doc/index.html">Humble</a></dd><br>
+        <dd><a href="../../../../galactic/doc/ros2_control_demos/doc/index.html">Galactic (EOL)</a></dd><br>
+        
+        <dd><a href="../../../../foxy/doc/ros2_control_demos/doc/index.html">Foxy (EOL)</a></dd><br>
+        
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="../../../../rolling/doc/ros2_control_demos/doc/index.html">Rolling</a></dd>
+      <dd><a href="index.html">Jazzy</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

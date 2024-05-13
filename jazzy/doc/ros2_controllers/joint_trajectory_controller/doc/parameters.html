@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Details about parameters &mdash; ROS2_Control: Jazzy May 2024 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/reviewer_stats.css?v=068b34ac" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//jazzy/doc/ros2_controllers/joint_trajectory_controller/doc/parameters.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=dbc0e75d"></script>
+        <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="rqt_joint_trajectory_controller" href="../../rqt_joint_trajectory_controller/doc/userdoc.html" />
+    <link rel="prev" title="Trajectory Representation" href="trajectory.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html">ros2_control</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/controllers_index.html">ros2_controllers</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#guidelines-and-best-practices">Guidelines and Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#controllers-for-mobile-robots">Controllers for Mobile Robots</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/controllers_index.html#controllers-for-manipulators-and-other-robots">Controllers for Manipulators and Other Robots</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../admittance_controller/doc/userdoc.html">Admittance Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../effort_controllers/doc/userdoc.html">Effort Controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../forward_command_controller/doc/userdoc.html">Forward Command Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../gripper_controllers/doc/userdoc.html">Gripper Controller</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="userdoc.html">Joint Trajectory Controller</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="userdoc.html#hardware-interface-types">Hardware interface types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc.html#other-features">Other features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc.html#using-joint-trajectory-controller-s">Using Joint Trajectory Controller(s)</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="userdoc.html#further-information">Further information</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="trajectory.html">Trajectory Representation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="trajectory.html#trajectory-replacement">Trajectory Replacement</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="#">joint_trajectory_controller Parameters</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#list-of-parameters">List of parameters</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#an-example-parameter-file">An example parameter file</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../../rqt_joint_trajectory_controller/doc/userdoc.html">rqt_joint_trajectory_controller</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../pid_controller/doc/userdoc.html">PID Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../position_controllers/doc/userdoc.html">Position Controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../velocity_controllers/doc/userdoc.html">Velocity Controllers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#broadcasters">Broadcasters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#common-controller-parameters">Common Controller Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes/release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../migration/migration.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_list/api_list.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../project_ideas.html">Project Ideas for GSoC 2024</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ROS2_Control: Jazzy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../doc/controllers_index.html">ros2_controllers</a></li>
+          <li class="breadcrumb-item"><a href="userdoc.html">joint_trajectory_controller</a></li>
+      <li class="breadcrumb-item active">Details about parameters</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ros-controls/ros2_controllers/blob/jazzy/joint_trajectory_controller/doc/parameters.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for a development version.
+    For the latest released version, please have a look at <a href="../../../../../iron/doc/ros2_controllers/joint_trajectory_controller/doc/parameters.html">Iron</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="details-about-parameters">
+<span id="parameters"></span><h1>Details about parameters<a class="headerlink" href="#details-about-parameters" title="Link to this heading"></a></h1>
+<p>This controller uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters. The parameter <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/jazzy/joint_trajectory_controller/src/joint_trajectory_controller_parameters.yaml">definition file located in the src folder</a> contains descriptions for all the parameters used by the controller.</p>
+<section id="list-of-parameters">
+<h2>List of parameters<a class="headerlink" href="#list-of-parameters" title="Link to this heading"></a></h2>
+<dl>
+<dt>joints (string_array)</dt><dd><p>Joint names to control and listen to</p>
+<p>Read only: True</p>
+<p>Default:  {}</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>contains no duplicates</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>command_joints (string_array)</dt><dd><p>Joint names to control. This parameters is used if JTC is used in a controller chain where command and state interfaces don’t have same names.</p>
+<p>Read only: True</p>
+<p>Default:  {}</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>contains no duplicates</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>command_interfaces (string_array)</dt><dd><p>Command interfaces provided by the hardware interface for all joints</p>
+<p>Read only: True</p>
+<p>Default:  {}</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>contains no duplicates</p></li>
+<li><p>every element is one of the list [‘position’, ‘velocity’, ‘acceleration’, ‘effort’]</p></li>
+<li><p>Custom validator: joint_trajectory_controller::command_interface_type_combinations</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>state_interfaces (string_array)</dt><dd><p>State interfaces provided by the hardware for all joints.</p>
+<p>Read only: True</p>
+<p>Default:  {}</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>contains no duplicates</p></li>
+<li><p>every element is one of the list [‘position’, ‘velocity’, ‘acceleration’]</p></li>
+<li><p>Custom validator: joint_trajectory_controller::state_interface_type_combinations</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>allow_partial_joints_goal (bool)</dt><dd><p>Allow joint goals defining trajectory for only some joints.</p>
+<p>Default:  false</p>
+</dd>
+<dt>open_loop_control (bool)</dt><dd><p>Use controller in open-loop control mode</p>
+<ul class="simple">
+<li><p>The controller ignores the states provided by hardware interface but using last commands as states for starting the trajectory interpolation.</p></li>
+<li><p>It deactivates the feedback control, see the <code class="docutils literal notranslate"><span class="pre">gains</span></code> structure.</p></li>
+</ul>
+<p>This is useful if hardware states are not following commands, i.e., an offset between those (typical for hydraulic manipulators).</p>
+<p>If this flag is set, the controller tries to read the values from the command interfaces on activation. If they have real numeric values, those will be used instead of state interfaces. Therefore it is important set command interfaces to NaN (i.e., <code class="docutils literal notranslate"><span class="pre">std::numeric_limits&lt;double&gt;::quiet_NaN()</span></code>) or state values when the hardware is started.</p>
+<p>Read only: True</p>
+<p>Default:  false</p>
+</dd>
+<dt>allow_integration_in_goal_trajectories (bool)</dt><dd><p>Allow integration in goal trajectories to accept goals without position or velocity specified</p>
+<p>Default:  false</p>
+</dd>
+<dt>action_monitor_rate (double)</dt><dd><p>Rate to monitor status changes when the controller is executing action (control_msgs::action::FollowJointTrajectory)</p>
+<p>Read only: True</p>
+<p>Default:  20.0</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than or equal to 0.1</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>interpolation_method (string)</dt><dd><p>The type of interpolation to use, if any</p>
+<p>Read only: True</p>
+<p>Default:  “splines”</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>one of the specified values: [‘splines’, ‘none’]</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>allow_nonzero_velocity_at_trajectory_end (bool)</dt><dd><p>If false, the last velocity point has to be zero or the goal will be rejected</p>
+<p>Default:  false</p>
+</dd>
+<dt>cmd_timeout (double)</dt><dd><p>Timeout after which the input command is considered stale. Timeout is counted from the end of the trajectory (the last point). <code class="docutils literal notranslate"><span class="pre">cmd_timeout</span></code> must be greater than <code class="docutils literal notranslate"><span class="pre">constraints.goal_time</span></code>, otherwise ignored. If zero, timeout is deactivated</p>
+<p>Default:  0.0</p>
+</dd>
+<dt>constraints</dt><dd><p>Default values for tolerances if no explicit values are set in the <code class="docutils literal notranslate"><span class="pre">JointTrajectory</span></code> message.</p>
+</dd>
+<dt>constraints.stopped_velocity_tolerance (double)</dt><dd><p>Velocity tolerance for at the end of the trajectory that indicates that controlled system is stopped.</p>
+<p>Default:  0.01</p>
+</dd>
+<dt>constraints.goal_time (double)</dt><dd><p>Time tolerance for achieving trajectory goal before or after commanded time. If set to zero, the controller will wait a potentially infinite amount of time.</p>
+<p>Default:  0.0</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than or equal to 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>constraints.&lt;joints&gt;.trajectory (double)</dt><dd><p>Per-joint trajectory offset tolerance during movement.</p>
+<p>Default:  0.0</p>
+</dd>
+<dt>constraints.&lt;joints&gt;.goal (double)</dt><dd><p>Per-joint trajectory offset tolerance at the goal position.</p>
+<p>Default:  0.0</p>
+</dd>
+<dt>gains</dt><dd><p>Only relevant, if <code class="docutils literal notranslate"><span class="pre">open_loop_control</span></code> is not set.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">velocity</span></code> is the only command interface for all joints or an <code class="docutils literal notranslate"><span class="pre">effort</span></code> command interface is configured, PID controllers are used for every joint.
+This structure contains the controller gains for every joint with the control law</p>
+<div class="math notranslate nohighlight">
+\[u = k_{ff} v_d + k_p e + k_i \sum e dt + k_d (v_d - v)\]</div>
+<p>with the desired velocity <span class="math notranslate nohighlight">\(v_d\)</span>, the measured velocity <span class="math notranslate nohighlight">\(v\)</span>, the position error <span class="math notranslate nohighlight">\(e\)</span> (definition see below),
+the controller period <span class="math notranslate nohighlight">\(dt\)</span>, and the <code class="docutils literal notranslate"><span class="pre">velocity</span></code> or <code class="docutils literal notranslate"><span class="pre">effort</span></code> manipulated variable (control variable) <span class="math notranslate nohighlight">\(u\)</span>, respectively.</p>
+<p>If the joint is of continuous type, the position error <span class="math notranslate nohighlight">\(e = normalize(s_d - s)\)</span> is normalized between <span class="math notranslate nohighlight">\(-\pi, \pi\)</span>,
+i.e., the shortest rotation to the target position is the desired motion.
+Otherwise  <span class="math notranslate nohighlight">\(e = s_d - s\)</span> is used, with the desired position <span class="math notranslate nohighlight">\(s_d\)</span> and the measured
+position <span class="math notranslate nohighlight">\(s\)</span> from the state interface.</p>
+</dd>
+<dt>gains.&lt;joints&gt;.p (double)</dt><dd><p>Proportional gain <span class="math notranslate nohighlight">\(k_p\)</span> for PID</p>
+<p>Default:  0.0</p>
+</dd>
+<dt>gains.&lt;joints&gt;.i (double)</dt><dd><p>Integral gain <span class="math notranslate nohighlight">\(k_i\)</span> for PID</p>
+<p>Default:  0.0</p>
+</dd>
+<dt>gains.&lt;joints&gt;.d (double)</dt><dd><p>Derivative gain <span class="math notranslate nohighlight">\(k_d\)</span> for PID</p>
+<p>Default:  0.0</p>
+</dd>
+<dt>gains.&lt;joints&gt;.i_clamp (double)</dt><dd><p>Integral clamp. Symmetrical in both positive and negative direction.</p>
+<p>Default:  0.0</p>
+</dd>
+<dt>gains.&lt;joints&gt;.ff_velocity_scale (double)</dt><dd><p>Feed-forward scaling <span class="math notranslate nohighlight">\(k_{ff}\)</span> of velocity</p>
+<p>Default:  0.0</p>
+</dd>
+<dt>gains.&lt;joints&gt;.angle_wraparound (bool)</dt><dd><p>[deprecated] For joints that wrap around (ie. are continuous). Normalizes position-error to -pi to pi.</p>
+<p>Default:  false</p>
+</dd>
+</dl>
+</section>
+<section id="an-example-parameter-file">
+<h2>An example parameter file<a class="headerlink" href="#an-example-parameter-file" title="Link to this heading"></a></h2>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">joint_trajectory_controller</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">action_monitor_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20.0</span>
+<span class="w">    </span><span class="nt">allow_integration_in_goal_trajectories</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">allow_nonzero_velocity_at_trajectory_end</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">allow_partial_joints_goal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">cmd_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">    </span><span class="nt">command_interfaces</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{}&#39;</span>
+<span class="w">    </span><span class="nt">command_joints</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{}&#39;</span>
+<span class="w">    </span><span class="nt">constraints</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">&lt;joints&gt;</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">goal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">        </span><span class="nt">trajectory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">      </span><span class="nt">goal_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">      </span><span class="nt">stopped_velocity_tolerance</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span>
+<span class="w">    </span><span class="nt">gains</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">&lt;joints&gt;</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">angle_wraparound</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">        </span><span class="nt">d</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">        </span><span class="nt">ff_velocity_scale</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">        </span><span class="nt">i</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">        </span><span class="nt">i_clamp</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">        </span><span class="nt">p</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">    </span><span class="nt">interpolation_method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">splines</span>
+<span class="w">    </span><span class="nt">joints</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{}&#39;</span>
+<span class="w">    </span><span class="nt">open_loop_control</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">state_interfaces</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{}&#39;</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="trajectory.html" class="btn btn-neutral float-left" title="Trajectory Representation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../rqt_joint_trajectory_controller/doc/userdoc.html" class="btn btn-neutral float-right" title="rqt_joint_trajectory_controller" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: jazzy
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Releases</dt>
+        <dd><a href="../../../../../iron/doc/ros2_controllers/joint_trajectory_controller/doc/parameters.html">Iron (latest)</a></dd><br>
+        <dd><a href="../../../../../humble/doc/ros2_controllers/joint_trajectory_controller/doc/parameters.html">Humble</a></dd><br>
+        <dd><a href="../../../../../galactic/index.html">Galactic (EOL)</a></dd><br>
+        
+        <dd><a href="../../../../../foxy/index.html">Foxy (EOL)</a></dd><br>
+        
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="../../../../../rolling/doc/ros2_controllers/joint_trajectory_controller/doc/parameters.html">Rolling</a></dd>
+      <dd><a href="parameters.html">Jazzy</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

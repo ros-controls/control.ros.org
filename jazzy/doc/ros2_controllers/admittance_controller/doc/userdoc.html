@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admittance Controller &mdash; ROS2_Control: Jazzy May 2024 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/reviewer_stats.css?v=068b34ac" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//jazzy/doc/ros2_controllers/admittance_controller/doc/userdoc.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=dbc0e75d"></script>
+        <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+        <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="effort_controllers" href="../../effort_controllers/doc/userdoc.html" />
+    <link rel="prev" title="tricycle_steering_controller" href="../../tricycle_steering_controller/doc/userdoc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html">ros2_control</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/controllers_index.html">ros2_controllers</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#guidelines-and-best-practices">Guidelines and Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#controllers-for-mobile-robots">Controllers for Mobile Robots</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/controllers_index.html#controllers-for-manipulators-and-other-robots">Controllers for Manipulators and Other Robots</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Admittance Controller</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ros-2-interface-of-the-controller">ROS 2 interface of the controller</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#topics">Topics</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#ros2-control-interfaces">ros2_control interfaces</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#references">References</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#states">States</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#commands">Commands</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../effort_controllers/doc/userdoc.html">Effort Controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../forward_command_controller/doc/userdoc.html">Forward Command Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../gripper_controllers/doc/userdoc.html">Gripper Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../joint_trajectory_controller/doc/userdoc.html">Joint Trajectory Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pid_controller/doc/userdoc.html">PID Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../position_controllers/doc/userdoc.html">Position Controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../velocity_controllers/doc/userdoc.html">Velocity Controllers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#broadcasters">Broadcasters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#common-controller-parameters">Common Controller Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes/release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../migration/migration.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_list/api_list.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../project_ideas.html">Project Ideas for GSoC 2024</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ROS2_Control: Jazzy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../doc/controllers_index.html">ros2_controllers</a></li>
+      <li class="breadcrumb-item active">Admittance Controller</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ros-controls/ros2_controllers/blob/jazzy/admittance_controller/doc/userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for a development version.
+    For the latest released version, please have a look at <a href="../../../../../iron/doc/ros2_controllers/admittance_controller/doc/userdoc.html">Iron</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="admittance-controller">
+<span id="admittance-controller-userdoc"></span><h1>Admittance Controller<a class="headerlink" href="#admittance-controller" title="Link to this heading"></a></h1>
+<p>Admittance controller enables you do zero-force control from a force measured on your TCP.
+The controller implements <code class="docutils literal notranslate"><span class="pre">ChainedControllerInterface</span></code>, so it is possible to add another controllers in front of it, e.g., <code class="docutils literal notranslate"><span class="pre">JointTrajectoryController</span></code>.</p>
+<p>The controller requires an external kinematics plugin to function. The <a class="reference external" href="https://github.com/ros-controls/kinematics_interface">kinematics_interface</a> repository provides an interface and an implementation that the admittance controller can use.</p>
+<section id="ros-2-interface-of-the-controller">
+<h2>ROS 2 interface of the controller<a class="headerlink" href="#ros-2-interface-of-the-controller" title="Link to this heading"></a></h2>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
+<p>The admittance controller uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters. The parameter <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/jazzy/admittance_controller/src/admittance_controller_parameters.yaml">definition file located in the src folder</a> contains descriptions for all the parameters used by the controller.</p>
+<dl>
+<dt>joints (string_array)</dt><dd><p>Specifies which joints will be used by the controller.</p>
+<p>Read only: True</p>
+</dd>
+<dt>command_joints (string_array)</dt><dd><p>(optional) Specifies the joints for writing into another controllers reference. This parameter is only relevant when chaining the output of this controller to the input of another controller.</p>
+<p>Read only: True</p>
+<p>Default:  {}</p>
+</dd>
+<dt>command_interfaces (string_array)</dt><dd><p>Specifies which command interfaces the controller will claim.</p>
+<p>Read only: True</p>
+</dd>
+<dt>state_interfaces (string_array)</dt><dd><p>Specifies which state interfaces the controller will claim.</p>
+<p>Read only: True</p>
+</dd>
+<dt>chainable_command_interfaces (string_array)</dt><dd><p>Specifies which reference interfaces the controller will export. Normally, the position and velocity are used.</p>
+<p>Read only: True</p>
+</dd>
+<dt>kinematics.plugin_name (string)</dt><dd><p>Specifies the name of the kinematics plugin to load.</p>
+</dd>
+<dt>kinematics.plugin_package (string)</dt><dd><p>Specifies the package name that contains the kinematics plugin.</p>
+</dd>
+<dt>kinematics.base (string)</dt><dd><p>Specifies the base link of the robot description used by the kinematics plugin.</p>
+</dd>
+<dt>kinematics.tip (string)</dt><dd><p>Specifies the end effector link of the robot description used by the kinematics plugin.</p>
+</dd>
+<dt>kinematics.alpha (double)</dt><dd><p>Specifies the damping coefficient for the Jacobian pseudo inverse.</p>
+<p>Default:  0.01</p>
+</dd>
+<dt>ft_sensor.name (string)</dt><dd><p>Specifies the name of the force torque sensor in the robot description which will be used in the admittance calculation.</p>
+</dd>
+<dt>ft_sensor.frame.id (string)</dt><dd><p>Specifies the frame/link name of the force torque sensor.</p>
+</dd>
+<dt>ft_sensor.filter_coefficient (double)</dt><dd><p>Specifies the filter coefficient for the sensor’s exponential filter.</p>
+<p>Default:  0.05</p>
+</dd>
+<dt>control.frame.id (string)</dt><dd><p>Specifies the control frame used for admittance calculation.</p>
+</dd>
+<dt>fixed_world_frame.frame.id (string)</dt><dd><p>Specifies the world frame use for admittance calculation. Gravity must point down in this frame.</p>
+</dd>
+<dt>gravity_compensation.frame.id (string)</dt><dd><p>Specifies the frame which center of gravity (CoG) is defined in. Normally, the force torque sensor frame should be used.</p>
+</dd>
+<dt>gravity_compensation.CoG.pos (double_array)</dt><dd><p>Specifies the position of the center of gravity (CoG) of the end effector in the gravity compensation frame.</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>length must be equal to 3</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>gravity_compensation.CoG.force (double)</dt><dd><p>Specifies the weight of the end effector, e.g mass * 9.81.</p>
+<p>Default:  0.0</p>
+</dd>
+<dt>admittance.selected_axes (bool_array)</dt><dd><p>Specifies whether the axes x, y, z, rx, ry, and rz should be included in the admittance calculation.</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>length must be equal to 6</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>admittance.mass (double_array)</dt><dd><p>Specifies the mass values for x, y, z, rx, ry, and rz used in the admittance calculation.</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>length must be equal to 6</p></li>
+<li><p>each element of array must be within bounds 0.0001</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>admittance.damping_ratio (double_array)</dt><dd><p>Specifies damping ratio values for x, y, z, rx, ry, and rz used in the admittance calculation. The damping ratio is defined as: zeta = D / (2 * sqrt( M * S )).</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>length must be equal to 6</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>admittance.stiffness (double_array)</dt><dd><p>Specifies the stiffness values for x, y, z, rx, ry, and rz used in the admittance calculation.</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>length must be equal to 6</p></li>
+<li><p>each element of array must be within bounds 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>admittance.joint_damping (double)</dt><dd><p>Specifies the joint damping applied used in the admittance calculation.</p>
+<p>Default:  5.0</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than or equal to 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>enable_parameter_update_without_reactivation (bool)</dt><dd><p>If enabled, the parameters will be dynamically updated while the controller is running.</p>
+<p>Default:  true</p>
+</dd>
+</dl>
+<p>An example parameter file for this controller can be found in <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/jazzy/admittance_controller/test/test_params.yaml">the test folder</a>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">load_admittance_controller</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># contains minimal parameters that need to be set to load controller</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">joints</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint1</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint2</span>
+
+<span class="w">    </span><span class="nt">command_interfaces</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">velocity</span>
+
+<span class="w">    </span><span class="nt">state_interfaces</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">velocity</span>
+
+<span class="w">    </span><span class="nt">chainable_command_interfaces</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">velocity</span>
+
+
+<span class="nt">test_admittance_controller</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># contains minimal needed parameters for kuka_kr6</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">joints</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint1</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint2</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint3</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint4</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint5</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint6</span>
+
+<span class="w">    </span><span class="nt">command_interfaces</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
+
+<span class="w">    </span><span class="nt">state_interfaces</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
+
+<span class="w">    </span><span class="nt">chainable_command_interfaces</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">velocity</span>
+
+<span class="w">    </span><span class="nt">kinematics</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">plugin_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kinematics_interface_kdl/KinematicsInterfaceKDL</span>
+<span class="w">      </span><span class="nt">plugin_package</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kinematics_interface</span>
+<span class="w">      </span><span class="nt">base</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">base_link</span><span class="w"> </span><span class="c1"># Assumed to be stationary</span>
+<span class="w">      </span><span class="nt">tip</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tool0</span>
+<span class="w">      </span><span class="nt">group_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">arm</span>
+<span class="w">      </span><span class="nt">alpha</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0005</span>
+
+<span class="w">    </span><span class="nt">ft_sensor</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ft_sensor_name</span>
+<span class="w">      </span><span class="nt">frame</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">link_6</span><span class="w">  </span><span class="c1"># tool0 Wrench measurements are in this frame</span>
+<span class="w">        </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"> </span><span class="c1"># force torque frame exists within URDF kinematic chain</span>
+<span class="w">      </span><span class="nt">filter_coefficient</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.005</span>
+
+<span class="w">    </span><span class="nt">control</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">frame</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tool0</span><span class="w"> </span><span class="c1"># Admittance calcs (displacement etc) are done in this frame. Usually the tool or end-effector</span>
+<span class="w">        </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"> </span><span class="c1"># control frame exists within URDF kinematic chain</span>
+
+<span class="w">    </span><span class="nt">fixed_world_frame</span><span class="p">:</span><span class="w">   </span><span class="c1"># Gravity points down (neg. Z) in this frame (Usually: world or base_link)</span>
+<span class="w">      </span><span class="nt">frame</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">base_link</span><span class="w"> </span><span class="c1"># Admittance calcs (displacement etc) are done in this frame. Usually the tool or end-effector</span>
+<span class="w">        </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"> </span><span class="c1"># control frame exists within URDF kinematic chain</span>
+
+<span class="w">    </span><span class="nt">gravity_compensation</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">frame</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tool0</span>
+<span class="w">        </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+
+<span class="w">      </span><span class="nt">CoG</span><span class="p">:</span><span class="w"> </span><span class="c1"># specifies the center of gravity of the end effector</span>
+<span class="w">        </span><span class="nt">pos</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span><span class="w"> </span><span class="c1"># x</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span><span class="w"> </span><span class="c1"># y</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span><span class="w"> </span><span class="c1"># z</span>
+<span class="w">        </span><span class="nt">force</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">23.0</span><span class="w"> </span><span class="c1"># mass * 9.81</span>
+
+<span class="w">    </span><span class="nt">admittance</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">selected_axes</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># x</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># y</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># z</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># rx</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># ry</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># rz</span>
+
+<span class="w">      </span><span class="c1"># Having &quot;.0&quot; at the end is MUST, otherwise there is a loading error</span>
+<span class="w">      </span><span class="c1"># F = M*a + D*v + S*(x - x_d)</span>
+<span class="w">      </span><span class="nt">mass</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.5</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6.6</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7.7</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8.8</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9.9</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.10</span>
+
+<span class="w">      </span><span class="nt">damping_ratio</span><span class="p">:</span><span class="w"> </span><span class="c1"># damping can be used instead: zeta = D / (2 * sqrt( M * S ))</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.828427</span><span class="w"> </span><span class="c1"># x</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.828427</span><span class="w"> </span><span class="c1"># y</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.828427</span><span class="w"> </span><span class="c1"># z</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.828427</span><span class="w"> </span><span class="c1"># rx</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.828427</span><span class="w"> </span><span class="c1"># ry</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.828427</span><span class="w"> </span><span class="c1"># rz</span>
+
+<span class="w">      </span><span class="nt">stiffness</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">214.1</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">214.2</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">214.3</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">214.4</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">214.5</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">214.6</span>
+</pre></div>
+</div>
+</section>
+<section id="topics">
+<h3>Topics<a class="headerlink" href="#topics" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>~/joint_references (input topic) [trajectory_msgs::msg::JointTrajectoryPoint]</dt><dd><p>Target joint commands when controller is not in chained mode.</p>
+</dd>
+<dt>~/state (output topic) [control_msgs::msg::AdmittanceControllerState]</dt><dd><p>Topic publishing internal states.</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="ros2-control-interfaces">
+<h2>ros2_control interfaces<a class="headerlink" href="#ros2-control-interfaces" title="Link to this heading"></a></h2>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Link to this heading"></a></h3>
+<p>The controller has <code class="docutils literal notranslate"><span class="pre">position</span></code> and <code class="docutils literal notranslate"><span class="pre">velocity</span></code> reference interfaces exported in the format:
+<code class="docutils literal notranslate"><span class="pre">&lt;controller_name&gt;/&lt;joint_name&gt;/[position|velocity]</span></code></p>
+</section>
+<section id="states">
+<h3>States<a class="headerlink" href="#states" title="Link to this heading"></a></h3>
+<p>The state interfaces are defined with <code class="docutils literal notranslate"><span class="pre">joints</span></code> and <code class="docutils literal notranslate"><span class="pre">state_interfaces</span></code> parameters as follows: <code class="docutils literal notranslate"><span class="pre">&lt;joint&gt;/&lt;state_interface&gt;</span></code>.
+Supported state interfaces are <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code>, and <code class="docutils literal notranslate"><span class="pre">acceleration</span></code> as defined in the <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/jazzy/hardware_interface/include/hardware_interface/types/hardware_interface_type_values.hpp">hardware_interface/hardware_interface_type_values.hpp</a>.
+If some interface is not provided, the last commanded interface will be used for calculation.</p>
+<p>For handling TCP wrenches <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/jazzy/controller_interface/include/semantic_components/force_torque_sensor.hpp">*Force Torque Sensor* semantic component  (from package *controller_interface*)</a> is used.
+The interfaces have prefix <code class="docutils literal notranslate"><span class="pre">ft_sensor.name</span></code>, building the interfaces: <code class="docutils literal notranslate"><span class="pre">&lt;sensor_name&gt;/[force.x|force.y|force.z|torque.x|torque.y|torque.z]</span></code>.</p>
+</section>
+<section id="commands">
+<h3>Commands<a class="headerlink" href="#commands" title="Link to this heading"></a></h3>
+<p>The command interfaces are defined with <code class="docutils literal notranslate"><span class="pre">joints</span></code> and <code class="docutils literal notranslate"><span class="pre">command_interfaces</span></code> parameters as follows: <code class="docutils literal notranslate"><span class="pre">&lt;joint&gt;/&lt;command_interface&gt;</span></code>.
+Supported state interfaces are <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code>, and <code class="docutils literal notranslate"><span class="pre">acceleration</span></code> as defined in the <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/jazzy/hardware_interface/include/hardware_interface/types/hardware_interface_type_values.hpp">hardware_interface/hardware_interface_type_values.hpp</a>.</p>
+</section>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../tricycle_steering_controller/doc/userdoc.html" class="btn btn-neutral float-left" title="tricycle_steering_controller" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../effort_controllers/doc/userdoc.html" class="btn btn-neutral float-right" title="effort_controllers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: jazzy
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Releases</dt>
+        <dd><a href="../../../../../iron/doc/ros2_controllers/admittance_controller/doc/userdoc.html">Iron (latest)</a></dd><br>
+        <dd><a href="../../../../../humble/doc/ros2_controllers/admittance_controller/doc/userdoc.html">Humble</a></dd><br>
+        <dd><a href="../../../../../galactic/index.html">Galactic (EOL)</a></dd><br>
+        
+        <dd><a href="../../../../../foxy/index.html">Foxy (EOL)</a></dd><br>
+        
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="../../../../../rolling/doc/ros2_controllers/admittance_controller/doc/userdoc.html">Rolling</a></dd>
+      <dd><a href="userdoc.html">Jazzy</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mock Components &mdash; ROS2_Control: Jazzy May 2024 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/reviewer_stats.css?v=068b34ac" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//jazzy/doc/ros2_control/hardware_interface/doc/mock_components_userdoc.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=dbc0e75d"></script>
+        <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+        <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="ros2_controllers" href="../../../ros2_controllers/doc/controllers_index.html" />
+    <link rel="prev" title="Different update rates for Hardware Components" href="different_update_rates_userdoc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/index.html">ros2_control</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#api-documentation">API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#features">Features</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/index.html#concepts">Concepts</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../controller_manager/doc/userdoc.html">Controller Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../controller_manager/doc/controller_chaining.html">Controller Chaining / Cascade Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardware_components_userdoc.html">Hardware Components</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Mock Components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#generic-system">Generic System</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#parameters">Parameters</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#component-parameters">Component Parameters</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#per-interface-parameters">Per-Interface Parameters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes/release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../migration/migration.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_list/api_list.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../project_ideas.html">Project Ideas for GSoC 2024</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ROS2_Control: Jazzy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../doc/index.html">ros2_control</a></li>
+      <li class="breadcrumb-item active">Mock Components</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ros-controls/ros2_control/blob/jazzy/hardware_interface/doc/mock_components_userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for a development version.
+    For the latest released version, please have a look at <a href="../../../../../iron/doc/ros2_control/hardware_interface/doc/mock_components_userdoc.html">Iron</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="mock-components">
+<span id="mock-components-userdoc"></span><h1>Mock Components<a class="headerlink" href="#mock-components" title="Link to this heading"></a></h1>
+<p>Mock components are trivial “simulations” of the hardware components, i.e., System, Sensor, and Actuator.
+They provide ideal behavior by mirroring commands to their states.
+The corresponding hardware interface can be added instead of real hardware for offline testing of ros2_control framework.
+The main advantage is that you can test all the “piping” inside the framework without having access to the hardware.
+This means that you can test your controllers, broadcaster, launch files, and even integrations with, e.g., MoveIt.
+The main intention is to reduce debugging time on the physical hardware and boost your development.</p>
+<section id="generic-system">
+<h2>Generic System<a class="headerlink" href="#generic-system" title="Link to this heading"></a></h2>
+<p>The component implements <code class="docutils literal notranslate"><span class="pre">hardware_interface::SystemInterface</span></code> supporting command and state interfaces.
+For more information about hardware components check <a class="reference internal" href="../../../getting_started/getting_started.html#overview-hardware-components"><span class="std std-ref">detailed documentation</span></a>.</p>
+<p>Features:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>support for mimic joints, which is parsed from the URDF (see the <a class="reference external" href="http://wiki.ros.org/urdf/XML/joint">URDF wiki</a>)</p></li>
+<li><p>mirroring commands to states with and without offset</p></li>
+<li><p>fake command interfaces for setting sensor data from an external node (combined with a <a class="reference internal" href="../../../ros2_controllers/forward_command_controller/doc/userdoc.html#forward-command-controller-userdoc"><span class="std std-ref">forward controller</span></a>)</p></li>
+<li><p>fake gpio interfaces for setting sensor data from an external node (combined with a <a class="reference internal" href="../../../ros2_controllers/forward_command_controller/doc/userdoc.html#forward-command-controller-userdoc"><span class="std std-ref">forward controller</span></a>)</p></li>
+</ul>
+</div></blockquote>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
+<p>A full example including all optional parameters (with default values):</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;MockHardwareSystem&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;hardware&gt;</span>
+<span class="w">    </span><span class="nt">&lt;plugin&gt;</span>mock_components/GenericSystem<span class="nt">&lt;/plugin&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;calculate_dynamics&quot;</span><span class="nt">&gt;</span>false<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;custom_interface_with_following_offset&quot;</span><span class="nt">&gt;&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;disable_commands&quot;</span><span class="nt">&gt;</span>false<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mock_gpio_commands&quot;</span><span class="nt">&gt;</span>false<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mock_sensor_commands&quot;</span><span class="nt">&gt;</span>false<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position_state_following_offset&quot;</span><span class="nt">&gt;</span>0.0<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/hardware&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint1&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;initial_value&quot;</span><span class="nt">&gt;</span>3.45<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/state_interface&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;acceleration&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint2&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;acceleration&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;initial_value&quot;</span><span class="nt">&gt;</span>2.78<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/state_interface&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;acceleration&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
+<span class="w">  </span><span class="nt">&lt;gpio</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;flange_vacuum&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;vacuum&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;vacuum&quot;</span><span class="w"> </span><span class="na">data_type=</span><span class="s">&quot;double&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/gpio&gt;</span>
+<span class="nt">&lt;/ros2_control&gt;</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="../../../ros2_control_demos/example_2/doc/userdoc.html#ros2-control-demos-example-2-userdoc"><span class="std std-ref">example_2</span></a> for an example using <code class="docutils literal notranslate"><span class="pre">calculate_dynamics</span></code> or <a class="reference internal" href="../../../ros2_control_demos/example_10/doc/userdoc.html#ros2-control-demos-example-10-userdoc"><span class="std std-ref">example_10</span></a> for using in combination with GPIO interfaces.</p>
+<section id="component-parameters">
+<h4>Component Parameters<a class="headerlink" href="#component-parameters" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>calculate_dynamics (optional; boolean; default: false)</dt><dd><p>Calculation of states from commands by using Euler-forward integration or finite differences.</p>
+</dd>
+<dt>custom_interface_with_following_offset (optional; string; default: “”)</dt><dd><p>Mapping of offsetted commands to a custom interface.</p>
+</dd>
+<dt>disable_commands (optional; boolean; default: false)</dt><dd><p>Disables mirroring commands to states.
+This option is helpful to simulate an erroneous connection to the hardware when nothing breaks, but suddenly there is no feedback from a hardware interface.
+Or it can help you to test your setup when the hardware is running without feedback, i.e., in open loop configuration.</p>
+</dd>
+<dt>mock_gpio_commands (optional; boolean; default: false)</dt><dd><p>Creates fake command interfaces for faking GPIO states with an external command.
+Those interfaces are usually used by a <a class="reference internal" href="../../../ros2_controllers/forward_command_controller/doc/userdoc.html#forward-command-controller-userdoc"><span class="std std-ref">forward controller</span></a> to provide access from ROS-world.</p>
+</dd>
+<dt>mock_sensor_commands (optional; boolean; default: false)</dt><dd><p>Creates fake command interfaces for faking sensor measurements with an external command.
+Those interfaces are usually used by a <a class="reference internal" href="../../../ros2_controllers/forward_command_controller/doc/userdoc.html#forward-command-controller-userdoc"><span class="std std-ref">forward controller</span></a> to provide access from ROS-world.</p>
+</dd>
+<dt>position_state_following_offset (optional; double; default: 0.0)</dt><dd><p>Following offset added to the commanded values when mirrored to states. Only applied, if <code class="docutils literal notranslate"><span class="pre">custom_interface_with_following_offset</span></code> is false.</p>
+</dd>
+</dl>
+</section>
+<section id="per-interface-parameters">
+<h4>Per-Interface Parameters<a class="headerlink" href="#per-interface-parameters" title="Link to this heading"></a></h4>
+<dl>
+<dt>initial_value (optional; double)</dt><dd><p>Initial value of certain state interface directly after startup. Example:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;initial_value&quot;</span><span class="nt">&gt;</span>3.45<span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;/state_interface&gt;</span>
+</pre></div>
+</div>
+<p>Note: This parameter is shared with the gazebo and gazebo classic plugins for
+joint interfaces. For Mock components it is also possible to set initial
+values for gpio or sensor state interfaces.</p>
+</dd>
+</dl>
+</section>
+</section>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="different_update_rates_userdoc.html" class="btn btn-neutral float-left" title="Different update rates for Hardware Components" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../../ros2_controllers/doc/controllers_index.html" class="btn btn-neutral float-right" title="ros2_controllers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: jazzy
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Releases</dt>
+        <dd><a href="../../../../../iron/doc/ros2_control/hardware_interface/doc/mock_components_userdoc.html">Iron (latest)</a></dd><br>
+        <dd><a href="../../../../../humble/doc/ros2_control/hardware_interface/doc/mock_components_userdoc.html">Humble</a></dd><br>
+        <dd><a href="../../../../../galactic/index.html">Galactic (EOL)</a></dd><br>
+        
+        <dd><a href="../../../../../foxy/index.html">Foxy (EOL)</a></dd><br>
+        
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="../../../../../rolling/doc/ros2_control/hardware_interface/doc/mock_components_userdoc.html">Rolling</a></dd>
+      <dd><a href="mock_components_userdoc.html">Jazzy</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

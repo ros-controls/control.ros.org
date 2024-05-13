@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>diff_drive_controller &mdash; ROS2_Control: Jazzy May 2024 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/reviewer_stats.css?v=068b34ac" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//jazzy/doc/ros2_controllers/diff_drive_controller/doc/userdoc.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=dbc0e75d"></script>
+        <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+        <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="steering_controllers_library" href="../../steering_controllers_library/doc/userdoc.html" />
+    <link rel="prev" title="bicycle_steering_controller" href="../../bicycle_steering_controller/doc/userdoc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html">ros2_control</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/controllers_index.html">ros2_controllers</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#guidelines-and-best-practices">Guidelines and Best Practices</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/controllers_index.html#controllers-for-mobile-robots">Controllers for Mobile Robots</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../ackermann_steering_controller/doc/userdoc.html">Ackermann Steering Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../bicycle_steering_controller/doc/userdoc.html">Bicycle Steering Controller</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Differential Drive Controller</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#other-features">Other features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#description-of-controller-s-interfaces">Description of controller’s interfaces</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#references">References</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#feedback">Feedback</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#output">Output</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#ros-2-interfaces">ROS 2 Interfaces</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#subscribers">Subscribers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#publishers">Publishers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#parameters">Parameters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../steering_controllers_library/doc/userdoc.html">Steering Controllers Library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tricycle_controller/doc/userdoc.html">Tricycle Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tricycle_steering_controller/doc/userdoc.html">Tricycle Steering Controller</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#controllers-for-manipulators-and-other-robots">Controllers for Manipulators and Other Robots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#broadcasters">Broadcasters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#common-controller-parameters">Common Controller Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes/release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../migration/migration.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_list/api_list.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../project_ideas.html">Project Ideas for GSoC 2024</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ROS2_Control: Jazzy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../doc/controllers_index.html">ros2_controllers</a></li>
+      <li class="breadcrumb-item active">diff_drive_controller</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ros-controls/ros2_controllers/blob/jazzy/diff_drive_controller/doc/userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for a development version.
+    For the latest released version, please have a look at <a href="../../../../../iron/doc/ros2_controllers/diff_drive_controller/doc/userdoc.html">Iron</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="diff-drive-controller">
+<span id="diff-drive-controller-userdoc"></span><h1>diff_drive_controller<a class="headerlink" href="#diff-drive-controller" title="Link to this heading"></a></h1>
+<p>Controller for mobile robots with differential drive.</p>
+<p>As input it takes velocity commands for the robot body, which are translated to wheel commands for the differential drive base.</p>
+<p>Odometry is computed from hardware feedback and published.</p>
+<section id="other-features">
+<h2>Other features<a class="headerlink" href="#other-features" title="Link to this heading"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Realtime-safe implementation.</p></li>
+<li><p>Odometry publishing</p></li>
+<li><p>Task-space velocity, acceleration and jerk limits</p></li>
+<li><p>Automatic stop after command time-out</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="description-of-controller-s-interfaces">
+<h2>Description of controller’s interfaces<a class="headerlink" href="#description-of-controller-s-interfaces" title="Link to this heading"></a></h2>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Link to this heading"></a></h3>
+<p>(the controller is not yet implemented as chainable controller)</p>
+</section>
+<section id="feedback">
+<h3>Feedback<a class="headerlink" href="#feedback" title="Link to this heading"></a></h3>
+<p>As feedback interface type the joints’ position (<code class="docutils literal notranslate"><span class="pre">hardware_interface::HW_IF_POSITION</span></code>) or velocity (<code class="docutils literal notranslate"><span class="pre">hardware_interface::HW_IF_VELOCITY</span></code>,if parameter <code class="docutils literal notranslate"><span class="pre">position_feedback=false</span></code>) are used.</p>
+</section>
+<section id="output">
+<h3>Output<a class="headerlink" href="#output" title="Link to this heading"></a></h3>
+<p>Joints’ velocity (<code class="docutils literal notranslate"><span class="pre">hardware_interface::HW_IF_VELOCITY</span></code>) are used.</p>
+</section>
+</section>
+<section id="ros-2-interfaces">
+<h2>ROS 2 Interfaces<a class="headerlink" href="#ros-2-interfaces" title="Link to this heading"></a></h2>
+<section id="subscribers">
+<h3>Subscribers<a class="headerlink" href="#subscribers" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>~/cmd_vel [geometry_msgs/msg/TwistStamped]</dt><dd><p>Velocity command for the controller. The controller extracts the x component of the linear velocity and the z component of the angular velocity. Velocities on other components are ignored.</p>
+</dd>
+</dl>
+</section>
+<section id="publishers">
+<h3>Publishers<a class="headerlink" href="#publishers" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>~/odom [nav_msgs::msg::Odometry]</dt><dd><p>This represents an estimate of the robot’s position and velocity in free space.</p>
+</dd>
+<dt>/tf [tf2_msgs::msg::TFMessage]</dt><dd><p>tf tree. Published only if <code class="docutils literal notranslate"><span class="pre">enable_odom_tf=true</span></code></p>
+</dd>
+<dt>~/cmd_vel_out [geometry_msgs/msg/TwistStamped]</dt><dd><p>Velocity command for the controller, where limits were applied. Published only if <code class="docutils literal notranslate"><span class="pre">publish_limited_velocity=true</span></code></p>
+</dd>
+</dl>
+</section>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
+<p>This controller uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters. The parameter <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/jazzy/diff_drive_controller/src/diff_drive_controller_parameter.yaml">definition file located in the src folder</a> contains descriptions for all the parameters used by the controller.</p>
+<dl>
+<dt>left_wheel_names (string_array)</dt><dd><p>Names of the left side wheels’ joints</p>
+<p>Default:  {}</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>parameter is not empty</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>right_wheel_names (string_array)</dt><dd><p>Names of the right side wheels’ joints</p>
+<p>Default:  {}</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>parameter is not empty</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>wheel_separation (double)</dt><dd><p>Shortest distance between the left and right wheels. If this parameter is wrong, the robot will not behave correctly in curves.</p>
+<p>Default:  0.0</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>wheel_radius (double)</dt><dd><p>Radius of a wheel, i.e., wheels size, used for transformation of linear velocity into wheel rotations. If this parameter is wrong the robot will move faster or slower then expected.</p>
+<p>Default:  0.0</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>wheel_separation_multiplier (double)</dt><dd><p>Correction factor for wheel separation (TODO(destogl): Please help me describe this correctly)</p>
+<p>Default:  1.0</p>
+</dd>
+<dt>left_wheel_radius_multiplier (double)</dt><dd><p>Correction factor when radius of left wheels differs from the nominal value in <code class="docutils literal notranslate"><span class="pre">wheel_radius</span></code> parameter.</p>
+<p>Default:  1.0</p>
+</dd>
+<dt>right_wheel_radius_multiplier (double)</dt><dd><p>Correction factor when radius of right wheels differs from the nominal value in <code class="docutils literal notranslate"><span class="pre">wheel_radius</span></code> parameter.</p>
+<p>Default:  1.0</p>
+</dd>
+<dt>tf_frame_prefix_enable (bool)</dt><dd><p>Enables or disables appending tf_prefix to tf frame id’s.</p>
+<p>Default:  true</p>
+</dd>
+<dt>tf_frame_prefix (string)</dt><dd><p>(optional) Prefix to be appended to the tf frames, will be added to odom_id and base_frame_id before publishing. If the parameter is empty, controller’s namespace will be used.</p>
+<p>Default:  “”</p>
+</dd>
+<dt>odom_frame_id (string)</dt><dd><p>Name of the frame for odometry. This frame is parent of <code class="docutils literal notranslate"><span class="pre">base_frame_id</span></code> when controller publishes odometry.</p>
+<p>Default:  “odom”</p>
+</dd>
+<dt>base_frame_id (string)</dt><dd><p>Name of the robot’s base frame that is child of the odometry frame.</p>
+<p>Default:  “base_link”</p>
+</dd>
+<dt>pose_covariance_diagonal (double_array)</dt><dd><p>Odometry covariance for the encoder output of the robot for the pose. These values should be tuned to your robot’s sample odometry data, but these values are a good place to start: <code class="docutils literal notranslate"><span class="pre">[0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.01]</span></code>.</p>
+<p>Default:  {0.0, 0.0, 0.0, 0.0, 0.0, 0.0}</p>
+</dd>
+<dt>twist_covariance_diagonal (double_array)</dt><dd><p>Odometry covariance for the encoder output of the robot for the speed. These values should be tuned to your robot’s sample odometry data, but these values are a good place to start: <code class="docutils literal notranslate"><span class="pre">[0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.01]</span></code>.</p>
+<p>Default:  {0.0, 0.0, 0.0, 0.0, 0.0, 0.0}</p>
+</dd>
+<dt>open_loop (bool)</dt><dd><p>If set to true the odometry of the robot will be calculated from the commanded values and not from feedback.</p>
+<p>Default:  false</p>
+</dd>
+<dt>position_feedback (bool)</dt><dd><p>Is there position feedback from hardware.</p>
+<p>Default:  true</p>
+</dd>
+<dt>enable_odom_tf (bool)</dt><dd><p>Publish transformation between <code class="docutils literal notranslate"><span class="pre">odom_frame_id</span></code> and <code class="docutils literal notranslate"><span class="pre">base_frame_id</span></code>.</p>
+<p>Default:  true</p>
+</dd>
+<dt>cmd_vel_timeout (double)</dt><dd><p>Timeout in seconds, after which input command on <code class="docutils literal notranslate"><span class="pre">cmd_vel</span></code> topic is considered staled.</p>
+<p>Default:  0.5</p>
+</dd>
+<dt>publish_limited_velocity (bool)</dt><dd><p>Publish limited velocity value.</p>
+<p>Default:  false</p>
+</dd>
+<dt>velocity_rolling_window_size (int)</dt><dd><p>Size of the rolling window for calculation of mean velocity use in odometry.</p>
+<p>Default:  10</p>
+</dd>
+<dt>publish_rate (double)</dt><dd><p>Publishing rate (Hz) of the odometry and TF messages.</p>
+<p>Default:  50.0</p>
+</dd>
+<dt>linear.x</dt><dd><p>Joint limits structure for the linear <code class="docutils literal notranslate"><span class="pre">x</span></code>-axis.
+The limiter ignores position limits.
+For details see <code class="docutils literal notranslate"><span class="pre">joint_limits</span></code> package from ros2_control repository.</p>
+</dd>
+<dt>linear.x.has_velocity_limits (bool)</dt><dd><p>Default:  false</p>
+</dd>
+<dt>linear.x.has_acceleration_limits (bool)</dt><dd><p>Default:  false</p>
+</dd>
+<dt>linear.x.has_jerk_limits (bool)</dt><dd><p>Default:  false</p>
+</dd>
+<dt>linear.x.max_velocity (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+<dt>linear.x.min_velocity (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+<dt>linear.x.max_acceleration (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+<dt>linear.x.min_acceleration (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+<dt>linear.x.max_jerk (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+<dt>linear.x.min_jerk (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+<dt>angular.z</dt><dd><p>Joint limits structure for the rotation about <code class="docutils literal notranslate"><span class="pre">z</span></code>-axis.
+The limiter ignores position limits.
+For details see <code class="docutils literal notranslate"><span class="pre">joint_limits</span></code> package from ros2_control repository.</p>
+</dd>
+<dt>angular.z.has_velocity_limits (bool)</dt><dd><p>Default:  false</p>
+</dd>
+<dt>angular.z.has_acceleration_limits (bool)</dt><dd><p>Default:  false</p>
+</dd>
+<dt>angular.z.has_jerk_limits (bool)</dt><dd><p>Default:  false</p>
+</dd>
+<dt>angular.z.max_velocity (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+<dt>angular.z.min_velocity (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+<dt>angular.z.max_acceleration (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+<dt>angular.z.min_acceleration (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+<dt>angular.z.max_jerk (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+<dt>angular.z.min_jerk (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+</dl>
+<p>An example parameter file for this controller can be found in <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/jazzy/diff_drive_controller/test/config/test_diff_drive_controller.yaml">the test directory</a>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test_diff_drive_controller</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">left_wheel_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;left_wheels&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">right_wheel_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;right_wheels&quot;</span><span class="p p-Indicator">]</span>
+
+<span class="w">    </span><span class="nt">wheel_separation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.40</span>
+<span class="w">    </span><span class="nt">wheel_radius</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.02</span>
+
+<span class="w">    </span><span class="nt">wheel_separation_multiplier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="w">    </span><span class="nt">left_wheel_radius_multiplier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="w">    </span><span class="nt">right_wheel_radius_multiplier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+
+<span class="w">    </span><span class="nt">odom_frame_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">odom</span>
+<span class="w">    </span><span class="nt">base_frame_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">base_link</span>
+<span class="w">    </span><span class="nt">pose_covariance_diagonal</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">twist_covariance_diagonal</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">]</span>
+
+<span class="w">    </span><span class="nt">position_feedback</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">open_loop</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">enable_odom_tf</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+
+<span class="w">    </span><span class="nt">cmd_vel_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span><span class="w"> </span><span class="c1"># seconds</span>
+<span class="w">    </span><span class="nt">publish_limited_velocity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">velocity_rolling_window_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+
+<span class="w">    </span><span class="nt">linear.x.has_velocity_limits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">linear.x.has_acceleration_limits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">linear.x.has_jerk_limits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">linear.x.max_velocity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">    </span><span class="nt">linear.x.min_velocity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">    </span><span class="nt">linear.x.max_acceleration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">    </span><span class="nt">linear.x.max_jerk</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">    </span><span class="nt">linear.x.min_jerk</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+
+<span class="w">    </span><span class="nt">angular.z.has_velocity_limits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">angular.z.has_acceleration_limits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">angular.z.has_jerk_limits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">angular.z.max_velocity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">    </span><span class="nt">angular.z.min_velocity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">    </span><span class="nt">angular.z.max_acceleration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">    </span><span class="nt">angular.z.min_acceleration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">    </span><span class="nt">angular.z.max_jerk</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">    </span><span class="nt">angular.z.min_jerk</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../bicycle_steering_controller/doc/userdoc.html" class="btn btn-neutral float-left" title="bicycle_steering_controller" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../steering_controllers_library/doc/userdoc.html" class="btn btn-neutral float-right" title="steering_controllers_library" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: jazzy
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Releases</dt>
+        <dd><a href="../../../../../iron/doc/ros2_controllers/diff_drive_controller/doc/userdoc.html">Iron (latest)</a></dd><br>
+        <dd><a href="../../../../../humble/doc/ros2_controllers/diff_drive_controller/doc/userdoc.html">Humble</a></dd><br>
+        <dd><a href="../../../../../galactic/doc/ros2_controllers/diff_drive_controller/doc/userdoc.html">Galactic (EOL)</a></dd><br>
+        
+        <dd><a href="../../../../../foxy/doc/ros2_controllers/diff_drive_controller/doc/userdoc.html">Foxy (EOL)</a></dd><br>
+        
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="../../../../../rolling/doc/ros2_controllers/diff_drive_controller/doc/userdoc.html">Rolling</a></dd>
+      <dd><a href="userdoc.html">Jazzy</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
