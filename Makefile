@@ -112,7 +112,7 @@ multiversion-with-api: Makefile
 	./make_help_scripts/delete_sub_repos.py
 	@echo Step 5: Building multiversion API
 	./make_help_scripts/create_api_multi_version.py
-	@echo Step 4: Create correct index + legacy master version
+	@echo Step 6: Create correct index + legacy master version
 	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=rolling/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
 # legacy, renamed Rolling version from "master" to "rolling"
 	@cp -r "$(BUILDDIR)"/html/rolling/ "$(BUILDDIR)"/html/master
