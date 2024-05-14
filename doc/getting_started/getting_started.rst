@@ -19,7 +19,7 @@ To receive the latest features and bug fixes or if you want to contribute to the
 
 You can choose between the following options:
 
-   * Stable version: These branches will be released in the future in the respective ROS 2 distribution binaries.
+   * Stable version: The changes in these branches will be tagged and released to the ROS 2 distribution binaries.
 
     .. raw:: html
 
