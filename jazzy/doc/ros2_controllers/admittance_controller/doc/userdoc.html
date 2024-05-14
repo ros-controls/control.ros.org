@@ -118,7 +118,7 @@
       <li class="breadcrumb-item active">Admittance Controller</li>
       <li class="wy-breadcrumbs-aside">
               <!-- User defined GitHub URL -->
-              <a href="https://github.com/ros-controls/ros2_controllers/blob/jazzy/admittance_controller/doc/userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/ros-controls/ros2_controllers/blob/master/admittance_controller/doc/userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -146,7 +146,7 @@ The controller implements <code class="docutils literal notranslate"><span class
 <h2>ROS 2 interface of the controller<a class="headerlink" href="#ros-2-interface-of-the-controller" title="Link to this heading"></a></h2>
 <section id="parameters">
 <h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
-<p>The admittance controller uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters. The parameter <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/jazzy/admittance_controller/src/admittance_controller_parameters.yaml">definition file located in the src folder</a> contains descriptions for all the parameters used by the controller.</p>
+<p>The admittance controller uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters. The parameter <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/master/admittance_controller/src/admittance_controller_parameters.yaml">definition file located in the src folder</a> contains descriptions for all the parameters used by the controller.</p>
 <dl>
 <dt>joints (string_array)</dt><dd><p>Specifies which joints will be used by the controller.</p>
 <p>Read only: True</p>
@@ -246,7 +246,7 @@ The controller implements <code class="docutils literal notranslate"><span class
 <p>Default:  true</p>
 </dd>
 </dl>
-<p>An example parameter file for this controller can be found in <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/jazzy/admittance_controller/test/test_params.yaml">the test folder</a>:</p>
+<p>An example parameter file for this controller can be found in <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/master/admittance_controller/test/test_params.yaml">the test folder</a>:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">load_admittance_controller</span><span class="p">:</span>
 <span class="w">  </span><span class="c1"># contains minimal parameters that need to be set to load controller</span>
 <span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
@@ -381,15 +381,15 @@ The controller implements <code class="docutils literal notranslate"><span class
 <section id="states">
 <h3>States<a class="headerlink" href="#states" title="Link to this heading"></a></h3>
 <p>The state interfaces are defined with <code class="docutils literal notranslate"><span class="pre">joints</span></code> and <code class="docutils literal notranslate"><span class="pre">state_interfaces</span></code> parameters as follows: <code class="docutils literal notranslate"><span class="pre">&lt;joint&gt;/&lt;state_interface&gt;</span></code>.
-Supported state interfaces are <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code>, and <code class="docutils literal notranslate"><span class="pre">acceleration</span></code> as defined in the <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/jazzy/hardware_interface/include/hardware_interface/types/hardware_interface_type_values.hpp">hardware_interface/hardware_interface_type_values.hpp</a>.
+Supported state interfaces are <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code>, and <code class="docutils literal notranslate"><span class="pre">acceleration</span></code> as defined in the <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/include/hardware_interface/types/hardware_interface_type_values.hpp">hardware_interface/hardware_interface_type_values.hpp</a>.
 If some interface is not provided, the last commanded interface will be used for calculation.</p>
-<p>For handling TCP wrenches <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/jazzy/controller_interface/include/semantic_components/force_torque_sensor.hpp">*Force Torque Sensor* semantic component  (from package *controller_interface*)</a> is used.
+<p>For handling TCP wrenches <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/controller_interface/include/semantic_components/force_torque_sensor.hpp">*Force Torque Sensor* semantic component  (from package *controller_interface*)</a> is used.
 The interfaces have prefix <code class="docutils literal notranslate"><span class="pre">ft_sensor.name</span></code>, building the interfaces: <code class="docutils literal notranslate"><span class="pre">&lt;sensor_name&gt;/[force.x|force.y|force.z|torque.x|torque.y|torque.z]</span></code>.</p>
 </section>
 <section id="commands">
 <h3>Commands<a class="headerlink" href="#commands" title="Link to this heading"></a></h3>
 <p>The command interfaces are defined with <code class="docutils literal notranslate"><span class="pre">joints</span></code> and <code class="docutils literal notranslate"><span class="pre">command_interfaces</span></code> parameters as follows: <code class="docutils literal notranslate"><span class="pre">&lt;joint&gt;/&lt;command_interface&gt;</span></code>.
-Supported state interfaces are <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code>, and <code class="docutils literal notranslate"><span class="pre">acceleration</span></code> as defined in the <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/jazzy/hardware_interface/include/hardware_interface/types/hardware_interface_type_values.hpp">hardware_interface/hardware_interface_type_values.hpp</a>.</p>
+Supported state interfaces are <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code>, and <code class="docutils literal notranslate"><span class="pre">acceleration</span></code> as defined in the <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/include/hardware_interface/types/hardware_interface_type_values.hpp">hardware_interface/hardware_interface_type_values.hpp</a>.</p>
 </section>
 </section>
 </section>

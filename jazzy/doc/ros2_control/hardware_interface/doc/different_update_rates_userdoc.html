@@ -113,7 +113,7 @@
       <li class="breadcrumb-item active">Different update rates for Hardware Components</li>
       <li class="wy-breadcrumbs-aside">
               <!-- User defined GitHub URL -->
-              <a href="https://github.com/ros-controls/ros2_control/blob/jazzy/hardware_interface/doc/different_update_rates_userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/doc/different_update_rates_userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -139,11 +139,11 @@ Components with update rates different from the main control loop.</p>
 <section id="by-counting-loops">
 <h2>By counting loops<a class="headerlink" href="#by-counting-loops" title="Link to this heading"></a></h2>
 <p>Current implementation of
-<a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/jazzy/controller_manager/src/ros2_control_node.cpp">ros2_control main node</a>
+<a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/controller_manager/src/ros2_control_node.cpp">ros2_control main node</a>
 has one update rate that controls the rate of the
 <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/0bdcd414c7ab8091f3e1b8d9b73a91c778388e82/hardware_interface/include/hardware_interface/system_interface.hpp#L175">read(…)</a>
 and <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/fe462926416d527d1da163bc3eabd02ee1de9be9/hardware_interface/include/hardware_interface/system_interface.hpp#L178">write(…)</a>
-calls in <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/jazzy/hardware_interface/include/hardware_interface/system_interface.hpp">hardware_interface(s)</a>.
+calls in <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/include/hardware_interface/system_interface.hpp">hardware_interface(s)</a>.
 To achieve different update rates for your hardware component you can use the following steps:</p>
 <ol class="arabic simple" id="step-1">
 <li><p>Add parameters of main control loop update rate and desired update rate for your hardware component</p></li>
