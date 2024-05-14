@@ -29,11 +29,11 @@ author = "ros2_control Development Team"
 copyright = "{}, {}".format(time.strftime("%Y"), author)
 
 # Adjust those to change ros distribution
-# you might also need to white list branch
+# you might also need to white list branch (see smv_branch_whitelist)
 ros_distro = "rolling"
 distro_title = "Rolling"
 distro_title_full = "Rolling Ridley"
-repos_file_branch = "rolling" # for single version only
+repos_file_branch = "master" # sets macro REPOS_FILE_BRANCH (will be overridden with multiversion)
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -341,7 +341,7 @@ def smv_rewrite_configs(app, config):
         # this map is used to match branches of control.ros.org to REPOS_FILE_BRANCH macro
         subrepo_branch = {
             base_branch: "master",
-            "jazzy": "jazzy",
+            "jazzy": "master",
             "iron": "iron",
             "humble": "humble",
             "foxy": "foxy",
