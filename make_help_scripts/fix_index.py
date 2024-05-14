@@ -33,7 +33,7 @@ def fix_index(base_branch, builddir):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Fix index.')
-    parser.add_argument('--builddir', required=True, help='Build directory.')
+    parser.add_argument('--build-dir', required=True, help='Build directory.')
 
     args = parser.parse_args()
-    fix_index(deploy_defines.base_branch, args.builddir)
+    fix_index(deploy_defines.base_branch, args.build_dir)

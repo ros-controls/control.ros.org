@@ -81,7 +81,7 @@ multiversion: Makefile
 	@echo Step 3: Deleting temporary commits
 	./make_help_scripts/delete_tmp_commits.py
 	@echo Step 4: Create correct index + legacy master version
-	./make_help_scripts/fix_index.py --builddir $(BUILDDIR)
+	./make_help_scripts/fix_index.py --build-dir $(BUILDDIR)
 
 multiversion-with-errors: Makefile
 	@echo Building multi version documentation without API
@@ -92,7 +92,7 @@ multiversion-with-errors: Makefile
 	@echo Step 3: Deleting temporary commits
 	./make_help_scripts/delete_tmp_commits.py
 	@echo Step 4: Create correct index + legacy master version
-	./make_help_scripts/fix_index.py --builddir $(BUILDDIR)
+	./make_help_scripts/fix_index.py --build-dir $(BUILDDIR)
 
 multiversion-with-api: Makefile
 	@echo Building multi version documentation with API
@@ -107,7 +107,7 @@ multiversion-with-api: Makefile
 	@echo Step 5: Building multiversion API
 	./make_help_scripts/create_api_multi_version.py
 	@echo Step 6: Create correct index + legacy master version
-	./make_help_scripts/fix_index.py --builddir $(BUILDDIR)
+	./make_help_scripts/fix_index.py --build-dir $(BUILDDIR)
 
 .PHONY: help Makefile html-with-errors html-with-api multiversion multiversion-with-api multiversion-with-errors html-all-subrepos html-all-subrepos-with-api html-all-subrepos-with-errors linkcheck-all-subrepos-with-api
 
