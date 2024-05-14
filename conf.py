@@ -203,9 +203,9 @@ else:
 
 # Add branches you want to whitelist here.
 smv_branch_whitelist = r"^(foxy|galactic|humble|iron|jazzy|"+ base_branch + r")$"
-smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy|galactic|humble|iron).*$"
+smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy|galactic|humble|iron|jazzy).*$"
 smv_remote_whitelist = r"^(origin)$"
-smv_latest_version = "iron"
+smv_latest_version = "jazzy"
 smv_eol_versions = ["foxy", "galactic"]
 
 distro_full_names = {
