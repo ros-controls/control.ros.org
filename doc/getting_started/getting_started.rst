@@ -33,30 +33,27 @@ You can choose between the following options:
         <a href="https://github.com/ros-controls/ros2_control_ci/actions/workflows/rolling-compatibility-{DISTRO}-binary-build.yml">
             <img src="https://github.com/ros-controls/ros2_control_ci/actions/workflows/rolling-compatibility-{DISTRO}-binary-build.yml/badge.svg" alt="Rolling Compatibility {DISTRO}"/></a>
 
-   .. tabs::
+* Download all repositories
 
-      .. group-tab:: Stable version
+  .. tabs::
 
+    .. group-tab:: Stable version
 
-        * Download all repositories
+        .. code-block:: shell
 
-          .. code-block:: shell
+          mkdir -p ~/ros2_ws/src
+          cd ~/ros2_ws/
+          wget https://raw.githubusercontent.com/ros-controls/ros2_control_ci/master/ros_controls.$ROS_DISTRO.repos
+          vcs import src < ros_controls.$ROS_DISTRO.repos
 
-            mkdir -p ~/ros2_ws/src
-            cd ~/ros2_ws/
-            wget https://raw.githubusercontent.com/ros-controls/ros2_control_ci/master/ros_controls.$ROS_DISTRO.repos
-            vcs import src < ros_controls.$ROS_DISTRO.repos
+    .. group-tab:: Development version
 
-      .. group-tab:: Development version
+        .. code-block:: shell
 
-        * Download all repositories
-
-          .. code-block:: shell
-
-            mkdir -p ~/ros2_ws/src
-            cd ~/ros2_ws/
-            wget https://raw.githubusercontent.com/ros-controls/ros2_control_ci/master/ros_controls.rolling-on-$ROS_DISTRO.repos.repos
-            vcs import src < ros_controls.$ROS_DISTRO.repos
+          mkdir -p ~/ros2_ws/src
+          cd ~/ros2_ws/
+          wget https://raw.githubusercontent.com/ros-controls/ros2_control_ci/master/ros_controls.rolling-on-$ROS_DISTRO.repos.repos
+          vcs import src < ros_controls.$ROS_DISTRO.repos
 
 * Install dependencies:
 
