@@ -15,27 +15,45 @@ To use it, you have to install ``ros-{DISTRO}-ros2-control`` and ``ros-{DISTRO}-
 Building from Source
 ---------------------------
 
-The rolling branch is compatible with both Humble and Iron ROS distributions. You can find more information about this compatibility on the respective `Humble <https://control.ros.org/humble/doc/getting_started/getting_started.html#building-from-source>`__ and `Iron <https://control.ros.org/iron/doc/getting_started/getting_started.html#building-from-source>`__ versions of this page.
+To receive the latest features and bug fixes or if you want to contribute to the framework, you can build the framework from source.
 
-.. raw:: html
+You can choose between the following options:
 
-    <a href="https://github.com/ros-controls/ros2_control_ci/actions/workflows/{DISTRO}-binary-build.yml">
-        <img src="https://github.com/ros-controls/ros2_control_ci/actions/workflows/{DISTRO}-binary-build.yml/badge.svg" alt="{DISTRO} Binary Build"/></a></br>
-    <a href="https://github.com/ros-controls/ros2_control_ci/actions/workflows/rolling-compatibility-iron-binary-build.yml">
-        <img src="https://github.com/ros-controls/ros2_control_ci/actions/workflows/rolling-compatibility-iron-binary-build.yml/badge.svg" alt="Rolling Compatibility iron"/></a>
-    <a href="https://github.com/ros-controls/ros2_control_ci/actions/workflows/rolling-compatibility-humble-binary-build.yml">
-        <img src="https://github.com/ros-controls/ros2_control_ci/actions/workflows/rolling-compatibility-humble-binary-build.yml/badge.svg" alt="Rolling Compatibility humble"/></a>
+   * Stable version: These branches will be released in the future in the respective ROS 2 distribution binaries.
 
-If you want to install the framework from source, e.g., for contributing to the framework, use the following commands:
+    .. raw:: html
 
-* Download all repositories
+        <a href="https://github.com/ros-controls/ros2_control_ci/actions/workflows/{DISTRO}-binary-build.yml">
+            <img src="https://github.com/ros-controls/ros2_control_ci/actions/workflows/{DISTRO}-binary-build.yml/badge.svg" alt="{DISTRO} Binary Build"/></a>
 
-  .. code-block:: shell
+   * Development version: We thrive to make the rolling development version (from the master branches) of the ros2_control stack compatible with earlier releases of ROS2. This is done by building the rolling version of the stack from source with the earlier releases of ROS2.
 
-    mkdir -p ~/ros2_ws/src
-    cd ~/ros2_ws/
-    wget https://raw.githubusercontent.com/ros-controls/ros2_control_ci/master/ros_controls.$ROS_DISTRO.repos
-    vcs import src < ros_controls.$ROS_DISTRO.repos
+    .. raw:: html
+
+        <a href="https://github.com/ros-controls/ros2_control_ci/actions/workflows/rolling-compatibility-{DISTRO}-binary-build.yml">
+            <img src="https://github.com/ros-controls/ros2_control_ci/actions/workflows/rolling-compatibility-{DISTRO}-binary-build.yml/badge.svg" alt="Rolling Compatibility {DISTRO}"/></a>
+
+* Download all repositories:
+
+  .. tabs::
+
+    .. group-tab:: Stable version
+
+        .. code-block:: shell
+
+          mkdir -p ~/ros2_ws/src
+          cd ~/ros2_ws/
+          wget https://raw.githubusercontent.com/ros-controls/ros2_control_ci/master/ros_controls.$ROS_DISTRO.repos
+          vcs import src < ros_controls.$ROS_DISTRO.repos
+
+    .. group-tab:: Development version
+
+        .. code-block:: shell
+
+          mkdir -p ~/ros2_ws/src
+          cd ~/ros2_ws/
+          wget https://raw.githubusercontent.com/ros-controls/ros2_control_ci/master/ros_controls.rolling-on-$ROS_DISTRO.repos.repos
+          vcs import src < ros_controls.$ROS_DISTRO.repos
 
 * Install dependencies:
 
