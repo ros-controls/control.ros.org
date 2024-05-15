@@ -25,6 +25,7 @@
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../_static/tabs.js?v=35627e55"></script>
         <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -135,21 +136,38 @@ To use it, you have to install <code class="docutils literal notranslate"><span 
 </section>
 <section id="building-from-source">
 <h3>Building from Source<a class="headerlink" href="#building-from-source" title="Link to this heading"></a></h3>
-<p>The rolling branch is compatible with both Humble and Iron ROS distributions. You can find more information about this compatibility on the respective <a class="reference external" href="https://control.ros.org/humble/doc/getting_started/getting_started.html#building-from-source">Humble</a> and <a class="reference external" href="https://control.ros.org/iron/doc/getting_started/getting_started.html#building-from-source">Iron</a> versions of this page.</p>
-<a href="https://github.com/ros-controls/ros2_control_ci/actions/workflows/jazzy-binary-build.yml">
-    <img src="https://github.com/ros-controls/ros2_control_ci/actions/workflows/jazzy-binary-build.yml/badge.svg" alt="jazzy Binary Build"/></a></br>
-<a href="https://github.com/ros-controls/ros2_control_ci/actions/workflows/rolling-compatibility-iron-binary-build.yml">
-    <img src="https://github.com/ros-controls/ros2_control_ci/actions/workflows/rolling-compatibility-iron-binary-build.yml/badge.svg" alt="Rolling Compatibility iron"/></a>
-<a href="https://github.com/ros-controls/ros2_control_ci/actions/workflows/rolling-compatibility-humble-binary-build.yml">
-    <img src="https://github.com/ros-controls/ros2_control_ci/actions/workflows/rolling-compatibility-humble-binary-build.yml/badge.svg" alt="Rolling Compatibility humble"/></a><p>If you want to install the framework from source, e.g., for contributing to the framework, use the following commands:</p>
+<p>To receive the latest features and bug fixes or if you want to contribute to the framework, you can build the framework from source.</p>
+<p>You can choose between the following options:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Stable version: The changes in these branches will be tagged and released to the ROS 2 distribution binaries.</p></li>
+</ul>
+<blockquote>
+<div><a href="https://github.com/ros-controls/ros2_control_ci/actions/workflows/jazzy-binary-build.yml">
+    <img src="https://github.com/ros-controls/ros2_control_ci/actions/workflows/jazzy-binary-build.yml/badge.svg" alt="jazzy Binary Build"/></a></div></blockquote>
+<ul class="simple">
+<li><p>Development version: We thrive to make the rolling development version (from the master branches) of the ros2_control stack compatible with earlier releases of ROS2. This is done by building the rolling version of the stack from source with the earlier releases of ROS2.</p></li>
+</ul>
+<blockquote>
+<div><a href="https://github.com/ros-controls/ros2_control_ci/actions/workflows/rolling-compatibility-jazzy-binary-build.yml">
+    <img src="https://github.com/ros-controls/ros2_control_ci/actions/workflows/rolling-compatibility-jazzy-binary-build.yml/badge.svg" alt="Rolling Compatibility jazzy"/></a></div></blockquote>
+</div></blockquote>
 <ul>
-<li><p>Download all repositories</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/ros2_ws/src
+<li><p>Download all repositories:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-U3RhYmxlIHZlcnNpb24=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-U3RhYmxlIHZlcnNpb24=" name="U3RhYmxlIHZlcnNpb24=" role="tab" tabindex="0">Stable version</button><button aria-controls="panel-0-RGV2ZWxvcG1lbnQgdmVyc2lvbg==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-RGV2ZWxvcG1lbnQgdmVyc2lvbg==" name="RGV2ZWxvcG1lbnQgdmVyc2lvbg==" role="tab" tabindex="-1">Development version</button></div><div aria-labelledby="tab-0-U3RhYmxlIHZlcnNpb24=" class="sphinx-tabs-panel group-tab" id="panel-0-U3RhYmxlIHZlcnNpb24=" name="U3RhYmxlIHZlcnNpb24=" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/ros2_ws/src
 <span class="nb">cd</span><span class="w"> </span>~/ros2_ws/
 wget<span class="w"> </span>https://raw.githubusercontent.com/ros-controls/ros2_control_ci/master/ros_controls.<span class="nv">$ROS_DISTRO</span>.repos
 vcs<span class="w"> </span>import<span class="w"> </span>src<span class="w"> </span>&lt;<span class="w"> </span>ros_controls.<span class="nv">$ROS_DISTRO</span>.repos
 </pre></div>
 </div>
+</div><div aria-labelledby="tab-0-RGV2ZWxvcG1lbnQgdmVyc2lvbg==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-RGV2ZWxvcG1lbnQgdmVyc2lvbg==" name="RGV2ZWxvcG1lbnQgdmVyc2lvbg==" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/ros2_ws/src
+<span class="nb">cd</span><span class="w"> </span>~/ros2_ws/
+wget<span class="w"> </span>https://raw.githubusercontent.com/ros-controls/ros2_control_ci/master/ros_controls.rolling-on-<span class="nv">$ROS_DISTRO</span>.repos.repos
+vcs<span class="w"> </span>import<span class="w"> </span>src<span class="w"> </span>&lt;<span class="w"> </span>ros_controls.<span class="nv">$ROS_DISTRO</span>.repos
+</pre></div>
+</div>
+</div></div>
 </li>
 <li><p>Install dependencies:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rosdep<span class="w"> </span>update<span class="w"> </span>--rosdistro<span class="o">=</span><span class="nv">$ROS_DISTRO</span>
