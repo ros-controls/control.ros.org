@@ -3,10 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - master
-  schedule:
-  # Run every morning to ensure component documentation is up to date on deployment
-   - cron: '23 5 * * *'
+      - jazzy
 
 jobs:
   check-links:
@@ -14,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        BRANCH: [humble, iron, master]
+        BRANCH: [Jazzy]
     steps:
     - uses: actions/checkout@v4
       with:
