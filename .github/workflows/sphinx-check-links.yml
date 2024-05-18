@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - humble
-  schedule:
-  # Run every morning to ensure component documentation is up to date on deployment
-   - cron: '23 5 * * *'
 
 jobs:
   check-links:
@@ -14,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        BRANCH: [humble, iron, master]
+        BRANCH: [humble]
     steps:
     - uses: actions/checkout@v4
       with:
