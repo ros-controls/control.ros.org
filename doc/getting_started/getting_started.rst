@@ -43,8 +43,7 @@ You can choose between the following options:
 
           mkdir -p ~/ros2_ws/src
           cd ~/ros2_ws/
-          wget https://raw.githubusercontent.com/ros-controls/ros2_control_ci/master/ros_controls.$ROS_DISTRO.repos
-          vcs import src < ros_controls.$ROS_DISTRO.repos
+          vcs import --input https://raw.githubusercontent.com/ros-controls/ros2_control_ci/master/ros_controls.$ROS_DISTRO.repos src
 
     .. group-tab:: Development version
 
@@ -52,8 +51,7 @@ You can choose between the following options:
 
           mkdir -p ~/ros2_ws/src
           cd ~/ros2_ws/
-          wget https://raw.githubusercontent.com/ros-controls/ros2_control_ci/master/ros_controls.rolling-on-$ROS_DISTRO.repos.repos
-          vcs import src < ros_controls.$ROS_DISTRO.repos
+          vcs import --input https://raw.githubusercontent.com/ros-controls/ros2_control_ci/master/ros_controls.rolling-on-$ROS_DISTRO.repos src
 
 * Install dependencies:
 
