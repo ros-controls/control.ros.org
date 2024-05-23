@@ -164,20 +164,23 @@ $(function() {
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  std::string get_name() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <span class="keyword">const</span> rclcpp_lifecycle::State &amp; get_state() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  std::string get_group_name() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  return_type read(<span class="keyword">const</span> rclcpp::Time &amp; time, <span class="keyword">const</span> rclcpp::Duration &amp; period);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <span class="keyword">const</span> rclcpp_lifecycle::State &amp; get_state() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  return_type write(<span class="keyword">const</span> rclcpp::Time &amp; time, <span class="keyword">const</span> rclcpp::Duration &amp; period);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  return_type read(<span class="keyword">const</span> rclcpp::Time &amp; time, <span class="keyword">const</span> rclcpp::Duration &amp; period);</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  std::unique_ptr&lt;SystemInterface&gt; impl_;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;};</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;}  <span class="comment">// namespace hardware_interface</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// HARDWARE_INTERFACE__SYSTEM_HPP_</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  return_type write(<span class="keyword">const</span> rclcpp::Time &amp; time, <span class="keyword">const</span> rclcpp::Duration &amp; period);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  std::unique_ptr&lt;SystemInterface&gt; impl_;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;};</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;}  <span class="comment">// namespace hardware_interface</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// HARDWARE_INTERFACE__SYSTEM_HPP_</span></div>
 <div class="ttc" id="aclasshardware__interface_1_1System_html"><div class="ttname"><a href="classhardware__interface_1_1System.html">hardware_interface::System</a></div><div class="ttdef"><b>Definition:</b> system.hpp:36</div></div>
 <div class="ttc" id="anamespacehardware__interface_html"><div class="ttname"><a href="namespacehardware__interface.html">hardware_interface</a></div><div class="ttdef"><b>Definition:</b> actuator.hpp:31</div></div>
 <div class="ttc" id="astructhardware__interface_1_1HardwareInfo_html"><div class="ttname"><a href="structhardware__interface_1_1HardwareInfo.html">hardware_interface::HardwareInfo</a></div><div class="ttdoc">This structure stores information about hardware defined in a robot's URDF.</div><div class="ttdef"><b>Definition:</b> hardware_info.hpp:131</div></div>

@@ -157,6 +157,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>initialize_sensor</b>
 <tr class="memitem:ab7ce1cf04aa7912c6ee6fee8327351ff"><td class="memItemLeft" align="right" valign="top"><a id="ab7ce1cf04aa7912c6ee6fee8327351ff"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>initialize_system</b> (std::unique_ptr&lt; <a class="el" href="classhardware__interface_1_1SystemInterface.html">SystemInterface</a> &gt; system, const <a class="el" href="structhardware__interface_1_1HardwareInfo.html">HardwareInfo</a> &amp;hardware_info)</td></tr>
 <tr class="separator:ab7ce1cf04aa7912c6ee6fee8327351ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acab45bd6a955cebfe788a39bfa334a96"><td class="memItemLeft" align="right" valign="top">return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceStorage.html#acab45bd6a955cebfe788a39bfa334a96">update_hardware_component_group_state</a> (const std::string &amp;group_name, const return_type &amp;value)</td></tr>
+<tr class="separator:acab45bd6a955cebfe788a39bfa334a96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -190,6 +192,9 @@ std::vector&lt; <a class="el" href="classhardware__interface_1_1System.html">Sys
 <tr class="memitem:a77ed3a0d08f1c7e9bda348dac01fc32e"><td class="memItemLeft" align="right" valign="top"><a id="a77ed3a0d08f1c7e9bda348dac01fc32e"></a>
 std::unordered_map&lt; std::string, <a class="el" href="structhardware__interface_1_1HardwareComponentInfo.html">HardwareComponentInfo</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>hardware_info_map_</b></td></tr>
 <tr class="separator:a77ed3a0d08f1c7e9bda348dac01fc32e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb354864592430a202228767d90612e8"><td class="memItemLeft" align="right" valign="top"><a id="aeb354864592430a202228767d90612e8"></a>
+std::unordered_map&lt; std::string, hardware_interface::return_type &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>hw_group_state_</b></td></tr>
+<tr class="separator:aeb354864592430a202228767d90612e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0010cb00bf2535cedf08239b846e0fab"><td class="memItemLeft" align="right" valign="top"><a id="a0010cb00bf2535cedf08239b846e0fab"></a>
 std::unordered_map&lt; std::string, std::vector&lt; std::string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceStorage.html#a0010cb00bf2535cedf08239b846e0fab">hardware_used_by_controllers_</a></td></tr>
 <tr class="memdesc:a0010cb00bf2535cedf08239b846e0fab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping between hardware and controllers that are using it (accessing data from it) <br /></td></tr>
@@ -297,6 +302,43 @@ rclcpp::node_interfaces::NodeClockInterface::SharedPtr&#160;</td><td class="memI
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="acab45bd6a955cebfe788a39bfa334a96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acab45bd6a955cebfe788a39bfa334a96">&#9670;&nbsp;</a></span>update_hardware_component_group_state()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">return_type hardware_interface::ResourceStorage::update_hardware_component_group_state </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>group_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const return_type &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns the return type of the hardware component group state, if the return type is other than OK, then updates the return type of the group to the respective one </p>
 
 </div>
 </div>

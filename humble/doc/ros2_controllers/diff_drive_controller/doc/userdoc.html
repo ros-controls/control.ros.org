@@ -192,20 +192,44 @@
 <h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
 <p>This controller uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters. The parameter <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/humble/diff_drive_controller/src/diff_drive_controller_parameter.yaml">definition file located in the src folder</a> contains descriptions for all the parameters used by the controller.</p>
 <dl>
-<dt>left_wheel_names (string_array)</dt><dd><p>Link names of the left side wheels</p>
+<dt>left_wheel_names (string_array)</dt><dd><p>Names of the left side wheels’ joints</p>
 <p>Default:  {}</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>parameter is not empty</p></li>
+</ul>
+</div></blockquote>
 </dd>
-<dt>right_wheel_names (string_array)</dt><dd><p>Link names of the right side wheels</p>
+<dt>right_wheel_names (string_array)</dt><dd><p>Names of the right side wheels’ joints</p>
 <p>Default:  {}</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>parameter is not empty</p></li>
+</ul>
+</div></blockquote>
 </dd>
 <dt>wheel_separation (double)</dt><dd><p>Shortest distance between the left and right wheels. If this parameter is wrong, the robot will not behave correctly in curves.</p>
 <p>Default:  0.0</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than 0.0</p></li>
+</ul>
+</div></blockquote>
 </dd>
 <dt>wheels_per_side (int)</dt><dd><p>Number of wheels on each side of the robot. This is important to take the wheels slip into account when multiple wheels on each side are present. If there are more wheels then control signals for each side, you should enter number for control signals. For example, Husky has two wheels on each side, but they use one control signal, in this case ‘1’ is the correct value of the parameter.</p>
 <p>Default:  0</p>
 </dd>
 <dt>wheel_radius (double)</dt><dd><p>Radius of a wheel, i.e., wheels size, used for transformation of linear velocity into wheel rotations. If this parameter is wrong the robot will move faster or slower then expected.</p>
 <p>Default:  0.0</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than 0.0</p></li>
+</ul>
+</div></blockquote>
 </dd>
 <dt>wheel_separation_multiplier (double)</dt><dd><p>Correction factor for wheel separation (TODO(destogl): Please help me describe this correctly)</p>
 <p>Default:  1.0</p>
@@ -308,7 +332,6 @@ For details see <code class="docutils literal notranslate"><span class="pre">joi
 <span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">left_wheel_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;left_wheels&quot;</span><span class="p p-Indicator">]</span>
 <span class="w">    </span><span class="nt">right_wheel_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;right_wheels&quot;</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="nt">write_op_modes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;motor_controller&quot;</span><span class="p p-Indicator">]</span>
 
 <span class="w">    </span><span class="nt">wheel_separation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.40</span>
 <span class="w">    </span><span class="nt">wheels_per_side</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w">  </span><span class="c1"># actually 2, but both are controlled by 1 signal</span>
@@ -327,7 +350,7 @@ For details see <code class="docutils literal notranslate"><span class="pre">joi
 <span class="w">    </span><span class="nt">open_loop</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">enable_odom_tf</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 
-<span class="w">    </span><span class="nt">cmd_vel_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">500</span><span class="w"> </span><span class="c1"># milliseconds</span>
+<span class="w">    </span><span class="nt">cmd_vel_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span><span class="w"> </span><span class="c1"># seconds</span>
 <span class="w">    </span><span class="nt">publish_limited_velocity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">velocity_rolling_window_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
 
