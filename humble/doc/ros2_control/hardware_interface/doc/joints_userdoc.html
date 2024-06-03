@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Joint Kinematics for ros2_control &mdash; ROS2_Control: Humble Jun 2024 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/reviewer_stats.css?v=068b34ac" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//humble/doc/ros2_control/hardware_interface/doc/joints_userdoc.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=d470ec32"></script>
+        <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+        <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Hardware Components" href="hardware_components_userdoc.html" />
+    <link rel="prev" title="Controller Chaining / Cascade Control" href="../../controller_manager/doc/controller_chaining.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/index.html">ros2_control</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#api-documentation">API Documentation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/index.html#concepts">Concepts</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../controller_manager/doc/userdoc.html">Controller Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../controller_manager/doc/controller_chaining.html">Controller Chaining / Cascade Control</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Joint Kinematics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nomenclature">Nomenclature</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#urdf">URDF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#transmission-interface">Transmission Interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#simulating-closed-loop-kinematic-chains">Simulating Closed-Loop Kinematic Chains</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hardware_components_userdoc.html">Hardware Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mock_components_userdoc.html">Mock Components</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../migration/migration.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_list/api_list.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../project_ideas.html">Project Ideas for GSoC 2024</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ROS2_Control: Humble</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../doc/index.html">ros2_control</a></li>
+      <li class="breadcrumb-item active">Joint Kinematics for ros2_control</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ros-controls/ros2_control/blob/humble/hardware_interface/doc/joints_userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for an older, but still supported, version of ROS 2.
+    For information on the latest version, please have a look at <a href="../../../../../iron/doc/ros2_control/hardware_interface/doc/joints_userdoc.html">Iron</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="joint-kinematics-for-ros2-control">
+<span id="joints-userdoc"></span><h1>Joint Kinematics for ros2_control<a class="headerlink" href="#joint-kinematics-for-ros2-control" title="Link to this heading"></a></h1>
+<p>This page should give an overview of the joint kinematics in the context of ros2_control. It is intended to give a brief introduction to the topic and to explain the current implementation in ros2_control.</p>
+<section id="nomenclature">
+<h2>Nomenclature<a class="headerlink" href="#nomenclature" title="Link to this heading"></a></h2>
+<dl>
+<dt>Degrees of Freedom (DoF)</dt><dd><p>From <a class="reference external" href="https://en.wikipedia.org/wiki/Degrees_of_freedom_(mechanics)">wikipedia</a>:</p>
+<blockquote>
+<div><p>In physics, the degrees of freedom (DoF) of a mechanical system is the number of independent parameters that define its configuration or state.</p>
+</div></blockquote>
+</dd>
+<dt>Joint</dt><dd><p>A joint is a connection between two links. In the ROS ecosystem, three types are more typical: Revolute (A hinge joint with position limits), Continuous (A continuous hinge without any position limits) or Prismatic (A sliding joint that moves along the axis).</p>
+<p>In general, a joint can be actuated or non-actuated, also called passive. Passive joints are joints that do not have their own actuation mechanism but instead allow movement by external forces or by being passively moved by other joints. A passive joint can have a DoF of one, such as a pendulum, or it can be part of a parallel kinematic mechanism with zero DoF.</p>
+</dd>
+<dt>Serial Kinematics</dt><dd><p>Serial kinematics refers to the arrangement of joints in a robotic manipulator where each joint is independent of the others, and the number of joints is equal to the DoF of the kinematic chain.</p>
+<p>A typical example is an industrial robot with six revolute joints, having 6-DoF. Each joint can be actuated independently, and the end-effector can be moved to any position and orientation in the workspace.</p>
+</dd>
+<dt>Kinematic Loops</dt><dd><p>On the other hand, kinematic loops, also known as closed-loop mechanisms, involve several joints that are connected in a kinematic chain and being actuated together. This means that the joints are coupled and cannot be moved independently: In general, the number of DoFs is smaller than the number of joints.
+This structure is typical for parallel kinematic mechanisms, where the end-effector is connected to the base by several kinematic chains.</p>
+<p>An example is the four-bar linkage, which consists of four links and four joints. It can have one or two actuators and consequently one or two DoFs, despite having four joints. Furthermore, we can say that we have one (two) actuated joint and three (two) passive joints, which must satisfy the kinematic constraints of the mechanism.</p>
+</dd>
+</dl>
+</section>
+<section id="urdf">
+<h2>URDF<a class="headerlink" href="#urdf" title="Link to this heading"></a></h2>
+<p>URDF is the default format to describe robot kinematics in ROS. However, only serial kinematic chains are supported, except for the so-called mimic joints. See the <a class="reference external" href="http://wiki.ros.org/urdf/XML/joint">URDF specification</a> for more details.</p>
+<p>Mimic joints can be defined in the following way in the URDF</p>
+<blockquote>
+<div><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;right_finger_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;prismatic&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;axis</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 1 0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0.0 -0.48 1&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0.0 0.0 0.0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;base&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;finger_right&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;limit</span><span class="w"> </span><span class="na">effort=</span><span class="s">&quot;1000.0&quot;</span><span class="w"> </span><span class="na">lower=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">upper=</span><span class="s">&quot;0.38&quot;</span><span class="w"> </span><span class="na">velocity=</span><span class="s">&quot;10&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/joint&gt;</span>
+<span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;left_finger_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;prismatic&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;mimic</span><span class="w"> </span><span class="na">joint=</span><span class="s">&quot;right_finger_joint&quot;</span><span class="w"> </span><span class="na">multiplier=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="na">offset=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;axis</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 1 0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0.0 0.48 1&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0.0 0.0 3.1415926535&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;base&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;finger_left&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;limit</span><span class="w"> </span><span class="na">effort=</span><span class="s">&quot;1000.0&quot;</span><span class="w"> </span><span class="na">lower=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">upper=</span><span class="s">&quot;0.38&quot;</span><span class="w"> </span><span class="na">velocity=</span><span class="s">&quot;10&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/joint&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Mimic joints are an abstraction of the real world. For example, they can be used to describe</p>
+<ul class="simple">
+<li><p>simple closed-loop kinematics with linear dependencies of the joint positions and velocities</p></li>
+<li><p>links connected with belts, like belt and pulley systems or telescope arms</p></li>
+<li><p>a simplified model of passive joints, e.g. a pendulum at the end-effector always pointing downwards</p></li>
+<li><p>abstract complex groups of actuated joints, where several joints are directly controlled by low-level control loops and move synchronously. Without giving a real-world example, this could be several motors with their individual power electronics but commanded with the same setpoint.</p></li>
+</ul>
+<p>Mimic joints defined in the URDF are parsed from the resource manager and stored in a class variable of type <code class="docutils literal notranslate"><span class="pre">HardwareInfo</span></code>, which can be accessed by the hardware components. The mimic joints must not have command interfaces but can have state interfaces.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;right_finger_joint&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;effort&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;effort&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;left_finger_joint&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;effort&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
+<span class="nt">&lt;/ros2_control&gt;</span>
+</pre></div>
+</div>
+<p>From the officially released packages, the following packages are already using this information:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="mock_components_userdoc.html#mock-components-userdoc"><span class="std std-ref">mock_components (generic system)</span></a></p></li>
+<li><p><a class="reference internal" href="../../../gazebo_ros2_control/doc/index.html#gazebo-ros2-control"><span class="std std-ref">gazebo_ros2_control</span></a></p></li>
+<li><p><a class="reference internal" href="../../../gz_ros2_control/doc/index.html#gz-ros2-control"><span class="std std-ref">gz_ros2_control</span></a></p></li>
+</ul>
+<p>As the URDF specifies only the kinematics, the mimic tag has to be independent of the hardware interface type used in ros2_control. This means that we interpret this info in the following way:</p>
+<ul class="simple">
+<li><p><strong>position = multiplier * other_joint_position + offset</strong></p></li>
+<li><p><strong>velocity = multiplier * other_joint_velocity</strong></p></li>
+</ul>
+<p>If someone wants to deactivate the mimic joint behavior for whatever reason without changing the URDF, it can be done by setting the attribute <code class="docutils literal notranslate"><span class="pre">mimic=false</span></code> of the joint tag in the <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code> section of the XML.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;left_finger_joint&quot;</span><span class="w"> </span><span class="na">mimic=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;effort&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/joint&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="transmission-interface">
+<h2>Transmission Interface<a class="headerlink" href="#transmission-interface" title="Link to this heading"></a></h2>
+<p>Mechanical transmissions transform effort/flow variables such that their product (power) remains constant. Effort variables for linear and rotational domains are force and torque; while the flow variables are respectively linear velocity and angular velocity.</p>
+<p>In robotics it is customary to place transmissions between actuators and joints. This interface adheres to this naming to identify the input and output spaces of the transformation. The provided interfaces allow bidirectional mappings between actuator and joint spaces for effort, velocity and position. Position is not a power variable, but the mappings can be implemented using the velocity map plus an integration constant representing the offset between actuator and joint zeros.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">transmission_interface</span></code> provides a base class and some implementations for plugins, which can be integrated and loaded by custom hardware components. They are not automatically loaded by any hardware component or the gazebo plugins, each hardware component is responsible for loading the appropriate transmission interface to map the actuator readings to joint readings.</p>
+<p>Currently the following implementations are available:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">SimpleTransmission</span></code>: A simple transmission with a constant reduction ratio and no additional dynamics.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DifferentialTransmission</span></code>: A differential transmission with two actuators and two joints.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FourBarLinkageTransmission</span></code>: A four-bar-linkage transmission with two actuators and two joints.</p></li>
+</ul>
+<p>For more information, see <a class="reference internal" href="../../../ros2_control_demos/example_8/doc/userdoc.html#ros2-control-demos-example-8-userdoc"><span class="std std-ref">example_8</span></a> or the <a class="reference external" href="http://docs.ros.org/en/humble/p/transmission_interface/index.html">transmission_interface</a> documentation.</p>
+</section>
+<section id="simulating-closed-loop-kinematic-chains">
+<h2>Simulating Closed-Loop Kinematic Chains<a class="headerlink" href="#simulating-closed-loop-kinematic-chains" title="Link to this heading"></a></h2>
+<p>Depending on the simulation plugin, different approaches can be used to simulate closed-loop kinematic chains. The following list gives an overview of the available simulation plugins and their capabilities:</p>
+<dl class="simple">
+<dt>gazebo_ros2_control:</dt><dd><ul class="simple">
+<li><p>mimic joints</p></li>
+<li><p>closed-loop kinematics are supported with <code class="docutils literal notranslate"><span class="pre">&lt;gazebo&gt;</span></code> tags in the URDF, see, e.g., <a class="reference external" href="http://classic.gazebosim.org/tutorials?tut=kinematic_loop&amp;cat=#Split4-barlinkageinURDFwithanSDFormatfixedjoint">here</a>.</p></li>
+</ul>
+</dd>
+<dt>gz_ros2_control:</dt><dd><ul class="simple">
+<li><p>mimic joints</p></li>
+<li><p>closed-loop kinematics are not directly supported yet, but can be implemented by using a <code class="docutils literal notranslate"><span class="pre">DetachableJoint</span></code> via custom plugins. Follow <a class="reference external" href="https://github.com/gazebosim/gz-physics/issues/25">this issue</a> for updates on this topic.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../controller_manager/doc/controller_chaining.html" class="btn btn-neutral float-left" title="Controller Chaining / Cascade Control" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="hardware_components_userdoc.html" class="btn btn-neutral float-right" title="Hardware Components" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: humble
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Releases</dt>
+        <dd><a href="../../../../../iron/doc/ros2_control/hardware_interface/doc/joints_userdoc.html">Iron (latest)</a></dd><br>
+        <dd><a href="joints_userdoc.html">Humble</a></dd><br>
+        <dd><a href="../../../../../galactic/index.html">Galactic (EOL)</a></dd><br>
+        
+        <dd><a href="../../../../../foxy/index.html">Foxy (EOL)</a></dd><br>
+        
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="../../../../../rolling/doc/ros2_control/hardware_interface/doc/joints_userdoc.html">Rolling</a></dd>
+      <dd><a href="../../../../../jazzy/doc/ros2_control/hardware_interface/doc/joints_userdoc.html">Jazzy</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
