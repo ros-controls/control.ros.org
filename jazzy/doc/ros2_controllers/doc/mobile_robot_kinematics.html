@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wheeled Mobile Robot Kinematics &mdash; ROS2_Control: Jazzy Jun 2024 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/reviewer_stats.css?v=068b34ac" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//jazzy/doc/ros2_controllers/doc/mobile_robot_kinematics.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=d470ec32"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Writing a new controller" href="writing_new_controller.html" />
+    <link rel="prev" title="ros2_controllers" href="controllers_index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_control/doc/index.html">ros2_control</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="controllers_index.html">ros2_controllers</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="controllers_index.html#guidelines-and-best-practices">Guidelines and Best Practices</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Wheeled Mobile Robot Kinematics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#omnidirectional-wheeled-mobile-robots">Omnidirectional Wheeled Mobile Robots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nonholonomic-wheeled-mobile-robots">Nonholonomic Wheeled Mobile Robots</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#unicycle-model">Unicycle model</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#differential-drive-robot">Differential Drive Robot</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#car-like-bicycle-model">Car-Like (Bicycle) Model</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#double-traction-axle">Double-Traction Axle</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#ackermann-steering">Ackermann Steering</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#ackermann-steering-with-traction">Ackermann Steering with Traction</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="writing_new_controller.html">Writing a new controller</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="controllers_index.html#controllers-for-wheeled-mobile-robots">Controllers for Wheeled Mobile Robots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers_index.html#controllers-for-manipulators-and-other-robots">Controllers for Manipulators and Other Robots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers_index.html#broadcasters">Broadcasters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers_index.html#common-controller-parameters">Common Controller Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_control/ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes/release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration/migration.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_list/api_list.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../project_ideas.html">Project Ideas for GSoC 2024</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ROS2_Control: Jazzy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="controllers_index.html">ros2_controllers</a></li>
+      <li class="breadcrumb-item active">Wheeled Mobile Robot Kinematics</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ros-controls/ros2_controllers/blob/master/doc/mobile_robot_kinematics.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for a development version.
+    For the latest released version, please have a look at <a href="../../../../iron/doc/ros2_controllers/doc/mobile_robot_kinematics.html">Iron</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="wheeled-mobile-robot-kinematics">
+<span id="mobile-robot-kinematics"></span><h1>Wheeled Mobile Robot Kinematics<a class="headerlink" href="#wheeled-mobile-robot-kinematics" title="Link to this heading"></a></h1>
+<p>This page introduces the kinematics of different wheeled mobile robots. For further reference see <a class="reference external" href="https://link.springer.com/book/10.1007/978-1-84628-642-1">Siciliano et.al - Robotics: Modelling, Planning and Control</a> and <a class="reference external" href="http://modernrobotics.org/">Kevin M. Lynch and Frank C. Park - Modern Robotics: Mechanics, Planning, And Control</a>.</p>
+<p>Wheeled mobile robots can be classified in two categories:</p>
+<dl class="simple">
+<dt>Omnidirectional robots</dt><dd><p>which can move instantaneously in any direction in the plane, and</p>
+</dd>
+<dt>Nonholonomic robots</dt><dd><p>which cannot move instantaneously in any direction in the plane.</p>
+</dd>
+</dl>
+<p>The forward integration of the kinematic model using the encoders of the wheel actuators — is referred to as <strong>odometric localization</strong> or <strong>passive localization</strong> or <strong>dead reckoning</strong>. We will call it just <strong>odometry</strong>.</p>
+<section id="omnidirectional-wheeled-mobile-robots">
+<h2>Omnidirectional Wheeled Mobile Robots<a class="headerlink" href="#omnidirectional-wheeled-mobile-robots" title="Link to this heading"></a></h2>
+<p>Robots with omniwheels or mecanum wheels. Section will be updated if controllers for these robots are implemented.</p>
+</section>
+<section id="nonholonomic-wheeled-mobile-robots">
+<h2>Nonholonomic Wheeled Mobile Robots<a class="headerlink" href="#nonholonomic-wheeled-mobile-robots" title="Link to this heading"></a></h2>
+<section id="unicycle-model">
+<h3>Unicycle model<a class="headerlink" href="#unicycle-model" title="Link to this heading"></a></h3>
+<p>To define the coordinate systems (<a class="reference external" href="https://www.ros.org/reps/rep-0103.html#id19">ROS coordinate frame conventions</a>, the coordinate systems follow the right-hand rule), consider the following simple unicycle model</p>
+<a class="reference internal image-reference" href="../../../_images/unicycle.svg"><img alt="Unicycle" class="align-center" src="../../../_images/unicycle.svg" width="550" /></a>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x_b,y_b\)</span> is the robot’s body-frame coordinate system, located at the contact point of the wheel on the ground.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_w,y_w\)</span> is the world coordinate system.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x,y\)</span> are the robot’s Cartesian coordinates in the world coordinate system.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\theta\)</span> is the robot’s heading angle, i.e. the orientation of the robot’s <span class="math notranslate nohighlight">\(x_b\)</span>-axis w.r.t. the world’s <span class="math notranslate nohighlight">\(x_w\)</span>-axis.</p></li>
+</ul>
+<p>In the following, we want to command the robot with a desired body twist</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\vec{\nu}_b = \begin{bmatrix}
+                \vec{\omega}_{b} \\
+                \vec{v}_{b}
+              \end{bmatrix},\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\vec{v}_{b}\)</span> is the linear velocity of the robot in its body-frame, and <span class="math notranslate nohighlight">\(\vec\omega_{b}\)</span> is the angular velocity of the robot in its body-frame. As we consider steering robots on a flat surface, it is sufficient to give</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(v_{b,x}\)</span>, i.e. the linear velocity of the robot in direction of the <span class="math notranslate nohighlight">\(x_b\)</span> axis.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\omega_{b,z}\)</span>, i.e. the angular velocity of the robot about the <span class="math notranslate nohighlight">\(x_z\)</span> axis.</p></li>
+</ul>
+<p>as desired system inputs. The forward kinematics of the unicycle can be calculated with</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\dot{x} &amp;= v_{b,x} \cos(\theta) \\
+\dot{y} &amp;= v_{b,x} \sin(\theta) \\
+\dot{\theta} &amp;= \omega_{b,z}\end{split}\]</div>
+<p>We will formulate the inverse kinematics to calculate the desired commands for the robot (wheel speed or steering) from the given body twist.</p>
+</section>
+<section id="differential-drive-robot">
+<h3>Differential Drive Robot<a class="headerlink" href="#differential-drive-robot" title="Link to this heading"></a></h3>
+<p>Citing <a class="reference external" href="https://link.springer.com/book/10.1007/978-1-84628-642-1">Siciliano et.al - Robotics: Modelling, Planning and Control</a>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>A unicycle in the strict sense (i.e., a vehicle equipped with a single wheel)
+is a robot with a serious problem of balance in static conditions. However,
+there exist vehicles that are kinematically equivalent to a unicycle but more
+stable from a mechanical viewpoint.
+</pre></div>
+</div>
+<p>One of these vehicles is the differential drive robot, which has two wheels, each of which is driven independently.</p>
+<a class="reference internal image-reference" href="../../../_images/diff_drive.svg"><img alt="Differential drive robot" class="align-center" src="../../../_images/diff_drive.svg" width="550" /></a>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(w\)</span> is the wheel track (the distance between the wheels).</p></li>
+</ul>
+<p><strong>Forward Kinematics</strong></p>
+<p>The forward kinematics of the differential drive model can be calculated from the unicycle model above using</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}v_{b,x} &amp;= \frac{v_{right} + v_{left}}{2} \\
+\omega_{b,z} &amp;= \frac{v_{right} - v_{left}}{w}\end{split}\]</div>
+<p><strong>Inverse Kinematics</strong></p>
+<p>The necessary wheel speeds to achieve a desired body twist can be calculated with:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}v_{left} &amp;= v_{b,x} - \omega_{b,z} w / 2 \\
+v_{right} &amp;= v_{b,x} + \omega_{b,z} w / 2\end{split}\]</div>
+<p><strong>Odometry</strong></p>
+<p>We can use the forward kinematics equations above to calculate the robot’s odometry directly from the encoder readings.</p>
+</section>
+<section id="car-like-bicycle-model">
+<h3>Car-Like (Bicycle) Model<a class="headerlink" href="#car-like-bicycle-model" title="Link to this heading"></a></h3>
+<p>The following picture shows a car-like robot with two wheels, where the front wheel is steerable. This model is also known as the bicycle model.</p>
+<a class="reference internal image-reference" href="../../../_images/car_like_robot.svg"><img alt="Car-like robot" class="align-center" src="../../../_images/car_like_robot.svg" width="550" /></a>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\phi\)</span> is the steering angle of the front wheel, counted positive in direction of rotation around <span class="math notranslate nohighlight">\(x_z\)</span>-axis.</p></li>
+<li><p><span class="math notranslate nohighlight">\(v_{rear}, v_{front}\)</span> is the velocity of the rear and front wheel.</p></li>
+<li><p><span class="math notranslate nohighlight">\(l\)</span> is the wheelbase.</p></li>
+</ul>
+<p>We assume that the wheels are rolling without slipping. This means that the velocity of the contact point of the wheel with the ground is zero and the wheel’s velocity points in the direction perpendicular to the wheel’s axis. The <strong>Instantaneous Center of Rotation</strong> (ICR), i.e. the center of the circle around which the robot rotates, is located at the intersection of the lines that are perpendicular to the wheels’ axes and pass through the contact points of the wheels with the ground.</p>
+<p>As a consequence of the no-slip condition, the velocity of the two wheels must satisfy the following constraint:</p>
+<div class="math notranslate nohighlight">
+\[v_{rear} = v_{front} \cos(\phi)\]</div>
+<p><strong>Forward Kinematics</strong></p>
+<p>The forward kinematics of the car-like model can be calculated with</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\dot{x} &amp;= v_{b,x} \cos(\theta) \\
+\dot{y} &amp;= v_{b,x} \sin(\theta) \\
+\dot{\theta} &amp;= \frac{v_{b,x}}{l} \tan(\phi)\end{split}\]</div>
+<p><strong>Inverse Kinematics</strong></p>
+<p>The steering angle is one command input of the robot:</p>
+<div class="math notranslate nohighlight">
+\[\phi = \arctan\left(\frac{l w_{b,z}}{v_{b,x}} \right)\]</div>
+<p>For the rear-wheel drive, the velocity of the rear wheel is the second input of the robot:</p>
+<div class="math notranslate nohighlight">
+\[v_{rear} = v_{b,x}\]</div>
+<p>For the front-wheel drive, the velocity of the front wheel is the second input of the robot:</p>
+<div class="math notranslate nohighlight">
+\[v_{front} = \frac{v_{b,x}}{\cos(\phi)}\]</div>
+<p><strong>Odometry</strong></p>
+<p>We have to distinguish between two cases: Encoders on the rear wheel or on the front wheel.</p>
+<p>For the rear wheel case:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\dot{x} &amp;= v_{rear} \cos(\theta) \\
+\dot{y} &amp;= v_{rear} \sin(\theta) \\
+\dot{\theta} &amp;= \frac{v_{rear}}{l} \tan(\phi)\end{split}\]</div>
+<p>For the front wheel case:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\dot{x} &amp;= v_{front} \cos(\theta) \cos(\phi)\\
+\dot{y} &amp;= v_{front} \sin(\theta) \cos(\phi)\\
+\dot{\theta} &amp;= \frac{v_{front}}{l} \sin(\phi)\end{split}\]</div>
+</section>
+<section id="double-traction-axle">
+<h3>Double-Traction Axle<a class="headerlink" href="#double-traction-axle" title="Link to this heading"></a></h3>
+<p>The following image shows a car-like robot with three wheels, with two independent traction wheels at the rear.</p>
+<a class="reference internal image-reference" href="../../../_images/double_traction.svg"><img alt="A car-like robot with two traction wheels at the rear" class="align-center" src="../../../_images/double_traction.svg" width="550" /></a>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(w_r\)</span> is the wheel track of the rear axle.</p></li>
+</ul>
+<p><strong>Forward Kinematics</strong></p>
+<p>The forward kinematics is the same as the car-like model above.</p>
+<p><strong>Inverse Kinematics</strong></p>
+<p>The turning radius of the robot is</p>
+<div class="math notranslate nohighlight">
+\[R_b = \frac{l}{\tan(\phi)}\]</div>
+<p>Then the velocity of the rear wheels must satisfy these conditions to avoid skidding</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}v_{rear,left} &amp;= v_{b,x}\frac{R_b - w_r/2}{R_b}\\
+v_{rear,right} &amp;= v_{b,x}\frac{R_b + w_r/2}{R_b}\end{split}\]</div>
+<p><strong>Odometry</strong></p>
+<p>The calculation of <span class="math notranslate nohighlight">\(v_{b,x}\)</span> from two encoder measurements of the traction axle is overdetermined.
+If there is no slip and the encoders are ideal,</p>
+<div class="math notranslate nohighlight">
+\[v_{b,x} = v_{rear,left} \frac{R_b}{R_b - w_r/2} =  v_{rear,right} \frac{R_b}{R_b + w_r/2}\]</div>
+<p>holds. But to get a more robust solution, we take the average of both , i.e.,</p>
+<div class="math notranslate nohighlight">
+\[v_{b,x} = 0.5 \left(v_{rear,left} \frac{R_b}{R_b - w_r/2} + v_{rear,right} \frac{R_b}{R_b + w_r/2}\right).\]</div>
+</section>
+<section id="ackermann-steering">
+<h3>Ackermann Steering<a class="headerlink" href="#ackermann-steering" title="Link to this heading"></a></h3>
+<p>The following image shows a four-wheeled robot with two independent steering wheels in the front.</p>
+<a class="reference internal image-reference" href="../../../_images/ackermann_steering.svg"><img alt="A car-like robot with two steering wheels at the front" class="align-center" src="../../../_images/ackermann_steering.svg" width="550" /></a>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(w_f\)</span> is the wheel track of the front axle, measured between the two kingpins.</p></li>
+</ul>
+<p>To prevent the front wheels from slipping, the steering angle of the front wheels cannot be equal.
+This is the so-called <strong>Ackermann steering</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ackermann steering can also be achieved by a <a class="reference external" href="https://en.wikipedia.org/wiki/Ackermann_steering_geometry">mechanical linkage between the two front wheels</a>.  In this case the robot has only one steering input, and the steering angle of the two front wheels is mechanically coupled. The inverse kinematics of the robot will then be the same as in the car-like model above.</p>
+</div>
+<p><strong>Forward Kinematics</strong></p>
+<p>The forward kinematics is the same as for the car-like model above.</p>
+<p><strong>Inverse Kinematics</strong></p>
+<p>The turning radius of the robot is</p>
+<div class="math notranslate nohighlight">
+\[R_b = \frac{l}{\tan(\phi)}\]</div>
+<p>Then the steering angles of the front wheels must satisfy these conditions to avoid skidding</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\phi_{left} &amp;= \arctan\left(\frac{l}{R_b - w_f/2}\right) &amp;= \arctan\left(\frac{2l\sin(\phi)}{2l\cos(\phi) - w_f\sin(\phi)}\right)\\
+\phi_{right} &amp;= \arctan\left(\frac{l}{R_b + w_f/2}\right) &amp;= \arctan\left(\frac{2l\sin(\phi)}{2l\cos(\phi) + w_f\sin(\phi)}\right)\end{split}\]</div>
+<p><strong>Odometry</strong></p>
+<p>The calculation of <span class="math notranslate nohighlight">\(\phi\)</span> from two angle measurements of the steering axle is overdetermined.
+If there is no slip and the measurements are ideal,</p>
+<div class="math notranslate nohighlight">
+\[\phi = \arctan\left(\frac{l\tan(\phi_{left})}{l + w_f/2 \tan(\phi_{left})}\right) = \arctan\left(\frac{l\tan(\phi_{right})}{l - w_f/2 \tan(\phi_{right})}\right)\]</div>
+<p>holds. But to get a more robust solution, we take the average of both , i.e.,</p>
+<div class="math notranslate nohighlight">
+\[\phi = 0.5 \left(\arctan\left(\frac{l\tan(\phi_{left})}{l + w_f/2 \tan(\phi_{left})}\right) + \arctan\left(\frac{l\tan(\phi_{right})}{l - w_f/2 \tan(\phi_{right})}\right)\right).\]</div>
+</section>
+<section id="ackermann-steering-with-traction">
+<h3>Ackermann Steering with Traction<a class="headerlink" href="#ackermann-steering-with-traction" title="Link to this heading"></a></h3>
+<p>The following image shows a four-wheeled car-like robot with two independent steering wheels at the front, which are also driven independently.</p>
+<a class="reference internal image-reference" href="../../../_images/ackermann_steering_traction.svg"><img alt="A car-like robot with two steering wheels at the front, which are also independently driven." class="align-center" src="../../../_images/ackermann_steering_traction.svg" width="550" /></a>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(d_{kp}\)</span> is the distance from the kingpin to the contact point of the front wheel with the ground.</p></li>
+</ul>
+<p><strong>Forward Kinematics</strong></p>
+<p>The forward kinematics is the same as the car-like model above.</p>
+<p><strong>Inverse Kinematics</strong></p>
+<p>To avoid slipping of the front wheels, the velocity of the front wheels cannot be equal and</p>
+<div class="math notranslate nohighlight">
+\[\frac{v_{front,left}}{R_{left}} = \frac{v_{front,right}}{R_{right}} = \frac{v_{b,x}}{R_b}\]</div>
+<p>with turning radius of the robot and the left/right front wheel</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}R_b       &amp;= \frac{l}{\tan(\phi)} \\
+R_{left}  &amp;= \frac{l-d_{kp}\sin(\phi_{left})}{\sin(\phi_{left})}\\
+R_{right} &amp;= \frac{l+d_{kp}\sin(\phi_{right})}{\sin(\phi_{right})}.\end{split}\]</div>
+<p>This results in the following inverse kinematics equations</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}v_{front,left} &amp;= \frac{v_{b,x}(l-d_{kp}\sin(\phi_{left}))}{R_b\sin(\phi_{left})}\\
+v_{front,right} &amp;= \frac{v_{b,x}(l+d_{kp}\sin(\phi_{right}))}{R_b\sin(\phi_{right})}\end{split}\]</div>
+<p>with the steering angles of the front wheels from the Ackermann steering equations above.</p>
+<p><strong>Odometry</strong></p>
+<p>The calculation of <span class="math notranslate nohighlight">\(v_{b,x}\)</span> from two encoder measurements of the traction axle is again overdetermined.
+If there is no slip and the encoders are ideal,</p>
+<div class="math notranslate nohighlight">
+\[v_{b,x} = v_{front,left} \frac{R_b\sin(\phi_{left})}{l-d_{kp}\sin(\phi_{left})} =  v_{front,right} \frac{R_b\sin(\phi_{right})}{l+d_{kp}\sin(\phi_{right})}\]</div>
+<p>holds. But to get a more robust solution, we take the average of both , i.e.,</p>
+<div class="math notranslate nohighlight">
+\[v_{b,x} = 0.5 \left( v_{front,left} \frac{R_b\sin(\phi_{left})}{l-d_{kp}\sin(\phi_{left})} +  v_{front,right} \frac{R_b\sin(\phi_{right})}{l+d_{kp}\sin(\phi_{right})}\right).\]</div>
+</section>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="controllers_index.html" class="btn btn-neutral float-left" title="ros2_controllers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="writing_new_controller.html" class="btn btn-neutral float-right" title="Writing a new controller" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: jazzy
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Releases</dt>
+        <dd><a href="../../../../iron/doc/ros2_controllers/doc/mobile_robot_kinematics.html">Iron (latest)</a></dd><br>
+        <dd><a href="../../../../humble/doc/ros2_controllers/doc/mobile_robot_kinematics.html">Humble</a></dd><br>
+        <dd><a href="../../../../galactic/index.html">Galactic (EOL)</a></dd><br>
+        
+        <dd><a href="../../../../foxy/index.html">Foxy (EOL)</a></dd><br>
+        
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="../../../../rolling/doc/ros2_controllers/doc/mobile_robot_kinematics.html">Rolling</a></dd>
+      <dd><a href="mobile_robot_kinematics.html">Jazzy</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

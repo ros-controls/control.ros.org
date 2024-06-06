@@ -59,7 +59,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html">ros2_control</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../doc/controllers_index.html">ros2_controllers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#guidelines-and-best-practices">Guidelines and Best Practices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#controllers-for-mobile-robots">Controllers for Mobile Robots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#controllers-for-wheeled-mobile-robots">Controllers for Wheeled Mobile Robots</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../doc/controllers_index.html#controllers-for-manipulators-and-other-robots">Controllers for Manipulators and Other Robots</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../../admittance_controller/doc/userdoc.html">Admittance Controller</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../effort_controllers/doc/userdoc.html">Effort Controllers</a></li>
@@ -281,9 +281,6 @@ position <span class="math notranslate nohighlight">\(s\)</span> from the state 
 <dt>gains.&lt;joints&gt;.ff_velocity_scale (double)</dt><dd><p>Feed-forward scaling <span class="math notranslate nohighlight">\(k_{ff}\)</span> of velocity</p>
 <p>Default:  0.0</p>
 </dd>
-<dt>gains.&lt;joints&gt;.angle_wraparound (bool)</dt><dd><p>[deprecated] For joints that wrap around (ie. are continuous). Normalizes position-error to -pi to pi.</p>
-<p>Default:  false</p>
-</dd>
 </dl>
 </section>
 <section id="an-example-parameter-file">
@@ -305,7 +302,6 @@ position <span class="math notranslate nohighlight">\(s\)</span> from the state 
 <span class="w">      </span><span class="nt">stopped_velocity_tolerance</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span>
 <span class="w">    </span><span class="nt">gains</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">&lt;joints&gt;</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">angle_wraparound</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">        </span><span class="nt">d</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
 <span class="w">        </span><span class="nt">ff_velocity_scale</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
 <span class="w">        </span><span class="nt">i</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>

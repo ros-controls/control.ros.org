@@ -29,8 +29,8 @@
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="tricycle_steering_controller" href="../../tricycle_steering_controller/doc/userdoc.html" />
-    <link rel="prev" title="steering_controllers_library" href="../../steering_controllers_library/doc/userdoc.html" /> 
+    <link rel="next" title="Admittance Controller" href="../../admittance_controller/doc/userdoc.html" />
+    <link rel="prev" title="ackermann_steering_controller" href="../../ackermann_steering_controller/doc/userdoc.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -58,17 +58,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html">ros2_control</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../doc/controllers_index.html">ros2_controllers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#guidelines-and-best-practices">Guidelines and Best Practices</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../../doc/controllers_index.html#controllers-for-mobile-robots">Controllers for Mobile Robots</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../../ackermann_steering_controller/doc/userdoc.html">Ackermann Steering Controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../bicycle_steering_controller/doc/userdoc.html">Bicycle Steering Controller</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/controllers_index.html#controllers-for-wheeled-mobile-robots">Controllers for Wheeled Mobile Robots</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../../diff_drive_controller/doc/userdoc.html">Differential Drive Controller</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../steering_controllers_library/doc/userdoc.html">Steering Controllers Library</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Tricycle Controller</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#velocity-commands">Velocity commands</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#other-features">Other features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ros-2-interfaces">ROS 2 Interfaces</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#subscribers">Subscribers</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../../tricycle_steering_controller/doc/userdoc.html">Tricycle Steering Controller</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#controllers-for-manipulators-and-other-robots">Controllers for Manipulators and Other Robots</a></li>
@@ -126,15 +126,10 @@
 
   <section id="tricycle-controller">
 <span id="tricycle-controller-userdoc"></span><h1>tricycle_controller<a class="headerlink" href="#tricycle-controller" title="Link to this heading"></a></h1>
-<p>Controller for mobile robots with tricycle drive.
-Input for control are robot base_link twist commands which are translated to traction and steering
+<p>Controller for mobile robots with a single double-actuated wheel, including traction and steering. An example is a tricycle robot with the actuated wheel in the front and two trailing wheels on the rear axle.</p>
+<p>Input for control are robot base_link twist commands which are translated to traction and steering
 commands for the tricycle drive base. Odometry is computed from hardware feedback and published.</p>
-<section id="velocity-commands">
-<h2>Velocity commands<a class="headerlink" href="#velocity-commands" title="Link to this heading"></a></h2>
-<p>The controller works with a velocity twist from which it extracts
-the x component of the linear velocity and the z component of the angular velocity.
-Velocities on other components are ignored.</p>
-</section>
+<p>For an introduction to mobile robot kinematics and the nomenclature used here, see <a class="reference internal" href="../../doc/mobile_robot_kinematics.html#mobile-robot-kinematics"><span class="std std-ref">Wheeled Mobile Robot Kinematics</span></a>.</p>
 <section id="other-features">
 <h2>Other features<a class="headerlink" href="#other-features" title="Link to this heading"></a></h2>
 <blockquote>
@@ -144,6 +139,16 @@ Velocity, acceleration and jerk limits
 Automatic stop after command timeout</p>
 </div></blockquote>
 </section>
+<section id="ros-2-interfaces">
+<h2>ROS 2 Interfaces<a class="headerlink" href="#ros-2-interfaces" title="Link to this heading"></a></h2>
+<section id="subscribers">
+<h3>Subscribers<a class="headerlink" href="#subscribers" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>~/cmd_vel [geometry_msgs/msg/TwistStamped]</dt><dd><p>Velocity command for the controller. The controller extracts the x component of the linear velocity and the z component of the angular velocity. Velocities on other components are ignored.</p>
+</dd>
+</dl>
+</section>
+</section>
 </section>
 
 
@@ -151,8 +156,8 @@ Automatic stop after command timeout</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../../steering_controllers_library/doc/userdoc.html" class="btn btn-neutral float-left" title="steering_controllers_library" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../../tricycle_steering_controller/doc/userdoc.html" class="btn btn-neutral float-right" title="tricycle_steering_controller" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../../ackermann_steering_controller/doc/userdoc.html" class="btn btn-neutral float-left" title="ackermann_steering_controller" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../admittance_controller/doc/userdoc.html" class="btn btn-neutral float-right" title="Admittance Controller" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

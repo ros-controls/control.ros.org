@@ -29,7 +29,7 @@
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="tricycle_controller" href="../../tricycle_controller/doc/userdoc.html" />
+    <link rel="next" title="bicycle_steering_controller" href="../../bicycle_steering_controller/doc/userdoc.html" />
     <link rel="prev" title="diff_drive_controller" href="../../diff_drive_controller/doc/userdoc.html" /> 
 </head>
 
@@ -58,16 +58,20 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html">ros2_control</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../doc/controllers_index.html">ros2_controllers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#guidelines-and-best-practices">Guidelines and Best Practices</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../../doc/controllers_index.html#controllers-for-mobile-robots">Controllers for Mobile Robots</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../../ackermann_steering_controller/doc/userdoc.html">Ackermann Steering Controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../bicycle_steering_controller/doc/userdoc.html">Bicycle Steering Controller</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/controllers_index.html#controllers-for-wheeled-mobile-robots">Controllers for Wheeled Mobile Robots</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../../diff_drive_controller/doc/userdoc.html">Differential Drive Controller</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Steering Controllers Library</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#execution-logic-of-the-controller">Execution logic of the controller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#currently-implemented-kinematics">Currently implemented kinematics</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../bicycle_steering_controller/doc/userdoc.html"> Bicycle</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../tricycle_steering_controller/doc/userdoc.html"> Tricylce</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../ackermann_steering_controller/doc/userdoc.html"> Ackermann</a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="#description-of-controller-s-interfaces">Description of controller’s interfaces</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#references-from-a-preceding-controller">References (from a preceding controller)</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#commands">Commands</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#states">States</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#command-interfaces">Command interfaces</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#state-interfaces">State interfaces</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#subscribers">Subscribers</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#publishers">Publishers</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#parameters">Parameters</a></li>
@@ -76,7 +80,6 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../tricycle_controller/doc/userdoc.html">Tricycle Controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../tricycle_steering_controller/doc/userdoc.html">Tricycle Steering Controller</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#controllers-for-manipulators-and-other-robots">Controllers for Manipulators and Other Robots</a></li>
@@ -136,82 +139,87 @@
 
   <section id="steering-controllers-library">
 <span id="steering-controllers-library-userdoc"></span><h1>steering_controllers_library<a class="headerlink" href="#steering-controllers-library" title="Link to this heading"></a></h1>
-<p>Library with shared functionalities for mobile robot controllers with steering drive (2 degrees of freedom).
-The library implements generic odometry and update methods and defines the main interfaces.</p>
-<p>Nomenclature used for the controller is used from <a class="reference external" href="https://en.wikipedia.org/wiki/Wheelbase">wikipedia</a>.</p>
+<p>Library with shared functionalities for mobile robot controllers with steering drives, with so-called non-holonomic constraints.</p>
+<p>The library implements generic odometry and update methods and defines the main interfaces.</p>
+<p>The update methods only use inverse kinematics, it does not implement any feedback control loops like path-tracking controllers etc.</p>
+<p>For an introduction to mobile robot kinematics and the nomenclature used here, see <a class="reference internal" href="../../doc/mobile_robot_kinematics.html#mobile-robot-kinematics"><span class="std std-ref">Wheeled Mobile Robot Kinematics</span></a>.</p>
 <section id="execution-logic-of-the-controller">
 <h2>Execution logic of the controller<a class="headerlink" href="#execution-logic-of-the-controller" title="Link to this heading"></a></h2>
-<p>The controller uses velocity input, i.e., stamped Twist messages where linear <code class="docutils literal notranslate"><span class="pre">x</span></code> and angular <code class="docutils literal notranslate"><span class="pre">z</span></code> components are used.
-Angular component under
-Values in other components are ignored.
-In the chain mode the controller provides two reference interfaces, one for linear velocity and one for steering angle position.
+<p>The controller uses velocity input, i.e., stamped <a class="reference external" href="https://github.com/ros2/common_interfaces/blob/jazzy/geometry_msgs/msg/TwistStamped.msg">twist messages</a> where linear <code class="docutils literal notranslate"><span class="pre">x</span></code> and angular <code class="docutils literal notranslate"><span class="pre">z</span></code> components are used.
+Values in other components are ignored.</p>
+<p>In the chain mode the controller provides two reference interfaces, one for linear velocity and one for steering angle position.
 Other relevant features are:</p>
 <ul class="simple">
 <li><p>support for front and rear steering configurations;</p></li>
 <li><p>odometry publishing as Odometry and TF message;</p></li>
 <li><p>input command timeout based on a parameter.</p></li>
 </ul>
-<p>The command for the wheels are calculated using <code class="docutils literal notranslate"><span class="pre">odometry</span></code> library where based on concrete kinematics traction and steering commands are calculated.
-Currently implemented kinematics in corresponding packages are:</p>
+<p>The command for the wheels are calculated using <code class="docutils literal notranslate"><span class="pre">odometry</span></code> library where based on concrete kinematics traction and steering commands are calculated.</p>
+</section>
+<section id="currently-implemented-kinematics">
+<h2>Currently implemented kinematics<a class="headerlink" href="#currently-implemented-kinematics" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../bicycle_steering_controller/doc/userdoc.html#bicycle-steering-controller-userdoc"><span class="std std-ref">Bicycle</span></a> - with one steering and one drive joints;</p></li>
 <li><p><a class="reference internal" href="../../tricycle_steering_controller/doc/userdoc.html#tricycle-steering-controller-userdoc"><span class="std std-ref">Tricylce</span></a> - with one steering and two drive joints;</p></li>
-<li><p><a class="reference internal" href="../../ackermann_steering_controller/doc/userdoc.html#ackermann-steering-controller-userdoc"><span class="std std-ref">Ackermann</span></a> - with two seering and two drive joints.</p></li>
+<li><p><a class="reference internal" href="../../ackermann_steering_controller/doc/userdoc.html#ackermann-steering-controller-userdoc"><span class="std std-ref">Ackermann</span></a> - with two steering and two drive joints.</p></li>
 </ul>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 <section id="description-of-controller-s-interfaces">
 <h2>Description of controller’s interfaces<a class="headerlink" href="#description-of-controller-s-interfaces" title="Link to this heading"></a></h2>
 <section id="references-from-a-preceding-controller">
 <h3>References (from a preceding controller)<a class="headerlink" href="#references-from-a-preceding-controller" title="Link to this heading"></a></h3>
+<p>Used when controller is in chained mode (<code class="docutils literal notranslate"><span class="pre">in_chained_mode</span> <span class="pre">==</span> <span class="pre">true</span></code>).</p>
 <ul class="simple">
-<li><p>&lt;controller_name&gt;/linear/velocity      [double], in m/s</p></li>
-<li><p>&lt;controller_name&gt;/angular/position     [double]  # in [rad]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;controller_name&gt;/linear/velocity</span></code>      double, in m/s</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;controller_name&gt;/angular/position</span></code>     double, in rad</p></li>
 </ul>
 </section>
-<section id="commands">
-<h3>Commands<a class="headerlink" href="#commands" title="Link to this heading"></a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">front_steering</span> <span class="pre">==</span> <span class="pre">true</span></code></p>
+<section id="command-interfaces">
+<h3>Command interfaces<a class="headerlink" href="#command-interfaces" title="Link to this heading"></a></h3>
+<p>If parameter <code class="docutils literal notranslate"><span class="pre">front_steering</span> <span class="pre">==</span> <span class="pre">true</span></code></p>
 <ul class="simple">
-<li><p>&lt;front_wheels_names[i]&gt;/position     [double]  # in [rad]</p></li>
-<li><p>&lt;rear_wheels_names[i]&gt;/velocity      [double]  # in [m/s]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;front_wheels_names[i]&gt;/position</span></code>     double, in rad</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;rear_wheels_names[i]&gt;/velocity</span></code>      double, in m/s</p></li>
 </ul>
-<p><code class="docutils literal notranslate"><span class="pre">front_steering</span> <span class="pre">==</span> <span class="pre">false</span></code></p>
+<p>If parameter <code class="docutils literal notranslate"><span class="pre">front_steering</span> <span class="pre">==</span> <span class="pre">false</span></code></p>
 <ul class="simple">
-<li><p>&lt;front_wheels_names[i]&gt;/velocity     [double]  # in [m/s]</p></li>
-<li><p>&lt;rear_wheels_names[i]&gt;/position      [double]  # in [rad]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;front_wheels_names[i]&gt;/velocity</span></code>     double, in m/s</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;rear_wheels_names[i]&gt;/position</span></code>      double, in rad</p></li>
 </ul>
 </section>
-<section id="states">
-<h3>States<a class="headerlink" href="#states" title="Link to this heading"></a></h3>
+<section id="state-interfaces">
+<h3>State interfaces<a class="headerlink" href="#state-interfaces" title="Link to this heading"></a></h3>
 <p>Depending on the <code class="docutils literal notranslate"><span class="pre">position_feedback</span></code>, different feedback types are expected</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">position_feedback</span> <span class="pre">==</span> <span class="pre">true</span></code> –&gt; <code class="docutils literal notranslate"><span class="pre">TRACTION_FEEDBACK_TYPE</span> <span class="pre">=</span> <span class="pre">position</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">position_feedback</span> <span class="pre">==</span> <span class="pre">false</span></code> –&gt; <code class="docutils literal notranslate"><span class="pre">TRACTION_FEEDBACK_TYPE</span> <span class="pre">=</span> <span class="pre">velocity</span></code></p></li>
 </ul>
-<p><code class="docutils literal notranslate"><span class="pre">front_steering</span> <span class="pre">==</span> <span class="pre">true</span></code></p>
+<p>If parameter <code class="docutils literal notranslate"><span class="pre">front_steering</span> <span class="pre">==</span> <span class="pre">true</span></code></p>
 <ul class="simple">
-<li><p>&lt;front_wheels_names[i]&gt;/position                  [double]  # in [rad]</p></li>
-<li><p>&lt;rear_wheels_names[i]&gt;/&lt;TRACTION_FEEDBACK_TYPE&gt;   [double]  # in [m] or [m/s]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;front_wheels_names[i]&gt;/position</span></code>                  double, in rad</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;rear_wheels_names[i]&gt;/&lt;TRACTION_FEEDBACK_TYPE&gt;</span></code>   double, in m or m/s</p></li>
 </ul>
-<p><code class="docutils literal notranslate"><span class="pre">front_steering</span> <span class="pre">==</span> <span class="pre">false</span></code></p>
+<p>If parameter <code class="docutils literal notranslate"><span class="pre">front_steering</span> <span class="pre">==</span> <span class="pre">false</span></code></p>
 <ul class="simple">
-<li><p>&lt;front_wheels_names[i]&gt;/&lt;TRACTION_FEEDBACK_TYPE&gt;  [double]  # [m] or [m/s]</p></li>
-<li><p>&lt;rear_wheels_names[i]&gt;/position                   [double]  # in [rad]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;front_wheels_names[i]&gt;/&lt;TRACTION_FEEDBACK_TYPE&gt;</span></code>  double, in m or m/s</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;rear_wheels_names[i]&gt;/position</span></code>                   double, in rad</p></li>
 </ul>
 </section>
 <section id="subscribers">
 <h3>Subscribers<a class="headerlink" href="#subscribers" title="Link to this heading"></a></h3>
 <p>Used when controller is not in chained mode (<code class="docutils literal notranslate"><span class="pre">in_chained_mode</span> <span class="pre">==</span> <span class="pre">false</span></code>).</p>
 <ul class="simple">
-<li><p>&lt;controller_name&gt;/reference  [geometry_msgs/msg/TwistStamped]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;controller_name&gt;/reference</span></code>  [<a class="reference external" href="https://github.com/ros2/common_interfaces/blob/jazzy/geometry_msgs/msg/TwistStamped.msg">geometry_msgs/msg/TwistStamped</a>]</p></li>
 </ul>
 </section>
 <section id="publishers">
 <h3>Publishers<a class="headerlink" href="#publishers" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>&lt;controller_name&gt;/odometry          [nav_msgs/msg/Odometry]</p></li>
-<li><p>&lt;controller_name&gt;/tf_odometry       [tf2_msgs/msg/TFMessage]</p></li>
-<li><p>&lt;controller_name&gt;/controller_state  [control_msgs/msg/SteeringControllerStatus]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;controller_name&gt;/odometry</span></code>          [<a class="reference external" href="https://github.com/ros2/common_interfaces/blob/jazzy/nav_msgs/msg/Odometry.msg">nav_msgs/msg/Odometry</a>]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;controller_name&gt;/tf_odometry</span></code>       [<a class="reference external" href="https://github.com/ros2/geometry2/blob/jazzy/tf2_msgs/msg/TFMessage.msg">tf2_msgs/msg/TFMessage</a>]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;controller_name&gt;/controller_state</span></code>  [<a class="reference external" href="https://github.com/ros-controls/control_msgs/blob/master/control_msgs/msg/SteeringControllerStatus.msg">control_msgs/msg/SteeringControllerStatus</a>]</p></li>
 </ul>
 </section>
 <section id="parameters">
@@ -294,9 +302,6 @@ Currently implemented kinematics in corresponding packages are:</p>
 <dt>position_feedback (bool)</dt><dd><p>Choice of feedback type, if position_feedback is false then <code class="docutils literal notranslate"><span class="pre">HW_IF_VELOCITY</span></code> is taken as interface type, if position_feedback is true then <code class="docutils literal notranslate"><span class="pre">HW_IF_POSITION</span></code> is taken as interface type</p>
 <p>Default:  false</p>
 </dd>
-<dt>use_stamped_vel (bool)</dt><dd><p>(Deprecated) Choice of vel type, if use_stamped_vel is false then <code class="docutils literal notranslate"><span class="pre">geometry_msgs::msg::Twist</span></code> is taken as vel msg type, if use_stamped_vel is true then <code class="docutils literal notranslate"><span class="pre">geometry_msgs::msg::TwistStamped</span></code> is taken as vel msg type</p>
-<p>Default:  false</p>
-</dd>
 </dl>
 </section>
 </section>
@@ -308,7 +313,7 @@ Currently implemented kinematics in corresponding packages are:</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../../diff_drive_controller/doc/userdoc.html" class="btn btn-neutral float-left" title="diff_drive_controller" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../../tricycle_controller/doc/userdoc.html" class="btn btn-neutral float-right" title="tricycle_controller" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../../bicycle_steering_controller/doc/userdoc.html" class="btn btn-neutral float-right" title="bicycle_steering_controller" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
