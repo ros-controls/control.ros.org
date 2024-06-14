@@ -15,13 +15,13 @@ End-effectors
 
 Non robot-devices
 ------------------
+- `ctrlX AUTOMATION <https://github.com/boschrexroth/ctrlx-automation-sdk-ros2>`_
 - `Force Dimension haptic devices <https://github.com/ICube-Robotics/forcedimension_ros2>`_
 - `Hoverboard motors <https://github.com/DataBot-Labs/hoverboard_ros2_control>`_
 - `NDI measurement systems <https://github.com/ICube-Robotics/ndisys_ros2>`_
 - `ODrive Motor Controller <https://github.com/Factor-Robotics/odrive_ros2_control>`_
 - `ODRI Motor Controller <https://github.com/stack-of-tasks/ros2_hardware_interface_odri>`_
 - `PCA9685 16-Channel 12-bit PWM/Servo Driver <https://github.com/rosblox/pca9685_ros2_control>`_
-- `ctrlX AUTOMATION <https://github.com/boschrexroth/ctrlx-automation-sdk-ros2>`_
 
 Official (supported by robot manufacturer)
 -------------------------------------------
