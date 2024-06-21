@@ -258,14 +258,14 @@ include</p>
 <p>To use PID control joints in gazebo_ros2_control, you should define their parameters inside the <code class="docutils literal notranslate"><span class="pre">&lt;joint&gt;</span></code> tag
 within the <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code> tag. These PID joints can be controlled either in position or velocity.</p>
 <ul class="simple">
-<li><p>To control a joint with velocity PID, simply set its <code class="docutils literal notranslate"><span class="pre">command_interface</span></code> to <code class="docutils literal notranslate"><span class="pre">velocity_PID</span></code>.</p></li>
-<li><p>To control a joint with position PID, set its <code class="docutils literal notranslate"><span class="pre">command_interface</span></code> to <code class="docutils literal notranslate"><span class="pre">position_PID</span></code>.</p></li>
+<li><p>To control a joint with velocity PID, simply set its <code class="docutils literal notranslate"><span class="pre">command_interface</span></code> to <code class="docutils literal notranslate"><span class="pre">velocity_pid</span></code>.</p></li>
+<li><p>To control a joint with position PID, set its <code class="docutils literal notranslate"><span class="pre">command_interface</span></code> to <code class="docutils literal notranslate"><span class="pre">position_pid</span></code>.</p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>You cannot have both command interfaces set to position and position_PID for the same joint. The same restriction applies to velocity (and velocity_PID).</p>
+<p>You cannot have both command interfaces set to position and position_pid for the same joint. The same restriction applies to velocity (and velocity_pid).</p>
 </div>
-<p>To create a system with one joint that can be controlled using both position_PID and velocity_PID, follow this example:</p>
+<p>To create a system with one joint that can be controlled using both position_pid and velocity_pid, follow this example:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;GazeboSystem&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
 <span class="w">   </span><span class="nt">&lt;hardware&gt;</span>
 <span class="w">     </span><span class="nt">&lt;plugin&gt;</span>gazebo_ros2_control/GazeboSystem<span class="nt">&lt;/plugin&gt;</span>
@@ -282,8 +282,8 @@ within the <code class="docutils literal notranslate"><span class="pre">&lt;ros2
 <span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;vel_kd&quot;</span><span class="nt">&gt;</span>2<span class="nt">&lt;/param&gt;</span>
 <span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;vel_max_integral_error&quot;</span><span class="nt">&gt;</span>10000<span class="nt">&lt;/param&gt;</span>
 
-<span class="w">     </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position_PID&quot;</span><span class="nt">/&gt;</span>
-<span class="w">     </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity_PID&quot;</span><span class="nt">/&gt;</span>
+<span class="w">     </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position_pid&quot;</span><span class="nt">/&gt;</span>
+<span class="w">     </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity_pid&quot;</span><span class="nt">/&gt;</span>
 
 <span class="w">     </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
 <span class="w">       </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;initial_value&quot;</span><span class="nt">&gt;</span>1.0<span class="nt">&lt;/param&gt;</span>
