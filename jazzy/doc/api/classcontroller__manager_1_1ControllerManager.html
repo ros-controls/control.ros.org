@@ -148,8 +148,11 @@ template&lt;typename T , typename std::enable_if&lt; std::is_convertible&lt; T *
 <tr class="memitem:acb3f8ac5ae15ad5f2e94844968bd3ace"><td class="memItemLeft" align="right" valign="top">CONTROLLER_MANAGER_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__manager_1_1ControllerManager.html#acb3f8ac5ae15ad5f2e94844968bd3ace">write</a> (const rclcpp::Time &amp;time, const rclcpp::Duration &amp;period)</td></tr>
 <tr class="memdesc:acb3f8ac5ae15ad5f2e94844968bd3ace"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write values from command interfaces.  <a href="classcontroller__manager_1_1ControllerManager.html#acb3f8ac5ae15ad5f2e94844968bd3ace">More...</a><br /></td></tr>
 <tr class="separator:acb3f8ac5ae15ad5f2e94844968bd3ace"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69cdd7755bbf036f765077c6c7e4b46f"><td class="memItemLeft" align="right" valign="top">CONTROLLER_MANAGER_PUBLIC bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__manager_1_1ControllerManager.html#a69cdd7755bbf036f765077c6c7e4b46f">is_resource_manager_initialized</a> () const</td></tr>
+<tr class="memdesc:a69cdd7755bbf036f765077c6c7e4b46f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deterministic (real-time safe) callback group, e.g., update function.  <a href="classcontroller__manager_1_1ControllerManager.html#a69cdd7755bbf036f765077c6c7e4b46f">More...</a><br /></td></tr>
+<tr class="separator:a69cdd7755bbf036f765077c6c7e4b46f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e52d7a474caec7ec1cbc2f65708c69b"><td class="memItemLeft" align="right" valign="top">CONTROLLER_MANAGER_PUBLIC unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__manager_1_1ControllerManager.html#a6e52d7a474caec7ec1cbc2f65708c69b">get_update_rate</a> () const</td></tr>
-<tr class="memdesc:a6e52d7a474caec7ec1cbc2f65708c69b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deterministic (real-time safe) callback group, e.g., update function.  <a href="classcontroller__manager_1_1ControllerManager.html#a6e52d7a474caec7ec1cbc2f65708c69b">More...</a><br /></td></tr>
+<tr class="memdesc:a6e52d7a474caec7ec1cbc2f65708c69b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update rate of the main control loop in the controller manager.  <a href="classcontroller__manager_1_1ControllerManager.html#a6e52d7a474caec7ec1cbc2f65708c69b">More...</a><br /></td></tr>
 <tr class="separator:a6e52d7a474caec7ec1cbc2f65708c69b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35433516ff6439af7de41bc58f0e4aac"><td class="memItemLeft" align="right" valign="top">CONTROLLER_MANAGER_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__manager_1_1ControllerManager.html#a35433516ff6439af7de41bc58f0e4aac">shutdown_async_controllers_and_components</a> ()</td></tr>
 <tr class="memdesc:a35433516ff6439af7de41bc58f0e4aac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes all async controllers and components.  <a href="classcontroller__manager_1_1ControllerManager.html#a35433516ff6439af7de41bc58f0e4aac">More...</a><br /></td></tr>
@@ -415,8 +418,37 @@ std::unique_ptr&lt; <a class="el" href="classhardware__interface_1_1ResourceMana
       </table>
 </div><div class="memdoc">
 
+<p>Update rate of the main control loop in the controller manager. </p>
+<p>Update rate of the main control loop in the controller manager. The method is used for per-controller update rate support.</p>
+<dl class="section return"><dt>Returns</dt><dd>update rate of the controller manager. </dd></dl>
+
+</div>
+</div>
+<a id="a69cdd7755bbf036f765077c6c7e4b46f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69cdd7755bbf036f765077c6c7e4b46f">&#9670;&nbsp;</a></span>is_resource_manager_initialized()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CONTROLLER_MANAGER_PUBLIC bool controller_manager::ControllerManager::is_resource_manager_initialized </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
 <p>Deterministic (real-time safe) callback group, e.g., update function. </p>
-<p>Deterministic (real-time safe) callback group for the update function. Default behavior is read hardware, update controller and finally write new values to the hardware. </p>
+<p>Deterministic (real-time safe) callback group for the update function. Default behavior is read hardware, update controller and finally write new values to the hardware. Interface for external components to check if Resource Manager is initialized. Checks if components in Resource Manager are loaded and initialized. </p><dl class="section return"><dt>Returns</dt><dd>true if they are initialized, false otherwise. </dd></dl>
 
 </div>
 </div>
