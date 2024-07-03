@@ -76,9 +76,9 @@ include:
 
 .. code-block:: xml
 
-  <ros2_control name="GazeboSimSystem" type="system">
+  <ros2_control name="IgnitionSystem" type="system">
     <hardware>
-      <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+      <plugin>ign_ros2_control/IgnitionSystem</plugin>
     </hardware>
     <joint name="slider_to_cart">
       <command_interface name="effort">
@@ -172,9 +172,9 @@ robot model is loaded. For example, the following XML will load the default plug
 
 .. code-block:: xml
 
-  <ros2_control name="GazeboSimSystem" type="system">
+  <ros2_control name="IgnitionSystem" type="system">
     <hardware>
-      <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+      <plugin>ign_ros2_control/IgnitionSystem</plugin>
     </hardware>
     ...
   <ros2_control>
@@ -249,6 +249,7 @@ You can run some of the mobile robots running the following commands:
 
   ros2 launch gz_ros2_control_demos diff_drive_example.launch.py
   ros2 launch gz_ros2_control_demos tricycle_drive_example.launch.py
+  ros2 launch gz_ros2_control_demos ackermann_drive_example.launch.py
 
 When the Gazebo world is launched you can run some of the following commands to move the robots.
 
@@ -256,6 +257,7 @@ When the Gazebo world is launched you can run some of the following commands to 
 
   ros2 run gz_ros2_control_demos example_diff_drive
   ros2 run gz_ros2_control_demos example_tricycle_drive
+  ros2 run gz_ros2_control_demos example_ackermann_drive
 
 Gripper
 -----------------------------------------------------------

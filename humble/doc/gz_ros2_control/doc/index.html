@@ -198,9 +198,9 @@ include:</p>
 <li><p>a specific <code class="docutils literal notranslate"><span class="pre">&lt;plugin&gt;</span></code> for our robot</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&lt;joint&gt;</span></code> tag including the robot controllers: commands and states.</p></li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;GazeboSimSystem&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;IgnitionSystem&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
 <span class="w">  </span><span class="nt">&lt;hardware&gt;</span>
-<span class="w">    </span><span class="nt">&lt;plugin&gt;</span>gz_ros2_control/GazeboSimSystem<span class="nt">&lt;/plugin&gt;</span>
+<span class="w">    </span><span class="nt">&lt;plugin&gt;</span>ign_ros2_control/IgnitionSystem<span class="nt">&lt;/plugin&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/hardware&gt;</span>
 <span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;slider_to_cart&quot;</span><span class="nt">&gt;</span>
 <span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;effort&quot;</span><span class="nt">&gt;</span>
@@ -284,9 +284,9 @@ robot hardware interfaces between <em>ros2_control</em> and Gazebo.</p>
 <code class="docutils literal notranslate"><span class="pre">hardware_interface::SystemInterface</span></code>. SystemInterface provides API-level access to read and command joint properties.</p>
 <p>The respective GazeboSimSystemInterface sub-class is specified in a URDF model and is loaded when the
 robot model is loaded. For example, the following XML will load the default plugin:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;GazeboSimSystem&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;IgnitionSystem&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
 <span class="w">  </span><span class="nt">&lt;hardware&gt;</span>
-<span class="w">    </span><span class="nt">&lt;plugin&gt;</span>gz_ros2_control/GazeboSimSystem<span class="nt">&lt;/plugin&gt;</span>
+<span class="w">    </span><span class="nt">&lt;plugin&gt;</span>ign_ros2_control/IgnitionSystem<span class="nt">&lt;/plugin&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/hardware&gt;</span>
 <span class="w">  </span>...
 <span class="nt">&lt;ros2_control&gt;</span>
@@ -364,11 +364,13 @@ ros2<span class="w"> </span>run<span class="w"> </span>gz_ros2_control_demos<spa
 <p>You can run some of the mobile robots running the following commands:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>diff_drive_example.launch.py
 ros2<span class="w"> </span>launch<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>tricycle_drive_example.launch.py
+ros2<span class="w"> </span>launch<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>ackermann_drive_example.launch.py
 </pre></div>
 </div>
 <p>When the Gazebo world is launched you can run some of the following commands to move the robots.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>example_diff_drive
 ros2<span class="w"> </span>run<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>example_tricycle_drive
+ros2<span class="w"> </span>run<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>example_ackermann_drive
 </pre></div>
 </div>
 </section>
