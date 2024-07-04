@@ -157,6 +157,20 @@
 <li><p>Action field <code class="docutils literal notranslate"><span class="pre">error_string</span></code> is now filled with meaningful strings (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/887">#887</a>).</p></li>
 <li><p>Angle wraparound behavior (continuous joints) was added from the current state to the first segment of the incoming trajectory (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/796">#796</a>).</p></li>
 <li><p>The URDF is now parsed for continuous joints and angle wraparound is automatically activated now (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/949">#949</a>). <code class="docutils literal notranslate"><span class="pre">angle_wraparound</span></code> parameter was completely removed.</p></li>
+<li><p>Tolerances sent with the action goal are now processed and used for the action. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/716">#716</a>). For details, see the <a class="reference external" href="https://github.com/ros-controls/control_msgs/blob/master/control_msgs/msg/JointTolerance.msg">JointTolerance message</a>:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>The tolerances specify the amount the position, velocity, and
+accelerations can vary from the setpoints.  For example, in the case
+of trajectory control, when the actual position varies beyond
+(desired position + position tolerance), the trajectory goal may
+abort.
+
+There are two special values for tolerances:
+<span class="w"> </span><span class="k">*</span><span class="w"> </span>0 - The tolerance is unspecified and will remain at whatever the default is
+<span class="w"> </span><span class="k">*</span><span class="w"> </span>-1 - The tolerance is &quot;erased&quot;.  If there was a default, the joint will be
+        allowed to move without restriction.
+</pre></div>
+</div>
+</li>
 </ul>
 </section>
 <section id="pid-controller">

@@ -140,9 +140,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a705f867c323d10570e68a47fbd107986"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsteering__odometry_1_1SteeringOdometry.html#a705f867c323d10570e68a47fbd107986">set_velocity_rolling_window_size</a> (const size_t velocity_rolling_window_size)</td></tr>
 <tr class="memdesc:a705f867c323d10570e68a47fbd107986"><td class="mdescLeft">&#160;</td><td class="mdescRight">Velocity rolling window size setter.  <a href="classsteering__odometry_1_1SteeringOdometry.html#a705f867c323d10570e68a47fbd107986">More...</a><br /></td></tr>
 <tr class="separator:a705f867c323d10570e68a47fbd107986"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f03c372422845995091803b53eaa4f5"><td class="memItemLeft" align="right" valign="top">std::tuple&lt; std::vector&lt; double &gt;, std::vector&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsteering__odometry_1_1SteeringOdometry.html#a7f03c372422845995091803b53eaa4f5">get_commands</a> (const double v_bx, const double omega_bz)</td></tr>
-<tr class="memdesc:a7f03c372422845995091803b53eaa4f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates inverse kinematics for the desired linear and angular velocities.  <a href="classsteering__odometry_1_1SteeringOdometry.html#a7f03c372422845995091803b53eaa4f5">More...</a><br /></td></tr>
-<tr class="separator:a7f03c372422845995091803b53eaa4f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bcc052a3429ebf39d4ccdb46e7e59a4"><td class="memItemLeft" align="right" valign="top">std::tuple&lt; std::vector&lt; double &gt;, std::vector&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsteering__odometry_1_1SteeringOdometry.html#a5bcc052a3429ebf39d4ccdb46e7e59a4">get_commands</a> (const double v_bx, const double omega_bz, const bool open_loop=true)</td></tr>
+<tr class="memdesc:a5bcc052a3429ebf39d4ccdb46e7e59a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates inverse kinematics for the desired linear and angular velocities.  <a href="classsteering__odometry_1_1SteeringOdometry.html#a5bcc052a3429ebf39d4ccdb46e7e59a4">More...</a><br /></td></tr>
+<tr class="separator:a5bcc052a3429ebf39d4ccdb46e7e59a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5ec12d5baa921444102edc1d77dcfd8"><td class="memItemLeft" align="right" valign="top"><a id="ae5ec12d5baa921444102edc1d77dcfd8"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsteering__odometry_1_1SteeringOdometry.html#ae5ec12d5baa921444102edc1d77dcfd8">reset_odometry</a> ()</td></tr>
 <tr class="memdesc:ae5ec12d5baa921444102edc1d77dcfd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset poses, heading, and accumulators. <br /></td></tr>
@@ -214,8 +214,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
-<a id="a7f03c372422845995091803b53eaa4f5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f03c372422845995091803b53eaa4f5">&#9670;&nbsp;</a></span>get_commands()</h2>
+<a id="a5bcc052a3429ebf39d4ccdb46e7e59a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bcc052a3429ebf39d4ccdb46e7e59a4">&#9670;&nbsp;</a></span>get_commands()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -230,7 +230,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>omega_bz</em>&#160;</td>
+          <td class="paramname"><em>omega_bz</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>open_loop</em> = <code>true</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -245,6 +251,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   <table class="params">
     <tr><td class="paramname">v_bx</td><td>Desired linear velocity of the robot in x_b-axis direction </td></tr>
     <tr><td class="paramname">omega_bz</td><td>Desired angular velocity of the robot around x_z-axis </td></tr>
+    <tr><td class="paramname">open_loop</td><td>If false, the IK will be calculated using measured steering angle </td></tr>
   </table>
   </dd>
 </dl>
