@@ -71,6 +71,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">joint_limits Namespace Reference</div>  </div>
@@ -79,10 +80,20 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classjoint__limits_1_1JointLimiterInterface.html">JointLimiterInterface</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classjoint__limits_1_1JointSaturationLimiter.html">JointSaturationLimiter</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:ae98629492cf5b25ed483356487a31b9c"><td class="memItemLeft" align="right" valign="top"><a id="ae98629492cf5b25ed483356487a31b9c"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>JointLimitsStateDataType</b> = trajectory_msgs::msg::JointTrajectoryPoint</td></tr>
+<tr class="separator:ae98629492cf5b25ed483356487a31b9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -99,6 +110,8 @@ Functions</h2></td></tr>
 <tr class="separator:a0c906fda05a4af588941a95248a3c171"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9efd6c7e78cfe5e801aa7b41178931b3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#a9efd6c7e78cfe5e801aa7b41178931b3">get_joint_limits</a> (const std::string &amp;joint_name, const rclcpp_lifecycle::LifecycleNode::SharedPtr &amp;lifecycle_node, <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> &amp;limits)</td></tr>
 <tr class="separator:a9efd6c7e78cfe5e801aa7b41178931b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1788b02ceb11d400f8fa35fb2a1a421b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#a1788b02ceb11d400f8fa35fb2a1a421b">check_for_limits_update</a> (const std::string &amp;joint_name, const std::vector&lt; rclcpp::Parameter &gt; &amp;parameters, const rclcpp::node_interfaces::NodeLoggingInterface::SharedPtr &amp;logging_itf, <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> &amp;updated_limits)</td></tr>
+<tr class="separator:a1788b02ceb11d400f8fa35fb2a1a421b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35aa9cb09663ccc5388b64506321bfb2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#a35aa9cb09663ccc5388b64506321bfb2">get_joint_limits</a> (const std::string &amp;joint_name, const rclcpp::node_interfaces::NodeParametersInterface::SharedPtr &amp;param_itf, const rclcpp::node_interfaces::NodeLoggingInterface::SharedPtr &amp;logging_itf, <a class="el" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a> &amp;soft_limits)</td></tr>
 <tr class="memdesc:a35aa9cb09663ccc5388b64506321bfb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Populate a <a class="el" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a> instance from the ROS parameter server.  <a href="namespacejoint__limits.html#a35aa9cb09663ccc5388b64506321bfb2">More...</a><br /></td></tr>
 <tr class="separator:a35aa9cb09663ccc5388b64506321bfb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -106,6 +119,8 @@ Functions</h2></td></tr>
 <tr class="separator:a9f2bc1a3dc978f86b0dc6f4074d29d95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7a570c8077ec84667ed2950938fbc14"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#ab7a570c8077ec84667ed2950938fbc14">get_joint_limits</a> (const std::string &amp;joint_name, const rclcpp_lifecycle::LifecycleNode::SharedPtr &amp;lifecycle_node, <a class="el" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a> &amp;soft_limits)</td></tr>
 <tr class="separator:ab7a570c8077ec84667ed2950938fbc14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad516ee22428c86c26ee00cb5b9d888ac"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#ad516ee22428c86c26ee00cb5b9d888ac">check_for_limits_update</a> (const std::string &amp;joint_name, const std::vector&lt; rclcpp::Parameter &gt; &amp;parameters, const rclcpp::node_interfaces::NodeLoggingInterface::SharedPtr &amp;logging_itf, <a class="el" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a> &amp;updated_limits)</td></tr>
+<tr class="separator:ad516ee22428c86c26ee00cb5b9d888ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4ec546f55c4b897a491589567b0bee9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#ae4ec546f55c4b897a491589567b0bee9">getJointLimits</a> (urdf::JointConstSharedPtr urdf_joint, <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> &amp;limits)</td></tr>
 <tr class="memdesc:ae4ec546f55c4b897a491589567b0bee9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Populate a <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> instance from URDF joint data.  <a href="namespacejoint__limits.html#ae4ec546f55c4b897a491589567b0bee9">More...</a><br /></td></tr>
 <tr class="separator:ae4ec546f55c4b897a491589567b0bee9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -114,8 +129,130 @@ Functions</h2></td></tr>
 <tr class="separator:aab5823d51fe2a7c4f8980db0762fe9e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><dl class="section author"><dt>Author</dt><dd>Adolfo Rodriguez Tsouroukdissian </dd></dl>
+<div class="textblock"><dl class="section author"><dt>Author</dt><dd>Denis Stogl</dd>
+<dd>
+Adolfo Rodriguez Tsouroukdissian</dd>
+<dd>
+Dr. Denis Stogl </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a id="a1788b02ceb11d400f8fa35fb2a1a421b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1788b02ceb11d400f8fa35fb2a1a421b">&#9670;&nbsp;</a></span>check_for_limits_update() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool joint_limits::check_for_limits_update </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>joint_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; rclcpp::Parameter &gt; &amp;&#160;</td>
+          <td class="paramname"><em>parameters</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const rclcpp::node_interfaces::NodeLoggingInterface::SharedPtr &amp;&#160;</td>
+          <td class="paramname"><em>logging_itf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> &amp;&#160;</td>
+          <td class="paramname"><em>updated_limits</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Check if any of updated parameters are related to <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a>.</p>
+<p>This method is intended to be used in the parameters update callback. It is recommended that it's result is temporarily stored and synchronized with the <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> structure in the main loop.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">joint_name</td><td>Name of the joint whose limits should be checked. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">parameters</td><td>List of the parameters that should be checked if they belong to this structure and that are used for updating the internal values. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">logging_itf</td><td>node logging interface to provide log errors. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">updated_limits</td><td>structure with updated <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a>. It is recommended that the currently used limits are stored into this structure before calling this method. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad516ee22428c86c26ee00cb5b9d888ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad516ee22428c86c26ee00cb5b9d888ac">&#9670;&nbsp;</a></span>check_for_limits_update() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool joint_limits::check_for_limits_update </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>joint_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; rclcpp::Parameter &gt; &amp;&#160;</td>
+          <td class="paramname"><em>parameters</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const rclcpp::node_interfaces::NodeLoggingInterface::SharedPtr &amp;&#160;</td>
+          <td class="paramname"><em>logging_itf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a> &amp;&#160;</td>
+          <td class="paramname"><em>updated_limits</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Check if any of updated parameters are related to <a class="el" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a>.</p>
+<p>This method is intended to be used in the parameters update callback. It is recommended that it's result is temporarily stored and synchronized with the <a class="el" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a> structure in the main loop.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">joint_name</td><td>Name of the joint whose limits should be checked. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">parameters</td><td>List of the parameters that should be checked if they belong to this structure and that are used for updating the internal values. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">logging_itf</td><td>node logging interface to provide log errors. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">updated_limits</td><td>structure with updated <a class="el" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a>. It is recommended that the currently used limits are stored into this structure before calling this method. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a81b9a4c8dca9261f88683cd819ffb708"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a81b9a4c8dca9261f88683cd819ffb708">&#9670;&nbsp;</a></span>declare_parameters() <span class="overload">[1/3]</span></h2>
 
@@ -464,7 +601,7 @@ Functions</h2></td></tr>
 <div class="line">        angle_wraparound: <span class="keyword">true</span>       # available only <span class="keywordflow">for</span> continuous joints</div>
 <div class="line">        has_velocity_limits: <span class="keyword">true</span></div>
 <div class="line">        max_velocity: 4.0</div>
-<div class="ttc" id="anamespacejoint__limits_html"><div class="ttname"><a href="namespacejoint__limits.html">joint_limits</a></div><div class="ttdef"><b>Definition:</b> joint_limits.hpp:25</div></div>
+<div class="ttc" id="anamespacejoint__limits_html"><div class="ttname"><a href="namespacejoint__limits.html">joint_limits</a></div><div class="ttdef"><b>Definition:</b> joint_limiter_interface.hpp:32</div></div>
 </div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">joint_name</td><td>Name of joint whose limits are to be fetched, e.g., "foo_joint". </td></tr>
