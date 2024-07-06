@@ -64,6 +64,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#motivation-purpose-and-use">Motivation, Purpose and Use</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#implementation">Implementation</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#a-controller-base-class-chainablecontroller">A Controller Base-Class: ChainableController</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#nomenclature">Nomenclature</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#inner-resource-management">Inner Resource Management</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#activation-and-deactivation-chained-controllers">Activation and Deactivation Chained Controllers</a></li>
 </ul>
@@ -146,7 +147,7 @@ Nevertheless, the author is convinced that this would add only unnecessary compl
 <h2>Motivation, Purpose and Use<a class="headerlink" href="#motivation-purpose-and-use" title="Link to this heading"></a></h2>
 <p>To describe the intent of this document, lets focus on the simple yet sufficient example <a class="reference external" href="https://github.com/ros-controls/roadmap/blob/master/design_drafts/controller_chaining.md#example-2">Example 2 from ‘controllers_chaining’ design docs</a>:</p>
 <img alt="Example2" src="../../../../_images/chaining_example2.png" />
-<p>In this example, we want to chain ‘position_tracking’ controller with ‘diff_drive_controller’ and two PID controllers.
+<p>In this example, we want to chain ‘position_tracking’ controller with ‘diff_drive_controller’ and two PID controllers as well as the ‘robot_localization’ controller.
 Let’s now imagine a use-case where we don’t only want to run all those controllers as a group, but also flexibly add preceding steps.
 This means the following:</p>
 <blockquote>
@@ -157,25 +158,51 @@ However, these controllers also provide virtual interfaces, so we can chain them
 <li><p>Then “diff_drive_controller” is activated and attaches itself to the virtual input interfaces of PID controllers.
 PID controllers also get informed that they are working in chained mode and therefore disable their external interface through subscriber.
 Now we check if kinematics of differential robot is running properly.</p></li>
-<li><p>After that, “position_tracking” can be activated and attached to “diff_drive_controller” that disables its external interfaces.</p></li>
-<li><p>If any of the controllers is deactivated, also all preceding controllers are deactivated.</p></li>
+<li><p>Once the ‘diff_drive_controller’ is activated, it exposes the ‘odom’ state interfaces that is used by ‘odom_publisher’ as well as ‘sensor_fusion’ controllers.
+The ‘odom_publisher’ controller is activated and attaches itself to the exported ‘odom’ state interfaces of ‘diff_drive_controller’.
+The ‘sensor_fusion’ controller is activated and attaches itself to the exported ‘odom’ state interfaces of ‘diff_drive_controller’ along with the ‘imu’ state interfaces.</p></li>
+<li><p>Once the ‘sensor_fusion’ controller is activated, it exposes the ‘odom’ state interfaces that is used by ‘robot_localization’ controller.
+The ‘robot_localization’ controller is activated and attaches itself to the ‘odom’ state interfaces of ‘sensor_fusion’ controller.
+Once activated, the ‘robot_localization’ controller exposes the ‘actual_pose’ state interfaces that is used by ‘position_tracking’ controller.</p></li>
+<li><p>After that, “position_tracking” can be activated and attached to “diff_drive_controller” that disables its external interfaces and to the ‘robot_localization’ controller which provides the ‘actual_pose’ state interface.</p></li>
+<li><p>If any of the controllers is deactivated, also all preceding controllers needs to be deactivated.</p></li>
 </ol>
 </div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only the controllers that exposes the reference interfaces are switched to chained mode, when their reference interfaces are used by other controllers. When their reference interfaces are not used by the other controllers, they are switched back to get references from the subscriber.
+However, the controllers that exposes the state interfaces are not triggered to chained mode, when their state interfaces are used by other controllers.</p>
+</div>
 </section>
 <section id="implementation">
 <h2>Implementation<a class="headerlink" href="#implementation" title="Link to this heading"></a></h2>
 <section id="a-controller-base-class-chainablecontroller">
 <h3>A Controller Base-Class: ChainableController<a class="headerlink" href="#a-controller-base-class-chainablecontroller" title="Link to this heading"></a></h3>
-<p>A <code class="docutils literal notranslate"><span class="pre">ChainableController</span></code> extends <code class="docutils literal notranslate"><span class="pre">ControllerInterface</span></code> class with <code class="docutils literal notranslate"><span class="pre">virtual</span> <span class="pre">InterfaceConfiguration</span> <span class="pre">input_interface_configuration()</span> <span class="pre">const</span> <span class="pre">=</span> <span class="pre">0</span></code> method.
-This method should implement for each controller that <strong>can be preceded</strong> by another controller exporting all the input interfaces.
-For simplicity reasons, it is assumed for now that controller’s all input interfaces are used.
-Therefore, do not try to implement any exclusive combinations of input interfaces, but rather write multiple controllers if you need exclusivity.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">ChainableController</span></code> base class implements <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">set_chained_mode(bool</span> <span class="pre">activate)</span></code> that sets an internal flag that a controller is used by another controller (in chained mode) and calls <code class="docutils literal notranslate"><span class="pre">virtual</span> <span class="pre">void</span> <span class="pre">on_set_chained_mode(bool</span> <span class="pre">activate)</span> <span class="pre">=</span> <span class="pre">0</span></code> that implements controller’s specific actions when chained modes is activated or deactivated, e.g., deactivating subscribers.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">ChainableController</span></code> extends <code class="docutils literal notranslate"><span class="pre">ControllerInterface</span></code> class with <code class="docutils literal notranslate"><span class="pre">virtual</span> <span class="pre">std::vector&lt;hardware_interface::CommandInterface&gt;</span> <span class="pre">export_reference_interfaces()</span> <span class="pre">=</span> <span class="pre">0</span></code> method as well as <code class="docutils literal notranslate"><span class="pre">virtual</span> <span class="pre">std::vector&lt;hardware_interface::StateInterface&gt;</span> <span class="pre">export_state_interfaces()</span> <span class="pre">=</span> <span class="pre">0</span></code> method.
+This method should be implemented for each controller that <strong>can be preceded</strong> by another controller exporting all the reference/state interfaces.
+For simplicity reasons, it is assumed for now that controller’s all reference interfaces are used by other controller. However, the state interfaces exported by the controller, can be used by multiple controllers at the same time and with the combination they want.
+Therefore, do not try to implement any exclusive combinations of reference interfaces, but rather write multiple controllers if you need exclusivity.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ChainableController</span></code> base class implements <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">set_chained_mode(bool</span> <span class="pre">activate)</span></code> that sets an internal flag that a controller is used by another controller (in chained mode) and calls <code class="docutils literal notranslate"><span class="pre">virtual</span> <span class="pre">void</span> <span class="pre">on_set_chained_mode(bool</span> <span class="pre">activate)</span> <span class="pre">=</span> <span class="pre">0</span></code> that implements controller’s specific actions when chained mode is activated or deactivated, e.g., deactivating subscribers.</p>
 <p>As an example, PID controllers export one virtual interface <code class="docutils literal notranslate"><span class="pre">pid_reference</span></code> and stop their subscriber <code class="docutils literal notranslate"><span class="pre">&lt;controller_name&gt;/pid_reference</span></code> when used in chained mode.  ‘diff_drive_controller’ controller exports list of virtual interfaces  <code class="docutils literal notranslate"><span class="pre">&lt;controller_name&gt;/v_x</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;controller_name&gt;/v_y</span></code>, and <code class="docutils literal notranslate"><span class="pre">&lt;controller_name&gt;/w_z</span></code>, and stops subscribers from topics <code class="docutils literal notranslate"><span class="pre">&lt;controller_name&gt;/cmd_vel</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;controller_name&gt;/cmd_vel_unstamped</span></code>. Its publishers can continue running.</p>
+</section>
+<section id="nomenclature">
+<h3>Nomenclature<a class="headerlink" href="#nomenclature" title="Link to this heading"></a></h3>
+<p>There are two types of interfaces within the context of <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code>: <code class="docutils literal notranslate"><span class="pre">CommandInterface</span></code> and <code class="docutils literal notranslate"><span class="pre">StateInterface</span></code>.</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">CommandInterface</span></code> is a Read-Write type of interface that can be used to get and set values. Its typical use-case is to set command values to the hardware.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">StateInterface</span></code> is a Read-Only type of interface that can be used to get values. Its typical use-case is to get actual state values from the hardware.</p></li>
+</ul>
+<p>These interfaces are utilized in different places within the controller in order to have a functional controller or controller chain that commands the hardware.</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">virtual</span> <span class="pre">InterfaceConfiguration</span> <span class="pre">command_interface_configuration()</span> <span class="pre">const</span></code> method defined in the <code class="docutils literal notranslate"><span class="pre">ControllerInterface</span></code> class is used to define the command interfaces used by the controller. These interfaces are used to command the hardware or the exposed reference interfaces from another controller. The <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> uses this configuration to claim the command interfaces from the <code class="docutils literal notranslate"><span class="pre">ResourceManager</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">virtual</span> <span class="pre">InterfaceConfiguration</span> <span class="pre">state_interface_configuration()</span> <span class="pre">const</span></code> method defined in the <code class="docutils literal notranslate"><span class="pre">ControllerInterface</span></code> class is used to define the state interfaces used by the controller. These interfaces are used to get the actual state values from the hardware or the exposed state interfaces from another controller. The <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> uses this configuration to claim the state interfaces from the <code class="docutils literal notranslate"><span class="pre">ResourceManager</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">std::vector&lt;hardware_interface::CommandInterface&gt;</span> <span class="pre">export_reference_interfaces()</span></code> method defined in the <code class="docutils literal notranslate"><span class="pre">ChainableController</span></code> class is used to define the reference interfaces exposed by the controller. These interfaces are used to command the controller from other controllers.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">std::vector&lt;hardware_interface::StateInterface&gt;</span> <span class="pre">export_state_interfaces()</span></code> method defined in the <code class="docutils literal notranslate"><span class="pre">ChainableController</span></code> class is used to define the state interfaces exposed by the controller. These interfaces are used to get the actual state values from the controller by other controllers.</p></li>
+</ul>
 </section>
 <section id="inner-resource-management">
 <h3>Inner Resource Management<a class="headerlink" href="#inner-resource-management" title="Link to this heading"></a></h3>
-<p>After configuring a chainable controller, controller manager calls <code class="docutils literal notranslate"><span class="pre">input_interface_configuration</span></code> method and takes ownership over controller’s input interfaces.
+<p>After configuring a chainable controller, controller manager calls <code class="docutils literal notranslate"><span class="pre">export_reference_interfaces</span></code> and <code class="docutils literal notranslate"><span class="pre">export_state_interfaces</span></code> method and takes ownership over controller’s exported reference/state interfaces.
 This is the same process as done by <code class="docutils literal notranslate"><span class="pre">ResourceManager</span></code> and hardware interfaces.
 Controller manager maintains “claimed” status of interface in a vector (the same as done in <code class="docutils literal notranslate"><span class="pre">ResourceManager</span></code>).</p>
 </section>
@@ -184,7 +211,9 @@ Controller manager maintains “claimed” status of interface in a vector (the 
 <p>Chained controllers must be activated and deactivated together or in the proper order.
 This means you must first activate all following controllers to have the preceding one activated.
 For the deactivation there is the inverse rule - all preceding controllers have to be deactivated before the following controller is deactivated.
-One can also think of it as an actual chain, you can not add a chain link or break the chain in the middle.</p>
+One can also think of it as an actual chain, you can not add a chain link or break the chain in the middle.
+The chained controllers can also be activated when parsed as in a single list through the fields <code class="docutils literal notranslate"><span class="pre">activate_controllers</span></code> or <code class="docutils literal notranslate"><span class="pre">deactivate_controllers</span></code> in the <code class="docutils literal notranslate"><span class="pre">switch_controllers</span></code> service provided by the controller_manager.
+The controller_manager <code class="docutils literal notranslate"><span class="pre">spawner</span></code> can also be used to activate all the controllers of the chain in a single call, by parsing the argument <code class="docutils literal notranslate"><span class="pre">--activate-as-group</span></code>.</p>
 </section>
 </section>
 <section id="debugging-outputs">
@@ -198,7 +227,7 @@ One can also think of it as an actual chain, you can not add a chain link or bre
 <section id="closing-remarks">
 <h2>Closing remarks<a class="headerlink" href="#closing-remarks" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>Maybe addition of the new controller’s type <code class="docutils literal notranslate"><span class="pre">ChainableController</span></code> is not necessary. It would also be feasible to add implementation of <code class="docutils literal notranslate"><span class="pre">input_interface_configuration()</span></code> method into <code class="docutils literal notranslate"><span class="pre">ControllerInterface</span></code> class with default result <code class="docutils literal notranslate"><span class="pre">interface_configuration_type::NONE</span></code>.</p></li>
+<li><p>Maybe addition of the new controller’s type <code class="docutils literal notranslate"><span class="pre">ChainableController</span></code> is not necessary. It would also be feasible to add implementation of <code class="docutils literal notranslate"><span class="pre">export_reference_interfaces()</span></code> and <code class="docutils literal notranslate"><span class="pre">export_state_interfaces()</span></code> method into <code class="docutils literal notranslate"><span class="pre">ControllerInterface</span></code> class with default result <code class="docutils literal notranslate"><span class="pre">interface_configuration_type::NONE</span></code>.</p></li>
 </ul>
 </section>
 </section>

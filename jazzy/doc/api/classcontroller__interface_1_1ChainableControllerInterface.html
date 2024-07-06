@@ -119,6 +119,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aca75cbab7693e216194b7c41aa12739d"><td class="memItemLeft" align="right" valign="top">CONTROLLER_INTERFACE_PUBLIC bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#aca75cbab7693e216194b7c41aa12739d">is_chainable</a> () const final</td></tr>
 <tr class="memdesc:aca75cbab7693e216194b7c41aa12739d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get information if a controller is chainable.  <a href="classcontroller__interface_1_1ChainableControllerInterface.html#aca75cbab7693e216194b7c41aa12739d">More...</a><br /></td></tr>
 <tr class="separator:aca75cbab7693e216194b7c41aa12739d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65fd6dcdbd23ba255494287f41143089"><td class="memItemLeft" align="right" valign="top">CONTROLLER_INTERFACE_PUBLIC std::vector&lt; <a class="el" href="classhardware__interface_1_1StateInterface.html">hardware_interface::StateInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#a65fd6dcdbd23ba255494287f41143089">export_state_interfaces</a> () final</td></tr>
+<tr class="separator:a65fd6dcdbd23ba255494287f41143089"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa82394dd8f431cc065b2d1081483499a"><td class="memItemLeft" align="right" valign="top">CONTROLLER_INTERFACE_PUBLIC std::vector&lt; <a class="el" href="classhardware__interface_1_1CommandInterface.html">hardware_interface::CommandInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#aa82394dd8f431cc065b2d1081483499a">export_reference_interfaces</a> () final</td></tr>
 <tr class="separator:aa82394dd8f431cc065b2d1081483499a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac53be760b72d721ef9528e0707ce1f4f"><td class="memItemLeft" align="right" valign="top">CONTROLLER_INTERFACE_PUBLIC bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#ac53be760b72d721ef9528e0707ce1f4f">set_chained_mode</a> (bool chained_mode) final</td></tr>
@@ -177,8 +179,10 @@ CONTROLLER_INTERFACE_PUBLIC const std::string &amp;&#160;</td><td class="memItem
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a0e7d22f3c410335ec57e725e30314b0d"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="classhardware__interface_1_1CommandInterface.html">hardware_interface::CommandInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#a0e7d22f3c410335ec57e725e30314b0d">on_export_reference_interfaces</a> ()=0</td></tr>
-<tr class="separator:a0e7d22f3c410335ec57e725e30314b0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99c0ebc82f87de51c0bb5e68bdb42d1e"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="classhardware__interface_1_1StateInterface.html">hardware_interface::StateInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#a99c0ebc82f87de51c0bb5e68bdb42d1e">on_export_state_interfaces</a> ()</td></tr>
+<tr class="separator:a99c0ebc82f87de51c0bb5e68bdb42d1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a427fc28e518153be4a5e2d1b37cab953"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="classhardware__interface_1_1CommandInterface.html">hardware_interface::CommandInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#a427fc28e518153be4a5e2d1b37cab953">on_export_reference_interfaces</a> ()</td></tr>
+<tr class="separator:a427fc28e518153be4a5e2d1b37cab953"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4817c40f074ea6e127c83e6137752e14"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#a4817c40f074ea6e127c83e6137752e14">on_set_chained_mode</a> (bool chained_mode)</td></tr>
 <tr class="memdesc:a4817c40f074ea6e127c83e6137752e14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual method that each chainable controller should implement to switch chained mode.  <a href="classcontroller__interface_1_1ChainableControllerInterface.html#a4817c40f074ea6e127c83e6137752e14">More...</a><br /></td></tr>
 <tr class="separator:a4817c40f074ea6e127c83e6137752e14"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -191,9 +195,19 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:abc2080ebf0d53fbd6e64c4c89333545f"><td class="memItemLeft" align="right" valign="top"><a id="abc2080ebf0d53fbd6e64c4c89333545f"></a>
+std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#abc2080ebf0d53fbd6e64c4c89333545f">exported_state_interface_names_</a></td></tr>
+<tr class="memdesc:abc2080ebf0d53fbd6e64c4c89333545f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage of values for state interfaces. <br /></td></tr>
+<tr class="separator:abc2080ebf0d53fbd6e64c4c89333545f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12e02433801c65d3483d6e7ad21ee97e"><td class="memItemLeft" align="right" valign="top"><a id="a12e02433801c65d3483d6e7ad21ee97e"></a>
+std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>state_interfaces_values_</b></td></tr>
+<tr class="separator:a12e02433801c65d3483d6e7ad21ee97e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43d6606d6c21c3310fc01e00094dd277"><td class="memItemLeft" align="right" valign="top"><a id="a43d6606d6c21c3310fc01e00094dd277"></a>
+std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#a43d6606d6c21c3310fc01e00094dd277">exported_reference_interface_names_</a></td></tr>
+<tr class="memdesc:a43d6606d6c21c3310fc01e00094dd277"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage of values for reference interfaces. <br /></td></tr>
+<tr class="separator:a43d6606d6c21c3310fc01e00094dd277"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d78ebc930aea2e27993c2233ac90f26"><td class="memItemLeft" align="right" valign="top"><a id="a1d78ebc930aea2e27993c2233ac90f26"></a>
-std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#a1d78ebc930aea2e27993c2233ac90f26">reference_interfaces_</a></td></tr>
-<tr class="memdesc:a1d78ebc930aea2e27993c2233ac90f26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage of values for reference interfaces. <br /></td></tr>
+std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>reference_interfaces_</b></td></tr>
 <tr class="separator:a1d78ebc930aea2e27993c2233ac90f26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classcontroller__interface_1_1ControllerInterfaceBase"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classcontroller__interface_1_1ControllerInterfaceBase')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html">controller_interface::ControllerInterfaceBase</a></td></tr>
 <tr class="memitem:a0f83186fc95e9ae8b27ee0ad29e5f148 inherit pro_attribs_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memItemLeft" align="right" valign="top"><a id="a0f83186fc95e9ae8b27ee0ad29e5f148"></a>
@@ -241,6 +255,35 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>urdf_</b> = &q
 <dl class="section return"><dt>Returns</dt><dd>list of command interfaces for preceding controllers. </dd></dl>
 
 <p>Implements <a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a0e9f2eae233f96dd1f51424b66dc3dda">controller_interface::ControllerInterfaceBase</a>.</p>
+
+</div>
+</div>
+<a id="a65fd6dcdbd23ba255494287f41143089"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65fd6dcdbd23ba255494287f41143089">&#9670;&nbsp;</a></span>export_state_interfaces()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="classhardware__interface_1_1StateInterface.html">hardware_interface::StateInterface</a> &gt; controller_interface::ChainableControllerInterface::export_state_interfaces </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Export interfaces for a chainable controller that can be used as state interface by other controllers.</p>
+<dl class="section return"><dt>Returns</dt><dd>list of state interfaces for preceding controllers. </dd></dl>
+
+<p>Implements <a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a5d7d94a8fe38dca4de7f0ed26ae8d502">controller_interface::ControllerInterfaceBase</a>.</p>
 
 </div>
 </div>
@@ -306,8 +349,8 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>urdf_</b> = &q
 
 </div>
 </div>
-<a id="a0e7d22f3c410335ec57e725e30314b0d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0e7d22f3c410335ec57e725e30314b0d">&#9670;&nbsp;</a></span>on_export_reference_interfaces()</h2>
+<a id="a427fc28e518153be4a5e2d1b37cab953"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a427fc28e518153be4a5e2d1b37cab953">&#9670;&nbsp;</a></span>on_export_reference_interfaces()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -316,7 +359,7 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>urdf_</b> = &q
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual std::vector&lt;<a class="el" href="classhardware__interface_1_1CommandInterface.html">hardware_interface::CommandInterface</a>&gt; controller_interface::ChainableControllerInterface::on_export_reference_interfaces </td>
+          <td class="memname">std::vector&lt; <a class="el" href="classhardware__interface_1_1CommandInterface.html">hardware_interface::CommandInterface</a> &gt; controller_interface::ChainableControllerInterface::on_export_reference_interfaces </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -324,14 +367,41 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>urdf_</b> = &q
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Virtual method that each chainable controller should implement to export its chainable interfaces. Each chainable controller implements this methods where all input (command) interfaces are exported. The method has the same meaning as <code>export_command_interface</code> method from <a class="el" href="classhardware__interface_1_1SystemInterface.html">hardware_interface::SystemInterface</a> or <a class="el" href="classhardware__interface_1_1ActuatorInterface.html">hardware_interface::ActuatorInterface</a>.</p>
+<p>Virtual method that each chainable controller should implement to export its read/write chainable interfaces. Each chainable controller implements this methods where all input (command) interfaces are exported. The method has the same meaning as <code>export_command_interface</code> method from <a class="el" href="classhardware__interface_1_1SystemInterface.html">hardware_interface::SystemInterface</a> or <a class="el" href="classhardware__interface_1_1ActuatorInterface.html">hardware_interface::ActuatorInterface</a>.</p>
 <dl class="section return"><dt>Returns</dt><dd>list of CommandInterfaces that other controller can use as their outputs. </dd></dl>
 
-<p>Implemented in <a class="el" href="classsteering__controllers__library_1_1SteeringControllersLibrary.html#a800034a340a9613bead2885697879e26">steering_controllers_library::SteeringControllersLibrary</a>, <a class="el" href="classpid__controller_1_1PidController.html#a6f874c80460ea9a3bea1afcfc06befa1">pid_controller::PidController</a>, <a class="el" href="classadmittance__controller_1_1AdmittanceController.html#a4ee2935d49f50f18a482f67010f23e81">admittance_controller::AdmittanceController</a>, and <a class="el" href="classpassthrough__controller_1_1PassthroughController.html#af06aed30d66abb5dc125dc680993a50e">passthrough_controller::PassthroughController</a>.</p>
+<p>Reimplemented in <a class="el" href="classsteering__controllers__library_1_1SteeringControllersLibrary.html#a800034a340a9613bead2885697879e26">steering_controllers_library::SteeringControllersLibrary</a>, <a class="el" href="classpid__controller_1_1PidController.html#a6f874c80460ea9a3bea1afcfc06befa1">pid_controller::PidController</a>, <a class="el" href="classadmittance__controller_1_1AdmittanceController.html#a4ee2935d49f50f18a482f67010f23e81">admittance_controller::AdmittanceController</a>, and <a class="el" href="classpassthrough__controller_1_1PassthroughController.html#af06aed30d66abb5dc125dc680993a50e">passthrough_controller::PassthroughController</a>.</p>
+
+</div>
+</div>
+<a id="a99c0ebc82f87de51c0bb5e68bdb42d1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99c0ebc82f87de51c0bb5e68bdb42d1e">&#9670;&nbsp;</a></span>on_export_state_interfaces()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="classhardware__interface_1_1StateInterface.html">hardware_interface::StateInterface</a> &gt; controller_interface::ChainableControllerInterface::on_export_state_interfaces </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Virtual method that each chainable controller should implement to export its read-only chainable interfaces. Each chainable controller implements this methods where all its state(read only) interfaces are exported. The method has the same meaning as <code>export_state_interfaces</code> method from <a class="el" href="classhardware__interface_1_1SystemInterface.html">hardware_interface::SystemInterface</a> or <a class="el" href="classhardware__interface_1_1ActuatorInterface.html">hardware_interface::ActuatorInterface</a>.</p>
+<dl class="section return"><dt>Returns</dt><dd>list of StateInterfaces that other controller can use as their inputs. </dd></dl>
 
 </div>
 </div>
@@ -396,7 +466,7 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>urdf_</b> = &q
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Set chained mode of a chainable controller. This method triggers internal processes to switch a chainable controller to "chained" mode and vice-versa. Setting controller to "chained" mode usually involves disabling of subscribers and other external interfaces to avoid potential concurrency in input commands.</p>
+<p>Set chained mode of a chainable controller. This method triggers internal processes to switch a chainable controller to "chained" mode and vice-versa. Setting controller to "chained" mode usually involves the usage of the controller's reference interfaces by the other controllers</p>
 <dl class="section return"><dt>Returns</dt><dd>true if mode is switched successfully and false if not. </dd></dl>
 
 <p>Implements <a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a56c8cc3ea5aaec0ca36d8aa8b20b433c">controller_interface::ControllerInterfaceBase</a>.</p>
