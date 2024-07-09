@@ -312,23 +312,30 @@ controller manager. By default the <em>gazebo_ros2_control</em> plugin is very s
 extensible via an additional plugin architecture to allow power users to create their own custom
 robot hardware interfaces between <em>ros2_control</em> and Gazebo Classic.</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo&gt;</span>
-<span class="w">    </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgazebo_ros2_control.so&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gazebo_ros2_control&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;robot_param&gt;</span>robot_description<span class="nt">&lt;/robot_param&gt;</span>
-<span class="w">      </span><span class="nt">&lt;robot_param_node&gt;</span>robot_state_publisher<span class="nt">&lt;/robot_param_node&gt;</span>
-<span class="w">      </span><span class="nt">&lt;parameters&gt;</span>$(find<span class="w"> </span>gazebo_ros2_control_demos)/config/cart_controller.yaml<span class="nt">&lt;/parameters&gt;</span>
-<span class="w">      </span><span class="nt">&lt;controller_manager_name&gt;</span>simulation_controller_manager<span class="nt">&lt;/controller_manager_name&gt;</span>
-<span class="w">    </span><span class="nt">&lt;/plugin&gt;</span>
+<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgazebo_ros2_control.so&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gazebo_ros2_control&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;parameters&gt;</span>$(find<span class="w"> </span>gazebo_ros2_control_demos)/config/cart_controller.yaml<span class="nt">&lt;/parameters&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/plugin&gt;</span>
 <span class="nt">&lt;/gazebo&gt;</span>
 </pre></div>
 </div>
 <p>The <em>gazebo_ros2_control</em> <code class="docutils literal notranslate"><span class="pre">&lt;plugin&gt;</span></code> tag also has the following optional child elements:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">&lt;robot_param&gt;</span></code>: The location of the <code class="docutils literal notranslate"><span class="pre">robot_description</span></code> (URDF) on the parameter server, defaults to <code class="docutils literal notranslate"><span class="pre">robot_description</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&lt;robot_param_node&gt;</span></code>: Name of the node where the <code class="docutils literal notranslate"><span class="pre">robot_param</span></code> is located, defaults to <code class="docutils literal notranslate"><span class="pre">robot_state_publisher</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&lt;parameters&gt;</span></code>: YAML file with the configuration of the controllers</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;parameters&gt;</span></code>: A YAML file with the configuration of the controllers. This element can be given multiple times to load multiple files.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&lt;hold_joints&gt;</span></code>: if set to true (default), it will hold the joints’ position if their interface was not claimed, e.g., the controller hasn’t been activated yet.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&lt;controller_manager_name&gt;</span></code>: Set controller manager name (default: <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code>)</p></li>
 </ul>
+<p>Additionally, one can specify a namespace and remapping rules, which will be forwarded to the controller_manager and loaded controllers. Add the following <code class="docutils literal notranslate"><span class="pre">&lt;ros&gt;</span></code> section:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo&gt;</span>
+<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgazebo_ros2_control.so&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gazebo_ros2_control&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span>...
+<span class="w">    </span><span class="nt">&lt;ros&gt;</span>
+<span class="w">      </span><span class="nt">&lt;namespace&gt;</span>my_namespace<span class="nt">&lt;/namespace&gt;</span>
+<span class="w">      </span><span class="nt">&lt;remapping&gt;</span>/robot_description:=/robot_description_full<span class="nt">&lt;/remapping&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/ros&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/plugin&gt;</span>
+<span class="nt">&lt;/gazebo&gt;</span>
+</pre></div>
+</div>
 <section id="default-gazebo-ros2-control-behavior">
 <h3>Default gazebo_ros2_control Behavior<a class="headerlink" href="#default-gazebo-ros2-control-behavior" title="Link to this heading"></a></h3>
 <p>By default, without a <code class="docutils literal notranslate"><span class="pre">&lt;plugin&gt;</span></code> tag, <em>gazebo_ros2_control</em> will attempt to get all of the information it needs to interface with a ros2_control-based controller out of the URDF. This is sufficient for most cases, and good for at least getting started.</p>

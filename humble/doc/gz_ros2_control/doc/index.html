@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>gz_ros2_control &mdash; ROS2_Control: Humble Jul 2024 documentation</title>
+  <title>ign_ros2_control &mdash; ROS2_Control: Humble Jul 2024 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -72,13 +72,13 @@
 <li class="toctree-l5"><a class="reference internal" href="#using-mimic-joints-in-simulation">Using mimic joints in simulation</a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#add-the-gz-ros2-control-plugin">Add the gz_ros2_control plugin</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#default-gz-ros2-control-behavior">Default gz_ros2_control Behavior</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#advanced-custom-gz-ros2-control-simulation-plugins">Advanced: custom gz_ros2_control Simulation Plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-the-ign-ros2-control-plugin">Add the ign_ros2_control plugin</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#default-ign-ros2-control-behavior">Default ign_ros2_control Behavior</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#advanced-custom-ign-ros2-control-simulation-plugins">Advanced: custom ign_ros2_control Simulation Plugins</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#set-up-controllers">Set up controllers</a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#gz-ros2-control-demos">gz_ros2_control_demos</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ign-ros2-control-demos">ign_ros2_control_demos</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#cart-on-rail">Cart on rail</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#mobile-robots">Mobile robots</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#gripper">Gripper</a></li>
@@ -117,7 +117,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../simulators/simulators.html">Simulator Integrations</a></li>
-      <li class="breadcrumb-item active">gz_ros2_control</li>
+      <li class="breadcrumb-item active">ign_ros2_control</li>
       <li class="wy-breadcrumbs-aside">
               <!-- User defined GitHub URL -->
               <a href="https://github.com/ros-controls/gz_ros2_control/blob/humble/doc/index.rst" class="fa fa-github"> Edit on GitHub</a>
@@ -139,8 +139,8 @@
 </p>
 
 
-  <section id="gz-ros2-control">
-<span id="id1"></span><h1>gz_ros2_control<a class="headerlink" href="#gz-ros2-control" title="Link to this heading"></a></h1>
+  <section id="ign-ros2-control">
+<span id="id1"></span><h1>ign_ros2_control<a class="headerlink" href="#ign-ros2-control" title="Link to this heading"></a></h1>
 <p>This is a ROS 2 package for integrating the <em>ros2_control</em> controller architecture with the <a class="reference external" href="https://gazebosim.org/home">Gazebo</a> simulator.</p>
 <p>This package provides a Gazebo-Sim system plugin which instantiates a <em>ros2_control</em> controller manager and connects it to a Gazebo model.</p>
 <section id="usage">
@@ -148,7 +148,7 @@
 <section id="modifying-or-building-your-own">
 <h3>Modifying or building your own<a class="headerlink" href="#modifying-or-building-your-own" title="Link to this heading"></a></h3>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>Dockerfile
-docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>gz_ros2_control<span class="w"> </span>.
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>ign_ros2_control<span class="w"> </span>.
 </pre></div>
 </div>
 </section>
@@ -159,7 +159,7 @@ docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </
 </ol>
 <blockquote>
 <div><p>Docker allows us to run the demo without the GUI if configured properly. The following command runs the demo without the GUI:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>--name<span class="w"> </span>gz_ros2_control_demo<span class="w"> </span>--net<span class="w"> </span>host<span class="w"> </span>gz_ros2_control<span class="w"> </span>ros2<span class="w"> </span>launch<span class="w"> </span>ign_ros2_control_demos<span class="w"> </span>cart_example_position.launch.py<span class="w"> </span>gui:<span class="o">=</span><span class="nb">false</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>--name<span class="w"> </span>ign_ros2_control_demo<span class="w"> </span>--net<span class="w"> </span>host<span class="w"> </span>ign_ros2_control<span class="w"> </span>ros2<span class="w"> </span>launch<span class="w"> </span>ign_ros2_control_demos<span class="w"> </span>cart_example_position.launch.py<span class="w"> </span>gui:<span class="o">=</span><span class="nb">false</span>
 </pre></div>
 </div>
 <p>Then on your local machine, you can run the Gazebo client:</p>
@@ -175,13 +175,13 @@ docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </
 images with customized local support injected for things like nvidia support. Rocker also supports user id specific files for cleaner
 mounting file permissions. You can install this tool with the following <a class="reference external" href="https://github.com/osrf/rocker/#installation">instructions</a>. (make sure you meet all of the <a class="reference external" href="https://github.com/osrf/rocker/#prerequisites">prerequisites</a>.</p>
 <p>The following command will launch Gazebo:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span>rocker<span class="w"> </span>--x11<span class="w"> </span>--nvidia<span class="w"> </span>--name<span class="w"> </span>gz_ros2_control_demo<span class="w"> </span>gz_ros2_control:latest
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span>rocker<span class="w"> </span>--x11<span class="w"> </span>--nvidia<span class="w"> </span>--name<span class="w"> </span>ign_ros2_control_demo<span class="w"> </span>ign_ros2_control:latest
 </pre></div>
 </div>
 <p>The following commands allow the cart to be moved along the rail:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>exec<span class="w"> </span>-it<span class="w"> </span>gz_ros2_control_demo<span class="w"> </span>bash
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>exec<span class="w"> </span>-it<span class="w"> </span>ign_ros2_control_demo<span class="w"> </span>bash
 source<span class="w"> </span>/home/ros2_ws/install/setup.bash
-ros2<span class="w"> </span>run<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>example_position
+ros2<span class="w"> </span>run<span class="w"> </span>ign_ros2_control_demos<span class="w"> </span>example_position
 </pre></div>
 </div>
 </div></blockquote>
@@ -219,7 +219,7 @@ include:</p>
 </section>
 <section id="using-mimic-joints-in-simulation">
 <h3>Using mimic joints in simulation<a class="headerlink" href="#using-mimic-joints-in-simulation" title="Link to this heading"></a></h3>
-<p>To use <code class="docutils literal notranslate"><span class="pre">mimic</span></code> joints in <em>gz_ros2_control</em> you should define its parameters to your URDF.
+<p>To use <code class="docutils literal notranslate"><span class="pre">mimic</span></code> joints in <em>ign_ros2_control</em> you should define its parameters to your URDF.
 We should include:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">&lt;mimic&gt;</span></code> tag to the mimicked joint <a class="reference external" href="https://wiki.ros.org/urdf/XML/joint">detailed manual</a></p></li>
@@ -247,29 +247,44 @@ We should include:</p>
 </div>
 </section>
 </section>
-<section id="add-the-gz-ros2-control-plugin">
-<h2>Add the gz_ros2_control plugin<a class="headerlink" href="#add-the-gz-ros2-control-plugin" title="Link to this heading"></a></h2>
+<section id="add-the-ign-ros2-control-plugin">
+<h2>Add the ign_ros2_control plugin<a class="headerlink" href="#add-the-ign-ros2-control-plugin" title="Link to this heading"></a></h2>
 <p>In addition to the <em>ros2_control</em> tags, a Gazebo plugin needs to be added to your URDF that
 actually parses the <em>ros2_control</em> tags and loads the appropriate hardware interfaces and
-controller manager. By default the <em>gz_ros2_control</em> plugin is very simple, though it is also
+controller manager. By default the <em>ign_ros2_control</em> plugin is very simple, though it is also
 extensible via an additional plugin architecture to allow power users to create their own custom
 robot hardware interfaces between <em>ros2_control</em> and Gazebo.</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo&gt;</span>
-<span class="w">    </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgz_ros2_control-system.so&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gz_ros2_control::GazeboSimROS2ControlPlugin&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;robot_param&gt;</span>robot_description<span class="nt">&lt;/robot_param&gt;</span>
-<span class="w">      </span><span class="nt">&lt;robot_param_node&gt;</span>robot_state_publisher<span class="nt">&lt;/robot_param_node&gt;</span>
-<span class="w">      </span><span class="nt">&lt;parameters&gt;</span>$(find<span class="w"> </span>gz_ros2_control_demos)/config/cart_controller.yaml<span class="nt">&lt;/parameters&gt;</span>
-<span class="w">    </span><span class="nt">&lt;/plugin&gt;</span>
+<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;ign_ros2_control-system&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ign_ros2_control::IgnitionROS2ControlPlugin&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;robot_param&gt;</span>robot_description<span class="nt">&lt;/robot_param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;robot_param_node&gt;</span>robot_state_publisher<span class="nt">&lt;/robot_param_node&gt;</span>
+<span class="w">    </span><span class="nt">&lt;parameters&gt;</span>$(find<span class="w"> </span>ign_ros2_control_demos)/config/cart_controller.yaml<span class="nt">&lt;/parameters&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/plugin&gt;</span>
 <span class="nt">&lt;/gazebo&gt;</span>
 </pre></div>
 </div>
-<p>The <em>gz_ros2_control</em> <code class="docutils literal notranslate"><span class="pre">&lt;plugin&gt;</span></code> tag also has the following optional child elements:</p>
+<p>The <em>ign_ros2_control</em> <code class="docutils literal notranslate"><span class="pre">&lt;plugin&gt;</span></code> tag also has the following optional child elements:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">&lt;parameters&gt;</span></code>: YAML file with the configuration of the controllers</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;robot_param&gt;</span></code>: The location of the <code class="docutils literal notranslate"><span class="pre">robot_description</span></code> (URDF) on the parameter server, defaults to <code class="docutils literal notranslate"><span class="pre">robot_description</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;robot_param_node&gt;</span></code>: Name of the node where the <code class="docutils literal notranslate"><span class="pre">robot_param</span></code> is located, defaults to <code class="docutils literal notranslate"><span class="pre">robot_state_publisher</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;parameters&gt;</span></code>: A YAML file with the configuration of the controllers. This element can be given multiple times to load multiple files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;controller_manager_name&gt;</span></code>: Set controller manager name (default: <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code>)</p></li>
 </ul>
-<section id="default-gz-ros2-control-behavior">
-<h3>Default gz_ros2_control Behavior<a class="headerlink" href="#default-gz-ros2-control-behavior" title="Link to this heading"></a></h3>
-<p>By default, without a <code class="docutils literal notranslate"><span class="pre">&lt;plugin&gt;</span></code> tag, <em>gz_ros2_control</em> will attempt to get all of the information it needs to interface with a ros2_control-based controller out of the URDF. This is sufficient for most cases, and good for at least getting started.</p>
+<p>Additionally, one can specify a namespace and remapping rules, which will be forwarded to the controller_manager and loaded controllers. Add the following <code class="docutils literal notranslate"><span class="pre">&lt;ros&gt;</span></code> section:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo&gt;</span>
+<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;ign_ros2_control-system&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ign_ros2_control::IgnitionROS2ControlPlugin&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span>...
+<span class="w">    </span><span class="nt">&lt;ros&gt;</span>
+<span class="w">      </span><span class="nt">&lt;namespace&gt;</span>my_namespace<span class="nt">&lt;/namespace&gt;</span>
+<span class="w">      </span><span class="nt">&lt;remapping&gt;</span>/robot_description:=/robot_description_full<span class="nt">&lt;/remapping&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/ros&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/plugin&gt;</span>
+<span class="nt">&lt;/gazebo&gt;</span>
+</pre></div>
+</div>
+<section id="default-ign-ros2-control-behavior">
+<h3>Default ign_ros2_control Behavior<a class="headerlink" href="#default-ign-ros2-control-behavior" title="Link to this heading"></a></h3>
+<p>By default, without a <code class="docutils literal notranslate"><span class="pre">&lt;plugin&gt;</span></code> tag, <em>ign_ros2_control</em> will attempt to get all of the information it needs to interface with a ros2_control-based controller out of the URDF. This is sufficient for most cases, and good for at least getting started.</p>
 <p>The default behavior provides the following ros2_control interfaces:</p>
 <ul class="simple">
 <li><p>hardware_interface::JointStateInterface</p></li>
@@ -277,10 +292,10 @@ robot hardware interfaces between <em>ros2_control</em> and Gazebo.</p>
 <li><p>hardware_interface::VelocityJointInterface</p></li>
 </ul>
 </section>
-<section id="advanced-custom-gz-ros2-control-simulation-plugins">
-<h3>Advanced: custom gz_ros2_control Simulation Plugins<a class="headerlink" href="#advanced-custom-gz-ros2-control-simulation-plugins" title="Link to this heading"></a></h3>
-<p>The <em>gz_ros2_control</em> Gazebo plugin also provides a pluginlib-based interface to implement custom interfaces between Gazebo and <em>ros2_control</em> for simulating more complex mechanisms (nonlinear springs, linkages, etc).</p>
-<p>These plugins must inherit the <code class="docutils literal notranslate"><span class="pre">gz_ros2_control::GazeboSimSystemInterface</span></code>, which implements a simulated <em>ros2_control</em>
+<section id="advanced-custom-ign-ros2-control-simulation-plugins">
+<h3>Advanced: custom ign_ros2_control Simulation Plugins<a class="headerlink" href="#advanced-custom-ign-ros2-control-simulation-plugins" title="Link to this heading"></a></h3>
+<p>The <em>ign_ros2_control</em> Gazebo plugin also provides a pluginlib-based interface to implement custom interfaces between Gazebo and <em>ros2_control</em> for simulating more complex mechanisms (nonlinear springs, linkages, etc).</p>
+<p>These plugins must inherit the <code class="docutils literal notranslate"><span class="pre">ign_ros2_control::GazeboSimSystemInterface</span></code>, which implements a simulated <em>ros2_control</em>
 <code class="docutils literal notranslate"><span class="pre">hardware_interface::SystemInterface</span></code>. SystemInterface provides API-level access to read and command joint properties.</p>
 <p>The respective GazeboSimSystemInterface sub-class is specified in a URDF model and is loaded when the
 robot model is loaded. For example, the following XML will load the default plugin:</p>
@@ -291,7 +306,7 @@ robot model is loaded. For example, the following XML will load the default plug
 <span class="w">  </span>...
 <span class="nt">&lt;ros2_control&gt;</span>
 <span class="nt">&lt;gazebo&gt;</span>
-<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gz_ros2_control::GazeboSimROS2ControlPlugin&quot;</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgz_ros2_control-system&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;ign_ros2_control-system&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ign_ros2_control::IgnitionROS2ControlPlugin&quot;</span><span class="nt">&gt;</span>
 <span class="w">    </span>...
 <span class="w">  </span><span class="nt">&lt;/plugin&gt;</span>
 <span class="nt">&lt;/gazebo&gt;</span>
@@ -301,11 +316,11 @@ robot model is loaded. For example, the following XML will load the default plug
 <section id="set-up-controllers">
 <h3>Set up controllers<a class="headerlink" href="#set-up-controllers" title="Link to this heading"></a></h3>
 <p>Use the tag <code class="docutils literal notranslate"><span class="pre">&lt;parameters&gt;</span></code> inside <code class="docutils literal notranslate"><span class="pre">&lt;plugin&gt;</span></code> to set the YAML file with the controller configuration
-and use the tag <code class="docutils literal notranslate"><span class="pre">&lt;controller_manager_prefix_node_name&gt;</span></code> to set the controller manager node name.</p>
+and use the tag <code class="docutils literal notranslate"><span class="pre">&lt;controller_manager_name&gt;</span></code> to set the controller manager node name.</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo&gt;</span>
-<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gz_ros2_control::GazeboSimROS2ControlPlugin&quot;</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgz_ros2_control-system&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;parameters&gt;</span>$(find<span class="w"> </span>gz_ros2_control_demos)/config/cart_controller.yaml<span class="nt">&lt;/parameters&gt;</span>
-<span class="w">    </span><span class="nt">&lt;controller_manager_prefix_node_name&gt;</span>controller_manager<span class="nt">&lt;/controller_manager_prefix_node_name&gt;</span>
+<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;ign_ros2_control-system&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ign_ros2_control::IgnitionROS2ControlPlugin&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;parameters&gt;</span>$(find<span class="w"> </span>ign_ros2_control_demos)/config/cart_controller.yaml<span class="nt">&lt;/parameters&gt;</span>
+<span class="w">    </span><span class="nt">&lt;controller_manager_name&gt;</span>controller_manager<span class="nt">&lt;/controller_manager_name&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/plugin&gt;</span>
 <span class="nt">&lt;gazebo&gt;</span>
 </pre></div>
@@ -338,23 +353,23 @@ and use the tag <code class="docutils literal notranslate"><span class="pre">&lt
 </div>
 </section>
 </section>
-<section id="gz-ros2-control-demos">
-<h2>gz_ros2_control_demos<a class="headerlink" href="#gz-ros2-control-demos" title="Link to this heading"></a></h2>
-<p>There are some examples in the <em>gz_ros2_control_demos</em> package.</p>
+<section id="ign-ros2-control-demos">
+<h2>ign_ros2_control_demos<a class="headerlink" href="#ign-ros2-control-demos" title="Link to this heading"></a></h2>
+<p>There are some examples in the <em>ign_ros2_control_demos</em> package.</p>
 <section id="cart-on-rail">
 <h3>Cart on rail<a class="headerlink" href="#cart-on-rail" title="Link to this heading"></a></h3>
 <p>These examples allow to launch a cart in a 30 meter rail.</p>
-<img alt="Cart" src="../../../_images/gz_ros2_control.gif" />
+<img alt="Cart" src="../../../_images/ign_ros2_control.gif" />
 <p>You can run some of the example configurations by running the following commands:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>cart_example_position.launch.py
-ros2<span class="w"> </span>launch<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>cart_example_velocity.launch.py
-ros2<span class="w"> </span>launch<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>cart_example_effort.launch.py
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ign_ros2_control_demos<span class="w"> </span>cart_example_position.launch.py
+ros2<span class="w"> </span>launch<span class="w"> </span>ign_ros2_control_demos<span class="w"> </span>cart_example_velocity.launch.py
+ros2<span class="w"> </span>launch<span class="w"> </span>ign_ros2_control_demos<span class="w"> </span>cart_example_effort.launch.py
 </pre></div>
 </div>
 <p>When the Gazebo world is launched, you can run some of the following commands to move the cart.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>example_position
-ros2<span class="w"> </span>run<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>example_velocity
-ros2<span class="w"> </span>run<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>example_effort
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>ign_ros2_control_demos<span class="w"> </span>example_position
+ros2<span class="w"> </span>run<span class="w"> </span>ign_ros2_control_demos<span class="w"> </span>example_velocity
+ros2<span class="w"> </span>run<span class="w"> </span>ign_ros2_control_demos<span class="w"> </span>example_effort
 </pre></div>
 </div>
 </section>
@@ -362,39 +377,39 @@ ros2<span class="w"> </span>run<span class="w"> </span>gz_ros2_control_demos<spa
 <h3>Mobile robots<a class="headerlink" href="#mobile-robots" title="Link to this heading"></a></h3>
 <img alt="DiffBot" src="../../../_images/diff_drive.gif" />
 <p>You can run some of the mobile robots running the following commands:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>diff_drive_example.launch.py
-ros2<span class="w"> </span>launch<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>tricycle_drive_example.launch.py
-ros2<span class="w"> </span>launch<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>ackermann_drive_example.launch.py
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ign_ros2_control_demos<span class="w"> </span>diff_drive_example.launch.py
+ros2<span class="w"> </span>launch<span class="w"> </span>ign_ros2_control_demos<span class="w"> </span>tricycle_drive_example.launch.py
+ros2<span class="w"> </span>launch<span class="w"> </span>ign_ros2_control_demos<span class="w"> </span>ackermann_drive_example.launch.py
 </pre></div>
 </div>
 <p>When the Gazebo world is launched you can run some of the following commands to move the robots.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>example_diff_drive
-ros2<span class="w"> </span>run<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>example_tricycle_drive
-ros2<span class="w"> </span>run<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>example_ackermann_drive
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>ign_ros2_control_demos<span class="w"> </span>example_diff_drive
+ros2<span class="w"> </span>run<span class="w"> </span>ign_ros2_control_demos<span class="w"> </span>example_tricycle_drive
+ros2<span class="w"> </span>run<span class="w"> </span>ign_ros2_control_demos<span class="w"> </span>example_ackermann_drive
 </pre></div>
 </div>
 </section>
 <section id="gripper">
 <h3>Gripper<a class="headerlink" href="#gripper" title="Link to this heading"></a></h3>
 <p>The following example shows a parallel gripper with a mimic joint:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>gripper_mimic_joint_example.launch.py
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ign_ros2_control_demos<span class="w"> </span>gripper_mimic_joint_example.launch.py
 </pre></div>
 </div>
 <p>Send example commands:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>example_gripper
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>ign_ros2_control_demos<span class="w"> </span>example_gripper
 </pre></div>
 </div>
 </section>
 <section id="pendulum-with-passive-joints-cart-pole">
 <h3>Pendulum with passive joints (cart-pole)<a class="headerlink" href="#pendulum-with-passive-joints-cart-pole" title="Link to this heading"></a></h3>
 <p>The following example shows a cart with a pendulum arm:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>pendulum_example_effort.launch.py
-ros2<span class="w"> </span>run<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>example_effort
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ign_ros2_control_demos<span class="w"> </span>pendulum_example_effort.launch.py
+ros2<span class="w"> </span>run<span class="w"> </span>ign_ros2_control_demos<span class="w"> </span>example_effort
 </pre></div>
 </div>
 <p>This uses the effort command interface for the cart’s degree of freedom on the rail. To demonstrate that the physics of the passive joint of the pendulum is solved correctly even with the position command interface, run</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>pendulum_example_position.launch.py
-ros2<span class="w"> </span>run<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>example_position
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ign_ros2_control_demos<span class="w"> </span>pendulum_example_position.launch.py
+ros2<span class="w"> </span>run<span class="w"> </span>ign_ros2_control_demos<span class="w"> </span>example_position
 </pre></div>
 </div>
 </section>

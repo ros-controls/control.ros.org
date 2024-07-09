@@ -84,9 +84,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aabdec0a07bc0d7e3cb06dc0922dff4c1"><td class="memItemLeft" align="right" valign="top"><a id="aabdec0a07bc0d7e3cb06dc0922dff4c1"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ResourceStorage</b> (rclcpp::node_interfaces::NodeClockInterface::SharedPtr clock_interface=nullptr)</td></tr>
-<tr class="separator:aabdec0a07bc0d7e3cb06dc0922dff4c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76fb71edaa59000118b770beeb62b7d0"><td class="memItemLeft" align="right" valign="top"><a id="a76fb71edaa59000118b770beeb62b7d0"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>ResourceStorage</b> (rclcpp::node_interfaces::NodeClockInterface::SharedPtr clock_interface, rclcpp::node_interfaces::NodeLoggingInterface::SharedPtr logger_interface)</td></tr>
+<tr class="separator:a76fb71edaa59000118b770beeb62b7d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f386dafde7c2c155ae846c1b9ef2cf4"><td class="memTemplParams" colspan="2"><a id="a1f386dafde7c2c155ae846c1b9ef2cf4"></a>
 template&lt;class HardwareT , class HardwareInterfaceT &gt; </td></tr>
 <tr class="memitem:a1f386dafde7c2c155ae846c1b9ef2cf4"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>load_hardware</b> (const <a class="el" href="structhardware__interface_1_1HardwareInfo.html">HardwareInfo</a> &amp;hardware_info, pluginlib::ClassLoader&lt; HardwareInterfaceT &gt; &amp;loader, std::vector&lt; HardwareT &gt; &amp;container)</td></tr>
@@ -165,6 +165,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr
 <tr class="separator:a296dcf8ab47a70137d772607067cfce2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acab45bd6a955cebfe788a39bfa334a96"><td class="memItemLeft" align="right" valign="top">return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceStorage.html#acab45bd6a955cebfe788a39bfa334a96">update_hardware_component_group_state</a> (const std::string &amp;group_name, const return_type &amp;value)</td></tr>
 <tr class="separator:acab45bd6a955cebfe788a39bfa334a96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a751de3ef484270e2d4359f6852d375f1"><td class="memItemLeft" align="right" valign="top">const rclcpp::Logger &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceStorage.html#a751de3ef484270e2d4359f6852d375f1">get_logger</a> () const</td></tr>
+<tr class="memdesc:a751de3ef484270e2d4359f6852d375f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the logger for the resource storage.  <a href="classhardware__interface_1_1ResourceStorage.html#a751de3ef484270e2d4359f6852d375f1">More...</a><br /></td></tr>
+<tr class="separator:a751de3ef484270e2d4359f6852d375f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ad0cdc43f53b8db3459bc2295939d3b"><td class="memItemLeft" align="right" valign="top">rclcpp::Clock::SharedPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceStorage.html#a6ad0cdc43f53b8db3459bc2295939d3b">get_clock</a> () const</td></tr>
+<tr class="memdesc:a6ad0cdc43f53b8db3459bc2295939d3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the clock for the resource storage.  <a href="classhardware__interface_1_1ResourceStorage.html#a6ad0cdc43f53b8db3459bc2295939d3b">More...</a><br /></td></tr>
+<tr class="separator:a6ad0cdc43f53b8db3459bc2295939d3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -177,6 +183,15 @@ pluginlib::ClassLoader&lt; <a class="el" href="classhardware__interface_1_1Senso
 <tr class="memitem:a4107d9c3e5af7063bd87d2b2937c7903"><td class="memItemLeft" align="right" valign="top"><a id="a4107d9c3e5af7063bd87d2b2937c7903"></a>
 pluginlib::ClassLoader&lt; <a class="el" href="classhardware__interface_1_1SystemInterface.html">SystemInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>system_loader_</b></td></tr>
 <tr class="separator:a4107d9c3e5af7063bd87d2b2937c7903"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71c6e2540d55ee994d033de3566d9f1c"><td class="memItemLeft" align="right" valign="top"><a id="a71c6e2540d55ee994d033de3566d9f1c"></a>
+rclcpp::node_interfaces::NodeClockInterface::SharedPtr&#160;</td><td class="memItemRight" valign="bottom"><b>clock_interface_</b></td></tr>
+<tr class="separator:a71c6e2540d55ee994d033de3566d9f1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b03f8f4e373cc0bfeb106cdde06b746"><td class="memItemLeft" align="right" valign="top"><a id="a7b03f8f4e373cc0bfeb106cdde06b746"></a>
+rclcpp::node_interfaces::NodeLoggingInterface::SharedPtr&#160;</td><td class="memItemRight" valign="bottom"><b>logger_interface_</b></td></tr>
+<tr class="separator:a7b03f8f4e373cc0bfeb106cdde06b746"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9e80888a58b2c7516875ed99a457c64"><td class="memItemLeft" align="right" valign="top"><a id="ad9e80888a58b2c7516875ed99a457c64"></a>
+rclcpp::Logger&#160;</td><td class="memItemRight" valign="bottom"><b>rm_logger_</b></td></tr>
+<tr class="separator:ad9e80888a58b2c7516875ed99a457c64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a936fa52ec7c63aa85e66d9e21d8bc789"><td class="memItemLeft" align="right" valign="top"><a id="a936fa52ec7c63aa85e66d9e21d8bc789"></a>
 std::vector&lt; <a class="el" href="classhardware__interface_1_1Actuator.html">Actuator</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>actuators_</b></td></tr>
 <tr class="separator:a936fa52ec7c63aa85e66d9e21d8bc789"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -238,9 +253,6 @@ std::unordered_map&lt; std::string, <a class="el" href="classhardware__interface
 <tr class="memitem:a9e58949f99b563dfe04dbf939c7ab186"><td class="memItemLeft" align="right" valign="top"><a id="a9e58949f99b563dfe04dbf939c7ab186"></a>
 unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>cm_update_rate_</b> = 100</td></tr>
 <tr class="separator:a9e58949f99b563dfe04dbf939c7ab186"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a71c6e2540d55ee994d033de3566d9f1c"><td class="memItemLeft" align="right" valign="top"><a id="a71c6e2540d55ee994d033de3566d9f1c"></a>
-rclcpp::node_interfaces::NodeClockInterface::SharedPtr&#160;</td><td class="memItemRight" valign="bottom"><b>clock_interface_</b></td></tr>
-<tr class="separator:a71c6e2540d55ee994d033de3566d9f1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a7ac8a1c05b54ad71f7d0c62315756b4c"></a>
@@ -312,6 +324,62 @@ rclcpp::node_interfaces::NodeClockInterface::SharedPtr&#160;</td><td class="memI
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>list of interface names that are added into internal storage. The output is used to avoid additional iterations to cache interface names, e.g., for initializing info structures. </dd></dl>
+
+</div>
+</div>
+<a id="a6ad0cdc43f53b8db3459bc2295939d3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ad0cdc43f53b8db3459bc2295939d3b">&#9670;&nbsp;</a></span>get_clock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">rclcpp::Clock::SharedPtr hardware_interface::ResourceStorage::get_clock </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the clock for the resource storage. </p>
+<dl class="section return"><dt>Returns</dt><dd>clock of the resource storage </dd></dl>
+
+</div>
+</div>
+<a id="a751de3ef484270e2d4359f6852d375f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a751de3ef484270e2d4359f6852d375f1">&#9670;&nbsp;</a></span>get_logger()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const rclcpp::Logger&amp; hardware_interface::ResourceStorage::get_logger </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the logger for the resource storage. </p>
+<dl class="section return"><dt>Returns</dt><dd>logger of the resource storage </dd></dl>
 
 </div>
 </div>
