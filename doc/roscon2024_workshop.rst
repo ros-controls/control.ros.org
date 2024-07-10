@@ -10,7 +10,7 @@ ROSCon 2024 Workshop
 ros2_control: Fun with Controllers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  .. image:: resources/images/ROSCon2024.jpg
+  .. image:: resources/images/ROSCon2024.png
       :scale: 50%
 
 Summary
