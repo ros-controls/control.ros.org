@@ -1,11 +1,11 @@
-.. _roscon2023_workshop:
+.. _roscon2024_workshop:
 
-ROSCon 2023 Workshop
+ROSCon 2024 Workshop
 ====================
 
 **Location: Room 202**
 
-**Time: 13:00-17:00, 18. October 2023**
+**Time: 13:00-17:00, 21. October 2024**
 
 ros2_control: Fun with Controllers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -32,40 +32,12 @@ If you don't have docker, follow `the docker instructions <https://docs.docker.c
 
 If you don't have docker compose, run ``sudo apt-get install docker-compose-plugin`` or follow `the docker compose instructions <https://docs.docker.com/compose/install/linux/>`_ to install it.
 
-Once done, grab the latest version of the workshop container by running:
-
-``docker pull bmagyar/roscon2024_workshop:latest``
-
-Now, to set up a workspace, run the following commands where you want this to be placed:
-
-  .. code-block:: shell
-
-    mkdir -p ws/src
-    cd ws/src
-    git clone https://github.com/ros-controls/roscon2023_control_workshop
-    vcs import --input roscon2023_control_workshop/roscon2023_control_workshop.ci.repos .
-
-
-You can run things locally if you have all dependencies set up.
-The alternative is using the container which includes all dependencies & comes ready to compile the workspace. Using the same terminal as before (or a new one parked at ``ws/src``) run:
-
-  .. code-block:: shell
-
-    docker compose -f roscon2023_control_workshop/docker/docker-compose.yaml run dev
-    tmux
-    source /opt/ros/rolling/setup.bash
-    colcon build --symlink-install
-    source install/setup.bash
-
-
-Open 2 more terminals in ``tmux`` by using ``CTRL+B`` and ``"`` and ``CTRL+B`` and ``%``.
-
-You can navigate in tmux using ``CTRL+B`` and ``ARROW`` keys.
+Stay tuned for more!
 
 People
 ------
 
 This workshop was brought to you by
 
-* Dr. Denis Stogl
-* Dr. Bence Magyar
+* Dr. Denis Stogl, `Stogl Robotics Consulting <https://stoglrobotics.de>`_
+* Dr. Bence Magyar, `Locus Robotics <https://locusrobotics.com>`_
