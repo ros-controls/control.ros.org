@@ -400,85 +400,84 @@ $(function() {
 <div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    }</div>
 <div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;  }</div>
 <div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160; </div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160; </div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;  <span class="comment">// Command - non RT version</span></div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;  command_struct_.position_cmd_ = joint_position_state_interface_-&gt;get().get_value();</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;  command_struct_.max_effort_ = params_.max_effort;</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;  command_struct_.max_velocity_ = params_.max_velocity;</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;  command_.initRT(command_struct_);</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;  <span class="comment">// Result</span></div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;  pre_alloc_result_ = std::make_shared&lt;control_msgs::action::ParallelGripperCommand::Result&gt;();</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;  pre_alloc_result_-&gt;state.position.resize(1);</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;  pre_alloc_result_-&gt;state.effort.resize(1);</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;  pre_alloc_result_-&gt;state.position[0] = command_struct_.position_cmd_;</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;  pre_alloc_result_-&gt;reached_goal = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;  pre_alloc_result_-&gt;stalled = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160; </div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;  <span class="comment">// Action interface</span></div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;  action_server_ = rclcpp_action::create_server&lt;control_msgs::action::ParallelGripperCommand&gt;(</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    get_node(), <span class="stringliteral">&quot;~/gripper_cmd&quot;</span>,</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    std::bind(</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;      &amp;GripperActionController::goal_callback, <span class="keyword">this</span>, std::placeholders::_1, std::placeholders::_2),</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;    std::bind(&amp;GripperActionController::cancel_callback, <span class="keyword">this</span>, std::placeholders::_1),</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;    std::bind(&amp;GripperActionController::accepted_callback, <span class="keyword">this</span>, std::placeholders::_1));</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160; </div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;  <span class="keywordflow">return</span> controller_interface::CallbackReturn::SUCCESS;</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;}</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160; </div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;controller_interface::CallbackReturn GripperActionController::on_deactivate(</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;  <span class="keyword">const</span> rclcpp_lifecycle::State &amp;)</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;{</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;  joint_command_interface_ = std::nullopt;</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;  joint_position_state_interface_ = std::nullopt;</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;  joint_velocity_state_interface_ = std::nullopt;</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;  release_interfaces();</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;  <span class="keywordflow">return</span> controller_interface::CallbackReturn::SUCCESS;</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;}</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160; </div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<a class="code" href="structcontroller__interface_1_1InterfaceConfiguration.html">controller_interface::InterfaceConfiguration</a></div>
-<div class="line"><a name="l00362"></a><span class="lineno"><a class="line" href="classparallel__gripper__action__controller_1_1GripperActionController.html#a39ff8dfbba9e6b515f145eccc8e495ca">  362</a></span>&#160;<a class="code" href="classparallel__gripper__action__controller_1_1GripperActionController.html#a39ff8dfbba9e6b515f145eccc8e495ca">GripperActionController::command_interface_configuration</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;  std::vector&lt;std::string&gt; names = {params_.joint + <span class="stringliteral">&quot;/&quot;</span> + <a class="code" href="namespacehardware__interface.html#adf4658e878804ad412a26773aa4705a6">hardware_interface::HW_IF_POSITION</a>};</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;  <span class="keywordflow">if</span> (!params_.max_effort_interface.empty())</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;  {</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    names.push_back({params_.max_effort_interface});</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;  }</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;  <span class="keywordflow">if</span> (!params_.max_velocity_interface.empty())</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;  {</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    names.push_back({params_.max_velocity_interface});</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;  }</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160; </div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;  <span class="keywordflow">return</span> {controller_interface::interface_configuration_type::INDIVIDUAL, names};</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;}</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160; </div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;<a class="code" href="structcontroller__interface_1_1InterfaceConfiguration.html">controller_interface::InterfaceConfiguration</a></div>
-<div class="line"><a name="l00378"></a><span class="lineno"><a class="line" href="classparallel__gripper__action__controller_1_1GripperActionController.html#a5a2dfb1a6d8d78df09869254c3cbdf68">  378</a></span>&#160;<a class="code" href="classparallel__gripper__action__controller_1_1GripperActionController.html#a5a2dfb1a6d8d78df09869254c3cbdf68">GripperActionController::state_interface_configuration</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;  std::vector&lt;std::string&gt; interface_names;</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp; interface : params_.state_interfaces)</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;  {</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;    interface_names.push_back(params_.joint + <span class="stringliteral">&quot;/&quot;</span> + interface);</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;  }</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;  <span class="keywordflow">return</span> {controller_interface::interface_configuration_type::INDIVIDUAL, interface_names};</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;}</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160; </div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;GripperActionController::GripperActionController()</div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;: controller_interface::ControllerInterface(),</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;  action_monitor_period_(rclcpp::Duration::from_seconds(0))</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;{</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;}</div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160; </div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;}  <span class="comment">// namespace parallel_gripper_action_controller</span></div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160; </div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// PARALLEL_GRIPPER_CONTROLLER__PARALLEL_GRIPPER_ACTION_CONTROLLER_IMPL_HPP_</span></div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;  <span class="comment">// Command - non RT version</span></div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;  command_struct_.position_cmd_ = joint_position_state_interface_-&gt;get().get_value();</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;  command_struct_.max_effort_ = params_.max_effort;</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;  command_struct_.max_velocity_ = params_.max_velocity;</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;  command_.initRT(command_struct_);</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160; </div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;  <span class="comment">// Result</span></div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;  pre_alloc_result_ = std::make_shared&lt;control_msgs::action::ParallelGripperCommand::Result&gt;();</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;  pre_alloc_result_-&gt;state.position.resize(1);</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;  pre_alloc_result_-&gt;state.effort.resize(1);</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;  pre_alloc_result_-&gt;state.position[0] = command_struct_.position_cmd_;</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;  pre_alloc_result_-&gt;reached_goal = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;  pre_alloc_result_-&gt;stalled = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160; </div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;  <span class="comment">// Action interface</span></div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;  action_server_ = rclcpp_action::create_server&lt;control_msgs::action::ParallelGripperCommand&gt;(</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    get_node(), <span class="stringliteral">&quot;~/gripper_cmd&quot;</span>,</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    std::bind(</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;      &amp;GripperActionController::goal_callback, <span class="keyword">this</span>, std::placeholders::_1, std::placeholders::_2),</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    std::bind(&amp;GripperActionController::cancel_callback, <span class="keyword">this</span>, std::placeholders::_1),</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;    std::bind(&amp;GripperActionController::accepted_callback, <span class="keyword">this</span>, std::placeholders::_1));</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160; </div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;  <span class="keywordflow">return</span> controller_interface::CallbackReturn::SUCCESS;</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;}</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160; </div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;controller_interface::CallbackReturn GripperActionController::on_deactivate(</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;  <span class="keyword">const</span> rclcpp_lifecycle::State &amp;)</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;{</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;  joint_command_interface_ = std::nullopt;</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;  joint_position_state_interface_ = std::nullopt;</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;  joint_velocity_state_interface_ = std::nullopt;</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;  release_interfaces();</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;  <span class="keywordflow">return</span> controller_interface::CallbackReturn::SUCCESS;</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;}</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160; </div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<a class="code" href="structcontroller__interface_1_1InterfaceConfiguration.html">controller_interface::InterfaceConfiguration</a></div>
+<div class="line"><a name="l00361"></a><span class="lineno"><a class="line" href="classparallel__gripper__action__controller_1_1GripperActionController.html#a39ff8dfbba9e6b515f145eccc8e495ca">  361</a></span>&#160;<a class="code" href="classparallel__gripper__action__controller_1_1GripperActionController.html#a39ff8dfbba9e6b515f145eccc8e495ca">GripperActionController::command_interface_configuration</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;  std::vector&lt;std::string&gt; names = {params_.joint + <span class="stringliteral">&quot;/&quot;</span> + <a class="code" href="namespacehardware__interface.html#adf4658e878804ad412a26773aa4705a6">hardware_interface::HW_IF_POSITION</a>};</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;  <span class="keywordflow">if</span> (!params_.max_effort_interface.empty())</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;  {</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    names.push_back({params_.max_effort_interface});</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;  }</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;  <span class="keywordflow">if</span> (!params_.max_velocity_interface.empty())</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;  {</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    names.push_back({params_.max_velocity_interface});</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;  }</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160; </div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;  <span class="keywordflow">return</span> {controller_interface::interface_configuration_type::INDIVIDUAL, names};</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;}</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160; </div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;<a class="code" href="structcontroller__interface_1_1InterfaceConfiguration.html">controller_interface::InterfaceConfiguration</a></div>
+<div class="line"><a name="l00377"></a><span class="lineno"><a class="line" href="classparallel__gripper__action__controller_1_1GripperActionController.html#a5a2dfb1a6d8d78df09869254c3cbdf68">  377</a></span>&#160;<a class="code" href="classparallel__gripper__action__controller_1_1GripperActionController.html#a5a2dfb1a6d8d78df09869254c3cbdf68">GripperActionController::state_interface_configuration</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;  std::vector&lt;std::string&gt; interface_names;</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp; interface : params_.state_interfaces)</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;  {</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;    interface_names.push_back(params_.joint + <span class="stringliteral">&quot;/&quot;</span> + interface);</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;  }</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;  <span class="keywordflow">return</span> {controller_interface::interface_configuration_type::INDIVIDUAL, interface_names};</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;}</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160; </div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;GripperActionController::GripperActionController()</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;: controller_interface::ControllerInterface(),</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;  action_monitor_period_(rclcpp::Duration::from_seconds(0))</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;{</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;}</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160; </div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;}  <span class="comment">// namespace parallel_gripper_action_controller</span></div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160; </div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// PARALLEL_GRIPPER_CONTROLLER__PARALLEL_GRIPPER_ACTION_CONTROLLER_IMPL_HPP_</span></div>
 <div class="ttc" id="aclasshardware__interface_1_1LoanedCommandInterface_html"><div class="ttname"><a href="classhardware__interface_1_1LoanedCommandInterface.html">hardware_interface::LoanedCommandInterface</a></div><div class="ttdef"><b>Definition:</b> loaned_command_interface.hpp:27</div></div>
 <div class="ttc" id="aclasshardware__interface_1_1LoanedStateInterface_html"><div class="ttname"><a href="classhardware__interface_1_1LoanedStateInterface.html">hardware_interface::LoanedStateInterface</a></div><div class="ttdef"><b>Definition:</b> loaned_state_interface.hpp:27</div></div>
 <div class="ttc" id="aclassparallel__gripper__action__controller_1_1GripperActionController_html_a23358e940d92d311eb9df96c72ea671a"><div class="ttname"><a href="classparallel__gripper__action__controller_1_1GripperActionController.html#a23358e940d92d311eb9df96c72ea671a">parallel_gripper_action_controller::GripperActionController::update</a></div><div class="ttdeci">GRIPPER_ACTION_CONTROLLER_PUBLIC controller_interface::return_type update(const rclcpp::Time &amp;time, const rclcpp::Duration &amp;period) override</div><div class="ttdef"><b>Definition:</b> parallel_gripper_action_controller_impl.hpp:58</div></div>
 <div class="ttc" id="aclassparallel__gripper__action__controller_1_1GripperActionController_html_a2f7576b9dc0ead5b0d52852c7d61d03d"><div class="ttname"><a href="classparallel__gripper__action__controller_1_1GripperActionController.html#a2f7576b9dc0ead5b0d52852c7d61d03d">parallel_gripper_action_controller::GripperActionController::computed_command_</a></div><div class="ttdeci">double computed_command_</div><div class="ttdoc">Computed command.</div><div class="ttdef"><b>Definition:</b> parallel_gripper_action_controller.hpp:160</div></div>
-<div class="ttc" id="aclassparallel__gripper__action__controller_1_1GripperActionController_html_a39ff8dfbba9e6b515f145eccc8e495ca"><div class="ttname"><a href="classparallel__gripper__action__controller_1_1GripperActionController.html#a39ff8dfbba9e6b515f145eccc8e495ca">parallel_gripper_action_controller::GripperActionController::command_interface_configuration</a></div><div class="ttdeci">GRIPPER_ACTION_CONTROLLER_PUBLIC controller_interface::InterfaceConfiguration command_interface_configuration() const override</div><div class="ttdoc">command_interface_configuration This controller requires the position command interfaces for the cont...</div><div class="ttdef"><b>Definition:</b> parallel_gripper_action_controller_impl.hpp:362</div></div>
+<div class="ttc" id="aclassparallel__gripper__action__controller_1_1GripperActionController_html_a39ff8dfbba9e6b515f145eccc8e495ca"><div class="ttname"><a href="classparallel__gripper__action__controller_1_1GripperActionController.html#a39ff8dfbba9e6b515f145eccc8e495ca">parallel_gripper_action_controller::GripperActionController::command_interface_configuration</a></div><div class="ttdeci">GRIPPER_ACTION_CONTROLLER_PUBLIC controller_interface::InterfaceConfiguration command_interface_configuration() const override</div><div class="ttdoc">command_interface_configuration This controller requires the position command interfaces for the cont...</div><div class="ttdef"><b>Definition:</b> parallel_gripper_action_controller_impl.hpp:361</div></div>
 <div class="ttc" id="aclassparallel__gripper__action__controller_1_1GripperActionController_html_a59946ab789fc1e757c53d62829caa9c0"><div class="ttname"><a href="classparallel__gripper__action__controller_1_1GripperActionController.html#a59946ab789fc1e757c53d62829caa9c0">parallel_gripper_action_controller::GripperActionController::last_movement_time_</a></div><div class="ttdeci">rclcpp::Time last_movement_time_</div><div class="ttdoc">Store stall time.</div><div class="ttdef"><b>Definition:</b> parallel_gripper_action_controller.hpp:159</div></div>
-<div class="ttc" id="aclassparallel__gripper__action__controller_1_1GripperActionController_html_a5a2dfb1a6d8d78df09869254c3cbdf68"><div class="ttname"><a href="classparallel__gripper__action__controller_1_1GripperActionController.html#a5a2dfb1a6d8d78df09869254c3cbdf68">parallel_gripper_action_controller::GripperActionController::state_interface_configuration</a></div><div class="ttdeci">GRIPPER_ACTION_CONTROLLER_PUBLIC controller_interface::InterfaceConfiguration state_interface_configuration() const override</div><div class="ttdoc">command_interface_configuration This controller requires the position and velocity state interfaces f...</div><div class="ttdef"><b>Definition:</b> parallel_gripper_action_controller_impl.hpp:378</div></div>
+<div class="ttc" id="aclassparallel__gripper__action__controller_1_1GripperActionController_html_a5a2dfb1a6d8d78df09869254c3cbdf68"><div class="ttname"><a href="classparallel__gripper__action__controller_1_1GripperActionController.html#a5a2dfb1a6d8d78df09869254c3cbdf68">parallel_gripper_action_controller::GripperActionController::state_interface_configuration</a></div><div class="ttdeci">GRIPPER_ACTION_CONTROLLER_PUBLIC controller_interface::InterfaceConfiguration state_interface_configuration() const override</div><div class="ttdoc">command_interface_configuration This controller requires the position and velocity state interfaces f...</div><div class="ttdef"><b>Definition:</b> parallel_gripper_action_controller_impl.hpp:377</div></div>
 <div class="ttc" id="aclassparallel__gripper__action__controller_1_1GripperActionController_html_a7c8571179a299f5a9d501767dd1e38c8"><div class="ttname"><a href="classparallel__gripper__action__controller_1_1GripperActionController.html#a7c8571179a299f5a9d501767dd1e38c8">parallel_gripper_action_controller::GripperActionController::rt_active_goal_</a></div><div class="ttdeci">RealtimeGoalHandleBuffer rt_active_goal_</div><div class="ttdoc">Container for the currently active action goal, if any.</div><div class="ttdef"><b>Definition:</b> parallel_gripper_action_controller.hpp:138</div></div>
 <div class="ttc" id="aclassparallel__gripper__action__controller_1_1GripperActionController_html_a96c65a1cc0dfa176aa65ae11f31647fc"><div class="ttname"><a href="classparallel__gripper__action__controller_1_1GripperActionController.html#a96c65a1cc0dfa176aa65ae11f31647fc">parallel_gripper_action_controller::GripperActionController::on_init</a></div><div class="ttdeci">GRIPPER_ACTION_CONTROLLER_PUBLIC controller_interface::CallbackReturn on_init() override</div><div class="ttdoc">Extending interface with initialization method which is individual for each controller.</div><div class="ttdef"><b>Definition:</b> parallel_gripper_action_controller_impl.hpp:42</div></div>
 <div class="ttc" id="aclassparallel__gripper__action__controller_1_1GripperActionController_html_ad41fe794a552235bd1f8f83c77a09ac6"><div class="ttname"><a href="classparallel__gripper__action__controller_1_1GripperActionController.html#ad41fe794a552235bd1f8f83c77a09ac6">parallel_gripper_action_controller::GripperActionController::check_for_success</a></div><div class="ttdeci">void check_for_success(const rclcpp::Time &amp;time, double error_position, double current_position, double current_velocity)</div><div class="ttdoc">Check for success and publish appropriate result and feedback.</div><div class="ttdef"><b>Definition:</b> parallel_gripper_action_controller_impl.hpp:178</div></div>
