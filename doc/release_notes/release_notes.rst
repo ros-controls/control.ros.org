@@ -9,19 +9,11 @@ These lists might not be complete, see the ``CHANGELOG.rst`` files in the respec
 
 For necessary changes to your code for a version update, see the :ref:`migration`.
 
-ros2_control
+Iron to Jazzy
 -------------
 
 .. toctree::
    :titlesonly:
 
-   Iron to Jazzy <../ros2_control/doc/release_notes/Jazzy.rst>
-
-
-ros2_controllers
-----------------
-
-.. toctree::
-   :titlesonly:
-
-   Iron to Jazzy <../ros2_controllers/doc/release_notes/Jazzy.rst>
+   ros2_control <../ros2_control/doc/release_notes.rst>
+   ros2_controllers <../ros2_controllers/doc/release_notes.rst>
