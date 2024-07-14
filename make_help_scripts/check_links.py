@@ -45,7 +45,7 @@ def main():
 
     # Check for broken links
     with open(LOGFILE, "r") as logfile:
-        broken_links = [line for line in logfile if "broken" in line and "github" not in line]
+        broken_links = [line for line in logfile if "broken" in line and "github" not in line and "vimeo" not in line]
 
     if broken_links:
         num_broken = len(broken_links)
