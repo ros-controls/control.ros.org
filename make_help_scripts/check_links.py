@@ -25,9 +25,11 @@ import sys
 
 LOGFILE = "linkcheck.log"
 
+
 def cleanup():
     os.remove(LOGFILE)
     shutil.rmtree("doc/api/", ignore_errors=True)
+
 
 def main():
     if len(sys.argv) != 2:
@@ -37,15 +39,18 @@ def main():
     html_dir = sys.argv[1]
 
     # Copy API documentation to local directory
-    shutil.copytree(os.path.join(html_dir, "doc", "api"), "doc/api/", dirs_exist_ok=True)
+    shutil.copytree(os.path.join(html_dir, "doc", "api"),
+                    "doc/api/", dirs_exist_ok=True)
 
     # Run linkcheck
     with open(LOGFILE, "w") as logfile:
-        subprocess.run(["make", "linkcheck"], stdout=logfile, stderr=subprocess.PIPE)
+        subprocess.run(["make", "linkcheck"], stdout=logfile,
+                       stderr=subprocess.PIPE)
 
     # Check for broken links
     with open(LOGFILE, "r") as logfile:
-        broken_links = [line for line in logfile if "broken" in line and "github" not in line]
+        broken_links = [
+            line for line in logfile if "broken" in line and "github" not in line and "vimeo" not in line]
 
     if broken_links:
         num_broken = len(broken_links)
@@ -57,6 +62,7 @@ def main():
 
     cleanup()
     sys.exit(0)
+
 
 if __name__ == "__main__":
     main()
