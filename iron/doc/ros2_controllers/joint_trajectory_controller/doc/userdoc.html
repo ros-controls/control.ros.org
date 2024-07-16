@@ -103,6 +103,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes/release_notes.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../migration/migration.html">Migration Guides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api_list/api_list.html">API Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
@@ -268,8 +269,20 @@ A yaml file for using it could be:</p>
 </dd>
 </dl>
 <p>The primary way to send trajectories is through the action interface, and should be favored when execution monitoring is desired.</p>
-<p>Action goals allow to specify not only the trajectory to execute, but also (optionally) path and goal tolerances.
-When no tolerances are specified, the defaults given in the parameter interface are used (see <a class="reference internal" href="parameters.html#parameters"><span class="std std-ref">Details about parameters</span></a>).
+<p>Action goals allow to specify not only the trajectory to execute, but also (optionally) path and goal tolerances. For details, see the <a class="reference external" href="https://github.com/ros-controls/control_msgs/blob/master/control_msgs/msg/JointTolerance.msg">JointTolerance message</a>:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>The tolerances specify the amount the position, velocity, and
+accelerations can vary from the setpoints.  For example, in the case
+of trajectory control, when the actual position varies beyond
+(desired position + position tolerance), the trajectory goal may
+abort.
+
+There are two special values for tolerances:
+<span class="w">  </span><span class="k">*</span><span class="w"> </span>0 - The tolerance is unspecified and will remain at whatever the default is
+<span class="w">  </span><span class="k">*</span><span class="w"> </span>-1 - The tolerance is &quot;erased&quot;.  If there was a default, the joint will be
+        allowed to move without restriction.
+</pre></div>
+</div>
+<p>When no tolerances are specified, the defaults given in the parameter interface are used (see <a class="reference internal" href="parameters.html#parameters"><span class="std std-ref">Details about parameters</span></a>).
 If tolerances are violated during trajectory execution, the action goal is aborted, the client is notified, and the current position is held.</p>
 <p>The action server returns success to the client and continues with the last commanded point after the target is reached within the specified tolerances.</p>
 </section>
