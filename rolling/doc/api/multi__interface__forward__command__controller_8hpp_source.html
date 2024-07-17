@@ -95,38 +95,36 @@ $(function() {
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#define FORWARD_COMMAND_CONTROLLER__MULTI_INTERFACE_FORWARD_COMMAND_CONTROLLER_HPP_</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;forward_command_controller/forward_controllers_base.hpp&quot;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;forward_command_controller/visibility_control.h&quot;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;multi_interface_forward_command_controller_parameters.hpp&quot;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">namespace </span>forward_command_controller</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{</div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classforward__command__controller_1_1MultiInterfaceForwardCommandController.html">   39</a></span>&#160;<span class="keyword">class </span><a class="code" href="classforward__command__controller_1_1MultiInterfaceForwardCommandController.html">MultiInterfaceForwardCommandController</a></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;: <span class="keyword">public</span> <a class="code" href="classforward__command__controller_1_1ForwardControllersBase.html">forward_command_controller::ForwardControllersBase</a></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;{</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  FORWARD_COMMAND_CONTROLLER_PUBLIC</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <a class="code" href="classforward__command__controller_1_1MultiInterfaceForwardCommandController.html">MultiInterfaceForwardCommandController</a>();</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classforward__command__controller_1_1MultiInterfaceForwardCommandController.html#aea8c453b8fcbbbf62f6a35ed8fdc39a2">declare_parameters</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  controller_interface::CallbackReturn <a class="code" href="classforward__command__controller_1_1MultiInterfaceForwardCommandController.html#a2c1952363ef4287f7dcf8e1574284eb0">read_parameters</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keyword">using</span> Params = multi_interface_forward_command_controller::Params;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="keyword">using</span> ParamListener = multi_interface_forward_command_controller::ParamListener;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  std::shared_ptr&lt;ParamListener&gt; param_listener_;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  Params params_;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;};</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;forward_command_controller/forward_controllers_base.hpp&quot;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;forward_command_controller/visibility_control.h&quot;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;multi_interface_forward_command_controller_parameters.hpp&quot;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">namespace </span>forward_command_controller</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classforward__command__controller_1_1MultiInterfaceForwardCommandController.html">   37</a></span>&#160;<span class="keyword">class </span><a class="code" href="classforward__command__controller_1_1MultiInterfaceForwardCommandController.html">MultiInterfaceForwardCommandController</a></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;: <span class="keyword">public</span> <a class="code" href="classforward__command__controller_1_1ForwardControllersBase.html">forward_command_controller::ForwardControllersBase</a></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;{</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  FORWARD_COMMAND_CONTROLLER_PUBLIC</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <a class="code" href="classforward__command__controller_1_1MultiInterfaceForwardCommandController.html">MultiInterfaceForwardCommandController</a>();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classforward__command__controller_1_1MultiInterfaceForwardCommandController.html#aea8c453b8fcbbbf62f6a35ed8fdc39a2">declare_parameters</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  controller_interface::CallbackReturn <a class="code" href="classforward__command__controller_1_1MultiInterfaceForwardCommandController.html#a2c1952363ef4287f7dcf8e1574284eb0">read_parameters</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keyword">using</span> Params = multi_interface_forward_command_controller::Params;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keyword">using</span> ParamListener = multi_interface_forward_command_controller::ParamListener;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  std::shared_ptr&lt;ParamListener&gt; param_listener_;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  Params params_;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;};</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;}  <span class="comment">// namespace forward_command_controller</span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}  <span class="comment">// namespace forward_command_controller</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// FORWARD_COMMAND_CONTROLLER__MULTI_INTERFACE_FORWARD_COMMAND_CONTROLLER_HPP_</span></div>
-<div class="ttc" id="aclassforward__command__controller_1_1ForwardControllersBase_html"><div class="ttname"><a href="classforward__command__controller_1_1ForwardControllersBase.html">forward_command_controller::ForwardControllersBase</a></div><div class="ttdoc">Forward command controller for a set of joints and interfaces.</div><div class="ttdef"><b>Definition:</b> forward_controllers_base.hpp:43</div></div>
-<div class="ttc" id="aclassforward__command__controller_1_1MultiInterfaceForwardCommandController_html"><div class="ttname"><a href="classforward__command__controller_1_1MultiInterfaceForwardCommandController.html">forward_command_controller::MultiInterfaceForwardCommandController</a></div><div class="ttdoc">Multi interface forward command controller for a set of interfaces.</div><div class="ttdef"><b>Definition:</b> multi_interface_forward_command_controller.hpp:41</div></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// FORWARD_COMMAND_CONTROLLER__MULTI_INTERFACE_FORWARD_COMMAND_CONTROLLER_HPP_</span></div>
+<div class="ttc" id="aclassforward__command__controller_1_1ForwardControllersBase_html"><div class="ttname"><a href="classforward__command__controller_1_1ForwardControllersBase.html">forward_command_controller::ForwardControllersBase</a></div><div class="ttdoc">Forward command controller for a set of joints and interfaces.</div><div class="ttdef"><b>Definition:</b> forward_controllers_base.hpp:42</div></div>
+<div class="ttc" id="aclassforward__command__controller_1_1MultiInterfaceForwardCommandController_html"><div class="ttname"><a href="classforward__command__controller_1_1MultiInterfaceForwardCommandController.html">forward_command_controller::MultiInterfaceForwardCommandController</a></div><div class="ttdoc">Multi interface forward command controller for a set of interfaces.</div><div class="ttdef"><b>Definition:</b> multi_interface_forward_command_controller.hpp:39</div></div>
 <div class="ttc" id="aclassforward__command__controller_1_1MultiInterfaceForwardCommandController_html_a2c1952363ef4287f7dcf8e1574284eb0"><div class="ttname"><a href="classforward__command__controller_1_1MultiInterfaceForwardCommandController.html#a2c1952363ef4287f7dcf8e1574284eb0">forward_command_controller::MultiInterfaceForwardCommandController::read_parameters</a></div><div class="ttdeci">controller_interface::CallbackReturn read_parameters() override</div><div class="ttdef"><b>Definition:</b> multi_interface_forward_command_controller.cpp:33</div></div>
 <div class="ttc" id="aclassforward__command__controller_1_1MultiInterfaceForwardCommandController_html_aea8c453b8fcbbbf62f6a35ed8fdc39a2"><div class="ttname"><a href="classforward__command__controller_1_1MultiInterfaceForwardCommandController.html#aea8c453b8fcbbbf62f6a35ed8fdc39a2">forward_command_controller::MultiInterfaceForwardCommandController::declare_parameters</a></div><div class="ttdeci">void declare_parameters() override</div><div class="ttdef"><b>Definition:</b> multi_interface_forward_command_controller.cpp:28</div></div>
 </div><!-- fragment --></div><!-- contents -->

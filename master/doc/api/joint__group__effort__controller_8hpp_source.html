@@ -94,34 +94,31 @@ $(function() {
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#ifndef EFFORT_CONTROLLERS__JOINT_GROUP_EFFORT_CONTROLLER_HPP_</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#define EFFORT_CONTROLLERS__JOINT_GROUP_EFFORT_CONTROLLER_HPP_</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;effort_controllers/visibility_control.h&quot;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;forward_command_controller/forward_command_controller.hpp&quot;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;rclcpp_lifecycle/node_interfaces/lifecycle_node_interface.hpp&quot;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">namespace </span>effort_controllers</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classeffort__controllers_1_1JointGroupEffortController.html">   36</a></span>&#160;<span class="keyword">class </span><a class="code" href="classeffort__controllers_1_1JointGroupEffortController.html">JointGroupEffortController</a> : <span class="keyword">public</span> <a class="code" href="classforward__command__controller_1_1ForwardCommandController.html">forward_command_controller::ForwardCommandController</a></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;effort_controllers/visibility_control.h&quot;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;forward_command_controller/forward_command_controller.hpp&quot;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">namespace </span>effort_controllers</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classeffort__controllers_1_1JointGroupEffortController.html">   33</a></span>&#160;<span class="keyword">class </span><a class="code" href="classeffort__controllers_1_1JointGroupEffortController.html">JointGroupEffortController</a> : <span class="keyword">public</span> <a class="code" href="classforward__command__controller_1_1ForwardCommandController.html">forward_command_controller::ForwardCommandController</a></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  EFFORT_CONTROLLERS_PUBLIC</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <a class="code" href="classeffort__controllers_1_1JointGroupEffortController.html">JointGroupEffortController</a>();</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  EFFORT_CONTROLLERS_PUBLIC</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <a class="code" href="classeffort__controllers_1_1JointGroupEffortController.html">JointGroupEffortController</a>();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  controller_interface::CallbackReturn <a class="code" href="classeffort__controllers_1_1JointGroupEffortController.html#a953346559888343f919a1e853e9efb98">on_init</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  EFFORT_CONTROLLERS_PUBLIC</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  controller_interface::CallbackReturn <a class="code" href="classeffort__controllers_1_1JointGroupEffortController.html#a953346559888343f919a1e853e9efb98">on_init</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  EFFORT_CONTROLLERS_PUBLIC</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  controller_interface::CallbackReturn on_deactivate(</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">const</span> rclcpp_lifecycle::State &amp; previous_state) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;};</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;}  <span class="comment">// namespace effort_controllers</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// EFFORT_CONTROLLERS__JOINT_GROUP_EFFORT_CONTROLLER_HPP_</span></div>
-<div class="ttc" id="aclasseffort__controllers_1_1JointGroupEffortController_html"><div class="ttname"><a href="classeffort__controllers_1_1JointGroupEffortController.html">effort_controllers::JointGroupEffortController</a></div><div class="ttdoc">Forward command controller for a set of effort controlled joints (linear or angular).</div><div class="ttdef"><b>Definition:</b> joint_group_effort_controller.hpp:37</div></div>
-<div class="ttc" id="aclasseffort__controllers_1_1JointGroupEffortController_html_a953346559888343f919a1e853e9efb98"><div class="ttname"><a href="classeffort__controllers_1_1JointGroupEffortController.html#a953346559888343f919a1e853e9efb98">effort_controllers::JointGroupEffortController::on_init</a></div><div class="ttdeci">EFFORT_CONTROLLERS_PUBLIC controller_interface::CallbackReturn on_init() override</div><div class="ttdoc">Extending interface with initialization method which is individual for each controller.</div><div class="ttdef"><b>Definition:</b> joint_group_effort_controller.cpp:31</div></div>
-<div class="ttc" id="aclassforward__command__controller_1_1ForwardCommandController_html"><div class="ttname"><a href="classforward__command__controller_1_1ForwardCommandController.html">forward_command_controller::ForwardCommandController</a></div><div class="ttdoc">Forward command controller for a set of joints.</div><div class="ttdef"><b>Definition:</b> forward_command_controller.hpp:41</div></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  controller_interface::CallbackReturn on_deactivate(</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">const</span> rclcpp_lifecycle::State &amp; previous_state) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;};</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;}  <span class="comment">// namespace effort_controllers</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// EFFORT_CONTROLLERS__JOINT_GROUP_EFFORT_CONTROLLER_HPP_</span></div>
+<div class="ttc" id="aclasseffort__controllers_1_1JointGroupEffortController_html"><div class="ttname"><a href="classeffort__controllers_1_1JointGroupEffortController.html">effort_controllers::JointGroupEffortController</a></div><div class="ttdoc">Forward command controller for a set of effort controlled joints (linear or angular).</div><div class="ttdef"><b>Definition:</b> joint_group_effort_controller.hpp:34</div></div>
+<div class="ttc" id="aclasseffort__controllers_1_1JointGroupEffortController_html_a953346559888343f919a1e853e9efb98"><div class="ttname"><a href="classeffort__controllers_1_1JointGroupEffortController.html#a953346559888343f919a1e853e9efb98">effort_controllers::JointGroupEffortController::on_init</a></div><div class="ttdeci">EFFORT_CONTROLLERS_PUBLIC controller_interface::CallbackReturn on_init() override</div><div class="ttdoc">Extending interface with initialization method which is individual for each controller.</div><div class="ttdef"><b>Definition:</b> joint_group_effort_controller.cpp:30</div></div>
+<div class="ttc" id="aclassforward__command__controller_1_1ForwardCommandController_html"><div class="ttname"><a href="classforward__command__controller_1_1ForwardCommandController.html">forward_command_controller::ForwardCommandController</a></div><div class="ttdoc">Forward command controller for a set of joints.</div><div class="ttdef"><b>Definition:</b> forward_command_controller.hpp:39</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
