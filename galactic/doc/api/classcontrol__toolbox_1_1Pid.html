@@ -118,8 +118,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a94168b013a704882750076ad0755210c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontrol__toolbox_1_1Pid.html#a94168b013a704882750076ad0755210c">getGains</a> (double &amp;p, double &amp;i, double &amp;d, double &amp;i_max, double &amp;i_min)</td></tr>
 <tr class="memdesc:a94168b013a704882750076ad0755210c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get PID gains for the controller.  <a href="classcontrol__toolbox_1_1Pid.html#a94168b013a704882750076ad0755210c">More...</a><br /></td></tr>
 <tr class="separator:a94168b013a704882750076ad0755210c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a986000725d1405f02f8abd2093f34aaf"><td class="memItemLeft" align="right" valign="top"><a id="a986000725d1405f02f8abd2093f34aaf"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>getGains</b> (double &amp;p, double &amp;i, double &amp;d, double &amp;i_max, double &amp;i_min, bool &amp;antiwindup)</td></tr>
+<tr class="memitem:a986000725d1405f02f8abd2093f34aaf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontrol__toolbox_1_1Pid.html#a986000725d1405f02f8abd2093f34aaf">getGains</a> (double &amp;p, double &amp;i, double &amp;d, double &amp;i_max, double &amp;i_min, bool &amp;antiwindup)</td></tr>
+<tr class="memdesc:a986000725d1405f02f8abd2093f34aaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get PID gains for the controller.  <a href="classcontrol__toolbox_1_1Pid.html#a986000725d1405f02f8abd2093f34aaf">More...</a><br /></td></tr>
 <tr class="separator:a986000725d1405f02f8abd2093f34aaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35c4bcfb5a7a3626c39529d3267a3b3d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcontrol__toolbox_1_1Pid_1_1Gains.html">Gains</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontrol__toolbox_1_1Pid.html#a35c4bcfb5a7a3626c39529d3267a3b3d">getGains</a> ()</td></tr>
 <tr class="memdesc:a35c4bcfb5a7a3626c39529d3267a3b3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get PID gains for the controller.  <a href="classcontrol__toolbox_1_1Pid.html#a35c4bcfb5a7a3626c39529d3267a3b3d">More...</a><br /></td></tr>
@@ -275,11 +275,17 @@ last_time = time;
     <tr><td class="paramname">i</td><td>The integral gain. </td></tr>
     <tr><td class="paramname">d</td><td>The derivative gain. </td></tr>
     <tr><td class="paramname">i_max</td><td>The max integral windup. </td></tr>
-    <tr><td class="paramname">i_min</td><td>The min integral windup.</td></tr>
+    <tr><td class="paramname">i_min</td><td>The min integral windup. </td></tr>
+    <tr><td class="paramname">antiwindup</td><td>If true, antiwindup is enabled and i_max/i_min are enforced</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>An std::invalid_argument exception is thrown if i_min &gt; i_max </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">An</td><td>std::invalid_argument exception is thrown if i_min &gt; i_max </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -438,7 +444,7 @@ last_time = time;
 </div>
 </div>
 <a id="a35c4bcfb5a7a3626c39529d3267a3b3d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a35c4bcfb5a7a3626c39529d3267a3b3d">&#9670;&nbsp;</a></span>getGains() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a35c4bcfb5a7a3626c39529d3267a3b3d">&#9670;&nbsp;</a></span>getGains() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -458,7 +464,7 @@ last_time = time;
 </div>
 </div>
 <a id="a94168b013a704882750076ad0755210c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a94168b013a704882750076ad0755210c">&#9670;&nbsp;</a></span>getGains() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a94168b013a704882750076ad0755210c">&#9670;&nbsp;</a></span>getGains() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -509,6 +515,71 @@ last_time = time;
     <tr><td class="paramname">d</td><td>The derivative gain. </td></tr>
     <tr><td class="paramname">i_max</td><td>The max integral windup. </td></tr>
     <tr><td class="paramname">i_min</td><td>The min integral windup. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a986000725d1405f02f8abd2093f34aaf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a986000725d1405f02f8abd2093f34aaf">&#9670;&nbsp;</a></span>getGains() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void control_toolbox::Pid::getGains </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>d</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>i_max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>i_min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool &amp;&#160;</td>
+          <td class="paramname"><em>antiwindup</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get PID gains for the controller. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The proportional gain. </td></tr>
+    <tr><td class="paramname">i</td><td>The integral gain. </td></tr>
+    <tr><td class="paramname">d</td><td>The derivative gain. </td></tr>
+    <tr><td class="paramname">i_max</td><td>The max integral windup. </td></tr>
+    <tr><td class="paramname">i_min</td><td>The min integral windup. </td></tr>
+    <tr><td class="paramname">antiwindup</td><td>If true, antiwindup is enabled and i_max/i_min are enforced </td></tr>
   </table>
   </dd>
 </dl>
@@ -572,7 +643,8 @@ last_time = time;
     <tr><td class="paramname">i</td><td>The integral gain. </td></tr>
     <tr><td class="paramname">d</td><td>The derivative gain. </td></tr>
     <tr><td class="paramname">i_max</td><td>The max integral windup. </td></tr>
-    <tr><td class="paramname">i_min</td><td>The min integral windup.</td></tr>
+    <tr><td class="paramname">i_min</td><td>The min integral windup. </td></tr>
+    <tr><td class="paramname">antiwindup</td><td>If true, antiwindup is enabled and i_max/i_min are enforced</td></tr>
   </table>
   </dd>
 </dl>
@@ -664,7 +736,8 @@ last_time = time;
     <tr><td class="paramname">i</td><td>The integral gain. </td></tr>
     <tr><td class="paramname">d</td><td>The derivative gain. </td></tr>
     <tr><td class="paramname">i_max</td><td>The max integral windup. </td></tr>
-    <tr><td class="paramname">i_min</td><td>The min integral windup.</td></tr>
+    <tr><td class="paramname">i_min</td><td>The min integral windup. </td></tr>
+    <tr><td class="paramname">antiwindup</td><td>If true, antiwindup is enabled and i_max/i_min are enforced</td></tr>
   </table>
   </dd>
 </dl>

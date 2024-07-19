@@ -82,11 +82,11 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aacc6fccf86be18ac186389c9f2ece52c"><td class="memItemLeft" align="right" valign="top"><a id="aacc6fccf86be18ac186389c9f2ece52c"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Gains</b> (double p, double i, double d, double i_max, double i_min)</td></tr>
+<tr class="memitem:aacc6fccf86be18ac186389c9f2ece52c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcontrol__toolbox_1_1Pid_1_1Gains.html#aacc6fccf86be18ac186389c9f2ece52c">Gains</a> (double p, double i, double d, double i_max, double i_min)</td></tr>
+<tr class="memdesc:aacc6fccf86be18ac186389c9f2ece52c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional constructor for passing in values without antiwindup.  <a href="structcontrol__toolbox_1_1Pid_1_1Gains.html#aacc6fccf86be18ac186389c9f2ece52c">More...</a><br /></td></tr>
 <tr class="separator:aacc6fccf86be18ac186389c9f2ece52c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59a72fec1a1b07fa99d55aed11c9dd3d"><td class="memItemLeft" align="right" valign="top"><a id="a59a72fec1a1b07fa99d55aed11c9dd3d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Gains</b> (double p, double i, double d, double i_max, double i_min, bool antiwindup)</td></tr>
+<tr class="memitem:a59a72fec1a1b07fa99d55aed11c9dd3d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcontrol__toolbox_1_1Pid_1_1Gains.html#a59a72fec1a1b07fa99d55aed11c9dd3d">Gains</a> (double p, double i, double d, double i_max, double i_min, bool antiwindup)</td></tr>
+<tr class="memdesc:a59a72fec1a1b07fa99d55aed11c9dd3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional constructor for passing in values.  <a href="structcontrol__toolbox_1_1Pid_1_1Gains.html#a59a72fec1a1b07fa99d55aed11c9dd3d">More...</a><br /></td></tr>
 <tr class="separator:a59a72fec1a1b07fa99d55aed11c9dd3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -106,7 +106,159 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Store gains in a struct to allow easier realtime buffer usage. </p>
-</div><h2 class="groupheader">Member Data Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aacc6fccf86be18ac186389c9f2ece52c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacc6fccf86be18ac186389c9f2ece52c">&#9670;&nbsp;</a></span>Gains() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">control_toolbox::Pid::Gains::Gains </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>d</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>i_max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>i_min</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Optional constructor for passing in values without antiwindup. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The proportional gain. </td></tr>
+    <tr><td class="paramname">i</td><td>The integral gain. </td></tr>
+    <tr><td class="paramname">d</td><td>The derivative gain. </td></tr>
+    <tr><td class="paramname">i_max</td><td>The max integral windup. </td></tr>
+    <tr><td class="paramname">i_min</td><td>The min integral windup.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">An</td><td>std::invalid_argument exception is thrown if i_min &gt; i_max </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a59a72fec1a1b07fa99d55aed11c9dd3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59a72fec1a1b07fa99d55aed11c9dd3d">&#9670;&nbsp;</a></span>Gains() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">control_toolbox::Pid::Gains::Gains </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>d</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>i_max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>i_min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>antiwindup</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Optional constructor for passing in values. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The proportional gain. </td></tr>
+    <tr><td class="paramname">i</td><td>The integral gain. </td></tr>
+    <tr><td class="paramname">d</td><td>The derivative gain. </td></tr>
+    <tr><td class="paramname">i_max</td><td>The max integral windup. </td></tr>
+    <tr><td class="paramname">i_min</td><td>The min integral windup. </td></tr>
+    <tr><td class="paramname">antiwindup</td><td>If true, antiwindup is enabled and i_max/i_min are enforced</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">An</td><td>std::invalid_argument exception is thrown if i_min &gt; i_max </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
 <a id="ab481349944d663c13a57bc64bb146958"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab481349944d663c13a57bc64bb146958">&#9670;&nbsp;</a></span>antiwindup_</h2>
 
