@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Debugging &mdash; ROS2_Control: Jazzy Jul 2024 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/reviewer_stats.css?v=068b34ac" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//jazzy/doc/ros2_control/doc/debugging.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=1def4cba"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+        <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="ros2_controllers" href="../../ros2_controllers/doc/controllers_index.html" />
+    <link rel="prev" title="Mock Components" href="../hardware_interface/doc/mock_components_userdoc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">ros2_control</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#api-documentation">API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#concepts">Concepts</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#guidelines-and-best-practices">Guidelines and Best Practices</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Debugging the Controller Manager and Plugins</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#how-to">How-To</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#additional-notes">Additional notes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes/release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration/migration.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_list/api_list.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../project_ideas.html">Project Ideas for GSoC 2024</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ROS2_Control: Jazzy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">ros2_control</a></li>
+      <li class="breadcrumb-item active">Debugging</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/ros-controls/control.ros.org/blob/jazzy//doc/ros2_control/doc/debugging.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for a development version.
+    For the latest released version, please have a look at <a href="../../../../iron/doc/ros2_control/doc/debugging.html">Iron</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="debugging">
+<h1>Debugging<a class="headerlink" href="#debugging" title="Link to this heading"></a></h1>
+<p>All controllers and hardware components are plugins loaded into the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code>. Therefore, the debugger must be attached to the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code>. If multiple <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> instances are running on your robot or machine, you need to attach the debugger to the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> associated with the hardware component or controller you want to debug.</p>
+<section id="how-to">
+<h2>How-To<a class="headerlink" href="#how-to" title="Link to this heading"></a></h2>
+<ul>
+<li><p>Install <code class="docutils literal notranslate"><span class="pre">xterm</span></code>, <code class="docutils literal notranslate"><span class="pre">gdb</span></code> and <code class="docutils literal notranslate"><span class="pre">gdbserver</span></code> on your system</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>xterm<span class="w"> </span>gdb<span class="w"> </span>gdbserver
+</pre></div>
+</div>
+</li>
+<li><p>Make sure you run a “debug” or “release with debug information” build:
+This is done by passing <code class="docutils literal notranslate"><span class="pre">--cmake-args</span> <span class="pre">-DCMAKE_BUILD_TYPE=RelWithDebInfo</span></code> to <code class="docutils literal notranslate"><span class="pre">colcon</span> <span class="pre">build</span></code>.
+Remember that in release builds some breakpoints might not behave as you expect as the the corresponding line might have been optimized by the compiler. For such cases, a full Debug build (<code class="docutils literal notranslate"><span class="pre">--cmake-args</span> <span class="pre">-DCMAKE_BUILD_TYPE=Debug</span></code>) is recommended.</p></li>
+<li><p>Adapt the launch file to run the controller manager with the debugger attached:</p>
+<ul>
+<li><p>Version A: Run it directly with the gdb CLI:</p>
+<p>Add <code class="docutils literal notranslate"><span class="pre">prefix=['xterm</span> <span class="pre">-e</span> <span class="pre">gdb</span> <span class="pre">-ex</span> <span class="pre">run</span> <span class="pre">--args']</span></code> to the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> node entry in your launch file.
+Due to how <code class="docutils literal notranslate"><span class="pre">ros2launch</span></code> works we need to run the specific node in a separate terminal instance.</p>
+</li>
+<li><p>Version B: Run it with gdbserver:</p>
+<p>Add <code class="docutils literal notranslate"><span class="pre">prefix=['gdbserver</span> <span class="pre">localhost:3000']</span></code> to the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> node entry in your launch file.
+Afterwards, you can either attach a gdb CLI instance or any IDE of your choice to that <code class="docutils literal notranslate"><span class="pre">gdbserver</span></code> instance.
+Ensure you start your debugger from a terminal where you have sourced your workspace to properly resolve all paths.</p>
+</li>
+</ul>
+<p>Example launch file entry:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Obtain the controller config file for the ros2 control node</span>
+<span class="n">controller_config_file</span> <span class="o">=</span> <span class="n">get_package_file</span><span class="p">(</span><span class="s2">&quot;&lt;package name&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;config/controllers.yaml&quot;</span><span class="p">)</span>
+
+<span class="n">controller_manager</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
+    <span class="n">package</span><span class="o">=</span><span class="s2">&quot;controller_manager&quot;</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;ros2_control_node&quot;</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">controller_config_file</span><span class="p">],</span>
+    <span class="n">output</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span>
+    <span class="n">emulate_tty</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">remappings</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;~/robot_description&quot;</span><span class="p">,</span> <span class="s2">&quot;/robot_description&quot;</span><span class="p">)</span>
+    <span class="p">],</span>
+    <span class="n">prefix</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;xterm -e gdb -ex run --args&#39;</span><span class="p">]</span>  <span class="c1"># or prefix=[&#39;gdbserver localhost:3000&#39;]</span>
+<span class="p">)</span>
+
+<span class="n">ld</span><span class="o">.</span><span class="n">add_action</span><span class="p">(</span><span class="n">controller_manager</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="additional-notes">
+<h2>Additional notes<a class="headerlink" href="#additional-notes" title="Link to this heading"></a></h2>
+<ul>
+<li><p>Debugging plugins</p>
+<p>You can only set breakpoints in plugins after the plugin has been loaded. In the ros2_control context this means after the controller / hardware component has been loaded:</p>
+</li>
+<li><p>Debug builds</p>
+<p>It’s often practical to include debug information only for the specific package you want to debug.
+<code class="docutils literal notranslate"><span class="pre">colcon</span> <span class="pre">build</span> <span class="pre">--packages-select</span> <span class="pre">[package_name]</span> <span class="pre">--cmake-args</span> <span class="pre">-DCMAKE_BUILD_TYPE=RelWithDebInfo</span></code> or <code class="docutils literal notranslate"><span class="pre">colcon</span> <span class="pre">build</span> <span class="pre">--packages-select</span> <span class="pre">[package_name]</span> <span class="pre">--cmake-args</span> <span class="pre">-DCMAKE_BUILD_TYPE=Debug</span></code></p>
+</li>
+<li><p>Realtime</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">update/on_activate/on_deactivate</span></code> method of a controller and the <code class="docutils literal notranslate"><span class="pre">read/write/on_activate/perform_command_mode_switch</span></code> methods of a hardware component all run in the context of the realtime update loop. Setting breakpoints there can and will cause issues that might even break your hardware in the worst case.</p>
+</div>
+<p>From experience, it might be better to use meaningful logs for the real-time context (with caution) or to add additional debug state interfaces (or publishers in the case of a controller).</p>
+<p>However, running the controller_manager and your plugin with gdb can still be very useful for debugging errors such as segfaults, as you can gather a full backtrace.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://juraph.com/miscellaneous/ros2_and_gdb/">ROS 2 and GDB</a></p></li>
+<li><p><a class="reference external" href="https://stackoverflow.com/questions/10919832/how-to-use-gdb-to-debug-a-plugin">Using GDB to debug a plugin</a></p></li>
+<li><p><a class="reference external" href="https://www.cs.umd.edu/~srhuang/teaching/cmsc212/gdb-tutorial-handout.pdf">GDB CLI Tutorial</a></p></li>
+</ul>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../hardware_interface/doc/mock_components_userdoc.html" class="btn btn-neutral float-left" title="Mock Components" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../ros2_controllers/doc/controllers_index.html" class="btn btn-neutral float-right" title="ros2_controllers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: jazzy
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Releases</dt>
+        <dd><a href="../../../../iron/doc/ros2_control/doc/debugging.html">Iron (latest)</a></dd><br>
+        <dd><a href="../../../../humble/doc/ros2_control/doc/debugging.html">Humble</a></dd><br>
+        <dd><a href="../../../../galactic/index.html">Galactic (EOL)</a></dd><br>
+        
+        <dd><a href="../../../../foxy/index.html">Foxy (EOL)</a></dd><br>
+        
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="../../../../rolling/doc/ros2_control/doc/debugging.html">Rolling</a></dd>
+      <dd><a href="debugging.html">Jazzy</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -106,203 +106,202 @@ $(function() {
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;hardware_interface/loaned_state_interface.hpp&quot;</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &quot;hardware_interface/sensor.hpp&quot;</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &quot;hardware_interface/system.hpp&quot;</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &quot;hardware_interface/types/hardware_interface_return_values.hpp&quot;</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &quot;hardware_interface/types/lifecycle_state_names.hpp&quot;</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &quot;lifecycle_msgs/msg/state.hpp&quot;</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &quot;rclcpp/duration.hpp&quot;</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &quot;rclcpp/node.hpp&quot;</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &quot;rclcpp/time.hpp&quot;</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacehardware__interface.html">hardware_interface</a></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;{</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">class </span>ResourceStorage;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">class </span>ControllerManager;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="structhardware__interface_1_1HardwareReadWriteStatus.html">   42</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structhardware__interface_1_1HardwareReadWriteStatus.html">HardwareReadWriteStatus</a></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="keywordtype">bool</span> ok;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  std::vector&lt;std::string&gt; failed_hardware_names;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;};</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classhardware__interface_1_1ResourceManager.html">   48</a></span>&#160;<span class="keyword">class </span>HARDWARE_INTERFACE_PUBLIC <a class="code" href="classhardware__interface_1_1ResourceManager.html">ResourceManager</a></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;{</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classhardware__interface_1_1ResourceManager.html">ResourceManager</a>(</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    rclcpp::node_interfaces::NodeClockInterface::SharedPtr clock_interface,</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    rclcpp::node_interfaces::NodeLoggingInterface::SharedPtr logger_interface);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classhardware__interface_1_1ResourceManager.html">ResourceManager</a>(</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keyword">const</span> std::string &amp; urdf,</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    rclcpp::node_interfaces::NodeClockInterface::SharedPtr clock_interface,</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    rclcpp::node_interfaces::NodeLoggingInterface::SharedPtr logger_interface,</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">bool</span> activate_all = <span class="keyword">false</span>, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> update_rate = 100);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <a class="code" href="classhardware__interface_1_1ResourceManager.html">ResourceManager</a>(<span class="keyword">const</span> <a class="code" href="classhardware__interface_1_1ResourceManager.html">ResourceManager</a> &amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <span class="keyword">virtual</span> ~<a class="code" href="classhardware__interface_1_1ResourceManager.html">ResourceManager</a>();</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> load_and_initialize_components(</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keyword">const</span> std::string &amp; urdf, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> update_rate = 100);</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <span class="keywordtype">bool</span> are_components_initialized() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  <a class="code" href="classhardware__interface_1_1LoanedStateInterface.html">LoanedStateInterface</a> claim_state_interface(<span class="keyword">const</span> std::string &amp; key);</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  std::vector&lt;std::string&gt; state_interface_keys() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  std::vector&lt;std::string&gt; available_state_interfaces() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  <span class="keywordtype">bool</span> state_interface_is_available(<span class="keyword">const</span> std::string &amp; name) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;  <span class="keywordtype">void</span> import_controller_exported_state_interfaces(</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    <span class="keyword">const</span> std::string &amp; controller_name, std::vector&lt;StateInterface&gt; &amp; interfaces);</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;  std::vector&lt;std::string&gt; get_controller_exported_state_interface_names(</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <span class="keyword">const</span> std::string &amp; controller_name);</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;  <span class="keywordtype">void</span> make_controller_exported_state_interfaces_available(<span class="keyword">const</span> std::string &amp; controller_name);</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; </div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;  <span class="keywordtype">void</span> make_controller_exported_state_interfaces_unavailable(<span class="keyword">const</span> std::string &amp; controller_name);</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;  <span class="keywordtype">void</span> remove_controller_exported_state_interfaces(<span class="keyword">const</span> std::string &amp; controller_name);</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;  <span class="keywordtype">void</span> import_controller_reference_interfaces(</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <span class="keyword">const</span> std::string &amp; controller_name, std::vector&lt;CommandInterface&gt; &amp; interfaces);</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;  std::vector&lt;std::string&gt; get_controller_reference_interface_names(</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <span class="keyword">const</span> std::string &amp; controller_name);</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160; </div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; </div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;  <span class="keywordtype">void</span> make_controller_reference_interfaces_available(<span class="keyword">const</span> std::string &amp; controller_name);</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; </div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;  <span class="keywordtype">void</span> make_controller_reference_interfaces_unavailable(<span class="keyword">const</span> std::string &amp; controller_name);</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160; </div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160; </div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;  <span class="keywordtype">void</span> remove_controller_reference_interfaces(<span class="keyword">const</span> std::string &amp; controller_name);</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160; </div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160; </div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;  <span class="keywordtype">void</span> cache_controller_to_hardware(</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    <span class="keyword">const</span> std::string &amp; controller_name, <span class="keyword">const</span> std::vector&lt;std::string&gt; &amp; interfaces);</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160; </div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160; </div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;  std::vector&lt;std::string&gt; get_cached_controllers_to_hardware(<span class="keyword">const</span> std::string &amp; hardware_name);</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160; </div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;  <span class="keywordtype">bool</span> command_interface_is_claimed(<span class="keyword">const</span> std::string &amp; key) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160; </div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;  <a class="code" href="classhardware__interface_1_1LoanedCommandInterface.html">LoanedCommandInterface</a> claim_command_interface(<span class="keyword">const</span> std::string &amp; key);</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; </div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160; </div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;  std::vector&lt;std::string&gt; command_interface_keys() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160; </div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;  std::vector&lt;std::string&gt; available_command_interfaces() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160; </div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160; </div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;  <span class="keywordtype">bool</span> command_interface_is_available(<span class="keyword">const</span> std::string &amp; interface) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160; </div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160; </div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;  <span class="keywordtype">size_t</span> actuator_components_size() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160; </div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160; </div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;  <span class="keywordtype">size_t</span> sensor_components_size() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;  <span class="keywordtype">size_t</span> system_components_size() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160; </div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160; </div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;  <span class="keywordtype">void</span> import_component(</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    std::unique_ptr&lt;ActuatorInterface&gt; actuator, <span class="keyword">const</span> <a class="code" href="structhardware__interface_1_1HardwareInfo.html">HardwareInfo</a> &amp; hardware_info);</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160; </div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160; </div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;  <span class="keywordtype">void</span> import_component(</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;    std::unique_ptr&lt;SensorInterface&gt; sensor, <span class="keyword">const</span> <a class="code" href="structhardware__interface_1_1HardwareInfo.html">HardwareInfo</a> &amp; hardware_info);</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160; </div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160; </div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;  <span class="keywordtype">void</span> import_component(</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    std::unique_ptr&lt;SystemInterface&gt; system, <span class="keyword">const</span> <a class="code" href="structhardware__interface_1_1HardwareInfo.html">HardwareInfo</a> &amp; hardware_info);</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160; </div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160; </div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;  std::unordered_map&lt;std::string, HardwareComponentInfo&gt; get_components_status();</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160; </div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160; </div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;  <span class="keywordtype">bool</span> prepare_command_mode_switch(</div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;    <span class="keyword">const</span> std::vector&lt;std::string&gt; &amp; start_interfaces,</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;    <span class="keyword">const</span> std::vector&lt;std::string&gt; &amp; stop_interfaces);</div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160; </div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160; </div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;  <span class="keywordtype">bool</span> perform_command_mode_switch(</div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;    <span class="keyword">const</span> std::vector&lt;std::string&gt; &amp; start_interfaces,</div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;    <span class="keyword">const</span> std::vector&lt;std::string&gt; &amp; stop_interfaces);</div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160; </div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160; </div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;  return_type set_component_state(</div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;    <span class="keyword">const</span> std::string &amp; component_name, rclcpp_lifecycle::State &amp; target_state);</div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160; </div>
-<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160; </div>
-<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;  <span class="keywordtype">void</span> shutdown_async_components();</div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160; </div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160; </div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;  <a class="code" href="structhardware__interface_1_1HardwareReadWriteStatus.html">HardwareReadWriteStatus</a> read(<span class="keyword">const</span> rclcpp::Time &amp; time, <span class="keyword">const</span> rclcpp::Duration &amp; period);</div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160; </div>
-<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160; </div>
-<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;  <a class="code" href="structhardware__interface_1_1HardwareReadWriteStatus.html">HardwareReadWriteStatus</a> write(<span class="keyword">const</span> rclcpp::Time &amp; time, <span class="keyword">const</span> rclcpp::Duration &amp; period);</div>
-<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160; </div>
-<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160; </div>
-<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;  <span class="keywordtype">bool</span> command_interface_exists(<span class="keyword">const</span> std::string &amp; key) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160; </div>
-<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160; </div>
-<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;  <span class="keywordtype">bool</span> state_interface_exists(<span class="keyword">const</span> std::string &amp; key) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160; </div>
-<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160; </div>
-<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;  rclcpp::Logger get_logger() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160; </div>
-<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160; </div>
-<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;  rclcpp::Clock::SharedPtr get_clock() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160; </div>
-<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;  <span class="keywordtype">bool</span> components_are_loaded_and_initialized_ = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160; </div>
-<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;  <span class="keyword">mutable</span> std::recursive_mutex resource_interfaces_lock_;</div>
-<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;  <span class="keyword">mutable</span> std::recursive_mutex claimed_command_interfaces_lock_;</div>
-<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;  <span class="keyword">mutable</span> std::recursive_mutex resources_lock_;</div>
-<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160; </div>
-<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;  <span class="keywordtype">bool</span> validate_storage(<span class="keyword">const</span> std::vector&lt;hardware_interface::HardwareInfo&gt; &amp; hardware_info) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160; </div>
-<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;  <span class="keywordtype">void</span> release_command_interface(<span class="keyword">const</span> std::string &amp; key);</div>
-<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160; </div>
-<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;  std::unordered_map&lt;std::string, bool&gt; claimed_command_interface_map_;</div>
-<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160; </div>
-<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;  std::unique_ptr&lt;ResourceStorage&gt; resource_storage_;</div>
-<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160; </div>
-<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;  <span class="comment">// Structure to store read and write status so it is not initialized in the real-time loop</span></div>
-<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;  <a class="code" href="structhardware__interface_1_1HardwareReadWriteStatus.html">HardwareReadWriteStatus</a> read_write_status;</div>
-<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;};</div>
-<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160; </div>
-<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;}  <span class="comment">// namespace hardware_interface</span></div>
-<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// HARDWARE_INTERFACE__RESOURCE_MANAGER_HPP_</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &quot;hardware_interface/system_interface.hpp&quot;</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &quot;hardware_interface/types/hardware_interface_return_values.hpp&quot;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &quot;rclcpp/duration.hpp&quot;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &quot;rclcpp/node_interfaces/node_logging_interface.hpp&quot;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &quot;rclcpp/time.hpp&quot;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacehardware__interface.html">hardware_interface</a></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">class </span>ResourceStorage;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">class </span>ControllerManager;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="structhardware__interface_1_1HardwareReadWriteStatus.html">   41</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structhardware__interface_1_1HardwareReadWriteStatus.html">HardwareReadWriteStatus</a></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;{</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keywordtype">bool</span> ok;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  std::vector&lt;std::string&gt; failed_hardware_names;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;};</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classhardware__interface_1_1ResourceManager.html">   47</a></span>&#160;<span class="keyword">class </span>HARDWARE_INTERFACE_PUBLIC <a class="code" href="classhardware__interface_1_1ResourceManager.html">ResourceManager</a></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;{</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classhardware__interface_1_1ResourceManager.html">ResourceManager</a>(</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    rclcpp::node_interfaces::NodeClockInterface::SharedPtr clock_interface,</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    rclcpp::node_interfaces::NodeLoggingInterface::SharedPtr logger_interface);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classhardware__interface_1_1ResourceManager.html">ResourceManager</a>(</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keyword">const</span> std::string &amp; urdf,</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    rclcpp::node_interfaces::NodeClockInterface::SharedPtr clock_interface,</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    rclcpp::node_interfaces::NodeLoggingInterface::SharedPtr logger_interface,</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">bool</span> activate_all = <span class="keyword">false</span>, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> update_rate = 100);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <a class="code" href="classhardware__interface_1_1ResourceManager.html">ResourceManager</a>(<span class="keyword">const</span> <a class="code" href="classhardware__interface_1_1ResourceManager.html">ResourceManager</a> &amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  <span class="keyword">virtual</span> ~<a class="code" href="classhardware__interface_1_1ResourceManager.html">ResourceManager</a>();</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> load_and_initialize_components(</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keyword">const</span> std::string &amp; urdf, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> update_rate = 100);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="keywordtype">bool</span> are_components_initialized() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  <a class="code" href="classhardware__interface_1_1LoanedStateInterface.html">LoanedStateInterface</a> claim_state_interface(<span class="keyword">const</span> std::string &amp; key);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  std::vector&lt;std::string&gt; state_interface_keys() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  std::vector&lt;std::string&gt; available_state_interfaces() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;  <span class="keywordtype">bool</span> state_interface_is_available(<span class="keyword">const</span> std::string &amp; name) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;  <span class="keywordtype">void</span> import_controller_exported_state_interfaces(</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    <span class="keyword">const</span> std::string &amp; controller_name, std::vector&lt;StateInterface&gt; &amp; interfaces);</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;  std::vector&lt;std::string&gt; get_controller_exported_state_interface_names(</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keyword">const</span> std::string &amp; controller_name);</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;  <span class="keywordtype">void</span> make_controller_exported_state_interfaces_available(<span class="keyword">const</span> std::string &amp; controller_name);</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;  <span class="keywordtype">void</span> make_controller_exported_state_interfaces_unavailable(<span class="keyword">const</span> std::string &amp; controller_name);</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;  <span class="keywordtype">void</span> remove_controller_exported_state_interfaces(<span class="keyword">const</span> std::string &amp; controller_name);</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  <span class="keywordtype">void</span> import_controller_reference_interfaces(</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <span class="keyword">const</span> std::string &amp; controller_name, std::vector&lt;CommandInterface&gt; &amp; interfaces);</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160; </div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;  std::vector&lt;std::string&gt; get_controller_reference_interface_names(</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    <span class="keyword">const</span> std::string &amp; controller_name);</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;  <span class="keywordtype">void</span> make_controller_reference_interfaces_available(<span class="keyword">const</span> std::string &amp; controller_name);</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160; </div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; </div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;  <span class="keywordtype">void</span> make_controller_reference_interfaces_unavailable(<span class="keyword">const</span> std::string &amp; controller_name);</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; </div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160; </div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;  <span class="keywordtype">void</span> remove_controller_reference_interfaces(<span class="keyword">const</span> std::string &amp; controller_name);</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160; </div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; </div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;  <span class="keywordtype">void</span> cache_controller_to_hardware(</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    <span class="keyword">const</span> std::string &amp; controller_name, <span class="keyword">const</span> std::vector&lt;std::string&gt; &amp; interfaces);</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160; </div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160; </div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;  std::vector&lt;std::string&gt; get_cached_controllers_to_hardware(<span class="keyword">const</span> std::string &amp; hardware_name);</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; </div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160; </div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;  <span class="keywordtype">bool</span> command_interface_is_claimed(<span class="keyword">const</span> std::string &amp; key) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; </div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;  <a class="code" href="classhardware__interface_1_1LoanedCommandInterface.html">LoanedCommandInterface</a> claim_command_interface(<span class="keyword">const</span> std::string &amp; key);</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160; </div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;  std::vector&lt;std::string&gt; command_interface_keys() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160; </div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; </div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;  std::vector&lt;std::string&gt; available_command_interfaces() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160; </div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160; </div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;  <span class="keywordtype">bool</span> command_interface_is_available(<span class="keyword">const</span> std::string &amp; interface) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160; </div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160; </div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;  <span class="keywordtype">size_t</span> actuator_components_size() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160; </div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160; </div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;  <span class="keywordtype">size_t</span> sensor_components_size() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; </div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160; </div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;  <span class="keywordtype">size_t</span> system_components_size() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160; </div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160; </div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;  <span class="keywordtype">void</span> import_component(</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    std::unique_ptr&lt;ActuatorInterface&gt; actuator, <span class="keyword">const</span> <a class="code" href="structhardware__interface_1_1HardwareInfo.html">HardwareInfo</a> &amp; hardware_info);</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160; </div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160; </div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;  <span class="keywordtype">void</span> import_component(</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;    std::unique_ptr&lt;SensorInterface&gt; sensor, <span class="keyword">const</span> <a class="code" href="structhardware__interface_1_1HardwareInfo.html">HardwareInfo</a> &amp; hardware_info);</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160; </div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160; </div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;  <span class="keywordtype">void</span> import_component(</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    std::unique_ptr&lt;SystemInterface&gt; system, <span class="keyword">const</span> <a class="code" href="structhardware__interface_1_1HardwareInfo.html">HardwareInfo</a> &amp; hardware_info);</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160; </div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160; </div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;  std::unordered_map&lt;std::string, HardwareComponentInfo&gt; get_components_status();</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160; </div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160; </div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;  <span class="keywordtype">bool</span> prepare_command_mode_switch(</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    <span class="keyword">const</span> std::vector&lt;std::string&gt; &amp; start_interfaces,</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;    <span class="keyword">const</span> std::vector&lt;std::string&gt; &amp; stop_interfaces);</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160; </div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160; </div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;  <span class="keywordtype">bool</span> perform_command_mode_switch(</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;    <span class="keyword">const</span> std::vector&lt;std::string&gt; &amp; start_interfaces,</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;    <span class="keyword">const</span> std::vector&lt;std::string&gt; &amp; stop_interfaces);</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160; </div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160; </div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;  return_type set_component_state(</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;    <span class="keyword">const</span> std::string &amp; component_name, rclcpp_lifecycle::State &amp; target_state);</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160; </div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160; </div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;  <span class="keywordtype">void</span> shutdown_async_components();</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160; </div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160; </div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;  <a class="code" href="structhardware__interface_1_1HardwareReadWriteStatus.html">HardwareReadWriteStatus</a> read(<span class="keyword">const</span> rclcpp::Time &amp; time, <span class="keyword">const</span> rclcpp::Duration &amp; period);</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160; </div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160; </div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;  <a class="code" href="structhardware__interface_1_1HardwareReadWriteStatus.html">HardwareReadWriteStatus</a> write(<span class="keyword">const</span> rclcpp::Time &amp; time, <span class="keyword">const</span> rclcpp::Duration &amp; period);</div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160; </div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160; </div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;  <span class="keywordtype">bool</span> command_interface_exists(<span class="keyword">const</span> std::string &amp; key) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160; </div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160; </div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;  <span class="keywordtype">bool</span> state_interface_exists(<span class="keyword">const</span> std::string &amp; key) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160; </div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160; </div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;  rclcpp::Logger get_logger() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160; </div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160; </div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;  rclcpp::Clock::SharedPtr get_clock() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160; </div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;  <span class="keywordtype">bool</span> components_are_loaded_and_initialized_ = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160; </div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;  <span class="keyword">mutable</span> std::recursive_mutex resource_interfaces_lock_;</div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;  <span class="keyword">mutable</span> std::recursive_mutex claimed_command_interfaces_lock_;</div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;  <span class="keyword">mutable</span> std::recursive_mutex resources_lock_;</div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160; </div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;  <span class="keywordtype">bool</span> validate_storage(<span class="keyword">const</span> std::vector&lt;hardware_interface::HardwareInfo&gt; &amp; hardware_info) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160; </div>
+<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;  <span class="keywordtype">void</span> release_command_interface(<span class="keyword">const</span> std::string &amp; key);</div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160; </div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;  std::unordered_map&lt;std::string, bool&gt; claimed_command_interface_map_;</div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160; </div>
+<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;  std::unique_ptr&lt;ResourceStorage&gt; resource_storage_;</div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160; </div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;  <span class="comment">// Structure to store read and write status so it is not initialized in the real-time loop</span></div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;  <a class="code" href="structhardware__interface_1_1HardwareReadWriteStatus.html">HardwareReadWriteStatus</a> read_write_status;</div>
+<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;};</div>
+<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160; </div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;}  <span class="comment">// namespace hardware_interface</span></div>
+<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// HARDWARE_INTERFACE__RESOURCE_MANAGER_HPP_</span></div>
 <div class="ttc" id="aclasshardware__interface_1_1LoanedCommandInterface_html"><div class="ttname"><a href="classhardware__interface_1_1LoanedCommandInterface.html">hardware_interface::LoanedCommandInterface</a></div><div class="ttdef"><b>Definition:</b> loaned_command_interface.hpp:27</div></div>
 <div class="ttc" id="aclasshardware__interface_1_1LoanedStateInterface_html"><div class="ttname"><a href="classhardware__interface_1_1LoanedStateInterface.html">hardware_interface::LoanedStateInterface</a></div><div class="ttdef"><b>Definition:</b> loaned_state_interface.hpp:27</div></div>
-<div class="ttc" id="aclasshardware__interface_1_1ResourceManager_html"><div class="ttname"><a href="classhardware__interface_1_1ResourceManager.html">hardware_interface::ResourceManager</a></div><div class="ttdef"><b>Definition:</b> resource_manager.hpp:49</div></div>
-<div class="ttc" id="anamespacehardware__interface_html"><div class="ttname"><a href="namespacehardware__interface.html">hardware_interface</a></div><div class="ttdef"><b>Definition:</b> actuator.hpp:33</div></div>
+<div class="ttc" id="aclasshardware__interface_1_1ResourceManager_html"><div class="ttname"><a href="classhardware__interface_1_1ResourceManager.html">hardware_interface::ResourceManager</a></div><div class="ttdef"><b>Definition:</b> resource_manager.hpp:48</div></div>
+<div class="ttc" id="anamespacehardware__interface_html"><div class="ttname"><a href="namespacehardware__interface.html">hardware_interface</a></div><div class="ttdef"><b>Definition:</b> actuator.hpp:34</div></div>
 <div class="ttc" id="astructhardware__interface_1_1HardwareInfo_html"><div class="ttname"><a href="structhardware__interface_1_1HardwareInfo.html">hardware_interface::HardwareInfo</a></div><div class="ttdoc">This structure stores information about hardware defined in a robot's URDF.</div><div class="ttdef"><b>Definition:</b> hardware_info.hpp:131</div></div>
-<div class="ttc" id="astructhardware__interface_1_1HardwareReadWriteStatus_html"><div class="ttname"><a href="structhardware__interface_1_1HardwareReadWriteStatus.html">hardware_interface::HardwareReadWriteStatus</a></div><div class="ttdef"><b>Definition:</b> resource_manager.hpp:43</div></div>
+<div class="ttc" id="astructhardware__interface_1_1HardwareReadWriteStatus_html"><div class="ttname"><a href="structhardware__interface_1_1HardwareReadWriteStatus.html">hardware_interface::HardwareReadWriteStatus</a></div><div class="ttdef"><b>Definition:</b> resource_manager.hpp:42</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
