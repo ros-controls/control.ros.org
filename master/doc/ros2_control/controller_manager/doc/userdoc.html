@@ -274,7 +274,7 @@ This is a class from which controller’s instance with name “<code class="doc
 <span class="go">                  controller_name</span>
 
 <span class="go">positional arguments:</span>
-<span class="go">  controller_name       Name of the controller</span>
+<span class="go">  controller_names      List of controllers</span>
 
 <span class="go">options:</span>
 <span class="go">  -h, --help            show this help message and exit</span>
@@ -283,14 +283,16 @@ This is a class from which controller’s instance with name “<code class="doc
 <span class="go">  -p PARAM_FILE, --param-file PARAM_FILE</span>
 <span class="go">                        Controller param file to be loaded into controller node before configure</span>
 <span class="go">  -n NAMESPACE, --namespace NAMESPACE</span>
-<span class="go">                        Namespace for the controller</span>
+<span class="go">                        DEPRECATED Namespace for the controller_manager and the controller(s)</span>
 <span class="go">  --load-only           Only load the controller and leave unconfigured.</span>
 <span class="go">  --inactive            Load and configure the controller, however do not activate them</span>
-<span class="go">  -t CONTROLLER_TYPE, --controller-type CONTROLLER_TYPE</span>
-<span class="go">                        If not provided it should exist in the controller manager namespace</span>
 <span class="go">  -u, --unload-on-kill  Wait until this application is interrupted and unload controller</span>
 <span class="go">  --controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT</span>
 <span class="go">                        Time to wait for the controller manager</span>
+<span class="go">  --activate-as-group   Activates all the parsed controllers list together instead of one by one. Useful for activating all chainable controllers altogether</span>
+<span class="go">  --fallback_controllers FALLBACK_CONTROLLERS [FALLBACK_CONTROLLERS ...]</span>
+<span class="go">                        Fallback controllers list are activated as a fallback strategy when the spawned controllers fail. When the argument is provided, it takes precedence over the fallback_controllers list in the</span>
+<span class="go">                        param file</span>
 </pre></div>
 </div>
 </section>
@@ -314,13 +316,14 @@ This is a class from which controller’s instance with name “<code class="doc
 <h2>rqt_controller_manager<a class="headerlink" href="#rqt-controller-manager" title="Link to this heading"></a></h2>
 <p>A GUI tool to interact with the controller manager services to be able to switch the lifecycle states of the controllers as well as the hardware components.</p>
 <img alt="../../../../_images/rqt_controller_manager.png" src="../../../../_images/rqt_controller_manager.png" />
-<p>It can be launched independently using the following command or as rqt plugin.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go"> ros2 run rqt_controller_manager rqt_controller_manager</span>
-
-<span class="go">* Double-click on a controller or hardware component to show the additional info.</span>
-<span class="go">* Right-click on a controller or hardware component to show a context menu with options for lifecycle management.</span>
+<p>It can be launched independently using the following command or as rqt plugin:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">ros2 run rqt_controller_manager rqt_controller_manager</span>
 </pre></div>
 </div>
+<ul class="simple">
+<li><p>Double-click on a controller or hardware component to show the additional info.</p></li>
+<li><p>Right-click on a controller or hardware component to show a context menu with options for lifecycle management.</p></li>
+</ul>
 </section>
 <section id="using-the-controller-manager-in-a-process">
 <h2>Using the Controller Manager in a Process<a class="headerlink" href="#using-the-controller-manager-in-a-process" title="Link to this heading"></a></h2>

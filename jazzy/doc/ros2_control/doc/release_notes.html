@@ -140,11 +140,8 @@
 <li><p>Pass URDF to controllers on init (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1088">#1088</a>).</p></li>
 <li><p>Pass controller manager update rate on the init of the controller interface  (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1141">#1141</a>)</p></li>
 <li><p>A method to get node options to setup the controller node #api-breaking (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1169">#1169</a>)</p></li>
-<li><p>Export state interfaces from the chainable controller #api-breaking (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1021">#1021</a>)</p>
-<ul>
+<li><p>Export state interfaces from the chainable controller #api-breaking (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1021">#1021</a>)</p></li>
 <li><p>All chainable controllers must implement the method <code class="docutils literal notranslate"><span class="pre">export_state_interfaces</span></code> to export the state interfaces, similar to <code class="docutils literal notranslate"><span class="pre">export_reference_interfaces</span></code> method that is exporting the reference interfaces.</p></li>
-</ul>
-</li>
 </ul>
 </section>
 <section id="controller-manager">
@@ -199,6 +196,7 @@ This should help avoiding extra legwork in controllers to get access to the <cod
 </li>
 <li><p>The support for the <code class="docutils literal notranslate"><span class="pre">description</span></code> parameter for loading the URDF was removed (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1358">#1358</a>).</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">--controller-type</span></code> or <code class="docutils literal notranslate"><span class="pre">-t</span></code> spawner arg is removed. Now the controller type is defined in the controller configuration file with <code class="docutils literal notranslate"><span class="pre">type</span></code> field (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1639">#1639</a>).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">--namespace</span></code> or <code class="docutils literal notranslate"><span class="pre">-n</span></code> spawner arg is deprecated. Now the spawner namespace can be defined using the ROS 2 standard way (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1640">#1640</a>).</p></li>
 </ul>
 </section>
 <section id="hardware-interface">
@@ -230,6 +228,7 @@ This should help avoiding extra legwork in controllers to get access to the <cod
 </li>
 <li><p>Soft limits are also parsed from the URDF into the <code class="docutils literal notranslate"><span class="pre">HardwareInfo</span></code> structure for the defined joints (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1488">#1488</a>)</p></li>
 <li><p>Access to logger and clock through <code class="docutils literal notranslate"><span class="pre">get_logger</span></code> and <code class="docutils literal notranslate"><span class="pre">get_clock</span></code> methods in ResourceManager and HardwareComponents <code class="docutils literal notranslate"><span class="pre">Actuator</span></code>, <code class="docutils literal notranslate"><span class="pre">Sensor</span></code> and <code class="docutils literal notranslate"><span class="pre">System</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1585">#1585</a>)</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">get_hardware_info</span></code> method to the hardware components interface to access the <code class="docutils literal notranslate"><span class="pre">HardwareInfo</span></code> instead of accessing the variable <code class="docutils literal notranslate"><span class="pre">info_</span></code> directly (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1643">#1643</a>)</p></li>
 </ul>
 </section>
 <section id="joint-limits">
