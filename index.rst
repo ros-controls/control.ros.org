@@ -6,6 +6,7 @@ Welcome to the ros2_control documentation!
 .. toctree::
    :hidden:
 
+   doc/roscon2024_workshop.rst
    doc/getting_started/getting_started.rst
    doc/ros2_control/doc/index.rst
    doc/ros2_controllers/doc/controllers_index.rst
