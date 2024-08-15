@@ -121,57 +121,59 @@ $(function() {
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classhardware__interface_1_1Sensor.html">Sensor</a>(std::unique_ptr&lt;SensorInterface&gt; impl);</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <a class="code" href="classhardware__interface_1_1Sensor.html">Sensor</a>(<a class="code" href="classhardware__interface_1_1Sensor.html">Sensor</a> &amp;&amp; other) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  ~<a class="code" href="classhardware__interface_1_1Sensor.html">Sensor</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keyword">const</span> rclcpp_lifecycle::State &amp; initialize(</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">const</span> <a class="code" href="structhardware__interface_1_1HardwareInfo.html">HardwareInfo</a> &amp; sensor_info, rclcpp::Logger logger,</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    rclcpp::node_interfaces::NodeClockInterface::SharedPtr clock_interface);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="keyword">const</span> rclcpp_lifecycle::State &amp; configure();</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keyword">const</span> rclcpp_lifecycle::State &amp; cleanup();</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="keyword">const</span> rclcpp_lifecycle::State &amp; shutdown();</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keyword">const</span> rclcpp_lifecycle::State &amp; activate();</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keyword">const</span> rclcpp_lifecycle::State &amp; deactivate();</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="keyword">const</span> rclcpp_lifecycle::State &amp; error();</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  std::vector&lt;StateInterface&gt; export_state_interfaces();</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  std::string get_name() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  std::string get_group_name() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="keyword">const</span> rclcpp_lifecycle::State &amp; get_state() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  return_type read(<span class="keyword">const</span> rclcpp::Time &amp; time, <span class="keyword">const</span> rclcpp::Duration &amp; period);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  return_type write(<span class="keyword">const</span> rclcpp::Time &amp;, <span class="keyword">const</span> rclcpp::Duration &amp;) { <span class="keywordflow">return</span> return_type::OK; }</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  std::unique_ptr&lt;SensorInterface&gt; impl_;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;};</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;}  <span class="comment">// namespace hardware_interface</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// HARDWARE_INTERFACE__SENSOR_HPP_</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classhardware__interface_1_1Sensor.html">Sensor</a>(<a class="code" href="classhardware__interface_1_1Sensor.html">Sensor</a> &amp;&amp; other) noexcept;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  ~<a class="code" href="classhardware__interface_1_1Sensor.html">Sensor</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="keyword">const</span> rclcpp_lifecycle::State &amp; initialize(</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">const</span> <a class="code" href="structhardware__interface_1_1HardwareInfo.html">HardwareInfo</a> &amp; sensor_info, rclcpp::Logger logger,</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    rclcpp::node_interfaces::NodeClockInterface::SharedPtr clock_interface);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keyword">const</span> rclcpp_lifecycle::State &amp; configure();</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keyword">const</span> rclcpp_lifecycle::State &amp; cleanup();</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keyword">const</span> rclcpp_lifecycle::State &amp; shutdown();</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keyword">const</span> rclcpp_lifecycle::State &amp; activate();</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="keyword">const</span> rclcpp_lifecycle::State &amp; deactivate();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="keyword">const</span> rclcpp_lifecycle::State &amp; error();</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  std::vector&lt;StateInterface&gt; export_state_interfaces();</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  std::string get_name() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  std::string get_group_name() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <span class="keyword">const</span> rclcpp_lifecycle::State &amp; get_state() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  return_type read(<span class="keyword">const</span> rclcpp::Time &amp; time, <span class="keyword">const</span> rclcpp::Duration &amp; period);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  HARDWARE_INTERFACE_PUBLIC</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  return_type write(<span class="keyword">const</span> rclcpp::Time &amp;, <span class="keyword">const</span> rclcpp::Duration &amp;) { <span class="keywordflow">return</span> return_type::OK; }</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  std::unique_ptr&lt;SensorInterface&gt; impl_;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="keyword">mutable</span> std::recursive_mutex sensors_mutex_;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;};</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;}  <span class="comment">// namespace hardware_interface</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// HARDWARE_INTERFACE__SENSOR_HPP_</span></div>
 <div class="ttc" id="aclasshardware__interface_1_1Sensor_html"><div class="ttname"><a href="classhardware__interface_1_1Sensor.html">hardware_interface::Sensor</a></div><div class="ttdef"><b>Definition:</b> sensor.hpp:38</div></div>
 <div class="ttc" id="anamespacehardware__interface_html"><div class="ttname"><a href="namespacehardware__interface.html">hardware_interface</a></div><div class="ttdef"><b>Definition:</b> actuator.hpp:34</div></div>
 <div class="ttc" id="astructhardware__interface_1_1HardwareInfo_html"><div class="ttname"><a href="structhardware__interface_1_1HardwareInfo.html">hardware_interface::HardwareInfo</a></div><div class="ttdoc">This structure stores information about hardware defined in a robot's URDF.</div><div class="ttdef"><b>Definition:</b> hardware_info.hpp:131</div></div>
