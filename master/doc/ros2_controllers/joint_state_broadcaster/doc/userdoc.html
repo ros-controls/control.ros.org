@@ -206,6 +206,9 @@ Using multiple joint_state_broadcaster instances we could publish and show both 
 </dd>
 <dt>map_interface_to_joint_state.effort (string)</dt><dd><p>Default:  “effort”</p>
 </dd>
+<dt>use_urdf_to_filter (bool)</dt><dd><p>Uses the robot_description to filter the <code class="docutils literal notranslate"><span class="pre">joint_states</span></code> topic. If true, the broadcaster will publish the data of the joints present in the URDF alone. If false, the broadcaster will publish the data of any interface that has type <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code>, or <code class="docutils literal notranslate"><span class="pre">effort</span></code>.</p>
+<p>Default:  true</p>
+</dd>
 </dl>
 </section>
 <section id="an-example-parameter-file">
@@ -220,6 +223,7 @@ Using multiple joint_state_broadcaster instances we could publish and show both 
 <span class="w">      </span><span class="nt">position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
 <span class="w">      </span><span class="nt">velocity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">velocity</span>
 <span class="w">    </span><span class="nt">use_local_topics</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">use_urdf_to_filter</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </pre></div>
 </div>
 </section>

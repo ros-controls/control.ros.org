@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['handle_600',['Handle',['../classhardware__interface_1_1Handle.html',1,'hardware_interface']]],
   ['hardwarecomponentinfo_601',['HardwareComponentInfo',['../structhardware__interface_1_1HardwareComponentInfo.html',1,'hardware_interface']]],
   ['hardwareinfo_602',['HardwareInfo',['../structhardware__interface_1_1HardwareInfo.html',1,'hardware_interface']]],
   ['hardwareinterfaceadapter_603',['HardwareInterfaceAdapter',['../classHardwareInterfaceAdapter.html',1,'']]],
