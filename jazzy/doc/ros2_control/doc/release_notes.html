@@ -143,6 +143,8 @@
 <li><p>A method to get node options to setup the controller node #api-breaking (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1169">#1169</a>)</p></li>
 <li><p>Export state interfaces from the chainable controller #api-breaking (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1021">#1021</a>)</p></li>
 <li><p>All chainable controllers must implement the method <code class="docutils literal notranslate"><span class="pre">export_state_interfaces</span></code> to export the state interfaces, similar to <code class="docutils literal notranslate"><span class="pre">export_reference_interfaces</span></code> method that is exporting the reference interfaces.</p></li>
+<li><p>The controllers will now set <code class="docutils literal notranslate"><span class="pre">use_global_arguments</span></code> from NodeOptions to false, to avoid getting influenced by global arguments (Issue : <a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1684">#1684</a>) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1694">#1694</a>).
+From now on, in order to set the parameters to the controller, the <code class="docutils literal notranslate"><span class="pre">--param-file</span></code> option from spawner should be used.</p></li>
 </ul>
 </section>
 <section id="controller-manager">
