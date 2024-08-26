@@ -259,9 +259,20 @@ robot hardware interfaces between <em>ros2_control</em> and Gazebo.</p>
 <p>The <em>gz_ros2_control</em> <code class="docutils literal notranslate"><span class="pre">&lt;plugin&gt;</span></code> tag also has the following optional child elements:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">&lt;parameters&gt;</span></code>: A YAML file with the configuration of the controllers. This element can be given multiple times to load multiple files.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&lt;hold_joints&gt;</span></code>: if set to true (default), it will hold the joints’ position if their interface was not claimed, e.g., the controller hasn’t been activated yet.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&lt;controller_manager_name&gt;</span></code>: Set controller manager name (default: <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code>)</p></li>
 </ul>
+<p>The following additional parameters can be set via child elements in the URDF or via ROS parameters in the YAML file above:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;hold_joints&gt;</span></code>: if set to true (default), it will hold the joints’ position if their interface was not claimed, e.g., the controller hasn’t been activated yet.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;position_proportional_gain&gt;</span></code>: Set the proportional gain. (default: 0.1) This determines the setpoint for a position-controlled joint <code class="docutils literal notranslate"><span class="pre">joint_velocity</span> <span class="pre">=</span> <span class="pre">joint_position_error</span> <span class="pre">*</span> <span class="pre">position_proportional_gain</span></code>.</p></li>
+</ul>
+<p>or via ROS parameters:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">gz_ros_control</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">hold_joints</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">position_proportional_gain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
+</pre></div>
+</div>
 <p>Additionally, one can specify a namespace and remapping rules, which will be forwarded to the controller_manager and loaded controllers. Add the following <code class="docutils literal notranslate"><span class="pre">&lt;ros&gt;</span></code> section:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo&gt;</span>
 <span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgz_ros2_control-system.so&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gz_ros2_control::GazeboSimROS2ControlPlugin&quot;</span><span class="nt">&gt;</span>
@@ -326,14 +337,12 @@ and use the tag <code class="docutils literal notranslate"><span class="pre">&lt
 <span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">update_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span><span class="w">  </span><span class="c1"># Hz</span>
 
-<span class="w">    </span><span class="nt">joint_trajectory_controller</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint_trajectory_controller/JointTrajectoryController</span>
-
 <span class="w">    </span><span class="nt">joint_state_broadcaster</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint_state_broadcaster/JointStateBroadcaster</span>
 
 <span class="nt">joint_trajectory_controller</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint_trajectory_controller/JointTrajectoryController</span>
 <span class="w">    </span><span class="nt">joints</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">slider_to_cart</span>
 <span class="w">    </span><span class="nt">command_interfaces</span><span class="p">:</span>
