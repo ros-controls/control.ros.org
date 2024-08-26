@@ -126,7 +126,7 @@ repos = {
             "galactic": "galactic",
             "humble": "humble",
             "iron": "iron",
-            "jazzy": "rolling",
+            "jazzy": "jazzy",
             "rolling": "rolling"
         },
         "pr": os.environ.get('GZ_ROS2_CONTROL_PR')
