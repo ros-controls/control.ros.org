@@ -65,6 +65,7 @@
 <li class="toctree-l3 current"><a class="reference internal" href="hardware_components_userdoc.html">Hardware Components</a><ul class="current">
 <li class="toctree-l4 current"><a class="reference internal" href="hardware_components_userdoc.html#guidelines-and-best-practices">Guidelines and Best Practices</a><ul class="current">
 <li class="toctree-l5 current"><a class="current reference internal" href="#">Hardware Interface Types</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l6"><a class="reference internal" href="#joints">Joints</a></li>
 <li class="toctree-l6"><a class="reference internal" href="#sensors">Sensors</a></li>
 <li class="toctree-l6"><a class="reference internal" href="#gpios">GPIOs</a></li>
@@ -142,6 +143,37 @@
 <p>The <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> framework provides a set of hardware interface types that can be used to implement
 a hardware component for a specific robot or device.
 The following sections describe the different hardware interface types and their usage.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>Hardware in ros2_control is described as URDF and internally parsed and encapsulated as <code class="docutils literal notranslate"><span class="pre">HardwareInfo</span></code>.
+The definition can be found in the <a class="reference external" href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/include/hardware_interface/hardware_info.hpp">ros2_control repository</a>.
+You can check the structs defined there to see what attributes are available for each of the xml tags.
+A generic example which shows the structure is provided below. More specific examples can be found in the Example part below.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;Name_of_the_hardware&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;hardware&gt;</span>
+<span class="w">    </span><span class="nt">&lt;plugin&gt;</span>library_name/ClassName<span class="nt">&lt;/plugin&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- added to hardware_parameters --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;example_param&quot;</span><span class="nt">&gt;</span>value<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/hardware&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;name_of_the_component&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;interface_name&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="cm">&lt;!-- All of them are optional. `data_type` and `size` are used for GPIOs. Size is length of an array. --&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;min&quot;</span><span class="nt">&gt;</span>-1<span class="nt">&lt;/param&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;max&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/param&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;initial_value&quot;</span><span class="nt">&gt;</span>0.0<span class="nt">&lt;/param&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;data_type&quot;</span><span class="nt">&gt;&lt;/param&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;size&quot;</span><span class="nt">&gt;</span>5<span class="nt">&lt;/param&gt;</span>
+<span class="w">       </span><span class="cm">&lt;!-- Optional. Added to the key/value storage parameters --&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;own_param_1&quot;</span><span class="nt">&gt;</span>some_value<span class="nt">&lt;/param&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;own_param_2&quot;</span><span class="nt">&gt;</span>other_value<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/command_interface&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- Short form to define StateInterface. Can be extended like CommandInterface. --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
+<span class="nt">&lt;/ros2_control&gt;</span>
+</pre></div>
+</div>
+</section>
 <section id="joints">
 <h2>Joints<a class="headerlink" href="#joints" title="Link to this heading"></a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">&lt;joint&gt;</span></code>-tag groups the interfaces associated with the joints of physical robots and actuators.
