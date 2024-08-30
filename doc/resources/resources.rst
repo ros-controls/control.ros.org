@@ -11,6 +11,44 @@ Any files submitted to the documentation should be "licensed" by stating your na
 Presentations
 ---------------
 
+<<<<<<< HEAD
+=======
+2023-10-18 ROSCon Workshop: ros2_control on Steroids
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+
+.. toctree::
+   :hidden:
+
+   roscon2023_workshop.rst
+
+Summary:
+  If you already know that the ros2_control framework acts as a Kernel for ROS 2 robotics systems, you are using it but struggling with application complexity, then this workshop is for you. The workshop covers the use of ros2_control in products from various industries and shows solutions for all the little issues when running 24/7.
+
+  You will get a practical overview of concepts like controller chaining, hardware modularization, multi-robot architectures and debugging of complex systems. On top of showcasing these functionalities, we expect your involvement in the discussion by bringing your complex application and discussing existing and potentially missing tooling in ros2_control.
+
+:doc:`Workshop page <roscon2023_workshop>`
+
+  Authors:
+    - Dr. Bence Magyar (Locus Robotics)
+    - Dr. Denis Stogl (Stogl Robotics Consulting)
+
+
+2023-09-19 ROSCon Spain Talk: Introduction to ros2_control
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+:download:`Presentation: Introduction to ros2_control <presentations/ROSCon_Spain_2023_introduction_to_ros2_control.pdf>`
+
+Summary:
+  This presentation aims to introduce the audience to the ros2_control framework, a hardware-agnostic control framework focusing on the modular composition of control systems for robots, sharing of controllers as well as real-time performance. The framework provides controller-lifecycle and hardware management on top of abstractions of real or virtual hardware interfaces. The talk explains different modules within the ros2_control ecosystem, such as hardware interfaces, controllers, controller managers, and how they interact with each other.
+
+`Recording <https://www.youtube.com/watch?v=YD3EOMfSo-w>`__
+
+  *Presenter: Sai Kishor Kothakota*
+
+  Authors:
+    - Sai Kishor Kothakota (PAL Robotics)
+
+
+>>>>>>> a340cc8 (Add ROSCon Spain 2023 ros2_control talk to resources (#337))
 2023-02 ROS Meetup Munich #5
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 `Presentation: Tricycle Controller with ros2_control <https://github.com/ros-controls/control.ros.org/blob/master/doc/resources/presentations/pixel_robotics_tricycle_controller_with_ros2_control.pdf>`_
