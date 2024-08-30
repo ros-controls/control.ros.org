@@ -11,8 +11,6 @@ Any files submitted to the documentation should be "licensed" by stating your na
 Presentations
 ---------------
 
-<<<<<<< HEAD
-=======
 2023-10-18 ROSCon Workshop: ros2_control on Steroids
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 
@@ -48,7 +46,6 @@ Summary:
     - Sai Kishor Kothakota (PAL Robotics)
 
 
->>>>>>> a340cc8 (Add ROSCon Spain 2023 ros2_control talk to resources (#337))
 2023-02 ROS Meetup Munich #5
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 `Presentation: Tricycle Controller with ros2_control <https://github.com/ros-controls/control.ros.org/blob/master/doc/resources/presentations/pixel_robotics_tricycle_controller_with_ros2_control.pdf>`_
