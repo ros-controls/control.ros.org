@@ -11,26 +11,6 @@ Any files submitted to the documentation should be "licensed" by stating your na
 Presentations
 ---------------
 
-2023-10-18 ROSCon Workshop: ros2_control on Steroids
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-
-.. toctree::
-   :hidden:
-
-   roscon2023_workshop.rst
-
-Summary:
-  If you already know that the ros2_control framework acts as a Kernel for ROS 2 robotics systems, you are using it but struggling with application complexity, then this workshop is for you. The workshop covers the use of ros2_control in products from various industries and shows solutions for all the little issues when running 24/7.
-
-  You will get a practical overview of concepts like controller chaining, hardware modularization, multi-robot architectures and debugging of complex systems. On top of showcasing these functionalities, we expect your involvement in the discussion by bringing your complex application and discussing existing and potentially missing tooling in ros2_control.
-
-:doc:`Workshop page <roscon2023_workshop>`
-
-  Authors:
-    - Dr. Bence Magyar (Locus Robotics)
-    - Dr. Denis Stogl (Stogl Robotics Consulting)
-
-
 2023-09-19 ROSCon Spain Talk: Introduction to ros2_control
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 :download:`Presentation: Introduction to ros2_control <presentations/ROSCon_Spain_2023_introduction_to_ros2_control.pdf>`
