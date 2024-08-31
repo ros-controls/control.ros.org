@@ -11,6 +11,22 @@ Any files submitted to the documentation should be "licensed" by stating your na
 Presentations
 ---------------
 
+
+2023-09-19 ROSCon Spain Talk: Introduction to ros2_control
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+:download:`Presentation: Introduction to ros2_control <presentations/ROSCon_Spain_2023_introduction_to_ros2_control.pdf>`
+
+Summary:
+  This presentation aims to introduce the audience to the ros2_control framework, a hardware-agnostic control framework focusing on the modular composition of control systems for robots, sharing of controllers as well as real-time performance. The framework provides controller-lifecycle and hardware management on top of abstractions of real or virtual hardware interfaces. The talk explains different modules within the ros2_control ecosystem, such as hardware interfaces, controllers, controller managers, and how they interact with each other.
+
+`Recording <https://www.youtube.com/watch?v=YD3EOMfSo-w>`__
+
+  *Presenter: Sai Kishor Kothakota*
+
+  Authors:
+    - Sai Kishor Kothakota (PAL Robotics)
+
+
 2023-02 ROS Meetup Munich #5
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 `Presentation: Tricycle Controller with ros2_control <https://github.com/ros-controls/control.ros.org/blob/master/doc/resources/presentations/pixel_robotics_tricycle_controller_with_ros2_control.pdf>`_
