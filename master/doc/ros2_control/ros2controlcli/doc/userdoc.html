@@ -142,18 +142,30 @@
 <section id="list-controllers">
 <h2>list_controllers<a class="headerlink" href="#list-controllers" title="Link to this heading"></a></h2>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>control<span class="w"> </span>list_controllers<span class="w"> </span>-h
-<span class="go">usage: ros2 control list_controllers [-h] [--spin-time SPIN_TIME] [-c CONTROLLER_MANAGER] [--include-hidden-nodes]</span>
+<span class="go">usage: ros2 control list_controllers [-h] [--spin-time SPIN_TIME] [-s] [--claimed-interfaces] [--required-state-interfaces] [--required-command-interfaces] [--chained-interfaces] [--reference-interfaces] [--verbose]</span>
+<span class="go">                                    [-c CONTROLLER_MANAGER] [--include-hidden-nodes] [--ros-args ...]</span>
 
 <span class="go">Output the list of loaded controllers, their type and status</span>
 
-<span class="go">optional arguments:</span>
+<span class="go">options:</span>
 <span class="go">  -h, --help            show this help message and exit</span>
 <span class="go">  --spin-time SPIN_TIME</span>
 <span class="go">                        Spin time in seconds to wait for discovery (only applies when not using an already running daemon)</span>
+<span class="go">  -s, --use-sim-time    Enable ROS simulation time</span>
+<span class="go">  --claimed-interfaces  List controller&#39;s claimed interfaces</span>
+<span class="go">  --required-state-interfaces</span>
+<span class="go">                        List controller&#39;s required state interfaces</span>
+<span class="go">  --required-command-interfaces</span>
+<span class="go">                        List controller&#39;s required command interfaces</span>
+<span class="go">  --chained-interfaces  List interfaces that the controllers are chained to</span>
+<span class="go">  --reference-interfaces</span>
+<span class="go">                        List controller&#39;s exported references</span>
+<span class="go">  --verbose, -v         List controller&#39;s claimed interfaces, required state interfaces and required command interfaces</span>
 <span class="go">  -c CONTROLLER_MANAGER, --controller-manager CONTROLLER_MANAGER</span>
-<span class="go">                        Name of the controller manager ROS node</span>
+<span class="go">                        Name of the controller manager ROS node (default: controller_manager)</span>
 <span class="go">  --include-hidden-nodes</span>
 <span class="go">                        Consider hidden nodes as well</span>
+<span class="go">  --ros-args ...        Pass arbitrary arguments to the executable</span>
 </pre></div>
 </div>
 <p>Example output:</p>
@@ -165,18 +177,20 @@
 <section id="list-controller-types">
 <h2>list_controller_types<a class="headerlink" href="#list-controller-types" title="Link to this heading"></a></h2>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>control<span class="w"> </span>list_controller_types<span class="w"> </span>-h
-<span class="go">usage: ros2 control list_controller_types [-h] [--spin-time SPIN_TIME] [-c CONTROLLER_MANAGER] [--include-hidden-nodes]</span>
+<span class="go">usage: ros2 control list_controller_types [-h] [--spin-time SPIN_TIME] [-s] [-c CONTROLLER_MANAGER] [--include-hidden-nodes] [--ros-args ...]</span>
 
 <span class="go">Output the available controller types and their base classes</span>
 
-<span class="go">optional arguments:</span>
+<span class="go">options:</span>
 <span class="go">  -h, --help            show this help message and exit</span>
 <span class="go">  --spin-time SPIN_TIME</span>
 <span class="go">                        Spin time in seconds to wait for discovery (only applies when not using an already running daemon)</span>
+<span class="go">  -s, --use-sim-time    Enable ROS simulation time</span>
 <span class="go">  -c CONTROLLER_MANAGER, --controller-manager CONTROLLER_MANAGER</span>
-<span class="go">                        Name of the controller manager ROS node</span>
+<span class="go">                        Name of the controller manager ROS node (default: controller_manager)</span>
 <span class="go">  --include-hidden-nodes</span>
 <span class="go">                        Consider hidden nodes as well</span>
+<span class="go">  --ros-args ...        Pass arbitrary arguments to the executable</span>
 </pre></div>
 </div>
 <p>Example output:</p>
@@ -190,20 +204,21 @@
 <section id="list-hardware-components">
 <h2>list_hardware_components<a class="headerlink" href="#list-hardware-components" title="Link to this heading"></a></h2>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_components<span class="w"> </span>-h
-<span class="go">usage: ros2 control list_hardware_components [-h] [--spin-time SPIN_TIME] [-s] [-c CONTROLLER_MANAGER] [--include-hidden-nodes]</span>
+<span class="go">usage: ros2 control list_hardware_components [-h] [--spin-time SPIN_TIME] [-s] [--verbose] [-c CONTROLLER_MANAGER] [--include-hidden-nodes] [--ros-args ...]</span>
 
 <span class="go">Output the list of available hardware components</span>
 
 <span class="go">options:</span>
-<span class="go">-h, --help            show this help message and exit</span>
-<span class="go">--spin-time SPIN_TIME</span>
+<span class="go">  -h, --help            show this help message and exit</span>
+<span class="go">  --spin-time SPIN_TIME</span>
 <span class="go">                        Spin time in seconds to wait for discovery (only applies when not using an already running daemon)</span>
-<span class="go">-s, --use-sim-time    Enable ROS simulation time</span>
-<span class="go">--verbose, -v         List hardware components with command and state interfaces</span>
-<span class="go">-c CONTROLLER_MANAGER, --controller-manager CONTROLLER_MANAGER</span>
-<span class="go">                        Name of the controller manager ROS node</span>
-<span class="go">--include-hidden-nodes</span>
+<span class="go">  -s, --use-sim-time    Enable ROS simulation time</span>
+<span class="go">  --verbose, -v         List hardware components with command and state interfaces</span>
+<span class="go">  -c CONTROLLER_MANAGER, --controller-manager CONTROLLER_MANAGER</span>
+<span class="go">                        Name of the controller manager ROS node (default: controller_manager)</span>
+<span class="go">  --include-hidden-nodes</span>
 <span class="go">                        Consider hidden nodes as well</span>
+<span class="go">  --ros-args ...        Pass arbitrary arguments to the executable</span>
 </pre></div>
 </div>
 <p>Example output:</p>
@@ -219,18 +234,20 @@
 <section id="list-hardware-interfaces">
 <h2>list_hardware_interfaces<a class="headerlink" href="#list-hardware-interfaces" title="Link to this heading"></a></h2>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_interfaces<span class="w"> </span>-h
-<span class="go">usage: ros2 control list_hardware_interfaces [-h] [--spin-time SPIN_TIME] [-c CONTROLLER_MANAGER] [--include-hidden-nodes]</span>
+<span class="go">usage: ros2 control list_hardware_interfaces [-h] [--spin-time SPIN_TIME] [-s] [-c CONTROLLER_MANAGER] [--include-hidden-nodes] [--ros-args ...]</span>
 
 <span class="go">Output the list of available command and state interfaces</span>
 
-<span class="go">optional arguments:</span>
+<span class="go">options:</span>
 <span class="go">  -h, --help            show this help message and exit</span>
 <span class="go">  --spin-time SPIN_TIME</span>
 <span class="go">                        Spin time in seconds to wait for discovery (only applies when not using an already running daemon)</span>
+<span class="go">  -s, --use-sim-time    Enable ROS simulation time</span>
 <span class="go">  -c CONTROLLER_MANAGER, --controller-manager CONTROLLER_MANAGER</span>
-<span class="go">                        Name of the controller manager ROS node</span>
+<span class="go">                        Name of the controller manager ROS node (default: controller_manager)</span>
 <span class="go">  --include-hidden-nodes</span>
 <span class="go">                        Consider hidden nodes as well</span>
+<span class="go">  --ros-args ...        Pass arbitrary arguments to the executable</span>
 </pre></div>
 </div>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_interfaces
@@ -246,73 +263,78 @@
 <section id="load-controller">
 <h2>load_controller<a class="headerlink" href="#load-controller" title="Link to this heading"></a></h2>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>control<span class="w"> </span>load_controller<span class="w"> </span>-h
-<span class="go">usage: ros2 control load_controller [-h] [--spin-time SPIN_TIME] [--set-state {inactive,active}] [-c CONTROLLER_MANAGER] [--include-hidden-nodes] controller_name</span>
+<span class="go">usage: ros2 control load_controller [-h] [--spin-time SPIN_TIME] [-s] [--set-state {inactive,active}] [-c CONTROLLER_MANAGER] [--include-hidden-nodes] [--ros-args ...] controller_name [param_file]</span>
 
 <span class="go">Load a controller in a controller manager</span>
 
 <span class="go">positional arguments:</span>
 <span class="go">  controller_name       Name of the controller</span>
+<span class="go">  param_file            The YAML file with the controller parameters</span>
 
-<span class="go">optional arguments:</span>
+<span class="go">options:</span>
 <span class="go">  -h, --help            show this help message and exit</span>
 <span class="go">  --spin-time SPIN_TIME</span>
 <span class="go">                        Spin time in seconds to wait for discovery (only applies when not using an already running daemon)</span>
+<span class="go">  -s, --use-sim-time    Enable ROS simulation time</span>
 <span class="go">  --set-state {inactive,active}</span>
 <span class="go">                        Set the state of the loaded controller</span>
 <span class="go">  -c CONTROLLER_MANAGER, --controller-manager CONTROLLER_MANAGER</span>
-<span class="go">                        Name of the controller manager ROS node</span>
+<span class="go">                        Name of the controller manager ROS node (default: controller_manager)</span>
 <span class="go">  --include-hidden-nodes</span>
 <span class="go">                        Consider hidden nodes as well</span>
+<span class="go">  --ros-args ...        Pass arbitrary arguments to the executable</span>
 </pre></div>
 </div>
 </section>
 <section id="reload-controller-libraries">
 <h2>reload_controller_libraries<a class="headerlink" href="#reload-controller-libraries" title="Link to this heading"></a></h2>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>control<span class="w"> </span>reload_controller_libraries<span class="w"> </span>-h
-<span class="go">usage: ros2 control reload_controller_libraries [-h] [--spin-time SPIN_TIME] [--force-kill] [-c CONTROLLER_MANAGER] [--include-hidden-nodes]</span>
+<span class="go">usage: ros2 control reload_controller_libraries [-h] [--spin-time SPIN_TIME] [-s] [--force-kill] [-c CONTROLLER_MANAGER] [--include-hidden-nodes] [--ros-args ...]</span>
 
 <span class="go">Reload controller libraries</span>
 
-<span class="go">optional arguments:</span>
+<span class="go">options:</span>
 <span class="go">  -h, --help            show this help message and exit</span>
 <span class="go">  --spin-time SPIN_TIME</span>
 <span class="go">                        Spin time in seconds to wait for discovery (only applies when not using an already running daemon)</span>
+<span class="go">  -s, --use-sim-time    Enable ROS simulation time</span>
 <span class="go">  --force-kill          Force stop of loaded controllers</span>
 <span class="go">  -c CONTROLLER_MANAGER, --controller-manager CONTROLLER_MANAGER</span>
-<span class="go">                        Name of the controller manager ROS node</span>
+<span class="go">                        Name of the controller manager ROS node (default: controller_manager)</span>
 <span class="go">  --include-hidden-nodes</span>
 <span class="go">                        Consider hidden nodes as well</span>
+<span class="go">  --ros-args ...        Pass arbitrary arguments to the executable</span>
 </pre></div>
 </div>
 </section>
 <section id="set-controller-state">
 <h2>set_controller_state<a class="headerlink" href="#set-controller-state" title="Link to this heading"></a></h2>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>control<span class="w"> </span>set_controller_state<span class="w"> </span>-h
-<span class="go">usage: ros2 control set_controller_state [-h] [--spin-time SPIN_TIME] [-c CONTROLLER_MANAGER] [--include-hidden-nodes] controller_name {inactive,active}</span>
+<span class="go">usage: ros2 control set_controller_state [-h] [--spin-time SPIN_TIME] [-s] [-c CONTROLLER_MANAGER] [--include-hidden-nodes] [--ros-args ...] controller_name {inactive,active}</span>
 
 <span class="go">Adjust the state of the controller</span>
 
 <span class="go">positional arguments:</span>
 <span class="go">  controller_name       Name of the controller to be changed</span>
-<span class="go">  {inactive,active}</span>
-<span class="go">                        State in which the controller should be changed to</span>
+<span class="go">  {inactive,active}     State in which the controller should be changed to</span>
 
-<span class="go">optional arguments:</span>
+<span class="go">options:</span>
 <span class="go">  -h, --help            show this help message and exit</span>
 <span class="go">  --spin-time SPIN_TIME</span>
 <span class="go">                        Spin time in seconds to wait for discovery (only applies when not using an already running daemon)</span>
+<span class="go">  -s, --use-sim-time    Enable ROS simulation time</span>
 <span class="go">  -c CONTROLLER_MANAGER, --controller-manager CONTROLLER_MANAGER</span>
-<span class="go">                        Name of the controller manager ROS node</span>
+<span class="go">                        Name of the controller manager ROS node (default: controller_manager)</span>
 <span class="go">  --include-hidden-nodes</span>
 <span class="go">                        Consider hidden nodes as well</span>
+<span class="go">  --ros-args ...        Pass arbitrary arguments to the executable</span>
 </pre></div>
 </div>
 </section>
 <section id="set-hardware-component-state">
 <h2>set_hardware_component_state<a class="headerlink" href="#set-hardware-component-state" title="Link to this heading"></a></h2>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>control<span class="w"> </span>set_hardware_component_state<span class="w"> </span>-h
-<span class="go">usage: ros2 control set_hardware_component_state [-h] [--spin-time SPIN_TIME] [-s] [-c CONTROLLER_MANAGER] [--include-hidden-nodes]</span>
-<span class="go">                                                hardware_component_name {unconfigured,inactive,active}</span>
+<span class="go">usage: ros2 control set_hardware_component_state [-h] [--spin-time SPIN_TIME] [-s] [-c CONTROLLER_MANAGER] [--include-hidden-nodes] [--ros-args ...] hardware_component_name {unconfigured,inactive,active}</span>
 
 <span class="go">Adjust the state of the hardware component</span>
 
@@ -328,64 +350,69 @@
 <span class="go">                        Spin time in seconds to wait for discovery (only applies when not using an already running daemon)</span>
 <span class="go">  -s, --use-sim-time    Enable ROS simulation time</span>
 <span class="go">  -c CONTROLLER_MANAGER, --controller-manager CONTROLLER_MANAGER</span>
-<span class="go">                        Name of the controller manager ROS node</span>
+<span class="go">                        Name of the controller manager ROS node (default: controller_manager)</span>
 <span class="go">  --include-hidden-nodes</span>
 <span class="go">                        Consider hidden nodes as well</span>
+<span class="go">  --ros-args ...        Pass arbitrary arguments to the executable</span>
 </pre></div>
 </div>
 </section>
 <section id="switch-controllers">
 <h2>switch_controllers<a class="headerlink" href="#switch-controllers" title="Link to this heading"></a></h2>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>control<span class="w"> </span>switch_controllers<span class="w"> </span>-h
-<span class="go">usage: ros2 control switch_controllers [-h] [--spin-time SPIN_TIME] [--deactivate [CTRL1 [CTRL2 ...]]] [--activate [CTRL1 [CTRL2 ...]]] [--strict] [--activate-asap] [--switch-timeout SWITCH_TIMEOUT] [-c CONTROLLER_MANAGER]</span>
-<span class="go">                                      [--include-hidden-nodes]</span>
+<span class="go">usage: ros2 control switch_controllers [-h] [--spin-time SPIN_TIME] [-s] [--deactivate [DEACTIVATE ...]] [--activate [ACTIVATE ...]] [--strict] [--activate-asap] [--switch-timeout SWITCH_TIMEOUT]</span>
+<span class="go">                                      [-c CONTROLLER_MANAGER] [--include-hidden-nodes] [--ros-args ...]</span>
 
 <span class="go">Switch controllers in a controller manager</span>
 
-<span class="go">optional arguments:</span>
-<span class="go">-h, --help            show this help message and exit</span>
-<span class="go">--spin-time SPIN_TIME</span>
-<span class="go">Spin time in seconds to wait for discovery (only applies when not using an already running daemon)</span>
-<span class="go">--deactivate [CTRL1 [CTRL2 ...]]</span>
-<span class="go">Name of the controllers to be deactivate</span>
-<span class="go">--activate [CTRL1 [CTRL2 ...]]</span>
-<span class="go">Name of the controllers to be activated</span>
-<span class="go">--strict              Strict switch</span>
-<span class="go">--activate-asap       Activate asap controllers</span>
-<span class="go">--switch-timeout SWITCH_TIMEOUT</span>
-<span class="go">Timeout for switching controllers</span>
-<span class="go">-c CONTROLLER_MANAGER, --controller-manager CONTROLLER_MANAGER</span>
-<span class="go">Name of the controller manager ROS node</span>
-<span class="go">--include-hidden-nodes</span>
-<span class="go">                      Consider hidden nodes as well</span>
+<span class="go">options:</span>
+<span class="go">  -h, --help            show this help message and exit</span>
+<span class="go">  --spin-time SPIN_TIME</span>
+<span class="go">                        Spin time in seconds to wait for discovery (only applies when not using an already running daemon)</span>
+<span class="go">  -s, --use-sim-time    Enable ROS simulation time</span>
+<span class="go">  --deactivate [DEACTIVATE ...]</span>
+<span class="go">                        Name of the controllers to be deactivated</span>
+<span class="go">  --activate [ACTIVATE ...]</span>
+<span class="go">                        Name of the controllers to be activated</span>
+<span class="go">  --strict              Strict switch</span>
+<span class="go">  --activate-asap       Start asap controllers</span>
+<span class="go">  --switch-timeout SWITCH_TIMEOUT</span>
+<span class="go">                        Timeout for switching controllers</span>
+<span class="go">  -c CONTROLLER_MANAGER, --controller-manager CONTROLLER_MANAGER</span>
+<span class="go">                        Name of the controller manager ROS node (default: controller_manager)</span>
+<span class="go">  --include-hidden-nodes</span>
+<span class="go">                        Consider hidden nodes as well</span>
+<span class="go">  --ros-args ...        Pass arbitrary arguments to the executable</span>
 </pre></div>
 </div>
 </section>
 <section id="unload-controller">
 <h2>unload_controller<a class="headerlink" href="#unload-controller" title="Link to this heading"></a></h2>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>control<span class="w"> </span>unload_controller<span class="w"> </span>-h
-<span class="go">usage: ros2 control unload_controller [-h] [--spin-time SPIN_TIME] [-c CONTROLLER_MANAGER] [--include-hidden-nodes] controller_name</span>
+<span class="go">usage: ros2 control unload_controller [-h] [--spin-time SPIN_TIME] [-s] [-c CONTROLLER_MANAGER] [--include-hidden-nodes] [--ros-args ...] controller_name</span>
 
 <span class="go">Unload a controller in a controller manager</span>
 
 <span class="go">positional arguments:</span>
 <span class="go">  controller_name       Name of the controller</span>
 
-<span class="go">optional arguments:</span>
+<span class="go">options:</span>
 <span class="go">  -h, --help            show this help message and exit</span>
 <span class="go">  --spin-time SPIN_TIME</span>
 <span class="go">                        Spin time in seconds to wait for discovery (only applies when not using an already running daemon)</span>
+<span class="go">  -s, --use-sim-time    Enable ROS simulation time</span>
 <span class="go">  -c CONTROLLER_MANAGER, --controller-manager CONTROLLER_MANAGER</span>
-<span class="go">                        Name of the controller manager ROS node</span>
+<span class="go">                        Name of the controller manager ROS node (default: controller_manager)</span>
 <span class="go">  --include-hidden-nodes</span>
 <span class="go">                        Consider hidden nodes as well</span>
+<span class="go">  --ros-args ...        Pass arbitrary arguments to the executable</span>
 </pre></div>
 </div>
 </section>
 <section id="view-controller-chains">
 <h2>view_controller_chains<a class="headerlink" href="#view-controller-chains" title="Link to this heading"></a></h2>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>control<span class="w"> </span>view_controller_chains<span class="w"> </span>-h
-<span class="go">usage: ros2 view_controller_chains</span>
+<span class="go">usage: ros2 control view_controller_chains [-h] [--spin-time SPIN_TIME] [-s] [-c CONTROLLER_MANAGER] [--include-hidden-nodes] [--ros-args ...]</span>
 
 <span class="go">Generates a diagram of the loaded chained controllers into /tmp/controller_diagram.gv.pdf</span>
 
@@ -395,9 +422,10 @@
 <span class="go">                        Spin time in seconds to wait for discovery (only applies when not using an already running daemon)</span>
 <span class="go">  -s, --use-sim-time    Enable ROS simulation time</span>
 <span class="go">  -c CONTROLLER_MANAGER, --controller-manager CONTROLLER_MANAGER</span>
-<span class="go">                        Name of the controller manager ROS node</span>
+<span class="go">                        Name of the controller manager ROS node (default: controller_manager)</span>
 <span class="go">  --include-hidden-nodes</span>
 <span class="go">                        Consider hidden nodes as well</span>
+<span class="go">  --ros-args ...        Pass arbitrary arguments to the executable</span>
 </pre></div>
 </div>
 </section>

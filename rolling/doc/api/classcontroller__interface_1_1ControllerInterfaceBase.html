@@ -136,11 +136,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3417ed9b9990df177ab116f9a7147b74"><td class="memItemLeft" align="right" valign="top">virtual CONTROLLER_INTERFACE_PUBLIC <a class="el" href="structcontroller__interface_1_1InterfaceConfiguration.html">InterfaceConfiguration</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a3417ed9b9990df177ab116f9a7147b74">state_interface_configuration</a> () const =0</td></tr>
 <tr class="memdesc:a3417ed9b9990df177ab116f9a7147b74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get configuration for controller's required state interfaces.  <a href="classcontroller__interface_1_1ControllerInterfaceBase.html#a3417ed9b9990df177ab116f9a7147b74">More...</a><br /></td></tr>
 <tr class="separator:a3417ed9b9990df177ab116f9a7147b74"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab651c47c448485ac058c50fe888b9fd1"><td class="memItemLeft" align="right" valign="top"><a id="ab651c47c448485ac058c50fe888b9fd1"></a>
-CONTROLLER_INTERFACE_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><b>assign_interfaces</b> (std::vector&lt; <a class="el" href="classhardware__interface_1_1LoanedCommandInterface.html">hardware_interface::LoanedCommandInterface</a> &gt; &amp;&amp;command_interfaces, std::vector&lt; <a class="el" href="classhardware__interface_1_1LoanedStateInterface.html">hardware_interface::LoanedStateInterface</a> &gt; &amp;&amp;state_interfaces)</td></tr>
+<tr class="memitem:ab651c47c448485ac058c50fe888b9fd1"><td class="memItemLeft" align="right" valign="top">virtual CONTROLLER_INTERFACE_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#ab651c47c448485ac058c50fe888b9fd1">assign_interfaces</a> (std::vector&lt; <a class="el" href="classhardware__interface_1_1LoanedCommandInterface.html">hardware_interface::LoanedCommandInterface</a> &gt; &amp;&amp;command_interfaces, std::vector&lt; <a class="el" href="classhardware__interface_1_1LoanedStateInterface.html">hardware_interface::LoanedStateInterface</a> &gt; &amp;&amp;state_interfaces)</td></tr>
+<tr class="memdesc:ab651c47c448485ac058c50fe888b9fd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that assigns the Loaned interfaces to the controller.  <a href="classcontroller__interface_1_1ControllerInterfaceBase.html#ab651c47c448485ac058c50fe888b9fd1">More...</a><br /></td></tr>
 <tr class="separator:ab651c47c448485ac058c50fe888b9fd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78343670e39b1f1cc969c6decd9de637"><td class="memItemLeft" align="right" valign="top"><a id="a78343670e39b1f1cc969c6decd9de637"></a>
-CONTROLLER_INTERFACE_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><b>release_interfaces</b> ()</td></tr>
+<tr class="memitem:a78343670e39b1f1cc969c6decd9de637"><td class="memItemLeft" align="right" valign="top">virtual CONTROLLER_INTERFACE_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a78343670e39b1f1cc969c6decd9de637">release_interfaces</a> ()</td></tr>
+<tr class="memdesc:a78343670e39b1f1cc969c6decd9de637"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that releases the Loaned interfaces from the controller.  <a href="classcontroller__interface_1_1ControllerInterfaceBase.html#a78343670e39b1f1cc969c6decd9de637">More...</a><br /></td></tr>
 <tr class="separator:a78343670e39b1f1cc969c6decd9de637"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a451d590f76ce6632b7715c4778fcc984"><td class="memItemLeft" align="right" valign="top"><a id="a451d590f76ce6632b7715c4778fcc984"></a>
 CONTROLLER_INTERFACE_PUBLIC return_type&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (const std::string &amp;controller_name, const std::string &amp;urdf, unsigned int cm_update_rate, const std::string &amp;node_namespace, const rclcpp::NodeOptions &amp;node_options)</td></tr>
@@ -204,6 +204,52 @@ std::vector&lt; <a class="el" href="classhardware__interface_1_1LoanedStateInter
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base interface class for an controller. The interface may not be used to implement a controller. The class provides definitions for <code><a class="el" href="classcontroller__interface_1_1ControllerInterface.html">ControllerInterface</a></code> and <code><a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html">ChainableControllerInterface</a></code> that should be implemented and extended for a specific controller. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ab651c47c448485ac058c50fe888b9fd1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab651c47c448485ac058c50fe888b9fd1">&#9670;&nbsp;</a></span>assign_interfaces()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void controller_interface::ControllerInterfaceBase::assign_interfaces </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classhardware__interface_1_1LoanedCommandInterface.html">hardware_interface::LoanedCommandInterface</a> &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>command_interfaces</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classhardware__interface_1_1LoanedStateInterface.html">hardware_interface::LoanedStateInterface</a> &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>state_interfaces</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Method that assigns the Loaned interfaces to the controller. </p>
+<p>Method used by the controller_manager to assign the interfaces to the controller. </p><dl class="section note"><dt>Note</dt><dd>When this method is overridden, the user has to also implement the <code>release_interfaces</code> method by overriding it to release the interfaces.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">command_interfaces</td><td>vector of command interfaces to be assigned to the controller. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">state_interfaces</td><td>vector of state interfaces to be assigned to the controller. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a04df56d589677c015eb11930d66bbfe4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a04df56d589677c015eb11930d66bbfe4">&#9670;&nbsp;</a></span>auto_declare()</h2>
 
@@ -421,6 +467,34 @@ template&lt;typename ParameterT &gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>true is controller is in chained mode and false if it is not. </dd></dl>
 
 <p>Implemented in <a class="el" href="classcontroller__interface_1_1ControllerInterface.html#ac86232dee7173226b28b8ba5d0e2b44d">controller_interface::ControllerInterface</a>, and <a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#a5add6d3d59bdf470ac241e07c62f4852">controller_interface::ChainableControllerInterface</a>.</p>
+
+</div>
+</div>
+<a id="a78343670e39b1f1cc969c6decd9de637"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78343670e39b1f1cc969c6decd9de637">&#9670;&nbsp;</a></span>release_interfaces()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void controller_interface::ControllerInterfaceBase::release_interfaces </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Method that releases the Loaned interfaces from the controller. </p>
+<p>Method used by the controller_manager to release the interfaces from the controller. </p>
 
 </div>
 </div>
