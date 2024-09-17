@@ -303,6 +303,26 @@ within the <code class="docutils literal notranslate"><span class="pre">&lt;ros2
 <li><p><code class="docutils literal notranslate"><span class="pre">pos_max_integral_error</span></code>: Maximum summation of the error</p></li>
 </ul>
 <p>The same definitions apply to the <code class="docutils literal notranslate"><span class="pre">vel_*</span></code> parameters.</p>
+<p>The PID parameters can be defined for <code class="docutils literal notranslate"><span class="pre">position</span></code> or <code class="docutils literal notranslate"><span class="pre">position_pid</span></code> and <code class="docutils literal notranslate"><span class="pre">velocity</span></code> or <code class="docutils literal notranslate"><span class="pre">velocity_pid</span></code> command interfaces as explained above, or defining them in a YAML file and loading it in the <code class="docutils literal notranslate"><span class="pre">gazebo_ros2_control</span></code> plugin as below:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">gazebo_ros2_control</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">pid_gains</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">position_pid</span><span class="p">:</span><span class="w"> </span><span class="c1"># (or) position</span>
+<span class="w">        </span><span class="nt">slider_to_cart</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">kp</span><span class="p">:</span><span class="w">  </span><span class="nv">100.0</span><span class="p p-Indicator">,</span><span class="nt"> kd</span><span class="p">:</span><span class="w"> </span><span class="nv">10.0</span><span class="p p-Indicator">,</span><span class="nt"> ki</span><span class="p">:</span><span class="w">  </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="nt"> max_integral_error</span><span class="p">:</span><span class="w"> </span><span class="nv">10000.0</span><span class="p p-Indicator">}</span>
+</pre></div>
+</div>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo&gt;</span>
+<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgazebo_ros2_control.so&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gazebo_ros2_control&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span>...
+<span class="w">    </span><span class="nt">&lt;ros&gt;</span>
+<span class="w">      </span><span class="nt">&lt;argument&gt;</span>--ros-args<span class="nt">&lt;/argument&gt;</span>
+<span class="w">      </span><span class="nt">&lt;argument&gt;</span>--params-file<span class="nt">&lt;/argument&gt;</span>
+<span class="w">      </span><span class="nt">&lt;argument&gt;</span>Path<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>configuration<span class="w"> </span>file<span class="nt">&lt;/argument&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/ros&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/plugin&gt;</span>
+<span class="nt">&lt;/gazebo&gt;</span>
+</pre></div>
+</div>
 </section>
 </section>
 <section id="add-the-gazebo-ros2-control-plugin">
@@ -479,12 +499,21 @@ ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos
 <section id="pid-control-joints">
 <h3>PID control joints<a class="headerlink" href="#pid-control-joints" title="Link to this heading"></a></h3>
 <p>The following examples shows a vertical cart control by a PID joint using position and velocity cmd.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>vertical_cart_example_position_pid.launch.py
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>vertical_cart_example_position_pids_in_yaml.launch.py
+ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>vertical_cart_example_position_pid.launch.py
 ros2<span class="w"> </span>launch<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>vertical_cart_example_velocity_pid.launch.py
 </pre></div>
 </div>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_position_pid
 ros2<span class="w"> </span>run<span class="w"> </span>gazebo_ros2_control_demos<span class="w"> </span>example_velocity
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">vertical_cart_example_position_pids_in_yaml.launch.py</span></code> example uses a YAML file as following to set the PID gains:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">gazebo_ros2_control</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">pid_gains</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">position</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">slider_to_cart</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">kp</span><span class="p">:</span><span class="w">  </span><span class="nv">100.0</span><span class="p p-Indicator">,</span><span class="nt"> kd</span><span class="p">:</span><span class="w"> </span><span class="nv">10.0</span><span class="p p-Indicator">,</span><span class="nt"> ki</span><span class="p">:</span><span class="w">  </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="nt"> max_integral_error</span><span class="p">:</span><span class="w"> </span><span class="nv">10000.0</span><span class="p p-Indicator">}</span>
 </pre></div>
 </div>
 </section>
