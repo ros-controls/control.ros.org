@@ -69,6 +69,12 @@
 <li class="toctree-l4"><a class="reference internal" href="#controller-interface">controller_interface</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#controller-manager">controller_manager</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hardware-interface">hardware_interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#adaption-of-command-stateinterfaces">Adaption of Command-/StateInterfaces</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#migration-of-command-stateinterfaces">Migration of Command-/StateInterfaces</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#migration-of-unlisted-command-stateinterfaces-not-defined-in-ros2-control-xml-tag">Migration of unlisted Command-/StateInterfaces not defined in <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> XML-tag</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#custom-export-of-command-stateinterfaces">Custom export of Command-/StateInterfaces</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../ros2_controllers/doc/migration.html">ros2_controllers</a></li>
@@ -201,6 +207,99 @@ In order to load the parameters to the controllers properly, it is needed to use
 <li><p><code class="docutils literal notranslate"><span class="pre">test_components</span></code> was moved to its own package. Update the dependencies if you are using them. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1325">#1325</a>)</p></li>
 <li><p>With (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1683">#1683</a>) the <code class="docutils literal notranslate"><span class="pre">rclcpp_lifecycle::State</span> <span class="pre">&amp;</span> <span class="pre">get_state()</span></code> and <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">set_state(const</span> <span class="pre">rclcpp_lifecycle::State</span> <span class="pre">&amp;</span> <span class="pre">new_state)</span></code> are replaced by <code class="docutils literal notranslate"><span class="pre">rclcpp_lifecycle::State</span> <span class="pre">&amp;</span> <span class="pre">get_lifecycle_state()</span></code> and <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">set_lifecycle_state(const</span> <span class="pre">rclcpp_lifecycle::State</span> <span class="pre">&amp;</span> <span class="pre">new_state)</span></code>. This change affects controllers and hardware. This is related to (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1240">#1240</a>) as variant support introduces <code class="docutils literal notranslate"><span class="pre">get_state</span></code> and <code class="docutils literal notranslate"><span class="pre">set_state</span></code> methods for setting/getting state of handles.</p></li>
 </ul>
+</section>
+<section id="adaption-of-command-stateinterfaces">
+<h2>Adaption of Command-/StateInterfaces<a class="headerlink" href="#adaption-of-command-stateinterfaces" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Command-/StateInterfaces</span></code> are now created and exported automatically by the framework via the <code class="docutils literal notranslate"><span class="pre">on_export_command_interfaces()</span></code> or <code class="docutils literal notranslate"><span class="pre">on_export_state_interfaces()</span></code> methods based on the interfaces defined in the <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> XML-tag, which get parsed and the <code class="docutils literal notranslate"><span class="pre">InterfaceDescription</span></code> is created accordingly (check the <a class="reference external" href="https://github.com/ros-controls/ros2_control/tree/master/hardware_interface/include/hardware_interface/hardware_info.hpp">hardware_info.hpp</a>). The memory is now allocated in the handle itself.</p></li>
+</ul>
+<section id="migration-of-command-stateinterfaces">
+<h3>Migration of Command-/StateInterfaces<a class="headerlink" href="#migration-of-command-stateinterfaces" title="Link to this heading"></a></h3>
+<p>To adapt to the new way of creating and exporting <code class="docutils literal notranslate"><span class="pre">Command-/StateInterfaces</span></code> follow those steps:</p>
+<ol class="arabic simple">
+<li><p>Delete the <code class="docutils literal notranslate"><span class="pre">std::vector&lt;hardware_interface::CommandInterface&gt;</span> <span class="pre">export_command_interfaces()</span> <span class="pre">override</span></code> and <code class="docutils literal notranslate"><span class="pre">std::vector&lt;hardware_interface::StateInterface&gt;</span> <span class="pre">export_state_interfaces()</span> <span class="pre">override</span></code>.</p></li>
+<li><p>Delete allocated memory for any <code class="docutils literal notranslate"><span class="pre">Command-/StateInterfaces</span></code>, e.g.:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>If you have a <code class="docutils literal notranslate"><span class="pre">std::vector&lt;double&gt;</span> <span class="pre">hw_commands_;</span></code> for joints’ <code class="docutils literal notranslate"><span class="pre">CommandInterfaces</span></code> delete the definition and any usage/appearance.</p></li>
+<li><p>Wherever you iterated over a state/command or accessed commands like this:</p></li>
+</ul>
+</div></blockquote>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// states</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">uint</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">hw_states_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">hw_states_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">some_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hw_states_</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="c1">// commands</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">uint</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">hw_commands_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">hw_commands_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">some_command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hw_commands_</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="c1">// specific state/command</span>
+<span class="n">hw_commands_</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hw_states_</span><span class="p">[</span><span class="n">y</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>replace it with</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// states replace with this</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">[</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">descr</span><span class="p">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">joint_state_interfaces_</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">set_state</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">some_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_state</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">//commands replace with this</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">[</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">descr</span><span class="p">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">joint_commands_interfaces_</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">set_command</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">some_command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_command</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// replace specific state/command, for this you need to store the names which are strings</span>
+<span class="c1">// somewhere or know them. However be careful since the names are fully qualified names which</span>
+<span class="c1">// means that the prefix is included for the name: E.g.: prefix/joint_1/velocity</span>
+<span class="n">set_command</span><span class="p">(</span><span class="n">name_of_command_interface_x</span><span class="p">,</span><span class="w"> </span><span class="n">get_state</span><span class="p">(</span><span class="n">name_of_state_interface_y</span><span class="p">));</span>
+</pre></div>
+</div>
+</section>
+<section id="migration-of-unlisted-command-stateinterfaces-not-defined-in-ros2-control-xml-tag">
+<h3>Migration of unlisted Command-/StateInterfaces not defined in <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> XML-tag<a class="headerlink" href="#migration-of-unlisted-command-stateinterfaces-not-defined-in-ros2-control-xml-tag" title="Link to this heading"></a></h3>
+<p>If you want some unlisted <code class="docutils literal notranslate"><span class="pre">Command-/StateInterfaces</span></code> not included in the <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> XML-tag you can follow those steps:</p>
+<ol class="arabic simple">
+<li><p>Override the <code class="docutils literal notranslate"><span class="pre">virtual</span> <span class="pre">std::vector&lt;hardware_interface::InterfaceDescription&gt;</span> <span class="pre">export_unlisted_command_interfaces()</span></code> or <code class="docutils literal notranslate"><span class="pre">virtual</span> <span class="pre">std::vector&lt;hardware_interface::InterfaceDescription&gt;</span> <span class="pre">export_unlisted_state_interfaces()</span></code></p></li>
+<li><p>Create the InterfaceDescription for each of the interfaces you want to create in the override <code class="docutils literal notranslate"><span class="pre">export_unlisted_command_interfaces()</span></code> or <code class="docutils literal notranslate"><span class="pre">export_unlisted_state_interfaces()</span></code> function, add it to a vector and return the vector:</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">InterfaceDescription</span><span class="o">&gt;</span><span class="w"> </span><span class="n">my_unlisted_interfaces</span><span class="p">;</span>
+
+<span class="n">InterfaceInfo</span><span class="w"> </span><span class="n">unlisted_interface</span><span class="p">;</span>
+<span class="n">unlisted_interface</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;some_unlisted_interface&quot;</span><span class="p">;</span>
+<span class="n">unlisted_interface</span><span class="p">.</span><span class="n">min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;-5.0&quot;</span><span class="p">;</span>
+<span class="n">unlisted_interface</span><span class="p">.</span><span class="n">data_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;double&quot;</span><span class="p">;</span>
+<span class="n">my_unlisted_interfaces</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">InterfaceDescription</span><span class="p">(</span><span class="n">info_</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">unlisted_interface</span><span class="p">));</span>
+
+<span class="k">return</span><span class="w"> </span><span class="n">my_unlisted_interfaces</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p>The unlisted interface will then be stored in either the <code class="docutils literal notranslate"><span class="pre">unlisted_command_interfaces_</span></code> or <code class="docutils literal notranslate"><span class="pre">unlisted_state_interfaces_</span></code> map depending in which function they are created.</p></li>
+<li><p>You can access it like any other interface with the <code class="docutils literal notranslate"><span class="pre">get_state(name)</span></code>, <code class="docutils literal notranslate"><span class="pre">set_state(name,</span> <span class="pre">value)</span></code>, <code class="docutils literal notranslate"><span class="pre">get_command(name)</span></code> or <code class="docutils literal notranslate"><span class="pre">set_command(name,</span> <span class="pre">value)</span></code>. E.g. <code class="docutils literal notranslate"><span class="pre">get_state(&quot;some_unlisted_interface&quot;)</span></code>.</p></li>
+</ol>
+</section>
+<section id="custom-export-of-command-stateinterfaces">
+<h3>Custom export of Command-/StateInterfaces<a class="headerlink" href="#custom-export-of-command-stateinterfaces" title="Link to this heading"></a></h3>
+<p>In case the default implementation (<code class="docutils literal notranslate"><span class="pre">on_export_command_interfaces()</span></code> or <code class="docutils literal notranslate"><span class="pre">on_export_state_interfaces()</span></code> ) for exporting the <code class="docutils literal notranslate"><span class="pre">Command-/StateInterfaces</span></code> is not enough you can override them. You should however consider the following things:</p>
+<ul class="simple">
+<li><p>If you want to have unlisted interfaces available you need to call the <code class="docutils literal notranslate"><span class="pre">export_unlisted_command_interfaces()</span></code> or <code class="docutils literal notranslate"><span class="pre">export_unlisted_state_interfaces()</span></code> and add them to the <code class="docutils literal notranslate"><span class="pre">unlisted_command_interfaces_</span></code> or <code class="docutils literal notranslate"><span class="pre">unlisted_state_interfaces_</span></code>.</p></li>
+<li><p>Don’t forget to store the created <code class="docutils literal notranslate"><span class="pre">Command-/StateInterfaces</span></code> internally as you only return <code class="docutils literal notranslate"><span class="pre">std::shared_ptr</span></code> and the resource manager will not provide access to the created <code class="docutils literal notranslate"><span class="pre">Command-/StateInterface</span></code> for the hardware. So you must take care of storing them yourself.</p></li>
+<li><p>Names must be unique!</p></li>
+</ul>
+</section>
 </section>
 </section>
 
