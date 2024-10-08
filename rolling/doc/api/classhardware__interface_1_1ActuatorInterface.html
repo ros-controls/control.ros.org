@@ -125,8 +125,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:afe36348523b8aadfc95493ad906629df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1fd1e5a0796fa97d565fd3dcb9d69ef"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="structhardware__interface_1_1InterfaceDescription.html">hardware_interface::InterfaceDescription</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ActuatorInterface.html#ac1fd1e5a0796fa97d565fd3dcb9d69ef">export_unlisted_state_interface_descriptions</a> ()</td></tr>
 <tr class="separator:ac1fd1e5a0796fa97d565fd3dcb9d69ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae441030ce7a63ac5ef2a73a2328cac34"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; StateInterface::SharedPtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ActuatorInterface.html#ae441030ce7a63ac5ef2a73a2328cac34">on_export_state_interfaces</a> ()</td></tr>
-<tr class="separator:ae441030ce7a63ac5ef2a73a2328cac34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3206fc7300fb74c03c516e73895fc3e3"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; StateInterface::ConstSharedPtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ActuatorInterface.html#a3206fc7300fb74c03c516e73895fc3e3">on_export_state_interfaces</a> ()</td></tr>
+<tr class="separator:a3206fc7300fb74c03c516e73895fc3e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ecbefd14572bb13ef73473411d05741"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="classhardware__interface_1_1CommandInterface.html">CommandInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ActuatorInterface.html#a3ecbefd14572bb13ef73473411d05741">export_command_interfaces</a> ()</td></tr>
 <tr class="memdesc:a3ecbefd14572bb13ef73473411d05741"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exports all command interfaces for this hardware interface.  <a href="classhardware__interface_1_1ActuatorInterface.html#a3ecbefd14572bb13ef73473411d05741">More...</a><br /></td></tr>
 <tr class="separator:a3ecbefd14572bb13ef73473411d05741"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -299,7 +299,7 @@ rclcpp_lifecycle::State&#160;</td><td class="memItemRight" valign="bottom"><b>li
 </div><div class="memdoc">
 
 <p>Exports all state interfaces for this hardware interface. </p>
-<p>Old way of exporting the StateInterfaces. If a empty vector is returned then the <a class="el" href="classhardware__interface_1_1ActuatorInterface.html#ae441030ce7a63ac5ef2a73a2328cac34">on_export_state_interfaces()</a> method is called. If a vector with StateInterfaces is returned then the exporting of the StateInterfaces is only done with this function and the ownership is transferred to the resource manager. The set_command(...), get_command(...), ..., can then not be used.</p>
+<p>Old way of exporting the StateInterfaces. If a empty vector is returned then the <a class="el" href="classhardware__interface_1_1ActuatorInterface.html#a3206fc7300fb74c03c516e73895fc3e3">on_export_state_interfaces()</a> method is called. If a vector with StateInterfaces is returned then the exporting of the StateInterfaces is only done with this function and the ownership is transferred to the resource manager. The set_command(...), get_command(...), ..., can then not be used.</p>
 <p>Note the ownership over the state interfaces is transferred to the caller.</p>
 <dl class="section return"><dt>Returns</dt><dd>vector of state interfaces </dd></dl>
 
@@ -663,8 +663,8 @@ CallbackReturn::ERROR if any error happens or data are missing. </dd></dl>
 
 </div>
 </div>
-<a id="ae441030ce7a63ac5ef2a73a2328cac34"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae441030ce7a63ac5ef2a73a2328cac34">&#9670;&nbsp;</a></span>on_export_state_interfaces()</h2>
+<a id="a3206fc7300fb74c03c516e73895fc3e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3206fc7300fb74c03c516e73895fc3e3">&#9670;&nbsp;</a></span>on_export_state_interfaces()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -673,7 +673,7 @@ CallbackReturn::ERROR if any error happens or data are missing. </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual std::vector&lt;StateInterface::SharedPtr&gt; hardware_interface::ActuatorInterface::on_export_state_interfaces </td>
+          <td class="memname">virtual std::vector&lt;StateInterface::ConstSharedPtr&gt; hardware_interface::ActuatorInterface::on_export_state_interfaces </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
