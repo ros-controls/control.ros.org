@@ -122,10 +122,10 @@ Collaboration diagram for controller_interface::ControllerInterface:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a8f9df0485b8a65363fecf5a3ccc9f51d"><td class="memItemLeft" align="right" valign="top">CONTROLLER_INTERFACE_PUBLIC bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterface.html#a8f9df0485b8a65363fecf5a3ccc9f51d">is_chainable</a> () const final</td></tr>
 <tr class="separator:a8f9df0485b8a65363fecf5a3ccc9f51d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a477b6fa59eb35c67525b795beeb04c2d"><td class="memItemLeft" align="right" valign="top">CONTROLLER_INTERFACE_PUBLIC std::vector&lt; <a class="el" href="classhardware__interface_1_1StateInterface.html">hardware_interface::StateInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterface.html#a477b6fa59eb35c67525b795beeb04c2d">export_state_interfaces</a> () final</td></tr>
-<tr class="separator:a477b6fa59eb35c67525b795beeb04c2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa318f32026cf1dd22733a0ac48c623c0"><td class="memItemLeft" align="right" valign="top">CONTROLLER_INTERFACE_PUBLIC std::vector&lt; <a class="el" href="classhardware__interface_1_1CommandInterface.html">hardware_interface::CommandInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterface.html#aa318f32026cf1dd22733a0ac48c623c0">export_reference_interfaces</a> () final</td></tr>
-<tr class="separator:aa318f32026cf1dd22733a0ac48c623c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7405ef7e3abfbff8f0a65c32c487d0f"><td class="memItemLeft" align="right" valign="top">CONTROLLER_INTERFACE_PUBLIC std::vector&lt; hardware_interface::StateInterface::SharedPtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterface.html#af7405ef7e3abfbff8f0a65c32c487d0f">export_state_interfaces</a> () final</td></tr>
+<tr class="separator:af7405ef7e3abfbff8f0a65c32c487d0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c33c51c3cb2e69b1ca4eeeed83bc6b2"><td class="memItemLeft" align="right" valign="top">CONTROLLER_INTERFACE_PUBLIC std::vector&lt; hardware_interface::CommandInterface::SharedPtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterface.html#a1c33c51c3cb2e69b1ca4eeeed83bc6b2">export_reference_interfaces</a> () final</td></tr>
+<tr class="separator:a1c33c51c3cb2e69b1ca4eeeed83bc6b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2000dfc59854737812ab54f0cfea8887"><td class="memItemLeft" align="right" valign="top">CONTROLLER_INTERFACE_PUBLIC bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterface.html#a2000dfc59854737812ab54f0cfea8887">set_chained_mode</a> (bool chained_mode) final</td></tr>
 <tr class="separator:a2000dfc59854737812ab54f0cfea8887"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac86232dee7173226b28b8ba5d0e2b44d"><td class="memItemLeft" align="right" valign="top">CONTROLLER_INTERFACE_PUBLIC bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterface.html#ac86232dee7173226b28b8ba5d0e2b44d">is_in_chained_mode</a> () const final</td></tr>
@@ -192,8 +192,8 @@ std::vector&lt; <a class="el" href="classhardware__interface_1_1LoanedStateInter
 <tr class="separator:abffb684790a208ce8d81af90be0cdd9c inherit pro_attribs_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="aa318f32026cf1dd22733a0ac48c623c0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa318f32026cf1dd22733a0ac48c623c0">&#9670;&nbsp;</a></span>export_reference_interfaces()</h2>
+<a id="a1c33c51c3cb2e69b1ca4eeeed83bc6b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c33c51c3cb2e69b1ca4eeeed83bc6b2">&#9670;&nbsp;</a></span>export_reference_interfaces()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -202,7 +202,7 @@ std::vector&lt; <a class="el" href="classhardware__interface_1_1LoanedStateInter
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; <a class="el" href="classhardware__interface_1_1CommandInterface.html">hardware_interface::CommandInterface</a> &gt; controller_interface::ControllerInterface::export_reference_interfaces </td>
+          <td class="memname">std::vector&lt; hardware_interface::CommandInterface::SharedPtr &gt; controller_interface::ControllerInterface::export_reference_interfaces </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -217,12 +217,12 @@ std::vector&lt; <a class="el" href="classhardware__interface_1_1LoanedStateInter
 <p>Controller has no reference interfaces.</p>
 <dl class="section return"><dt>Returns</dt><dd>empty list. </dd></dl>
 
-<p>Implements <a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a0e9f2eae233f96dd1f51424b66dc3dda">controller_interface::ControllerInterfaceBase</a>.</p>
+<p>Implements <a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a5e54fc202d420d6be63ed0dd53b6f19d">controller_interface::ControllerInterfaceBase</a>.</p>
 
 </div>
 </div>
-<a id="a477b6fa59eb35c67525b795beeb04c2d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a477b6fa59eb35c67525b795beeb04c2d">&#9670;&nbsp;</a></span>export_state_interfaces()</h2>
+<a id="af7405ef7e3abfbff8f0a65c32c487d0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7405ef7e3abfbff8f0a65c32c487d0f">&#9670;&nbsp;</a></span>export_state_interfaces()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -231,7 +231,7 @@ std::vector&lt; <a class="el" href="classhardware__interface_1_1LoanedStateInter
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; <a class="el" href="classhardware__interface_1_1StateInterface.html">hardware_interface::StateInterface</a> &gt; controller_interface::ControllerInterface::export_state_interfaces </td>
+          <td class="memname">std::vector&lt; hardware_interface::StateInterface::SharedPtr &gt; controller_interface::ControllerInterface::export_state_interfaces </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -246,7 +246,7 @@ std::vector&lt; <a class="el" href="classhardware__interface_1_1LoanedStateInter
 <p>A non-chainable controller doesn't export any state interfaces.</p>
 <dl class="section return"><dt>Returns</dt><dd>empty list. </dd></dl>
 
-<p>Implements <a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a5d7d94a8fe38dca4de7f0ed26ae8d502">controller_interface::ControllerInterfaceBase</a>.</p>
+<p>Implements <a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#acc4ecd830982584efadcf5acde8c264f">controller_interface::ControllerInterfaceBase</a>.</p>
 
 </div>
 </div>
