@@ -213,7 +213,18 @@ This loop reads states from hardware, updates controller and writes commands to 
 <dt>&lt;controller_name&gt;.type</dt><dd><p>Name of a plugin exported using <code class="docutils literal notranslate"><span class="pre">pluginlib</span></code> for a controller.
 This is a class from which controller’s instance with name “<code class="docutils literal notranslate"><span class="pre">controller_name</span></code>” is created.</p>
 </dd>
+<dt>&lt;controller_name&gt;.params_file</dt><dd><p>The absolute path to the YAML file with parameters for the controller.
+The file should contain the parameters for the controller in the standard ROS 2 YAML format.</p>
+</dd>
+<dt>&lt;controller_name&gt;.fallback_controllers</dt><dd><p>List of controllers that are activated as a fallback strategy, when the spawned controllers fail by returning <code class="docutils literal notranslate"><span class="pre">return_type::ERROR</span></code> during the <code class="docutils literal notranslate"><span class="pre">update</span></code> cycle.
+It is recommended to add all the controllers needed for the fallback strategy to the list, including the chainable controllers whose interfaces are used by the main fallback controllers.</p>
+</dd>
 </dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The fallback controllers activation is subject to the availability of the state and command interfaces at the time of activation.
+It is recommended to test the fallback strategy in simulation before deploying it on the real robot.</p>
+</div>
 <section id="handling-multiple-controller-managers">
 <h3>Handling Multiple Controller Managers<a class="headerlink" href="#handling-multiple-controller-managers" title="Link to this heading"></a></h3>
 <p>When dealing with multiple controller managers, you have two options for managing different robot descriptions:</p>
