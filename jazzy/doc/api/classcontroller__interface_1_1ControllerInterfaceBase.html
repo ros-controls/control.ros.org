@@ -155,6 +155,8 @@ virtual CONTROLLER_INTERFACE_PUBLIC CallbackReturn&#160;</td><td class="memItemR
 <tr class="separator:a352fede6a3954e3bd497399ead0b9df5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add1fed599ea8a49a696ea657bf6a02b1"><td class="memItemLeft" align="right" valign="top">virtual CONTROLLER_INTERFACE_PUBLIC return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#add1fed599ea8a49a696ea657bf6a02b1">update</a> (const rclcpp::Time &amp;time, const rclcpp::Duration &amp;period)=0</td></tr>
 <tr class="separator:add1fed599ea8a49a696ea657bf6a02b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ce13d37974ea7fa182bd7d85b26dd44"><td class="memItemLeft" align="right" valign="top">CONTROLLER_INTERFACE_PUBLIC std::pair&lt; bool, return_type &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a0ce13d37974ea7fa182bd7d85b26dd44">trigger_update</a> (const rclcpp::Time &amp;time, const rclcpp::Duration &amp;period)</td></tr>
+<tr class="separator:a0ce13d37974ea7fa182bd7d85b26dd44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03633f8fc5280c1894c29688ab4971c5"><td class="memItemLeft" align="right" valign="top"><a id="a03633f8fc5280c1894c29688ab4971c5"></a>
 CONTROLLER_INTERFACE_PUBLIC std::shared_ptr&lt; rclcpp_lifecycle::LifecycleNode &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>get_node</b> ()</td></tr>
 <tr class="separator:a03633f8fc5280c1894c29688ab4971c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -191,6 +193,8 @@ CONTROLLER_INTERFACE_PUBLIC const std::string &amp;&#160;</td><td class="memItem
 <tr class="memitem:a8d052e19a586221d71318391515a5714"><td class="memItemLeft" align="right" valign="top">virtual CONTROLLER_INTERFACE_PUBLIC bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a8d052e19a586221d71318391515a5714">is_in_chained_mode</a> () const =0</td></tr>
 <tr class="memdesc:a8d052e19a586221d71318391515a5714"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get information if a controller is currently in chained mode.  <a href="classcontroller__interface_1_1ControllerInterfaceBase.html#a8d052e19a586221d71318391515a5714">More...</a><br /></td></tr>
 <tr class="separator:a8d052e19a586221d71318391515a5714"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34ec5cc2075333ce2fc73a97388f01c5"><td class="memItemLeft" align="right" valign="top">CONTROLLER_INTERFACE_PUBLIC void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a34ec5cc2075333ce2fc73a97388f01c5">wait_for_trigger_update_to_finish</a> ()</td></tr>
+<tr class="separator:a34ec5cc2075333ce2fc73a97388f01c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -559,6 +563,43 @@ template&lt;typename ParameterT &gt; </div>
 
 </div>
 </div>
+<a id="a0ce13d37974ea7fa182bd7d85b26dd44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ce13d37974ea7fa182bd7d85b26dd44">&#9670;&nbsp;</a></span>trigger_update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt; bool, return_type &gt; controller_interface::ControllerInterfaceBase::trigger_update </td>
+          <td>(</td>
+          <td class="paramtype">const rclcpp::Time &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const rclcpp::Duration &amp;&#160;</td>
+          <td class="paramname"><em>period</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Trigger update method. This method is used by the controller_manager to trigger the update method of the controller. The method is used to trigger the update method of the controller synchronously or asynchronously, based on the controller configuration. <b>The method called in the (real-time) control loop.</b></p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">time</td><td>The time at the start of this control loop iteration </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">period</td><td>The measured time taken by the last control loop iteration </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A pair with the first element being a boolean indicating if the async callback method was triggered and the second element being the last return value of the async function. For more details check the AsyncFunctionHandler implementation in <code><a class="el" href="namespacerealtime__tools.html">realtime_tools</a></code> package. </dd></dl>
+
+</div>
+</div>
 <a id="add1fed599ea8a49a696ea657bf6a02b1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#add1fed599ea8a49a696ea657bf6a02b1">&#9670;&nbsp;</a></span>update()</h2>
 
@@ -603,6 +644,26 @@ template&lt;typename ParameterT &gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>return_type::OK if update is successfully, otherwise return_type::ERROR. </dd></dl>
 
 <p>Implemented in <a class="el" href="classtricycle__controller_1_1TricycleController.html#adea072f933f6b464856299ec77d76586">tricycle_controller::TricycleController</a>, <a class="el" href="classrange__sensor__broadcaster_1_1RangeSensorBroadcaster.html#a83dcad9e66a52095c50a114e8f261006">range_sensor_broadcaster::RangeSensorBroadcaster</a>, <a class="el" href="classparallel__gripper__action__controller_1_1GripperActionController.html#a23358e940d92d311eb9df96c72ea671a">parallel_gripper_action_controller::GripperActionController</a>, <a class="el" href="classjoint__trajectory__controller_1_1JointTrajectoryController.html#a3b9c5a2d39eeea7652b6226c5dca2fdc">joint_trajectory_controller::JointTrajectoryController</a>, <a class="el" href="classjoint__state__broadcaster_1_1JointStateBroadcaster.html#a78329faed4f9a41858cc130122a8a198">joint_state_broadcaster::JointStateBroadcaster</a>, <a class="el" href="classimu__sensor__broadcaster_1_1IMUSensorBroadcaster.html#a41224cedf96782693d81e7386315ceca">imu_sensor_broadcaster::IMUSensorBroadcaster</a>, <a class="el" href="classgripper__action__controller_1_1GripperActionController.html#ae91d5b87a188d1d195407ef7ee7cd4b4">gripper_action_controller::GripperActionController&lt; HardwareInterface &gt;</a>, <a class="el" href="classforward__command__controller_1_1ForwardControllersBase.html#a723d658dae9f2b3798f81ab90c339cfb">forward_command_controller::ForwardControllersBase</a>, <a class="el" href="classforce__torque__sensor__broadcaster_1_1ForceTorqueSensorBroadcaster.html#a117e93983c4d51c2ad7dcb51789e55d2">force_torque_sensor_broadcaster::ForceTorqueSensorBroadcaster</a>, <a class="el" href="classdiff__drive__controller_1_1DiffDriveController.html#a234f4b6976ff84275307225a608718e0">diff_drive_controller::DiffDriveController</a>, <a class="el" href="classros2__control__demo__example__7_1_1RobotController.html#a24a6260a594ac291ea031ac2116efe1a">ros2_control_demo_example_7::RobotController</a>, <a class="el" href="classros2__control__demo__example__10_1_1GPIOController.html#a2486f49c344cc9245d13bd4ae07092ef">ros2_control_demo_example_10::GPIOController</a>, and <a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#a7cc9715499c50020997f4d4f10f67d14">controller_interface::ChainableControllerInterface</a>.</p>
+
+</div>
+</div>
+<a id="a34ec5cc2075333ce2fc73a97388f01c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34ec5cc2075333ce2fc73a97388f01c5">&#9670;&nbsp;</a></span>wait_for_trigger_update_to_finish()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void controller_interface::ControllerInterfaceBase::wait_for_trigger_update_to_finish </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Method to wait for any running async update cycle to finish after finishing the current cycle. This is needed to be called before deactivating the controller by the controller_manager, so that the interfaces still exist when the controller finishes its cycle and then it's exits.</p>
+<dl class="section note"><dt>Note</dt><dd><b>The method is not real-time safe and shouldn't be called in the control loop.</b></dd></dl>
+<p>If the controller is running in async mode, the method will wait for the current async update to finish. If the controller is not running in async mode, the method will do nothing. </p>
 
 </div>
 </div>

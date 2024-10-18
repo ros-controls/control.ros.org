@@ -15,5 +15,6 @@ var searchData=
   ['controllermanagerlister_581',['ControllerManagerLister',['../classrqt__joint__trajectory__controller_1_1utils_1_1ControllerManagerLister.html',1,'rqt_joint_trajectory_controller::utils']]],
   ['controllernamecompleter_582',['ControllerNameCompleter',['../classros2controlcli_1_1api_1_1ControllerNameCompleter.html',1,'ros2controlcli::api']]],
   ['controllerspec_583',['ControllerSpec',['../structcontroller__manager_1_1ControllerSpec.html',1,'controller_manager']]],
-  ['controllertable_584',['ControllerTable',['../classrqt__controller__manager_1_1controller__manager_1_1ControllerTable.html',1,'rqt_controller_manager::controller_manager']]]
+  ['controllertable_584',['ControllerTable',['../classrqt__controller__manager_1_1controller__manager_1_1ControllerTable.html',1,'rqt_controller_manager::controller_manager']]],
+  ['controllerupdatestats_585',['ControllerUpdateStats',['../structcontroller__interface_1_1ControllerUpdateStats.html',1,'controller_interface']]]
 ];
