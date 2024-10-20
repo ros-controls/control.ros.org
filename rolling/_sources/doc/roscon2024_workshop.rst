@@ -3,7 +3,7 @@
 ROSCon 2024 Workshop
 ====================
 
-**Location: Room 202**
+**Location: Room 200**
 
 **Time: 13:00-17:00, 21. October 2024**
 
@@ -32,7 +32,13 @@ If you don't have docker, follow `the docker instructions <https://docs.docker.c
 
 If you don't have docker compose, run ``sudo apt-get install docker-compose-plugin`` or follow `the docker compose instructions <https://docs.docker.com/compose/install/linux/>`_ to install it.
 
-Stay tuned for more!
+Slides are available in `pdf <https://tinyurl.com/ros2control-pdf>`_ and `pptx <https://tinyurl.com/ros2control-pptx>`_ .
+
+Try pulling the container we use prior to coming to the workshop:
+
+.. code::
+
+   docker pull bmagyar/roscon2024_workshop
 
 People
 ------
