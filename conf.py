@@ -172,6 +172,14 @@ html_logo = "images/logo_ros-controls.png"
 
 github_url = "https://github.com/ros-controls/control.ros.org"
 
+# -- linkchecker options -----------------------------------------------------
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#filtering
+linkcheck_anchors_ignore_for_url = [
+    'https://github.com/',
+    'https://index.ros.org/'
+    ]
+linkcheck_ignore = [r'https://gazebosim.org/home']
+
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
