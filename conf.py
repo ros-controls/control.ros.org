@@ -33,7 +33,7 @@ copyright = "{}, {}".format(time.strftime("%Y"), author)
 ros_distro = "jazzy"
 distro_title = "Jazzy"
 distro_title_full = "Jazzy Jalisco"
-repos_file_branch = "jazzy"
+repos_file_branch = "master"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
