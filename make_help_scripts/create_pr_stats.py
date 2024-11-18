@@ -692,7 +692,7 @@ branches = {
   "ros2_debian": "main"
 }
 
-maintainers = ["bmagyar", "destogl", "christophfroehlich"]
+maintainers = ["bmagyar", "destogl", "christophfroehlich", "saikishor"]
 blacklist = ["dependabot[bot]", "mergify[bot]"]
 
 # Get the current date and time
