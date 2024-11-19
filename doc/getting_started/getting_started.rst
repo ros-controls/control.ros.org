@@ -15,16 +15,16 @@ To use it, you have to install ``ros-{DISTRO}-ros2-control`` and ``ros-{DISTRO}-
 Building from Source
 ---------------------------
 
-The rolling branch is compatible with both Humble and Iron ROS distributions. You can find more information about this compatibility on the respective `Humble <https://control.ros.org/humble/doc/getting_started/getting_started.html#building-from-source>`__ and `Iron <https://control.ros.org/iron/doc/getting_started/getting_started.html#building-from-source>`__ versions of this page.
+The rolling branch is compatible with both Humble and Jazzy ROS distributions. You can find more information about this compatibility on the respective `Humble <https://control.ros.org/humble/doc/getting_started/getting_started.html#building-from-source>`__ and `Jazzy <https://control.ros.org/jazzy/doc/getting_started/getting_started.html#building-from-source>`__ versions of this page.
 
 .. raw:: html
 
     <a href="https://github.com/ros-controls/ros2_control_ci/actions/workflows/{DISTRO}-binary-build.yml">
         <img src="https://github.com/ros-controls/ros2_control_ci/actions/workflows/{DISTRO}-binary-build.yml/badge.svg" alt="{DISTRO} Binary Build"/></a></br>
-    <a href="https://github.com/ros-controls/ros2_control_ci/actions/workflows/rolling-compatibility-iron-binary-build.yml">
-        <img src="https://github.com/ros-controls/ros2_control_ci/actions/workflows/rolling-compatibility-iron-binary-build.yml/badge.svg" alt="Rolling Compatibility iron"/></a>
+    <a href="https://github.com/ros-controls/ros2_control_ci/actions/workflows/rolling-compatibility-jazzy-binary-build.yml">
+        <img src="https://github.com/ros-controls/ros2_control_ci/actions/workflows/rolling-compatibility-jazzy-binary-build.yml/badge.svg" alt="Rolling Compatibility Jazzy"/></a>
     <a href="https://github.com/ros-controls/ros2_control_ci/actions/workflows/rolling-compatibility-humble-binary-build.yml">
-        <img src="https://github.com/ros-controls/ros2_control_ci/actions/workflows/rolling-compatibility-humble-binary-build.yml/badge.svg" alt="Rolling Compatibility humble"/></a>
+        <img src="https://github.com/ros-controls/ros2_control_ci/actions/workflows/rolling-compatibility-humble-binary-build.yml/badge.svg" alt="Rolling Compatibility Humble"/></a>
 
 If you want to install the framework from source, e.g., for contributing to the framework, use the following commands:
 
