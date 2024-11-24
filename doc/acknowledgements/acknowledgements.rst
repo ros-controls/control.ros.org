@@ -84,7 +84,7 @@ The project has received major contributions from the following companies and in
 
 |aitlogo|
 
-.. |aitlogo| image:: images/aitlogo.jpg
+.. |aitlogo| image:: images/ait_logo.jpg
     :width: 300
     :alt: "Austrian Institute of Technology"
 
