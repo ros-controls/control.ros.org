@@ -45,7 +45,7 @@ Summary:
   Authors:
     - Sai Kishor Kothakota (PAL Robotics)
 
-2023-07-07 ROS Developers Day 2023: Configure a Mobile Manipulator with ros2_control 
+2023-07-07 ROS Developers Day 2023: Configure a Mobile Manipulator with ros2_control
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 TBD add rosject link
 
