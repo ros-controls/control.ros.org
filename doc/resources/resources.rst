@@ -47,8 +47,11 @@ Summary:
 
 2023-07-07 ROS Developers Day 2023: Configure a Mobile Manipulator with ros2_control
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+
 `Recording <https://www.youtube.com/watch?v=LvBjVmZxxDA>`__
+
 `Github repo with code <https://github.com/bmagyar/rosdevday2023>`__
+
 TBD add Construct rosject link
 
 
