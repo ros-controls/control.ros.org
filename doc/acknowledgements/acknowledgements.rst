@@ -76,6 +76,19 @@ Companies and Institutions
 --------------------------
 The project has received major contributions from the following companies and institutions.
 
+|stoglroboticslogo|
+
+.. |stoglroboticslogo| image:: images/stoglroboticslogo.png
+    :width: 300
+    :alt: "Stogl Robotics Consulting"
+
+|aitlogo|
+
+.. |aitlogo| image:: images/ait_logo.jpg
+    :width: 300
+    :alt: "Austrian Institute of Technology"
+
+
 |palroboticslogo|
 
 .. |palroboticslogo| image:: images/palroboticslogo.png
@@ -87,12 +100,6 @@ The project has received major contributions from the following companies and in
 .. |picknikroboticslogo| image:: images/picknikroboticslogo.png
     :width: 300
     :alt: "PickNik Robotics"
-
-|stoglroboticslogo|
-
-.. |stoglroboticslogo| image:: images/stoglroboticslogo.png
-    :width: 300
-    :alt: "Stogl Robotics Consulting"
 
 |rosin_ack_logo_wide|
 

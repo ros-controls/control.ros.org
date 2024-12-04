@@ -172,6 +172,14 @@ html_logo = "images/logo_ros-controls.png"
 
 github_url = "https://github.com/ros-controls/control.ros.org"
 
+# -- linkchecker options -----------------------------------------------------
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#filtering
+linkcheck_anchors_ignore_for_url = [
+    'https://github.com/',
+    'https://index.ros.org/'
+    ]
+linkcheck_ignore = [r'https://gazebosim.org/home']
+
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
@@ -206,7 +214,7 @@ smv_branch_whitelist = r"^(foxy|galactic|humble|iron|jazzy|"+ base_branch + r")$
 smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy|galactic|humble|iron|jazzy).*$"
 smv_remote_whitelist = r"^(origin)$"
 smv_latest_version = "jazzy"
-smv_eol_versions = ["foxy", "galactic"]
+smv_eol_versions = ["foxy", "galactic", "iron"]
 
 distro_full_names = {
     "foxy": "Foxy Fitzroy",

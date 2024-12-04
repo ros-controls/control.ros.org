@@ -12,9 +12,11 @@ Communication protocols
 End-effectors
 --------------
 - `Schunk SVH 5-finger Hand <https://github.com/SCHUNK-SE-Co-KG/schunk_svh_ros_driver/tree/ros2-humble>`_
+- `TESOLLO DG-3F Delto Gripper-3F <https://github.com/Tesollo-Delto/DELTO_ROS2>`_
 
 Non robot-devices
 ------------------
+- `ctrlX AUTOMATION <https://github.com/boschrexroth/ctrlx-automation-sdk-ros2>`_
 - `Force Dimension haptic devices <https://github.com/ICube-Robotics/forcedimension_ros2>`_
 - `Hoverboard motors <https://github.com/DataBot-Labs/hoverboard_ros2_control>`_
 - `NDI measurement systems <https://github.com/ICube-Robotics/ndisys_ros2>`_
