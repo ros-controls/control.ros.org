@@ -685,7 +685,7 @@ branches = {
   "control_msgs": "master",
   "control.ros.org": "master",
   "gazebo_ros2_control": "master",
-  "gz_ros2_control": "master",
+  "gz_ros2_control": "rolling",
   "kinematics_interface": "master",
   "ros2_control_ci": "master",
   "ros2_rhel": "main",
@@ -696,7 +696,7 @@ maintainers = ["bmagyar", "destogl", "christophfroehlich", "saikishor"]
 blacklist = ["dependabot[bot]", "mergify[bot]"]
 
 # Get the current date and time
-current_date = datetime.utcnow()
+current_date = datetime.now(datetime.timezone.utc)
 
 # Calculate one year ago from the current date
 one_year_ago = current_date - timedelta(days=365)
