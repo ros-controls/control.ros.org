@@ -633,7 +633,7 @@ def create_contributors_table_with_graph(contributors_stats, user_details, table
 
 def print_reviewers_stats(reviewers_stats):
   """
-  Prints the statistics of the reviewers.
+  Prints the statistics of the 10 reviewers with most finished reviews.
 
   Args:
     reviewers_stats (dict): A dictionary containing the statistics of the reviewers.
@@ -646,7 +646,7 @@ def print_reviewers_stats(reviewers_stats):
 
 def print_contributors_stats(contributors_stats):
   """
-  Prints the statistics of the contributors.
+  Prints the statistics of the 10 contributors with the most line changes.
 
   Args:
     contributors_stats (dict): A dictionary containing the statistics of the contributors.
