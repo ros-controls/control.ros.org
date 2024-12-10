@@ -64,7 +64,7 @@ branch_version = {
     "humble": "humble",
     "iron": "iron",
     "jazzy": "jazzy",
-    base_branch: "rolling"  # master is rolling, PRs are tested on rolling
+    base_branch: "rolling"  # PRs are tested on rolling
 }
 
 # the subrepos which are cloned into the branches and, optionally, their corresponding PR for checkout
@@ -79,7 +79,7 @@ repos = {
             "humble": "humble",
             "iron": "iron",
             "jazzy": "master",
-            "rolling": "master"  # master is rolling
+            "rolling": "master"
         },
         "pr": os.environ.get('ROS2_CONTROL_PR')
     },
@@ -91,7 +91,7 @@ repos = {
             "humble": "humble",
             "iron": "iron",
             "jazzy": "master",
-            "rolling": "master"  # master is rolling
+            "rolling": "master"
         },
         "pr": os.environ.get('ROS2_CONTROLLERS_PR')
     },
@@ -103,7 +103,7 @@ repos = {
             "humble": "humble",
             "iron": "iron",
             "jazzy": "master",
-            "rolling": "master"  # master is rolling
+            "rolling": "master"
         },
         "pr": os.environ.get('ROS2_CONTROL_DEMOS_PR')
     },
@@ -115,7 +115,7 @@ repos = {
             "humble": "humble",
             "iron": "iron",
             "jazzy": "master",
-            "rolling": "master"  # master is rolling
+            "rolling": "master"
         },
         "pr": os.environ.get('GAZEBO_ROS2_CONTROL_PR')
     },
@@ -139,7 +139,7 @@ repos = {
             "humble": "ros2-master",
             "iron": "ros2-master",
             "jazzy": "ros2-master",
-            "rolling": "ros2-master"  # master is rolling
+            "rolling": "ros2-master"
         },
         "pr": None
     },
@@ -151,7 +151,7 @@ repos = {
             "humble": "humble",
             "iron": "master",
             "jazzy": "master",
-            "rolling": "master"  # master is rolling
+            "rolling": "master"
         },
         "pr": None
     },
@@ -163,7 +163,7 @@ repos = {
             "humble": "master",
             "iron": "master",
             "jazzy": "master",
-            "rolling": "master"  # master is rolling
+            "rolling": "master"
         },
         "pr": None
     },
@@ -175,7 +175,7 @@ repos = {
             "humble": "humble",
             "iron": "master",
             "jazzy": "master",
-            "rolling": "master"  # master is rolling
+            "rolling": "master"
         },
         "pr": None
     }
