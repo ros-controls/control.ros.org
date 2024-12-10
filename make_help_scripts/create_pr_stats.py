@@ -15,7 +15,7 @@
 
 import requests
 import os
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import time
 
 def get_api_response(url):
@@ -696,7 +696,7 @@ maintainers = ["bmagyar", "destogl", "christophfroehlich", "saikishor"]
 blacklist = ["dependabot[bot]", "mergify[bot]"]
 
 # Get the current date and time
-current_date = datetime.now(datetime.timezone.utc)
+current_date = datetime.now(timezone.utc)
 
 # Calculate one year ago from the current date
 one_year_ago = current_date - timedelta(days=365)
