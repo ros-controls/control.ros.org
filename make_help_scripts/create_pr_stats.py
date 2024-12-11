@@ -15,7 +15,7 @@
 
 import requests
 import os
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import time
 
 def get_api_response(url):
@@ -633,7 +633,7 @@ def create_contributors_table_with_graph(contributors_stats, user_details, table
 
 def print_reviewers_stats(reviewers_stats):
   """
-  Prints the statistics of the reviewers.
+  Prints the statistics of the 10 reviewers with most finished reviews.
 
   Args:
     reviewers_stats (dict): A dictionary containing the statistics of the reviewers.
@@ -646,7 +646,7 @@ def print_reviewers_stats(reviewers_stats):
 
 def print_contributors_stats(contributors_stats):
   """
-  Prints the statistics of the contributors.
+  Prints the statistics of the 10 contributors with the most line changes.
 
   Args:
     contributors_stats (dict): A dictionary containing the statistics of the contributors.
@@ -685,7 +685,7 @@ branches = {
   "control_msgs": "master",
   "control.ros.org": "master",
   "gazebo_ros2_control": "master",
-  "gz_ros2_control": "master",
+  "gz_ros2_control": "rolling",
   "kinematics_interface": "master",
   "ros2_control_ci": "master",
   "ros2_rhel": "main",
@@ -696,7 +696,7 @@ maintainers = ["bmagyar", "destogl", "christophfroehlich"]
 blacklist = ["dependabot[bot]", "mergify[bot]"]
 
 # Get the current date and time
-current_date = datetime.utcnow()
+current_date = datetime.now(timezone.utc)
 
 # Calculate one year ago from the current date
 one_year_ago = current_date - timedelta(days=365)
