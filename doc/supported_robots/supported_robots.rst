@@ -30,6 +30,7 @@ Official (supported by robot manufacturer)
 - `Clearpath Robotics Jackal J100 <https://docs.clearpathrobotics.com/docs/robots/outdoor_robots/jackal/user_manual_jackal>`_
 - `Clearpath Robotics Warthog W200 <https://docs.clearpathrobotics.com/docs/robots/outdoor_robots/warthog/user_manual_warthog>`_
 - `Flexiv Robotics Rizon robots <https://github.com/flexivrobotics/flexiv_ros2>`_
+- `Franka Robotics - Franka Research 3 (FR3) <https://github.com/frankaemika/franka_ros2>`_
 - `Husarion ROSbot 2R / 2 PRO <https://github.com/husarion/rosbot_ros>`_
 - `Husarion ROSbot XL <https://github.com/husarion/rosbot_xl_ros>`_
 - `Husarion ROSbot XL with OpenMANIPULATOR-X (including MoveIt2) <https://husarion.com/tutorials/ros-projects/rosbot-xl-openmanipulator-x/>`_
