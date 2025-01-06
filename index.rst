@@ -30,7 +30,7 @@ If you are not familiar with the control theory, please get some idea about it (
 
 ``ros2_control`` Repositories
 -------------------------------------------
-The ros2_control framework consists of the following Github repositories:
+The framework consists of the following Github repositories hosted under the `ros-controls`_ Github organization:
 
 * `ros2_control`_ - the main interfaces and components of the framework;
 * `ros2_controllers`_ - widely used controllers, such as forward command controller, joint trajectory controller, differential drive controller;
@@ -38,12 +38,16 @@ The ros2_control framework consists of the following Github repositories:
 * `realtime_tools`_ - general toolkit for realtime support, e.g., realtime buffers and publishers;
 * `control_msgs`_ - common messages;
 * `kinematics_interface`_ - for using C++ kinematics frameworks;
+* `gz_ros2_control`_ - Plugin for Gazebo (Ignition);
+* `gazebo_ros2_control`_ - Plugin for Gazebo Classic (deprecated);
 
 
-Additionally, there are following (unreleased) packages are relevant for getting-started and project management:
+Additionally, the following (unreleased) packages are relevant for documentation and project management:
 
 * `ros2_control_demos`_ - example implementations of common use-cases for a smooth start;
-* `roadmap`_ - planning and design docs for the project.
+* `roadmap`_ - planning and design docs for the project;
+* `ros2_control_ci`_ - reusable Github actions;
+* `control.ros.org`_ - this documentation page.
 
 Development Organisation and Communication
 -------------------------------------------
@@ -77,6 +81,11 @@ General discussions
 .. _control_toolbox: https://github.com/ros-controls/control_toolbox
 .. _kinematics_interface: https://github.com/ros-controls/kinematics_interface
 .. _ros2_control_demos: https://github.com/ros-controls/ros2_control_demos
+.. _gazebo_ros2_control: https://github.com/ros-controls/gazebo_ros2_control
+.. _gz_ros2_control: https://github.com/ros-controls/gz_ros2_control
+.. _ros2_control_ci: https://github.com/ros-controls/ros2_control_ci
+.. _control.ros.org: https://github.com/ros-controls/control.ros.org
+.. _ros-controls: https://github.com/ros-controls
 .. _controller_manager_msgs: https://github.com/ros-controls/ros2_control/tree/{REPOS_FILE_BRANCH}/controller_manager_msgs
 .. _Controller Manager: https://github.com/ros-controls/ros2_control/blob/{REPOS_FILE_BRANCH}/controller_manager/src/controller_manager.cpp
 .. _ControllerInterface: https://github.com/ros-controls/ros2_control/blob/{REPOS_FILE_BRANCH}/controller_interface/include/controller_interface/controller_interface.hpp
