@@ -29,6 +29,7 @@ Official (supported by robot manufacturer)
 - `Clearpath Robotics Husky A200 <https://docs.clearpathrobotics.com/docs/robots/outdoor_robots/husky/user_manual_husky>`_
 - `Clearpath Robotics Jackal J100 <https://docs.clearpathrobotics.com/docs/robots/outdoor_robots/jackal/user_manual_jackal>`_
 - `Clearpath Robotics Warthog W200 <https://docs.clearpathrobotics.com/docs/robots/outdoor_robots/warthog/user_manual_warthog>`_
+- `Denso Robots - 4-Axis (SCARA) robots, 5-and 6-Axis robots, and Collaborative robots (not OSS type) <https://github.com/DENSORobot/denso_robot_ros2>`_
 - `Flexiv Robotics Rizon robots <https://github.com/flexivrobotics/flexiv_ros2>`_
 - `Franka Robotics - Franka Research 3 (FR3) <https://github.com/frankaemika/franka_ros2>`_
 - `Husarion ROSbot 2R / 2 PRO <https://github.com/husarion/rosbot_ros>`_
