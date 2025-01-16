@@ -17,8 +17,7 @@ You can run the following commands to install the binary packages
 For Ubuntu deb packages
   .. code-block:: shell
   
-    sudo apt install ros-{DISTRO}-ros2-control
-    sudo apt install ros-{DISTRO}-ros2-controllers
+    sudo apt install ros-{DISTRO}-ros2-control ros-{DISTRO}-ros2-controllers
 
 For RHEL (RPM) packages
   .. code-block:: shell
