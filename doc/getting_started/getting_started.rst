@@ -22,8 +22,7 @@ For Ubuntu deb packages
 For RHEL (RPM) packages
   .. code-block:: shell
 
-    sudo dnf install ros-{DISTRO}-ros2-control
-    sudo dnf install ros-{DISTRO}-ros2-controllers
+    sudo dnf install ros-{DISTRO}-ros2-control ros-{DISTRO}-ros2-controllers
           
   
 
