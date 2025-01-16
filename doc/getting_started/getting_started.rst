@@ -14,7 +14,7 @@ To use it, you have to install ``ros-{DISTRO}-ros2-control`` and ``ros-{DISTRO}-
 
 You can run the following commands to install the binary packages 
 
-For Ubuntu deb packages Linux - Noble Numbat (24.04)
+For Ubuntu deb packages
   .. code-block:: shell
   
     sudo apt install ros-{DISTRO}-ros2-control
