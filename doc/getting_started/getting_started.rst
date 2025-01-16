@@ -12,11 +12,19 @@ Binary packages
 The ros2_control framework is released for ROS 2 {DISTRO}.
 To use it, you have to install ``ros-{DISTRO}-ros2-control`` and ``ros-{DISTRO}-ros2-controllers`` packages.
 
-You can run the following commands to install the binary packages
+You can run the following commands to install the binary packages 
+
+For Ubuntu deb packages Linux - Noble Numbat (24.04)
   .. code-block:: shell
   
     sudo apt install ros-{DISTRO}-ros2-control
     sudo apt install ros-{DISTRO}-ros2-controllers
+
+For RHEL (RPM) packages
+  .. code-block:: shell
+
+    sudo dnf install ros-{DISTRO}-ros2-control
+    sudo dnf install ros-{DISTRO}-ros2-controllers
           
   
 
