@@ -15,7 +15,7 @@ To use it, you have to install ``ros-{DISTRO}-ros2-control`` and ``ros-{DISTRO}-
 For Ubuntu deb packages
 
   .. code-block:: shell
-  
+
     sudo apt install ros-{DISTRO}-ros2-control ros-{DISTRO}-ros2-controllers
 
 For RHEL (RPM) packages
@@ -23,8 +23,8 @@ For RHEL (RPM) packages
   .. code-block:: shell
 
     sudo dnf install ros-{DISTRO}-ros2-control ros-{DISTRO}-ros2-controllers
-          
-  
+
+
 
 
 Building from Source
