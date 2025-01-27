@@ -37,6 +37,7 @@ Official (supported by robot manufacturer)
 - `Husarion ROSbot XL with OpenMANIPULATOR-X (including MoveIt2) <https://husarion.com/tutorials/ros-projects/rosbot-xl-openmanipulator-x/>`_
 - `igus/Commonplace Robotics <https://github.com/CommonplaceRobotics/iRC_ROS>`_
 - `Kinova® Kortex™ Gen3 <https://github.com/Kinovarobotics/ros2_kortex>`_
+- `Mitsubishi MELFA <https://github.com/Mitsubishi-Electric-Asia/melfa_ros2_driver>`_
 - `PMB2 - Differential Drive Mobile Base <https://github.com/pal-robotics/pmb2_simulation/tree/humble-devel>`_
 - `TIAGo - Mobile Manipulator <https://github.com/pal-robotics/tiago_simulation/tree/humble-devel>`_
 - `Universal Robots <https://github.com/UniversalRobots/Universal_Robots_ROS2_Driver>`_
