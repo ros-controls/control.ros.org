@@ -63,12 +63,9 @@ branch_version = {
     "galactic": "galactic",
     "humble": "humble",
     "iron": "iron",
-<<<<<<< HEAD
-    base_branch: "jazzy"
-=======
     "jazzy": "jazzy",
-    base_branch: "rolling"  # PRs are tested on rolling
->>>>>>> 99271f8 (Fix/stats (#363))
+    base_branch: "jazzy",
+    "jazzy": "jazzy" # PRs are tested on jazzy
 }
 
 # the subrepos which are cloned into the branches and, optionally, their corresponding PR for checkout
