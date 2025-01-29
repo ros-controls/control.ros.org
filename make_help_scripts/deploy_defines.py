@@ -135,8 +135,8 @@ repos = {
         "url": "https://github.com/ros-controls/control_toolbox",
         "branch_version": {
             "foxy": "foxy",
-            "galactic": "ros2-master",
-            "humble": "ros2-master",
+            "galactic": "humble",
+            "humble": "humble",
             "iron": "ros2-master",
             "jazzy": "ros2-master",
             "rolling": "ros2-master"
@@ -159,10 +159,10 @@ repos = {
         "url": "https://github.com/ros-controls/realtime_tools",
         "branch_version": {
             "foxy": "foxy-devel",
-            "galactic": "master",
-            "humble": "master",
-            "iron": "master",
-            "jazzy": "master",
+            "galactic": "humble",
+            "humble": "humble",
+            "iron": "jazzy",
+            "jazzy": "jazzy",
             "rolling": "master"
         },
         "pr": None
