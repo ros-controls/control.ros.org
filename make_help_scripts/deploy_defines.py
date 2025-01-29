@@ -64,8 +64,8 @@ branch_version = {
     "humble": "humble",
     "iron": "iron",
     "jazzy": "jazzy",
-    base_branch: "jazzy",
-    "jazzy": "jazzy" # PRs are tested on jazzy
+    base_branch: "jazzy", # PRs are tested on jazzy
+    "master": "rolling"
 }
 
 # the subrepos which are cloned into the branches and, optionally, their corresponding PR for checkout
