@@ -61,14 +61,10 @@ def add_pr_stats_file():
 branch_version = {
     "foxy": "foxy",
     "galactic": "galactic",
-    base_branch: "humble",
+    base_branch: "humble", # PRs are tested on humble
     "iron": "iron",
-<<<<<<< HEAD
-    "master": "rolling"  # master is rolling, PRs are tested on rolling
-=======
     "jazzy": "jazzy",
-    base_branch: "rolling"  # PRs are tested on rolling
->>>>>>> 99271f8 (Fix/stats (#363))
+    "master": "rolling"  # master is rolling
 }
 
 # the subrepos which are cloned into the branches and, optionally, their corresponding PR for checkout
@@ -82,12 +78,8 @@ repos = {
             "galactic": "galactic",
             "humble": "humble",
             "iron": "iron",
-<<<<<<< HEAD
-            "rolling": "master"  # master is rolling
-=======
             "jazzy": "master",
             "rolling": "master"
->>>>>>> 99271f8 (Fix/stats (#363))
         },
         "pr": os.environ.get('ROS2_CONTROL_PR')
     },
@@ -98,12 +90,8 @@ repos = {
             "galactic": "galactic",
             "humble": "humble",
             "iron": "iron",
-<<<<<<< HEAD
-            "rolling": "master"  # master is rolling
-=======
             "jazzy": "master",
             "rolling": "master"
->>>>>>> 99271f8 (Fix/stats (#363))
         },
         "pr": os.environ.get('ROS2_CONTROLLERS_PR')
     },
@@ -114,12 +102,8 @@ repos = {
             "galactic": "galactic",
             "humble": "humble",
             "iron": "iron",
-<<<<<<< HEAD
-            "rolling": "master"  # master is rolling
-=======
             "jazzy": "master",
             "rolling": "master"
->>>>>>> 99271f8 (Fix/stats (#363))
         },
         "pr": os.environ.get('ROS2_CONTROL_DEMOS_PR')
     },
@@ -130,12 +114,8 @@ repos = {
             "galactic": "galactic",
             "humble": "humble",
             "iron": "iron",
-<<<<<<< HEAD
-            "rolling": "master"  # master is rolling
-=======
             "jazzy": "master",
             "rolling": "master"
->>>>>>> 99271f8 (Fix/stats (#363))
         },
         "pr": os.environ.get('GAZEBO_ROS2_CONTROL_PR')
     },
@@ -157,12 +137,8 @@ repos = {
             "galactic": "ros2-master",
             "humble": "ros2-master",
             "iron": "ros2-master",
-<<<<<<< HEAD
-            "rolling": "ros2-master"  # master is rolling
-=======
             "jazzy": "ros2-master",
             "rolling": "ros2-master"
->>>>>>> 99271f8 (Fix/stats (#363))
         },
         "pr": None
     },
@@ -173,12 +149,8 @@ repos = {
             "galactic": "galactic-devel",
             "humble": "humble",
             "iron": "master",
-<<<<<<< HEAD
-            "rolling": "master"  # master is rolling
-=======
             "jazzy": "master",
             "rolling": "master"
->>>>>>> 99271f8 (Fix/stats (#363))
         },
         "pr": None
     },
@@ -189,12 +161,8 @@ repos = {
             "galactic": "master",
             "humble": "master",
             "iron": "master",
-<<<<<<< HEAD
-            "rolling": "master"  # master is rolling
-=======
             "jazzy": "master",
             "rolling": "master"
->>>>>>> 99271f8 (Fix/stats (#363))
         },
         "pr": None
     },
@@ -205,12 +173,8 @@ repos = {
             "galactic": "humble",
             "humble": "humble",
             "iron": "master",
-<<<<<<< HEAD
-            "rolling": "master"  # master is rolling
-=======
             "jazzy": "master",
             "rolling": "master"
->>>>>>> 99271f8 (Fix/stats (#363))
         },
         "pr": None
     }
