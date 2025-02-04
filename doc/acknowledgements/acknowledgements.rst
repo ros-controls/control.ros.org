@@ -78,8 +78,8 @@ The project has received major contributions from the following companies and in
 
 |stoglroboticslogo|
 
-.. |stoglroboticslogo| image:: images/stoglroboticslogo.png
-    :width: 300
+.. |stoglroboticslogo| image:: images/b-robotizedlogo.png
+    :width: 320
     :alt: "Stogl Robotics Consulting"
 
 |aitlogo|
