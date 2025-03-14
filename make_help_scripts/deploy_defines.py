@@ -114,8 +114,6 @@ repos = {
             "galactic": "galactic",
             "humble": "humble",
             "iron": "iron",
-            "jazzy": "master",
-            "rolling": "master"
         },
         "pr": os.environ.get('GAZEBO_ROS2_CONTROL_PR')
     },

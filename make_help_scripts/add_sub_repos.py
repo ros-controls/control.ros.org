@@ -24,7 +24,10 @@ def add_sub_repositories(base_branch):
     os.chdir(deploy_defines.base_dir)
     for repo_name, repo_details in deploy_defines.repos.items():
         repo_path = os.path.join("doc", repo_name)
-        branch = repo_details["branch_version"][deploy_defines.branch_version[base_branch]]
+        branch = repo_details["branch_version"].get(deploy_defines.branch_version[base_branch], None)
+        if branch is None:
+            print(f"Branch version for {deploy_defines.branch_version[base_branch]} not found in {repo_name}")
+            continue
         if not os.path.isdir(repo_path):
             print(f"Create {repo_path} and checkout {branch} branch")
             subprocess.run(["git", "clone", "-b", branch, repo_details["url"], repo_path], check=True)
