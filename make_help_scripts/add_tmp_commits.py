@@ -55,7 +55,10 @@ def add_sub_repositories_and_commit():
             print(f"Create doc/{repo_name}")
             # Remove leftover folders if existing
             shutil.rmtree(f"doc/{repo_name}", ignore_errors=True)
-            branch = repo_details["branch_version"][version]
+            branch = repo_details["branch_version"].get(version, None)
+            if branch is None:
+                print(f"Branch version for {version} not found in {repo_name}")
+                continue
             subprocess.run(["git", "clone", "-b", branch, repo_details["url"], f"doc/{repo_name}"], check=True, stdout=subprocess.DEVNULL)
             os.chdir(f"doc/{repo_name}")
             # Remove git repo so that doc files of subrepo can be added to tmp commit
