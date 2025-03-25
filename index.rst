@@ -40,7 +40,6 @@ The framework consists of the following Github repositories hosted under the `ro
 * `control_msgs`_ - common messages;
 * `kinematics_interface`_ - for using C++ kinematics frameworks;
 * `gz_ros2_control`_ - Plugin for Gazebo (Ignition);
-* `gazebo_ros2_control`_ - Plugin for Gazebo Classic (deprecated);
 
 
 Additionally, the following (unreleased) packages are relevant for documentation and project management:
@@ -82,7 +81,6 @@ General discussions
 .. _control_toolbox: https://github.com/ros-controls/control_toolbox
 .. _kinematics_interface: https://github.com/ros-controls/kinematics_interface
 .. _ros2_control_demos: https://github.com/ros-controls/ros2_control_demos
-.. _gazebo_ros2_control: https://github.com/ros-controls/gazebo_ros2_control
 .. _gz_ros2_control: https://github.com/ros-controls/gz_ros2_control
 .. _ros2_control_ci: https://github.com/ros-controls/ros2_control_ci
 .. _control.ros.org: https://github.com/ros-controls/control.ros.org
