@@ -38,14 +38,17 @@ The framework consists of the following Github repositories hosted under the `ro
 * `realtime_tools`_ - general toolkit for realtime support, e.g., realtime buffers and publishers;
 * `control_msgs`_ - common messages;
 * `kinematics_interface`_ - for using C++ kinematics frameworks;
-* `gz_ros2_control`_ - Plugin for Gazebo (Ignition);
-* `gazebo_ros2_control`_ - Plugin for Gazebo Classic (deprecated);
+* `gz_ros2_control`_ - Plugin for Gazebo;
 
 
 Additionally, the following (unreleased) packages are relevant for documentation and project management:
 
 * `ros2_control_demos`_ - example implementations of common use-cases for a smooth start;
 * `roadmap`_ - planning and design docs for the project;
+* `ros2_control_ci`_ - reusable Github actions;
+* `ros2_debian`_ - Docker images for Debian CI jobs;
+* `ros2_rhel`_ - Docker images for RHEL CI jobs;
+* `ros2_control_cmake`_ - CMake macros for the project;
 * `ros2_control_ci`_ - reusable Github actions;
 * `control.ros.org`_ - this documentation page.
 
@@ -81,9 +84,11 @@ General discussions
 .. _control_toolbox: https://github.com/ros-controls/control_toolbox
 .. _kinematics_interface: https://github.com/ros-controls/kinematics_interface
 .. _ros2_control_demos: https://github.com/ros-controls/ros2_control_demos
-.. _gazebo_ros2_control: https://github.com/ros-controls/gazebo_ros2_control
 .. _gz_ros2_control: https://github.com/ros-controls/gz_ros2_control
 .. _ros2_control_ci: https://github.com/ros-controls/ros2_control_ci
+.. _ros2_control_cmake: https://github.com/ros-controls/ros2_control_cmake
+.. _ros2_debian: https://github.com/ros-controls/ros2_debian
+.. _ros2_rhel: https://github.com/ros-controls/ros2_rhel
 .. _control.ros.org: https://github.com/ros-controls/control.ros.org
 .. _ros-controls: https://github.com/ros-controls
 .. _controller_manager_msgs: https://github.com/ros-controls/ros2_control/tree/{REPOS_FILE_BRANCH}/controller_manager_msgs
