@@ -19,6 +19,7 @@ Welcome to the ros2_control documentation!
    doc/supported_robots/supported_robots.rst
    doc/resources/resources.rst
    doc/contributing/contributing.rst
+   doc/governance/governance.rst
    doc/project_ideas.rst
    doc/acknowledgements/acknowledgements.rst
 
