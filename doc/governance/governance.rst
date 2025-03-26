@@ -113,7 +113,7 @@ The following repositories are managed by the ros-controls PMC:
    * - https://github.com/ros-controls/control.ros.org
      - Not Yet Available
    * - https://github.com/ros-controls/gz_ros2_control
-     - Not Yet Available
+     - Alejandro Hernandez Cordero
    * - https://github.com/ros-controls/kinematics_interface
      - Not Yet Available
    * - https://github.com/ros-controls/realtime_tools
