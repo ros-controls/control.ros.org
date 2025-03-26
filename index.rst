@@ -19,7 +19,6 @@ Welcome to the ros2_control documentation - Humble!
    doc/resources/resources.rst
    doc/contributing/contributing.rst
    doc/governance/governance.rst
-   doc/project_ideas.rst
    doc/acknowledgements/acknowledgements.rst
 
 The ros2_control is a framework for (real-time) control of robots using (`ROS 2 <https://docs.ros.org/en/rolling/>`_).
