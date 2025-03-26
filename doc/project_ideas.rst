@@ -1,6 +1,6 @@
 .. _project_ideas:
 
-Project Ideas for GSoC 2024
+Project Ideas for GSoC
 =============================
 
 Tutorials and Demos for ros2_control
