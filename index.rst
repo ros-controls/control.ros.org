@@ -18,6 +18,7 @@ Welcome to the ros2_control documentation - Humble!
    doc/supported_robots/supported_robots.rst
    doc/resources/resources.rst
    doc/contributing/contributing.rst
+   doc/governance/governance.rst
    doc/project_ideas.rst
    doc/acknowledgements/acknowledgements.rst
 
@@ -54,14 +55,16 @@ Additionally, the following (unreleased) packages are relevant for documentation
 
 Development Organisation and Communication
 -------------------------------------------
+OSRA
+   The ros-controls project is governed by the `Open Source Robotics Alliance (OSRA) <https://osralliance.org/>`__. See :ref:`Governance` for more details.
 
 Questions
    Please use `Robotics Stack Exchange <https://robotics.stackexchange.com>`_ and tag your questions with ``ros2_control``.
 
-WG Meeting
-   Every second Wednesday there is a Working Group meeting.
+PMC Meeting
+   Every second Wednesday there is a PMC meeting.
    To join the meeting check the announcement on `ROS Discourse`_.
-   You can joint the meeting through `google groups <https://groups.google.com/forum/#!forum/ros-control-working-group-invites>`_ or directly on Google Meet (check the announcement).
+   You can join the meeting through `google groups <https://groups.google.com/forum/#!forum/ros-control-working-group-invites>`_ or directly on Zoom (check the announcement).
    To propose new discussion points, or review notes from previous meetings, check `this document <https://docs.google.com/document/d/1818AoYucI2z82awL_-8sAA5pMCV_g_wXCJiM6SQmhSQ/edit?usp=sharing>`_.
 
 Projects
