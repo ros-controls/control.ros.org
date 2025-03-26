@@ -8,7 +8,7 @@ Project Governance
    :depth: 2
    :local:
 
-Since 2022, the ros-controls project has been governed by the `Open Source Robotics Alliance (OSRA) <https://osralliance.org/>`__.
+Since 2025, the ros-controls project has been governed by the `Open Source Robotics Alliance (OSRA) <https://osralliance.org/>`__.
 The information below is meant to give a quick overview of the project governance, but for full information please see `the OSRA's website <https://osralliance.org/how-it-works/>`__.
 
 The ros-controls Project Management Committee is responsible for the day-to-day operations of the ros-controls project.
