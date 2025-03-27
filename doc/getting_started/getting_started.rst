@@ -68,6 +68,7 @@ If you want to install the framework from source, e.g., for contributing to the 
     colcon build --symlink-install
 
 * Do not forget to source ``setup.bash`` from the ``install`` folder!
+* If you run into the problem that the ```ros2_control_cmake``` package is missing consider cloning, building and sourcing [this repo](https://github.com/ros-controls/ros2_control_cmake)
 
 
 Architecture
