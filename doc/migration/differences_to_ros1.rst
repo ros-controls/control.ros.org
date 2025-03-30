@@ -14,7 +14,7 @@ Still, this solution is not optimal, especially when combining robots with exter
 The ros2_control framework defines three types of hardware ``Actuator``, ``Sensor`` and ``System``.
 Using a combination (composition) of those basic components, any physical robotic cell (robot and its surrounding) can be described.
 This also means that multi-robot, robot-sensor, robot-gripper combinations are supported out of the box.
-Section :ref:`Hardware Components section <overview_hardware_components>` describes this in detail.
+Section :ref:`Hardware Components <overview_hardware_components>` describes this in detail.
 
 Hardware Interfaces
 -------------------
