@@ -14,14 +14,14 @@ Still, this solution is not optimal, especially when combining robots with exter
 The ros2_control framework defines three types of hardware ``Actuator``, ``Sensor`` and ``System``.
 Using a combination (composition) of those basic components, any physical robotic cell (robot and its surrounding) can be described.
 This also means that multi-robot, robot-sensor, robot-gripper combinations are supported out of the box.
-Section `Hardware Components <#hardware-components>`__ describes this in detail.
+Section :ref:`Hardware Components <overview_hardware_components>` describes this in detail.
 
 Hardware Interfaces
 -------------------
 
 The ros_control framework allows only three types of interfaces (joints), i.e., ``position``, ``velocity``, and ``effort``. The ``RobotHW`` class makes it very hard to use any other data to control the robot.
 
-The ros2_control approach does not enforce a fixed set of interface types, but they are defined as strings in `hardware's description <#hardware-description-in-urdf>`__.
+The ros2_control approach does not enforce a fixed set of interface types, but they are defined as strings in :ref:`hardware's description <hardware_description_in_urdf>`.
 To ensure compatibility of standard controllers, standard interfaces are defined as constants in `hardware_interface package <https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/include/hardware_interface/types/hardware_interface_type_values.hpp>`__.
 
 Controller's Access to Hardware

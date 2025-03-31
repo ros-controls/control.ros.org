@@ -166,6 +166,8 @@ Actuator
 
 A detailed explanation of hardware components is given in the `Hardware Access through Controllers design document`_.
 
+.. _hardware_description_in_urdf:
+
 Hardware Description in URDF
 ----------------------------
 The ros2_control framework uses the ``<ros2_control>``-tag in the robot's URDF file to describe its components, i.e., the hardware setup.
