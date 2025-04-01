@@ -14,9 +14,7 @@
 # limitations under the License.
 
 # This script is used to check the links in the ROS documentation.
-# due to a bug in the sphinx linkchecker, github anchors are false positives and
-# have to be explicitly ignored
-# https://github.com/sphinx-doc/sphinx/issues/9016
+# linkcheck_anchors_ignore_for_url and linkcheck_ignore in conf.py can be used to ignore errors
 
 import os
 import shutil
