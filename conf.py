@@ -178,7 +178,10 @@ linkcheck_anchors_ignore_for_url = [
     'https://github.com/',
     'https://index.ros.org/'
     ]
-linkcheck_ignore = [r'https://gazebosim.org/home']
+linkcheck_ignore = [
+    r'https://gazebosim.org/home',
+    r'https://blogs.oracle.com/linux/post/task-priority'
+]
 
 # -- Options for HTMLHelp output ---------------------------------------------
 
