@@ -26,7 +26,7 @@ Before sending us a pull request, please ensure that:
 
 5. New code = new tests. If you are adding new functionality, always make sure to add some tests exercising the code and serving as live documentation of your original intention.
 
-To send us a pull request, please:
+**To send us a pull request, please:**
 
 1. Fork the repository.
 2. Modify the source; please focus on the specific change you are contributing. If you also reformat all the code, it will be hard for us to focus on your change.
