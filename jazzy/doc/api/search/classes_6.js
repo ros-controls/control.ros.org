@@ -14,6 +14,7 @@ var searchData=
   ['genericsystem_11',['GenericSystem',['../classmock__components_1_1GenericSystem.html',1,'mock_components']]],
   ['gpiocommandcontroller_12',['GpioCommandController',['../classgpio__controllers_1_1GpioCommandController.html',1,'gpio_controllers']]],
   ['gpssensor_13',['GPSSensor',['../classsemantic__components_1_1GPSSensor.html',1,'semantic_components']]],
-  ['gripperactioncontroller_14',['gripperactioncontroller',['../classgripper__action__controller_1_1GripperActionController.html',1,'gripper_action_controller::GripperActionController&lt; HardwareInterface &gt;'],['../classparallel__gripper__action__controller_1_1GripperActionController.html',1,'parallel_gripper_action_controller::GripperActionController']]],
-  ['gzresourcemanager_15',['GZResourceManager',['../classgz__ros2__control_1_1GZResourceManager.html',1,'gz_ros2_control']]]
+  ['gpssensorbroadcaster_14',['GPSSensorBroadcaster',['../classgps__sensor__broadcaster_1_1GPSSensorBroadcaster.html',1,'gps_sensor_broadcaster']]],
+  ['gripperactioncontroller_15',['gripperactioncontroller',['../classgripper__action__controller_1_1GripperActionController.html',1,'gripper_action_controller::GripperActionController&lt; HardwareInterface &gt;'],['../classparallel__gripper__action__controller_1_1GripperActionController.html',1,'parallel_gripper_action_controller::GripperActionController']]],
+  ['gzresourcemanager_16',['GZResourceManager',['../classgz__ros2__control_1_1GZResourceManager.html',1,'gz_ros2_control']]]
 ];
