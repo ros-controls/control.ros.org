@@ -67,5 +67,6 @@ var searchData=
   ['getvy_64',['getVy',['../classmecanum__drive__controller_1_1Odometry.html#ab77b2d11a60fab578dc5cc9cc4363d1b',1,'mecanum_drive_controller::Odometry']]],
   ['getwz_65',['getWz',['../classmecanum__drive__controller_1_1Odometry.html#ac03d5789e5a95d90b46d9c7f7258b953',1,'mecanum_drive_controller::Odometry']]],
   ['getx_66',['getX',['../classmecanum__drive__controller_1_1Odometry.html#a4964c24a7e17cca8d3eba39123e92733',1,'mecanum_drive_controller::Odometry']]],
-  ['gety_67',['getY',['../classmecanum__drive__controller_1_1Odometry.html#aa10bb571e668d1fe549c42bb9bad1ea6',1,'mecanum_drive_controller::Odometry']]]
+  ['gety_67',['getY',['../classmecanum__drive__controller_1_1Odometry.html#aa10bb571e668d1fe549c42bb9bad1ea6',1,'mecanum_drive_controller::Odometry']]],
+  ['gravitycompensation_68',['GravityCompensation',['../classcontrol__filters_1_1GravityCompensation.html#adb36ad03b0797052de2deb4b86cbe392',1,'control_filters::GravityCompensation']]]
 ];
