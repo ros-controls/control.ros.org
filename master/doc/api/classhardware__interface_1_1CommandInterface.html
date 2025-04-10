@@ -128,6 +128,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aecdbcaf774ae6f5027ac2cc3fa3d3a18" id="r_aecdbcaf774ae6f5027ac2cc3fa3d3a18"><td class="memItemLeft" align="right" valign="top"><a id="aecdbcaf774ae6f5027ac2cc3fa3d3a18" name="aecdbcaf774ae6f5027ac2cc3fa3d3a18"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>CommandInterface</b> (<a class="el" href="classhardware__interface_1_1CommandInterface.html">CommandInterface</a> &amp;&amp;other)=default</td></tr>
 <tr class="separator:aecdbcaf774ae6f5027ac2cc3fa3d3a18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bb70a9c28ab2da4f5f0220c7cc53f14" id="r_a9bb70a9c28ab2da4f5f0220c7cc53f14"><td class="memItemLeft" align="right" valign="top"><a id="a9bb70a9c28ab2da4f5f0220c7cc53f14" name="a9bb70a9c28ab2da4f5f0220c7cc53f14"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_on_set_command_limiter</b> (std::function&lt; double(double, bool &amp;)&gt; on_set_command_limiter)</td></tr>
+<tr class="separator:a9bb70a9c28ab2da4f5f0220c7cc53f14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba79971e5a9603a2e41d9a8b64d4cb60" id="r_aba79971e5a9603a2e41d9a8b64d4cb60"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aba79971e5a9603a2e41d9a8b64d4cb60"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1CommandInterface.html#aba79971e5a9603a2e41d9a8b64d4cb60">set_limited_value</a> (const T &amp;value)</td></tr>
+<tr class="memdesc:aba79971e5a9603a2e41d9a8b64d4cb60"><td class="mdescLeft">&#160;</td><td class="mdescRight">A setter for the value of the command interface that triggers the limiter.  <br /></td></tr>
+<tr class="separator:aba79971e5a9603a2e41d9a8b64d4cb60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad19f25f0e045f3da524c8c518f69c9ab" id="r_ad19f25f0e045f3da524c8c518f69c9ab"><td class="memItemLeft" align="right" valign="top"><a id="ad19f25f0e045f3da524c8c518f69c9ab" name="ad19f25f0e045f3da524c8c518f69c9ab"></a>
+const bool &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>is_limited</b> () const</td></tr>
+<tr class="separator:ad19f25f0e045f3da524c8c518f69c9ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf16a7e3b416d4e39db72fb59a3f9bba" id="r_aaf16a7e3b416d4e39db72fb59a3f9bba"><td class="memItemLeft" align="right" valign="top"><a id="aaf16a7e3b416d4e39db72fb59a3f9bba" name="aaf16a7e3b416d4e39db72fb59a3f9bba"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>registerIntrospection</b> () const</td></tr>
 <tr class="separator:aaf16a7e3b416d4e39db72fb59a3f9bba"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -264,6 +274,44 @@ std::shared_mutex&#160;</td><td class="memItemRight" valign="bottom"><b>handle_m
 
 <p><a class="el" href="classhardware__interface_1_1CommandInterface.html">CommandInterface</a> copy constructor is actively deleted. </p>
 <p>Command interfaces are having a unique ownership and thus can't be copied in order to avoid simultaneous writes to the same resource. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aba79971e5a9603a2e41d9a8b64d4cb60" name="aba79971e5a9603a2e41d9a8b64d4cb60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba79971e5a9603a2e41d9a8b64d4cb60">&#9670;&#160;</a></span>set_limited_value()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool hardware_interface::CommandInterface::set_limited_value </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A setter for the value of the command interface that triggers the limiter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>The value to be set. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the value was set successfully, false otherwise. </dd></dl>
 
 </div>
 </div>

@@ -203,6 +203,10 @@ All joints defined in the <code class="docutils literal notranslate"><span class
 <section id="parameters">
 <h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h2>
 <dl class="simple">
+<dt>enforce_command_limits (optional; bool; default: <code class="docutils literal notranslate"><span class="pre">false</span></code> for Jazzy and earlier distro and <code class="docutils literal notranslate"><span class="pre">true</span></code> for Rolling and newer distros)</dt><dd><p>Enforces the joint limits to the joint command interfaces.
+If the command is outside the limits, the command is clamped to be within the limits depending on the type of configured joint limits in the URDF.
+If the command is within the limits, the command is passed through without any changes.</p>
+</dd>
 <dt>&lt;controller_name&gt;.type</dt><dd><p>Name of a plugin exported using <code class="docutils literal notranslate"><span class="pre">pluginlib</span></code> for a controller.
 This is a class from which controller’s instance with name “<code class="docutils literal notranslate"><span class="pre">controller_name</span></code>” is created.</p>
 </dd>

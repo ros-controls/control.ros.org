@@ -125,6 +125,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a154b8ff2aa3100affdbb4c374fa4bbcc" id="r_a154b8ff2aa3100affdbb4c374fa4bbcc"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceManager.html#a154b8ff2aa3100affdbb4c374fa4bbcc">load_and_initialize_components</a> (const std::string &amp;urdf, const unsigned int update_rate=100)</td></tr>
 <tr class="memdesc:a154b8ff2aa3100affdbb4c374fa4bbcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load resources from on a given URDF.  <br /></td></tr>
 <tr class="separator:a154b8ff2aa3100affdbb4c374fa4bbcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab38b3793dcd6d4b313e9eb14388d52ee" id="r_ab38b3793dcd6d4b313e9eb14388d52ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceManager.html#ab38b3793dcd6d4b313e9eb14388d52ee">import_joint_limiters</a> (const std::string &amp;urdf)</td></tr>
+<tr class="memdesc:ab38b3793dcd6d4b313e9eb14388d52ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Import joint limiters from the URDF.  <br /></td></tr>
+<tr class="separator:ab38b3793dcd6d4b313e9eb14388d52ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25bd1dad46c65fd87dd99696f574936c" id="r_a25bd1dad46c65fd87dd99696f574936c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceManager.html#a25bd1dad46c65fd87dd99696f574936c">are_components_initialized</a> () const</td></tr>
 <tr class="memdesc:a25bd1dad46c65fd87dd99696f574936c"><td class="mdescLeft">&#160;</td><td class="mdescRight">if the resource manager load_and_initialize_components(...) function has been called this returns true. We want to permit to loading the urdf later on, but we currently don't want to permit multiple calls to load_and_initialize_components (reloading/loading different urdf).  <br /></td></tr>
 <tr class="separator:a25bd1dad46c65fd87dd99696f574936c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -221,6 +224,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a20d11cea529a849400a6a885fc9f8a64" id="r_a20d11cea529a849400a6a885fc9f8a64"><td class="memItemLeft" align="right" valign="top">return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceManager.html#a20d11cea529a849400a6a885fc9f8a64">set_component_state</a> (const std::string &amp;component_name, rclcpp_lifecycle::State &amp;target_state)</td></tr>
 <tr class="memdesc:a20d11cea529a849400a6a885fc9f8a64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets state of hardware component.  <br /></td></tr>
 <tr class="separator:a20d11cea529a849400a6a885fc9f8a64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5bfdb9c37bcf88b55750145e05056f7" id="r_ac5bfdb9c37bcf88b55750145e05056f7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceManager.html#ac5bfdb9c37bcf88b55750145e05056f7">enforce_command_limits</a> (const rclcpp::Duration &amp;period)</td></tr>
+<tr class="separator:ac5bfdb9c37bcf88b55750145e05056f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9fe34534b983c80a80cb501d8ab837c7" id="r_a9fe34534b983c80a80cb501d8ab837c7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structhardware__interface_1_1HardwareReadWriteStatus.html">HardwareReadWriteStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceManager.html#a9fe34534b983c80a80cb501d8ab837c7">read</a> (const rclcpp::Time &amp;time, const rclcpp::Duration &amp;period)</td></tr>
 <tr class="memdesc:a9fe34534b983c80a80cb501d8ab837c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads all loaded hardware components.  <br /></td></tr>
 <tr class="separator:a9fe34534b983c80a80cb501d8ab837c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -236,6 +241,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a29bc9e1b84dc92c7d6bb9251ffecdeef" id="r_a29bc9e1b84dc92c7d6bb9251ffecdeef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceManager.html#a29bc9e1b84dc92c7d6bb9251ffecdeef">set_on_component_state_switch_callback</a> (std::function&lt; void()&gt; callback)</td></tr>
 <tr class="memdesc:a29bc9e1b84dc92c7d6bb9251ffecdeef"><td class="mdescLeft">&#160;</td><td class="mdescRight">A method to register a callback to be called when the component state changes.  <br /></td></tr>
 <tr class="separator:a29bc9e1b84dc92c7d6bb9251ffecdeef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5193cb4c30ff7434cd35587ba64ea22" id="r_ac5193cb4c30ff7434cd35587ba64ea22"><td class="memItemLeft" align="right" valign="top"><a id="ac5193cb4c30ff7434cd35587ba64ea22" name="ac5193cb4c30ff7434cd35587ba64ea22"></a>
+const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_robot_description</b> () const</td></tr>
+<tr class="separator:ac5193cb4c30ff7434cd35587ba64ea22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -675,6 +683,28 @@ false if the resource manager doesn't have any components loaded and initialized
 
 </div>
 </div>
+<a id="ac5bfdb9c37bcf88b55750145e05056f7" name="ac5bfdb9c37bcf88b55750145e05056f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5bfdb9c37bcf88b55750145e05056f7">&#9670;&#160;</a></span>enforce_command_limits()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool hardware_interface::ResourceManager::enforce_command_limits </td>
+          <td>(</td>
+          <td class="paramtype">const rclcpp::Duration &amp;&#160;</td>
+          <td class="paramname"><em>period</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Enforce the command limits for the position, velocity, effort, and acceleration interfaces. </p><dl class="section note"><dt>Note</dt><dd>This method is RT-safe </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the command interfaces are out of limits and the limits are enforced </dd>
+<dd>
+false if the command interfaces values are within limits </dd></dl>
+
+</div>
+</div>
 <a id="a74df02b374391ed286443e2f64f4e497" name="a74df02b374391ed286443e2f64f4e497"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a74df02b374391ed286443e2f64f4e497">&#9670;&#160;</a></span>get_cached_controllers_to_hardware()</h2>
 
@@ -1028,6 +1058,32 @@ given that no hardware_info is available, the component has to be configured ext
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">controller_name</td><td>name of the controller which reference interfaces are imported. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">interfaces</td><td>list of controller's reference interfaces as CommandInterfaces. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab38b3793dcd6d4b313e9eb14388d52ee" name="ab38b3793dcd6d4b313e9eb14388d52ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab38b3793dcd6d4b313e9eb14388d52ee">&#9670;&#160;</a></span>import_joint_limiters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void hardware_interface::ResourceManager::import_joint_limiters </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>urdf</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Import joint limiters from the URDF. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">urdf</td><td>string containing the URDF. </td></tr>
   </table>
   </dd>
 </dl>

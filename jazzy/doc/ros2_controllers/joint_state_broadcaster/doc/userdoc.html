@@ -70,6 +70,7 @@
 <li class="toctree-l5"><a class="reference internal" href="#an-example-parameter-file">An example parameter file</a></li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="#order-of-the-joints-in-the-message">Order of the joints in the message</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../range_sensor_broadcaster/doc/userdoc.html">Range Sensor Broadcaster</a></li>
@@ -218,6 +219,33 @@ Using multiple joint_state_broadcaster instances we could publish and show both 
 </pre></div>
 </div>
 </section>
+</section>
+<section id="order-of-the-joints-in-the-message">
+<h2>Order of the joints in the message<a class="headerlink" href="#order-of-the-joints-in-the-message" title="Link to this heading"></a></h2>
+<p>The order of the joints in the message can determined by 3 different parameter settings:</p>
+<ol class="arabic">
+<li><dl class="simple">
+<dt>No defined <code class="docutils literal notranslate"><span class="pre">joints</span></code> parameter and <code class="docutils literal notranslate"><span class="pre">use_urdf_to_filter</span></code> set to <code class="docutils literal notranslate"><span class="pre">false</span></code>:</dt><dd><p>The order of the joints in the message is the same as the order of the joints’ state interfaces registered in the resource manager. This is typically the order in which the hardware components are loaded and configured.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>No defined <code class="docutils literal notranslate"><span class="pre">joints</span></code> parameter and <code class="docutils literal notranslate"><span class="pre">use_urdf_to_filter</span></code> set to <code class="docutils literal notranslate"><span class="pre">true</span></code>:</dt><dd><p>The order of the joints in the message is the same as the order of the joints in the URDF file, which is inherited from the loaded URDF model and independent of the order in the <cite>ros2_control</cite> tag.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Defined <code class="docutils literal notranslate"><span class="pre">joints</span></code> parameter along with <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> parameter:</dt><dd><p>The order of the joints in the message is the same as the order of the joints in the <code class="docutils literal notranslate"><span class="pre">joints</span></code> parameter.</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">joints</span></code> parameter is a subset of the total available joints in the URDF (or) the total available state interfaces, then only the joints in the <code class="docutils literal notranslate"><span class="pre">joints</span></code> parameter are published in the message.</p>
+<p>If any of the combinations of the defined <code class="docutils literal notranslate"><span class="pre">joints</span></code> parameter and <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> parameter are not in the available state interfaces, the controller will fail to activate.</p>
+</dd>
+</dl>
+</li>
+</ol>
+<dl class="simple">
+<dt>..note::</dt><dd><p>If the <code class="docutils literal notranslate"><span class="pre">extra_joints</span></code> parameter is set, the joints in the <code class="docutils literal notranslate"><span class="pre">extra_joints</span></code> parameter are appended to the end of the joint names in the message.</p>
+</dd>
+</dl>
 </section>
 </section>
 
