@@ -325,74 +325,101 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>  }</div>
 </div>
 <div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span> </div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>  <span class="keywordtype">void</span> set_state(<span class="keyword">const</span> std::string &amp; interface_name, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp; value)</div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>  {</div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>    sensor_states_map_.at(interface_name)-&gt;set_value(value);</div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>  }</div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span> </div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>  <span class="keywordtype">double</span> get_state(<span class="keyword">const</span> std::string &amp; interface_name)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span><span class="keyword">  </span>{</div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>    <span class="keywordflow">return</span> sensor_states_map_.at(interface_name)-&gt;get_value();</div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>  }</div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span> </div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span> </div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno"><a class="line" href="classhardware__interface_1_1SensorInterface.html#a5cfa62de5c309e20563c796a980fe548">  342</a></span>  rclcpp::Logger <a class="code hl_function" href="classhardware__interface_1_1SensorInterface.html#a5cfa62de5c309e20563c796a980fe548">get_logger</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> sensor_logger_; }</div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span> </div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span> </div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno"><a class="line" href="classhardware__interface_1_1SensorInterface.html#a246a5ca32890163fef69ff07e15c6291">  348</a></span>  rclcpp::Clock::SharedPtr <a class="code hl_function" href="classhardware__interface_1_1SensorInterface.html#a246a5ca32890163fef69ff07e15c6291">get_clock</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> sensor_clock_; }</div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span> </div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span> </div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno"><a class="line" href="classhardware__interface_1_1SensorInterface.html#a2ca5a8929eab3537df2c4be95a63dc78">  354</a></span>  <span class="keyword">const</span> <a class="code hl_struct" href="structhardware__interface_1_1HardwareInfo.html">HardwareInfo</a> &amp; <a class="code hl_function" href="classhardware__interface_1_1SensorInterface.html#a2ca5a8929eab3537df2c4be95a63dc78">get_hardware_info</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> info_; }</div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span> </div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span> </div>
-<div class="foldopen" id="foldopen00360" data-start="{" data-end="}">
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno"><a class="line" href="classhardware__interface_1_1SensorInterface.html#aefa3ac3c0749d0ec5eb02e1c63ecf995">  360</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhardware__interface_1_1SensorInterface.html#aefa3ac3c0749d0ec5eb02e1c63ecf995">enable_introspection</a>(<span class="keywordtype">bool</span> enable)</div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>  {</div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>    <span class="keywordflow">if</span> (enable)</div>
-<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>    {</div>
-<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>      stats_registrations_.enableAll();</div>
-<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>    }</div>
-<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>    <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>    {</div>
-<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>      stats_registrations_.disableAll();</div>
-<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>    }</div>
-<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>  }</div>
-</div>
-<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span> </div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span><span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>  <a class="code hl_struct" href="structhardware__interface_1_1HardwareInfo.html">HardwareInfo</a> info_;</div>
-<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>  <span class="comment">// interface names to InterfaceDescription</span></div>
-<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>  std::unordered_map&lt;std::string, InterfaceDescription&gt; joint_state_interfaces_;</div>
-<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>  std::unordered_map&lt;std::string, InterfaceDescription&gt; sensor_state_interfaces_;</div>
-<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>  std::unordered_map&lt;std::string, InterfaceDescription&gt; unlisted_state_interfaces_;</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>  <span class="keywordtype">void</span> set_state(<span class="keyword">const</span> std::string &amp; interface_name, <span class="keyword">const</span> T &amp; value)</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>  {</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>    <span class="keyword">auto</span> it = sensor_states_map_.find(interface_name);</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>    <span class="keywordflow">if</span> (it == sensor_states_map_.end())</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>    {</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>      <span class="keywordflow">throw</span> std::runtime_error(</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>        <span class="stringliteral">&quot;State interface not found: &quot;</span> + interface_name +</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>        <span class="stringliteral">&quot; in sensor hardware component: &quot;</span> + info_.<a class="code hl_variable" href="structhardware__interface_1_1HardwareInfo.html#ae4bd7e3df1c803e10e836db9734c8915">name</a> + <span class="stringliteral">&quot;. This should not happen.&quot;</span>);</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>    }</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>    <span class="keyword">auto</span> &amp; handle = it-&gt;second;</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>    std::unique_lock&lt;std::shared_mutex&gt; lock(handle-&gt;get_mutex());</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>    std::ignore = handle-&gt;set_value(lock, value);</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>  }</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span> </div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T = <span class="keywordtype">double</span>&gt;</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>  T get_state(<span class="keyword">const</span> std::string &amp; interface_name)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span><span class="keyword">  </span>{</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>    <span class="keyword">auto</span> it = sensor_states_map_.find(interface_name);</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>    <span class="keywordflow">if</span> (it == sensor_states_map_.end())</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>    {</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>      <span class="keywordflow">throw</span> std::runtime_error(</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>        <span class="stringliteral">&quot;State interface not found: &quot;</span> + interface_name +</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>        <span class="stringliteral">&quot; in sensor hardware component: &quot;</span> + info_.<a class="code hl_variable" href="structhardware__interface_1_1HardwareInfo.html#ae4bd7e3df1c803e10e836db9734c8915">name</a> + <span class="stringliteral">&quot;. This should not happen.&quot;</span>);</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>    }</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>    <span class="keyword">auto</span> &amp; handle = it-&gt;second;</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>    std::shared_lock&lt;std::shared_mutex&gt; lock(handle-&gt;get_mutex());</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>    <span class="keyword">const</span> <span class="keyword">auto</span> opt_value = handle-&gt;get_optional&lt;T&gt;(lock);</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>    <span class="keywordflow">if</span> (!opt_value)</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>    {</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>      <span class="keywordflow">throw</span> std::runtime_error(</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>        <span class="stringliteral">&quot;Failed to get state value from interface: &quot;</span> + interface_name +</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>        <span class="stringliteral">&quot;. This should not happen.&quot;</span>);</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>    }</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>    <span class="keywordflow">return</span> opt_value.value();</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>  }</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span> </div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span> </div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno"><a class="line" href="classhardware__interface_1_1SensorInterface.html#a5cfa62de5c309e20563c796a980fe548">  369</a></span>  rclcpp::Logger <a class="code hl_function" href="classhardware__interface_1_1SensorInterface.html#a5cfa62de5c309e20563c796a980fe548">get_logger</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> sensor_logger_; }</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span> </div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span> </div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno"><a class="line" href="classhardware__interface_1_1SensorInterface.html#a246a5ca32890163fef69ff07e15c6291">  375</a></span>  rclcpp::Clock::SharedPtr <a class="code hl_function" href="classhardware__interface_1_1SensorInterface.html#a246a5ca32890163fef69ff07e15c6291">get_clock</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> sensor_clock_; }</div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span> </div>
 <div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span> </div>
-<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>  <span class="comment">// Exported Command- and StateInterfaces in order they are listed in the hardware description.</span></div>
-<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>  std::vector&lt;StateInterface::SharedPtr&gt; joint_states_;</div>
-<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>  std::vector&lt;StateInterface::SharedPtr&gt; sensor_states_;</div>
-<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>  std::vector&lt;StateInterface::SharedPtr&gt; unlisted_states_;</div>
-<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span> </div>
-<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>  rclcpp_lifecycle::State lifecycle_state_;</div>
-<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>  std::unique_ptr&lt;realtime_tools::AsyncFunctionHandler&lt;return_type&gt;&gt; read_async_handler_;</div>
-<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span> </div>
-<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>  rclcpp::Clock::SharedPtr sensor_clock_;</div>
-<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>  rclcpp::Logger sensor_logger_;</div>
-<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>  <span class="comment">// interface names to Handle accessed through getters/setters</span></div>
-<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>  std::unordered_map&lt;std::string, StateInterface::SharedPtr&gt; sensor_states_map_;</div>
-<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span> </div>
-<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span><span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>  pal_statistics::RegistrationsRAII stats_registrations_;</div>
-<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>};</div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno"><a class="line" href="classhardware__interface_1_1SensorInterface.html#a2ca5a8929eab3537df2c4be95a63dc78">  381</a></span>  <span class="keyword">const</span> <a class="code hl_struct" href="structhardware__interface_1_1HardwareInfo.html">HardwareInfo</a> &amp; <a class="code hl_function" href="classhardware__interface_1_1SensorInterface.html#a2ca5a8929eab3537df2c4be95a63dc78">get_hardware_info</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> info_; }</div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span> </div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span> </div>
+<div class="foldopen" id="foldopen00387" data-start="{" data-end="}">
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno"><a class="line" href="classhardware__interface_1_1SensorInterface.html#aefa3ac3c0749d0ec5eb02e1c63ecf995">  387</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhardware__interface_1_1SensorInterface.html#aefa3ac3c0749d0ec5eb02e1c63ecf995">enable_introspection</a>(<span class="keywordtype">bool</span> enable)</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>  {</div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>    <span class="keywordflow">if</span> (enable)</div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>    {</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>      stats_registrations_.enableAll();</div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>    }</div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>    {</div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>      stats_registrations_.disableAll();</div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>    }</div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>  }</div>
 </div>
-<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span> </div>
-<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>}  <span class="comment">// namespace hardware_interface</span></div>
-<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span><span class="preprocessor">#endif  </span><span class="comment">// HARDWARE_INTERFACE__SENSOR_INTERFACE_HPP_</span></div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span> </div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>  <a class="code hl_struct" href="structhardware__interface_1_1HardwareInfo.html">HardwareInfo</a> info_;</div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>  <span class="comment">// interface names to InterfaceDescription</span></div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>  std::unordered_map&lt;std::string, InterfaceDescription&gt; joint_state_interfaces_;</div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>  std::unordered_map&lt;std::string, InterfaceDescription&gt; sensor_state_interfaces_;</div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>  std::unordered_map&lt;std::string, InterfaceDescription&gt; unlisted_state_interfaces_;</div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span> </div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>  <span class="comment">// Exported Command- and StateInterfaces in order they are listed in the hardware description.</span></div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>  std::vector&lt;StateInterface::SharedPtr&gt; joint_states_;</div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>  std::vector&lt;StateInterface::SharedPtr&gt; sensor_states_;</div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>  std::vector&lt;StateInterface::SharedPtr&gt; unlisted_states_;</div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span> </div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>  rclcpp_lifecycle::State lifecycle_state_;</div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>  std::unique_ptr&lt;realtime_tools::AsyncFunctionHandler&lt;return_type&gt;&gt; read_async_handler_;</div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span> </div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>  rclcpp::Clock::SharedPtr sensor_clock_;</div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>  rclcpp::Logger sensor_logger_;</div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>  <span class="comment">// interface names to Handle accessed through getters/setters</span></div>
+<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>  std::unordered_map&lt;std::string, StateInterface::SharedPtr&gt; sensor_states_map_;</div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span> </div>
+<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>  pal_statistics::RegistrationsRAII stats_registrations_;</div>
+<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>};</div>
+</div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span> </div>
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>}  <span class="comment">// namespace hardware_interface</span></div>
+<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span><span class="preprocessor">#endif  </span><span class="comment">// HARDWARE_INTERFACE__SENSOR_INTERFACE_HPP_</span></div>
 <div class="ttc" id="aclasshardware__interface_1_1SensorInterface_html"><div class="ttname"><a href="classhardware__interface_1_1SensorInterface.html">hardware_interface::SensorInterface</a></div><div class="ttdoc">Virtual Class to implement when integrating a stand-alone sensor into ros2_control.</div><div class="ttdef"><b>Definition</b> sensor_interface.hpp:76</div></div>
 <div class="ttc" id="aclasshardware__interface_1_1SensorInterface_html_a1c5fddfb9944df57e25ac9d2c849ca44"><div class="ttname"><a href="classhardware__interface_1_1SensorInterface.html#a1c5fddfb9944df57e25ac9d2c849ca44">hardware_interface::SensorInterface::export_state_interfaces</a></div><div class="ttdeci">virtual std::vector&lt; StateInterface &gt; export_state_interfaces()</div><div class="ttdoc">Exports all state interfaces for this hardware interface.</div><div class="ttdef"><b>Definition</b> sensor_interface.hpp:172</div></div>
-<div class="ttc" id="aclasshardware__interface_1_1SensorInterface_html_a246a5ca32890163fef69ff07e15c6291"><div class="ttname"><a href="classhardware__interface_1_1SensorInterface.html#a246a5ca32890163fef69ff07e15c6291">hardware_interface::SensorInterface::get_clock</a></div><div class="ttdeci">rclcpp::Clock::SharedPtr get_clock() const</div><div class="ttdoc">Get the clock of the SensorInterface.</div><div class="ttdef"><b>Definition</b> sensor_interface.hpp:348</div></div>
-<div class="ttc" id="aclasshardware__interface_1_1SensorInterface_html_a2ca5a8929eab3537df2c4be95a63dc78"><div class="ttname"><a href="classhardware__interface_1_1SensorInterface.html#a2ca5a8929eab3537df2c4be95a63dc78">hardware_interface::SensorInterface::get_hardware_info</a></div><div class="ttdeci">const HardwareInfo &amp; get_hardware_info() const</div><div class="ttdoc">Get the hardware info of the SensorInterface.</div><div class="ttdef"><b>Definition</b> sensor_interface.hpp:354</div></div>
+<div class="ttc" id="aclasshardware__interface_1_1SensorInterface_html_a246a5ca32890163fef69ff07e15c6291"><div class="ttname"><a href="classhardware__interface_1_1SensorInterface.html#a246a5ca32890163fef69ff07e15c6291">hardware_interface::SensorInterface::get_clock</a></div><div class="ttdeci">rclcpp::Clock::SharedPtr get_clock() const</div><div class="ttdoc">Get the clock of the SensorInterface.</div><div class="ttdef"><b>Definition</b> sensor_interface.hpp:375</div></div>
+<div class="ttc" id="aclasshardware__interface_1_1SensorInterface_html_a2ca5a8929eab3537df2c4be95a63dc78"><div class="ttname"><a href="classhardware__interface_1_1SensorInterface.html#a2ca5a8929eab3537df2c4be95a63dc78">hardware_interface::SensorInterface::get_hardware_info</a></div><div class="ttdeci">const HardwareInfo &amp; get_hardware_info() const</div><div class="ttdoc">Get the hardware info of the SensorInterface.</div><div class="ttdef"><b>Definition</b> sensor_interface.hpp:381</div></div>
 <div class="ttc" id="aclasshardware__interface_1_1SensorInterface_html_a3ffd5a1cdbd1e6ed6ba5f479ebcd7de0"><div class="ttname"><a href="classhardware__interface_1_1SensorInterface.html#a3ffd5a1cdbd1e6ed6ba5f479ebcd7de0">hardware_interface::SensorInterface::get_group_name</a></div><div class="ttdeci">const std::string &amp; get_group_name() const</div><div class="ttdoc">Get name of the actuator hardware group to which it belongs to.</div><div class="ttdef"><b>Definition</b> sensor_interface.hpp:311</div></div>
-<div class="ttc" id="aclasshardware__interface_1_1SensorInterface_html_a5cfa62de5c309e20563c796a980fe548"><div class="ttname"><a href="classhardware__interface_1_1SensorInterface.html#a5cfa62de5c309e20563c796a980fe548">hardware_interface::SensorInterface::get_logger</a></div><div class="ttdeci">rclcpp::Logger get_logger() const</div><div class="ttdoc">Get the logger of the SensorInterface.</div><div class="ttdef"><b>Definition</b> sensor_interface.hpp:342</div></div>
+<div class="ttc" id="aclasshardware__interface_1_1SensorInterface_html_a5cfa62de5c309e20563c796a980fe548"><div class="ttname"><a href="classhardware__interface_1_1SensorInterface.html#a5cfa62de5c309e20563c796a980fe548">hardware_interface::SensorInterface::get_logger</a></div><div class="ttdeci">rclcpp::Logger get_logger() const</div><div class="ttdoc">Get the logger of the SensorInterface.</div><div class="ttdef"><b>Definition</b> sensor_interface.hpp:369</div></div>
 <div class="ttc" id="aclasshardware__interface_1_1SensorInterface_html_a6ca998930562960d76d197581122d476"><div class="ttname"><a href="classhardware__interface_1_1SensorInterface.html#a6ca998930562960d76d197581122d476">hardware_interface::SensorInterface::SensorInterface</a></div><div class="ttdeci">SensorInterface(const SensorInterface &amp;other)=delete</div><div class="ttdoc">SensorInterface copy constructor is actively deleted.</div></div>
 <div class="ttc" id="aclasshardware__interface_1_1SensorInterface_html_a74dd627432dc5c4e9a2b393d82cdfe25"><div class="ttname"><a href="classhardware__interface_1_1SensorInterface.html#a74dd627432dc5c4e9a2b393d82cdfe25">hardware_interface::SensorInterface::read</a></div><div class="ttdeci">virtual return_type read(const rclcpp::Time &amp;time, const rclcpp::Duration &amp;period)=0</div><div class="ttdoc">Read the current state values from the actuator.</div></div>
 <div class="ttc" id="aclasshardware__interface_1_1SensorInterface_html_a958bb595db4a92c6de62923f1a85ce10"><div class="ttname"><a href="classhardware__interface_1_1SensorInterface.html#a958bb595db4a92c6de62923f1a85ce10">hardware_interface::SensorInterface::on_export_state_interfaces</a></div><div class="ttdeci">virtual std::vector&lt; StateInterface::ConstSharedPtr &gt; on_export_state_interfaces()</div><div class="ttdef"><b>Definition</b> sensor_interface.hpp:200</div></div>
@@ -400,7 +427,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclasshardware__interface_1_1SensorInterface_html_aaaeb68d2db877ea8a1d47ebb110c17e5"><div class="ttname"><a href="classhardware__interface_1_1SensorInterface.html#aaaeb68d2db877ea8a1d47ebb110c17e5">hardware_interface::SensorInterface::get_name</a></div><div class="ttdeci">const std::string &amp; get_name() const</div><div class="ttdoc">Get name of the actuator hardware.</div><div class="ttdef"><b>Definition</b> sensor_interface.hpp:305</div></div>
 <div class="ttc" id="aclasshardware__interface_1_1SensorInterface_html_ade03fd1b9ad0e859f33a404f74f5ad7e"><div class="ttname"><a href="classhardware__interface_1_1SensorInterface.html#ade03fd1b9ad0e859f33a404f74f5ad7e">hardware_interface::SensorInterface::trigger_read</a></div><div class="ttdeci">HardwareComponentCycleStatus trigger_read(const rclcpp::Time &amp;time, const rclcpp::Duration &amp;period)</div><div class="ttdoc">Triggers the read method synchronously or asynchronously depending on the HardwareInfo.</div><div class="ttdef"><b>Definition</b> sensor_interface.hpp:252</div></div>
 <div class="ttc" id="aclasshardware__interface_1_1SensorInterface_html_adff26cb43c28b47e77a7f8236ea5c4d6"><div class="ttname"><a href="classhardware__interface_1_1SensorInterface.html#adff26cb43c28b47e77a7f8236ea5c4d6">hardware_interface::SensorInterface::export_unlisted_state_interface_descriptions</a></div><div class="ttdeci">virtual std::vector&lt; hardware_interface::InterfaceDescription &gt; export_unlisted_state_interface_descriptions()</div><div class="ttdef"><b>Definition</b> sensor_interface.hpp:187</div></div>
-<div class="ttc" id="aclasshardware__interface_1_1SensorInterface_html_aefa3ac3c0749d0ec5eb02e1c63ecf995"><div class="ttname"><a href="classhardware__interface_1_1SensorInterface.html#aefa3ac3c0749d0ec5eb02e1c63ecf995">hardware_interface::SensorInterface::enable_introspection</a></div><div class="ttdeci">void enable_introspection(bool enable)</div><div class="ttdoc">Enable or disable introspection of the sensor hardware.</div><div class="ttdef"><b>Definition</b> sensor_interface.hpp:360</div></div>
+<div class="ttc" id="aclasshardware__interface_1_1SensorInterface_html_aefa3ac3c0749d0ec5eb02e1c63ecf995"><div class="ttname"><a href="classhardware__interface_1_1SensorInterface.html#aefa3ac3c0749d0ec5eb02e1c63ecf995">hardware_interface::SensorInterface::enable_introspection</a></div><div class="ttdeci">void enable_introspection(bool enable)</div><div class="ttdoc">Enable or disable introspection of the sensor hardware.</div><div class="ttdef"><b>Definition</b> sensor_interface.hpp:387</div></div>
 <div class="ttc" id="aclasshardware__interface_1_1SensorInterface_html_af47cc09caaa328361edb2852b8876b77"><div class="ttname"><a href="classhardware__interface_1_1SensorInterface.html#af47cc09caaa328361edb2852b8876b77">hardware_interface::SensorInterface::set_lifecycle_state</a></div><div class="ttdeci">void set_lifecycle_state(const rclcpp_lifecycle::State &amp;new_state)</div><div class="ttdoc">Set life-cycle state of the actuator hardware.</div><div class="ttdef"><b>Definition</b> sensor_interface.hpp:323</div></div>
 <div class="ttc" id="aclasshardware__interface_1_1SensorInterface_html_af4f035f15749bcf41eb39b2de970bfb7"><div class="ttname"><a href="classhardware__interface_1_1SensorInterface.html#af4f035f15749bcf41eb39b2de970bfb7">hardware_interface::SensorInterface::init</a></div><div class="ttdeci">CallbackReturn init(const HardwareInfo &amp;hardware_info, rclcpp::Logger logger, rclcpp::Clock::SharedPtr clock)</div><div class="ttdef"><b>Definition</b> sensor_interface.hpp:123</div></div>
 <div class="ttc" id="aclasshardware__interface_1_1SensorInterface_html_af5b68a7d8faca41dc295dc1702421b9c"><div class="ttname"><a href="classhardware__interface_1_1SensorInterface.html#af5b68a7d8faca41dc295dc1702421b9c">hardware_interface::SensorInterface::init</a></div><div class="ttdeci">CallbackReturn init(const HardwareInfo &amp;hardware_info, rclcpp::Logger logger, rclcpp::node_interfaces::NodeClockInterface::SharedPtr clock_interface)</div><div class="ttdef"><b>Definition</b> sensor_interface.hpp:107</div></div>
