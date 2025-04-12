@@ -61,7 +61,7 @@ Please keep the following in mind:
 
     Even if you are not a maintainer, you are still encouraged to review pull requests. This helps us increase the review pace and increase code quality. Also, you are very likely to find some issues/limitations nobody else is seeing.
 
-4. Always do "squash and merge" and clean a commit message from comments like "fixup linters", "use pre-commit", "correct header", or "Address review comments" and similar. This means that each PR results in exactly one (1) commit on the main branch.
+4. There is no need to do "squash and merge" of commits to your PR. We will squash the commits when merging the PR into the head branch.
 
 5. Please do not do "cowboy-style" PR merges over the weekend. It doesn't matter how trivial PR is. Give people a chance to do a proper review and comment on it.
 
