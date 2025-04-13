@@ -104,7 +104,7 @@ The project has received major contributions from the following companies and in
 |rosin_ack_logo_wide|
 
 Supported by ROSIN - ROS-Industrial Quality-Assured Robot Software Components.
-More information: https://www.rosin-project.eu
+More information: https://cordis.europa.eu/project/id/732287
 
 This project has received funding from the European Union's Horizon 2020
 research and innovation programme under grant agreement no. 732287.
