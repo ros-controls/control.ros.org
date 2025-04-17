@@ -130,6 +130,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5ab41eab4900b8e49adcc19c0d452f47" id="r_a5ab41eab4900b8e49adcc19c0d452f47"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classjoint__limits_1_1JointSaturationLimiter.html#a5ab41eab4900b8e49adcc19c0d452f47">on_enforce</a> (const JointLimitsStateDataType &amp;current_joint_states, JointLimitsStateDataType &amp;desired_joint_states, const rclcpp::Duration &amp;dt) override</td></tr>
 <tr class="memdesc:a5ab41eab4900b8e49adcc19c0d452f47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enforce joint limits to desired position, velocity and acceleration using clamping. Class implements this method accepting following data types:  <br /></td></tr>
 <tr class="separator:a5ab41eab4900b8e49adcc19c0d452f47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae59afb40e79815d33eaf65758935b230" id="r_ae59afb40e79815d33eaf65758935b230"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classjoint__limits_1_1JointSaturationLimiter.html#ae59afb40e79815d33eaf65758935b230">reset_internals</a> () override</td></tr>
+<tr class="memdesc:ae59afb40e79815d33eaf65758935b230"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset internal states of the limiter.  <br /></td></tr>
+<tr class="separator:ae59afb40e79815d33eaf65758935b230"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc227128710390ed8a2d3534ee4d138c" id="r_abc227128710390ed8a2d3534ee4d138c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classjoint__limits_1_1JointSaturationLimiter.html#abc227128710390ed8a2d3534ee4d138c">on_init</a> ()</td></tr>
 <tr class="memdesc:abc227128710390ed8a2d3534ee4d138c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method is realized by an implementation.  <br /></td></tr>
 <tr class="separator:abc227128710390ed8a2d3534ee4d138c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -164,6 +167,9 @@ rclcpp::Clock::SharedPtr&#160;</td><td class="memItemRight" valign="bottom"><b>c
 <tr class="memitem:acdd8e63ef53156bdb50904db251f9865" id="r_acdd8e63ef53156bdb50904db251f9865"><td class="memItemLeft" align="right" valign="top"><a id="acdd8e63ef53156bdb50904db251f9865" name="acdd8e63ef53156bdb50904db251f9865"></a>
 JointLimitsStateDataType&#160;</td><td class="memItemRight" valign="bottom"><b>prev_command_</b></td></tr>
 <tr class="separator:acdd8e63ef53156bdb50904db251f9865"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afae996db631e367cff5efc6ff98810b9" id="r_afae996db631e367cff5efc6ff98810b9"><td class="memItemLeft" align="right" valign="top"><a id="afae996db631e367cff5efc6ff98810b9" name="afae996db631e367cff5efc6ff98810b9"></a>
+std::mutex&#160;</td><td class="memItemRight" valign="bottom"><b>mutex_</b></td></tr>
+<tr class="separator:afae996db631e367cff5efc6ff98810b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classjoint__limits_1_1JointLimiterInterface"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classjoint__limits_1_1JointLimiterInterface')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classjoint__limits_1_1JointLimiterInterface.html">joint_limits::JointLimiterInterface&lt; JointLimitsStateDataType &gt;</a></td></tr>
 <tr class="memitem:a46095a2ec58d03b4e8bcf356e1a330c4 inherit pro_attribs_classjoint__limits_1_1JointLimiterInterface" id="r_a46095a2ec58d03b4e8bcf356e1a330c4"><td class="memItemLeft" align="right" valign="top">
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>number_of_joints_</b></td></tr>
@@ -355,6 +361,38 @@ template&lt;typename JointLimitsStateDataType &gt; </div>
 <p>Implements <a class="el" href="classjoint__limits_1_1JointLimiterInterface.html#a0b9e6da58ef52d8ed431ecac680821ba">joint_limits::JointLimiterInterface&lt; JointLimitsStateDataType &gt;</a>.</p>
 
 <p>Reimplemented in <a class="el" href="classjoint__limits_1_1JointSoftLimiter.html#a2b0f355cf3bf658bb99a4b152af8ab01">joint_limits::JointSoftLimiter</a>.</p>
+
+</div>
+</div>
+<a id="ae59afb40e79815d33eaf65758935b230" name="ae59afb40e79815d33eaf65758935b230"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae59afb40e79815d33eaf65758935b230">&#9670;&#160;</a></span>reset_internals()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename JointLimitsStateDataType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classjoint__limits_1_1JointSaturationLimiter.html">joint_limits::JointSaturationLimiter</a>&lt; JointLimitsStateDataType &gt;::reset_internals </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reset internal states of the limiter. </p>
+<p>This method is called when the controller is stopped or when the controller is reconfigured. It should reset all internal states of the limiter. </p>
+
+<p>Implements <a class="el" href="classjoint__limits_1_1JointLimiterInterface.html">joint_limits::JointLimiterInterface&lt; JointLimitsStateDataType &gt;</a>.</p>
 
 </div>
 </div>

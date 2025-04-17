@@ -118,9 +118,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a83bcea6e06e5e2566832224b252da84e" id="r_a83bcea6e06e5e2566832224b252da84e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#a83bcea6e06e5e2566832224b252da84e">is_limited</a> (double value, double min, double max)</td></tr>
 <tr class="memdesc:a83bcea6e06e5e2566832224b252da84e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a value is limited by the given limits.  <br /></td></tr>
 <tr class="separator:a83bcea6e06e5e2566832224b252da84e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaba5f7260dfe4f95349e0914c7c468a5" id="r_aaba5f7260dfe4f95349e0914c7c468a5"><td class="memItemLeft" align="right" valign="top">PositionLimits&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#aaba5f7260dfe4f95349e0914c7c468a5">compute_position_limits</a> (const <a class="el" href="structjoint__limits_1_1JointLimits.html">joint_limits::JointLimits</a> &amp;limits, const std::optional&lt; double &gt; &amp;act_vel, const std::optional&lt; double &gt; &amp;act_pos, const std::optional&lt; double &gt; &amp;prev_command_pos, double dt)</td></tr>
-<tr class="memdesc:aaba5f7260dfe4f95349e0914c7c468a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the position limits based on the velocity and acceleration limits.  <br /></td></tr>
-<tr class="separator:aaba5f7260dfe4f95349e0914c7c468a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a476b4f8a889f0669fc74236f3a26b057" id="r_a476b4f8a889f0669fc74236f3a26b057"><td class="memItemLeft" align="right" valign="top">PositionLimits&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#a476b4f8a889f0669fc74236f3a26b057">compute_position_limits</a> (const std::string &amp;joint_name, const <a class="el" href="structjoint__limits_1_1JointLimits.html">joint_limits::JointLimits</a> &amp;limits, const std::optional&lt; double &gt; &amp;act_vel, const std::optional&lt; double &gt; &amp;act_pos, const std::optional&lt; double &gt; &amp;prev_command_pos, double dt)</td></tr>
+<tr class="memdesc:a476b4f8a889f0669fc74236f3a26b057"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the position limits based on the velocity and acceleration limits.  <br /></td></tr>
+<tr class="separator:a476b4f8a889f0669fc74236f3a26b057"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a640dbfbd7b525e448cbcc5d2ef98d029" id="r_a640dbfbd7b525e448cbcc5d2ef98d029"><td class="memItemLeft" align="right" valign="top">VelocityLimits&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#a640dbfbd7b525e448cbcc5d2ef98d029">compute_velocity_limits</a> (const std::string &amp;joint_name, const <a class="el" href="structjoint__limits_1_1JointLimits.html">joint_limits::JointLimits</a> &amp;limits, const double &amp;desired_vel, const std::optional&lt; double &gt; &amp;act_pos, const std::optional&lt; double &gt; &amp;prev_command_vel, double dt)</td></tr>
 <tr class="memdesc:a640dbfbd7b525e448cbcc5d2ef98d029"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the velocity limits based on the position and acceleration limits.  <br /></td></tr>
 <tr class="separator:a640dbfbd7b525e448cbcc5d2ef98d029"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -387,8 +387,8 @@ Sai Kishor Kothakota </dd></dl>
 
 </div>
 </div>
-<a id="aaba5f7260dfe4f95349e0914c7c468a5" name="aaba5f7260dfe4f95349e0914c7c468a5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaba5f7260dfe4f95349e0914c7c468a5">&#9670;&#160;</a></span>compute_position_limits()</h2>
+<a id="a476b4f8a889f0669fc74236f3a26b057" name="a476b4f8a889f0669fc74236f3a26b057"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a476b4f8a889f0669fc74236f3a26b057">&#9670;&#160;</a></span>compute_position_limits()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -396,6 +396,12 @@ Sai Kishor Kothakota </dd></dl>
         <tr>
           <td class="memname">PositionLimits joint_limits::compute_position_limits </td>
           <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>joint_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const <a class="el" href="structjoint__limits_1_1JointLimits.html">joint_limits::JointLimits</a> &amp;&#160;</td>
           <td class="paramname"><em>limits</em>, </td>
         </tr>
@@ -434,14 +440,19 @@ Sai Kishor Kothakota </dd></dl>
 <p>Computes the position limits based on the velocity and acceleration limits. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">joint_name</td><td>The name of the joint. </td></tr>
     <tr><td class="paramname">limits</td><td>The joint limits. </td></tr>
     <tr><td class="paramname">act_vel</td><td>The actual velocity of the joint. </td></tr>
+    <tr><td class="paramname">act_pos</td><td>The actual position of the joint. </td></tr>
     <tr><td class="paramname">prev_command_pos</td><td>The previous commanded position of the joint. </td></tr>
     <tr><td class="paramname">dt</td><td>The time step. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The position limits, first is the lower limit and second is the upper limit. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>: We use the previous command position to compute the limits here because using the actual position would be too conservative, usually there is a couple of cycles of delay between the command sent to the robot and the robot actually showing that in the state. That effectively limits the velocity with which the joint can be moved which is much lower than the actual velocity limit.</dd>
+<dd>
+: We use the previous command position to compute the limits here because using the actual position would be too conservative, usually there is a couple of cycles of delay between the command sent to the robot and the robot actually showing that in the state. That effectively limits the velocity with which the joint can be moved which is much lower than the actual velocity limit.</dd></dl>
 
 </div>
 </div>
