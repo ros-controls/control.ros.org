@@ -6,10 +6,15 @@ As an open-source project, we welcome each contributor, regardless of their back
 To reduce the entropy of the universe and our vivid, open, and collaborative environment, we have set up some standards and methods for contributions.
 
 
+Finding contributions to work on
+--------------------------------
+Looking at the existing issues is a great way to find something to contribute on.
+We created a project board to help you find issues that are good for newcomers, see the `Contributing Board <https://github.com/orgs/ros-controls/projects/11>`__.
+
 Pull Requests
 -------------
 
-Requirements for pull requests are as follows:
+Before sending us a pull request, please ensure that:
 
 1. Limited scope. Your PR should do one thing or one set of things. Avoid adding "random fixes" to PRs. Put those on separate PRs.
 
@@ -20,6 +25,18 @@ Requirements for pull requests are as follows:
 4. Don't be afraid to request reviews from maintainers.
 
 5. New code = new tests. If you are adding new functionality, always make sure to add some tests exercising the code and serving as live documentation of your original intention.
+
+**To send us a pull request, please:**
+
+1. Fork the repository.
+2. Modify the source; please focus on the specific change you are contributing. If you also reformat all the code, it will be hard for us to focus on your change.
+3. Ensure local tests pass. (``colcon test`` and ``pre-commit run`` (requires you to install pre-commit by ``pip3 install pre-commit``)
+4. Commit to your fork using clear commit messages.
+5. Send a pull request, answering any default questions in the pull request interface.
+6. Pay attention to any automated CI failures reported in the pull request, and stay involved in the conversation.
+
+GitHub provides additional documentation on `forking a repository <https://help.github.com/articles/fork-a-repo/>`__ and
+`creating a pull request <https://help.github.com/articles/creating-a-pull-request/>`__.
 
 
 Rules for the repositories and process of merging pull requests
@@ -40,14 +57,15 @@ Please keep the following in mind:
 
 3. Each PR must be approved by two maintainers (explicitly, please!). Only exceptions are PR's from other active maintainers in the repository, where one approval backed up with traceable discussion is sufficient.
 
-   **NOTE**: If you are not a maintainer, you are still encouraged to review pull requests. This helps us increase the review pace and increase code quality. Also, you are very likely to find some issues/limitations nobody else is seeing.
+  .. note::
 
-4. Always do "squash and merge" and clean a commit message from comments like "fixup linters", "use pre-commit", "correct header", or "Address review comments" and similar. This means that each PR results in exactly one (1) commit on the main branch.
+    Even if you are not a maintainer, you are still encouraged to review pull requests. This helps us increase the review pace and increase code quality. Also, you are very likely to find some issues/limitations nobody else is seeing.
+
+4. There is no need to do "squash and merge" of commits to your PR. We will squash the commits when merging the PR into the head branch.
 
 5. Please do not do "cowboy-style" PR merges over the weekend. It doesn't matter how trivial PR is. Give people a chance to do a proper review and comment on it.
 
 6. Be aware of the impact a PR has and give other maintainers and contributors sufficient time for the review proportional to its impact. Ping them if necessary, repeatedly if necessary.
-
 
 
 Writing documentation
@@ -58,7 +76,20 @@ We use Sphinx with `Read The Docs theme <https://docs.readthedocs.io/en/stable/i
 General information is located in the `control.ros.org <https://github.com/ros-controls/ros2_control>`__ repository, while the documentation for the packages is written in the respective repositories.
 
 
+Licensing
+------------------------------------------
+Any contribution that you make to this project will
+be under the Apache 2 License, as dictated by that
+`license <http://www.apache.org/licenses/LICENSE-2.0.html>`__:
 
+
+  5. Submission of Contributions. Unless You explicitly state otherwise,
+  any Contribution intentionally submitted for inclusion in the Work
+  by You to the Licensor shall be under the terms and conditions of
+  this License, without any additional terms or conditions.
+  Notwithstanding the above, nothing herein shall supersede or modify
+  the terms of any separate license agreement you may have executed
+  with Licensor regarding such Contributions.
 
 
 Repository structure and CI configuration
