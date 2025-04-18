@@ -46,7 +46,7 @@ Additionally, the following (unreleased) packages are relevant for documentation
 
 * `ros2_control_demos`_ - example implementations of common use-cases for a smooth start;
 * `roadmap`_ - planning and design docs for the project;
-* `ros2_control_ci`_ - reusable Github actions and Docker images for RHEL and Debian CI jobs;
+* `ros2_control_ci`_ - reusable Github actions and Docker images for Ubuntu, RHEL, and Debian CI jobs;
 * `.github`_ - Github organization-wide files, such as issue templates;
 * `ros2_control_cmake`_ - CMake macros for the project;
 * `ros2_control_ci`_ - reusable Github actions;
