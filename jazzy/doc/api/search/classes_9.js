@@ -16,6 +16,7 @@ var searchData=
   ['jointsaturationlimiter_3c_20jointcontrolinterfacesdata_20_3e_13',['JointSaturationLimiter&lt; JointControlInterfacesData &gt;',['../classjoint__limits_1_1JointSaturationLimiter.html',1,'joint_limits']]],
   ['jointsoftlimiter_14',['JointSoftLimiter',['../classjoint__limits_1_1JointSoftLimiter.html',1,'joint_limits']]],
   ['jointstatebroadcaster_15',['JointStateBroadcaster',['../classjoint__state__broadcaster_1_1JointStateBroadcaster.html',1,'joint_state_broadcaster']]],
-  ['jointtrajectorycontroller_16',['jointtrajectorycontroller',['../classjoint__trajectory__controller_1_1JointTrajectoryController.html',1,'joint_trajectory_controller::JointTrajectoryController'],['../classrqt__joint__trajectory__controller_1_1joint__trajectory__controller_1_1JointTrajectoryController.html',1,'rqt_joint_trajectory_controller.joint_trajectory_controller.JointTrajectoryController']]],
-  ['jointvalue_17',['JointValue',['../structros2__control__demo__example__11_1_1JointValue.html',1,'ros2_control_demo_example_11']]]
+  ['jointstatedata_16',['JointStateData',['../structjoint__state__broadcaster_1_1JointStateBroadcaster_1_1JointStateData.html',1,'joint_state_broadcaster::JointStateBroadcaster']]],
+  ['jointtrajectorycontroller_17',['jointtrajectorycontroller',['../classjoint__trajectory__controller_1_1JointTrajectoryController.html',1,'joint_trajectory_controller::JointTrajectoryController'],['../classrqt__joint__trajectory__controller_1_1joint__trajectory__controller_1_1JointTrajectoryController.html',1,'rqt_joint_trajectory_controller.joint_trajectory_controller.JointTrajectoryController']]],
+  ['jointvalue_18',['JointValue',['../structros2__control__demo__example__11_1_1JointValue.html',1,'ros2_control_demo_example_11']]]
 ];

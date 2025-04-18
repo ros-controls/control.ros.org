@@ -118,7 +118,5 @@ The following repositories are managed by the ros-controls PMC:
      - Not Yet Available
    * - https://github.com/ros-controls/realtime_tools
      - Not Yet Available
-   * - https://github.com/ros-controls/ros2_rhel
-     - Not Yet Available
-   * - https://github.com/ros-controls/ros2_debian
+   * - https://github.com/ros-controls/.github
      - Not Yet Available
