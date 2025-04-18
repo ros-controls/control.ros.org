@@ -160,6 +160,15 @@ Now we check if kinematics of differential robot is running properly.</p></li>
 <li><p>If any of the controllers is deactivated, also all preceding controllers are deactivated.</p></li>
 </ol>
 </div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Controllers that expose the reference interfaces are switched to chained mode only when their reference interfaces are used by other controllers. When their reference interfaces are not used by other controllers, they are switched back to get references from the subscriber.
+However, the controllers that expose the state interfaces are not triggered to chained mode when their state interfaces are used by other controllers.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This document uses terms <em>preceding</em> and <em>following</em> controller. These terms refer to such ordering of controllers that controller A <em>precedes</em> controller B if A claims (<em>connects its output to</em>) B’s reference interfaces (<em>inputs</em>). In the example diagram at the beginning of this section, ‘diff_drive_controller’ <em>precedes</em> ‘pid left wheel’ and ‘pid right wheel’. Consequently, ‘pid left wheel’ and ‘pid right wheel’ are controllers <em>following</em> after ‘diff_drive_controller’.</p>
+</div>
 </section>
 <section id="implementation">
 <h2>Implementation<a class="headerlink" href="#implementation" title="Link to this heading"></a></h2>
