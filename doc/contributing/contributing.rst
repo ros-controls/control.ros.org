@@ -1,6 +1,7 @@
 Contributing
 =============
 
+<<<<<<< HEAD
 First, thank you for considering contributing to the ros2_control project.
 As an open-source project, we welcome each contributor, regardless of their background and experience.
 To reduce the entropy of the universe and our vivid, open, and collaborative environment, we have set up some standards and methods for contributions.
@@ -141,3 +142,7 @@ Documentation Usage
    <iframe plausible-embed src="https://plausible.io/share/control.ros.org?auth=tvWI_5b9EWW3e12NsySNr&embed=true&theme=system&background=transparent" scrolling="no" frameborder="0" loading="lazy" style="width: 1px; min-width: 100%; height: 1600px;"></iframe>
    <div style="font-size: 14px; padding-bottom: 14px;">Stats powered by <a target="_blank" style="color: #2c3953; text-decoration: underline;" href="https://plausible.io">Plausible Analytics</a></div>
    <script async src="https://plausible.io/js/embed.host.js"></script>
+=======
+.. include:: ../.github/CONTRIBUTING.md
+   :parser: myst_parser.sphinx_
+>>>>>>> 3eb19b4 (Parse markdown file from .github repo (#445))
