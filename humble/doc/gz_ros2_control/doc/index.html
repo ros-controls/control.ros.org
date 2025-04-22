@@ -60,9 +60,10 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../../simulators/simulators.html">Simulator Integrations</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../../simulators/simulators.html#hosted-by-ros-controls">Hosted by ros-controls</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Gazebo</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#usage">Usage</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#modifying-or-building-your-own">Modifying or building your own</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#to-run-the-demo">To run the demo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installation">Installation</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#binary-packages">Binary packages</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#building-from-source">Building from source</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#using-docker">Using docker</a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#add-ros2-control-tag-to-a-urdf">Add ros2_control tag to a URDF</a><ul>
@@ -142,17 +143,47 @@
 <span id="gz-ros2-control"></span><span id="id1"></span><h1>gz_ros2_control<a class="headerlink" href="#ign-ros2-control" title="Link to this heading"></a></h1>
 <p>This is a ROS 2 package for integrating the <em>ros2_control</em> controller architecture with the <a class="reference external" href="https://gazebosim.org/home">Gazebo</a> simulator.</p>
 <p>This package provides a Gazebo-Sim system plugin which instantiates a <em>ros2_control</em> controller manager and connects it to a Gazebo model.</p>
-<section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
-<section id="modifying-or-building-your-own">
-<h3>Modifying or building your own<a class="headerlink" href="#modifying-or-building-your-own" title="Link to this heading"></a></h3>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
+<section id="binary-packages">
+<h3>Binary packages<a class="headerlink" href="#binary-packages" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">gz_ros2_control</span></code> is released for ROS 2 humble on Ubuntu. To use it, you have to install <code class="docutils literal notranslate"><span class="pre">ros-humble-gz-ros2-control</span></code> package, e.g., by running the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-humble-gz-ros2-control<span class="w"> </span>ros-humble-gz-ros2-control-demos
+</pre></div>
+</div>
+</section>
+<section id="building-from-source">
+<h3>Building from source<a class="headerlink" href="#building-from-source" title="Link to this heading"></a></h3>
+<p>To use latest yet-to-be-released features or use a non-default Gazebo combination (see the compatibility matrix in the <a class="reference external" href="https://github.com/ros-controls/gz_ros2_control/tree/humble?tab=readme-ov-file#compatibility-matrix">README</a> for currently supported combinations), you have to build the package from source.</p>
+<p>If you want compile this from source, you have to choose the Gazebo version first. The default one is <code class="docutils literal notranslate"><span class="pre">fortress</span></code>, and you simply can compile it with</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/gz_ros2_control_ws/src
+<span class="nb">cd</span><span class="w"> </span>~/gz_ros2_control_ws/src
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ros-controls/gz_ros2_control<span class="w"> </span>-b<span class="w"> </span><span class="nv">$ROS_DISTRO</span>
+rosdep<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>--from-paths<span class="w"> </span>.<span class="w"> </span>--ignore-src<span class="w"> </span>--rosdistro<span class="w"> </span><span class="nv">$ROS_DISTRO</span><span class="w"> </span>-y
+<span class="nb">cd</span><span class="w"> </span>~/gz_ros2_control_ws
+colcon<span class="w"> </span>build
+</pre></div>
+</div>
+<p>If you want to use <code class="docutils literal notranslate"><span class="pre">harmonic</span></code>, then follow the instructions in the <a class="reference external" href="https://gazebosim.org/docs/harmonic/ros_installation/#gazebo-harmonic-with-ros-2-humble-or-rolling-use-with-caution">official Gazebo Harmonic documentation</a> how to install Gazebo Harmonic on ROS 2 humble, i.e, <code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">gz-harmonic</span> <span class="pre">ros-humble-ros-gzharmonic</span> <span class="pre">ros-humble-ros-gzharmonic-bridge</span></code>. Additionally, you need to <a class="reference external" href="https://github.com/osrf/osrf-rosdep#installing-rosdep-rules-to-resolve-gazebo-harmonic-libraries">install the rosdep rules</a> for Gazebo Harmonic.</p>
+<p>Then create a workspace, clone the correct branch of this repo and compile it by setting the environment variable <code class="docutils literal notranslate"><span class="pre">GZ_VERSION</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/gz_ros2_control_ws/src
+<span class="nb">cd</span><span class="w"> </span>~/gz_ros2_control_ws/src
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ros-controls/gz_ros2_control<span class="w"> </span>-b<span class="w"> </span>humble
+<span class="nb">export</span><span class="w"> </span><span class="nv">GZ_VERSION</span><span class="o">=</span>harmonic
+rosdep<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>--from-paths<span class="w"> </span>.<span class="w"> </span>--ignore-src<span class="w"> </span>--rosdistro<span class="w"> </span><span class="nv">$ROS_DISTRO</span><span class="w"> </span>-y<span class="w"> </span>--skip-keys<span class="o">=</span><span class="s2">&quot;ros_gz_bridge ros_gz_sim&quot;</span>
+<span class="nb">cd</span><span class="w"> </span>~/gz_ros2_control_ws
+colcon<span class="w"> </span>build
+</pre></div>
+</div>
+</section>
+<section id="using-docker">
+<h3>Using docker<a class="headerlink" href="#using-docker" title="Link to this heading"></a></h3>
+<p>Build the docker image</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>Dockerfile
 docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>gz_ros2_control<span class="w"> </span>.
 </pre></div>
 </div>
-</section>
-<section id="to-run-the-demo">
-<h3>To run the demo<a class="headerlink" href="#to-run-the-demo" title="Link to this heading"></a></h3>
+<p>and run the demo</p>
 <ol class="arabic simple">
 <li><p>Using Docker</p></li>
 </ol>
