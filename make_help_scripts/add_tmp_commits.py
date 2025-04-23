@@ -46,9 +46,8 @@ def add_sub_repositories_and_commit():
         print(f"Switch to branch: {branch} with version: {version}")
         subprocess.run(["git", "checkout", branch], check=True)
         # Modify .gitignore to include subrepositories
-        subprocess.run(["sed", "-i", "s/doc\/ros2_control/\#doc\/ros2_control/g", ".gitignore"], check=True)
-        subprocess.run(["sed", "-i", "s/doc\/gz_ros2_control/\#doc\/gz_ros2_control/g", ".gitignore"], check=True)
-        subprocess.run(["sed", "-i", "s/doc\/gazebo_ros2_control/\#doc\/gazebo_ros2_control/g", ".gitignore"], check=True)
+        for repo_name in deploy_defines.repos.keys():
+            subprocess.run(["sed", "-i", f"s/doc\/{repo_name}/\#doc\/{repo_name}/g", ".gitignore"], check=True)
         # Clone all subrepositories and add as tmp commit to branch of multi version
         print(f"Clone repositories for {branch} and checkout branches for {version}")
         for repo_name, repo_details in deploy_defines.repos.items():

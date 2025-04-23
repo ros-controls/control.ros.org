@@ -12,7 +12,9 @@ Communication protocols
 End-effectors
 --------------
 - `Schunk SVH 5-finger Hand <https://github.com/SCHUNK-SE-Co-KG/schunk_svh_ros_driver/tree/ros2-humble>`_
-- `TESOLLO DG-3F Delto Gripper-3F <https://github.com/Tesollo-Delto/DELTO_ROS2>`_
+- `TESOLLO DG-3F-B <https://github.com/Tesollo-Delto/DG3F_B_ROS2>`__
+- `TESOLLO DG-3F-M <https://github.com/Tesollo-Delto/DG3F_M_5F_ROS2>`__
+- `TESOLLO DG-5F <https://github.com/Tesollo-Delto/DG3F_M_5F_ROS2>`__
 
 Non robot-devices
 ------------------
@@ -26,9 +28,12 @@ Non robot-devices
 
 Official (supported by robot manufacturer)
 -------------------------------------------
-- `Clearpath Robotics Husky A200 <https://docs.clearpathrobotics.com/docs/robots/outdoor_robots/husky/user_manual_husky>`_
-- `Clearpath Robotics Jackal J100 <https://docs.clearpathrobotics.com/docs/robots/outdoor_robots/jackal/user_manual_jackal>`_
-- `Clearpath Robotics Warthog W200 <https://docs.clearpathrobotics.com/docs/robots/outdoor_robots/warthog/user_manual_warthog>`_
+- `Clearpath Robotics Dingo Dx1X0 <https://docs.clearpathrobotics.com/docs_robots/indoor_robots/dingo/user_manual_dingo>`_
+- `Clearpath Robotics Husky A200 <https://docs.clearpathrobotics.com/docs_robots/outdoor_robots/husky/a200/user_manual_husky>`_
+- `Clearpath Robotics Husky A300 <https://docs.clearpathrobotics.com/docs_robots/outdoor_robots/husky/a300/>`_
+- `Clearpath Robotics Jackal J100 <https://docs.clearpathrobotics.com/docs_robots/outdoor_robots/jackal/user_manual_jackal>`_
+- `Clearpath Robotics Ridgeback R100 <https://docs.clearpathrobotics.com/docs_robots/indoor_robots/ridgeback/user_manual_ridgeback>`_
+- `Clearpath Robotics Warthog W200 <https://docs.clearpathrobotics.com/docs_robots/outdoor_robots/warthog/user_manual_warthog>`_
 - `Denso Robots - 4-Axis (SCARA) robots, 5-and 6-Axis robots, and Collaborative robots (not OSS type) <https://github.com/DENSORobot/denso_robot_ros2>`_
 - `Flexiv Robotics Rizon robots <https://github.com/flexivrobotics/flexiv_ros2>`_
 - `Franka Robotics - Franka Research 3 (FR3) <https://github.com/frankaemika/franka_ros2>`_
