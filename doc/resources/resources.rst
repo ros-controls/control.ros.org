@@ -11,6 +11,25 @@ Any files submitted to the documentation should be "licensed" by stating your na
 Presentations
 ---------------
 
+2024-10-21 ROSCon Workshop: Fun with Controllers
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+
+.. toctree::
+   :hidden:
+
+   roscon2024_workshop.rst
+
+Summary:
+  If you already know that the ros2_control framework acts as a Kernel for ROS 2 robotics systems you are using but need help with application complexity, then this workshop is for you. The workshop covers the use of ros2_control controllers in products from various industries and shows solutions for all the little issues when running 24/7.
+
+  You will get a practical overview of concepts like controller chaining - used for cascade control and real-time state estimators; and asynchronous and “side-load” controllers that enable you to run complex calculations without jitter in your control loops. We expect your active involvement!
+
+:doc:`Workshop page <roscon2024_workshop>`
+
+  Authors:
+    - Dr. Denis Stogl (Stogl Robotics Consulting)
+    - Dr. Bence Magyar (Locus Robotics)
+
 2023-10-18 ROSCon Workshop: ros2_control on Steroids
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 
