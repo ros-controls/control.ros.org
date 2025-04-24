@@ -66,9 +66,12 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Contributing</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#contributing-guidelines">Contributing Guidelines</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#reporting-bugs-feature-requests">Reporting Bugs/Feature Requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#finding-contributions-to-work-on">Finding Contributions to Work on</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#contributing-via-pull-requests">Contributing via Pull Requests</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#finding-contributions-to-work-on">Finding contributions to work on</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rules-for-the-repositories-and-process-of-merging-pull-requests">Rules for the Repositories and Process of Merging Pull Requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#writing-documentation">Writing Documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#licensing">Licensing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#repository-structure-and-ci-configuration">Repository Structure and CI configuration</a></li>
 </ul>
 </li>
 </ul>
@@ -117,16 +120,13 @@
 <h1>Contributing<a class="headerlink" href="#contributing" title="Link to this heading"></a></h1>
 <section id="contributing-guidelines">
 <h2>Contributing Guidelines<a class="headerlink" href="#contributing-guidelines" title="Link to this heading"></a></h2>
-<p>Thank you for your interest in contributing to <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code>.
-Whether it’s a bug report, new feature, correction, or additional
-documentation, we greatly value feedback and contributions from our community.</p>
-<p>Please read through this document before submitting any issues or pull requests to ensure we have all the necessary
-information to effectively respond to your bug report or contribution.</p>
+<p>First, thank you for considering contributing to the ros2_control project.
+As an open-source project, we welcome each contributor, regardless of their background and experience.
+To reduce the entropy of the universe and our vivid, open, and collaborative environment, we have set up some standards and methods for contributions.</p>
 <section id="reporting-bugs-feature-requests">
 <h3>Reporting Bugs/Feature Requests<a class="headerlink" href="#reporting-bugs-feature-requests" title="Link to this heading"></a></h3>
 <p>We welcome you to use the GitHub issue tracker to report bugs or suggest features.</p>
-<p>When filing an issue, please check <a class="reference external" href="https://github.com/ros-controls/ros2_control/issues">existing open</a>, or <a class="reference external" href="https://github.com/ros-controls/ros2_control/issues?utf8=%E2%9C%93&amp;amp;q=is%3Aissue%20is%3Aclosed%20">recently closed</a>, issues to make sure
-somebody else hasn’t already reported the issue.
+<p>When filing an issue, please check existing open issues or recently closed issues to make sure somebody else hasn’t already reported the issue.
 Please try to include as much information as you can. Details like these are incredibly useful:</p>
 <ul class="simple">
 <li><p>A reproducible test case or series of steps</p></li>
@@ -135,11 +135,14 @@ Please try to include as much information as you can. Details like these are inc
 <li><p>Anything unusual about your environment or deployment</p></li>
 </ul>
 </section>
+<section id="finding-contributions-to-work-on">
+<h3>Finding Contributions to Work on<a class="headerlink" href="#finding-contributions-to-work-on" title="Link to this heading"></a></h3>
+<p>Looking at the existing issues is a great way to find something to contribute on.
+We created a project board to help you find issues that are good for newcomers, see the <a class="reference external" href="https://github.com/orgs/ros-controls/projects/11">Contributing Board</a>.</p>
+</section>
 <section id="contributing-via-pull-requests">
 <h3>Contributing via Pull Requests<a class="headerlink" href="#contributing-via-pull-requests" title="Link to this heading"></a></h3>
-<p>The following guidance should be up-to-date, but the documentation as found <a class="reference external" href="https://control.ros.org/master/doc/contributing/contributing.html#pull-requests">here</a> should prove as the final say.</p>
-<p>Contributions via pull requests are much appreciated.
-Before sending us a pull request, please ensure that:</p>
+<p>Contributions via pull requests are much appreciated. Before sending us a pull request, please ensure that:</p>
 <ol class="arabic simple">
 <li><p>Limited scope. Your PR should do one thing or one set of things. Avoid adding “random fixes” to PRs. Put those on separate PRs.</p></li>
 <li><p>Give your PR a descriptive title. Add a short summary, if required.</p></li>
@@ -147,11 +150,10 @@ Before sending us a pull request, please ensure that:</p>
 <li><p>Don’t be afraid to request reviews from maintainers.</p></li>
 <li><p>New code = new tests. If you are adding new functionality, always make sure to add some tests exercising the code and serving as live documentation of your original intention.</p></li>
 </ol>
-<p>To send us a pull request, please:</p>
+<p><strong>To send us a pull request, please:</strong></p>
 <ol class="arabic simple">
 <li><p>Fork the repository.</p></li>
-<li><p>Modify the source; please focus on the specific change you are contributing.
-If you also reformat all the code, it will be hard for us to focus on your change.</p></li>
+<li><p>Modify the source; please focus on the specific change you are contributing. If you also reformat all the code, it will be hard for us to focus on your change.</p></li>
 <li><p>Ensure local tests pass. (<code class="docutils literal notranslate"><span class="pre">colcon</span> <span class="pre">test</span></code> and <code class="docutils literal notranslate"><span class="pre">pre-commit</span> <span class="pre">run</span></code> (requires you to install pre-commit by <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">pre-commit</span></code>)</p></li>
 <li><p>Commit to your fork using clear commit messages.</p></li>
 <li><p>Send a pull request, answering any default questions in the pull request interface.</p></li>
@@ -160,27 +162,85 @@ If you also reformat all the code, it will be hard for us to focus on your chang
 <p>GitHub provides additional documentation on <a class="reference external" href="https://help.github.com/articles/fork-a-repo/">forking a repository</a> and
 <a class="reference external" href="https://help.github.com/articles/creating-a-pull-request/">creating a pull request</a>.</p>
 </section>
-<section id="finding-contributions-to-work-on">
-<h3>Finding contributions to work on<a class="headerlink" href="#finding-contributions-to-work-on" title="Link to this heading"></a></h3>
-<p>Looking at the existing issues is a great way to find something to contribute on.
-As this project, by default, uses the default GitHub issue labels
-(enhancement/bug/duplicate/help wanted/invalid/question/wontfix), looking at any <a class="reference external" href="https://github.com/ros-controls/ros2_control/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22">‘help wanted’</a> issues
-is a great place to start.</p>
+<section id="rules-for-the-repositories-and-process-of-merging-pull-requests">
+<h3>Rules for the Repositories and Process of Merging Pull Requests<a class="headerlink" href="#rules-for-the-repositories-and-process-of-merging-pull-requests" title="Link to this heading"></a></h3>
+<p>This section targets maintainers, but you are also welcome to read it to understand the process of how we handle PRs in our organization.
+This guideline is especially applicable for the following repositories:</p>
+<ul class="simple">
+<li><p>ros2_control,</p></li>
+<li><p>ros2_controllers,</p></li>
+<li><p>ros2_control_demos.</p></li>
+</ul>
+<p>Please keep the following in mind:</p>
+<ol class="arabic simple">
+<li><p>Please work from your fork when submitting PR. That way, we are keeping the main repo clean from feature branches.</p></li>
+<li><p>Each PR should have all checks satisfied before they can be considered for merging.</p></li>
+<li><p>Each PR must be approved by two maintainers (explicitly, please!). Only exceptions are PR’s from other active maintainers in the repository, where one approval backed up with traceable discussion is sufficient.</p></li>
+<li><p>There is no need to do “squash and merge” of commits to your PR. We will squash the commits when merging the PR into the head branch.</p></li>
+<li><p>Please do not do “cowboy-style” PR merges over the weekend. It doesn’t matter how trivial PR is. Give people a chance to do a proper review and comment on it.</p></li>
+<li><p>Be aware of the impact a PR has and give other maintainers and contributors sufficient time for the review proportional to its impact. Ping them if necessary, repeatedly if necessary.</p></li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Even if you are not a maintainer, you are still encouraged to review pull requests.
+This helps us increase the review pace and increase code quality.
+Also, you are very likely to find some issues/limitations nobody else is seeing.
+</pre></div>
+</div>
+</section>
+<section id="writing-documentation">
+<h3>Writing Documentation<a class="headerlink" href="#writing-documentation" title="Link to this heading"></a></h3>
+<p>We use Sphinx with <a class="reference external" href="https://docs.readthedocs.io/en/stable/index.html">Read The Docs theme</a> for documentation.</p>
+<p>General information is located in the <a class="reference external" href="https://github.com/ros-controls/control.ros.org">control.ros.org</a> repository, while the documentation for the packages is written in the respective repositories.</p>
 </section>
 <section id="licensing">
 <h3>Licensing<a class="headerlink" href="#licensing" title="Link to this heading"></a></h3>
-<p>Any contribution that you make to this repository will
+<p>Any contribution that you make to this project will
 be under the Apache 2 License, as dictated by that
 <a class="reference external" href="http://www.apache.org/licenses/LICENSE-2.0.html">license</a>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">5.</span> <span class="n">Submission</span> <span class="n">of</span> <span class="n">Contributions</span><span class="o">.</span> <span class="n">Unless</span> <span class="n">You</span> <span class="n">explicitly</span> <span class="n">state</span> <span class="n">otherwise</span><span class="p">,</span>
-   <span class="nb">any</span> <span class="n">Contribution</span> <span class="n">intentionally</span> <span class="n">submitted</span> <span class="k">for</span> <span class="n">inclusion</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">Work</span>
-   <span class="n">by</span> <span class="n">You</span> <span class="n">to</span> <span class="n">the</span> <span class="n">Licensor</span> <span class="n">shall</span> <span class="n">be</span> <span class="n">under</span> <span class="n">the</span> <span class="n">terms</span> <span class="ow">and</span> <span class="n">conditions</span> <span class="n">of</span>
-   <span class="n">this</span> <span class="n">License</span><span class="p">,</span> <span class="n">without</span> <span class="nb">any</span> <span class="n">additional</span> <span class="n">terms</span> <span class="ow">or</span> <span class="n">conditions</span><span class="o">.</span>
-   <span class="n">Notwithstanding</span> <span class="n">the</span> <span class="n">above</span><span class="p">,</span> <span class="n">nothing</span> <span class="n">herein</span> <span class="n">shall</span> <span class="n">supersede</span> <span class="ow">or</span> <span class="n">modify</span>
-   <span class="n">the</span> <span class="n">terms</span> <span class="n">of</span> <span class="nb">any</span> <span class="n">separate</span> <span class="n">license</span> <span class="n">agreement</span> <span class="n">you</span> <span class="n">may</span> <span class="n">have</span> <span class="n">executed</span>
-   <span class="k">with</span> <span class="n">Licensor</span> <span class="n">regarding</span> <span class="n">such</span> <span class="n">Contributions</span><span class="o">.</span>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>5. Submission of Contributions. Unless You explicitly state otherwise,
+any Contribution intentionally submitted for inclusion in the Work
+by You to the Licensor shall be under the terms and conditions of
+this License, without any additional terms or conditions.
+Notwithstanding the above, nothing herein shall supersede or modify
+the terms of any separate license agreement you may have executed
+with Licensor regarding such Contributions.
 </pre></div>
 </div>
+</section>
+<section id="repository-structure-and-ci-configuration">
+<h3>Repository Structure and CI configuration<a class="headerlink" href="#repository-structure-and-ci-configuration" title="Link to this heading"></a></h3>
+<p>Three build stages are checking the current and future compatibility of the framework.</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">binary</span></code> - against released packages (main and testing) in ROS distributions. This shows that direct local build is possible.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">semi-binary</span></code> - against released core ROS packages (main and testing), but the immediate dependencies are pulled from the source.
+This shows that local build with dependencies is possible, and if it fails there, we can expect that after the next package sync, we will not be able to build.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">source</span></code> - also core ROS packages are build from source. It shows potential issues in the mid future.</p></li>
+</ol>
+<p>Each repository has two types of branches: development, and stable.
+PR’s should always be submitted against the development branch.
+When the PR is accepted, and there are no API and ABI changes to a stable branch, the maintainers will consider a backport to the stable branches.</p>
+<p>We use the following naming conventions for branches:</p>
+<p><strong>Development branch</strong>:</p>
+<ul class="simple">
+<li><p>Name: <code class="docutils literal notranslate"><span class="pre">master</span></code></p></li>
+<li><p>CI rule for merge:</p>
+<ul>
+<li><p>must: <code class="docutils literal notranslate"><span class="pre">semi-binary</span></code> (working against development branch of ros2_control)</p></li>
+<li><p>good: <code class="docutils literal notranslate"><span class="pre">binary</span></code>      (working against the same stable branch of other ros2_control repositories)</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">source</span></code> build each day check against master branches of ROS 2</p></li>
+</ul>
+<p><strong>Stable branches</strong>:</p>
+<ul class="simple">
+<li><p>Name: <code class="docutils literal notranslate"><span class="pre">&lt;ros_distro&gt;</span></code> (e.g., humble, jazzy)</p></li>
+<li><p>CI rule for merge:</p>
+<ul>
+<li><p>must: <code class="docutils literal notranslate"><span class="pre">semi-binary</span></code> (working against the same stable branch of other ros2_control repositories)</p></li>
+<li><p>must: <code class="docutils literal notranslate"><span class="pre">binary</span></code>    (working against released versions of ros2_control) - except for adding new non-braking features</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">source</span></code> build each day against distribution branches</p></li>
+</ul>
 </section>
 </section>
 </section>

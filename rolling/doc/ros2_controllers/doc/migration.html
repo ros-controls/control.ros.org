@@ -66,6 +66,7 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">ros2_controllers</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#diff-drive-controller">diff_drive_controller</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#joint-trajectory-controller">joint_trajectory_controller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#steering-controllers-library">steering_controllers_library</a></li>
 </ul>
 </li>
 </ul>
@@ -139,6 +140,19 @@
 <li><p>The URDF is now parsed for continuous joints and angle wraparound is automatically activated now (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/949">#949</a>). Remove the <code class="docutils literal notranslate"><span class="pre">angle_wraparound</span></code> parameter from the configuration and set continuous joint type in the URDF of the respective joint.</p></li>
 <li><p>Tolerances sent with the action goal were not used before, but are now processed and used for the upcoming action. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/716">#716</a>). Adaptions to the action goal might be necessary.</p></li>
 <li><p>Parameter <code class="docutils literal notranslate"><span class="pre">open_loop_control</span></code> is replaced by <code class="docutils literal notranslate"><span class="pre">interpolate_from_desired_state</span></code> and setting the feedback gains to zero (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1525">#1525</a>).</p></li>
+</ul>
+</section>
+<section id="steering-controllers-library">
+<h2>steering_controllers_library<a class="headerlink" href="#steering-controllers-library" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">front_steering</span></code> parameter was removed (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1166">#1166</a>). Now every kinematics type (bicycle, tricycle, Ackermann) has dedicated parameters for steering or traction wheels instead of front/rear wheels.</p>
+<ul>
+<li><p><em>General</em>: Remove <code class="docutils literal notranslate"><span class="pre">front_steering</span></code> and use <code class="docutils literal notranslate"><span class="pre">traction_joints_names</span></code>/<code class="docutils literal notranslate"><span class="pre">steering_joints_names</span></code> instead of <code class="docutils literal notranslate"><span class="pre">rear_wheels_names</span></code>/<code class="docutils literal notranslate"><span class="pre">front_wheels_names</span></code>, respectively.</p></li>
+<li><p><em>bicycle_steering_controller</em>: Set <code class="docutils literal notranslate"><span class="pre">traction_wheel_radius</span></code> instead of <code class="docutils literal notranslate"><span class="pre">front_wheel_radius</span></code>, <code class="docutils literal notranslate"><span class="pre">rear_wheel_radius</span></code>.</p></li>
+<li><p><em>tricycle_steering_controller</em>: Set <code class="docutils literal notranslate"><span class="pre">traction_wheels_radius</span></code> instead of <code class="docutils literal notranslate"><span class="pre">front_wheels_radius</span></code>, <code class="docutils literal notranslate"><span class="pre">rear_wheels_radius</span></code>.</p></li>
+<li><p><em>ackermann_steering_controller</em>: Set <code class="docutils literal notranslate"><span class="pre">traction_wheels_radius</span></code> instead of <code class="docutils literal notranslate"><span class="pre">front_wheels_radius</span></code>, <code class="docutils literal notranslate"><span class="pre">rear_wheels_radius</span></code>, and <code class="docutils literal notranslate"><span class="pre">traction_track_width</span></code> (and optionally <code class="docutils literal notranslate"><span class="pre">steering_track_width</span></code>, if it differs) instead of <code class="docutils literal notranslate"><span class="pre">rear_wheel_track</span></code>, <code class="docutils literal notranslate"><span class="pre">front_wheel_track</span></code>.</p></li>
+</ul>
+</li>
 </ul>
 </section>
 </section>

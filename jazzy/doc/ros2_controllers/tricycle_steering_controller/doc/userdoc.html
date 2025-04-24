@@ -62,12 +62,12 @@
 <li class="toctree-l3 current"><a class="reference internal" href="../../steering_controllers_library/doc/userdoc.html">Steering Controllers Library</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="../../steering_controllers_library/doc/userdoc.html#execution-logic-of-the-controller">Execution logic of the controller</a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="../../steering_controllers_library/doc/userdoc.html#currently-implemented-kinematics">Currently implemented kinematics</a><ul class="current">
-<li class="toctree-l5"><a class="reference internal" href="../../bicycle_steering_controller/doc/userdoc.html"> Bicycle</a></li>
-<li class="toctree-l5 current"><a class="current reference internal" href="#"> Tricylce</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../bicycle_steering_controller/doc/userdoc.html">Bicycle</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="#">Tricycle</a><ul>
 <li class="toctree-l6"><a class="reference internal" href="#parameters">Parameters</a></li>
 </ul>
 </li>
-<li class="toctree-l5"><a class="reference internal" href="../../ackermann_steering_controller/doc/userdoc.html"> Ackermann</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../ackermann_steering_controller/doc/userdoc.html">Ackermann</a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="../../steering_controllers_library/doc/userdoc.html#description-of-controller-s-interfaces">Description of controller’s interfaces</a></li>
@@ -92,6 +92,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../governance/governance.html">Project Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../statistics.html">Documentation Usage</a></li>
 </ul>
 
         </div>
@@ -134,14 +135,11 @@
 <p>For an exemplary parameterization see the <code class="docutils literal notranslate"><span class="pre">test</span></code> folder of the controller’s package.</p>
 <p>Additionally to the parameters of the <a class="reference internal" href="../../steering_controllers_library/doc/userdoc.html#parameters"><span class="std std-ref">Steering Controller Library</span></a>, this controller adds the following parameters:</p>
 <dl>
-<dt>wheel_track (double)</dt><dd><p>Wheel track length. For details see: <a class="reference external" href="https://en.wikipedia.org/wiki/Wheelbase">https://en.wikipedia.org/wiki/Wheelbase</a></p>
+<dt>wheel_track (double)</dt><dd><p>(deprecated) Axle track, use ‘traction_track_width’ instead</p>
 <p>Default:  0.0</p>
-<p>Constraints:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>greater than 0.0</p></li>
-</ul>
-</div></blockquote>
+</dd>
+<dt>traction_track_width (double)</dt><dd><p>Axle track</p>
+<p>Default:  0.0</p>
 </dd>
 <dt>wheelbase (double)</dt><dd><p>Distance between front and rear wheels. For details see: <a class="reference external" href="https://en.wikipedia.org/wiki/Wheelbase">https://en.wikipedia.org/wiki/Wheelbase</a></p>
 <p>Default:  0.0</p>
@@ -152,23 +150,14 @@
 </ul>
 </div></blockquote>
 </dd>
-<dt>front_wheels_radius (double)</dt><dd><p>Front wheels radius.</p>
+<dt>traction_wheels_radius (double)</dt><dd><p>Traction wheels radius.</p>
 <p>Default:  0.0</p>
-<p>Constraints:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>greater than 0.0</p></li>
-</ul>
-</div></blockquote>
 </dd>
-<dt>rear_wheels_radius (double)</dt><dd><p>Rear wheels radius.</p>
+<dt>front_wheels_radius (double)</dt><dd><p>DEPRECATED: Use ‘traction_wheels_radius’</p>
 <p>Default:  0.0</p>
-<p>Constraints:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>greater than 0.0</p></li>
-</ul>
-</div></blockquote>
+</dd>
+<dt>rear_wheels_radius (double)</dt><dd><p>DEPRECATED: Use ‘traction_wheels_radius’</p>
+<p>Default:  0.0</p>
 </dd>
 </dl>
 </section>
