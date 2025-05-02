@@ -304,7 +304,7 @@ The full structure of the map is given in the following example:</p>
 </ul>
 </div></blockquote>
 </dd>
-<dt>diagnostics.threshold.controllers.periodicity</dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">periodicity</span></code> diagnostics will be published only for the asynchronous controllers, because any affect to the synchronous controllers will be reflected directly in the controller manager’s periodicity.</p>
+<dt>diagnostics.threshold.controllers.periodicity</dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">periodicity</span></code> diagnostics will be published for the asynchronous controllers, because any affect to the synchronous controllers will be reflected directly in the controller manager’s periodicity. It is also published for the synchronous controllers that have a different update rate than the controller manager update rate.</p>
 </dd>
 <dt>diagnostics.threshold.controllers.periodicity.mean_error.warn (double)</dt><dd><p>The warning threshold for the mean error of the controller update loop in Hz. If the mean error exceeds this threshold, a warning diagnostic will be published.</p>
 <p>Default:  5.0</p>
@@ -342,7 +342,7 @@ The full structure of the map is given in the following example:</p>
 </ul>
 </div></blockquote>
 </dd>
-<dt>diagnostics.threshold.controllers.execution_time</dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">execution_time</span></code> diagnostics will be published for all controllers. The <code class="docutils literal notranslate"><span class="pre">mean_error</span></code> for a synchronous controller will be computed against zero, as it should be as low as possible. However, the <code class="docutils literal notranslate"><span class="pre">mean_error</span></code> for an asynchronous controller will be computed against the controller’s desired update period, as the controller can take a maximum of the desired period cycle to execute it’s update cycle.</p>
+<dt>diagnostics.threshold.controllers.execution_time.mean_error</dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">execution_time</span></code> diagnostics will be published for all controllers. The <code class="docutils literal notranslate"><span class="pre">mean_error</span></code> for a synchronous controller will be computed against zero, as it should be as low as possible. However, the <code class="docutils literal notranslate"><span class="pre">mean_error</span></code> for an asynchronous controller will be computed against the controller’s desired update period, as the controller can take a maximum of the desired period to execute its update cycle.</p>
 </dd>
 <dt>diagnostics.threshold.controllers.execution_time.mean_error.warn (double)</dt><dd><p>The warning threshold for the mean error of the controller’s update cycle execution time in microseconds. If the mean error exceeds this threshold, a warning diagnostic will be published.</p>
 <p>Default:  1000.0</p>
@@ -380,6 +380,82 @@ The full structure of the map is given in the following example:</p>
 </ul>
 </div></blockquote>
 </dd>
+<dt>diagnostics.threshold.hardware_components.periodicity</dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">periodicity</span></code> diagnostics will be published for the asynchronous hardware components, because any affect to the synchronous hardware components will be reflected directly in the controller manager’s periodicity. It is also published for the synchronous hardware components that have a different read/write rate than the controller manager update rate.</p>
+</dd>
+<dt>diagnostics.threshold.hardware_components.periodicity.mean_error.warn (double)</dt><dd><p>The warning threshold for the mean error of the hardware component’s read/write loop in Hz. If the mean error exceeds this threshold, a warning diagnostic will be published.</p>
+<p>Default:  5.0</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>diagnostics.threshold.hardware_components.periodicity.mean_error.error (double)</dt><dd><p>The error threshold for the mean error of the hardware component’s read/write loop in Hz. If the mean error exceeds this threshold, an error diagnostic will be published.</p>
+<p>Default:  10.0</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>diagnostics.threshold.hardware_components.periodicity.standard_deviation.warn (double)</dt><dd><p>The warning threshold for the standard deviation of the hardware component’s read/write loop in Hz. If the standard deviation exceeds this threshold, a warning diagnostic will be published.</p>
+<p>Default:  5.0</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>diagnostics.threshold.hardware_components.periodicity.standard_deviation.error (double)</dt><dd><p>The error threshold for the standard deviation of the hardware component’s read/write loop in Hz. If the standard deviation exceeds this threshold, an error diagnostic will be published.</p>
+<p>Default:  10.0</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>diagnostics.threshold.hardware_components.execution_time.mean_error</dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">execution_time</span></code> diagnostics will be published for all hardware components. The <code class="docutils literal notranslate"><span class="pre">mean_error</span></code> for a synchronous hardware component will be computed against zero, as it should be as low as possible. However, the <code class="docutils literal notranslate"><span class="pre">mean_error</span></code> for an asynchronous hardware component will be computed against its desired read/write period, as the hardware component can take a maximum of the desired period to execute the read/write cycle.</p>
+</dd>
+<dt>diagnostics.threshold.hardware_components.execution_time.mean_error.warn (double)</dt><dd><p>The warning threshold for the mean error of the hardware component’s read/write cycle execution time in microseconds. If the mean error exceeds this threshold, a warning diagnostic will be published.</p>
+<p>Default:  1000.0</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>diagnostics.threshold.hardware_components.execution_time.mean_error.error (double)</dt><dd><p>The error threshold for the mean error of the hardware component’s read/write cycle execution time in microseconds. If the mean error exceeds this threshold, a error diagnostic will be published.</p>
+<p>Default:  2000.0</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>diagnostics.threshold.hardware_components.execution_time.standard_deviation.warn (double)</dt><dd><p>The warning threshold for the standard deviation of the hardware component’s read/write cycle execution time in microseconds. If the standard deviation exceeds this threshold, a warning diagnostic will be published.</p>
+<p>Default:  100.0</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>diagnostics.threshold.hardware_components.execution_time.standard_deviation.error (double)</dt><dd><p>The error threshold for the standard deviation of the hardware component’s update cycle execution time in microseconds. If the standard deviation exceeds this threshold, an error diagnostic will be published.</p>
+<p>Default:  200.0</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
 </dl>
 <p><strong>An example parameter file:</strong></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">controller_manager</span><span class="p">:</span>
@@ -395,6 +471,21 @@ The full structure of the map is given in the following example:</p>
 <span class="w">              </span><span class="nt">error</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0</span>
 <span class="w">              </span><span class="nt">warn</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0</span>
 <span class="w">        </span><span class="nt">controllers</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">execution_time</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">mean_error</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">error</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2000.0</span>
+<span class="w">              </span><span class="nt">warn</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000.0</span>
+<span class="w">            </span><span class="nt">standard_deviation</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">error</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">200.0</span>
+<span class="w">              </span><span class="nt">warn</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100.0</span>
+<span class="w">          </span><span class="nt">periodicity</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">mean_error</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">error</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0</span>
+<span class="w">              </span><span class="nt">warn</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0</span>
+<span class="w">            </span><span class="nt">standard_deviation</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">error</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0</span>
+<span class="w">              </span><span class="nt">warn</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0</span>
+<span class="w">        </span><span class="nt">hardware_components</span><span class="p">:</span>
 <span class="w">          </span><span class="nt">execution_time</span><span class="p">:</span>
 <span class="w">            </span><span class="nt">mean_error</span><span class="p">:</span>
 <span class="w">              </span><span class="nt">error</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2000.0</span>
