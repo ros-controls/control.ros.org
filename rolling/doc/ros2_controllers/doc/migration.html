@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Migration Guides: Iron to Jazzy &mdash; ROS2_Control: Rolling May 2025 documentation</title>
+  <title>Migration Guides: Jazzy to Kilted &mdash; ROS2_Control: Rolling May 2025 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -63,12 +63,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../migration/migration.html#coming-from-ros-control-ros-1">Coming from ros_control (ROS 1)</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../migration/migration.html#between-different-ros-2-distributions">Between different ROS 2 distributions</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../../ros2_control/doc/migration.html">ros2_control</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">ros2_controllers</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#diff-drive-controller">diff_drive_controller</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#joint-trajectory-controller">joint_trajectory_controller</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#steering-controllers-library">steering_controllers_library</a></li>
-</ul>
-</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ros2_controllers</a></li>
 </ul>
 </li>
 </ul>
@@ -97,7 +92,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../migration/migration.html">Migration Guides</a></li>
-      <li class="breadcrumb-item active">Migration Guides: Iron to Jazzy</li>
+      <li class="breadcrumb-item active">Migration Guides: Jazzy to Kilted</li>
       <li class="wy-breadcrumbs-aside">
               <!-- User defined GitHub URL -->
               <a href="https://github.com/ros-controls/ros2_controllers/blob/master/doc/migration.rst" class="fa fa-github"> Edit on GitHub</a>
@@ -119,42 +114,9 @@
 </p>
 
 
-  <section id="migration-guides-iron-to-jazzy">
-<h1>Migration Guides: Iron to Jazzy<a class="headerlink" href="#migration-guides-iron-to-jazzy" title="Link to this heading"></a></h1>
-<p>This list summarizes important changes between Iron (previous) and Jazzy (current) releases, where changes to user code might be necessary.</p>
-<section id="diff-drive-controller">
-<h2>diff_drive_controller<a class="headerlink" href="#diff-drive-controller" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>The twist message on <code class="docutils literal notranslate"><span class="pre">~/cmd_vel</span></code> is now required to be of stamped type (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/812">#812</a>).</p></li>
-<li><p>Parameters <code class="docutils literal notranslate"><span class="pre">has_velocity_limits</span></code>, <code class="docutils literal notranslate"><span class="pre">has_acceleration_limits</span></code>, and <code class="docutils literal notranslate"><span class="pre">has_jerk_limits</span></code> are removed. Instead, set the respective limits to <code class="docutils literal notranslate"><span class="pre">.NAN</span></code>. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1315">#1315</a>).</p></li>
-</ul>
-</section>
-<section id="joint-trajectory-controller">
-<h2>joint_trajectory_controller<a class="headerlink" href="#joint-trajectory-controller" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>Parameter <code class="docutils literal notranslate"><span class="pre">allow_nonzero_velocity_at_trajectory_end</span></code> is now per default <code class="docutils literal notranslate"><span class="pre">false</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/834">#834</a>).</p></li>
-<li><p>The parameter <code class="docutils literal notranslate"><span class="pre">start_with_holding</span></code> is removed, it now always holds the position at activation (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/839">#839</a>).</p></li>
-<li><p>Goals are now cancelled in <code class="docutils literal notranslate"><span class="pre">on_deactivate</span></code> transition (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/962">#962</a>).</p></li>
-<li><p>Empty trajectory messages are discarded (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/902">#902</a>).</p></li>
-<li><p>Angle wraparound behavior (continuous joints) was added from the current state to the first segment of the incoming trajectory (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/796">#796</a>).</p></li>
-<li><p>The URDF is now parsed for continuous joints and angle wraparound is automatically activated now (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/949">#949</a>). Remove the <code class="docutils literal notranslate"><span class="pre">angle_wraparound</span></code> parameter from the configuration and set continuous joint type in the URDF of the respective joint.</p></li>
-<li><p>Tolerances sent with the action goal were not used before, but are now processed and used for the upcoming action. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/716">#716</a>). Adaptions to the action goal might be necessary.</p></li>
-<li><p>Parameter <code class="docutils literal notranslate"><span class="pre">open_loop_control</span></code> is replaced by <code class="docutils literal notranslate"><span class="pre">interpolate_from_desired_state</span></code> and setting the feedback gains to zero (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1525">#1525</a>).</p></li>
-</ul>
-</section>
-<section id="steering-controllers-library">
-<h2>steering_controllers_library<a class="headerlink" href="#steering-controllers-library" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">front_steering</span></code> parameter was removed (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1166">#1166</a>). Now every kinematics type (bicycle, tricycle, Ackermann) has dedicated parameters for steering or traction wheels instead of front/rear wheels.</p>
-<ul>
-<li><p><em>General</em>: Remove <code class="docutils literal notranslate"><span class="pre">front_steering</span></code> and use <code class="docutils literal notranslate"><span class="pre">traction_joints_names</span></code>/<code class="docutils literal notranslate"><span class="pre">steering_joints_names</span></code> instead of <code class="docutils literal notranslate"><span class="pre">rear_wheels_names</span></code>/<code class="docutils literal notranslate"><span class="pre">front_wheels_names</span></code>, respectively.</p></li>
-<li><p><em>bicycle_steering_controller</em>: Set <code class="docutils literal notranslate"><span class="pre">traction_wheel_radius</span></code> instead of <code class="docutils literal notranslate"><span class="pre">front_wheel_radius</span></code>, <code class="docutils literal notranslate"><span class="pre">rear_wheel_radius</span></code>.</p></li>
-<li><p><em>tricycle_steering_controller</em>: Set <code class="docutils literal notranslate"><span class="pre">traction_wheels_radius</span></code> instead of <code class="docutils literal notranslate"><span class="pre">front_wheels_radius</span></code>, <code class="docutils literal notranslate"><span class="pre">rear_wheels_radius</span></code>.</p></li>
-<li><p><em>ackermann_steering_controller</em>: Set <code class="docutils literal notranslate"><span class="pre">traction_wheels_radius</span></code> instead of <code class="docutils literal notranslate"><span class="pre">front_wheels_radius</span></code>, <code class="docutils literal notranslate"><span class="pre">rear_wheels_radius</span></code>, and <code class="docutils literal notranslate"><span class="pre">traction_track_width</span></code> (and optionally <code class="docutils literal notranslate"><span class="pre">steering_track_width</span></code>, if it differs) instead of <code class="docutils literal notranslate"><span class="pre">rear_wheel_track</span></code>, <code class="docutils literal notranslate"><span class="pre">front_wheel_track</span></code>.</p></li>
-</ul>
-</li>
-</ul>
-</section>
+  <section id="migration-guides-jazzy-to-kilted">
+<h1>Migration Guides: Jazzy to Kilted<a class="headerlink" href="#migration-guides-jazzy-to-kilted" title="Link to this heading"></a></h1>
+<p>This list summarizes important changes between Jazzy (previous) and Kilted (current) releases, where changes to user code might be necessary.</p>
 </section>
 
 
@@ -204,6 +166,7 @@
     <dl>
       <dt>In Development</dt>
       <dd><a href="migration.html">Rolling</a></dd>
+      <dd><a href="../../../../kilted/doc/ros2_controllers/doc/migration.html">Kilted</a></dd>
     </dl>
   </div>
 </div><script>

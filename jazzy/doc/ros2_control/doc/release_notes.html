@@ -27,7 +27,7 @@
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Release Notes: Iron to Jazzy" href="../../ros2_controllers/doc/release_notes.html" />
+    <link rel="next" title="Release Notes: Humble to Jazzy" href="../../ros2_controllers/doc/release_notes.html" />
     <link rel="prev" title="Release Notes" href="../../release_notes/release_notes.html" /> 
 </head>
 
@@ -100,7 +100,7 @@
       <li class="breadcrumb-item active">Iron to Jazzy</li>
       <li class="wy-breadcrumbs-aside">
               <!-- User defined GitHub URL -->
-              <a href="https://github.com/ros-controls/ros2_control/blob/master/doc/release_notes/Jazzy.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/ros-controls/ros2_control/blob/jazzy/doc/release_notes/Jazzy.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -299,7 +299,7 @@ This should help avoiding extra legwork in controllers to get access to the <cod
 <h2>Adaption of Command-/StateInterfaces<a class="headerlink" href="#adaption-of-command-stateinterfaces" title="Link to this heading"></a></h2>
 <p>Changes from <a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1688">(PR #1688)</a> for an overview of related changes and discussion refer to <a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1240">(PR #1240)</a>.</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Command-/StateInterfaces</span></code> are now created and exported automatically by the framework via the <code class="docutils literal notranslate"><span class="pre">on_export_command_interfaces()</span></code> or <code class="docutils literal notranslate"><span class="pre">on_export_state_interfaces()</span></code> methods based on the interfaces defined in the <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> XML-tag, which gets parsed and the <code class="docutils literal notranslate"><span class="pre">InterfaceDescription</span></code> is created accordingly (check the <a class="reference external" href="https://github.com/ros-controls/ros2_control/tree/master/hardware_interface/include/hardware_interface/hardware_info.hpp">hardware_info.hpp</a>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Command-/StateInterfaces</span></code> are now created and exported automatically by the framework via the <code class="docutils literal notranslate"><span class="pre">on_export_command_interfaces()</span></code> or <code class="docutils literal notranslate"><span class="pre">on_export_state_interfaces()</span></code> methods based on the interfaces defined in the <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> XML-tag, which gets parsed and the <code class="docutils literal notranslate"><span class="pre">InterfaceDescription</span></code> is created accordingly (check the <a class="reference external" href="https://github.com/ros-controls/ros2_control/tree/jazzy/hardware_interface/include/hardware_interface/hardware_info.hpp">hardware_info.hpp</a>).</p></li>
 <li><p>The memory for storing the value of a <code class="docutils literal notranslate"><span class="pre">Command-/StateInterfaces</span></code> is no longer allocated in the hardware but instead in the <code class="docutils literal notranslate"><span class="pre">Command-/StateInterfaces</span></code> itself.</p></li>
 <li><p>To access the automatically created <code class="docutils literal notranslate"><span class="pre">Command-/StateInterfaces</span></code> we provide the <code class="docutils literal notranslate"><span class="pre">std::unordered_map&lt;std::string,</span> <span class="pre">InterfaceDescription&gt;</span></code>, where the string is the fully qualified name of the interface and the <code class="docutils literal notranslate"><span class="pre">InterfaceDescription</span></code> is the configuration of the interface. The <code class="docutils literal notranslate"><span class="pre">std::unordered_map&lt;&gt;</span></code> are divided into <code class="docutils literal notranslate"><span class="pre">type_state_interfaces_</span></code> and <code class="docutils literal notranslate"><span class="pre">type_command_interfaces_</span></code> where type can be: <code class="docutils literal notranslate"><span class="pre">joint</span></code>, <code class="docutils literal notranslate"><span class="pre">sensor</span></code>, <code class="docutils literal notranslate"><span class="pre">gpio</span></code> and <code class="docutils literal notranslate"><span class="pre">unlisted</span></code>. E.g. the <code class="docutils literal notranslate"><span class="pre">CommandInterfaces</span></code> for all joints can be found in the  <code class="docutils literal notranslate"><span class="pre">joint_command_interfaces_</span></code> map. The <code class="docutils literal notranslate"><span class="pre">unlisted</span></code> includes all interfaces not listed in the <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> XML-tag but were created by overriding the <code class="docutils literal notranslate"><span class="pre">export_unlisted_command_interfaces()</span></code> or <code class="docutils literal notranslate"><span class="pre">export_unlisted_state_interfaces()</span></code> function by creating some custom <code class="docutils literal notranslate"><span class="pre">Command-/StateInterfaces</span></code>.</p></li>
 </ul>
@@ -333,7 +333,7 @@ This should help avoiding extra legwork in controllers to get access to the <cod
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../../release_notes/release_notes.html" class="btn btn-neutral float-left" title="Release Notes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../../ros2_controllers/doc/release_notes.html" class="btn btn-neutral float-right" title="Release Notes: Iron to Jazzy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../../ros2_controllers/doc/release_notes.html" class="btn btn-neutral float-right" title="Release Notes: Humble to Jazzy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
@@ -374,6 +374,7 @@ This should help avoiding extra legwork in controllers to get access to the <cod
     <dl>
       <dt>In Development</dt>
       <dd><a href="../../../../rolling/doc/ros2_control/doc/release_notes.html">Rolling</a></dd>
+      <dd><a href="../../../../kilted/doc/ros2_control/doc/release_notes.html">Kilted</a></dd>
     </dl>
   </div>
 </div><script>
