@@ -30,9 +30,9 @@ copyright = "{}, {}".format(time.strftime("%Y"), author)
 
 # Adjust those to change ros distribution
 # you might also need to white list branch
-ros_distro = "jazzy"
-distro_title = "Jazzy"
-distro_title_full = "Jazzy Jalisco"
+ros_distro = "kilted"
+distro_title = "Kilted"
+distro_title_full = "Kilted Kaiju"
 repos_file_branch = "master"
 
 # The version info for the project you're documenting, acts as replacement for
@@ -212,14 +212,14 @@ if os.environ.get('BASE_BRANCH_PR') is not None:
 elif os.environ.get('BASE_BRANCH') is not None:
   base_branch = os.environ.get('BASE_BRANCH')
 else:
-  base_branch = "jazzy"
+  base_branch = "rolling"
 
 # Add branches you want to whitelist here.
-smv_branch_whitelist = r"^(foxy|galactic|humble|iron|"+ base_branch + r")$"
+smv_branch_whitelist = r"^(foxy|galactic|humble|iron|jazzy|kilted|"+ base_branch + r")$"
 smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy|galactic|humble|iron|jazzy).*$"
 smv_remote_whitelist = r"^(origin)$"
-smv_latest_version = "iron"
-smv_eol_versions = ["foxy", "galactic"]
+smv_latest_version = "kilted"
+smv_eol_versions = ["foxy", "galactic", "iron"]
 
 distro_full_names = {
     "foxy": "Foxy Fitzroy",
@@ -227,6 +227,7 @@ distro_full_names = {
     "humble": "Humble Hawksbill",
     "iron": "Iron Irwini",
     "jazzy": "Jazzy Jalisco",
+    "kilted": "Kilted Kaiju",
     "rolling": "Rolling Ridley",
 }
 
@@ -344,7 +345,9 @@ def smv_rewrite_configs(app, config):
     if app.config.smv_current_version != "":
         # this map is used to match branches of control.ros.org to ROS distros, e.g., DISTRO macro
         branch_distro = {
-            base_branch: "jazzy",
+            base_branch: "rolling",
+            "kilted": "kilted",
+            "jazzy": "jazzy",
             "iron": "iron",
             "humble": "humble",
             "foxy": "foxy",
@@ -352,7 +355,9 @@ def smv_rewrite_configs(app, config):
         }
         # this map is used to match branches of control.ros.org to REPOS_FILE_BRANCH macro
         subrepo_branch = {
-            base_branch: "jazzy",
+            base_branch: "master",
+            "kilted": "master",
+            "jazzy": "jazzy",
             "iron": "iron",
             "humble": "humble",
             "foxy": "foxy",
