@@ -68,8 +68,9 @@ language = "en"
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 # exclude index.rst files from packages/metapackages for rosdoc2
-exclude_patterns = ["_build", "Thumbs.db", ".DS_Store",
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "README.md",
                     "**/CHANGELOG.rst", "**/README.rst",
+                    "**/*.md", # exclude markdown files, only add them explicitly
                     "doc/ros2_control/ros2_control/**.rst",
                     "doc/ros2_control/transmission_interface/**.rst",
                     "doc/realtime_tools/**.rst",
@@ -94,7 +95,8 @@ extensions = [
     "sphinx_copybutton",
     "generate_parameter_library",
     'sphinx_tabs.tabs',
-    "sphinx.ext.autosectionlabel"
+    "sphinx.ext.autosectionlabel",
+    'myst_parser'
 ]
 
 # Make sure the target is unique

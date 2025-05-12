@@ -185,5 +185,17 @@ repos = {
             "rolling": "master"
         },
         "pr": None
+    },
+    ".github": {
+        "url": "https://github.com/ros-controls/.github",
+        "branch_version": {
+            "foxy": "master",
+            "galactic": "master",
+            "humble": "master",
+            "iron": "master",
+            "jazzy": "master",
+            "rolling": "master"
+        },
+        "pr": None
     }
 }
