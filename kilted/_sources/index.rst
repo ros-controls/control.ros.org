@@ -1,7 +1,7 @@
 .. _documentation_home:
 
-Welcome to the ros2_control documentation - Jazzy!
-==================================================
+Welcome to the ros2_control documentation - Kilted!
+===================================================
 
 .. toctree::
    :hidden:
