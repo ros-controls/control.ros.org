@@ -196,6 +196,7 @@ repos = {
             "humble": "master",
             "iron": "master",
             "jazzy": "master",
+            "kilted": "master",
             "rolling": "master"
         },
         "pr": None
