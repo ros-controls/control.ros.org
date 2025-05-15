@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Iron to Jazzy &mdash; ROS2_Control: Kilted May 2025 documentation</title>
+  <title>Release Notes: Jazzy to Kilted &mdash; ROS2_Control: Kilted May 2025 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -59,16 +59,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../simulators/simulators.html">Simulator Integrations</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../release_notes/release_notes.html">Release Notes</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">ros2_control</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#general">General</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#controller-interface">controller_interface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#controller-manager">controller_manager</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#hardware-interface">hardware_interface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#joint-limits">joint_limits</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#adaption-of-command-stateinterfaces">Adaption of Command-/StateInterfaces</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ros2controlcli">ros2controlcli</a></li>
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">ros2_control</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ros2_controllers/doc/release_notes.html">ros2_controllers</a></li>
 </ul>
 </li>
@@ -97,10 +88,10 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../release_notes/release_notes.html">Release Notes</a></li>
-      <li class="breadcrumb-item active">Iron to Jazzy</li>
+      <li class="breadcrumb-item active">Release Notes: Jazzy to Kilted</li>
       <li class="wy-breadcrumbs-aside">
               <!-- User defined GitHub URL -->
-              <a href="https://github.com/ros-controls/ros2_control/blob/master/doc/release_notes/Jazzy.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/ros-controls/ros2_control/blob/master/doc/release_notes.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -119,221 +110,9 @@
 </p>
 
 
-  <section id="iron-to-jazzy">
-<h1>Iron to Jazzy<a class="headerlink" href="#iron-to-jazzy" title="Link to this heading"></a></h1>
-<section id="general">
-<h2>General<a class="headerlink" href="#general" title="Link to this heading"></a></h2>
-<ul>
-<li><p>A <code class="docutils literal notranslate"><span class="pre">version.h</span></code> file will be generated per package using the ament_generate_version_header  (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1449">#1449</a>). For example, you can include the version of the package in the logs.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;controller_manager/version.h&gt;</span>
-<span class="p">...</span>
-<span class="n">RCLCPP_INFO</span><span class="p">(</span><span class="n">get_logger</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;controller_manager version: %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">CONTROLLER_MANAGER_VERSION_STR</span><span class="p">);</span>
-</pre></div>
-</div>
-</li>
-</ul>
-</section>
-<section id="controller-interface">
-<h2>controller_interface<a class="headerlink" href="#controller-interface" title="Link to this heading"></a></h2>
-<p>For details see the controller_manager section.</p>
-<ul class="simple">
-<li><p>Pass URDF to controllers on init (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1088">#1088</a>).</p></li>
-<li><p>Pass controller manager update rate on the init of the controller interface  (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1141">#1141</a>)</p></li>
-<li><p>A method to get node options to setup the controller node #api-breaking (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1169">#1169</a>)</p></li>
-<li><p>Export state interfaces from the chainable controller #api-breaking (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1021">#1021</a>)</p></li>
-<li><p>All chainable controllers must implement the method <code class="docutils literal notranslate"><span class="pre">export_state_interfaces</span></code> to export the state interfaces, similar to <code class="docutils literal notranslate"><span class="pre">export_reference_interfaces</span></code> method that is exporting the reference interfaces.</p></li>
-<li><p>The controllers will now set <code class="docutils literal notranslate"><span class="pre">use_global_arguments</span></code> from <a class="reference external" href="https://docs.ros.org/en/rolling/p/rclcpp/generated/classrclcpp_1_1NodeOptions.html#_CPPv4N6rclcpp11NodeOptions20use_global_argumentsEb">NodeOptions</a> to false, to avoid getting influenced by global arguments (Issue : <a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1684">#1684</a>) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1694">#1694</a>). From now on, in order to set the parameters to the controller, the <code class="docutils literal notranslate"><span class="pre">--param-file</span></code> option from spawner should be used.</p></li>
-<li><p>With (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1683">#1683</a>) the <code class="docutils literal notranslate"><span class="pre">rclcpp_lifecycle::State</span> <span class="pre">&amp;</span> <span class="pre">get_state()</span></code> and <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">set_state(const</span> <span class="pre">rclcpp_lifecycle::State</span> <span class="pre">&amp;</span> <span class="pre">new_state)</span></code> are replaced by <code class="docutils literal notranslate"><span class="pre">rclcpp_lifecycle::State</span> <span class="pre">&amp;</span> <span class="pre">get_lifecycle_state()</span></code> and <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">set_lifecycle_state(const</span> <span class="pre">rclcpp_lifecycle::State</span> <span class="pre">&amp;</span> <span class="pre">new_state)</span></code>. This change affects controllers and hardware. This is related to (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1240">#1240</a>) as variant support introduces <code class="docutils literal notranslate"><span class="pre">get_state</span></code> and <code class="docutils literal notranslate"><span class="pre">set_state</span></code> methods for setting/getting state of handles.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">assign_interfaces</span></code> and <code class="docutils literal notranslate"><span class="pre">release_interfaces</span></code> methods are now virtual, so that the user can override them to store the interfaces into custom variable types, so that the user can have the flexibility to take the ownership of the loaned interfaces to the controller (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1743">#1743</a>)</p></li>
-<li><p>The new <code class="docutils literal notranslate"><span class="pre">PoseSensor</span></code> semantic component provides a standard interface for hardware providing cartesian poses (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1775">#1775</a>)</p></li>
-<li><p>The controllers now support the fallback controllers (a list of controllers that will be activated, when the spawned controllers fails by throwing an exception or returning <code class="docutils literal notranslate"><span class="pre">return_type::ERROR</span></code> during the <code class="docutils literal notranslate"><span class="pre">update</span></code> cycle) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1789">#1789</a>)</p></li>
-<li><p>The controllers can be easily introspect the internal member variables using the macro <code class="docutils literal notranslate"><span class="pre">REGISTER_ROS2_CONTROL_INTROSPECTION</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1918">#1918</a>)</p></li>
-<li><p>A new <code class="docutils literal notranslate"><span class="pre">SemanticComponentCommandInterface</span></code> semantic component provides capabilities analogous to the <code class="docutils literal notranslate"><span class="pre">SemanticComponentInterface</span></code>, but for write-only devices (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1945">#1945</a>)</p></li>
-<li><p>The new semantic command interface <code class="docutils literal notranslate"><span class="pre">LedRgbDevice</span></code> provides standard (command) interfaces for 3-channel LED devices (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1945">#1945</a>)</p></li>
-</ul>
-</section>
-<section id="controller-manager">
-<h2>controller_manager<a class="headerlink" href="#controller-manager" title="Link to this heading"></a></h2>
-<ul>
-<li><p>URDF is now passed to controllers on init (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1088">#1088</a>)
-This should help avoiding extra legwork in controllers to get access to the <code class="docutils literal notranslate"><span class="pre">/robot_description</span></code>.</p></li>
-<li><p>Pass controller manager update rate on the init of the controller interface (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1141">#1141</a>)</p></li>
-<li><p>Report inactive controllers as a diagnostics ok instead of an error (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1184">#1184</a>)</p></li>
-<li><p>Set chained controller interfaces ‘available’ for activated controllers (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1098">#1098</a>)</p>
-<ul class="simple">
-<li><p>Configured chainable controller: Listed exported interfaces are unavailable and unclaimed</p></li>
-<li><p>Active chainable controller (not in chained mode): Listed exported interfaces are available but unclaimed</p></li>
-<li><p>Active chainable controller (in chained mode): Listed exported interfaces are available and claimed</p></li>
-</ul>
-</li>
-<li><p>Try using SCHED_FIFO on any kernel (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1142">#1142</a>)</p></li>
-<li><p>A method to get node options to setup the controller node was added (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1169">#1169</a>): <code class="docutils literal notranslate"><span class="pre">get_node_options</span></code> can be overridden by controllers, this would make it easy for other controllers to be able to setup their own custom node options</p></li>
-<li><p>CM now subscribes to <code class="docutils literal notranslate"><span class="pre">robot_description</span></code> topic instead of <code class="docutils literal notranslate"><span class="pre">~/robot_description</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1410">#1410</a>).</p></li>
-<li><p>Change the controller sorting with an approach similar to directed acyclic graphs (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1384">#1384</a>)</p></li>
-<li><p>Changes from <a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1256">(PR #1256)</a></p>
-<ul>
-<li><p>All <code class="docutils literal notranslate"><span class="pre">joints</span></code> defined in the <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code>-tag have to be present in the URDF received <a class="reference internal" href="../controller_manager/doc/userdoc.html#subscribers"><span class="std std-ref">by the controller manager</span></a>, otherwise the following error is shown:</p>
-<blockquote>
-<div><p>The published robot description file (URDF) seems not to be genuine. The following error was caught: &lt;unknown_joint&gt; not found in URDF.</p>
-</div></blockquote>
-<p>This is to ensure that the URDF and the <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code>-tag are consistent. E.g., for configuration ports use <code class="docutils literal notranslate"><span class="pre">gpio</span></code> interface types instead.</p>
-</li>
-<li><p>The syntax for mimic joints is changed to the <a class="reference external" href="https://wiki.ros.org/urdf/XML/joint">official URDF specification</a>.</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;right_finger_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;prismatic&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;axis</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 1 0&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0.0 -0.48 1&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0.0 0.0 0.0&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;base&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;finger_right&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;limit</span><span class="w"> </span><span class="na">effort=</span><span class="s">&quot;1000.0&quot;</span><span class="w"> </span><span class="na">lower=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">upper=</span><span class="s">&quot;0.38&quot;</span><span class="w"> </span><span class="na">velocity=</span><span class="s">&quot;10&quot;</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;/joint&gt;</span>
-<span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;left_finger_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;prismatic&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;mimic</span><span class="w"> </span><span class="na">joint=</span><span class="s">&quot;right_finger_joint&quot;</span><span class="w"> </span><span class="na">multiplier=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="na">offset=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;axis</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 1 0&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0.0 0.48 1&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0.0 0.0 3.1415926535&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;base&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;finger_left&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;limit</span><span class="w"> </span><span class="na">effort=</span><span class="s">&quot;1000.0&quot;</span><span class="w"> </span><span class="na">lower=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">upper=</span><span class="s">&quot;0.38&quot;</span><span class="w"> </span><span class="na">velocity=</span><span class="s">&quot;10&quot;</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;/joint&gt;</span>
-</pre></div>
-</div>
-</li>
-</ul>
-<blockquote>
-<div><p>The parameters within the <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> tag are not supported any more.</p>
-</div></blockquote>
-</li>
-<li><p>The support for the <code class="docutils literal notranslate"><span class="pre">description</span></code> parameter for loading the URDF was removed (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1358">#1358</a>).</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">--controller-type</span></code> or <code class="docutils literal notranslate"><span class="pre">-t</span></code> spawner arg is removed. Now the controller type is defined in the controller configuration file with <code class="docutils literal notranslate"><span class="pre">type</span></code> field (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1639">#1639</a>).</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">--namespace</span></code> or <code class="docutils literal notranslate"><span class="pre">-n</span></code> spawner arg is deprecated. Now the spawner namespace can be defined using the ROS 2 standard way (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1640">#1640</a>).</p></li>
-<li><p>Added support for the wildcard entries for the controller configuration files (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1724">#1724</a>).</p></li>
-<li><p>The spawner now supports the <code class="docutils literal notranslate"><span class="pre">--controller-ros-args</span></code> argument to pass the ROS 2 node arguments to the controller node to be able to remap topics, services and etc (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1713">#1713</a>).</p></li>
-<li><p>The spawner now supports parsing multiple <code class="docutils literal notranslate"><span class="pre">-p</span></code> or <code class="docutils literal notranslate"><span class="pre">--param-file</span></code> arguments, this should help in loading multiple parameter files for a controller or for multiple controllers (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1805">#1805</a>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--switch-timeout</span></code> was added as parameter to the helper scripts <code class="docutils literal notranslate"><span class="pre">spawner.py</span></code> and <code class="docutils literal notranslate"><span class="pre">unspawner.py</span></code>. Useful if controllers cannot be switched immediately, e.g., paused simulations at startup (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1790">#1790</a>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ros2_control_node</span></code> can now handle the sim time used by different simulators, when <code class="docutils literal notranslate"><span class="pre">use_sim_time</span></code> is set to true (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1810">#1810</a>).</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">ros2_control_node</span></code> node now accepts the <code class="docutils literal notranslate"><span class="pre">thread_priority</span></code> parameter to set the scheduler priority of the controller_manager’s RT thread (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1820">#1820</a>).</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">ros2_control_node</span></code> node has a new <code class="docutils literal notranslate"><span class="pre">lock_memory</span></code> parameter to lock memory at startup to physical RAM in order to avoid page faults (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1822">#1822</a>).</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">ros2_control_node</span></code> node has a new <code class="docutils literal notranslate"><span class="pre">cpu_affinity</span></code> parameter to bind the process to a specific CPU core. By default, this is not enabled. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1852">#1852</a>).</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">--service-call-timeout</span></code> was added as parameter to the helper scripts <code class="docutils literal notranslate"><span class="pre">spawner.py</span></code>. Useful when the CPU load is high at startup and the service call does not return immediately (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1808">#1808</a>).</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">cpu_affinity</span></code> parameter can now accept of types <code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">int_array</span></code> to bind the process to a specific CPU core or multiple CPU cores. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1915">#1915</a>).</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">pal_statistics</span></code> is now integrated into the controller_manager, so that the controllers, hardware components and the controller_manager can be easily introspected and monitored using the topics <code class="docutils literal notranslate"><span class="pre">~/introspection_data/names</span></code> and <code class="docutils literal notranslate"><span class="pre">~/introspection_data/values</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1918">#1918</a>).</p></li>
-<li><p>A python module <code class="docutils literal notranslate"><span class="pre">test_utils</span></code> was added to the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> package to help with integration testing (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1955">#1955</a>).</p></li>
-<li><p>A new parameter <code class="docutils literal notranslate"><span class="pre">enforce_command_limits</span></code> is introduced to be able to enable and disable the enforcement of the command limits (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1989">#1989</a>).</p></li>
-<li><p>A latched topic <code class="docutils literal notranslate"><span class="pre">~/activity</span></code> has been added to the controller_manager to publish the activity of the controller_manager, where the change in states of the controllers and the hardware components are published. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2006">#2006</a>).</p></li>
-<li><p>The controller manager will use a monotonic clock for triggering read-update-write cycles, but when the <code class="docutils literal notranslate"><span class="pre">use_sim_time</span></code> parameter is set to true, it will use the ROS Clock for triggering. When monotonic clock is being used, all the hardware components will receive the monotonic time in their read and write method, instead the controllers will always receive the ROS time in their update method irrespective of the clock being used. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2046">#2046</a>).</p></li>
-</ul>
-</section>
-<section id="hardware-interface">
-<h2>hardware_interface<a class="headerlink" href="#hardware-interface" title="Link to this heading"></a></h2>
-<ul>
-<li><p>A portable version for string-to-double conversion was added: <code class="docutils literal notranslate"><span class="pre">hardware_interface::stod</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1257">#1257</a>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">test_components</span></code> was moved to its own package (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1325">#1325</a>)</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> tag now supports parsing of the limits from the URDF into the <code class="docutils literal notranslate"><span class="pre">HardwareInfo</span></code> structure. More conservative limits can be defined using the <code class="docutils literal notranslate"><span class="pre">min</span></code> and <code class="docutils literal notranslate"><span class="pre">max</span></code> attributes per interface (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1472">#1472</a>)</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;RRBotSystemMutipleGPIOs&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;hardware&gt;</span>
-<span class="w">    </span><span class="nt">&lt;plugin&gt;</span>ros2_control_demo_hardware/RRBotSystemPositionOnlyHardware<span class="nt">&lt;/plugin&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;example_param_hw_start_duration_sec&quot;</span><span class="nt">&gt;</span>2.0<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;example_param_hw_stop_duration_sec&quot;</span><span class="nt">&gt;</span>3.0<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;example_param_hw_slowdown&quot;</span><span class="nt">&gt;</span>2.0<span class="nt">&lt;/param&gt;</span>
-<span class="w">  </span><span class="nt">&lt;/hardware&gt;</span>
-<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint1&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;min&quot;</span><span class="nt">&gt;</span>-1<span class="nt">&lt;/param&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;max&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;/command_interface&gt;</span>
-<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;limits</span><span class="w"> </span><span class="na">enable=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;/command_interface&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
-<span class="nt">&lt;/ros2_control&gt;</span>
-</pre></div>
-</div>
-</li>
-<li><p>Soft limits are also parsed from the URDF into the <code class="docutils literal notranslate"><span class="pre">HardwareInfo</span></code> structure for the defined joints (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1488">#1488</a>)</p></li>
-<li><p>Access to logger and clock through <code class="docutils literal notranslate"><span class="pre">get_logger</span></code> and <code class="docutils literal notranslate"><span class="pre">get_clock</span></code> methods in ResourceManager and HardwareComponents <code class="docutils literal notranslate"><span class="pre">Actuator</span></code>, <code class="docutils literal notranslate"><span class="pre">Sensor</span></code> and <code class="docutils literal notranslate"><span class="pre">System</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1585">#1585</a>)</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> tag now supports parsing read/write rate <code class="docutils literal notranslate"><span class="pre">rw_rate</span></code> for the each hardware component parsed through the URDF (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1570">#1570</a>)</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;RRBotSystemMutipleGPIOs&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="w"> </span><span class="na">rw_rate=</span><span class="s">&quot;500&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;hardware&gt;</span>
-<span class="w">    </span><span class="nt">&lt;plugin&gt;</span>ros2_control_demo_hardware/RRBotSystemPositionOnlyHardware<span class="nt">&lt;/plugin&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;example_param_hw_start_duration_sec&quot;</span><span class="nt">&gt;</span>2.0<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;example_param_hw_stop_duration_sec&quot;</span><span class="nt">&gt;</span>3.0<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;example_param_hw_slowdown&quot;</span><span class="nt">&gt;</span>2.0<span class="nt">&lt;/param&gt;</span>
-<span class="w">  </span><span class="nt">&lt;/hardware&gt;</span>
-<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint1&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
-<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint2&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
-<span class="nt">&lt;/ros2_control&gt;</span>
-<span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;MultimodalGripper&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;actuator&quot;</span><span class="w"> </span><span class="na">rw_rate=</span><span class="s">&quot;200&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;hardware&gt;</span>
-<span class="w">    </span><span class="nt">&lt;plugin&gt;</span>ros2_control_demo_hardware/MultimodalGripper<span class="nt">&lt;/plugin&gt;</span>
-<span class="w">  </span><span class="nt">&lt;/hardware&gt;</span>
-<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;parallel_fingers&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;min&quot;</span><span class="nt">&gt;</span>0<span class="nt">&lt;/param&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;max&quot;</span><span class="nt">&gt;</span>100<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;/command_interface&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
-<span class="w">  </span><span class="nt">&lt;gpio</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;suction&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;suction&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;suction&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;/gpio&gt;</span>
-<span class="nt">&lt;/ros2_control&gt;</span>
-</pre></div>
-</div>
-</li>
-<li><p>Added <code class="docutils literal notranslate"><span class="pre">get_hardware_info</span></code> method to the hardware components interface to access the <code class="docutils literal notranslate"><span class="pre">HardwareInfo</span></code> instead of accessing the variable <code class="docutils literal notranslate"><span class="pre">info_</span></code> directly (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1643">#1643</a>)</p></li>
-<li><p>With (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1683">#1683</a>) the <code class="docutils literal notranslate"><span class="pre">rclcpp_lifecycle::State</span> <span class="pre">&amp;</span> <span class="pre">get_state()</span></code> and <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">set_state(const</span> <span class="pre">rclcpp_lifecycle::State</span> <span class="pre">&amp;</span> <span class="pre">new_state)</span></code> are replaced by <code class="docutils literal notranslate"><span class="pre">rclcpp_lifecycle::State</span> <span class="pre">&amp;</span> <span class="pre">get_lifecycle_state()</span></code> and <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">set_lifecycle_state(const</span> <span class="pre">rclcpp_lifecycle::State</span> <span class="pre">&amp;</span> <span class="pre">new_state)</span></code>. This change affects controllers and hardware. This is related to (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1240">#1240</a>) as variant support introduces <code class="docutils literal notranslate"><span class="pre">get_state</span></code> and <code class="docutils literal notranslate"><span class="pre">set_state</span></code> methods for setting/getting state of handles.</p></li>
-<li><p>With (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1421">#1421</a>) a key-value storage is added to InterfaceInfo. This allows to define extra params with per Command-/StateInterface in the <code class="docutils literal notranslate"><span class="pre">.ros2_control.xacro</span></code> file.</p></li>
-<li><p>With (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1763">#1763</a>) parsing for SDF published to <code class="docutils literal notranslate"><span class="pre">robot_description</span></code> topic is now also supported.</p></li>
-<li><p>With (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1567">#1567</a>) all the Hardware components now have a fully functional asynchronous functionality, by simply adding <code class="docutils literal notranslate"><span class="pre">is_async</span></code> tag to the ros2_control tag in the URDF. This will allow the hardware components to run in a separate thread, and the controller manager will be able to run the controllers in parallel with the hardware components.</p></li>
-<li><p>The hardware components can be easily introspect the internal member variables using the macro <code class="docutils literal notranslate"><span class="pre">REGISTER_ROS2_CONTROL_INTROSPECTION</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1918">#1918</a>)</p></li>
-<li><p>Added new <code class="docutils literal notranslate"><span class="pre">get_optional</span></code> method that returns <code class="docutils literal notranslate"><span class="pre">std::optional</span></code> of the templated type, and this can be used to check if the value is available or not (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1976">#1976</a> and <a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2061">#2061</a>)</p></li>
-<li><p>Added hardware components execution time and periodicity statistics diagnostics (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2086">#2086</a>)</p></li>
-</ul>
-</section>
-<section id="joint-limits">
-<h2>joint_limits<a class="headerlink" href="#joint-limits" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>Add header to import limits from standard URDF definition (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1298">#1298</a>)</p></li>
-</ul>
-</section>
-<section id="adaption-of-command-stateinterfaces">
-<h2>Adaption of Command-/StateInterfaces<a class="headerlink" href="#adaption-of-command-stateinterfaces" title="Link to this heading"></a></h2>
-<p>Changes from <a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1688">(PR #1688)</a> for an overview of related changes and discussion refer to <a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1240">(PR #1240)</a>.</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Command-/StateInterfaces</span></code> are now created and exported automatically by the framework via the <code class="docutils literal notranslate"><span class="pre">on_export_command_interfaces()</span></code> or <code class="docutils literal notranslate"><span class="pre">on_export_state_interfaces()</span></code> methods based on the interfaces defined in the <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> XML-tag, which gets parsed and the <code class="docutils literal notranslate"><span class="pre">InterfaceDescription</span></code> is created accordingly (check the <a class="reference external" href="https://github.com/ros-controls/ros2_control/tree/master/hardware_interface/include/hardware_interface/hardware_info.hpp">hardware_info.hpp</a>).</p></li>
-<li><p>The memory for storing the value of a <code class="docutils literal notranslate"><span class="pre">Command-/StateInterfaces</span></code> is no longer allocated in the hardware but instead in the <code class="docutils literal notranslate"><span class="pre">Command-/StateInterfaces</span></code> itself.</p></li>
-<li><p>To access the automatically created <code class="docutils literal notranslate"><span class="pre">Command-/StateInterfaces</span></code> we provide the <code class="docutils literal notranslate"><span class="pre">std::unordered_map&lt;std::string,</span> <span class="pre">InterfaceDescription&gt;</span></code>, where the string is the fully qualified name of the interface and the <code class="docutils literal notranslate"><span class="pre">InterfaceDescription</span></code> is the configuration of the interface. The <code class="docutils literal notranslate"><span class="pre">std::unordered_map&lt;&gt;</span></code> are divided into <code class="docutils literal notranslate"><span class="pre">type_state_interfaces_</span></code> and <code class="docutils literal notranslate"><span class="pre">type_command_interfaces_</span></code> where type can be: <code class="docutils literal notranslate"><span class="pre">joint</span></code>, <code class="docutils literal notranslate"><span class="pre">sensor</span></code>, <code class="docutils literal notranslate"><span class="pre">gpio</span></code> and <code class="docutils literal notranslate"><span class="pre">unlisted</span></code>. E.g. the <code class="docutils literal notranslate"><span class="pre">CommandInterfaces</span></code> for all joints can be found in the  <code class="docutils literal notranslate"><span class="pre">joint_command_interfaces_</span></code> map. The <code class="docutils literal notranslate"><span class="pre">unlisted</span></code> includes all interfaces not listed in the <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> XML-tag but were created by overriding the <code class="docutils literal notranslate"><span class="pre">export_unlisted_command_interfaces()</span></code> or <code class="docutils literal notranslate"><span class="pre">export_unlisted_state_interfaces()</span></code> function by creating some custom <code class="docutils literal notranslate"><span class="pre">Command-/StateInterfaces</span></code>.</p></li>
-</ul>
-</section>
-<section id="ros2controlcli">
-<h2>ros2controlcli<a class="headerlink" href="#ros2controlcli" title="Link to this heading"></a></h2>
-<ul>
-<li><p>Spawner colours were added to <code class="docutils literal notranslate"><span class="pre">list_controllers</span></code> depending upon active or inactive (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1409">#1409</a>)</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">set_hardware_component_state</span></code> verb was added (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1248">#1248</a>). Use the following command to set the state of a hardware component</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>set_hardware_component_state<span class="w"> </span>&lt;hardware_component_name&gt;<span class="w"> </span>&lt;state&gt;
-</pre></div>
-</div>
-</li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">load_controller</span></code> now supports parsing of the params file (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1703">#1703</a>).</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>load_controller<span class="w"> </span>&lt;controller_name&gt;<span class="w"> </span>&lt;realtive_or_absolute_file_path&gt;
-</pre></div>
-</div>
-</li>
-<li><p>All the ros2controlcli verbs now support the namespacing through the ROS 2 standard way (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1703">#1703</a>).</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>&lt;verb&gt;<span class="w"> </span>&lt;arguments&gt;<span class="w"> </span>--ros-args<span class="w"> </span>-r<span class="w"> </span>__ns:<span class="o">=</span>&lt;namespace&gt;
-</pre></div>
-</div>
-</li>
-</ul>
-</section>
+  <section id="release-notes-jazzy-to-kilted">
+<h1>Release Notes: Jazzy to Kilted<a class="headerlink" href="#release-notes-jazzy-to-kilted" title="Link to this heading"></a></h1>
+<p>This list summarizes the changes between Jazzy (previous) and Kilted (current) releases.</p>
 </section>
 
 

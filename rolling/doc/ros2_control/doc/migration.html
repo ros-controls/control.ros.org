@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Iron to Jazzy &mdash; ROS2_Control: Rolling May 2025 documentation</title>
+  <title>Migration Guides: Jazzy to Kilted &mdash; ROS2_Control: Rolling May 2025 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -62,19 +62,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../../migration/migration.html">Migration Guides</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../migration/migration.html#coming-from-ros-control-ros-1">Coming from ros_control (ROS 1)</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../migration/migration.html#between-different-ros-2-distributions">Between different ROS 2 distributions</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">ros2_control</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#controller-interface">controller_interface</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#controller-manager">controller_manager</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#hardware-interface">hardware_interface</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#adaption-of-command-stateinterfaces">Adaption of Command-/StateInterfaces</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#access-to-command-stateinterfaces">Access to Command-/StateInterfaces</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#migration-of-command-stateinterfaces">Migration of Command-/StateInterfaces</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#migration-of-unlisted-command-stateinterfaces-not-defined-in-ros2-control-xml-tag">Migration of unlisted Command-/StateInterfaces not defined in <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> XML-tag</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#custom-export-of-command-stateinterfaces">Custom export of Command-/StateInterfaces</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ros2_control</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../ros2_controllers/doc/migration.html">ros2_controllers</a></li>
 </ul>
 </li>
@@ -104,10 +92,10 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../migration/migration.html">Migration Guides</a></li>
-      <li class="breadcrumb-item active">Iron to Jazzy</li>
+      <li class="breadcrumb-item active">Migration Guides: Jazzy to Kilted</li>
       <li class="wy-breadcrumbs-aside">
               <!-- User defined GitHub URL -->
-              <a href="https://github.com/ros-controls/ros2_control/blob/master/doc/migration/Jazzy.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/ros-controls/ros2_control/blob/master/doc/migration.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -126,206 +114,9 @@
 </p>
 
 
-  <section id="iron-to-jazzy">
-<h1>Iron to Jazzy<a class="headerlink" href="#iron-to-jazzy" title="Link to this heading"></a></h1>
-<section id="controller-interface">
-<h2>controller_interface<a class="headerlink" href="#controller-interface" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">update_reference_from_subscribers()</span></code> method got time and period parameters <a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/846">(PR #846)</a>.</p></li>
-<li><p>The changes from <a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1694">(PR #1694)</a> will affect how the controllers will be loading the parameters. Defining parameters in a single yaml file and loading it to the controller_manager node alone will no longer work.
-In order to load the parameters to the controllers properly, it is needed to use <code class="docutils literal notranslate"><span class="pre">--param-file</span></code> option from the spawner. This is because the controllers will now set <code class="docutils literal notranslate"><span class="pre">use_global_arguments</span></code> from <a class="reference external" href="https://docs.ros.org/en/rolling/p/rclcpp/generated/classrclcpp_1_1NodeOptions.html#_CPPv4N6rclcpp11NodeOptions20use_global_argumentsEb">NodeOptions</a> to false, to avoid getting influenced by global arguments.</p></li>
-<li><p>With (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1683">#1683</a>) the <code class="docutils literal notranslate"><span class="pre">rclcpp_lifecycle::State</span> <span class="pre">&amp;</span> <span class="pre">get_state()</span></code> and <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">set_state(const</span> <span class="pre">rclcpp_lifecycle::State</span> <span class="pre">&amp;</span> <span class="pre">new_state)</span></code> are replaced by <code class="docutils literal notranslate"><span class="pre">rclcpp_lifecycle::State</span> <span class="pre">&amp;</span> <span class="pre">get_lifecycle_state()</span></code> and <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">set_lifecycle_state(const</span> <span class="pre">rclcpp_lifecycle::State</span> <span class="pre">&amp;</span> <span class="pre">new_state)</span></code>. This change affects controllers and hardware. This is related to (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1240">#1240</a>) as variant support introduces <code class="docutils literal notranslate"><span class="pre">get_state</span></code> and <code class="docutils literal notranslate"><span class="pre">set_state</span></code> methods for setting/getting state of handles.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">exported_state_interfaces_</span></code> and <code class="docutils literal notranslate"><span class="pre">exported_reference_interfaces_</span></code> now uses the the full interface name as the key to the unordered_map, instead of the interface type. This is related to (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2038">#2038</a>). For instance, the key would be <code class="docutils literal notranslate"><span class="pre">joint_1/position</span></code> instead of <code class="docutils literal notranslate"><span class="pre">position</span></code>.</p></li>
-</ul>
-</section>
-<section id="controller-manager">
-<h2>controller_manager<a class="headerlink" href="#controller-manager" title="Link to this heading"></a></h2>
-<ul>
-<li><p>Rename <code class="docutils literal notranslate"><span class="pre">class_type</span></code> to <code class="docutils literal notranslate"><span class="pre">plugin_name</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/780">#780</a>)</p></li>
-<li><p>CM now subscribes to <code class="docutils literal notranslate"><span class="pre">robot_description</span></code> topic instead of <code class="docutils literal notranslate"><span class="pre">~/robot_description</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1410">#1410</a>). As a consequence, when using multiple controller managers, you have to remap the topic within the launch file, an example for a python launch file:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">remappings</span><span class="o">=</span><span class="p">[</span>
-            <span class="p">(</span><span class="s1">&#39;/robot_description&#39;</span><span class="p">,</span> <span class="s1">&#39;/custom_1/robot_description&#39;</span><span class="p">),</span>
-        <span class="p">]</span>
-</pre></div>
-</div>
-</li>
-<li><p>Changes from <a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1256">(PR #1256)</a></p>
-<ul>
-<li><p>All <code class="docutils literal notranslate"><span class="pre">joints</span></code> defined in the <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code>-tag have to be present in the URDF received <a class="reference internal" href="../controller_manager/doc/userdoc.html#subscribers"><span class="std std-ref">by the controller manager</span></a>, otherwise the following error is shown:</p>
-<blockquote>
-<div><p>The published robot description file (URDF) seems not to be genuine. The following error was caught: &lt;unknown_joint&gt; not found in URDF.</p>
-</div></blockquote>
-<p>This is to ensure that the URDF and the <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code>-tag are consistent. E.g., for configuration ports use <code class="docutils literal notranslate"><span class="pre">gpio</span></code> interface types instead.</p>
-</li>
-<li><p>The syntax for mimic joints is changed to the <a class="reference external" href="https://wiki.ros.org/urdf/XML/joint">official URDF specification</a>. The parameters within the <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> tag are not supported any more. Instead of</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;GazeboSystem&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;right_finger_joint&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;initial_value&quot;</span><span class="nt">&gt;</span>0.15<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;/state_interface&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;effort&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
-<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;left_finger_joint&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mimic&quot;</span><span class="nt">&gt;</span>right_finger_joint<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;multiplier&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;effort&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
-<span class="nt">&lt;/ros2_control&gt;</span>
-</pre></div>
-</div>
-<p>define your mimic joints directly in the joint definitions:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;right_finger_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;prismatic&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;axis</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 1 0&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0.0 -0.48 1&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0.0 0.0 0.0&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;base&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;finger_right&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;limit</span><span class="w"> </span><span class="na">effort=</span><span class="s">&quot;1000.0&quot;</span><span class="w"> </span><span class="na">lower=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">upper=</span><span class="s">&quot;0.38&quot;</span><span class="w"> </span><span class="na">velocity=</span><span class="s">&quot;10&quot;</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;/joint&gt;</span>
-<span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;left_finger_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;prismatic&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;mimic</span><span class="w"> </span><span class="na">joint=</span><span class="s">&quot;right_finger_joint&quot;</span><span class="w"> </span><span class="na">multiplier=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="na">offset=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;axis</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 1 0&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0.0 0.48 1&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0.0 0.0 3.1415926535&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;base&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;finger_left&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;limit</span><span class="w"> </span><span class="na">effort=</span><span class="s">&quot;1000.0&quot;</span><span class="w"> </span><span class="na">lower=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">upper=</span><span class="s">&quot;0.38&quot;</span><span class="w"> </span><span class="na">velocity=</span><span class="s">&quot;10&quot;</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;/joint&gt;</span>
-</pre></div>
-</div>
-</li>
-</ul>
-</li>
-<li><p>The support for the <code class="docutils literal notranslate"><span class="pre">description</span></code> parameter for loading the URDF was removed (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1358">#1358</a>). Use <code class="docutils literal notranslate"><span class="pre">robot_description</span></code> topic instead, e.g., you can use the <a class="reference external" href="https://index.ros.org/p/robot_state_publisher/#rolling">robot_state_publisher</a>. For an example, see <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/pull/456">this PR</a> where the change was applied to the demo repository.</p></li>
-</ul>
-</section>
-<section id="hardware-interface">
-<h2>hardware_interface<a class="headerlink" href="#hardware-interface" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">test_components</span></code> was moved to its own package. Update the dependencies if you are using them. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1325">#1325</a>)</p></li>
-<li><p>With (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1683">#1683</a>) the <code class="docutils literal notranslate"><span class="pre">rclcpp_lifecycle::State</span> <span class="pre">&amp;</span> <span class="pre">get_state()</span></code> and <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">set_state(const</span> <span class="pre">rclcpp_lifecycle::State</span> <span class="pre">&amp;</span> <span class="pre">new_state)</span></code> are replaced by <code class="docutils literal notranslate"><span class="pre">rclcpp_lifecycle::State</span> <span class="pre">&amp;</span> <span class="pre">get_lifecycle_state()</span></code> and <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">set_lifecycle_state(const</span> <span class="pre">rclcpp_lifecycle::State</span> <span class="pre">&amp;</span> <span class="pre">new_state)</span></code>. This change affects controllers and hardware. This is related to (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1240">#1240</a>) as variant support introduces <code class="docutils literal notranslate"><span class="pre">get_state</span></code> and <code class="docutils literal notranslate"><span class="pre">set_state</span></code> methods for setting/getting state of handles.</p></li>
-<li><p>A new <code class="docutils literal notranslate"><span class="pre">get_optional</span></code> that returns a <code class="docutils literal notranslate"><span class="pre">std::optional</span></code> was added to the <code class="docutils literal notranslate"><span class="pre">CommandInterface</span></code> and <code class="docutils literal notranslate"><span class="pre">StateInterface</span></code>. This can be used to check if the value is available or not. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1976">#1976</a> and <a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2061">#2061</a>)</p></li>
-</ul>
-</section>
-<section id="adaption-of-command-stateinterfaces">
-<h2>Adaption of Command-/StateInterfaces<a class="headerlink" href="#adaption-of-command-stateinterfaces" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>The handles for <code class="docutils literal notranslate"><span class="pre">Command-/StateInterfaces</span></code> have new set/get methods to access the values.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Command-/StateInterfaces</span></code> are now created and exported automatically by the framework via the <code class="docutils literal notranslate"><span class="pre">on_export_command_interfaces()</span></code> or <code class="docutils literal notranslate"><span class="pre">on_export_state_interfaces()</span></code> methods based on the interfaces defined in the <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> XML-tag, which get parsed and the <code class="docutils literal notranslate"><span class="pre">InterfaceDescription</span></code> is created accordingly (check the <a class="reference external" href="https://github.com/ros-controls/ros2_control/tree/master/hardware_interface/include/hardware_interface/hardware_info.hpp">hardware_info.hpp</a>). The memory is now allocated in the handle itself.</p></li>
-</ul>
-<section id="access-to-command-stateinterfaces">
-<h3>Access to Command-/StateInterfaces<a class="headerlink" href="#access-to-command-stateinterfaces" title="Link to this heading"></a></h3>
-<p>Earlier code will issue compile-time warnings like:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>warning: ‘double hardware_interface::Handle::get_value() const’ is deprecated: Use std::optional&lt;T&gt; get_optional() or bool get_value(double &amp; value) instead to retrieve the value. [-Wdeprecated-declarations]
-warning: ignoring return value of ‘bool hardware_interface::Handle::set_value(const T&amp;) [with T = double]’ [-Wunused-result]
-</pre></div>
-</div>
-<p>The old methods are deprecated and will be removed in the future. The new methods are:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">std::optional&lt;T&gt;</span> <span class="pre">get_optional()</span></code> for getting the value.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">set_value(const</span> <span class="pre">T</span> <span class="pre">&amp;</span> <span class="pre">value)</span></code> for setting the value.</p></li>
-</ul>
-</div></blockquote>
-<p>The return value <code class="docutils literal notranslate"><span class="pre">bool</span></code> or <code class="docutils literal notranslate"><span class="pre">std::optional&lt;T&gt;</span></code> with <code class="docutils literal notranslate"><span class="pre">get_value</span></code> can be used to check if the value is available or not. Similarly, the <code class="docutils literal notranslate"><span class="pre">set_value</span></code> method returns a <code class="docutils literal notranslate"><span class="pre">bool</span></code> to check if the value was set or not.
-The <code class="docutils literal notranslate"><span class="pre">get_value</span></code> method will return an empty <code class="docutils literal notranslate"><span class="pre">std::nullopt</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code> if the value is not available. The <code class="docutils literal notranslate"><span class="pre">set_value</span></code> method will return <code class="docutils literal notranslate"><span class="pre">false</span></code> if the value was not set.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Checking the result of these operations is important as the value might not be available or the value might not be set.
-This is usually the case when the ros2_control framework has some asynchronous operations due to asynchronous controllers or asynchronous hardware components where different threads are involved to access the same data.</p>
-</div>
-</section>
-<section id="migration-of-command-stateinterfaces">
-<h3>Migration of Command-/StateInterfaces<a class="headerlink" href="#migration-of-command-stateinterfaces" title="Link to this heading"></a></h3>
-<p>To adapt to the new way of creating and exporting <code class="docutils literal notranslate"><span class="pre">Command-/StateInterfaces</span></code> follow those steps:</p>
-<ol class="arabic simple">
-<li><p>Delete the <code class="docutils literal notranslate"><span class="pre">std::vector&lt;hardware_interface::CommandInterface&gt;</span> <span class="pre">export_command_interfaces()</span> <span class="pre">override</span></code> and <code class="docutils literal notranslate"><span class="pre">std::vector&lt;hardware_interface::StateInterface&gt;</span> <span class="pre">export_state_interfaces()</span> <span class="pre">override</span></code>.</p></li>
-<li><p>Delete allocated memory for any <code class="docutils literal notranslate"><span class="pre">Command-/StateInterfaces</span></code>, e.g.:</p></li>
-</ol>
-<blockquote>
-<div><ul class="simple">
-<li><p>If you have a <code class="docutils literal notranslate"><span class="pre">std::vector&lt;double&gt;</span> <span class="pre">hw_commands_;</span></code> for joints’ <code class="docutils literal notranslate"><span class="pre">CommandInterfaces</span></code> delete the definition and any usage/appearance.</p></li>
-<li><p>Wherever you iterated over a state/command or accessed commands like this:</p></li>
-</ul>
-</div></blockquote>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// states</span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">uint</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">hw_states_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="n">hw_states_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">some_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hw_states_</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-<span class="p">}</span>
-
-<span class="c1">// commands</span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">uint</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">hw_commands_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="n">hw_commands_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">some_command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hw_commands_</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-<span class="p">}</span>
-
-<span class="c1">// specific state/command</span>
-<span class="n">hw_commands_</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hw_states_</span><span class="p">[</span><span class="n">y</span><span class="p">];</span>
-</pre></div>
-</div>
-<p>replace it with</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// states replace with this</span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">[</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">descr</span><span class="p">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">joint_state_interfaces_</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="n">set_state</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
-<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">some_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_state</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="c1">//commands replace with this</span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">[</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">descr</span><span class="p">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">joint_commands_interfaces_</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="n">set_command</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
-<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">some_command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_command</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="c1">// replace specific state/command, for this you need to store the names which are strings</span>
-<span class="c1">// somewhere or know them. However be careful since the names are fully qualified names which</span>
-<span class="c1">// means that the prefix is included for the name: E.g.: prefix/joint_1/velocity</span>
-<span class="n">set_command</span><span class="p">(</span><span class="n">name_of_command_interface_x</span><span class="p">,</span><span class="w"> </span><span class="n">get_state</span><span class="p">(</span><span class="n">name_of_state_interface_y</span><span class="p">));</span>
-</pre></div>
-</div>
-</section>
-<section id="migration-of-unlisted-command-stateinterfaces-not-defined-in-ros2-control-xml-tag">
-<h3>Migration of unlisted Command-/StateInterfaces not defined in <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> XML-tag<a class="headerlink" href="#migration-of-unlisted-command-stateinterfaces-not-defined-in-ros2-control-xml-tag" title="Link to this heading"></a></h3>
-<p>If you want some unlisted <code class="docutils literal notranslate"><span class="pre">Command-/StateInterfaces</span></code> not included in the <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> XML-tag you can follow those steps:</p>
-<ol class="arabic simple">
-<li><p>Override the <code class="docutils literal notranslate"><span class="pre">virtual</span> <span class="pre">std::vector&lt;hardware_interface::InterfaceDescription&gt;</span> <span class="pre">export_unlisted_command_interfaces()</span></code> or <code class="docutils literal notranslate"><span class="pre">virtual</span> <span class="pre">std::vector&lt;hardware_interface::InterfaceDescription&gt;</span> <span class="pre">export_unlisted_state_interfaces()</span></code></p></li>
-<li><p>Create the InterfaceDescription for each of the interfaces you want to create in the override <code class="docutils literal notranslate"><span class="pre">export_unlisted_command_interfaces()</span></code> or <code class="docutils literal notranslate"><span class="pre">export_unlisted_state_interfaces()</span></code> function, add it to a vector and return the vector:</p></li>
-</ol>
-<blockquote>
-<div><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">InterfaceDescription</span><span class="o">&gt;</span><span class="w"> </span><span class="n">my_unlisted_interfaces</span><span class="p">;</span>
-
-<span class="n">InterfaceInfo</span><span class="w"> </span><span class="n">unlisted_interface</span><span class="p">;</span>
-<span class="n">unlisted_interface</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;some_unlisted_interface&quot;</span><span class="p">;</span>
-<span class="n">unlisted_interface</span><span class="p">.</span><span class="n">min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;-5.0&quot;</span><span class="p">;</span>
-<span class="n">unlisted_interface</span><span class="p">.</span><span class="n">data_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;double&quot;</span><span class="p">;</span>
-<span class="n">my_unlisted_interfaces</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">InterfaceDescription</span><span class="p">(</span><span class="n">info_</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">unlisted_interface</span><span class="p">));</span>
-
-<span class="k">return</span><span class="w"> </span><span class="n">my_unlisted_interfaces</span><span class="p">;</span>
-</pre></div>
-</div>
-</div></blockquote>
-<ol class="arabic simple" start="3">
-<li><p>The unlisted interface will then be stored in either the <code class="docutils literal notranslate"><span class="pre">unlisted_command_interfaces_</span></code> or <code class="docutils literal notranslate"><span class="pre">unlisted_state_interfaces_</span></code> map depending in which function they are created.</p></li>
-<li><p>You can access it like any other interface with the <code class="docutils literal notranslate"><span class="pre">get_state(name)</span></code>, <code class="docutils literal notranslate"><span class="pre">set_state(name,</span> <span class="pre">value)</span></code>, <code class="docutils literal notranslate"><span class="pre">get_command(name)</span></code> or <code class="docutils literal notranslate"><span class="pre">set_command(name,</span> <span class="pre">value)</span></code>. E.g. <code class="docutils literal notranslate"><span class="pre">get_state(&quot;some_unlisted_interface&quot;)</span></code>.</p></li>
-</ol>
-</section>
-<section id="custom-export-of-command-stateinterfaces">
-<h3>Custom export of Command-/StateInterfaces<a class="headerlink" href="#custom-export-of-command-stateinterfaces" title="Link to this heading"></a></h3>
-<p>In case the default implementation (<code class="docutils literal notranslate"><span class="pre">on_export_command_interfaces()</span></code> or <code class="docutils literal notranslate"><span class="pre">on_export_state_interfaces()</span></code> ) for exporting the <code class="docutils literal notranslate"><span class="pre">Command-/StateInterfaces</span></code> is not enough you can override them. You should however consider the following things:</p>
-<ul class="simple">
-<li><p>If you want to have unlisted interfaces available you need to call the <code class="docutils literal notranslate"><span class="pre">export_unlisted_command_interfaces()</span></code> or <code class="docutils literal notranslate"><span class="pre">export_unlisted_state_interfaces()</span></code> and add them to the <code class="docutils literal notranslate"><span class="pre">unlisted_command_interfaces_</span></code> or <code class="docutils literal notranslate"><span class="pre">unlisted_state_interfaces_</span></code>.</p></li>
-<li><p>Don’t forget to store the created <code class="docutils literal notranslate"><span class="pre">Command-/StateInterfaces</span></code> internally as you only return <code class="docutils literal notranslate"><span class="pre">std::shared_ptr</span></code> and the resource manager will not provide access to the created <code class="docutils literal notranslate"><span class="pre">Command-/StateInterface</span></code> for the hardware. So you must take care of storing them yourself.</p></li>
-<li><p>Names must be unique!</p></li>
-</ul>
-</section>
-</section>
+  <section id="migration-guides-jazzy-to-kilted">
+<h1>Migration Guides: Jazzy to Kilted<a class="headerlink" href="#migration-guides-jazzy-to-kilted" title="Link to this heading"></a></h1>
+<p>This list summarizes important changes between Jazzy (previous) and Kilted (current) releases, where changes to user code might be necessary.</p>
 </section>
 
 
