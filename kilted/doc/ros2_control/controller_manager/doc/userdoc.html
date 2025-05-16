@@ -268,6 +268,16 @@ The full structure of the map is given in the following example:</p>
 </ul>
 </div></blockquote>
 </dd>
+<dt>defaults.switch_controller.strictness (string)</dt><dd><p>The default switch controller strategy. This strategy is used when no strategy is specified in the switch_controller service call.</p>
+<p>Default:  “best_effort”</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>parameter is not empty</p></li>
+<li><p>one of the specified values: [‘strict’, ‘best_effort’]</p></li>
+</ul>
+</div></blockquote>
+</dd>
 <dt>diagnostics.threshold.controller_manager.periodicity.mean_error.warn (double)</dt><dd><p>The warning threshold for the mean error of the controller manager’s periodicity in Hz. If the mean error exceeds this threshold, a warning diagnostic will be published.</p>
 <p>Default:  5.0</p>
 <p>Constraints:</p>
@@ -460,6 +470,9 @@ The full structure of the map is given in the following example:</p>
 <p><strong>An example parameter file:</strong></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">controller_manager</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">defaults</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">switch_controller</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">strictness</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">best_effort</span>
 <span class="w">    </span><span class="nt">diagnostics</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">threshold</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">controller_manager</span><span class="p">:</span>
