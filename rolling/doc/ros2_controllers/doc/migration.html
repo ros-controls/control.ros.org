@@ -63,7 +63,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../../migration/migration.html#coming-from-ros-control-ros-1">Coming from ros_control (ROS 1)</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../migration/migration.html#between-different-ros-2-distributions">Between different ROS 2 distributions</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../../ros2_control/doc/migration.html">ros2_control</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">ros2_controllers</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ros2_controllers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gripperactioncontroller">GripperActionController</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diff-drive-controller">diff_drive_controller</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -117,6 +121,16 @@
   <section id="migration-guides-jazzy-to-kilted">
 <h1>Migration Guides: Jazzy to Kilted<a class="headerlink" href="#migration-guides-jazzy-to-kilted" title="Link to this heading"></a></h1>
 <p>This list summarizes important changes between Jazzy (previous) and Kilted (current) releases, where changes to user code might be necessary.</p>
+<section id="gripperactioncontroller">
+<h2>GripperActionController<a class="headerlink" href="#gripperactioncontroller" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">effort_controllers/GripperActionController</span></code> and <code class="docutils literal notranslate"><span class="pre">position_controllers/GripperActionController</span></code> have been removed. The <code class="docutils literal notranslate"><span class="pre">parallel_gripper_action_controller/GripperActionController</span></code> should be used instead. <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1652">(#1652</a>).</p>
+</section>
+<section id="diff-drive-controller">
+<h2>diff_drive_controller<a class="headerlink" href="#diff-drive-controller" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Parameters <code class="docutils literal notranslate"><span class="pre">has_velocity_limits</span></code>, <code class="docutils literal notranslate"><span class="pre">has_acceleration_limits</span></code>, and <code class="docutils literal notranslate"><span class="pre">has_jerk_limits</span></code> are removed. Instead, set the respective limits to <code class="docutils literal notranslate"><span class="pre">.NAN</span></code>. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1653">#1653</a>).</p></li>
+</ul>
+</section>
 </section>
 
 

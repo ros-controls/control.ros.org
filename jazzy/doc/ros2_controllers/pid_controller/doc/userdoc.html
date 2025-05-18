@@ -205,6 +205,10 @@ Plugin name: pid_controller/PidController</p>
 <ul class="simple">
 <li><p>&lt;controller_name&gt;/set_feedforward_control  [std_srvs/srv/SetBool]</p></li>
 </ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This service is being deprecated in favour of setting the <code class="docutils literal notranslate"><span class="pre">feedforward_gain</span></code> parameter to a non-zero value.</p>
+</div>
 </section>
 <section id="publishers">
 <h3>Publishers<a class="headerlink" href="#publishers" title="Link to this heading"></a></h3>
@@ -217,6 +221,11 @@ Plugin name: pid_controller/PidController</p>
 <p>The PID controller uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters.</p>
 <section id="list-of-parameters">
 <h4>List of parameters<a class="headerlink" href="#list-of-parameters" title="Link to this heading"></a></h4>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The parameter <code class="docutils literal notranslate"><span class="pre">enable_feedforward</span></code> is being deprecated in favor of setting the <code class="docutils literal notranslate"><span class="pre">feedforward_gain</span></code> parameter to a non-zero value.
+This might cause different behavior in the future if currently the <code class="docutils literal notranslate"><span class="pre">feedforward_gain</span></code> is set to a non-zero value and not activated.</p>
+</div>
 <dl>
 <dt>dof_names (string_array)</dt><dd><p>Specifies dof_names or axes used by the controller. If ‘reference_and_state_dof_names’ parameter is defined, then only command dof names are defined with this parameter.</p>
 <p>Read only: True</p>
@@ -262,6 +271,9 @@ Plugin name: pid_controller/PidController</p>
 </div></blockquote>
 </dd>
 <dt>use_external_measured_states (bool)</dt><dd><p>Use external states from a topic instead from state interfaces.</p>
+<p>Default:  false</p>
+</dd>
+<dt>enable_feedforward (bool)</dt><dd><p>Enables feedforward gain. (Will be deprecated in favour of setting feedforward_gain to a non-zero value.)</p>
 <p>Default:  false</p>
 </dd>
 <dt>gains.&lt;dof_names&gt;.p (double)</dt><dd><p>Proportional gain for PID</p>

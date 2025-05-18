@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['joint_5flimits_0',['joint_limits',['../namespacejoint__limits.html',1,'']]],
-  ['joint_5ftrajectory_5fcontroller_1',['joint_trajectory_controller',['../namespacejoint__trajectory__controller.html',1,'']]]
+  ['kinematics_5finterface_0',['kinematics_interface',['../namespacekinematics__interface.html',1,'']]],
+  ['kinematics_5finterface_5fkdl_1',['kinematics_interface_kdl',['../namespacekinematics__interface__kdl.html',1,'']]]
 ];

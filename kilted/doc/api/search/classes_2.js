@@ -3,7 +3,7 @@ var searchData=
   ['carlikebotsystemhardware_0',['CarlikeBotSystemHardware',['../classros2__control__demo__example__11_1_1CarlikeBotSystemHardware.html',1,'ros2_control_demo_example_11']]],
   ['chainablecontrollerinterface_1',['ChainableControllerInterface',['../classcontroller__interface_1_1ChainableControllerInterface.html',1,'controller_interface']]],
   ['commandinterface_2',['CommandInterface',['../classhardware__interface_1_1CommandInterface.html',1,'hardware_interface']]],
-  ['commands_3',['commands',['../structgripper__action__controller_1_1GripperActionController_1_1Commands.html',1,'gripper_action_controller::GripperActionController&lt; HardwareInterface &gt;::Commands'],['../structparallel__gripper__action__controller_1_1GripperActionController_1_1Commands.html',1,'parallel_gripper_action_controller::GripperActionController::Commands']]],
+  ['commands_3',['Commands',['../structparallel__gripper__action__controller_1_1GripperActionController_1_1Commands.html',1,'parallel_gripper_action_controller::GripperActionController']]],
   ['componentinfo_4',['ComponentInfo',['../structhardware__interface_1_1ComponentInfo.html',1,'hardware_interface']]],
   ['controlcommand_5',['ControlCommand',['../classros2controlcli_1_1command_1_1control_1_1ControlCommand.html',1,'ros2controlcli::command::control']]],
   ['controllerchainspec_6',['ControllerChainSpec',['../structcontroller__manager_1_1ControllerChainSpec.html',1,'controller_manager']]],

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['kinematics_5finterface_0',['kinematics_interface',['../namespacekinematics__interface.html',1,'']]],
-  ['kinematics_5finterface_5fkdl_1',['kinematics_interface_kdl',['../namespacekinematics__interface__kdl.html',1,'']]]
+  ['parallel_5fgripper_5faction_5fcontroller_0',['parallel_gripper_action_controller',['../namespaceparallel__gripper__action__controller.html',1,'']]],
+  ['passthrough_5fcontroller_1',['passthrough_controller',['../namespacepassthrough__controller.html',1,'']]]
 ];

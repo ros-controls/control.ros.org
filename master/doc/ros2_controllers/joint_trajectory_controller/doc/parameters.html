@@ -62,7 +62,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../admittance_controller/doc/userdoc.html">Admittance Controller</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../effort_controllers/doc/userdoc.html">Effort Controllers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../forward_command_controller/doc/userdoc.html">Forward Command Controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../gripper_controllers/doc/userdoc.html">Gripper Controller</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="userdoc.html">Joint Trajectory Controller</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="userdoc.html#hardware-interface-types">Hardware interface types</a></li>
 <li class="toctree-l4"><a class="reference internal" href="userdoc.html#other-features">Other features</a></li>
@@ -203,10 +202,6 @@
 <dt>allow_partial_joints_goal (bool)</dt><dd><p>Allow joint goals defining trajectory for only some joints.</p>
 <p>Default:  false</p>
 </dd>
-<dt>open_loop_control (bool)</dt><dd><p>deprecated: use <code class="docutils literal notranslate"><span class="pre">interpolate_from_desired_state</span></code> and set feedback gains to zero instead</p>
-<p>Read only: True</p>
-<p>Default:  false</p>
-</dd>
 <dt>interpolate_from_desired_state (bool)</dt><dd><p>Interpolate from the current desired state when receiving a new trajectory.</p>
 <p>The controller ignores the states provided by hardware interface but using last commands as states for starting the trajectory interpolation.</p>
 <p>This is useful if hardware states are not following commands, i.e., an offset between those (typical for hydraulic manipulators). Furthermore, it is necessary if you have a reference trajectory that you send over multiple messages (e.g. for MPC-style trajectory planning).</p>
@@ -322,7 +317,6 @@ position <span class="math notranslate nohighlight">\(s\)</span> from the state 
 <span class="w">    </span><span class="nt">interpolate_from_desired_state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">    </span><span class="nt">interpolation_method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">splines</span>
 <span class="w">    </span><span class="nt">joints</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{}&#39;</span>
-<span class="w">    </span><span class="nt">open_loop_control</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">    </span><span class="nt">set_last_command_interface_value_as_state_on_activation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">state_interfaces</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{}&#39;</span>
 </pre></div>

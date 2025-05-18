@@ -16,6 +16,6 @@ var searchData=
   ['gpssensor_13',['GPSSensor',['../classsemantic__components_1_1GPSSensor.html',1,'semantic_components']]],
   ['gpssensorbroadcaster_14',['GPSSensorBroadcaster',['../classgps__sensor__broadcaster_1_1GPSSensorBroadcaster.html',1,'gps_sensor_broadcaster']]],
   ['gravitycompensation_15',['GravityCompensation',['../classcontrol__filters_1_1GravityCompensation.html',1,'control_filters']]],
-  ['gripperactioncontroller_16',['gripperactioncontroller',['../classgripper__action__controller_1_1GripperActionController.html',1,'gripper_action_controller::GripperActionController&lt; HardwareInterface &gt;'],['../classparallel__gripper__action__controller_1_1GripperActionController.html',1,'parallel_gripper_action_controller::GripperActionController']]],
+  ['gripperactioncontroller_16',['GripperActionController',['../classparallel__gripper__action__controller_1_1GripperActionController.html',1,'parallel_gripper_action_controller']]],
   ['gzresourcemanager_17',['GZResourceManager',['../classgz__ros2__control_1_1GZResourceManager.html',1,'gz_ros2_control']]]
 ];

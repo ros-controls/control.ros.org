@@ -16,6 +16,5 @@ var searchData=
   ['hw_5fif_5fproportional_5fgain_13',['HW_IF_PROPORTIONAL_GAIN',['../namespacehardware__interface.html#a7fdde020d345be8161df60f37e99cc35',1,'hardware_interface']]],
   ['hw_5fif_5ftemperature_14',['HW_IF_TEMPERATURE',['../namespacehardware__interface.html#a76afc427cf6bb732ce7fbb50a9ca7aa5',1,'hardware_interface']]],
   ['hw_5fif_5ftorque_15',['HW_IF_TORQUE',['../namespacehardware__interface.html#a539ef1a761f06cc939e4575b4cbd3dbb',1,'hardware_interface']]],
-  ['hw_5fif_5fvelocity_16',['HW_IF_VELOCITY',['../namespacehardware__interface.html#ac92e707f8d468092ae48031e87cacb11',1,'hardware_interface']]],
-  ['hw_5fiface_5fadapter_5f_17',['hw_iface_adapter_',['../classgripper__action__controller_1_1GripperActionController.html#a74a8b7866370f86483b750b4f8a0faa4',1,'gripper_action_controller::GripperActionController']]]
+  ['hw_5fif_5fvelocity_16',['HW_IF_VELOCITY',['../namespacehardware__interface.html#ac92e707f8d468092ae48031e87cacb11',1,'hardware_interface']]]
 ];
