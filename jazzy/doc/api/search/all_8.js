@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['handle_0',['Handle',['../classhardware__interface_1_1Handle.html',1,'hardware_interface']]],
+  ['handle_0',['handle',['../classtransmission__interface_1_1Handle.html',1,'transmission_interface::Handle'],['../classhardware__interface_1_1Handle.html',1,'hardware_interface::Handle']]],
   ['handledatatype_1',['HandleDataType',['../classhardware__interface_1_1HandleDataType.html',1,'hardware_interface']]],
   ['hardware_5finterface_2',['hardware_interface',['../namespacehardware__interface.html',1,'']]],
   ['hardware_5fparameters_3',['hardware_parameters',['../structhardware__interface_1_1HardwareInfo.html#a59a6f095aa4e32b9c0fb405cd87b6caa',1,'hardware_interface::HardwareInfo']]],
