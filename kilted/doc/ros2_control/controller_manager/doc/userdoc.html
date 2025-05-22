@@ -579,8 +579,8 @@ The full structure of the map is given in the following example:</p>
 <section id="spawner">
 <h3><code class="docutils literal notranslate"><span class="pre">spawner</span></code><a class="headerlink" href="#spawner" title="Link to this heading"></a></h3>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>run<span class="w"> </span>controller_manager<span class="w"> </span>spawner<span class="w"> </span>-h
-<span class="go">usage: spawner [-h] [-c CONTROLLER_MANAGER] [-p PARAM_FILE] [-n NAMESPACE] [--load-only] [--inactive] [-u] [--controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT]</span>
-<span class="go">              [--switch-timeout SWITCH_TIMEOUT] [--activate-as-group] [--service-call-timeout SERVICE_CALL_TIMEOUT] [--controller-ros-args CONTROLLER_ROS_ARGS]</span>
+<span class="go">usage: spawner [-h] [-c CONTROLLER_MANAGER] [-p PARAM_FILE] [--load-only] [--inactive] [-u] [--controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT] [--switch-timeout SWITCH_TIMEOUT] [--service-call-timeout SERVICE_CALL_TIMEOUT] [--activate-as-group]</span>
+<span class="go">              [--controller-ros-args CONTROLLER_ROS_ARGS]</span>
 <span class="go">              controller_names [controller_names ...]</span>
 
 <span class="go">positional arguments:</span>
@@ -592,21 +592,18 @@ The full structure of the map is given in the following example:</p>
 <span class="go">                        Name of the controller manager ROS node</span>
 <span class="go">  -p PARAM_FILE, --param-file PARAM_FILE</span>
 <span class="go">                        Controller param file to be loaded into controller node before configure. Pass multiple times to load different files for different controllers or to override the parameters of the same controller.</span>
-<span class="go">  -n NAMESPACE, --namespace NAMESPACE</span>
-<span class="go">                        DEPRECATED Namespace for the controller_manager and the controller(s)</span>
 <span class="go">  --load-only           Only load the controller and leave unconfigured.</span>
 <span class="go">  --inactive            Load and configure the controller, however do not activate them</span>
 <span class="go">  -u, --unload-on-kill  Wait until this application is interrupted and unload controller</span>
 <span class="go">  --controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT</span>
 <span class="go">                        Time to wait for the controller manager service to be available</span>
+<span class="go">  --switch-timeout SWITCH_TIMEOUT</span>
+<span class="go">                        Time to wait for a successful state switch of controllers. Useful when switching cannot be performed immediately, e.g., paused simulations at startup</span>
 <span class="go">  --service-call-timeout SERVICE_CALL_TIMEOUT</span>
 <span class="go">                        Time to wait for the service response from the controller manager</span>
-<span class="go">  --switch-timeout SWITCH_TIMEOUT</span>
-<span class="go">                        Time to wait for a successful state switch of controllers. Useful if controllers cannot be switched immediately, e.g., paused</span>
-<span class="go">                        simulations at startup</span>
 <span class="go">  --activate-as-group   Activates all the parsed controllers list together instead of one by one. Useful for activating all chainable controllers altogether</span>
 <span class="go">  --controller-ros-args CONTROLLER_ROS_ARGS</span>
-<span class="go">                        The --ros-args to be passed to the controller node for remapping topics etc</span>
+<span class="go">                        The --ros-args to be passed to the controller node, e.g., for remapping topics. Pass multiple times for every argument.</span>
 </pre></div>
 </div>
 <p>The parsed controller config file can follow the same conventions as the typical ROS 2 parameter file format. Now, the spawner can handle config files with wildcard entries and also the controller name in the absolute namespace. See the following examples on the config files:</p>
