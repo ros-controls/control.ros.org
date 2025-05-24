@@ -121,52 +121,54 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classjoint__limits_1_1JointSoftLimiter.html">   30</a></span><span class="keyword">class </span><a class="code hl_class" href="classjoint__limits_1_1JointSoftLimiter.html">JointSoftLimiter</a> : <span class="keyword">public</span> <a class="code hl_class" href="classjoint__limits_1_1JointSaturationLimiter.html">JointSaturationLimiter</a>&lt;JointControlInterfacesData&gt;</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>{</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">public</span>:</div>
-<div class="foldopen" id="foldopen00033" data-start="{" data-end="}">
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classjoint__limits_1_1JointSoftLimiter.html#a2b0f355cf3bf658bb99a4b152af8ab01">   33</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classjoint__limits_1_1JointSoftLimiter.html#a2b0f355cf3bf658bb99a4b152af8ab01">on_init</a>()<span class="keyword"> override</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keyword">  </span>{</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keyword">const</span> <span class="keywordtype">bool</span> result = (number_of_joints_ == 1);</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordflow">if</span> (!result &amp;&amp; <a class="code hl_function" href="classjoint__limits_1_1JointLimiterInterface.html#a544461c7cf11e73232d464a9f1457983">has_logging_interface</a>())</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    {</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>      RCLCPP_ERROR(</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        node_logging_itf_-&gt;get_logger(),</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="stringliteral">&quot;JointInterfacesSaturationLimiter: Expects the number of joints to be 1, but given : &quot;</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="stringliteral">&quot;%zu&quot;</span>,</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        number_of_joints_);</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    }</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    prev_command_ = <a class="code hl_struct" href="structjoint__limits_1_1JointControlInterfacesData.html">JointControlInterfacesData</a>();</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  }</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <span class="keyword">virtual</span> <a class="code hl_class" href="classjoint__limits_1_1JointSoftLimiter.html">~JointSoftLimiter</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="foldopen" id="foldopen00035" data-start="{" data-end="}">
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classjoint__limits_1_1JointSoftLimiter.html#a2b0f355cf3bf658bb99a4b152af8ab01">   35</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classjoint__limits_1_1JointSoftLimiter.html#a2b0f355cf3bf658bb99a4b152af8ab01">on_init</a>()<span class="keyword"> override</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">  </span>{</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keyword">const</span> <span class="keywordtype">bool</span> result = (number_of_joints_ == 1);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordflow">if</span> (!result &amp;&amp; <a class="code hl_function" href="classjoint__limits_1_1JointLimiterInterface.html#a544461c7cf11e73232d464a9f1457983">has_logging_interface</a>())</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>      RCLCPP_ERROR(</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        node_logging_itf_-&gt;get_logger(),</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="stringliteral">&quot;JointInterfacesSaturationLimiter: Expects the number of joints to be 1, but given : &quot;</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="stringliteral">&quot;%zu&quot;</span>,</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        number_of_joints_);</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    }</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    prev_command_ = <a class="code hl_struct" href="structjoint__limits_1_1JointControlInterfacesData.html">JointControlInterfacesData</a>();</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  }</div>
 </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classjoint__limits_1_1JointSoftLimiter.html#a1e3a49ffe8ca02c3d83729314b862c3d">on_enforce</a>(</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structjoint__limits_1_1JointControlInterfacesData.html">JointControlInterfacesData</a> &amp; actual, <a class="code hl_struct" href="structjoint__limits_1_1JointControlInterfacesData.html">JointControlInterfacesData</a> &amp; desired,</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keyword">const</span> rclcpp::Duration &amp; dt) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  <span class="keywordtype">bool</span> has_soft_position_limits(<span class="keyword">const</span> <a class="code hl_struct" href="structjoint__limits_1_1SoftJointLimits.html">joint_limits::SoftJointLimits</a> &amp; soft_joint_limits)</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  {</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordflow">return</span> std::isfinite(soft_joint_limits.min_position) &amp;&amp;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>           std::isfinite(soft_joint_limits.max_position) &amp;&amp;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>           (soft_joint_limits.max_position - soft_joint_limits.min_position) &gt;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>             VALUE_CONSIDERED_ZERO;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  }</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <span class="keywordtype">bool</span> has_soft_limits(<span class="keyword">const</span> <a class="code hl_struct" href="structjoint__limits_1_1SoftJointLimits.html">joint_limits::SoftJointLimits</a> &amp; soft_joint_limits)</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  {</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordflow">return</span> has_soft_position_limits(soft_joint_limits) &amp;&amp;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>           std::isfinite(soft_joint_limits.k_position) &amp;&amp;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>           std::abs(soft_joint_limits.k_position) &gt; VALUE_CONSIDERED_ZERO;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  }</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>};</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classjoint__limits_1_1JointSoftLimiter.html#a1e3a49ffe8ca02c3d83729314b862c3d">on_enforce</a>(</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structjoint__limits_1_1JointControlInterfacesData.html">JointControlInterfacesData</a> &amp; actual, <a class="code hl_struct" href="structjoint__limits_1_1JointControlInterfacesData.html">JointControlInterfacesData</a> &amp; desired,</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keyword">const</span> rclcpp::Duration &amp; dt) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <span class="keywordtype">bool</span> has_soft_position_limits(<span class="keyword">const</span> <a class="code hl_struct" href="structjoint__limits_1_1SoftJointLimits.html">joint_limits::SoftJointLimits</a> &amp; soft_joint_limits)</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  {</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordflow">return</span> std::isfinite(soft_joint_limits.min_position) &amp;&amp;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>           std::isfinite(soft_joint_limits.max_position) &amp;&amp;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>           (soft_joint_limits.max_position - soft_joint_limits.min_position) &gt;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>             VALUE_CONSIDERED_ZERO;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  }</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  <span class="keywordtype">bool</span> has_soft_limits(<span class="keyword">const</span> <a class="code hl_struct" href="structjoint__limits_1_1SoftJointLimits.html">joint_limits::SoftJointLimits</a> &amp; soft_joint_limits)</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  {</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordflow">return</span> has_soft_position_limits(soft_joint_limits) &amp;&amp;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>           std::isfinite(soft_joint_limits.k_position) &amp;&amp;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>           std::abs(soft_joint_limits.k_position) &gt; VALUE_CONSIDERED_ZERO;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  }</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>};</div>
 </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>}  <span class="comment">// namespace joint_limits</span></div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="preprocessor">#endif  </span><span class="comment">// JOINT_LIMITS__JOINT_SOFT_LIMITER_HPP_</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>}  <span class="comment">// namespace joint_limits</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="preprocessor">#endif  </span><span class="comment">// JOINT_LIMITS__JOINT_SOFT_LIMITER_HPP_</span></div>
 <div class="ttc" id="aclassjoint__limits_1_1JointLimiterInterface_html_a544461c7cf11e73232d464a9f1457983"><div class="ttname"><a href="classjoint__limits_1_1JointLimiterInterface.html#a544461c7cf11e73232d464a9f1457983">joint_limits::JointLimiterInterface::has_logging_interface</a></div><div class="ttdeci">bool has_logging_interface() const</div><div class="ttdoc">Checks if the logging interface is set.</div><div class="ttdef"><b>Definition</b> joint_limiter_interface.hpp:248</div></div>
 <div class="ttc" id="aclassjoint__limits_1_1JointSaturationLimiter_html"><div class="ttname"><a href="classjoint__limits_1_1JointSaturationLimiter.html">joint_limits::JointSaturationLimiter</a></div><div class="ttdef"><b>Definition</b> joint_saturation_limiter.hpp:38</div></div>
 <div class="ttc" id="aclassjoint__limits_1_1JointSoftLimiter_html"><div class="ttname"><a href="classjoint__limits_1_1JointSoftLimiter.html">joint_limits::JointSoftLimiter</a></div><div class="ttdef"><b>Definition</b> joint_soft_limiter.hpp:31</div></div>
 <div class="ttc" id="aclassjoint__limits_1_1JointSoftLimiter_html_a1e3a49ffe8ca02c3d83729314b862c3d"><div class="ttname"><a href="classjoint__limits_1_1JointSoftLimiter.html#a1e3a49ffe8ca02c3d83729314b862c3d">joint_limits::JointSoftLimiter::on_enforce</a></div><div class="ttdeci">bool on_enforce(const JointControlInterfacesData &amp;actual, JointControlInterfacesData &amp;desired, const rclcpp::Duration &amp;dt) override</div><div class="ttdef"><b>Definition</b> joint_soft_limiter.cpp:22</div></div>
-<div class="ttc" id="aclassjoint__limits_1_1JointSoftLimiter_html_a2b0f355cf3bf658bb99a4b152af8ab01"><div class="ttname"><a href="classjoint__limits_1_1JointSoftLimiter.html#a2b0f355cf3bf658bb99a4b152af8ab01">joint_limits::JointSoftLimiter::on_init</a></div><div class="ttdeci">bool on_init() override</div><div class="ttdoc">Method is realized by an implementation.</div><div class="ttdef"><b>Definition</b> joint_soft_limiter.hpp:33</div></div>
+<div class="ttc" id="aclassjoint__limits_1_1JointSoftLimiter_html_a2b0f355cf3bf658bb99a4b152af8ab01"><div class="ttname"><a href="classjoint__limits_1_1JointSoftLimiter.html#a2b0f355cf3bf658bb99a4b152af8ab01">joint_limits::JointSoftLimiter::on_init</a></div><div class="ttdeci">bool on_init() override</div><div class="ttdoc">Method is realized by an implementation.</div><div class="ttdef"><b>Definition</b> joint_soft_limiter.hpp:35</div></div>
 <div class="ttc" id="anamespacejoint__limits_html"><div class="ttname"><a href="namespacejoint__limits.html">joint_limits</a></div><div class="ttdef"><b>Definition</b> data_structures.hpp:39</div></div>
 <div class="ttc" id="astructjoint__limits_1_1JointControlInterfacesData_html"><div class="ttname"><a href="structjoint__limits_1_1JointControlInterfacesData.html">joint_limits::JointControlInterfacesData</a></div><div class="ttdef"><b>Definition</b> data_structures.hpp:47</div></div>
 <div class="ttc" id="astructjoint__limits_1_1SoftJointLimits_html"><div class="ttname"><a href="structjoint__limits_1_1SoftJointLimits.html">joint_limits::SoftJointLimits</a></div><div class="ttdef"><b>Definition</b> joint_limits.hpp:113</div></div>
