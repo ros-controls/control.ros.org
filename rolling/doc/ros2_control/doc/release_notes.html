@@ -61,6 +61,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../../release_notes/release_notes.html">Release Notes</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">ros2_control</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#controller-manager">controller_manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-interface">hardware_interface</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#ros2controlcli">ros2controlcli</a></li>
 </ul>
 </li>
@@ -122,6 +123,12 @@
 <ul class="simple">
 <li><p>The default strictness of the <code class="docutils literal notranslate"><span class="pre">swtich_controllers</span></code> can now we be chosen using ROS 2 parameters. The default behaviour is still left to <code class="docutils literal notranslate"><span class="pre">BEST_EFFORT</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2168">#2168</a>).</p></li>
 <li><p>Parameter <code class="docutils literal notranslate"><span class="pre">shutdown_on_initial_state_failure</span></code> was added to avoid shutting down on hardware initial state failure  (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2330">#2330</a>).</p></li>
+</ul>
+</section>
+<section id="hardware-interface">
+<h2>hardware_interface<a class="headerlink" href="#hardware-interface" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">prepare_command_mode_switch</span></code> and <code class="docutils literal notranslate"><span class="pre">perform_command_mode_switch</span></code> methods will now only receive the start/stop interfaces that belong to the hardware component instead of everything (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2120">#2120</a>)</p></li>
 </ul>
 </section>
 <section id="ros2controlcli">

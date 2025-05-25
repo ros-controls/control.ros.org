@@ -486,17 +486,15 @@ CallbackReturn::ERROR if any error happens or data are missing. </dd></dl>
 </table>
 </div><div class="memdoc">
 <p>Perform the mode-switching for the new command interface combination.</p>
-<dl class="section note"><dt>Note</dt><dd>This is part of the realtime update loop, and should be fast. </dd>
-<dd>
-All starting and stopping interface keys are passed to all components, so the function should return return_type::OK by default when given interface keys not relevant for this component.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This is part of the realtime update loop, and should be fast. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">start_interfaces</td><td>vector of string identifiers for the command interfaces starting.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">start_interfaces</td><td>vector of string identifiers for the command interfaces starting. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">stop_interfaces</td><td>vector of string identifiers for the command interfaces stopping. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>return_type::OK if the new command interface combination can be switched to, or if the interface key is not relevant to this system. Returns return_type::ERROR otherwise. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>return_type::OK if the new command interface combination can be switched to (or) if the interface key is not relevant to this system. Returns return_type::ERROR otherwise. </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classhardware__interface_1_1SystemInterface.html#a1da44ec2a9ef354e056e2dac3e95682f">hardware_interface::SystemInterface</a>.</p>
 

@@ -185,8 +185,8 @@ std::vector&lt; <a class="el" href="classtransmission__interface_1_1ActuatorHand
 <tr>
 <td><b> Actuator to joint </b>  </td><td><p class="formulaDsp">
 \begin{eqnarray*}
-\tau_{j_1} &amp; = &amp; n_{j_1} n_{a_1} \tau_{a_1} \\
-\tau_{j_2} &amp; = &amp; n_{j_2} (n_{a_2} \tau_{a_2} - n_{j_1} n_{a_1} \tau_{a_1})
+\tau_{j_1} &amp; = &amp; n_{j_1} n_{a_1} \tau_{a_1} + n_{a_2} \tau_{a_2}  \\
+\tau_{j_2} &amp; = &amp; n_{j_2} n_{a_2} \tau_{a_2}2}
 \end{eqnarray*}
 </p>
   </td><td><p class="formulaDsp">
@@ -205,8 +205,8 @@ x_{j_2} &amp; = &amp; \frac{ x_{a_2} / n_{a_2} - x_{a_1} / (n_{j_1} n_{a_1}) }{ 
 <tr>
 <td><b> Joint to actuator </b>  </td><td><p class="formulaDsp">
 \begin{eqnarray*}
-\tau_{a_1} &amp; = &amp; \tau_{j_1} / (n_{j_1} n_{a_1}) \\
-\tau_{a_2} &amp; = &amp; \frac{ \tau_{j_1} + \tau_{j_2} / n_{j_2} }{ n_{a_2} }
+\tau_{a_1} &amp; = &amp; \frac{\tau_{j_1} - \tau_{j_2}/n_{j_2}} {n_{j_1} n_{a_1}} \\
+\tau_{a_2} &amp; = &amp; \frac{\tau_{j_2}} {n_{j_2} n_{a_2}}
 \end{eqnarray*}
 </p>
   </td><td><p class="formulaDsp">

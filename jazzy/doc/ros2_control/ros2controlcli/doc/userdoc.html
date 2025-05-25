@@ -202,7 +202,7 @@
 <span class="go">  --spin-time SPIN_TIME</span>
 <span class="go">                        Spin time in seconds to wait for discovery (only applies when not using an already running daemon)</span>
 <span class="go">  -s, --use-sim-time    Enable ROS simulation time</span>
-<span class="go">  --verbose, -v         List hardware components with command and state interfaces</span>
+<span class="go">  --verbose, -v         List hardware components with command and state interfaces along with their data types</span>
 <span class="go">  -c CONTROLLER_MANAGER, --controller-manager CONTROLLER_MANAGER</span>
 <span class="go">                        Name of the controller manager ROS node (default: controller_manager)</span>
 <span class="go">  --include-hidden-nodes</span>
@@ -217,13 +217,30 @@
 <span class="go">    type: system</span>
 <span class="go">    plugin name: ros2_control_demo_hardware/RRBotSystemPositionOnlyHardware</span>
 <span class="go">    state: id=3 label=active</span>
+<span class="go">    command interfaces</span>
+<span class="go">      joint2/position [available] [claimed]</span>
+<span class="go">      joint1/position [available] [claimed]</span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_components<span class="w"> </span>-v
+<span class="go">Hardware Component 0</span>
+<span class="go">    name: RRBot</span>
+<span class="go">    type: system</span>
+<span class="go">    plugin name: ros2_control_demo_hardware/RRBotSystemPositionOnlyHardware</span>
+<span class="go">    state: id=3 label=active</span>
+<span class="go">    command interfaces</span>
+<span class="go">      joint2/position [double] [available] [claimed]</span>
+<span class="go">      joint1/position [double] [available] [claimed]</span>
+<span class="go">    state interfaces</span>
+<span class="go">      joint2/position [double] [available]</span>
+<span class="go">      joint1/position [double] [available]</span>
 </pre></div>
 </div>
 </section>
 <section id="list-hardware-interfaces">
 <h2>list_hardware_interfaces<a class="headerlink" href="#list-hardware-interfaces" title="Link to this heading"></a></h2>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_interfaces<span class="w"> </span>-h
-<span class="go">usage: ros2 control list_hardware_interfaces [-h] [--spin-time SPIN_TIME] [-s] [-c CONTROLLER_MANAGER] [--include-hidden-nodes] [--ros-args ...]</span>
+<span class="go">usage: ros2 control list_hardware_interfaces [-h] [--spin-time SPIN_TIME] [-s] [--verbose] [-c CONTROLLER_MANAGER] [--include-hidden-nodes] [--ros-args ...]</span>
 
 <span class="go">Output the list of available command and state interfaces</span>
 
@@ -232,6 +249,7 @@
 <span class="go">  --spin-time SPIN_TIME</span>
 <span class="go">                        Spin time in seconds to wait for discovery (only applies when not using an already running daemon)</span>
 <span class="go">  -s, --use-sim-time    Enable ROS simulation time</span>
+<span class="go">  --verbose, -v         List hardware interfaces and their data types</span>
 <span class="go">  -c CONTROLLER_MANAGER, --controller-manager CONTROLLER_MANAGER</span>
 <span class="go">                        Name of the controller manager ROS node (default: controller_manager)</span>
 <span class="go">  --include-hidden-nodes</span>
@@ -246,6 +264,15 @@
 <span class="go">state interfaces</span>
 <span class="go">  joint1/position</span>
 <span class="go">  joint2/position</span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_interfaces<span class="w"> </span>-v
+<span class="go">command interfaces</span>
+<span class="go">  joint1/position [double] [unclaimed]</span>
+<span class="go">  joint2/position [double] [unclaimed]</span>
+<span class="go">state interfaces</span>
+<span class="go">  joint1/position [double]</span>
+<span class="go">  joint2/position [double]</span>
 </pre></div>
 </div>
 </section>

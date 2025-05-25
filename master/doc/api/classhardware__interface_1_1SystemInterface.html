@@ -851,17 +851,15 @@ CallbackReturn::ERROR if any error happens or data are missing. </dd></dl>
 </table>
 </div><div class="memdoc">
 <p>Perform the mode-switching for the new command interface combination.</p>
-<dl class="section note"><dt>Note</dt><dd>This is part of the realtime update loop, and should be fast. </dd>
-<dd>
-All starting and stopping interface keys are passed to all components, so the function should return return_type::OK by default when given interface keys not relevant for this component.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This is part of the realtime update loop, and should be fast. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">start_interfaces</td><td>vector of string identifiers for the command interfaces starting.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">start_interfaces</td><td>vector of string identifiers for the command interfaces starting. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">stop_interfaces</td><td>vector of string identifiers for the command interfaces stopping. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>return_type::OK if the new command interface combination can be switched to, or if the interface key is not relevant to this system. Returns return_type::ERROR otherwise. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>return_type::OK if the new command interface combination can be switched to (or) if the interface key is not relevant to this system. Returns return_type::ERROR otherwise. </dd></dl>
 
 <p>Reimplemented in <a class="el" href="classgazebo__ros2__control_1_1GazeboSystem.html#ad6684fa89ef6276a97d194459ddd901f">gazebo_ros2_control::GazeboSystem</a>, <a class="el" href="classgz__ros2__control_1_1GazeboSimSystem.html#ae4674f9a2bc743cbeb98dd799a7ffc97">gz_ros2_control::GazeboSimSystem</a>, and <a class="el" href="classmock__components_1_1GenericSystem.html#a719bc50550c599b2b0e5d45da6f28c0e">mock_components::GenericSystem</a>.</p>
 
@@ -903,17 +901,15 @@ All starting and stopping interface keys are passed to all components, so the fu
 
 <p>Prepare for a new command interface switch. </p>
 <p>Prepare for any mode-switching required by the new command interface combination.</p>
-<dl class="section note"><dt>Note</dt><dd>This is a non-realtime evaluation of whether a set of command interface claims are possible, and call to start preparing data structures for the upcoming switch that will occur. </dd>
-<dd>
-All starting and stopping interface keys are passed to all components, so the function should return return_type::OK by default when given interface keys not relevant for this component.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This is a non-realtime evaluation of whether a set of command interface claims are possible, and call to start preparing data structures for the upcoming switch that will occur. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">start_interfaces</td><td>vector of string identifiers for the command interfaces starting.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">start_interfaces</td><td>vector of string identifiers for the command interfaces starting. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">stop_interfaces</td><td>vector of string identifiers for the command interfaces stopping. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>return_type::OK if the new command interface combination can be prepared, or if the interface key is not relevant to this system. Returns return_type::ERROR otherwise. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>return_type::OK if the new command interface combination can be prepared (or) if the interface key is not relevant to this system. Returns return_type::ERROR otherwise. </dd></dl>
 
 <p>Reimplemented in <a class="el" href="classmock__components_1_1GenericSystem.html#aa783edd32f21fff60c1c1073586a1da5">mock_components::GenericSystem</a>, and <a class="el" href="classros2__control__demo__example__3_1_1RRBotSystemMultiInterfaceHardware.html#a6339dbab5d64610af0ab34d664dc82bf">ros2_control_demo_example_3::RRBotSystemMultiInterfaceHardware</a>.</p>
 
