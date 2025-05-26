@@ -103,7 +103,7 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1RealtimeServerGoalHandle.html">RealtimeServerGoalHandle</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1RealtimeThreadSafeBoxBase.html">RealtimeThreadSafeBoxBase</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html">RealtimeThreadSafeBox</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
@@ -122,26 +122,30 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>prio_inherit_mutex</
 <tr class="memitem:a13ca26452db4d1900900e518e9d0df0f" id="r_a13ca26452db4d1900900e518e9d0df0f"><td class="memItemLeft" align="right" valign="top"><a id="a13ca26452db4d1900900e518e9d0df0f" name="a13ca26452db4d1900900e518e9d0df0f"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>prio_inherit_recursive_mutex</b> = <a class="el" href="classrealtime__tools_1_1detail_1_1mutex.html">detail::mutex</a>&lt; <a class="el" href="structrealtime__tools_1_1detail_1_1recursive__mutex__type__t.html">detail::recursive_mutex_type_t</a>, <a class="el" href="structrealtime__tools_1_1detail_1_1robust__robustness__t.html">detail::robust_robustness_t</a> &gt;</td></tr>
 <tr class="separator:a13ca26452db4d1900900e518e9d0df0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a752356a92b2d23adbfd96edddb15aed2" id="r_a752356a92b2d23adbfd96edddb15aed2"><td class="memTemplParams" colspan="2"><a id="a752356a92b2d23adbfd96edddb15aed2" name="a752356a92b2d23adbfd96edddb15aed2"></a>
+<tr class="memitem:ac0006af0b0c939a7f8ba9c3db82a0b78" id="r_ac0006af0b0c939a7f8ba9c3db82a0b78"><td class="memTemplParams" colspan="2"><a id="ac0006af0b0c939a7f8ba9c3db82a0b78" name="ac0006af0b0c939a7f8ba9c3db82a0b78"></a>
+template&lt;class T , typename mutex_type  = std::mutex&gt; </td></tr>
+<tr class="memitem:ac0006af0b0c939a7f8ba9c3db82a0b78"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>RealtimeBoxBase</b> = <a class="el" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html">RealtimeThreadSafeBox</a>&lt; T, mutex_type &gt;</td></tr>
+<tr class="separator:ac0006af0b0c939a7f8ba9c3db82a0b78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1d3255249d21479d2b42315bae183d5" id="r_aa1d3255249d21479d2b42315bae183d5"><td class="memTemplParams" colspan="2"><a id="aa1d3255249d21479d2b42315bae183d5" name="aa1d3255249d21479d2b42315bae183d5"></a>
 template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a752356a92b2d23adbfd96edddb15aed2"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>RealtimeBox</b> = <a class="el" href="classrealtime__tools_1_1RealtimeThreadSafeBoxBase.html">RealtimeThreadSafeBox</a>&lt; T &gt;</td></tr>
-<tr class="separator:a752356a92b2d23adbfd96edddb15aed2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1d3255249d21479d2b42315bae183d5"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>RealtimeBoxStandard</b> = <a class="el" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html">RealtimeBoxBase</a>&lt; T, std::mutex &gt;</td></tr>
+<tr class="separator:aa1d3255249d21479d2b42315bae183d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2796f251bcf2a1217638e2173ff04052" id="r_a2796f251bcf2a1217638e2173ff04052"><td class="memTemplParams" colspan="2"><a id="a2796f251bcf2a1217638e2173ff04052" name="a2796f251bcf2a1217638e2173ff04052"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a2796f251bcf2a1217638e2173ff04052"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>RealtimeBoxRecursive</b> = <a class="el" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html">RealtimeBoxBase</a>&lt; T, std::recursive_mutex &gt;</td></tr>
+<tr class="separator:a2796f251bcf2a1217638e2173ff04052"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60aaf6f236d62fef85f3fd6bf63b488f" id="r_a60aaf6f236d62fef85f3fd6bf63b488f"><td class="memTemplParams" colspan="2"><a id="a60aaf6f236d62fef85f3fd6bf63b488f" name="a60aaf6f236d62fef85f3fd6bf63b488f"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a60aaf6f236d62fef85f3fd6bf63b488f"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>RealtimeBox</b> = <a class="el" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html">RealtimeBoxStandard</a>&lt; T &gt;</td></tr>
+<tr class="separator:a60aaf6f236d62fef85f3fd6bf63b488f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab73c70f7af735681fdab8dde6168162" id="r_aab73c70f7af735681fdab8dde6168162"><td class="memTemplParams" colspan="2"><a id="aab73c70f7af735681fdab8dde6168162" name="aab73c70f7af735681fdab8dde6168162"></a>
 template&lt;class MessageT &gt; </td></tr>
 <tr class="memitem:aab73c70f7af735681fdab8dde6168162"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>RealtimePublisherSharedPtr</b> = std::shared_ptr&lt; <a class="el" href="classrealtime__tools_1_1RealtimePublisher.html">RealtimePublisher</a>&lt; MessageT &gt; &gt;</td></tr>
 <tr class="separator:aab73c70f7af735681fdab8dde6168162"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adce668695dbb2a50b2493c7b184f064e" id="r_adce668695dbb2a50b2493c7b184f064e"><td class="memTemplParams" colspan="2"><a id="adce668695dbb2a50b2493c7b184f064e" name="adce668695dbb2a50b2493c7b184f064e"></a>
+<tr class="memitem:a67950674eef8a918f08bbfbfb4b69eb7" id="r_a67950674eef8a918f08bbfbfb4b69eb7"><td class="memTemplParams" colspan="2"><a id="a67950674eef8a918f08bbfbfb4b69eb7" name="a67950674eef8a918f08bbfbfb4b69eb7"></a>
 template&lt;typename T &gt; </td></tr>
-<tr class="memitem:adce668695dbb2a50b2493c7b184f064e"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>RealtimeThreadSafeBoxStandard</b> = <a class="el" href="classrealtime__tools_1_1RealtimeThreadSafeBoxBase.html">RealtimeThreadSafeBoxBase</a>&lt; T, std::mutex &gt;</td></tr>
-<tr class="separator:adce668695dbb2a50b2493c7b184f064e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2557f03f24bb17ec4b89073fd46ea81f" id="r_a2557f03f24bb17ec4b89073fd46ea81f"><td class="memTemplParams" colspan="2"><a id="a2557f03f24bb17ec4b89073fd46ea81f" name="a2557f03f24bb17ec4b89073fd46ea81f"></a>
-template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a2557f03f24bb17ec4b89073fd46ea81f"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>RealtimeThreadSafeBoxRecursive</b> = <a class="el" href="classrealtime__tools_1_1RealtimeThreadSafeBoxBase.html">RealtimeThreadSafeBoxBase</a>&lt; T, std::recursive_mutex &gt;</td></tr>
-<tr class="separator:a2557f03f24bb17ec4b89073fd46ea81f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a71583511d9f8ccba95c2450f91602424" id="r_a71583511d9f8ccba95c2450f91602424"><td class="memTemplParams" colspan="2"><a id="a71583511d9f8ccba95c2450f91602424" name="a71583511d9f8ccba95c2450f91602424"></a>
-template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a71583511d9f8ccba95c2450f91602424"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>RealtimeThreadSafeBox</b> = <a class="el" href="classrealtime__tools_1_1RealtimeThreadSafeBoxBase.html">RealtimeThreadSafeBoxStandard</a>&lt; T &gt;</td></tr>
-<tr class="separator:a71583511d9f8ccba95c2450f91602424"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67950674eef8a918f08bbfbfb4b69eb7"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>RealtimeThreadSafeBoxRecursive</b> = <a class="el" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html">RealtimeThreadSafeBox</a>&lt; T, RECURSIVE_MUTEX &gt;</td></tr>
+<tr class="separator:a67950674eef8a918f08bbfbfb4b69eb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
