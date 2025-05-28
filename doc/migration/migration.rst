@@ -24,3 +24,5 @@ For non-breaking updates, see the :ref:`release_notes`.
 
    ros2_control <../ros2_control/doc/migration.rst>
    ros2_controllers <../ros2_controllers/doc/migration.rst>
+   control_toolbox <../control_toolbox/doc/migration.rst>
+   realtime_tools <../realtime_tools/doc/migration.rst>
