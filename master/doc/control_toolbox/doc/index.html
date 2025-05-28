@@ -1,0 +1,302 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>control_toolbox &mdash; ROS2_Control: Rolling May 2025 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/reviewer_stats.css?v=068b34ac" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//rolling/doc/control_toolbox/doc/index.html" />
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=603c6540"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="realtime_tools" href="../../realtime_tools/doc/index.html" />
+    <link rel="prev" title="Command Line Interface" href="../../ros2_control/ros2controlcli/doc/userdoc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_control/doc/index.html">ros2_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../utilities.html">Utilities</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../ros2_control/ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">control_toolbox</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#base-classes">Base classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#control-filters">Control filters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#available-filters">Available filters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gravity-compensation-filter">Gravity compensation filter</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#gc-required-parameters">GC: Required parameters</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#gc-algorithm">GC: Algorithm</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#low-pass-filter">Low Pass filter</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#lpf-required-parameters">LPF: Required parameters</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#lpf-algorithm">LPF: Algorithm</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#exponential-filter">Exponential filter</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#ef-required-parameters">EF: Required parameters</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#ef-algorithm">EF: Algorithm</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../realtime_tools/doc/index.html">realtime_tools</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes/release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration/migration.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_list/api_list.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../governance/governance.html">Project Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statistics.html">Documentation Usage</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ROS2_Control: Rolling</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../utilities.html">Utilities</a></li>
+      <li class="breadcrumb-item active">control_toolbox</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ros-controls/control_toolbox/blob/master/doc/index.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for a development version.
+    For the latest released version, please have a look at <a href="../../../../jazzy/index.html">Jazzy</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="control-toolbox">
+<h1>control_toolbox<a class="headerlink" href="#control-toolbox" title="Link to this heading"></a></h1>
+<p>This package contains several C++ classes and filter plugins useful in writing controllers.</p>
+<section id="base-classes">
+<h2>Base classes<a class="headerlink" href="#base-classes" title="Link to this heading"></a></h2>
+<p>Tbd.</p>
+</section>
+<section id="control-filters">
+<h2>Control filters<a class="headerlink" href="#control-filters" title="Link to this heading"></a></h2>
+<p>Implement filter plugins for control purposes as <a class="reference external" href="https://github.com/ros/filters">ros/filters</a></p>
+<section id="available-filters">
+<h3>Available filters<a class="headerlink" href="#available-filters" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Gravity Compensation: implements a gravity compensation algorithm, removing the gravity component from the incoming data (Wrench).</p></li>
+<li><p>Low Pass: implements a low-pass filter based on a time-invariant <a class="reference external" href="https://en.wikipedia.org/wiki/Infinite_impulse_response">Infinite Impulse Response (IIR) filter</a>, for different data types (doubles or wrench).</p></li>
+<li><p>Exponential Filter: Exponential filter for double data type.</p></li>
+</ul>
+</section>
+<section id="gravity-compensation-filter">
+<h3>Gravity compensation filter<a class="headerlink" href="#gravity-compensation-filter" title="Link to this heading"></a></h3>
+<p>This filter implements an algorithm compensating for the gravity forces acting at the center of gravity (CoG) of a known mass, computed at a <code class="docutils literal notranslate"><span class="pre">sensor_frame</span></code> and applied to a <code class="docutils literal notranslate"><span class="pre">data_in</span></code> wrench.</p>
+<p>The filter relies on tf2, and might fail if transforms are missing.</p>
+<p>Note that, for convenience, the filter can perform additional frame changes if data_out frame id is given.</p>
+<section id="gc-required-parameters">
+<h4>GC: Required parameters<a class="headerlink" href="#gc-required-parameters" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">world_frame</span></code> (ℛ<sub>w</sub>): frame in which the <code class="docutils literal notranslate"><span class="pre">CoG.force</span></code> is represented.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sensor_frame</span></code> (ℛ<sub>s</sub>): frame in which the <code class="docutils literal notranslate"><span class="pre">CoG.pos</span></code> is defined</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CoG.pos</span></code> (p<sub>s</sub>): position of the CoG of the mass the filter should compensate for</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CoG.force</span></code> (g<sub>w</sub>): constant (but updatable) force of gravity at the Cog (typically m.G), defined along axes of the <code class="docutils literal notranslate"><span class="pre">world_frame</span></code></p></li>
+</ul>
+</section>
+<section id="gc-algorithm">
+<h4>GC: Algorithm<a class="headerlink" href="#gc-algorithm" title="Link to this heading"></a></h4>
+<p>Given</p>
+<ul class="simple">
+<li><p>above-required parameters,  ℛ<sub>w</sub>, ℛ<sub>s</sub>, p<sub>s</sub>, g<sub>w</sub></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data_in</span></code>, a wrench ℱ<sub>i</sub> = {f<sub>i</sub>, τ<sub>i</sub>} represented in the <code class="docutils literal notranslate"><span class="pre">data_in</span></code> frame ℛ<sub>i</sub></p></li>
+<li><p>access to tf2 homogeneous transforms:</p>
+<ul>
+<li><p>T<sub>si</sub> from ℛ<sub>i</sub> to ℛ<sub>s</sub></p></li>
+<li><p>T<sub>sw</sub> from ℛ<sub>w</sub> to ℛ<sub>s</sub></p></li>
+<li><p>T<sub>os</sub> from ℛ<sub>s</sub> to ℛ<sub>o</sub></p></li>
+</ul>
+</li>
+</ul>
+<p>Compute <code class="docutils literal notranslate"><span class="pre">data_out</span></code> compensated wrench ℱc<sub>o</sub> = {fc<sub>o</sub>, τc<sub>o</sub>} represented in the <code class="docutils literal notranslate"><span class="pre">data_out</span></code> frame ℛ<sub>o</sub> if given, or the <code class="docutils literal notranslate"><span class="pre">data_in</span></code> frame ℛ<sub>i</sub> otherwise, with equations:</p>
+<p>ℱc<sub>o</sub> = T<sub>os</sub>.ℱc<sub>s</sub>,</p>
+<p>with ℱc<sub>s</sub> = {fc<sub>s</sub>, τc<sub>s</sub>}  the compensated wrench in <code class="docutils literal notranslate"><span class="pre">sensor_frame</span></code> (common frame for computation)</p>
+<p>and,</p>
+<p>fc<sub>s</sub> = f<sub>s</sub> - T<sub>sw</sub>g<sub>w</sub></p>
+<p>its force  and,</p>
+<p>τc<sub>s</sub> = τ<sub>s</sub> - p<sub>s</sub> x (T<sub>sw</sub>g<sub>w</sub>)</p>
+<p>its torque, and</p>
+<p>ℱ<sub>s</sub>  = T<sub>si</sub>.ℱ<sub>i</sub> = {f<sub>s</sub>, τ<sub>s</sub>}</p>
+<p>the full transform of the input wrench ℱ<sub>i</sub> to sensor frame ℛ<sub>s</sub></p>
+<p>Remarks :</p>
+<ul class="simple">
+<li><p>a full vector is used for gravity force, to not impose gravity to be only along z of <code class="docutils literal notranslate"><span class="pre">world_frame</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data_in</span></code> frame is usually equal to <code class="docutils literal notranslate"><span class="pre">sensor_frame</span></code>, but could be different since measurement of wrench might occur in another frame. E.g.: measurements are at the <strong>FT sensor flange</strong> = <code class="docutils literal notranslate"><span class="pre">data_in</span></code> frame, but CoG is given in <strong>FT sensor base</strong> = <code class="docutils literal notranslate"><span class="pre">sensor_frame</span></code> (=frame to which it is mounted on the robot), introducing an offset (thickness of the sensor) to be accounted for.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data_out</span></code> frame is usually <code class="docutils literal notranslate"><span class="pre">data_in</span></code> frame, but for convenience, can be set to any other useful frame. E.g.: wrench expressed in a <code class="docutils literal notranslate"><span class="pre">control_frame</span></code> like the center of a gripper.</p></li>
+<li><p>T<sub>sw</sub> will only rotate the g<sub>w</sub> vector, because gravity is a field applied everywhere, and not a wrench (no torque should be induced by transforming from ℛ<sub>w</sub> to ℛ<sub>s</sub>).</p></li>
+</ul>
+</section>
+</section>
+<section id="low-pass-filter">
+<h3>Low Pass filter<a class="headerlink" href="#low-pass-filter" title="Link to this heading"></a></h3>
+<p>This filter implements a low-pass filter in the form of an <a class="reference external" href="https://en.wikipedia.org/wiki/Infinite_impulse_response">IIR filter</a>, applied to a <code class="docutils literal notranslate"><span class="pre">data_in</span></code> (double or wrench).
+The feedforward and feedback coefficients of the IIR filter are computed from the low-pass filter parameters.</p>
+<section id="lpf-required-parameters">
+<h4>LPF: Required parameters<a class="headerlink" href="#lpf-required-parameters" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>sampling frequency as <code class="docutils literal notranslate"><span class="pre">sf</span></code></p></li>
+<li><p>damping frequency as <code class="docutils literal notranslate"><span class="pre">df</span></code></p></li>
+<li><p>damping intensity as <code class="docutils literal notranslate"><span class="pre">di</span></code></p></li>
+</ul>
+</section>
+<section id="lpf-algorithm">
+<h4>LPF: Algorithm<a class="headerlink" href="#lpf-algorithm" title="Link to this heading"></a></h4>
+<p>Given</p>
+<ul class="simple">
+<li><p>above-required parameters,  <code class="docutils literal notranslate"><span class="pre">sf</span></code>, <code class="docutils literal notranslate"><span class="pre">df</span></code>, <code class="docutils literal notranslate"><span class="pre">di</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data_in</span></code>, a double or wrench <code class="docutils literal notranslate"><span class="pre">x</span></code></p></li>
+</ul>
+<p>Compute <code class="docutils literal notranslate"><span class="pre">data_out</span></code>, the filtered output <code class="docutils literal notranslate"><span class="pre">y(n)</span></code> with equation:</p>
+<p>y(n) = b x(n-1) + a y(n-1)</p>
+<p>with</p>
+<ul class="simple">
+<li><p>a the feedbackward coefficient such that a = exp( -1/sf (2 pi df) / (10^(di/-10)) )</p></li>
+<li><p>b the feedforward coefficient such that b = 1 - a</p></li>
+</ul>
+</section>
+</section>
+<section id="exponential-filter">
+<h3>Exponential filter<a class="headerlink" href="#exponential-filter" title="Link to this heading"></a></h3>
+<section id="ef-required-parameters">
+<h4>EF: Required parameters<a class="headerlink" href="#ef-required-parameters" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">alpha</span></code>: the exponential decay factor</p></li>
+</ul>
+</section>
+<section id="ef-algorithm">
+<h4>EF: Algorithm<a class="headerlink" href="#ef-algorithm" title="Link to this heading"></a></h4>
+<p>smoothed_value  = alpha * current_value + (1 - alpha) * last_smoothed_value;</p>
+</section>
+</section>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../ros2_control/ros2controlcli/doc/userdoc.html" class="btn btn-neutral float-left" title="Command Line Interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../realtime_tools/doc/index.html" class="btn btn-neutral float-right" title="realtime_tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: rolling
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Releases</dt>
+        <dd><a href="../../../../jazzy/index.html">Jazzy (latest)</a></dd><br>
+        <dd><a href="../../../../iron/doc/control_toolbox/doc/index.html">Iron (EOL)</a></dd><br>
+        
+        <dd><a href="../../../../humble/doc/control_toolbox/doc/index.html">Humble</a></dd><br>
+        <dd><a href="../../../../galactic/doc/control_toolbox/doc/index.html">Galactic (EOL)</a></dd><br>
+        
+        <dd><a href="../../../../foxy/index.html">Foxy (EOL)</a></dd><br>
+        
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="index.html">Rolling</a></dd>
+      <dd><a href="../../../../kilted/doc/control_toolbox/doc/index.html">Kilted</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
