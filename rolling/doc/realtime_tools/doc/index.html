@@ -60,7 +60,17 @@
 <li class="toctree-l2"><a class="reference internal" href="../../ros2_control/ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../control_toolbox/doc/index.html">control_toolbox</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">realtime_tools</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#realtime-publisher">Realtime Publisher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exchange-data-between-different-threads">Exchange data between different threads</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#provided-concepts">Provided concepts</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#realtimethreadsafebox">RealtimeThreadSafeBox</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#lockfreequeue">LockFreeQueue</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#realtimepublisher">RealtimePublisher</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#guidelines">Guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#other-classes-and-helper-methods">Other classes and helper methods</a></li>
 </ul>
 </li>
 </ul>
@@ -117,8 +127,21 @@
   <section id="realtime-tools">
 <h1>realtime_tools<a class="headerlink" href="#realtime-tools" title="Link to this heading"></a></h1>
 <p>Contains a set of tools that can be used from a hard realtime thread, without breaking the realtime behavior.</p>
-<section id="realtime-publisher">
-<h2>Realtime Publisher<a class="headerlink" href="#realtime-publisher" title="Link to this heading"></a></h2>
+<section id="exchange-data-between-different-threads">
+<h2>Exchange data between different threads<a class="headerlink" href="#exchange-data-between-different-threads" title="Link to this heading"></a></h2>
+<p>This package contains different concepts for exchanging data between different threads. In the following, a guideline for the usage for ros2_controllers is given.</p>
+<section id="provided-concepts">
+<h3>Provided concepts<a class="headerlink" href="#provided-concepts" title="Link to this heading"></a></h3>
+<section id="realtimethreadsafebox">
+<h4>RealtimeThreadSafeBox<a class="headerlink" href="#realtimethreadsafebox" title="Link to this heading"></a></h4>
+<p>A Box that ensures thread-safe access to the boxed contents. Access is best effort. If it can not lock it will return.</p>
+</section>
+<section id="lockfreequeue">
+<h4>LockFreeQueue<a class="headerlink" href="#lockfreequeue" title="Link to this heading"></a></h4>
+<p>This class provides a base implementation for lock-free queues on top of <a class="reference external" href="https://www.boost.org/doc/libs/latest/doc/html/lockfree.html">Boost.Lockfree</a> for lock-free queues with various functionalities, such as pushing, popping, and checking the state of the queue. It supports both single-producer single-consumer (SPSC) and multiple-producer multiple-consumer (MPMC) queues.</p>
+</section>
+<section id="realtimepublisher">
+<h4>RealtimePublisher<a class="headerlink" href="#realtimepublisher" title="Link to this heading"></a></h4>
 <p>The <code class="docutils literal notranslate"><span class="pre">realtime_tools::RealtimePublisher</span></code> allows users that write C++ ros2_controllers to publish messages on a ROS topic from a hard realtime loop. The normal ROS publisher is not realtime safe, and should not be used from within the update loop of a realtime controller. The realtime publisher is a wrapper around the ROS publisher; the wrapper creates an extra non-realtime thread that publishes messages on a ROS topic. The example below shows a typical usage of the realtime publisher in the <code class="docutils literal notranslate"><span class="pre">on_configure()</span></code> (non-realtime method) and <code class="docutils literal notranslate"><span class="pre">update()</span></code> (realtime method) methods of a realtime controller:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;realtime_tools/realtime_publisher.hpp&gt;</span>
 
@@ -152,6 +175,35 @@
 <span class="p">}</span>
 </pre></div>
 </div>
+</section>
+</section>
+<section id="guidelines">
+<h3>Guidelines<a class="headerlink" href="#guidelines" title="Link to this heading"></a></h3>
+<p>There exist the following typical use-cases for ros2_controllers:</p>
+<ul>
+<li><p>Passing command messages from topic subscribers in a non-realtime thread to the realtime-thread (one-way).</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>If you care only about the latest received message, use the <code class="docutils literal notranslate"><span class="pre">realtime_tools::RealtimeThreadSafeBox</span></code>.</p></li>
+<li><p>If you care about the intermediate messages, i.e., receiving more than one message before the realtime-thread can process it: Use the <code class="docutils literal notranslate"><span class="pre">realtime_tools::LockFreeQueue</span></code> and set a suitable queue size for your application, i.e., consider the maximum expected topic rate vs controller update rate.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Send data from the realtime thread to the non-realtime thread for publishing data (one-way): Use the <code class="docutils literal notranslate"><span class="pre">realtime_tools::RealtimePublisher</span></code>.</p></li>
+<li><p>Exchange data (two-way) between a non-realtime thread and a realtime-thread like state information, current goals etc.:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>For primitive types like <code class="docutils literal notranslate"><span class="pre">bool</span></code>, you can simply use <code class="docutils literal notranslate"><span class="pre">std::atomic&lt;bool&gt;</span></code>, see <a class="reference external" href="https://en.cppreference.com/w/cpp/atomic/atomic/">cppreference</a>.</p></li>
+<li><p>For all other types, when missing some data samples from RT loop is not of major importance, then use the <code class="docutils literal notranslate"><span class="pre">realtime_tools::RealtimeThreadSafeBox</span></code> with <code class="docutils literal notranslate"><span class="pre">try_set</span></code> method. In the contrary situation, it is recommended to use <code class="docutils literal notranslate"><span class="pre">realtime_tools::LockFreeQueue</span></code> to avoid missing any samples.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+</section>
+<section id="other-classes-and-helper-methods">
+<h2>Other classes and helper methods<a class="headerlink" href="#other-classes-and-helper-methods" title="Link to this heading"></a></h2>
+<p>Tba.</p>
 </section>
 </section>
 
