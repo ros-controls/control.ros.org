@@ -20,6 +20,5 @@ var searchData=
   ['is_5fresource_5fmanager_5finitialized_17',['is_resource_manager_initialized',['../classcontroller__manager_1_1ControllerManager.html#ad6dd4d15e3164c1d3a33c0ceaa57c0bb',1,'controller_manager::ControllerManager']]],
   ['is_5frunning_18',['is_running',['../classrealtime__tools_1_1AsyncFunctionHandler.html#a64cdf96e23ae62a3fdb4586023f00a71',1,'realtime_tools::AsyncFunctionHandler']]],
   ['is_5fstopped_19',['is_stopped',['../classrealtime__tools_1_1AsyncFunctionHandler.html#ada1a48bddba7e13894292201fa943c0d',1,'realtime_tools::AsyncFunctionHandler']]],
-  ['is_5ftrigger_5fcycle_5fin_5fprogress_20',['is_trigger_cycle_in_progress',['../classrealtime__tools_1_1AsyncFunctionHandler.html#a2bbf1c3b006b37730a18b1831e41f6af',1,'realtime_tools::AsyncFunctionHandler']]],
-  ['is_5funique_21',['is_unique',['../namespaceros2__control.html#a2920001f39cee96d5c3d5f56da8cd39e',1,'ros2_control']]]
+  ['is_5ftrigger_5fcycle_5fin_5fprogress_20',['is_trigger_cycle_in_progress',['../classrealtime__tools_1_1AsyncFunctionHandler.html#a2bbf1c3b006b37730a18b1831e41f6af',1,'realtime_tools::AsyncFunctionHandler']]]
 ];
