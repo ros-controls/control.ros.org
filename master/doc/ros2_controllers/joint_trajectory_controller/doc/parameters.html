@@ -261,17 +261,26 @@
 <dt>constraints.&lt;joints&gt;.goal (double)</dt><dd><p>Per-joint trajectory offset tolerance at the goal position.</p>
 <p>Default:  0.0</p>
 </dd>
-<dt>gains</dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">velocity</span></code> is the only command interface for all joints or an <code class="docutils literal notranslate"><span class="pre">effort</span></code> command interface is configured, PID controllers are used for every joint.
-This structure contains the controller gains for every joint with the control law</p>
+<dt>gains</dt><dd><p>The parameters are used to configure PID loops for the <code class="docutils literal notranslate"><span class="pre">velocity</span></code> or <code class="docutils literal notranslate"><span class="pre">effort</span></code>-only command interfaces. This structure contains the controller gains for every joint with following the control laws</p>
+<ul>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">velocity</span></code> is the only command interface:</p>
 <div class="math notranslate nohighlight">
 \[u = k_{ff} v_d + k_p e + k_i \sum e dt + k_d (v_d - v)\]</div>
 <p>with the desired velocity <span class="math notranslate nohighlight">\(v_d\)</span>, the measured velocity <span class="math notranslate nohighlight">\(v\)</span>, the position error <span class="math notranslate nohighlight">\(e\)</span> (definition see below),
-the controller period <span class="math notranslate nohighlight">\(dt\)</span>, and the <code class="docutils literal notranslate"><span class="pre">velocity</span></code> or <code class="docutils literal notranslate"><span class="pre">effort</span></code> manipulated variable (control variable) <span class="math notranslate nohighlight">\(u\)</span>, respectively.</p>
+the controller period <span class="math notranslate nohighlight">\(dt\)</span>, and the <code class="docutils literal notranslate"><span class="pre">velocity</span></code> manipulated variable (control variable) <span class="math notranslate nohighlight">\(u\)</span>, respectively.</p>
+</li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">effort</span></code> is the only command interface:</p>
+<div class="math notranslate nohighlight">
+\[u = k_{ff} v_d + \delta_d + k_p e + k_i \sum e dt + k_d (v_d - v)\]</div>
+<p>with the desired velocity <span class="math notranslate nohighlight">\(v_d\)</span>, the desired effort <span class="math notranslate nohighlight">\(\delta_d\)</span> if provided in the trajectory (or 0 otherwise), the measured velocity <span class="math notranslate nohighlight">\(v\)</span>, the position error <span class="math notranslate nohighlight">\(e\)</span> (definition see below),
+the controller period <span class="math notranslate nohighlight">\(dt\)</span>, and the <code class="docutils literal notranslate"><span class="pre">effort</span></code> manipulated variable (control variable) <span class="math notranslate nohighlight">\(u\)</span>, respectively.</p>
+</li>
+</ul>
 <p>If the joint is of continuous type, the position error <span class="math notranslate nohighlight">\(e = normalize(s_d - s)\)</span> is normalized between <span class="math notranslate nohighlight">\(-\pi, \pi\)</span>,
 i.e., the shortest rotation to the target position is the desired motion.
 Otherwise  <span class="math notranslate nohighlight">\(e = s_d - s\)</span> is used, with the desired position <span class="math notranslate nohighlight">\(s_d\)</span> and the measured
 position <span class="math notranslate nohighlight">\(s\)</span> from the state interface.</p>
-<p>If you want to turn off the PIDs (open loop control), set the feedback gains to zero.</p>
+<p>If you want to turn off the PIDs (open loop control), set the feedback gains to zero and an appropriate value for feed-forward gain <span class="math notranslate nohighlight">\(k_{ff}\)</span>.</p>
 </dd>
 <dt>gains.&lt;joints&gt;.p (double)</dt><dd><p>Proportional gain <span class="math notranslate nohighlight">\(k_p\)</span> for PID</p>
 <p>Default:  0.0</p>
