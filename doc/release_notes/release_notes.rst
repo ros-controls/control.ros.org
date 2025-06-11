@@ -15,3 +15,5 @@ For necessary changes to your code for a version update, see the :ref:`migration
 
    ros2_control <../ros2_control/doc/release_notes.rst>
    ros2_controllers <../ros2_controllers/doc/release_notes.rst>
+   control_toolbox <../control_toolbox/doc/release_notes.rst>
+   realtime_tools <../realtime_tools/doc/release_notes.rst>
