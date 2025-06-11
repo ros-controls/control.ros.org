@@ -151,6 +151,7 @@
 <span class="k">private</span><span class="o">:</span>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">realtime_tools</span><span class="o">::</span><span class="n">RealtimePublisher</span><span class="o">&lt;</span><span class="n">my_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">MyMsg</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">state_publisher_</span><span class="p">;</span>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Publisher</span><span class="o">&lt;</span><span class="n">my_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">MyMsg</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">s_publisher_</span><span class="p">;</span>
+<span class="w">  </span><span class="n">my_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">MyMsg</span><span class="w"> </span><span class="n">some_msg_</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="n">controller_interface</span><span class="o">::</span><span class="n">CallbackReturn</span><span class="w"> </span><span class="n">MyController</span><span class="o">::</span><span class="n">on_configure</span><span class="p">(</span>
@@ -160,7 +161,8 @@
 <span class="w">  </span><span class="n">s_publisher_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_node</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">create_publisher</span><span class="o">&lt;</span><span class="n">my_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">MyMsg</span><span class="o">&gt;</span><span class="p">(</span>
 <span class="w">    </span><span class="s">&quot;~/status&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">SystemDefaultsQoS</span><span class="p">());</span>
 <span class="w">  </span><span class="n">state_publisher_</span><span class="w"> </span><span class="o">=</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">realtime_tools</span><span class="o">::</span><span class="n">RealtimePublisher</span><span class="o">&lt;</span><span class="n">ControllerStateMsg</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">s_publisher_</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">realtime_tools</span><span class="o">::</span><span class="n">RealtimePublisher</span><span class="o">&lt;</span><span class="n">my_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">MyMsg</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">s_publisher_</span><span class="p">);</span>
+<span class="w">  </span><span class="n">some_msg_</span><span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">frame_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">params_</span><span class="p">.</span><span class="n">frame_id</span><span class="p">;</span>
 <span class="w">  </span><span class="p">...</span>
 <span class="p">}</span>
 
@@ -169,9 +171,10 @@
 <span class="p">{</span>
 <span class="w">  </span><span class="p">...</span>
 <span class="w">  </span><span class="c1">// Publish controller state</span>
-<span class="w">  </span><span class="n">state_publisher_</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">();</span>
-<span class="w">  </span><span class="n">state_publisher_</span><span class="o">-&gt;</span><span class="n">msg_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">some_msg</span><span class="p">;</span>
-<span class="w">  </span><span class="n">state_publisher_</span><span class="o">-&gt;</span><span class="n">unlockAndPublish</span><span class="p">();</span>
+<span class="w">  </span><span class="n">some_msg_</span><span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">stamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_node</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">now</span><span class="p">();</span>
+<span class="w">  </span><span class="c1">// Fill in the rest of the message</span>
+<span class="w">  </span><span class="p">....</span>
+<span class="w">  </span><span class="n">state_publisher_</span><span class="o">-&gt;</span><span class="n">try_publish</span><span class="p">(</span><span class="n">some_msg_</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>

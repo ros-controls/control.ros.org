@@ -121,8 +121,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a46400f89feee20959656ff807c901bcb" id="r_a46400f89feee20959656ff807c901bcb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1RealtimePublisher.html#a46400f89feee20959656ff807c901bcb">trylock</a> ()</td></tr>
 <tr class="memdesc:a46400f89feee20959656ff807c901bcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to acquire the data lock for non-realtime message publishing.  <br /></td></tr>
 <tr class="separator:a46400f89feee20959656ff807c901bcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfeb9a0e19e704329c2c36d82dcecd92" id="r_acfeb9a0e19e704329c2c36d82dcecd92"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1RealtimePublisher.html#acfeb9a0e19e704329c2c36d82dcecd92">can_publish</a> () const</td></tr>
+<tr class="memdesc:acfeb9a0e19e704329c2c36d82dcecd92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the realtime publisher is in a state to publish messages.  <br /></td></tr>
+<tr class="separator:acfeb9a0e19e704329c2c36d82dcecd92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f8e780273553fa490a22b633ce1c95b" id="r_a2f8e780273553fa490a22b633ce1c95b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1RealtimePublisher.html#a2f8e780273553fa490a22b633ce1c95b">try_publish</a> (const MessageT &amp;msg)</td></tr>
+<tr class="memdesc:a2f8e780273553fa490a22b633ce1c95b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to publish the given message.  <br /></td></tr>
+<tr class="separator:a2f8e780273553fa490a22b633ce1c95b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a345194a37592e2e1fb0f4ecc77c1ae9c" id="r_a345194a37592e2e1fb0f4ecc77c1ae9c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1RealtimePublisher.html#a345194a37592e2e1fb0f4ecc77c1ae9c">tryPublish</a> (const MessageT &amp;msg)</td></tr>
-<tr class="memdesc:a345194a37592e2e1fb0f4ecc77c1ae9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to get the data lock from realtime and publish the given message.  <br /></td></tr>
+<tr class="memdesc:a345194a37592e2e1fb0f4ecc77c1ae9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to publish the given message (deprecated)  <br /></td></tr>
 <tr class="separator:a345194a37592e2e1fb0f4ecc77c1ae9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab904fade8bc1b6f1392cc7ed6db913fc" id="r_ab904fade8bc1b6f1392cc7ed6db913fc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1RealtimePublisher.html#ab904fade8bc1b6f1392cc7ed6db913fc">unlockAndPublish</a> ()</td></tr>
 <tr class="memdesc:ab904fade8bc1b6f1392cc7ed6db913fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unlock the msg_ variable for the non-realtime thread to start publishing.  <br /></td></tr>
@@ -140,12 +146,20 @@ std::thread &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_thre
 <tr class="memitem:ae308e0feacb5ff50b56513171b1fe4c0" id="r_ae308e0feacb5ff50b56513171b1fe4c0"><td class="memItemLeft" align="right" valign="top"><a id="ae308e0feacb5ff50b56513171b1fe4c0" name="ae308e0feacb5ff50b56513171b1fe4c0"></a>
 const std::thread &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_thread</b> () const</td></tr>
 <tr class="separator:ae308e0feacb5ff50b56513171b1fe4c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1689c7138af6a772311e870bf793b034" id="r_a1689c7138af6a772311e870bf793b034"><td class="memItemLeft" align="right" valign="top"><a id="a1689c7138af6a772311e870bf793b034" name="a1689c7138af6a772311e870bf793b034"></a>
+const MessageT &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_msg</b> () const</td></tr>
+<tr class="separator:a1689c7138af6a772311e870bf793b034"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ad2990401c21ebd4ca56e55a6ab3da8" id="r_a0ad2990401c21ebd4ca56e55a6ab3da8"><td class="memItemLeft" align="right" valign="top"><a id="a0ad2990401c21ebd4ca56e55a6ab3da8" name="a0ad2990401c21ebd4ca56e55a6ab3da8"></a>
+std::mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_mutex</b> ()</td></tr>
+<tr class="separator:a0ad2990401c21ebd4ca56e55a6ab3da8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad28c8337187377eabd9a2ef60abbcc44" id="r_ad28c8337187377eabd9a2ef60abbcc44"><td class="memItemLeft" align="right" valign="top"><a id="ad28c8337187377eabd9a2ef60abbcc44" name="ad28c8337187377eabd9a2ef60abbcc44"></a>
+const std::mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_mutex</b> () const</td></tr>
+<tr class="separator:ad28c8337187377eabd9a2ef60abbcc44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:af25936f3c9e27a9d559a23801ffb6eb3" id="r_af25936f3c9e27a9d559a23801ffb6eb3"><td class="memItemLeft" align="right" valign="top"><a id="af25936f3c9e27a9d559a23801ffb6eb3" name="af25936f3c9e27a9d559a23801ffb6eb3"></a>
 MessageT&#160;</td><td class="memItemRight" valign="bottom"><b>msg_</b></td></tr>
-<tr class="memdesc:af25936f3c9e27a9d559a23801ffb6eb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">The msg_ variable contains the data that will get published on the ROS topic. <br /></td></tr>
 <tr class="separator:af25936f3c9e27a9d559a23801ffb6eb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -187,6 +201,37 @@ template&lt;class MessageT &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="acfeb9a0e19e704329c2c36d82dcecd92" name="acfeb9a0e19e704329c2c36d82dcecd92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfeb9a0e19e704329c2c36d82dcecd92">&#9670;&#160;</a></span>can_publish()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class MessageT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classrealtime__tools_1_1RealtimePublisher.html">realtime_tools::RealtimePublisher</a>&lt; MessageT &gt;::can_publish </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if the realtime publisher is in a state to publish messages. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if the publisher is in a state to publish messages </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The msg_ variable can be safely accessed if this function returns true </dd></dl>
+
+</div>
+</div>
 <a id="add366862cb0f6914cf409056b51b4f4d" name="add366862cb0f6914cf409056b51b4f4d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#add366862cb0f6914cf409056b51b4f4d">&#9670;&#160;</a></span>lock()</h2>
 
@@ -247,6 +292,44 @@ template&lt;class MessageT &gt; </div>
 
 </div>
 </div>
+<a id="a2f8e780273553fa490a22b633ce1c95b" name="a2f8e780273553fa490a22b633ce1c95b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f8e780273553fa490a22b633ce1c95b">&#9670;&#160;</a></span>try_publish()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class MessageT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classrealtime__tools_1_1RealtimePublisher.html">realtime_tools::RealtimePublisher</a>&lt; MessageT &gt;::try_publish </td>
+          <td>(</td>
+          <td class="paramtype">const MessageT &amp;&#160;</td>
+          <td class="paramname"><em>msg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Try to publish the given message. </p>
+<p>This method attempts to publish the given message if the publisher is in a state to do so. It uses a try_lock to avoid blocking if the mutex is already held by another thread.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">msg</td><td>The message to publish </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the message was successfully published, false otherwise </dd></dl>
+
+</div>
+</div>
 <a id="a46400f89feee20959656ff807c901bcb" name="a46400f89feee20959656ff807c901bcb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a46400f89feee20959656ff807c901bcb">&#9670;&#160;</a></span>trylock()</h2>
 
@@ -304,15 +387,16 @@ template&lt;class MessageT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Try to get the data lock from realtime and publish the given message. </p>
-<p>Tries to gain unique access to msg_ variable. If this succeeds update the msg_ variable and call unlockAndPublish</p>
+<p>Try to publish the given message (deprecated) </p>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000003">Deprecated:</a></b></dt><dd>This method is deprecated and should be replaced with <a class="el" href="classrealtime__tools_1_1RealtimePublisher.html#a2f8e780273553fa490a22b633ce1c95b" title="Try to publish the given message.">try_publish()</a></dd></dl>
+<p>This method is deprecated and should be replaced with <a class="el" href="classrealtime__tools_1_1RealtimePublisher.html#a2f8e780273553fa490a22b633ce1c95b" title="Try to publish the given message.">try_publish()</a>. It attempts to publish the given message if the publisher is in a state to do so. It uses a try_lock to avoid blocking if the mutex is already held by another thread.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">msg</td><td>The message to publish </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>false in case no lock for the realtime variable is acquired. This implies the message will not be published. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the message was successfully published, false otherwise </dd></dl>
 
 </div>
 </div>
