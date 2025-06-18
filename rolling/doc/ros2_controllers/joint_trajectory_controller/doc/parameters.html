@@ -297,6 +297,34 @@ position <span class="math notranslate nohighlight">\(s\)</span> from the state 
 <dt>gains.&lt;joints&gt;.ff_velocity_scale (double)</dt><dd><p>Feed-forward scaling <span class="math notranslate nohighlight">\(k_{ff}\)</span> of velocity</p>
 <p>Default:  0.0</p>
 </dd>
+<dt>gains.&lt;joints&gt;.u_clamp_max (double)</dt><dd><p>Upper output clamp.</p>
+<p>Default:  std::numeric_limits&lt;double&gt;::infinity()</p>
+</dd>
+<dt>gains.&lt;joints&gt;.u_clamp_min (double)</dt><dd><p>Lower output clamp.</p>
+<p>Default:  -std::numeric_limits&lt;double&gt;::infinity()</p>
+</dd>
+<dt>gains.&lt;joints&gt;.i_clamp_max (double)</dt><dd><p>[Deprecated, see antiwindup_strategy] Upper integral clamp.</p>
+<p>Default:  0.0</p>
+</dd>
+<dt>gains.&lt;joints&gt;.i_clamp_min (double)</dt><dd><p>[Deprecated, see antiwindup_strategy] Lower integral clamp.</p>
+<p>Default:  0.0</p>
+</dd>
+<dt>gains.&lt;joints&gt;.antiwindup_strategy (string)</dt><dd><p>Specifies the anti-windup strategy. Options: ‘back_calculation’, ‘conditional_integration’, ‘legacy’ or ‘none’. Note that the ‘back_calculation’ strategy use the tracking_time_constant parameter to tune the anti-windup behavior.</p>
+<p>Read only: True</p>
+<p>Default:  “legacy”</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>one of the specified values: [‘back_calculation’, ‘conditional_integration’, ‘legacy’, ‘none’]</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>gains.&lt;joints&gt;.tracking_time_constant (double)</dt><dd><p>Specifies the tracking time constant for the ‘back_calculation’ strategy. If set to 0.0 when this strategy is selected, a recommended default value will be applied.</p>
+<p>Default:  0.0</p>
+</dd>
+<dt>gains.&lt;joints&gt;.error_deadband (double)</dt><dd><p>Is used to stop integration when the error is within the given range.</p>
+<p>Default:  0.0</p>
+</dd>
 </dl>
 </section>
 <section id="an-example-parameter-file">
@@ -318,11 +346,18 @@ position <span class="math notranslate nohighlight">\(s\)</span> from the state 
 <span class="w">      </span><span class="nt">stopped_velocity_tolerance</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span>
 <span class="w">    </span><span class="nt">gains</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">&lt;joints&gt;</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">antiwindup_strategy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">legacy</span>
 <span class="w">        </span><span class="nt">d</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">        </span><span class="nt">error_deadband</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
 <span class="w">        </span><span class="nt">ff_velocity_scale</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
 <span class="w">        </span><span class="nt">i</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
 <span class="w">        </span><span class="nt">i_clamp</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">        </span><span class="nt">i_clamp_max</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">        </span><span class="nt">i_clamp_min</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
 <span class="w">        </span><span class="nt">p</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">        </span><span class="nt">tracking_time_constant</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">        </span><span class="nt">u_clamp_max</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">std::numeric_limits&lt;double&gt;::infinity()</span>
+<span class="w">        </span><span class="nt">u_clamp_min</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-std::numeric_limits&lt;double&gt;::infinity()</span>
 <span class="w">    </span><span class="nt">interpolate_from_desired_state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">    </span><span class="nt">interpolation_method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">splines</span>
 <span class="w">    </span><span class="nt">joints</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{}&#39;</span>
