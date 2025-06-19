@@ -63,6 +63,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">ros2_controllers</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#force-torque-sensor-broadcaster">force_torque_sensor_broadcaster</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#joint-trajectory-controller">joint_trajectory_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pid-controller">pid_controller</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../control_toolbox/doc/release_notes.html">control_toolbox</a></li>
@@ -129,6 +130,15 @@
 <h2>joint_trajectory_controller<a class="headerlink" href="#joint-trajectory-controller" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>The controller now supports the new anti-windup strategy of the PID class, which allows for more flexible control of the anti-windup behavior. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1759">#1759</a>).</p></li>
+</ul>
+</section>
+<section id="pid-controller">
+<h2>pid_controller<a class="headerlink" href="#pid-controller" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The controller now supports the new anti-windup strategy of the PID class, which allows for more flexible control of the anti-windup behavior (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1585">#1585</a>).
+* Output clamping via <code class="docutils literal notranslate"><span class="pre">u_clamp_max</span></code> and <code class="docutils literal notranslate"><span class="pre">u_clamp_min</span></code> was added, allowing users to bound the controller output.
+* The legacy <code class="docutils literal notranslate"><span class="pre">antiwindup</span></code> boolean and integral clamp parameters <code class="docutils literal notranslate"><span class="pre">i_clamp_max</span></code>/<code class="docutils literal notranslate"><span class="pre">i_clamp_min</span></code> have been deprecated in favor of the new <code class="docutils literal notranslate"><span class="pre">antiwindup_strategy</span></code> parameter. A <code class="docutils literal notranslate"><span class="pre">tracking_time_constant</span></code> parameter has also been introduced to configure the back-calculation strategy.
+* A new <code class="docutils literal notranslate"><span class="pre">error_deadband</span></code> parameter stops integration when the error is within a specified range.</p></li>
 </ul>
 </section>
 </section>
