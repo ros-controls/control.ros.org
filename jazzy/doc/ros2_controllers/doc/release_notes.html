@@ -183,6 +183,10 @@ There are two special values for tolerances:
 <ul class="simple">
 <li><p>🚀 The PID controller was added 🎉 (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/434">#434</a>).</p></li>
 <li><p>Add <code class="docutils literal notranslate"><span class="pre">save_i_term</span></code> parameter to control retention of integral state after re-activation (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1507">#1507</a>).</p></li>
+<li><p>The controller now supports the new anti-windup strategy of the PID class, which allows for more flexible control of the anti-windup behavior (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1585">#1585</a>).
+* Output clamping via <code class="docutils literal notranslate"><span class="pre">u_clamp_max</span></code> and <code class="docutils literal notranslate"><span class="pre">u_clamp_min</span></code> was added, allowing users to bound the controller output.
+* The legacy <code class="docutils literal notranslate"><span class="pre">antiwindup</span></code> boolean and integral clamp parameters <code class="docutils literal notranslate"><span class="pre">i_clamp_max</span></code>/<code class="docutils literal notranslate"><span class="pre">i_clamp_min</span></code> have been deprecated in favor of the new <code class="docutils literal notranslate"><span class="pre">antiwindup_strategy</span></code> parameter. A <code class="docutils literal notranslate"><span class="pre">tracking_time_constant</span></code> parameter has also been introduced to configure the back-calculation strategy.
+* A new <code class="docutils literal notranslate"><span class="pre">error_deadband</span></code> parameter stops integration when the error is within a specified range.</p></li>
 </ul>
 </section>
 <section id="steering-controllers-library">

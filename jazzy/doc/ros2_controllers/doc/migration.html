@@ -66,6 +66,7 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">ros2_controllers</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#diff-drive-controller">diff_drive_controller</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#joint-trajectory-controller">joint_trajectory_controller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pid-controller">pid_controller</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#steering-controllers-library">steering_controllers_library</a></li>
 </ul>
 </li>
@@ -133,6 +134,14 @@
 <li><p>The URDF is now parsed for continuous joints and angle wraparound is automatically activated now (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/949">#949</a>). Remove the <code class="docutils literal notranslate"><span class="pre">angle_wraparound</span></code> parameter from the configuration and set continuous joint type in the URDF of the respective joint.</p></li>
 <li><p>Tolerances sent with the action goal were not used before, but are now processed and used for the upcoming action. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/716">#716</a>). Adaptions to the action goal might be necessary.</p></li>
 <li><p>Parameter <code class="docutils literal notranslate"><span class="pre">open_loop_control</span></code> is replaced by <code class="docutils literal notranslate"><span class="pre">interpolate_from_desired_state</span></code> and setting the feedback gains to zero (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1525">#1525</a>).</p></li>
+</ul>
+</section>
+<section id="pid-controller">
+<h2>pid_controller<a class="headerlink" href="#pid-controller" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Parameters <code class="docutils literal notranslate"><span class="pre">enable_feedforward</span></code> and service <code class="docutils literal notranslate"><span class="pre">set_feedforward_control</span></code> are deprecated. Instead, set the feedforward_gain to zero or a non-zero value. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1553">#1553</a>).</p></li>
+<li><p>The legacy <code class="docutils literal notranslate"><span class="pre">antiwindup</span></code> boolean and integral clamp parameters <code class="docutils literal notranslate"><span class="pre">i_clamp_max</span></code>/<code class="docutils literal notranslate"><span class="pre">i_clamp_min</span></code> have
+been deprecated in favor of the new <code class="docutils literal notranslate"><span class="pre">antiwindup_strategy</span></code> parameter (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1585">#1585</a>). Choose a suitable anti-windup strategy and set the parameters accordingly.</p></li>
 </ul>
 </section>
 <section id="steering-controllers-library">

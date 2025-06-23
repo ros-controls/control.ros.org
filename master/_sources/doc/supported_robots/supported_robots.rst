@@ -25,6 +25,7 @@ Non robot-devices
 - `ODrive Motor Controller <https://github.com/Factor-Robotics/odrive_ros2_control>`_
 - `ODRI Motor Controller <https://github.com/stack-of-tasks/ros2_hardware_interface_odri>`_
 - `PCA9685 16-Channel 12-bit PWM/Servo Driver <https://github.com/rosblox/pca9685_ros2_control>`_
+- `ROBOTIS Dynamixel <https://github.com/ROBOTIS-GIT/dynamixel_hardware_interface>`_
 
 Official (supported by robot manufacturer)
 -------------------------------------------
@@ -44,6 +45,8 @@ Official (supported by robot manufacturer)
 - `Kinova® Kortex™ Gen3 <https://github.com/Kinovarobotics/ros2_kortex>`_
 - `Mitsubishi MELFA <https://github.com/Mitsubishi-Electric-Asia/melfa_ros2_driver>`_
 - `PMB2 - Differential Drive Mobile Base <https://github.com/pal-robotics/pmb2_simulation/tree/humble-devel>`_
+- `ROBOTIS AI Worker <https://github.com/ROBOTIS-GIT/ai_worker>`_
+- `ROBOTIS OpenMANIPULATOR <https://github.com/ROBOTIS-GIT/open_manipulator>`_
 - `TIAGo - Mobile Manipulator <https://github.com/pal-robotics/tiago_simulation/tree/humble-devel>`_
 - `Universal Robots <https://github.com/UniversalRobots/Universal_Robots_ROS2_Driver>`_
 - `xArm <https://github.com/xarm-Developer/xarm_ros2>`_

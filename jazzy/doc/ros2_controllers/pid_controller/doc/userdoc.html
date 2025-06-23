@@ -285,14 +285,35 @@ This might cause different behavior in the future if currently the <code class="
 <dt>gains.&lt;dof_names&gt;.d (double)</dt><dd><p>Derivative gain for PID</p>
 <p>Default:  0.0</p>
 </dd>
-<dt>gains.&lt;dof_names&gt;.antiwindup (bool)</dt><dd><p>Antiwindup functionality. When set to true, limits the integral error to prevent windup; otherwise, constrains the integral contribution to the control output. i_clamp_max and i_clamp_min are applied in both scenarios.</p>
+<dt>gains.&lt;dof_names&gt;.u_clamp_max (double)</dt><dd><p>Upper output clamp.</p>
+<p>Default:  std::numeric_limits&lt;double&gt;::infinity()</p>
+</dd>
+<dt>gains.&lt;dof_names&gt;.u_clamp_min (double)</dt><dd><p>Lower output clamp.</p>
+<p>Default:  -std::numeric_limits&lt;double&gt;::infinity()</p>
+</dd>
+<dt>gains.&lt;dof_names&gt;.antiwindup (bool)</dt><dd><p>[Deprecated, see antiwindup_strategy] Anti-windup functionality. When set to true, limits the integral error to prevent windup; otherwise, constrains the integral contribution to the control output. i_clamp_max and i_clamp_min are applied in both scenarios.</p>
 <p>Default:  false</p>
 </dd>
-<dt>gains.&lt;dof_names&gt;.i_clamp_max (double)</dt><dd><p>Upper integral clamp.</p>
+<dt>gains.&lt;dof_names&gt;.i_clamp_max (double)</dt><dd><p>[Deprecated, see antiwindup_strategy] Upper integral clamp.</p>
 <p>Default:  0.0</p>
 </dd>
-<dt>gains.&lt;dof_names&gt;.i_clamp_min (double)</dt><dd><p>Lower integral clamp.</p>
+<dt>gains.&lt;dof_names&gt;.i_clamp_min (double)</dt><dd><p>[Deprecated, see antiwindup_strategy] Lower integral clamp.</p>
 <p>Default:  0.0</p>
+</dd>
+<dt>gains.&lt;dof_names&gt;.antiwindup_strategy (string)</dt><dd><p>Specifies the anti-windup strategy. Options: ‘back_calculation’, ‘conditional_integration’, ‘legacy’ or ‘none’. Note that the ‘back_calculation’ strategy use the tracking_time_constant parameter to tune the anti-windup behavior.</p>
+<p>Default:  “legacy”</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>one of the specified values: [‘back_calculation’, ‘conditional_integration’, ‘legacy’, ‘none’]</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>gains.&lt;dof_names&gt;.tracking_time_constant (double)</dt><dd><p>Specifies the tracking time constant for the ‘back_calculation’ strategy. If set to 0.0 when this strategy is selected, a recommended default value will be applied.</p>
+<p>Default:  0.0</p>
+</dd>
+<dt>gains.&lt;dof_names&gt;.error_deadband (double)</dt><dd><p>Is used to stop integration when the error is within the given range.</p>
+<p>Default:  1e-16</p>
 </dd>
 <dt>gains.&lt;dof_names&gt;.feedforward_gain (double)</dt><dd><p>Gain for the feed-forward part.</p>
 <p>Default:  0.0</p>
