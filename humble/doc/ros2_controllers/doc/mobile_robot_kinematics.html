@@ -60,6 +60,7 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Wheeled Mobile Robot Kinematics</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#omnidirectional-wheeled-mobile-robots">Omnidirectional Wheeled Mobile Robots</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#omnidirectional-drive-robots-using-omni-wheels">Omnidirectional Drive Robots using Omni Wheels</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#swerve-drive-robots">Swerve Drive Robots</a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#nonholonomic-wheeled-mobile-robots">Nonholonomic Wheeled Mobile Robots</a><ul>
@@ -212,6 +213,58 @@ rA^\dagger
   \vdots\\
   \omega_n
 \end{bmatrix}\end{split}\]</div>
+</section>
+<section id="swerve-drive-robots">
+<h3>Swerve Drive Robots<a class="headerlink" href="#swerve-drive-robots" title="Link to this heading"></a></h3>
+<p>The below explains the kinematics of omnidirectional drive robots using four swerve modules, each with independently controlled steering and driving motors. It follows the coordinate conventions defined in <a class="reference external" href="https://www.ros.org/reps/rep-0103.html">REP-103</a>.</p>
+<img alt="Swerve Drive Robot" class="align-center" src="../../../_images/swerve_drive.svg" /><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x_b, y_b\)</span> is the robot’s body-frame coordinate system, located at the geometric center of the robot.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_w, y_w\)</span> is the world coordinate system.</p></li>
+<li><p><span class="math notranslate nohighlight">\(v_{b,x}\)</span> is the robot’s linear velocity on the x-axis.</p></li>
+<li><p><span class="math notranslate nohighlight">\(v_{b,y}\)</span> is the robot’s linear velocity on the y-axis.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\omega_{b,z}\)</span> is the robot’s angular velocity on the z-axis.</p></li>
+<li><p><span class="math notranslate nohighlight">\(l\)</span> is the wheelbase (distance between front and rear wheels).</p></li>
+<li><p><span class="math notranslate nohighlight">\(w\)</span> is the track width (distance between left and right wheels).</p></li>
+<li><p>Red arrows on wheel <span class="math notranslate nohighlight">\(i\)</span> signify the direction of the wheel’s velocity <span class="math notranslate nohighlight">\(v_i\)</span>.</p></li>
+</ul>
+<p>Each swerve module <span class="math notranslate nohighlight">\(i\)</span>, for <span class="math notranslate nohighlight">\(i = 0, 1, 2, 3\)</span> (typically front-left, front-right, back-left, back-right) is located at <span class="math notranslate nohighlight">\((l_{i,x}, l_{i,y})\)</span> relative to the center, typically:</p>
+<ul class="simple">
+<li><p>Front-left: <span class="math notranslate nohighlight">\((l/2, w/2)\)</span></p></li>
+<li><p>Front-right: <span class="math notranslate nohighlight">\((l/2, -w/2)\)</span></p></li>
+<li><p>Back-left: <span class="math notranslate nohighlight">\((-l/2, w/2)\)</span></p></li>
+<li><p>Back-right: <span class="math notranslate nohighlight">\((-l/2, -w/2)\)</span></p></li>
+</ul>
+<p><strong>Inverse Kinematics</strong></p>
+<p>For each module <span class="math notranslate nohighlight">\(i\)</span> at position <span class="math notranslate nohighlight">\((l_{i,x}, l_{i,y})\)</span>, the velocity vector is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{bmatrix}
+v_{i,x} \\
+v_{i,y}
+\end{bmatrix}
+=
+\begin{bmatrix}
+v_{b,x} - \omega_{b,z} l_{i,y} \\
+v_{b,y} + \omega_{b,z} l_{i,x}
+\end{bmatrix}\end{split}\]</div>
+<p>The wheel velocity <span class="math notranslate nohighlight">\(v_i\)</span> and steering angle <span class="math notranslate nohighlight">\(\phi_i\)</span> are:</p>
+<div class="math notranslate nohighlight">
+\[v_i = \sqrt{v_{i,x}^2 + v_{i,y}^2}\]</div>
+<div class="math notranslate nohighlight">
+\[\phi_i = \arctan2(v_{i,y}, v_{i,x})\]</div>
+<p><strong>Odometry</strong></p>
+<p>The body twist of the robot is computed from the wheel velocities <span class="math notranslate nohighlight">\(v_i\)</span> and steering angles <span class="math notranslate nohighlight">\(\phi_i\)</span>. Each module’s velocity components in the body frame are:</p>
+<div class="math notranslate nohighlight">
+\[v_{i,x} = v_i \cos(\phi_i), \quad v_{i,y} = v_i \sin(\phi_i)\]</div>
+<p>The chassis velocities are calculated as:</p>
+<div class="math notranslate nohighlight">
+\[v_{b,x} = \frac{1}{4} \sum_{i=0}^{3} v_{i,x}, \quad v_{b,y} = \frac{1}{4} \sum_{i=0}^{3} v_{i,y}\]</div>
+<div class="math notranslate nohighlight">
+\[\omega_{b,z} = \frac{\sum_{i=0}^{3} (v_{i,y} l_{i,x} - v_{i,x} l_{i,y})}{\sum_{i=0}^{3} (l_{i,x}^2 + l_{i,y}^2)}\]</div>
+<p>Odometry updates the robot’s pose (<span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>, <span class="math notranslate nohighlight">\(\theta\)</span>) in the global frame using the computed chassis velocities. The global velocities are:</p>
+<div class="math notranslate nohighlight">
+\[v_{x,\text{global}} = v_{b,x} \cos(\theta) - v_{b,y} \sin(\theta)\]</div>
+<div class="math notranslate nohighlight">
+\[v_{y,\text{global}} = v_{b,x} \sin(\theta) + v_{b,y} \cos(\theta)\]</div>
 </section>
 </section>
 <section id="nonholonomic-wheeled-mobile-robots">
