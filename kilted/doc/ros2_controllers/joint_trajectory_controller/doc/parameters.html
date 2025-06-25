@@ -29,7 +29,7 @@
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
     <link rel="next" title="rqt_joint_trajectory_controller" href="../../rqt_joint_trajectory_controller/doc/userdoc.html" />
-    <link rel="prev" title="Trajectory Representation" href="trajectory.html" /> 
+    <link rel="prev" title="Speed scaling" href="speed_scaling.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -69,6 +69,7 @@
 <li class="toctree-l4 current"><a class="reference internal" href="userdoc.html#further-information">Further information</a><ul class="current">
 <li class="toctree-l5"><a class="reference internal" href="trajectory.html">Trajectory Representation</a></li>
 <li class="toctree-l5"><a class="reference internal" href="trajectory.html#trajectory-replacement">Trajectory Replacement</a></li>
+<li class="toctree-l5"><a class="reference internal" href="speed_scaling.html">Speed scaling</a></li>
 <li class="toctree-l5 current"><a class="current reference internal" href="#">joint_trajectory_controller Parameters</a><ul>
 <li class="toctree-l6"><a class="reference internal" href="#list-of-parameters">List of parameters</a></li>
 <li class="toctree-l6"><a class="reference internal" href="#an-example-parameter-file">An example parameter file</a></li>
@@ -198,6 +199,24 @@
 <li><p>Custom validator: joint_trajectory_controller::state_interface_type_combinations</p></li>
 </ul>
 </div></blockquote>
+</dd>
+<dt>speed_scaling.initial_scaling_factor (double)</dt><dd><p>The initial value of the scaling factor if no exchange with hardware takes place.</p>
+<p>Read only: True</p>
+<p>Default:  1.0</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than or equal to 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>speed_scaling.state_interface (string)</dt><dd><p>Fully qualified name of the speed scaling state interface name</p>
+<p>Read only: True</p>
+<p>Default:  “”</p>
+</dd>
+<dt>speed_scaling.command_interface (string)</dt><dd><p>Command interface name used for setting the speed scaling factor on the hardware.</p>
+<p>Read only: True</p>
+<p>Default:  “”</p>
 </dd>
 <dt>allow_partial_joints_goal (bool)</dt><dd><p>Allow joint goals defining trajectory for only some joints.</p>
 <p>Default:  false</p>
@@ -362,6 +381,10 @@ position <span class="math notranslate nohighlight">\(s\)</span> from the state 
 <span class="w">    </span><span class="nt">interpolation_method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">splines</span>
 <span class="w">    </span><span class="nt">joints</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{}&#39;</span>
 <span class="w">    </span><span class="nt">set_last_command_interface_value_as_state_on_activation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">speed_scaling</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">command_interface</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w">      </span><span class="nt">initial_scaling_factor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="w">      </span><span class="nt">state_interface</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
 <span class="w">    </span><span class="nt">state_interfaces</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{}&#39;</span>
 </pre></div>
 </div>
@@ -373,7 +396,7 @@ position <span class="math notranslate nohighlight">\(s\)</span> from the state 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="trajectory.html" class="btn btn-neutral float-left" title="Trajectory Representation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="speed_scaling.html" class="btn btn-neutral float-left" title="Speed scaling" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../../rqt_joint_trajectory_controller/doc/userdoc.html" class="btn btn-neutral float-right" title="rqt_joint_trajectory_controller" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

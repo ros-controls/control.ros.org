@@ -1,0 +1,292 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Speed scaling &mdash; ROS2_Control: Rolling Jun 2025 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/reviewer_stats.css?v=068b34ac" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//rolling/doc/ros2_controllers/joint_trajectory_controller/doc/speed_scaling.html" />
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=6f8c6e2f"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Details about parameters" href="parameters.html" />
+    <link rel="prev" title="Trajectory Representation" href="trajectory.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html">ros2_control</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/controllers_index.html">ros2_controllers</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#guidelines-and-best-practices">Guidelines and Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#controllers-for-wheeled-mobile-robots">Controllers for Wheeled Mobile Robots</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/controllers_index.html#controllers-for-manipulators-and-other-robots">Controllers for Manipulators and Other Robots</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../admittance_controller/doc/userdoc.html">Admittance Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../effort_controllers/doc/userdoc.html">Effort Controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../forward_command_controller/doc/userdoc.html">Forward Command Controller</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="userdoc.html">Joint Trajectory Controller</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="userdoc.html#hardware-interface-types">Hardware interface types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc.html#other-features">Other features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc.html#using-joint-trajectory-controller-s">Using Joint Trajectory Controller(s)</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="userdoc.html#further-information">Further information</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="trajectory.html">Trajectory Representation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="trajectory.html#trajectory-replacement">Trajectory Replacement</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="#">Speed scaling</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#methods-of-speed-scaling">Methods of speed scaling</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="#on-robot-speed-scaling">On-Robot speed scaling</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#on-controller-speed-scaling">On-Controller speed scaling</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="#effect-on-tolerances">Effect on tolerances</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="parameters.html">joint_trajectory_controller Parameters</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../rqt_joint_trajectory_controller/doc/userdoc.html">rqt_joint_trajectory_controller</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../parallel_gripper_controller/doc/userdoc.html">Parallel Gripper Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pid_controller/doc/userdoc.html">PID Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../position_controllers/doc/userdoc.html">Position Controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../velocity_controllers/doc/userdoc.html">Velocity Controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../gpio_controllers/doc/userdoc.html">Gpio Command Controller</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#broadcasters">Broadcasters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#common-controller-parameters">Common Controller Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utilities.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes/release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../migration/migration.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_list/api_list.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../governance/governance.html">Project Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../statistics.html">Documentation Usage</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ROS2_Control: Rolling</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../doc/controllers_index.html">ros2_controllers</a></li>
+          <li class="breadcrumb-item"><a href="userdoc.html">joint_trajectory_controller</a></li>
+      <li class="breadcrumb-item active">Speed scaling</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/ros-controls/control.ros.org/blob/rolling//doc/ros2_controllers/joint_trajectory_controller/doc/speed_scaling.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for a development version.
+    For the latest released version, please have a look at <a href="../../../../../jazzy/index.html">Jazzy</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="speed-scaling">
+<span id="jtc-speed-scaling"></span><h1>Speed scaling<a class="headerlink" href="#speed-scaling" title="Link to this heading"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">joint_trajectory_controller</span></code> (JTC) supports dynamically scaling its trajectory execution speed.
+That means, when specifying a scaling factor <span class="math notranslate nohighlight">\({f}\)</span> of less than 1, execution will proceed only
+<span class="math notranslate nohighlight">\({f \cdot \Delta_t}\)</span> per control step where <span class="math notranslate nohighlight">\({\Delta_t}\)</span> is the controller’s cycle time.</p>
+<section id="methods-of-speed-scaling">
+<h2>Methods of speed scaling<a class="headerlink" href="#methods-of-speed-scaling" title="Link to this heading"></a></h2>
+<p>Generally, the speed scaling feature has two separate scaling approaches in mind: On-Robot scaling
+and On-Controller scaling. They are both conceptually different and to correctly configure speed
+scaling it is important to understand the differences.</p>
+<section id="on-robot-speed-scaling">
+<h3>On-Robot speed scaling<a class="headerlink" href="#on-robot-speed-scaling" title="Link to this heading"></a></h3>
+<p>This scaling method is intended for robots that provide a scaling feature directly on the robot’s
+teach pendant and / or through a safety feature. One example of such robots are the <a class="reference external" href="https://github.com/UniversalRobots/Universal_Robots_ROS2_Driver">Universal
+Robots manipulators</a>.</p>
+<p>The hardware interface needs to report the speed scaling through a state interface so it can be
+read by the controller. Optionally, a command interface for setting the speed scaling value on the
+hardware can be provided (if applicable) in order to set speed scaling through a ROS topic.</p>
+<p>For the scope of this documentation a user-defined scaling and a safety-limited scaling will be
+treated the same resulting in a “hardware scaling factor”.</p>
+<p>In this setup, the hardware will treat the command sent from the ROS controller (e.g. Reach joint
+configuration <span class="math notranslate nohighlight">\({\theta}\)</span> within <span class="math notranslate nohighlight">\({\Delta_t}\)</span> seconds.). This effectively means that the
+robot will only make half of the way towards the target configuration when a scaling factor of 0.5
+is given (neglecting acceleration and deceleration influences during this time period).</p>
+<p>The following plot shows trajectory execution (for one joint) with a hardware-scaled execution and
+a controller that is <strong>not</strong> aware of speed scaling:</p>
+<img alt="Trajectory with a hardware-scaled-down execution with a non-scaled controller" src="../../../../_images/traj_without_speed_scaling.png" />
+<p>The graph shows a trajectory with one joint being moved to a target point and back to its starting
+point. As the joint’s speed is limited to a very low setting on the teach pendant, speed scaling
+(black line) activates and limits the joint speed (green line). As a result, the target trajectory
+(light blue) doesn’t get executed by the robot, but instead the pink trajectory is executed. The
+vertical distance between the light blue line and the pink line is the path error in each control
+cycle. We can see that the path deviation gets above 300 degrees at some point and the target point
+at -6 radians never gets reached.</p>
+<p>With the scaled version of the trajectory controller the example motion shown in the previous diagram becomes:</p>
+<img alt="Trajectory with a hardware-scaled-down execution with a scaled controller" src="../../../../_images/traj_with_speed_scaling.png" />
+<p>The deviation between trajectory interpolation on the ROS side and actual robot execution stays
+minimal and the robot reaches the intermediate setpoint instead of returning “too early” as in the
+example above.</p>
+<p>Scaling is done in such a way, that the time in the trajectory is virtually scaled. For example, if
+a controller runs with a cycle time of 100 Hz, each control cycle is 10 ms long. A speed scaling of
+0.5 means that in each time step the trajectory is moved forward by 5 ms instead.
+So, the beginning of the 3rd timestep is 15 ms instead of 30 ms in the trajectory.</p>
+<p>Command sampling is performed as in the unscaled case, with the timestep’s start plus the <strong>full</strong>
+cycle time of 10 ms. The robot will scale down the motion command by 50% resulting in only half of
+the distance being executed, which is why the next control cycle will be started at the current
+start plus half of the step time.</p>
+</section>
+<section id="on-controller-speed-scaling">
+<h3>On-Controller speed scaling<a class="headerlink" href="#on-controller-speed-scaling" title="Link to this heading"></a></h3>
+<p>Conceptually, with this scaling the robot hardware isn’t aware of any scaling happening. The JTC
+generates commands to be sent to the robot that are already scaled down accordingly, so they can be
+directly executed by the robot.</p>
+<p>Since the hardware isn’t aware of speed scaling, the speed-scaling related command and state
+interfaces should not be specified and the scaling factor will be set through the
+<code class="docutils literal notranslate"><span class="pre">~/speed_scaling_input</span></code> topic directly:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>--qos-durability<span class="w"> </span>transient_local<span class="w"> </span>--once<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>/joint_trajectory_controller/speed_scaling_input<span class="w"> </span>control_msgs/msg/SpeedScalingFactor<span class="w"> </span><span class="s2">&quot;{factor: 0.5}&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">~/speed_scaling_input</span></code> topic uses the QoS durability profile <code class="docutils literal notranslate"><span class="pre">transient_local</span></code>. This
+means you can restart the controller while still having a publisher on that topic active.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The current implementation only works for position-based interfaces.</p>
+</div>
+</section>
+</section>
+<section id="effect-on-tolerances">
+<h2>Effect on tolerances<a class="headerlink" href="#effect-on-tolerances" title="Link to this heading"></a></h2>
+<p>When speed scaling is used while executing a trajectory, the tolerances configured for execution
+will be scaled, as well.</p>
+<p>Since commands are generated from the scaled trajectory time, <strong>path errors</strong> will also be compared
+to the scaled trajectory.</p>
+<p>The <strong>goal time tolerance</strong> also uses the virtual trajectory time. This means that a trajectory
+being executed with a constant scaling factor of 0.5 will take twice as long for execution than the
+<code class="docutils literal notranslate"><span class="pre">time_from_start</span></code> value of the last trajectory point specifies. As long as the robot doesn’t take
+longer than that the goal time tolerance is considered to be met.</p>
+<p>If an application relies on the actual execution time as set in the <code class="docutils literal notranslate"><span class="pre">time_from_start</span></code> fields, an
+external monitoring has to be wrapped around the trajectory execution action.</p>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="trajectory.html" class="btn btn-neutral float-left" title="Trajectory Representation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="parameters.html" class="btn btn-neutral float-right" title="Details about parameters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: rolling
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Releases</dt>
+        <dd><a href="../../../../../jazzy/index.html">Jazzy (latest)</a></dd><br>
+        <dd><a href="../../../../../iron/index.html">Iron (EOL)</a></dd><br>
+        
+        <dd><a href="../../../../../humble/index.html">Humble</a></dd><br>
+        <dd><a href="../../../../../galactic/index.html">Galactic (EOL)</a></dd><br>
+        
+        <dd><a href="../../../../../foxy/index.html">Foxy (EOL)</a></dd><br>
+        
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="speed_scaling.html">Rolling</a></dd>
+      <dd><a href="../../../../../kilted/doc/ros2_controllers/joint_trajectory_controller/doc/speed_scaling.html">Kilted</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
