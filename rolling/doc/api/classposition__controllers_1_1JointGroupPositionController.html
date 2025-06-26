@@ -115,19 +115,21 @@ Collaboration diagram for position_controllers::JointGroupPositionController:</d
 <div class="dyncontent">
 <div class="center"><img src="classposition__controllers_1_1JointGroupPositionController__coll__graph.png" border="0" usemap="#aposition__controllers_1_1JointGroupPositionController_coll__map" alt="Collaboration graph"/></div>
 <map name="aposition__controllers_1_1JointGroupPositionController_coll__map" id="aposition__controllers_1_1JointGroupPositionController_coll__map">
-<area shape="rect" title="Forward command controller for a set of position controlled joints (linear or angular)." alt="" coords="1415,60,1629,100"/>
-<area shape="rect" href="classforward__command__controller_1_1ForwardCommandController.html" title="Forward command controller for a set of joints." alt="" coords="1152,60,1365,100"/>
-<area shape="poly" title=" " alt="" coords="1379,77,1414,77,1414,83,1379,83"/>
-<area shape="rect" href="classforward__command__controller_1_1ForwardControllersBase.html" title="Forward command controller for a set of joints and interfaces." alt="" coords="889,60,1103,100"/>
-<area shape="poly" title=" " alt="" coords="1116,77,1152,77,1152,83,1116,83"/>
-<area shape="rect" href="classcontroller__interface_1_1ControllerInterface.html" title=" " alt="" coords="555,5,707,45"/>
-<area shape="poly" title=" " alt="" coords="721,36,890,61,889,67,721,41"/>
+<area shape="rect" title="Forward command controller for a set of position controlled joints (linear or angular)." alt="" coords="1444,69,1659,109"/>
+<area shape="rect" href="classforward__command__controller_1_1ForwardCommandController.html" title="Forward command controller for a set of joints." alt="" coords="1181,69,1395,109"/>
+<area shape="poly" title=" " alt="" coords="1409,87,1444,87,1444,92,1409,92"/>
+<area shape="rect" href="classforward__command__controller_1_1ForwardControllersBase.html" title="Forward command controller for a set of joints and interfaces." alt="" coords="919,69,1132,109"/>
+<area shape="poly" title=" " alt="" coords="1145,87,1181,87,1181,92,1145,92"/>
+<area shape="rect" href="classcontroller__interface_1_1ControllerInterface.html" title=" " alt="" coords="569,5,721,45"/>
+<area shape="poly" title=" " alt="" coords="735,38,919,69,918,74,734,43"/>
 <area shape="rect" href="classcontroller__interface_1_1ControllerInterfaceBase.html" title=" " alt="" coords="307,5,491,45"/>
-<area shape="poly" title=" " alt="" coords="505,23,555,23,555,28,505,28"/>
+<area shape="poly" title=" " alt="" coords="504,23,569,23,569,28,504,28"/>
 <area shape="rect" title=" " alt="" coords="5,5,257,45"/>
 <area shape="poly" title=" " alt="" coords="271,23,306,23,306,28,271,28"/>
-<area shape="rect" href="classrealtime__tools_1_1RealtimeBuffer.html" title=" " alt="" coords="540,70,723,125"/>
-<area shape="poly" title=" " alt="" coords="737,90,889,82,889,88,737,95"/>
+<area shape="rect" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html" title=" " alt="" coords="540,69,751,109"/>
+<area shape="poly" title=" " alt="" coords="764,87,918,87,918,92,764,92"/>
+<area shape="rect" title=" " alt="" coords="576,134,715,159"/>
+<area shape="poly" title=" " alt="" coords="728,132,894,107,918,103,919,108,895,112,729,137"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -240,9 +242,12 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>interface_name
 <tr class="memitem:a589946d552215dcf1534f66776b6b68d inherit pro_attribs_classforward__command__controller_1_1ForwardControllersBase" id="r_a589946d552215dcf1534f66776b6b68d"><td class="memItemLeft" align="right" valign="top">
 std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>command_interface_types_</b></td></tr>
 <tr class="separator:a589946d552215dcf1534f66776b6b68d inherit pro_attribs_classforward__command__controller_1_1ForwardControllersBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a183c7757615e0baa88b38b88b374b490 inherit pro_attribs_classforward__command__controller_1_1ForwardControllersBase" id="r_a183c7757615e0baa88b38b88b374b490"><td class="memItemLeft" align="right" valign="top">
-<a class="el" href="classrealtime__tools_1_1RealtimeBuffer.html">realtime_tools::RealtimeBuffer</a>&lt; std::shared_ptr&lt; CmdType &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>rt_command_ptr_</b></td></tr>
-<tr class="separator:a183c7757615e0baa88b38b88b374b490 inherit pro_attribs_classforward__command__controller_1_1ForwardControllersBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25dedf4dd975261bfc9082e13bbe702b inherit pro_attribs_classforward__command__controller_1_1ForwardControllersBase" id="r_a25dedf4dd975261bfc9082e13bbe702b"><td class="memItemLeft" align="right" valign="top">
+<a class="el" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html">realtime_tools::RealtimeThreadSafeBox</a>&lt; CmdType &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>rt_command_</b></td></tr>
+<tr class="separator:a25dedf4dd975261bfc9082e13bbe702b inherit pro_attribs_classforward__command__controller_1_1ForwardControllersBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9576bb5051502288371238836fcd43e4 inherit pro_attribs_classforward__command__controller_1_1ForwardControllersBase" id="r_a9576bb5051502288371238836fcd43e4"><td class="memItemLeft" align="right" valign="top">
+CmdType&#160;</td><td class="memItemRight" valign="bottom"><b>joint_commands_</b></td></tr>
+<tr class="separator:a9576bb5051502288371238836fcd43e4 inherit pro_attribs_classforward__command__controller_1_1ForwardControllersBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab159c31b2932fe8ab4d344579b930cf1 inherit pro_attribs_classforward__command__controller_1_1ForwardControllersBase" id="r_ab159c31b2932fe8ab4d344579b930cf1"><td class="memItemLeft" align="right" valign="top">
 rclcpp::Subscription&lt; CmdType &gt;::SharedPtr&#160;</td><td class="memItemRight" valign="bottom"><b>joints_command_subscriber_</b></td></tr>
 <tr class="separator:ab159c31b2932fe8ab4d344579b930cf1 inherit pro_attribs_classforward__command__controller_1_1ForwardControllersBase"><td class="memSeparator" colspan="2">&#160;</td></tr>

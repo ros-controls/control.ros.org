@@ -1,6 +1,5 @@
 var searchData=
 [
   ['vel_5fpid_0',['vel_pid',['../classgazebo__ros2__control_1_1GazeboSystemPrivate.html#a02602f06733ec461e8c8e9ed5889d28b',1,'gazebo_ros2_control::GazeboSystemPrivate']]],
-  ['verbose_5f_1',['verbose_',['../classparallel__gripper__action__controller_1_1GripperActionController.html#a0f184ca51b3aed0462f38ba63777334f',1,'parallel_gripper_action_controller::GripperActionController']]],
-  ['viewcontrollerchainsverb_2',['ViewControllerChainsVerb',['../classros2controlcli_1_1verb_1_1view__controller__chains_1_1ViewControllerChainsVerb.html',1,'ros2controlcli::verb::view_controller_chains']]]
+  ['viewcontrollerchainsverb_1',['ViewControllerChainsVerb',['../classros2controlcli_1_1verb_1_1view__controller__chains_1_1ViewControllerChainsVerb.html',1,'ros2controlcli::verb::view_controller_chains']]]
 ];
