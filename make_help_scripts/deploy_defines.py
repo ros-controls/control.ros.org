@@ -145,7 +145,7 @@ repos = {
             "kilted": "ros2-master",
             "rolling": "ros2-master"
         },
-        "pr": None
+        "pr": os.environ.get('CONTROL_TOOLBOX_PR')
     },
     "control_msgs": {
         "url": "https://github.com/ros-controls/control_msgs",
@@ -171,7 +171,7 @@ repos = {
             "kilted": "master",
             "rolling": "master"
         },
-        "pr": None
+        "pr": os.environ.get('REALTIME_TOOLS_PR')
     },
     "kinematics_interface": {
         "url": "https://github.com/ros-controls/kinematics_interface",
