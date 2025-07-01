@@ -69,6 +69,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#add-ros2-control-tag-to-a-urdf-or-sdf">Add ros2_control tag to a URDF or SDF</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#simple-setup">Simple setup</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#using-mimic-joints-in-simulation">Using mimic joints in simulation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#using-force-torque-sensors-in-simulation">Using force-torque sensors in simulation</a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#add-the-gz-ros2-control-plugin">Add the gz_ros2_control plugin</a><ul>
@@ -259,6 +260,19 @@ include:</p>
 </pre></div>
 </div>
 <p>The mimic joint must not have command interfaces configured in the <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code> tag, but state interfaces can be configured.</p>
+</section>
+<section id="using-force-torque-sensors-in-simulation">
+<h3>Using force-torque sensors in simulation<a class="headerlink" href="#using-force-torque-sensors-in-simulation" title="Link to this heading"></a></h3>
+<p>To use <code class="docutils literal notranslate"><span class="pre">force-torque</span></code> sensors in <em>gz_ros2_control</em> you should define its parameters in your URDF or SDF (see the <a class="reference external" href="http://sdformat.org/spec?ver=1.12&amp;elem=sensor#sensor_force_torque">SDF specification</a>)</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;force_torque_sensor&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;force_torque&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;update_rate&gt;</span>10.0<span class="nt">&lt;/update_rate&gt;</span>
+<span class="w">  </span><span class="nt">&lt;always_on&gt;</span>true<span class="nt">&lt;/always_on&gt;</span>
+<span class="w">  </span><span class="nt">&lt;visualize&gt;</span>true<span class="nt">&lt;/visualize&gt;</span>
+<span class="w">  </span><span class="nt">&lt;topic&gt;</span>force_torque_sensor<span class="nt">&lt;/topic&gt;</span>
+<span class="nt">&lt;/sensor&gt;</span>
+</pre></div>
+</div>
+<p>It is important to add this as <code class="docutils literal notranslate"><span class="pre">reference</span></code> sensor in the <code class="docutils literal notranslate"><span class="pre">&lt;gazebo&gt;</span></code> tag in your URDF file.</p>
 </section>
 </section>
 <section id="add-the-gz-ros2-control-plugin">

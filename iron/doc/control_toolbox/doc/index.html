@@ -107,7 +107,91 @@
 <p>This package contains several C++ classes and filter plugins useful in writing controllers.</p>
 <section id="base-classes">
 <h2>Base classes<a class="headerlink" href="#base-classes" title="Link to this heading"></a></h2>
-<p>Tbd.</p>
+<section id="pid">
+<h3>PID<a class="headerlink" href="#pid" title="Link to this heading"></a></h3>
+</section>
+<section id="pid-controller">
+<h3>PID Controller<a class="headerlink" href="#pid-controller" title="Link to this heading"></a></h3>
+<p>The PID (Proportional-Integral-Derivative) controller is a widely used feedback controller. This class implements a generic structure that can be used to create a wide range of PID controllers. It can function independently or be subclassed to provide more specific controls based on a particular control loop. Integral retention on reset is supported, which prevents re-winding the integrator after temporary disabling in presence of constant disturbances.</p>
+<section id="pid-equation">
+<h4>PID Equation<a class="headerlink" href="#pid-equation" title="Link to this heading"></a></h4>
+<p>The standard PID equation is given by:</p>
+<p>command = p<sub>term</sub> + i<sub>term</sub> + d<sub>term</sub></p>
+<p>where:</p>
+<ul class="simple">
+<li><p>p<sub>term</sub> = p<sub>gain</sub> * error</p></li>
+<li><p>i<sub>term</sub> = i<sub>term</sub> + i<sub>gain</sub> * error * dt</p></li>
+<li><p>d<sub>term</sub> = d<sub>gain</sub> * d<sub>error</sub></p></li>
+</ul>
+<p>and:</p>
+<ul class="simple">
+<li><p>error = desired_state - measured_state</p></li>
+<li><p>d<sub>error</sub> = (error - error<sub>last</sub>) / dt</p></li>
+</ul>
+</section>
+<section id="parameters">
+<h4>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">p</span></code> (Proportional gain): This gain determines the reaction to the current error. A larger proportional gain results in a larger change in the controller output for a given change in the error.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">i</span></code> (Integral gain): This gain determines the reaction based on the sum of recent errors. The integral term accounts for past values of the error and integrates them over time to produce the <code class="docutils literal notranslate"><span class="pre">i_term</span></code>. This helps in eliminating steady-state errors.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">d</span></code> (Derivative gain): This gain determines the reaction based on the rate at which the error has been changing. The derivative term predicts future errors based on the rate of change of the current error. This helps in reducing overshoot, settling time, and other transient performance variables.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">u_clamp</span></code> (Minimum and maximum bounds for the controller output): These bounds are applied to the final command output of the controller, ensuring the output stays within acceptable physical limits.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tracking_time_constant</span></code> (Tracking time constant): This parameter is specific to the ‘back_calculation’ anti-windup strategy. If set to 0.0 when this strategy is selected, a recommended default value will be applied.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">antiwindup_strat</span></code> (Anti-windup strategy): This parameter selects how the integrator is prevented from winding up when the controller output saturates. Available options are:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">NONE</span></code>: no anti-windup technique; the integral term accumulates without correction.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BACK_CALCULATION</span></code>: adjusts the integral term based on the difference between the unsaturated and saturated outputs using the tracking time constant <code class="docutils literal notranslate"><span class="pre">tracking_time_constant</span></code>. Faster correction for smaller <code class="docutils literal notranslate"><span class="pre">tracking_time_constant</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CONDITIONAL_INTEGRATION</span></code>: only updates the integral term when the controller is not in saturation or when the error drives the output away from saturation, freezing integration otherwise.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="anti-windup-strategies">
+<h4>Anti-Windup Strategies<a class="headerlink" href="#anti-windup-strategies" title="Link to this heading"></a></h4>
+<p>Anti-windup functionality is crucial for PID controllers, especially when the control output is subject to saturation (clamping). Without anti-windup, the integral term can accumulate excessively when the controller output is saturated, leading to large overshoots and sluggish response once the error changes direction. The <code class="docutils literal notranslate"><span class="pre">control_toolbox::Pid</span></code> class offers two anti-windup strategies:</p>
+<ul>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">BACK_CALCULATION</span></code></strong>: This strategy adjusts the integral term based on the difference between the saturated and unsaturated controller output. When the controller output <code class="docutils literal notranslate"><span class="pre">command</span></code> exceeds the output limits (<code class="docutils literal notranslate"><span class="pre">u_max</span></code> or <code class="docutils literal notranslate"><span class="pre">u_min</span></code>), the integral term <code class="docutils literal notranslate"><span class="pre">i_term</span></code> is adjusted by subtracting a value proportional to the difference between the saturated output <code class="docutils literal notranslate"><span class="pre">command_sat</span></code> and the unsaturated output <code class="docutils literal notranslate"><span class="pre">command</span></code>. This prevents the integral term from accumulating beyond what is necessary to maintain the output at its saturation limit. The <code class="docutils literal notranslate"><span class="pre">tracking_time_constant</span></code> parameter is used to tune the speed of this adjustment. A smaller value results in faster anti-windup action.</p>
+<p>The update rule for the integral term with back-calculation is:</p>
+<p>i<sub>term</sub> += dt * (i<sub>gain</sub> * error + (1 / trk<sub>tc</sub>) * (command<sub>sat</sub> - command))</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">trk_tc</span></code>, i.e., <code class="docutils literal notranslate"><span class="pre">tracking_time_constant</span></code> parameter, is set to 0.0, a default value is calculated based on the proportional and derivative gains:</p>
+<ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">d_gain</span></code> is not zero: trk<sub>tc</sub> = √(d<sub>gain</sub> / i<sub>gain</sub>)</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">d_gain</span></code> is zero: trk<sub>tc</sub> = p<sub>gain</sub> / i<sub>gain</sub></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">CONDITIONAL_INTEGRATION</span></code></strong>: In this strategy, the integral term is only updated when the controller is not in saturation or when the error has a sign that would lead the controller out of saturation. Specifically, the integral term is frozen (not updated) if the controller output is saturated and the error has the same sign as the saturated output. This prevents further accumulation of the integral term in the direction of saturation.</p>
+<p>The integral term is updated only if the following condition is met:</p>
+<p>(command - command<sub>sat</sub> = 0) ∨ (error * command ≤ 0)</p>
+<p>This means the integral term <code class="docutils literal notranslate"><span class="pre">i_term</span></code> is updated as <code class="docutils literal notranslate"><span class="pre">i_term</span> <span class="pre">+=</span> <span class="pre">dt</span> <span class="pre">*</span> <span class="pre">i_gain</span> <span class="pre">*</span> <span class="pre">error</span></code> only when the controller is not saturated, or when it is saturated but the error is driving the output away from the saturation limit.</p>
+</li>
+</ul>
+</section>
+<section id="usage-example">
+<h4>Usage Example<a class="headerlink" href="#usage-example" title="Link to this heading"></a></h4>
+<p>To use the <code class="docutils literal notranslate"><span class="pre">Pid</span></code> class, you should first call some version of <code class="docutils literal notranslate"><span class="pre">initialize()</span></code> and then call <code class="docutils literal notranslate"><span class="pre">compute_command()</span></code> at every update step. For example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">control_toolbox</span><span class="o">::</span><span class="n">Pid</span><span class="w"> </span><span class="n">pid</span><span class="p">;</span>
+<span class="n">pid</span><span class="p">.</span><span class="n">initialize</span><span class="p">(</span><span class="mf">6.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">-5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">control_toolbox</span><span class="o">::</span><span class="n">AntiwindupStrategy</span><span class="o">::</span><span class="n">BACK_CALCULATION</span><span class="p">);</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">position_desired</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span><span class="p">;</span>
+<span class="p">...</span>
+<span class="n">rclcpp</span><span class="o">::</span><span class="n">Time</span><span class="w"> </span><span class="n">last_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_clock</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">now</span><span class="p">();</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nb">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Time</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_clock</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">now</span><span class="p">();</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">effort</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pid</span><span class="p">.</span><span class="n">compute_command</span><span class="p">(</span><span class="n">position_desired</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">currentPosition</span><span class="p">(),</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">last_time</span><span class="p">);</span>
+<span class="w">  </span><span class="n">last_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">time</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="references">
+<h4>References<a class="headerlink" href="#references" title="Link to this heading"></a></h4>
+<ol class="arabic simple">
+<li><p>Visioli, A. <em>Practical PID Control</em>. London: Springer-Verlag London Limited, 2006. 476 p.</p></li>
+<li><p>Vrancic, D., Horowitz, R., &amp; Hagiwara, T. “Antiwindup, Bumpless, and Conditioned Transfer Techniques for PID Controllers.” <em>IEEE Control Systems Magazine</em>, vol. 16, no. 4, 1996, pp. 48–57.</p></li>
+<li><p>Bohn, C.; Atherton, D. “An analysis package comparing PID anti-windup strategies.” <em>IEEE Control Systems Magazine</em>, 1995, pp. 34–40.</p></li>
+<li><p>Åström, K.; Hägglund, T. <em>PID Controllers: Theory, Design and Tuning</em>. Research Triangle Park, USA: ISA Press / Springer-Verlag London Limited, 1995. 343 p.</p></li>
+</ol>
+</section>
+</section>
 </section>
 <section id="control-filters">
 <h2>Control filters<a class="headerlink" href="#control-filters" title="Link to this heading"></a></h2>
