@@ -156,4 +156,4 @@ realtime_tools
      - ROS Index
    * - control_msgs
      - `API <http://docs.ros.org/en/{DISTRO}/p/realtime_tools/>`__
-     - `ROS Index <https://index.ros.org/p/velocity_controllers/>`__
+     - `ROS Index <https://index.ros.org/p/realtime_tools/>`__
