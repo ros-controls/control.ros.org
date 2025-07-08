@@ -271,6 +271,12 @@ We prefer this way of doing so as filtering introduces delay (which makes it dif
 <dt>kinematics.sum_of_robot_center_projection_on_X_Y_axis (double)</dt><dd><p>Wheels geometric param used in mecanum wheels’ IK. lx and ly represent the distance from the robot’s center to the wheels projected on the x and y axis with origin at robots center respectively, sum_of_robot_center_projection_on_X_Y_axis = lx+ly</p>
 <p>Default:  0.0</p>
 </dd>
+<dt>tf_frame_prefix_enable (bool)</dt><dd><p>Enables or disables appending <code class="docutils literal notranslate"><span class="pre">tf_frame_prefix</span></code> to tf frame id’s. See its parameter description for more information.</p>
+<p>Default:  true</p>
+</dd>
+<dt>tf_frame_prefix (string)</dt><dd><p>(optional) Prefix to be appended to the tf frames, will be added to odom_frame_id and base_frame_id before publishing. If the parameter is empty, controller’s namespace will be used.</p>
+<p>Default:  “”</p>
+</dd>
 <dt>base_frame_id (string)</dt><dd><p>Base frame_id set to value of base_frame_id.</p>
 <p>Default:  “base_link”</p>
 </dd>
@@ -288,46 +294,47 @@ We prefer this way of doing so as filtering introduces delay (which makes it dif
 </dd>
 </dl>
 <p>An example parameter file for this controller can be found in <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/jazzy/mecanum_drive_controller/test/mecanum_drive_controller_params.yaml">the test directory</a>:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test_mecanum_drive_controller</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">reference_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.9</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">/**</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">test_mecanum_drive_controller</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">reference_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.9</span>
 
-<span class="w">    </span><span class="nt">front_left_wheel_command_joint_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;front_left_wheel_joint&quot;</span>
-<span class="w">    </span><span class="nt">front_right_wheel_command_joint_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;front_right_wheel_joint&quot;</span>
-<span class="w">    </span><span class="nt">rear_right_wheel_command_joint_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;back_right_wheel_joint&quot;</span>
-<span class="w">    </span><span class="nt">rear_left_wheel_command_joint_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;back_left_wheel_joint&quot;</span>
+<span class="w">      </span><span class="nt">front_left_wheel_command_joint_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;front_left_wheel_joint&quot;</span>
+<span class="w">      </span><span class="nt">front_right_wheel_command_joint_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;front_right_wheel_joint&quot;</span>
+<span class="w">      </span><span class="nt">rear_right_wheel_command_joint_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;back_right_wheel_joint&quot;</span>
+<span class="w">      </span><span class="nt">rear_left_wheel_command_joint_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;back_left_wheel_joint&quot;</span>
 
-<span class="w">    </span><span class="nt">kinematics</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">base_frame_offset</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> x</span><span class="p">:</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="nt"> y</span><span class="p">:</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="nt"> theta</span><span class="p">:</span><span class="w"> </span><span class="nv">0.0</span><span class="w"> </span><span class="p p-Indicator">}</span>
-<span class="w">      </span><span class="nt">wheels_radius</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
-<span class="w">      </span><span class="nt">sum_of_robot_center_projection_on_X_Y_axis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="w">      </span><span class="nt">kinematics</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">base_frame_offset</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> x</span><span class="p">:</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="nt"> y</span><span class="p">:</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="nt"> theta</span><span class="p">:</span><span class="w"> </span><span class="nv">0.0</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">        </span><span class="nt">wheels_radius</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
+<span class="w">        </span><span class="nt">sum_of_robot_center_projection_on_X_Y_axis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
 
-<span class="w">    </span><span class="nt">base_frame_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;base_link&quot;</span>
-<span class="w">    </span><span class="nt">odom_frame_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;odom&quot;</span>
-<span class="w">    </span><span class="nt">enable_odom_tf</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">    </span><span class="nt">twist_covariance_diagonal</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">7.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">14.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">21.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">28.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">35.0</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="nt">pose_covariance_diagonal</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">7.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">14.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">21.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">28.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">35.0</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">base_frame_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;base_link&quot;</span>
+<span class="w">      </span><span class="nt">odom_frame_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;odom&quot;</span>
+<span class="w">      </span><span class="nt">enable_odom_tf</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">twist_covariance_diagonal</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">7.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">14.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">21.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">28.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">35.0</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">pose_covariance_diagonal</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">6.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">12.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">18.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">24.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">30.0</span><span class="p p-Indicator">]</span>
 
 
-<span class="nt">test_mecanum_drive_controller_with_rotation</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">reference_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0</span>
+<span class="w">  </span><span class="nt">test_mecanum_drive_controller_with_rotation</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">reference_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0</span>
 
-<span class="w">    </span><span class="nt">front_left_wheel_command_joint_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;front_left_wheel_joint&quot;</span>
-<span class="w">    </span><span class="nt">front_right_wheel_command_joint_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;front_right_wheel_joint&quot;</span>
-<span class="w">    </span><span class="nt">rear_right_wheel_command_joint_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;rear_right_wheel_joint&quot;</span>
-<span class="w">    </span><span class="nt">rear_left_wheel_command_joint_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;rear_left_wheel_joint&quot;</span>
+<span class="w">      </span><span class="nt">front_left_wheel_command_joint_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;front_left_wheel_joint&quot;</span>
+<span class="w">      </span><span class="nt">front_right_wheel_command_joint_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;front_right_wheel_joint&quot;</span>
+<span class="w">      </span><span class="nt">rear_right_wheel_command_joint_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;rear_right_wheel_joint&quot;</span>
+<span class="w">      </span><span class="nt">rear_left_wheel_command_joint_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;rear_left_wheel_joint&quot;</span>
 
-<span class="w">    </span><span class="nt">kinematics</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">base_frame_offset</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> x</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="nt"> y</span><span class="p">:</span><span class="w"> </span><span class="nv">2.0</span><span class="p p-Indicator">,</span><span class="nt"> theta</span><span class="p">:</span><span class="w"> </span><span class="nv">3.0</span><span class="w"> </span><span class="p p-Indicator">}</span>
-<span class="w">      </span><span class="nt">wheels_radius</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
-<span class="w">      </span><span class="nt">sum_of_robot_center_projection_on_X_Y_axis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.2925</span>
+<span class="w">      </span><span class="nt">kinematics</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">base_frame_offset</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> x</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="nt"> y</span><span class="p">:</span><span class="w"> </span><span class="nv">2.0</span><span class="p p-Indicator">,</span><span class="nt"> theta</span><span class="p">:</span><span class="w"> </span><span class="nv">3.0</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">        </span><span class="nt">wheels_radius</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
+<span class="w">        </span><span class="nt">sum_of_robot_center_projection_on_X_Y_axis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.2925</span>
 
-<span class="w">    </span><span class="nt">base_frame_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;base_link&quot;</span>
-<span class="w">    </span><span class="nt">odom_frame_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;odom&quot;</span>
-<span class="w">    </span><span class="nt">enable_odom_tf</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">    </span><span class="nt">pose_covariance_diagonal</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="nt">twist_covariance_diagonal</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">base_frame_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;base_link&quot;</span>
+<span class="w">      </span><span class="nt">odom_frame_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;odom&quot;</span>
+<span class="w">      </span><span class="nt">enable_odom_tf</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">pose_covariance_diagonal</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">twist_covariance_diagonal</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">]</span>
 </pre></div>
 </div>
 </section>
