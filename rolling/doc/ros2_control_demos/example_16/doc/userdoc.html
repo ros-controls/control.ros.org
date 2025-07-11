@@ -205,28 +205,14 @@ state<span class="w"> </span>interfaces
 <p>There are also two <code class="docutils literal notranslate"><span class="pre">[unclaimed]</span></code> interfaces from diff_drive_controller, one for angular velocity and one for linear velocity. These are provided by the diff_drive_controller because it is chainable. You can ignore them since we don’t use them in this example.</p>
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li><p>We specified <code class="docutils literal notranslate"><span class="pre">feedforward_gain</span></code> as part of <code class="docutils literal notranslate"><span class="pre">gains</span></code> in diffbot_chained_controllers.yaml. To actually enable feedforward mode for the pid_controller, we need to use a service provided by pid_controller. Let’s enable it.</p></li>
-</ol>
-<blockquote>
-<div><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/pid_controller_left_wheel_joint/set_feedforward_control<span class="w"> </span>std_srvs/srv/SetBool<span class="w"> </span><span class="s2">&quot;data: true&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
-ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/pid_controller_right_wheel_joint/set_feedforward_control<span class="w"> </span>std_srvs/srv/SetBool<span class="w"> </span><span class="s2">&quot;data: true&quot;</span>
-</pre></div>
-</div>
-<p>You should get</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>response:
-std_srvs.srv.SetBool_Response<span class="o">(</span><span class="nv">success</span><span class="o">=</span>True,<span class="w"> </span><span class="nv">message</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="o">)</span>
-</pre></div>
-</div>
-</div></blockquote>
-<ol class="arabic simple" start="5">
-<li><p>To see the pid_controller in action, let’s subscribe to the controler_state topic, e.g. pid_controller_left_wheel_joint/controller_state topic.</p></li>
+<li><p>To see the pid_controller in action, let’s subscribe to the controller_state topic, e.g. pid_controller_left_wheel_joint/controller_state topic.</p></li>
 </ol>
 <blockquote>
 <div><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/pid_controller_left_wheel_joint/controller_state
 </pre></div>
 </div>
 </div></blockquote>
-<ol class="arabic simple" start="6">
+<ol class="arabic simple" start="5">
 <li><p>Now we are ready to send a command to move the robot. Send a command to <em>Diff Drive Controller</em> by opening another terminal and executing</p></li>
 </ol>
 <blockquote>
@@ -245,7 +231,7 @@ std_srvs.srv.SetBool_Response<span class="o">(</span><span class="nv">success</s
 </div>
 <p>You should now see robot is moving in circles in <em>RViz</em>.</p>
 </div></blockquote>
-<ol class="arabic simple" start="7">
+<ol class="arabic simple" start="6">
 <li><p>In the terminal where launch file is started, you should see the commands being sent to the wheels and how they are gradually stabilizing to the target velocity similar to following output.</p></li>
 </ol>
 <blockquote>
@@ -264,7 +250,7 @@ std_srvs.srv.SetBool_Response<span class="o">(</span><span class="nv">success</s
 </pre></div>
 </div>
 </div></blockquote>
-<ol class="arabic simple" start="8">
+<ol class="arabic simple" start="7">
 <li><p>Let’s go back to the terminal where we subscribed to the controller_state topic and see the changing states.</p></li>
 </ol>
 <blockquote>
@@ -332,20 +318,12 @@ ROS2<span class="w"> </span>Topic<span class="w"> </span>Subscriber
 <p>Click ‘Yes’ for the first dialog and ‘OK” to the following two dialogs, then you will see the plotjuggler window.</p>
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>To enable feedforward mode and published a command to move the robot, instead of doing these manually, we will use the demo_test.launch.py. Open another terminal and execute</p></li>
-</ol>
-<blockquote>
-<div><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_16<span class="w"> </span>demo_test.launch.py
-</pre></div>
-</div>
-</div></blockquote>
-<ol class="arabic simple" start="4">
 <li><p>From the plotjuggler, you can see the controllers’ states and commands being plotted, similar to following figure. From the figure, the DiffBot’s wheel velocities and commands from PID controllers are converged to the target velocity fairly quickly.</p></li>
 </ol>
 <blockquote>
 <div><a class="reference internal image-reference" href="../../../../_images/diffbot_velocities.png"><img alt="Plotjuggler visualization of DiffBot velocities and commands" src="../../../../_images/diffbot_velocities.png" style="width: 400px;" /></a>
 </div></blockquote>
-<ol class="arabic simple" start="5">
+<ol class="arabic simple" start="4">
 <li><p>Change the <code class="docutils literal notranslate"><span class="pre">gains</span></code> in the <code class="docutils literal notranslate"><span class="pre">diffbot_chained_controllers.yaml</span></code> file with some different values, repeat above steps and observe its effect to the pid_controller commands. For example, to change the <code class="docutils literal notranslate"><span class="pre">feedforward_gain</span></code> of the right wheel to 0.50, you can use the following command:</p></li>
 </ol>
 <blockquote>
@@ -367,12 +345,6 @@ ROS2<span class="w"> </span>Topic<span class="w"> </span>Subscriber
 </li>
 <li><p>RViz configuration: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/ros2_control_demo_description/diffbot/rviz/diffbot.rviz">diffbot.rviz</a></p></li>
 <li><p>Hardware interface plugin: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_16/hardware/diffbot_system.cpp">diffbot_system.cpp</a></p></li>
-<li><p>Demo helper utility:</p>
-<ul>
-<li><p>demo test helper node: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_16/bringup/launch/demo_test_helper.py">demo_test_helper.py</a></p></li>
-<li><p>demo test launch file: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_16/bringup/launch/demo_test.launch.py">demo_test.launch.py</a></p></li>
-</ul>
-</li>
 </ul>
 </section>
 <section id="controllers-from-this-demo">
