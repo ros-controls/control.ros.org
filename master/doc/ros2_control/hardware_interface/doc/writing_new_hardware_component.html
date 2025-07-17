@@ -172,7 +172,57 @@ class HardwareInterfaceName : public hardware_interface::$InterfaceType$Interfac
 <li><p>Include the header file of your hardware interface and add a namespace definition to simplify further development.</p></li>
 <li><p>Implement <code class="docutils literal notranslate"><span class="pre">on_init</span></code> method. Here, you should initialize all member variables and process the parameters from the <code class="docutils literal notranslate"><span class="pre">info</span></code> argument.
 In the first line usually the parents <code class="docutils literal notranslate"><span class="pre">on_init</span></code> is called to process standard values, like name. This is done using: <code class="docutils literal notranslate"><span class="pre">hardware_interface::(Actuator|Sensor|System)Interface::on_init(info)</span></code>.
-If all required parameters are set and valid and everything works fine return <code class="docutils literal notranslate"><span class="pre">CallbackReturn::SUCCESS</span></code> or <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">CallbackReturn::ERROR</span></code> otherwise.</p></li>
+If all required parameters are set and valid and everything works fine return <code class="docutils literal notranslate"><span class="pre">CallbackReturn::SUCCESS</span></code> or <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">CallbackReturn::ERROR</span></code> otherwise.</p>
+<ol class="arabic">
+<li><p><strong>(Optional) Adding Publisher, Services, etc.</strong></p>
+<p>A common requirement for a hardware component is to publish status or diagnostic information without interfering with the real-time control loop.</p>
+<p>This allows you to add any standard ROS 2 component (publishers, subscribers, services, timers) to your hardware interface without compromising real-time performance. There are two primary ways to achieve this.</p>
+<p><strong>Method 1: Using the Framework-Managed Node (Recommended &amp; Simplest)</strong></p>
+<p>The framework internally creates a dedicated ROS 2 node for each hardware component. Your hardware plugin can then get a handle to this node and use it.</p>
+<ol class="arabic">
+<li><p><strong>Access and using the Default Node</strong>: You can get a <code class="docutils literal notranslate"><span class="pre">shared_ptr</span></code> to the node by calling the <code class="docutils literal notranslate"><span class="pre">get_node()</span></code> method and use it just like any other <code class="docutils literal notranslate"><span class="pre">rclcpp::Node::SharedPtr</span></code> to create publishers, timers, etc.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Continuing inside on_configure()</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">get_node</span><span class="p">())</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="n">my_publisher_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_node</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">create_publisher</span><span class="o">&lt;</span><span class="n">std_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">String</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;~/status&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+
+<span class="w">   </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="o">::</span><span class="nn">chrono_literals</span><span class="p">;</span>
+<span class="w">   </span><span class="n">my_timer_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_node</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">create_wall_timer</span><span class="p">(</span><span class="mi">1</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="k">this</span><span class="p">]()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">std_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">String</span><span class="w"> </span><span class="n">msg</span><span class="p">;</span>
+<span class="w">      </span><span class="n">msg</span><span class="p">.</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hardware status update!&quot;</span><span class="p">;</span>
+<span class="w">      </span><span class="n">my_publisher_</span><span class="o">-&gt;</span><span class="n">publish</span><span class="p">(</span><span class="n">msg</span><span class="p">);</span>
+<span class="w">   </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p><strong>Method 2: Using the Executor from `HardwareComponentParams`</strong></p>
+<p>For more advanced use cases where you need direct control over node creation, the <code class="docutils literal notranslate"><span class="pre">on_init</span></code> method can be configured to receive a <code class="docutils literal notranslate"><span class="pre">HardwareComponentParams</span></code> struct. This struct contains a <code class="docutils literal notranslate"><span class="pre">weak_ptr</span></code> to the <code class="docutils literal notranslate"><span class="pre">ControllerManager</span></code>’s executor.</p>
+<ol class="arabic">
+<li><p><strong>Update ``on_init`` Signature</strong>: First, your hardware interface must override the <code class="docutils literal notranslate"><span class="pre">on_init</span></code> version that takes <code class="docutils literal notranslate"><span class="pre">HardwareComponentParams</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// In your &lt;robot_hardware_interface_name&gt;.hpp</span>
+<span class="n">hardware_interface</span><span class="o">::</span><span class="n">CallbackReturn</span><span class="w"> </span><span class="nf">on_init</span><span class="p">(</span>
+<span class="k">const</span><span class="w"> </span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">HardwareComponentParams</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">params</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Lock and Use the Executor</strong>: Inside <code class="docutils literal notranslate"><span class="pre">on_init</span></code>, you must safely “lock” the <code class="docutils literal notranslate"><span class="pre">weak_ptr</span></code> to get a usable <code class="docutils literal notranslate"><span class="pre">shared_ptr</span></code>. You can then create your own node and add it to the executor.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// In your &lt;robot_hardware_interface_name&gt;.cpp, inside on_init(params)</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">locked_executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">params</span><span class="p">.</span><span class="n">executor</span><span class="p">.</span><span class="n">lock</span><span class="p">())</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="n">my_custom_node_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Node</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;my_custom_node&quot;</span><span class="p">);</span>
+<span class="w">   </span><span class="n">locked_executor</span><span class="o">-&gt;</span><span class="n">add_node</span><span class="p">(</span><span class="n">my_custom_node_</span><span class="o">-&gt;</span><span class="n">get_node_base_interface</span><span class="p">());</span>
+<span class="w">   </span><span class="c1">// ... create publishers/timers on my_custom_node_ ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>For a complete, working implementation that uses the framework-managed node to publish diagnostic messages, see the demo in example 17.</p>
+</li>
+</ol>
+</li>
 <li><p>Write the <code class="docutils literal notranslate"><span class="pre">on_configure</span></code> method where you usually setup the communication to the hardware and set everything up so that the hardware can be activated.</p></li>
 <li><p>Implement <code class="docutils literal notranslate"><span class="pre">on_cleanup</span></code> method, which does the opposite of <code class="docutils literal notranslate"><span class="pre">on_configure</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Command-/StateInterfaces</span></code> are now created and exported automatically by the framework via the <code class="docutils literal notranslate"><span class="pre">on_export_command_interfaces()</span></code> or <code class="docutils literal notranslate"><span class="pre">on_export_state_interfaces()</span></code> methods based on the interfaces defined in the <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> XML-tag, which gets parsed and the <code class="docutils literal notranslate"><span class="pre">InterfaceDescription</span></code> is created accordingly (check the <a class="reference external" href="https://github.com/ros-controls/ros2_control/tree/master/hardware_interface/include/hardware_interface/hardware_info.hpp">hardware_info.hpp</a>).</p>
