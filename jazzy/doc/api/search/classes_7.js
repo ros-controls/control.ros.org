@@ -4,11 +4,13 @@ var searchData=
   ['handledatatype_1',['HandleDataType',['../classhardware__interface_1_1HandleDataType.html',1,'hardware_interface']]],
   ['hardwarecomponentcyclestatus_2',['HardwareComponentCycleStatus',['../structhardware__interface_1_1HardwareComponentCycleStatus.html',1,'hardware_interface']]],
   ['hardwarecomponentinfo_3',['HardwareComponentInfo',['../structhardware__interface_1_1HardwareComponentInfo.html',1,'hardware_interface']]],
-  ['hardwarecomponentstatisticsdata_4',['HardwareComponentStatisticsData',['../structhardware__interface_1_1HardwareComponentStatisticsData.html',1,'hardware_interface']]],
-  ['hardwareinfo_5',['HardwareInfo',['../structhardware__interface_1_1HardwareInfo.html',1,'hardware_interface']]],
-  ['hardwareinterfaceadapter_6',['HardwareInterfaceAdapter',['../classHardwareInterfaceAdapter.html',1,'']]],
-  ['hardwareinterfaceadapter_3c_20hardware_5finterface_3a_3ahw_5fif_5feffort_20_3e_7',['HardwareInterfaceAdapter&lt; hardware_interface::HW_IF_EFFORT &gt;',['../classHardwareInterfaceAdapter_3_01hardware__interface_1_1HW__IF__EFFORT_01_4.html',1,'']]],
-  ['hardwareinterfaceadapter_3c_20hardware_5finterface_3a_3ahw_5fif_5fposition_20_3e_8',['HardwareInterfaceAdapter&lt; hardware_interface::HW_IF_POSITION &gt;',['../classHardwareInterfaceAdapter_3_01hardware__interface_1_1HW__IF__POSITION_01_4.html',1,'']]],
-  ['hardwarereadwritestatus_9',['HardwareReadWriteStatus',['../structhardware__interface_1_1HardwareReadWriteStatus.html',1,'hardware_interface']]],
-  ['hwcomponenttable_10',['HwComponentTable',['../classrqt__controller__manager_1_1controller__manager_1_1HwComponentTable.html',1,'rqt_controller_manager::controller_manager']]]
+  ['hardwarecomponentinterfaceparams_4',['HardwareComponentInterfaceParams',['../structhardware__interface_1_1HardwareComponentInterfaceParams.html',1,'hardware_interface']]],
+  ['hardwarecomponentparams_5',['HardwareComponentParams',['../structhardware__interface_1_1HardwareComponentParams.html',1,'hardware_interface']]],
+  ['hardwarecomponentstatisticsdata_6',['HardwareComponentStatisticsData',['../structhardware__interface_1_1HardwareComponentStatisticsData.html',1,'hardware_interface']]],
+  ['hardwareinfo_7',['HardwareInfo',['../structhardware__interface_1_1HardwareInfo.html',1,'hardware_interface']]],
+  ['hardwareinterfaceadapter_8',['HardwareInterfaceAdapter',['../classHardwareInterfaceAdapter.html',1,'']]],
+  ['hardwareinterfaceadapter_3c_20hardware_5finterface_3a_3ahw_5fif_5feffort_20_3e_9',['HardwareInterfaceAdapter&lt; hardware_interface::HW_IF_EFFORT &gt;',['../classHardwareInterfaceAdapter_3_01hardware__interface_1_1HW__IF__EFFORT_01_4.html',1,'']]],
+  ['hardwareinterfaceadapter_3c_20hardware_5finterface_3a_3ahw_5fif_5fposition_20_3e_10',['HardwareInterfaceAdapter&lt; hardware_interface::HW_IF_POSITION &gt;',['../classHardwareInterfaceAdapter_3_01hardware__interface_1_1HW__IF__POSITION_01_4.html',1,'']]],
+  ['hardwarereadwritestatus_11',['HardwareReadWriteStatus',['../structhardware__interface_1_1HardwareReadWriteStatus.html',1,'hardware_interface']]],
+  ['hwcomponenttable_12',['HwComponentTable',['../classrqt__controller__manager_1_1controller__manager_1_1HwComponentTable.html',1,'rqt_controller_manager::controller_manager']]]
 ];

@@ -162,9 +162,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac82a8ae30bd960b4fe24805d4451398a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0a68c388de974971497d79f999c1a20" id="r_ae0a68c388de974971497d79f999c1a20"><td class="memItemLeft" align="right" valign="top">CallbackReturn&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1SystemInterface.html#ae0a68c388de974971497d79f999c1a20">init</a> (const <a class="el" href="structhardware__interface_1_1HardwareInfo.html">HardwareInfo</a> &amp;hardware_info, rclcpp::Logger logger, rclcpp::Clock::SharedPtr clock)</td></tr>
 <tr class="separator:ae0a68c388de974971497d79f999c1a20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a010c7ea002a0cc59d4dbdafcfe9e24" id="r_a2a010c7ea002a0cc59d4dbdafcfe9e24"><td class="memItemLeft" align="right" valign="top">CallbackReturn&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1SystemInterface.html#a2a010c7ea002a0cc59d4dbdafcfe9e24">init</a> (const <a class="el" href="structhardware__interface_1_1HardwareComponentParams.html">hardware_interface::HardwareComponentParams</a> &amp;params)</td></tr>
+<tr class="separator:a2a010c7ea002a0cc59d4dbdafcfe9e24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e92fac1a9d82e418452bf597edd22e0" id="r_a4e92fac1a9d82e418452bf597edd22e0"><td class="memItemLeft" align="right" valign="top">virtual CallbackReturn&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1SystemInterface.html#a4e92fac1a9d82e418452bf597edd22e0">on_init</a> (const <a class="el" href="structhardware__interface_1_1HardwareInfo.html">HardwareInfo</a> &amp;hardware_info)</td></tr>
 <tr class="memdesc:a4e92fac1a9d82e418452bf597edd22e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialization of the hardware interface from data parsed from the robot's URDF.  <br /></td></tr>
 <tr class="separator:a4e92fac1a9d82e418452bf597edd22e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6a1ce6d42dd869b4a35485b1c17bd5c" id="r_ad6a1ce6d42dd869b4a35485b1c17bd5c"><td class="memItemLeft" align="right" valign="top">virtual CallbackReturn&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1SystemInterface.html#ad6a1ce6d42dd869b4a35485b1c17bd5c">on_init</a> (const <a class="el" href="structhardware__interface_1_1HardwareComponentInterfaceParams.html">hardware_interface::HardwareComponentInterfaceParams</a> &amp;params)</td></tr>
+<tr class="memdesc:ad6a1ce6d42dd869b4a35485b1c17bd5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialization of the hardware interface from data parsed from the robot's URDF.  <br /></td></tr>
+<tr class="separator:ad6a1ce6d42dd869b4a35485b1c17bd5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b0e5d03bdb8f82b2ffc86c2ee79bb60" id="r_a2b0e5d03bdb8f82b2ffc86c2ee79bb60"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="classhardware__interface_1_1StateInterface.html">StateInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1SystemInterface.html#a2b0e5d03bdb8f82b2ffc86c2ee79bb60">export_state_interfaces</a> ()</td></tr>
 <tr class="memdesc:a2b0e5d03bdb8f82b2ffc86c2ee79bb60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exports all state interfaces for this hardware interface.  <br /></td></tr>
 <tr class="separator:a2b0e5d03bdb8f82b2ffc86c2ee79bb60"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -674,8 +679,44 @@ CallbackReturn::ERROR critical error has happened that should be managed in "on_
 
 </div>
 </div>
+<a id="a2a010c7ea002a0cc59d4dbdafcfe9e24" name="a2a010c7ea002a0cc59d4dbdafcfe9e24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a010c7ea002a0cc59d4dbdafcfe9e24">&#9670;&#160;</a></span>init() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CallbackReturn hardware_interface::SystemInterface::init </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structhardware__interface_1_1HardwareComponentParams.html">hardware_interface::HardwareComponentParams</a> &amp;&#160;</td>
+          <td class="paramname"><em>params</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Initialization of the hardware interface from data parsed from the robot's URDF and also the clock and logger interfaces. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">params</td><td>A struct of type <a class="el" href="structhardware__interface_1_1HardwareComponentParams.html" title="Parameters required for the initialization of a specific hardware component plugin....">HardwareComponentParams</a> containing all necessary parameters for initializing this specific hardware component, including its <a class="el" href="structhardware__interface_1_1HardwareInfo.html" title="This structure stores information about hardware defined in a robot&#39;s URDF.">HardwareInfo</a>, a dedicated logger, a clock, and a weak_ptr to the executor. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section warning"><dt>Warning</dt><dd>The parsed executor should not be used to call <code>cancel()</code> or use blocking callbacks such as <code>spin()</code>. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>CallbackReturn::SUCCESS if required data are provided and can be parsed. </dd>
+<dd>
+CallbackReturn::ERROR if any error happens or data are missing. </dd></dl>
+
+</div>
+</div>
 <a id="ae0a68c388de974971497d79f999c1a20" name="ae0a68c388de974971497d79f999c1a20"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae0a68c388de974971497d79f999c1a20">&#9670;&#160;</a></span>init() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0a68c388de974971497d79f999c1a20">&#9670;&#160;</a></span>init() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -728,7 +769,7 @@ CallbackReturn::ERROR if any error happens or data are missing. </dd></dl>
 </div>
 </div>
 <a id="ac82a8ae30bd960b4fe24805d4451398a" name="ac82a8ae30bd960b4fe24805d4451398a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac82a8ae30bd960b4fe24805d4451398a">&#9670;&#160;</a></span>init() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac82a8ae30bd960b4fe24805d4451398a">&#9670;&#160;</a></span>init() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -834,8 +875,46 @@ CallbackReturn::ERROR if any error happens or data are missing. </dd></dl>
 
 </div>
 </div>
+<a id="ad6a1ce6d42dd869b4a35485b1c17bd5c" name="ad6a1ce6d42dd869b4a35485b1c17bd5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6a1ce6d42dd869b4a35485b1c17bd5c">&#9670;&#160;</a></span>on_init() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual CallbackReturn hardware_interface::SystemInterface::on_init </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structhardware__interface_1_1HardwareComponentInterfaceParams.html">hardware_interface::HardwareComponentInterfaceParams</a> &amp;&#160;</td>
+          <td class="paramname"><em>params</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initialization of the hardware interface from data parsed from the robot's URDF. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">params</td><td>A struct of type <a class="el" href="structhardware__interface_1_1HardwareComponentInterfaceParams.html" title="Parameters required for the initialization of a specific hardware component plugin....">hardware_interface::HardwareComponentInterfaceParams</a> containing all necessary parameters for initializing this specific hardware component, specifically its <a class="el" href="structhardware__interface_1_1HardwareInfo.html" title="This structure stores information about hardware defined in a robot&#39;s URDF.">HardwareInfo</a>, and a weak_ptr to the executor. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section warning"><dt>Warning</dt><dd>The parsed executor should not be used to call <code>cancel()</code> or use blocking callbacks such as <code>spin()</code>. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>CallbackReturn::SUCCESS if required data are provided and can be parsed. </dd>
+<dd>
+CallbackReturn::ERROR if any error happens or data are missing. </dd></dl>
+
+</div>
+</div>
 <a id="a4e92fac1a9d82e418452bf597edd22e0" name="a4e92fac1a9d82e418452bf597edd22e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4e92fac1a9d82e418452bf597edd22e0">&#9670;&#160;</a></span>on_init()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e92fac1a9d82e418452bf597edd22e0">&#9670;&#160;</a></span>on_init() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
