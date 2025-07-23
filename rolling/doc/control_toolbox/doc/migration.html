@@ -65,7 +65,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../ros2_control/doc/migration.html">ros2_control</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../ros2_controllers/doc/migration.html">ros2_controllers</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">control_toolbox</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#pid-pidros">Pid/PidRos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pid-pidros">Pid/PidROS</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../realtime_tools/doc/migration.html">realtime_tools</a></li>
@@ -123,9 +123,10 @@
 <h1>Migration Guides: Jazzy to Kilted<a class="headerlink" href="#migration-guides-jazzy-to-kilted" title="Link to this heading"></a></h1>
 <p>This list summarizes important changes between Jazzy (previous) and Kilted (current) releases, where changes to user code might be necessary.</p>
 <section id="pid-pidros">
-<h2>Pid/PidRos<a class="headerlink" href="#pid-pidros" title="Link to this heading"></a></h2>
+<h2>Pid/PidROS<a class="headerlink" href="#pid-pidros" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>The parameters <code class="docutils literal notranslate"><span class="pre">antiwindup</span></code>, <code class="docutils literal notranslate"><span class="pre">i_clamp_max</span></code>, and <code class="docutils literal notranslate"><span class="pre">i_clamp_min</span></code> have been removed. The anti-windup behavior is now configured via the <code class="docutils literal notranslate"><span class="pre">AntiWindupStrategy</span></code> enum. (<a class="reference external" href="https://github.com/ros-controls/control_toolbox/pull/298">#298</a>).</p></li>
+<li><p>The constructors of <code class="docutils literal notranslate"><span class="pre">PidROS</span></code> have changed and <code class="docutils literal notranslate"><span class="pre">prefix_is_for_params</span></code> argument has been deprecated. Use explicit parameter and topic prefix instead (<a class="reference external" href="https://github.com/ros-controls/control_toolbox/pull/431">#431</a>).</p></li>
 </ul>
 </section>
 </section>
