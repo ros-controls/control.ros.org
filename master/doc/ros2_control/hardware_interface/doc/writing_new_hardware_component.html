@@ -197,13 +197,13 @@ If all required parameters are set and valid and everything works fine return <c
 </div>
 </li>
 </ol>
-<p><strong>Method 2: Using the Executor from `HardwareComponentParams`</strong></p>
-<p>For more advanced use cases where you need direct control over node creation, the <code class="docutils literal notranslate"><span class="pre">on_init</span></code> method can be configured to receive a <code class="docutils literal notranslate"><span class="pre">HardwareComponentParams</span></code> struct. This struct contains a <code class="docutils literal notranslate"><span class="pre">weak_ptr</span></code> to the <code class="docutils literal notranslate"><span class="pre">ControllerManager</span></code>’s executor.</p>
+<p><strong>Method 2: Using the Executor from `HardwareComponentInterfaceParams`</strong></p>
+<p>For more advanced use cases where you need direct control over node creation, the <code class="docutils literal notranslate"><span class="pre">on_init</span></code> method can be configured to receive a <code class="docutils literal notranslate"><span class="pre">HardwareComponentInterfaceParams</span></code> struct. This struct contains a <code class="docutils literal notranslate"><span class="pre">weak_ptr</span></code> to the <code class="docutils literal notranslate"><span class="pre">ControllerManager</span></code>’s executor.</p>
 <ol class="arabic">
-<li><p><strong>Update ``on_init`` Signature</strong>: First, your hardware interface must override the <code class="docutils literal notranslate"><span class="pre">on_init</span></code> version that takes <code class="docutils literal notranslate"><span class="pre">HardwareComponentParams</span></code>.</p>
+<li><p><strong>Update ``on_init`` Signature</strong>: First, your hardware interface must override the <code class="docutils literal notranslate"><span class="pre">on_init</span></code> version that takes <code class="docutils literal notranslate"><span class="pre">HardwareComponentInterfaceParams</span></code>.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// In your &lt;robot_hardware_interface_name&gt;.hpp</span>
 <span class="n">hardware_interface</span><span class="o">::</span><span class="n">CallbackReturn</span><span class="w"> </span><span class="nf">on_init</span><span class="p">(</span>
-<span class="k">const</span><span class="w"> </span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">HardwareComponentParams</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">params</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">HardwareComponentInterfaceParams</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">params</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
 </pre></div>
 </div>
 </li>

@@ -62,7 +62,10 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../../migration/migration.html">Migration Guides</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../migration/migration.html#coming-from-ros-control-ros-1">Coming from ros_control (ROS 1)</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../migration/migration.html#between-different-ros-2-distributions">Between different ROS 2 distributions</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">ros2_control</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ros2_control</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#hardware-interface">hardware_interface</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="../../ros2_controllers/doc/migration.html">ros2_controllers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../control_toolbox/doc/migration.html">control_toolbox</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../realtime_tools/doc/migration.html">realtime_tools</a></li>
@@ -119,6 +122,43 @@
   <section id="migration-guides-jazzy-to-kilted">
 <h1>Migration Guides: Jazzy to Kilted<a class="headerlink" href="#migration-guides-jazzy-to-kilted" title="Link to this heading"></a></h1>
 <p>This list summarizes important changes between Jazzy (previous) and Kilted (current) releases, where changes to user code might be necessary.</p>
+<section id="hardware-interface">
+<h2>hardware_interface<a class="headerlink" href="#hardware-interface" title="Link to this heading"></a></h2>
+<ul>
+<li><p>The preferred signature for the <code class="docutils literal notranslate"><span class="pre">on_init</span></code> method in all
+<code class="docutils literal notranslate"><span class="pre">hardware_interface::*Interface</span></code> classes has changed (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2323">#
+2323</a>) from</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">CallbackReturn</span><span class="w"> </span><span class="n">on_init</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">HardwareInfo</span><span class="o">&amp;</span><span class="w"> </span><span class="n">info</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>to</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">CallbackReturn</span><span class="w"> </span><span class="n">on_init</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">HardwareComponentInterfaceParams</span><span class="o">&amp;</span><span class="w"> </span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">HardwareInfo</span></code> object can be accessed from the <code class="docutils literal notranslate"><span class="pre">HardwareComponentInterfaceParams</span></code> object using
+<code class="docutils literal notranslate"><span class="pre">params.hardware_info</span></code>. Hardware implementations implementing the <code class="docutils literal notranslate"><span class="pre">on_init</span></code> method should
+update their method signature accordingly as the deprecated signature will be removed in a
+future release.</p>
+<p>See <a class="reference internal" href="../hardware_interface/doc/writing_new_hardware_component.html#writing-new-hardware-component"><span class="std std-ref">Writing a Hardware Component</span></a> for advanced usage of the
+<code class="docutils literal notranslate"><span class="pre">HardwareComponentInterfaceParams</span></code> object.</p>
+</li>
+<li><p>The preferred signature for the <code class="docutils literal notranslate"><span class="pre">init()</span></code> method in all
+<code class="docutils literal notranslate"><span class="pre">hardware_interface::*Interface</span></code> classes has changed (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2344">#
+2344</a>) from</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">CallbackReturn</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">HardwareInfo</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">hardware_info</span><span class="p">,</span><span class="w"> </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Logger</span><span class="w"> </span><span class="n">logger</span><span class="p">,</span><span class="w"> </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Clock</span><span class="o">::</span><span class="n">SharedPtr</span><span class="w"> </span><span class="n">clock</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>to</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">CallbackReturn</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">HardwareComponentParams</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">initialize</span></code> methods of all hardware components (such as <code class="docutils literal notranslate"><span class="pre">Actuator</span></code>, <code class="docutils literal notranslate"><span class="pre">Sensor</span></code>, etc.)
+have been updated from passing a <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">HardwareInfo</span> <span class="pre">&amp;</span></code> to passing a <code class="docutils literal notranslate"><span class="pre">const</span>
+<span class="pre">HardwareComponentParams</span> <span class="pre">&amp;</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2323"># 2323</a>).
+The old signatures are deprecated and will be removed in a future release.</p></li>
+</ul>
+</section>
 </section>
 
 
