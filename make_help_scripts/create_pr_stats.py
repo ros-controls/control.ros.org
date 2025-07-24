@@ -671,6 +671,7 @@ repos = [
   "gazebo_ros2_control",
   "gz_ros2_control",
   "kinematics_interface",
+  "topic_based_hardware_interfaces",
   "ros2_control_ci",
   "ros2_rhel",
   "ros2_debian"
@@ -687,6 +688,7 @@ branches = {
   "gazebo_ros2_control": "master",
   "gz_ros2_control": "rolling",
   "kinematics_interface": "master",
+  "topic_based_hardware_interfaces": "main",
   "ros2_control_ci": "master",
   "ros2_rhel": "main",
   "ros2_debian": "main"
