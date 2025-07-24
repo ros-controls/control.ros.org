@@ -12,6 +12,7 @@ var searchData=
   ['jointlimitsinterfaceexception_9',['JointLimitsInterfaceException',['../classjoint__limits__interface_1_1JointLimitsInterfaceException.html',1,'joint_limits_interface']]],
   ['jointsoftlimitshandle_10',['JointSoftLimitsHandle',['../classjoint__limits__interface_1_1JointSoftLimitsHandle.html',1,'joint_limits_interface']]],
   ['jointstatebroadcaster_11',['JointStateBroadcaster',['../classjoint__state__broadcaster_1_1JointStateBroadcaster.html',1,'joint_state_broadcaster']]],
-  ['jointtrajectorycontroller_12',['jointtrajectorycontroller',['../classjoint__trajectory__controller_1_1JointTrajectoryController.html',1,'joint_trajectory_controller::JointTrajectoryController'],['../classrqt__joint__trajectory__controller_1_1joint__trajectory__controller_1_1JointTrajectoryController.html',1,'rqt_joint_trajectory_controller.joint_trajectory_controller.JointTrajectoryController']]],
-  ['jointvalue_13',['JointValue',['../structros2__control__demo__example__11_1_1JointValue.html',1,'ros2_control_demo_example_11']]]
+  ['jointstatetopicsystem_12',['JointStateTopicSystem',['../classjoint__state__topic__hardware__interface_1_1JointStateTopicSystem.html',1,'joint_state_topic_hardware_interface']]],
+  ['jointtrajectorycontroller_13',['jointtrajectorycontroller',['../classjoint__trajectory__controller_1_1JointTrajectoryController.html',1,'joint_trajectory_controller::JointTrajectoryController'],['../classrqt__joint__trajectory__controller_1_1joint__trajectory__controller_1_1JointTrajectoryController.html',1,'rqt_joint_trajectory_controller.joint_trajectory_controller.JointTrajectoryController']]],
+  ['jointvalue_14',['JointValue',['../structros2__control__demo__example__11_1_1JointValue.html',1,'ros2_control_demo_example_11']]]
 ];
