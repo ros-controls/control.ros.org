@@ -118,5 +118,7 @@ The following repositories are managed by the ros-controls PMC:
      - Not Yet Available
    * - https://github.com/ros-controls/realtime_tools
      - Not Yet Available
+   * - https://github.com/ros-controls/topic_based_hardware_interfaces
+     - Marq Rasmussen
    * - https://github.com/ros-controls/.github
      - Not Yet Available

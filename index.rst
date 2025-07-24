@@ -40,6 +40,7 @@ The framework consists of the following Github repositories hosted under the `ro
 * `control_msgs`_ - common messages;
 * `kinematics_interface`_ - for using C++ kinematics frameworks;
 * `gz_ros2_control`_ - Plugin for Gazebo;
+* `topic_based_hardware_interfaces`_ - hardware_interfaces for simulators and other hardware that only support ROS topic-based communication;
 
 
 Additionally, the following (unreleased) packages are relevant for documentation and project management:
@@ -83,6 +84,7 @@ General discussions
 .. _ros2_controllers: https://github.com/ros-controls/ros2_controllers
 .. _control_msgs: https://github.com/ros-controls/control_msgs
 .. _realtime_tools: https://github.com/ros-controls/realtime_tools
+.. _topic_based_hardware_interfaces: https://github.com/ros-controls/topic_based_hardware_interfaces
 .. _control_toolbox: https://github.com/ros-controls/control_toolbox
 .. _kinematics_interface: https://github.com/ros-controls/kinematics_interface
 .. _ros2_control_demos: https://github.com/ros-controls/ros2_control_demos
