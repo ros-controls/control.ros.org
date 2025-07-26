@@ -361,15 +361,23 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>  {</div>
 <div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> index = 0; index &lt; num_cmd_joints_; ++index)</div>
 <div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>    {</div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>      joint_interface[index].get().set_value(trajectory_point_interface[map_cmd_to_joints_[index]]);</div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>    }</div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>  }</div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>};</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>      <span class="keywordflow">if</span> (!joint_interface[index].get().set_value(</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>            trajectory_point_interface[map_cmd_to_joints_[index]]))</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>      {</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>        RCLCPP_ERROR(</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>          get_node()-&gt;get_logger(),</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>          <span class="stringliteral">&quot;Failed to set value for joint &#39;%s&#39; in command interface &#39;%s&#39;. &quot;</span>,</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>          command_joint_names_[index].c_str(), joint_interface[index].get().get_name().c_str());</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>      }</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>    }</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>  }</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>};</div>
 </div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span> </div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>}  <span class="comment">// namespace joint_trajectory_controller</span></div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span> </div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span><span class="preprocessor">#endif  </span><span class="comment">// JOINT_TRAJECTORY_CONTROLLER__JOINT_TRAJECTORY_CONTROLLER_HPP_</span></div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span> </div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>}  <span class="comment">// namespace joint_trajectory_controller</span></div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span> </div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span><span class="preprocessor">#endif  </span><span class="comment">// JOINT_TRAJECTORY_CONTROLLER__JOINT_TRAJECTORY_CONTROLLER_HPP_</span></div>
 <div class="ttc" id="aclasscontroller__interface_1_1ControllerInterface_html"><div class="ttname"><a href="classcontroller__interface_1_1ControllerInterface.html">controller_interface::ControllerInterface</a></div><div class="ttdef"><b>Definition</b> controller_interface.hpp:27</div></div>
 <div class="ttc" id="aclassjoint__trajectory__controller_1_1JointTrajectoryController_html"><div class="ttname"><a href="classjoint__trajectory__controller_1_1JointTrajectoryController.html">joint_trajectory_controller::JointTrajectoryController</a></div><div class="ttdef"><b>Definition</b> joint_trajectory_controller.hpp:56</div></div>
 <div class="ttc" id="aclassjoint__trajectory__controller_1_1JointTrajectoryController_html_a0fa999d67e7b56da07423350905d61e8"><div class="ttname"><a href="classjoint__trajectory__controller_1_1JointTrajectoryController.html#a0fa999d67e7b56da07423350905d61e8">joint_trajectory_controller::JointTrajectoryController::interpolation_method_</a></div><div class="ttdeci">interpolation_methods::InterpolationMethod interpolation_method_</div><div class="ttdoc">Specify interpolation method. Default to splines.</div><div class="ttdef"><b>Definition</b> joint_trajectory_controller.hpp:123</div></div>
