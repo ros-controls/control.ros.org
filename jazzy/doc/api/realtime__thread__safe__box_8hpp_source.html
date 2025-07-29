@@ -325,132 +325,139 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>  }</div>
 </div>
 <div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span> </div>
-<div class="foldopen" id="foldopen00280" data-start="{" data-end="}">
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno"><a class="line" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#accd1d06e3a98324e2690b4cdd28a982a">  280</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#accd1d06e3a98324e2690b4cdd28a982a">set</a>(<span class="keyword">const</span> std::function&lt;<span class="keywordtype">void</span>(T &amp;)&gt; &amp; func)</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>  {</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    std::lock_guard&lt;mutex_t&gt; guard(lock_);</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>    <span class="keywordflow">if</span> (!func) {</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>      <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (is_ptr_or_smart_ptr&lt;T&gt;) {</div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>        value_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>      }</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>    }</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>    func(value_);</div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>  }</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>  <span class="keyword">template</span> &lt;</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    <span class="keyword">typename</span> F,</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>    <span class="keyword">typename</span> = std::enable_if_t&lt;std::is_invocable_v&lt;F, T &amp;&gt; &amp;&amp; !std::is_invocable_v&lt;F, T&gt;&gt;&gt;</div>
+<div class="foldopen" id="foldopen00284" data-start="{" data-end="}">
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno"><a class="line" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a6092bc137fbf1e96ec92cfa10295dd7e">  284</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a6092bc137fbf1e96ec92cfa10295dd7e">set</a>(F &amp;&amp; func)</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>  {</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    std::lock_guard&lt;mutex_t&gt; guard(lock_);</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    std::forward&lt;F&gt;(func)(value_);</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>  }</div>
 </div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span> </div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U = T&gt;</div>
-<div class="foldopen" id="foldopen00297" data-start="{" data-end="}">
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno"><a class="line" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a87f94ea738bb45c363c1220247bac717">  297</a></span>  [[nodiscard]] <span class="keyword">typename</span> std::enable_if_t&lt;!is_ptr_or_smart_ptr&lt;U&gt;, U&gt; <a class="code hl_function" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a87f94ea738bb45c363c1220247bac717">get</a>()<span class="keyword"> const</span></div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span><span class="keyword">  </span>{</div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>    std::lock_guard&lt;mutex_t&gt; guard(lock_);</div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    <span class="keywordflow">return</span> value_;</div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>  }</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span> </div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U = T&gt;</div>
+<div class="foldopen" id="foldopen00295" data-start="{" data-end="}">
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno"><a class="line" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a6345622bfe8b3156728d59a0384ec28b">  295</a></span>  <span class="keyword">typename</span> std::enable_if_t&lt;is_ptr_or_smart_ptr&lt;U&gt;, <span class="keywordtype">void</span>&gt; <a class="code hl_function" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a6345622bfe8b3156728d59a0384ec28b">set</a>(std::nullptr_t)</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>  {</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>    std::lock_guard&lt;mutex_t&gt; guard(lock_);</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    value_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>  }</div>
 </div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span> </div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U = T&gt;</div>
-<div class="foldopen" id="foldopen00308" data-start="{" data-end="}">
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno"><a class="line" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#ad8aca6cadadc725a826eee0cf51ffb69">  308</a></span>  <span class="keyword">typename</span> std::enable_if_t&lt;!is_ptr_or_smart_ptr&lt;U&gt;, <span class="keywordtype">void</span>&gt; <a class="code hl_function" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#ad8aca6cadadc725a826eee0cf51ffb69">get</a>(T &amp; in)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span><span class="keyword">  </span>{</div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>    std::lock_guard&lt;mutex_t&gt; guard(lock_);</div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>    <span class="comment">// cppcheck-suppress missingReturn</span></div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>    in = value_;</div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>  }</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span> </div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U = T&gt;</div>
+<div class="foldopen" id="foldopen00306" data-start="{" data-end="}">
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno"><a class="line" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a87f94ea738bb45c363c1220247bac717">  306</a></span>  [[nodiscard]] <span class="keyword">typename</span> std::enable_if_t&lt;!is_ptr_or_smart_ptr&lt;U&gt;, U&gt; <a class="code hl_function" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a87f94ea738bb45c363c1220247bac717">get</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span><span class="keyword">  </span>{</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    std::lock_guard&lt;mutex_t&gt; guard(lock_);</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>    <span class="keywordflow">return</span> value_;</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>  }</div>
 </div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span> </div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U = T&gt;</div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>  [[deprecated(<span class="stringliteral">&quot;Use get(const std::function&lt;void(const T &amp;)&gt; &amp; func) instead!&quot;</span>)]]</div>
-<div class="foldopen" id="foldopen00323" data-start="{" data-end="}">
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno"><a class="line" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a69f4007822c091d789f2a883cad2d9b3">  323</a></span>  <span class="keyword">typename</span> std::enable_if_t&lt;is_ptr_or_smart_ptr&lt;U&gt;, <span class="keywordtype">void</span>&gt; <a class="code hl_function" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a69f4007822c091d789f2a883cad2d9b3">get</a>(T &amp; in)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span><span class="keyword">  </span>{</div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>    std::lock_guard&lt;mutex_t&gt; guard(lock_);</div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>    <span class="comment">// cppcheck-suppress missingReturn</span></div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>    in = value_;</div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>  }</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span> </div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U = T&gt;</div>
+<div class="foldopen" id="foldopen00317" data-start="{" data-end="}">
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno"><a class="line" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#ad8aca6cadadc725a826eee0cf51ffb69">  317</a></span>  <span class="keyword">typename</span> std::enable_if_t&lt;!is_ptr_or_smart_ptr&lt;U&gt;, <span class="keywordtype">void</span>&gt; <a class="code hl_function" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#ad8aca6cadadc725a826eee0cf51ffb69">get</a>(T &amp; in)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span><span class="keyword">  </span>{</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>    std::lock_guard&lt;mutex_t&gt; guard(lock_);</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>    <span class="comment">// cppcheck-suppress missingReturn</span></div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>    in = value_;</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>  }</div>
 </div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span> </div>
-<div class="foldopen" id="foldopen00335" data-start="{" data-end="}">
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno"><a class="line" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#aa8f971cfe73d682184f0efe87b029599">  335</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#aa8f971cfe73d682184f0efe87b029599">get</a>(<span class="keyword">const</span> std::function&lt;<span class="keywordtype">void</span>(<span class="keyword">const</span> T &amp;)&gt; &amp; func)</div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>  {</div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>    std::lock_guard&lt;mutex_t&gt; guard(lock_);</div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>    func(value_);</div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>  }</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span> </div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U = T&gt;</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>  [[deprecated(<span class="stringliteral">&quot;Use get(const std::function&lt;void(const T &amp;)&gt; &amp; func) instead!&quot;</span>)]]</div>
+<div class="foldopen" id="foldopen00332" data-start="{" data-end="}">
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno"><a class="line" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a69f4007822c091d789f2a883cad2d9b3">  332</a></span>  <span class="keyword">typename</span> std::enable_if_t&lt;is_ptr_or_smart_ptr&lt;U&gt;, <span class="keywordtype">void</span>&gt; <a class="code hl_function" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a69f4007822c091d789f2a883cad2d9b3">get</a>(T &amp; in)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span><span class="keyword">  </span>{</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>    std::lock_guard&lt;mutex_t&gt; guard(lock_);</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>    <span class="comment">// cppcheck-suppress missingReturn</span></div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>    in = value_;</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>  }</div>
 </div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span> </div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U = T&gt;</div>
-<div class="foldopen" id="foldopen00346" data-start="{" data-end="}">
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno"><a class="line" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a52209ef485556ec4ca35287a69eb6261">  346</a></span>  <span class="keyword">typename</span> std::enable_if_t&lt;!is_ptr_or_smart_ptr&lt;U&gt;, <span class="keywordtype">void</span>&gt; <a class="code hl_function" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a52209ef485556ec4ca35287a69eb6261">operator=</a>(<span class="keyword">const</span> T &amp; value)</div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>  {</div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>    <a class="code hl_function" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a6464f2a28f43d12bc27b8b2c36568233">set</a>(value);</div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>  }</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span> </div>
+<div class="foldopen" id="foldopen00344" data-start="{" data-end="}">
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno"><a class="line" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#aa8f971cfe73d682184f0efe87b029599">  344</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#aa8f971cfe73d682184f0efe87b029599">get</a>(<span class="keyword">const</span> std::function&lt;<span class="keywordtype">void</span>(<span class="keyword">const</span> T &amp;)&gt; &amp; func)</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>  {</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>    std::lock_guard&lt;mutex_t&gt; guard(lock_);</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>    func(value_);</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>  }</div>
 </div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span> </div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U = T, <span class="keyword">typename</span> = <span class="keyword">typename</span> std::enable_if_t&lt;!is_ptr_or_smart_ptr&lt;U&gt;&gt;&gt;</div>
-<div class="foldopen" id="foldopen00356" data-start="{" data-end="}">
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno"><a class="line" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a8611d2c325dd6946585f0da5af76c6dc">  356</a></span>  [[nodiscard]] <span class="keyword">operator</span> T()<span class="keyword"> const</span></div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span><span class="keyword">  </span>{</div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>    <span class="comment">// Only makes sense with the getNonRT method otherwise we would return an std::optional</span></div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a87f94ea738bb45c363c1220247bac717">get</a>();</div>
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>  }</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span> </div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U = T&gt;</div>
+<div class="foldopen" id="foldopen00355" data-start="{" data-end="}">
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno"><a class="line" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a52209ef485556ec4ca35287a69eb6261">  355</a></span>  <span class="keyword">typename</span> std::enable_if_t&lt;!is_ptr_or_smart_ptr&lt;U&gt;, <span class="keywordtype">void</span>&gt; <a class="code hl_function" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a52209ef485556ec4ca35287a69eb6261">operator=</a>(<span class="keyword">const</span> T &amp; value)</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>  {</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>    <a class="code hl_function" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a6464f2a28f43d12bc27b8b2c36568233">set</a>(value);</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>  }</div>
 </div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span> </div>
-<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U = T, <span class="keyword">typename</span> = <span class="keyword">typename</span> std::enable_if_t&lt;!is_ptr_or_smart_ptr&lt;U&gt;&gt;&gt;</div>
-<div class="foldopen" id="foldopen00367" data-start="{" data-end="}">
-<div class="line"><a id="l00367" name="l00367"></a><span class="lineno"><a class="line" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#ae9427bafe0f8c5ba742e15823d0c8acb">  367</a></span>  [[nodiscard]] <span class="keyword">operator</span> std::optional&lt;T&gt;()<span class="keyword"> const</span></div>
-<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span><span class="keyword">  </span>{</div>
-<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#ac10b593ec5f135c4d4bfcb2a9e67029c">try_get</a>();</div>
-<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>  }</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span> </div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U = T, <span class="keyword">typename</span> = <span class="keyword">typename</span> std::enable_if_t&lt;!is_ptr_or_smart_ptr&lt;U&gt;&gt;&gt;</div>
+<div class="foldopen" id="foldopen00365" data-start="{" data-end="}">
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno"><a class="line" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a8611d2c325dd6946585f0da5af76c6dc">  365</a></span>  [[nodiscard]] <span class="keyword">operator</span> T()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span><span class="keyword">  </span>{</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>    <span class="comment">// Only makes sense with the getNonRT method otherwise we would return an std::optional</span></div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a87f94ea738bb45c363c1220247bac717">get</a>();</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>  }</div>
 </div>
-<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span> </div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>  <span class="comment">// In case one wants to actually use a pointer</span></div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>  <span class="comment">// in this implementation we allow accessing the lock directly.</span></div>
-<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>  <span class="comment">// Note: Be careful with lock.unlock().</span></div>
-<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>  <span class="comment">// It may only be called from the thread that locked the mutex!</span></div>
-<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>  [[nodiscard]] <span class="keyword">const</span> mutex_t &amp; get_mutex()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> lock_; }</div>
-<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>  [[nodiscard]] mutex_t &amp; get_mutex() { <span class="keywordflow">return</span> lock_; }</div>
-<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span> </div>
-<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>  [[nodiscard]] [[deprecated(<span class="stringliteral">&quot;Use get_mutex() instead!&quot;</span>)]] mutex_t &amp; getMutex() { <span class="keywordflow">return</span> lock_; }</div>
-<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>  [[nodiscard]] [[deprecated(<span class="stringliteral">&quot;Use get_mutex() instead!&quot;</span>)]] <span class="keyword">const</span> mutex_t &amp; getMutex()<span class="keyword"> const</span></div>
-<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span><span class="keyword">  </span>{</div>
-<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>    <span class="keywordflow">return</span> lock_;</div>
-<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>  }</div>
-<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span> </div>
-<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>  T value_;</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span> </div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U = T, <span class="keyword">typename</span> = <span class="keyword">typename</span> std::enable_if_t&lt;!is_ptr_or_smart_ptr&lt;U&gt;&gt;&gt;</div>
+<div class="foldopen" id="foldopen00376" data-start="{" data-end="}">
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno"><a class="line" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#ae9427bafe0f8c5ba742e15823d0c8acb">  376</a></span>  [[nodiscard]] <span class="keyword">operator</span> std::optional&lt;T&gt;()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span><span class="keyword">  </span>{</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#ac10b593ec5f135c4d4bfcb2a9e67029c">try_get</a>();</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>  }</div>
+</div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span> </div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>  <span class="comment">// In case one wants to actually use a pointer</span></div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>  <span class="comment">// in this implementation we allow accessing the lock directly.</span></div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>  <span class="comment">// Note: Be careful with lock.unlock().</span></div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>  <span class="comment">// It may only be called from the thread that locked the mutex!</span></div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>  [[nodiscard]] <span class="keyword">const</span> mutex_t &amp; get_mutex()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> lock_; }</div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>  [[nodiscard]] mutex_t &amp; get_mutex() { <span class="keywordflow">return</span> lock_; }</div>
 <div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span> </div>
-<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>  <span class="comment">// Protects access to the thing in the box.  This mutex is</span></div>
-<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>  <span class="comment">// guaranteed to be locked for no longer than the duration of the</span></div>
-<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>  <span class="comment">// copy, so as long as the copy is realtime safe and the OS has</span></div>
-<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>  <span class="comment">// priority inheritance for mutexes, this lock can be safely locked</span></div>
-<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>  <span class="comment">// from within realtime.</span></div>
-<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>  <span class="keyword">mutable</span> mutex_t lock_;</div>
-<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>};</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>  [[nodiscard]] [[deprecated(<span class="stringliteral">&quot;Use get_mutex() instead!&quot;</span>)]] mutex_t &amp; getMutex() { <span class="keywordflow">return</span> lock_; }</div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>  [[nodiscard]] [[deprecated(<span class="stringliteral">&quot;Use get_mutex() instead!&quot;</span>)]] <span class="keyword">const</span> mutex_t &amp; getMutex()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span><span class="keyword">  </span>{</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>    <span class="keywordflow">return</span> lock_;</div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>  }</div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span> </div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>  T value_;</div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span> </div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>  <span class="comment">// Protects access to the thing in the box.  This mutex is</span></div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>  <span class="comment">// guaranteed to be locked for no longer than the duration of the</span></div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>  <span class="comment">// copy, so as long as the copy is realtime safe and the OS has</span></div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>  <span class="comment">// priority inheritance for mutexes, this lock can be safely locked</span></div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>  <span class="comment">// from within realtime.</span></div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>  <span class="keyword">mutable</span> mutex_t lock_;</div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>};</div>
 </div>
-<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span> </div>
-<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span><span class="comment">// Provide specialisations for other mutex types</span></div>
-<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span> </div>
-<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span><span class="keyword">using </span>RealtimeThreadSafeBoxRecursive = RealtimeThreadSafeBox&lt;T, RECURSIVE_MUTEX&gt;;</div>
-<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span> </div>
-<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>}  <span class="comment">// namespace realtime_tools</span></div>
-<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span> </div>
-<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span><span class="preprocessor">#endif  </span><span class="comment">// REALTIME_TOOLS__REALTIME_THREAD_SAFE_BOX_HPP_</span></div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span> </div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span><span class="comment">// Provide specialisations for other mutex types</span></div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span> </div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span><span class="keyword">using </span>RealtimeThreadSafeBoxRecursive = RealtimeThreadSafeBox&lt;T, RECURSIVE_MUTEX&gt;;</div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span> </div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>}  <span class="comment">// namespace realtime_tools</span></div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span> </div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span><span class="preprocessor">#endif  </span><span class="comment">// REALTIME_TOOLS__REALTIME_THREAD_SAFE_BOX_HPP_</span></div>
 <div class="ttc" id="aclassrealtime__tools_1_1RealtimeThreadSafeBox_html"><div class="ttname"><a href="classrealtime__tools_1_1RealtimeThreadSafeBox.html">realtime_tools::RealtimeThreadSafeBox</a></div><div class="ttdef"><b>Definition</b> realtime_thread_safe_box.hpp:68</div></div>
 <div class="ttc" id="aclassrealtime__tools_1_1RealtimeThreadSafeBox_html_a0c8bbeec248349338d2c7f9d8de32348"><div class="ttname"><a href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a0c8bbeec248349338d2c7f9d8de32348">realtime_tools::RealtimeThreadSafeBox::tryGet</a></div><div class="ttdeci">std::enable_if_t&lt;!is_ptr_or_smart_ptr&lt; U &gt;, std::optional&lt; U &gt; &gt; tryGet() const</div><div class="ttdoc">get the content with best effort</div><div class="ttdef"><b>Definition</b> realtime_thread_safe_box.hpp:231</div></div>
 <div class="ttc" id="aclassrealtime__tools_1_1RealtimeThreadSafeBox_html_a260d9075ed3b678470db8a24853d940d"><div class="ttname"><a href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a260d9075ed3b678470db8a24853d940d">realtime_tools::RealtimeThreadSafeBox::set</a></div><div class="ttdeci">std::enable_if_t&lt; is_ptr_or_smart_ptr&lt; U &gt;, void &gt; set(const T &amp;value)</div><div class="ttdoc">Wait until the mutex can be locked and set the content (RealtimeThreadSafeBox behavior)</div><div class="ttdef"><b>Definition</b> realtime_thread_safe_box.hpp:270</div></div>
 <div class="ttc" id="aclassrealtime__tools_1_1RealtimeThreadSafeBox_html_a3c9bda73722f24b6538f4756ecf0685c"><div class="ttname"><a href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a3c9bda73722f24b6538f4756ecf0685c">realtime_tools::RealtimeThreadSafeBox::try_set</a></div><div class="ttdeci">bool try_set(const std::function&lt; void(T &amp;)&gt; &amp;func)</div><div class="ttdoc">access the content readable with best effort</div><div class="ttdef"><b>Definition</b> realtime_thread_safe_box.hpp:152</div></div>
-<div class="ttc" id="aclassrealtime__tools_1_1RealtimeThreadSafeBox_html_a52209ef485556ec4ca35287a69eb6261"><div class="ttname"><a href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a52209ef485556ec4ca35287a69eb6261">realtime_tools::RealtimeThreadSafeBox::operator=</a></div><div class="ttdeci">std::enable_if_t&lt;!is_ptr_or_smart_ptr&lt; U &gt;, void &gt; operator=(const T &amp;value)</div><div class="ttdoc">provide a custom assignment operator for easier usage</div><div class="ttdef"><b>Definition</b> realtime_thread_safe_box.hpp:346</div></div>
+<div class="ttc" id="aclassrealtime__tools_1_1RealtimeThreadSafeBox_html_a52209ef485556ec4ca35287a69eb6261"><div class="ttname"><a href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a52209ef485556ec4ca35287a69eb6261">realtime_tools::RealtimeThreadSafeBox::operator=</a></div><div class="ttdeci">std::enable_if_t&lt;!is_ptr_or_smart_ptr&lt; U &gt;, void &gt; operator=(const T &amp;value)</div><div class="ttdoc">provide a custom assignment operator for easier usage</div><div class="ttdef"><b>Definition</b> realtime_thread_safe_box.hpp:355</div></div>
+<div class="ttc" id="aclassrealtime__tools_1_1RealtimeThreadSafeBox_html_a6092bc137fbf1e96ec92cfa10295dd7e"><div class="ttname"><a href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a6092bc137fbf1e96ec92cfa10295dd7e">realtime_tools::RealtimeThreadSafeBox::set</a></div><div class="ttdeci">void set(F &amp;&amp;func)</div><div class="ttdoc">wait until the mutex could be locked and access the content (rw)</div><div class="ttdef"><b>Definition</b> realtime_thread_safe_box.hpp:284</div></div>
+<div class="ttc" id="aclassrealtime__tools_1_1RealtimeThreadSafeBox_html_a6345622bfe8b3156728d59a0384ec28b"><div class="ttname"><a href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a6345622bfe8b3156728d59a0384ec28b">realtime_tools::RealtimeThreadSafeBox::set</a></div><div class="ttdeci">std::enable_if_t&lt; is_ptr_or_smart_ptr&lt; U &gt;, void &gt; set(std::nullptr_t)</div><div class="ttdoc">wait until the mutex could be locked and access the content (rw)</div><div class="ttdef"><b>Definition</b> realtime_thread_safe_box.hpp:295</div></div>
 <div class="ttc" id="aclassrealtime__tools_1_1RealtimeThreadSafeBox_html_a6464f2a28f43d12bc27b8b2c36568233"><div class="ttname"><a href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a6464f2a28f43d12bc27b8b2c36568233">realtime_tools::RealtimeThreadSafeBox::set</a></div><div class="ttdeci">std::enable_if_t&lt;!is_ptr_or_smart_ptr&lt; U &gt;, void &gt; set(const T &amp;value)</div><div class="ttdoc">Wait until the mutex can be locked and set the content (RealtimeThreadSafeBox behavior)</div><div class="ttdef"><b>Definition</b> realtime_thread_safe_box.hpp:255</div></div>
 <div class="ttc" id="aclassrealtime__tools_1_1RealtimeThreadSafeBox_html_a65b85bc76c6bc2cc8e6ae57198bc9704"><div class="ttname"><a href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a65b85bc76c6bc2cc8e6ae57198bc9704">realtime_tools::RealtimeThreadSafeBox::tryGet</a></div><div class="ttdeci">bool tryGet(const std::function&lt; void(const T &amp;)&gt; &amp;func)</div><div class="ttdoc">access the content (r) with best effort</div><div class="ttdef"><b>Definition</b> realtime_thread_safe_box.hpp:244</div></div>
-<div class="ttc" id="aclassrealtime__tools_1_1RealtimeThreadSafeBox_html_a69f4007822c091d789f2a883cad2d9b3"><div class="ttname"><a href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a69f4007822c091d789f2a883cad2d9b3">realtime_tools::RealtimeThreadSafeBox::get</a></div><div class="ttdeci">std::enable_if_t&lt; is_ptr_or_smart_ptr&lt; U &gt;, void &gt; get(T &amp;in) const</div><div class="ttdoc">Wait until the mutex could be locked and get the content (r)</div><div class="ttdef"><b>Definition</b> realtime_thread_safe_box.hpp:323</div></div>
+<div class="ttc" id="aclassrealtime__tools_1_1RealtimeThreadSafeBox_html_a69f4007822c091d789f2a883cad2d9b3"><div class="ttname"><a href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a69f4007822c091d789f2a883cad2d9b3">realtime_tools::RealtimeThreadSafeBox::get</a></div><div class="ttdeci">std::enable_if_t&lt; is_ptr_or_smart_ptr&lt; U &gt;, void &gt; get(T &amp;in) const</div><div class="ttdoc">Wait until the mutex could be locked and get the content (r)</div><div class="ttdef"><b>Definition</b> realtime_thread_safe_box.hpp:332</div></div>
 <div class="ttc" id="aclassrealtime__tools_1_1RealtimeThreadSafeBox_html_a75b67b2f9c9f55a56d034342938ff5b1"><div class="ttname"><a href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a75b67b2f9c9f55a56d034342938ff5b1">realtime_tools::RealtimeThreadSafeBox::trySet</a></div><div class="ttdeci">bool trySet(const std::function&lt; void(T &amp;)&gt; &amp;func)</div><div class="ttdoc">access the content readable with best effort</div><div class="ttdef"><b>Definition</b> realtime_thread_safe_box.hpp:189</div></div>
-<div class="ttc" id="aclassrealtime__tools_1_1RealtimeThreadSafeBox_html_a87f94ea738bb45c363c1220247bac717"><div class="ttname"><a href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a87f94ea738bb45c363c1220247bac717">realtime_tools::RealtimeThreadSafeBox::get</a></div><div class="ttdeci">std::enable_if_t&lt;!is_ptr_or_smart_ptr&lt; U &gt;, U &gt; get() const</div><div class="ttdoc">Wait until the mutex could be locked and get the content (RealtimeThreadSafeBox behaviour)</div><div class="ttdef"><b>Definition</b> realtime_thread_safe_box.hpp:297</div></div>
+<div class="ttc" id="aclassrealtime__tools_1_1RealtimeThreadSafeBox_html_a87f94ea738bb45c363c1220247bac717"><div class="ttname"><a href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a87f94ea738bb45c363c1220247bac717">realtime_tools::RealtimeThreadSafeBox::get</a></div><div class="ttdeci">std::enable_if_t&lt;!is_ptr_or_smart_ptr&lt; U &gt;, U &gt; get() const</div><div class="ttdoc">Wait until the mutex could be locked and get the content (RealtimeThreadSafeBox behaviour)</div><div class="ttdef"><b>Definition</b> realtime_thread_safe_box.hpp:306</div></div>
 <div class="ttc" id="aclassrealtime__tools_1_1RealtimeThreadSafeBox_html_a88937c62a7dbf257ce7ad183430e3620"><div class="ttname"><a href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a88937c62a7dbf257ce7ad183430e3620">realtime_tools::RealtimeThreadSafeBox::trySet</a></div><div class="ttdeci">std::enable_if_t&lt;!is_ptr_or_smart_ptr&lt; U &gt;, bool &gt; trySet(const T &amp;value)</div><div class="ttdoc">set a new content with best effort</div><div class="ttdef"><b>Definition</b> realtime_thread_safe_box.hpp:171</div></div>
-<div class="ttc" id="aclassrealtime__tools_1_1RealtimeThreadSafeBox_html_aa8f971cfe73d682184f0efe87b029599"><div class="ttname"><a href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#aa8f971cfe73d682184f0efe87b029599">realtime_tools::RealtimeThreadSafeBox::get</a></div><div class="ttdeci">void get(const std::function&lt; void(const T &amp;)&gt; &amp;func)</div><div class="ttdoc">Wait until the mutex could be locked and access the content (r)</div><div class="ttdef"><b>Definition</b> realtime_thread_safe_box.hpp:335</div></div>
+<div class="ttc" id="aclassrealtime__tools_1_1RealtimeThreadSafeBox_html_aa8f971cfe73d682184f0efe87b029599"><div class="ttname"><a href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#aa8f971cfe73d682184f0efe87b029599">realtime_tools::RealtimeThreadSafeBox::get</a></div><div class="ttdeci">void get(const std::function&lt; void(const T &amp;)&gt; &amp;func)</div><div class="ttdoc">Wait until the mutex could be locked and access the content (r)</div><div class="ttdef"><b>Definition</b> realtime_thread_safe_box.hpp:344</div></div>
 <div class="ttc" id="aclassrealtime__tools_1_1RealtimeThreadSafeBox_html_aaac1103aa7d98d31573f06806189da45"><div class="ttname"><a href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#aaac1103aa7d98d31573f06806189da45">realtime_tools::RealtimeThreadSafeBox::try_get</a></div><div class="ttdeci">bool try_get(const std::function&lt; void(const T &amp;)&gt; &amp;func)</div><div class="ttdoc">access the content (r) with best effort</div><div class="ttdef"><b>Definition</b> realtime_thread_safe_box.hpp:213</div></div>
 <div class="ttc" id="aclassrealtime__tools_1_1RealtimeThreadSafeBox_html_ac10b593ec5f135c4d4bfcb2a9e67029c"><div class="ttname"><a href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#ac10b593ec5f135c4d4bfcb2a9e67029c">realtime_tools::RealtimeThreadSafeBox::try_get</a></div><div class="ttdeci">std::enable_if_t&lt;!is_ptr_or_smart_ptr&lt; U &gt;, std::optional&lt; U &gt; &gt; try_get() const</div><div class="ttdoc">get the content with best effort</div><div class="ttdef"><b>Definition</b> realtime_thread_safe_box.hpp:199</div></div>
-<div class="ttc" id="aclassrealtime__tools_1_1RealtimeThreadSafeBox_html_accd1d06e3a98324e2690b4cdd28a982a"><div class="ttname"><a href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#accd1d06e3a98324e2690b4cdd28a982a">realtime_tools::RealtimeThreadSafeBox::set</a></div><div class="ttdeci">void set(const std::function&lt; void(T &amp;)&gt; &amp;func)</div><div class="ttdoc">wait until the mutex could be locked and access the content (rw)</div><div class="ttdef"><b>Definition</b> realtime_thread_safe_box.hpp:280</div></div>
-<div class="ttc" id="aclassrealtime__tools_1_1RealtimeThreadSafeBox_html_ad8aca6cadadc725a826eee0cf51ffb69"><div class="ttname"><a href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#ad8aca6cadadc725a826eee0cf51ffb69">realtime_tools::RealtimeThreadSafeBox::get</a></div><div class="ttdeci">std::enable_if_t&lt;!is_ptr_or_smart_ptr&lt; U &gt;, void &gt; get(T &amp;in) const</div><div class="ttdoc">Wait until the mutex could be locked and get the content (r)</div><div class="ttdef"><b>Definition</b> realtime_thread_safe_box.hpp:308</div></div>
+<div class="ttc" id="aclassrealtime__tools_1_1RealtimeThreadSafeBox_html_ad8aca6cadadc725a826eee0cf51ffb69"><div class="ttname"><a href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#ad8aca6cadadc725a826eee0cf51ffb69">realtime_tools::RealtimeThreadSafeBox::get</a></div><div class="ttdeci">std::enable_if_t&lt;!is_ptr_or_smart_ptr&lt; U &gt;, void &gt; get(T &amp;in) const</div><div class="ttdoc">Wait until the mutex could be locked and get the content (r)</div><div class="ttdef"><b>Definition</b> realtime_thread_safe_box.hpp:317</div></div>
 <div class="ttc" id="aclassrealtime__tools_1_1RealtimeThreadSafeBox_html_af7d47b667d53288b8ba97f823d0bc715"><div class="ttname"><a href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#af7d47b667d53288b8ba97f823d0bc715">realtime_tools::RealtimeThreadSafeBox::try_set</a></div><div class="ttdeci">std::enable_if_t&lt;!is_ptr_or_smart_ptr&lt; U &gt;, bool &gt; try_set(const T &amp;value)</div><div class="ttdoc">set a new content with best effort</div><div class="ttdef"><b>Definition</b> realtime_thread_safe_box.hpp:137</div></div>
 <div class="ttc" id="anamespacerealtime__tools_html"><div class="ttname"><a href="namespacerealtime__tools.html">realtime_tools</a></div><div class="ttdoc">A pthread mutex wrapper that provides a mutex with the priority inheritance protocol and a priority c...</div><div class="ttdef"><b>Definition</b> async_function_handler.hpp:38</div></div>
 </div><!-- fragment --></div><!-- contents -->
