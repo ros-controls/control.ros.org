@@ -85,6 +85,7 @@
 <li class="toctree-l5"><a class="reference internal" href="#pendulum-with-passive-joints-cart-pole">Pendulum with passive joints (cart-pole)</a></li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="#notes-on-the-command-interface">Notes on the command interface</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../topic_based_hardware_interfaces/doc/index.html">topic-based</a></li>
@@ -503,6 +504,24 @@ ros2<span class="w"> </span>run<span class="w"> </span>gz_ros2_control_demos<spa
 </pre></div>
 </div>
 </section>
+</section>
+<section id="notes-on-the-command-interface">
+<h2>Notes on the command interface<a class="headerlink" href="#notes-on-the-command-interface" title="Link to this heading"></a></h2>
+<p>The <em>gz_ros2_control</em> plugin receives commands from the ROS2 Control controllers through various command interfaces
+and applies them to Gazebo simulated joints. Specifically, there are three types of command interfaces.
+Their current behavior is described below:</p>
+<ul class="simple">
+<li><p><strong>Effort Command Interface</strong>: The force or torque requested by the controller is applied directly to the joint as is.</p></li>
+<li><p><strong>Velocity Command Interface</strong>: The velocity requested by the controller is applied directly to the joint as is.
+Note that on some vehicle models, using the velocity command interface to drive the wheels may cause slippage and odometer errors.
+This is because the wheels are accelerated to the required speed instantaneously, but the chassis cannot reach the same speed immediately.</p></li>
+<li><p><strong>Position Command Interface</strong>: The <em>gz_ros2_control</em> plugin controls the velocity of the joints to make them reach the position required by the controller.
+The velocity is calculated as <code class="docutils literal notranslate"><span class="pre">joint_velocity</span> <span class="pre">=</span> <span class="pre">position_proportional_gain</span> <span class="pre">*</span> <span class="pre">joint_position_error</span> <span class="pre">*</span> <span class="pre">controller_manager_update_rate</span></code>,
+where <code class="docutils literal notranslate"><span class="pre">position_proportional_gain</span></code> is configurable as described above.
+For those who are designing control systems: This means that the response of the joint is equivalent to a discrete-time first-order system.
+The system’s time constant is <code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">/</span> <span class="pre">(position_proportional_gain</span> <span class="pre">*</span> <span class="pre">controller_manager_update_rate)</span></code>.
+In theory, <code class="docutils literal notranslate"><span class="pre">position_proportional_gain</span></code> cannot be greater than 2 to maintain system stability, and cannot be greater than 1 to avoid oscillations.</p></li>
+</ul>
 </section>
 </section>
 

@@ -220,11 +220,9 @@ CONTROLLER_INTERFACE_PUBLIC unsigned int&#160;</td><td class="memItemRight" vali
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a0f83186fc95e9ae8b27ee0ad29e5f148" id="r_a0f83186fc95e9ae8b27ee0ad29e5f148"><td class="memItemLeft" align="right" valign="top"><a id="a0f83186fc95e9ae8b27ee0ad29e5f148" name="a0f83186fc95e9ae8b27ee0ad29e5f148"></a>
-std::vector&lt; <a class="el" href="classhardware__interface_1_1LoanedCommandInterface.html">hardware_interface::LoanedCommandInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>command_interfaces_</b></td></tr>
+<tr class="memitem:a0f83186fc95e9ae8b27ee0ad29e5f148" id="r_a0f83186fc95e9ae8b27ee0ad29e5f148"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classhardware__interface_1_1LoanedCommandInterface.html">hardware_interface::LoanedCommandInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a0f83186fc95e9ae8b27ee0ad29e5f148">command_interfaces_</a></td></tr>
 <tr class="separator:a0f83186fc95e9ae8b27ee0ad29e5f148"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abffb684790a208ce8d81af90be0cdd9c" id="r_abffb684790a208ce8d81af90be0cdd9c"><td class="memItemLeft" align="right" valign="top"><a id="abffb684790a208ce8d81af90be0cdd9c" name="abffb684790a208ce8d81af90be0cdd9c"></a>
-std::vector&lt; <a class="el" href="classhardware__interface_1_1LoanedStateInterface.html">hardware_interface::LoanedStateInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>state_interfaces_</b></td></tr>
+<tr class="memitem:abffb684790a208ce8d81af90be0cdd9c" id="r_abffb684790a208ce8d81af90be0cdd9c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classhardware__interface_1_1LoanedStateInterface.html">hardware_interface::LoanedStateInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#abffb684790a208ce8d81af90be0cdd9c">state_interfaces_</a></td></tr>
 <tr class="separator:abffb684790a208ce8d81af90be0cdd9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f05708e13e7368b4cea7d9cbb57e920" id="r_a9f05708e13e7368b4cea7d9cbb57e920"><td class="memItemLeft" align="right" valign="top"><a id="a9f05708e13e7368b4cea7d9cbb57e920" name="a9f05708e13e7368b4cea7d9cbb57e920"></a>
 unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>update_rate_</b> = 0</td></tr>
@@ -298,7 +296,7 @@ template&lt;typename ParameterT &gt; </div>
 </div><div class="memdoc">
 
 <p>Get configuration for controller's required command interfaces. </p>
-<p>Method used by the controller_manager to get the set of command interfaces used by the controller. Each controller can use individual method to determine interface names that in simples case have the following format: <code>&lt;joint&gt;/&lt;interface&gt;</code>. The method is called only in <code>inactive</code> or <code>active</code> state, i.e., <code>on_configure</code> has to be called first. The configuration is used to check if controller can be activated and to claim interfaces from hardware. The claimed interfaces are populated in the command_interfaces_ member.</p>
+<p>Method used by the controller_manager to get the set of command interfaces used by the controller. Each controller can use individual method to determine interface names that in simples case have the following format: <code>&lt;joint&gt;/&lt;interface&gt;</code>. The method is called only in <code>inactive</code> or <code>active</code> state, i.e., <code>on_configure</code> has to be called first. The configuration is used to check if controller can be activated and to claim interfaces from hardware. The claimed interfaces are populated in the <a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a0f83186fc95e9ae8b27ee0ad29e5f148">command_interfaces_</a> member.</p>
 <dl class="section return"><dt>Returns</dt><dd>configuration of command interfaces. </dd></dl>
 
 <p>Implemented in <a class="el" href="classpassthrough__controller_1_1PassthroughController.html#ae3ad8ce49dcf414a37cf3bf8ed1033f4">passthrough_controller::PassthroughController</a>, <a class="el" href="classros2__control__demo__example__7_1_1RobotController.html#aa941b278752fe3a70eb6422d12531972">ros2_control_demo_example_7::RobotController</a>, <a class="el" href="classadmittance__controller_1_1AdmittanceController.html#a6e768ac328c2432c340a919d2d6e9f7f">admittance_controller::AdmittanceController</a>, <a class="el" href="classdiff__drive__controller_1_1DiffDriveController.html#af89523acbee1a5e496a371105cd3c175">diff_drive_controller::DiffDriveController</a>, <a class="el" href="classforce__torque__sensor__broadcaster_1_1ForceTorqueSensorBroadcaster.html#a3e333561b936d77cc5bc29156340dd68">force_torque_sensor_broadcaster::ForceTorqueSensorBroadcaster</a>, <a class="el" href="classforward__command__controller_1_1ForwardControllersBase.html#a0436a3c1cd27a023f0cfe276abb478a1">forward_command_controller::ForwardControllersBase</a>, <a class="el" href="classgpio__controllers_1_1GpioCommandController.html#a94288f0114f290e60e0edab57074de37">gpio_controllers::GpioCommandController</a>, <a class="el" href="classgripper__action__controller_1_1GripperActionController.html#ae6d6fb605e71941c845137b268bf5d52">gripper_action_controller::GripperActionController&lt; HardwareInterface &gt;</a>, <a class="el" href="classimu__sensor__broadcaster_1_1IMUSensorBroadcaster.html#a4830752b42e2c9225b8e4eb7df7fe769">imu_sensor_broadcaster::IMUSensorBroadcaster</a>, <a class="el" href="classjoint__state__broadcaster_1_1JointStateBroadcaster.html#aaff71defaa9c3c92b540ab879df00142">joint_state_broadcaster::JointStateBroadcaster</a>, <a class="el" href="classjoint__trajectory__controller_1_1JointTrajectoryController.html#a717a2ad0030e8474fb457051a17f74d1">joint_trajectory_controller::JointTrajectoryController</a>, <a class="el" href="classmecanum__drive__controller_1_1MecanumDriveController.html#a876570b3b135889656b4b4e035223fdb">mecanum_drive_controller::MecanumDriveController</a>, <a class="el" href="classpid__controller_1_1PidController.html#ae5dbcaa1ea31d5d460f3d605d411d62b">pid_controller::PidController</a>, <a class="el" href="classpose__broadcaster_1_1PoseBroadcaster.html#afe693ccce8385f5b3862d29c276d1923">pose_broadcaster::PoseBroadcaster</a>, <a class="el" href="classrange__sensor__broadcaster_1_1RangeSensorBroadcaster.html#a6c270905944a47ebe32d68dc028895d4">range_sensor_broadcaster::RangeSensorBroadcaster</a>, <a class="el" href="classsteering__controllers__library_1_1SteeringControllersLibrary.html#a7e6399841bfbadc0170bb3140fcb385f">steering_controllers_library::SteeringControllersLibrary</a>, and <a class="el" href="classtricycle__controller_1_1TricycleController.html#a8f22d9f28d699290115cc63f7c7b72b4">tricycle_controller::TricycleController</a>.</p>
@@ -530,6 +528,53 @@ template&lt;typename ParameterT &gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>return_type::OK if update is successfully, otherwise return_type::ERROR. </dd></dl>
 
 <p>Implemented in <a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#a7cc9715499c50020997f4d4f10f67d14">controller_interface::ChainableControllerInterface</a>, <a class="el" href="classros2__control__demo__example__7_1_1RobotController.html#a24a6260a594ac291ea031ac2116efe1a">ros2_control_demo_example_7::RobotController</a>, <a class="el" href="classdiff__drive__controller_1_1DiffDriveController.html#a234f4b6976ff84275307225a608718e0">diff_drive_controller::DiffDriveController</a>, <a class="el" href="classforce__torque__sensor__broadcaster_1_1ForceTorqueSensorBroadcaster.html#a117e93983c4d51c2ad7dcb51789e55d2">force_torque_sensor_broadcaster::ForceTorqueSensorBroadcaster</a>, <a class="el" href="classforward__command__controller_1_1ForwardControllersBase.html#a723d658dae9f2b3798f81ab90c339cfb">forward_command_controller::ForwardControllersBase</a>, <a class="el" href="classgpio__controllers_1_1GpioCommandController.html#a38c0624f5cd75e48a3668639adc776d1">gpio_controllers::GpioCommandController</a>, <a class="el" href="classgripper__action__controller_1_1GripperActionController.html#ae91d5b87a188d1d195407ef7ee7cd4b4">gripper_action_controller::GripperActionController&lt; HardwareInterface &gt;</a>, <a class="el" href="classimu__sensor__broadcaster_1_1IMUSensorBroadcaster.html#a41224cedf96782693d81e7386315ceca">imu_sensor_broadcaster::IMUSensorBroadcaster</a>, <a class="el" href="classjoint__state__broadcaster_1_1JointStateBroadcaster.html#a78329faed4f9a41858cc130122a8a198">joint_state_broadcaster::JointStateBroadcaster</a>, <a class="el" href="classjoint__trajectory__controller_1_1JointTrajectoryController.html#a3b9c5a2d39eeea7652b6226c5dca2fdc">joint_trajectory_controller::JointTrajectoryController</a>, <a class="el" href="classpose__broadcaster_1_1PoseBroadcaster.html#a357e596e789c87b8e1ee99eb1ffb3c21">pose_broadcaster::PoseBroadcaster</a>, <a class="el" href="classrange__sensor__broadcaster_1_1RangeSensorBroadcaster.html#a83dcad9e66a52095c50a114e8f261006">range_sensor_broadcaster::RangeSensorBroadcaster</a>, and <a class="el" href="classtricycle__controller_1_1TricycleController.html#adea072f933f6b464856299ec77d76586">tricycle_controller::TricycleController</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a0f83186fc95e9ae8b27ee0ad29e5f148" name="a0f83186fc95e9ae8b27ee0ad29e5f148"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f83186fc95e9ae8b27ee0ad29e5f148">&#9670;&#160;</a></span>command_interfaces_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="classhardware__interface_1_1LoanedCommandInterface.html">hardware_interface::LoanedCommandInterface</a>&gt; controller_interface::ControllerInterfaceBase::command_interfaces_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Loaned command interfaces. </p><dl class="section note"><dt>Note</dt><dd>The order of these interfaces is determined by the return value of <a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a7241e933b6cb95b3304a49c8a6830aa6">command_interface_configuration()</a>: If interface_configuration_type::INDIVIDUAL is specified, the order matches that of the returned vector. If interface_configuration_type::ALL is specified, the order is determined by the internal memory of the resource_manager and may not be deterministic. To obtain a consistent order, use get_ordered_interfaces() from <a class="el" href="helpers_8hpp_source.html">helpers.hpp</a>. </dd></dl>
+
+</div>
+</div>
+<a id="abffb684790a208ce8d81af90be0cdd9c" name="abffb684790a208ce8d81af90be0cdd9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abffb684790a208ce8d81af90be0cdd9c">&#9670;&#160;</a></span>state_interfaces_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="classhardware__interface_1_1LoanedStateInterface.html">hardware_interface::LoanedStateInterface</a>&gt; controller_interface::ControllerInterfaceBase::state_interfaces_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Loaned state interfaces. </p><dl class="section note"><dt>Note</dt><dd>The order of these interfaces is determined by the return value of <a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a3417ed9b9990df177ab116f9a7147b74">state_interface_configuration()</a>: If interface_configuration_type::INDIVIDUAL is specified, the order matches that of the returned vector. If interface_configuration_type::ALL is specified, the order is determined by the internal memory of the resource_manager and may not be deterministic. To obtain a consistent order, use get_ordered_interfaces() from <a class="el" href="helpers_8hpp_source.html">helpers.hpp</a>. </dd></dl>
 
 </div>
 </div>
