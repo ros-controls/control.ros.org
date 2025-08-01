@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Example 13: Multi-robot system with lifecycle management &mdash; ROS2_Control: Rolling Jul 2025 documentation</title>
+  <title>Example 13: Multi-robot system with lifecycle management &mdash; ROS2_Control: Rolling Aug 2025 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
@@ -18,7 +18,7 @@
     <link rel="canonical" href="https://control.ros.org/rolling//rolling/doc/ros2_control_demos/example_13/doc/userdoc.html" />
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=a613cea7"></script>
+      <script src="../../../../_static/documentation_options.js?v=3aa49437"></script>
       <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -410,11 +410,11 @@ threedofbot_position_controller<span class="o">[</span>forward_command_controlle
 </div>
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li><p>Configure <code class="docutils literal notranslate"><span class="pre">FakeThreeDofBot</span></code> and its joint state broadcaster and non-movement command interfaces. Call</p></li>
+<li><p>Configure <code class="docutils literal notranslate"><span class="pre">FakeThreeDofBot</span></code> and its joint state broadcaster. Call</p></li>
 </ol>
 <blockquote>
 <div><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>set_hardware_component_state<span class="w"> </span>FakeThreeDofBot<span class="w"> </span>inactive
-ros2<span class="w"> </span>control<span class="w"> </span>switch_controllers<span class="w"> </span>--activate<span class="w"> </span>threedofbot_joint_state_broadcaster<span class="w"> </span>threedofbot_pid_gain_controller
+ros2<span class="w"> </span>control<span class="w"> </span>switch_controllers<span class="w"> </span>--activate<span class="w"> </span>threedofbot_joint_state_broadcaster
 </pre></div>
 </div>
 <p>Scenario state:</p>
@@ -432,15 +432,15 @@ Hardware<span class="w"> </span>Component<span class="w"> </span><span class="m"
 <span class="w">      </span>state:<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="nv">label</span><span class="o">=</span>inactive
 <span class="w">      </span><span class="nb">command</span><span class="w"> </span>interfaces
 <span class="w">              </span>threedofbot_joint1/position<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>unclaimed<span class="o">]</span>
-<span class="w">              </span>threedofbot_joint1/pid_gain<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+<span class="w">              </span>threedofbot_joint1/pid_gain<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>unclaimed<span class="o">]</span>
 <span class="w">              </span>threedofbot_joint2/position<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>unclaimed<span class="o">]</span>
-<span class="w">              </span>threedofbot_joint2/pid_gain<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+<span class="w">              </span>threedofbot_joint2/pid_gain<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>unclaimed<span class="o">]</span>
 <span class="w">              </span>threedofbot_joint3/position<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>unclaimed<span class="o">]</span>
-<span class="w">              </span>threedofbot_joint3/pid_gain<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+<span class="w">              </span>threedofbot_joint3/pid_gain<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>unclaimed<span class="o">]</span>
 ...
 </pre></div>
 </div>
-<p>Controllers status, <code class="docutils literal notranslate"><span class="pre">threedofbot_joint_state_broadcaster</span></code> and <code class="docutils literal notranslate"><span class="pre">threedofbot_pid_gain_controller</span></code> are in active state now:</p>
+<p>Controllers status, <code class="docutils literal notranslate"><span class="pre">threedofbot_joint_state_broadcaster</span></code> is in active state now:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ros2<span class="w"> </span>control<span class="w"> </span>list_controllers
 joint_state_broadcaster<span class="o">[</span>joint_state_broadcaster/JointStateBroadcaster<span class="o">]</span><span class="w"> </span>active
 rrbot_external_fts_broadcaster<span class="o">[</span>force_torque_sensor_broadcaster/ForceTorqueSensorBroadcaster<span class="o">]</span><span class="w"> </span>active
@@ -450,7 +450,7 @@ rrbot_with_sensor_fts_broadcaster<span class="o">[</span>force_torque_sensor_bro
 rrbot_with_sensor_joint_state_broadcaster<span class="o">[</span>joint_state_broadcaster/JointStateBroadcaster<span class="o">]</span><span class="w"> </span>active
 rrbot_with_sensor_position_controller<span class="o">[</span>forward_command_controller/ForwardCommandController<span class="o">]</span><span class="w"> </span>active
 threedofbot_joint_state_broadcaster<span class="o">[</span>joint_state_broadcaster/JointStateBroadcaster<span class="o">]</span><span class="w"> </span>active
-threedofbot_pid_gain_controller<span class="o">[</span>forward_command_controller/ForwardCommandController<span class="o">]</span><span class="w"> </span>active
+threedofbot_pid_gain_controller<span class="o">[</span>forward_command_controller/ForwardCommandController<span class="o">]</span><span class="w"> </span>inactive
 threedofbot_position_controller<span class="o">[</span>forward_command_controller/ForwardCommandController<span class="o">]</span><span class="w"> </span>inactive
 </pre></div>
 </div>
@@ -479,11 +479,11 @@ ros2<span class="w"> </span>control<span class="w"> </span>switch_controllers<sp
 </ul>
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li><p>Activate <code class="docutils literal notranslate"><span class="pre">FakeThreeDofBot</span></code> and its controller. Call</p></li>
+<li><p>Activate <code class="docutils literal notranslate"><span class="pre">FakeThreeDofBot</span></code> and its controllers. Call</p></li>
 </ol>
 <blockquote>
 <div><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>set_hardware_component_state<span class="w"> </span>FakeThreeDofBot<span class="w"> </span>active
-ros2<span class="w"> </span>control<span class="w"> </span>switch_controllers<span class="w"> </span>--activate<span class="w"> </span>threedofbot_position_controller
+ros2<span class="w"> </span>control<span class="w"> </span>switch_controllers<span class="w"> </span>--activate<span class="w"> </span>threedofbot_pid_gain_controller<span class="w"> </span>threedofbot_position_controller
 </pre></div>
 </div>
 <p>Scenario state:</p>
