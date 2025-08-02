@@ -268,10 +268,9 @@ CallbackReturn::FAILURE method execution has failed and and can be called again.
 CallbackReturn::ERROR critical error has happened that should be managed in "on_error" method.</dd></dl>
 <p>The hardware ends after each method in a state with the following meaning:</p>
 <p>UNCONFIGURED (on_init, on_cleanup): Hardware is initialized but communication is not started and therefore no interface is available.</p>
-<p>INACTIVE (on_configure, on_deactivate): Communication with the hardware is started and it is configured. States can be read and command interfaces are available.</p>
-<p>As of now, it is left to the hardware component implementation to continue using the command received from the <code>CommandInterfaces</code> or to skip them completely.</p>
+<p>INACTIVE (on_configure, on_deactivate): Communication with the hardware is started and it is configured. States can be read, but command interfaces are not available.</p>
 <p>FINALIZED (on_shutdown): Hardware interface is ready for unloading/destruction. Allocated memory is cleaned up.</p>
-<p>ACTIVE (on_activate): Power circuits of hardware are active and hardware can be moved, e.g., brakes are disabled. Command interfaces available.</p>
+<p>ACTIVE (on_activate): Power circuits of hardware are active and hardware can be moved, e.g., brakes are disabled. Command interfaces are available.</p>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Implement<ul>
 <li><a href="https://github.com/ros-controls/ros2_control/issues/931">https://github.com/ros-controls/ros2_control/issues/931</a></li>
 <li><a href="https://github.com/ros-controls/roadmap/pull/51/files">https://github.com/ros-controls/roadmap/pull/51/files</a></li>
