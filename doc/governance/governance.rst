@@ -128,19 +128,20 @@ Releases, Versioning, and Public API
 As ros-controls PMC is independent of the ROS PMC we thrive to follow `its strategy <https://docs.ros.org/en/rolling/The-ROS2-Project/Contributing/Developer-Guide.html#quality-practices>`__ but have to adapt
 it according to our needs. This includes an asynchronous release cycle, where ros-controls claims to
 have a stable release for a ROS distro on **1st of October after an official ROS distribution release**.
-Releases of ros2_control packages will be **available** via the ROS build farm earlier than this date.
-The stable release will be announced on `ROS discourse <https://discourse.openrobotics.org/c/ros-controls/ros-controls-announce-news/107>`__ on time.
+But ros2_control packages may be available via the ROS build farm earlier than this date.
+The stable release, called **released ros2_control version** from now, will be announced on `ROS discourse <https://discourse.openrobotics.org/c/ros-controls/ros-controls-announce-news/107>`__ on time.
 
-We will use the ROS-specific rules on top of ``semver's`` for versioning., but also adhere to some ros-controls-specific rules:
+Versioning
+~~~~~~~~~~
 
-* Major version increments (i.e. breaking changes) should not be made within a released ros2_control version (see above).
+We will use the ROS-specific rules on top of ``semver's`` for versioning, but also adhere to some ros-controls-specific rules:
 
-  * Patch (interface-preserving) and minor (non-breaking) version increments do not break compatibility, so these sorts of changes *are* allowed within a release.
+* Major version increments (i.e. breaking changes) should not be made within a **released ros2_control version**.
 
-* For compiled code, the ABI is considered part of the public interface.
-  Any change that requires recompiling dependent code is considered major (breaking).
+* ros2_control heavily relies on the usage of `pluginlib <https://index.ros.org/p/pluginlib/>`__. Therefore, we distinguish two types of compiled code: non-plugin code together with plugin base classes, and plugins itself.
 
-  * ABI breaking changes *can* be made in a minor version bump *before* a distribution release (getting added to the rolling release).
+  * ABI of plugins may change at every release, i.e., also within **released ros2_control version**. Typically, they are built by the buildfarm and not intended to be linked against your code.
+  * For non-plugin code, the ABI is considered part of the public interface. Any change that requires recompiling dependent code is considered major (breaking) and must not be made within a **released ros2_control version**.
 
 Public API declaration
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -160,25 +161,23 @@ If something you are using is not explicitly listed as part of the public API in
 Deprecation strategy
 ~~~~~~~~~~~~~~~~~~~~
 
-Where possible, we will also use the tick-tock deprecation and migration strategy for major version increments.
-New deprecations will come in a new distribution release, accompanied by compiler warnings expressing that the functionality is being deprecated.
-In the next release, the functionality will be completely removed (no warnings).
+Where possible, we will use the tick-tock deprecation and migration strategy for breaking changes (API or behavior-breaking changes).
+
+* New deprecations can be run-time messages or compiler warnings expressing that the functionality is being deprecated. The functionality will be completely removed in any future release, or at latest in the next **released ros2_control version** (there may be details in the deprecation note).
+
+* New deprecations can also come in every release of **released ros2_control version** by performing backports of any changes to the rolling version. But the deprecated functionality will remain available.
 
 Example of function ``foo`` deprecated and replaced by function ``bar``:
 
-=========  ========================================================
- Version    API
-=========  ========================================================
-X-turtle   void foo();
-Y-turtle   [[deprecated("use bar()")]] void foo(); <br> void bar();
-Z-turtle   void bar();
-=========  ========================================================
+.. list-table::
+   :header-rows: 1
 
-We must not add deprecations after a distribution is released.
-Deprecations do not necessarily require a major version bump, though.
-A deprecation can be introduced in a minor version bump if the bump happens before the distro is released (similar to ABI breaking changes).
-
-For example, if X-turtle begins development as ``2.0.0``, a deprecation can be added in ``2.1.0`` before X-turtle is released.
-
-We will attempt to maintain compatibility across distros as much as possible.
-However, like the caveats associated with SemVer, tick-tock or even deprecation in general may be impossible to completely adhere to in certain cases.
+   * - Package version
+     - API
+   * - x.<y>.z
+     - ``void foo();``
+   * - x.<y+1>.z
+     - ``[[deprecated("use bar()")]] void foo();``
+       ``void bar();``
+   * - x.<y+2>.z
+     - ``void bar();``
