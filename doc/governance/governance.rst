@@ -128,7 +128,7 @@ Releases, Versioning, and Public API
 As ros-controls PMC is independent of the ROS PMC we thrive to follow `its strategy <https://docs.ros.org/en/rolling/The-ROS2-Project/Contributing/Developer-Guide.html#quality-practices>`__ but have to adapt
 it according to our needs. This includes an asynchronous release cycle, where ros-controls claims to
 have a stable release for a ROS distro on **1st of October after an official ROS distribution release**.
-But ros2_control packages may be available via the ROS build farm earlier than this date.
+It is very likely that ros2_control packages will be available via the ROS build farm earlier than this date.
 The stable release, called **released ros2_control version** from now, will be announced on `ROS discourse <https://discourse.openrobotics.org/c/ros-controls/ros-controls-announce-news/107>`__ on time.
 
 Versioning
@@ -136,7 +136,7 @@ Versioning
 
 We will use the ROS-specific rules on top of ``semver's`` for versioning, but also adhere to some ros-controls-specific rules:
 
-* Major version increments (i.e. breaking changes) should not be made within a **released ros2_control version**.
+* Major version increments (i.e. API breaking changes) should not be made within a **released ros2_control version**.
 
 * ros2_control heavily relies on the usage of `pluginlib <https://index.ros.org/p/pluginlib/>`__. Therefore, we distinguish two types of compiled code: non-plugin code together with plugin base classes, and plugins itself.
 
