@@ -165,7 +165,7 @@ Where possible, we will use the tick-tock deprecation and migration strategy for
 
 * New deprecations can be run-time messages or compiler warnings expressing that the functionality is being deprecated. The functionality will be completely removed in any future release, or at latest in the next **released ros2_control version** (there may be details in the deprecation note).
 
-* New deprecations can also come in every release of **released ros2_control version** by performing backports of any changes to the rolling version. But the deprecated functionality will remain available.
+* New deprecations can also come in every release of **released ros2_control version** by performing backports of any changes to the rolling version. These are meant to help users migrate early, however the functionality will remain available in that ROS distribution.
 
 Example of function ``foo`` deprecated and replaced by function ``bar``:
 
