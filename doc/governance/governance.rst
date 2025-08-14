@@ -125,11 +125,11 @@ The following repositories are managed by the ros-controls PMC:
 
 Releases, Versioning, and Public API
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-As ros-controls PMC is independent of the ROS PMC we thrive to follow `its strategy <https://docs.ros.org/en/rolling/The-ROS2-Project/Contributing/Developer-Guide.html#quality-practices>`__ but have to adapt
-it according to our needs. This includes an asynchronous release cycle, where ros-controls claims to
-have a stable release for a ROS distro on **1st of October after an official ROS distribution release**.
+As ros-controls PMC is independent of the ROS PMC we thrive to follow `its strategy <https://docs.ros.org/en/rolling/The-ROS2-Project/Contributing/Developer-Guide.html#quality-practices>`__
+but have to adapt it according to our needs. This includes an asynchronous release cycle, where ros-controls repositories have reached a stable state for a ROS distro on **1st of October after an official ROS distribution release**.
 It is very likely that ros2_control packages will be available via the ROS build farm earlier than this date.
-This stable release, called **stable ros2_control release** from now, will be announced on `ROS discourse <https://discourse.openrobotics.org/c/ros-controls/ros-controls-announce-news/107>`__ on time.
+
+This stable release for a ROS distro, called **stable ros2_control release** from now, will be announced on `ROS discourse <https://discourse.openrobotics.org/c/ros-controls/ros-controls-announce-news/107>`__ on time.
 
 Versioning
 ~~~~~~~~~~
@@ -140,22 +140,24 @@ We will use the ROS-specific rules on top of ``semver's`` for versioning, but al
 
 * ros2_control heavily relies on the usage of `pluginlib <https://index.ros.org/p/pluginlib/>`__. Therefore, we distinguish two types of compiled code: non-plugin code together with plugin base classes, and plugins itself.
 
-  * ABI of plugins may change at every release, i.e., also within **stable ros2_control release**. Typically, they are built by the buildfarm and not intended to be linked against your code.
-  * For non-plugin code, the ABI is considered part of the public interface. Any change that requires recompiling dependent code is considered major (breaking) and must not be made within a **stable ros2_control release**.
+  * ABI of plugins may change at every release, i.e., also within a **stable ros2_control release**. Plugins built by the buildfarm will still be loaded by pluginlib's class loader, but code linking against the exported libraries will break.
+  * For non-plugin code, ABI breaks within a **stable ros2_control release** are less likely but still unavoidable to fix code which is critical for robot control.
+
+.. note::
+
+  * Always update your full ROS installation, not only a single package.
+  * Recompile your custom code after updating any upstream ROS packages.
+
 
 Public API declaration
 ~~~~~~~~~~~~~~~~~~~~~~
 
 According to ``semver``, every package must clearly declare a public API.
-We will use the "Public API Declaration" section of the quality declaration of a package to declare what symbols are part of the public API.
 
-For most C and C++ packages the declaration is any header that it installs.
-However, it is acceptable to define a set of symbols which are considered private.
-Avoiding private symbols in headers can help with ABI stability, but is not required.
+* For most C++ packages the declaration is any header that it installs. Private class members and methods are not part of the public API.
 
-For other languages like Python, a public API must be explicitly defined, so that it is clear what symbols can be relied on with respect to the versioning guidelines.
-The public API can also be extended to build artifacts like configuration variables, CMake config files, etc. as well as executables and command-line options and output.
-Any elements of the public API should be clearly stated in the package's documentation.
+* For other languages like Python, a public API must be explicitly defined, so that it is clear what symbols can be relied on with respect to the versioning guidelines.
+
 If something you are using is not explicitly listed as part of the public API in the package's documentation, then you cannot depend on it not changing between minor or patch versions.
 
 Deprecation strategy
@@ -165,7 +167,7 @@ Where possible, we will use the tick-tock deprecation and migration strategy for
 
 * New deprecations can be run-time messages or compiler warnings expressing that the functionality is being deprecated. The functionality will be completely removed in any future release, or at latest in the next **stable ros2_control release** (there may be details in the deprecation note).
 
-* New deprecations can also come in every release of **stable ros2_control release** by performing backports of any changes to the rolling version. These are meant to help users migrate early, however the functionality will remain available in that ROS distribution.
+* New deprecations can also come in every release of **stable ros2_control release** by performing backports of changes from the rolling version. These are meant to help users migrate early, however the functionality will remain available in that ROS distribution.
 
 Example of function ``foo`` deprecated and replaced by function ``bar``:
 
@@ -173,11 +175,25 @@ Example of function ``foo`` deprecated and replaced by function ``bar``:
    :header-rows: 1
 
    * - Package version
+     - Description
      - API
-   * - x.<y>.z
+   * - x.y.z, <x-1>.y.z
+     - Original version
      - ``void foo();``
    * - x.<y+1>.z
-     - ``[[deprecated("use bar()")]] void foo();``
-       ``void bar();``
+     - New feature including deprecation
+     - | ``[[deprecated("use bar()")]] void foo();``
+       | ``void bar();``
+   * - <x-1>.<y+1>.z
+     - Backport to **stable ros2_control release**
+     - | ``[[deprecated("use bar()")]] void foo();``
+       | ``void bar();``
    * - x.<y+2>.z
+     - New release of development version
      - ``void bar();``
+   * - <x-1>.<y+2>.z
+     - New release of **stable ros2_control release**
+     - | ``[[deprecated("use bar()")]] void foo();``
+       | ``void bar();``
+
+Have a look at :ref:`release_notes` and :ref:`migration`, where we will highlight necessary changes within every ros2_control version of a ROS distro.
