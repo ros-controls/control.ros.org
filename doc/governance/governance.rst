@@ -129,19 +129,19 @@ As ros-controls PMC is independent of the ROS PMC we thrive to follow `its strat
 it according to our needs. This includes an asynchronous release cycle, where ros-controls claims to
 have a stable release for a ROS distro on **1st of October after an official ROS distribution release**.
 It is very likely that ros2_control packages will be available via the ROS build farm earlier than this date.
-The stable release, called **released ros2_control version** from now, will be announced on `ROS discourse <https://discourse.openrobotics.org/c/ros-controls/ros-controls-announce-news/107>`__ on time.
+This stable release, called **stable ros2_control release** from now, will be announced on `ROS discourse <https://discourse.openrobotics.org/c/ros-controls/ros-controls-announce-news/107>`__ on time.
 
 Versioning
 ~~~~~~~~~~
 
 We will use the ROS-specific rules on top of ``semver's`` for versioning, but also adhere to some ros-controls-specific rules:
 
-* Major version increments (i.e. API breaking changes) should not be made within a **released ros2_control version**.
+* Major version increments (i.e. API breaking changes) should not be made within a **stable ros2_control release**.
 
 * ros2_control heavily relies on the usage of `pluginlib <https://index.ros.org/p/pluginlib/>`__. Therefore, we distinguish two types of compiled code: non-plugin code together with plugin base classes, and plugins itself.
 
-  * ABI of plugins may change at every release, i.e., also within **released ros2_control version**. Typically, they are built by the buildfarm and not intended to be linked against your code.
-  * For non-plugin code, the ABI is considered part of the public interface. Any change that requires recompiling dependent code is considered major (breaking) and must not be made within a **released ros2_control version**.
+  * ABI of plugins may change at every release, i.e., also within **stable ros2_control release**. Typically, they are built by the buildfarm and not intended to be linked against your code.
+  * For non-plugin code, the ABI is considered part of the public interface. Any change that requires recompiling dependent code is considered major (breaking) and must not be made within a **stable ros2_control release**.
 
 Public API declaration
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -163,9 +163,9 @@ Deprecation strategy
 
 Where possible, we will use the tick-tock deprecation and migration strategy for breaking changes (API or behavior-breaking changes).
 
-* New deprecations can be run-time messages or compiler warnings expressing that the functionality is being deprecated. The functionality will be completely removed in any future release, or at latest in the next **released ros2_control version** (there may be details in the deprecation note).
+* New deprecations can be run-time messages or compiler warnings expressing that the functionality is being deprecated. The functionality will be completely removed in any future release, or at latest in the next **stable ros2_control release** (there may be details in the deprecation note).
 
-* New deprecations can also come in every release of **released ros2_control version** by performing backports of any changes to the rolling version. These are meant to help users migrate early, however the functionality will remain available in that ROS distribution.
+* New deprecations can also come in every release of **stable ros2_control release** by performing backports of any changes to the rolling version. These are meant to help users migrate early, however the functionality will remain available in that ROS distribution.
 
 Example of function ``foo`` deprecated and replaced by function ``bar``:
 
