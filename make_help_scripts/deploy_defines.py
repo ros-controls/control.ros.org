@@ -105,7 +105,7 @@ repos = {
             "galactic": "galactic",
             "humble": "humble",
             "iron": "iron",
-            "jazzy": "master",
+            "jazzy": "jazzy",
             "kilted": "master",
             "rolling": "master"
         },
