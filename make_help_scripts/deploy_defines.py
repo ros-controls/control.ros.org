@@ -64,7 +64,8 @@ branch_version = {
     base_branch: "humble", # PRs are tested on humble
     "iron": "iron",
     "jazzy": "jazzy",
-    "master": "rolling"  # master is rolling
+    "kilted": "kilted",
+    "rolling": "rolling"
 }
 
 # the subrepos which are cloned into the branches and, optionally, their corresponding PR for checkout
@@ -78,7 +79,8 @@ repos = {
             "galactic": "galactic",
             "humble": "humble",
             "iron": "iron",
-            "jazzy": "master",
+            "jazzy": "jazzy",
+            "kilted": "master",
             "rolling": "master"
         },
         "pr": os.environ.get('ROS2_CONTROL_PR')
@@ -90,7 +92,8 @@ repos = {
             "galactic": "galactic",
             "humble": "humble",
             "iron": "iron",
-            "jazzy": "master",
+            "jazzy": "jazzy",
+            "kilted": "master",
             "rolling": "master"
         },
         "pr": os.environ.get('ROS2_CONTROLLERS_PR')
@@ -102,7 +105,8 @@ repos = {
             "galactic": "galactic",
             "humble": "humble",
             "iron": "iron",
-            "jazzy": "master",
+            "jazzy": "jazzy",
+            "kilted": "master",
             "rolling": "master"
         },
         "pr": os.environ.get('ROS2_CONTROL_DEMOS_PR')
@@ -126,7 +130,9 @@ repos = {
             "galactic": "galactic",
             "humble": "humble",
             "iron": "iron",
-            "rolling": "master"  # master is rolling
+            "jazzy": "jazzy",
+            "kilted": "kilted",
+            "rolling": "rolling"
         },
         "pr": os.environ.get('GZ_ROS2_CONTROL_PR')
     },
@@ -137,7 +143,8 @@ repos = {
             "galactic": "humble",
             "humble": "humble",
             "iron": "ros2-master",
-            "jazzy": "ros2-master",
+            "jazzy": "jazzy",
+            "kilted": "ros2-master",
             "rolling": "ros2-master"
         },
         "pr": None
@@ -149,7 +156,8 @@ repos = {
             "galactic": "galactic-devel",
             "humble": "humble",
             "iron": "master",
-            "jazzy": "master",
+            "jazzy": "jazzy",
+            "kilted": "master",
             "rolling": "master"
         },
         "pr": None
@@ -162,6 +170,7 @@ repos = {
             "humble": "humble",
             "iron": "jazzy",
             "jazzy": "jazzy",
+            "kilted": "master",
             "rolling": "master"
         },
         "pr": None
@@ -173,7 +182,8 @@ repos = {
             "galactic": "humble",
             "humble": "humble",
             "iron": "master",
-            "jazzy": "master",
+            "jazzy": "jazzy",
+            "kilted": "master",
             "rolling": "master"
         },
         "pr": None
