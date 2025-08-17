@@ -211,16 +211,19 @@ else:
   base_branch = "humble"
 
 # Add branches you want to whitelist here.
-smv_branch_whitelist = r"^(foxy|galactic|"+ base_branch + r")$"
-smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy|galactic|humble|iron).*$"
+smv_branch_whitelist = r"^(foxy|galactic|humble|iron|jazzy|kilted|"+ base_branch + r")$"
+smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy|galactic|humble|iron|jazzy).*$"
 smv_remote_whitelist = r"^(origin)$"
-smv_latest_version = "humble"
-smv_eol_versions = []
+smv_latest_version = "kilted"
+smv_eol_versions = ["foxy", "galactic", "iron"]
 
 distro_full_names = {
     "foxy": "Foxy Fitzroy",
     "galactic": "Galactic Geochelone",
     "humble": "Humble Hawksbill",
+    "iron": "Iron Irwini",
+    "jazzy": "Jazzy Jalisco",
+    "kilted": "Kilted Kaiju",
     "rolling": "Rolling Ridley",
 }
 
