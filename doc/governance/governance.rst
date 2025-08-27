@@ -169,6 +169,9 @@ Where possible, we will use the tick-tock deprecation and migration strategy for
 
 * New deprecations can also come in every release of **stable ros2_control release** by performing backports of changes from the rolling version. These are meant to help users migrate early, however the functionality will remain available in that ROS distribution.
 
+The ros2_control maintainer team considers safety a top priority and bugs or issues found in the framework may be back ported to distros regardless of API stability.
+These issues will be discussed at the biweekly PMC meeting where the community can decide the best route forward.
+
 Example of function ``foo`` deprecated and replaced by function ``bar``:
 
 .. list-table::
