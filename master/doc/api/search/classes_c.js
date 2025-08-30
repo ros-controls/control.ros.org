@@ -2,8 +2,9 @@ var searchData=
 [
   ['mecanumdrivecontroller_0',['MecanumDriveController',['../classmecanum__drive__controller_1_1MecanumDriveController.html',1,'mecanum_drive_controller']]],
   ['mimicjoint_1',['mimicjoint',['../structhardware__interface_1_1MimicJoint.html',1,'hardware_interface::MimicJoint'],['../structMimicJoint.html',1,'MimicJoint']]],
-  ['motionprimitivesforwardcontroller_2',['MotionPrimitivesForwardController',['../classmotion__primitives__forward__controller_1_1MotionPrimitivesForwardController.html',1,'motion_primitives_forward_controller']]],
-  ['movingaveragestatisticsdata_3',['MovingAverageStatisticsData',['../classros2__control_1_1MovingAverageStatisticsData.html',1,'ros2_control']]],
-  ['multiinterfaceforwardcommandcontroller_4',['MultiInterfaceForwardCommandController',['../classforward__command__controller_1_1MultiInterfaceForwardCommandController.html',1,'forward_command_controller']]],
-  ['mutex_5',['mutex',['../classrealtime__tools_1_1detail_1_1mutex.html',1,'realtime_tools::detail']]]
+  ['motionprimitivesbasecontroller_2',['MotionPrimitivesBaseController',['../classmotion__primitives__controllers_1_1MotionPrimitivesBaseController.html',1,'motion_primitives_controllers']]],
+  ['motionprimitivesforwardcontroller_3',['MotionPrimitivesForwardController',['../classmotion__primitives__controllers_1_1MotionPrimitivesForwardController.html',1,'motion_primitives_controllers']]],
+  ['movingaveragestatisticsdata_4',['MovingAverageStatisticsData',['../classros2__control_1_1MovingAverageStatisticsData.html',1,'ros2_control']]],
+  ['multiinterfaceforwardcommandcontroller_5',['MultiInterfaceForwardCommandController',['../classforward__command__controller_1_1MultiInterfaceForwardCommandController.html',1,'forward_command_controller']]],
+  ['mutex_6',['mutex',['../classrealtime__tools_1_1detail_1_1mutex.html',1,'realtime_tools::detail']]]
 ];

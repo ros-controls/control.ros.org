@@ -1,0 +1,413 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Example 17: RRBot with Hardware Component that publishes diagnostics &mdash; ROS2_Control: Jazzy Aug 2025 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/reviewer_stats.css?v=068b34ac" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//jazzy/doc/ros2_control_demos/example_17/doc/userdoc.html" />
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=3aa49437"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../../_static/tabs.js?v=35627e55"></script>
+      <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Utilities" href="../../../utilities.html" />
+    <link rel="prev" title="DiffBot with Chained Controllers" href="../../example_16/doc/userdoc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html">ros2_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/index.html">Demos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#what-you-can-find-in-this-repository">What you can find in this repository</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#goals">Goals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#examples-overview">Examples Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#quick-hints">Quick Hints</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/index.html#examples">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../example_1/doc/userdoc.html">Example 1: RRBot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_2/doc/userdoc.html">Example 2: DiffBot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_3/doc/userdoc.html">Example 3: RRBot with multiple interfaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_4/doc/userdoc.html">Example 4: Industrial robot with integrated sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_5/doc/userdoc.html">Example 5: Industrial robots with externally connected sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_6/doc/userdoc.html">Example 6: Modular robots with separate communication to each actuator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_7/doc/userdoc.html">Example 7: Full tutorial with a 6DOF robot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_8/doc/userdoc.html">Example 8: Using transmissions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_9/doc/userdoc.html">Example 9: Gazebo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_10/doc/userdoc.html">Example 10: Industrial robot with GPIO interfaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_11/doc/userdoc.html">Example 11: CarlikeBot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_12/doc/userdoc.html">Example 12: Controller chaining</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_13/doc/userdoc.html">Example 13: Multiple robots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_14/doc/userdoc.html">Example 14: Modular robots with actuators not providing states</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_15/doc/userdoc.html">Example 15: Using multiple controller managers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example_16/doc/userdoc.html">Example 16: DiffBot with chained controllers</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Example 17: RRBot with Hardware Component that publishes diagnostics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tutorial-steps">Tutorial steps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementation-details-of-the-diagnostic-publisher">Implementation Details of the Diagnostic Publisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#files-used-for-this-demos">Files used for this demos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#controllers-from-this-demo">Controllers from this demo</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utilities.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes/release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../migration/migration.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_list/api_list.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../governance/governance.html">Project Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../statistics.html">Documentation Usage</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ROS2_Control: Jazzy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../doc/index.html">Demos</a></li>
+      <li class="breadcrumb-item active">Example 17: RRBot with Hardware Component that publishes diagnostics</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ros-controls/ros2_control_demos/blob/jazzy/example_17/doc/userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+
+  <section id="example-17-rrbot-with-hardware-component-that-publishes-diagnostics">
+<span id="ros2-control-demos-example-17-userdoc"></span><h1>Example 17: RRBot with Hardware Component that publishes diagnostics<a class="headerlink" href="#example-17-rrbot-with-hardware-component-that-publishes-diagnostics" title="Link to this heading"></a></h1>
+<p>This example shows how to publish diagnostics from a hardware component using ROS 2 features available within the <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> framework.</p>
+<p>It is essentially the same as Example 1, but with a modified hardware interface plugin that demonstrates two methods for publishing status information:
+1.  Using the standard <code class="docutils literal notranslate"><span class="pre">diagnostic_updater</span></code> on the default node to publish to the <code class="docutils literal notranslate"><span class="pre">/diagnostics</span></code> topic. This is the recommended approach for hardware status reporting.
+2.  Using the Controller Manager’s Executor to add a custom ROS 2 node for publishing to a separate, non-standard topic.</p>
+<p>See the <a class="reference internal" href="#diagnostic-publisher-implementation"><span class="std std-ref">Implementation Details of the Diagnostic Publisher</span></a> for more information.</p>
+<p>For <em>example_17</em>, the hardware interface plugin is implemented having only one interface.</p>
+<ul class="simple">
+<li><p>The communication is done using proprietary API to communicate with the robot control box.</p></li>
+<li><p>Data for all joints is exchanged at once.</p></li>
+<li><p>Examples: KUKA RSI</p></li>
+</ul>
+<p>The <em>RRBot</em> URDF files can be found in the <code class="docutils literal notranslate"><span class="pre">description/urdf</span></code> folder.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The commands below are given for a local installation of this repository and its dependencies as well as for running them from a docker container. For more information on the docker usage see <a class="reference internal" href="../../doc/index.html#using-docker"><span class="std std-ref">Using Docker</span></a>.</p>
+</div>
+<section id="tutorial-steps">
+<h2>Tutorial steps<a class="headerlink" href="#tutorial-steps" title="Link to this heading"></a></h2>
+<p>Follow the same basic steps as in Example 1. You can find the details here:
+<a class="reference internal" href="../../example_1/doc/userdoc.html#ros2-control-demos-example-1-userdoc"><span class="std std-ref">Example 1: RRBot System Position Only</span></a>.</p>
+<p>This tutorial differs by including a hardware interface that publishes diagnostics using two different mechanisms:</p>
+<ol class="arabic simple">
+<li><p>A <strong>default node</strong> is automatically provided to the hardware component. We use the standard <code class="docutils literal notranslate"><span class="pre">diagnostic_updater</span></code> library on this node to publish structured diagnostic data.</p></li>
+<li><p>A <strong>custom ROS 2 node</strong> is created inside the hardware interface and added to the executor provided by the controller manager. This demonstrates a more manual approach useful for non-diagnostic topics.</p></li>
+</ol>
+<p>The nodes and topics:</p>
+<ul class="simple">
+<li><p>Default node (via <code class="docutils literal notranslate"><span class="pre">diagnostic_updater</span></code>):
+- Is named after the hardware component (e.g., <code class="docutils literal notranslate"><span class="pre">/RRBot</span></code>).
+- Publishes periodically to the standard <code class="docutils literal notranslate"><span class="pre">/diagnostics</span></code> topic.
+- Uses message type <code class="docutils literal notranslate"><span class="pre">diagnostic_msgs/msg/DiagnosticArray</span></code>.</p></li>
+<li><p>Custom node:
+- Is named <code class="docutils literal notranslate"><span class="pre">&lt;hardware_name&gt;_custom_node</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">/rrbot_custom_node</span></code>).
+- Publishes on the topic <code class="docutils literal notranslate"><span class="pre">/rrbot_custom_status</span></code>.
+- Uses message type <code class="docutils literal notranslate"><span class="pre">std_msgs/msg/String</span></code>.
+- Sends a message every 2 seconds.</p></li>
+</ul>
+<p>To check that the nodes are running and diagnostics are published correctly:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-TG9jYWw=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-TG9jYWw=" name="TG9jYWw=" role="tab" tabindex="0">Local</button><button aria-controls="panel-0-RG9ja2Vy" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-RG9ja2Vy" name="RG9ja2Vy" role="tab" tabindex="-1">Docker</button></div><div aria-labelledby="tab-0-TG9jYWw=" class="sphinx-tabs-panel group-tab" id="panel-0-TG9jYWw=" name="TG9jYWw=" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># List available nodes</span>
+ros2<span class="w"> </span>node<span class="w"> </span>list
+
+<span class="c1"># You should see something like:</span>
+<span class="c1"># /rrbot           (the default node)</span>
+<span class="c1"># /rrbot_custom_node (the custom node)</span>
+<span class="c1"># /controller_manager</span>
+<span class="c1"># /robot_state_publisher</span>
+
+<span class="c1"># List topics and confirm diagnostics topics are available</span>
+ros2<span class="w"> </span>topic<span class="w"> </span>list
+
+<span class="c1"># Confirm message type of the diagnostics topic</span>
+ros2<span class="w"> </span>topic<span class="w"> </span>info<span class="w"> </span>/diagnostics
+<span class="c1"># Should show: diagnostic_msgs/msg/DiagnosticArray</span>
+
+<span class="c1"># Confirm message type of the custom status topic</span>
+ros2<span class="w"> </span>topic<span class="w"> </span>info<span class="w"> </span>/rrbot_custom_status
+<span class="c1"># Should show: std_msgs/msg/String</span>
+
+<span class="c1"># Echo the raw messages published by the default node</span>
+ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/diagnostics
+
+<span class="c1"># Echo the messages published by the custom node</span>
+ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/rrbot_custom_status
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-RG9ja2Vy" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-RG9ja2Vy" name="RG9ja2Vy" role="tabpanel" tabindex="0"><p>Enter the running container shell first:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>ros2_control_demos<span class="w"> </span>./entrypoint.sh<span class="w"> </span>bash
+</pre></div>
+</div>
+<p>Then run the same commands inside the container:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>node<span class="w"> </span>list
+ros2<span class="w"> </span>topic<span class="w"> </span>info<span class="w"> </span>/diagnostics
+ros2<span class="w"> </span>topic<span class="w"> </span>info<span class="w"> </span>/rrbot_custom_status
+ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/diagnostics
+ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/rrbot_custom_status
+</pre></div>
+</div>
+</div></div>
+<p>The echoed messages should look similar to:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># From /diagnostics (showing the default node&#39;s output)</span>
+<span class="nt">header</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">stamp</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">sec</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1678886401</span>
+<span class="w">    </span><span class="nt">nanosec</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">123456789</span>
+<span class="nt">status</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;RRBot&quot;</span>
+<span class="w">  </span><span class="nt">message</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Hardware</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">OK&quot;</span>
+<span class="w">  </span><span class="nt">hardware_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="w">  </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="nn">---</span>
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># From /rrbot_custom_status (showing the custom node&#39;s output)</span>
+data:<span class="w"> </span>RRBot<span class="w"> </span><span class="s1">&#39;RRBot&#39;</span><span class="w"> </span>custom<span class="w"> </span>node<span class="w"> </span>is<span class="w"> </span>alive<span class="w"> </span>at<span class="w"> </span><span class="m">1751087597</span>.146549
+---
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The custom diagnostics node and its timer are created only if the executor is successfully passed to the hardware component. If you don’t see the topic or node, ensure the hardware plugin is correctly implemented and that the controller manager is providing an executor.</p>
+</div>
+</section>
+<section id="implementation-details-of-the-diagnostic-publisher">
+<span id="diagnostic-publisher-implementation"></span><h2>Implementation Details of the Diagnostic Publisher<a class="headerlink" href="#implementation-details-of-the-diagnostic-publisher" title="Link to this heading"></a></h2>
+<p>This example demonstrates the two recommended ways for a hardware component to perform ROS 2 communications: using the standard <code class="docutils literal notranslate"><span class="pre">diagnostic_updater</span></code> on the default node, and creating a separate custom node added to the Controller Manager’s executor.</p>
+<p><strong>1. Using the ``diagnostic_updater`` with the Default Node (Standard Method)</strong></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">diagnostic_updater</span></code> library is the standard ROS 2 tool for publishing diagnostics. It automatically handles timer creation and publishing to the <code class="docutils literal notranslate"><span class="pre">/diagnostics</span></code> topic, making it the preferred method. The <code class="docutils literal notranslate"><span class="pre">HardwareComponentInterface</span></code> provides a <code class="docutils literal notranslate"><span class="pre">get_node()</span></code> method to access the default node, which is passed to the updater.</p>
+<p>The key steps are:
+1.  <strong>Create an Updater</strong>: Instantiate <code class="docutils literal notranslate"><span class="pre">diagnostic_updater::Updater</span></code>, passing it the default node. The updater internally creates a publisher to <code class="docutils literal notranslate"><span class="pre">/diagnostics</span></code> and a periodic timer (default 1 Hz).
+2.  <strong>Set Hardware ID</strong>: Set a unique identifier for the hardware component.
+3.  <strong>Add a Diagnostic Task</strong>: Add a function that will be called periodically by the updater’s internal timer. This function populates a <code class="docutils literal notranslate"><span class="pre">DiagnosticStatusWrapper</span></code> with the current status of the hardware.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;diagnostic_updater/diagnostic_updater.hpp&quot;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">get_node</span><span class="p">())</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">updater_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">diagnostic_updater</span><span class="o">::</span><span class="n">Updater</span><span class="o">&gt;</span><span class="p">(</span><span class="n">get_node</span><span class="p">());</span>
+<span class="w">  </span><span class="n">updater_</span><span class="o">-&gt;</span><span class="n">setHardwareID</span><span class="p">(</span><span class="n">get_hardware_info</span><span class="p">().</span><span class="n">name</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">updater_</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span>
+<span class="w">    </span><span class="n">get_hardware_info</span><span class="p">().</span><span class="n">name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; Status&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">RRBotSystemPositionOnlyHardware</span><span class="o">::</span><span class="n">produce_diagnostics</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">RRBotSystemPositionOnlyHardware</span><span class="o">::</span><span class="n">produce_diagnostics</span><span class="p">(</span>
+<span class="w">  </span><span class="n">diagnostic_updater</span><span class="o">::</span><span class="n">DiagnosticStatusWrapper</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">stat</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="c1">// Add status summary</span>
+<span class="w">  </span><span class="n">stat</span><span class="p">.</span><span class="n">summary</span><span class="p">(</span><span class="n">diagnostic_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">DiagnosticStatus</span><span class="o">::</span><span class="n">OK</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Hardware is OK&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">// Optionally add key-value pairs</span>
+<span class="w">  </span><span class="c1">// stat.add(&quot;voltage&quot;, &quot;24.1V&quot;);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>2. Creating a Custom Node with the Executor (Advanced Method)</strong></p>
+<p>For non-diagnostic topics or when a separate node identity is required, a hardware component can create its own node and add it to the Controller Manager’s executor.</p>
+<ol class="arabic simple">
+<li><p><strong>Receiving the Executor Reference</strong>: The <code class="docutils literal notranslate"><span class="pre">on_init</span></code> method of the hardware interface is implemented with an updated signature that accepts <code class="docutils literal notranslate"><span class="pre">HardwareComponentInterfaceParams</span></code>. This struct contains a weak pointer to the <code class="docutils literal notranslate"><span class="pre">ControllerManager</span></code>’s executor.</p></li>
+</ol>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Get Weak Pointer to Executor from HardwareComponentInterfaceParams</span>
+<span class="n">executor_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">params</span><span class="p">.</span><span class="n">executor</span><span class="p">;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Safely Accessing the Executor</strong>: Before using the executor, its <code class="docutils literal notranslate"><span class="pre">weak_ptr</span></code> must be “locked” into a <code class="docutils literal notranslate"><span class="pre">shared_ptr</span></code>. This is a crucial safety check to ensure the executor is still valid.</p></li>
+</ol>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">locked_executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">executor_</span><span class="p">.</span><span class="n">lock</span><span class="p">())</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="c1">// ... executor is valid and can be used here ...</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">CallbackReturn</span><span class="o">::</span><span class="n">ERROR</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Creating and Adding a Node</strong>: Inside the locked scope, a standard <code class="docutils literal notranslate"><span class="pre">rclcpp::Node</span></code> is created. This new node is then added to the <code class="docutils literal notranslate"><span class="pre">ControllerManager</span></code>’s executor. This allows the node’s callbacks (e.g., for timers or subscriptions) to be processed by the same multi-threaded executor.</p></li>
+</ol>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Inside the `if (auto locked_executor = ...)` block</span>
+<span class="n">custom_status_node_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Node</span><span class="o">&gt;</span><span class="p">(</span><span class="n">get_hardware_info</span><span class="p">().</span><span class="n">name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;_custom_node&quot;</span><span class="p">);</span>
+<span class="n">locked_executor</span><span class="o">-&gt;</span><span class="n">add_node</span><span class="p">(</span><span class="n">custom_status_node_</span><span class="o">-&gt;</span><span class="n">get_node_base_interface</span><span class="p">());</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p><strong>Publishing Status Messages</strong>: A publisher and a periodic wall timer are created on the new custom node. The timer’s callback periodically publishes a status message, demonstrating that the node is alive and running alongside the main control loop.</p></li>
+</ol>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Inside the `if (auto locked_executor = ...)` block</span>
+<span class="n">custom_status_publisher_</span><span class="w"> </span><span class="o">=</span>
+<span class="w">  </span><span class="n">custom_status_node_</span><span class="o">-&gt;</span><span class="n">create_publisher</span><span class="o">&lt;</span><span class="n">std_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">String</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;rrbot_custom_status&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+
+<span class="n">custom_status_timer_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">custom_status_node_</span><span class="o">-&gt;</span><span class="n">create_wall_timer</span><span class="p">(</span>
+<span class="w">  </span><span class="mi">2</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="k">this</span><span class="p">](){</span><span class="w"> </span><span class="cm">/* ... lambda to publish message ... */</span><span class="w"> </span><span class="p">});</span>
+</pre></div>
+</div>
+<p><strong>3. (Extra)Using the Default Node, but with a Custom Publisher</strong></p>
+<p>This is not implemented in the example, but is also a viable option.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Get Default Node added to executor</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">default_node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_node</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">default_node</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">default_status_publisher_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">default_node</span><span class="o">-&gt;</span><span class="n">create_publisher</span><span class="o">&lt;</span><span class="n">std_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">String</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;rrbot_default_status&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="o">::</span><span class="nn">chrono_literals</span><span class="p">;</span>
+<span class="w">    </span><span class="n">default_status_timer_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">default_node</span><span class="o">-&gt;</span><span class="n">create_wall_timer</span><span class="p">(</span><span class="mf">2.5</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="k">this</span><span class="p">](){</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This pattern is the recommended approach for hardware components that need to perform their own ROS communications without interfering with the real-time control loop.</p>
+</section>
+<section id="files-used-for-this-demos">
+<h2>Files used for this demos<a class="headerlink" href="#files-used-for-this-demos" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Launch file: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/jazzy/example_1/bringup/launch/rrbot.launch.py">rrbot.launch.py</a></p></li>
+<li><p>Controllers yaml:</p>
+<ul>
+<li><p><a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/jazzy/example_1/bringup/config/rrbot_controllers.yaml">rrbot_controllers.yaml</a></p></li>
+<li><p><a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/jazzy/example_1/bringup/config/rrbot_jtc.yaml">rrbot_jtc.yaml</a></p></li>
+</ul>
+</li>
+<li><p>URDF file: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/jazzy/example_1/description/urdf/rrbot.urdf.xacro">rrbot.urdf.xacro</a></p>
+<ul>
+<li><p>Description: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/jazzy/ros2_control_demo_description/rrbot/urdf/rrbot_description.urdf.xacro">rrbot_description.urdf.xacro</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> tag: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/jazzy/example_1/description/ros2_control/rrbot.ros2_control.xacro">rrbot.ros2_control.xacro</a></p></li>
+</ul>
+</li>
+<li><p>RViz configuration: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/jazzy/ros2_control_demo_description/rrbot/rviz/rrbot.rviz">rrbot.rviz</a></p></li>
+<li><p>Hardware interface plugin: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/jazzy/example_17/hardware/rrbot.cpp">rrbot.cpp</a></p></li>
+</ul>
+</section>
+<section id="controllers-from-this-demo">
+<h2>Controllers from this demo<a class="headerlink" href="#controllers-from-this-demo" title="Link to this heading"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Joint</span> <span class="pre">State</span> <span class="pre">Broadcaster</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/tree/jazzy/joint_state_broadcaster">ros2_controllers repository</a>): <a class="reference internal" href="../../../ros2_controllers/joint_state_broadcaster/doc/userdoc.html#joint-state-broadcaster-userdoc"><span class="std std-ref">doc</span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Forward</span> <span class="pre">Command</span> <span class="pre">Controller</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/tree/jazzy/forward_command_controller">ros2_controllers repository</a>): <a class="reference internal" href="../../../ros2_controllers/forward_command_controller/doc/userdoc.html#forward-command-controller-userdoc"><span class="std std-ref">doc</span></a></p></li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../example_16/doc/userdoc.html" class="btn btn-neutral float-left" title="DiffBot with Chained Controllers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../../utilities.html" class="btn btn-neutral float-right" title="Utilities" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: jazzy
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Releases</dt>
+        <dd><a href="userdoc.html">Jazzy (latest)</a></dd><br>
+        <dd><a href="../../../../../iron/index.html">Iron (EOL)</a></dd><br>
+        
+        <dd><a href="../../../../../humble/index.html">Humble</a></dd><br>
+        <dd><a href="../../../../../galactic/index.html">Galactic (EOL)</a></dd><br>
+        
+        <dd><a href="../../../../../foxy/index.html">Foxy (EOL)</a></dd><br>
+        
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="../../../../../rolling/doc/ros2_control_demos/example_17/doc/userdoc.html">Rolling</a></dd>
+      <dd><a href="../../../../../kilted/doc/ros2_control_demos/example_17/doc/userdoc.html">Kilted</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
