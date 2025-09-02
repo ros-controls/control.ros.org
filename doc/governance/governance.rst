@@ -141,12 +141,14 @@ We will use the ROS-specific rules on top of ``semver's`` for versioning, but al
 * ros2_control heavily relies on the usage of `pluginlib <https://index.ros.org/p/pluginlib/>`__. Therefore, we distinguish two types of compiled code: non-plugin code together with plugin base classes, and plugins itself.
 
   * ABI of plugins may change at every release, i.e., also within a **stable ros2_control release**. Plugins built by the buildfarm will still be loaded by pluginlib's class loader, but code linking against the exported libraries will break.
-  * For non-plugin code, ABI breaks within a **stable ros2_control release** are less likely but still unavoidable to fix code, e.g. critical for safety aspects of robot control.
+  * For non-plugin code, ABI breaks within a **stable ros2_control release** are less likely but still unavoidable to fix code, which is critical regarding safety aspects of robot control.
 
-.. note::
+  .. important::
 
-  * Always update your full ROS installation, not only a single package. For example, on Ubuntu run ``sudo apt update && sudo apt upgrade`` after you install a new package.
-  * Recompile your custom code after updating any upstream ROS packages.
+    * Always update your full ROS installation, not only a single package. For example, on Ubuntu run ``sudo apt update && sudo apt upgrade`` after you install a new package.
+    * Recompile your custom code after updating any upstream ROS packages.
+
+* The same applies for run-time behavior changes: Changes within a **stable ros2_control release** are less likely but still unavoidable to fix safety-critical behavior. Where possible, we try to keep the legacy behavior configurable together with a deprecation warning, see section below.
 
 The ros2_control maintainer team considers safety a top priority and bugs or issues found in the framework may be back ported to distros regardless of API stability.
 These issues will be discussed at the biweekly PMC meeting where the community can decide the best route forward.
@@ -173,7 +175,7 @@ Where possible, we will use the tick-tock deprecation and migration strategy for
 
 Have a look at :ref:`release_notes` and :ref:`migration`, where we will highlight necessary changes within every ros2_control version of a ROS distro.
 
-.. note::
+.. important::
 
   Don't use compiler flags like ``-Wall -Werror`` in your development environment, as they may cause unnecessary build failures if deprecation notes are added.
 
