@@ -141,13 +141,15 @@ We will use the ROS-specific rules on top of ``semver's`` for versioning, but al
 * ros2_control heavily relies on the usage of `pluginlib <https://index.ros.org/p/pluginlib/>`__. Therefore, we distinguish two types of compiled code: non-plugin code together with plugin base classes, and plugins itself.
 
   * ABI of plugins may change at every release, i.e., also within a **stable ros2_control release**. Plugins built by the buildfarm will still be loaded by pluginlib's class loader, but code linking against the exported libraries will break.
-  * For non-plugin code, ABI breaks within a **stable ros2_control release** are less likely but still unavoidable to fix code which is critical for robot control.
+  * For non-plugin code, ABI breaks within a **stable ros2_control release** are less likely but still unavoidable to fix code, e.g. critical for safety aspects of robot control.
 
 .. note::
 
-  * Always update your full ROS installation, not only a single package.
+  * Always update your full ROS installation, not only a single package. For example, on Ubuntu run ``sudo apt update && sudo apt upgrade`` after you install a new package.
   * Recompile your custom code after updating any upstream ROS packages.
 
+The ros2_control maintainer team considers safety a top priority and bugs or issues found in the framework may be back ported to distros regardless of API stability.
+These issues will be discussed at the biweekly PMC meeting where the community can decide the best route forward.
 
 Public API declaration
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -167,10 +169,13 @@ Where possible, we will use the tick-tock deprecation and migration strategy for
 
 * New deprecations can be run-time messages or compiler warnings expressing that the functionality is being deprecated. The functionality will be completely removed in any future release, or at latest in the next **stable ros2_control release** (there may be details in the deprecation note).
 
-* New deprecations can also come in every release of **stable ros2_control release** by performing backports of changes from the rolling version. These are meant to help users migrate early, however the functionality will remain available in that ROS distribution.
+* New deprecations can also come in every release of **stable ros2_control release** by performing backports of changes from the rolling version. These are meant to help users migrate early, however the functionality will remain available in that specific ROS distribution.
 
-The ros2_control maintainer team considers safety a top priority and bugs or issues found in the framework may be back ported to distros regardless of API stability.
-These issues will be discussed at the biweekly PMC meeting where the community can decide the best route forward.
+Have a look at :ref:`release_notes` and :ref:`migration`, where we will highlight necessary changes within every ros2_control version of a ROS distro.
+
+.. note::
+
+  Don't use compiler flags like ``-Wall -Werror`` in your development environment, as they may cause unnecessary build failures if deprecation notes are added.
 
 Example of function ``foo`` deprecated and replaced by function ``bar``:
 
@@ -198,5 +203,3 @@ Example of function ``foo`` deprecated and replaced by function ``bar``:
      - New release of **stable ros2_control release**
      - | ``[[deprecated("use bar()")]] void foo();``
        | ``void bar();``
-
-Have a look at :ref:`release_notes` and :ref:`migration`, where we will highlight necessary changes within every ros2_control version of a ROS distro.
