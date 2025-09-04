@@ -215,9 +215,12 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>get_name</b> (
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-types" name="pro-types"></a>
 Protected Types</h2></td></tr>
-<tr class="memitem:a0c8552358e2ccacdf956e35fdcb76be7" id="r_a0c8552358e2ccacdf956e35fdcb76be7"><td class="memItemLeft" align="right" valign="top"><a id="a0c8552358e2ccacdf956e35fdcb76be7" name="a0c8552358e2ccacdf956e35fdcb76be7"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>StatePublisher</b> = <a class="el" href="classrealtime__tools_1_1RealtimePublisher.html">realtime_tools::RealtimePublisher</a>&lt; geometry_msgs::msg::WrenchStamped &gt;</td></tr>
-<tr class="separator:a0c8552358e2ccacdf956e35fdcb76be7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c8288b253255737c788cd046e5fc711" id="r_a4c8288b253255737c788cd046e5fc711"><td class="memItemLeft" align="right" valign="top"><a id="a4c8288b253255737c788cd046e5fc711" name="a4c8288b253255737c788cd046e5fc711"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>StatePublisher</b> = rclcpp::Publisher&lt; WrenchMsgType &gt;::SharedPtr</td></tr>
+<tr class="separator:a4c8288b253255737c788cd046e5fc711"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c8f2a2fbd1925dae0f9177bf1e5c059" id="r_a6c8f2a2fbd1925dae0f9177bf1e5c059"><td class="memItemLeft" align="right" valign="top"><a id="a6c8f2a2fbd1925dae0f9177bf1e5c059" name="a6c8f2a2fbd1925dae0f9177bf1e5c059"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>StateRTPublisher</b> = <a class="el" href="classrealtime__tools_1_1RealtimePublisher.html">realtime_tools::RealtimePublisher</a>&lt; WrenchMsgType &gt;</td></tr>
+<tr class="separator:a6c8f2a2fbd1925dae0f9177bf1e5c059"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -245,12 +248,30 @@ Params&#160;</td><td class="memItemRight" valign="bottom"><b>params_</b></td></t
 <tr class="memitem:a562062469b4a9f9a5e12f3ccef4e0756" id="r_a562062469b4a9f9a5e12f3ccef4e0756"><td class="memItemLeft" align="right" valign="top"><a id="a562062469b4a9f9a5e12f3ccef4e0756" name="a562062469b4a9f9a5e12f3ccef4e0756"></a>
 std::unique_ptr&lt; <a class="el" href="classsemantic__components_1_1ForceTorqueSensor.html">semantic_components::ForceTorqueSensor</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>force_torque_sensor_</b></td></tr>
 <tr class="separator:a562062469b4a9f9a5e12f3ccef4e0756"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56ded38ecd841e95b6b2a867e712f73b" id="r_a56ded38ecd841e95b6b2a867e712f73b"><td class="memItemLeft" align="right" valign="top"><a id="a56ded38ecd841e95b6b2a867e712f73b" name="a56ded38ecd841e95b6b2a867e712f73b"></a>
-rclcpp::Publisher&lt; geometry_msgs::msg::WrenchStamped &gt;::SharedPtr&#160;</td><td class="memItemRight" valign="bottom"><b>sensor_state_publisher_</b></td></tr>
-<tr class="separator:a56ded38ecd841e95b6b2a867e712f73b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad46418132d6b9a061a33aecc7016a301" id="r_ad46418132d6b9a061a33aecc7016a301"><td class="memItemLeft" align="right" valign="top"><a id="ad46418132d6b9a061a33aecc7016a301" name="ad46418132d6b9a061a33aecc7016a301"></a>
-std::unique_ptr&lt; <a class="el" href="classrealtime__tools_1_1RealtimePublisher.html">StatePublisher</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>realtime_publisher_</b></td></tr>
-<tr class="separator:ad46418132d6b9a061a33aecc7016a301"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24ef8a8953d091cd5bbae753dbcbee0b" id="r_a24ef8a8953d091cd5bbae753dbcbee0b"><td class="memItemLeft" align="right" valign="top"><a id="a24ef8a8953d091cd5bbae753dbcbee0b" name="a24ef8a8953d091cd5bbae753dbcbee0b"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>has_filter_chain_</b> = false</td></tr>
+<tr class="separator:a24ef8a8953d091cd5bbae753dbcbee0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19f8e0ab85e3cfddf0603ab7f2a053a9" id="r_a19f8e0ab85e3cfddf0603ab7f2a053a9"><td class="memItemLeft" align="right" valign="top"><a id="a19f8e0ab85e3cfddf0603ab7f2a053a9" name="a19f8e0ab85e3cfddf0603ab7f2a053a9"></a>
+WrenchMsgType&#160;</td><td class="memItemRight" valign="bottom"><b>wrench_raw_</b></td></tr>
+<tr class="separator:a19f8e0ab85e3cfddf0603ab7f2a053a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0365cb7f5748feb3af6ec1ea48c78a1" id="r_ae0365cb7f5748feb3af6ec1ea48c78a1"><td class="memItemLeft" align="right" valign="top"><a id="ae0365cb7f5748feb3af6ec1ea48c78a1" name="ae0365cb7f5748feb3af6ec1ea48c78a1"></a>
+WrenchMsgType&#160;</td><td class="memItemRight" valign="bottom"><b>wrench_filtered_</b></td></tr>
+<tr class="separator:ae0365cb7f5748feb3af6ec1ea48c78a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba578c9c0e795f354f88a7e4170fbb7f" id="r_aba578c9c0e795f354f88a7e4170fbb7f"><td class="memItemLeft" align="right" valign="top"><a id="aba578c9c0e795f354f88a7e4170fbb7f" name="aba578c9c0e795f354f88a7e4170fbb7f"></a>
+std::unique_ptr&lt; filters::FilterChain&lt; WrenchMsgType &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>filter_chain_</b></td></tr>
+<tr class="separator:aba578c9c0e795f354f88a7e4170fbb7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed14beb934fc73c6256d2c08f6dfa6f5" id="r_aed14beb934fc73c6256d2c08f6dfa6f5"><td class="memItemLeft" align="right" valign="top"><a id="aed14beb934fc73c6256d2c08f6dfa6f5" name="aed14beb934fc73c6256d2c08f6dfa6f5"></a>
+StatePublisher&#160;</td><td class="memItemRight" valign="bottom"><b>sensor_raw_state_publisher_</b></td></tr>
+<tr class="separator:aed14beb934fc73c6256d2c08f6dfa6f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4b3a630b92607ae46b2430849f656e6" id="r_ae4b3a630b92607ae46b2430849f656e6"><td class="memItemLeft" align="right" valign="top"><a id="ae4b3a630b92607ae46b2430849f656e6" name="ae4b3a630b92607ae46b2430849f656e6"></a>
+StatePublisher&#160;</td><td class="memItemRight" valign="bottom"><b>sensor_filtered_state_publisher_</b></td></tr>
+<tr class="separator:ae4b3a630b92607ae46b2430849f656e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2787b3d2c29c9d677e403d193ff2d560" id="r_a2787b3d2c29c9d677e403d193ff2d560"><td class="memItemLeft" align="right" valign="top"><a id="a2787b3d2c29c9d677e403d193ff2d560" name="a2787b3d2c29c9d677e403d193ff2d560"></a>
+std::unique_ptr&lt; <a class="el" href="classrealtime__tools_1_1RealtimePublisher.html">StateRTPublisher</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>realtime_raw_publisher_</b></td></tr>
+<tr class="separator:a2787b3d2c29c9d677e403d193ff2d560"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b816104ad9f746251098a2c275b674c" id="r_a9b816104ad9f746251098a2c275b674c"><td class="memItemLeft" align="right" valign="top"><a id="a9b816104ad9f746251098a2c275b674c" name="a9b816104ad9f746251098a2c275b674c"></a>
+std::unique_ptr&lt; <a class="el" href="classrealtime__tools_1_1RealtimePublisher.html">StateRTPublisher</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>realtime_filtered_publisher_</b></td></tr>
+<tr class="separator:a9b816104ad9f746251098a2c275b674c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classcontroller__interface_1_1ChainableControllerInterface"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classcontroller__interface_1_1ChainableControllerInterface')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html">controller_interface::ChainableControllerInterface</a></td></tr>
 <tr class="memitem:abc2080ebf0d53fbd6e64c4c89333545f inherit pro_attribs_classcontroller__interface_1_1ChainableControllerInterface" id="r_abc2080ebf0d53fbd6e64c4c89333545f"><td class="memItemLeft" align="right" valign="top">
 std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>exported_state_interface_names_</b></td></tr>
