@@ -284,21 +284,18 @@ Plugin name: pid_controller/PidController</p>
 <dt>gains.&lt;dof_names&gt;.u_clamp_min (double)</dt><dd><p>Lower output clamp.</p>
 <p>Default:  -std::numeric_limits&lt;double&gt;::infinity()</p>
 </dd>
-<dt>gains.&lt;dof_names&gt;.antiwindup (bool)</dt><dd><p>[Deprecated, see antiwindup_strategy] Anti-windup functionality. When set to true, limits the integral error to prevent windup; otherwise, constrains the integral contribution to the control output. i_clamp_max and i_clamp_min are applied in both scenarios.</p>
-<p>Default:  false</p>
+<dt>gains.&lt;dof_names&gt;.i_clamp_max (double)</dt><dd><p>Upper integral clamp.</p>
+<p>Default:  std::numeric_limits&lt;double&gt;::infinity()</p>
 </dd>
-<dt>gains.&lt;dof_names&gt;.i_clamp_max (double)</dt><dd><p>[Deprecated, see antiwindup_strategy] Upper integral clamp.</p>
-<p>Default:  0.0</p>
+<dt>gains.&lt;dof_names&gt;.i_clamp_min (double)</dt><dd><p>Lower integral clamp.</p>
+<p>Default:  -std::numeric_limits&lt;double&gt;::infinity()</p>
 </dd>
-<dt>gains.&lt;dof_names&gt;.i_clamp_min (double)</dt><dd><p>[Deprecated, see antiwindup_strategy] Lower integral clamp.</p>
-<p>Default:  0.0</p>
-</dd>
-<dt>gains.&lt;dof_names&gt;.antiwindup_strategy (string)</dt><dd><p>Specifies the anti-windup strategy. Options: ‘back_calculation’, ‘conditional_integration’, ‘legacy’ or ‘none’. Note that the ‘back_calculation’ strategy use the tracking_time_constant parameter to tune the anti-windup behavior.</p>
-<p>Default:  “legacy”</p>
+<dt>gains.&lt;dof_names&gt;.antiwindup_strategy (string)</dt><dd><p>Specifies the anti-windup strategy. Options: ‘back_calculation’, ‘conditional_integration’ or ‘none’. Note that the ‘back_calculation’ strategy use the tracking_time_constant parameter to tune the anti-windup behavior.</p>
+<p>Default:  “none”</p>
 <p>Constraints:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>one of the specified values: [‘back_calculation’, ‘conditional_integration’, ‘legacy’, ‘none’]</p></li>
+<li><p>one of the specified values: [‘back_calculation’, ‘conditional_integration’, ‘none’]</p></li>
 </ul>
 </div></blockquote>
 </dd>
