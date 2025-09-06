@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ros2_controllers &mdash; ROS2_Control: Rolling Sep 2025 documentation</title>
+  <title>motion_primitive_controllers &mdash; ROS2_Control: Rolling Sep 2025 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -67,12 +67,19 @@
 <li class="toctree-l3"><a class="reference internal" href="../position_controllers/doc/userdoc.html">Position Controllers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../velocity_controllers/doc/userdoc.html">Velocity Controllers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../gpio_controllers/doc/userdoc.html">Gpio Command Controller</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Motion Primitive Controller</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#contributing">Contributing</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#build-status">Build status</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#acknowledgements">Acknowledgements</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">motion_primitive_controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#description">Description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#command-and-state-interfaces">Command and State Interfaces</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#command-interfaces">Command Interfaces</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#state-interfaces">State Interfaces</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#architecture-overview">Architecture Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#demo-video-with-ur10e">Demo-Video with UR10e</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#demo-video-with-kr3">Demo-Video with KR3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parameters">Parameters</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../doc/controllers_index.html#broadcasters">Broadcasters</a></li>
@@ -109,7 +116,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../doc/controllers_index.html">ros2_controllers</a></li>
-      <li class="breadcrumb-item active">ros2_controllers</li>
+      <li class="breadcrumb-item active">motion_primitive_controllers</li>
       <li class="wy-breadcrumbs-aside">
               <!-- User defined GitHub URL -->
               <a href="https://github.com/ros-controls/ros2_controllers/blob/master/motion_primitives_controllers/userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
@@ -131,59 +138,94 @@
 </p>
 
 
-  <section id="ros2-controllers">
-<span id="motion-primitives-controllers-userdoc"></span><h1>ros2_controllers<a class="headerlink" href="#ros2-controllers" title="Link to this heading"></a></h1>
-<p><a class="reference external" href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" /></a>
-<a class="reference external" href="https://codecov.io/gh/ros-controls/ros2_controllers"><img alt="codecov" src="https://codecov.io/gh/ros-controls/ros2_controllers/graph/badge.svg?token=KSdY0tsHm6" /></a></p>
-<p>Commonly used and generalized controllers for ros2-control framework that are ready to use with many robots, MoveIt2 and Nav2.</p>
-<section id="contributing">
-<h2>Contributing<a class="headerlink" href="#contributing" title="Link to this heading"></a></h2>
-<p>As an open-source project, we welcome each contributor, regardless of their background and experience. Pick a <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pulls">PR</a> and review it, or <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/contribute">create your own</a>!
-If you are new to the project, please read the <a class="reference external" href="https://control.ros.org/rolling/doc/contributing/contributing.html">contributing guide</a> for more information on how to get started. We are happy to help you with your first contribution.</p>
+  <section id="motion-primitive-controllers">
+<span id="motion-primitives-controllers-userdoc"></span><h1>motion_primitive_controllers<a class="headerlink" href="#motion-primitive-controllers" title="Link to this heading"></a></h1>
+<p>Package to control robots using motion primitives like LINEAR_JOINT (PTP/ MOVEJ), LINEAR_CARTESIAN (LIN/ MOVEL) and CIRCULAR_CARTESIAN (CIRC/ MOVEC)</p>
 </section>
-<section id="build-status">
-<h2>Build status<a class="headerlink" href="#build-status" title="Link to this heading"></a></h2>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head text-center"><p>ROS2 Distro</p></th>
-<th class="head text-center"><p>Branch</p></th>
-<th class="head text-center"><p>Build status</p></th>
-<th class="head text-center"><p>Documentation</p></th>
-<th class="head text-center"><p>Released packages</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td class="text-center"><p><strong>Rolling</strong></p></td>
-<td class="text-center"><p><a class="reference external" href="https://github.com/ros-controls/ros2_controllers/tree/master"><code class="docutils literal notranslate"><span class="pre">master</span></code></a></p></td>
-<td class="text-center"><p><a class="reference external" href="https://github.com/ros-controls/ros2_controllers/actions/workflows/rolling-binary-build.yml?branch=master"><img alt="Rolling Binary Build" src="https://github.com/ros-controls/ros2_controllers/actions/workflows/rolling-binary-build.yml/badge.svg?branch=master" /></a> <br> <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/actions/workflows/rolling-semi-binary-build.yml?branch=master"><img alt="Rolling Semi-Binary Build" src="https://github.com/ros-controls/ros2_controllers/actions/workflows/rolling-semi-binary-build.yml/badge.svg?branch=master" /></a> <br> <a class="reference external" href="https://build.ros2.org/job/Rdev__ros2_controllers__ubuntu_noble_amd64/"><img alt="build.ros2.org" src="https://build.ros2.org/buildStatus/icon?job=Rdev__ros2_controllers__ubuntu_noble_amd64&amp;subject=build.ros2.org" /></a></p></td>
-<td class="text-center"><p><a class="reference external" href="https://control.ros.org/master/doc/ros2_controllers/doc/controllers_index.html">control.ros.org</a></p></td>
-<td class="text-center"><p><a class="reference external" href="https://build.ros2.org/job/Rbin_uN64__ros2_controllers__ubuntu_noble_amd64__binary/"><img alt="Build Status" src="https://build.ros2.org/buildStatus/icon?job=Rbin_uN64__ros2_controllers__ubuntu_noble_amd64__binary" /></a></p></td>
-</tr>
-<tr class="row-odd"><td class="text-center"><p><strong>Kilted</strong></p></td>
-<td class="text-center"><p><a class="reference external" href="https://github.com/ros-controls/ros2_controllers/tree/master"><code class="docutils literal notranslate"><span class="pre">master</span></code></a></p></td>
-<td class="text-center"><p>see above <br> <a class="reference external" href="https://build.ros2.org/job/Kdev__ros2_controllers__ubuntu_noble_amd64/"><img alt="build.ros2.org" src="https://build.ros2.org/buildStatus/icon?job=Kdev__ros2_controllers__ubuntu_noble_amd64&amp;subject=build.ros2.org" /></a></p></td>
-<td class="text-center"><p><a class="reference external" href="https://control.ros.org/master/doc/ros2_controllers/doc/controllers_index.html">control.ros.org</a></p></td>
-<td class="text-center"><p><a class="reference external" href="https://build.ros2.org/job/Kbin_uN64__ros2_controllers__ubuntu_noble_amd64__binary/"><img alt="Build Status" src="https://build.ros2.org/buildStatus/icon?job=Kbin_uN64__ros2_controllers__ubuntu_noble_amd64__binary" /></a></p></td>
-</tr>
-<tr class="row-even"><td class="text-center"><p><strong>Jazzy</strong></p></td>
-<td class="text-center"><p><a class="reference external" href="https://github.com/ros-controls/ros2_controllers/tree/jazzy"><code class="docutils literal notranslate"><span class="pre">jazzy</span></code></a></p></td>
-<td class="text-center"><p><a class="reference external" href="https://github.com/ros-controls/ros2_controllers/actions/workflows/jazzy-binary-build.yml?branch=master"><img alt="Jazzy Binary Build" src="https://github.com/ros-controls/ros2_controllers/actions/workflows/jazzy-binary-build.yml/badge.svg?branch=master" /></a> <br> <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/actions/workflows/jazzy-semi-binary-build.yml?branch=master"><img alt="Jazzy Semi-Binary Build" src="https://github.com/ros-controls/ros2_controllers/actions/workflows/jazzy-semi-binary-build.yml/badge.svg?branch=master" /></a> <br> <a class="reference external" href="https://build.ros2.org/job/Jdev__ros2_controllers__ubuntu_noble_amd64/"><img alt="build.ros2.org" src="https://build.ros2.org/buildStatus/icon?job=Jdev__ros2_controllers__ubuntu_noble_amd64&amp;subject=build.ros2.org" /></a></p></td>
-<td class="text-center"><p><a class="reference external" href="https://control.ros.org/jazzy/doc/ros2_controllers/doc/controllers_index.html">control.ros.org</a></p></td>
-<td class="text-center"><p><a class="reference external" href="https://build.ros2.org/job/Jbin_uN64__ros2_controllers__ubuntu_noble_amd64__binary/"><img alt="Build Status" src="https://build.ros2.org/buildStatus/icon?job=Jbin_uN64__ros2_controllers__ubuntu_noble_amd64__binary" /></a></p></td>
-</tr>
-<tr class="row-odd"><td class="text-center"><p><strong>Humble</strong></p></td>
-<td class="text-center"><p><a class="reference external" href="https://github.com/ros-controls/ros2_controllers/tree/humble"><code class="docutils literal notranslate"><span class="pre">humble</span></code></a></p></td>
-<td class="text-center"><p><a class="reference external" href="https://github.com/ros-controls/ros2_controllers/actions/workflows/humble-binary-build.yml?branch=master"><img alt="Humble Binary Build" src="https://github.com/ros-controls/ros2_controllers/actions/workflows/humble-binary-build.yml/badge.svg?branch=master" /></a> <br> <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/actions/workflows/humble-semi-binary-build.yml?branch=master"><img alt="Humble Semi-Binary Build" src="https://github.com/ros-controls/ros2_controllers/actions/workflows/humble-semi-binary-build.yml/badge.svg?branch=master" /></a> <br> <a class="reference external" href="https://build.ros2.org/job/Hdev__ros2_controllers__ubuntu_jammy_amd64/"><img alt="build.ros2.org" src="https://build.ros2.org/buildStatus/icon?job=Hdev__ros2_controllers__ubuntu_jammy_amd64&amp;subject=build.ros2.org" /></a></p></td>
-<td class="text-center"><p><a class="reference external" href="https://control.ros.org/humble/doc/ros2_controllers/doc/controllers_index.html">control.ros.org</a></p></td>
-<td class="text-center"><p><a class="reference external" href="https://build.ros2.org/job/Hbin_uJ64__ros2_controllers__ubuntu_jammy_amd64__binary/"><img alt="Build Status" src="https://build.ros2.org/buildStatus/icon?job=Hbin_uJ64__ros2_controllers__ubuntu_jammy_amd64__binary" /></a></p></td>
-</tr>
-</tbody>
-</table>
+<section id="description">
+<h1>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h1>
+<p>This project provides an interface for sending motion primitives to an industrial robot controller using the <code class="docutils literal notranslate"><span class="pre">ExecuteMotionPrimitiveSequence.action</span></code> action from <a class="reference external" href="https://github.com/ros-controls/control_msgs/blob/motion_primitives/control_msgs/action/ExecuteMotionPrimitiveSequence.action">control_msgs</a>. The controller receives the primitives via the action interface and forwards them through command interfaces to the robot-specific hardware interface. Currently, hardware interfaces for <a class="reference external" href="https://github.com/UniversalRobots/Universal_Robots_ROS2_Driver">Universal Robots</a> and <a class="reference external" href="https://github.com/b-robotized-forks/kuka_experimental/tree/motion_primitive_kuka_driver">KUKA Robots</a> are implemented.</p>
+<ul class="simple">
+<li><p>Supported motion primitives:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">LINEAR_JOINT</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LINEAR_CARTESIAN</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CIRCULAR_CARTESIAN</span></code></p></li>
+</ul>
+</li>
+</ul>
+<p>If multiple motion primitives are passed to the controller via the action, the controller forwards them to the hardware interface as a sequence. To do this, it first sends <code class="docutils literal notranslate"><span class="pre">MOTION_SEQUENCE_START</span></code>, followed by each individual primitive, and finally <code class="docutils literal notranslate"><span class="pre">MOTION_SEQUENCE_END</span></code>. All primitives between these two markers will be executed as a single, continuous sequence. This allows seamless transitions (blending) between primitives.</p>
+<p>The action interface also allows stopping the current execution of motion primitives. When a stop request is received, the controller sends <code class="docutils literal notranslate"><span class="pre">STOP_MOTION</span></code> to the hardware interface, which then halts the robot’s movement. Once the controller receives confirmation that the robot has stopped, it sends <code class="docutils literal notranslate"><span class="pre">RESET_STOP</span></code> to the hardware interface. After that, new commands can be sent.</p>
+<p><img alt="Action Image" src="../../../_images/Moprim_Controller_ExecuteMotion_Action.drawio.png" /></p>
+<p>This can be done, for example, via a Python script as demonstrated in the <a class="reference external" href="https://github.com/UniversalRobots/Universal_Robots_ROS2_Driver/blob/main/ur_robot_driver/examples/send_dummy_motion_primitives_ur10e.py"><code class="docutils literal notranslate"><span class="pre">example</span> <span class="pre">python</span> <span class="pre">script</span></code></a> in the <code class="docutils literal notranslate"><span class="pre">Universal_Robots_ROS2_Driver</span></code> package.</p>
+<section id="command-and-state-interfaces">
+<h2>Command and State Interfaces<a class="headerlink" href="#command-and-state-interfaces" title="Link to this heading"></a></h2>
+<p>To transmit the motion primitives, the following command and state interfaces are required. All interfaces use the naming scheme <code class="docutils literal notranslate"><span class="pre">tf_prefix_</span> <span class="pre">+</span> <span class="pre">&quot;motion_primitive/&lt;interface</span> <span class="pre">name&gt;&quot;</span></code> where the <code class="docutils literal notranslate"><span class="pre">tf_prefix</span></code> is provided to the controller as a parameter.</p>
+<section id="command-interfaces">
+<h3>Command Interfaces<a class="headerlink" href="#command-interfaces" title="Link to this heading"></a></h3>
+<p>These interfaces are used to send motion primitive data to the hardware interface:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">motion_type</span></code>: Type of motion primitive (LINEAR_JOINT, LINEAR_CARTESIAN, CIRCULAR_CARTESIAN)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">q1</span></code> – <code class="docutils literal notranslate"><span class="pre">q6</span></code>: Target joint positions for joint-based motion</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pos_x</span></code>, <code class="docutils literal notranslate"><span class="pre">pos_y</span></code>, <code class="docutils literal notranslate"><span class="pre">pos_z</span></code>: Target Cartesian position</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pos_qx</span></code>, <code class="docutils literal notranslate"><span class="pre">pos_qy</span></code>, <code class="docutils literal notranslate"><span class="pre">pos_qz</span></code>, <code class="docutils literal notranslate"><span class="pre">pos_qw</span></code>: Orientation quaternion of the target pose</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pos_via_x</span></code>, <code class="docutils literal notranslate"><span class="pre">pos_via_y</span></code>, <code class="docutils literal notranslate"><span class="pre">pos_via_z</span></code>: Intermediate via-point position for circular motion</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pos_via_qx</span></code>, <code class="docutils literal notranslate"><span class="pre">pos_via_qy</span></code>, <code class="docutils literal notranslate"><span class="pre">pos_via_qz</span></code>, <code class="docutils literal notranslate"><span class="pre">pos_via_qw</span></code>: Orientation quaternion of via-point</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">blend_radius</span></code>: Blending radius for smooth transitions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">velocity</span></code>: Desired motion velocity</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">acceleration</span></code>: Desired motion acceleration</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">move_time</span></code>: Optional duration for time-based execution (For LINEAR_JOINT and LINEAR_CARTESIAN. If move_time &gt; 0, velocity and acceleration are ignored)</p></li>
+</ul>
 </section>
-<section id="acknowledgements">
-<h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Link to this heading"></a></h2>
-<p>The project has received major contributions from companies and institutions <a class="reference external" href="https://control.ros.org/rolling/doc/acknowledgements/acknowledgements.html">listed on control.ros.org</a></p>
+<section id="state-interfaces">
+<h3>State Interfaces<a class="headerlink" href="#state-interfaces" title="Link to this heading"></a></h3>
+<p>These interfaces are used to communicate the internal status of the hardware interface back to the <code class="docutils literal notranslate"><span class="pre">motion_primitives_forward_controller</span></code>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">execution_status</span></code>: Indicates the current execution state of the primitive. Possible values are:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">IDLE</span></code>: No motion in progress</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">EXECUTING</span></code>: Currently executing a primitive</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SUCCESS</span></code>: Last command finished successfully</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ERROR</span></code>: An error occurred during execution</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">STOPPING</span></code>: The hardware interface has received the <code class="docutils literal notranslate"><span class="pre">STOP_MOTION</span></code> command, but the robot has not yet come to a stop.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">STOPPED</span></code>: The robot was stopped using the <code class="docutils literal notranslate"><span class="pre">STOP_MOTION</span></code> command and must be reset with the <code class="docutils literal notranslate"><span class="pre">RESET_STOP</span></code> command before executing new commands.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ready_for_new_primitive</span></code>: Boolean flag indicating whether the interface is ready to receive a new motion primitive</p></li>
+</ul>
 </section>
+</section>
+</section>
+<section id="architecture-overview">
+<h1>Architecture Overview<a class="headerlink" href="#architecture-overview" title="Link to this heading"></a></h1>
+<p>Architecture for a UR robot with <a class="reference external" href="https://github.com/UniversalRobots/Universal_Robots_ROS2_Driver"><code class="docutils literal notranslate"><span class="pre">Universal_Robots_ROS2_Driver</span></code> in motion primitives mode</a>.</p>
+<p><img alt="UR Robot Architecture" src="../../../_images/ros2_control_motion_primitives_ur.drawio.png" /></p>
+<p>Architecture for a KUKA robot with <a class="reference external" href="https://github.com/b-robotized-forks/kuka_experimental/tree/motion_primitive_kuka_driver/kuka_eki_motion_primitives_hw_interface"><code class="docutils literal notranslate"><span class="pre">kuka_eki_motion_primitives_hw_interface</span></code></a>.</p>
+<p><img alt="KUKA Robot Architecture" src="../../../_images/ros2_control_motion_primitives_kuka.drawio.png" /></p>
+</section>
+<section id="demo-video-with-ur10e">
+<h1>Demo-Video with UR10e<a class="headerlink" href="#demo-video-with-ur10e" title="Link to this heading"></a></h1>
+<p><a class="reference external" href="https://youtu.be/SKz6LFvJmhQ"><img alt="UR demo video" src="../../../_images/moprim_forward_controller_ur_demo_thumbnail.png" /></a></p>
+</section>
+<section id="demo-video-with-kr3">
+<h1>Demo-Video with KR3<a class="headerlink" href="#demo-video-with-kr3" title="Link to this heading"></a></h1>
+<p><a class="reference external" href="https://youtu.be/_BWCO36j9bg"><img alt="KUKA demo video" src="../../../_images/moprim_forward_controller_kuka_demo_thumbnail.png" /></a></p>
+</section>
+<section id="parameters">
+<h1>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h1>
+<p>This controller uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters. The parameter <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/master/motion_primitives_controllers/src/motion_primitives_forward_controller_parameter.yaml">definition file located in the src folder</a> contains descriptions for all the parameters used by the controller.</p>
+<dl>
+<dt>tf_prefix (string)</dt><dd><p>All interfaces use the naming scheme <cite>tf_prefix_ + motion_primitive/&lt;interface name&gt;</cite></p>
+<p>Read only: True</p>
+<p>Default:  “”</p>
+</dd>
+</dl>
+<p>An example parameter file for this controller can be found in <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/master/motion_primitives_controllers/test/motion_primitives_forward_controller_params.yaml">the test directory</a>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test_motion_primitives_forward_controller</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">tf_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+</pre></div>
+</div>
 </section>
 
 
