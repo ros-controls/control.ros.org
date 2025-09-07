@@ -166,10 +166,10 @@ constexpr <a class="el" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html
 <tr class="memitem:a6092bc137fbf1e96ec92cfa10295dd7e"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a6092bc137fbf1e96ec92cfa10295dd7e">set</a> (F &amp;&amp;func)</td></tr>
 <tr class="memdesc:a6092bc137fbf1e96ec92cfa10295dd7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">wait until the mutex could be locked and access the content (rw)  <br /></td></tr>
 <tr class="separator:a6092bc137fbf1e96ec92cfa10295dd7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6345622bfe8b3156728d59a0384ec28b" id="r_a6345622bfe8b3156728d59a0384ec28b"><td class="memTemplParams" colspan="2">template&lt;typename U  = T&gt; </td></tr>
-<tr class="memitem:a6345622bfe8b3156728d59a0384ec28b"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if_t&lt; is_ptr_or_smart_ptr&lt; U &gt;, void &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a6345622bfe8b3156728d59a0384ec28b">set</a> (std::nullptr_t)</td></tr>
-<tr class="memdesc:a6345622bfe8b3156728d59a0384ec28b"><td class="mdescLeft">&#160;</td><td class="mdescRight">wait until the mutex could be locked and access the content (rw)  <br /></td></tr>
-<tr class="separator:a6345622bfe8b3156728d59a0384ec28b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7bedf81b34839f6b3b8ba874a020325" id="r_aa7bedf81b34839f6b3b8ba874a020325"><td class="memTemplParams" colspan="2">template&lt;typename U  = T, typename  = std::enable_if_t&lt;is_ptr_or_smart_ptr&lt;U&gt;&gt;&gt; </td></tr>
+<tr class="memitem:aa7bedf81b34839f6b3b8ba874a020325"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#aa7bedf81b34839f6b3b8ba874a020325">set</a> (std::nullptr_t)</td></tr>
+<tr class="memdesc:aa7bedf81b34839f6b3b8ba874a020325"><td class="mdescLeft">&#160;</td><td class="mdescRight">wait until the mutex could be locked and access the content (rw)  <br /></td></tr>
+<tr class="separator:aa7bedf81b34839f6b3b8ba874a020325"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87f94ea738bb45c363c1220247bac717" id="r_a87f94ea738bb45c363c1220247bac717"><td class="memTemplParams" colspan="2">template&lt;typename U  = T&gt; </td></tr>
 <tr class="memitem:a87f94ea738bb45c363c1220247bac717"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if_t&lt;!is_ptr_or_smart_ptr&lt; U &gt;, U &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html#a87f94ea738bb45c363c1220247bac717">get</a> () const</td></tr>
 <tr class="memdesc:a87f94ea738bb45c363c1220247bac717"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait until the mutex could be locked and get the content (<a class="el" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html">RealtimeThreadSafeBox</a> behaviour)  <br /></td></tr>
@@ -550,21 +550,21 @@ template&lt;typename F , typename  = std::enable_if_t&lt;std::is_invocable_v&lt;
 
 </div>
 </div>
-<a id="a6345622bfe8b3156728d59a0384ec28b" name="a6345622bfe8b3156728d59a0384ec28b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6345622bfe8b3156728d59a0384ec28b">&#9670;&#160;</a></span>set() <span class="overload">[4/4]</span></h2>
+<a id="aa7bedf81b34839f6b3b8ba874a020325" name="aa7bedf81b34839f6b3b8ba874a020325"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7bedf81b34839f6b3b8ba874a020325">&#9670;&#160;</a></span>set() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class T , typename mutex_type  = DEFAULT_MUTEX&gt; </div>
 <div class="memtemplate">
-template&lt;typename U  = T&gt; </div>
+template&lt;typename U  = T, typename  = std::enable_if_t&lt;is_ptr_or_smart_ptr&lt;U&gt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::enable_if_t&lt; is_ptr_or_smart_ptr&lt; U &gt;, void &gt; <a class="el" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html">realtime_tools::RealtimeThreadSafeBox</a>&lt; T, mutex_type &gt;::set </td>
+          <td class="memname">void <a class="el" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html">realtime_tools::RealtimeThreadSafeBox</a>&lt; T, mutex_type &gt;::set </td>
           <td>(</td>
           <td class="paramtype">std::nullptr_t&#160;</td>
           <td class="paramname"></td><td>)</td>
