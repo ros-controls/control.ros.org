@@ -101,6 +101,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a472ecb59df2bc496c0f1e4031ce6c7c5" id="r_a472ecb59df2bc496c0f1e4031ce6c7c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1AsyncFunctionHandler.html#a472ecb59df2bc496c0f1e4031ce6c7c5">init</a> (std::function&lt; T(const rclcpp::Time &amp;, const rclcpp::Duration &amp;)&gt; callback, std::function&lt; bool()&gt; trigger_predicate, int thread_priority=50)</td></tr>
 <tr class="memdesc:a472ecb59df2bc496c0f1e4031ce6c7c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the <a class="el" href="classrealtime__tools_1_1AsyncFunctionHandler.html" title="Class to handle asynchronous function calls. AsyncFunctionHandler is a class that allows the user to ...">AsyncFunctionHandler</a> with the callback, trigger_predicate and thread_priority.  <br /></td></tr>
 <tr class="separator:a472ecb59df2bc496c0f1e4031ce6c7c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c5562a9a1c390eb00218a1a2299ff43" id="r_a2c5562a9a1c390eb00218a1a2299ff43"><td class="memItemLeft" align="right" valign="top"><a id="a2c5562a9a1c390eb00218a1a2299ff43" name="a2c5562a9a1c390eb00218a1a2299ff43"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (std::function&lt; T(const rclcpp::Time &amp;, const rclcpp::Duration &amp;)&gt; callback, const <a class="el" href="structrealtime__tools_1_1AsyncFunctionHandlerParams.html">AsyncFunctionHandlerParams</a> &amp;params)</td></tr>
+<tr class="separator:a2c5562a9a1c390eb00218a1a2299ff43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a164607e72b03ca46d47d667a961705f1" id="r_a164607e72b03ca46d47d667a961705f1"><td class="memItemLeft" align="right" valign="top">std::pair&lt; bool, T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1AsyncFunctionHandler.html#a164607e72b03ca46d47d667a961705f1">trigger_async_callback</a> (const rclcpp::Time &amp;time, const rclcpp::Duration &amp;period)</td></tr>
 <tr class="memdesc:a164607e72b03ca46d47d667a961705f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Triggers the async callback method cycle.  <br /></td></tr>
 <tr class="separator:a164607e72b03ca46d47d667a961705f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -116,9 +119,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4ef8e189833741c203d64a62ecb72952" id="r_a4ef8e189833741c203d64a62ecb72952"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1AsyncFunctionHandler.html#a4ef8e189833741c203d64a62ecb72952">reset_variables</a> ()</td></tr>
 <tr class="memdesc:a4ef8e189833741c203d64a62ecb72952"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the internal variables of the <a class="el" href="classrealtime__tools_1_1AsyncFunctionHandler.html" title="Class to handle asynchronous function calls. AsyncFunctionHandler is a class that allows the user to ...">AsyncFunctionHandler</a>.  <br /></td></tr>
 <tr class="separator:a4ef8e189833741c203d64a62ecb72952"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2112028c20c4efaf1fcb407df0889559" id="r_a2112028c20c4efaf1fcb407df0889559"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1AsyncFunctionHandler.html#a2112028c20c4efaf1fcb407df0889559">wait_for_trigger_cycle_to_finish</a> ()</td></tr>
-<tr class="memdesc:a2112028c20c4efaf1fcb407df0889559"><td class="mdescLeft">&#160;</td><td class="mdescRight">Waits until the current async callback method trigger cycle is finished.  <br /></td></tr>
-<tr class="separator:a2112028c20c4efaf1fcb407df0889559"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02107da5507878a66c6a1f474b9c0855" id="r_a02107da5507878a66c6a1f474b9c0855"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1AsyncFunctionHandler.html#a02107da5507878a66c6a1f474b9c0855">wait_for_trigger_cycle_to_finish</a> ()</td></tr>
+<tr class="memdesc:a02107da5507878a66c6a1f474b9c0855"><td class="mdescLeft">&#160;</td><td class="mdescRight">Waits until the current async callback method trigger cycle is finished.  <br /></td></tr>
+<tr class="separator:a02107da5507878a66c6a1f474b9c0855"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab7dadbefea71a57316c100ae8402b70" id="r_aab7dadbefea71a57316c100ae8402b70"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1AsyncFunctionHandler.html#aab7dadbefea71a57316c100ae8402b70">pause_execution</a> ()</td></tr>
+<tr class="memdesc:aab7dadbefea71a57316c100ae8402b70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pauses the execution of the async callback thread.  <br /></td></tr>
+<tr class="separator:aab7dadbefea71a57316c100ae8402b70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aefa236dd4d561028160e4ec5c3f93f03" id="r_aefa236dd4d561028160e4ec5c3f93f03"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1AsyncFunctionHandler.html#aefa236dd4d561028160e4ec5c3f93f03">is_initialized</a> () const</td></tr>
 <tr class="memdesc:aefa236dd4d561028160e4ec5c3f93f03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the <a class="el" href="classrealtime__tools_1_1AsyncFunctionHandler.html" title="Class to handle asynchronous function calls. AsyncFunctionHandler is a class that allows the user to ...">AsyncFunctionHandler</a> is initialized.  <br /></td></tr>
 <tr class="separator:aefa236dd4d561028160e4ec5c3f93f03"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -131,6 +137,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ada1a48bddba7e13894292201fa943c0d" id="r_ada1a48bddba7e13894292201fa943c0d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1AsyncFunctionHandler.html#ada1a48bddba7e13894292201fa943c0d">is_stopped</a> () const</td></tr>
 <tr class="memdesc:ada1a48bddba7e13894292201fa943c0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the async callback is triggered to stop the cycle.  <br /></td></tr>
 <tr class="separator:ada1a48bddba7e13894292201fa943c0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a802dd3dc181324ec81701cb1657400cf" id="r_a802dd3dc181324ec81701cb1657400cf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1AsyncFunctionHandler.html#a802dd3dc181324ec81701cb1657400cf">is_paused</a> () const</td></tr>
+<tr class="memdesc:a802dd3dc181324ec81701cb1657400cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the async callback thread is paused.  <br /></td></tr>
+<tr class="separator:a802dd3dc181324ec81701cb1657400cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24af73e90c69d4c6a8c752e805ce5611" id="r_a24af73e90c69d4c6a8c752e805ce5611"><td class="memItemLeft" align="right" valign="top">std::thread &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1AsyncFunctionHandler.html#a24af73e90c69d4c6a8c752e805ce5611">get_thread</a> ()</td></tr>
 <tr class="memdesc:a24af73e90c69d4c6a8c752e805ce5611"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the async worker thread.  <br /></td></tr>
 <tr class="separator:a24af73e90c69d4c6a8c752e805ce5611"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -466,6 +475,36 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="a802dd3dc181324ec81701cb1657400cf" name="a802dd3dc181324ec81701cb1657400cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a802dd3dc181324ec81701cb1657400cf">&#9670;&#160;</a></span>is_paused()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classrealtime__tools_1_1AsyncFunctionHandler.html">realtime_tools::AsyncFunctionHandler</a>&lt; T &gt;::is_paused </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if the async callback thread is paused. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if the async callback thread is paused, false otherwise </dd></dl>
+
+</div>
+</div>
 <a id="a64cdf96e23ae62a3fdb4586023f00a71" name="a64cdf96e23ae62a3fdb4586023f00a71"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a64cdf96e23ae62a3fdb4586023f00a71">&#9670;&#160;</a></span>is_running()</h2>
 
@@ -583,6 +622,37 @@ template&lt;typename T &gt; </div>
 
 <p>Join the async callback thread. </p>
 <p>If the async method is running, it will join the async thread. If the async method is not running, it will return immediately. </p>
+
+</div>
+</div>
+<a id="aab7dadbefea71a57316c100ae8402b70" name="aab7dadbefea71a57316c100ae8402b70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab7dadbefea71a57316c100ae8402b70">&#9670;&#160;</a></span>pause_execution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classrealtime__tools_1_1AsyncFunctionHandler.html">realtime_tools::AsyncFunctionHandler</a>&lt; T &gt;::pause_execution </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pauses the execution of the async callback thread. </p>
+<p>If the async method is running, it will pause the async thread until the next trigger cycle. If the async method is not running, it will return immediately. </p><dl class="section note"><dt>Note</dt><dd>This method is non real-time safe, as it uses a mutex to pause the thread.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the async callback thread was paused, false otherwise. </dd></dl>
 
 </div>
 </div>
@@ -728,8 +798,8 @@ In the case of controllers, The controller manager is responsible for triggering
 
 </div>
 </div>
-<a id="a2112028c20c4efaf1fcb407df0889559" name="a2112028c20c4efaf1fcb407df0889559"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2112028c20c4efaf1fcb407df0889559">&#9670;&#160;</a></span>wait_for_trigger_cycle_to_finish()</h2>
+<a id="a02107da5507878a66c6a1f474b9c0855" name="a02107da5507878a66c6a1f474b9c0855"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02107da5507878a66c6a1f474b9c0855">&#9670;&#160;</a></span>wait_for_trigger_cycle_to_finish()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -740,7 +810,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classrealtime__tools_1_1AsyncFunctionHandler.html">realtime_tools::AsyncFunctionHandler</a>&lt; T &gt;::wait_for_trigger_cycle_to_finish </td>
+          <td class="memname">bool <a class="el" href="classrealtime__tools_1_1AsyncFunctionHandler.html">realtime_tools::AsyncFunctionHandler</a>&lt; T &gt;::wait_for_trigger_cycle_to_finish </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
