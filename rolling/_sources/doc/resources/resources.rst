@@ -11,6 +11,19 @@ Any files submitted to the documentation should be "licensed" by stating your na
 Presentations
 ---------------
 
+2025-09-26 ROSCon UK Workshop: Writing Custom Robot Drivers
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+
+.. toctree::
+   :hidden:
+
+   roscon2024_workshop.rst
+
+:doc:`Workshop page <roscon2025_workshop>`
+
+  Authors:
+    - Dr. Bence Magyar (Locus Robotics)
+
 2024-10-21 ROSCon Workshop: Fun with Controllers
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 
