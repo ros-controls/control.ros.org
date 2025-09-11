@@ -7,6 +7,7 @@
   </span>
   <div class="rst-other-versions">
     <dl>
+<<<<<<< HEAD
       <dt>ros2_control - Rolling</dt>
       {%- for item in versions.in_development|sort(reverse=True) %}
       <dd><a href="{{ item.url }}">{{ item.name|title }} (latest)</a></dd>
@@ -14,16 +15,35 @@
     </dl>
     <dl>
       <dt>ros2_control - Foxy, Galactic, and Humble</dt>
+=======
+      <dt>Stable Releases</dt>
+>>>>>>> 2b79764 (Add `Releases, Versioning, and Public API` declaration section (#481))
       {%- for item in versions.releases|sort(reverse=True) %}
         {%- if item.name == latest_version.name %}
         <dd><a href="{{ item.url }}">{{ item.name|title }} (recommended)</a></dd><br>
         {%- elif item.name in eol_versions %}
-        <dd><a href="{{ item.url }}">{{ item.name|title }} (EOL)</a></dd><br>
         {% else %}
         <dd><a href="{{ item.url }}">{{ item.name|title }}</a></dd><br>
         {%- endif %}
       {%- endfor %}
     </dl>
+<<<<<<< HEAD
+=======
+    <dl>
+      <dt>End-of-Life</dt>
+      {%- for item in versions.releases|sort(reverse=True) %}
+        {%- if item.name in eol_versions %}
+        <dd><a href="{{ item.url }}">{{ item.name|title }}</a></dd><br>
+        {%- endif %}
+      {%- endfor %}
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      {%- for item in versions.in_development|sort(reverse=True) %}
+      <dd><a href="{{ item.url }}">{{ item.name|title }}</a></dd>
+      {%- endfor %}
+    </dl>
+>>>>>>> 2b79764 (Add `Releases, Versioning, and Public API` declaration section (#481))
   </div>
 </div>
 {%- endif %}
