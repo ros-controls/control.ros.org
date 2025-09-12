@@ -26,6 +26,7 @@ Non robot-devices
 - `ODRI Motor Controller <https://github.com/stack-of-tasks/ros2_hardware_interface_odri>`_
 - `PCA9685 16-Channel 12-bit PWM/Servo Driver <https://github.com/rosblox/pca9685_ros2_control>`_
 - `ROBOTIS Dynamixel <https://github.com/ROBOTIS-GIT/dynamixel_hardware_interface>`_
+- `Feetech Servos <https://github.com/JafarAbdi/feetech_ros2_driver>`_
 
 Official (supported by robot manufacturer)
 -------------------------------------------
