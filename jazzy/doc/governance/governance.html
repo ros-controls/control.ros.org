@@ -69,6 +69,12 @@
 <li class="toctree-l2"><a class="reference internal" href="#current-ros-controls-committers">Current ros-controls Committers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#past-ros-controls-pmc-constituents">Past ros-controls PMC Constituents</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#repositories-managed-by-the-ros-controls-pmc">Repositories managed by the ros-controls PMC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#releases-versioning-and-public-api">Releases, Versioning, and Public API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#versioning">Versioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#public-api-declaration">Public API declaration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#deprecation-strategy">Deprecation strategy</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
@@ -110,6 +116,13 @@
 <li><p><a class="reference internal" href="#current-ros-controls-committers" id="id2">Current ros-controls Committers</a></p></li>
 <li><p><a class="reference internal" href="#past-ros-controls-pmc-constituents" id="id3">Past ros-controls PMC Constituents</a></p></li>
 <li><p><a class="reference internal" href="#repositories-managed-by-the-ros-controls-pmc" id="id4">Repositories managed by the ros-controls PMC</a></p></li>
+<li><p><a class="reference internal" href="#releases-versioning-and-public-api" id="id5">Releases, Versioning, and Public API</a></p>
+<ul>
+<li><p><a class="reference internal" href="#versioning" id="id6">Versioning</a></p></li>
+<li><p><a class="reference internal" href="#public-api-declaration" id="id7">Public API declaration</a></p></li>
+<li><p><a class="reference internal" href="#deprecation-strategy" id="id8">Deprecation strategy</a></p></li>
+</ul>
+</li>
 </ul>
 </nav>
 <p>Since 2025, the ros-controls project has been governed by the <a class="reference external" href="https://osralliance.org/">Open Source Robotics Alliance (OSRA)</a>.
@@ -249,6 +262,101 @@ The Project Leader, all PMC Members, and all Committers are chosen on a meritocr
 </tr>
 </tbody>
 </table>
+</section>
+<section id="releases-versioning-and-public-api">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Releases, Versioning, and Public API</a><a class="headerlink" href="#releases-versioning-and-public-api" title="Link to this heading"></a></h2>
+<p>As ros-controls PMC is independent of the ROS PMC we thrive to follow <a class="reference external" href="https://docs.ros.org/en/rolling/The-ROS2-Project/Contributing/Developer-Guide.html#quality-practices">its strategy</a>
+but have to adapt it according to our needs. This includes an asynchronous release cycle, where ros-controls repositories have reached a stable state for a ROS distro on <strong>1st of October after an official ROS distribution release</strong>.
+It is very likely that ros2_control packages will be available via the ROS build farm earlier than this date.</p>
+<p>This stable release for a ROS distro, called <strong>stable ros2_control release</strong> from now, will be announced on <a class="reference external" href="https://discourse.openrobotics.org/c/ros-controls/ros-controls-announce-news/107">ROS discourse</a> on time.</p>
+<section id="versioning">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Versioning</a><a class="headerlink" href="#versioning" title="Link to this heading"></a></h3>
+<p>We will use the ROS-specific rules on top of <code class="docutils literal notranslate"><span class="pre">semver's</span></code> for versioning, but also adhere to some ros-controls-specific rules:</p>
+<ul>
+<li><p>Major version increments (i.e. API breaking changes) should not be made within a <strong>stable ros2_control release</strong>.</p></li>
+<li><p>ros2_control heavily relies on the usage of <a class="reference external" href="https://index.ros.org/p/pluginlib/">pluginlib</a>. Therefore, we distinguish two types of compiled code: non-plugin code together with plugin base classes, and plugins itself.</p>
+<ul class="simple">
+<li><p>ABI of plugins may change at every release, i.e., also within a <strong>stable ros2_control release</strong>. Plugins built by the buildfarm will still be loaded by pluginlib’s class loader, but code linking against the exported libraries will break.</p></li>
+<li><p>For non-plugin code, ABI breaks within a <strong>stable ros2_control release</strong> are less likely but still unavoidable to fix code, which is critical regarding safety aspects of robot control.</p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ul class="simple">
+<li><p>Always update your full ROS installation, not only a single package. For example, on Ubuntu run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">update</span> <span class="pre">&amp;&amp;</span> <span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">upgrade</span></code> after you install a new package.</p></li>
+<li><p>Recompile your custom code after updating any upstream ROS packages.</p></li>
+</ul>
+</div>
+</li>
+<li><p>The same applies for run-time behavior changes: Changes within a <strong>stable ros2_control release</strong> are less likely but still unavoidable to fix safety-critical behavior. Where possible, we try to keep the legacy behavior configurable together with a deprecation warning, see section below.</p></li>
+</ul>
+<p>The ros2_control maintainer team considers safety a top priority and bugs or issues found in the framework may be back ported to distros regardless of API stability.
+These issues will be discussed at the biweekly PMC meeting where the community can decide the best route forward.</p>
+</section>
+<section id="public-api-declaration">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">Public API declaration</a><a class="headerlink" href="#public-api-declaration" title="Link to this heading"></a></h3>
+<p>According to <code class="docutils literal notranslate"><span class="pre">semver</span></code>, every package must clearly declare a public API.</p>
+<ul class="simple">
+<li><p>For most C++ packages the declaration is any header that it installs. Private class members and methods are not part of the public API.</p></li>
+<li><p>For other languages like Python, a public API must be explicitly defined, so that it is clear what symbols can be relied on with respect to the versioning guidelines.</p></li>
+</ul>
+<p>If something you are using is not explicitly listed as part of the public API in the package’s documentation, then you cannot depend on it not changing between minor or patch versions.</p>
+</section>
+<section id="deprecation-strategy">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">Deprecation strategy</a><a class="headerlink" href="#deprecation-strategy" title="Link to this heading"></a></h3>
+<p>Where possible, we will use the tick-tock deprecation and migration strategy for breaking changes (API or behavior-breaking changes).</p>
+<ul class="simple">
+<li><p>New deprecations can be run-time messages or compiler warnings expressing that the functionality is being deprecated. The functionality will be completely removed in any future release, or at latest in the next <strong>stable ros2_control release</strong> (there may be details in the deprecation note).</p></li>
+<li><p>New deprecations can also come in every release of <strong>stable ros2_control release</strong> by performing backports of changes from the rolling version. These are meant to help users migrate early, however the functionality will remain available in that specific ROS distribution.</p></li>
+</ul>
+<p>Have a look at <a class="reference internal" href="../release_notes/release_notes.html#release-notes"><span class="std std-ref">Release Notes</span></a> and <a class="reference internal" href="../migration/migration.html#migration"><span class="std std-ref">Migration Guides</span></a>, where we will highlight necessary changes within every ros2_control version of a ROS distro.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Don’t use compiler flags like <code class="docutils literal notranslate"><span class="pre">-Wall</span> <span class="pre">-Werror</span></code> in your development environment, as they may cause unnecessary build failures if deprecation notes are added.</p>
+</div>
+<p>Example of function <code class="docutils literal notranslate"><span class="pre">foo</span></code> deprecated and replaced by function <code class="docutils literal notranslate"><span class="pre">bar</span></code>:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Package version</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>API</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>x.y.z, &lt;x-1&gt;.y.z</p></td>
+<td><p>Original version</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">foo();</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>x.&lt;y+1&gt;.z</p></td>
+<td><p>New feature including deprecation</p></td>
+<td><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">[[deprecated(&quot;use</span> <span class="pre">bar()&quot;)]]</span> <span class="pre">void</span> <span class="pre">foo();</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">bar();</span></code></div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>&lt;x-1&gt;.&lt;y+1&gt;.z</p></td>
+<td><p>Backport to <strong>stable ros2_control release</strong></p></td>
+<td><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">[[deprecated(&quot;use</span> <span class="pre">bar()&quot;)]]</span> <span class="pre">void</span> <span class="pre">foo();</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">bar();</span></code></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p>x.&lt;y+2&gt;.z</p></td>
+<td><p>New release of development version</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">bar();</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>&lt;x-1&gt;.&lt;y+2&gt;.z</p></td>
+<td><p>New release of <strong>stable ros2_control release</strong></p></td>
+<td><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">[[deprecated(&quot;use</span> <span class="pre">bar()&quot;)]]</span> <span class="pre">void</span> <span class="pre">foo();</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">bar();</span></code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
 </section>
 </section>
 
