@@ -503,9 +503,8 @@ The <code class="docutils literal notranslate"><span class="pre">on_cleanup</spa
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">on_deactivate</span></code> is called when a controller stops running. It is important to release the claimed command interface in this method, so other controllers can use them if needed. This is down with the <code class="docutils literal notranslate"><span class="pre">release_interfaces</span></code> function.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">on_deactivate</span></code> is called when a controller stops running. In our case it is empty:</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">controller_interface</span><span class="o">::</span><span class="n">CallbackReturn</span><span class="w"> </span><span class="nf">on_deactivate</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">rclcpp_lifecycle</span><span class="o">::</span><span class="n">State</span><span class="w"> </span><span class="o">&amp;</span><span class="n">previous_state</span><span class="p">){</span>
-<span class="w">    </span><span class="n">release_interfaces</span><span class="p">();</span>
 <span class="w">    </span><span class="c1">// The controller should be properly shutdown during this</span>
 <span class="w">    </span><span class="c1">// ...</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">CallbackReturn</span><span class="o">::</span><span class="n">SUCCESS</span><span class="p">;</span>
