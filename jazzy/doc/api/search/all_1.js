@@ -11,7 +11,7 @@ var searchData=
   ['actuatorinfo_8',['ActuatorInfo',['../structhardware__interface_1_1ActuatorInfo.html',1,'hardware_interface']]],
   ['actuatorinterface_9',['ActuatorInterface',['../classhardware__interface_1_1ActuatorInterface.html',1,'hardware_interface']]],
   ['add_5fcommand_5finterfaces_10',['add_command_interfaces',['../classhardware__interface_1_1ResourceStorage.html#a9898f892be821fd76cb80e6d1ad88dab',1,'hardware_interface::ResourceStorage']]],
-  ['add_5fmeasurement_11',['add_measurement',['../classros2__control_1_1MovingAverageStatistics.html#a935d67376f79ca33ed598037a9176796',1,'ros2_control::MovingAverageStatistics']]],
+  ['add_5fmeasurement_11',['add_measurement',['../classros2__control_1_1MovingAverageStatistics.html#afc01d9d4ba84065b69cbc4892a5de1c0',1,'ros2_control::MovingAverageStatistics']]],
   ['add_5fstate_5finterfaces_12',['add_state_interfaces',['../classhardware__interface_1_1ResourceStorage.html#a8f387289150e2263b1f2a34ed656189e',1,'hardware_interface::ResourceStorage']]],
   ['admittance_5fcontroller_13',['admittance_controller',['../namespaceadmittance__controller.html',1,'']]],
   ['admittancecontroller_14',['AdmittanceController',['../classadmittance__controller_1_1AdmittanceController.html',1,'admittance_controller']]],
