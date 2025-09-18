@@ -34,6 +34,10 @@ For optimal copy&paste experience, you can pull the github repository. Some thin
 
   git pull https://github.com/ros-controls/roscon2025_control_workshop
 
+Slides
+------
+
+:download:`Slides for: ros2_control: Fun with Robot Drivers <presentations/ROSCon2025-Workshop_Fun_with_Robot_Drivers.pdf>`
 
 People
 ------
