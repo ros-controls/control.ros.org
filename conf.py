@@ -182,7 +182,8 @@ linkcheck_anchors_ignore_for_url = [
     ]
 linkcheck_ignore = [
     r'https://gazebosim.org/home',
-    r'https://blogs.oracle.com/linux/post/task-priority'
+    r'https://blogs.oracle.com/linux/post/task-priority',
+    r'https://www.blender.org/'
 ]
 
 # -- Options for HTMLHelp output ---------------------------------------------
