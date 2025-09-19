@@ -49,7 +49,6 @@ Additionally, the following (unreleased) packages are relevant for documentation
 * `ros2_control_ci`_ - reusable Github actions and Docker images for Ubuntu, RHEL, and Debian CI jobs;
 * `.github`_ - Github organization-wide files, such as issue templates;
 * `ros2_control_cmake`_ - CMake macros for the project;
-* `ros2_control_ci`_ - reusable Github actions;
 * `control.ros.org`_ - this documentation page.
 
 Development Organisation and Communication
