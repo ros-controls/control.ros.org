@@ -3,11 +3,15 @@
 ROSCon 2025 Workshop
 =======================
 
-  .. image:: images/ROSConUK2025.png
-      :width: 50%
 
-  .. image:: images/ROSCon2025.png
-      :width: 50%
+.. list-table::
+    :widths: 50 50
+    :align: center
+
+    * - .. figure:: images/ROSCon2025.png
+
+      - .. figure:: images/ROSConUK2025.png
+          :figwidth: 75%
 
 ros2_control: Writing Custom Robot Drivers
 ------------------------------------------
