@@ -129,9 +129,8 @@ The following is a step-by-step guide to create source files, basic tests, and c
 <li><p><strong>Preparing package</strong></p>
 <p>If the package for the controller does not exist, then create it first.
 The package should have <code class="docutils literal notranslate"><span class="pre">ament_cmake</span></code> as a build type.
-The easiest way is to search online for the most recent manual.
-A helpful command to support this process is <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">pkg</span> <span class="pre">create</span></code>.
-Use the <code class="docutils literal notranslate"><span class="pre">--help</span></code> flag for more information on how to use it.
+Generally, you can use <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">pkg</span> <span class="pre">create</span> <span class="pre">&lt;controller_name_package&gt;</span> <span class="pre">--build-type</span> <span class="pre">ament_cmake</span></code>.
+Use the <code class="docutils literal notranslate"><span class="pre">--help</span></code> flag for more information on how to use this command.
 There is also an option to create library source files and compile rules to help you in the following steps.</p>
 </li>
 <li><p><strong>Preparing source files</strong></p>
@@ -141,11 +140,26 @@ In <code class="docutils literal notranslate"><span class="pre">include/&lt;PACK
 </li>
 <li><p><strong>Adding declarations into header file (.hpp)</strong></p>
 <ol class="arabic">
-<li><p>Take care that you use header guards. ROS 2-style is using <code class="docutils literal notranslate"><span class="pre">#ifndef</span></code> and <code class="docutils literal notranslate"><span class="pre">#define</span></code> preprocessor directives. (For more information on this, a search engine is your friend :) ).</p></li>
+<li><p>Take care that you use header guards. ROS 2-style is using <code class="docutils literal notranslate"><span class="pre">#ifndef</span></code> and <code class="docutils literal notranslate"><span class="pre">#define</span></code> preprocessor directives.</p></li>
 <li><p>include <code class="docutils literal notranslate"><span class="pre">&quot;controller_interface/controller_interface.hpp&quot;</span></code>.</p></li>
 <li><p>Define a unique namespace for your controller. This is usually a package name written in <code class="docutils literal notranslate"><span class="pre">snake_case</span></code>.</p></li>
-<li><p>Define the class of the controller, extending <code class="docutils literal notranslate"><span class="pre">ControllerInterface</span></code>, e.g.,</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ControllerName</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">controller_interface</span><span class="o">::</span><span class="n">ControllerInterface</span>
+<li><p>Define the class of the controller, extending <code class="docutils literal notranslate"><span class="pre">ControllerInterface</span></code>. Now, your code should look similar to this:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef &lt;CONTROLLER_NAME&gt;_HPP_</span>
+<span class="cp">#define &lt;CONTROLLER_NAME&gt;_HPP_</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;controller_interface/controller_interface.hpp&quot;</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="o">&lt;</span><span class="nn">controller_name</span><span class="o">&gt;</span>
+<span class="p">{</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ControllerName</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">controller_interface</span><span class="o">::</span><span class="n">ControllerInterface</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="c1">// ...</span>
+<span class="p">};</span>
+
+<span class="p">}</span><span class="w">  </span><span class="c1">// namespace &lt;controller_name&gt;</span>
+
+<span class="cp">#endif  </span><span class="c1">// &lt;CONTROLLER_NAME&gt;_HPP_</span>
 </pre></div>
 </div>
 </li>
@@ -162,7 +176,7 @@ If so, you can add two protected string vectors to store those values.</p></li>
 <li><p>(optional) Implement a constructor if needed. There, you could initialize member variables.
 This could also be done in the <code class="docutils literal notranslate"><span class="pre">on_init</span></code> method.</p></li>
 <li><p>Implement the <code class="docutils literal notranslate"><span class="pre">on_init</span></code> method. The first line usually calls the parent <code class="docutils literal notranslate"><span class="pre">on_init</span></code> method.
-Here is the best place to initialize the variables, reserve memory, and most importantly, declare node parameters used by the controller. If everything works fine return <code class="docutils literal notranslate"><span class="pre">controller_interface::return_type::OK</span></code> or <code class="docutils literal notranslate"><span class="pre">controller_interface::return_type::ERROR</span></code> otherwise.</p></li>
+Here is the best place to initialize the variables, reserve memory, and most importantly, declare node parameters used by the controller. If everything works fine return <code class="docutils literal notranslate"><span class="pre">controller_interface::CallbackReturn::SUCCESS</span></code> or <code class="docutils literal notranslate"><span class="pre">controller_interface::CallbackReturn::ERROR</span></code> otherwise.</p></li>
 <li><p>Write the <code class="docutils literal notranslate"><span class="pre">on_configure</span></code> method. Parameters are usually read here, and everything is prepared so that the controller can be started.</p></li>
 <li><p>Implement <code class="docutils literal notranslate"><span class="pre">command_interface_configuration</span></code> and <code class="docutils literal notranslate"><span class="pre">state_interface_configuration</span></code> where required interfaces are defined.
 There are three options of the interface configuration <code class="docutils literal notranslate"><span class="pre">ALL</span></code>, <code class="docutils literal notranslate"><span class="pre">INDIVIDUAL</span></code>, and <code class="docutils literal notranslate"><span class="pre">NONE</span></code> defined in <code class="docutils literal notranslate"><span class="pre">controller_interface/controller_interface.hpp&quot;</span></code>.
@@ -224,9 +238,9 @@ For details, see how it is done for controllers in the <a class="reference exter
 </li>
 <li><p><strong>Compiling and testing the controller</strong></p>
 <ol class="arabic simple">
-<li><p>Now everything is ready to compile the controller using the <code class="docutils literal notranslate"><span class="pre">colcon</span> <span class="pre">build</span> <span class="pre">&lt;controller_name_package&gt;</span></code> command.
+<li><p>Now everything is ready to compile the controller using the <code class="docutils literal notranslate"><span class="pre">colcon</span> <span class="pre">build</span> <span class="pre">--packages-select</span> <span class="pre">&lt;controller_name_package&gt;</span></code> command.
 Remember to go into the root of your workspace before executing this command.</p></li>
-<li><p>If compilation was successful, source the <code class="docutils literal notranslate"><span class="pre">setup.bash</span></code> file from the install folder and execute <code class="docutils literal notranslate"><span class="pre">colcon</span> <span class="pre">test</span> <span class="pre">&lt;controller_name_package&gt;</span></code> to check if the new controller can be found through <code class="docutils literal notranslate"><span class="pre">pluginlib</span></code> library and be loaded by the controller manager.</p></li>
+<li><p>If compilation was successful, source the <code class="docutils literal notranslate"><span class="pre">setup.bash</span></code> file from the install folder and execute <code class="docutils literal notranslate"><span class="pre">colcon</span> <span class="pre">test</span> <span class="pre">--packages-select</span> <span class="pre">&lt;controller_name_package&gt;</span></code> to check if the new controller can be found through <code class="docutils literal notranslate"><span class="pre">pluginlib</span></code> library and be loaded by the controller manager.</p></li>
 </ol>
 </li>
 </ol>
