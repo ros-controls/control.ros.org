@@ -23,6 +23,7 @@
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/tabs.js?v=35627e55"></script>
       <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -73,7 +74,6 @@
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#add-the-gz-ros2-control-plugin">Add the gz_ros2_control plugin</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#default-gz-ros2-control-behavior">Default gz_ros2_control Behavior</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#advanced-custom-gz-ros2-control-simulation-plugins">Advanced: custom gz_ros2_control Simulation Plugins</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#set-up-controllers">Set up controllers</a></li>
 </ul>
@@ -275,20 +275,20 @@ actually parses the <em>ros2_control</em> tags and loads the appropriate hardwar
 controller manager. By default the <em>gz_ros2_control</em> plugin is very simple, though it is also
 extensible via an additional plugin architecture to allow power users to create their own custom
 robot hardware interfaces between <em>ros2_control</em> and Gazebo.</p>
-<p>URDF:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo&gt;</span>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-VVJERg==" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-VVJERg==" name="VVJERg==" role="tab" tabindex="0">URDF</button><button aria-controls="panel-0-U0RG" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-U0RG" name="U0RG" role="tab" tabindex="-1">SDF</button></div><div aria-labelledby="tab-0-VVJERg==" class="sphinx-tabs-panel group-tab" id="panel-0-VVJERg==" name="VVJERg==" role="tabpanel" tabindex="0"><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo&gt;</span>
 <span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgz_ros2_control-system.so&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gz_ros2_control::GazeboSimROS2ControlPlugin&quot;</span><span class="nt">&gt;</span>
 <span class="w">    </span><span class="nt">&lt;parameters&gt;</span>$(find<span class="w"> </span>gz_ros2_control_demos)/config/cart_controller.yaml<span class="nt">&lt;/parameters&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/plugin&gt;</span>
 <span class="nt">&lt;/gazebo&gt;</span>
 </pre></div>
 </div>
-<p>SDF:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgz_ros2_control-system.so&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gz_ros2_control::GazeboSimROS2ControlPlugin&quot;</span><span class="nt">&gt;</span>
+</div><div aria-labelledby="tab-0-U0RG" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-U0RG" name="U0RG" role="tabpanel" tabindex="0"><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgz_ros2_control-system.so&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gz_ros2_control::GazeboSimROS2ControlPlugin&quot;</span><span class="nt">&gt;</span>
 <span class="w">  </span><span class="nt">&lt;parameters&gt;</span>$(find<span class="w"> </span>gz_ros2_control_demos)/config/cart_controller.yaml<span class="nt">&lt;/parameters&gt;</span>
 <span class="nt">&lt;/plugin&gt;</span>
 </pre></div>
 </div>
+</div></div>
 <p>The <em>gz_ros2_control</em> <code class="docutils literal notranslate"><span class="pre">&lt;plugin&gt;</span></code> tag also has the following optional child elements:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">&lt;parameters&gt;</span></code>: A YAML file with the configuration of the controllers. This element can be given multiple times to load multiple files.</p></li>
@@ -307,8 +307,8 @@ robot hardware interfaces between <em>ros2_control</em> and Gazebo.</p>
 </pre></div>
 </div>
 <p>Additionally, one can specify a namespace and remapping rules, which will be forwarded to the controller_manager and loaded controllers. Add the following <code class="docutils literal notranslate"><span class="pre">&lt;ros&gt;</span></code> section:</p>
-<p>URDF:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo&gt;</span>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-VVJERg==" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-1-VVJERg==" name="VVJERg==" role="tab" tabindex="0">URDF</button><button aria-controls="panel-1-U0RG" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-1-U0RG" name="U0RG" role="tab" tabindex="-1">SDF</button></div><div aria-labelledby="tab-1-VVJERg==" class="sphinx-tabs-panel group-tab" id="panel-1-VVJERg==" name="VVJERg==" role="tabpanel" tabindex="0"><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo&gt;</span>
 <span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgz_ros2_control-system.so&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gz_ros2_control::GazeboSimROS2ControlPlugin&quot;</span><span class="nt">&gt;</span>
 <span class="w">    </span>...
 <span class="w">    </span><span class="nt">&lt;ros&gt;</span>
@@ -319,8 +319,7 @@ robot hardware interfaces between <em>ros2_control</em> and Gazebo.</p>
 <span class="nt">&lt;/gazebo&gt;</span>
 </pre></div>
 </div>
-<p>SDF:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgz_ros2_control-system.so&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gz_ros2_control::GazeboSimROS2ControlPlugin&quot;</span><span class="nt">&gt;</span>
+</div><div aria-labelledby="tab-1-U0RG" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-1-U0RG" name="U0RG" role="tabpanel" tabindex="0"><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgz_ros2_control-system.so&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gz_ros2_control::GazeboSimROS2ControlPlugin&quot;</span><span class="nt">&gt;</span>
 <span class="w">  </span>...
 <span class="w">  </span><span class="nt">&lt;ros&gt;</span>
 <span class="w">    </span><span class="nt">&lt;namespace&gt;</span>my_namespace<span class="nt">&lt;/namespace&gt;</span>
@@ -329,27 +328,18 @@ robot hardware interfaces between <em>ros2_control</em> and Gazebo.</p>
 <span class="nt">&lt;/plugin&gt;</span>
 </pre></div>
 </div>
-<section id="default-gz-ros2-control-behavior">
-<h3>Default gz_ros2_control Behavior<a class="headerlink" href="#default-gz-ros2-control-behavior" title="Link to this heading"></a></h3>
-<p>By default, without a <code class="docutils literal notranslate"><span class="pre">&lt;plugin&gt;</span></code> tag, <em>gz_ros2_control</em> will attempt to get all of the information it needs to interface with a ros2_control-based controller out of the URDF or SDF. This is sufficient for most cases, and good for at least getting started.</p>
-<p>The default behavior provides the following ros2_control interfaces:</p>
-<ul class="simple">
-<li><p>hardware_interface::JointStateInterface</p></li>
-<li><p>hardware_interface::EffortJointInterface</p></li>
-<li><p>hardware_interface::VelocityJointInterface</p></li>
-</ul>
-</section>
+</div></div>
 <section id="advanced-custom-gz-ros2-control-simulation-plugins">
 <h3>Advanced: custom gz_ros2_control Simulation Plugins<a class="headerlink" href="#advanced-custom-gz-ros2-control-simulation-plugins" title="Link to this heading"></a></h3>
 <p>The <em>gz_ros2_control</em> Gazebo plugin also provides a pluginlib-based interface to implement custom interfaces between Gazebo and <em>ros2_control</em> for simulating more complex mechanisms (nonlinear springs, linkages, etc).</p>
 <p>These plugins must inherit the <code class="docutils literal notranslate"><span class="pre">gz_ros2_control::GazeboSimSystemInterface</span></code>, which implements a simulated <em>ros2_control</em>
 <code class="docutils literal notranslate"><span class="pre">hardware_interface::SystemInterface</span></code>. SystemInterface provides API-level access to read and command joint properties.</p>
-<p>The respective GazeboSimSystemInterface sub-class is specified in a URDF or SDF model and is loaded when the
-robot model is loaded. For example, the following XML will load the default plugin:</p>
-<p>URDF:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;GazeboSimSystem&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<p>The respective GazeboSimSystemInterface is specified in a URDF or SDF model and is loaded when the
+robot model is loaded. For example, the following XML will load a custom plugin:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-VVJERg==" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-2-VVJERg==" name="VVJERg==" role="tab" tabindex="0">URDF</button><button aria-controls="panel-2-U0RG" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-2-U0RG" name="U0RG" role="tab" tabindex="-1">SDF</button></div><div aria-labelledby="tab-2-VVJERg==" class="sphinx-tabs-panel group-tab" id="panel-2-VVJERg==" name="VVJERg==" role="tabpanel" tabindex="0"><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;GazeboSimSystem&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
 <span class="w">  </span><span class="nt">&lt;hardware&gt;</span>
-<span class="w">    </span><span class="nt">&lt;plugin&gt;</span>gz_ros2_control/GazeboSimSystem<span class="nt">&lt;/plugin&gt;</span>
+<span class="w">    </span><span class="nt">&lt;plugin&gt;</span>gz_ros2_control_demos/GazeboCustomSimSystem<span class="nt">&lt;/plugin&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/hardware&gt;</span>
 <span class="w">  </span>...
 <span class="nt">&lt;ros2_control&gt;</span>
@@ -360,10 +350,9 @@ robot model is loaded. For example, the following XML will load the default plug
 <span class="nt">&lt;/gazebo&gt;</span>
 </pre></div>
 </div>
-<p>SDF:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;GazeboSimSystem&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+</div><div aria-labelledby="tab-2-U0RG" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-2-U0RG" name="U0RG" role="tabpanel" tabindex="0"><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;GazeboSimSystem&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
 <span class="w">  </span><span class="nt">&lt;hardware&gt;</span>
-<span class="w">    </span><span class="nt">&lt;plugin&gt;</span>gz_ros2_control/GazeboSimSystem<span class="nt">&lt;/plugin&gt;</span>
+<span class="w">    </span><span class="nt">&lt;plugin&gt;</span>gz_ros2_control_demos/GazeboCustomSimSystem<span class="nt">&lt;/plugin&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/hardware&gt;</span>
 <span class="w">  </span>...
 <span class="nt">&lt;ros2_control&gt;</span>
@@ -372,13 +361,14 @@ robot model is loaded. For example, the following XML will load the default plug
 <span class="nt">&lt;/plugin&gt;</span>
 </pre></div>
 </div>
+</div></div>
 </section>
 <section id="set-up-controllers">
 <h3>Set up controllers<a class="headerlink" href="#set-up-controllers" title="Link to this heading"></a></h3>
 <p>Use the tag <code class="docutils literal notranslate"><span class="pre">&lt;parameters&gt;</span></code> inside <code class="docutils literal notranslate"><span class="pre">&lt;plugin&gt;</span></code> to set the YAML file with the controller configuration
 and use the tag <code class="docutils literal notranslate"><span class="pre">&lt;controller_manager_prefix_node_name&gt;</span></code> to set the controller manager node name.</p>
-<p>URDF:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo&gt;</span>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-3-VVJERg==" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-3-VVJERg==" name="VVJERg==" role="tab" tabindex="0">URDF</button><button aria-controls="panel-3-U0RG" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-3-U0RG" name="U0RG" role="tab" tabindex="-1">SDF</button></div><div aria-labelledby="tab-3-VVJERg==" class="sphinx-tabs-panel group-tab" id="panel-3-VVJERg==" name="VVJERg==" role="tabpanel" tabindex="0"><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo&gt;</span>
 <span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gz_ros2_control::GazeboSimROS2ControlPlugin&quot;</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgz_ros2_control-system&quot;</span><span class="nt">&gt;</span>
 <span class="w">    </span><span class="nt">&lt;parameters&gt;</span>$(find<span class="w"> </span>gz_ros2_control_demos)/config/cart_controller.yaml<span class="nt">&lt;/parameters&gt;</span>
 <span class="w">    </span><span class="nt">&lt;controller_manager_prefix_node_name&gt;</span>controller_manager<span class="nt">&lt;/controller_manager_prefix_node_name&gt;</span>
@@ -386,13 +376,13 @@ and use the tag <code class="docutils literal notranslate"><span class="pre">&lt
 <span class="nt">&lt;gazebo&gt;</span>
 </pre></div>
 </div>
-<p>SDF:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gz_ros2_control::GazeboSimROS2ControlPlugin&quot;</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgz_ros2_control-system&quot;</span><span class="nt">&gt;</span>
+</div><div aria-labelledby="tab-3-U0RG" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-3-U0RG" name="U0RG" role="tabpanel" tabindex="0"><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gz_ros2_control::GazeboSimROS2ControlPlugin&quot;</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgz_ros2_control-system&quot;</span><span class="nt">&gt;</span>
 <span class="w">  </span><span class="nt">&lt;parameters&gt;</span>$(find<span class="w"> </span>gz_ros2_control_demos)/config/cart_controller.yaml<span class="nt">&lt;/parameters&gt;</span>
 <span class="w">  </span><span class="nt">&lt;controller_manager_prefix_node_name&gt;</span>controller_manager<span class="nt">&lt;/controller_manager_prefix_node_name&gt;</span>
 <span class="nt">&lt;/plugin&gt;</span>
 </pre></div>
 </div>
+</div></div>
 <p>The following is a basic configuration of the controllers:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">joint_state_broadcaster</span></code>: This controller publishes the state of all resources registered to a <code class="docutils literal notranslate"><span class="pre">hardware_interface::StateInterface</span></code> to a topic of type <code class="docutils literal notranslate"><span class="pre">sensor_msgs/msg/JointState</span></code>.</p></li>

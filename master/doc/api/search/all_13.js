@@ -1,7 +1,7 @@
 var searchData=
 [
   ['test_5fconstants_0',['test_constants',['../namespacetest__constants.html',1,'']]],
-  ['testfixture_1',['testfixture',['../classft__sensor__test_1_1TestFixture.html',1,'ft_sensor_test.TestFixture'],['../classposition__test_1_1TestFixture.html',1,'position_test.TestFixture'],['../classvelocity__test_1_1TestFixture.html',1,'velocity_test.TestFixture'],['../classeffort__test_1_1TestFixture.html',1,'effort_test.TestFixture']]],
+  ['testfixture_1',['testfixture',['../classft__sensor__test_1_1TestFixture.html',1,'ft_sensor_test.TestFixture'],['../classposition__test_1_1TestFixture.html',1,'position_test.TestFixture'],['../classvelocity__custom__plugin__test_1_1TestFixture.html',1,'velocity_custom_plugin_test.TestFixture'],['../classvelocity__test_1_1TestFixture.html',1,'velocity_test.TestFixture'],['../classeffort__test_1_1TestFixture.html',1,'effort_test.TestFixture']]],
   ['thread_5fexecutor_5fspin_5f_2',['thread_executor_spin_',['../classgz__ros2__control_1_1GazeboSimROS2ControlPluginPrivate.html#aaf43334ae52000e5f9e09a6b97e67ce3',1,'gz_ros2_control::GazeboSimROS2ControlPluginPrivate']]],
   ['thread_5fpriority_3',['thread_priority',['../structhardware__interface_1_1HardwareInfo.html#a280b5138de77f89056a73d19eeccbde1',1,'hardware_interface::HardwareInfo']]],
   ['todo_20list_4',['Todo List',['../todo.html',1,'']]],

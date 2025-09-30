@@ -218,17 +218,6 @@ Additionally, one can specify a namespace and remapping rules, which will be for
     </plugin>
   </gazebo>
 
-Default gz_ros2_control Behavior
------------------------------------------------------------
-
-By default, without a ``<plugin>`` tag, *gz_ros2_control* will attempt to get all of the information it needs to interface with a ros2_control-based controller out of the URDF. This is sufficient for most cases, and good for at least getting started.
-
-The default behavior provides the following ros2_control interfaces:
-
-* hardware_interface::JointStateInterface
-* hardware_interface::EffortJointInterface
-* hardware_interface::VelocityJointInterface
-
 Advanced: custom gz_ros2_control Simulation Plugins
 -----------------------------------------------------------
 
@@ -237,19 +226,19 @@ The *gz_ros2_control* Gazebo plugin also provides a pluginlib-based interface to
 These plugins must inherit the ``gz_ros2_control::GazeboSimSystemInterface``, which implements a simulated *ros2_control*
 ``hardware_interface::SystemInterface``. SystemInterface provides API-level access to read and command joint properties.
 
-The respective GazeboSimSystemInterface sub-class is specified in a URDF model and is loaded when the
-robot model is loaded. For example, the following XML will load the default plugin:
+The respective GazeboSimSystemInterface is specified in a URDF model and is loaded when the
+robot model is loaded. For example, the following XML will load a custom plugin:
 
 .. code-block:: xml
 
   <ros2_control name="GazeboSimSystem" type="system">
     <hardware>
-      <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+      <plugin>gz_ros2_control_demos/GazeboCustomSimSystem</plugin>
     </hardware>
     ...
   <ros2_control>
   <gazebo>
-    <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+    <plugin name="gz_ros2_control::GazeboSimROS2ControlPlugin" filename="libgz_ros2_control-system">
       ...
     </plugin>
   </gazebo>
