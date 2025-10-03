@@ -109,6 +109,8 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1HandleDataType.html">HandleDataType</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhardware__interface_1_1HardwareAsyncParams.html">HardwareAsyncParams</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1HardwareComponent.html">HardwareComponent</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhardware__interface_1_1HardwareComponentCycleStatus.html">HardwareComponentCycleStatus</a></td></tr>
@@ -217,8 +219,11 @@ Functions</h2></td></tr>
 <tr class="memitem:aa671d478597d51c09ea3a5ebad3da68c" id="r_aa671d478597d51c09ea3a5ebad3da68c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehardware__interface.html#aa671d478597d51c09ea3a5ebad3da68c">stod</a> (const std::string &amp;s)</td></tr>
 <tr class="memdesc:aa671d478597d51c09ea3a5ebad3da68c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to convert a std::string to double in a locale-independent way.  <br /></td></tr>
 <tr class="separator:aa671d478597d51c09ea3a5ebad3da68c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad28292f4a774ae437f32b27ffad9bdaa" id="r_ad28292f4a774ae437f32b27ffad9bdaa"><td class="memItemLeft" align="right" valign="top"><a id="ad28292f4a774ae437f32b27ffad9bdaa" name="ad28292f4a774ae437f32b27ffad9bdaa"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>parse_bool</b> (const std::string &amp;bool_string)</td></tr>
+<tr class="memitem:a839813a9880eae9dc3b3b64b9d1810ae" id="r_a839813a9880eae9dc3b3b64b9d1810ae"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehardware__interface.html#a839813a9880eae9dc3b3b64b9d1810ae">to_lower_case</a> (const std::string &amp;string)</td></tr>
+<tr class="memdesc:a839813a9880eae9dc3b3b64b9d1810ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a string to lower case.  <br /></td></tr>
+<tr class="separator:a839813a9880eae9dc3b3b64b9d1810ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad28292f4a774ae437f32b27ffad9bdaa" id="r_ad28292f4a774ae437f32b27ffad9bdaa"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehardware__interface.html#ad28292f4a774ae437f32b27ffad9bdaa">parse_bool</a> (const std::string &amp;bool_string)</td></tr>
+<tr class="memdesc:ad28292f4a774ae437f32b27ffad9bdaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse a boolean value from a string.  <br /></td></tr>
 <tr class="separator:ad28292f4a774ae437f32b27ffad9bdaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5a93d36963f5205b71a5990f9a97a24" id="r_ab5a93d36963f5205b71a5990f9a97a24"><td class="memTemplParams" colspan="2"><a id="ab5a93d36963f5205b71a5990f9a97a24" name="ab5a93d36963f5205b71a5990f9a97a24"></a>
 template&lt;typename T &gt; </td></tr>
@@ -311,6 +316,39 @@ constexpr char&#160;</td><td class="memItemRight" valign="bottom"><b>HW_IF_FEEDF
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>: Denis Stogl </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a id="ad28292f4a774ae437f32b27ffad9bdaa" name="ad28292f4a774ae437f32b27ffad9bdaa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad28292f4a774ae437f32b27ffad9bdaa">&#9670;&#160;</a></span>parse_bool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool hardware_interface::parse_bool </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>bool_string</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Parse a boolean value from a string. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bool_string</td><td>The input string, can be "true", "false" (case insensitive) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The parsed boolean value. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::invalid_argument</td><td>if the string is not a valid boolean representation. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a7109f5528d32311c5b0bee84ea92cfd8" name="a7109f5528d32311c5b0bee84ea92cfd8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7109f5528d32311c5b0bee84ea92cfd8">&#9670;&#160;</a></span>parse_command_interface_descriptions() <span class="overload">[1/2]</span></h2>
 
@@ -487,6 +525,33 @@ constexpr char&#160;</td><td class="memItemRight" valign="bottom"><b>HW_IF_FEEDF
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a839813a9880eae9dc3b3b64b9d1810ae" name="a839813a9880eae9dc3b3b64b9d1810ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a839813a9880eae9dc3b3b64b9d1810ae">&#9670;&#160;</a></span>to_lower_case()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string hardware_interface::to_lower_case </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>string</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convert a string to lower case. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">string</td><td>The input string. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The lower case version of the input string. </dd></dl>
 
 </div>
 </div>

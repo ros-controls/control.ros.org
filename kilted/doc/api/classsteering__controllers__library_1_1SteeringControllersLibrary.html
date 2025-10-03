@@ -205,6 +205,9 @@ controller_interface::CallbackReturn&#160;</td><td class="memItemRight" valign="
 <tr class="memitem:a451d590f76ce6632b7715c4778fcc984 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase" id="r_a451d590f76ce6632b7715c4778fcc984"><td class="memItemLeft" align="right" valign="top">
 return_type&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (const std::string &amp;controller_name, const std::string &amp;urdf, unsigned int cm_update_rate, const std::string &amp;node_namespace, const rclcpp::NodeOptions &amp;node_options)</td></tr>
 <tr class="separator:a451d590f76ce6632b7715c4778fcc984 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d08f60ac709f27c0d1f8d987947cadf inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase" id="r_a7d08f60ac709f27c0d1f8d987947cadf"><td class="memItemLeft" align="right" valign="top">
+return_type&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (const <a class="el" href="structcontroller__interface_1_1ControllerInterfaceParams.html">controller_interface::ControllerInterfaceParams</a> &amp;params)</td></tr>
+<tr class="separator:a7d08f60ac709f27c0d1f8d987947cadf inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e7ab0f474471aaa0e931ea8fe840bcc inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase" id="r_a9e7ab0f474471aaa0e931ea8fe840bcc"><td class="memItemLeft" align="right" valign="top">
 const rclcpp_lifecycle::State &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>configure</b> ()</td></tr>
 <tr class="memdesc:a9e7ab0f474471aaa0e931ea8fe840bcc inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Custom configure method to read additional parameters for controller-nodes. <br /></td></tr>
@@ -229,6 +232,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_async</b> () const
 <tr class="memitem:abcf2ca1f97be0b2ec3a2b6f34c77ea9b inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase" id="r_abcf2ca1f97be0b2ec3a2b6f34c77ea9b"><td class="memItemLeft" align="right" valign="top">
 const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_robot_description</b> () const</td></tr>
 <tr class="separator:abcf2ca1f97be0b2ec3a2b6f34c77ea9b inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a147447e490b82828fab4769d902589fe inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase" id="r_a147447e490b82828fab4769d902589fe"><td class="memItemLeft" align="right" valign="top">const std::unordered_map&lt; std::string, <a class="el" href="structjoint__limits_1_1JointLimits.html">joint_limits::JointLimits</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a147447e490b82828fab4769d902589fe">get_hard_joint_limits</a> () const</td></tr>
+<tr class="separator:a147447e490b82828fab4769d902589fe inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1496bf3dfa4abb0ffb0972b9534d6d91 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase" id="r_a1496bf3dfa4abb0ffb0972b9534d6d91"><td class="memItemLeft" align="right" valign="top">const std::unordered_map&lt; std::string, <a class="el" href="structjoint__limits_1_1SoftJointLimits.html">joint_limits::SoftJointLimits</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a1496bf3dfa4abb0ffb0972b9534d6d91">get_soft_joint_limits</a> () const</td></tr>
+<tr class="separator:a1496bf3dfa4abb0ffb0972b9534d6d91 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abead5138c0f8538e49318b61aea89553 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase" id="r_abead5138c0f8538e49318b61aea89553"><td class="memItemLeft" align="right" valign="top">virtual rclcpp::NodeOptions&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#abead5138c0f8538e49318b61aea89553">define_custom_node_options</a> () const</td></tr>
 <tr class="separator:abead5138c0f8538e49318b61aea89553 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04df56d589677c015eb11930d66bbfe4 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase" id="r_a04df56d589677c015eb11930d66bbfe4"><td class="memTemplParams" colspan="2">template&lt;typename ParameterT &gt; </td></tr>
@@ -301,9 +308,15 @@ rclcpp::Publisher&lt; ControllerStateMsgTf &gt;::SharedPtr&#160;</td><td class="
 <tr class="memitem:a8d6754a177b5f603959acc934a640a24" id="r_a8d6754a177b5f603959acc934a640a24"><td class="memItemLeft" align="right" valign="top"><a id="a8d6754a177b5f603959acc934a640a24" name="a8d6754a177b5f603959acc934a640a24"></a>
 std::unique_ptr&lt; <a class="el" href="classrealtime__tools_1_1RealtimePublisher.html">ControllerStatePublisherOdom</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>rt_odom_state_publisher_</b></td></tr>
 <tr class="separator:a8d6754a177b5f603959acc934a640a24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea79719d2e0640a3adba9436f82134b5" id="r_aea79719d2e0640a3adba9436f82134b5"><td class="memItemLeft" align="right" valign="top"><a id="aea79719d2e0640a3adba9436f82134b5" name="aea79719d2e0640a3adba9436f82134b5"></a>
+ControllerStateMsgOdom&#160;</td><td class="memItemRight" valign="bottom"><b>odom_state_msg_</b></td></tr>
+<tr class="separator:aea79719d2e0640a3adba9436f82134b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add94d561d07c7ced22ae86704a84b865" id="r_add94d561d07c7ced22ae86704a84b865"><td class="memItemLeft" align="right" valign="top"><a id="add94d561d07c7ced22ae86704a84b865" name="add94d561d07c7ced22ae86704a84b865"></a>
 std::unique_ptr&lt; <a class="el" href="classrealtime__tools_1_1RealtimePublisher.html">ControllerStatePublisherTf</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>rt_tf_odom_state_publisher_</b></td></tr>
 <tr class="separator:add94d561d07c7ced22ae86704a84b865"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a4ad8f78c59e9b21d8d02a5905d347c" id="r_a1a4ad8f78c59e9b21d8d02a5905d347c"><td class="memItemLeft" align="right" valign="top"><a id="a1a4ad8f78c59e9b21d8d02a5905d347c" name="a1a4ad8f78c59e9b21d8d02a5905d347c"></a>
+ControllerStateMsgTf&#160;</td><td class="memItemRight" valign="bottom"><b>tf_odom_state_msg_</b></td></tr>
+<tr class="separator:a1a4ad8f78c59e9b21d8d02a5905d347c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4c66f867952305f02aff2c9a8b793bd" id="r_ac4c66f867952305f02aff2c9a8b793bd"><td class="memItemLeft" align="right" valign="top"><a id="ac4c66f867952305f02aff2c9a8b793bd" name="ac4c66f867952305f02aff2c9a8b793bd"></a>
 <a class="el" href="classsteering__odometry_1_1SteeringOdometry.html">steering_odometry::SteeringOdometry</a>&#160;</td><td class="memItemRight" valign="bottom"><b>odometry_</b></td></tr>
 <tr class="memdesc:ac4c66f867952305f02aff2c9a8b793bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Odometry: <br /></td></tr>
@@ -317,6 +330,9 @@ rclcpp::Publisher&lt; SteeringControllerStateMsg &gt;::SharedPtr&#160;</td><td c
 <tr class="memitem:a1f1ebda75b4bcc81f79bb9b7f1f7505d" id="r_a1f1ebda75b4bcc81f79bb9b7f1f7505d"><td class="memItemLeft" align="right" valign="top"><a id="a1f1ebda75b4bcc81f79bb9b7f1f7505d" name="a1f1ebda75b4bcc81f79bb9b7f1f7505d"></a>
 std::unique_ptr&lt; <a class="el" href="classrealtime__tools_1_1RealtimePublisher.html">ControllerStatePublisher</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>controller_state_publisher_</b></td></tr>
 <tr class="separator:a1f1ebda75b4bcc81f79bb9b7f1f7505d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a925689191c3a93b12aa459204a2d1a99" id="r_a925689191c3a93b12aa459204a2d1a99"><td class="memItemLeft" align="right" valign="top"><a id="a925689191c3a93b12aa459204a2d1a99" name="a925689191c3a93b12aa459204a2d1a99"></a>
+SteeringControllerStateMsg&#160;</td><td class="memItemRight" valign="bottom"><b>controller_state_msg_</b></td></tr>
+<tr class="separator:a925689191c3a93b12aa459204a2d1a99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60b23bc1bf0182a0972c23f9367bea9d" id="r_a60b23bc1bf0182a0972c23f9367bea9d"><td class="memItemLeft" align="right" valign="top"><a id="a60b23bc1bf0182a0972c23f9367bea9d" name="a60b23bc1bf0182a0972c23f9367bea9d"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>nr_state_itfs_</b></td></tr>
 <tr class="separator:a60b23bc1bf0182a0972c23f9367bea9d"><td class="memSeparator" colspan="2">&#160;</td></tr>

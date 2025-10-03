@@ -12,5 +12,6 @@ var searchData=
   ['computed_5fcommand_5f_9',['computed_command_',['../classparallel__gripper__action__controller_1_1GripperActionController.html#a2f7576b9dc0ead5b0d52852c7d61d03d',1,'parallel_gripper_action_controller::GripperActionController']]],
   ['control_5fperiod_5f_10',['control_period_',['../classgz__ros2__control_1_1GazeboSimROS2ControlPluginPrivate.html#a8e3c14bb8d79dbbd2583b149c130c218',1,'gz_ros2_control::GazeboSimROS2ControlPluginPrivate']]],
   ['controller_5fmanager_5f_11',['controller_manager_',['../classgz__ros2__control_1_1GazeboSimROS2ControlPluginPrivate.html#a4ede56623319788b25b4af08f51c9bdf',1,'gz_ros2_control::GazeboSimROS2ControlPluginPrivate']]],
-  ['controllers_5fexported_5fstate_5finterfaces_5fmap_5f_12',['controllers_exported_state_interfaces_map_',['../classhardware__interface_1_1ResourceStorage.html#a63e1c34fa7dcdf6276cbf17aaf4a4ea5',1,'hardware_interface::ResourceStorage']]]
+  ['controllers_5fexported_5fstate_5finterfaces_5fmap_5f_12',['controllers_exported_state_interfaces_map_',['../classhardware__interface_1_1ResourceStorage.html#a63e1c34fa7dcdf6276cbf17aaf4a4ea5',1,'hardware_interface::ResourceStorage']]],
+  ['cpu_5faffinity_5fcores_13',['cpu_affinity_cores',['../structhardware__interface_1_1HardwareAsyncParams.html#ade30c4d7541b1b2c8ba69e35423f8b4e',1,'hardware_interface::HardwareAsyncParams']]]
 ];

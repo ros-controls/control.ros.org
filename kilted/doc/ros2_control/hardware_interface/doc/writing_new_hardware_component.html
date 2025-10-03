@@ -176,9 +176,14 @@ If all required parameters are set and valid and everything works fine return <c
 <ol class="arabic">
 <li><p><strong>(Optional) Adding Publisher, Services, etc.</strong></p>
 <p>A common requirement for a hardware component is to publish status or diagnostic information without interfering with the real-time control loop.</p>
-<p>This allows you to add any standard ROS 2 component (publishers, subscribers, services, timers) to your hardware interface without compromising real-time performance. There are two primary ways to achieve this.</p>
-<p><strong>Method 1: Using the Framework-Managed Node (Recommended &amp; Simplest)</strong></p>
-<p>The framework internally creates a dedicated ROS 2 node for each hardware component. Your hardware plugin can then get a handle to this node and use it.</p>
+<p>This allows you to add any standard ROS 2 component (publishers, subscribers, services, timers) to your hardware interface without compromising real-time performance. There are three primary ways to achieve this.</p>
+<p><strong>Method 1: Using the Framework-Managed Publisher (Recommended &amp; Simplest for HardwareStatus Messages)</strong></p>
+<blockquote>
+<div><p>Refer <a class="reference internal" href="#framework-managed-publisher"><span class="std std-ref">Framework Managed Publisher</span></a></p>
+</div></blockquote>
+<p><strong>Method 2: Using the Framework-Managed Node (Recommended &amp; Simplest for Custom Messages)</strong></p>
+<blockquote>
+<div><p>The framework internally creates a dedicated ROS 2 node for each hardware component. Your hardware plugin can then get a handle to this node and use it.</p>
 <ol class="arabic">
 <li><p><strong>Access and using the Default Node</strong>: You can get a <code class="docutils literal notranslate"><span class="pre">shared_ptr</span></code> to the node by calling the <code class="docutils literal notranslate"><span class="pre">get_node()</span></code> method and use it just like any other <code class="docutils literal notranslate"><span class="pre">rclcpp::Node::SharedPtr</span></code> to create publishers, timers, etc.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Continuing inside on_configure()</span>
@@ -197,8 +202,10 @@ If all required parameters are set and valid and everything works fine return <c
 </div>
 </li>
 </ol>
-<p><strong>Method 2: Using the Executor from `HardwareComponentInterfaceParams`</strong></p>
-<p>For more advanced use cases where you need direct control over node creation, the <code class="docutils literal notranslate"><span class="pre">on_init</span></code> method can be configured to receive a <code class="docutils literal notranslate"><span class="pre">HardwareComponentInterfaceParams</span></code> struct. This struct contains a <code class="docutils literal notranslate"><span class="pre">weak_ptr</span></code> to the <code class="docutils literal notranslate"><span class="pre">ControllerManager</span></code>’s executor.</p>
+</div></blockquote>
+<p><strong>Method 3: Using the Executor from `HardwareComponentInterfaceParams`</strong></p>
+<blockquote>
+<div><p>For more advanced use cases where you need direct control over node creation, the <code class="docutils literal notranslate"><span class="pre">on_init</span></code> method can be configured to receive a <code class="docutils literal notranslate"><span class="pre">HardwareComponentInterfaceParams</span></code> struct. This struct contains a <code class="docutils literal notranslate"><span class="pre">weak_ptr</span></code> to the <code class="docutils literal notranslate"><span class="pre">ControllerManager</span></code>’s executor.</p>
 <ol class="arabic">
 <li><p><strong>Update ``on_init`` Signature</strong>: First, your hardware interface must override the <code class="docutils literal notranslate"><span class="pre">on_init</span></code> version that takes <code class="docutils literal notranslate"><span class="pre">HardwareComponentInterfaceParams</span></code>.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// In your &lt;robot_hardware_interface_name&gt;.hpp</span>
@@ -219,7 +226,8 @@ If all required parameters are set and valid and everything works fine return <c
 </div>
 </li>
 </ol>
-<p>For a complete, working implementation that uses the framework-managed node to publish diagnostic messages, see the demo in example 17.</p>
+<p>For a complete, working implementation that uses the framework-managed node to publish diagnostic messages, see the demo in <a class="reference internal" href="../../../ros2_control_demos/example_17/doc/userdoc.html#ros2-control-demos-example-17-userdoc"><span class="std std-ref">Example 17</span></a>.</p>
+</div></blockquote>
 </li>
 </ol>
 </li>
@@ -266,6 +274,80 @@ If all required parameters are set and valid and everything works fine return <c
 <li><p>Implement <code class="docutils literal notranslate"><span class="pre">on_error</span></code> method where different errors from all states are handled.</p></li>
 <li><p>Implement the <code class="docutils literal notranslate"><span class="pre">read</span></code> method getting the states from the hardware and storing them to internal variables defined in <code class="docutils literal notranslate"><span class="pre">export_state_interfaces</span></code>.</p></li>
 <li><p>Implement <code class="docutils literal notranslate"><span class="pre">write</span></code> method that commands the hardware based on the values stored in internal variables defined in <code class="docutils literal notranslate"><span class="pre">export_command_interfaces</span></code>.</p></li>
+<li><p>(optional) <strong>Framework Managed Publisher</strong></p>
+<p id="framework-managed-publisher">Implement <code class="docutils literal notranslate"><span class="pre">init_hardware_status_message</span></code> and <code class="docutils literal notranslate"><span class="pre">update_hardware_status_message</span></code> methods to publish the framework-supported hardware status reporting through <code class="docutils literal notranslate"><span class="pre">control_msgs/msg/HardwareStatus</span></code> messages:</p>
+<ul class="simple">
+<li><p><strong>`init_hardware_status_message`</strong>: This non-realtime method is called once during initialization. You must override it to define the <strong>static structure</strong> of your status message. This includes setting the <code class="docutils literal notranslate"><span class="pre">hardware_id</span></code>, resizing the <code class="docutils literal notranslate"><span class="pre">hardware_device_states</span></code> vector, and for each device, resizing its specific status vectors (e.g., <code class="docutils literal notranslate"><span class="pre">generic_hardware_status</span></code>, <code class="docutils literal notranslate"><span class="pre">canopen_states</span></code>) and populating static fields like <code class="docutils literal notranslate"><span class="pre">device_id</span></code> and interface <code class="docutils literal notranslate"><span class="pre">name</span></code>. Pre-allocating the message structure here is crucial for real-time safety.</p></li>
+</ul>
+<blockquote>
+<div><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// In your &lt;robot_hardware_interface_name&gt;.hpp</span>
+<span class="n">hardware_interface</span><span class="o">::</span><span class="n">CallbackReturn</span><span class="w"> </span><span class="nf">init_hardware_status_message</span><span class="p">(</span>
+<span class="n">control_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">HardwareStatus</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">msg_template</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+
+<span class="c1">// In your &lt;robot_hardware_interface_name&gt;.cpp</span>
+<span class="n">hardware_interface</span><span class="o">::</span><span class="n">CallbackReturn</span><span class="w"> </span><span class="nf">MyHardware::init_hardware_status_message</span><span class="p">(</span>
+<span class="n">control_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">HardwareStatus</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="n">msg</span><span class="p">.</span><span class="n">hardware_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_hardware_info</span><span class="p">().</span><span class="n">name</span><span class="p">;</span>
+<span class="w">   </span><span class="n">msg</span><span class="p">.</span><span class="n">hardware_device_states</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">get_hardware_info</span><span class="p">().</span><span class="n">joints</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+
+<span class="w">   </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">get_hardware_info</span><span class="p">().</span><span class="n">joints</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="w">   </span><span class="p">{</span>
+<span class="w">      </span><span class="n">msg</span><span class="p">.</span><span class="n">hardware_device_states</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">device_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_hardware_info</span><span class="p">().</span><span class="n">joints</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">name</span><span class="p">;</span>
+<span class="w">      </span><span class="c1">// This example uses one generic status per joint</span>
+<span class="w">      </span><span class="n">msg</span><span class="p">.</span><span class="n">hardware_device_states</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">generic_hardware_status</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">CallbackReturn</span><span class="o">::</span><span class="n">SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ul class="simple">
+<li><p><strong>`update_hardware_status_message`</strong>: This real-time safe method is called from the framework’s timer callback. You must override it to <strong>fill in the dynamic values</strong> of the pre-structured message. This typically involves copying your internal state variables (updated in your <cite>read()</cite> method) into the fields of the message. This method must be fast and non-allocating.</p></li>
+</ul>
+<blockquote>
+<div><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// In your &lt;robot_hardware_interface_name&gt;.hpp</span>
+<span class="n">hardware_interface</span><span class="o">::</span><span class="n">return_type</span><span class="w"> </span><span class="nf">update_hardware_status_message</span><span class="p">(</span>
+<span class="n">control_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">HardwareStatus</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+
+<span class="c1">// In your &lt;robot_hardware_interface_name&gt;.cpp</span>
+<span class="n">hardware_interface</span><span class="o">::</span><span class="n">return_type</span><span class="w"> </span><span class="nf">MyHardware::update_hardware_status_message</span><span class="p">(</span>
+<span class="n">control_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">HardwareStatus</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">get_hardware_info</span><span class="p">().</span><span class="n">joints</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="w">   </span><span class="p">{</span>
+<span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">generic_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="n">hardware_device_states</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">generic_hardware_status</span><span class="p">;</span>
+<span class="w">      </span><span class="c1">// Example: Map internal state to a standard status field</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">abs</span><span class="p">(</span><span class="n">hw_positions_</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">joint_limits_</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">max_position</span><span class="p">)</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">         </span><span class="n">generic_status</span><span class="p">.</span><span class="n">health_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">control_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">GenericState</span><span class="o">::</span><span class="n">HEALTH_ERROR</span><span class="p">;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="k">else</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">         </span><span class="n">generic_status</span><span class="p">.</span><span class="n">health_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">control_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">GenericState</span><span class="o">::</span><span class="n">HEALTH_OK</span><span class="p">;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">return_type</span><span class="o">::</span><span class="n">OK</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ul class="simple">
+<li><p><strong>Enable in URDF</strong>: Finally, to activate the publisher, add the <code class="docutils literal notranslate"><span class="pre">status_publish_rate</span></code> parameter to your <code class="docutils literal notranslate"><span class="pre">&lt;hardware&gt;</span></code> tag in the URDF. Setting it to 0.0 disables the feature.</p></li>
+</ul>
+<blockquote>
+<div><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;MyHardware&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;hardware&gt;</span>
+<span class="w">   </span><span class="nt">&lt;plugin&gt;</span>my_package/MyHardware<span class="nt">&lt;/plugin&gt;</span>
+<span class="w">   </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;status_publish_rate&quot;</span><span class="nt">&gt;</span>20.0<span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;/hardware&gt;</span>
+...
+<span class="nt">&lt;/ros2_control&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>For a complete, working implementation that uses the framework-managed node to publish diagnostic messages, see the demo in <a class="reference internal" href="../../../ros2_control_demos/example_17/doc/userdoc.html#ros2-control-demos-example-17-userdoc"><span class="std std-ref">Example 17</span></a>.</p>
+</li>
 <li><p>IMPORTANT: At the end of your file after the namespace is closed, add the <code class="docutils literal notranslate"><span class="pre">PLUGINLIB_EXPORT_CLASS</span></code> macro.</p></li>
 </ol>
 <blockquote>

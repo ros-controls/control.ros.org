@@ -164,7 +164,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keywordtype">double</span> <span class="comment">/* error_velocity */</span>, <span class="keywordtype">double</span> max_allowed_effort)</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  {</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="comment">// Forward desired position to command</span></div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    joint_handle_-&gt;get().set_value(desired_position);</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    std::ignore = joint_handle_-&gt;get().set_value(desired_position);</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keywordflow">return</span> max_allowed_effort;</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  }</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
@@ -217,7 +217,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    }</div>
 <div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    <span class="comment">// Reset PIDs, zero effort commands</span></div>
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    pid_-&gt;reset();</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    joint_handle_-&gt;get().set_value(0.0);</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    std::ignore = joint_handle_-&gt;get().set_value(0.0);</div>
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>  }</div>
 <div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>  <span class="keywordtype">void</span> stopping(<span class="keyword">const</span> rclcpp::Time &amp; <span class="comment">/* time */</span>) {}</div>
@@ -237,7 +237,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <span class="keywordtype">double</span> command = pid_-&gt;compute_command(error_position, error_velocity, period);</div>
 <div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    command = std::min&lt;double&gt;(</div>
 <div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>      fabs(max_allowed_effort), std::max&lt;double&gt;(-fabs(max_allowed_effort), command));</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    joint_handle_-&gt;get().set_value(command);</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    std::ignore = joint_handle_-&gt;get().set_value(command);</div>
 <div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    last_update_time_ = std::chrono::steady_clock::now();</div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    <span class="keywordflow">return</span> command;</div>
 <div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>  }</div>

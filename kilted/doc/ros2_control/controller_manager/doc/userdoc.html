@@ -479,6 +479,8 @@ The full structure of the map is given in the following example:</p>
 </ul>
 </div></blockquote>
 </dd>
+<dt>overruns.print_warnings (bool)</dt><dd><p>If true, the controller manager will print a warning message to the console if an overrun is detected in its real-time loop (<code class="docutils literal notranslate"><span class="pre">read</span></code>, <code class="docutils literal notranslate"><span class="pre">update</span></code> and <code class="docutils literal notranslate"><span class="pre">write</span></code>). By default, it is set to true, except when used with <code class="docutils literal notranslate"><span class="pre">use_sim_time</span></code> parameter set to true.</p>
+</dd>
 </dl>
 <p><strong>An example parameter file:</strong></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">controller_manager</span><span class="p">:</span>
@@ -533,6 +535,8 @@ The full structure of the map is given in the following example:</p>
 <span class="w">      </span><span class="nt">inactive</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{}&#39;</span>
 <span class="w">      </span><span class="nt">shutdown_on_initial_state_failure</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">      </span><span class="nt">unconfigured</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{}&#39;</span>
+<span class="w">    </span><span class="nt">overruns</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">print_warnings</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
 <span class="w">    </span><span class="nt">update_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100.0</span>
 </pre></div>
 </div>
@@ -592,9 +596,9 @@ The full structure of the map is given in the following example:</p>
 <section id="spawner">
 <h3><code class="docutils literal notranslate"><span class="pre">spawner</span></code><a class="headerlink" href="#spawner" title="Link to this heading"></a></h3>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>run<span class="w"> </span>controller_manager<span class="w"> </span>spawner<span class="w"> </span>-h
-<span class="go">usage: spawner [-h] [-c CONTROLLER_MANAGER] [-p PARAM_FILE] [--load-only] [--inactive] [-u] [--controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT] [--switch-timeout SWITCH_TIMEOUT] [--service-call-timeout SERVICE_CALL_TIMEOUT] [--activate-as-group]</span>
-<span class="go">              [--controller-ros-args CONTROLLER_ROS_ARGS]</span>
-<span class="go">              controller_names [controller_names ...]</span>
+<span class="go">usage: spawner [-h] [-c CONTROLLER_MANAGER] [-p PARAM_FILE] [--load-only] [--inactive] [-u] [--controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT] [--switch-timeout SWITCH_TIMEOUT]</span>
+<span class="go">           [--service-call-timeout SERVICE_CALL_TIMEOUT] [--activate-as-group] [--switch-asap | --no-switch-asap] [--controller-ros-args CONTROLLER_ROS_ARGS]</span>
+<span class="go">           controller_names [controller_names ...]</span>
 
 <span class="go">positional arguments:</span>
 <span class="go">  controller_names      List of controllers</span>
@@ -615,6 +619,8 @@ The full structure of the map is given in the following example:</p>
 <span class="go">  --service-call-timeout SERVICE_CALL_TIMEOUT</span>
 <span class="go">                        Time to wait for the service response from the controller manager</span>
 <span class="go">  --activate-as-group   Activates all the parsed controllers list together instead of one by one. Useful for activating all chainable controllers altogether</span>
+<span class="go">  --switch-asap, --no-switch-asap</span>
+<span class="go">                        Option to switch the controllers in the realtime loop at the earliest possible time or in the non-realtime loop.</span>
 <span class="go">  --controller-ros-args CONTROLLER_ROS_ARGS</span>
 <span class="go">                        The --ros-args to be passed to the controller node, e.g., for remapping topics. Pass multiple times for every argument.</span>
 </pre></div>
@@ -789,6 +795,11 @@ If it is an array of integers, the node’s affinity will be set to the specifie
 <dt>thread_priority (optional; int; default: 50)</dt><dd><p>Sets the thread priority of the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> node to the specified value. The value must be between 0 and 99.</p>
 </dd>
 <dt>use_sim_time (optional; bool; default: false)</dt><dd><p>Enables the use of simulation time in the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> node.</p>
+</dd>
+<dt>overruns.manage (optional; bool; default: true)</dt><dd><p>Enables or disables the handling of overruns in the real-time loop of the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> node.
+If set to true, the controller manager will detect overruns caused by system time changes or longer execution times of the controllers and hardware components.
+If an overrun is detected, the controller manager will print a warning message to the console.
+When used with <code class="docutils literal notranslate"><span class="pre">use_sim_time</span></code> set to true, this parameter is ignored and the overrun handling is disabled.</p>
 </dd>
 </dl>
 </section>

@@ -158,8 +158,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>{</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  command_struct_rt_ = *(command_.readFromRT());</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <span class="keyword">const</span> <span class="keywordtype">double</span> current_position = joint_position_state_interface_-&gt;get().get_value();</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="keyword">const</span> <span class="keywordtype">double</span> current_velocity = joint_velocity_state_interface_-&gt;get().get_value();</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <span class="keyword">const</span> <span class="keywordtype">double</span> current_position = joint_position_state_interface_-&gt;get().get_optional().value();</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="keyword">const</span> <span class="keywordtype">double</span> current_velocity = joint_velocity_state_interface_-&gt;get().get_optional().value();</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  <span class="keyword">const</span> <span class="keywordtype">double</span> error_position = command_struct_rt_.position_ - current_position;</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  <span class="keyword">const</span> <span class="keywordtype">double</span> error_velocity = -current_velocity;</div>
@@ -241,7 +241,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span><span class="keyword">template</span> &lt;const <span class="keywordtype">char</span> * HardwareInterface&gt;</div>
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span><span class="keywordtype">void</span> GripperActionController&lt;HardwareInterface&gt;::set_hold_position()</div>
 <div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>{</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>  command_struct_.position_ = joint_position_state_interface_-&gt;get().get_value();</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>  command_struct_.position_ = joint_position_state_interface_-&gt;get().get_optional().value();</div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>  command_struct_.max_effort_ = params_.max_effort;</div>
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>  command_.writeFromNonRT(command_struct_);</div>
 <div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>}</div>
@@ -381,7 +381,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>  hw_iface_adapter_.init(joint_command_interface_, get_node());</div>
 <div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span> </div>
 <div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>  <span class="comment">// Command - non RT version</span></div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>  command_struct_.position_ = joint_position_state_interface_-&gt;get().get_value();</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>  command_struct_.position_ = joint_position_state_interface_-&gt;get().get_optional().value();</div>
 <div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>  command_struct_.max_effort_ = params_.max_effort;</div>
 <div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>  command_.initRT(command_struct_);</div>
 <div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span> </div>

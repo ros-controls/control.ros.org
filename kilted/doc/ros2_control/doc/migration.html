@@ -64,6 +64,7 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../../migration/migration.html#between-different-ros-2-distributions">Between different ROS 2 distributions</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">ros2_control</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#controller-interface">controller_interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#controller-manager">controller_manager</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hardware-interface">hardware_interface</a></li>
 </ul>
 </li>
@@ -129,6 +130,17 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">get_ordered_interfaces</span></code> now throws if the size of the output vector does not match the size of the input names vector (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2528">#2528</a>).</p></li>
 </ul>
 </section>
+<section id="controller-manager">
+<h2>controller_manager<a class="headerlink" href="#controller-manager" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt>The spawner now supports two new arguments <code class="docutils literal notranslate"><span class="pre">--switch-asap</span></code> and <code class="docutils literal notranslate"><span class="pre">--no-switch-asap</span></code> to control the behaviour of the spawner when switching controllers to be in realtime loop (or) non-realtime loop.</dt><dd><p>By default, it is set to <code class="docutils literal notranslate"><span class="pre">--no-switch-asap</span></code> because when activating multiple controllers at same time might affect the realtime loop performance (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2453">#2452</a>)
+If it is needed to switch controllers in realtime loop, then the argument <code class="docutils literal notranslate"><span class="pre">--switch-asap</span></code> need to be parsed to the spawner.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
 <section id="hardware-interface">
 <h2>hardware_interface<a class="headerlink" href="#hardware-interface" title="Link to this heading"></a></h2>
 <ul>
@@ -164,6 +176,9 @@ future release.</p>
 have been updated from passing a <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">HardwareInfo</span> <span class="pre">&amp;</span></code> to passing a <code class="docutils literal notranslate"><span class="pre">const</span>
 <span class="pre">HardwareComponentParams</span> <span class="pre">&amp;</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2323"># 2323</a>).
 The old signatures are deprecated and will be removed in a future release.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">thread_priority</span></code> variable in the <code class="docutils literal notranslate"><span class="pre">HardwareInfo</span></code> struct has been deprecated in favor of newly
+introduced <code class="docutils literal notranslate"><span class="pre">async_params</span></code> variable that has more options in the <code class="docutils literal notranslate"><span class="pre">HardwareComponentParams</span></code> struct.
+The deprecated <code class="docutils literal notranslate"><span class="pre">thread_priority</span></code> variable will be removed in a future release. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2477"># 2477</a>).</p></li>
 </ul>
 </section>
 </section>
