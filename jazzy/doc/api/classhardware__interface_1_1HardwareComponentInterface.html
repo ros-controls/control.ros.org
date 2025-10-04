@@ -160,11 +160,13 @@ Collaboration diagram for hardware_interface::HardwareComponentInterface:</div>
 <div class="dyncontent">
 <div class="center"><img src="classhardware__interface_1_1HardwareComponentInterface__coll__graph.png" border="0" usemap="#ahardware__interface_1_1HardwareComponentInterface_coll__map" alt="Collaboration graph"/></div>
 <map name="ahardware__interface_1_1HardwareComponentInterface_coll__map" id="ahardware__interface_1_1HardwareComponentInterface_coll__map">
-<area shape="rect" title="Virtual base class for all hardware components (Actuators, Sensors, and Systems)." alt="" coords="343,37,569,77"/>
-<area shape="rect" title=" " alt="" coords="5,5,257,45"/>
-<area shape="poly" title=" " alt="" coords="272,36,343,44,342,49,271,42"/>
-<area shape="rect" href="structhardware__interface_1_1HardwareInfo.html" title="This structure stores information about hardware defined in a robot&#39;s URDF." alt="" coords="57,69,205,109"/>
-<area shape="poly" title=" " alt="" coords="219,78,342,66,342,71,220,83"/>
+<area shape="rect" title="Virtual base class for all hardware components (Actuators, Sensors, and Systems)." alt="" coords="669,37,896,77"/>
+<area shape="rect" title=" " alt="" coords="332,5,584,45"/>
+<area shape="poly" title=" " alt="" coords="598,36,669,44,669,49,598,42"/>
+<area shape="rect" href="structhardware__interface_1_1HardwareInfo.html" title="This structure stores information about hardware defined in a robot&#39;s URDF." alt="" coords="384,69,532,109"/>
+<area shape="poly" title=" " alt="" coords="546,78,668,66,669,71,546,83"/>
+<area shape="rect" href="structhardware__interface_1_1HardwareAsyncParams.html" title=" " alt="" coords="5,69,185,109"/>
+<area shape="poly" title=" " alt="" coords="199,87,384,87,384,92,199,92"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -259,6 +261,9 @@ template&lt;typename T  = double&gt; </td></tr>
 <tr class="memitem:ad2bce0ab92e38999de67bdd97c1a4d9d" id="r_ad2bce0ab92e38999de67bdd97c1a4d9d"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structhardware__interface_1_1HardwareInfo.html">HardwareInfo</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1HardwareComponentInterface.html#ad2bce0ab92e38999de67bdd97c1a4d9d">get_hardware_info</a> () const</td></tr>
 <tr class="memdesc:ad2bce0ab92e38999de67bdd97c1a4d9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the hardware info of the Interface.  <br /></td></tr>
 <tr class="separator:ad2bce0ab92e38999de67bdd97c1a4d9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63fa1b6fbc94251465881984665e21db" id="r_a63fa1b6fbc94251465881984665e21db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1HardwareComponentInterface.html#a63fa1b6fbc94251465881984665e21db">pause_async_operations</a> ()</td></tr>
+<tr class="memdesc:a63fa1b6fbc94251465881984665e21db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pause any asynchronous operations.  <br /></td></tr>
+<tr class="separator:a63fa1b6fbc94251465881984665e21db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05cadd029c60bd25e7c4c65b14393f67" id="r_a05cadd029c60bd25e7c4c65b14393f67"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1HardwareComponentInterface.html#a05cadd029c60bd25e7c4c65b14393f67">prepare_for_activation</a> ()</td></tr>
 <tr class="memdesc:a05cadd029c60bd25e7c4c65b14393f67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prepare for the activation of the hardware.  <br /></td></tr>
 <tr class="separator:a05cadd029c60bd25e7c4c65b14393f67"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -980,6 +985,34 @@ CallbackReturn::ERROR if any error happens or data are missing. </dd></dl>
 CallbackReturn::ERROR if any error happens or data are missing. </dd></dl>
 
 <p>Reimplemented in <a class="el" href="classgazebo__ros2__control_1_1GazeboSystem.html#a766072ed786f1323fdce73fdaba1b07e">gazebo_ros2_control::GazeboSystem</a>, and <a class="el" href="classgz__ros2__control_1_1GazeboSimSystem.html#a549d6ed6066b0d589314231af1e45d78">gz_ros2_control::GazeboSimSystem</a>.</p>
+
+</div>
+</div>
+<a id="a63fa1b6fbc94251465881984665e21db" name="a63fa1b6fbc94251465881984665e21db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63fa1b6fbc94251465881984665e21db">&#9670;&#160;</a></span>pause_async_operations()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void hardware_interface::HardwareComponentInterface::pause_async_operations </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pause any asynchronous operations. </p>
+<p>This method is called to pause any ongoing asynchronous operations, such as read/write cycles. It is typically used during lifecycle transitions or when the hardware needs to be paused. </p>
 
 </div>
 </div>

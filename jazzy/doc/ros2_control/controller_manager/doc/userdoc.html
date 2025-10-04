@@ -274,6 +274,14 @@ The full structure of the map is given in the following example:</p>
 </ul>
 </div></blockquote>
 </dd>
+<dt>defaults.allow_controller_activation_with_inactive_hardware (bool)</dt><dd><p>If true, controllers are allowed to claim resources from inactive hardware components. If false, controllers can only claim resources from active hardware components. However, it is not recommended to set this parameter to true for the safety reasons with the hardware and unexpected movement, this is purely added for backward compatibility.</p>
+<p>Read only: True</p>
+<p>Default:  false</p>
+</dd>
+<dt>defaults.deactivate_controllers_on_hardware_self_deactivate (bool)</dt><dd><p>If set to true, when a hardware component returns DEACTIVATE on the write cycle, controllers using those interfaces will be deactivated. When set to false, controllers using those interfaces will continue to run. It is not recommended to set this parameter to false for safety reasons with hardware. This will be the default behaviour of the controller manager and this parameter will be removed in future releases. Please use with caution.</p>
+<p>Read only: True</p>
+<p>Default:  true</p>
+</dd>
 <dt>diagnostics.threshold.controller_manager.periodicity.mean_error.warn (double)</dt><dd><p>The warning threshold for the mean error of the controller manager’s periodicity in Hz. If the mean error exceeds this threshold, a warning diagnostic will be published.</p>
 <p>Default:  5.0</p>
 <p>Constraints:</p>
@@ -462,11 +470,15 @@ The full structure of the map is given in the following example:</p>
 </ul>
 </div></blockquote>
 </dd>
+<dt>overruns.print_warnings (bool)</dt><dd><p>If true, the controller manager will print a warning message to the console if an overrun is detected in its real-time loop (<code class="docutils literal notranslate"><span class="pre">read</span></code>, <code class="docutils literal notranslate"><span class="pre">update</span></code> and <code class="docutils literal notranslate"><span class="pre">write</span></code>). By default, it is set to true, except when used with <code class="docutils literal notranslate"><span class="pre">use_sim_time</span></code> parameter set to true.</p>
+</dd>
 </dl>
 <p><strong>An example parameter file:</strong></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">controller_manager</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">defaults</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">allow_controller_activation_with_inactive_hardware</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">      </span><span class="nt">deactivate_controllers_on_hardware_self_deactivate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">      </span><span class="nt">switch_controller</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">strictness</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">best_effort</span>
 <span class="w">    </span><span class="nt">diagnostics</span><span class="p">:</span>
@@ -514,6 +526,8 @@ The full structure of the map is given in the following example:</p>
 <span class="w">      </span><span class="nt">inactive</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{}&#39;</span>
 <span class="w">      </span><span class="nt">shutdown_on_initial_state_failure</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">      </span><span class="nt">unconfigured</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{}&#39;</span>
+<span class="w">    </span><span class="nt">overruns</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">print_warnings</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
 <span class="w">    </span><span class="nt">update_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100.0</span>
 </pre></div>
 </div>
@@ -573,8 +587,10 @@ The full structure of the map is given in the following example:</p>
 <section id="spawner">
 <h3><code class="docutils literal notranslate"><span class="pre">spawner</span></code><a class="headerlink" href="#spawner" title="Link to this heading"></a></h3>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>run<span class="w"> </span>controller_manager<span class="w"> </span>spawner<span class="w"> </span>-h
-<span class="go">usage: spawner [-h] [-c CONTROLLER_MANAGER] [-p PARAM_FILE] [-n NAMESPACE] [--load-only] [--inactive] [-u] [--controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT]</span>
-<span class="go">              [--switch-timeout SWITCH_TIMEOUT] [--activate-as-group] [--service-call-timeout SERVICE_CALL_TIMEOUT] [--controller-ros-args CONTROLLER_ROS_ARGS]</span>
+<span class="go">usage: spawner [-h] [-c CONTROLLER_MANAGER] [-p PARAM_FILE] [-n NAMESPACE] [--load-only] [--inactive] [-u]</span>
+<span class="go">              [--controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT] [--switch-timeout SWITCH_TIMEOUT]</span>
+<span class="go">              [--service-call-timeout SERVICE_CALL_TIMEOUT] [--activate-as-group] [--switch-asap | --no-switch-asap]</span>
+<span class="go">              [--controller-ros-args CONTROLLER_ROS_ARGS]</span>
 <span class="go">              controller_names [controller_names ...]</span>
 
 <span class="go">positional arguments:</span>
@@ -585,7 +601,8 @@ The full structure of the map is given in the following example:</p>
 <span class="go">  -c CONTROLLER_MANAGER, --controller-manager CONTROLLER_MANAGER</span>
 <span class="go">                        Name of the controller manager ROS node</span>
 <span class="go">  -p PARAM_FILE, --param-file PARAM_FILE</span>
-<span class="go">                        Controller param file to be loaded into controller node before configure. Pass multiple times to load different files for different controllers or to override the parameters of the same controller.</span>
+<span class="go">                        Controller param file to be loaded into controller node before configure. Pass multiple times to load different files for</span>
+<span class="go">                        different controllers or to override the parameters of the same controller.</span>
 <span class="go">  -n NAMESPACE, --namespace NAMESPACE</span>
 <span class="go">                        DEPRECATED Namespace for the controller_manager and the controller(s)</span>
 <span class="go">  --load-only           Only load the controller and leave unconfigured.</span>
@@ -593,14 +610,17 @@ The full structure of the map is given in the following example:</p>
 <span class="go">  -u, --unload-on-kill  Wait until this application is interrupted and unload controller</span>
 <span class="go">  --controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT</span>
 <span class="go">                        Time to wait for the controller manager service to be available</span>
+<span class="go">  --switch-timeout SWITCH_TIMEOUT</span>
+<span class="go">                        Time to wait for a successful state switch of controllers. Useful when switching cannot be performed immediately, e.g.,</span>
+<span class="go">                        paused simulations at startup</span>
 <span class="go">  --service-call-timeout SERVICE_CALL_TIMEOUT</span>
 <span class="go">                        Time to wait for the service response from the controller manager</span>
-<span class="go">  --switch-timeout SWITCH_TIMEOUT</span>
-<span class="go">                        Time to wait for a successful state switch of controllers. Useful if controllers cannot be switched immediately, e.g., paused</span>
-<span class="go">                        simulations at startup</span>
-<span class="go">  --activate-as-group   Activates all the parsed controllers list together instead of one by one. Useful for activating all chainable controllers altogether</span>
+<span class="go">  --activate-as-group   Activates all the parsed controllers list together instead of one by one. Useful for activating all chainable controllers</span>
+<span class="go">                        altogether</span>
+<span class="go">  --switch-asap, --no-switch-asap</span>
+<span class="go">                        Option to switch the controllers in the realtime loop at the earliest possible time or in the non-realtime loop.</span>
 <span class="go">  --controller-ros-args CONTROLLER_ROS_ARGS</span>
-<span class="go">                        The --ros-args to be passed to the controller node for remapping topics etc</span>
+<span class="go">                        The --ros-args to be passed to the controller node, e.g., for remapping topics. Pass multiple times for every argument.</span>
 </pre></div>
 </div>
 <p>The parsed controller config file can follow the same conventions as the typical ROS 2 parameter file format. Now, the spawner can handle config files with wildcard entries and also the controller name in the absolute namespace. See the following examples on the config files:</p>
@@ -773,6 +793,11 @@ If it is an array of integers, the node’s affinity will be set to the specifie
 <dt>thread_priority (optional; int; default: 50)</dt><dd><p>Sets the thread priority of the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> node to the specified value. The value must be between 0 and 99.</p>
 </dd>
 <dt>use_sim_time (optional; bool; default: false)</dt><dd><p>Enables the use of simulation time in the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> node.</p>
+</dd>
+<dt>overruns.manage (optional; bool; default: true)</dt><dd><p>Enables or disables the handling of overruns in the real-time loop of the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> node.
+If set to true, the controller manager will detect overruns caused by system time changes or longer execution times of the controllers and hardware components.
+If an overrun is detected, the controller manager will print a warning message to the console.
+When used with <code class="docutils literal notranslate"><span class="pre">use_sim_time</span></code> set to true, this parameter is ignored and the overrun handling is disabled.</p>
 </dd>
 </dl>
 </section>
