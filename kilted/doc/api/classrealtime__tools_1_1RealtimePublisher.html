@@ -140,20 +140,22 @@ Public Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>unlock</b> ()</td></tr>
 <tr class="memdesc:aac76d6377c9e9888c739d6c226d94dce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unlocks the data without publishing anything. <br /></td></tr>
 <tr class="separator:aac76d6377c9e9888c739d6c226d94dce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a9d50b1a4a9ac594db8a709d4751acb" id="r_a4a9d50b1a4a9ac594db8a709d4751acb"><td class="memItemLeft" align="right" valign="top"><a id="a4a9d50b1a4a9ac594db8a709d4751acb" name="a4a9d50b1a4a9ac594db8a709d4751acb"></a>
-std::thread &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_thread</b> ()</td></tr>
+<tr class="memitem:a4a9d50b1a4a9ac594db8a709d4751acb" id="r_a4a9d50b1a4a9ac594db8a709d4751acb"><td class="memItemLeft" align="right" valign="top">std::thread &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1RealtimePublisher.html#a4a9d50b1a4a9ac594db8a709d4751acb">get_thread</a> ()</td></tr>
+<tr class="memdesc:a4a9d50b1a4a9ac594db8a709d4751acb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the thread object for the publishing thread.  <br /></td></tr>
 <tr class="separator:a4a9d50b1a4a9ac594db8a709d4751acb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae308e0feacb5ff50b56513171b1fe4c0" id="r_ae308e0feacb5ff50b56513171b1fe4c0"><td class="memItemLeft" align="right" valign="top"><a id="ae308e0feacb5ff50b56513171b1fe4c0" name="ae308e0feacb5ff50b56513171b1fe4c0"></a>
-const std::thread &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_thread</b> () const</td></tr>
+<tr class="memitem:ae308e0feacb5ff50b56513171b1fe4c0" id="r_ae308e0feacb5ff50b56513171b1fe4c0"><td class="memItemLeft" align="right" valign="top">const std::thread &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1RealtimePublisher.html#ae308e0feacb5ff50b56513171b1fe4c0">get_thread</a> () const</td></tr>
+<tr class="memdesc:ae308e0feacb5ff50b56513171b1fe4c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the thread object for the publishing thread.  <br /></td></tr>
 <tr class="separator:ae308e0feacb5ff50b56513171b1fe4c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1689c7138af6a772311e870bf793b034" id="r_a1689c7138af6a772311e870bf793b034"><td class="memItemLeft" align="right" valign="top"><a id="a1689c7138af6a772311e870bf793b034" name="a1689c7138af6a772311e870bf793b034"></a>
 const MessageT &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_msg</b> () const</td></tr>
 <tr class="separator:a1689c7138af6a772311e870bf793b034"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ad2990401c21ebd4ca56e55a6ab3da8" id="r_a0ad2990401c21ebd4ca56e55a6ab3da8"><td class="memItemLeft" align="right" valign="top"><a id="a0ad2990401c21ebd4ca56e55a6ab3da8" name="a0ad2990401c21ebd4ca56e55a6ab3da8"></a>
 std::mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_mutex</b> ()</td></tr>
+<tr class="memdesc:a0ad2990401c21ebd4ca56e55a6ab3da8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the mutex protecting the stored message. <br /></td></tr>
 <tr class="separator:a0ad2990401c21ebd4ca56e55a6ab3da8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad28c8337187377eabd9a2ef60abbcc44" id="r_ad28c8337187377eabd9a2ef60abbcc44"><td class="memItemLeft" align="right" valign="top"><a id="ad28c8337187377eabd9a2ef60abbcc44" name="ad28c8337187377eabd9a2ef60abbcc44"></a>
 const std::mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_mutex</b> () const</td></tr>
+<tr class="memdesc:ad28c8337187377eabd9a2ef60abbcc44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the mutex protecting the stored message. <br /></td></tr>
 <tr class="separator:ad28c8337187377eabd9a2ef60abbcc44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -228,7 +230,66 @@ template&lt;class MessageT &gt; </div>
 
 <p>Check if the realtime publisher is in a state to publish messages. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if the publisher is in a state to publish messages </dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The msg_ variable can be safely accessed if this function returns true </dd></dl>
+
+</div>
+</div>
+<a id="a4a9d50b1a4a9ac594db8a709d4751acb" name="a4a9d50b1a4a9ac594db8a709d4751acb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a9d50b1a4a9ac594db8a709d4751acb">&#9670;&#160;</a></span>get_thread() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class MessageT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::thread &amp; <a class="el" href="classrealtime__tools_1_1RealtimePublisher.html">realtime_tools::RealtimePublisher</a>&lt; MessageT &gt;::get_thread </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the thread object for the publishing thread. </p>
+<p>This can be used to set thread properties. </p>
+
+</div>
+</div>
+<a id="ae308e0feacb5ff50b56513171b1fe4c0" name="ae308e0feacb5ff50b56513171b1fe4c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae308e0feacb5ff50b56513171b1fe4c0">&#9670;&#160;</a></span>get_thread() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class MessageT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::thread &amp; <a class="el" href="classrealtime__tools_1_1RealtimePublisher.html">realtime_tools::RealtimePublisher</a>&lt; MessageT &gt;::get_thread </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the thread object for the publishing thread. </p>
+<p>This can be used to set thread properties. </p>
 
 </div>
 </div>
