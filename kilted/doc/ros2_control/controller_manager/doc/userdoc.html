@@ -843,6 +843,19 @@ Likewise, if a controller returns <code class="docutils literal notranslate"><sp
 <span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">...</span>
 </pre></div>
 </div>
+<p>You can set more parameters of the <code class="docutils literal notranslate"><span class="pre">AsyncFunctionHandler</span></code>, which handles the thread of the controller, using the <code class="docutils literal notranslate"><span class="pre">async_parameters</span></code> namespace. For example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">example_async_controller</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">example_controller/ExampleAsyncController</span>
+<span class="w">    </span><span class="nt">update_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span><span class="w">  </span><span class="c1"># Hz</span>
+<span class="w">    </span><span class="nt">is_async</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">async_parameters</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">cpu_affinity</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">4</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">thread_priority</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span>
+<span class="w">      </span><span class="nt">wait_until_initial_trigger</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+</pre></div>
+</div>
 <p>will result in the controller being loaded and configured to run at 20Hz, while the controller manager runs at 100Hz. The description of the parameters can be found in the <a class="reference external" href="https://control.ros.org/master/doc/ros2_controllers/doc/controllers_index.html#common-controller-parameters">Common Controller Parameters</a> section of the ros2_controllers documentation.</p>
 </section>
 </section>
