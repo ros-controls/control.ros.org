@@ -213,7 +213,7 @@ else:
 
 # Add branches you want to whitelist here.
 smv_branch_whitelist = r"^(foxy|galactic|humble|iron|jazzy|kilted|"+ base_branch + r")$"
-smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy|galactic|humble|iron|jazzy).*$"
+smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy|galactic|humble|iron|jazzy|kilted).*$"
 smv_remote_whitelist = r"^(origin)$"
 smv_latest_version = "kilted"
 smv_eol_versions = ["foxy", "galactic", "iron"]
