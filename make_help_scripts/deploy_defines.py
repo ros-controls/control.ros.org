@@ -80,7 +80,7 @@ repos = {
             "humble": "humble",
             "iron": "iron",
             "jazzy": "jazzy",
-            "kilted": "master",
+            "kilted": "kilted",
             "rolling": "master"
         },
         "pr": os.environ.get('ROS2_CONTROL_PR')
@@ -168,7 +168,7 @@ repos = {
             "humble": "humble",
             "iron": "jazzy",
             "jazzy": "jazzy",
-            "kilted": "master",
+            "kilted": "kilted",
             "rolling": "master"
         },
         "pr": os.environ.get('REALTIME_TOOLS_PR')
