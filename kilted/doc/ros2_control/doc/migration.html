@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Migration Guides: Kilted Kaiju to Lyrical Luth &mdash; ROS2_Control: Kilted Oct 2025 documentation</title>
+  <title>Migration Guides: Jazzy to Kilted &mdash; ROS2_Control: Kilted Oct 2025 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -99,7 +99,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../migration/migration.html">Migration Guides</a></li>
-      <li class="breadcrumb-item active">Migration Guides: Kilted Kaiju to Lyrical Luth</li>
+      <li class="breadcrumb-item active">Migration Guides: Jazzy to Kilted</li>
       <li class="wy-breadcrumbs-aside">
               <!-- User defined GitHub URL -->
               <a href="https://github.com/ros-controls/ros2_control/blob/master/doc/migration.rst" class="fa fa-github"> Edit on GitHub</a>
@@ -121,17 +121,74 @@
 </p>
 
 
-  <section id="migration-guides-kilted-kaiju-to-lyrical-luth">
-<h1>Migration Guides: Kilted Kaiju to Lyrical Luth<a class="headerlink" href="#migration-guides-kilted-kaiju-to-lyrical-luth" title="Link to this heading"></a></h1>
-<p>This list summarizes important changes between Kilted Kaiju (previous) and Lyrical Luth (current) releases, where changes to user code might be necessary.</p>
+  <section id="migration-guides-jazzy-to-kilted">
+<h1>Migration Guides: Jazzy to Kilted<a class="headerlink" href="#migration-guides-jazzy-to-kilted" title="Link to this heading"></a></h1>
+<p>This list summarizes important changes between Jazzy (previous) and Kilted (current) releases, where changes to user code might be necessary.</p>
 <section id="controller-interface">
 <h2>controller_interface<a class="headerlink" href="#controller-interface" title="Link to this heading"></a></h2>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_ordered_interfaces</span></code> now throws if the size of the output vector does not match the size of the input names vector (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2528">#2528</a>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">controller_interface::init()</span></code> has been deprecated, use the <code class="docutils literal notranslate"><span class="pre">init(const</span> <span class="pre">controller_interface::ControllerInterfaceParams</span> <span class="pre">&amp;</span> <span class="pre">params)</span></code> method instead. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2390">#2390</a>).
+For example, the following code:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">controller_interface</span><span class="o">::</span><span class="n">ControllerInterfaceParams</span><span class="w"> </span><span class="n">params</span><span class="p">;</span>
+<span class="n">params</span><span class="p">.</span><span class="n">controller_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;controller_name&quot;</span><span class="p">;</span>
+<span class="n">params</span><span class="p">.</span><span class="n">robot_description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="n">params</span><span class="p">.</span><span class="n">update_rate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span>
+<span class="n">params</span><span class="p">.</span><span class="n">node_namespace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="n">params</span><span class="p">.</span><span class="n">node_options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="n">define_custom_node_options</span><span class="p">();</span>
+<span class="n">controller</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="n">params</span><span class="p">);</span>
+</pre></div>
+</div>
+</li>
+</ul>
 </section>
 <section id="controller-manager">
 <h2>controller_manager<a class="headerlink" href="#controller-manager" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The spawner now supports two new arguments <code class="docutils literal notranslate"><span class="pre">--switch-asap</span></code> and <code class="docutils literal notranslate"><span class="pre">--no-switch-asap</span></code> to control the behaviour of the spawner when switching controllers to be in realtime loop (or) non-realtime loop.
+By default, it is set to <code class="docutils literal notranslate"><span class="pre">--no-switch-asap</span></code> because when activating multiple controllers at same time might affect the realtime loop performance (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2453">#2452</a>).
+If it is needed to switch controllers in realtime loop, then the argument <code class="docutils literal notranslate"><span class="pre">--switch-asap</span></code> need to be parsed to the spawner.</p></li>
+</ul>
 </section>
 <section id="hardware-interface">
 <h2>hardware_interface<a class="headerlink" href="#hardware-interface" title="Link to this heading"></a></h2>
+<ul>
+<li><p>The preferred signature for the <code class="docutils literal notranslate"><span class="pre">on_init</span></code> method in all
+<code class="docutils literal notranslate"><span class="pre">hardware_interface::*Interface</span></code> classes has changed (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2323">#
+2323</a>) from</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">CallbackReturn</span><span class="w"> </span><span class="n">on_init</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">HardwareInfo</span><span class="o">&amp;</span><span class="w"> </span><span class="n">info</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>to</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">CallbackReturn</span><span class="w"> </span><span class="n">on_init</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">HardwareComponentInterfaceParams</span><span class="o">&amp;</span><span class="w"> </span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">HardwareInfo</span></code> object can be accessed from the <code class="docutils literal notranslate"><span class="pre">HardwareComponentInterfaceParams</span></code> object using
+<code class="docutils literal notranslate"><span class="pre">params.hardware_info</span></code>. Hardware implementations implementing the <code class="docutils literal notranslate"><span class="pre">on_init</span></code> method should
+update their method signature accordingly as the deprecated signature will be removed in a
+future release.</p>
+<p>See <a class="reference internal" href="../hardware_interface/doc/writing_new_hardware_component.html#writing-new-hardware-component"><span class="std std-ref">Writing a Hardware Component</span></a> for advanced usage of the
+<code class="docutils literal notranslate"><span class="pre">HardwareComponentInterfaceParams</span></code> object.</p>
+</li>
+<li><p>The preferred signature for the <code class="docutils literal notranslate"><span class="pre">init()</span></code> method in all
+<code class="docutils literal notranslate"><span class="pre">hardware_interface::*Interface</span></code> classes has changed (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2344">#
+2344</a>) from</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">CallbackReturn</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">HardwareInfo</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">hardware_info</span><span class="p">,</span><span class="w"> </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Logger</span><span class="w"> </span><span class="n">logger</span><span class="p">,</span><span class="w"> </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Clock</span><span class="o">::</span><span class="n">SharedPtr</span><span class="w"> </span><span class="n">clock</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>to</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">CallbackReturn</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">HardwareComponentParams</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">initialize</span></code> methods of all hardware components (such as <code class="docutils literal notranslate"><span class="pre">Actuator</span></code>, <code class="docutils literal notranslate"><span class="pre">Sensor</span></code>, etc.)
+have been updated from passing a <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">HardwareInfo</span> <span class="pre">&amp;</span></code> to passing a <code class="docutils literal notranslate"><span class="pre">const</span>
+<span class="pre">HardwareComponentParams</span> <span class="pre">&amp;</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2323"># 2323</a>).
+The old signatures are deprecated and will be removed in a future release.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">thread_priority</span></code> variable in the <code class="docutils literal notranslate"><span class="pre">HardwareInfo</span></code> struct has been deprecated in favor of newly
+introduced <code class="docutils literal notranslate"><span class="pre">async_params</span></code> variable that has more options in the <code class="docutils literal notranslate"><span class="pre">HardwareComponentParams</span></code> struct.
+The deprecated <code class="docutils literal notranslate"><span class="pre">thread_priority</span></code> variable will be removed in a future release. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2477"># 2477</a>).</p></li>
+</ul>
 </section>
 </section>
 
@@ -171,7 +228,7 @@
     <dl>
       <dt>Stable Releases</dt>
         <dd><a href="migration.html">Kilted</a></dd><br>
-        <dd><a href="../../../../jazzy/doc/ros2_control/doc/migration.html">Jazzy (latest)</a></dd><br>
+        <dd><a href="../../../../jazzy/doc/ros2_control/doc/migration.html">Jazzy (latest LTS)</a></dd><br>
         
         <dd><a href="../../../../humble/doc/ros2_control/doc/migration.html">Humble</a></dd><br>
         

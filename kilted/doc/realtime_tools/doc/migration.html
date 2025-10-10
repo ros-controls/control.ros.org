@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Migration Guides: Kilted Kaiju to Lyrical Luth &mdash; ROS2_Control: Kilted Oct 2025 documentation</title>
+  <title>Migration Guides: Jazzy to Kilted &mdash; ROS2_Control: Kilted Oct 2025 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -65,7 +65,10 @@
 <li class="toctree-l3"><a class="reference internal" href="../../ros2_control/doc/migration.html">ros2_control</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../ros2_controllers/doc/migration.html">ros2_controllers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../control_toolbox/doc/migration.html">control_toolbox</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">realtime_tools</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">realtime_tools</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#realtimebox">RealtimeBox</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -94,7 +97,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../migration/migration.html">Migration Guides</a></li>
-      <li class="breadcrumb-item active">Migration Guides: Kilted Kaiju to Lyrical Luth</li>
+      <li class="breadcrumb-item active">Migration Guides: Jazzy to Kilted</li>
       <li class="wy-breadcrumbs-aside">
               <!-- User defined GitHub URL -->
               <a href="https://github.com/ros-controls/realtime_tools/blob/master/doc/migration.rst" class="fa fa-github"> Edit on GitHub</a>
@@ -116,9 +119,16 @@
 </p>
 
 
-  <section id="migration-guides-kilted-kaiju-to-lyrical-luth">
-<h1>Migration Guides: Kilted Kaiju to Lyrical Luth<a class="headerlink" href="#migration-guides-kilted-kaiju-to-lyrical-luth" title="Link to this heading"></a></h1>
-<p>This list summarizes important changes between Kilted Kaiju (previous) and Lyrical Luth (current) releases, where changes to user code might be necessary.</p>
+  <section id="migration-guides-jazzy-to-kilted">
+<h1>Migration Guides: Jazzy to Kilted<a class="headerlink" href="#migration-guides-jazzy-to-kilted" title="Link to this heading"></a></h1>
+<p>This list summarizes important changes between Jazzy (previous) and Kilted (current) releases, where changes to user code might be necessary.</p>
+<section id="realtimebox">
+<h2>RealtimeBox<a class="headerlink" href="#realtimebox" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">RealtimeBox</span></code> is deprecated. Update your code to use <code class="docutils literal notranslate"><span class="pre">realtime_thread_safe_box.hpp</span></code> header, and class name <code class="docutils literal notranslate"><span class="pre">RealtimeThreadSafeBox</span></code> instead. (<a class="reference external" href="https://github.com/ros-controls/realtime_tools/pull/318">#318</a>, <a class="reference external" href="https://github.com/ros-controls/realtime_tools/pull/342">#342</a>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RealtimePublisher</span></code> is updated with a new <code class="docutils literal notranslate"><span class="pre">try_publish</span></code> API. Update your code with a local message variable and call <code class="docutils literal notranslate"><span class="pre">try_publish</span></code> with that variable. The old API is deprecated and will be removed in a future release. (<a class="reference external" href="https://github.com/ros-controls/realtime_tools/pull/323">#323</a>).</p></li>
+</ul>
+</section>
 </section>
 
 
@@ -157,7 +167,7 @@
     <dl>
       <dt>Stable Releases</dt>
         <dd><a href="migration.html">Kilted</a></dd><br>
-        <dd><a href="../../../../jazzy/doc/realtime_tools/doc/migration.html">Jazzy (latest)</a></dd><br>
+        <dd><a href="../../../../jazzy/doc/realtime_tools/doc/migration.html">Jazzy (latest LTS)</a></dd><br>
         
         <dd><a href="../../../../humble/index.html">Humble</a></dd><br>
         

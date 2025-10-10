@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Release Notes: Kilted Kaiju to Lyrical Luth &mdash; ROS2_Control: Kilted Oct 2025 documentation</title>
+  <title>Release Notes: Jazzy to Kilted &mdash; ROS2_Control: Kilted Oct 2025 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -60,7 +60,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../simulators/simulators.html">Simulator Integrations</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../release_notes/release_notes.html">Release Notes</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">ros2_control</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#controller-interface">controller_interface</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#controller-manager">controller_manager</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hardware-interface">hardware_interface</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#ros2controlcli">ros2controlcli</a></li>
@@ -96,7 +95,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../release_notes/release_notes.html">Release Notes</a></li>
-      <li class="breadcrumb-item active">Release Notes: Kilted Kaiju to Lyrical Luth</li>
+      <li class="breadcrumb-item active">Release Notes: Jazzy to Kilted</li>
       <li class="wy-breadcrumbs-aside">
               <!-- User defined GitHub URL -->
               <a href="https://github.com/ros-controls/ros2_control/blob/master/doc/release_notes.rst" class="fa fa-github"> Edit on GitHub</a>
@@ -118,23 +117,35 @@
 </p>
 
 
-  <section id="release-notes-kilted-kaiju-to-lyrical-luth">
-<h1>Release Notes: Kilted Kaiju to Lyrical Luth<a class="headerlink" href="#release-notes-kilted-kaiju-to-lyrical-luth" title="Link to this heading"></a></h1>
-<p>This list summarizes important changes between Kilted Kaiju (previous) and Lyrical Luth (current) releases.</p>
-<section id="controller-interface">
-<h2>controller_interface<a class="headerlink" href="#controller-interface" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>The new <code class="docutils literal notranslate"><span class="pre">MagneticFieldSensor</span></code> semantic component provides an interface for reading data from magnetometers. <a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2627">(#2627</a>)</p></li>
-</ul>
-</section>
+  <section id="release-notes-jazzy-to-kilted">
+<h1>Release Notes: Jazzy to Kilted<a class="headerlink" href="#release-notes-jazzy-to-kilted" title="Link to this heading"></a></h1>
+<p>This list summarizes the changes between Jazzy (previous) and Kilted (current) releases.</p>
 <section id="controller-manager">
 <h2>controller_manager<a class="headerlink" href="#controller-manager" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The default strictness of the <code class="docutils literal notranslate"><span class="pre">switch_controllers</span></code> can now we be chosen using ROS 2 parameters. The default behaviour is still left to <code class="docutils literal notranslate"><span class="pre">BEST_EFFORT</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2168">#2168</a>).</p></li>
+<li><p>Parameter <code class="docutils literal notranslate"><span class="pre">shutdown_on_initial_state_failure</span></code> was added to avoid shutting down on hardware initial state failure  (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2230">#2230</a>).</p></li>
+<li><p>The controller manager now publishes <code class="docutils literal notranslate"><span class="pre">~/statistics/names</span></code> and <code class="docutils literal notranslate"><span class="pre">~/statistics/values</span></code> topics to introspect the execution time and periodicity of the different entities running in the realtime loop (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2449">#2449</a>).</p></li>
+<li><p>The controller manager now supports switching (activating and deactivating) controllers in both realtime and non-realtime modes. This is controlled by the parameter <code class="docutils literal notranslate"><span class="pre">activate_asap</span></code> of the <code class="docutils literal notranslate"><span class="pre">switch_controllers</span></code> service (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2453">#2452</a>).</p></li>
+<li><p>The spawner now supports two new arguments <code class="docutils literal notranslate"><span class="pre">--switch-asap</span></code> and <code class="docutils literal notranslate"><span class="pre">--no-switch-asap</span></code> to control the behaviour of the spawner when switching controllers to be in realtime loop (or) non-realtime loop. By default, it is set to <code class="docutils literal notranslate"><span class="pre">--no-switch-asap</span></code> because when activating multiple controllers at same time might affect the realtime loop performance (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2453">#2452</a>).</p></li>
+<li><p>New parameters <code class="docutils literal notranslate"><span class="pre">overruns.manage</span></code> and <code class="docutils literal notranslate"><span class="pre">overruns.print_warnings</span></code> were added to control the behavior of the controller manager/ros2_control_node when overruns occur (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2546/files">#2546</a>).</p></li>
+</ul>
 </section>
 <section id="hardware-interface">
 <h2>hardware_interface<a class="headerlink" href="#hardware-interface" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">prepare_command_mode_switch</span></code> and <code class="docutils literal notranslate"><span class="pre">perform_command_mode_switch</span></code> methods will now only receive the start/stop interfaces that belong to the hardware component instead of everything (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2120">#2120</a>)</p></li>
+<li><p>The hardware interface is now treated similarly as ERROR, when a hardware component returns ERROR on the read cycle (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2334">#2334</a>).</p></li>
+<li><p>The controllers are now deactivated when a hardware component returns DEACTIVATE on the write cycle. The parameter <code class="docutils literal notranslate"><span class="pre">deactivate_controllers_on_hardware_self_deactivate</span></code> is added to control this behavior temporarily. It is recommended to set this parameter to true in order to avoid controllers to use inactive hardware components and to avoid any unexpected behavior. This feature parameter will be removed in future releases and will be defaulted to true (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2334">#2334</a> &amp; <a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2501">#2501</a>).</p></li>
+<li><p>The controllers are not allowed to be activated when the hardware component is in INACTIVE state. The parameter <code class="docutils literal notranslate"><span class="pre">allow_controller_activation_with_inactive_hardware</span></code> is added to control this behavior temporarily. It is recommended to set this parameter to false in order to avoid controllers to use inactive hardware components and to avoid any unexpected behavior. This feature parameter will be removed in future releases and will be defaulted to false (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2347">#2347</a>).</p></li>
+<li><p>The asynchronous components now support two scheduling policies: <code class="docutils literal notranslate"><span class="pre">synchronized</span></code> and <code class="docutils literal notranslate"><span class="pre">detached</span></code> and other properties to configure them (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2477">#2477</a>).</p></li>
+</ul>
 </section>
 <section id="ros2controlcli">
 <h2>ros2controlcli<a class="headerlink" href="#ros2controlcli" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The CLI verbs <code class="docutils literal notranslate"><span class="pre">list_hardware_components</span></code> and <code class="docutils literal notranslate"><span class="pre">list_hardware_interfaces</span></code> will now show the data type used by the internal Command and State interfaces (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2204">#2204</a>).</p></li>
+</ul>
 </section>
 </section>
 
@@ -174,7 +185,7 @@
     <dl>
       <dt>Stable Releases</dt>
         <dd><a href="release_notes.html">Kilted</a></dd><br>
-        <dd><a href="../../../../jazzy/doc/ros2_control/doc/release_notes.html">Jazzy (latest)</a></dd><br>
+        <dd><a href="../../../../jazzy/doc/ros2_control/doc/release_notes.html">Jazzy (latest LTS)</a></dd><br>
         
         <dd><a href="../../../../humble/doc/ros2_control/doc/release_notes.html">Humble</a></dd><br>
         
