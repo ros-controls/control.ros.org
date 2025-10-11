@@ -219,7 +219,7 @@ else:
 smv_branch_whitelist = r"^(foxy|galactic|humble|iron|jazzy|kilted|"+ base_branch + r")$"
 smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy|galactic|humble|iron|jazzy|kilted).*$"
 smv_remote_whitelist = r"^(origin)$"
-smv_latest_version = "jazzy"
+smv_latest_version = "kilted"
 smv_eol_versions = ["foxy", "galactic", "iron"]
 
 distro_full_names = {
