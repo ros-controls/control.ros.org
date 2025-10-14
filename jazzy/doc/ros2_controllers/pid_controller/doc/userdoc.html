@@ -307,10 +307,10 @@ This might cause different behavior in the future if currently the <code class="
 <p>Default:  false</p>
 </dd>
 <dt>gains.&lt;dof_names&gt;.i_clamp_max (double)</dt><dd><p>[Deprecated, see antiwindup_strategy] Upper integral clamp.</p>
-<p>Default:  0.0</p>
+<p>Default:  std::numeric_limits&lt;double&gt;::infinity()</p>
 </dd>
 <dt>gains.&lt;dof_names&gt;.i_clamp_min (double)</dt><dd><p>[Deprecated, see antiwindup_strategy] Lower integral clamp.</p>
-<p>Default:  0.0</p>
+<p>Default:  -std::numeric_limits&lt;double&gt;::infinity()</p>
 </dd>
 <dt>gains.&lt;dof_names&gt;.antiwindup_strategy (string)</dt><dd><p>Specifies the anti-windup strategy. Options: ‘back_calculation’, ‘conditional_integration’, ‘legacy’ or ‘none’. Note that the ‘back_calculation’ strategy use the tracking_time_constant parameter to tune the anti-windup behavior.</p>
 <p>Default:  “legacy”</p>
@@ -348,8 +348,8 @@ This might cause different behavior in the future if currently the <code class="
 <span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
 <span class="c1"># TODO(christohfroehlich): Remove this global parameters once the deprecated antiwindup parameters are removed.</span>
 <span class="w">    </span><span class="nt">gains</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">joint1</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">antiwindup_strategy</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;none&quot;</span><span class="p p-Indicator">,</span><span class="nt"> i_clamp_max</span><span class="p">:</span><span class="w"> </span><span class="nv">.inf</span><span class="p p-Indicator">,</span><span class="nt"> i_clamp_min</span><span class="p">:</span><span class="w"> </span><span class="nv">-.inf</span><span class="p p-Indicator">}</span>
-<span class="w">      </span><span class="nt">joint2</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">antiwindup_strategy</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;none&quot;</span><span class="p p-Indicator">,</span><span class="nt"> i_clamp_max</span><span class="p">:</span><span class="w"> </span><span class="nv">.inf</span><span class="p p-Indicator">,</span><span class="nt"> i_clamp_min</span><span class="p">:</span><span class="w"> </span><span class="nv">-.inf</span><span class="p p-Indicator">}</span>
+<span class="w">      </span><span class="nt">joint1</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">antiwindup_strategy</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;none&quot;</span><span class="p p-Indicator">,}</span>
+<span class="w">      </span><span class="nt">joint2</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">antiwindup_strategy</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;none&quot;</span><span class="p p-Indicator">,}</span>
 
 <span class="nt">test_pid_controller</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
@@ -450,6 +450,9 @@ This might cause different behavior in the future if currently the <code class="
 
 <span class="w">    </span><span class="nt">reference_and_state_dof_names</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint1state</span>
+
+<span class="w">    </span><span class="nt">gains</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">joint1</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">antiwindup_strategy</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;none&quot;</span><span class="p p-Indicator">}</span>
 </pre></div>
 </div>
 </section>

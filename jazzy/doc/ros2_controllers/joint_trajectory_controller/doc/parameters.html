@@ -297,8 +297,14 @@ position <span class="math notranslate nohighlight">\(s\)</span> from the state 
 <dt>gains.&lt;joints&gt;.d (double)</dt><dd><p>Derivative gain <span class="math notranslate nohighlight">\(k_d\)</span> for PID</p>
 <p>Default:  0.0</p>
 </dd>
-<dt>gains.&lt;joints&gt;.i_clamp (double)</dt><dd><p>Integral clamp. Symmetrical in both positive and negative direction.</p>
-<p>Default:  0.0</p>
+<dt>gains.&lt;joints&gt;.i_clamp (double)</dt><dd><p>[Deprecated, use i_clamp_max/i_clamp_min] Integral clamp. Symmetrical in both positive and negative direction.</p>
+<p>Default:  std::numeric_limits&lt;double&gt;::infinity()</p>
+</dd>
+<dt>gains.&lt;joints&gt;.i_clamp_max (double)</dt><dd><p>Upper integral clamp.</p>
+<p>Default:  std::numeric_limits&lt;double&gt;::infinity()</p>
+</dd>
+<dt>gains.&lt;joints&gt;.i_clamp_min (double)</dt><dd><p>Lower integral clamp.</p>
+<p>Default:  -std::numeric_limits&lt;double&gt;::infinity()</p>
 </dd>
 <dt>gains.&lt;joints&gt;.ff_velocity_scale (double)</dt><dd><p>Feed-forward scaling <span class="math notranslate nohighlight">\(k_{ff}\)</span> of velocity</p>
 <p>Default:  0.0</p>
@@ -308,12 +314,6 @@ position <span class="math notranslate nohighlight">\(s\)</span> from the state 
 </dd>
 <dt>gains.&lt;joints&gt;.u_clamp_min (double)</dt><dd><p>Lower output clamp.</p>
 <p>Default:  -std::numeric_limits&lt;double&gt;::infinity()</p>
-</dd>
-<dt>gains.&lt;joints&gt;.i_clamp_max (double)</dt><dd><p>[Deprecated, see antiwindup_strategy] Upper integral clamp.</p>
-<p>Default:  0.0</p>
-</dd>
-<dt>gains.&lt;joints&gt;.i_clamp_min (double)</dt><dd><p>[Deprecated, see antiwindup_strategy] Lower integral clamp.</p>
-<p>Default:  0.0</p>
 </dd>
 <dt>gains.&lt;joints&gt;.antiwindup_strategy (string)</dt><dd><p>Specifies the anti-windup strategy. Options: ‘back_calculation’, ‘conditional_integration’, ‘legacy’ or ‘none’. Note that the ‘back_calculation’ strategy use the tracking_time_constant parameter to tune the anti-windup behavior.</p>
 <p>Read only: True</p>
@@ -357,9 +357,9 @@ position <span class="math notranslate nohighlight">\(s\)</span> from the state 
 <span class="w">        </span><span class="nt">error_deadband</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
 <span class="w">        </span><span class="nt">ff_velocity_scale</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
 <span class="w">        </span><span class="nt">i</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
-<span class="w">        </span><span class="nt">i_clamp</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
-<span class="w">        </span><span class="nt">i_clamp_max</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
-<span class="w">        </span><span class="nt">i_clamp_min</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">        </span><span class="nt">i_clamp</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">std::numeric_limits&lt;double&gt;::infinity()</span>
+<span class="w">        </span><span class="nt">i_clamp_max</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">std::numeric_limits&lt;double&gt;::infinity()</span>
+<span class="w">        </span><span class="nt">i_clamp_min</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-std::numeric_limits&lt;double&gt;::infinity()</span>
 <span class="w">        </span><span class="nt">p</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
 <span class="w">        </span><span class="nt">tracking_time_constant</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
 <span class="w">        </span><span class="nt">u_clamp_max</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">std::numeric_limits&lt;double&gt;::infinity()</span>
