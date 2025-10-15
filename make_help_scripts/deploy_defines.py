@@ -142,10 +142,10 @@ repos = {
             "foxy": "foxy",
             "galactic": "humble",
             "humble": "humble",
-            "iron": "ros2-master",
+            "iron": "jazzy",
             "jazzy": "jazzy",
-            "kilted": "ros2-master",
-            "rolling": "ros2-master"
+            "kilted": "kilted",
+            "rolling": "master"
         },
         "pr": None
     },
@@ -155,7 +155,7 @@ repos = {
             "foxy": "foxy-devel",
             "galactic": "galactic-devel",
             "humble": "humble",
-            "iron": "master",
+            "iron": "jazzy",
             "jazzy": "jazzy",
             "kilted": "master",
             "rolling": "master"
@@ -181,7 +181,7 @@ repos = {
             "foxy": "humble",
             "galactic": "humble",
             "humble": "humble",
-            "iron": "master",
+            "iron": "jazzy",
             "jazzy": "jazzy",
             "kilted": "master",
             "rolling": "master"
