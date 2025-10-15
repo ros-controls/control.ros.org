@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Migration Guides: Jazzy to Kilted &mdash; ROS2_Control: Iron Oct 2025 documentation</title>
+  <title>Migration Guides: Humble to Jazzy &mdash; ROS2_Control: Iron Oct 2025 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -80,7 +80,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Migration Guides: Jazzy to Kilted</li>
+      <li class="breadcrumb-item active">Migration Guides: Humble to Jazzy</li>
       <li class="wy-breadcrumbs-aside">
               <!-- User defined GitHub URL -->
               <a href="https://github.com/ros-controls/control_toolbox/blob/iron/doc/migration.rst" class="fa fa-github"> Edit on GitHub</a>
@@ -102,13 +102,17 @@
 </p>
 
 
-  <section id="migration-guides-jazzy-to-kilted">
-<h1>Migration Guides: Jazzy to Kilted<a class="headerlink" href="#migration-guides-jazzy-to-kilted" title="Link to this heading"></a></h1>
-<p>This list summarizes important changes between Jazzy (previous) and Kilted (current) releases, where changes to user code might be necessary.</p>
+  <section id="migration-guides-humble-to-jazzy">
+<h1>Migration Guides: Humble to Jazzy<a class="headerlink" href="#migration-guides-humble-to-jazzy" title="Link to this heading"></a></h1>
+<p>This list summarizes important changes between Humble (previous) and Jazzy (current) releases, where changes to user code might be necessary.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This list was created in June 2025 (tag 4.4.0), earlier changes may not be included.</p>
+</div>
 <section id="pid-pidros">
 <h2>Pid/PidROS<a class="headerlink" href="#pid-pidros" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>The parameters <code class="docutils literal notranslate"><span class="pre">antiwindup</span></code>, <code class="docutils literal notranslate"><span class="pre">i_clamp_max</span></code>, and <code class="docutils literal notranslate"><span class="pre">i_clamp_min</span></code> have been removed. The anti-windup behavior is now configured via the <code class="docutils literal notranslate"><span class="pre">AntiWindupStrategy</span></code> enum. (<a class="reference external" href="https://github.com/ros-controls/control_toolbox/pull/298">#298</a>).</p></li>
+<li><p>The parameters <code class="docutils literal notranslate"><span class="pre">antiwindup</span></code>, <code class="docutils literal notranslate"><span class="pre">i_clamp_max</span></code>, and <code class="docutils literal notranslate"><span class="pre">i_clamp_min</span></code> will be removed. The anti-windup behavior is now configured via the <code class="docutils literal notranslate"><span class="pre">AntiWindupStrategy</span></code> enum. (<a class="reference external" href="https://github.com/ros-controls/control_toolbox/pull/298">#298</a>).</p></li>
 <li><p>The constructors of <code class="docutils literal notranslate"><span class="pre">PidROS</span></code> have changed and <code class="docutils literal notranslate"><span class="pre">prefix_is_for_params</span></code> argument has been deprecated. Use explicit parameter and topic prefix instead (<a class="reference external" href="https://github.com/ros-controls/control_toolbox/pull/431">#431</a>).</p></li>
 </ul>
 </section>

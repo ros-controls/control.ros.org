@@ -118,9 +118,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a16f652ede24b5fbbc229190604bb5255" id="r_a16f652ede24b5fbbc229190604bb5255"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkinematics__interface_1_1KinematicsInterface.html#a16f652ede24b5fbbc229190604bb5255">calculate_jacobian_inverse</a> (const Eigen::VectorXd &amp;joint_pos, const std::string &amp;link_name, Eigen::Matrix&lt; double, Eigen::Dynamic, 6 &gt; &amp;jacobian_inverse)=0</td></tr>
 <tr class="memdesc:a16f652ede24b5fbbc229190604bb5255"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the jacobian inverse for a specified link using provided joint positions.  <br /></td></tr>
 <tr class="separator:a16f652ede24b5fbbc229190604bb5255"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a532bb7b9d1fe072770a0ff2b38cdcfb5" id="r_a532bb7b9d1fe072770a0ff2b38cdcfb5"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkinematics__interface_1_1KinematicsInterface.html#a532bb7b9d1fe072770a0ff2b38cdcfb5">calculate_frame_difference</a> (Eigen::Matrix&lt; double, 7, 1 &gt; &amp;x_a, Eigen::Matrix&lt; double, 7, 1 &gt; &amp;x_b, double dt, Eigen::Matrix&lt; double, 6, 1 &gt; &amp;delta_x)=0</td></tr>
-<tr class="memdesc:a532bb7b9d1fe072770a0ff2b38cdcfb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the difference between two Cartesian frames.  <br /></td></tr>
-<tr class="separator:a532bb7b9d1fe072770a0ff2b38cdcfb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0566e190ecab08e6b55842d192754a8c" id="r_a0566e190ecab08e6b55842d192754a8c"><td class="memItemLeft" align="right" valign="top"><a id="a0566e190ecab08e6b55842d192754a8c" name="a0566e190ecab08e6b55842d192754a8c"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>convert_cartesian_deltas_to_joint_deltas</b> (std::vector&lt; double &gt; &amp;joint_pos_vec, const std::vector&lt; double &gt; &amp;delta_x_vec, const std::string &amp;link_name, std::vector&lt; double &gt; &amp;delta_theta_vec)</td></tr>
 <tr class="separator:a0566e190ecab08e6b55842d192754a8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -136,73 +133,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>calculate_jacobian</b
 <tr class="memitem:a0af2c223c111c3da3473066419edaeab" id="r_a0af2c223c111c3da3473066419edaeab"><td class="memItemLeft" align="right" valign="top"><a id="a0af2c223c111c3da3473066419edaeab" name="a0af2c223c111c3da3473066419edaeab"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>calculate_jacobian_inverse</b> (const std::vector&lt; double &gt; &amp;joint_pos_vec, const std::string &amp;link_name, Eigen::Matrix&lt; double, Eigen::Dynamic, 6 &gt; &amp;jacobian_inverse)</td></tr>
 <tr class="separator:a0af2c223c111c3da3473066419edaeab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3721b2e536e50f351450fea09789cc64" id="r_a3721b2e536e50f351450fea09789cc64"><td class="memItemLeft" align="right" valign="top"><a id="a3721b2e536e50f351450fea09789cc64" name="a3721b2e536e50f351450fea09789cc64"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>calculate_frame_difference</b> (std::vector&lt; double &gt; &amp;x_a_vec, std::vector&lt; double &gt; &amp;x_b_vec, double dt, std::vector&lt; double &gt; &amp;delta_x_vec)</td></tr>
-<tr class="separator:a3721b2e536e50f351450fea09789cc64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a532bb7b9d1fe072770a0ff2b38cdcfb5" name="a532bb7b9d1fe072770a0ff2b38cdcfb5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a532bb7b9d1fe072770a0ff2b38cdcfb5">&#9670;&#160;</a></span>calculate_frame_difference()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual bool kinematics_interface::KinematicsInterface::calculate_frame_difference </td>
-          <td>(</td>
-          <td class="paramtype">Eigen::Matrix&lt; double, 7, 1 &gt; &amp;&#160;</td>
-          <td class="paramname"><em>x_a</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Eigen::Matrix&lt; double, 7, 1 &gt; &amp;&#160;</td>
-          <td class="paramname"><em>x_b</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>dt</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Eigen::Matrix&lt; double, 6, 1 &gt; &amp;&#160;</td>
-          <td class="paramname"><em>delta_x</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Calculates the difference between two Cartesian frames. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">x_a</td><td>first Cartesian frame (x, y, z, wx, wy, wz, ww) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">x_b</td><td>second Cartesian frame (x, y, z, wx, wy, wz, ww) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td>time interval over which the numerical differentiation takes place </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">delta_x</td><td>Cartesian deltas (x, y, z, wx, wy, wz) </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if successful </dd></dl>
-
-<p>Implemented in <a class="el" href="classkinematics__interface__kdl_1_1KinematicsInterfaceKDL.html#afa114c8ff8eea87876236fb4e0a91859">kinematics_interface_kdl::KinematicsInterfaceKDL</a>.</p>
-
-</div>
-</div>
 <a id="aa8088b6de47d261488f055091e3d4135" name="aa8088b6de47d261488f055091e3d4135"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa8088b6de47d261488f055091e3d4135">&#9670;&#160;</a></span>calculate_jacobian()</h2>
 

@@ -155,41 +155,35 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keyword">const</span> Eigen::VectorXd &amp; joint_pos, <span class="keyword">const</span> std::string &amp; link_name,</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    Eigen::Matrix&lt;double, Eigen::Dynamic, 6&gt; &amp; jacobian_inverse) <span class="keyword">override</span>;</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classkinematics__interface__kdl_1_1KinematicsInterfaceKDL.html#afa114c8ff8eea87876236fb4e0a91859">calculate_frame_difference</a>(</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    Eigen::Matrix&lt;double, 7, 1&gt; &amp; x_a, Eigen::Matrix&lt;double, 7, 1&gt; &amp; x_b, <span class="keywordtype">double</span> dt,</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    Eigen::Matrix&lt;double, 6, 1&gt; &amp; delta_x) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  <span class="comment">// verification methods</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  <span class="keywordtype">bool</span> verify_initialized();</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  <span class="keywordtype">bool</span> verify_link_name(<span class="keyword">const</span> std::string &amp; link_name);</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  <span class="keywordtype">bool</span> verify_joint_vector(<span class="keyword">const</span> Eigen::VectorXd &amp; joint_vector);</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  <span class="keywordtype">bool</span> verify_jacobian(<span class="keyword">const</span> Eigen::Matrix&lt;double, 6, Eigen::Dynamic&gt; &amp; jacobian);</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  <span class="keywordtype">bool</span> verify_jacobian_inverse(<span class="keyword">const</span> Eigen::Matrix&lt;double, Eigen::Dynamic, 6&gt; &amp; jacobian);</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  <span class="keywordtype">bool</span> verify_period(<span class="keyword">const</span> <span class="keywordtype">double</span> dt);</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  <span class="keywordtype">bool</span> initialized = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  std::string root_name_;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  <span class="keywordtype">size_t</span> num_joints_;</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  KDL::Chain chain_;</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  std::shared_ptr&lt;KDL::ChainFkSolverPos_recursive&gt; fk_pos_solver_;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  KDL::JntArray q_;</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  Eigen::Matrix&lt;KDL::Frame, 2, 1&gt; frames_;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  KDL::Twist delta_x_;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  std::shared_ptr&lt;KDL::Jacobian&gt; jacobian_;</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  std::shared_ptr&lt;Eigen::Matrix&lt;double, Eigen::Dynamic, 6&gt;&gt; jacobian_inverse_;</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  std::shared_ptr&lt;KDL::ChainJntToJacSolver&gt; jac_solver_;</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  std::shared_ptr&lt;rclcpp::node_interfaces::NodeParametersInterface&gt; parameters_interface_;</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  std::unordered_map&lt;std::string, int&gt; link_name_map_;</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  <span class="keywordtype">double</span> alpha;  <span class="comment">// damping term for Jacobian inverse</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  Eigen::MatrixXd I;</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>};</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <span class="comment">// verification methods</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="keywordtype">bool</span> verify_initialized();</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <span class="keywordtype">bool</span> verify_link_name(<span class="keyword">const</span> std::string &amp; link_name);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  <span class="keywordtype">bool</span> verify_joint_vector(<span class="keyword">const</span> Eigen::VectorXd &amp; joint_vector);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  <span class="keywordtype">bool</span> verify_jacobian(<span class="keyword">const</span> Eigen::Matrix&lt;double, 6, Eigen::Dynamic&gt; &amp; jacobian);</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  <span class="keywordtype">bool</span> verify_jacobian_inverse(<span class="keyword">const</span> Eigen::Matrix&lt;double, Eigen::Dynamic, 6&gt; &amp; jacobian);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  <span class="keywordtype">bool</span> initialized = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  std::string root_name_;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  <span class="keywordtype">size_t</span> num_joints_;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  KDL::Chain chain_;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  std::shared_ptr&lt;KDL::ChainFkSolverPos_recursive&gt; fk_pos_solver_;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  KDL::JntArray q_;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  KDL::Frame frame_;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  std::shared_ptr&lt;KDL::Jacobian&gt; jacobian_;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  std::shared_ptr&lt;Eigen::Matrix&lt;double, Eigen::Dynamic, 6&gt;&gt; jacobian_inverse_;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  std::shared_ptr&lt;KDL::ChainJntToJacSolver&gt; jac_solver_;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  std::shared_ptr&lt;rclcpp::node_interfaces::NodeParametersInterface&gt; parameters_interface_;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  std::unordered_map&lt;std::string, int&gt; link_name_map_;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  <span class="keywordtype">double</span> alpha;  <span class="comment">// damping term for Jacobian inverse</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  Eigen::MatrixXd I;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>};</div>
 </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>}  <span class="comment">// namespace kinematics_interface_kdl</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>}  <span class="comment">// namespace kinematics_interface_kdl</span></div>
 </div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="preprocessor">#endif  </span><span class="comment">// KINEMATICS_INTERFACE_KDL__KINEMATICS_INTERFACE_KDL_HPP_</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="preprocessor">#endif  </span><span class="comment">// KINEMATICS_INTERFACE_KDL__KINEMATICS_INTERFACE_KDL_HPP_</span></div>
 <div class="ttc" id="aclasskinematics__interface_1_1KinematicsInterface_html"><div class="ttname"><a href="classkinematics__interface_1_1KinematicsInterface.html">kinematics_interface::KinematicsInterface</a></div><div class="ttdef"><b>Definition</b> kinematics_interface.hpp:35</div></div>
 <div class="ttc" id="aclasskinematics__interface__kdl_1_1KinematicsInterfaceKDL_html"><div class="ttname"><a href="classkinematics__interface__kdl_1_1KinematicsInterfaceKDL.html">kinematics_interface_kdl::KinematicsInterfaceKDL</a></div><div class="ttdef"><b>Definition</b> kinematics_interface_kdl.hpp:40</div></div>
 <div class="ttc" id="aclasskinematics__interface__kdl_1_1KinematicsInterfaceKDL_html_a314557a63d3c46168f449a7500cbcac1"><div class="ttname"><a href="classkinematics__interface__kdl_1_1KinematicsInterfaceKDL.html#a314557a63d3c46168f449a7500cbcac1">kinematics_interface_kdl::KinematicsInterfaceKDL::convert_joint_deltas_to_cartesian_deltas</a></div><div class="ttdeci">bool convert_joint_deltas_to_cartesian_deltas(const Eigen::VectorXd &amp;joint_pos, const Eigen::VectorXd &amp;delta_theta, const std::string &amp;link_name, Eigen::Matrix&lt; double, 6, 1 &gt; &amp;delta_x) override</div><div class="ttdoc">Convert joint delta-theta to Cartesian delta-x.</div><div class="ttdef"><b>Definition</b> kinematics_interface_kdl.cpp:114</div></div>
@@ -198,7 +192,6 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclasskinematics__interface__kdl_1_1KinematicsInterfaceKDL_html_aa1453f56de9e049ac812fd6fb33b9765"><div class="ttname"><a href="classkinematics__interface__kdl_1_1KinematicsInterfaceKDL.html#aa1453f56de9e049ac812fd6fb33b9765">kinematics_interface_kdl::KinematicsInterfaceKDL::initialize</a></div><div class="ttdeci">bool initialize(const std::string &amp;robot_description, std::shared_ptr&lt; rclcpp::node_interfaces::NodeParametersInterface &gt; parameters_interface, const std::string &amp;param_namespace) override</div><div class="ttdoc">Initialize plugin. This method must be called before any other.</div><div class="ttdef"><b>Definition</b> kinematics_interface_kdl.cpp:23</div></div>
 <div class="ttc" id="aclasskinematics__interface__kdl_1_1KinematicsInterfaceKDL_html_aab303c0302f0ed56d69d92013754e0b9"><div class="ttname"><a href="classkinematics__interface__kdl_1_1KinematicsInterfaceKDL.html#aab303c0302f0ed56d69d92013754e0b9">kinematics_interface_kdl::KinematicsInterfaceKDL::convert_cartesian_deltas_to_joint_deltas</a></div><div class="ttdeci">bool convert_cartesian_deltas_to_joint_deltas(const Eigen::VectorXd &amp;joint_pos, const Eigen::Matrix&lt; double, 6, 1 &gt; &amp;delta_x, const std::string &amp;link_name, Eigen::VectorXd &amp;delta_theta) override</div><div class="ttdoc">Convert Cartesian delta-x to joint delta-theta, using the Jacobian.</div><div class="ttdef"><b>Definition</b> kinematics_interface_kdl.cpp:137</div></div>
 <div class="ttc" id="aclasskinematics__interface__kdl_1_1KinematicsInterfaceKDL_html_ae330283904ddd72bcf061a5f567a77e9"><div class="ttname"><a href="classkinematics__interface__kdl_1_1KinematicsInterfaceKDL.html#ae330283904ddd72bcf061a5f567a77e9">kinematics_interface_kdl::KinematicsInterfaceKDL::calculate_jacobian</a></div><div class="ttdeci">bool calculate_jacobian(const Eigen::VectorXd &amp;joint_pos, const std::string &amp;link_name, Eigen::Matrix&lt; double, 6, Eigen::Dynamic &gt; &amp;jacobian) override</div><div class="ttdoc">Calculates the jacobian for a specified link using provided joint positions.</div><div class="ttdef"><b>Definition</b> kinematics_interface_kdl.cpp:161</div></div>
-<div class="ttc" id="aclasskinematics__interface__kdl_1_1KinematicsInterfaceKDL_html_afa114c8ff8eea87876236fb4e0a91859"><div class="ttname"><a href="classkinematics__interface__kdl_1_1KinematicsInterfaceKDL.html#afa114c8ff8eea87876236fb4e0a91859">kinematics_interface_kdl::KinematicsInterfaceKDL::calculate_frame_difference</a></div><div class="ttdeci">bool calculate_frame_difference(Eigen::Matrix&lt; double, 7, 1 &gt; &amp;x_a, Eigen::Matrix&lt; double, 7, 1 &gt; &amp;x_b, double dt, Eigen::Matrix&lt; double, 6, 1 &gt; &amp;delta_x) override</div><div class="ttdoc">Calculates the difference between two Cartesian frames.</div><div class="ttdef"><b>Definition</b> kinematics_interface_kdl.cpp:239</div></div>
 <div class="ttc" id="anamespacekinematics__interface__kdl_html"><div class="ttname"><a href="namespacekinematics__interface__kdl.html">kinematics_interface_kdl</a></div><div class="ttdef"><b>Definition</b> kinematics_interface_kdl.hpp:38</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

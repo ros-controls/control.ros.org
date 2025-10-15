@@ -6,8 +6,11 @@ To add your robot, submit a PR to this page on Github!
 
 Communication protocols
 ------------------------
+- `Beckhoff ADS <https://github.com/b-robotized/beckhoff_ads_driver>`_
 - `CanOpen <https://github.com/ros-industrial/ros2_canopen>`_
+- `ctrlX DataLayer non-realtime <https://github.com/b-robotized/rexroth_datalayer_driver>`_
 - `Ethercat <https://github.com/ICube-Robotics/ethercat_driver_ros2>`_
+- `Modbus (client) <https://github.com/b-robotized/modbus_hardware_interface>`_
 
 End-effectors
 --------------
