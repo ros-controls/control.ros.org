@@ -182,8 +182,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac731e9ab375b33fb5c0d7cb1eb2bcee6" id="r_ac731e9ab375b33fb5c0d7cb1eb2bcee6"><td class="memItemLeft" align="right" valign="top"><a id="ac731e9ab375b33fb5c0d7cb1eb2bcee6" name="ac731e9ab375b33fb5c0d7cb1eb2bcee6"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>HardwareComponentInterface</b> (<a class="el" href="classhardware__interface_1_1HardwareComponentInterface.html">HardwareComponentInterface</a> &amp;&amp;other)=delete</td></tr>
 <tr class="separator:ac731e9ab375b33fb5c0d7cb1eb2bcee6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aacc86eae8411b70018342c6942875952" id="r_aacc86eae8411b70018342c6942875952"><td class="memItemLeft" align="right" valign="top">CallbackReturn&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1HardwareComponentInterface.html#aacc86eae8411b70018342c6942875952">init</a> (const <a class="el" href="structhardware__interface_1_1HardwareInfo.html">HardwareInfo</a> &amp;hardware_info, rclcpp::Logger logger, rclcpp::Clock::SharedPtr clock)</td></tr>
-<tr class="separator:aacc86eae8411b70018342c6942875952"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabf391eb7bf12832217dcc68b9a01eff" id="r_aabf391eb7bf12832217dcc68b9a01eff"><td class="memItemLeft" align="right" valign="top">CallbackReturn&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1HardwareComponentInterface.html#aabf391eb7bf12832217dcc68b9a01eff">init</a> (const <a class="el" href="structhardware__interface_1_1HardwareComponentParams.html">hardware_interface::HardwareComponentParams</a> &amp;params)</td></tr>
 <tr class="separator:aabf391eb7bf12832217dcc68b9a01eff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9d119decfb7cfe97f84950521c47b34" id="r_ae9d119decfb7cfe97f84950521c47b34"><td class="memItemLeft" align="right" valign="top">virtual CallbackReturn&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1HardwareComponentInterface.html#ae9d119decfb7cfe97f84950521c47b34">init_hardware_status_message</a> (control_msgs::msg::HardwareStatus &amp;)</td></tr>
@@ -192,9 +190,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a80af0065454e5ecffb77d503e69e1bc8" id="r_a80af0065454e5ecffb77d503e69e1bc8"><td class="memItemLeft" align="right" valign="top">virtual return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1HardwareComponentInterface.html#a80af0065454e5ecffb77d503e69e1bc8">update_hardware_status_message</a> (control_msgs::msg::HardwareStatus &amp;)</td></tr>
 <tr class="memdesc:a80af0065454e5ecffb77d503e69e1bc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">User-overridable method to fill the hardware status message with real-time data.  <br /></td></tr>
 <tr class="separator:a80af0065454e5ecffb77d503e69e1bc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8c57e888a1bb075b3a8a4cae3da8a80" id="r_af8c57e888a1bb075b3a8a4cae3da8a80"><td class="memItemLeft" align="right" valign="top">virtual CallbackReturn&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1HardwareComponentInterface.html#af8c57e888a1bb075b3a8a4cae3da8a80">on_init</a> (const <a class="el" href="structhardware__interface_1_1HardwareInfo.html">HardwareInfo</a> &amp;hardware_info)</td></tr>
-<tr class="memdesc:af8c57e888a1bb075b3a8a4cae3da8a80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialization of the hardware interface from data parsed from the robot's URDF.  <br /></td></tr>
-<tr class="separator:af8c57e888a1bb075b3a8a4cae3da8a80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad320c531f9901fcc125acd3fd25e15c1" id="r_ad320c531f9901fcc125acd3fd25e15c1"><td class="memItemLeft" align="right" valign="top">virtual CallbackReturn&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1HardwareComponentInterface.html#ad320c531f9901fcc125acd3fd25e15c1">on_init</a> (const <a class="el" href="structhardware__interface_1_1HardwareComponentInterfaceParams.html">hardware_interface::HardwareComponentInterfaceParams</a> &amp;params)</td></tr>
 <tr class="memdesc:ad320c531f9901fcc125acd3fd25e15c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialization of the hardware interface from data parsed from the robot's URDF.  <br /></td></tr>
 <tr class="separator:ad320c531f9901fcc125acd3fd25e15c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -441,7 +436,7 @@ rclcpp::TimerBase::SharedPtr&#160;</td><td class="memItemRight" valign="bottom">
 <p>Note the ownership over the state interfaces is transferred to the caller.</p>
 <dl class="section return"><dt>Returns</dt><dd>vector of state interfaces </dd></dl>
 
-<p>Reimplemented in <a class="el" href="classgazebo__ros2__control_1_1GazeboSystem.html#a4839226a2e037af9d87a0104325873be">gazebo_ros2_control::GazeboSystem</a>, <a class="el" href="classgz__ros2__control_1_1GazeboSimSystem.html#a43c1a97d664ff35196ec7d2eae4bef4d">gz_ros2_control::GazeboSimSystem</a>, <a class="el" href="classgz__ros2__control__demos_1_1GazeboCustomSimSystem.html#a5a63166317ab363af636f8a6f245e592">gz_ros2_control_demos::GazeboCustomSimSystem</a>, <a class="el" href="classmock__components_1_1GenericSystem.html#ac81e256d891bb32aa9d6e6a5727ea55d">mock_components::GenericSystem</a>, and <a class="el" href="classjoint__state__topic__hardware__interface_1_1JointStateTopicSystem.html#ad4f436851516d8450956a599d804884d">joint_state_topic_hardware_interface::JointStateTopicSystem</a>.</p>
+<p>Reimplemented in <a class="el" href="classgazebo__ros2__control_1_1GazeboSystem.html#a4839226a2e037af9d87a0104325873be">gazebo_ros2_control::GazeboSystem</a>, <a class="el" href="classgz__ros2__control_1_1GazeboSimSystem.html#a43c1a97d664ff35196ec7d2eae4bef4d">gz_ros2_control::GazeboSimSystem</a>, <a class="el" href="classgz__ros2__control__demos_1_1GazeboCustomSimSystem.html#a5a63166317ab363af636f8a6f245e592">gz_ros2_control_demos::GazeboCustomSimSystem</a>, and <a class="el" href="classjoint__state__topic__hardware__interface_1_1JointStateTopicSystem.html#ad4f436851516d8450956a599d804884d">joint_state_topic_hardware_interface::JointStateTopicSystem</a>.</p>
 
 </div>
 </div>
@@ -473,7 +468,7 @@ rclcpp::TimerBase::SharedPtr&#160;</td><td class="memItemRight" valign="bottom">
 <p>Note the ownership over the state interfaces is transferred to the caller.</p>
 <dl class="section return"><dt>Returns</dt><dd>vector of state interfaces </dd></dl>
 
-<p>Reimplemented in <a class="el" href="classgazebo__ros2__control_1_1GazeboSystem.html#ac99925403feb5c7dd5ae99b91297fdab">gazebo_ros2_control::GazeboSystem</a>, <a class="el" href="classgz__ros2__control_1_1GazeboSimSystem.html#a45aa0c2fc175a188e47e1bd89469c17b">gz_ros2_control::GazeboSimSystem</a>, <a class="el" href="classgz__ros2__control__demos_1_1GazeboCustomSimSystem.html#ab1535e8c44e542064fd6f48028101d50">gz_ros2_control_demos::GazeboCustomSimSystem</a>, <a class="el" href="classmock__components_1_1GenericSystem.html#a3b5064b009383dd1af323a20ccd79fb4">mock_components::GenericSystem</a>, and <a class="el" href="classjoint__state__topic__hardware__interface_1_1JointStateTopicSystem.html#ab749d961600b60ff722649676c2666c8">joint_state_topic_hardware_interface::JointStateTopicSystem</a>.</p>
+<p>Reimplemented in <a class="el" href="classgazebo__ros2__control_1_1GazeboSystem.html#ac99925403feb5c7dd5ae99b91297fdab">gazebo_ros2_control::GazeboSystem</a>, <a class="el" href="classgz__ros2__control_1_1GazeboSimSystem.html#a45aa0c2fc175a188e47e1bd89469c17b">gz_ros2_control::GazeboSimSystem</a>, <a class="el" href="classgz__ros2__control__demos_1_1GazeboCustomSimSystem.html#ab1535e8c44e542064fd6f48028101d50">gz_ros2_control_demos::GazeboCustomSimSystem</a>, and <a class="el" href="classjoint__state__topic__hardware__interface_1_1JointStateTopicSystem.html#ab749d961600b60ff722649676c2666c8">joint_state_topic_hardware_interface::JointStateTopicSystem</a>.</p>
 
 </div>
 </div>
@@ -501,6 +496,8 @@ rclcpp::TimerBase::SharedPtr&#160;</td><td class="memItemRight" valign="bottom">
 </div><div class="memdoc">
 <p>Override this method to export custom CommandInterfaces which are not defined in the URDF file. Those interfaces will be added to the unlisted_command_interfaces_ map.</p>
 <dl class="section return"><dt>Returns</dt><dd>vector of descriptions to the unlisted CommandInterfaces </dd></dl>
+
+<p>Reimplemented in <a class="el" href="classmock__components_1_1GenericSystem.html#ad7ffa9a1bab9fe4adf498dedda03df77">mock_components::GenericSystem</a>.</p>
 
 </div>
 </div>
@@ -826,7 +823,7 @@ template&lt;typename T  = double&gt; </div>
 </div>
 </div>
 <a id="aabf391eb7bf12832217dcc68b9a01eff" name="aabf391eb7bf12832217dcc68b9a01eff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aabf391eb7bf12832217dcc68b9a01eff">&#9670;&#160;</a></span>init() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aabf391eb7bf12832217dcc68b9a01eff">&#9670;&#160;</a></span>init()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -861,59 +858,6 @@ CallbackReturn::ERROR if any error happens or data are missing. </dd></dl>
 
 </div>
 </div>
-<a id="aacc86eae8411b70018342c6942875952" name="aacc86eae8411b70018342c6942875952"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aacc86eae8411b70018342c6942875952">&#9670;&#160;</a></span>init() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">CallbackReturn hardware_interface::HardwareComponentInterface::init </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structhardware__interface_1_1HardwareInfo.html">HardwareInfo</a> &amp;&#160;</td>
-          <td class="paramname"><em>hardware_info</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">rclcpp::Logger&#160;</td>
-          <td class="paramname"><em>logger</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">rclcpp::Clock::SharedPtr&#160;</td>
-          <td class="paramname"><em>clock</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Initialization of the hardware interface from data parsed from the robot's URDF and also the clock and logger interfaces. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">hardware_info</td><td>structure with data from URDF. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">clock</td><td>pointer to the resource manager clock. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">logger</td><td>Logger for the hardware component. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>CallbackReturn::SUCCESS if required data are provided and can be parsed. </dd>
-<dd>
-CallbackReturn::ERROR if any error happens or data are missing. </dd></dl>
-
-</div>
-</div>
 <a id="ae9d119decfb7cfe97f84950521c47b34" name="ae9d119decfb7cfe97f84950521c47b34"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae9d119decfb7cfe97f84950521c47b34">&#9670;&#160;</a></span>init_hardware_status_message()</h2>
 
@@ -939,7 +883,7 @@ CallbackReturn::ERROR if any error happens or data are missing. </dd></dl>
 </div><div class="memdoc">
 
 <p>User-overridable method to configure the structure of the HardwareStatus message. </p>
-<p>To enable status publishing, override this method to pre-allocate the message structure and fill in static information like device IDs and interface names. This method is called once during the non-realtime <code><a class="el" href="classhardware__interface_1_1HardwareComponentInterface.html#aacc86eae8411b70018342c6942875952">init()</a></code> phase. If the <code>hardware_device_states</code> vector is left empty, publishing will be disabled.</p>
+<p>To enable status publishing, override this method to pre-allocate the message structure and fill in static information like device IDs and interface names. This method is called once during the non-realtime <code><a class="el" href="classhardware__interface_1_1HardwareComponentInterface.html#aabf391eb7bf12832217dcc68b9a01eff">init()</a></code> phase. If the <code>hardware_device_states</code> vector is left empty, publishing will be disabled.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">msg_template</td><td>A reference to a HardwareStatus message to be configured. </td></tr>
@@ -1008,7 +952,7 @@ CallbackReturn::ERROR if any error happens or data are missing. </dd></dl>
 </div>
 </div>
 <a id="ad320c531f9901fcc125acd3fd25e15c1" name="ad320c531f9901fcc125acd3fd25e15c1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad320c531f9901fcc125acd3fd25e15c1">&#9670;&#160;</a></span>on_init() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad320c531f9901fcc125acd3fd25e15c1">&#9670;&#160;</a></span>on_init()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1044,45 +988,6 @@ CallbackReturn::ERROR if any error happens or data are missing. </dd></dl>
 CallbackReturn::ERROR if any error happens or data are missing. </dd></dl>
 
 <p>Reimplemented in <a class="el" href="classgz__ros2__control_1_1GazeboSimSystem.html#a3b5206c73ba2a8e93550e7df3537f430">gz_ros2_control::GazeboSimSystem</a>, <a class="el" href="classgz__ros2__control__demos_1_1GazeboCustomSimSystem.html#a92e8f23e57f24fa67ab26efe58fdea0c">gz_ros2_control_demos::GazeboCustomSimSystem</a>, <a class="el" href="classmock__components_1_1GenericSystem.html#a53d11cd0b4e903352ceee2225fa5efbf">mock_components::GenericSystem</a>, <a class="el" href="classros2__control__demo__example__1_1_1RRBotSystemPositionOnlyHardware.html#ad3e8a178ad436cb13ba0bce8b837571c">ros2_control_demo_example_1::RRBotSystemPositionOnlyHardware</a>, <a class="el" href="classros2__control__demo__example__10_1_1RRBotSystemWithGPIOHardware.html#a29efb76af3efa379d711178dd3feb036">ros2_control_demo_example_10::RRBotSystemWithGPIOHardware</a>, <a class="el" href="classros2__control__demo__example__11_1_1CarlikeBotSystemHardware.html#a1c9939346a84709c36ac93ba35e64889">ros2_control_demo_example_11::CarlikeBotSystemHardware</a>, <a class="el" href="classros2__control__demo__example__12_1_1RRBotSystemPositionOnlyHardware.html#ac806377a0785a872599d799560ebb151">ros2_control_demo_example_12::RRBotSystemPositionOnlyHardware</a>, <a class="el" href="classros2__control__demo__example__14_1_1RRBotActuatorWithoutFeedback.html#a806bc085beabc072b47fc22c79382eb8">ros2_control_demo_example_14::RRBotActuatorWithoutFeedback</a>, <a class="el" href="classros2__control__demo__example__14_1_1RRBotSensorPositionFeedback.html#a868c82dae19a0b2ebcf34d6bd42c33ee">ros2_control_demo_example_14::RRBotSensorPositionFeedback</a>, <a class="el" href="classros2__control__demo__example__16_1_1DiffBotSystemHardware.html#a8f281fa314495253c72f0bd88e7e4b04">ros2_control_demo_example_16::DiffBotSystemHardware</a>, <a class="el" href="classros2__control__demo__example__17_1_1RRBotSystemPositionOnlyHardware.html#a3066a1f6986d5baf3516bfb887a4dad7">ros2_control_demo_example_17::RRBotSystemPositionOnlyHardware</a>, <a class="el" href="classros2__control__demo__example__2_1_1DiffBotSystemHardware.html#ae15c792282b44aaff228586911999e85">ros2_control_demo_example_2::DiffBotSystemHardware</a>, <a class="el" href="classros2__control__demo__example__3_1_1RRBotSystemMultiInterfaceHardware.html#ada737e4ea8883f6b9d6f0f4ce235e463">ros2_control_demo_example_3::RRBotSystemMultiInterfaceHardware</a>, <a class="el" href="classros2__control__demo__example__4_1_1RRBotSystemWithSensorHardware.html#a35157e4fb3a5708da1fb5580f46345d7">ros2_control_demo_example_4::RRBotSystemWithSensorHardware</a>, <a class="el" href="classros2__control__demo__example__5_1_1ExternalRRBotForceTorqueSensorHardware.html#aa890a0108e15299e22bae674f187b1a0">ros2_control_demo_example_5::ExternalRRBotForceTorqueSensorHardware</a>, <a class="el" href="classros2__control__demo__example__5_1_1RRBotSystemPositionOnlyHardware.html#ade6143e8e3f6fb87dcbb9edf2c536f4d">ros2_control_demo_example_5::RRBotSystemPositionOnlyHardware</a>, <a class="el" href="classros2__control__demo__example__6_1_1RRBotModularJoint.html#a7e5699474dd7c19c80684ab12b8d7760">ros2_control_demo_example_6::RRBotModularJoint</a>, <a class="el" href="classros2__control__demo__example__7_1_1RobotSystem.html#aa82ae5332fa91fb55a20116dc865dd57">ros2_control_demo_example_7::RobotSystem</a>, <a class="el" href="classros2__control__demo__example__8_1_1RRBotTransmissionsSystemPositionOnlyHardware.html#a52deab8019ad830cf20749868540adfc">ros2_control_demo_example_8::RRBotTransmissionsSystemPositionOnlyHardware</a>, <a class="el" href="classros2__control__demo__example__9_1_1RRBotSystemPositionOnlyHardware.html#a58298b35738ecf09fe133ab6b4016ecc">ros2_control_demo_example_9::RRBotSystemPositionOnlyHardware</a>, and <a class="el" href="classjoint__state__topic__hardware__interface_1_1JointStateTopicSystem.html#a7072bc084f1dd4c8a1b9c9842a165823">joint_state_topic_hardware_interface::JointStateTopicSystem</a>.</p>
-
-</div>
-</div>
-<a id="af8c57e888a1bb075b3a8a4cae3da8a80" name="af8c57e888a1bb075b3a8a4cae3da8a80"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af8c57e888a1bb075b3a8a4cae3da8a80">&#9670;&#160;</a></span>on_init() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual CallbackReturn hardware_interface::HardwareComponentInterface::on_init </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structhardware__interface_1_1HardwareInfo.html">HardwareInfo</a> &amp;&#160;</td>
-          <td class="paramname"><em>hardware_info</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Initialization of the hardware interface from data parsed from the robot's URDF. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">hardware_info</td><td>structure with data from URDF. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>CallbackReturn::SUCCESS if required data are provided and can be parsed. </dd>
-<dd>
-CallbackReturn::ERROR if any error happens or data are missing. </dd></dl>
-
-<p>Reimplemented in <a class="el" href="classgazebo__ros2__control_1_1GazeboSystem.html#a766072ed786f1323fdce73fdaba1b07e">gazebo_ros2_control::GazeboSystem</a>.</p>
 
 </div>
 </div>
