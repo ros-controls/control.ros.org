@@ -137,72 +137,75 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  CallbackReturn <a class="code hl_function" href="classmock__components_1_1GenericSystem.html#a53d11cd0b4e903352ceee2225fa5efbf">on_init</a>(</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structhardware__interface_1_1HardwareComponentInterfaceParams.html">hardware_interface::HardwareComponentInterfaceParams</a> &amp; params) <span class="keyword">override</span>;</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  hardware_interface::CallbackReturn on_activate(</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  hardware_interface::CallbackReturn on_configure(</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keyword">const</span> rclcpp_lifecycle::State &amp; previous_state) <span class="keyword">override</span>;</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  std::vector&lt;hardware_interface::InterfaceDescription&gt;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  <a class="code hl_function" href="classmock__components_1_1GenericSystem.html#ad7ffa9a1bab9fe4adf498dedda03df77">export_unlisted_command_interface_descriptions</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  hardware_interface::CallbackReturn on_activate(</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keyword">const</span> rclcpp_lifecycle::State &amp; previous_state) <span class="keyword">override</span>;</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  return_type <a class="code hl_function" href="classmock__components_1_1GenericSystem.html#aa783edd32f21fff60c1c1073586a1da5">prepare_command_mode_switch</a>(</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keyword">const</span> std::vector&lt;std::string&gt; &amp; start_interfaces,</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keyword">const</span> std::vector&lt;std::string&gt; &amp; stop_interfaces) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  return_type <a class="code hl_function" href="classmock__components_1_1GenericSystem.html#a719bc50550c599b2b0e5d45da6f28c0e">perform_command_mode_switch</a>(</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keyword">const</span> std::vector&lt;std::string&gt; &amp; start_interfaces,</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keyword">const</span> std::vector&lt;std::string&gt; &amp; stop_interfaces) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  return_type <a class="code hl_function" href="classmock__components_1_1GenericSystem.html#a87246468061271ca2121f156d871b1c0">read</a>(<span class="keyword">const</span> rclcpp::Time &amp; time, <span class="keyword">const</span> rclcpp::Duration &amp; period) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="foldopen" id="foldopen00064" data-start="{" data-end="}">
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="classmock__components_1_1GenericSystem.html#a64e4042a2824dcc04dde6a373a2eb84a">   64</a></span>  return_type <a class="code hl_function" href="classmock__components_1_1GenericSystem.html#a64e4042a2824dcc04dde6a373a2eb84a">write</a>(<span class="keyword">const</span> rclcpp::Time &amp; <span class="comment">/*time*/</span>, <span class="keyword">const</span> rclcpp::Duration &amp; <span class="comment">/*period*/</span>)<span class="keyword"> override</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="keyword">  </span>{</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordflow">return</span> return_type::OK;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  }</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  std::vector&lt;hardware_interface::InterfaceDescription&gt;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  <a class="code hl_function" href="classmock__components_1_1GenericSystem.html#ad7ffa9a1bab9fe4adf498dedda03df77">export_unlisted_command_interface_descriptions</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  return_type <a class="code hl_function" href="classmock__components_1_1GenericSystem.html#aa783edd32f21fff60c1c1073586a1da5">prepare_command_mode_switch</a>(</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keyword">const</span> std::vector&lt;std::string&gt; &amp; start_interfaces,</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keyword">const</span> std::vector&lt;std::string&gt; &amp; stop_interfaces) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  return_type <a class="code hl_function" href="classmock__components_1_1GenericSystem.html#a719bc50550c599b2b0e5d45da6f28c0e">perform_command_mode_switch</a>(</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keyword">const</span> std::vector&lt;std::string&gt; &amp; start_interfaces,</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keyword">const</span> std::vector&lt;std::string&gt; &amp; stop_interfaces) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  return_type <a class="code hl_function" href="classmock__components_1_1GenericSystem.html#a87246468061271ca2121f156d871b1c0">read</a>(<span class="keyword">const</span> rclcpp::Time &amp; time, <span class="keyword">const</span> rclcpp::Duration &amp; period) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="foldopen" id="foldopen00067" data-start="{" data-end="}">
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="classmock__components_1_1GenericSystem.html#a64e4042a2824dcc04dde6a373a2eb84a">   67</a></span>  return_type <a class="code hl_function" href="classmock__components_1_1GenericSystem.html#a64e4042a2824dcc04dde6a373a2eb84a">write</a>(<span class="keyword">const</span> rclcpp::Time &amp; <span class="comment">/*time*/</span>, <span class="keyword">const</span> rclcpp::Duration &amp; <span class="comment">/*period*/</span>)<span class="keyword"> override</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="keyword">  </span>{</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordflow">return</span> return_type::OK;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  }</div>
 </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="keyword">protected</span>:</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="foldopen" id="foldopen00077" data-start="{" data-end="};">
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="classmock__components_1_1GenericSystem.html#aa6d5c94e327b940ed50ccb4c65b6288c">   77</a></span>  <span class="keyword">const</span> std::vector&lt;std::string&gt; <a class="code hl_variable" href="classmock__components_1_1GenericSystem.html#aa6d5c94e327b940ed50ccb4c65b6288c">standard_interfaces_</a> = {</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <a class="code hl_variable" href="namespacehardware__interface.html#adf4658e878804ad412a26773aa4705a6">hardware_interface::HW_IF_POSITION</a>, <a class="code hl_variable" href="namespacehardware__interface.html#ac92e707f8d468092ae48031e87cacb11">hardware_interface::HW_IF_VELOCITY</a>,</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <a class="code hl_variable" href="namespacehardware__interface.html#ac2f4024766cc8e328cf568d30e5099c6">hardware_interface::HW_IF_ACCELERATION</a>, <a class="code hl_variable" href="namespacehardware__interface.html#a51a32aa22fecafedbf00b6fddf4b2dd7">hardware_interface::HW_IF_EFFORT</a>};</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="foldopen" id="foldopen00080" data-start="{" data-end="};">
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="classmock__components_1_1GenericSystem.html#aa6d5c94e327b940ed50ccb4c65b6288c">   80</a></span>  <span class="keyword">const</span> std::vector&lt;std::string&gt; <a class="code hl_variable" href="classmock__components_1_1GenericSystem.html#aa6d5c94e327b940ed50ccb4c65b6288c">standard_interfaces_</a> = {</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <a class="code hl_variable" href="namespacehardware__interface.html#adf4658e878804ad412a26773aa4705a6">hardware_interface::HW_IF_POSITION</a>, <a class="code hl_variable" href="namespacehardware__interface.html#ac92e707f8d468092ae48031e87cacb11">hardware_interface::HW_IF_VELOCITY</a>,</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <a class="code hl_variable" href="namespacehardware__interface.html#ac2f4024766cc8e328cf568d30e5099c6">hardware_interface::HW_IF_ACCELERATION</a>, <a class="code hl_variable" href="namespacehardware__interface.html#a51a32aa22fecafedbf00b6fddf4b2dd7">hardware_interface::HW_IF_EFFORT</a>};</div>
 </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  std::vector&lt;std::string&gt; skip_interfaces_;</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  std::vector&lt;std::string&gt; other_interfaces_;</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  std::vector&lt;std::string&gt; sensor_interfaces_;</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  std::vector&lt;std::string&gt; gpio_mock_interfaces_;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  <span class="keywordtype">bool</span> populate_interfaces(</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keyword">const</span> std::vector&lt;hardware_interface::ComponentInfo&gt; &amp; components,</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    std::vector&lt;hardware_interface::InterfaceDescription&gt; &amp; command_interface_descriptions) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  <span class="keywordtype">bool</span> use_mock_gpio_command_interfaces_;</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  <span class="keywordtype">bool</span> use_mock_sensor_command_interfaces_;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  std::vector&lt;std::string&gt; skip_interfaces_;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  std::vector&lt;std::string&gt; other_interfaces_;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  std::vector&lt;std::string&gt; sensor_interfaces_;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  std::vector&lt;std::string&gt; gpio_mock_interfaces_;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  <span class="keywordtype">bool</span> populate_interfaces(</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keyword">const</span> std::vector&lt;hardware_interface::ComponentInfo&gt; &amp; components,</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    std::vector&lt;hardware_interface::InterfaceDescription&gt; &amp; command_interface_descriptions) <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  <span class="keywordtype">double</span> position_state_following_offset_;</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  std::string custom_interface_with_following_offset_;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  <span class="keywordtype">bool</span> use_mock_gpio_command_interfaces_;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  <span class="keywordtype">bool</span> use_mock_sensor_command_interfaces_;</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  <span class="keywordtype">bool</span> calculate_dynamics_;</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  std::vector&lt;size_t&gt; joint_control_mode_;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  <span class="keywordtype">double</span> position_state_following_offset_;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  std::string custom_interface_with_following_offset_;</div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  <span class="keywordtype">bool</span> command_propagation_disabled_;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>};</div>
-</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  <span class="keywordtype">bool</span> calculate_dynamics_;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  std::vector&lt;size_t&gt; joint_control_mode_;</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="keyword">typedef</span> GenericSystem GenericRobot;</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>}  <span class="comment">// namespace mock_components</span></div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="preprocessor">#endif  </span><span class="comment">// MOCK_COMPONENTS__GENERIC_SYSTEM_HPP_</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  <span class="keywordtype">bool</span> command_propagation_disabled_;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>};</div>
+</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="keyword">typedef</span> GenericSystem GenericRobot;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>}  <span class="comment">// namespace mock_components</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="preprocessor">#endif  </span><span class="comment">// MOCK_COMPONENTS__GENERIC_SYSTEM_HPP_</span></div>
 <div class="ttc" id="aclasshardware__interface_1_1SystemInterface_html"><div class="ttname"><a href="classhardware__interface_1_1SystemInterface.html">hardware_interface::SystemInterface</a></div><div class="ttdoc">Virtual Class to implement when integrating a complex system into ros2_control.</div><div class="ttdef"><b>Definition</b> system_interface.hpp:67</div></div>
 <div class="ttc" id="aclassmock__components_1_1GenericSystem_html"><div class="ttname"><a href="classmock__components_1_1GenericSystem.html">mock_components::GenericSystem</a></div><div class="ttdef"><b>Definition</b> generic_system.hpp:43</div></div>
 <div class="ttc" id="aclassmock__components_1_1GenericSystem_html_a53d11cd0b4e903352ceee2225fa5efbf"><div class="ttname"><a href="classmock__components_1_1GenericSystem.html#a53d11cd0b4e903352ceee2225fa5efbf">mock_components::GenericSystem::on_init</a></div><div class="ttdeci">CallbackReturn on_init(const hardware_interface::HardwareComponentInterfaceParams &amp;params) override</div><div class="ttdoc">Initialization of the hardware interface from data parsed from the robot's URDF.</div><div class="ttdef"><b>Definition</b> generic_system.cpp:34</div></div>
-<div class="ttc" id="aclassmock__components_1_1GenericSystem_html_a64e4042a2824dcc04dde6a373a2eb84a"><div class="ttname"><a href="classmock__components_1_1GenericSystem.html#a64e4042a2824dcc04dde6a373a2eb84a">mock_components::GenericSystem::write</a></div><div class="ttdeci">return_type write(const rclcpp::Time &amp;, const rclcpp::Duration &amp;) override</div><div class="ttdoc">Write the current command values to the hardware.</div><div class="ttdef"><b>Definition</b> generic_system.hpp:64</div></div>
+<div class="ttc" id="aclassmock__components_1_1GenericSystem_html_a64e4042a2824dcc04dde6a373a2eb84a"><div class="ttname"><a href="classmock__components_1_1GenericSystem.html#a64e4042a2824dcc04dde6a373a2eb84a">mock_components::GenericSystem::write</a></div><div class="ttdeci">return_type write(const rclcpp::Time &amp;, const rclcpp::Duration &amp;) override</div><div class="ttdoc">Write the current command values to the hardware.</div><div class="ttdef"><b>Definition</b> generic_system.hpp:67</div></div>
 <div class="ttc" id="aclassmock__components_1_1GenericSystem_html_a719bc50550c599b2b0e5d45da6f28c0e"><div class="ttname"><a href="classmock__components_1_1GenericSystem.html#a719bc50550c599b2b0e5d45da6f28c0e">mock_components::GenericSystem::perform_command_mode_switch</a></div><div class="ttdeci">return_type perform_command_mode_switch(const std::vector&lt; std::string &gt; &amp;start_interfaces, const std::vector&lt; std::string &gt; &amp;stop_interfaces) override</div><div class="ttdef"><b>Definition</b> generic_system.cpp:291</div></div>
-<div class="ttc" id="aclassmock__components_1_1GenericSystem_html_a87246468061271ca2121f156d871b1c0"><div class="ttname"><a href="classmock__components_1_1GenericSystem.html#a87246468061271ca2121f156d871b1c0">mock_components::GenericSystem::read</a></div><div class="ttdeci">return_type read(const rclcpp::Time &amp;time, const rclcpp::Duration &amp;period) override</div><div class="ttdoc">Read the current state values from the hardware.</div><div class="ttdef"><b>Definition</b> generic_system.cpp:353</div></div>
-<div class="ttc" id="aclassmock__components_1_1GenericSystem_html_aa6d5c94e327b940ed50ccb4c65b6288c"><div class="ttname"><a href="classmock__components_1_1GenericSystem.html#aa6d5c94e327b940ed50ccb4c65b6288c">mock_components::GenericSystem::standard_interfaces_</a></div><div class="ttdeci">const std::vector&lt; std::string &gt; standard_interfaces_</div><div class="ttdoc">Use standard interfaces for joints because they are relevant for dynamic behavior.</div><div class="ttdef"><b>Definition</b> generic_system.hpp:77</div></div>
+<div class="ttc" id="aclassmock__components_1_1GenericSystem_html_a87246468061271ca2121f156d871b1c0"><div class="ttname"><a href="classmock__components_1_1GenericSystem.html#a87246468061271ca2121f156d871b1c0">mock_components::GenericSystem::read</a></div><div class="ttdeci">return_type read(const rclcpp::Time &amp;time, const rclcpp::Duration &amp;period) override</div><div class="ttdoc">Read the current state values from the hardware.</div><div class="ttdef"><b>Definition</b> generic_system.cpp:359</div></div>
+<div class="ttc" id="aclassmock__components_1_1GenericSystem_html_aa6d5c94e327b940ed50ccb4c65b6288c"><div class="ttname"><a href="classmock__components_1_1GenericSystem.html#aa6d5c94e327b940ed50ccb4c65b6288c">mock_components::GenericSystem::standard_interfaces_</a></div><div class="ttdeci">const std::vector&lt; std::string &gt; standard_interfaces_</div><div class="ttdoc">Use standard interfaces for joints because they are relevant for dynamic behavior.</div><div class="ttdef"><b>Definition</b> generic_system.hpp:80</div></div>
 <div class="ttc" id="aclassmock__components_1_1GenericSystem_html_aa783edd32f21fff60c1c1073586a1da5"><div class="ttname"><a href="classmock__components_1_1GenericSystem.html#aa783edd32f21fff60c1c1073586a1da5">mock_components::GenericSystem::prepare_command_mode_switch</a></div><div class="ttdeci">return_type prepare_command_mode_switch(const std::vector&lt; std::string &gt; &amp;start_interfaces, const std::vector&lt; std::string &gt; &amp;stop_interfaces) override</div><div class="ttdoc">Prepare for a new command interface switch.</div><div class="ttdef"><b>Definition</b> generic_system.cpp:195</div></div>
 <div class="ttc" id="aclassmock__components_1_1GenericSystem_html_ad7ffa9a1bab9fe4adf498dedda03df77"><div class="ttname"><a href="classmock__components_1_1GenericSystem.html#ad7ffa9a1bab9fe4adf498dedda03df77">mock_components::GenericSystem::export_unlisted_command_interface_descriptions</a></div><div class="ttdeci">std::vector&lt; hardware_interface::InterfaceDescription &gt; export_unlisted_command_interface_descriptions() override</div><div class="ttdef"><b>Definition</b> generic_system.cpp:177</div></div>
 <div class="ttc" id="anamespacehardware__interface_html_a51a32aa22fecafedbf00b6fddf4b2dd7"><div class="ttname"><a href="namespacehardware__interface.html#a51a32aa22fecafedbf00b6fddf4b2dd7">hardware_interface::HW_IF_EFFORT</a></div><div class="ttdeci">constexpr char HW_IF_EFFORT[]</div><div class="ttdoc">Constant defining effort interface name.</div><div class="ttdef"><b>Definition</b> hardware_interface_type_values.hpp:27</div></div>
