@@ -194,7 +194,7 @@ For more information about hardware components check <a class="reference interna
 <dl class="simple">
 <dt>calculate_dynamics (optional; boolean; default: false)</dt><dd><p>Calculation of states from commands by using Euler-forward integration or finite differences.</p>
 </dd>
-<dt>custom_interface_with_following_offset (optional; string; default: “”)</dt><dd><p>Mapping of offsetted commands to a custom interface.</p>
+<dt>custom_interface_with_following_offset (optional; string; default: “”)</dt><dd><p>Mapping of offsetted commands to a custom interface (see <code class="docutils literal notranslate"><span class="pre">position_state_following_offset</span></code>).</p>
 </dd>
 <dt>disable_commands (optional; boolean; default: false)</dt><dd><p>Disables mirroring commands to states.
 This option is helpful to simulate an erroneous connection to the hardware when nothing breaks, but suddenly there is no feedback from a hardware interface.
@@ -206,7 +206,9 @@ Those interfaces are usually used by a <a class="reference internal" href="../..
 <dt>mock_sensor_commands (optional; boolean; default: false)</dt><dd><p>Creates fake command interfaces for faking sensor measurements with an external command.
 Those interfaces are usually used by a <a class="reference internal" href="../../../ros2_controllers/forward_command_controller/doc/userdoc.html#forward-command-controller-userdoc"><span class="std std-ref">forward controller</span></a> to provide access from ROS-world.</p>
 </dd>
-<dt>position_state_following_offset (optional; double; default: 0.0)</dt><dd><p>Following offset added to the commanded values when mirrored to states. Only applied, if <code class="docutils literal notranslate"><span class="pre">custom_interface_with_following_offset</span></code> is false.</p>
+<dt>position_state_following_offset (optional; double; default: 0.0)</dt><dd><p>Following offset added to the state values when commands are mirrored to states.
+If <code class="docutils literal notranslate"><span class="pre">custom_interface_with_following_offset</span></code> is empty, the offset is applied to the <code class="docutils literal notranslate"><span class="pre">position</span></code> state interface.
+If a custom interface is set, the <code class="docutils literal notranslate"><span class="pre">position</span></code> state value + offset is applied to that interface.</p>
 </dd>
 </dl>
 </section>
