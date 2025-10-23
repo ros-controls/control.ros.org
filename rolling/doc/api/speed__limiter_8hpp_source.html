@@ -126,7 +126,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordtype">double</span> max_acceleration, <span class="keywordtype">double</span> max_deceleration, <span class="keywordtype">double</span> max_deceleration_reverse,</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordtype">double</span> min_jerk, <span class="keywordtype">double</span> max_jerk)</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  {</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    speed_limiter_ = <a class="code hl_class" href="classcontrol__toolbox_1_1LowPassFilter.html">control_toolbox::RateLimiter&lt;double&gt;</a>(</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    speed_limiter_ = <a class="code hl_class" href="classcontrol__toolbox_1_1RateLimiter.html">control_toolbox::RateLimiter&lt;double&gt;</a>(</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>      min_velocity, max_velocity, max_acceleration_reverse, max_acceleration, max_deceleration,</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>      max_deceleration_reverse, min_jerk, max_jerk);</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  }</div>
@@ -156,14 +156,14 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  <a class="code hl_class" href="classcontrol__toolbox_1_1LowPassFilter.html">control_toolbox::RateLimiter&lt;double&gt;</a> speed_limiter_;  <span class="comment">// Instance of the new RateLimiter</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  <a class="code hl_class" href="classcontrol__toolbox_1_1RateLimiter.html">control_toolbox::RateLimiter&lt;double&gt;</a> speed_limiter_;  <span class="comment">// Instance of the new RateLimiter</span></div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>};</div>
 </div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>}  <span class="comment">// namespace diff_drive_controller</span></div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="preprocessor">#endif  </span><span class="comment">// DIFF_DRIVE_CONTROLLER__SPEED_LIMITER_HPP_</span></div>
-<div class="ttc" id="aclasscontrol__toolbox_1_1LowPassFilter_html"><div class="ttname"><a href="classcontrol__toolbox_1_1LowPassFilter.html">control_toolbox::LowPassFilter</a></div><div class="ttdoc">A Low-pass filter class.</div><div class="ttdef"><b>Definition</b> low_pass_filter.hpp:79</div></div>
+<div class="ttc" id="aclasscontrol__toolbox_1_1RateLimiter_html"><div class="ttname"><a href="classcontrol__toolbox_1_1RateLimiter.html">control_toolbox::RateLimiter</a></div><div class="ttdef"><b>Definition</b> rate_limiter.hpp:32</div></div>
 <div class="ttc" id="aclasscontrol__toolbox_1_1RateLimiter_html_a00da07212fa428c0b3b7e7ed80de42fe"><div class="ttname"><a href="classcontrol__toolbox_1_1RateLimiter.html#a00da07212fa428c0b3b7e7ed80de42fe">control_toolbox::RateLimiter::limit_value</a></div><div class="ttdeci">T limit_value(T &amp;v)</div><div class="ttdoc">Limit the value.</div><div class="ttdef"><b>Definition</b> rate_limiter.hpp:251</div></div>
 <div class="ttc" id="aclasscontrol__toolbox_1_1RateLimiter_html_a0ef5f9ce5756456348ec6c02a5b13f49"><div class="ttname"><a href="classcontrol__toolbox_1_1RateLimiter.html#a0ef5f9ce5756456348ec6c02a5b13f49">control_toolbox::RateLimiter::limit_second_derivative</a></div><div class="ttdeci">T limit_second_derivative(T &amp;v, T v0, T v1, T dt)</div><div class="ttdoc">Limit the second_derivative.</div><div class="ttdef"><b>Definition</b> rate_limiter.hpp:295</div></div>
 <div class="ttc" id="aclasscontrol__toolbox_1_1RateLimiter_html_aca9d0a69fd9b23422028b2f459f63d8a"><div class="ttname"><a href="classcontrol__toolbox_1_1RateLimiter.html#aca9d0a69fd9b23422028b2f459f63d8a">control_toolbox::RateLimiter::limit</a></div><div class="ttdeci">T limit(T &amp;v, T v0, T v1, T dt)</div><div class="ttdoc">Limit the value, first_derivative, and second_derivative.</div><div class="ttdef"><b>Definition</b> rate_limiter.hpp:239</div></div>
