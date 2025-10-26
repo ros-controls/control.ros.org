@@ -42,7 +42,7 @@ For optimal copy&paste experience, you can pull the github repository. Some thin
 
 .. code::
 
-  git pull https://github.com/ros-controls/roscon2025_control_workshop
+  git clone https://github.com/ros-controls/roscon2025_control_workshop
 
 Slides
 ------
