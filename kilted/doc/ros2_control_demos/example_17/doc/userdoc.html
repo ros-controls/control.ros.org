@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Example 17: RRBot with Hardware Component that publishes diagnostics &mdash; ROS2_Control: Kilted Nov 2025 documentation</title>
+  <title>Example 17: RRBot with Hardware Component that publishes diagnostics and status messages &mdash; ROS2_Control: Kilted Nov 2025 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
@@ -81,6 +81,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../example_16/doc/userdoc.html">Example 16: DiffBot with chained controllers</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Example 17: RRBot with Hardware Component that publishes diagnostics</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#tutorial-steps">Tutorial steps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementation-details-of-the-hardware-status-publisher">Implementation Details of the Hardware Status Publisher</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#implementation-details-of-the-diagnostic-publisher">Implementation Details of the Diagnostic Publisher</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#files-used-for-this-demos">Files used for this demos</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#controllers-from-this-demo">Controllers from this demo</a></li>
@@ -118,7 +119,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../doc/index.html">Demos</a></li>
-      <li class="breadcrumb-item active">Example 17: RRBot with Hardware Component that publishes diagnostics</li>
+      <li class="breadcrumb-item active">Example 17: RRBot with Hardware Component that publishes diagnostics and status messages</li>
       <li class="wy-breadcrumbs-aside">
               <!-- User defined GitHub URL -->
               <a href="https://github.com/ros-controls/ros2_control_demos/blob/master/example_17/doc/userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
@@ -131,13 +132,17 @@
              
 
 
-  <section id="example-17-rrbot-with-hardware-component-that-publishes-diagnostics">
-<span id="ros2-control-demos-example-17-userdoc"></span><h1>Example 17: RRBot with Hardware Component that publishes diagnostics<a class="headerlink" href="#example-17-rrbot-with-hardware-component-that-publishes-diagnostics" title="Link to this heading"></a></h1>
-<p>This example shows how to publish diagnostics from a hardware component using ROS 2 features available within the <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> framework.</p>
-<p>It is essentially the same as Example 1, but with a modified hardware interface plugin that demonstrates two methods for publishing status information:
-1.  Using the standard <code class="docutils literal notranslate"><span class="pre">diagnostic_updater</span></code> on the default node to publish to the <code class="docutils literal notranslate"><span class="pre">/diagnostics</span></code> topic. This is the recommended approach for hardware status reporting.
-2.  Using the Controller Manager’s Executor to add a custom ROS 2 node for publishing to a separate, non-standard topic.</p>
-<p>See the <a class="reference internal" href="#diagnostic-publisher-implementation"><span class="std std-ref">Implementation Details of the Diagnostic Publisher</span></a> for more information.</p>
+  <section id="example-17-rrbot-with-hardware-component-that-publishes-diagnostics-and-status-messages">
+<span id="ros2-control-demos-example-17-userdoc"></span><h1>Example 17: RRBot with Hardware Component that publishes diagnostics and status messages<a class="headerlink" href="#example-17-rrbot-with-hardware-component-that-publishes-diagnostics-and-status-messages" title="Link to this heading"></a></h1>
+<p>This example shows how to publish diagnostics and status messages from a hardware component using ROS 2 features available within the <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> framework.</p>
+<p>It is essentially the same as Example 1, but with a modified hardware interface plugin that demonstrates three methods for publishing status information:</p>
+<ol class="arabic simple">
+<li><p>Using the standard <code class="docutils literal notranslate"><span class="pre">diagnostic_updater</span></code> on the default node to publish to the <code class="docutils literal notranslate"><span class="pre">/diagnostics</span></code> topic.</p></li>
+<li><p>Using the Controller Manager’s Executor to add a custom ROS 2 node for publishing to a separate, non-standard topic.</p></li>
+<li><p>Using the framework managed default publisher, which publishes with a <code class="docutils literal notranslate"><span class="pre">HardwareStatus</span></code> message, this is the recommended way when you want to publish structured messages.</p></li>
+</ol>
+<p>Note: Structured messages mentioned above are in reference to <a class="reference external" href="https://github.com/ros-controls/roadmap/blob/master/design_drafts/hardware_status.md">hardware_status roadmap</a></p>
+<p>See <a class="reference internal" href="#diagnostic-publisher-implementation"><span class="std std-ref">Implementation Details of the Diagnostic Publisher</span></a> and <a class="reference internal" href="#hardware-status-publisher-implementation"><span class="std std-ref">Implementation Details of the Hardware Status Publisher</span></a> for more information.</p>
 <p>For <em>example_17</em>, the hardware interface plugin is implemented having only one interface.</p>
 <ul class="simple">
 <li><p>The communication is done using proprietary API to communicate with the robot control box.</p></li>
@@ -158,17 +163,34 @@
 <li><p>A <strong>default node</strong> is automatically provided to the hardware component. We use the standard <code class="docutils literal notranslate"><span class="pre">diagnostic_updater</span></code> library on this node to publish structured diagnostic data.</p></li>
 <li><p>A <strong>custom ROS 2 node</strong> is created inside the hardware interface and added to the executor provided by the controller manager. This demonstrates a more manual approach useful for non-diagnostic topics.</p></li>
 </ol>
+<p>as well as</p>
+<ol class="arabic simple" start="3">
+<li><p>A  <strong>default publisher</strong> is automatically created through steps detailed in <a class="reference internal" href="#hardware-status-publisher-implementation"><span class="std std-ref">Implementation Details of the Hardware Status Publisher</span></a>.</p></li>
+</ol>
 <p>The nodes and topics:</p>
 <ul class="simple">
-<li><p>Default node (via <code class="docutils literal notranslate"><span class="pre">diagnostic_updater</span></code>):
-- Is named after the hardware component (e.g., <code class="docutils literal notranslate"><span class="pre">/RRBot</span></code>).
-- Publishes periodically to the standard <code class="docutils literal notranslate"><span class="pre">/diagnostics</span></code> topic.
-- Uses message type <code class="docutils literal notranslate"><span class="pre">diagnostic_msgs/msg/DiagnosticArray</span></code>.</p></li>
-<li><p>Custom node:
-- Is named <code class="docutils literal notranslate"><span class="pre">&lt;hardware_name&gt;_custom_node</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">/rrbot_custom_node</span></code>).
-- Publishes on the topic <code class="docutils literal notranslate"><span class="pre">/rrbot_custom_status</span></code>.
-- Uses message type <code class="docutils literal notranslate"><span class="pre">std_msgs/msg/String</span></code>.
-- Sends a message every 2 seconds.</p></li>
+<li><p>Default node (via <code class="docutils literal notranslate"><span class="pre">diagnostic_updater</span></code>):</p>
+<ul>
+<li><p>Is named after the hardware component (e.g., <code class="docutils literal notranslate"><span class="pre">/RRBot</span></code>).</p></li>
+<li><p>Publishes periodically to the standard <code class="docutils literal notranslate"><span class="pre">/diagnostics</span></code> topic.</p></li>
+<li><p>Uses message type <code class="docutils literal notranslate"><span class="pre">diagnostic_msgs/msg/DiagnosticArray</span></code>.</p></li>
+</ul>
+</li>
+<li><p>Custom node:</p>
+<ul>
+<li><p>Is named <code class="docutils literal notranslate"><span class="pre">&lt;hardware_name&gt;_custom_node</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">/rrbot_custom_node</span></code>).</p></li>
+<li><p>Publishes on the topic <code class="docutils literal notranslate"><span class="pre">/rrbot_custom_status</span></code>.</p></li>
+<li><p>Uses message type <code class="docutils literal notranslate"><span class="pre">std_msgs/msg/String</span></code>.</p></li>
+<li><p>Sends a message every 2 seconds.</p></li>
+</ul>
+</li>
+<li><p>Default Publisher:</p>
+<ul>
+<li><p>Publishes on the topic <code class="docutils literal notranslate"><span class="pre">/rrbot/hardware_status</span></code>.</p></li>
+<li><p>Uses message type <code class="docutils literal notranslate"><span class="pre">control_msgs/msg/HardwareStatus</span></code>.</p></li>
+<li><p>Sends a message at rate specified by <code class="docutils literal notranslate"><span class="pre">status_publish_rate</span></code> parameter in ros2_control tag.</p></li>
+</ul>
+</li>
 </ul>
 <p>To check that the nodes are running and diagnostics are published correctly:</p>
 <div class="sphinx-tabs docutils container">
@@ -192,11 +214,18 @@ ros2<span class="w"> </span>topic<span class="w"> </span>info<span class="w"> </
 ros2<span class="w"> </span>topic<span class="w"> </span>info<span class="w"> </span>/rrbot_custom_status
 <span class="c1"># Should show: std_msgs/msg/String</span>
 
+<span class="c1"># Confirm message type of the default publisher topic</span>
+ros2<span class="w"> </span>topic<span class="w"> </span>info<span class="w"> </span>/rrbot/hardware_status
+<span class="c1"># Should show: control_msgs/msg/HardwareStatus</span>
+
 <span class="c1"># Echo the raw messages published by the default node</span>
 ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/diagnostics
 
 <span class="c1"># Echo the messages published by the custom node</span>
 ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/rrbot_custom_status
+
+<span class="c1"># Echo the messages published by default publisher</span>
+ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/rrbot/hardware_status
 </pre></div>
 </div>
 </div><div aria-labelledby="tab-0-RG9ja2Vy" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-RG9ja2Vy" name="RG9ja2Vy" role="tabpanel" tabindex="0"><p>Enter the running container shell first:</p>
@@ -207,8 +236,10 @@ ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>node<span class="w"> </span>list
 ros2<span class="w"> </span>topic<span class="w"> </span>info<span class="w"> </span>/diagnostics
 ros2<span class="w"> </span>topic<span class="w"> </span>info<span class="w"> </span>/rrbot_custom_status
+ros2<span class="w"> </span>topic<span class="w"> </span>info<span class="w"> </span>/rrbot/hardware_status
 ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/diagnostics
 ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/rrbot_custom_status
+ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/rrbot/hardware_status
 </pre></div>
 </div>
 </div></div>
@@ -224,12 +255,62 @@ ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</
 <span class="w">  </span><span class="nt">message</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Hardware</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">OK&quot;</span>
 <span class="w">  </span><span class="nt">hardware_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
 <span class="w">  </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
-<span class="nn">---</span>
 </pre></div>
 </div>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># From /rrbot_custom_status (showing the custom node&#39;s output)</span>
 data:<span class="w"> </span>RRBot<span class="w"> </span><span class="s1">&#39;RRBot&#39;</span><span class="w"> </span>custom<span class="w"> </span>node<span class="w"> </span>is<span class="w"> </span>alive<span class="w"> </span>at<span class="w"> </span><span class="m">1751087597</span>.146549
----
+</pre></div>
+</div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># From /rrbot/hardware_status (showing the default publisher&#39;s output)</span>
+<span class="w"> </span><span class="nt">header</span><span class="p">:</span>
+<span class="w">   </span><span class="nt">stamp</span><span class="p">:</span>
+<span class="w">     </span><span class="nt">sec</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1007</span>
+<span class="w">     </span><span class="nt">nanosec</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">560488417</span>
+<span class="w">   </span><span class="nt">frame_id</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w"> </span><span class="nt">hardware_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RRBot</span>
+<span class="w"> </span><span class="nt">hardware_device_states</span><span class="p">:</span>
+<span class="w"> </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">header</span><span class="p">:</span>
+<span class="w">     </span><span class="nt">stamp</span><span class="p">:</span>
+<span class="w">       </span><span class="nt">sec</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1761387923</span>
+<span class="w">       </span><span class="nt">nanosec</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">368924291</span>
+<span class="w">     </span><span class="nt">frame_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint1</span>
+<span class="w">   </span><span class="nt">device_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint1</span>
+<span class="w">   </span><span class="nt">hardware_status</span><span class="p">:</span>
+<span class="w">   </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">health_status</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">     </span><span class="nt">error_domain</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="w">     </span><span class="nt">operational_mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="w">     </span><span class="nt">power_state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="w">     </span><span class="nt">connectivity_status</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">     </span><span class="nt">manufacturer</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w">     </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w">     </span><span class="nt">firmware_version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w">     </span><span class="nt">state_details</span><span class="p">:</span>
+<span class="w">     </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position_state</span>
+<span class="w">       </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;0.000000&#39;</span>
+<span class="w">   </span><span class="nt">canopen_states</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="w">   </span><span class="nt">ethercat_states</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="w">   </span><span class="nt">vda5050_states</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="w"> </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">header</span><span class="p">:</span>
+<span class="w">     </span><span class="nt">stamp</span><span class="p">:</span>
+<span class="w">       </span><span class="nt">sec</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1761387923</span>
+<span class="w">       </span><span class="nt">nanosec</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">368970350</span>
+<span class="w">     </span><span class="nt">frame_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint2</span>
+<span class="w">   </span><span class="nt">device_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint2</span>
+<span class="w">   </span><span class="nt">hardware_status</span><span class="p">:</span>
+<span class="w">   </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">health_status</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">     </span><span class="nt">error_domain</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="w">     </span><span class="nt">operational_mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="w">     </span><span class="nt">power_state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="w">     </span><span class="nt">connectivity_status</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">     </span><span class="nt">manufacturer</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w">     </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w">     </span><span class="nt">firmware_version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w">     </span><span class="nt">state_details</span><span class="p">:</span>
+<span class="w">     </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position_state</span>
+<span class="w">       </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;0.000000&#39;</span>
+<span class="w">   </span><span class="nt">canopen_states</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="w">   </span><span class="nt">ethercat_states</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="w">   </span><span class="nt">vda5050_states</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -237,15 +318,91 @@ data:<span class="w"> </span>RRBot<span class="w"> </span><span class="s1">&#39;
 <p>The custom diagnostics node and its timer are created only if the executor is successfully passed to the hardware component. If you don’t see the topic or node, ensure the hardware plugin is correctly implemented and that the controller manager is providing an executor.</p>
 </div>
 </section>
+<section id="implementation-details-of-the-hardware-status-publisher">
+<span id="hardware-status-publisher-implementation"></span><h2>Implementation Details of the Hardware Status Publisher<a class="headerlink" href="#implementation-details-of-the-hardware-status-publisher" title="Link to this heading"></a></h2>
+<p><strong>1. Using the Framework-Managed Status Publisher (Recommended for HardwareStatus Messages)</strong></p>
+<blockquote>
+<div><p>The <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> framework provides a built-in, real-time safe mechanism for publishing standardized hardware status via the <code class="docutils literal notranslate"><span class="pre">control_msgs/msg/HardwareStatus</span></code> message. This is the simplest and most robust way to provide detailed status messages. It is enabled by implementing two virtual methods in your hardware component.</p>
+<ol class="loweralpha">
+<li><p><strong>Override init_hardware_status_message</strong>: This non-realtime method is called once during initialization. You must override it to define the <strong>static structure</strong> of your status message. This includes setting the <code class="docutils literal notranslate"><span class="pre">hardware_id</span></code>, resizing the <code class="docutils literal notranslate"><span class="pre">hardware_device_states</span></code> vector, and for each device, resizing its specific status vectors (e.g., <code class="docutils literal notranslate"><span class="pre">generic_hardware_status</span></code>) and populating static fields like <code class="docutils literal notranslate"><span class="pre">device_id</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// In rrbot.hpp, add the override declaration:</span>
+<span class="n">hardware_interface</span><span class="o">::</span><span class="n">CallbackReturn</span><span class="w"> </span><span class="nf">init_hardware_status_message</span><span class="p">(</span>
+<span class="w">  </span><span class="n">control_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">HardwareStatus</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">msg_template</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+
+<span class="c1">// In rrbot.cpp</span>
+<span class="n">hardware_interface</span><span class="o">::</span><span class="n">CallbackReturn</span><span class="w"> </span><span class="nf">RRBotSystemPositionOnlyHardware::init_hardware_status_message</span><span class="p">(</span>
+<span class="w">  </span><span class="n">control_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">HardwareStatus</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">msg</span><span class="p">.</span><span class="n">hardware_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_hardware_info</span><span class="p">().</span><span class="n">name</span><span class="p">;</span>
+<span class="w">  </span><span class="n">msg</span><span class="p">.</span><span class="n">hardware_device_states</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">get_hardware_info</span><span class="p">().</span><span class="n">joints</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">get_hardware_info</span><span class="p">().</span><span class="n">joints</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="n">msg</span><span class="p">.</span><span class="n">hardware_device_states</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">device_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_hardware_info</span><span class="p">().</span><span class="n">joints</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// This example uses one generic status per joint</span>
+<span class="w">    </span><span class="n">msg</span><span class="p">.</span><span class="n">hardware_device_states</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">generic_hardware_status</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">CallbackReturn</span><span class="o">::</span><span class="n">SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Override update_hardware_status_message</strong>: This real-time safe method is called from the framework’s internal timer. You override it to <strong>fill in the dynamic values</strong> of the pre-structured message, typically by copying your hardware’s internal state variables (updated in your <code class="docutils literal notranslate"><span class="pre">read()</span></code> method) into the fields of the message.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// In rrbot.hpp, add the override declaration:</span>
+<span class="n">hardware_interface</span><span class="o">::</span><span class="n">return_type</span><span class="w"> </span><span class="nf">update_hardware_status_message</span><span class="p">(</span>
+<span class="w">  </span><span class="n">control_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">HardwareStatus</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+
+<span class="c1">// In rrbot.cpp</span>
+<span class="n">hardware_interface</span><span class="o">::</span><span class="n">return_type</span><span class="w"> </span><span class="nf">RRBotSystemPositionOnlyHardware::update_hardware_status_message</span><span class="p">(</span>
+<span class="w">  </span><span class="n">control_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">HardwareStatus</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">get_hardware_info</span><span class="p">().</span><span class="n">joints</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">generic_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="n">hardware_device_states</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">generic_hardware_status</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// Example: Map internal state to a standard status field</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_state</span><span class="p">(</span><span class="n">get_hardware_info</span><span class="p">().</span><span class="n">joints</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;/position&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">abs</span><span class="p">(</span><span class="n">position</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">2.5</span><span class="p">)</span><span class="w"> </span><span class="c1">// Arbitrary warning threshold</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="n">generic_status</span><span class="p">.</span><span class="n">health_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">control_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">GenericState</span><span class="o">::</span><span class="n">HEALTH_WARNING</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="n">generic_status</span><span class="p">.</span><span class="n">health_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">control_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">GenericState</span><span class="o">::</span><span class="n">HEALTH_OK</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">generic_status</span><span class="p">.</span><span class="n">operational_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">control_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">GenericState</span><span class="o">::</span><span class="n">MODE_AUTO</span><span class="p">;</span>
+<span class="w">    </span><span class="n">generic_status</span><span class="p">.</span><span class="n">power_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">control_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">GenericState</span><span class="o">::</span><span class="n">POWER_ON</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">return_type</span><span class="o">::</span><span class="n">OK</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Enable in URDF</strong>: To activate the publisher, add the <code class="docutils literal notranslate"><span class="pre">status_publish_rate</span></code> parameter to your <code class="docutils literal notranslate"><span class="pre">&lt;hardware&gt;</span></code> tag in the URDF. Setting it to 0.0 disabled the feature.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;RRBotSystemPositionOnly&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;hardware&gt;</span>
+<span class="w">    </span><span class="nt">&lt;plugin&gt;</span>ros2_control_demo_example_17/RRBotSystemPositionOnlyHardware<span class="nt">&lt;/plugin&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;status_publish_rate&quot;</span><span class="nt">&gt;</span>20.0<span class="nt">&lt;/param&gt;</span><span class="w"> </span><span class="cm">&lt;!-- Defaults to 0.0 Hz --&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/hardware&gt;</span>
+<span class="w">  </span>...
+<span class="nt">&lt;/ros2_control&gt;</span>
+</pre></div>
+</div>
+<p>This will create a publisher on the topic <code class="docutils literal notranslate"><span class="pre">/rrbot/hardware_status</span></code>.</p>
+</li>
+</ol>
+</div></blockquote>
+</section>
 <section id="implementation-details-of-the-diagnostic-publisher">
 <span id="diagnostic-publisher-implementation"></span><h2>Implementation Details of the Diagnostic Publisher<a class="headerlink" href="#implementation-details-of-the-diagnostic-publisher" title="Link to this heading"></a></h2>
 <p>This example demonstrates the two recommended ways for a hardware component to perform ROS 2 communications: using the standard <code class="docutils literal notranslate"><span class="pre">diagnostic_updater</span></code> on the default node, and creating a separate custom node added to the Controller Manager’s executor.</p>
 <p><strong>1. Using the ``diagnostic_updater`` with the Default Node (Standard Method)</strong></p>
 <p>The <code class="docutils literal notranslate"><span class="pre">diagnostic_updater</span></code> library is the standard ROS 2 tool for publishing diagnostics. It automatically handles timer creation and publishing to the <code class="docutils literal notranslate"><span class="pre">/diagnostics</span></code> topic, making it the preferred method. The <code class="docutils literal notranslate"><span class="pre">HardwareComponentInterface</span></code> provides a <code class="docutils literal notranslate"><span class="pre">get_node()</span></code> method to access the default node, which is passed to the updater.</p>
-<p>The key steps are:
-1.  <strong>Create an Updater</strong>: Instantiate <code class="docutils literal notranslate"><span class="pre">diagnostic_updater::Updater</span></code>, passing it the default node. The updater internally creates a publisher to <code class="docutils literal notranslate"><span class="pre">/diagnostics</span></code> and a periodic timer (default 1 Hz).
-2.  <strong>Set Hardware ID</strong>: Set a unique identifier for the hardware component.
-3.  <strong>Add a Diagnostic Task</strong>: Add a function that will be called periodically by the updater’s internal timer. This function populates a <code class="docutils literal notranslate"><span class="pre">DiagnosticStatusWrapper</span></code> with the current status of the hardware.</p>
+<p>The key steps are:</p>
+<ol class="arabic simple">
+<li><p><strong>Create an Updater</strong>: Instantiate <code class="docutils literal notranslate"><span class="pre">diagnostic_updater::Updater</span></code>, passing it the default node. The updater internally creates a publisher to <code class="docutils literal notranslate"><span class="pre">/diagnostics</span></code> and a periodic timer (default 1 Hz).</p></li>
+<li><p><strong>Set Hardware ID</strong>: Set a unique identifier for the hardware component.</p></li>
+<li><p><strong>Add a Diagnostic Task</strong>: Add a function that will be called periodically by the updater’s internal timer. This function populates a <code class="docutils literal notranslate"><span class="pre">DiagnosticStatusWrapper</span></code> with the current status of the hardware.</p></li>
+</ol>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;diagnostic_updater/diagnostic_updater.hpp&quot;</span>
 
 <span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">get_node</span><span class="p">())</span>
