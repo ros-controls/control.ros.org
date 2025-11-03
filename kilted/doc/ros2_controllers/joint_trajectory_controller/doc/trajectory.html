@@ -248,6 +248,11 @@ I.e., one has to provide position and its derivatives as needed.</p>
 <span id="joint-trajectory-controller-trajectory-replacement"></span><h1>Trajectory Replacement<a class="headerlink" href="#trajectory-replacement" title="Link to this heading"></a></h1>
 <p><em>Parts of this documentation were originally published in the ROS 1 wiki under the</em> <a class="reference external" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0 license</a>. <a class="footnote-reference brackets" href="#f1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
 <p>Joint trajectory messages allow to specify the time at which a new trajectory should start executing by means of the header timestamp, where zero time (the default) means “start now”.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>As of now, this functionality is not ported to ROS 2, see <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/issues/84">this issue</a> for more information.
+The current implementation just forgets the old trajectory.</p>
+</div>
 <p>The arrival of a new trajectory command does not necessarily mean that the controller will completely discard the currently running trajectory and substitute it with the new one.
 Rather, the controller will take the useful parts of both and combine them appropriately, yielding a smarter trajectory replacement strategy.</p>
 <p>The steps followed by the controller for trajectory replacement are as follows:</p>
