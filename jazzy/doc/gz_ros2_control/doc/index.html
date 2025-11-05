@@ -266,6 +266,7 @@ include:</p>
 <section id="using-force-torque-sensors-in-simulation">
 <h3>Using force-torque sensors in simulation<a class="headerlink" href="#using-force-torque-sensors-in-simulation" title="Link to this heading"></a></h3>
 <p>To use <code class="docutils literal notranslate"><span class="pre">force-torque</span></code> sensors in <em>gz_ros2_control</em> you should define its parameters in your URDF or SDF (see the <a class="reference external" href="http://sdformat.org/spec?ver=1.12&amp;elem=sensor#sensor_force_torque">SDF specification</a>)</p>
+<p>An example in SDF is shown here:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;force_torque_sensor&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;force_torque&quot;</span><span class="nt">&gt;</span>
 <span class="w">  </span><span class="nt">&lt;update_rate&gt;</span>10.0<span class="nt">&lt;/update_rate&gt;</span>
 <span class="w">  </span><span class="nt">&lt;always_on&gt;</span>true<span class="nt">&lt;/always_on&gt;</span>
@@ -274,7 +275,22 @@ include:</p>
 <span class="nt">&lt;/sensor&gt;</span>
 </pre></div>
 </div>
-<p>It is important to add this as <code class="docutils literal notranslate"><span class="pre">reference</span></code> sensor in the <code class="docutils literal notranslate"><span class="pre">&lt;gazebo&gt;</span></code> tag in your URDF file.</p>
+<p>It is important to add this as <code class="docutils literal notranslate"><span class="pre">reference</span></code> sensor in the <code class="docutils literal notranslate"><span class="pre">&lt;gazebo&gt;</span></code> tag in your URDF file where the reference is the joint you will be attaching the force torque sensor to:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo</span><span class="w"> </span><span class="na">reference=</span><span class="s">&quot;attached_joint&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="cm">&lt;!-- If &#39;attached_joint&#39; is of &#39;fixed&#39; type,</span>
+<span class="cm">  setting &#39;preserveFixedJoint&#39; to true will prevent the</span>
+<span class="cm">  links from being lumped together during the URDF to</span>
+<span class="cm">  SDF conversion. Otherwise, it can be omitted. --&gt;</span>
+<span class="w">  </span><span class="nt">&lt;preserveFixedJoint&gt;</span>true<span class="nt">&lt;/preserveFixedJoint&gt;</span>
+<span class="w">  </span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;force_torque_sensor&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;force_torque&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;update_rate&gt;</span>10.0<span class="nt">&lt;/update_rate&gt;</span>
+<span class="w">    </span><span class="nt">&lt;always_on&gt;</span>true<span class="nt">&lt;/always_on&gt;</span>
+<span class="w">    </span><span class="nt">&lt;visualize&gt;</span>true<span class="nt">&lt;/visualize&gt;</span>
+<span class="w">    </span><span class="nt">&lt;topic&gt;</span>force_torque_sensor<span class="nt">&lt;/topic&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/sensor&gt;</span>
+<span class="nt">&lt;/gazebo&gt;</span>
+</pre></div>
+</div>
 </section>
 </section>
 <section id="add-the-gz-ros2-control-plugin">
