@@ -2,6 +2,7 @@
 
 Resources
 =========
+*Make sure you also check the ROSCon presentations and videos for the ros2_control updates - those are not listed here.*
 
 The resources provided in the ``resources`` folder are available for use under CC-BY license |CC-BY|_.
 The original authors are named either in the documents or in the list down below.
@@ -11,8 +12,8 @@ Any files submitted to the documentation should be "licensed" by stating your na
 Presentations
 ---------------
 
-2025-09-26 ROSCon UK Workshop: Writing Custom Robot Drivers
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2025-09-26 ROSCon UK Workshop: Writing Custom Robot Drivers and Control Workshop at ROSCon 2025 Singapore
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 
 .. toctree::
    :hidden:
