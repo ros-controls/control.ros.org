@@ -93,7 +93,7 @@ repos = {
             "humble": "humble",
             "iron": "iron",
             "jazzy": "jazzy",
-            "kilted": "master",
+            "kilted": "kilted",
             "rolling": "master"
         },
         "pr": os.environ.get('ROS2_CONTROLLERS_PR')
