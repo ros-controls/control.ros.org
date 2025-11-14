@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Release Notes: Jazzy to Kilted &mdash; ROS2_Control: Rolling Nov 2025 documentation</title>
+  <title>Release Notes: Kilted Kaiju to Lyrical Luth &mdash; ROS2_Control: Rolling Nov 2025 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -61,16 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../simulators/simulators.html">Simulator Integrations</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../release_notes/release_notes.html">Release Notes</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../ros2_control/doc/release_notes.html">ros2_control</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">ros2_controllers</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#chained-filter-controller">chained_filter_controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#force-torque-sensor-broadcaster">force_torque_sensor_broadcaster</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#imu-sensor-broadcaster">imu_sensor_broadcaster</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#joint-trajectory-controller">joint_trajectory_controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#omni-wheel-drive-controller">omni_wheel_drive_controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pid-controller">pid_controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#motion-primitives-forward-controller">motion_primitives_forward_controller</a></li>
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">ros2_controllers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../control_toolbox/doc/release_notes.html">control_toolbox</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../realtime_tools/doc/release_notes.html">realtime_tools</a></li>
 </ul>
@@ -100,7 +91,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../release_notes/release_notes.html">Release Notes</a></li>
-      <li class="breadcrumb-item active">Release Notes: Jazzy to Kilted</li>
+      <li class="breadcrumb-item active">Release Notes: Kilted Kaiju to Lyrical Luth</li>
       <li class="wy-breadcrumbs-aside">
               <!-- User defined GitHub URL -->
               <a href="https://github.com/ros-controls/ros2_controllers/blob/master/doc/release_notes.rst" class="fa fa-github"> Edit on GitHub</a>
@@ -122,59 +113,9 @@
 </p>
 
 
-  <section id="release-notes-jazzy-to-kilted">
-<h1>Release Notes: Jazzy to Kilted<a class="headerlink" href="#release-notes-jazzy-to-kilted" title="Link to this heading"></a></h1>
-<p>This list summarizes the changes between Jazzy (previous) and Kilted (current) releases.</p>
-<section id="chained-filter-controller">
-<h2>chained_filter_controller<a class="headerlink" href="#chained-filter-controller" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>The chained_filter_controller was added to use generic filter plugins (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1634">#1634</a>).</p></li>
-</ul>
-</section>
-<section id="force-torque-sensor-broadcaster">
-<h2>force_torque_sensor_broadcaster<a class="headerlink" href="#force-torque-sensor-broadcaster" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>Multiplier support was added. Users can now specify per–axis scaling factors for both force and torque readings, applied after the existing offset logic. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1647/files">#1647</a>).</p></li>
-<li><p>Added support for filter chains, allowing users to configure a sequence of filter plugins with their parameters. The force/torque sensor readings are filtered sequentially and published on a separate topic.</p></li>
-</ul>
-</section>
-<section id="imu-sensor-broadcaster">
-<h2>imu_sensor_broadcaster<a class="headerlink" href="#imu-sensor-broadcaster" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>IMU sensor broadcaster is now a chainable controller. It supports a calibration by means of a rotation, defined as euler angles, to its target frame. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1833/files">#1833</a>).</p></li>
-</ul>
-</section>
-<section id="joint-trajectory-controller">
-<h2>joint_trajectory_controller<a class="headerlink" href="#joint-trajectory-controller" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>The controller now supports the new anti-windup strategy of the PID class, which allows for more flexible control of the anti-windup behavior. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1759">#1759</a>).</p></li>
-<li><p>Scaling support was added in <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1191">#1191</a>. With this the controller
-“stretches the time” with which it progresses in the trajectory. Scaling can either be set
-manually or it can be synchronized with the hardware. See <a class="reference internal" href="../joint_trajectory_controller/doc/speed_scaling.html#jtc-speed-scaling"><span class="std std-ref">Speed scaling</span></a> for details.</p></li>
-</ul>
-</section>
-<section id="omni-wheel-drive-controller">
-<h2>omni_wheel_drive_controller<a class="headerlink" href="#omni-wheel-drive-controller" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>🚀 The omni_wheel_drive_controller was added 🎉 (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1535">#1535</a>).</p></li>
-</ul>
-</section>
-<section id="pid-controller">
-<h2>pid_controller<a class="headerlink" href="#pid-controller" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>The controller now supports the new anti-windup strategy of the PID class, which allows for more flexible control of the anti-windup behavior (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1585">#1585</a>).
-* Output clamping via <code class="docutils literal notranslate"><span class="pre">u_clamp_max</span></code> and <code class="docutils literal notranslate"><span class="pre">u_clamp_min</span></code> was added, allowing users to bound the controller output.
-* The legacy <code class="docutils literal notranslate"><span class="pre">antiwindup</span></code> boolean and integral clamp parameters <code class="docutils literal notranslate"><span class="pre">i_clamp_max</span></code>/<code class="docutils literal notranslate"><span class="pre">i_clamp_min</span></code> have been deprecated in favor of the new <code class="docutils literal notranslate"><span class="pre">antiwindup_strategy</span></code> parameter. A <code class="docutils literal notranslate"><span class="pre">tracking_time_constant</span></code> parameter has also been introduced to configure the back-calculation strategy.
-* A new <code class="docutils literal notranslate"><span class="pre">error_deadband</span></code> parameter stops integration when the error is within a specified range.</p></li>
-<li><p>PID state publisher can be turned off or on by using  <code class="docutils literal notranslate"><span class="pre">activate_state_publisher</span></code> parameter. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1823">#1823</a>).</p></li>
-</ul>
-</section>
-<section id="motion-primitives-forward-controller">
-<h2>motion_primitives_forward_controller<a class="headerlink" href="#motion-primitives-forward-controller" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>🚀 The motion_primitives_forward_controller was added 🎉 (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1636">#1636</a>).</p></li>
-</ul>
-</section>
+  <section id="release-notes-kilted-kaiju-to-lyrical-luth">
+<h1>Release Notes: Kilted Kaiju to Lyrical Luth<a class="headerlink" href="#release-notes-kilted-kaiju-to-lyrical-luth" title="Link to this heading"></a></h1>
+<p>This list summarizes important changes between Kilted Kaiju (previous) and Lyrical Luth (current) releases.</p>
 </section>
 
 
