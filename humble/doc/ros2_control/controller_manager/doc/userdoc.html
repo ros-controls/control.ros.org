@@ -453,8 +453,9 @@ and to prevent the node from being swapped out to disk.
 Find more information about the setup for memory locking in the following link : <a class="reference external" href="https://access.redhat.com/solutions/61334">How to set ulimit values</a>
 The following command can be used to set the memory locking limit temporarily : <code class="docutils literal notranslate"><span class="pre">ulimit</span> <span class="pre">-l</span> <span class="pre">unlimited</span></code>.</p>
 </dd>
-<dt>cpu_affinity (optional; int; default: -1)</dt><dd><p>Sets the CPU affinity of the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> node to the specified CPU core.
-The value of -1 means that the CPU affinity is not set.</p>
+<dt>cpu_affinity (optional; int (or) int_array;)</dt><dd><p>Sets the CPU affinity of the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> node to the specified CPU core.
+If it is an integer, the node’s affinity will be set to the specified CPU core.
+If it is an array of integers, the node’s affinity will be set to the specified set of CPU cores.</p>
 </dd>
 <dt>thread_priority (optional; int; default: 50)</dt><dd><p>Sets the thread priority of the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> node to the specified value. The value must be between 0 and 99.</p>
 </dd>
