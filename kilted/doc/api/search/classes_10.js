@@ -27,8 +27,9 @@ var searchData=
   ['statetolerances_24',['StateTolerances',['../structjoint__trajectory__controller_1_1StateTolerances.html',1,'joint_trajectory_controller']]],
   ['steeringcontrollerslibrary_25',['SteeringControllersLibrary',['../classsteering__controllers__library_1_1SteeringControllersLibrary.html',1,'steering_controllers_library']]],
   ['steeringhandle_26',['SteeringHandle',['../structtricycle__controller_1_1TricycleController_1_1SteeringHandle.html',1,'tricycle_controller::TricycleController']]],
-  ['steeringlimiter_27',['SteeringLimiter',['../classtricycle__controller_1_1SteeringLimiter.html',1,'tricycle_controller']]],
-  ['steeringodometry_28',['SteeringOdometry',['../classsteering__odometry_1_1SteeringOdometry.html',1,'steering_odometry']]],
-  ['switchcontrollersverb_29',['SwitchControllersVerb',['../classros2controlcli_1_1verb_1_1switch__controllers_1_1SwitchControllersVerb.html',1,'ros2controlcli::verb::switch_controllers']]],
-  ['systeminterface_30',['SystemInterface',['../classhardware__interface_1_1SystemInterface.html',1,'hardware_interface']]]
+  ['steeringkinematics_27',['SteeringKinematics',['../classsteering__kinematics_1_1SteeringKinematics.html',1,'steering_kinematics']]],
+  ['steeringlimiter_28',['SteeringLimiter',['../classtricycle__controller_1_1SteeringLimiter.html',1,'tricycle_controller']]],
+  ['steeringodometry_29',['SteeringOdometry',['../classsteering__odometry_1_1SteeringOdometry.html',1,'steering_odometry']]],
+  ['switchcontrollersverb_30',['SwitchControllersVerb',['../classros2controlcli_1_1verb_1_1switch__controllers_1_1SwitchControllersVerb.html',1,'ros2controlcli::verb::switch_controllers']]],
+  ['systeminterface_31',['SystemInterface',['../classhardware__interface_1_1SystemInterface.html',1,'hardware_interface']]]
 ];

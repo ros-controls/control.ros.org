@@ -63,10 +63,13 @@
 <li class="toctree-l3"><a class="reference internal" href="../../admittance_controller/doc/userdoc.html">Admittance Controller</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../effort_controllers/doc/userdoc.html">Effort Controllers</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Forward Command Controller</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#hardware-interface-type">Hardware interface type</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#ros-2-interface-of-the-controller">ROS 2 interface of the controller</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#topics">Topics</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#forward-command-controller-and-multi-interface-forward-command-controller">forward_command_controller and multi_interface_forward_command_controller</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#hardware-interface-type">Hardware interface type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#ros-2-interface-of-the-controller">ROS 2 interface of the controller</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#topics">Topics</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#parameters">Parameters</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -143,27 +146,25 @@
 
   <section id="forward-command-controller">
 <span id="forward-command-controller-userdoc"></span><h1>forward_command_controller<a class="headerlink" href="#forward-command-controller" title="Link to this heading"></a></h1>
-<p>This is a base class implementing a feedforward controller. Specific implementations of this base class can be found in:</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="../../position_controllers/doc/userdoc.html#position-controllers-userdoc"><span class="std std-ref">position_controllers</span></a></p></li>
-<li><p><a class="reference internal" href="../../velocity_controllers/doc/userdoc.html#velocity-controllers-userdoc"><span class="std std-ref">velocity_controllers</span></a></p></li>
-<li><p><a class="reference internal" href="../../effort_controllers/doc/userdoc.html#effort-controllers-userdoc"><span class="std std-ref">effort_controllers</span></a></p></li>
-</ul>
+<p>A selection of controllers that forward commands of different types.</p>
+<section id="forward-command-controller-and-multi-interface-forward-command-controller">
+<h2>forward_command_controller and multi_interface_forward_command_controller<a class="headerlink" href="#forward-command-controller-and-multi-interface-forward-command-controller" title="Link to this heading"></a></h2>
+<p>Both controllers forward <code class="docutils literal notranslate"><span class="pre">std_msgs::msg::Float64MultiArray</span></code> to a set of interfaces, which can be parameterized as follows: While <code class="docutils literal notranslate"><span class="pre">forward_command_controller/ForwardCommandController</span></code> only claims a single interface type per joint (<code class="docutils literal notranslate"><span class="pre">joint[i]</span> <span class="pre">+</span> <span class="pre">&quot;/&quot;</span> <span class="pre">+</span> <span class="pre">interface_name</span></code>), the <code class="docutils literal notranslate"><span class="pre">forward_command_controller/MultiInterfaceForwardCommandController</span></code> claims the combination of all interfaces specified in the <code class="docutils literal notranslate"><span class="pre">interface_names</span></code> parameter (<code class="docutils literal notranslate"><span class="pre">joint[i]</span> <span class="pre">+</span> <span class="pre">&quot;/&quot;</span> <span class="pre">+</span> <span class="pre">interface_names[j]</span></code>).</p>
 <section id="hardware-interface-type">
-<h2>Hardware interface type<a class="headerlink" href="#hardware-interface-type" title="Link to this heading"></a></h2>
-<p>This controller can be used for every type of command interface.</p>
+<h3>Hardware interface type<a class="headerlink" href="#hardware-interface-type" title="Link to this heading"></a></h3>
+<p>This controller can be used for every type of command interface, not only limited to joints.</p>
 </section>
 <section id="ros-2-interface-of-the-controller">
-<h2>ROS 2 interface of the controller<a class="headerlink" href="#ros-2-interface-of-the-controller" title="Link to this heading"></a></h2>
+<h3>ROS 2 interface of the controller<a class="headerlink" href="#ros-2-interface-of-the-controller" title="Link to this heading"></a></h3>
 <section id="topics">
-<h3>Topics<a class="headerlink" href="#topics" title="Link to this heading"></a></h3>
+<h4>Topics<a class="headerlink" href="#topics" title="Link to this heading"></a></h4>
 <dl class="simple">
 <dt>~/commands (input topic) [std_msgs::msg::Float64MultiArray]</dt><dd><p>Target joint commands</p>
 </dd>
 </dl>
 </section>
 <section id="parameters">
-<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
+<h4>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h4>
 <p>This controller uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters.</p>
 <blockquote>
 <div><div class="sphinx-tabs docutils container">
@@ -177,7 +178,7 @@
 </ul>
 </div></blockquote>
 </dd>
-<dt>interface_name (string)</dt><dd><p>Name of the interface to command</p>
+<dt>interface_name (string)</dt><dd><p>Name of the interface of the joint</p>
 <p>Read only: True</p>
 <p>Constraints:</p>
 <blockquote>
@@ -197,7 +198,7 @@
 </ul>
 </div></blockquote>
 </dd>
-<dt>interface_names (string_array)</dt><dd><p>Names of the interfaces to command</p>
+<dt>interface_names (string_array)</dt><dd><p>Names of the interfaces per joint to claim</p>
 <p>Read only: True</p>
 <p>Constraints:</p>
 <blockquote>
@@ -209,6 +210,7 @@
 </dl>
 </div></div>
 </div></blockquote>
+</section>
 </section>
 </section>
 </section>

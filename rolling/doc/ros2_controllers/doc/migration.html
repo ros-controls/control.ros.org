@@ -64,7 +64,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../../migration/migration.html#coming-from-ros-control-ros-1">Coming from ros_control (ROS 1)</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../migration/migration.html#between-different-ros-2-distributions">Between different ROS 2 distributions</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../../ros2_control/doc/migration.html">ros2_control</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">ros2_controllers</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ros2_controllers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#effort-controllers">effort_controllers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#position-controllers">position_controllers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velocity-controllers">velocity_controllers</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="../../control_toolbox/doc/migration.html">control_toolbox</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../realtime_tools/doc/migration.html">realtime_tools</a></li>
 </ul>
@@ -120,6 +125,24 @@
   <section id="migration-guides-kilted-kaiju-to-lyrical-luth">
 <h1>Migration Guides: Kilted Kaiju to Lyrical Luth<a class="headerlink" href="#migration-guides-kilted-kaiju-to-lyrical-luth" title="Link to this heading"></a></h1>
 <p>This list summarizes important changes between Kilted Kaiju (previous) and Lyrical Luth (current) releases, where changes to user code might be necessary.</p>
+<section id="effort-controllers">
+<h2>effort_controllers<a class="headerlink" href="#effort-controllers" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">effort_controllers/JointGroupEffortController</span></code> is deprecated. Use <a class="reference internal" href="../forward_command_controller/doc/userdoc.html#forward-command-controller-userdoc"><span class="std std-ref">forward_command_controller</span></a> instead by adding the <code class="docutils literal notranslate"><span class="pre">interface_name</span></code> parameter and set it to <code class="docutils literal notranslate"><span class="pre">effort</span></code>. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1913">#1913</a>).</p></li>
+</ul>
+</section>
+<section id="position-controllers">
+<h2>position_controllers<a class="headerlink" href="#position-controllers" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">position_controllers/JointGroupPositionController</span></code> is deprecated. Use <a class="reference internal" href="../forward_command_controller/doc/userdoc.html#forward-command-controller-userdoc"><span class="std std-ref">forward_command_controller</span></a> instead by adding the <code class="docutils literal notranslate"><span class="pre">interface_name</span></code> parameter and set it to <code class="docutils literal notranslate"><span class="pre">position</span></code>. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1913">#1913</a>).</p></li>
+</ul>
+</section>
+<section id="velocity-controllers">
+<h2>velocity_controllers<a class="headerlink" href="#velocity-controllers" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">velocity_controllers/JointGroupVelocityController</span></code> is deprecated. Use <a class="reference internal" href="../forward_command_controller/doc/userdoc.html#forward-command-controller-userdoc"><span class="std std-ref">forward_command_controller</span></a> instead by adding the <code class="docutils literal notranslate"><span class="pre">interface_name</span></code> parameter and set it to <code class="docutils literal notranslate"><span class="pre">velocity</span></code>. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1913">#1913</a>).</p></li>
+</ul>
+</section>
 </section>
 
 
