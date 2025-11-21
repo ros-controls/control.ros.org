@@ -70,6 +70,11 @@
 <li class="toctree-l5"><a class="reference internal" href="#modifying-the-urdf-ros2-control-tag-for-new-robots">Modifying the urdf <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> tag for new robots</a></li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="#cm-topic-hardware-component">cm_topic_hardware_component</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#ros-subscribers">ROS subscribers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#ros2-control-section-in-urdf">ros2_control section in URDF</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -205,6 +210,73 @@
 <span class="w">                </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
 <span class="w">            </span><span class="nt">&lt;/joint&gt;</span>
 <span class="w">        </span><span class="nt">&lt;/ros2_control&gt;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="cm-topic-hardware-component">
+<h2>cm_topic_hardware_component<a class="headerlink" href="#cm-topic-hardware-component" title="Link to this heading"></a></h2>
+<p>The CM Topic System implements a ros2_control <code class="docutils literal notranslate"><span class="pre">hardware_interface::SystemInterface</span></code> subscribing to
+topics of type <code class="docutils literal notranslate"><span class="pre">pal_statistics_msgs::msg::StatisticsNames</span></code> and <code class="docutils literal notranslate"><span class="pre">pal_statistics_msgs::msg::StatisticsValues</span></code>,
+and sets its state interface to the received values (if present).</p>
+<p>Per default, the ros2_control controller manager publishes these topics to <code class="docutils literal notranslate"><span class="pre">/controller_manager/introspection_data/names</span></code>
+and <code class="docutils literal notranslate"><span class="pre">/controller_manager/introspection_data/values</span></code>.</p>
+<p>This component serves as a possibility to replay ROS bags and inject the states from a hardware component into the ros2_control stack.
+For example, use <code class="docutils literal notranslate"><span class="pre">ros2bag</span></code> CLI to extract these two topics via</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>bag<span class="w"> </span>play<span class="w"> </span>&lt;bag_file&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--topics<span class="w"> </span>/controller_manager/introspection_data/names<span class="w"> </span>/controller_manager/introspection_data/values<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--remap<span class="w"> </span>/controller_manager/introspection_data/names:<span class="o">=</span>/&lt;hardware_component_name&gt;/names<span class="se">\</span>
+<span class="w">          </span>/controller_manager/introspection_data/values:<span class="o">=</span>/&lt;hardware_component_name&gt;/values
+</pre></div>
+</div>
+<p>Note that with this setup the current time of your OS is used and not published from the ROS bag.
+If you want to control the speed of playback, run</p>
+<ul>
+<li><p>your ros2_control_node with <code class="docutils literal notranslate"><span class="pre">--ros-args</span> <span class="pre">-p</span> <span class="pre">--use_sim_time:=true</span></code></p></li>
+<li><p>and the <code class="docutils literal notranslate"><span class="pre">--rate</span></code> and <code class="docutils literal notranslate"><span class="pre">--clock</span></code> options, for example</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>bag<span class="w"> </span>play<span class="w"> </span>&lt;bag_file&gt;<span class="w"> </span>--rate<span class="w"> </span><span class="m">2</span>.0<span class="w"> </span>--clock<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--topics<span class="w"> </span>/controller_manager/introspection_data/names<span class="w"> </span>/controller_manager/introspection_data/values<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--remap<span class="w"> </span>/controller_manager/introspection_data/names:<span class="o">=</span>/&lt;hardware_component_name&gt;/names<span class="se">\</span>
+<span class="w">          </span>/controller_manager/introspection_data/values:<span class="o">=</span>/&lt;hardware_component_name&gt;/values
+</pre></div>
+</div>
+</li>
+</ul>
+<section id="ros-subscribers">
+<h3>ROS subscribers<a class="headerlink" href="#ros-subscribers" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>/&lt;hardware_component_name&gt;/names: <code class="docutils literal notranslate"><span class="pre">pal_statistics_msgs::msg::StatisticsNames</span></code></p></li>
+<li><p>/&lt;hardware_component_name&gt;/values:  <code class="docutils literal notranslate"><span class="pre">pal_statistics_msgs::msg::StatisticsValues</span></code></p></li>
+</ul>
+</section>
+<section id="ros2-control-section-in-urdf">
+<h3>ros2_control section in URDF<a class="headerlink" href="#ros2-control-section-in-urdf" title="Link to this heading"></a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;hardware_component_name&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;hardware&gt;</span>
+<span class="w">    </span><span class="nt">&lt;plugin&gt;</span>cm_topic_hardware_component/CMTopicSystem<span class="nt">&lt;/plugin&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/hardware&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint_1&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;initial_value&quot;</span><span class="nt">&gt;</span>0.2<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/state_interface&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint_2&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;initial_value&quot;</span><span class="nt">&gt;</span>0.3<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/state_interface&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint_3&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;initial_value&quot;</span><span class="nt">&gt;</span>0.1<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/state_interface&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
+<span class="nt">&lt;/ros2_control&gt;</span>
 </pre></div>
 </div>
 </section>
