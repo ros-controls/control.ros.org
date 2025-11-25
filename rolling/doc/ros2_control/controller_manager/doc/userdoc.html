@@ -239,6 +239,10 @@ It is recommended to test the fallback strategy in simulation before deploying i
 <p>Read only: True</p>
 <p>Default:  true</p>
 </dd>
+<dt>handle_exceptions (bool)</dt><dd><p>If true, the controller manager will catch exceptions thrown during the different operations of controllers and hardware components. If false, exceptions will propagate up and will cause the controller manager to crash.</p>
+<p>Read only: True</p>
+<p>Default:  true</p>
+</dd>
 <dt>hardware_components_initial_state</dt><dd><p>Map of parameters for controlled lifecycle management of hardware components.
 The names of the components are defined as attribute of <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code>-tag in <code class="docutils literal notranslate"><span class="pre">robot_description</span></code>.
 Hardware components found in <code class="docutils literal notranslate"><span class="pre">robot_description</span></code>, but without explicit state definition will be immediately activated.
@@ -533,6 +537,7 @@ The full structure of the map is given in the following example:</p>
 <span class="w">              </span><span class="nt">error</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0</span>
 <span class="w">              </span><span class="nt">warn</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0</span>
 <span class="w">    </span><span class="nt">enforce_command_limits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">handle_exceptions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">hardware_components_initial_state</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">inactive</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{}&#39;</span>
 <span class="w">      </span><span class="nt">shutdown_on_initial_state_failure</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>

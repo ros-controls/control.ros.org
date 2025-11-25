@@ -60,6 +60,7 @@
 <li class="toctree-l2 current"><a class="reference internal" href="index.html#guidelines-and-best-practices">Guidelines and Best Practices</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Debugging the Controller Manager and Plugins</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#how-to">How-To</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#catching-exceptions">Catching Exceptions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#additional-notes">Additional notes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#references">References</a></li>
 </ul>
@@ -165,6 +166,22 @@ Ensure you start your debugger from a terminal where you have sourced your works
 <span class="p">)</span>
 
 <span class="n">ld</span><span class="o">.</span><span class="n">add_action</span><span class="p">(</span><span class="n">controller_manager</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="catching-exceptions">
+<h2>Catching Exceptions<a class="headerlink" href="#catching-exceptions" title="Link to this heading"></a></h2>
+<ul>
+<li><p>The controller manager by default catches most of the exceptions thrown by controllers and hardware components to avoid crashing the whole system. However, it does print the exception type and message to the console.
+This can make debugging difficult as the debugger might not catch the exception and also when the exception message is not clear enough to identify the root cause.
+This behaviour can be disabled by setting the parameter <code class="docutils literal notranslate"><span class="pre">handle_exceptions</span></code> to <code class="docutils literal notranslate"><span class="pre">false</span></code> in the controller manager node, this way the exceptions will propagate up to the controller manager and can be caught by the debugger (or) crash by printing the stacktrace during normal execution.</p>
+<p>Example controller manager config file:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">controller_manager</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">update_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">handle_exceptions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </pre></div>
 </div>
 </li>
