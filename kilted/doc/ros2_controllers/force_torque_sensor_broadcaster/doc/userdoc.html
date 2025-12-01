@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Force Torque Sensor Broadcaster &mdash; ROS2_Control: Kilted Nov 2025 documentation</title>
+  <title>Force Torque Sensor Broadcaster &mdash; ROS2_Control: Kilted Dec 2025 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
@@ -18,7 +18,7 @@
     <link rel="canonical" href="https://control.ros.org/rolling//kilted/doc/ros2_controllers/force_torque_sensor_broadcaster/doc/userdoc.html" />
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=e5327d8c"></script>
+      <script src="../../../../_static/documentation_options.js?v=5ba4a380"></script>
       <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -61,6 +61,12 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../../doc/controllers_index.html#broadcasters">Broadcasters</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Force Torque Sensor Broadcaster</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#wrench-transformer-node">Wrench Transformer Node</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wrench-transformer-parameters">Wrench Transformer Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#topics">Topics</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../imu_sensor_broadcaster/doc/userdoc.html">IMU Sensor Broadcaster</a></li>
@@ -227,6 +233,54 @@ An example definition is:</p>
 <span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">filters/IncrementFilterWrench</span>
 </pre></div>
 </div>
+</section>
+</section>
+<section id="wrench-transformer-node">
+<h1>Wrench Transformer Node<a class="headerlink" href="#wrench-transformer-node" title="Link to this heading"></a></h1>
+<p>The package provides a standalone ROS 2 node <code class="docutils literal notranslate"><span class="pre">wrench_transformer_node</span></code> that transforms wrench messages published by the <code class="docutils literal notranslate"><span class="pre">ForceTorqueSensorBroadcaster</span></code> controller to different target frames using TF2. This is useful when applications need force/torque data in coordinate frames other than the sensor frame.</p>
+<p>The node subscribes to wrench messages from the broadcaster (either raw or filtered) and publishes transformed versions to separate topics for each target frame.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>The wrench transformer node can be launched as a standalone executable:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>force_torque_sensor_broadcaster<span class="w"> </span>wrench_transformer_node
+</pre></div>
+</div>
+</section>
+<section id="wrench-transformer-parameters">
+<h2>Wrench Transformer Parameters<a class="headerlink" href="#wrench-transformer-parameters" title="Link to this heading"></a></h2>
+<p>The wrench transformer uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters. The parameter <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/master/force_torque_sensor_broadcaster/src/wrench_transformer_parameters.yaml">definition file for the wrench transformer</a> contains descriptions for all the parameters.</p>
+<p>Full list of parameters:</p>
+<dl>
+<dt>target_frames (string_array)</dt><dd><p>Array of target frame names to transform the input wrench to. For each frame, a separate output topic will be published.</p>
+<p>Default:  {}</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>parameter is not empty</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>tf_timeout (double)</dt><dd><p>Timeout in seconds for TF lookups when transforming wrenches between frames.</p>
+<p>Default:  0.1</p>
+</dd>
+</dl>
+</section>
+<section id="topics">
+<h2>Topics<a class="headerlink" href="#topics" title="Link to this heading"></a></h2>
+<p>The node subscribes to:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">~/wrench</span></code> (raw wrench messages). To subscribe to filtered wrench messages, use topic remapping: <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">run</span> <span class="pre">...</span> <span class="pre">--ros-args</span> <span class="pre">-r</span> <span class="pre">~/wrench:=&lt;namespace&gt;/wrench_filtered</span></code></p></li>
+</ul>
+<p>The node publishes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;namespace&gt;/&lt;target_frame&gt;/wrench</span></code> for each target frame specified in <code class="docutils literal notranslate"><span class="pre">target_frames</span></code></p>
+<ul>
+<li><p>If the node is in the root namespace (<code class="docutils literal notranslate"><span class="pre">/</span></code>), the namespace defaults to the node name (e.g., <code class="docutils literal notranslate"><span class="pre">/fts_wrench_transformer/&lt;target_frame&gt;/wrench</span></code>)</p></li>
+<li><p>If the input topic is remapped to a filtered topic (contains “filtered” in the name), the output topics automatically append <code class="docutils literal notranslate"><span class="pre">_filtered</span></code> suffix (e.g., <code class="docutils literal notranslate"><span class="pre">&lt;namespace&gt;/&lt;target_frame&gt;/wrench_filtered</span></code>)</p></li>
+<li><p>This allows users to distinguish between transformed raw wrench data and transformed filtered wrench data</p></li>
+</ul>
+</li>
+</ul>
 </section>
 </section>
 
