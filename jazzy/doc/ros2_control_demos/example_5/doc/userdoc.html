@@ -176,6 +176,11 @@ In starting terminal you will see a lot of output from the hardware implementati
 This is only of exemplary purposes and should be avoided as much as possible in a hardware interface implementation.</p>
 <p>If you can see two orange and one yellow rectangle in in <em>RViz</em> everything has started properly.
 Still, to be sure, let’s introspect the control system before moving <em>RRBot</em>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The launch file supports an optional <code class="docutils literal notranslate"><span class="pre">use_wrench_transformer</span></code> argument to enable the wrench transformer node.
+See step 7 for details on using the wrench transformer feature.</p>
+</div>
 </li>
 <li><p>Check if the hardware interface loaded properly, by opening another terminal and executing</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_interfaces
@@ -275,6 +280,48 @@ wrench:
 <p>Wrench data are also visualized in <em>RViz</em>:</p>
 <a class="reference internal image-reference" href="../../../../_images/rrbot_wrench.png"><img alt="Revolute-Revolute Manipulator Robot with wrench visualization" src="../../../../_images/rrbot_wrench.png" style="width: 400px;" /></a>
 </li>
+<li><p>Access transformed wrench data in different frames using the <em>Wrench Transformer Node</em> (optional):</p>
+<p>The launch file can optionally start a <code class="docutils literal notranslate"><span class="pre">wrench_transformer_node</span></code> that transforms wrench messages
+from the sensor frame (<code class="docutils literal notranslate"><span class="pre">tool_link</span></code>) to other target frames using TF2. This feature is disabled by default.</p>
+<p>To enable the wrench transformer, launch with the <code class="docutils literal notranslate"><span class="pre">use_wrench_transformer</span></code> argument:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_5<span class="w"> </span>rrbot_system_with_external_sensor.launch.py<span class="w"> </span>use_wrench_transformer:<span class="o">=</span><span class="nb">true</span>
+</pre></div>
+</div>
+<p>Once enabled, check available transformed wrench topics:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>wrench
+</pre></div>
+</div>
+<p>You should see topics like:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>/fts_wrench_transformer/base_link/wrench
+/fts_wrench_transformer/link1/wrench
+</pre></div>
+</div>
+<p>View transformed wrench data in the <code class="docutils literal notranslate"><span class="pre">base_link</span></code> frame:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/fts_wrench_transformer/base_link/wrench
+</pre></div>
+</div>
+<p>The transformed wrench messages will have the same structure as the original wrench, but with
+<code class="docutils literal notranslate"><span class="pre">frame_id</span></code> set to the target frame (e.g., <code class="docutils literal notranslate"><span class="pre">base_link</span></code>) and the force/torque values transformed
+to that coordinate frame.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>header:
+<span class="w">  </span>stamp:
+<span class="w">    </span>sec:<span class="w"> </span><span class="m">1676444704</span>
+<span class="w">    </span>nanosec:<span class="w"> </span><span class="m">332221422</span>
+<span class="w">  </span>frame_id:<span class="w"> </span>base_link
+wrench:
+<span class="w">  </span>force:
+<span class="w">    </span>x:<span class="w"> </span>&lt;transformed_value&gt;
+<span class="w">    </span>y:<span class="w"> </span>&lt;transformed_value&gt;
+<span class="w">    </span>z:<span class="w"> </span>&lt;transformed_value&gt;
+<span class="w">  </span>torque:
+<span class="w">    </span>x:<span class="w"> </span>&lt;transformed_value&gt;
+<span class="w">    </span>y:<span class="w"> </span>&lt;transformed_value&gt;
+<span class="w">    </span>z:<span class="w"> </span>&lt;transformed_value&gt;
+</pre></div>
+</div>
+<p>The wrench transformer configuration can be customized in the parameter file:
+<a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/jazzy/example_5/bringup/config/wrench_transformer_params.yaml">wrench_transformer_params.yaml</a></p>
+</li>
 </ol>
 </section>
 <section id="files-used-for-this-demos">
@@ -282,6 +329,7 @@ wrench:
 <ul class="simple">
 <li><p>Launch file: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/jazzy/example_5/bringup/launch/rrbot_system_with_external_sensor.launch.py">rrbot_system_with_external_sensor.launch.py</a></p></li>
 <li><p>Controllers yaml: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/jazzy/example_5/bringup/config/rrbot_with_external_sensor_controllers.yaml">rrbot_with_external_sensor_controllers.yaml</a></p></li>
+<li><p>Wrench transformer params: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/jazzy/example_5/bringup/config/wrench_transformer_params.yaml">wrench_transformer_params.yaml</a></p></li>
 <li><p>URDF: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/blob/jazzy/example_5/description/urdf/rrbot_system_with_external_sensor.urdf.xacro">rrbot_with_external_sensor_controllers.urdf.xacro</a></p>
 <ul>
 <li><p>Description: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/jazzy/ros2_control_demo_description/rrbot/urdf/rrbot_description.urdf.xacro">rrbot_description.urdf.xacro</a></p></li>
