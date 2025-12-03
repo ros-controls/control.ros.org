@@ -112,39 +112,38 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">// ROS</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#include &lt;hardware_interface/system_interface.hpp&gt;</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &lt;hardware_interface/types/hardware_component_interface_params.hpp&gt;</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &lt;rclcpp/subscription.hpp&gt;</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &lt;pal_statistics_msgs/msg/statistics_names.hpp&gt;</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &lt;pal_statistics_msgs/msg/statistics_values.hpp&gt;</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword">namespace </span>cm_topic_hardware_component</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>{</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">using </span>CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="foldopen" id="foldopen00035" data-start="{" data-end="};">
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classcm__topic__hardware__component_1_1CMTopicSystem.html">   35</a></span><span class="keyword">class </span><a class="code hl_class" href="classcm__topic__hardware__component_1_1CMTopicSystem.html">CMTopicSystem</a> : <span class="keyword">public</span> <a class="code hl_class" href="classhardware__interface_1_1SystemInterface.html">hardware_interface::SystemInterface</a></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>{</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  CallbackReturn on_init(<span class="keyword">const</span> hardware_interface::HardwareComponentInterfaceParams&amp; params) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  hardware_interface::return_type <a class="code hl_function" href="classcm__topic__hardware__component_1_1CMTopicSystem.html#a1e221c941637a35cafbae7c5671c234e">read</a>(<span class="keyword">const</span> rclcpp::Time&amp; time, <span class="keyword">const</span> rclcpp::Duration&amp; period) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  hardware_interface::return_type <a class="code hl_function" href="classcm__topic__hardware__component_1_1CMTopicSystem.html#a9a07f6559c9a175ab07881dc59c560d7">write</a>(<span class="keyword">const</span> rclcpp::Time&amp; <span class="comment">/*time*/</span>, <span class="keyword">const</span> rclcpp::Duration&amp; <span class="comment">/*period*/</span>) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  rclcpp::Subscription&lt;pal_statistics_msgs::msg::StatisticsNames&gt;::SharedPtr pal_names_subscriber_;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  rclcpp::Subscription&lt;pal_statistics_msgs::msg::StatisticsValues&gt;::SharedPtr pal_values_subscriber_;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  pal_statistics_msgs::msg::StatisticsValues latest_pal_values_;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  std::unordered_map&lt;uint32_t, std::vector&lt;std::string&gt;&gt; pal_statistics_names_per_topic_;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>};</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#include &quot;hardware_interface/system_interface.hpp&quot;</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &quot;hardware_interface/types/hardware_component_interface_params.hpp&quot;</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;pal_statistics_msgs/msg/statistics_names.hpp&quot;</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &quot;pal_statistics_msgs/msg/statistics_values.hpp&quot;</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &quot;rclcpp/subscription.hpp&quot;</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keyword">namespace </span>cm_topic_hardware_component</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>{</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">using </span>CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="foldopen" id="foldopen00034" data-start="{" data-end="};">
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classcm__topic__hardware__component_1_1CMTopicSystem.html">   34</a></span><span class="keyword">class </span><a class="code hl_class" href="classcm__topic__hardware__component_1_1CMTopicSystem.html">CMTopicSystem</a> : <span class="keyword">public</span> <a class="code hl_class" href="classhardware__interface_1_1SystemInterface.html">hardware_interface::SystemInterface</a></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>{</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  CallbackReturn on_init(<span class="keyword">const</span> hardware_interface::HardwareComponentInterfaceParams&amp; params) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  hardware_interface::return_type <a class="code hl_function" href="classcm__topic__hardware__component_1_1CMTopicSystem.html#a1e221c941637a35cafbae7c5671c234e">read</a>(<span class="keyword">const</span> rclcpp::Time&amp; time, <span class="keyword">const</span> rclcpp::Duration&amp; period) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  hardware_interface::return_type <a class="code hl_function" href="classcm__topic__hardware__component_1_1CMTopicSystem.html#a9a07f6559c9a175ab07881dc59c560d7">write</a>(<span class="keyword">const</span> rclcpp::Time&amp; <span class="comment">/*time*/</span>, <span class="keyword">const</span> rclcpp::Duration&amp; <span class="comment">/*period*/</span>) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  rclcpp::Subscription&lt;pal_statistics_msgs::msg::StatisticsNames&gt;::SharedPtr pal_names_subscriber_;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  rclcpp::Subscription&lt;pal_statistics_msgs::msg::StatisticsValues&gt;::SharedPtr pal_values_subscriber_;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  pal_statistics_msgs::msg::StatisticsValues latest_pal_values_;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  std::unordered_map&lt;uint32_t, std::vector&lt;std::string&gt;&gt; pal_statistics_names_per_topic_;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>};</div>
 </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>}  <span class="comment">// namespace cm_topic_hardware_component</span></div>
-<div class="ttc" id="aclasscm__topic__hardware__component_1_1CMTopicSystem_html"><div class="ttname"><a href="classcm__topic__hardware__component_1_1CMTopicSystem.html">cm_topic_hardware_component::CMTopicSystem</a></div><div class="ttdef"><b>Definition</b> cm_topic_hardware_component.hpp:36</div></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>}  <span class="comment">// namespace cm_topic_hardware_component</span></div>
+<div class="ttc" id="aclasscm__topic__hardware__component_1_1CMTopicSystem_html"><div class="ttname"><a href="classcm__topic__hardware__component_1_1CMTopicSystem.html">cm_topic_hardware_component::CMTopicSystem</a></div><div class="ttdef"><b>Definition</b> cm_topic_hardware_component.hpp:35</div></div>
 <div class="ttc" id="aclasscm__topic__hardware__component_1_1CMTopicSystem_html_a1e221c941637a35cafbae7c5671c234e"><div class="ttname"><a href="classcm__topic__hardware__component_1_1CMTopicSystem.html#a1e221c941637a35cafbae7c5671c234e">cm_topic_hardware_component::CMTopicSystem::read</a></div><div class="ttdeci">hardware_interface::return_type read(const rclcpp::Time &amp;time, const rclcpp::Duration &amp;period) override</div><div class="ttdoc">Read the current state values from the actuator.</div><div class="ttdef"><b>Definition</b> cm_topic_hardware_component.cpp:44</div></div>
-<div class="ttc" id="aclasscm__topic__hardware__component_1_1CMTopicSystem_html_a9a07f6559c9a175ab07881dc59c560d7"><div class="ttname"><a href="classcm__topic__hardware__component_1_1CMTopicSystem.html#a9a07f6559c9a175ab07881dc59c560d7">cm_topic_hardware_component::CMTopicSystem::write</a></div><div class="ttdeci">hardware_interface::return_type write(const rclcpp::Time &amp;, const rclcpp::Duration &amp;) override</div><div class="ttdoc">Write the current command values to the actuator.</div><div class="ttdef"><b>Definition</b> cm_topic_hardware_component.cpp:79</div></div>
+<div class="ttc" id="aclasscm__topic__hardware__component_1_1CMTopicSystem_html_a9a07f6559c9a175ab07881dc59c560d7"><div class="ttname"><a href="classcm__topic__hardware__component_1_1CMTopicSystem.html#a9a07f6559c9a175ab07881dc59c560d7">cm_topic_hardware_component::CMTopicSystem::write</a></div><div class="ttdeci">hardware_interface::return_type write(const rclcpp::Time &amp;, const rclcpp::Duration &amp;) override</div><div class="ttdoc">Write the current command values to the actuator.</div><div class="ttdef"><b>Definition</b> cm_topic_hardware_component.cpp:94</div></div>
 <div class="ttc" id="aclasshardware__interface_1_1SystemInterface_html"><div class="ttname"><a href="classhardware__interface_1_1SystemInterface.html">hardware_interface::SystemInterface</a></div><div class="ttdoc">Virtual Class to implement when integrating a complex system into ros2_control.</div><div class="ttdef"><b>Definition</b> system_interface.hpp:85</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
