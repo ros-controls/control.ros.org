@@ -132,6 +132,48 @@
 </section>
 <section id="hardware-interface">
 <h2>hardware_interface<a class="headerlink" href="#hardware-interface" title="Link to this heading"></a></h2>
+<ul>
+<li><p>The signature for the <code class="docutils literal notranslate"><span class="pre">on_init</span></code> method in all
+<code class="docutils literal notranslate"><span class="pre">hardware_interface::*Interface</span></code> classes has changed (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2323">#2323</a>,
+<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2589">#2589</a>) from</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">CallbackReturn</span><span class="w"> </span><span class="n">on_init</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">HardwareInfo</span><span class="o">&amp;</span><span class="w"> </span><span class="n">info</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>to</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">CallbackReturn</span><span class="w"> </span><span class="n">on_init</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">HardwareComponentInterfaceParams</span><span class="o">&amp;</span><span class="w"> </span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">HardwareInfo</span></code> object can be accessed from the <code class="docutils literal notranslate"><span class="pre">HardwareComponentInterfaceParams</span></code> object using
+<code class="docutils literal notranslate"><span class="pre">params.hardware_info</span></code>. See <a class="reference internal" href="../hardware_interface/doc/writing_new_hardware_component.html#writing-new-hardware-component"><span class="std std-ref">Writing a Hardware Component</span></a> for advanced usage of the
+<code class="docutils literal notranslate"><span class="pre">HardwareComponentInterfaceParams</span></code> object.</p>
+</li>
+<li><p>The signature for the <code class="docutils literal notranslate"><span class="pre">init()</span></code> method in all
+<code class="docutils literal notranslate"><span class="pre">hardware_interface::*Interface</span></code> classes has changed (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2344">#2344</a>,
+<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2589">#2589</a>) from</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">CallbackReturn</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">HardwareInfo</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">hardware_info</span><span class="p">,</span><span class="w"> </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Logger</span><span class="w"> </span><span class="n">logger</span><span class="p">,</span><span class="w"> </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Clock</span><span class="o">::</span><span class="n">SharedPtr</span><span class="w"> </span><span class="n">clock</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>to</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">CallbackReturn</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">HardwareComponentParams</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">initialize</span></code> methods of all hardware components (such as <code class="docutils literal notranslate"><span class="pre">Actuator</span></code>, <code class="docutils literal notranslate"><span class="pre">Sensor</span></code>, etc.)
+have been changed from passing a <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">HardwareInfo</span> <span class="pre">&amp;</span></code> to passing a <code class="docutils literal notranslate"><span class="pre">const</span>
+<span class="pre">HardwareComponentParams</span> <span class="pre">&amp;</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2323">#2323</a>,
+<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2589">#2589</a>).</p></li>
+<li><dl class="simple">
+<dt>The <code class="docutils literal notranslate"><span class="pre">get_value</span></code> of LoanedStateInterface and LoanedCommandInterface is now accessed using <code class="docutils literal notranslate"><span class="pre">get_optional</span></code> method. The value will be returned as an <code class="docutils literal notranslate"><span class="pre">std::optional&lt;T&gt;</span></code>. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2061">#2061</a>).</dt><dd><p>This change was made to better handle cases where the interface value may not be accessible due to a concurrent access from other threads in the system.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>The <code class="docutils literal notranslate"><span class="pre">double</span> <span class="pre">get_value()</span></code> of standard StateInterface and CommandInterface is now accessed using  <code class="docutils literal notranslate"><span class="pre">get_optional</span></code> or <code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">get_value(T</span> <span class="pre">&amp;</span> <span class="pre">value,</span> <span class="pre">bool</span> <span class="pre">wait_for_lock)</span></code> method. The value will be returned as an <code class="docutils literal notranslate"><span class="pre">std::optional&lt;T&gt;</span></code> when using <code class="docutils literal notranslate"><span class="pre">get_optional</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2831">#2831</a>).</dt><dd><p>Likewise, the <code class="docutils literal notranslate"><span class="pre">set_value</span></code> method has been updated to <code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">set_value(const</span> <span class="pre">T</span> <span class="pre">&amp;</span> <span class="pre">value,</span> <span class="pre">bool</span> <span class="pre">wait_for_lock)</span></code> and return value is to indicate success or failure of the operation (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2831">#2831</a>).
+You can use the return values of these methods to handle cases where the interface value may not be accessible due to a concurrent access from other threads in the system. You can set the <code class="docutils literal notranslate"><span class="pre">wait_for_lock</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">true</span></code> to block until the lock is acquired, however, this is not real-time safe and should be used with caution in real-time contexts.</p>
+</dd>
+</dl>
+</li>
+</ul>
 </section>
 </section>
 
