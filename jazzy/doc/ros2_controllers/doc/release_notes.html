@@ -193,6 +193,9 @@ There are two special values for tolerances:
 <li><p>Feed-forward effort trajectories are supported now (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1200">#1200</a>).</p></li>
 <li><p>Parameter <code class="docutils literal notranslate"><span class="pre">open_loop_control</span></code> is replaced by <code class="docutils literal notranslate"><span class="pre">interpolate_from_desired_state</span></code> and setting the feedback gains to zero (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1525">#1525</a>).</p></li>
 <li><p>The controller now supports the new anti-windup strategy of the PID class, which allows for more flexible control of the anti-windup behavior. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1759">#1759</a>).</p></li>
+<li><p>Fill in 0 velocities and accelerations into point before trajectories if the state interfaces
+don’t contain velocity / acceleration information, but the trajectory does. This way, the segment
+up to the first waypoint will use the same interpolation as the rest of the trajectory. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2043">#2043</a>)</p></li>
 </ul>
 </section>
 <section id="mecanum-drive-controller">

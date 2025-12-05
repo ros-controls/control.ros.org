@@ -197,10 +197,16 @@ An example definition is:</p>
 <p>The node subscribes to wrench messages from the broadcaster (either raw or filtered) and publishes transformed versions to separate topics for each target frame.</p>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
-<p>The wrench transformer node can be launched as a standalone executable:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>force_torque_sensor_broadcaster<span class="w"> </span>wrench_transformer_node
+<p>The wrench transformer can be launched with target frames passed directly as positional arguments:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>force_torque_sensor_broadcaster<span class="w"> </span>wrench_transformer_node<span class="w"> </span>frame1<span class="w"> </span>frame2
 </pre></div>
 </div>
+<p>Target frames may also be set via the <code class="docutils literal notranslate"><span class="pre">target_frames</span></code> parameter:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>force_torque_sensor_broadcaster<span class="w"> </span>wrench_transformer_node<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--ros-args<span class="w"> </span>-p<span class="w"> </span>target_frames:<span class="o">=</span><span class="s2">&quot;[&#39;frame1&#39;,&#39;frame2&#39;]&quot;</span>
+</pre></div>
+</div>
+<p>Positional arguments override the parameter value when both are provided.</p>
 </section>
 <section id="wrench-transformer-parameters">
 <h2>Wrench Transformer Parameters<a class="headerlink" href="#wrench-transformer-parameters" title="Link to this heading"></a></h2>

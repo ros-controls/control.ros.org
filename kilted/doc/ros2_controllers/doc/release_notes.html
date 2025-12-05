@@ -142,6 +142,9 @@
 <li><p>Scaling support was added in <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1191">#1191</a>. With this the controller
 “stretches the time” with which it progresses in the trajectory. Scaling can either be set
 manually or it can be synchronized with the hardware. See <a class="reference internal" href="../joint_trajectory_controller/doc/speed_scaling.html#jtc-speed-scaling"><span class="std std-ref">Speed scaling</span></a> for details.</p></li>
+<li><p>Fill in 0 velocities and accelerations into point before trajectories if the state interfaces
+don’t contain velocity / acceleration information, but the trajectory does. This way, the segment
+up to the first waypoint will use the same interpolation as the rest of the trajectory. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2043">#2043</a>)</p></li>
 </ul>
 </section>
 <section id="omni-wheel-drive-controller">

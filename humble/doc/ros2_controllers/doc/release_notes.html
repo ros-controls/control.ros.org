@@ -163,6 +163,9 @@ There are two special values for tolerances:
 </div>
 </li>
 <li><p>Add the boolean parameter <code class="docutils literal notranslate"><span class="pre">set_last_command_interface_value_as_state_on_activation</span></code>. When set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, the last command interface value is used as both the current state and the last commanded state upon activation. When set to <code class="docutils literal notranslate"><span class="pre">false</span></code>, the current state is used for both (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1231">#1231</a>).</p></li>
+<li><p>Fill in 0 velocities and accelerations into point before trajectories if the state interfaces
+don’t contain velocity / acceleration information, but the trajectory does. This way, the segment
+up to the first waypoint will use the same interpolation as the rest of the trajectory. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2043">#2043</a>)</p></li>
 </ul>
 </section>
 <section id="mecanum-drive-controller">

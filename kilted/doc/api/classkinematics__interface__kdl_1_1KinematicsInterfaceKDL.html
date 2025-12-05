@@ -201,14 +201,15 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>calculate_frame_diffe
 <p>Calculates the difference between two Cartesian frames. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">x_a</td><td>first Cartesian frame (x, y, z, wx, wy, wz, ww) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">x_b</td><td>second Cartesian frame (x, y, z, wx, wy, wz, ww) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x_a</td><td>first Cartesian frame (x, y, z, qx, qy, qz, qw) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x_b</td><td>second Cartesian frame (x, y, z, qx, qy, qz, qw) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td>time interval over which the numerical differentiation takes place </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">delta_x</td><td>Cartesian deltas (x, y, z, wx, wy, wz) </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">delta_x</td><td>Cartesian deltas (vx, vy, vz, wx, wy, wz) </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true if successful </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if successful</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This method is independent of robot kinematics and the model loaded to the plugin </dd></dl>
 
 <p>Implements <a class="el" href="classkinematics__interface_1_1KinematicsInterface.html#a532bb7b9d1fe072770a0ff2b38cdcfb5">kinematics_interface::KinematicsInterface</a>.</p>
 
