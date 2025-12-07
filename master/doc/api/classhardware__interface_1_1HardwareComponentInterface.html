@@ -238,6 +238,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4eef45d2413041c535345c32703b59cc" id="r_a4eef45d2413041c535345c32703b59cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1HardwareComponentInterface.html#a4eef45d2413041c535345c32703b59cc">set_lifecycle_state</a> (const rclcpp_lifecycle::State &amp;new_state)</td></tr>
 <tr class="memdesc:a4eef45d2413041c535345c32703b59cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set life-cycle state of the hardware.  <br /></td></tr>
 <tr class="separator:a4eef45d2413041c535345c32703b59cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ef6a9d013882dfa2457ae1450fda530" id="r_a8ef6a9d013882dfa2457ae1450fda530"><td class="memItemLeft" align="right" valign="top"><a id="a8ef6a9d013882dfa2457ae1450fda530" name="a8ef6a9d013882dfa2457ae1450fda530"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>get_lifecycle_id</b> () const</td></tr>
+<tr class="separator:a8ef6a9d013882dfa2457ae1450fda530"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af161dd9e1d9517b49cbcd8cfded29b52" id="r_af161dd9e1d9517b49cbcd8cfded29b52"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1HardwareComponentInterface.html#af161dd9e1d9517b49cbcd8cfded29b52">has_state</a> (const std::string &amp;interface_name) const</td></tr>
 <tr class="memdesc:af161dd9e1d9517b49cbcd8cfded29b52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Does the state interface exist?  <br /></td></tr>
 <tr class="separator:af161dd9e1d9517b49cbcd8cfded29b52"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -331,6 +334,9 @@ std::unordered_map&lt; std::string, <a class="el" href="structhardware__interfac
 <tr class="memitem:afe161405d130d2f730e74eadc7c2af67" id="r_afe161405d130d2f730e74eadc7c2af67"><td class="memItemLeft" align="right" valign="top"><a id="afe161405d130d2f730e74eadc7c2af67" name="afe161405d130d2f730e74eadc7c2af67"></a>
 rclcpp_lifecycle::State&#160;</td><td class="memItemRight" valign="bottom"><b>lifecycle_state_</b></td></tr>
 <tr class="separator:afe161405d130d2f730e74eadc7c2af67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ce4041432ec8f17612b97670028239b" id="r_a5ce4041432ec8f17612b97670028239b"><td class="memItemLeft" align="right" valign="top"><a id="a5ce4041432ec8f17612b97670028239b" name="a5ce4041432ec8f17612b97670028239b"></a>
+std::atomic&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>lifecycle_id_cache_</b> = lifecycle_msgs::msg::State::PRIMARY_STATE_UNKNOWN</td></tr>
+<tr class="separator:a5ce4041432ec8f17612b97670028239b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a22cb458efdbba6cca23cfa3f3bfef7" id="r_a4a22cb458efdbba6cca23cfa3f3bfef7"><td class="memItemLeft" align="right" valign="top"><a id="a4a22cb458efdbba6cca23cfa3f3bfef7" name="a4a22cb458efdbba6cca23cfa3f3bfef7"></a>
 std::unique_ptr&lt; <a class="el" href="classrealtime__tools_1_1AsyncFunctionHandler.html">realtime_tools::AsyncFunctionHandler</a>&lt; return_type &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>async_handler_</b></td></tr>
 <tr class="separator:a4a22cb458efdbba6cca23cfa3f3bfef7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -821,6 +827,9 @@ template&lt;typename T  = double&gt; </div>
 </div><div class="memdoc">
 
 <p>Get life-cycle state of the hardware. </p>
+<dl class="section note"><dt>Note</dt><dd>Accessing members of the returned rclcpp_lifecycle::State is not real-time safe and should not be called in the control loop. </dd>
+<dd>
+This method is thread safe. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>state. </dd></dl>
 
 </div>
@@ -1663,6 +1672,7 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 
 <p>Set life-cycle state of the hardware. </p>
+<p>Get the lifecycle id of the hardware component interface that is cached internally to avoid calls to <a class="el" href="classhardware__interface_1_1HardwareComponentInterface.html#a23be4bc12cdbcdaa493e9efa7146c7fd" title="Get life-cycle state of the hardware.">get_lifecycle_state()</a> in the real-time control loop. </p><dl class="section note"><dt>Note</dt><dd>This method is real-time safe and thread safe and can be called in the control loop. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>state. </dd></dl>
 
 </div>

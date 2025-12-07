@@ -209,9 +209,10 @@ std::shared_ptr&lt; rclcpp_lifecycle::LifecycleNode &gt;&#160;</td><td class="me
 <tr class="memitem:a8d6b91b295317e81d1ae12b68cc9cf71" id="r_a8d6b91b295317e81d1ae12b68cc9cf71"><td class="memItemLeft" align="right" valign="top"><a id="a8d6b91b295317e81d1ae12b68cc9cf71" name="a8d6b91b295317e81d1ae12b68cc9cf71"></a>
 std::shared_ptr&lt; const rclcpp_lifecycle::LifecycleNode &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>get_node</b> () const</td></tr>
 <tr class="separator:a8d6b91b295317e81d1ae12b68cc9cf71"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77ddb578597111c2d28e9351063c1c22" id="r_a77ddb578597111c2d28e9351063c1c22"><td class="memItemLeft" align="right" valign="top"><a id="a77ddb578597111c2d28e9351063c1c22" name="a77ddb578597111c2d28e9351063c1c22"></a>
-const rclcpp_lifecycle::State &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_lifecycle_state</b> () const</td></tr>
+<tr class="memitem:a77ddb578597111c2d28e9351063c1c22" id="r_a77ddb578597111c2d28e9351063c1c22"><td class="memItemLeft" align="right" valign="top">const rclcpp_lifecycle::State &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a77ddb578597111c2d28e9351063c1c22">get_lifecycle_state</a> () const</td></tr>
 <tr class="separator:a77ddb578597111c2d28e9351063c1c22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67b21b29b0678f3cbec32cb563d67099" id="r_a67b21b29b0678f3cbec32cb563d67099"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a67b21b29b0678f3cbec32cb563d67099">get_lifecycle_id</a> () const</td></tr>
+<tr class="separator:a67b21b29b0678f3cbec32cb563d67099"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a312f99066d6c15f47b195cda4624ba78" id="r_a312f99066d6c15f47b195cda4624ba78"><td class="memItemLeft" align="right" valign="top"><a id="a312f99066d6c15f47b195cda4624ba78" name="a312f99066d6c15f47b195cda4624ba78"></a>
 unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>get_update_rate</b> () const</td></tr>
 <tr class="separator:a312f99066d6c15f47b195cda4624ba78"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -512,6 +513,46 @@ template&lt;typename ParameterT &gt; </div>
       </table>
 </div><div class="memdoc">
 <p>Get the unordered map of joint limits that are defined in the robot description. </p>
+
+</div>
+</div>
+<a id="a67b21b29b0678f3cbec32cb563d67099" name="a67b21b29b0678f3cbec32cb563d67099"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67b21b29b0678f3cbec32cb563d67099">&#9670;&#160;</a></span>get_lifecycle_id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t controller_interface::ControllerInterfaceBase::get_lifecycle_id </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get the lifecycle id of the controller node that is cached internally to avoid calls to <a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a77ddb578597111c2d28e9351063c1c22">get_lifecycle_state()</a> in the real-time control loop. </p><dl class="section note"><dt>Note</dt><dd>This method is real-time safe and thread safe and can be called in the control loop. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>lifecycle id of the controller node. </dd></dl>
+
+</div>
+</div>
+<a id="a77ddb578597111c2d28e9351063c1c22" name="a77ddb578597111c2d28e9351063c1c22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77ddb578597111c2d28e9351063c1c22">&#9670;&#160;</a></span>get_lifecycle_state()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const rclcpp_lifecycle::State &amp; controller_interface::ControllerInterfaceBase::get_lifecycle_state </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get the current lifecycle state of the controller node. </p><dl class="section note"><dt>Note</dt><dd>Accessing members of the returned rclcpp_lifecycle::State is not real-time safe and should not be called in the control loop. </dd>
+<dd>
+This method is thread safe. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>lifecycle state of the controller node. </dd></dl>
 
 </div>
 </div>
