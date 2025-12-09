@@ -67,6 +67,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#effort-controllers">effort_controllers</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#position-controllers">position_controllers</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#velocity-controllers">velocity_controllers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diff-drive-controller">diff_drive_controller</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../control_toolbox/doc/migration.html">control_toolbox</a></li>
@@ -140,6 +141,13 @@
 <h2>velocity_controllers<a class="headerlink" href="#velocity-controllers" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">velocity_controllers/JointGroupVelocityController</span></code> is deprecated. Use <a class="reference internal" href="../forward_command_controller/doc/userdoc.html#forward-command-controller-userdoc"><span class="std std-ref">forward_command_controller</span></a> instead by adding the <code class="docutils literal notranslate"><span class="pre">interface_name</span></code> parameter and set it to <code class="docutils literal notranslate"><span class="pre">velocity</span></code>. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1913">#1913</a>).</p></li>
+</ul>
+</section>
+<section id="diff-drive-controller">
+<h2>diff_drive_controller<a class="headerlink" href="#diff-drive-controller" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Instead of using <code class="docutils literal notranslate"><span class="pre">tf_frame_prefix_enable:=false</span></code>, set an empty <code class="docutils literal notranslate"><span class="pre">tf_frame_prefix:=&quot;&quot;</span></code> parameter instead. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1997">#1997</a>).</p></li>
+<li><p>For using node namespace as tf prefix: Set <code class="docutils literal notranslate"><span class="pre">tf_frame_prefix:=&quot;~&quot;</span></code>, where the (“~”) character is substituted with node namespace. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1997">#1997</a>).</p></li>
 </ul>
 </section>
 </section>
