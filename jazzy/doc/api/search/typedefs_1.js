@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['handle_5fdatatype_0',['HANDLE_DATATYPE',['../namespacehardware__interface.html#a68eee11e53e32c6e2fd51547de19900e',1,'hardware_interface']]]
+  ['handle_5fdatatype_0',['HANDLE_DATATYPE',['../namespacehardware__interface.html#a8f2f071f9b74d473fd6adb2126cb56f0',1,'hardware_interface']]]
 ];

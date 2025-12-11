@@ -175,8 +175,8 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>Actuator</b> = <a cl
 <tr class="memitem:af127ad1f7288042a450a4e783e44cf5c" id="r_af127ad1f7288042a450a4e783e44cf5c"><td class="memItemLeft" align="right" valign="top"><a id="af127ad1f7288042a450a4e783e44cf5c" name="af127ad1f7288042a450a4e783e44cf5c"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>CallbackReturn</b> = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn</td></tr>
 <tr class="separator:af127ad1f7288042a450a4e783e44cf5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a68eee11e53e32c6e2fd51547de19900e" id="r_a68eee11e53e32c6e2fd51547de19900e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehardware__interface.html#a68eee11e53e32c6e2fd51547de19900e">HANDLE_DATATYPE</a> = std::variant&lt; std::monostate, double, bool &gt;</td></tr>
-<tr class="separator:a68eee11e53e32c6e2fd51547de19900e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f2f071f9b74d473fd6adb2126cb56f0" id="r_a8f2f071f9b74d473fd6adb2126cb56f0"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehardware__interface.html#a8f2f071f9b74d473fd6adb2126cb56f0">HANDLE_DATATYPE</a> = std::variant&lt; std::monostate, double, float, bool, uint8_t, int8_t, uint16_t, int16_t, uint32_t, int32_t &gt;</td></tr>
+<tr class="separator:a8f2f071f9b74d473fd6adb2126cb56f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ae0934d485279419a2a494bcdb552de" id="r_a3ae0934d485279419a2a494bcdb552de"><td class="memItemLeft" align="right" valign="top"><a id="a3ae0934d485279419a2a494bcdb552de" name="a3ae0934d485279419a2a494bcdb552de"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>Sensor</b> = <a class="el" href="classhardware__interface_1_1HardwareComponent.html">HardwareComponent</a></td></tr>
 <tr class="separator:a3ae0934d485279419a2a494bcdb552de"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -218,6 +218,35 @@ Functions</h2></td></tr>
 <tr class="memitem:aa671d478597d51c09ea3a5ebad3da68c" id="r_aa671d478597d51c09ea3a5ebad3da68c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehardware__interface.html#aa671d478597d51c09ea3a5ebad3da68c">stod</a> (const std::string &amp;s)</td></tr>
 <tr class="memdesc:aa671d478597d51c09ea3a5ebad3da68c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to convert a std::string to double in a locale-independent way.  <br /></td></tr>
 <tr class="separator:aa671d478597d51c09ea3a5ebad3da68c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97e7712e52272c52ef38c4057cee4b7b" id="r_a97e7712e52272c52ef38c4057cee4b7b"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehardware__interface.html#a97e7712e52272c52ef38c4057cee4b7b">stof</a> (const std::string &amp;s)</td></tr>
+<tr class="memdesc:a97e7712e52272c52ef38c4057cee4b7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to convert a std::string to float in a locale-independent way.  <br /></td></tr>
+<tr class="separator:a97e7712e52272c52ef38c4057cee4b7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9382af667b2370e0755d8ef724a0ff20" id="r_a9382af667b2370e0755d8ef724a0ff20"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a9382af667b2370e0755d8ef724a0ff20"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehardware__interface.html#a9382af667b2370e0755d8ef724a0ff20">stoi_generic</a> (const std::string &amp;s)</td></tr>
+<tr class="memdesc:a9382af667b2370e0755d8ef724a0ff20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overflow-safe conversion from string to int32_t.  <br /></td></tr>
+<tr class="separator:a9382af667b2370e0755d8ef724a0ff20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9927f783f2d97103f0ebe08a25e961d" id="r_ab9927f783f2d97103f0ebe08a25e961d"><td class="memItemLeft" align="right" valign="top"><a id="ab9927f783f2d97103f0ebe08a25e961d" name="ab9927f783f2d97103f0ebe08a25e961d"></a>
+int8_t&#160;</td><td class="memItemRight" valign="bottom"><b>stoi8</b> (const std::string &amp;s)</td></tr>
+<tr class="separator:ab9927f783f2d97103f0ebe08a25e961d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a931e955a753ba9cae18db5a8122a17ab" id="r_a931e955a753ba9cae18db5a8122a17ab"><td class="memItemLeft" align="right" valign="top"><a id="a931e955a753ba9cae18db5a8122a17ab" name="a931e955a753ba9cae18db5a8122a17ab"></a>
+int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>stoi16</b> (const std::string &amp;s)</td></tr>
+<tr class="separator:a931e955a753ba9cae18db5a8122a17ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88f5cf71c926339365a4c75cd2e25ac3" id="r_a88f5cf71c926339365a4c75cd2e25ac3"><td class="memItemLeft" align="right" valign="top"><a id="a88f5cf71c926339365a4c75cd2e25ac3" name="a88f5cf71c926339365a4c75cd2e25ac3"></a>
+int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>stoi32</b> (const std::string &amp;s)</td></tr>
+<tr class="separator:a88f5cf71c926339365a4c75cd2e25ac3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1eb68224b89161018e15878694e7bac3" id="r_a1eb68224b89161018e15878694e7bac3"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a1eb68224b89161018e15878694e7bac3"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehardware__interface.html#a1eb68224b89161018e15878694e7bac3">stoui_generic</a> (const std::string &amp;s)</td></tr>
+<tr class="memdesc:a1eb68224b89161018e15878694e7bac3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overflow-safe conversion from string to uint32_t.  <br /></td></tr>
+<tr class="separator:a1eb68224b89161018e15878694e7bac3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93182c896ad3104d9dec6f0bce8d5c58" id="r_a93182c896ad3104d9dec6f0bce8d5c58"><td class="memItemLeft" align="right" valign="top"><a id="a93182c896ad3104d9dec6f0bce8d5c58" name="a93182c896ad3104d9dec6f0bce8d5c58"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>stoui8</b> (const std::string &amp;s)</td></tr>
+<tr class="separator:a93182c896ad3104d9dec6f0bce8d5c58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4137074d0bd8a4f4ba63f6bda49fa8e" id="r_ac4137074d0bd8a4f4ba63f6bda49fa8e"><td class="memItemLeft" align="right" valign="top"><a id="ac4137074d0bd8a4f4ba63f6bda49fa8e" name="ac4137074d0bd8a4f4ba63f6bda49fa8e"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>stoui16</b> (const std::string &amp;s)</td></tr>
+<tr class="separator:ac4137074d0bd8a4f4ba63f6bda49fa8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4ef4ac3fb0400e8423eae888776d063" id="r_ab4ef4ac3fb0400e8423eae888776d063"><td class="memItemLeft" align="right" valign="top"><a id="ab4ef4ac3fb0400e8423eae888776d063" name="ab4ef4ac3fb0400e8423eae888776d063"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>stoui32</b> (const std::string &amp;s)</td></tr>
+<tr class="separator:ab4ef4ac3fb0400e8423eae888776d063"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a839813a9880eae9dc3b3b64b9d1810ae" id="r_a839813a9880eae9dc3b3b64b9d1810ae"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehardware__interface.html#a839813a9880eae9dc3b3b64b9d1810ae">to_lower_case</a> (const std::string &amp;string)</td></tr>
 <tr class="memdesc:a839813a9880eae9dc3b3b64b9d1810ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a string to lower case.  <br /></td></tr>
 <tr class="separator:a839813a9880eae9dc3b3b64b9d1810ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -315,14 +344,14 @@ constexpr char&#160;</td><td class="memItemRight" valign="bottom"><b>HW_IF_FEEDF
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>: Denis Stogl </dd></dl>
 </div><h2 class="groupheader">Typedef Documentation</h2>
-<a id="a68eee11e53e32c6e2fd51547de19900e" name="a68eee11e53e32c6e2fd51547de19900e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a68eee11e53e32c6e2fd51547de19900e">&#9670;&#160;</a></span>HANDLE_DATATYPE</h2>
+<a id="a8f2f071f9b74d473fd6adb2126cb56f0" name="a8f2f071f9b74d473fd6adb2126cb56f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f2f071f9b74d473fd6adb2126cb56f0">&#9670;&#160;</a></span>HANDLE_DATATYPE</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="namespacehardware__interface.html#a68eee11e53e32c6e2fd51547de19900e">hardware_interface::HANDLE_DATATYPE</a> = typedef std::variant&lt;std::monostate, double, bool&gt;</td>
+          <td class="memname">using <a class="el" href="namespacehardware__interface.html#a8f2f071f9b74d473fd6adb2126cb56f0">hardware_interface::HANDLE_DATATYPE</a> = typedef std::variant&lt; std::monostate, double, float, bool, uint8_t, int8_t, uint16_t, int16_t, uint32_t, int32_t&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -536,7 +565,91 @@ constexpr char&#160;</td><td class="memItemRight" valign="bottom"><b>HW_IF_FEEDF
 <p>Helper function to convert a std::string to double in a locale-independent way. </p>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">std::invalid_argument</td><td>if not a valid number from <a href="https://github.com/ros-planning/srdfdom/blob/ad17b8d25812f752c397a6011cec64aeff090c46/src/model.cpp#L53">https://github.com/ros-planning/srdfdom/blob/ad17b8d25812f752c397a6011cec64aeff090c46/src/model.cpp#L53</a> </td></tr>
+    <tr><td class="paramname">std::invalid_argument</td><td>if not a valid number or exceeds limits from <a href="https://github.com/ros-planning/srdfdom/blob/ad17b8d25812f752c397a6011cec64aeff090c46/src/model.cpp#L53">https://github.com/ros-planning/srdfdom/blob/ad17b8d25812f752c397a6011cec64aeff090c46/src/model.cpp#L53</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a97e7712e52272c52ef38c4057cee4b7b" name="a97e7712e52272c52ef38c4057cee4b7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97e7712e52272c52ef38c4057cee4b7b">&#9670;&#160;</a></span>stof()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float hardware_interface::stof </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function to convert a std::string to float in a locale-independent way. </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::invalid_argument</td><td>if not a valid number or exceeds limits </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9382af667b2370e0755d8ef724a0ff20" name="a9382af667b2370e0755d8ef724a0ff20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9382af667b2370e0755d8ef724a0ff20">&#9670;&#160;</a></span>stoi_generic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">T hardware_interface::stoi_generic </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Overflow-safe conversion from string to int32_t. </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::out_of_range</td><td>if the converted value would fall out of the range of int32_t </td></tr>
+    <tr><td class="paramname">std::invalid_argument</td><td>if no conversion could be performed </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1eb68224b89161018e15878694e7bac3" name="a1eb68224b89161018e15878694e7bac3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1eb68224b89161018e15878694e7bac3">&#9670;&#160;</a></span>stoui_generic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">T hardware_interface::stoui_generic </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Overflow-safe conversion from string to uint32_t. </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::out_of_range</td><td>if the converted value would fall out of the range of int32_t </td></tr>
+    <tr><td class="paramname">std::invalid_argument</td><td>if no conversion could be performed </td></tr>
   </table>
   </dd>
 </dl>

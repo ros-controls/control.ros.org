@@ -189,15 +189,19 @@ they are published at the root (e.g., <code class="docutils literal notranslate"
 <h3>List of parameters<a class="headerlink" href="#list-of-parameters" title="Link to this heading"></a></h3>
 <dl>
 <dt>use_local_topics (bool)</dt><dd><p>Defining if <code class="docutils literal notranslate"><span class="pre">joint_states</span></code> and <code class="docutils literal notranslate"><span class="pre">dynamic_joint_states</span></code> messages should be published into local namespace, e.g., <code class="docutils literal notranslate"><span class="pre">/my_state_broadcaster/joint_states</span></code>.</p>
+<p>Read only: True</p>
 <p>Default:  false</p>
 </dd>
 <dt>joints (string_array)</dt><dd><p>Parameter to support broadcasting of only specific joints and interfaces. It has to be used in combination with the <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> parameter. If either <code class="docutils literal notranslate"><span class="pre">joints</span></code> or <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> is left empty, all available state interfaces will be published. Joint state broadcaster asks for access to all defined interfaces on all defined joints.</p>
+<p>Read only: True</p>
 <p>Default:  {}</p>
 </dd>
 <dt>extra_joints (string_array)</dt><dd><p>Names of extra joints to be added to <code class="docutils literal notranslate"><span class="pre">joint_states</span></code> and <code class="docutils literal notranslate"><span class="pre">dynamic_joint_states</span></code> with state set to 0.</p>
+<p>Read only: True</p>
 <p>Default:  {}</p>
 </dd>
 <dt>interfaces (string_array)</dt><dd><p>Parameter to support broadcasting of only specific joints and interfaces. It has to be used in combination with the <code class="docutils literal notranslate"><span class="pre">joints</span></code> parameter. If either <code class="docutils literal notranslate"><span class="pre">joints</span></code> or <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> is left empty, all available state interfaces will be published.</p>
+<p>Read only: True</p>
 <p>Default:  {}</p>
 </dd>
 <dt>map_interface_to_joint_state</dt><dd><p>Optional parameter (map) providing mapping between custom interface names to standard fields in <code class="docutils literal notranslate"><span class="pre">joint_states</span></code> message.
@@ -238,17 +242,26 @@ Using multiple joint_state_broadcaster instances we could publish and show both 
 </pre></div>
 </div>
 </dd>
-<dt>map_interface_to_joint_state.position (string)</dt><dd><p>Default:  “position”</p>
+<dt>map_interface_to_joint_state.position (string)</dt><dd><p>Read only: True</p>
+<p>Default:  “position”</p>
 </dd>
-<dt>map_interface_to_joint_state.velocity (string)</dt><dd><p>Default:  “velocity”</p>
+<dt>map_interface_to_joint_state.velocity (string)</dt><dd><p>Read only: True</p>
+<p>Default:  “velocity”</p>
 </dd>
-<dt>map_interface_to_joint_state.effort (string)</dt><dd><p>Default:  “effort”</p>
+<dt>map_interface_to_joint_state.effort (string)</dt><dd><p>Read only: True</p>
+<p>Default:  “effort”</p>
 </dd>
 <dt>use_urdf_to_filter (bool)</dt><dd><p>Uses the robot_description to filter the <code class="docutils literal notranslate"><span class="pre">joint_states</span></code> topic. If true, the broadcaster will publish the data of the joints present in the URDF alone. If false, the broadcaster will publish the data of any interface that has type <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code>, or <code class="docutils literal notranslate"><span class="pre">effort</span></code>.</p>
+<p>Read only: True</p>
 <p>Default:  true</p>
 </dd>
 <dt>frame_id (string)</dt><dd><p>The frame_id to be used in the published joint states. This parameter allows rviz2 to visualize the effort of the joints.</p>
+<p>Read only: True</p>
 <p>Default:  “base_link”</p>
+</dd>
+<dt>publish_dynamic_joint_states (bool)</dt><dd><p>Whether to publish dynamic joint states.</p>
+<p>Read only: True</p>
+<p>Default:  true</p>
 </dd>
 </dl>
 </section>
@@ -264,6 +277,7 @@ Using multiple joint_state_broadcaster instances we could publish and show both 
 <span class="w">      </span><span class="nt">effort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">effort</span>
 <span class="w">      </span><span class="nt">position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
 <span class="w">      </span><span class="nt">velocity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">velocity</span>
+<span class="w">    </span><span class="nt">publish_dynamic_joint_states</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">use_local_topics</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">    </span><span class="nt">use_urdf_to_filter</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </pre></div>
