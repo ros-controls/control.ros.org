@@ -82,6 +82,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classcontroller__interface_1_1ControllerInterfaceBase-members.html">List of all members</a>  </div>
@@ -175,6 +176,11 @@ Collaboration diagram for controller_interface::ControllerInterfaceBase:</div>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcontroller__interface_1_1ControllerInterfaceBase_1_1ControllerInterfaceBaseImpl.html">ControllerInterfaceBaseImpl</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a04d5266fe0945d54b5ee5fb360213830" id="r_a04d5266fe0945d54b5ee5fb360213830"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structcontroller__interface_1_1InterfaceConfiguration.html">InterfaceConfiguration</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a04d5266fe0945d54b5ee5fb360213830">command_interface_configuration</a> () const =0</td></tr>
@@ -947,7 +953,7 @@ This method is thread safe. </dd></dl>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Loaned command interfaces. </p><dl class="section note"><dt>Note</dt><dd>The order of these interfaces is determined by the return value of <a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a04d5266fe0945d54b5ee5fb360213830">command_interface_configuration()</a>: If interface_configuration_type::INDIVIDUAL is specified, the order matches that of the returned vector. If interface_configuration_type::ALL is specified, the order is determined by the internal memory of the resource_manager and may not be deterministic. To obtain a consistent order, use get_ordered_interfaces() from helpers.hpp. </dd></dl>
+<p>Loaned command interfaces. </p><dl class="section note"><dt>Note</dt><dd>The order of these interfaces is determined by the return value of <a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a04d5266fe0945d54b5ee5fb360213830">command_interface_configuration()</a>: If interface_configuration_type::INDIVIDUAL is specified, the order matches that of the returned vector. If interface_configuration_type::ALL is specified, the order is determined by the internal memory of the resource_manager and may not be deterministic. To obtain a consistent order, use get_ordered_interfaces() from helpers.hpp. If interface_configuration_type::INDIVIDUAL_BEST_EFFORT or REGEX is specified, the order might not matched the requested one, as it depends on the available interfaces in the resource manager. Use the get_ordered_interfaces() from helpers.hpp to obtain a consistent order. </dd></dl>
 
 </div>
 </div>
@@ -970,7 +976,7 @@ This method is thread safe. </dd></dl>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Loaned state interfaces. </p><dl class="section note"><dt>Note</dt><dd>The order of these interfaces is determined by the return value of <a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a94487d61a82341a21be4a6d9563fe668">state_interface_configuration()</a>: If interface_configuration_type::INDIVIDUAL is specified, the order matches that of the returned vector. If interface_configuration_type::ALL is specified, the order is determined by the internal memory of the resource_manager and may not be deterministic. To obtain a consistent order, use get_ordered_interfaces() from helpers.hpp. </dd></dl>
+<p>Loaned state interfaces. </p><dl class="section note"><dt>Note</dt><dd>The order of these interfaces is determined by the return value of <a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a94487d61a82341a21be4a6d9563fe668">state_interface_configuration()</a>: If interface_configuration_type::INDIVIDUAL is specified, the order matches that of the returned vector. If interface_configuration_type::ALL is specified, the order is determined by the internal memory of the resource_manager and may not be deterministic. To obtain a consistent order, use get_ordered_interfaces() from helpers.hpp. If interface_configuration_type::INDIVIDUAL_BEST_EFFORT or REGEX is specified, the order might not matched the requested one, as it depends on the available interfaces in the resource manager. Use the get_ordered_interfaces() from helpers.hpp to obtain a consistent order. </dd></dl>
 
 </div>
 </div>
