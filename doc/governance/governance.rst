@@ -70,6 +70,10 @@ The ros-controls committers (who are not also part of the ros-controls PMC) cons
      - `Honu Robotics <https://www.honurobotics.com/>`_
      - `ahcorde <https://github.com/ahcorde>`_
      - CET (UTC+1)/CEST (UTC+2)
+   * - Marq Rasmussen
+     - `Locus Robotics <https://locusrobotics.com/>`_
+     - `MarqRazz <https://github.com/MarqRazz>`_
+     - MST (UTC-7)/MDT (UTC-6)
 
 Past ros-controls PMC Constituents
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
