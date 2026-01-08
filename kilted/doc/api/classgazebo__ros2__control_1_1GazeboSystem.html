@@ -126,8 +126,8 @@ Collaboration diagram for gazebo_ros2_control::GazeboSystem:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a766072ed786f1323fdce73fdaba1b07e" id="r_a766072ed786f1323fdce73fdaba1b07e"><td class="memItemLeft" align="right" valign="top"><a id="a766072ed786f1323fdce73fdaba1b07e" name="a766072ed786f1323fdce73fdaba1b07e"></a>
-CallbackReturn&#160;</td><td class="memItemRight" valign="bottom"><b>on_init</b> (const <a class="el" href="structhardware__interface_1_1HardwareInfo.html">hardware_interface::HardwareInfo</a> &amp;system_info) override</td></tr>
+<tr class="memitem:a766072ed786f1323fdce73fdaba1b07e" id="r_a766072ed786f1323fdce73fdaba1b07e"><td class="memItemLeft" align="right" valign="top">CallbackReturn&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgazebo__ros2__control_1_1GazeboSystem.html#a766072ed786f1323fdce73fdaba1b07e">on_init</a> (const <a class="el" href="structhardware__interface_1_1HardwareInfo.html">hardware_interface::HardwareInfo</a> &amp;system_info) override</td></tr>
+<tr class="memdesc:a766072ed786f1323fdce73fdaba1b07e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialization of the hardware interface from data parsed from the robot's URDF.  <br /></td></tr>
 <tr class="separator:a766072ed786f1323fdce73fdaba1b07e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac99925403feb5c7dd5ae99b91297fdab" id="r_ac99925403feb5c7dd5ae99b91297fdab"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classhardware__interface_1_1StateInterface.html">hardware_interface::StateInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgazebo__ros2__control_1_1GazeboSystem.html#ac99925403feb5c7dd5ae99b91297fdab">export_state_interfaces</a> () override</td></tr>
 <tr class="memdesc:ac99925403feb5c7dd5ae99b91297fdab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exports all state interfaces for this hardware interface.  <br /></td></tr>
@@ -463,6 +463,45 @@ pal_statistics::RegistrationsRAII&#160;</td><td class="memItemRight" valign="bot
 <p>Initialize the system interface param[in] model_nh pointer to the ros2 node param[in] parent_model pointer to the model param[in] control_hardware vector filled with information about robot's control resources param[in] sdf pointer to the SDF. </p>
 
 <p>Implements <a class="el" href="classgazebo__ros2__control_1_1GazeboSystemInterface.html#a76f9fd8dae87a69f2bbb9dedf413fcf7">gazebo_ros2_control::GazeboSystemInterface</a>.</p>
+
+</div>
+</div>
+<a id="a766072ed786f1323fdce73fdaba1b07e" name="a766072ed786f1323fdce73fdaba1b07e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a766072ed786f1323fdce73fdaba1b07e">&#9670;&#160;</a></span>on_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CallbackReturn gazebo_ros2_control::GazeboSystem::on_init </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structhardware__interface_1_1HardwareInfo.html">hardware_interface::HardwareInfo</a> &amp;&#160;</td>
+          <td class="paramname"><em>hardware_info</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initialization of the hardware interface from data parsed from the robot's URDF. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">hardware_info</td><td>structure with data from URDF. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>CallbackReturn::SUCCESS if required data are provided and can be parsed. </dd>
+<dd>
+CallbackReturn::ERROR if any error happens or data are missing. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classhardware__interface_1_1HardwareComponentInterface.html#a499d58c02ee6704027ba9bfcf4c4cff2">hardware_interface::HardwareComponentInterface</a>.</p>
 
 </div>
 </div>
