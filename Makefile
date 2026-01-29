@@ -13,6 +13,7 @@ help:
 	@$(SPHINXBUILD) -M help $(SOURCEDIR) $(BUILDDIR) $(SPHINXOPTS) $(O)
 	@echo "  html-with-api"
 	@echo "  html-with-errors"
+	@echo "  html-verbose"
 	@echo "  html-all-subrepos"
 	@echo "  html-all-subrepos-with-errors"
 	@echo "  html-all-subrepos-with-api"
@@ -20,6 +21,10 @@ help:
 	@echo "  multiversion-with-api"
 	@echo "  multiversion-with-errors"
 	@echo "  linkcheck-all-subrepos-with-api"
+
+html-verbose: Makefile
+	@echo Single version without API, verbose output (for finding autosection label)
+	$(SPHINXBUILD) $(SPHINXOPTS) -vvv $(SOURCEDIR) $(BUILDDIR)/html
 
 html-with-errors: Makefile
 	@echo Single version without API, no checkout of sub_repos
