@@ -125,11 +125,11 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>resolve_tolerance_s
 <tr class="separator:af9b0e17f56618c8217dd190a7d2e5948"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af18ab090b979f84aaaceae0497b6fa6d" id="r_af18ab090b979f84aaaceae0497b6fa6d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__trajectory__controller.html#af18ab090b979f84aaaceae0497b6fa6d">wraparound_joint</a> (std::vector&lt; double &gt; &amp;current_position, const std::vector&lt; double &gt; next_position, const std::vector&lt; bool &gt; &amp;joints_angle_wraparound)</td></tr>
 <tr class="separator:af18ab090b979f84aaaceae0497b6fa6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ffeebd0ee81ea783246109dd440c7f4" id="r_a2ffeebd0ee81ea783246109dd440c7f4"><td class="memItemLeft" align="right" valign="top"><a id="a2ffeebd0ee81ea783246109dd440c7f4" name="a2ffeebd0ee81ea783246109dd440c7f4"></a>
-tl::expected&lt; void, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>command_interface_type_combinations</b> (rclcpp::Parameter const &amp;parameter)</td></tr>
+<tr class="memitem:a2ffeebd0ee81ea783246109dd440c7f4" id="r_a2ffeebd0ee81ea783246109dd440c7f4"><td class="memItemLeft" align="right" valign="top">tl::expected&lt; void, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__trajectory__controller.html#a2ffeebd0ee81ea783246109dd440c7f4">command_interface_type_combinations</a> (rclcpp::Parameter const &amp;parameter)</td></tr>
+<tr class="memdesc:a2ffeebd0ee81ea783246109dd440c7f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validate command interface type combinations for joint trajectory controller.  <br /></td></tr>
 <tr class="separator:a2ffeebd0ee81ea783246109dd440c7f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7100d1f2541cc803cad36fc77d31bfb0" id="r_a7100d1f2541cc803cad36fc77d31bfb0"><td class="memItemLeft" align="right" valign="top"><a id="a7100d1f2541cc803cad36fc77d31bfb0" name="a7100d1f2541cc803cad36fc77d31bfb0"></a>
-tl::expected&lt; void, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>state_interface_type_combinations</b> (rclcpp::Parameter const &amp;parameter)</td></tr>
+<tr class="memitem:a7100d1f2541cc803cad36fc77d31bfb0" id="r_a7100d1f2541cc803cad36fc77d31bfb0"><td class="memItemLeft" align="right" valign="top">tl::expected&lt; void, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__trajectory__controller.html#a7100d1f2541cc803cad36fc77d31bfb0">state_interface_type_combinations</a> (rclcpp::Parameter const &amp;parameter)</td></tr>
+<tr class="memdesc:a7100d1f2541cc803cad36fc77d31bfb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validate state interface type combinations for joint trajectory controller.  <br /></td></tr>
 <tr class="separator:a7100d1f2541cc803cad36fc77d31bfb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -190,6 +190,33 @@ tl::expected&lt; void, std::string &gt;&#160;</td><td class="memItemRight" valig
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if <code>state_error</code> fulfills <code>state_tolerance</code>. </dd></dl>
+
+</div>
+</div>
+<a id="a2ffeebd0ee81ea783246109dd440c7f4" name="a2ffeebd0ee81ea783246109dd440c7f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ffeebd0ee81ea783246109dd440c7f4">&#9670;&#160;</a></span>command_interface_type_combinations()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">tl::expected&lt; void, std::string &gt; joint_trajectory_controller::command_interface_type_combinations </td>
+          <td>(</td>
+          <td class="paramtype">rclcpp::Parameter const &amp;&#160;</td>
+          <td class="paramname"><em>parameter</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Validate command interface type combinations for joint trajectory controller. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">parameter</td><td>The rclcpp parameter containing the command interface types. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>tl::expected&lt;void, std::string&gt; An empty expected on success, or an error message on failure. </dd></dl>
 
 </div>
 </div>
@@ -328,6 +355,33 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>The map between <code>t1</code> indices (implicitly encoded in return vector indices) to <code>t2</code> indices. If <code>t1</code> is <code>"{C, B}"</code> and <code>t2</code> is <code>"{A, B, C, D}"</code>, the associated mapping vector is <code>"{2, 1}"</code>. return empty vector if <code>t1</code> is not a subset of <code>t2</code>. </dd></dl>
+
+</div>
+</div>
+<a id="a7100d1f2541cc803cad36fc77d31bfb0" name="a7100d1f2541cc803cad36fc77d31bfb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7100d1f2541cc803cad36fc77d31bfb0">&#9670;&#160;</a></span>state_interface_type_combinations()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">tl::expected&lt; void, std::string &gt; joint_trajectory_controller::state_interface_type_combinations </td>
+          <td>(</td>
+          <td class="paramtype">rclcpp::Parameter const &amp;&#160;</td>
+          <td class="paramname"><em>parameter</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Validate state interface type combinations for joint trajectory controller. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">parameter</td><td>The rclcpp parameter containing the state interface types. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>tl::expected&lt;void, std::string&gt; An empty expected on success, or an error message on failure. </dd></dl>
 
 </div>
 </div>
