@@ -4,7 +4,7 @@ var searchData=
   ['i_5fmax_1',['i_max',['../structcontrol__toolbox_1_1AntiWindupStrategy.html#aab613af75a5dc289401b54b5be624052',1,'control_toolbox::AntiWindupStrategy']]],
   ['i_5fmin_2',['i_min',['../structcontrol__toolbox_1_1AntiWindupStrategy.html#ad30be6ffc8a8365179eb82cf3d160a5a',1,'control_toolbox::AntiWindupStrategy']]],
   ['i_5fterm_5f_3',['i_term_',['../classcontrol__toolbox_1_1Pid.html#aed58f10eac176fe579cf3b56b26c2324',1,'control_toolbox::Pid']]],
-  ['imu_5fsensor_5fdata_5f_4',['imu_sensor_data_',['../classgazebo__ros2__control_1_1GazeboSystemPrivate.html#a5403b56bcab107df7384740779466c8b',1,'gazebo_ros2_control::GazeboSystemPrivate::imu_sensor_data_'],['../classImuData.html#aea5660e0ba8060bf1fc8e3ec8bb17084',1,'ImuData::imu_sensor_data_']]],
+  ['imu_5fsensor_5fdata_5f_4',['imu_sensor_data_',['../classgazebo__ros2__control_1_1GazeboSystemPrivate.html#a5403b56bcab107df7384740779466c8b',1,'gazebo_ros2_control::GazeboSystemPrivate']]],
   ['imus_5f_5',['imus_',['../classgz__ros2__control_1_1GazeboSimSystemPrivate.html#a0d8bc1a400ca3eae8bd33d0d40505a0d',1,'gz_ros2_control::GazeboSimSystemPrivate']]],
   ['initial_5fvalue_6',['initial_value',['../structhardware__interface_1_1InterfaceInfo.html#a1681ac364efe0a5961addbe90d10edfb',1,'hardware_interface::InterfaceInfo']]],
   ['interface_5finfo_7',['interface_info',['../structhardware__interface_1_1InterfaceDescription.html#a4e3c4a660b0cbdb3f93ab11f1b874f72',1,'hardware_interface::InterfaceDescription']]],

@@ -7,8 +7,9 @@ var searchData=
   ['parent_5fmodel_5f_4',['parent_model_',['../classgazebo__ros2__control_1_1GazeboSystemPrivate.html#a6da64dfce90eb93f65b0bd7dee50847e',1,'gazebo_ros2_control::GazeboSystemPrivate']]],
   ['plugin_5fname_5',['plugin_name',['../structhardware__interface_1_1HardwareComponentInfo.html#a7f260c2558f50bb6b5df5599694211f7',1,'hardware_interface::HardwareComponentInfo']]],
   ['pos_5fpid_6',['pos_pid',['../classgazebo__ros2__control_1_1GazeboSystemPrivate.html#a30685124565113e76420669068f1b9e1',1,'gazebo_ros2_control::GazeboSystemPrivate']]],
-  ['position_5fproportional_5fgain_5f_7',['position_proportional_gain_',['../classgz__ros2__control_1_1GazeboSimSystemPrivate.html#a07b9c97182b34d54049a2b71a2e88f35',1,'gz_ros2_control::GazeboSimSystemPrivate']]],
-  ['prefix_5fname_8',['prefix_name',['../structhardware__interface_1_1InterfaceDescription.html#ad24a1ab2af784ee08c3b0605f1f97bd3',1,'hardware_interface::InterfaceDescription']]],
-  ['prefix_5fname_5f_9',['prefix_name_',['../classhardware__interface_1_1Handle.html#aa8589ccbeafb5f553409dc7fa1ff6546',1,'hardware_interface::Handle']]],
-  ['print_5fwarnings_10',['print_warnings',['../structhardware__interface_1_1HardwareAsyncParams.html#a5a92fb0232f404383319f60a5ff1a1a0',1,'hardware_interface::HardwareAsyncParams']]]
+  ['position_7',['position',['../structjointData.html#a33799016221831ca551ed9b1861bcf4e',1,'jointData']]],
+  ['position_5fproportional_5fgain_5f_8',['position_proportional_gain_',['../classgz__ros2__control_1_1GazeboSimSystemPrivate.html#a07b9c97182b34d54049a2b71a2e88f35',1,'gz_ros2_control::GazeboSimSystemPrivate']]],
+  ['prefix_5fname_9',['prefix_name',['../structhardware__interface_1_1InterfaceDescription.html#ad24a1ab2af784ee08c3b0605f1f97bd3',1,'hardware_interface::InterfaceDescription']]],
+  ['prefix_5fname_5f_10',['prefix_name_',['../classhardware__interface_1_1Handle.html#aa8589ccbeafb5f553409dc7fa1ff6546',1,'hardware_interface::Handle']]],
+  ['print_5fwarnings_11',['print_warnings',['../structhardware__interface_1_1HardwareAsyncParams.html#a5a92fb0232f404383319f60a5ff1a1a0',1,'hardware_interface::HardwareAsyncParams']]]
 ];
