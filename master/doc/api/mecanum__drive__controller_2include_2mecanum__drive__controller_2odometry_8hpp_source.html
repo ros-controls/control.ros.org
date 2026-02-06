@@ -150,27 +150,29 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classmecanum__drive__controller_1_1Odometry.html#a7edcbc85fb63401a72964cf959fd768b">setWheelsParams</a>(</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keyword">const</span> <span class="keywordtype">double</span> sum_of_robot_center_projection_on_X_Y_axis, <span class="keyword">const</span> <span class="keywordtype">double</span> wheels_radius);</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  rclcpp::Time timestamp_;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  std::array&lt;double, PLANAR_POINT_DIM&gt; base_frame_offset_;</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  <span class="keywordtype">double</span> position_x_in_base_frame_;     <span class="comment">// [m]</span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  <span class="keywordtype">double</span> position_y_in_base_frame_;     <span class="comment">// [m]</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  <span class="keywordtype">double</span> orientation_z_in_base_frame_;  <span class="comment">// [rad]</span></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  <span class="keywordtype">double</span> velocity_in_base_frame_linear_x;   <span class="comment">// [m/s]</span></div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  <span class="keywordtype">double</span> velocity_in_base_frame_linear_y;   <span class="comment">// [m/s]</span></div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  <span class="keywordtype">double</span> velocity_in_base_frame_angular_z;  <span class="comment">// [rad/s]</span></div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  <span class="keywordtype">double</span> sum_of_robot_center_projection_on_X_Y_axis_;</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  <span class="keywordtype">double</span> wheels_radius_;  <span class="comment">// [m]</span></div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>};</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classmecanum__drive__controller_1_1Odometry.html#ac4f07be31f2d2c1a7c3c0ba9fbd2095d">setOdometry</a>(<span class="keywordtype">double</span> x, <span class="keywordtype">double</span> y, <span class="keywordtype">double</span> heading);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  rclcpp::Time timestamp_;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  std::array&lt;double, PLANAR_POINT_DIM&gt; base_frame_offset_;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  <span class="keywordtype">double</span> position_x_in_base_frame_;     <span class="comment">// [m]</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  <span class="keywordtype">double</span> position_y_in_base_frame_;     <span class="comment">// [m]</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  <span class="keywordtype">double</span> orientation_z_in_base_frame_;  <span class="comment">// [rad]</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  <span class="keywordtype">double</span> velocity_in_base_frame_linear_x;   <span class="comment">// [m/s]</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  <span class="keywordtype">double</span> velocity_in_base_frame_linear_y;   <span class="comment">// [m/s]</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  <span class="keywordtype">double</span> velocity_in_base_frame_angular_z;  <span class="comment">// [rad/s]</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  <span class="keywordtype">double</span> sum_of_robot_center_projection_on_X_Y_axis_;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  <span class="keywordtype">double</span> wheels_radius_;  <span class="comment">// [m]</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>};</div>
 </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>}  <span class="comment">// namespace mecanum_drive_controller</span></div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="preprocessor">#endif  </span><span class="comment">// MECANUM_DRIVE_CONTROLLER__ODOMETRY_HPP_ */</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>}  <span class="comment">// namespace mecanum_drive_controller</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="preprocessor">#endif  </span><span class="comment">// MECANUM_DRIVE_CONTROLLER__ODOMETRY_HPP_ */</span></div>
 <div class="ttc" id="aclassmecanum__drive__controller_1_1Odometry_html"><div class="ttname"><a href="classmecanum__drive__controller_1_1Odometry.html">mecanum_drive_controller::Odometry</a></div><div class="ttdoc">The Odometry class handles odometry readings (2D pose and velocity with related timestamp)</div><div class="ttdef"><b>Definition</b> odometry.hpp:30</div></div>
 <div class="ttc" id="aclassmecanum__drive__controller_1_1Odometry_html_a189fc517d731fd7c117a492832635838"><div class="ttname"><a href="classmecanum__drive__controller_1_1Odometry.html#a189fc517d731fd7c117a492832635838">mecanum_drive_controller::Odometry::IntegrationFunction</a></div><div class="ttdeci">std::function&lt; void(double, double, double)&gt; IntegrationFunction</div><div class="ttdoc">Integration function, used to integrate the odometry:</div><div class="ttdef"><b>Definition</b> odometry.hpp:33</div></div>
 <div class="ttc" id="aclassmecanum__drive__controller_1_1Odometry_html_a210839959e1f02c4973eb47bf17b7f29"><div class="ttname"><a href="classmecanum__drive__controller_1_1Odometry.html#a210839959e1f02c4973eb47bf17b7f29">mecanum_drive_controller::Odometry::getVx</a></div><div class="ttdeci">double getVx() const</div><div class="ttdef"><b>Definition</b> odometry.hpp:62</div></div>
@@ -182,6 +184,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassmecanum__drive__controller_1_1Odometry_html_aa10bb571e668d1fe549c42bb9bad1ea6"><div class="ttname"><a href="classmecanum__drive__controller_1_1Odometry.html#aa10bb571e668d1fe549c42bb9bad1ea6">mecanum_drive_controller::Odometry::getY</a></div><div class="ttdeci">double getY() const</div><div class="ttdef"><b>Definition</b> odometry.hpp:58</div></div>
 <div class="ttc" id="aclassmecanum__drive__controller_1_1Odometry_html_ab77b2d11a60fab578dc5cc9cc4363d1b"><div class="ttname"><a href="classmecanum__drive__controller_1_1Odometry.html#ab77b2d11a60fab578dc5cc9cc4363d1b">mecanum_drive_controller::Odometry::getVy</a></div><div class="ttdeci">double getVy() const</div><div class="ttdef"><b>Definition</b> odometry.hpp:64</div></div>
 <div class="ttc" id="aclassmecanum__drive__controller_1_1Odometry_html_ac03d5789e5a95d90b46d9c7f7258b953"><div class="ttname"><a href="classmecanum__drive__controller_1_1Odometry.html#ac03d5789e5a95d90b46d9c7f7258b953">mecanum_drive_controller::Odometry::getWz</a></div><div class="ttdeci">double getWz() const</div><div class="ttdef"><b>Definition</b> odometry.hpp:66</div></div>
+<div class="ttc" id="aclassmecanum__drive__controller_1_1Odometry_html_ac4f07be31f2d2c1a7c3c0ba9fbd2095d"><div class="ttname"><a href="classmecanum__drive__controller_1_1Odometry.html#ac4f07be31f2d2c1a7c3c0ba9fbd2095d">mecanum_drive_controller::Odometry::setOdometry</a></div><div class="ttdeci">void setOdometry(double x, double y, double heading)</div><div class="ttdoc">Sets the odometry to given 2D pose values.</div><div class="ttdef"><b>Definition</b> odometry.cpp:123</div></div>
 <div class="ttc" id="aclassmecanum__drive__controller_1_1Odometry_html_afabc243a8b1d205ca0b865cd873b7398"><div class="ttname"><a href="classmecanum__drive__controller_1_1Odometry.html#afabc243a8b1d205ca0b865cd873b7398">mecanum_drive_controller::Odometry::Odometry</a></div><div class="ttdeci">Odometry()</div><div class="ttdoc">Constructor Timestamp will get the current time value Value will be set to zero.</div><div class="ttdef"><b>Definition</b> odometry.cpp:22</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
