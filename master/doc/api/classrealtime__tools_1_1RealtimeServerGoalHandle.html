@@ -106,8 +106,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setCanceled</b> (Resu
 <tr class="memitem:ad793b0e47e41c4333d5b3394b2603d07" id="r_ad793b0e47e41c4333d5b3394b2603d07"><td class="memItemLeft" align="right" valign="top"><a id="ad793b0e47e41c4333d5b3394b2603d07" name="ad793b0e47e41c4333d5b3394b2603d07"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setSucceeded</b> (ResultSharedPtr result=nullptr)</td></tr>
 <tr class="separator:ad793b0e47e41c4333d5b3394b2603d07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1affbfbd2aa79fcba79b327ee5fd0738" id="r_a1affbfbd2aa79fcba79b327ee5fd0738"><td class="memItemLeft" align="right" valign="top"><a id="a1affbfbd2aa79fcba79b327ee5fd0738" name="a1affbfbd2aa79fcba79b327ee5fd0738"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setFeedback</b> (FeedbackSharedPtr feedback=nullptr)</td></tr>
+<tr class="memitem:a1affbfbd2aa79fcba79b327ee5fd0738" id="r_a1affbfbd2aa79fcba79b327ee5fd0738"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1RealtimeServerGoalHandle.html#a1affbfbd2aa79fcba79b327ee5fd0738">setFeedback</a> (FeedbackSharedPtr feedback=nullptr)</td></tr>
+<tr class="memdesc:a1affbfbd2aa79fcba79b327ee5fd0738"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set feedback to be published by runNonRealtime().  <br /></td></tr>
 <tr class="separator:a1affbfbd2aa79fcba79b327ee5fd0738"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18b9b9ba3942f1c7fae2b9bd9e65bdaa" id="r_a18b9b9ba3942f1c7fae2b9bd9e65bdaa"><td class="memItemLeft" align="right" valign="top"><a id="a18b9b9ba3942f1c7fae2b9bd9e65bdaa" name="a18b9b9ba3942f1c7fae2b9bd9e65bdaa"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>execute</b> ()</td></tr>
@@ -131,6 +131,44 @@ ResultSharedPtr&#160;</td><td class="memItemRight" valign="bottom"><b>preallocat
 FeedbackSharedPtr&#160;</td><td class="memItemRight" valign="bottom"><b>preallocated_feedback_</b></td></tr>
 <tr class="separator:a63ec5d2324f60cd80275a397b9053739"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a1affbfbd2aa79fcba79b327ee5fd0738" name="a1affbfbd2aa79fcba79b327ee5fd0738"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1affbfbd2aa79fcba79b327ee5fd0738">&#9670;&#160;</a></span>setFeedback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Action &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classrealtime__tools_1_1RealtimeServerGoalHandle.html">realtime_tools::RealtimeServerGoalHandle</a>&lt; Action &gt;::setFeedback </td>
+          <td>(</td>
+          <td class="paramtype">FeedbackSharedPtr&#160;</td>
+          <td class="paramname"><em>feedback</em> = <code>nullptr</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set feedback to be published by runNonRealtime(). </p>
+<p>This method is lock-free and safe to call from real-time context. The feedback pointer is atomically exchanged, and the non-RT thread will pick it up on the next runNonRealtime() call.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">feedback</td><td>Shared pointer to feedback message. The caller must ensure the feedback object remains valid until runNonRealtime() processes it. Using a preallocated feedback message is recommended. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>realtime_tools/realtime_tools/include/realtime_tools/<a class="el" href="realtime__server__goal__handle_8hpp_source.html">realtime_server_goal_handle.hpp</a></li>
 </ul>
