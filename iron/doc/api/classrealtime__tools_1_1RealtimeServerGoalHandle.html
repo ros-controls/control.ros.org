@@ -106,9 +106,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setCanceled</b> (Resu
 <tr class="memitem:ad793b0e47e41c4333d5b3394b2603d07" id="r_ad793b0e47e41c4333d5b3394b2603d07"><td class="memItemLeft" align="right" valign="top"><a id="ad793b0e47e41c4333d5b3394b2603d07" name="ad793b0e47e41c4333d5b3394b2603d07"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setSucceeded</b> (ResultSharedPtr result=nullptr)</td></tr>
 <tr class="separator:ad793b0e47e41c4333d5b3394b2603d07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1affbfbd2aa79fcba79b327ee5fd0738" id="r_a1affbfbd2aa79fcba79b327ee5fd0738"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1RealtimeServerGoalHandle.html#a1affbfbd2aa79fcba79b327ee5fd0738">setFeedback</a> (FeedbackSharedPtr feedback=nullptr)</td></tr>
-<tr class="memdesc:a1affbfbd2aa79fcba79b327ee5fd0738"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set feedback to be published by runNonRealtime().  <br /></td></tr>
-<tr class="separator:a1affbfbd2aa79fcba79b327ee5fd0738"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9460c03961f99de3ce26ca87b4e938a6" id="r_a9460c03961f99de3ce26ca87b4e938a6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1RealtimeServerGoalHandle.html#a9460c03961f99de3ce26ca87b4e938a6">setFeedback</a> (FeedbackSharedPtr feedback=nullptr)</td></tr>
+<tr class="memdesc:a9460c03961f99de3ce26ca87b4e938a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set feedback to be published by runNonRealtime().  <br /></td></tr>
+<tr class="separator:a9460c03961f99de3ce26ca87b4e938a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18b9b9ba3942f1c7fae2b9bd9e65bdaa" id="r_a18b9b9ba3942f1c7fae2b9bd9e65bdaa"><td class="memItemLeft" align="right" valign="top"><a id="a18b9b9ba3942f1c7fae2b9bd9e65bdaa" name="a18b9b9ba3942f1c7fae2b9bd9e65bdaa"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>execute</b> ()</td></tr>
 <tr class="separator:a18b9b9ba3942f1c7fae2b9bd9e65bdaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -132,8 +132,8 @@ FeedbackSharedPtr&#160;</td><td class="memItemRight" valign="bottom"><b>prealloc
 <tr class="separator:a63ec5d2324f60cd80275a397b9053739"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a1affbfbd2aa79fcba79b327ee5fd0738" name="a1affbfbd2aa79fcba79b327ee5fd0738"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1affbfbd2aa79fcba79b327ee5fd0738">&#9670;&#160;</a></span>setFeedback()</h2>
+<a id="a9460c03961f99de3ce26ca87b4e938a6" name="a9460c03961f99de3ce26ca87b4e938a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9460c03961f99de3ce26ca87b4e938a6">&#9670;&#160;</a></span>setFeedback()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -144,7 +144,7 @@ template&lt;class Action &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classrealtime__tools_1_1RealtimeServerGoalHandle.html">realtime_tools::RealtimeServerGoalHandle</a>&lt; Action &gt;::setFeedback </td>
+          <td class="memname">bool <a class="el" href="classrealtime__tools_1_1RealtimeServerGoalHandle.html">realtime_tools::RealtimeServerGoalHandle</a>&lt; Action &gt;::setFeedback </td>
           <td>(</td>
           <td class="paramtype">FeedbackSharedPtr&#160;</td>
           <td class="paramname"><em>feedback</em> = <code>nullptr</code></td><td>)</td>
@@ -159,13 +159,21 @@ template&lt;class Action &gt; </div>
 </div><div class="memdoc">
 
 <p>Set feedback to be published by runNonRealtime(). </p>
-<p>This method is lock-free and safe to call from real-time context. The feedback pointer is atomically exchanged, and the non-RT thread will pick it up on the next runNonRealtime() call.</p>
+<p>This method uses a non-blocking lock acquisition with try_to_lock() and is safe to call from real-time context without causing thread blocking or priority inversion. If the lock cannot be acquired (because runNonRealtime() is holding it), the update is silently skipped to avoid blocking the real-time thread.</p>
+<p>The feedback pointer is stored and the non-RT thread will publish it on the next runNonRealtime() call, provided the goal handle is in executing state.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">feedback</td><td>Shared pointer to feedback message. The caller must ensure the feedback object remains valid until runNonRealtime() processes it. Using a preallocated feedback message is recommended. </td></tr>
+    <tr><td class="paramname">feedback</td><td>Shared pointer to feedback message. Can be nullptr to clear pending feedback. If a valid pointer is provided, the caller must ensure the feedback object remains valid until runNonRealtime() processes it. Using a preallocated feedback message (stored in preallocated_feedback_) is recommended to avoid dynamic allocations in the real-time thread.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the lock was acquired and feedback was successfully set, false if the lock could not be acquired (feedback update was dropped).</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>If the mutex lock cannot be acquired, the feedback update is dropped without notification. This is intentional to preserve real-time guarantees. Check the return value if you need to know whether the update succeeded.</dd>
+<dd>
+Feedback is only published if the goal is currently executing. If feedback is set after the goal transitions out of executing state, it will be discarded.</dd></dl>
+<dl class="section see"><dt>See also</dt><dd>runNonRealtime() for the counterpart that publishes the feedback. </dd>
+<dd>
+preallocated_feedback_ for recommended pre-allocated feedback usage. </dd></dl>
 
 </div>
 </div>
