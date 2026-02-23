@@ -356,11 +356,12 @@ robot hardware interfaces between <em>ros2_control</em> and Gazebo.</p>
 </div></div>
 <section id="advanced-custom-gz-ros2-control-simulation-plugins">
 <h3>Advanced: custom gz_ros2_control Simulation Plugins<a class="headerlink" href="#advanced-custom-gz-ros2-control-simulation-plugins" title="Link to this heading"></a></h3>
-<p>The <em>gz_ros2_control</em> Gazebo plugin also provides a pluginlib-based interface to implement custom interfaces between Gazebo and <em>ros2_control</em> for simulating more complex mechanisms (nonlinear springs, linkages, etc).</p>
+<p>The <em>gz_ros2_control</em> Gazebo plugin also provides a pluginlib-based interface to implement custom interfaces between
+Gazebo and <em>ros2_control</em> for simulating more complex mechanisms (nonlinear springs, linkages, etc) or actuator dynamics.</p>
 <p>These plugins must inherit the <code class="docutils literal notranslate"><span class="pre">gz_ros2_control::GazeboSimSystemInterface</span></code>, which implements a simulated <em>ros2_control</em>
-<code class="docutils literal notranslate"><span class="pre">hardware_interface::SystemInterface</span></code>. SystemInterface provides API-level access to read and command joint properties.</p>
+<code class="docutils literal notranslate"><span class="pre">hardware_interface::SystemInterface</span></code>.</p>
 <p>The respective GazeboSimSystemInterface is specified in a URDF or SDF model and is loaded when the
-robot model is loaded. For example, the following XML will load a custom plugin:</p>
+robot model is loaded. For example, the following XML will load a custom plugin instead:</p>
 <div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-VVJERg==" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-2-VVJERg==" name="VVJERg==" role="tab" tabindex="0">URDF</button><button aria-controls="panel-2-U0RG" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-2-U0RG" name="U0RG" role="tab" tabindex="-1">SDF</button></div><div aria-labelledby="tab-2-VVJERg==" class="sphinx-tabs-panel group-tab" id="panel-2-VVJERg==" name="VVJERg==" role="tabpanel" tabindex="0"><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;GazeboSimSystem&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
 <span class="w">  </span><span class="nt">&lt;hardware&gt;</span>
@@ -387,6 +388,12 @@ robot model is loaded. For example, the following XML will load a custom plugin:
 </pre></div>
 </div>
 </div></div>
+<p>The <code class="docutils literal notranslate"><span class="pre">gz_ros2_control_demos/GazeboCustomSimSystem</span></code> demonstrates how to implement actuator dynamics for a joint with
+velocity command interface by using a configurable low pass filter. Run</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>gz_ros2_control_demos<span class="w"> </span>cart_example_velocity_custom_plugin.launch.py
+</pre></div>
+</div>
+<p>and compare it with the behavior of <code class="docutils literal notranslate"><span class="pre">cart_example_velocity.launch.py</span></code> using any plotting tool like plotjuggler.</p>
 </section>
 <section id="set-up-controllers">
 <h3>Set up controllers<a class="headerlink" href="#set-up-controllers" title="Link to this heading"></a></h3>

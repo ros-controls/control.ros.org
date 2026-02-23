@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['testfixture_0',['testfixture',['../classeffort__test_1_1TestFixture.html',1,'effort_test.TestFixture'],['../classft__sensor__test_1_1TestFixture.html',1,'ft_sensor_test.TestFixture'],['../classposition__test_1_1TestFixture.html',1,'position_test.TestFixture'],['../classvelocity__test_1_1TestFixture.html',1,'velocity_test.TestFixture']]],
+  ['testfixture_0',['testfixture',['../classeffort__test_1_1TestFixture.html',1,'effort_test.TestFixture'],['../classft__sensor__test_1_1TestFixture.html',1,'ft_sensor_test.TestFixture'],['../classposition__test_1_1TestFixture.html',1,'position_test.TestFixture'],['../classvelocity__custom__plugin__test_1_1TestFixture.html',1,'velocity_custom_plugin_test.TestFixture'],['../classvelocity__test_1_1TestFixture.html',1,'velocity_test.TestFixture']]],
   ['tractionhandle_1',['TractionHandle',['../structtricycle__controller_1_1TricycleController_1_1TractionHandle.html',1,'tricycle_controller::TricycleController']]],
   ['tractionlimiter_2',['TractionLimiter',['../classtricycle__controller_1_1TractionLimiter.html',1,'tricycle_controller']]],
   ['trajectory_3',['Trajectory',['../classjoint__trajectory__controller_1_1Trajectory.html',1,'joint_trajectory_controller']]],
