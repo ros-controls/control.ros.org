@@ -126,6 +126,8 @@ The following repositories are managed by the ros-controls PMC:
      - Marq Rasmussen
    * - https://github.com/ros-controls/.github
      - Not Yet Available
+   * - https://github.com/ros-controls/mujoco_ros2_control
+     - Not Yet Available
 
 Releases, Versioning, and Public API
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
