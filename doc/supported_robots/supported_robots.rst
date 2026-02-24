@@ -15,9 +15,7 @@ Communication protocols
 End-effectors
 --------------
 - `Schunk SVH 5-finger Hand <https://github.com/SCHUNK-SE-Co-KG/schunk_svh_ros_driver/tree/ros2-humble>`_
-- `TESOLLO DG-3F-B <https://github.com/Tesollo-Delto/DG3F_B_ROS2>`__
-- `TESOLLO DG-3F-M <https://github.com/Tesollo-Delto/DG3F_M_5F_ROS2>`__
-- `TESOLLO DG-5F <https://github.com/Tesollo-Delto/DG3F_M_5F_ROS2>`__
+- `TESOLLO Delto Gripper-M <https://github.com/tesollodelto/delto_m_ros2>`__
 
 Non robot-devices
 ------------------
