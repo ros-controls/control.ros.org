@@ -96,7 +96,8 @@ extensions = [
     "generate_parameter_library",
     'sphinx_tabs.tabs',
     "sphinx.ext.autosectionlabel",
-    'myst_parser'
+    'myst_parser',
+    'sphinxcontrib.youtube'
 ]
 
 # Make sure the target is unique
