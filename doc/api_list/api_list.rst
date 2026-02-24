@@ -61,9 +61,6 @@ ros2_controllers
   * - diff_drive_controller
     - `API <http://docs.ros.org/en/{DISTRO}/p/diff_drive_controller/>`__
     - `ROS Index <https://index.ros.org/p/diff_drive_controller/>`__
-  * - effort_controllers
-    - `API <http://docs.ros.org/en/{DISTRO}/p/effort_controllers/>`__
-    - `ROS Index <https://index.ros.org/p/effort_controllers/>`__
   * - force_torque_sensor_broadcaster
     - `API <http://docs.ros.org/en/{DISTRO}/p/force_torque_sensor_broadcaster/>`__
     - `ROS Index <https://index.ros.org/p/force_torque_sensor_broadcaster/>`__
@@ -82,9 +79,6 @@ ros2_controllers
   * - pid_controller
     - `API <http://docs.ros.org/en/{DISTRO}/p/pid_controller/>`__
     - `ROS Index <https://index.ros.org/p/pid_controller/>`__
-  * - position_controllers
-    - `API <http://docs.ros.org/en/{DISTRO}/p/position_controllers/>`__
-    - `ROS Index <https://index.ros.org/p/position_controllers/>`__
   * - range_sensor_broadcaster
     - `API <http://docs.ros.org/en/{DISTRO}/p/range_sensor_broadcaster/>`__
     - `ROS Index <https://index.ros.org/p/range_sensor_broadcaster/>`__
@@ -97,9 +91,6 @@ ros2_controllers
   * - tricycle_steering_controller
     - `API <http://docs.ros.org/en/{DISTRO}/p/tricycle_steering_controller/>`__
     - `ROS Index <https://index.ros.org/p/tricycle_steering_controller/>`__
-  * - velocity_controllers
-    - `API <http://docs.ros.org/en/{DISTRO}/p/velocity_controllers/>`__
-    - `ROS Index <https://index.ros.org/p/velocity_controllers/>`__
 
 control_msgs
 *************
