@@ -53,6 +53,11 @@ The ros-controls PMC currently consists of the following constituents:
      - `saikishor <https://github.com/saikishor>`_
      - Member
      - CET (UTC+1)/CEST (UTC+2)
+   * - Marq Rasmussen
+     - `Locus Robotics <https://locusrobotics.com/>`_
+     - `MarqRazz <https://github.com/MarqRazz>`_
+     - Member
+     - MST (UTC-7)/MDT (UTC-6)
 
 Current ros-controls Committers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -70,10 +75,6 @@ The ros-controls committers (who are not also part of the ros-controls PMC) cons
      - `Honu Robotics <https://www.honurobotics.com/>`_
      - `ahcorde <https://github.com/ahcorde>`_
      - CET (UTC+1)/CEST (UTC+2)
-   * - Marq Rasmussen
-     - `Locus Robotics <https://locusrobotics.com/>`_
-     - `MarqRazz <https://github.com/MarqRazz>`_
-     - MST (UTC-7)/MDT (UTC-6)
 
 Past ros-controls PMC Constituents
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -101,31 +102,31 @@ The following repositories are managed by the ros-controls PMC:
    * - Repository URL
      - Committers
    * - https://github.com/ros-controls/ros2_control
-     - Not Yet Available
+     - None yet
    * - https://github.com/ros-controls/ros2_controllers
-     - Not Yet Available
+     - None yet
    * - https://github.com/ros-controls/ros2_control_cmake
-     - Not Yet Available
+     - None yet
    * - https://github.com/ros-controls/ros2_control_ci
-     - Not Yet Available
+     - None yet
    * - https://github.com/ros-controls/ros2_control_demos
-     - Not Yet Available
+     - None yet
    * - https://github.com/ros-controls/control_msgs
-     - Not Yet Available
+     - None yet
    * - https://github.com/ros-controls/control_toolbox
-     - Not Yet Available
+     - None yet
    * - https://github.com/ros-controls/control.ros.org
-     - Not Yet Available
+     - None yet
    * - https://github.com/ros-controls/gz_ros2_control
      - Alejandro Hernandez Cordero
    * - https://github.com/ros-controls/kinematics_interface
-     - Not Yet Available
+     - None yet
    * - https://github.com/ros-controls/realtime_tools
-     - Not Yet Available
+     - None yet
    * - https://github.com/ros-controls/topic_based_hardware_interfaces
-     - Marq Rasmussen
+     - None yet
    * - https://github.com/ros-controls/.github
-     - Not Yet Available
+     - None yet
 
 Releases, Versioning, and Public API
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
