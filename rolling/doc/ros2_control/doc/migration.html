@@ -201,6 +201,38 @@
 </li>
 <li><p>The exported state interfaces are now returned as <code class="docutils literal notranslate"><span class="pre">ConstSharedPtr</span></code> from <code class="docutils literal notranslate"><span class="pre">export_state_interfaces()</span></code> to ensure they are read-only for consumers (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1767">#1767</a>).</p></li>
 <li><p>The internal storage variables will be removed in upcoming releases. Controllers should now use the ordered exported interface containers (<code class="docutils literal notranslate"><span class="pre">ordered_exported_state_interfaces_</span></code> and <code class="docutils literal notranslate"><span class="pre">ordered_exported_reference_interfaces_</span></code>) which store shared pointers instead of raw values (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2988">#2988</a>).</p></li>
+<li><p>The controller manager’s ros arguments are no longer forwarded to the controllers via NodeOptions. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/3016">#3016</a>)
+So, any remapping done at the controller manager level will not be visible to the controllers anymore.
+It is recommended to use the <code class="docutils literal notranslate"><span class="pre">--controller-ros-args</span></code> option of the spawner to pass ros arguments to controllers.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">control_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
+    <span class="n">package</span><span class="o">=</span><span class="s2">&quot;controller_manager&quot;</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;ros2_control_node&quot;</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">robot_controllers</span><span class="p">],</span>
+    <span class="n">remappings</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;/diffbot_base_controller/cmd_vel&quot;</span><span class="p">,</span> <span class="s2">&quot;/cmd_vel&quot;</span><span class="p">)],</span>
+    <span class="n">output</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>to</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">control_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
+    <span class="n">package</span><span class="o">=</span><span class="s2">&quot;controller_manager&quot;</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;ros2_control_node&quot;</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">robot_controllers</span><span class="p">],</span>
+    <span class="n">output</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">spawner_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
+    <span class="n">package</span><span class="o">=</span><span class="s2">&quot;controller_manager&quot;</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;spawner&quot;</span><span class="p">,</span>
+    <span class="n">arguments</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;diffbot_base_controller&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--controller-ros-args&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--remap&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;/diffbot_base_controller/cmd_vel:=/cmd_vel&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</li>
 </ul>
 </section>
 </section>
