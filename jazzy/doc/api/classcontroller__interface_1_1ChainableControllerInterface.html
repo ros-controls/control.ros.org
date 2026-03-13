@@ -227,8 +227,12 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>get_name</b> (
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a99c0ebc82f87de51c0bb5e68bdb42d1e" id="r_a99c0ebc82f87de51c0bb5e68bdb42d1e"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="classhardware__interface_1_1StateInterface.html">hardware_interface::StateInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#a99c0ebc82f87de51c0bb5e68bdb42d1e">on_export_state_interfaces</a> ()</td></tr>
 <tr class="separator:a99c0ebc82f87de51c0bb5e68bdb42d1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d9b5123f95c50b55591636ace6bf35e" id="r_a2d9b5123f95c50b55591636ace6bf35e"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; hardware_interface::StateInterface::SharedPtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#a2d9b5123f95c50b55591636ace6bf35e">on_export_state_interfaces_list</a> ()</td></tr>
+<tr class="separator:a2d9b5123f95c50b55591636ace6bf35e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a427fc28e518153be4a5e2d1b37cab953" id="r_a427fc28e518153be4a5e2d1b37cab953"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="classhardware__interface_1_1CommandInterface.html">hardware_interface::CommandInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#a427fc28e518153be4a5e2d1b37cab953">on_export_reference_interfaces</a> ()</td></tr>
 <tr class="separator:a427fc28e518153be4a5e2d1b37cab953"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab6fb5f0cb024391b1deb93f594d49cb" id="r_aab6fb5f0cb024391b1deb93f594d49cb"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; hardware_interface::CommandInterface::SharedPtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#aab6fb5f0cb024391b1deb93f594d49cb">on_export_reference_interfaces_list</a> ()</td></tr>
+<tr class="separator:aab6fb5f0cb024391b1deb93f594d49cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4817c40f074ea6e127c83e6137752e14" id="r_a4817c40f074ea6e127c83e6137752e14"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#a4817c40f074ea6e127c83e6137752e14">on_set_chained_mode</a> (bool chained_mode)</td></tr>
 <tr class="memdesc:a4817c40f074ea6e127c83e6137752e14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual method that each chainable controller should implement to switch chained mode.  <br /></td></tr>
 <tr class="separator:a4817c40f074ea6e127c83e6137752e14"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -428,6 +432,33 @@ pal_statistics::RegistrationsRAII&#160;</td><td class="memItemRight" valign="bot
 
 </div>
 </div>
+<a id="aab6fb5f0cb024391b1deb93f594d49cb" name="aab6fb5f0cb024391b1deb93f594d49cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab6fb5f0cb024391b1deb93f594d49cb">&#9670;&#160;</a></span>on_export_reference_interfaces_list()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; hardware_interface::CommandInterface::SharedPtr &gt; controller_interface::ChainableControllerInterface::on_export_reference_interfaces_list </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Virtual method that each chainable controller should implement to export its read/write chainable interfaces. Each chainable controller implements this methods where all input (command) interfaces are exported. The method has the same meaning as <code>on_export_command_interfaces</code> method from <a class="el" href="classhardware__interface_1_1SystemInterface.html" title="Virtual Class to implement when integrating a complex system into ros2_control.">hardware_interface::SystemInterface</a> or <a class="el" href="classhardware__interface_1_1ActuatorInterface.html" title="Virtual Class to implement when integrating a 1 DoF actuator into ros2_control.">hardware_interface::ActuatorInterface</a>.</p>
+<dl class="section return"><dt>Returns</dt><dd>list of CommandInterfaces that other controller can use as their outputs. </dd></dl>
+
+</div>
+</div>
 <a id="a99c0ebc82f87de51c0bb5e68bdb42d1e" name="a99c0ebc82f87de51c0bb5e68bdb42d1e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a99c0ebc82f87de51c0bb5e68bdb42d1e">&#9670;&#160;</a></span>on_export_state_interfaces()</h2>
 
@@ -454,6 +485,33 @@ pal_statistics::RegistrationsRAII&#160;</td><td class="memItemRight" valign="bot
 <dl class="section return"><dt>Returns</dt><dd>list of StateInterfaces that other controller can use as their inputs. </dd></dl>
 
 <p>Reimplemented in <a class="el" href="classchained__filter__controller_1_1ChainedFilter.html#aafd2d79552046a500be1b7187e300fc9">chained_filter_controller::ChainedFilter</a>, <a class="el" href="classforce__torque__sensor__broadcaster_1_1ForceTorqueSensorBroadcaster.html#ab68ae0af9f340e71e1e186729b9b0211">force_torque_sensor_broadcaster::ForceTorqueSensorBroadcaster</a>, and <a class="el" href="classpid__controller_1_1PidController.html#a3e3f33a6253597ce1e9a0168b23b8809">pid_controller::PidController</a>.</p>
+
+</div>
+</div>
+<a id="a2d9b5123f95c50b55591636ace6bf35e" name="a2d9b5123f95c50b55591636ace6bf35e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d9b5123f95c50b55591636ace6bf35e">&#9670;&#160;</a></span>on_export_state_interfaces_list()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; hardware_interface::StateInterface::SharedPtr &gt; controller_interface::ChainableControllerInterface::on_export_state_interfaces_list </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Virtual method that each chainable controller should implement to export its read-only chainable interfaces. Each chainable controller implements this methods where all its state(read only) interfaces are exported. The method has the same meaning as <code>on_export_state_interfaces</code> method from <a class="el" href="classhardware__interface_1_1SystemInterface.html" title="Virtual Class to implement when integrating a complex system into ros2_control.">hardware_interface::SystemInterface</a> or <a class="el" href="classhardware__interface_1_1ActuatorInterface.html" title="Virtual Class to implement when integrating a 1 DoF actuator into ros2_control.">hardware_interface::ActuatorInterface</a>.</p>
+<dl class="section return"><dt>Returns</dt><dd>list of StateInterfaces that other controller can use as their inputs. </dd></dl>
 
 </div>
 </div>
