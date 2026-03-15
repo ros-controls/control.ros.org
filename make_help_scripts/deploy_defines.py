@@ -188,6 +188,19 @@ repos = {
         },
         "pr": None
     },
+    "topic_based_hardware_interfaces": {
+        "url": "https://github.com/ros-controls/topic_based_hardware_interfaces",
+        "branch_version": {
+            "foxy": "main",
+            "galactic": "main",
+            "humble": "main",
+            "iron": "main",
+            "jazzy": "main",
+            "kilted": "main",
+            "rolling": "main"
+        },
+        "pr": None
+    },
     ".github": {
         "url": "https://github.com/ros-controls/.github",
         "branch_version": {
