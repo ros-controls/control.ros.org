@@ -162,6 +162,9 @@ CallbackReturn&#160;</td><td class="memItemRight" valign="bottom"><b>on_cleanup<
 <tr class="memitem:a69bc4a408f93289110af63da5582c5d1" id="r_a69bc4a408f93289110af63da5582c5d1"><td class="memItemLeft" align="right" valign="top"><a id="a69bc4a408f93289110af63da5582c5d1" name="a69bc4a408f93289110af63da5582c5d1"></a>
 CallbackReturn&#160;</td><td class="memItemRight" valign="bottom"><b>on_error</b> (const rclcpp_lifecycle::State &amp;previous_state) override</td></tr>
 <tr class="separator:a69bc4a408f93289110af63da5582c5d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af21bbeb0c317d3190086305d68c5937a" id="r_af21bbeb0c317d3190086305d68c5937a"><td class="memItemLeft" align="right" valign="top"><a id="af21bbeb0c317d3190086305d68c5937a" name="af21bbeb0c317d3190086305d68c5937a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>reset_odometry</b> (const std::shared_ptr&lt; rmw_request_id_t &gt; request_header, const std::shared_ptr&lt; std_srvs::srv::Empty::Request &gt; req, std::shared_ptr&lt; std_srvs::srv::Empty::Response &gt; res)</td></tr>
+<tr class="separator:af21bbeb0c317d3190086305d68c5937a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classcontroller__interface_1_1ControllerInterface"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classcontroller__interface_1_1ControllerInterface')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classcontroller__interface_1_1ControllerInterface.html">controller_interface::ControllerInterface</a></td></tr>
 <tr class="memitem:a8f9df0485b8a65363fecf5a3ccc9f51d inherit pub_methods_classcontroller__interface_1_1ControllerInterface" id="r_a8f9df0485b8a65363fecf5a3ccc9f51d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterface.html#a8f9df0485b8a65363fecf5a3ccc9f51d">is_chainable</a> () const final</td></tr>
 <tr class="separator:a8f9df0485b8a65363fecf5a3ccc9f51d inherit pub_methods_classcontroller__interface_1_1ControllerInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -246,9 +249,6 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>convert_trans_rot_v
 <tr class="memitem:a095f433e83231f214684a1b4a03ae70c" id="r_a095f433e83231f214684a1b4a03ae70c"><td class="memItemLeft" align="right" valign="top"><a id="a095f433e83231f214684a1b4a03ae70c" name="a095f433e83231f214684a1b4a03ae70c"></a>
 std::tuple&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>twist_to_ackermann</b> (double linear_command, double angular_command)</td></tr>
 <tr class="separator:a095f433e83231f214684a1b4a03ae70c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af21bbeb0c317d3190086305d68c5937a" id="r_af21bbeb0c317d3190086305d68c5937a"><td class="memItemLeft" align="right" valign="top"><a id="af21bbeb0c317d3190086305d68c5937a" name="af21bbeb0c317d3190086305d68c5937a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>reset_odometry</b> (const std::shared_ptr&lt; rmw_request_id_t &gt; request_header, const std::shared_ptr&lt; std_srvs::srv::Empty::Request &gt; req, std::shared_ptr&lt; std_srvs::srv::Empty::Response &gt; res)</td></tr>
-<tr class="separator:af21bbeb0c317d3190086305d68c5937a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a792a379a4453dc5637d99bf934a9f53d" id="r_a792a379a4453dc5637d99bf934a9f53d"><td class="memItemLeft" align="right" valign="top"><a id="a792a379a4453dc5637d99bf934a9f53d" name="a792a379a4453dc5637d99bf934a9f53d"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr>
 <tr class="separator:a792a379a4453dc5637d99bf934a9f53d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -316,6 +316,9 @@ std::shared_ptr&lt; TwistStamped &gt;&#160;</td><td class="memItemRight" valign=
 <tr class="memitem:af557aabf5733f7d566a40524868670f2" id="r_af557aabf5733f7d566a40524868670f2"><td class="memItemLeft" align="right" valign="top"><a id="af557aabf5733f7d566a40524868670f2" name="af557aabf5733f7d566a40524868670f2"></a>
 rclcpp::Service&lt; std_srvs::srv::Empty &gt;::SharedPtr&#160;</td><td class="memItemRight" valign="bottom"><b>reset_odom_service_</b></td></tr>
 <tr class="separator:af557aabf5733f7d566a40524868670f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6503c6bc48d243ba86744b9d3e8073ac" id="r_a6503c6bc48d243ba86744b9d3e8073ac"><td class="memItemLeft" align="right" valign="top"><a id="a6503c6bc48d243ba86744b9d3e8073ac" name="a6503c6bc48d243ba86744b9d3e8073ac"></a>
+std::atomic&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>reset_odom_</b> {false}</td></tr>
+<tr class="separator:a6503c6bc48d243ba86744b9d3e8073ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5eadaaa625016136fcb0c6b4976065e" id="r_ac5eadaaa625016136fcb0c6b4976065e"><td class="memItemLeft" align="right" valign="top"><a id="ac5eadaaa625016136fcb0c6b4976065e" name="ac5eadaaa625016136fcb0c6b4976065e"></a>
 std::queue&lt; AckermannDrive &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>previous_commands_</b></td></tr>
 <tr class="separator:ac5eadaaa625016136fcb0c6b4976065e"><td class="memSeparator" colspan="2">&#160;</td></tr>
