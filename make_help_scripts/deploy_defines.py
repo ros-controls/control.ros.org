@@ -200,5 +200,15 @@ repos = {
             "rolling": "master"
         },
         "pr": None
+    },
+    "mujoco_ros2_control": {
+        "url": "https://github.com/ros-controls/mujoco_ros2_control.git",
+        "branch_version": {
+            "humble": "main",
+            "jazzy": "main",
+            "kilted": "main",
+            "rolling": "main"
+        },
+        "pr": None
     }
 }

@@ -11,6 +11,7 @@ Hosted by ros-controls
    :titlesonly:
 
    Gazebo <../gz_ros2_control/doc/index.rst>
+   MuJoCo <mujoco/mujoco.rst>
 
 
 End-Of-Life
