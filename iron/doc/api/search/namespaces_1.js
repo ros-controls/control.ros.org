@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['control_5ftoolbox_0',['control_toolbox',['../namespacecontrol__toolbox.html',1,'']]]
+  ['admittance_5fcontroller_0',['admittance_controller',['../namespaceadmittance__controller.html',1,'']]]
 ];

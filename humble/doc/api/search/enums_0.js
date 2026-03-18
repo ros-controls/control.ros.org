@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['wheelindex_0',['WheelIndex',['../classmecanum__drive__controller_1_1MecanumDriveController.html#a66a0b28228a7be7a7b41ee886b193b23',1,'mecanum_drive_controller::MecanumDriveController']]]
+  ['actuatortype_0',['ActuatorType',['../namespacemujoco__ros2__control.html#a20cbb1d8399ce15ed84435b528afee2a',1,'mujoco_ros2_control']]]
 ];

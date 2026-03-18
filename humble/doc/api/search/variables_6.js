@@ -5,7 +5,9 @@ var searchData=
   ['hardware_5fused_5fby_5fcontrollers_5f_2',['hardware_used_by_controllers_',['../classhardware__interface_1_1ResourceStorage.html#a0010cb00bf2535cedf08239b846e0fab',1,'hardware_interface::ResourceStorage']]],
   ['hw_5fif_5facceleration_3',['HW_IF_ACCELERATION',['../namespacehardware__interface.html#ac2f4024766cc8e328cf568d30e5099c6',1,'hardware_interface']]],
   ['hw_5fif_5feffort_4',['HW_IF_EFFORT',['../namespacehardware__interface.html#a51a32aa22fecafedbf00b6fddf4b2dd7',1,'hardware_interface']]],
-  ['hw_5fif_5fposition_5',['HW_IF_POSITION',['../namespacehardware__interface.html#adf4658e878804ad412a26773aa4705a6',1,'hardware_interface']]],
-  ['hw_5fif_5fvelocity_6',['HW_IF_VELOCITY',['../namespacehardware__interface.html#ac92e707f8d468092ae48031e87cacb11',1,'hardware_interface']]],
-  ['hw_5fiface_5fadapter_5f_7',['hw_iface_adapter_',['../classgripper__action__controller_1_1GripperActionController.html#a74a8b7866370f86483b750b4f8a0faa4',1,'gripper_action_controller::GripperActionController']]]
+  ['hw_5fif_5fforce_5',['HW_IF_FORCE',['../namespacehardware__interface.html#a75d05f9ead251a338466639860856154',1,'hardware_interface']]],
+  ['hw_5fif_5fposition_6',['HW_IF_POSITION',['../namespacehardware__interface.html#adf4658e878804ad412a26773aa4705a6',1,'hardware_interface']]],
+  ['hw_5fif_5ftorque_7',['HW_IF_TORQUE',['../namespacehardware__interface.html#a539ef1a761f06cc939e4575b4cbd3dbb',1,'hardware_interface']]],
+  ['hw_5fif_5fvelocity_8',['HW_IF_VELOCITY',['../namespacehardware__interface.html#ac92e707f8d468092ae48031e87cacb11',1,'hardware_interface']]],
+  ['hw_5fiface_5fadapter_5f_9',['hw_iface_adapter_',['../classgripper__action__controller_1_1GripperActionController.html#a74a8b7866370f86483b750b4f8a0faa4',1,'gripper_action_controller::GripperActionController']]]
 ];
