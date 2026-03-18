@@ -674,7 +674,8 @@ repos = [
   "topic_based_hardware_interfaces",
   "ros2_control_ci",
   "ros2_rhel",
-  "ros2_debian"
+  "ros2_debian",
+  "mujoco_ros2_control"
 ]
 
 branches = {
@@ -691,7 +692,8 @@ branches = {
   "topic_based_hardware_interfaces": "main",
   "ros2_control_ci": "master",
   "ros2_rhel": "main",
-  "ros2_debian": "main"
+  "ros2_debian": "main",
+  "mujoco_ros2_control": "main"
 }
 
 maintainers = ["bmagyar", "destogl", "christophfroehlich"]
