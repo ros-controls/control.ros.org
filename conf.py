@@ -142,6 +142,7 @@ html_static_path = ["_static"]
 # or fully qualified paths (eg. https://...)
 html_css_files = [
     'reviewer_stats.css',
+    'custom.css',
 ]
 
 # Custom sidebar templates, must be a dictionary that maps document names
