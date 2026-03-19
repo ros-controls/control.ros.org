@@ -77,6 +77,12 @@
 <li class="toctree-l6"><a class="reference internal" href="#services">Services</a></li>
 </ul>
 </li>
+<li class="toctree-l5"><a class="reference internal" href="#debugging">Debugging</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#pausing-the-simulation">Pausing the Simulation</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#single-stepping-via-the-keyboard">Single-Stepping via the Keyboard</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#single-stepping-via-ros-2-service">Single-Stepping via ROS 2 Service</a></li>
+</ul>
+</li>
 <li class="toctree-l5"><a class="reference internal" href="#test-robot-system">Test Robot System</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#development">Development</a></li>
 </ul>
@@ -130,7 +136,7 @@
   <strong>
     
     You're reading the documentation for a development version.
-    For the latest released version, please have a look at <a href="../../../../kilted/index.html">Kilted</a>.
+    For the latest released version, please have a look at <a href="../../../../kilted/doc/simulators/mujoco/mujoco.html">Kilted</a>.
     
   </strong>
 </p>
@@ -502,14 +508,96 @@ regardless of whether their interfaces are exposed via <code class="docutils lit
 </section>
 <section id="services">
 <h4>Services<a class="headerlink" href="#services" title="Link to this heading"></a></h4>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">~/set_pause</span></code> (<code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control_msgs/srv/SetPause</span></code>): Pauses or resumes the simulation.</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">~/reset_world</span></code> (<code class="docutils literal notranslate"><span class="pre">std_srvs/srv/Empty</span></code>): Resets the simulation to the robot’s initial spawning state.</p></li>
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">paused</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code> to pause, or <code class="docutils literal notranslate"><span class="pre">false</span></code> to resume.</p></li>
+<li><p>Returns immediately — no blocking. Returns <code class="docutils literal notranslate"><span class="pre">success</span> <span class="pre">=</span> <span class="pre">true</span></code> even if the simulation is already in the requested state.</p></li>
+<li><p>When resuming, the physics loop automatically re-syncs its wall-clock reference so no catch-up steps are executed.</p></li>
 </ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pause the simulation</span>
+ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/set_pause<span class="w"> </span>mujoco_ros2_control_msgs/srv/SetPause<span class="w"> </span><span class="s2">&quot;{paused: true}&quot;</span>
+
+<span class="c1"># Resume the simulation</span>
+ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/set_pause<span class="w"> </span>mujoco_ros2_control_msgs/srv/SetPause<span class="w"> </span><span class="s2">&quot;{paused: false}&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~/reset_world</span></code> (<code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control_msgs/srv/ResetWorld</span></code>): Resets the simulation state.</p>
+<ul class="simple">
+<li><p>If the optional <code class="docutils literal notranslate"><span class="pre">keyframe</span></code> string field is empty, the simulation is restored to the state captured at startup (initial joint positions, velocities, and control values).</p></li>
+<li><p>If a <code class="docutils literal notranslate"><span class="pre">keyframe</span></code> name is provided, that named keyframe from the MJCF is applied instead.</p></li>
+<li><p>Returns <code class="docutils literal notranslate"><span class="pre">success</span></code> and a human-readable <code class="docutils literal notranslate"><span class="pre">message</span></code>.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reset to startup state</span>
+ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/reset_world<span class="w"> </span>mujoco_ros2_control_msgs/srv/ResetWorld<span class="w"> </span><span class="s2">&quot;{}&quot;</span>
+
+<span class="c1"># Reset to a named MJCF keyframe</span>
+ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/reset_world<span class="w"> </span>mujoco_ros2_control_msgs/srv/ResetWorld<span class="w"> </span><span class="s2">&quot;{keyframe: &#39;home&#39;}&quot;</span>
+</pre></div>
+</div>
 <blockquote>
 <div><p>[!IMPORTANT]
 If controllers are active during the service call, the robot may reset to the initial state and then immediately
 snap back to its previous commanded position. To avoid this, it is recommended to deactivate any active joint
 controllers before calling this service.</p>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~/step_simulation</span></code> (<code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control_msgs/srv/StepSimulation</span></code>): Advances the paused simulation by an exact
+number of physics steps and blocks until all steps have completed.</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">steps</span></code> field (<code class="docutils literal notranslate"><span class="pre">uint32</span></code>) specifies how many physics steps to execute. Must be ≥ 1.</p></li>
+<li><p>The call returns only after all requested steps are finished (or a timeout/divergence is detected).</p></li>
+<li><p>Returns <code class="docutils literal notranslate"><span class="pre">success</span></code> and a human-readable <code class="docutils literal notranslate"><span class="pre">message</span></code>.</p></li>
+<li><p><strong>The simulation must be paused</strong> before calling this service. If <code class="docutils literal notranslate"><span class="pre">sim_-&gt;run</span></code> is true the call returns immediately with <code class="docutils literal notranslate"><span class="pre">success</span> <span class="pre">=</span> <span class="pre">false</span></code>.</p></li>
+<li><p>Timeout: whichever is larger — 30 s, or 10 ms × <code class="docutils literal notranslate"><span class="pre">steps</span></code>.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step the simulation forward by 100 physics steps</span>
+ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/step_simulation<span class="w"> </span>mujoco_ros2_control_msgs/srv/StepSimulation<span class="w"> </span><span class="s2">&quot;{steps: 100}&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<section id="debugging">
+<h3>Debugging<a class="headerlink" href="#debugging" title="Link to this heading"></a></h3>
+<p>The simulator provides several mechanisms for pausing execution and advancing it in a controlled, step-by-step fashion.
+This is useful for inspecting robot state, verifying controller output, or reproducing intermittent issues.</p>
+<section id="pausing-the-simulation">
+<h4>Pausing the Simulation<a class="headerlink" href="#pausing-the-simulation" title="Link to this heading"></a></h4>
+<p>Click the <strong>Pause</strong> button in the MuJoCo Simulate window (or press <strong>Space</strong>) to pause the physics loop.
+When paused, the simulation clock stops advancing and no physics steps are executed until explicitly requested.</p>
+</section>
+<section id="single-stepping-via-the-keyboard">
+<h4>Single-Stepping via the Keyboard<a class="headerlink" href="#single-stepping-via-the-keyboard" title="Link to this heading"></a></h4>
+<p>While the simulation window is focused and the simulation is <strong>paused</strong>, press <strong><code class="docutils literal notranslate"><span class="pre">S</span></code></strong> to advance the simulation
+by exactly one physics step. Holding <code class="docutils literal notranslate"><span class="pre">S</span></code> down will advance the simulation continuously one step at a time,
+allowing slow, frame-by-frame inspection of the robot’s motion.</p>
+<p>The status overlay in the top-right corner of the simulation window shows the current state
+(<code class="docutils literal notranslate"><span class="pre">Running</span></code> / <code class="docutils literal notranslate"><span class="pre">Paused</span></code>) and the total number of physics steps executed.</p>
+</section>
+<section id="single-stepping-via-ros-2-service">
+<h4>Single-Stepping via ROS 2 Service<a class="headerlink" href="#single-stepping-via-ros-2-service" title="Link to this heading"></a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">~/step_simulation</span></code> service allows programmatic step-by-step control from the command line or
+from test/debug scripts. This is particularly useful for automated testing scenarios where a
+reproducible sequence of physics steps is needed.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pause the simulation first (from the UI or via another mechanism), then:</span>
+
+<span class="c1"># Advance by a single physics step</span>
+ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/step_simulation<span class="w"> </span>mujoco_ros2_control_msgs/srv/StepSimulation<span class="w"> </span><span class="s2">&quot;{steps: 1}&quot;</span>
+
+<span class="c1"># Advance by 500 steps (blocks until complete)</span>
+ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/step_simulation<span class="w"> </span>mujoco_ros2_control_msgs/srv/StepSimulation<span class="w"> </span><span class="s2">&quot;{steps: 500}&quot;</span>
+</pre></div>
+</div>
+<p>The service call <strong>blocks</strong> until all requested steps have been executed, the simulation diverges, or a
+timeout is reached. This makes it safe to pipeline service calls sequentially without additional
+synchronisation (e.g. send a command → step N times → read state → repeat).</p>
+<blockquote>
+<div><p>[!NOTE]
+<code class="docutils literal notranslate"><span class="pre">~/step_simulation</span></code> requires the simulation to be <strong>paused</strong>. Calling it while the simulation is running
+returns <code class="docutils literal notranslate"><span class="pre">success:</span> <span class="pre">false</span></code> immediately without executing any steps.</p>
 </div></blockquote>
 </section>
 </section>
@@ -560,10 +648,10 @@ We generally recommend looking there for examples and recommended workflows.</p>
   <div class="rst-other-versions">
     <dl>
       <dt>Stable Releases</dt>
-        <dd><a href="../../../../kilted/index.html">Kilted (latest)</a></dd><br>
-        <dd><a href="../../../../jazzy/index.html">Jazzy</a></dd><br>
+        <dd><a href="../../../../kilted/doc/simulators/mujoco/mujoco.html">Kilted (latest)</a></dd><br>
+        <dd><a href="../../../../jazzy/doc/simulators/mujoco/mujoco.html">Jazzy</a></dd><br>
         
-        <dd><a href="../../../../humble/index.html">Humble</a></dd><br>
+        <dd><a href="../../../../humble/doc/simulators/mujoco/mujoco.html">Humble</a></dd><br>
         
         
     </dl>
