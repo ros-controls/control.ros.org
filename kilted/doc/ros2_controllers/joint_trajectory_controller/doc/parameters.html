@@ -70,6 +70,7 @@
 <li class="toctree-l4 current"><a class="reference internal" href="userdoc.html#further-information">Further information</a><ul class="current">
 <li class="toctree-l5"><a class="reference internal" href="trajectory.html">Trajectory Representation</a></li>
 <li class="toctree-l5"><a class="reference internal" href="trajectory.html#trajectory-replacement">Trajectory Replacement</a></li>
+<li class="toctree-l5"><a class="reference internal" href="decelerate_on_cancel.html">Decelerate on cancel</a></li>
 <li class="toctree-l5"><a class="reference internal" href="speed_scaling.html">Speed scaling</a></li>
 <li class="toctree-l5 current"><a class="current reference internal" href="#">joint_trajectory_controller Parameters</a><ul>
 <li class="toctree-l6"><a class="reference internal" href="#list-of-parameters">List of parameters</a></li>
@@ -259,7 +260,7 @@
 <dt>cmd_timeout (double)</dt><dd><p>Timeout after which the input command is considered stale. Timeout is counted from the end of the trajectory (the last point). <code class="docutils literal notranslate"><span class="pre">cmd_timeout</span></code> must be greater than <code class="docutils literal notranslate"><span class="pre">constraints.goal_time</span></code>, otherwise ignored. If zero, timeout is deactivated</p>
 <p>Default:  0.0</p>
 </dd>
-<dt>constraints</dt><dd><p>Default values for tolerances if no explicit values are set in the <code class="docutils literal notranslate"><span class="pre">JointTrajectory</span></code> message.</p>
+<dt>constraints</dt><dd><p>Default values for tolerances if no explicit values are set in the <code class="docutils literal notranslate"><span class="pre">JointTrajectory</span></code> message. Also contains the <code class="docutils literal notranslate"><span class="pre">decelerate_on_cancel</span></code> option and per-joint <code class="docutils literal notranslate"><span class="pre">max_deceleration_on_cancel</span></code> values for smooth stopping behavior (see <a class="reference internal" href="decelerate_on_cancel.html#joint-trajectory-controller-decelerate-on-cancel"><span class="std std-ref">Decelerate on cancel</span></a>).</p>
 </dd>
 <dt>constraints.stopped_velocity_tolerance (double)</dt><dd><p>Velocity tolerance for at the end of the trajectory that indicates that controlled system is stopped.</p>
 <p>Default:  0.01</p>
@@ -273,11 +274,25 @@
 </ul>
 </div></blockquote>
 </dd>
+<dt>constraints.decelerate_on_cancel (bool)</dt><dd><p>If true and each joints max_deceleration_on_cancel is greater than 0, decelerate to a stop when the request is canceled or the goal constraints are violated. Requires velocity state interface from all joints in the controller.</p>
+<p>Read only: True</p>
+<p>Default:  false</p>
+</dd>
 <dt>constraints.&lt;joints&gt;.trajectory (double)</dt><dd><p>Per-joint trajectory offset tolerance during movement.</p>
 <p>Default:  0.0</p>
 </dd>
 <dt>constraints.&lt;joints&gt;.goal (double)</dt><dd><p>Per-joint trajectory offset tolerance at the goal position.</p>
 <p>Default:  0.0</p>
+</dd>
+<dt>constraints.&lt;joints&gt;.max_deceleration_on_cancel (double)</dt><dd><p>Per-joint max acceleration used to calculate the stopping position when a request is canceled or preempted.</p>
+<p>Read only: True</p>
+<p>Default:  0.0</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than or equal to 0.0</p></li>
+</ul>
+</div></blockquote>
 </dd>
 <dt>gains</dt><dd><p>The parameters are used to configure PID loops for the <code class="docutils literal notranslate"><span class="pre">velocity</span></code> or <code class="docutils literal notranslate"><span class="pre">effort</span></code>-only command interfaces. This structure contains the controller gains for every joint with following the control laws</p>
 <ul>
@@ -355,7 +370,9 @@ position <span class="math notranslate nohighlight">\(s\)</span> from the state 
 <span class="w">    </span><span class="nt">constraints</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">&lt;joints&gt;</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">goal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">        </span><span class="nt">max_deceleration_on_cancel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
 <span class="w">        </span><span class="nt">trajectory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">      </span><span class="nt">decelerate_on_cancel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">      </span><span class="nt">goal_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
 <span class="w">      </span><span class="nt">stopped_velocity_tolerance</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span>
 <span class="w">    </span><span class="nt">gains</span><span class="p">:</span>

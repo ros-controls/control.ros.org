@@ -161,6 +161,7 @@ manually or it can be synchronized with the hardware. See <a class="reference in
 <li><p>Fill in 0 velocities and accelerations into point before trajectories if the state interfaces
 don’t contain velocity / acceleration information, but the trajectory does. This way, the segment
 up to the first waypoint will use the same interpolation as the rest of the trajectory. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2043">#2043</a>)</p></li>
+<li><p>Added decelerate-to-stop functionality when a trajectory is canceled or preempted. Instead of immediately holding position, the controller can now smoothly decelerate each joint to a stop using the per-joint <code class="docutils literal notranslate"><span class="pre">max_deceleration_on_cancel</span></code> parameter. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2163">#2163</a>)</p></li>
 </ul>
 </section>
 <section id="omni-wheel-drive-controller">

@@ -298,6 +298,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>preempt_active_goal</
 std::shared_ptr&lt; trajectory_msgs::msg::JointTrajectory &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>set_hold_position</b> ()</td></tr>
 <tr class="memdesc:a59a88c09fadc80dc8d46eb115be22b61"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the current position with zero velocity and acceleration as new command <br /></td></tr>
 <tr class="separator:a59a88c09fadc80dc8d46eb115be22b61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af389af4b9bbbabb21a2fe5b8941e36db" id="r_af389af4b9bbbabb21a2fe5b8941e36db"><td class="memItemLeft" align="right" valign="top"><a id="af389af4b9bbbabb21a2fe5b8941e36db" name="af389af4b9bbbabb21a2fe5b8941e36db"></a>
+std::shared_ptr&lt; trajectory_msgs::msg::JointTrajectory &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>decelerate_to_hold_position</b> ()</td></tr>
+<tr class="memdesc:af389af4b9bbbabb21a2fe5b8941e36db"><td class="mdescLeft">&#160;</td><td class="mdescRight">decelerate at constant rate to a holding position with zero velocity and acceleration as new command <br /></td></tr>
+<tr class="separator:af389af4b9bbbabb21a2fe5b8941e36db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e961d8e09864b24325cc3def4b92d49" id="r_a4e961d8e09864b24325cc3def4b92d49"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; trajectory_msgs::msg::JointTrajectory &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classjoint__trajectory__controller_1_1JointTrajectoryController.html#a4e961d8e09864b24325cc3def4b92d49">set_success_trajectory_point</a> ()</td></tr>
 <tr class="memdesc:a4e961d8e09864b24325cc3def4b92d49"><td class="mdescLeft">&#160;</td><td class="mdescRight">set last trajectory point to be repeated at success  <br /></td></tr>
 <tr class="separator:a4e961d8e09864b24325cc3def4b92d49"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -423,6 +427,24 @@ std::vector&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>
 <tr class="memitem:a1b636a411f758707bb948745097c6f69" id="r_a1b636a411f758707bb948745097c6f69"><td class="memItemLeft" align="right" valign="top"><a id="a1b636a411f758707bb948745097c6f69" name="a1b636a411f758707bb948745097c6f69"></a>
 std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tmp_command_</b></td></tr>
 <tr class="separator:a1b636a411f758707bb948745097c6f69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f304ab050d5f66251860a5b707c2f23" id="r_a0f304ab050d5f66251860a5b707c2f23"><td class="memItemLeft" align="right" valign="top"><a id="a0f304ab050d5f66251860a5b707c2f23" name="a0f304ab050d5f66251860a5b707c2f23"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>should_decelerate_on_cancel_</b> = false</td></tr>
+<tr class="separator:a0f304ab050d5f66251860a5b707c2f23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbb93b9d2ce7772f62607352a85e018d" id="r_afbb93b9d2ce7772f62607352a85e018d"><td class="memItemLeft" align="right" valign="top"><a id="afbb93b9d2ce7772f62607352a85e018d" name="afbb93b9d2ce7772f62607352a85e018d"></a>
+std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>max_decel_</b></td></tr>
+<tr class="separator:afbb93b9d2ce7772f62607352a85e018d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07c52d7742033f2d6686911f5c038614" id="r_a07c52d7742033f2d6686911f5c038614"><td class="memItemLeft" align="right" valign="top"><a id="a07c52d7742033f2d6686911f5c038614" name="a07c52d7742033f2d6686911f5c038614"></a>
+std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>stop_time_</b></td></tr>
+<tr class="separator:a07c52d7742033f2d6686911f5c038614"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7dae43d8e7b642213f0131931eedc05" id="r_ae7dae43d8e7b642213f0131931eedc05"><td class="memItemLeft" align="right" valign="top"><a id="ae7dae43d8e7b642213f0131931eedc05" name="ae7dae43d8e7b642213f0131931eedc05"></a>
+std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>hold_position_</b></td></tr>
+<tr class="separator:ae7dae43d8e7b642213f0131931eedc05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d662726ada06fa4a2a943d54268d27c" id="r_a9d662726ada06fa4a2a943d54268d27c"><td class="memItemLeft" align="right" valign="top"><a id="a9d662726ada06fa4a2a943d54268d27c" name="a9d662726ada06fa4a2a943d54268d27c"></a>
+std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>stop_direction_</b></td></tr>
+<tr class="separator:a9d662726ada06fa4a2a943d54268d27c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1db14bd0bc036ab719089d02d059bf42" id="r_a1db14bd0bc036ab719089d02d059bf42"><td class="memItemLeft" align="right" valign="top"><a id="a1db14bd0bc036ab719089d02d059bf42" name="a1db14bd0bc036ab719089d02d059bf42"></a>
+std::shared_ptr&lt; trajectory_msgs::msg::JointTrajectory &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>stop_trajectory_</b></td></tr>
+<tr class="separator:a1db14bd0bc036ab719089d02d059bf42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05055ed8d2322490357ec664aebafacf" id="r_a05055ed8d2322490357ec664aebafacf"><td class="memItemLeft" align="right" valign="top"><a id="a05055ed8d2322490357ec664aebafacf" name="a05055ed8d2322490357ec664aebafacf"></a>
 std::atomic&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>scaling_factor_</b> {1.0}</td></tr>
 <tr class="separator:a05055ed8d2322490357ec664aebafacf"><td class="memSeparator" colspan="2">&#160;</td></tr>

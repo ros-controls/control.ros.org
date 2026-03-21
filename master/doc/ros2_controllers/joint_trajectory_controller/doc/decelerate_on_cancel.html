@@ -1,0 +1,282 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Decelerate on cancel &mdash; ROS2_Control: Rolling Mar 2026 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/reviewer_stats.css?v=068b34ac" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=d85a351e" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//rolling/doc/ros2_controllers/joint_trajectory_controller/doc/decelerate_on_cancel.html" />
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=4a841b48"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Speed scaling" href="speed_scaling.html" />
+    <link rel="prev" title="Trajectory Representation" href="trajectory.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html">ros2_control</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/controllers_index.html">ros2_controllers</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#guidelines-and-best-practices">Guidelines and Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#controllers-for-wheeled-mobile-robots">Controllers for Wheeled Mobile Robots</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/controllers_index.html#controllers-for-manipulators-and-other-robots">Controllers for Manipulators and Other Robots</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../admittance_controller/doc/userdoc.html">Admittance Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../effort_controllers/doc/userdoc.html">Effort Controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../forward_command_controller/doc/userdoc.html">Forward Command Controller</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="userdoc.html">Joint Trajectory Controller</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="userdoc.html#hardware-interface-types">Hardware interface types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc.html#other-features">Other features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc.html#using-joint-trajectory-controller-s">Using Joint Trajectory Controller(s)</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="userdoc.html#further-information">Further information</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="trajectory.html">Trajectory Representation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="trajectory.html#trajectory-replacement">Trajectory Replacement</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="#">Decelerate on cancel</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#how-it-works">How it works</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#configuration">Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="speed_scaling.html">Speed scaling</a></li>
+<li class="toctree-l5"><a class="reference internal" href="parameters.html">joint_trajectory_controller Parameters</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../rqt_joint_trajectory_controller/doc/userdoc.html">rqt_joint_trajectory_controller</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../parallel_gripper_controller/doc/userdoc.html">Parallel Gripper Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pid_controller/doc/userdoc.html">PID Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../position_controllers/doc/userdoc.html">Position Controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../velocity_controllers/doc/userdoc.html">Velocity Controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../gpio_controllers/doc/userdoc.html">Gpio Command Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../motion_primitives_controllers/userdoc.html">motion_primitive_controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../motion_primitives_controllers/userdoc.html#description">Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../motion_primitives_controllers/userdoc.html#architecture-overview">Architecture Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../motion_primitives_controllers/userdoc.html#demo-video-with-ur10e">Demo-Video with UR10e</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../motion_primitives_controllers/userdoc.html#demo-video-with-kr3">Demo-Video with KR3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../motion_primitives_controllers/userdoc.html#parameters">Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#broadcasters">Broadcasters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#filters">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#common-controller-parameters">Common Controller Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utilities.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes/release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../migration/migration.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_list/api_list.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../governance/governance.html">Project Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../statistics.html">Documentation Usage</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ROS2_Control: Rolling</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../doc/controllers_index.html">ros2_controllers</a></li>
+          <li class="breadcrumb-item"><a href="userdoc.html">joint_trajectory_controller</a></li>
+      <li class="breadcrumb-item active">Decelerate on cancel</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ros-controls/ros2_controllers/blob/master/joint_trajectory_controller/doc/decelerate_on_cancel.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for a development version.
+    For the latest released version, please have a look at <a href="../../../../../kilted/doc/ros2_controllers/joint_trajectory_controller/doc/decelerate_on_cancel.html">Kilted</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="decelerate-on-cancel">
+<span id="joint-trajectory-controller-decelerate-on-cancel"></span><h1>Decelerate on cancel<a class="headerlink" href="#decelerate-on-cancel" title="Link to this heading"></a></h1>
+<p>By default, when a trajectory is canceled or preempted, the controller immediately holds the current position.
+This can cause problems for hardware that is moving at high velocity, as the abrupt stop may trigger faults or cause excessive wear.</p>
+<p>When the <code class="docutils literal notranslate"><span class="pre">decelerate_on_cancel</span></code> feature is enabled, the controller instead generates a smooth stop trajectory that decelerates each joint to zero velocity using a constant deceleration profile before holding position.</p>
+<img alt="Default behavior: immediate hold position on cancel" src="../../../../_images/decelerate_hold_position.png" />
+<p><em>Default behavior: the controller instantly sets the command position to the current position when a trajectory is canceled, causing an abrupt stop.</em></p>
+<img alt="Decelerate to stop behavior on cancel" src="../../../../_images/decelerate_to_stop.png" />
+<p><em>With decelerate on cancel enabled: the controller generates a ramped stop trajectory that smoothly decelerates each joint before holding position.</em></p>
+<section id="how-it-works">
+<h2>How it works<a class="headerlink" href="#how-it-works" title="Link to this heading"></a></h2>
+<p>When a trajectory is canceled or preempted and <code class="docutils literal notranslate"><span class="pre">decelerate_on_cancel</span></code> is enabled, the controller:</p>
+<ol class="arabic">
+<li><p>Reads the current velocity of each joint from the velocity state interface.</p></li>
+<li><p>Computes the stopping distance and time for each joint using its configured <code class="docutils literal notranslate"><span class="pre">max_deceleration_on_cancel</span></code> value:</p>
+<div class="math notranslate nohighlight">
+\[t_{stop} = \frac{|v|}{a_{max}}\]</div>
+<div class="math notranslate nohighlight">
+\[d_{stop} = \frac{v \cdot t_{stop}}{2}\]</div>
+<p>where <span class="math notranslate nohighlight">\(v\)</span> is the current velocity and <span class="math notranslate nohighlight">\(a_{max}\)</span> is the configured maximum deceleration.</p>
+</li>
+<li><p>Generates a trajectory with intermediate waypoints that linearly ramp velocity to zero over the computed stopping time.</p></li>
+<li><p>Appends a final hold-position point at the computed stop position.</p></li>
+</ol>
+<p>Each joint decelerates independently based on its own <code class="docutils literal notranslate"><span class="pre">max_deceleration_on_cancel</span></code> value, but the trajectory is synchronized so all joints finish at the same time (the slowest joint’s stop time).</p>
+</section>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The hardware must provide a <code class="docutils literal notranslate"><span class="pre">velocity</span></code> state interface for all joints in the controller. If velocity state feedback is not available, the controller falls back to the default hold-position behavior.</p></li>
+<li><p>Each joint must have a valid (greater than zero) <code class="docutils literal notranslate"><span class="pre">max_deceleration_on_cancel</span></code> value. Joints with a value of <code class="docutils literal notranslate"><span class="pre">0.0</span></code> cause the controller to fall back to hold-position behavior.</p></li>
+</ul>
+</section>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h2>
+<p>Enable the feature by setting <code class="docutils literal notranslate"><span class="pre">constraints.decelerate_on_cancel</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code> and providing a <code class="docutils literal notranslate"><span class="pre">max_deceleration_on_cancel</span></code> value (in rad/s^2 or m/s^2) for each joint under <code class="docutils literal notranslate"><span class="pre">constraints.&lt;joint_name&gt;</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">controller_name</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">joints</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint_1</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint_2</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint_3</span>
+
+<span class="w">    </span><span class="nt">constraints</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">decelerate_on_cancel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">stopped_velocity_tolerance</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span>
+<span class="w">      </span><span class="nt">goal_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">      </span><span class="nt">joint_1</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">max_deceleration_on_cancel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0</span>
+<span class="w">      </span><span class="nt">joint_2</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">max_deceleration_on_cancel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.0</span>
+<span class="w">      </span><span class="nt">joint_3</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">max_deceleration_on_cancel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6.0</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Both <code class="docutils literal notranslate"><span class="pre">decelerate_on_cancel</span></code> and <code class="docutils literal notranslate"><span class="pre">max_deceleration_on_cancel</span></code> are read-only parameters. They can only be set at controller configuration time and cannot be changed at runtime.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Choose <code class="docutils literal notranslate"><span class="pre">max_deceleration_on_cancel</span></code> values that are within the physical limits of your hardware. Values that are too high may still cause faults, while values that are too low will result in longer stopping distances.</p>
+</div>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="trajectory.html" class="btn btn-neutral float-left" title="Trajectory Representation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="speed_scaling.html" class="btn btn-neutral float-right" title="Speed scaling" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: rolling
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Stable Releases</dt>
+        <dd><a href="../../../../../kilted/doc/ros2_controllers/joint_trajectory_controller/doc/decelerate_on_cancel.html">Kilted (latest)</a></dd><br>
+        <dd><a href="../../../../../jazzy/index.html">Jazzy</a></dd><br>
+        
+        <dd><a href="../../../../../humble/index.html">Humble</a></dd><br>
+        
+        
+    </dl>
+    <dl>
+      <dt>End-of-Life</dt>
+        <dd><a href="../../../../../iron/index.html">Iron</a></dd><br>
+        <dd><a href="../../../../../galactic/index.html">Galactic</a></dd><br>
+        <dd><a href="../../../../../foxy/index.html">Foxy</a></dd><br>
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="decelerate_on_cancel.html">Rolling</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
