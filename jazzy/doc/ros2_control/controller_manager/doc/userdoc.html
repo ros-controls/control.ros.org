@@ -644,6 +644,52 @@ The full structure of the map is given in the following example:</p>
 <span class="go">                        The --ros-args to be passed to the controller node, e.g., for remapping topics. Pass multiple times for every argument.</span>
 </pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">spawner</span></code> now supports per controller arguments, while parsing the arguments for multiple controllers using <code class="docutils literal notranslate"><span class="pre">--controller</span></code> option. For example, to spawn two controllers with different parameter files and remapping topics, the following command can be used:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>run<span class="w"> </span>controller_manager<span class="w"> </span>spawner<span class="w"> </span>--controller<span class="w"> </span>position_trajectory_controller<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--param-file<span class="w"> </span>/path/to/position_trajectory_controller_params.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--controller-ros-args<span class="w"> </span><span class="s2">&quot;--ros-args --remap /joint_states:=/rrbot/joint_states&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--controller<span class="w"> </span>velocity_trajectory_controller<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--param-file<span class="w"> </span>/path/to/velocity_trajectory_controller_params.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--controller-ros-args<span class="w"> </span><span class="s2">&quot;--ros-args --remap /joint_states:=/rrbot/joint_states&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>run<span class="w">  </span>controller_manager<span class="w"> </span>spawner<span class="w"> </span>--controller<span class="w"> </span>-h
+<span class="go">Usage: spawner [global_options] --controller &lt;name&gt; [controller_options] --controller &lt;name&gt; ...</span>
+
+<span class="go">Global Options:</span>
+<span class="go">usage: spawner [-c CONTROLLER_MANAGER] [--controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT] [--switch-timeout SWITCH_TIMEOUT] [--service-call-timeout SERVICE_CALL_TIMEOUT] [--activate-as-group]</span>
+<span class="go">              [--switch-asap | --no-switch-asap] [-u] [-h]</span>
+
+<span class="go">options:</span>
+<span class="go">  -c CONTROLLER_MANAGER, --controller-manager CONTROLLER_MANAGER</span>
+<span class="go">                        Name of the controller manager</span>
+<span class="go">  --controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT</span>
+<span class="go">                        Timeout for controller manager services</span>
+<span class="go">  --switch-timeout SWITCH_TIMEOUT</span>
+<span class="go">                        Timeout for switch controller service</span>
+<span class="go">  --service-call-timeout SERVICE_CALL_TIMEOUT</span>
+<span class="go">                        Timeout for service calls</span>
+<span class="go">  --activate-as-group   Activate controllers as a group</span>
+<span class="go">  --switch-asap, --no-switch-asap</span>
+<span class="go">                        Switch controllers as soon as possible</span>
+<span class="go">  -u, --unload-on-kill  Deactivate the active controllers and unload them on kill</span>
+<span class="go">  -h, --help            Show help</span>
+
+<span class="go">Controller Options:</span>
+<span class="go">usage: spawner [-p PARAM_FILE] [--load-only] [--inactive] [--controller-ros-args CONTROLLER_ROS_ARGS] controller_name</span>
+
+<span class="go">positional arguments:</span>
+<span class="go">  controller_name       Name of the controller</span>
+
+<span class="go">options:</span>
+<span class="go">  -p PARAM_FILE, --param-file PARAM_FILE</span>
+<span class="go">                        Parameter files to load for the controller</span>
+<span class="go">  --load-only           Load the controller but do not configure/activate it</span>
+<span class="go">  --inactive            Configure the controller but do not switch it</span>
+<span class="go">  --controller-ros-args CONTROLLER_ROS_ARGS</span>
+<span class="go">                        ROS arguments to pass to the controller</span>
+</pre></div>
+</div>
 <p>The parsed controller config file can follow the same conventions as the typical ROS 2 parameter file format. Now, the spawner can handle config files with wildcard entries and also the controller name in the absolute namespace. See the following examples on the config files:</p>
 <blockquote>
 <div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">/**</span><span class="p">:</span>
