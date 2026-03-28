@@ -75,9 +75,9 @@ The ros-controls committers (who are not also part of the ros-controls PMC) cons
      - `MarqRazz <https://github.com/MarqRazz>`_
      - MST (UTC-7)/MDT (UTC-6)
    * - Julia Jia
-     - ?
+     - Independent
      - `Juliaj <https://github.com/Juliaj>`_
-     - ?
+     - PST (UTC-8)/PDT (UTC-7)
 
 Past ros-controls PMC Constituents
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
