@@ -126,13 +126,10 @@ The following repositories are managed by the ros-controls PMC:
      - Not Yet Available
    * - https://github.com/ros-controls/realtime_tools
      - Not Yet Available
-<<<<<<< HEAD
-=======
    * - https://github.com/ros-controls/topic_based_hardware_interfaces
      - Marq Rasmussen
    * - https://github.com/ros-controls/onnxruntime_vendor
      - Julia Jia
->>>>>>> e879a0d (Add onnxruntime_vendor (#597))
    * - https://github.com/ros-controls/.github
      - Not Yet Available
 
