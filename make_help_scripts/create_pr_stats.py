@@ -675,7 +675,8 @@ repos = [
   "ros2_control_ci",
   "ros2_rhel",
   "ros2_debian",
-  "mujoco_ros2_control"
+  "mujoco_ros2_control",
+  "onnxruntime_vendor"
 ]
 
 branches = {
@@ -693,7 +694,8 @@ branches = {
   "ros2_control_ci": "master",
   "ros2_rhel": "main",
   "ros2_debian": "main",
-  "mujoco_ros2_control": "main"
+  "mujoco_ros2_control": "main",
+  "onnxruntime_vendor": "main"
 }
 
 maintainers = ["bmagyar", "destogl", "christophfroehlich"]
