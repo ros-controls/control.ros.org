@@ -642,7 +642,45 @@ The full structure of the map is given in the following example:</p>
 <span class="go">                        Option to switch the controllers in the realtime loop at the earliest possible time or in the non-realtime loop.</span>
 <span class="go">  --controller-ros-args CONTROLLER_ROS_ARGS</span>
 <span class="go">                        The --ros-args to be passed to the controller node, e.g., for remapping topics. Pass multiple times for every argument.</span>
+
+<span class="go">When launching ``spawner`` with ROS parameter files that use substitutions (for example, launch ``allow_substs=True``),</span>
+<span class="go">the resolved ``--params-file`` path(s) used by the spawner node are automatically forwarded to each controller along</span>
+<span class="go">with any explicit ``--param-file`` arguments passed to the spawner command.</span>
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If a single parameter file is used for multiple controllers, the spawner will automatically forward the resolved path(s) to each controller. The following methods are recommended:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Node(</span>
+<span class="go">    package=&quot;controller_manager&quot;,</span>
+<span class="go">    executable=&quot;spawner&quot;,</span>
+<span class="go">    arguments=[</span>
+<span class="go">        &quot;my_controller&quot;,</span>
+<span class="go">        &quot;--param-file&quot;,</span>
+<span class="go">        PathSubstitution(FindPackageShare(&quot;my_config_pkg&quot;))</span>
+<span class="go">        / &quot;config&quot;</span>
+<span class="go">        / &quot;controllers.yaml&quot;,</span>
+<span class="go">    ],</span>
+<span class="go">),</span>
+</pre></div>
+</div>
+<p>(or)</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Node(</span>
+<span class="go">    package=&quot;controller_manager&quot;,</span>
+<span class="go">    executable=&quot;spawner&quot;,</span>
+<span class="go">    parameters=[</span>
+<span class="go">        ParameterFile(</span>
+<span class="go">            PathSubstitution(FindPackageShare(&quot;my_config_pkg&quot;))</span>
+<span class="go">            / &quot;config&quot;</span>
+<span class="go">            / &quot;controllers.yaml&quot;,</span>
+<span class="go">        ),</span>
+<span class="go">    ],</span>
+<span class="go">    arguments=[</span>
+<span class="go">        &quot;my_controller&quot;</span>
+<span class="go">    ],</span>
+<span class="go">),</span>
+</pre></div>
+</div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">spawner</span></code> now supports per controller arguments, while parsing the arguments for multiple controllers using <code class="docutils literal notranslate"><span class="pre">--controller</span></code> option. For example, to spawn two controllers with different parameter files and remapping topics, the following command can be used:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>run<span class="w"> </span>controller_manager<span class="w"> </span>spawner<span class="w"> </span>--controller<span class="w"> </span>position_trajectory_controller<span class="w"> </span><span class="se">\</span>

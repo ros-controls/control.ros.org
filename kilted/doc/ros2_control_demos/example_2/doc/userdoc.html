@@ -144,6 +144,16 @@ The robot is basically a box moving according to differential drive kinematics.<
 <p class="admonition-title">Note</p>
 <p>The commands below are given for a local installation of this repository and its dependencies as well as for running them from a docker container. For more information on the docker usage see <a class="reference internal" href="../../doc/index.html#using-docker"><span class="std std-ref">Using Docker</span></a>.</p>
 </div>
+<p>This demo shows also how you can use custom controller manager name and simplify your configuration. Besided that provides also <code class="docutils literal notranslate"><span class="pre">.launch.xml</span></code> version of the launch file to directly compare it with the <code class="docutils literal notranslate"><span class="pre">.launch.py</span></code> version.</p>
+<p>You can rename the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> node, e.g., when want to separate the hardware management on the same machine. Check the <code class="docutils literal notranslate"><span class="pre">launch.py</span></code> to see the name set to default name and <code class="docutils literal notranslate"><span class="pre">launch.xml</span></code> to see how to set a custom name.</p>
+<blockquote>
+<div><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>node<span class="w"> </span>list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>diffbot
+</pre></div>
+</div>
+<p>You should see the manager <code class="docutils literal notranslate"><span class="pre">/my_diffbot_manager</span></code> and the hardware node <code class="docutils literal notranslate"><span class="pre">/diffbot</span></code> (or similar, based on your URDF name).</p>
+</div></blockquote>
+<p><strong>Configuration Note</strong>:
+The <code class="docutils literal notranslate"><span class="pre">diffbot_controllers.yaml</span></code> file demonstrates that you do not need to nest controller parameters under a <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> namespace. Since the spawner loads parameters directly for each controller, the YAML file can simply list the controllers at the root level. This makes the configuration more flexible and easier to reuse.</p>
 <section id="tutorial-steps">
 <h2>Tutorial steps<a class="headerlink" href="#tutorial-steps" title="Link to this heading"></a></h2>
 <ol class="arabic">

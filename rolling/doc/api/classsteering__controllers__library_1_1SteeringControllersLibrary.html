@@ -116,17 +116,19 @@ Collaboration diagram for steering_controllers_library::SteeringControllersLibra
 <div class="dyncontent">
 <div class="center"><img src="classsteering__controllers__library_1_1SteeringControllersLibrary__coll__graph.png" border="0" usemap="#asteering__controllers__library_1_1SteeringControllersLibrary_coll__map" alt="Collaboration graph"/></div>
 <map name="asteering__controllers__library_1_1SteeringControllersLibrary_coll__map" id="asteering__controllers__library_1_1SteeringControllersLibrary_coll__map">
-<area shape="rect" title=" " alt="" coords="896,70,1099,125"/>
+<area shape="rect" title=" " alt="" coords="999,106,1201,161"/>
 <area shape="rect" href="classcontroller__interface_1_1ChainableControllerInterface.html" title=" " alt="" coords="548,5,765,45"/>
-<area shape="poly" title=" " alt="" coords="766,46,896,73,895,79,765,51"/>
+<area shape="poly" title=" " alt="" coords="779,43,876,62,975,87,1028,103,1026,109,974,92,874,68,778,48"/>
 <area shape="rect" href="classcontroller__interface_1_1ControllerInterfaceBase.html" title=" " alt="" coords="307,5,491,45"/>
 <area shape="poly" title=" " alt="" coords="504,23,548,23,548,28,504,28"/>
 <area shape="rect" title=" " alt="" coords="5,5,257,45"/>
 <area shape="poly" title=" " alt="" coords="271,23,306,23,306,28,271,28"/>
 <area shape="rect" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html" title=" " alt="" coords="540,70,773,125"/>
-<area shape="poly" title=" " alt="" coords="787,95,896,95,896,100,787,100"/>
+<area shape="poly" title=" " alt="" coords="787,105,999,123,998,128,787,111"/>
 <area shape="rect" href="classsteering__kinematics_1_1SteeringKinematics.html" title="The SteeringKinematics class handles forward kinematics (odometry calculations) and inverse kinematic..." alt="" coords="578,149,735,189"/>
-<area shape="poly" title=" " alt="" coords="748,147,895,116,896,121,749,153"/>
+<area shape="poly" title=" " alt="" coords="749,160,974,141,998,139,999,145,975,147,749,165"/>
+<area shape="rect" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html" title=" " alt="" coords="564,213,749,283"/>
+<area shape="poly" title=" " alt="" coords="762,226,865,204,974,176,1028,158,1029,163,975,181,867,209,764,231"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -165,6 +167,12 @@ virtual controller_interface::CallbackReturn&#160;</td><td class="memItemRight" 
 <tr class="memitem:acc6e7fc98402333362bd37024eece1c0" id="r_acc6e7fc98402333362bd37024eece1c0"><td class="memItemLeft" align="right" valign="top"><a id="acc6e7fc98402333362bd37024eece1c0" name="acc6e7fc98402333362bd37024eece1c0"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>update_odometry</b> (const rclcpp::Duration &amp;period)=0</td></tr>
 <tr class="separator:acc6e7fc98402333362bd37024eece1c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add5745587b3f08bf3aaa3b394cf2c3a0" id="r_add5745587b3f08bf3aaa3b394cf2c3a0"><td class="memItemLeft" align="right" valign="top"><a id="add5745587b3f08bf3aaa3b394cf2c3a0" name="add5745587b3f08bf3aaa3b394cf2c3a0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_odometry</b> (const std::shared_ptr&lt; rmw_request_id_t &gt; request_header, const std::shared_ptr&lt; control_msgs::srv::SetOdometry::Request &gt; req, std::shared_ptr&lt; control_msgs::srv::SetOdometry::Response &gt; res)</td></tr>
+<tr class="separator:add5745587b3f08bf3aaa3b394cf2c3a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8522c047f935cb08a89aa538524b56db" id="r_a8522c047f935cb08a89aa538524b56db"><td class="memItemLeft" align="right" valign="top"><a id="a8522c047f935cb08a89aa538524b56db" name="a8522c047f935cb08a89aa538524b56db"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr>
+<tr class="separator:a8522c047f935cb08a89aa538524b56db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae06f5761464c760595778bb93b06741a" id="r_ae06f5761464c760595778bb93b06741a"><td class="memItemLeft" align="right" valign="top"><a id="ae06f5761464c760595778bb93b06741a" name="ae06f5761464c760595778bb93b06741a"></a>
 controller_interface::CallbackReturn&#160;</td><td class="memItemRight" valign="bottom"><b>on_configure</b> (const rclcpp_lifecycle::State &amp;previous_state) override</td></tr>
 <tr class="separator:ae06f5761464c760595778bb93b06741a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -174,6 +182,12 @@ controller_interface::CallbackReturn&#160;</td><td class="memItemRight" valign="
 <tr class="memitem:aa7851a2ffe9162261849cd269a968a20" id="r_aa7851a2ffe9162261849cd269a968a20"><td class="memItemLeft" align="right" valign="top"><a id="aa7851a2ffe9162261849cd269a968a20" name="aa7851a2ffe9162261849cd269a968a20"></a>
 controller_interface::CallbackReturn&#160;</td><td class="memItemRight" valign="bottom"><b>on_deactivate</b> (const rclcpp_lifecycle::State &amp;previous_state) override</td></tr>
 <tr class="separator:aa7851a2ffe9162261849cd269a968a20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d9391808d400d39052d5a10075b2569" id="r_a4d9391808d400d39052d5a10075b2569"><td class="memItemLeft" align="right" valign="top"><a id="a4d9391808d400d39052d5a10075b2569" name="a4d9391808d400d39052d5a10075b2569"></a>
+controller_interface::CallbackReturn&#160;</td><td class="memItemRight" valign="bottom"><b>on_cleanup</b> (const rclcpp_lifecycle::State &amp;previous_state) override</td></tr>
+<tr class="separator:a4d9391808d400d39052d5a10075b2569"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a61f554eec87939f029bfb02dea9da9" id="r_a3a61f554eec87939f029bfb02dea9da9"><td class="memItemLeft" align="right" valign="top"><a id="a3a61f554eec87939f029bfb02dea9da9" name="a3a61f554eec87939f029bfb02dea9da9"></a>
+controller_interface::CallbackReturn&#160;</td><td class="memItemRight" valign="bottom"><b>on_error</b> (const rclcpp_lifecycle::State &amp;previous_state) override</td></tr>
+<tr class="separator:a3a61f554eec87939f029bfb02dea9da9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abfe34b985f0659d94fc454febab9363c" id="r_abfe34b985f0659d94fc454febab9363c"><td class="memItemLeft" align="right" valign="top">controller_interface::return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsteering__controllers__library_1_1SteeringControllersLibrary.html#abfe34b985f0659d94fc454febab9363c">update_reference_from_subscribers</a> (const rclcpp::Time &amp;time, const rclcpp::Duration &amp;period) override</td></tr>
 <tr class="memdesc:abfe34b985f0659d94fc454febab9363c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update reference from input topics when not in chained mode.  <br /></td></tr>
 <tr class="separator:abfe34b985f0659d94fc454febab9363c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -326,6 +340,15 @@ ControllerStateMsgTf&#160;</td><td class="memItemRight" valign="bottom"><b>tf_od
 <a class="el" href="classsteering__kinematics_1_1SteeringKinematics.html">steering_kinematics::SteeringKinematics</a>&#160;</td><td class="memItemRight" valign="bottom"><b>odometry_</b></td></tr>
 <tr class="memdesc:a07f0b326fb497cea42f062b1604b39e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Odometry: <br /></td></tr>
 <tr class="separator:a07f0b326fb497cea42f062b1604b39e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e6dada3215feeb1a83a9027dffd4d9f" id="r_a1e6dada3215feeb1a83a9027dffd4d9f"><td class="memItemLeft" align="right" valign="top"><a id="a1e6dada3215feeb1a83a9027dffd4d9f" name="a1e6dada3215feeb1a83a9027dffd4d9f"></a>
+rclcpp::Service&lt; control_msgs::srv::SetOdometry &gt;::SharedPtr&#160;</td><td class="memItemRight" valign="bottom"><b>set_odom_service_</b></td></tr>
+<tr class="separator:a1e6dada3215feeb1a83a9027dffd4d9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53925838294d8dc1fa52e4c50a020519" id="r_a53925838294d8dc1fa52e4c50a020519"><td class="memItemLeft" align="right" valign="top"><a id="a53925838294d8dc1fa52e4c50a020519" name="a53925838294d8dc1fa52e4c50a020519"></a>
+std::atomic&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>set_odom_requested_</b> {false}</td></tr>
+<tr class="separator:a53925838294d8dc1fa52e4c50a020519"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a888a108579442b26cbe3135fc92fae98" id="r_a888a108579442b26cbe3135fc92fae98"><td class="memItemLeft" align="right" valign="top"><a id="a888a108579442b26cbe3135fc92fae98" name="a888a108579442b26cbe3135fc92fae98"></a>
+<a class="el" href="classrealtime__tools_1_1RealtimeThreadSafeBox.html">realtime_tools::RealtimeThreadSafeBox</a>&lt; control_msgs::srv::SetOdometry::Request &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>requested_odom_params_</b></td></tr>
+<tr class="separator:a888a108579442b26cbe3135fc92fae98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59ce4839a57cc0c0a271ae0d8610bb33" id="r_a59ce4839a57cc0c0a271ae0d8610bb33"><td class="memItemLeft" align="right" valign="top"><a id="a59ce4839a57cc0c0a271ae0d8610bb33" name="a59ce4839a57cc0c0a271ae0d8610bb33"></a>
 SteeringControllerStateMsg&#160;</td><td class="memItemRight" valign="bottom"><b>published_state_</b></td></tr>
 <tr class="separator:a59ce4839a57cc0c0a271ae0d8610bb33"><td class="memSeparator" colspan="2">&#160;</td></tr>
