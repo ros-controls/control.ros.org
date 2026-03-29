@@ -74,6 +74,10 @@ The ros-controls committers (who are not also part of the ros-controls PMC) cons
      - `Locus Robotics <https://locusrobotics.com/>`_
      - `MarqRazz <https://github.com/MarqRazz>`_
      - MST (UTC-7)/MDT (UTC-6)
+   * - Julia Jia
+     - Independent
+     - `Juliaj <https://github.com/Juliaj>`_
+     - PST (UTC-8)/PDT (UTC-7)
 
 Past ros-controls PMC Constituents
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -122,6 +126,10 @@ The following repositories are managed by the ros-controls PMC:
      - Not Yet Available
    * - https://github.com/ros-controls/realtime_tools
      - Not Yet Available
+   * - https://github.com/ros-controls/topic_based_hardware_interfaces
+     - Marq Rasmussen
+   * - https://github.com/ros-controls/onnxruntime_vendor
+     - Julia Jia
    * - https://github.com/ros-controls/.github
      - Not Yet Available
 
