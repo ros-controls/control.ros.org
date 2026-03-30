@@ -40,6 +40,7 @@ The framework consists of the following Github repositories hosted under the `ro
 * `control_msgs`_ - common messages;
 * `kinematics_interface`_ - for using C++ kinematics frameworks;
 * `gz_ros2_control`_ - Plugin for Gazebo;
+* `mujoco_ros2_control`_ - Plugin for MuJoCo;
 * `onnxruntime_vendor`_ - Vendor package for `ONNX Runtime <https://onnxruntime.ai/>`_.
 
 
@@ -88,6 +89,7 @@ General discussions
 .. _kinematics_interface: https://github.com/ros-controls/kinematics_interface
 .. _ros2_control_demos: https://github.com/ros-controls/ros2_control_demos
 .. _gz_ros2_control: https://github.com/ros-controls/gz_ros2_control
+.. _mujoco_ros2_control: https://github.com/ros-controls/mujoco_ros2_control
 .. _ros2_control_ci: https://github.com/ros-controls/ros2_control_ci
 .. _.github: https://github.com/ros-controls/.github
 .. _ros2_control_cmake: https://github.com/ros-controls/ros2_control_cmake
