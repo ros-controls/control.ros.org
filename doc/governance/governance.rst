@@ -78,6 +78,22 @@ The ros-controls committers (who are not also part of the ros-controls PMC) cons
      - Independent
      - `Juliaj <https://github.com/Juliaj>`_
      - PST (UTC-8)/PDT (UTC-7)
+   * - Nathan Dunkelberger
+     - `NASA JSC Robotics <https://www.nasa.gov/reference/jsc-robotics/>`_
+     - `ndunkelb-nasa <https://github.com/ndunkelb-nasa>`_
+     - CST (UTC-6)/CDT (UTC-5)
+   * - Emma Zemler
+     - `NASA JSC Robotics <https://www.nasa.gov/reference/jsc-robotics/>`_
+     - `ezemler-nasa <https://github.com/ezemler-nasa>`_
+     - CST (UTC-6)/CDT (UTC-5)
+   * - Michael Tobia
+     - `NASA JSC Robotics <https://www.nasa.gov/reference/jsc-robotics/>`_
+     - `mtobia-nasa <https://github.com/mtobia-nasa>`_
+     - CST (UTC-6)/CDT (UTC-5)
+   * - Erik Holum
+     - `NASA JSC Robotics <https://www.nasa.gov/reference/jsc-robotics/>`_
+     - `eholum-nasa <https://github.com/eholum-nasa>`_
+     - EST (UTC-5)/EDT (UTC-4)
 
 Past ros-controls PMC Constituents
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -133,7 +149,7 @@ The following repositories are managed by the ros-controls PMC:
    * - https://github.com/ros-controls/.github
      - Not Yet Available
    * - https://github.com/ros-controls/mujoco_ros2_control
-     - None yet
+     - Nathan Dunkelberger, Emma Zemler, Michael Tobia, Erik Holum
 
 Releases, Versioning, and Public API
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
