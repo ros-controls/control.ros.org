@@ -42,6 +42,7 @@ The framework consists of the following Github repositories hosted under the `ro
 * `gz_ros2_control`_ - Plugin for Gazebo;
 * `topic_based_hardware_interfaces`_ - hardware_interfaces for simulators and other hardware that only support ROS topic-based communication;
 * `mujoco_ros2_control`_ - Plugin for MuJoCo;
+* `onnxruntime_vendor`_ - Vendor package for `ONNX Runtime <https://onnxruntime.ai/>`_.
 
 
 Additionally, the following (unreleased) packages are relevant for documentation and project management:
@@ -86,6 +87,7 @@ General discussions
 .. _realtime_tools: https://github.com/ros-controls/realtime_tools
 .. _topic_based_hardware_interfaces: https://github.com/ros-controls/topic_based_hardware_interfaces
 .. _control_toolbox: https://github.com/ros-controls/control_toolbox
+.. _onnxruntime_vendor: https://github.com/ros-controls/onnxruntime_vendor
 .. _kinematics_interface: https://github.com/ros-controls/kinematics_interface
 .. _ros2_control_demos: https://github.com/ros-controls/ros2_control_demos
 .. _gz_ros2_control: https://github.com/ros-controls/gz_ros2_control
