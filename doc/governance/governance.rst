@@ -148,7 +148,7 @@ The following repositories are managed by the ros-controls PMC:
    * - https://github.com/ros-controls/onnxruntime_vendor
      - Julia Jia
    * - https://github.com/ros-controls/.github
-     - Not Yet Available
+     - None yet
    * - https://github.com/ros-controls/mujoco_ros2_control
      - Nathan Dunkelberger, Emma Zemler, Michael Tobia, Erik Holum
 
