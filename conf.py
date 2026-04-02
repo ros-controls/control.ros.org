@@ -96,7 +96,8 @@ extensions = [
     "generate_parameter_library",
     'sphinx_tabs.tabs',
     "sphinx.ext.autosectionlabel",
-    'myst_parser'
+    'myst_parser',
+    'sphinxcontrib.youtube'
 ]
 
 # Make sure the target is unique
@@ -145,6 +146,7 @@ html_static_path = ["_static"]
 # or fully qualified paths (eg. https://...)
 html_css_files = [
     'reviewer_stats.css',
+    'custom.css',
 ]
 
 # Custom sidebar templates, must be a dictionary that maps document names
