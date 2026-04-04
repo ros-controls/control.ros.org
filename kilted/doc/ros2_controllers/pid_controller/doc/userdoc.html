@@ -263,6 +263,10 @@ Plugin name: pid_controller/PidController</p>
 </ul>
 </div></blockquote>
 </dd>
+<dt>set_current_state_as_first_setpoint (bool)</dt><dd><p>When true, the controller will set the current state as the first setpoint when the controller is activated. This can help to avoid large initial errors and sudden jumps in the control output when the controller starts.</p>
+<p>Read only: True</p>
+<p>Default:  true</p>
+</dd>
 <dt>use_external_measured_states (bool)</dt><dd><p>Use external states from a topic instead from state interfaces.</p>
 <p>Default:  false</p>
 </dd>
@@ -335,6 +339,8 @@ Plugin name: pid_controller/PidController</p>
 
 <span class="w">    </span><span class="nt">reference_and_state_interfaces</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;position&quot;</span><span class="p p-Indicator">]</span>
 
+<span class="w">    </span><span class="nt">set_current_state_as_first_setpoint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+
 <span class="w">    </span><span class="nt">gains</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">joint1</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">p</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="nt"> i</span><span class="p">:</span><span class="w"> </span><span class="nv">2.0</span><span class="p p-Indicator">,</span><span class="nt"> d</span><span class="p">:</span><span class="w"> </span><span class="nv">3.0</span><span class="p p-Indicator">,</span><span class="nt"> u_clamp_max</span><span class="p">:</span><span class="w"> </span><span class="nv">5.0</span><span class="p p-Indicator">,</span><span class="nt"> u_clamp_min</span><span class="p">:</span><span class="w"> </span><span class="nv">-5.0</span><span class="p p-Indicator">}</span>
 
@@ -346,6 +352,8 @@ Plugin name: pid_controller/PidController</p>
 <span class="w">    </span><span class="nt">command_interface</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
 
 <span class="w">    </span><span class="nt">reference_and_state_interfaces</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;position&quot;</span><span class="p p-Indicator">]</span>
+
+<span class="w">    </span><span class="nt">set_current_state_as_first_setpoint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 
 <span class="w">    </span><span class="nt">gains</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">joint1</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">p</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="nt"> i</span><span class="p">:</span><span class="w"> </span><span class="nv">2.0</span><span class="p p-Indicator">,</span><span class="nt"> d</span><span class="p">:</span><span class="w"> </span><span class="nv">3.0</span><span class="p p-Indicator">}</span>
@@ -359,6 +367,8 @@ Plugin name: pid_controller/PidController</p>
 
 <span class="w">    </span><span class="nt">reference_and_state_interfaces</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;position&quot;</span><span class="p p-Indicator">]</span>
 
+<span class="w">    </span><span class="nt">set_current_state_as_first_setpoint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+
 <span class="w">    </span><span class="nt">gains</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">joint1</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">p</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="nt"> i</span><span class="p">:</span><span class="w"> </span><span class="nv">2.0</span><span class="p p-Indicator">,</span><span class="nt"> d</span><span class="p">:</span><span class="w"> </span><span class="nv">3.0</span><span class="p p-Indicator">,</span><span class="nt"> angle_wraparound</span><span class="p">:</span><span class="w"> </span><span class="nv">true</span><span class="p p-Indicator">}</span>
 
@@ -370,6 +380,8 @@ Plugin name: pid_controller/PidController</p>
 <span class="w">    </span><span class="nt">command_interface</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
 
 <span class="w">    </span><span class="nt">reference_and_state_interfaces</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;position&quot;</span><span class="p p-Indicator">]</span>
+
+<span class="w">    </span><span class="nt">set_current_state_as_first_setpoint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 
 <span class="w">    </span><span class="nt">gains</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">joint1</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">p</span><span class="p">:</span><span class="w"> </span><span class="nv">0.5</span><span class="p p-Indicator">,</span><span class="nt"> i</span><span class="p">:</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="nt"> d</span><span class="p">:</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="nt"> feedforward_gain</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">}</span>
@@ -384,6 +396,8 @@ Plugin name: pid_controller/PidController</p>
 
 <span class="w">    </span><span class="nt">reference_and_state_interfaces</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;position&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;velocity&quot;</span><span class="p p-Indicator">]</span>
 
+<span class="w">    </span><span class="nt">set_current_state_as_first_setpoint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+
 <span class="w">    </span><span class="nt">gains</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">joint1</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">p</span><span class="p">:</span><span class="w"> </span><span class="nv">0.5</span><span class="p p-Indicator">,</span><span class="nt"> i</span><span class="p">:</span><span class="w"> </span><span class="nv">0.3</span><span class="p p-Indicator">,</span><span class="nt"> d</span><span class="p">:</span><span class="w"> </span><span class="nv">0.4</span><span class="p p-Indicator">,</span><span class="nt"> feedforward_gain</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">}</span>
 <span class="w">      </span><span class="nt">joint2</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">p</span><span class="p">:</span><span class="w"> </span><span class="nv">0.5</span><span class="p p-Indicator">,</span><span class="nt"> i</span><span class="p">:</span><span class="w"> </span><span class="nv">0.3</span><span class="p p-Indicator">,</span><span class="nt"> d</span><span class="p">:</span><span class="w"> </span><span class="nv">0.4</span><span class="p p-Indicator">,</span><span class="nt"> feedforward_gain</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">}</span>
@@ -397,6 +411,8 @@ Plugin name: pid_controller/PidController</p>
 
 <span class="w">    </span><span class="nt">reference_and_state_interfaces</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;position&quot;</span><span class="p p-Indicator">]</span>
 
+<span class="w">    </span><span class="nt">set_current_state_as_first_setpoint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+
 <span class="w">    </span><span class="nt">gains</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">joint1</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">p</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="nt"> i</span><span class="p">:</span><span class="w"> </span><span class="nv">2.0</span><span class="p p-Indicator">,</span><span class="nt"> d</span><span class="p">:</span><span class="w"> </span><span class="nv">3.0</span><span class="p p-Indicator">,</span><span class="nt"> save_i_term</span><span class="p">:</span><span class="w"> </span><span class="nv">false</span><span class="p p-Indicator">}</span>
 
@@ -409,8 +425,24 @@ Plugin name: pid_controller/PidController</p>
 
 <span class="w">    </span><span class="nt">reference_and_state_interfaces</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;position&quot;</span><span class="p p-Indicator">]</span>
 
+<span class="w">    </span><span class="nt">set_current_state_as_first_setpoint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+
 <span class="w">    </span><span class="nt">gains</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">joint1</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">p</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="nt"> i</span><span class="p">:</span><span class="w"> </span><span class="nv">2.0</span><span class="p p-Indicator">,</span><span class="nt"> d</span><span class="p">:</span><span class="w"> </span><span class="nv">3.0</span><span class="p p-Indicator">,</span><span class="nt"> save_i_term</span><span class="p">:</span><span class="w"> </span><span class="nv">true</span><span class="p p-Indicator">}</span>
+
+<span class="nt">test_pid_controller_no_first_setpoint</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">dof_names</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint1</span>
+
+<span class="w">    </span><span class="nt">command_interface</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
+
+<span class="w">    </span><span class="nt">reference_and_state_interfaces</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;position&quot;</span><span class="p p-Indicator">]</span>
+
+<span class="w">    </span><span class="nt">set_current_state_as_first_setpoint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+
+<span class="w">    </span><span class="nt">gains</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">joint1</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">p</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="nt"> i</span><span class="p">:</span><span class="w"> </span><span class="nv">2.0</span><span class="p p-Indicator">,</span><span class="nt"> d</span><span class="p">:</span><span class="w"> </span><span class="nv">3.0</span><span class="p p-Indicator">,</span><span class="nt"> u_clamp_max</span><span class="p">:</span><span class="w"> </span><span class="nv">5.0</span><span class="p p-Indicator">,</span><span class="nt"> u_clamp_min</span><span class="p">:</span><span class="w"> </span><span class="nv">-5.0</span><span class="p p-Indicator">}</span>
 </pre></div>
 </div>
 <p>or as <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/master/pid_controller/test/pid_controller_preceding_params.yaml">preceding controller</a>:</p>
