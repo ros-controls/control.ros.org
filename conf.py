@@ -97,7 +97,8 @@ extensions = [
     'sphinx_tabs.tabs',
     "sphinx.ext.autosectionlabel",
     'myst_parser',
-    'sphinxcontrib.youtube'
+    'sphinxcontrib.youtube',
+    'sphinxcontrib.cairosvgconverter'
 ]
 
 # Make sure the target is unique
@@ -192,6 +193,14 @@ linkcheck_ignore = [
 
 # Output file base name for HTML help builder.
 htmlhelp_basename = "ros2ControlDocumentation"
+
+pdf_basename = f"ros2_control_{ros_distro}"
+latex_author = author.replace("_", r"\_")
+latex_engine = "xelatex"
+
+latex_documents = [
+    (master_doc, f"{pdf_basename}.tex", f"ros2\\_control Documentation ({distro_title_full})", latex_author, "manual"),
+]
 
 
 # -- Extension configuration -------------------------------------------------
