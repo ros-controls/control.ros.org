@@ -51,12 +51,12 @@ jobs:
       run: make pdf-rolling
     - name: clone gh-pages branch
       uses: actions/checkout@v6
-      if: ${{ success() && github.event_name != 'pull_request' }}
+      if: ${{ success() && github.event_name != 'pull_request' && !env.ACT }}
       with:
         ref: gh-pages
         path: gh-pages
     - name: Deploy Pages
-      if: ${{ success() && github.event_name != 'pull_request' }}
+      if: ${{ success() && github.event_name != 'pull_request' && !env.ACT }}
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
