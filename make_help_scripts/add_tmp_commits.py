@@ -19,6 +19,35 @@ import sys
 import shutil
 import deploy_defines
 
+
+def checkout_branch(branch_name):
+    """Checkout a branch in CI even when refs are shallow or detached."""
+    # First use an already available local branch.
+    if subprocess.run(["git", "rev-parse", "--verify", "--quiet", f"refs/heads/{branch_name}"], check=False).returncode == 0:
+        subprocess.run(["git", "checkout", branch_name], check=True)
+        return
+
+    # Try to fetch the branch from origin (works for same-repo branches).
+    fetch_result = subprocess.run(
+        ["git", "fetch", "--no-tags", "origin", f"refs/heads/{branch_name}:refs/remotes/origin/{branch_name}"],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if fetch_result.returncode == 0:
+        subprocess.run(["git", "checkout", "-B", branch_name, f"origin/{branch_name}"], check=True)
+        return
+
+    # On fork PRs, the head branch may not exist on origin; use checked out HEAD as fallback.
+    if os.environ.get("GITHUB_HEAD_REF") == branch_name:
+        subprocess.run(["git", "checkout", "-B", branch_name, "HEAD"], check=True)
+        return
+
+    print(f"Could not checkout branch '{branch_name}'.")
+    if fetch_result.stderr:
+        print(fetch_result.stderr.strip())
+    sys.exit(2)
+
 def check_repositories():
     os.chdir(deploy_defines.base_dir)
     # Check for uncommitted changes in control.ros.org repository
@@ -39,12 +68,12 @@ def check_repositories():
 def add_sub_repositories_and_commit():
     os.chdir(deploy_defines.base_dir)
     # Checkout the base branch
-    subprocess.run(["git", "checkout", deploy_defines.base_branch], check=True)
+    checkout_branch(deploy_defines.base_branch)
     # For each branch from multi version, checkout branch, clone sub repositories with docs add as tmp commit and remove
     for branch, version in deploy_defines.branch_version.items():
         print("----------------------------------------------------")
         print(f"Switch to branch: {branch} with version: {version}")
-        subprocess.run(["git", "checkout", branch], check=True)
+        checkout_branch(branch)
         # Modify .gitignore to include subrepositories
         for repo_name in deploy_defines.repos.keys():
             subprocess.run(["sed", "-i", f"s/doc\/{repo_name}/\#doc\/{repo_name}/g", ".gitignore"], check=True)
@@ -64,7 +93,7 @@ def add_sub_repositories_and_commit():
         subprocess.run(["git", "add", "."], check=True)
         # We don't want to use-precommit to check if subrepos are correct
         subprocess.run(["git", "commit", "-m", "Add temporary changes for multi version", "--no-verify"], check=True, stdout=subprocess.DEVNULL)
-        subprocess.run(["git", "checkout", deploy_defines.base_branch], check=True)
+        checkout_branch(deploy_defines.base_branch)
     print("---------- end add_sub_repositories_and_commit ----------------")
 
 if __name__ == "__main__":
