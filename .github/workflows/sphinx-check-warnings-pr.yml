@@ -38,3 +38,9 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         make html-all-subrepos-with-errors
+    - name: Upload HTML artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: multiversion-html
+        path: _build/html
+        if-no-files-found: error
