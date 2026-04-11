@@ -22,9 +22,31 @@ import deploy_defines
 
 def checkout_branch(branch_name):
     """Checkout a branch in CI even when refs are shallow or detached."""
-    # Ensure the branch exists locally by fetching it explicitly from origin.
-    subprocess.run(["git", "fetch", "--no-tags", "origin", f"{branch_name}:{branch_name}"], check=True)
-    subprocess.run(["git", "checkout", branch_name], check=True)
+    # First use an already available local branch.
+    if subprocess.run(["git", "rev-parse", "--verify", "--quiet", f"refs/heads/{branch_name}"], check=False).returncode == 0:
+        subprocess.run(["git", "checkout", branch_name], check=True)
+        return
+
+    # Try to fetch the branch from origin (works for same-repo branches).
+    fetch_result = subprocess.run(
+        ["git", "fetch", "--no-tags", "origin", f"refs/heads/{branch_name}:refs/remotes/origin/{branch_name}"],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if fetch_result.returncode == 0:
+        subprocess.run(["git", "checkout", "-B", branch_name, f"origin/{branch_name}"], check=True)
+        return
+
+    # On fork PRs, the head branch may not exist on origin; use checked out HEAD as fallback.
+    if os.environ.get("GITHUB_HEAD_REF") == branch_name:
+        subprocess.run(["git", "checkout", "-B", branch_name, "HEAD"], check=True)
+        return
+
+    print(f"Could not checkout branch '{branch_name}'.")
+    if fetch_result.stderr:
+        print(fetch_result.stderr.strip())
+    sys.exit(2)
 
 def check_repositories():
     os.chdir(deploy_defines.base_dir)
