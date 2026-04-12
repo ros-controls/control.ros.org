@@ -31,8 +31,10 @@ jobs:
         cd generate_parameter_library/generate_parameter_library_py/
         python -m pip install .
       shell: bash
-    - name: Install doxygen and graphviz
-      run: sudo apt-get install -y doxygen graphviz
+    - name: Install doxygen, graphviz, and LaTeX
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y doxygen graphviz latexmk texlive-fonts-recommended texlive-latex-extra texlive-latex-recommended texlive-plain-generic texlive-xetex fonts-freefont-otf
     - name: Restore stats
       uses: actions/cache/restore@v5
       with:
@@ -45,6 +47,8 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         make multiversion-with-api
+    - name: Build Rolling PDF
+      run: make pdf-rolling
     - name: clone gh-pages branch
       uses: actions/checkout@v6
       if: ${{ success() && github.event_name != 'pull_request' && !env.ACT }}

@@ -5,6 +5,7 @@
 # You can set these variables from the command line.
 SPHINXOPTS    =
 SPHINXBUILD   = python3 -m sphinx
+PYTHON        ?= python3
 SOURCEDIR     = .
 BUILDDIR      = _build
 
@@ -13,6 +14,11 @@ help:
 	@$(SPHINXBUILD) -M help $(SOURCEDIR) $(BUILDDIR) $(SPHINXOPTS) $(O)
 	@echo "  html-with-api"
 	@echo "  html-with-errors"
+<<<<<<< HEAD
+=======
+	@echo "  html-verbose"
+	@echo "  pdf-rolling"
+>>>>>>> cef8c5d (Add documentation downloads page and Rolling PDF build (#616))
 	@echo "  html-all-subrepos"
 	@echo "  html-all-subrepos-with-errors"
 	@echo "  html-all-subrepos-with-api"
@@ -31,6 +37,28 @@ html-with-api: Makefile
 	$(SPHINXBUILD) $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
 	@echo Step 2: Building API
 	./make_help_scripts/create_api.py
+
+pdf-rolling: Makefile
+	@echo Building Rolling PDF
+	@set -e; \
+	cleanup() { ./make_help_scripts/delete_sub_repos.py; }; \
+	trap cleanup EXIT; \
+	echo Step 1: Cloning all subrepositories; \
+	./make_help_scripts/add_sub_repos.py; \
+	echo Step 2: Resetting LaTeX build directory; \
+	rm -rf $(BUILDDIR)/latex; \
+	echo Step 3: Generating LaTeX sources; \
+	$(SPHINXBUILD) -M latex $(SOURCEDIR) $(BUILDDIR) $(SPHINXOPTS) $(O); \
+	echo Step 4: Preparing LaTeX image assets; \
+	$(PYTHON) ./make_help_scripts/prepare_latex_assets.py --latex-dir $(BUILDDIR)/latex; \
+	echo Step 5: Compiling PDF; \
+	$(MAKE) -C $(BUILDDIR)/latex LATEXMKOPTS='-interaction=nonstopmode -halt-on-error' all-pdf; \
+	echo Step 6: Copy PDF into published html folders; \
+	pdf_file=$$(find $(BUILDDIR)/latex -maxdepth 1 -name 'ros2_control_*.pdf' -print -quit); \
+	if [ -z "$$pdf_file" ]; then echo "No generated PDF found in $(BUILDDIR)/latex"; exit 1; fi; \
+	mkdir -p $(BUILDDIR)/html/downloads $(BUILDDIR)/html/rolling/downloads; \
+	cp "$$pdf_file" $(BUILDDIR)/html/downloads/; \
+	cp "$$pdf_file" $(BUILDDIR)/html/rolling/downloads/
 
 html-all-subrepos: Makefile
 	@echo Single html file without API
@@ -109,7 +137,7 @@ multiversion-with-api: Makefile
 	@echo Step 6: Create correct index
 	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=master/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
 
-.PHONY: help Makefile html-with-errors html-with-api multiversion multiversion-with-api multiversion-with-errors html-all-subrepos html-all-subrepos-with-api html-all-subrepos-with-errors linkcheck-all-subrepos-with-api
+.PHONY: help Makefile html-with-errors html-with-api pdf-rolling multiversion multiversion-with-api multiversion-with-errors html-all-subrepos html-all-subrepos-with-api html-all-subrepos-with-errors linkcheck-all-subrepos-with-api
 
 # TODO(denis): Enable this!
 # # # # Generate the doxygen xml (for Sphinx) and copy the doxygen html to the
@@ -121,7 +149,7 @@ multiversion-with-api: Makefile
 # Remove generated content (Sphinx and doxygen)
 # only remove html and doctrees directories since pip also uses _build for side-packages
 clean:
-	rm -fr $(BUILDDIR)/html $(BUILDDIR)/doctrees
+	rm -fr $(BUILDDIR)/html $(BUILDDIR)/doctrees $(BUILDDIR)/latex
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
