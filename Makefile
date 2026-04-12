@@ -55,9 +55,11 @@ pdf-rolling: Makefile
 	echo Step 5: Compiling PDF; \
 	$(MAKE) -C $(BUILDDIR)/latex LATEXMKOPTS='-interaction=nonstopmode -halt-on-error' all-pdf; \
 	echo Step 6: Copy PDF into published html folders; \
+	pdf_file=$$(find $(BUILDDIR)/latex -maxdepth 1 -name 'ros2_control_*.pdf' -print -quit); \
+	if [ -z "$$pdf_file" ]; then echo "No generated PDF found in $(BUILDDIR)/latex"; exit 1; fi; \
 	mkdir -p $(BUILDDIR)/html/downloads $(BUILDDIR)/html/rolling/downloads; \
-	cp $(BUILDDIR)/latex/ros2_control_rolling.pdf $(BUILDDIR)/html/downloads/; \
-	cp $(BUILDDIR)/latex/ros2_control_rolling.pdf $(BUILDDIR)/html/rolling/downloads/
+	cp "$$pdf_file" $(BUILDDIR)/html/downloads/; \
+	cp "$$pdf_file" $(BUILDDIR)/html/rolling/downloads/
 
 html-all-subrepos: Makefile
 	@echo Single html file without API

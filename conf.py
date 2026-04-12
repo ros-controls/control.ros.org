@@ -401,7 +401,26 @@ def github_link_rewrite_branch(app, pagename, templatename, context, doctree):
 
 def expand_macros(app, docname, source):
     result = source[0]
-    for key, value in app.config.macros.items():
+    distro = app.config.macros.get("DISTRO", ros_distro)
+
+    if app.builder.name == "html" and distro == "rolling":
+        downloads_content = (
+            "The currently supported format is linked below:\n\n"
+            f"- `PDF <../downloads/ros2_control_{distro}.pdf>`_"
+        )
+    elif distro == "rolling":
+        downloads_content = (
+            "PDF downloads are published on the generated Rolling HTML site."
+        )
+    else:
+        downloads_content = (
+            "PDF downloads are currently published only for the Rolling documentation."
+        )
+
+    macro_values = dict(app.config.macros)
+    macro_values["DOWNLOADS_CONTENT"] = downloads_content
+
+    for key, value in macro_values.items():
         result = result.replace(f"{{{key}}}", value)
     source[0] = result
 
