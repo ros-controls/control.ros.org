@@ -14,8 +14,11 @@ help:
 	@$(SPHINXBUILD) -M help $(SOURCEDIR) $(BUILDDIR) $(SPHINXOPTS) $(O)
 	@echo "  html-with-api"
 	@echo "  html-with-errors"
+<<<<<<< HEAD
+=======
 	@echo "  html-verbose"
 	@echo "  pdf-rolling"
+>>>>>>> cef8c5d (Add documentation downloads page and Rolling PDF build (#616))
 	@echo "  html-all-subrepos"
 	@echo "  html-all-subrepos-with-errors"
 	@echo "  html-all-subrepos-with-api"
@@ -23,10 +26,6 @@ help:
 	@echo "  multiversion-with-api"
 	@echo "  multiversion-with-errors"
 	@echo "  linkcheck-all-subrepos-with-api"
-
-html-verbose: Makefile
-	@echo Single version without API, verbose output (for finding autosection label)
-	$(SPHINXBUILD) $(SPHINXOPTS) -vvv $(SOURCEDIR) $(BUILDDIR)/html
 
 html-with-errors: Makefile
 	@echo Single version without API, no checkout of sub_repos
@@ -109,8 +108,8 @@ multiversion: Makefile
 	sphinx-multiversion $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
 	@echo Step 3: Deleting temporary commits
 	./make_help_scripts/delete_tmp_commits.py
-	@echo Step 4: Create correct index + legacy master version
-	./make_help_scripts/fix_index.py --build-dir $(BUILDDIR)
+	@echo Step 4: Create correct index
+	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=master/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
 
 multiversion-with-errors: Makefile
 	@echo Building multi version documentation without API
@@ -120,8 +119,8 @@ multiversion-with-errors: Makefile
 	sphinx-multiversion $(SPHINXOPTS) -W --keep-going $(SOURCEDIR) $(BUILDDIR)/html
 	@echo Step 3: Deleting temporary commits
 	./make_help_scripts/delete_tmp_commits.py
-	@echo Step 4: Create correct index + legacy master version
-	./make_help_scripts/fix_index.py --build-dir $(BUILDDIR)
+	@echo Step 4: Create correct index
+	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=master/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
 
 multiversion-with-api: Makefile
 	@echo Building multi version documentation with API
@@ -135,8 +134,8 @@ multiversion-with-api: Makefile
 	./make_help_scripts/delete_sub_repos.py
 	@echo Step 5: Building multiversion API
 	./make_help_scripts/create_api_multi_version.py
-	@echo Step 6: Create correct index + legacy master version
-	./make_help_scripts/fix_index.py --build-dir $(BUILDDIR)
+	@echo Step 6: Create correct index
+	@echo "<html><head><meta http-equiv=\"refresh\" content=\"0; url=master/index.html\" /></head></html>" > "$(BUILDDIR)"/html/index.html
 
 .PHONY: help Makefile html-with-errors html-with-api pdf-rolling multiversion multiversion-with-api multiversion-with-errors html-all-subrepos html-all-subrepos-with-api html-all-subrepos-with-errors linkcheck-all-subrepos-with-api
 
