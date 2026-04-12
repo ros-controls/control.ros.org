@@ -1,0 +1,78 @@
+\_form#0=186x13:$command  = p_{term} + i_{term} + d_{term} $
+\_form#1=116x10:$ p_{term}  = p_{gain} * p_{error} $
+\_form#2=189x15:$ i_{term}  = i_{term} + \int{i_{gain} * p_{error} * dt} $
+\_form#3=116x14:$ d_{term}  = d_{gain} * d_{error} $
+\_form#4=170x14:$ d_{error} = (p_{error} - p_{error last}) / dt $
+\_form#5=133x9:$ p_{error}  = p_{desired} - p_{state} $
+\_form#6=28x11:$i_{term}$
+\_form#7=14x9:$\omega_1$
+\_form#8=14x9:$\omega_2$
+\_form#9=10x9:$T$
+\_form#10=141x16:$s(n) = A \sin [ K(e^{\delta t/L} - 1) ]$
+\_form#11=54x23:$K = \frac{\omega_1T}{\ln \frac{\omega_2}{\omega_1} }$
+\_form#12=50x21:$L = \frac{T}{\ln \frac{\omega_2}{\omega_1} }$
+\_form#13=10x10:$A$
+\_form#14=11x10:$K$
+\_form#15=9x10:$L$
+\_form#16=160x64:\begin{eqnarray*}
+\tau_{j_1} & = & n_{j_1} ( n_{a_1} \tau_{a_1} + n_{a_2} \tau_{a_2} ) \\[2.5em]
+\tau_{j_2} & = & n_{j_2} ( n_{a_1} \tau_{a_1} + n_{a_2} \tau_{a_2} )
+\end{eqnarray*}
+\_form#17=155x79:\begin{eqnarray*}
+\dot{x}_{j_1} & = & \frac{ \dot{x}_{a_1} / n_{a_1} + \dot{x}_{a_2} / n_{a_2} }{2 n_{j_1}} \\[1em]
+\dot{x}_{j_2} & = & \frac{ \dot{x}_{a_1} / n_{a_1} - \dot{x}_{a_2} / n_{a_2} }{2 n_{j_2}}
+\end{eqnarray*}
+\_form#18=198x79:\begin{eqnarray*}
+x_{j_1} & = & \frac{ x_{a_1} / n_{a_1} + x_{a_2} / n_{a_2} }{2 n_{j_1}}  + x_{off_1} \\[1em]
+x_{j_2} & = & \frac{ x_{a_1} / n_{a_1} - x_{a_2} / n_{a_2} }{2 n_{j_1}}  + x_{off_2}
+\end{eqnarray*}
+\_form#19=145x78:\begin{eqnarray*}
+\tau_{a_1} & = & \frac{ \tau_{j_1} / n_{j_1} + \tau_{j_2} / n_{j_2} }{2 n_{a_1}} \\[1em]
+\tau_{a_2} & = & \frac{ \tau_{j_1} / n_{j_1} - \tau_{j_2} / n_{j_2} }{2 n_{a_1}}
+\end{eqnarray*}
+\_form#20=163x64:\begin{eqnarray*}
+\dot{x}_{a_1} & = & n_{a_1} ( n_{j_1} \dot{x}_{j_1} + n_{j_2} \dot{x}_{j_2} ) \\[2.5em]
+\dot{x}_{a_2} & = & n_{a_2} ( n_{j_1} \dot{x}_{j_1} - n_{j_2} \dot{x}_{j_2} )
+\end{eqnarray*}
+\_form#21=269x64:\begin{eqnarray*}
+x_{a_1} & = & n_{a_1} \left[ n_{j_1} (x_{j_1} - x_{off_1}) + n_{j_2} (x_{j_2} - x_{off_2}) \right] \\[2.5em]
+x_{a_2} & = & n_{a_2} \left[ n_{j_1} (x_{j_1} - x_{off_1}) - n_{j_2} (x_{j_2} - x_{off_2}) \right]
+\end{eqnarray*}
+\_form#22=8x6:$ x $
+\_form#23=8x9:$ \dot{x} $
+\_form#24=8x6:$ \tau $
+\_form#25=5x5:$ _a $
+\_form#26=5x9:$ _j $
+\_form#27=25x10:$ x_{off}$
+\_form#28=9x6:$ n $
+\_form#29=26x14:$ (0, 1) $
+\_form#30=178x29:\begin{eqnarray*}
+\tau_{j_1} & = & n_{j_1} n_{a_1} \tau_{a_1} \\
+\tau_{j_2} & = & n_{j_2} (n_{a_2} \tau_{a_2} - n_{j_1} n_{a_1} \tau_{a_1})
+\end{eqnarray*}
+\_form#31=181x65:\begin{eqnarray*}
+\dot{x}_{j_1} & = & \frac{ \dot{x}_{a_1} }{ n_{j_1} n_{a_1} } \\
+\dot{x}_{j_2} & = & \frac{ \dot{x}_{a_2} / n_{a_2} - \dot{x}_{a_1} / (n_{j_1} n_{a_1}) }{ n_{j_2} }
+\end{eqnarray*}
+\_form#32=225x63:\begin{eqnarray*}
+x_{j_1} & = & \frac{ x_{a_1} }{ n_{j_1} n_{a_1} } + x_{off_1} \\
+x_{j_2} & = & \frac{ x_{a_2} / n_{a_2} - x_{a_1} / (n_{j_1} n_{a_1}) }{ n_{j_2} } + x_{off_2}
+\end{eqnarray*}
+\_form#33=123x48:\begin{eqnarray*}
+\tau_{a_1} & = & \tau_{j_1} / (n_{j_1} n_{a_1}) \\
+\tau_{a_2} & = & \frac{ \tau_{j_1} + \tau_{j_2} / n_{j_2} }{ n_{a_2} }
+\end{eqnarray*}
+\_form#34=146x31:\begin{eqnarray*}
+\dot{x}_{a_1} & = & n_{j_1} n_{a_1} \dot{x}_{j_1} \\
+\dot{x}_{a_2} & = & n_{a_2} (\dot{x}_{j_1} + n_{j_2} \dot{x}_{j_2})
+\end{eqnarray*}
+\_form#35=251x33:\begin{eqnarray*}
+x_{a_1} & = & n_{j_1} n_{a_1} (x_{j_1} - x_{off_1}) \\
+x_{a_2} & = & n_{a_2} \left[(x_{j_1} - x_{off_1}) + n_{j_2} (x_{j_2}  - x_{off_2})\right]
+\end{eqnarray*}
+\_form#36=46x10:\[ \tau_j = n \tau_a \]
+\_form#37=56x14:\[ \dot{x}_j = \dot{x}_a / n \]
+\_form#38=95x14:\[ x_j = x_a / n + x_{off} \]
+\_form#39=54x14:\[ \tau_a = \tau_j / n\]
+\_form#40=49x13:\[ \dot{x}_a = n \dot{x}_j \]
+\_form#41=99x14:\[ x_a = n (x_j - x_{off}) \]

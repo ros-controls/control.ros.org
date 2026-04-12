@@ -180,19 +180,19 @@ std::vector&lt; <a class="el" href="classtransmission__interface_1_1ActuatorHand
 <picture><source srcset="form_40_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaDsp" alt="\begin{eqnarray*}
 \tau_{j_1} &amp; = &amp; n_{j_1} n_{a_1} \tau_{a_1} \\
 \tau_{j_2} &amp; = &amp; n_{j_2} (n_{a_2} \tau_{a_2} - n_{j_1} n_{a_1} \tau_{a_1})
-\end{eqnarray*}" src="form_40.png"/></picture>
+\end{eqnarray*}" src="form_40.png" width="178" height="29"/></picture>
 </p>
   </td><td><p class="formulaDsp">
 <picture><source srcset="form_41_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaDsp" alt="\begin{eqnarray*}
 \dot{x}_{j_1} &amp; = &amp; \frac{ \dot{x}_{a_1} }{ n_{j_1} n_{a_1} } \\
 \dot{x}_{j_2} &amp; = &amp; \frac{ \dot{x}_{a_2} / n_{a_2} - \dot{x}_{a_1} / (n_{j_1} n_{a_1}) }{ n_{j_2} }
-\end{eqnarray*}" src="form_41.png"/></picture>
+\end{eqnarray*}" src="form_41.png" width="181" height="65"/></picture>
 </p>
   </td><td><p class="formulaDsp">
 <picture><source srcset="form_42_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaDsp" alt="\begin{eqnarray*}
 x_{j_1} &amp; = &amp; \frac{ x_{a_1} }{ n_{j_1} n_{a_1} } + x_{off_1} \\
 x_{j_2} &amp; = &amp; \frac{ x_{a_2} / n_{a_2} - x_{a_1} / (n_{j_1} n_{a_1}) }{ n_{j_2} } + x_{off_2}
-\end{eqnarray*}" src="form_42.png"/></picture>
+\end{eqnarray*}" src="form_42.png" width="225" height="63"/></picture>
 </p>
    </td></tr>
 <tr>
@@ -200,28 +200,28 @@ x_{j_2} &amp; = &amp; \frac{ x_{a_2} / n_{a_2} - x_{a_1} / (n_{j_1} n_{a_1}) }{ 
 <picture><source srcset="form_43_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaDsp" alt="\begin{eqnarray*}
 \tau_{a_1} &amp; = &amp; \tau_{j_1} / (n_{j_1} n_{a_1}) \\
 \tau_{a_2} &amp; = &amp; \frac{ \tau_{j_1} + \tau_{j_2} / n_{j_2} }{ n_{a_2} }
-\end{eqnarray*}" src="form_43.png"/></picture>
+\end{eqnarray*}" src="form_43.png" width="123" height="48"/></picture>
 </p>
   </td><td><p class="formulaDsp">
 <picture><source srcset="form_44_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaDsp" alt="\begin{eqnarray*}
 \dot{x}_{a_1} &amp; = &amp; n_{j_1} n_{a_1} \dot{x}_{j_1} \\
 \dot{x}_{a_2} &amp; = &amp; n_{a_2} (\dot{x}_{j_1} + n_{j_2} \dot{x}_{j_2})
-\end{eqnarray*}" src="form_44.png"/></picture>
+\end{eqnarray*}" src="form_44.png" width="146" height="31"/></picture>
 </p>
   </td><td><p class="formulaDsp">
 <picture><source srcset="form_45_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaDsp" alt="\begin{eqnarray*}
 x_{a_1} &amp; = &amp; n_{j_1} n_{a_1} (x_{j_1} - x_{off_1}) \\
 x_{a_2} &amp; = &amp; n_{a_2} \left[(x_{j_1} - x_{off_1}) + n_{j_2} (x_{j_2}  - x_{off_2})\right]
-\end{eqnarray*}" src="form_45.png"/></picture>
+\end{eqnarray*}" src="form_45.png" width="251" height="33"/></picture>
 </p>
  </td></tr>
 </table>
 </center><p>where:</p><ul>
-<li><picture><source srcset="form_32_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ x $" src="form_32.png"/></picture>, <picture><source srcset="form_33_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ \dot{x} $" src="form_33.png"/></picture> and <picture><source srcset="form_34_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ \tau $" src="form_34.png"/></picture> are position, velocity and effort variables, respectively.</li>
-<li>Subindices <picture><source srcset="form_35_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ _a $" src="form_35.png"/></picture> and <picture><source srcset="form_36_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ _j $" src="form_36.png"/></picture> are used to represent actuator-space and joint-space variables, respectively.</li>
-<li><picture><source srcset="form_37_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ x_{off}$" src="form_37.png"/></picture> represents the offset between motor and joint zeros, expressed in joint position coordinates. (cf. <a class="el" href="classtransmission__interface_1_1SimpleTransmission.html" title="Implementation of a simple reducer transmission.">SimpleTransmission</a> class documentation for a more detailed description of this variable).</li>
-<li><picture><source srcset="form_38_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ n $" src="form_38.png"/></picture> represents a transmission ratio (reducers/amplifiers are depicted as timing belts in the figure). A transmission ratio can take any real value <em>except</em> zero. In particular:<ul>
-<li>If its absolute value is greater than one, it's a velocity reducer / effort amplifier, while if its absolute value lies in <picture><source srcset="form_39_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ (0, 1) $" src="form_39.png"/></picture> it's a velocity amplifier / effort reducer.</li>
+<li><picture><source srcset="form_32_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ x $" src="form_32.png" width="8" height="6"/></picture>, <picture><source srcset="form_33_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ \dot{x} $" src="form_33.png" width="8" height="9"/></picture> and <picture><source srcset="form_34_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ \tau $" src="form_34.png" width="8" height="6"/></picture> are position, velocity and effort variables, respectively.</li>
+<li>Subindices <picture><source srcset="form_35_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ _a $" src="form_35.png" width="5" height="5"/></picture> and <picture><source srcset="form_36_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ _j $" src="form_36.png" width="5" height="9"/></picture> are used to represent actuator-space and joint-space variables, respectively.</li>
+<li><picture><source srcset="form_37_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ x_{off}$" src="form_37.png" width="25" height="10"/></picture> represents the offset between motor and joint zeros, expressed in joint position coordinates. (cf. <a class="el" href="classtransmission__interface_1_1SimpleTransmission.html" title="Implementation of a simple reducer transmission.">SimpleTransmission</a> class documentation for a more detailed description of this variable).</li>
+<li><picture><source srcset="form_38_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ n $" src="form_38.png" width="9" height="6"/></picture> represents a transmission ratio (reducers/amplifiers are depicted as timing belts in the figure). A transmission ratio can take any real value <em>except</em> zero. In particular:<ul>
+<li>If its absolute value is greater than one, it's a velocity reducer / effort amplifier, while if its absolute value lies in <picture><source srcset="form_39_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ (0, 1) $" src="form_39.png" width="26" height="14"/></picture> it's a velocity amplifier / effort reducer.</li>
 <li>Negative values represent a direction flip, ie. input and output move in opposite directions.</li>
 <li><b>Important:</b> Use transmission ratio signs to match this class' convention of positive actuator/joint directions with a given mechanical design, as they will in general not match. </li>
 </ul>
