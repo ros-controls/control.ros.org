@@ -278,6 +278,31 @@ instructions to load this plugin together with the parameter <code class="docuti
 <p>This enables the integration of the velocity commands to the position state interface, which can be
 checked by means of <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">topic</span> <span class="pre">echo</span> <span class="pre">/joint_states</span></code>: The position values are increasing over time if the robot is moving.
 You now can test the setup with the commands from above, it should work identically as the custom hardware component plugin.</p>
+<p>Another parameter of <code class="docutils literal notranslate"><span class="pre">mock_components/GenericSystem</span></code> is <code class="docutils literal notranslate"><span class="pre">disable_commands</span></code>.
+When set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, the hardware plugin stops mirroring commanded values to the state interfaces.
+This simulates a disconnected driver scenario — commands are sent to the hardware successfully,
+but no feedback signal is received back, as would happen with a broken encoder cable or a dropped network connection.</p>
+<p>Stop the launch file and restart with an additional parameter:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_2<span class="w"> </span>diffbot.launch.py<span class="w"> </span>use_mock_hardware:<span class="o">=</span>True<span class="w"> </span>disable_commands:<span class="o">=</span>True
+</pre></div>
+</div>
+<p>Send velocity commands as before. Then check joint states:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/joint_states
+</pre></div>
+</div>
+<p>You will notice that the position and velocity values <strong>do not change</strong> over time, even though commands are actively being published.
+This is confirmed by the warning in the controller manager terminal:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>ros2_control_node-1<span class="o">]</span><span class="w"> </span><span class="o">[</span>WARN<span class="o">]</span><span class="w"> </span><span class="o">[</span>...<span class="o">]</span><span class="w"> </span><span class="o">[</span>controller_manager.hardware_component.system.DiffBot<span class="o">]</span>:<span class="w"> </span>Command<span class="w"> </span>propagation<span class="w"> </span>is<span class="w"> </span>disabled<span class="w"> </span>-<span class="w"> </span>no<span class="w"> </span>values<span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>returned!
+</pre></div>
+</div>
+<p>The relevant configuration in <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/jazzy/example_2/description/ros2_control/diffbot.ros2_control.xacro">diffbot.ros2_control.xacro</a> is:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;hardware&gt;</span>
+<span class="w">  </span><span class="nt">&lt;plugin&gt;</span>mock_components/GenericSystem<span class="nt">&lt;/plugin&gt;</span>
+<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;calculate_dynamics&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;disable_commands&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;/hardware&gt;</span>
+</pre></div>
+</div>
 <p>More information on mock_components can be found in the <a class="reference internal" href="../../../ros2_control/hardware_interface/doc/mock_components_userdoc.html#mock-components-userdoc"><span class="std std-ref">ros2_control documentation</span></a>.</p>
 </div></blockquote>
 </section>
