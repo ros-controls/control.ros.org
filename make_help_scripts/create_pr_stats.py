@@ -318,7 +318,9 @@ def add_contributors_stats_for_repo(owner, repo, whitelist, blacklist, earliest_
 
     for week in entry.get("weeks", []):
       week_date = datetime.fromtimestamp(week.get("w", 0), tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-      total_changes = int(week.get("a", 0)) + int(week.get("d", 0))
+      additions = int(week.get("a", 0))
+      deletions = abs(int(week.get("d", 0)))
+      total_changes = additions + deletions
       commits_in_week = int(week.get("c", 0))
 
       _merge_contributor_stats(base_dict, contributor_login, total_changes, commits_in_week, week_date)
