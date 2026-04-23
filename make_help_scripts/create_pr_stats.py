@@ -18,6 +18,47 @@ import os
 from datetime import datetime, timedelta, timezone
 import time
 
+
+GLOBAL_HEADERS = {
+  "Accept": "application/vnd.github.v3+json",
+  "Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}"
+}
+REQUEST_TIMEOUT_SECONDS = 30
+
+
+def _get_rate_limit_reset_from_headers(response):
+  """Get reset timestamp from response headers, or 0 when unavailable."""
+  reset_header = response.headers.get("X-RateLimit-Reset")
+  if not reset_header:
+    return 0
+  try:
+    return int(reset_header)
+  except ValueError:
+    return 0
+
+
+def _wait_for_rate_limit_reset(response, default_wait=60):
+  """Sleep until the reported reset time (plus a small safety buffer)."""
+  reset_ts = _get_rate_limit_reset_from_headers(response)
+  if reset_ts > 0:
+    wait_seconds = int(reset_ts - datetime.now(timezone.utc).timestamp()) + 5
+    wait_seconds = max(wait_seconds, 5)
+  else:
+    wait_seconds = default_wait
+  print(f"Rate limit hit, waiting {wait_seconds} seconds before retry")
+  time.sleep(wait_seconds)
+
+
+def _get_retry_after_seconds(response):
+  """Parse Retry-After header if present, otherwise return 0."""
+  retry_after = response.headers.get("Retry-After")
+  if not retry_after:
+    return 0
+  try:
+    return max(int(retry_after), 0)
+  except ValueError:
+    return 0
+
 def get_api_response(url):
   """
   Sends a GET request to the specified URL with the necessary headers and returns the JSON response.
@@ -28,18 +69,74 @@ def get_api_response(url):
   Returns:
     tuple: A tuple containing the JSON response as a dictionary and the response object.
   """
-  global_header = {
-    "Accept": "application/vnd.github.v3+json",
-    "Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}"
-  }
-  # TODO(anyone): add error handling
-  response = requests.get(url, headers=global_header)
-  if response.status_code != 200:
-    print(f"Error {response.status_code}: {response.json()['message']}")
-    return [], response
-  json = response.json()
+  max_retries = 4
+  for attempt in range(max_retries + 1):
+    try:
+      response = requests.get(url, headers=GLOBAL_HEADERS, timeout=REQUEST_TIMEOUT_SECONDS)
+    except requests.RequestException as ex:
+      if attempt < max_retries:
+        wait_seconds = min(2 ** attempt, 16)
+        print(f"Request failed ({ex}), retrying in {wait_seconds}s: {url}")
+        time.sleep(wait_seconds)
+        continue
+      print(f"Request failed after retries: {url}")
+      return None, None
 
-  return json, response
+    if response.status_code == 403:
+      try:
+        payload = response.json()
+      except ValueError:
+        payload = {}
+      message = str(payload.get("message", ""))
+      remaining = response.headers.get("X-RateLimit-Remaining", "")
+      is_rate_limit = "rate limit" in message.lower() or remaining == "0"
+      is_secondary_limit = "secondary rate limit" in message.lower()
+      if is_rate_limit or is_secondary_limit:
+        if attempt < max_retries:
+          retry_after = _get_retry_after_seconds(response)
+          if retry_after > 0:
+            print(f"GitHub asked to retry after {retry_after}s")
+            time.sleep(retry_after)
+          else:
+            _wait_for_rate_limit_reset(response)
+          continue
+      print(f"Error {response.status_code}: {message}")
+      return None, response
+
+    if response.status_code == 429:
+      if attempt < max_retries:
+        retry_after = _get_retry_after_seconds(response)
+        wait_seconds = retry_after if retry_after > 0 else min(2 ** attempt, 16)
+        print(f"Too many requests, retrying in {wait_seconds}s")
+        time.sleep(wait_seconds)
+        continue
+      print("Error 429: Too many requests")
+      return None, response
+
+    if response.status_code >= 500:
+      if attempt < max_retries:
+        wait_seconds = min(2 ** attempt, 16)
+        print(f"Server error {response.status_code}, retrying in {wait_seconds}s")
+        time.sleep(wait_seconds)
+        continue
+      print(f"Error {response.status_code}: server error after retries")
+      return None, response
+
+    if response.status_code != 200:
+      try:
+        message = response.json().get("message", "Unknown error")
+      except ValueError:
+        message = response.text
+      print(f"Error {response.status_code}: {message}")
+      return None, response
+
+    try:
+      return response.json(), response
+    except ValueError:
+      print(f"Error: invalid JSON response from {url}")
+      return None, response
+
+  return None, response
 
 def get_api_response_wait(url):
   """
@@ -52,12 +149,7 @@ def get_api_response_wait(url):
   Returns:
     tuple: A tuple containing the JSON response as a dictionary and the response object.
   """
-  remaining, reset = get_api_limit()
-  if remaining == 0:
-    wait_time = datetime.fromtimestamp(reset) - datetime.utcnow()
-    print(f"Waiting {wait_time.total_seconds()} seconds for API rate limit reset")
-    time.sleep(wait_time.total_seconds() + 60) # add 60 seconds to be sure
-
+  # Rate-limit handling is done inside get_api_response with header-based waits.
   return get_api_response(url)
 
 def get_api_limit():
@@ -70,7 +162,7 @@ def get_api_limit():
   url = "https://api.github.com/rate_limit"
   json, response = get_api_response(url)
 
-  if json:
+  if isinstance(json, dict) and "rate" in json:
     return json["rate"]["remaining"], json["rate"]["reset"]
   else:
     return 0, 0
@@ -91,6 +183,9 @@ def get_all_pages(url):
   """
   while url:
     json, response = get_api_response_wait(url)
+
+    if json is None or response is None:
+      break
 
     yield json
 
@@ -114,10 +209,10 @@ def get_user_details(user):
   url = f"https://api.github.com/users/{user}"
   json, _ = get_api_response_wait(url)
 
-  if json:
+  if isinstance(json, dict) and json:
     return json["name"], json["avatar_url"]
   else:
-    return ""
+    return "", ""
 
 
 def get_pr_stats(owner, repos, branches, whitelist, blacklist, earliest_date=""):
@@ -161,6 +256,8 @@ def get_pr_stats(owner, repos, branches, whitelist, blacklist, earliest_date="")
     url = f"https://api.github.com/repos/{owner}/{repo}/pulls?state=closed&base={branches[repo]}&per_page=100"
 
     for pulls in get_all_pages(url):
+      if not isinstance(pulls, list):
+        continue
 
       for pull in pulls:
           ct_pull += 1
@@ -204,6 +301,8 @@ def get_pr_stats(owner, repos, branches, whitelist, blacklist, earliest_date="")
           # Get reviews for the pull request, but count only once per PR
           pull_reviews_url = pull["url"] + "/reviews"
           pull_reviews, _ = get_api_response_wait(pull_reviews_url)
+          if not isinstance(pull_reviews, list):
+            continue
           local_reviewers = {} # prevent double counting
           local_reviewers_filter = {} # prevent double counting
 
@@ -260,6 +359,8 @@ def get_pr_stats(owner, repos, branches, whitelist, blacklist, earliest_date="")
     commits_url = f"https://api.github.com/repos/{owner}/{repo}/commits?branch={branches[repo]}"
 
     for commits in get_all_pages(commits_url):
+      if not isinstance(commits, list):
+        continue
       for commit in commits:
         if commit['author'] is None:
           # print('No author in commit: ' + commit['url'])
@@ -273,6 +374,8 @@ def get_pr_stats(owner, repos, branches, whitelist, blacklist, earliest_date="")
             current_dict = contributors
 
         commit_details, _ = get_api_response_wait(commit['url'])
+        if not isinstance(commit_details, dict):
+          continue
         if 'stats' in commit_details.keys():
           additions = commit_details['stats']['additions']
           deletions = commit_details['stats']['deletions']
