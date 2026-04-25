@@ -198,7 +198,7 @@
 <li><p>Exchange data (two-way) between a non-realtime thread and a realtime-thread like state information, current goals etc.:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>For primitive types like <code class="docutils literal notranslate"><span class="pre">bool</span></code>, you can simply use <code class="docutils literal notranslate"><span class="pre">std::atomic&lt;bool&gt;</span></code>, see <a class="reference external" href="https://en.cppreference.com/w/cpp/atomic/atomic/">cppreference</a>.</p></li>
+<li><p>For primitive types like <code class="docutils literal notranslate"><span class="pre">bool</span></code>, you can simply use <code class="docutils literal notranslate"><span class="pre">std::atomic&lt;bool&gt;</span></code>, see <a class="reference external" href="https://en.cppreference.com/w/cpp/atomic/atomic">cppreference</a>.</p></li>
 <li><p>For all other types, when missing some data samples from RT loop is not of major importance, then use the <code class="docutils literal notranslate"><span class="pre">realtime_tools::RealtimeThreadSafeBox</span></code> with <code class="docutils literal notranslate"><span class="pre">try_set</span></code> method. In the contrary situation, it is recommended to use <code class="docutils literal notranslate"><span class="pre">realtime_tools::LockFreeQueue</span></code> to avoid missing any samples.</p></li>
 </ul>
 </div></blockquote>
