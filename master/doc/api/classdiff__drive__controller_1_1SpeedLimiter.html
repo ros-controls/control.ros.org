@@ -93,6 +93,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a36e83f710484bdb5cf063648486eea2a" id="r_a36e83f710484bdb5cf063648486eea2a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdiff__drive__controller_1_1SpeedLimiter.html#a36e83f710484bdb5cf063648486eea2a">SpeedLimiter</a> (double min_velocity, double max_velocity, double max_acceleration_reverse, double max_acceleration, double max_deceleration, double max_deceleration_reverse, double min_jerk, double max_jerk)</td></tr>
 <tr class="memdesc:a36e83f710484bdb5cf063648486eea2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
 <tr class="separator:a36e83f710484bdb5cf063648486eea2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c56d85be2b69f518c8057dc77695d78" id="r_a8c56d85be2b69f518c8057dc77695d78"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdiff__drive__controller_1_1SpeedLimiter.html#a8c56d85be2b69f518c8057dc77695d78">set_params</a> (double min_velocity, double max_velocity, double max_acceleration_reverse, double max_acceleration, double max_deceleration, double max_deceleration_reverse, double min_jerk, double max_jerk)</td></tr>
+<tr class="memdesc:a8c56d85be2b69f518c8057dc77695d78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update parameters at runtime.  <br /></td></tr>
+<tr class="separator:a8c56d85be2b69f518c8057dc77695d78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c75c610b5a7c81f4768d0bbfb579ad7" id="r_a1c75c610b5a7c81f4768d0bbfb579ad7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdiff__drive__controller_1_1SpeedLimiter.html#a1c75c610b5a7c81f4768d0bbfb579ad7">limit</a> (double &amp;v, double v0, double v1, double dt)</td></tr>
 <tr class="memdesc:a1c75c610b5a7c81f4768d0bbfb579ad7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Limit the velocity, acceleration, and jerk.  <br /></td></tr>
 <tr class="separator:a1c75c610b5a7c81f4768d0bbfb579ad7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -402,6 +405,94 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Limiting factor (1.0 if none) </dd></dl>
+
+</div>
+</div>
+<a id="a8c56d85be2b69f518c8057dc77695d78" name="a8c56d85be2b69f518c8057dc77695d78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c56d85be2b69f518c8057dc77695d78">&#9670;&#160;</a></span>set_params()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void diff_drive_controller::SpeedLimiter::set_params </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>min_velocity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>max_velocity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>max_acceleration_reverse</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>max_acceleration</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>max_deceleration</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>max_deceleration_reverse</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>min_jerk</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>max_jerk</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update parameters at runtime. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">min_velocity</td><td>Minimum velocity [m/s], usually &lt;= 0 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">max_velocity</td><td>Maximum velocity [m/s], usually &gt;= 0 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">max_acceleration_reverse</td><td>Maximum acceleration in reverse direction [m/s^2], usually &lt;= 0 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">max_acceleration</td><td>Maximum acceleration [m/s^2], usually &gt;= 0 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">max_deceleration</td><td>Maximum deceleration [m/s^2], usually &lt;= 0 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">max_deceleration_reverse</td><td>Maximum deceleration in reverse direction [m/s^2], usually &gt;= 0 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">min_jerk</td><td>Minimum jerk [m/s^3], usually &lt;= 0 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">max_jerk</td><td>Maximum jerk [m/s^3], usually &gt;= 0</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>If max_* values are NAN, the respective limit is deactivated If min_* values are NAN (unspecified), defaults to -max If min_first_derivative_pos/max_first_derivative_neg values are NAN, symmetric limits are used </dd></dl>
 
 </div>
 </div>

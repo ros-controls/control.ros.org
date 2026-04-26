@@ -211,6 +211,7 @@ Unless the parameter <code class="docutils literal notranslate"><span class="pre
 <p>This controller uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters. The parameter <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/master/diff_drive_controller/src/diff_drive_controller_parameter.yaml">definition file located in the src folder</a> contains descriptions for all the parameters used by the controller.</p>
 <dl>
 <dt>left_wheel_names (string_array)</dt><dd><p>Names of the left side wheels’ joints</p>
+<p>Read only: True</p>
 <p>Default:  {}</p>
 <p>Constraints:</p>
 <blockquote>
@@ -220,6 +221,7 @@ Unless the parameter <code class="docutils literal notranslate"><span class="pre
 </div></blockquote>
 </dd>
 <dt>right_wheel_names (string_array)</dt><dd><p>Names of the right side wheels’ joints</p>
+<p>Read only: True</p>
 <p>Default:  {}</p>
 <p>Constraints:</p>
 <blockquote>
@@ -229,6 +231,7 @@ Unless the parameter <code class="docutils literal notranslate"><span class="pre
 </div></blockquote>
 </dd>
 <dt>wheel_separation (double)</dt><dd><p>Shortest distance between the left and right wheels. If this parameter is wrong, the robot will not behave correctly in curves.</p>
+<p>Read only: True</p>
 <p>Default:  0.0</p>
 <p>Constraints:</p>
 <blockquote>
@@ -238,6 +241,7 @@ Unless the parameter <code class="docutils literal notranslate"><span class="pre
 </div></blockquote>
 </dd>
 <dt>wheel_radius (double)</dt><dd><p>Radius of a wheel, i.e., wheels size, used for transformation of linear velocity into wheel rotations. If this parameter is wrong the robot will move faster or slower than expected.</p>
+<p>Read only: True</p>
 <p>Default:  0.0</p>
 <p>Constraints:</p>
 <blockquote>
@@ -247,36 +251,47 @@ Unless the parameter <code class="docutils literal notranslate"><span class="pre
 </div></blockquote>
 </dd>
 <dt>wheel_separation_multiplier (double)</dt><dd><p>Correction factor when the actual wheel separation differs from the nominal value in the <code class="docutils literal notranslate"><span class="pre">wheel_separation</span></code> parameter.</p>
+<p>Read only: True</p>
 <p>Default:  1.0</p>
 </dd>
 <dt>left_wheel_radius_multiplier (double)</dt><dd><p>Correction factor when radius of left wheels differs from the nominal value in <code class="docutils literal notranslate"><span class="pre">wheel_radius</span></code> parameter.</p>
+<p>Read only: True</p>
 <p>Default:  1.0</p>
 </dd>
 <dt>right_wheel_radius_multiplier (double)</dt><dd><p>Correction factor when radius of right wheels differs from the nominal value in <code class="docutils literal notranslate"><span class="pre">wheel_radius</span></code> parameter.</p>
+<p>Read only: True</p>
 <p>Default:  1.0</p>
 </dd>
 <dt>tf_frame_prefix_enable (bool)</dt><dd><p>Deprecated: this parameter will be removed in a future release. Use ‘tf_frame_prefix’ instead.</p>
+<p>Read only: True</p>
 <p>Default:  true</p>
 </dd>
 <dt>tf_frame_prefix (string)</dt><dd><p>(optional) Prefix to be appended to the tf frames, will be added to odom_id and base_frame_id before publishing. If the parameter is empty, controller’s namespace will be used.</p>
+<p>Read only: True</p>
 <p>Default:  “”</p>
 </dd>
 <dt>odom_frame_id (string)</dt><dd><p>Name of the frame for odometry. This frame is parent of <code class="docutils literal notranslate"><span class="pre">base_frame_id</span></code> when controller publishes odometry.</p>
+<p>Read only: True</p>
 <p>Default:  “odom”</p>
 </dd>
 <dt>base_frame_id (string)</dt><dd><p>Name of the robot’s base frame that is child of the odometry frame.</p>
+<p>Read only: True</p>
 <p>Default:  “base_link”</p>
 </dd>
 <dt>pose_covariance_diagonal (double_array)</dt><dd><p>Odometry covariance for the encoder output of the robot for the pose. These values should be tuned to your robot’s sample odometry data, but these values are a good place to start: <code class="docutils literal notranslate"><span class="pre">[0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.01]</span></code>.</p>
+<p>Read only: True</p>
 <p>Default:  {0.0, 0.0, 0.0, 0.0, 0.0, 0.0}</p>
 </dd>
 <dt>twist_covariance_diagonal (double_array)</dt><dd><p>Odometry covariance for the encoder output of the robot for the speed. These values should be tuned to your robot’s sample odometry data, but these values are a good place to start: <code class="docutils literal notranslate"><span class="pre">[0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.001,</span> <span class="pre">0.01]</span></code>.</p>
+<p>Read only: True</p>
 <p>Default:  {0.0, 0.0, 0.0, 0.0, 0.0, 0.0}</p>
 </dd>
 <dt>open_loop (bool)</dt><dd><p>If set to true the odometry of the robot will be calculated from the commanded values and not from feedback.</p>
+<p>Read only: True</p>
 <p>Default:  false</p>
 </dd>
 <dt>position_feedback (bool)</dt><dd><p>Is there position feedback from hardware.</p>
+<p>Read only: True</p>
 <p>Default:  true</p>
 </dd>
 <dt>enable_odom_tf (bool)</dt><dd><p>Publish transformation between <code class="docutils literal notranslate"><span class="pre">odom_frame_id</span></code> and <code class="docutils literal notranslate"><span class="pre">base_frame_id</span></code>.</p>
@@ -289,9 +304,11 @@ Unless the parameter <code class="docutils literal notranslate"><span class="pre
 <p>Default:  false</p>
 </dd>
 <dt>velocity_rolling_window_size (int)</dt><dd><p>Size of the rolling window for calculation of mean velocity use in odometry.</p>
+<p>Read only: True</p>
 <p>Default:  10</p>
 </dd>
 <dt>publish_rate (double)</dt><dd><p>Publishing rate (Hz) of the odometry and TF messages. This parameter is deprecated and will be removed in a future release.</p>
+<p>Read only: True</p>
 <p>Default:  50.0</p>
 </dd>
 <dt>linear.x</dt><dd><p>Joint limits structure for the linear <code class="docutils literal notranslate"><span class="pre">x</span></code>-axis.</p>
