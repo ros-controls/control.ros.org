@@ -203,7 +203,7 @@ they are published at the root (e.g., <code class="docutils literal notranslate"
 <p>Read only: True</p>
 <p>Default:  {}</p>
 </dd>
-<dt>interfaces (string_array)</dt><dd><p>Parameter to support broadcasting of only specific joints and interfaces. It has to be used in combination with the <code class="docutils literal notranslate"><span class="pre">joints</span></code> parameter. If either <code class="docutils literal notranslate"><span class="pre">joints</span></code> or <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> is left empty, all available state interfaces will be published.</p>
+<dt>interfaces (string_array)</dt><dd><p>Parameter to support broadcasting of only specific joints and interfaces. It has to be used in combination with the <code class="docutils literal notranslate"><span class="pre">joints</span></code> parameter. If either <code class="docutils literal notranslate"><span class="pre">joints</span></code> or <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> is left empty, all available state interfaces will be published. If this parameter contains <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code>, or <code class="docutils literal notranslate"><span class="pre">effort</span></code>, the corresponding <code class="docutils literal notranslate"><span class="pre">map_interface_to_joint_state.&lt;field&gt;</span></code> setting is ignored because the standard interface is already requested directly. A warning is printed only when such an ignored mapping is set to a different custom interface name.</p>
 <p>Read only: True</p>
 <p>Default:  {}</p>
 </dd>
@@ -226,6 +226,10 @@ Using multiple joint_state_broadcaster instances we could publish and show both 
 <span class="w">    </span><span class="nt">effort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;custom_interface&gt;</span>
 </pre></div>
 </div>
+<p>If <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> explicitly contains <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code>, or <code class="docutils literal notranslate"><span class="pre">effort</span></code>, the matching
+<code class="docutils literal notranslate"><span class="pre">map_interface_to_joint_state</span></code> entry is ignored because the standard interface is already
+requested directly. In that wrong configuration, a warning is printed only when the configured
+mapping value differs from the standard interface name.</p>
 <p>Examples:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">map_interface_to_joint_state</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kf_estimated_position</span>
