@@ -223,8 +223,8 @@ else:
   base_branch = "humble"
 
 # Add branches you want to whitelist here.
-smv_branch_whitelist = r"^(foxy|galactic|humble|iron|jazzy|kilted|"+ base_branch + r")$"
-smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy|galactic|humble|iron|jazzy|kilted).*$"
+smv_branch_whitelist = r"^(foxy|galactic|humble|iron|jazzy|kilted|lyrical|"+ base_branch + r")$"
+smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy|galactic|humble|iron|jazzy|kilted|lyrical).*$"
 smv_remote_whitelist = r"^(origin)$"
 smv_latest_version = "kilted"
 smv_eol_versions = ["foxy", "galactic", "iron"]
@@ -236,6 +236,7 @@ distro_full_names = {
     "iron": "Iron Irwini",
     "jazzy": "Jazzy Jalisco",
     "kilted": "Kilted Kaiju",
+    "lyrical": "Lyrical Luth",
     "rolling": "Rolling Ridley",
 }
 
@@ -353,6 +354,12 @@ def smv_rewrite_configs(app, config):
     if app.config.smv_current_version != "":
         branch_distro = {
             base_branch: "rolling",
+<<<<<<< HEAD
+=======
+            "lyrical": "rolling",
+            "kilted": "kilted",
+            "jazzy": "jazzy",
+>>>>>>> 4a92ecf (Add lyrical to multiversion build (#649))
             "iron": "iron",
             "humble": "humble",
             "foxy": "foxy",
@@ -361,6 +368,12 @@ def smv_rewrite_configs(app, config):
         # this map is used to match branches of control.ros.org to REPOS_FILE_BRANCH macro
         subrepo_branch = {
             base_branch: "master",
+<<<<<<< HEAD
+=======
+            "lyrical": "master",
+            "kilted": "kilted",
+            "jazzy": "jazzy",
+>>>>>>> 4a92ecf (Add lyrical to multiversion build (#649))
             "iron": "iron",
             "humble": "humble",
             "foxy": "foxy",

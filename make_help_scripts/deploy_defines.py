@@ -65,7 +65,12 @@ branch_version = {
     "iron": "iron",
     "jazzy": "jazzy",
     "kilted": "kilted",
+<<<<<<< HEAD
     "rolling": "rolling"
+=======
+    "lyrical": "rolling",
+    base_branch: "rolling"  # PRs are tested on rolling
+>>>>>>> 4a92ecf (Add lyrical to multiversion build (#649))
 }
 
 # the subrepos which are cloned into the branches and, optionally, their corresponding PR for checkout
@@ -81,6 +86,7 @@ repos = {
             "iron": "iron",
             "jazzy": "jazzy",
             "kilted": "kilted",
+            "lyrical": "master",
             "rolling": "master"
         },
         "pr": os.environ.get('ROS2_CONTROL_PR')
@@ -94,6 +100,7 @@ repos = {
             "iron": "iron",
             "jazzy": "jazzy",
             "kilted": "kilted",
+            "lyrical": "master",
             "rolling": "master"
         },
         "pr": os.environ.get('ROS2_CONTROLLERS_PR')
@@ -107,6 +114,7 @@ repos = {
             "iron": "iron",
             "jazzy": "jazzy",
             "kilted": "master",
+            "lyrical": "master",
             "rolling": "master"
         },
         "pr": os.environ.get('ROS2_CONTROL_DEMOS_PR')
@@ -132,6 +140,7 @@ repos = {
             "iron": "iron",
             "jazzy": "jazzy",
             "kilted": "kilted",
+            "lyrical": "rolling",
             "rolling": "rolling"
         },
         "pr": os.environ.get('GZ_ROS2_CONTROL_PR')
@@ -145,6 +154,7 @@ repos = {
             "iron": "jazzy",
             "jazzy": "jazzy",
             "kilted": "kilted",
+            "lyrical": "master",
             "rolling": "master"
         },
         "pr": None
@@ -158,6 +168,7 @@ repos = {
             "iron": "jazzy",
             "jazzy": "jazzy",
             "kilted": "master",
+            "lyrical": "master",
             "rolling": "master"
         },
         "pr": None
@@ -171,6 +182,7 @@ repos = {
             "iron": "jazzy",
             "jazzy": "jazzy",
             "kilted": "kilted",
+            "lyrical": "master",
             "rolling": "master"
         },
         "pr": None
@@ -184,10 +196,25 @@ repos = {
             "iron": "jazzy",
             "jazzy": "jazzy",
             "kilted": "master",
+            "lyrical": "master",
             "rolling": "master"
         },
         "pr": None
     },
+<<<<<<< HEAD
+=======
+    "topic_based_hardware_interfaces": {
+        "url": "https://github.com/ros-controls/topic_based_hardware_interfaces",
+        "branch_version": {
+            "iron": "main",
+            "jazzy": "main",
+            "kilted": "main",
+            "lyrical": "main",
+            "rolling": "main"
+        },
+        "pr": None
+    },
+>>>>>>> 4a92ecf (Add lyrical to multiversion build (#649))
     ".github": {
         "url": "https://github.com/ros-controls/.github",
         "branch_version": {
@@ -197,6 +224,7 @@ repos = {
             "iron": "master",
             "jazzy": "master",
             "kilted": "master",
+            "lyrical": "master",
             "rolling": "master"
         },
         "pr": None
@@ -207,6 +235,7 @@ repos = {
             "humble": "main",
             "jazzy": "main",
             "kilted": "main",
+            "lyrical": "main",
             "rolling": "main"
         },
         "pr": None
