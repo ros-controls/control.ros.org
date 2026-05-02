@@ -64,8 +64,14 @@ branch_version = {
     "humble": "humble",
     "iron": "iron",
     "jazzy": "jazzy",
+<<<<<<< HEAD
     base_branch: "kilted",  # PRs are tested on kilted
     "rolling": "rolling"
+=======
+    "kilted": "kilted",
+    "lyrical": "rolling",
+    base_branch: "rolling"  # PRs are tested on rolling
+>>>>>>> 4a92ecf (Add lyrical to multiversion build (#649))
 }
 
 # the subrepos which are cloned into the branches and, optionally, their corresponding PR for checkout
@@ -81,6 +87,7 @@ repos = {
             "iron": "iron",
             "jazzy": "jazzy",
             "kilted": "kilted",
+            "lyrical": "master",
             "rolling": "master"
         },
         "pr": os.environ.get('ROS2_CONTROL_PR')
@@ -94,6 +101,7 @@ repos = {
             "iron": "iron",
             "jazzy": "jazzy",
             "kilted": "kilted",
+            "lyrical": "master",
             "rolling": "master"
         },
         "pr": os.environ.get('ROS2_CONTROLLERS_PR')
@@ -107,6 +115,7 @@ repos = {
             "iron": "iron",
             "jazzy": "jazzy",
             "kilted": "master",
+            "lyrical": "master",
             "rolling": "master"
         },
         "pr": os.environ.get('ROS2_CONTROL_DEMOS_PR')
@@ -130,6 +139,7 @@ repos = {
             "iron": "iron",
             "jazzy": "jazzy",
             "kilted": "kilted",
+            "lyrical": "rolling",
             "rolling": "rolling"
         },
         "pr": os.environ.get('GZ_ROS2_CONTROL_PR')
@@ -143,6 +153,7 @@ repos = {
             "iron": "jazzy",
             "jazzy": "jazzy",
             "kilted": "kilted",
+            "lyrical": "master",
             "rolling": "master"
         },
         "pr": os.environ.get('CONTROL_TOOLBOX_PR')
@@ -156,6 +167,7 @@ repos = {
             "iron": "jazzy",
             "jazzy": "jazzy",
             "kilted": "master",
+            "lyrical": "master",
             "rolling": "master"
         },
         "pr": None
@@ -169,6 +181,7 @@ repos = {
             "iron": "jazzy",
             "jazzy": "jazzy",
             "kilted": "kilted",
+            "lyrical": "master",
             "rolling": "master"
         },
         "pr": os.environ.get('REALTIME_TOOLS_PR')
@@ -182,6 +195,7 @@ repos = {
             "iron": "jazzy",
             "jazzy": "jazzy",
             "kilted": "master",
+            "lyrical": "master",
             "rolling": "master"
         },
         "pr": None
@@ -189,12 +203,10 @@ repos = {
     "topic_based_hardware_interfaces": {
         "url": "https://github.com/ros-controls/topic_based_hardware_interfaces",
         "branch_version": {
-            "foxy": "main",
-            "galactic": "main",
-            "humble": "main",
             "iron": "main",
             "jazzy": "main",
             "kilted": "main",
+            "lyrical": "main",
             "rolling": "main"
         },
         "pr": None
@@ -208,6 +220,7 @@ repos = {
             "iron": "master",
             "jazzy": "master",
             "kilted": "master",
+            "lyrical": "master",
             "rolling": "master"
         },
         "pr": None
@@ -218,6 +231,7 @@ repos = {
             "humble": "main",
             "jazzy": "main",
             "kilted": "main",
+            "lyrical": "main",
             "rolling": "main"
         },
         "pr": None
