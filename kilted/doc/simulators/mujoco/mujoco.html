@@ -151,7 +151,7 @@ As such, users are required to convert any existing robot description files to a
 This includes adding actuators, sensors, and cameras as needed to the MJCF XML.</p>
 <p>This conversion can be done either offline or at run time.
 We have built a <em>highly experimental</em> tool to automate URDF conversion.
-For more information refer to the <a class="reference external" href="https://github.com/ros-controls/mujoco_ros2_control/blob/main/mujoco_ros2_control/docs/TOOLS.md">documentation</a>.</p>
+For more information refer to the <a class="reference internal" href="#./docs/TOOLS.md"><span class="xref myst">documentation</span></a>.</p>
 </section>
 <section id="hardware-interface-setup">
 <h3>Hardware Interface Setup<a class="headerlink" href="#hardware-interface-setup" title="Link to this heading"></a></h3>
@@ -472,19 +472,18 @@ For example, the following will add 12 sites named <code class="docutils literal
 </div>
 <p>The lidar sensor is then configurable through ROS 2 control xacro with:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="cm">&lt;!-- Lidar sensors are matched to a set of rangefinder sensors in the MJCF, which should be --&gt;</span>
-<span class="w">    </span><span class="cm">&lt;!-- generated with &quot;replicate&quot; and will generally be of the form &quot;&lt;sensor_name&gt;-01&quot;. --&gt;</span>
-<span class="w">    </span><span class="cm">&lt;!-- We assume the lidar sensor starts at angle 0, increments by the specified `angle_increment`, and --&gt;</span>
-<span class="w">    </span><span class="cm">&lt;!-- that there are exactly `num_rangefinders` all named from &lt;sensor_name&gt;-000 to the max --&gt;</span>
-<span class="w">    </span><span class="cm">&lt;!-- &lt;sensor_name&gt;-&lt;num_rangefinders&gt; --&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- generated with the &quot;&lt;lidar&gt;&quot; inputs in the conversion script. The consists of N rangefinders --&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- and will generally be of the form &quot;&lt;sensor_name&gt;-01&quot;. These parameters should line up with --&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- those documented in the laserscan message. --&gt;</span>
 <span class="w">    </span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;lidar&quot;</span><span class="nt">&gt;</span>
 <span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;frame_name&quot;</span><span class="nt">&gt;</span>lidar_sensor_frame<span class="nt">&lt;/param&gt;</span>
 <span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;angle_increment&quot;</span><span class="nt">&gt;</span>0.025<span class="nt">&lt;/param&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;num_rangefinders&quot;</span><span class="nt">&gt;</span>12<span class="nt">&lt;/param&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;min_angle&quot;</span><span class="nt">&gt;</span>-0.3<span class="nt">&lt;/param&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;max_angle&quot;</span><span class="nt">&gt;</span>0.3<span class="nt">&lt;/param&gt;</span>
 <span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;range_min&quot;</span><span class="nt">&gt;</span>0.05<span class="nt">&lt;/param&gt;</span>
 <span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;range_max&quot;</span><span class="nt">&gt;</span>10<span class="nt">&lt;/param&gt;</span>
 <span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;laserscan_topic&quot;</span><span class="nt">&gt;</span>/scan<span class="nt">&lt;/param&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/sensor&gt;</span>
-<span class="w">  </span><span class="nt">&lt;/ros2_control&gt;</span>
 </pre></div>
 </div>
 </section>

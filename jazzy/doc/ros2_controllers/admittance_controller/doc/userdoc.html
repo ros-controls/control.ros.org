@@ -276,6 +276,77 @@ The controller implements <code class="docutils literal notranslate"><span class
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">velocity</span>
 
+<span class="w">    </span><span class="nt">kinematics</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">plugin_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kinematics_interface_kdl/KinematicsInterfaceKDL</span>
+<span class="w">      </span><span class="nt">plugin_package</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kinematics_interface</span>
+<span class="w">      </span><span class="nt">base</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">base_link</span><span class="w"> </span><span class="c1"># Assumed to be stationary</span>
+<span class="w">      </span><span class="nt">tip</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tool0</span>
+<span class="w">      </span><span class="nt">group_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">arm</span>
+<span class="w">      </span><span class="nt">alpha</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0005</span>
+
+<span class="w">    </span><span class="nt">ft_sensor</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ft_sensor_name</span>
+<span class="w">      </span><span class="nt">frame</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">link_6</span><span class="w"> </span><span class="c1"># tool0 Wrench measurements are in this frame</span>
+<span class="w">        </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"> </span><span class="c1"># force torque frame exists within URDF kinematic chain</span>
+<span class="w">      </span><span class="nt">filter_coefficient</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.005</span>
+
+<span class="w">    </span><span class="nt">control</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">frame</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tool0</span><span class="w"> </span><span class="c1"># Admittance calcs (displacement etc) are done in this frame. Usually the tool or end-effector</span>
+<span class="w">        </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"> </span><span class="c1"># control frame exists within URDF kinematic chain</span>
+
+<span class="w">    </span><span class="nt">fixed_world_frame</span><span class="p">:</span><span class="w"> </span><span class="c1"># Gravity points down (neg. Z) in this frame (Usually: world or base_link)</span>
+<span class="w">      </span><span class="nt">frame</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">base_link</span><span class="w"> </span><span class="c1"># Admittance calcs (displacement etc) are done in this frame. Usually the tool or end-effector</span>
+<span class="w">        </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"> </span><span class="c1"># control frame exists within URDF kinematic chain</span>
+
+<span class="w">    </span><span class="nt">gravity_compensation</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">frame</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tool0</span>
+<span class="w">        </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+
+<span class="w">      </span><span class="nt">CoG</span><span class="p">:</span><span class="w"> </span><span class="c1"># specifies the center of gravity of the end effector</span>
+<span class="w">        </span><span class="nt">pos</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span><span class="w"> </span><span class="c1"># x</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span><span class="w"> </span><span class="c1"># y</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span><span class="w"> </span><span class="c1"># z</span>
+<span class="w">        </span><span class="nt">force</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">23.0</span><span class="w"> </span><span class="c1"># mass * 9.81</span>
+
+<span class="w">    </span><span class="nt">admittance</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">selected_axes</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># x</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># y</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># z</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># rx</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># ry</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># rz</span>
+
+<span class="w">      </span><span class="c1"># Having &quot;.0&quot; at the end is MUST, otherwise there is a loading error</span>
+<span class="w">      </span><span class="c1"># F = M*a + D*v + S*(x - x_d)</span>
+<span class="w">      </span><span class="nt">mass</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.5</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6.6</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7.7</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8.8</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9.9</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.10</span>
+
+<span class="w">      </span><span class="nt">damping_ratio</span><span class="p">:</span><span class="w"> </span><span class="c1"># damping can be used instead: zeta = D / (2 * sqrt( M * S ))</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.828427</span><span class="w"> </span><span class="c1"># x</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.828427</span><span class="w"> </span><span class="c1"># y</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.828427</span><span class="w"> </span><span class="c1"># z</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.828427</span><span class="w"> </span><span class="c1"># rx</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.828427</span><span class="w"> </span><span class="c1"># ry</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.828427</span><span class="w"> </span><span class="c1"># rz</span>
+
+<span class="w">      </span><span class="nt">stiffness</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">214.1</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">214.2</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">214.3</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">214.4</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">214.5</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">214.6</span>
 
 <span class="nt">test_admittance_controller</span><span class="p">:</span>
 <span class="w">  </span><span class="c1"># contains minimal needed parameters for kuka_kr6</span>
