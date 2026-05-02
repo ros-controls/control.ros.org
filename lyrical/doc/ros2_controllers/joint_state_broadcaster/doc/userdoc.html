@@ -1,0 +1,384 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>joint_state_broadcaster &mdash; ROS2_Control: Rolling May 2026 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/reviewer_stats.css?v=068b34ac" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=d85a351e" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//rolling/doc/ros2_controllers/joint_state_broadcaster/doc/userdoc.html" />
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=7748e526"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+      <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Range Sensor Broadcaster" href="../../range_sensor_broadcaster/doc/userdoc.html" />
+    <link rel="prev" title="IMU Sensor Broadcaster" href="../../imu_sensor_broadcaster/doc/userdoc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html">ros2_control</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/controllers_index.html">ros2_controllers</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#guidelines-and-best-practices">Guidelines and Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#controllers-for-wheeled-mobile-robots">Controllers for Wheeled Mobile Robots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#controllers-for-manipulators-and-other-robots">Controllers for Manipulators and Other Robots</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/controllers_index.html#broadcasters">Broadcasters</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../force_torque_sensor_broadcaster/doc/userdoc.html">Force Torque Sensor Broadcaster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../force_torque_sensor_broadcaster/doc/userdoc.html#wrench-transformer-node">Wrench Transformer Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../imu_sensor_broadcaster/doc/userdoc.html">IMU Sensor Broadcaster</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Joint State Broadcaster</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#commands">Commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hardware-interface-type">Hardware interface type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#published-topics">Published topics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#list-of-parameters">List of parameters</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#an-example-parameter-file">An example parameter file</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#order-of-the-joints-in-the-message">Order of the joints in the message</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../range_sensor_broadcaster/doc/userdoc.html">Range Sensor Broadcaster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pose_broadcaster/doc/userdoc.html">Pose Broadcaster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../gps_sensor_broadcaster/doc/userdoc.html">GPS Sensor Broadcaster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../state_interfaces_broadcaster/doc/userdoc.html">State Interfaces Broadcaster</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#filters">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#common-controller-parameters">Common Controller Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utilities.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes/release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../migration/migration.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_list/api_list.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../governance/governance.html">Project Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../statistics.html">Documentation Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation_downloads.html">Documentation Downloads</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ROS2_Control: Rolling</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../doc/controllers_index.html">ros2_controllers</a></li>
+      <li class="breadcrumb-item active">joint_state_broadcaster</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ros-controls/ros2_controllers/blob/master/joint_state_broadcaster/doc/userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for an older, but still supported, version of ROS 2.
+    For information on the latest version, please have a look at <a href="../../../../../kilted/doc/ros2_controllers/joint_state_broadcaster/doc/userdoc.html">Kilted</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="joint-state-broadcaster">
+<span id="joint-state-broadcaster-userdoc"></span><h1>joint_state_broadcaster<a class="headerlink" href="#joint-state-broadcaster" title="Link to this heading"></a></h1>
+<p>The broadcaster reads all state interfaces and reports them on <code class="docutils literal notranslate"><span class="pre">/joint_states</span></code> and <code class="docutils literal notranslate"><span class="pre">/dynamic_joint_states</span></code>.</p>
+<section id="commands">
+<h2>Commands<a class="headerlink" href="#commands" title="Link to this heading"></a></h2>
+<p>Broadcasters are not real controllers, and therefore take no commands.</p>
+</section>
+<section id="hardware-interface-type">
+<h2>Hardware interface type<a class="headerlink" href="#hardware-interface-type" title="Link to this heading"></a></h2>
+<p>By default, all available <em>joint state interfaces</em> are used, unless configured otherwise.
+In the latter case, resulting interfaces is defined by a “matrix” of interfaces defined by the cross-product of the <code class="docutils literal notranslate"><span class="pre">joints</span></code> and <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> parameters.
+If some requested interfaces are missing, the controller will print a warning about that, but work for other interfaces.
+If none of the requested interface are not defined, the controller returns error on activation.</p>
+</section>
+<section id="published-topics">
+<h2>Published topics<a class="headerlink" href="#published-topics" title="Link to this heading"></a></h2>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">/joint_states</span></code> (<code class="docutils literal notranslate"><span class="pre">sensor_msgs/msg/JointState</span></code>):</p>
+<p>Publishes <em>movement-related</em> interfaces only — <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">effort</span></code> — for joints that provide them. If a joint does not expose a given
+movement interface, that field is omitted/left empty for that joint in the message.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/dynamic_joint_states</span></code> (<code class="docutils literal notranslate"><span class="pre">control_msgs/msg/DynamicJointState</span></code>):</p>
+<p>Publishes <strong>all available state interfaces</strong> for each joint. This includes the
+movement interfaces (position/velocity/effort) <em>and</em> any additional or custom
+interfaces provided by the hardware (e.g., temperature, voltage, torque sensor
+readings, calibration flags).</p>
+<p>The message maps <code class="docutils literal notranslate"><span class="pre">joint_names</span></code> to per-joint interface name lists and values.
+Example payload:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">joint_names</span><span class="p">:</span> <span class="p">[</span><span class="n">joint1</span><span class="p">,</span> <span class="n">joint2</span><span class="p">]</span>
+<span class="n">interface_values</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">interface_names</span><span class="p">:</span> <span class="p">[</span><span class="n">position</span><span class="p">,</span> <span class="n">velocity</span><span class="p">,</span> <span class="n">effort</span><span class="p">]</span>
+    <span class="n">values</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.5708</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">]</span>
+  <span class="o">-</span> <span class="n">interface_names</span><span class="p">:</span> <span class="p">[</span><span class="n">position</span><span class="p">,</span> <span class="n">temperature</span><span class="p">]</span>
+    <span class="n">values</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.7854</span><span class="p">,</span> <span class="mf">42.1</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Use this topic if you need <em>every</em> reported interface, not just movement.</p>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">use_local_topics</span></code> is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, both topics are published in the
+controller’s namespace (e.g., <code class="docutils literal notranslate"><span class="pre">/my_state_broadcaster/joint_states</span></code> and
+<code class="docutils literal notranslate"><span class="pre">/my_state_broadcaster/dynamic_joint_states</span></code>). If <code class="docutils literal notranslate"><span class="pre">false</span></code> (default),
+they are published at the root (e.g., <code class="docutils literal notranslate"><span class="pre">/joint_states</span></code>).</p>
+</div>
+</section>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h2>
+<p>This controller uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters. The parameter <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/master/joint_state_broadcaster/src/joint_state_broadcaster_parameters.yaml">definition file located in the src folder</a> contains descriptions for all the parameters used by the controller.</p>
+<section id="list-of-parameters">
+<h3>List of parameters<a class="headerlink" href="#list-of-parameters" title="Link to this heading"></a></h3>
+<dl>
+<dt>use_local_topics (bool)</dt><dd><p>Defining if <code class="docutils literal notranslate"><span class="pre">joint_states</span></code> and <code class="docutils literal notranslate"><span class="pre">dynamic_joint_states</span></code> messages should be published into local namespace, e.g., <code class="docutils literal notranslate"><span class="pre">/my_state_broadcaster/joint_states</span></code>.</p>
+<p>Read only: True</p>
+<p>Default:  false</p>
+</dd>
+<dt>joints (string_array)</dt><dd><p>Parameter to support broadcasting of only specific joints and interfaces. It has to be used in combination with the <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> parameter. If either <code class="docutils literal notranslate"><span class="pre">joints</span></code> or <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> is left empty, all available state interfaces will be published. Joint state broadcaster asks for access to all defined interfaces on all defined joints.</p>
+<p>Read only: True</p>
+<p>Default:  {}</p>
+</dd>
+<dt>extra_joints (string_array)</dt><dd><p>Names of extra joints to be added to <code class="docutils literal notranslate"><span class="pre">joint_states</span></code> and <code class="docutils literal notranslate"><span class="pre">dynamic_joint_states</span></code> with state set to 0.</p>
+<p>Read only: True</p>
+<p>Default:  {}</p>
+</dd>
+<dt>interfaces (string_array)</dt><dd><p>Parameter to support broadcasting of only specific joints and interfaces. It has to be used in combination with the <code class="docutils literal notranslate"><span class="pre">joints</span></code> parameter. If either <code class="docutils literal notranslate"><span class="pre">joints</span></code> or <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> is left empty, all available state interfaces will be published. If this parameter contains <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code>, or <code class="docutils literal notranslate"><span class="pre">effort</span></code>, the corresponding <code class="docutils literal notranslate"><span class="pre">map_interface_to_joint_state.&lt;field&gt;</span></code> setting is ignored because the standard interface is already requested directly. A warning is printed only when such an ignored mapping is set to a different custom interface name.</p>
+<p>Read only: True</p>
+<p>Default:  {}</p>
+</dd>
+<dt>map_interface_to_joint_state</dt><dd><p>Optional parameter (map) providing mapping between custom interface names to standard fields in <code class="docutils literal notranslate"><span class="pre">joint_states</span></code> message.
+Usecases:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Hydraulics robots where feedback and commanded values often have an offset and reliance on open-loop control is common.
+Typically one would map both values in separate interfaces in the framework.
+To visualize those data multiple joint_state_broadcaster instances and robot_state_publishers would be used to visualize both values in RViz.</p></li>
+<li><p>A robot provides multiple measuring techniques for its joint values which results in slightly different values.
+Typically one would use separate interface for providing those values in the framework.
+Using multiple joint_state_broadcaster instances we could publish and show both in RViz.</p></li>
+</ol>
+</div></blockquote>
+<p>Format (each line is optional):</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">map_interface_to_joint_state</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;custom_interface&gt;</span>
+<span class="w">    </span><span class="nt">velocity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;custom_interface&gt;</span>
+<span class="w">    </span><span class="nt">effort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;custom_interface&gt;</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> explicitly contains <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code>, or <code class="docutils literal notranslate"><span class="pre">effort</span></code>, the matching
+<code class="docutils literal notranslate"><span class="pre">map_interface_to_joint_state</span></code> entry is ignored because the standard interface is already
+requested directly. In that wrong configuration, a warning is printed only when the configured
+mapping value differs from the standard interface name.</p>
+<p>Examples:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">map_interface_to_joint_state</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kf_estimated_position</span>
+</pre></div>
+</div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">map_interface_to_joint_state</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">velocity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">derived_velocity</span>
+<span class="w">    </span><span class="nt">effort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">derived_effort</span>
+</pre></div>
+</div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">map_interface_to_joint_state</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">effort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">torque_sensor</span>
+</pre></div>
+</div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">map_interface_to_joint_state</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">effort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">current_sensor</span>
+</pre></div>
+</div>
+</dd>
+<dt>map_interface_to_joint_state.position (string)</dt><dd><p>Read only: True</p>
+<p>Default:  “position”</p>
+</dd>
+<dt>map_interface_to_joint_state.velocity (string)</dt><dd><p>Read only: True</p>
+<p>Default:  “velocity”</p>
+</dd>
+<dt>map_interface_to_joint_state.effort (string)</dt><dd><p>Read only: True</p>
+<p>Default:  “effort”</p>
+</dd>
+<dt>use_urdf_to_filter (bool)</dt><dd><p>Uses the robot_description to filter the <code class="docutils literal notranslate"><span class="pre">joint_states</span></code> topic. If true, the broadcaster will publish the data of the joints present in the URDF alone. If false, the broadcaster will publish the data of any interface that has type <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code>, or <code class="docutils literal notranslate"><span class="pre">effort</span></code>.</p>
+<p>Read only: True</p>
+<p>Default:  true</p>
+</dd>
+<dt>frame_id (string)</dt><dd><p>The frame_id to be used in the published joint states. This parameter allows rviz2 to visualize the effort of the joints.</p>
+<p>Read only: True</p>
+<p>Default:  “base_link”</p>
+</dd>
+<dt>publish_dynamic_joint_states (bool)</dt><dd><p>[Deprecated] Whether to publish dynamic joint states. This parameter is deprecated and will be removed in future releases.</p>
+<p>Read only: True</p>
+<p>Default:  false</p>
+</dd>
+</dl>
+</section>
+<section id="an-example-parameter-file">
+<h3>An example parameter file<a class="headerlink" href="#an-example-parameter-file" title="Link to this heading"></a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">joint_state_broadcaster</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">extra_joints</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{}&#39;</span>
+<span class="w">    </span><span class="nt">frame_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">base_link</span>
+<span class="w">    </span><span class="nt">interfaces</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{}&#39;</span>
+<span class="w">    </span><span class="nt">joints</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{}&#39;</span>
+<span class="w">    </span><span class="nt">map_interface_to_joint_state</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">effort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">effort</span>
+<span class="w">      </span><span class="nt">position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
+<span class="w">      </span><span class="nt">velocity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">velocity</span>
+<span class="w">    </span><span class="nt">publish_dynamic_joint_states</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">use_local_topics</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">use_urdf_to_filter</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="order-of-the-joints-in-the-message">
+<h2>Order of the joints in the message<a class="headerlink" href="#order-of-the-joints-in-the-message" title="Link to this heading"></a></h2>
+<p>The order of the joints in the message can determined by 3 different parameter settings:</p>
+<ol class="arabic">
+<li><dl class="simple">
+<dt>No defined <code class="docutils literal notranslate"><span class="pre">joints</span></code> parameter and <code class="docutils literal notranslate"><span class="pre">use_urdf_to_filter</span></code> set to <code class="docutils literal notranslate"><span class="pre">false</span></code>:</dt><dd><p>The order of the joints in the message is the same as the order of the joints’ state interfaces registered in the resource manager. This is typically the order in which the hardware components are loaded and configured.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>No defined <code class="docutils literal notranslate"><span class="pre">joints</span></code> parameter and <code class="docutils literal notranslate"><span class="pre">use_urdf_to_filter</span></code> set to <code class="docutils literal notranslate"><span class="pre">true</span></code>:</dt><dd><p>The order of the joints in the message is the same as the order of the joints in the URDF file, which is inherited from the loaded URDF model and independent of the order in the <cite>ros2_control</cite> tag.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Defined <code class="docutils literal notranslate"><span class="pre">joints</span></code> parameter along with <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> parameter:</dt><dd><p>The order of the joints in the message is the same as the order of the joints in the <code class="docutils literal notranslate"><span class="pre">joints</span></code> parameter.</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">joints</span></code> parameter is a subset of the total available joints in the URDF (or) the total available state interfaces, then only the joints in the <code class="docutils literal notranslate"><span class="pre">joints</span></code> parameter are published in the message.</p>
+<p>If any of the combinations of the defined <code class="docutils literal notranslate"><span class="pre">joints</span></code> parameter and <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> parameter are not in the available state interfaces, the controller will fail to activate.</p>
+</dd>
+</dl>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">extra_joints</span></code> parameter is set, the joints in the <code class="docutils literal notranslate"><span class="pre">extra_joints</span></code> parameter are appended to the end of the joint names in the message.</p>
+</div>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../imu_sensor_broadcaster/doc/userdoc.html" class="btn btn-neutral float-left" title="IMU Sensor Broadcaster" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../range_sensor_broadcaster/doc/userdoc.html" class="btn btn-neutral float-right" title="Range Sensor Broadcaster" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: lyrical
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Stable Releases</dt>
+        <dd><a href="userdoc.html">Lyrical</a></dd><br>
+        <dd><a href="../../../../../kilted/doc/ros2_controllers/joint_state_broadcaster/doc/userdoc.html">Kilted (latest)</a></dd><br>
+        <dd><a href="../../../../../jazzy/doc/ros2_controllers/joint_state_broadcaster/doc/userdoc.html">Jazzy</a></dd><br>
+        
+        <dd><a href="../../../../../humble/doc/ros2_controllers/joint_state_broadcaster/doc/userdoc.html">Humble</a></dd><br>
+        
+        
+    </dl>
+    <dl>
+      <dt>End-of-Life</dt>
+        <dd><a href="../../../../../iron/doc/ros2_controllers/joint_state_broadcaster/doc/userdoc.html">Iron</a></dd><br>
+        <dd><a href="../../../../../galactic/doc/ros2_controllers/joint_state_broadcaster/doc/userdoc.html">Galactic</a></dd><br>
+        <dd><a href="../../../../../foxy/doc/ros2_controllers/joint_state_broadcaster/doc/userdoc.html">Foxy</a></dd><br>
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="../../../../../rolling/doc/ros2_controllers/joint_state_broadcaster/doc/userdoc.html">Rolling</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

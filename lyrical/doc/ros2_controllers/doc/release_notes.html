@@ -1,0 +1,262 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Release Notes: Kilted Kaiju to Lyrical Luth &mdash; ROS2_Control: Rolling May 2026 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/reviewer_stats.css?v=068b34ac" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=d85a351e" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//rolling/doc/ros2_controllers/doc/release_notes.html" />
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=7748e526"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Release Notes: Jazzy to Kilted" href="../../control_toolbox/doc/release_notes.html" />
+    <link rel="prev" title="Release Notes: Kilted Kaiju to Lyrical Luth" href="../../ros2_control/doc/release_notes.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_control/doc/index.html">ros2_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="controllers_index.html">ros2_controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../utilities.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../release_notes/release_notes.html">Release Notes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../ros2_control/doc/release_notes.html">ros2_control</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">ros2_controllers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#state-interfaces-broadcaster">state_interfaces_broadcaster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#force-torque-sensor-broadcaster">force_torque_sensor_broadcaster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#diff-drive-controller">diff_drive_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mecanum-drive-controller">mecanum_drive_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#joint-state-broadcaster">joint_state_broadcaster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#omni-wheel-drive-controller">omni_wheel_drive_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#joint-trajectory-controller">joint_trajectory_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pid-controller">pid_controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#steering-controllers-library">steering_controllers_library</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../control_toolbox/doc/release_notes.html">control_toolbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../realtime_tools/doc/release_notes.html">realtime_tools</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration/migration.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_list/api_list.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../governance/governance.html">Project Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statistics.html">Documentation Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation_downloads.html">Documentation Downloads</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ROS2_Control: Rolling</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../release_notes/release_notes.html">Release Notes</a></li>
+      <li class="breadcrumb-item active">Release Notes: Kilted Kaiju to Lyrical Luth</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ros-controls/ros2_controllers/blob/master/doc/release_notes.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for an older, but still supported, version of ROS 2.
+    For information on the latest version, please have a look at <a href="../../../../kilted/doc/ros2_controllers/doc/release_notes.html">Kilted</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="release-notes-kilted-kaiju-to-lyrical-luth">
+<h1>Release Notes: Kilted Kaiju to Lyrical Luth<a class="headerlink" href="#release-notes-kilted-kaiju-to-lyrical-luth" title="Link to this heading"></a></h1>
+<p>This list summarizes important changes between Kilted Kaiju (previous) and Lyrical Luth (current) releases.</p>
+<section id="state-interfaces-broadcaster">
+<h2>state_interfaces_broadcaster<a class="headerlink" href="#state-interfaces-broadcaster" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>🚀 The state_interfaces_broadcaster was added 🎉 (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2006">#2006</a>).</p></li>
+</ul>
+</section>
+<section id="force-torque-sensor-broadcaster">
+<h2>force_torque_sensor_broadcaster<a class="headerlink" href="#force-torque-sensor-broadcaster" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Added support for transforming Wrench messages to a given list of target frames. This is useful when applications need force/torque data in their preferred coordinate frames. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2021/files">#2021</a>).</p></li>
+</ul>
+</section>
+<section id="diff-drive-controller">
+<h2>diff_drive_controller<a class="headerlink" href="#diff-drive-controller" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Parameter <code class="docutils literal notranslate"><span class="pre">tf_frame_prefix_enable</span></code> got deprecated and will be removed in a future release (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1997">#1997</a>).</p></li>
+<li><p>Now any tilde (“~”) character in <code class="docutils literal notranslate"><span class="pre">tf_frame_prefix</span></code> is substituted with node namespace. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1997">#1997</a>).</p></li>
+<li><p>Set odometry service added to be used at runtime. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2096">#2096</a>).</p></li>
+<li><p>Removed deprecated parameter <code class="docutils literal notranslate"><span class="pre">publish_rate</span></code> and associated rate-limiting logic. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2259">#2259</a>).</p></li>
+</ul>
+</section>
+<section id="mecanum-drive-controller">
+<h2>mecanum_drive_controller<a class="headerlink" href="#mecanum-drive-controller" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Parameter <code class="docutils literal notranslate"><span class="pre">tf_frame_prefix_enable</span></code> got deprecated and will be removed in a future release (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2063">#2063</a>).</p></li>
+<li><p>Now any tilde (“~”) character in <code class="docutils literal notranslate"><span class="pre">tf_frame_prefix</span></code> is substituted with node namespace. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2063">#2063</a>).</p></li>
+<li><p>Set odometry service added to be used at runtime. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2110">#2110</a>).</p></li>
+</ul>
+</section>
+<section id="joint-state-broadcaster">
+<h2>joint_state_broadcaster<a class="headerlink" href="#joint-state-broadcaster" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Make all parameters read-only (the never got re-evaluated after initialization anyways). (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2064">#2064</a>)</p></li>
+<li><p>Added parameter <code class="docutils literal notranslate"><span class="pre">publish_dynamic_joint_states</span></code> to enable/disable publishing of dynamic joint states. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2064">#2064</a>)</p></li>
+<li><p>Removed interfaces with other data types than double for publishing to <code class="docutils literal notranslate"><span class="pre">dynamic_joint_states</span></code>. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2115">#2115</a>)</p></li>
+<li><p>Parameter <code class="docutils literal notranslate"><span class="pre">publish_dynamic_joint_states</span></code> is now deprecated (default changed to <code class="docutils literal notranslate"><span class="pre">false</span></code>).</p></li>
+</ul>
+</section>
+<section id="omni-wheel-drive-controller">
+<h2>omni_wheel_drive_controller<a class="headerlink" href="#omni-wheel-drive-controller" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Parameter <code class="docutils literal notranslate"><span class="pre">tf_frame_prefix_enable</span></code> got deprecated and will be removed in a future release (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2073">#2073</a>).</p></li>
+<li><p>Now any tilde (“~”) character in <code class="docutils literal notranslate"><span class="pre">tf_frame_prefix</span></code> is substituted with node namespace. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2073">#2073</a>).</p></li>
+<li><p>Set odometry service added to be used at runtime. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2148">#2148</a>).</p></li>
+</ul>
+</section>
+<section id="joint-trajectory-controller">
+<h2>joint_trajectory_controller<a class="headerlink" href="#joint-trajectory-controller" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Fill in 0 velocities and accelerations into point before trajectories if the state interfaces
+don’t contain velocity / acceleration information, but the trajectory does. This way, the segment
+up to the first waypoint will use the same interpolation as the rest of the trajectory. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2043">#2043</a>)</p></li>
+<li><p>Added decelerate-to-stop functionality when a trajectory is canceled or preempted. Instead of immediately holding position, the controller can now smoothly decelerate each joint to a stop using the per-joint <code class="docutils literal notranslate"><span class="pre">max_deceleration_on_cancel</span></code> parameter. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2163">#2163</a>)</p></li>
+</ul>
+</section>
+<section id="pid-controller">
+<h2>pid_controller<a class="headerlink" href="#pid-controller" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Added parameter <code class="docutils literal notranslate"><span class="pre">set_current_state_as_first_setpoint</span></code> (default: true) to set the current state as the first setpoint when the controller is activated, helping to avoid large initial errors and sudden jumps in control output.</p></li>
+</ul>
+</section>
+<section id="steering-controllers-library">
+<h2>steering_controllers_library<a class="headerlink" href="#steering-controllers-library" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Parameter <code class="docutils literal notranslate"><span class="pre">tf_frame_prefix</span></code> added with the similar functionality to other controllers. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2080">#2080</a>).</p></li>
+<li><p>Set odometry service added to be used at runtime. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2244">#2244</a>).</p></li>
+</ul>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../ros2_control/doc/release_notes.html" class="btn btn-neutral float-left" title="Release Notes: Kilted Kaiju to Lyrical Luth" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../control_toolbox/doc/release_notes.html" class="btn btn-neutral float-right" title="Release Notes: Jazzy to Kilted" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: lyrical
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Stable Releases</dt>
+        <dd><a href="release_notes.html">Lyrical</a></dd><br>
+        <dd><a href="../../../../kilted/doc/ros2_controllers/doc/release_notes.html">Kilted (latest)</a></dd><br>
+        <dd><a href="../../../../jazzy/doc/ros2_controllers/doc/release_notes.html">Jazzy</a></dd><br>
+        
+        <dd><a href="../../../../humble/doc/ros2_controllers/doc/release_notes.html">Humble</a></dd><br>
+        
+        
+    </dl>
+    <dl>
+      <dt>End-of-Life</dt>
+        <dd><a href="../../../../iron/doc/ros2_controllers/doc/release_notes.html">Iron</a></dd><br>
+        <dd><a href="../../../../galactic/index.html">Galactic</a></dd><br>
+        <dd><a href="../../../../foxy/index.html">Foxy</a></dd><br>
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="../../../../rolling/doc/ros2_controllers/doc/release_notes.html">Rolling</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

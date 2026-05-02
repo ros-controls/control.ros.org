@@ -1,0 +1,329 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Running Controllers Asynchronously &mdash; ROS2_Control: Rolling May 2026 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/reviewer_stats.css?v=068b34ac" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=d85a351e" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//rolling/doc/ros2_control/controller_manager/doc/running_controllers_asynchronously.html" />
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=7748e526"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+      <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Controller Chaining / Cascade Control" href="controller_chaining.html" />
+    <link rel="prev" title="Controller Manager" href="userdoc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/index.html">ros2_control</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#api-documentation">API Documentation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/index.html#concepts">Concepts</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="userdoc.html">Controller Manager</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="userdoc.html#determinism">Determinism</a></li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc.html#publishers">Publishers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc.html#subscribers">Subscribers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc.html#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc.html#handling-multiple-controller-managers">Handling Multiple Controller Managers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc.html#helper-scripts">Helper scripts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc.html#rqt-controller-manager">rqt_controller_manager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc.html#using-the-controller-manager-in-a-process">Using the Controller Manager in a Process</a></li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc.html#launching-controller-manager-with-ros2-control-node">Launching controller_manager with ros2_control_node</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="userdoc.html#concepts">Concepts</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="userdoc.html#restarting-all-controllers">Restarting all controllers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="userdoc.html#restarting-hardware">Restarting hardware</a></li>
+<li class="toctree-l5"><a class="reference internal" href="userdoc.html#hardware-and-controller-errors">Hardware and Controller Errors</a></li>
+<li class="toctree-l5"><a class="reference internal" href="userdoc.html#factors-that-affect-determinism">Factors that affect Determinism</a></li>
+<li class="toctree-l5 current"><a class="reference internal" href="userdoc.html#support-for-asynchronous-updates">Support for Asynchronous Updates</a><ul class="current">
+<li class="toctree-l6 current"><a class="current reference internal" href="#">Asynchronous Controllers</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#scheduling-behavior">Scheduling Behavior</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#see-also">See Also</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc.html#monitoring-and-tuning">Monitoring and Tuning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="controller_chaining.html">Controller Chaining / Cascade Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../hardware_interface/doc/joints_userdoc.html">Joint Kinematics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../hardware_interface/doc/joint_limiting.html">Joint Limiting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../hardware_interface/doc/hardware_components_userdoc.html">Hardware Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../hardware_interface/doc/mock_components_userdoc.html">Mock Components</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#guidelines-and-best-practices">Guidelines and Best Practices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utilities.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes/release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../migration/migration.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_list/api_list.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../governance/governance.html">Project Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../statistics.html">Documentation Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation_downloads.html">Documentation Downloads</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ROS2_Control: Rolling</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../doc/index.html">ros2_control</a></li>
+          <li class="breadcrumb-item"><a href="userdoc.html">Controller Manager</a></li>
+      <li class="breadcrumb-item active">Running Controllers Asynchronously</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ros-controls/ros2_control/blob/master/controller_manager/doc/running_controllers_asynchronously.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for an older, but still supported, version of ROS 2.
+    For information on the latest version, please have a look at <a href="../../../../../kilted/doc/ros2_control/controller_manager/doc/running_controllers_asynchronously.html">Kilted</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="running-controllers-asynchronously">
+<span id="id1"></span><h1>Running Controllers Asynchronously<a class="headerlink" href="#running-controllers-asynchronously" title="Link to this heading"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> framework allows controllers to run asynchronously.
+This is useful when a controller’s <code class="docutils literal notranslate"><span class="pre">update()</span></code> method contains blocking calls or requires more execution time that affects the controller manager’s control loop period, which would
+otherwise affect the periodicity of the control loop causing overruns.</p>
+<p>For example, if the <code class="docutils literal notranslate"><span class="pre">update_rate</span></code> for the controller manager is 100Hz, the sum of the
+execution times of all controllers’ <code class="docutils literal notranslate"><span class="pre">update()</span></code> calls and hardware components <code class="docutils literal notranslate"><span class="pre">read()</span></code>
+and <code class="docutils literal notranslate"><span class="pre">write()</span></code> calls must be below 10ms. If one controller requires 15ms of execution
+time, it cannot be executed synchronously without affecting the overall system update rate.
+Running such a controller asynchronously allows it to execute on a dedicated thread without
+blocking the main control loop.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The async update support is transparent to each controller implementation.
+Any existing controller can be run asynchronously just by setting
+the <code class="docutils literal notranslate"><span class="pre">is_async</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+</div>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h2>
+<p>The following parameters can be set in the controller’s configuration to run it
+asynchronously:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">is_async</span></code>: (optional) If set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, the controller will run its <code class="docutils literal notranslate"><span class="pre">update()</span></code>
+method asynchronously. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">update_rate</span></code>: (optional) The rate in Hz at which the controller’s <code class="docutils literal notranslate"><span class="pre">update()</span></code> is
+triggered. If not set or set to <code class="docutils literal notranslate"><span class="pre">0</span></code>, the controller runs at the same rate as the
+controller manager.</p></li>
+</ul>
+<p>Additional thread parameters can be set under the <code class="docutils literal notranslate"><span class="pre">async_parameters</span></code> namespace:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">thread_priority</span></code>: (optional) The priority of the thread that runs the controller’s
+<code class="docutils literal notranslate"><span class="pre">update()</span></code>. The priority is an integer value between 0 and 99. If not set, the thread
+inherits the same priority as the controller manager thread.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cpu_affinity</span></code>: (optional) A list of CPU core IDs to pin the async thread to.
+Default is an empty list, meaning the thread can run on any CPU core.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The thread priority is only used when the controller runs asynchronously.
+Asynchronous controller threads use the FIFO scheduling policy.</p>
+</div>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<p>The following example shows how to configure an asynchronous controller in a ROS 2
+YAML parameters file. The controller manager runs at 100Hz and the async controller
+is configured to run at 20Hz:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">controller_manager</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">update_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span><span class="w">  </span><span class="c1"># Hz</span>
+
+<span class="nt">example_async_controller</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">example_controller/ExampleController</span>
+<span class="w">    </span><span class="nt">is_async</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">update_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span><span class="w">  </span><span class="c1"># Hz</span>
+</pre></div>
+</div>
+<p>This will result in the controller being triggered at 20Hz while the controller manager
+runs at 100Hz.</p>
+<p>Additional thread parameters can be configured using the <code class="docutils literal notranslate"><span class="pre">async_parameters</span></code> namespace:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">example_async_controller</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">example_controller/ExampleController</span>
+<span class="w">    </span><span class="nt">is_async</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">update_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span><span class="w">  </span><span class="c1"># Hz</span>
+<span class="w">    </span><span class="nt">async_parameters</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">thread_priority</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span>
+<span class="w">      </span><span class="nt">cpu_affinity</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">4</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+<p>The description of all parameters can be found in the <a class="reference external" href="https://control.ros.org/master/doc/ros2_controllers/doc/controllers_index.html#common-controller-parameters">Common Controller Parameters</a>
+section of the <code class="docutils literal notranslate"><span class="pre">ros2_controllers</span></code> documentation.</p>
+</section>
+<section id="scheduling-behavior">
+<h2>Scheduling Behavior<a class="headerlink" href="#scheduling-behavior" title="Link to this heading"></a></h2>
+<p>From a design perspective, the controller manager functions as a scheduler that triggers
+updates for asynchronous controllers during the control loop.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ControllerInterfaceBase</span></code> calls <code class="docutils literal notranslate"><span class="pre">AsyncFunctionHandler</span></code> to handle the actual
+<code class="docutils literal notranslate"><span class="pre">update()</span></code> callback of the controller. The <code class="docutils literal notranslate"><span class="pre">AsyncFunctionHandler</span></code> is part of the <a class="reference external" href="https://control.ros.org/rolling/doc/realtime_tools/doc/index.html">realtime_tools</a> package. This is the same mechanism used by the resource
+manager to support <code class="docutils literal notranslate"><span class="pre">read()</span></code> and <code class="docutils literal notranslate"><span class="pre">write()</span></code> operations for asynchronous hardware
+components (see <a class="reference internal" href="../../hardware_interface/doc/asynchronous_components.html#asynchronous-components"><span class="std std-ref">Running Hardware Components Asynchronously</span></a>). When a controller is configured to run
+asynchronously, the controller interface creates an async handler during the controller’s
+configuration phase and binds it to the controller’s <code class="docutils literal notranslate"><span class="pre">update()</span></code> method. The async
+handler thread is created with either the same thread priority as the controller manager
+or the priority specified by the <code class="docutils literal notranslate"><span class="pre">thread_priority</span></code> parameter.</p>
+<p>When triggered by the controller manager, the async handler checks whether the previous
+trigger has completed and then calls the <code class="docutils literal notranslate"><span class="pre">update()</span></code> method. If the previous <code class="docutils literal notranslate"><span class="pre">update()</span></code>
+is still running when the next trigger arrives, the previous result is reused and the
+controller manager prints a warning:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">[ros2_control_node-1] [WARN] [1741626670.311533972] [example_async_controller]: The controller missed xx update cycles out of yy total triggers.</span>
+</pre></div>
+</div>
+<p>If this warning appears frequently, the controller’s <code class="docutils literal notranslate"><span class="pre">update_rate</span></code> should be reduced, as
+the computation is taking longer than the configured period allows.</p>
+<p>If the async controller’s <code class="docutils literal notranslate"><span class="pre">update()</span></code> method throws an unhandled exception, the controller
+manager handles it the same way as for synchronous controllers — by deactivating the
+controller. An error message is printed similar to the following:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">[ros2_control_node-1] [ERROR] [1741629098.352771957] [AsyncFunctionHandler]: AsyncFunctionHandler: Exception caught in the async callback thread!</span>
+<span class="go">...</span>
+<span class="go">[ros2_control_node-1] [ERROR] [1741629098.352874151] [controller_manager]: Caught exception of type : St13runtime_error while updating controller</span>
+<span class="go">[ros2_control_node-1] [ERROR] [1741629098.352940701] [controller_manager]: Deactivating controllers : [example_async_controller] as their update resulted in an error!</span>
+</pre></div>
+</div>
+</section>
+<section id="see-also">
+<h2>See Also<a class="headerlink" href="#see-also" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../hardware_interface/doc/asynchronous_components.html#asynchronous-components"><span class="std std-ref">Running Hardware Components Asynchronously</span></a> — Running hardware components asynchronously</p></li>
+<li><p><a class="reference internal" href="../../hardware_interface/doc/different_update_rates_userdoc.html#different-update-rates-userdoc"><span class="std std-ref">Different update rates for Hardware Components</span></a> — Running hardware components at different update rates</p></li>
+</ul>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="userdoc.html" class="btn btn-neutral float-left" title="Controller Manager" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="controller_chaining.html" class="btn btn-neutral float-right" title="Controller Chaining / Cascade Control" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: lyrical
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Stable Releases</dt>
+        <dd><a href="running_controllers_asynchronously.html">Lyrical</a></dd><br>
+        <dd><a href="../../../../../kilted/doc/ros2_control/controller_manager/doc/running_controllers_asynchronously.html">Kilted (latest)</a></dd><br>
+        <dd><a href="../../../../../jazzy/doc/ros2_control/controller_manager/doc/running_controllers_asynchronously.html">Jazzy</a></dd><br>
+        
+        <dd><a href="../../../../../humble/index.html">Humble</a></dd><br>
+        
+        
+    </dl>
+    <dl>
+      <dt>End-of-Life</dt>
+        <dd><a href="../../../../../iron/index.html">Iron</a></dd><br>
+        <dd><a href="../../../../../galactic/index.html">Galactic</a></dd><br>
+        <dd><a href="../../../../../foxy/index.html">Foxy</a></dd><br>
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="../../../../../rolling/doc/ros2_control/controller_manager/doc/running_controllers_asynchronously.html">Rolling</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

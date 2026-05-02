@@ -1,0 +1,348 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Migration Guides: Kilted Kaiju to Lyrical Luth &mdash; ROS2_Control: Rolling May 2026 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/reviewer_stats.css?v=068b34ac" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=d85a351e" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//rolling/doc/ros2_control/doc/migration.html" />
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=7748e526"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Migration Guides: Kilted Kaiju to Lyrical Luth" href="../../ros2_controllers/doc/migration.html" />
+    <link rel="prev" title="Differences to ros_control (ROS 1)" href="../../migration/differences_to_ros1.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">ros2_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../utilities.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes/release_notes.html">Release Notes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../migration/migration.html">Migration Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../migration/migration.html#coming-from-ros-control-ros-1">Coming from ros_control (ROS 1)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../migration/migration.html#between-different-ros-2-distributions">Between different ROS 2 distributions</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ros2_control</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#controller-interface">controller_interface</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#chainablecontrollerinterface">ChainableControllerInterface</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#controller-manager">controller_manager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hardware-interface">hardware_interface</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_controllers/doc/migration.html">ros2_controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../control_toolbox/doc/migration.html">control_toolbox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../realtime_tools/doc/migration.html">realtime_tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_list/api_list.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../governance/governance.html">Project Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statistics.html">Documentation Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation_downloads.html">Documentation Downloads</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ROS2_Control: Rolling</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../migration/migration.html">Migration Guides</a></li>
+      <li class="breadcrumb-item active">Migration Guides: Kilted Kaiju to Lyrical Luth</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ros-controls/ros2_control/blob/master/doc/migration.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for an older, but still supported, version of ROS 2.
+    For information on the latest version, please have a look at <a href="../../../../kilted/doc/ros2_control/doc/migration.html">Kilted</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="migration-guides-kilted-kaiju-to-lyrical-luth">
+<h1>Migration Guides: Kilted Kaiju to Lyrical Luth<a class="headerlink" href="#migration-guides-kilted-kaiju-to-lyrical-luth" title="Link to this heading"></a></h1>
+<p>This list summarizes important changes between Kilted Kaiju (previous) and Lyrical Luth (current) releases, where changes to user code might be necessary.</p>
+<section id="controller-interface">
+<h2>controller_interface<a class="headerlink" href="#controller-interface" title="Link to this heading"></a></h2>
+<section id="chainablecontrollerinterface">
+<h3>ChainableControllerInterface<a class="headerlink" href="#chainablecontrollerinterface" title="Link to this heading"></a></h3>
+<ul>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">on_export_state_interfaces()</span></code> method is deprecated and replaced by <code class="docutils literal notranslate"><span class="pre">on_export_state_interfaces_list()</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2988">#2988</a>). The new method returns shared pointers instead of objects by value:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Old (deprecated)</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">StateInterface</span><span class="o">&gt;</span><span class="w"> </span><span class="n">on_export_state_interfaces</span><span class="p">()</span>
+
+<span class="c1">// New</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">StateInterface</span><span class="o">::</span><span class="n">SharedPtr</span><span class="o">&gt;</span><span class="w"> </span><span class="n">on_export_state_interfaces_list</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Example migration:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Old implementation</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">StateInterface</span><span class="o">&gt;</span>
+<span class="n">MyController</span><span class="o">::</span><span class="n">on_export_state_interfaces</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">StateInterface</span><span class="o">&gt;</span><span class="w"> </span><span class="n">state_interfaces</span><span class="p">;</span>
+<span class="w">  </span><span class="n">state_interfaces</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">get_node</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get_name</span><span class="p">())</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;/my_state&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;position&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">my_state_value_</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">state_interfaces</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// New implementation</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">StateInterface</span><span class="o">::</span><span class="n">SharedPtr</span><span class="o">&gt;</span>
+<span class="n">MyController</span><span class="o">::</span><span class="n">on_export_state_interfaces_list</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">StateInterface</span><span class="o">::</span><span class="n">SharedPtr</span><span class="o">&gt;</span><span class="w"> </span><span class="n">state_interfaces</span><span class="p">;</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">state_interface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">StateInterface</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">get_node</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get_name</span><span class="p">())</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;/my_state&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;position&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">state_interface</span><span class="o">-&gt;</span><span class="n">set_value</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;::</span><span class="n">quiet_NaN</span><span class="p">());</span>
+<span class="w">  </span><span class="n">state_interfaces</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">state_interface</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">state_interfaces</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">on_export_reference_interfaces()</span></code> method is deprecated and replaced by <code class="docutils literal notranslate"><span class="pre">on_export_reference_interfaces_list()</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2988">#2988</a>). The new method returns shared pointers instead of objects by value:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Old (deprecated)</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">CommandInterface</span><span class="o">&gt;</span><span class="w"> </span><span class="n">on_export_reference_interfaces</span><span class="p">()</span>
+
+<span class="c1">// New</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">CommandInterface</span><span class="o">::</span><span class="n">SharedPtr</span><span class="o">&gt;</span><span class="w"> </span><span class="n">on_export_reference_interfaces_list</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Example migration:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Old implementation</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">CommandInterface</span><span class="o">&gt;</span>
+<span class="n">MyController</span><span class="o">::</span><span class="n">on_export_reference_interfaces</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">reference_interfaces_</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;::</span><span class="n">quiet_NaN</span><span class="p">());</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">CommandInterface</span><span class="o">&gt;</span><span class="w"> </span><span class="n">reference_interfaces</span><span class="p">;</span>
+<span class="w">  </span><span class="n">reference_interfaces</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">get_node</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get_name</span><span class="p">())</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;/my_ref&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;velocity&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">reference_interfaces_</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">reference_interfaces</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// New implementation</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">CommandInterface</span><span class="o">::</span><span class="n">SharedPtr</span><span class="o">&gt;</span>
+<span class="n">MyController</span><span class="o">::</span><span class="n">on_export_reference_interfaces_list</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">CommandInterface</span><span class="o">::</span><span class="n">SharedPtr</span><span class="o">&gt;</span><span class="w"> </span><span class="n">reference_interfaces</span><span class="p">;</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">cmd_interface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">CommandInterface</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">get_node</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get_name</span><span class="p">())</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;/my_ref&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;velocity&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">cmd_interface</span><span class="o">-&gt;</span><span class="n">set_value</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;::</span><span class="n">quiet_NaN</span><span class="p">());</span>
+<span class="w">  </span><span class="n">reference_interfaces</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">cmd_interface</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">reference_interfaces</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>The exported state interfaces are now returned as <code class="docutils literal notranslate"><span class="pre">ConstSharedPtr</span></code> from <code class="docutils literal notranslate"><span class="pre">export_state_interfaces()</span></code> to ensure they are read-only for consumers (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1767">#1767</a>).</p></li>
+<li><p>The internal storage variables will be removed in upcoming releases. Controllers should now use the ordered exported interface containers (<code class="docutils literal notranslate"><span class="pre">ordered_exported_state_interfaces_</span></code> and <code class="docutils literal notranslate"><span class="pre">ordered_exported_reference_interfaces_</span></code>) which store shared pointers instead of raw values (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2988">#2988</a>).</p></li>
+<li><p>The controller manager’s ros arguments are no longer forwarded to the controllers via NodeOptions. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/3016">#3016</a>)
+So, any remapping done at the controller manager level will not be visible to the controllers anymore.
+It is recommended to use the <code class="docutils literal notranslate"><span class="pre">--controller-ros-args</span></code> option of the spawner to pass ros arguments to controllers.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">control_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
+    <span class="n">package</span><span class="o">=</span><span class="s2">&quot;controller_manager&quot;</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;ros2_control_node&quot;</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">robot_controllers</span><span class="p">],</span>
+    <span class="n">remappings</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;/diffbot_base_controller/cmd_vel&quot;</span><span class="p">,</span> <span class="s2">&quot;/cmd_vel&quot;</span><span class="p">)],</span>
+    <span class="n">output</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>to</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">control_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
+    <span class="n">package</span><span class="o">=</span><span class="s2">&quot;controller_manager&quot;</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;ros2_control_node&quot;</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">robot_controllers</span><span class="p">],</span>
+    <span class="n">output</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">spawner_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
+    <span class="n">package</span><span class="o">=</span><span class="s2">&quot;controller_manager&quot;</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;spawner&quot;</span><span class="p">,</span>
+    <span class="n">arguments</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;diffbot_base_controller&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--controller-ros-args&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--remap&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;/diffbot_base_controller/cmd_vel:=/cmd_vel&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<section id="controller-manager">
+<h2>controller_manager<a class="headerlink" href="#controller-manager" title="Link to this heading"></a></h2>
+</section>
+<section id="hardware-interface">
+<h2>hardware_interface<a class="headerlink" href="#hardware-interface" title="Link to this heading"></a></h2>
+<ul>
+<li><p>The signature for the <code class="docutils literal notranslate"><span class="pre">on_init</span></code> method in all
+<code class="docutils literal notranslate"><span class="pre">hardware_interface::*Interface</span></code> classes has changed (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2323">#2323</a>,
+<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2589">#2589</a>) from</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">CallbackReturn</span><span class="w"> </span><span class="n">on_init</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">HardwareInfo</span><span class="o">&amp;</span><span class="w"> </span><span class="n">info</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>to</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">CallbackReturn</span><span class="w"> </span><span class="n">on_init</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">HardwareComponentInterfaceParams</span><span class="o">&amp;</span><span class="w"> </span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">HardwareInfo</span></code> object can be accessed from the <code class="docutils literal notranslate"><span class="pre">HardwareComponentInterfaceParams</span></code> object using
+<code class="docutils literal notranslate"><span class="pre">params.hardware_info</span></code>. See <a class="reference internal" href="../hardware_interface/doc/writing_new_hardware_component.html#writing-new-hardware-component"><span class="std std-ref">Writing a Hardware Component</span></a> for advanced usage of the
+<code class="docutils literal notranslate"><span class="pre">HardwareComponentInterfaceParams</span></code> object.</p>
+</li>
+<li><p>The signature for the <code class="docutils literal notranslate"><span class="pre">init()</span></code> method in all
+<code class="docutils literal notranslate"><span class="pre">hardware_interface::*Interface</span></code> classes has changed (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2344">#2344</a>,
+<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2589">#2589</a>) from</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">CallbackReturn</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">HardwareInfo</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">hardware_info</span><span class="p">,</span><span class="w"> </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Logger</span><span class="w"> </span><span class="n">logger</span><span class="p">,</span><span class="w"> </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Clock</span><span class="o">::</span><span class="n">SharedPtr</span><span class="w"> </span><span class="n">clock</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>to</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">CallbackReturn</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">HardwareComponentParams</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">initialize</span></code> methods of all hardware components (such as <code class="docutils literal notranslate"><span class="pre">Actuator</span></code>, <code class="docutils literal notranslate"><span class="pre">Sensor</span></code>, etc.)
+have been changed from passing a <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">HardwareInfo</span> <span class="pre">&amp;</span></code> to passing a <code class="docutils literal notranslate"><span class="pre">const</span>
+<span class="pre">HardwareComponentParams</span> <span class="pre">&amp;</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2323">#2323</a>,
+<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2589">#2589</a>).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">get_value</span></code> of LoanedStateInterface and LoanedCommandInterface is now accessed using <code class="docutils literal notranslate"><span class="pre">get_optional</span></code> method. The value will be returned as an <code class="docutils literal notranslate"><span class="pre">std::optional&lt;T&gt;</span></code>. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2061">#2061</a>).</p>
+<p>This change was made to better handle cases where the interface value may not be accessible due to a concurrent access from other threads in the system.</p>
+</li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">double</span> <span class="pre">get_value()</span></code> of standard StateInterface and CommandInterface is now accessed using  <code class="docutils literal notranslate"><span class="pre">get_optional</span></code> or <code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">get_value(T</span> <span class="pre">&amp;</span> <span class="pre">value,</span> <span class="pre">bool</span> <span class="pre">wait_for_lock)</span></code> method. The value will be returned as an <code class="docutils literal notranslate"><span class="pre">std::optional&lt;T&gt;</span></code> when using <code class="docutils literal notranslate"><span class="pre">get_optional</span></code> (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2831">#2831</a>).</p>
+<p>Likewise, the <code class="docutils literal notranslate"><span class="pre">set_value</span></code> method has been updated to <code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">set_value(const</span> <span class="pre">T</span> <span class="pre">&amp;</span> <span class="pre">value,</span> <span class="pre">bool</span> <span class="pre">wait_for_lock)</span></code> and return value is to indicate success or failure of the operation (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2831">#2831</a>).</p>
+<p>You can use the return values of these methods to handle cases where the interface value may not be accessible due to a concurrent access from other threads in the system. You can set the <code class="docutils literal notranslate"><span class="pre">wait_for_lock</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">true</span></code> to block until the lock is acquired, however, this is not real-time safe and should be used with caution in real-time contexts.</p>
+</li>
+</ul>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../migration/differences_to_ros1.html" class="btn btn-neutral float-left" title="Differences to ros_control (ROS 1)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../ros2_controllers/doc/migration.html" class="btn btn-neutral float-right" title="Migration Guides: Kilted Kaiju to Lyrical Luth" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: lyrical
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Stable Releases</dt>
+        <dd><a href="migration.html">Lyrical</a></dd><br>
+        <dd><a href="../../../../kilted/doc/ros2_control/doc/migration.html">Kilted (latest)</a></dd><br>
+        <dd><a href="../../../../jazzy/doc/ros2_control/doc/migration.html">Jazzy</a></dd><br>
+        
+        <dd><a href="../../../../humble/doc/ros2_control/doc/migration.html">Humble</a></dd><br>
+        
+        
+    </dl>
+    <dl>
+      <dt>End-of-Life</dt>
+        <dd><a href="../../../../iron/doc/ros2_control/doc/migration.html">Iron</a></dd><br>
+        <dd><a href="../../../../galactic/index.html">Galactic</a></dd><br>
+        <dd><a href="../../../../foxy/index.html">Foxy</a></dd><br>
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="../../../../rolling/doc/ros2_control/doc/migration.html">Rolling</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,277 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>forward_command_controller &mdash; ROS2_Control: Rolling May 2026 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/reviewer_stats.css?v=068b34ac" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=d85a351e" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//rolling/doc/ros2_controllers/forward_command_controller/doc/userdoc.html" />
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=7748e526"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../../_static/tabs.js?v=35627e55"></script>
+      <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="joint_trajectory_controller" href="../../joint_trajectory_controller/doc/userdoc.html" />
+    <link rel="prev" title="Admittance Controller" href="../../admittance_controller/doc/userdoc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html">ros2_control</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/controllers_index.html">ros2_controllers</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#guidelines-and-best-practices">Guidelines and Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#controllers-for-wheeled-mobile-robots">Controllers for Wheeled Mobile Robots</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/controllers_index.html#controllers-for-manipulators-and-other-robots">Controllers for Manipulators and Other Robots</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../admittance_controller/doc/userdoc.html">Admittance Controller</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Forward Command Controller</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#forward-command-controller-and-multi-interface-forward-command-controller">forward_command_controller and multi_interface_forward_command_controller</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#hardware-interface-type">Hardware interface type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#ros-2-interface-of-the-controller">ROS 2 interface of the controller</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#topics">Topics</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#parameters">Parameters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../joint_trajectory_controller/doc/userdoc.html">Joint Trajectory Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../parallel_gripper_controller/doc/userdoc.html">Parallel Gripper Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pid_controller/doc/userdoc.html">PID Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../gpio_controllers/doc/userdoc.html">Gpio Command Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../motion_primitives_controllers/userdoc.html">motion_primitive_controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../motion_primitives_controllers/userdoc.html#description">Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../motion_primitives_controllers/userdoc.html#architecture-overview">Architecture Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../motion_primitives_controllers/userdoc.html#demo-video-with-ur10e">Demo-Video with UR10e</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../motion_primitives_controllers/userdoc.html#demo-video-with-kr3">Demo-Video with KR3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../motion_primitives_controllers/userdoc.html#parameters">Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#broadcasters">Broadcasters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#filters">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#common-controller-parameters">Common Controller Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utilities.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes/release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../migration/migration.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_list/api_list.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../governance/governance.html">Project Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../statistics.html">Documentation Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation_downloads.html">Documentation Downloads</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ROS2_Control: Rolling</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../doc/controllers_index.html">ros2_controllers</a></li>
+      <li class="breadcrumb-item active">forward_command_controller</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ros-controls/ros2_controllers/blob/master/forward_command_controller/doc/userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for an older, but still supported, version of ROS 2.
+    For information on the latest version, please have a look at <a href="../../../../../kilted/doc/ros2_controllers/forward_command_controller/doc/userdoc.html">Kilted</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="forward-command-controller">
+<span id="forward-command-controller-userdoc"></span><h1>forward_command_controller<a class="headerlink" href="#forward-command-controller" title="Link to this heading"></a></h1>
+<p>A selection of controllers that forward commands of different types.</p>
+<section id="forward-command-controller-and-multi-interface-forward-command-controller">
+<h2>forward_command_controller and multi_interface_forward_command_controller<a class="headerlink" href="#forward-command-controller-and-multi-interface-forward-command-controller" title="Link to this heading"></a></h2>
+<p>Both controllers forward <code class="docutils literal notranslate"><span class="pre">std_msgs::msg::Float64MultiArray</span></code> to a set of interfaces, which can be parameterized as follows: While <code class="docutils literal notranslate"><span class="pre">forward_command_controller/ForwardCommandController</span></code> only claims a single interface type per joint (<code class="docutils literal notranslate"><span class="pre">joint[i]</span> <span class="pre">+</span> <span class="pre">&quot;/&quot;</span> <span class="pre">+</span> <span class="pre">interface_name</span></code>), the <code class="docutils literal notranslate"><span class="pre">forward_command_controller/MultiInterfaceForwardCommandController</span></code> claims the combination of all interfaces specified in the <code class="docutils literal notranslate"><span class="pre">interface_names</span></code> parameter (<code class="docutils literal notranslate"><span class="pre">joint[i]</span> <span class="pre">+</span> <span class="pre">&quot;/&quot;</span> <span class="pre">+</span> <span class="pre">interface_names[j]</span></code>).</p>
+<section id="hardware-interface-type">
+<h3>Hardware interface type<a class="headerlink" href="#hardware-interface-type" title="Link to this heading"></a></h3>
+<p>This controller can be used for every type of command interface, not only limited to joints.</p>
+</section>
+<section id="ros-2-interface-of-the-controller">
+<h3>ROS 2 interface of the controller<a class="headerlink" href="#ros-2-interface-of-the-controller" title="Link to this heading"></a></h3>
+<section id="topics">
+<h4>Topics<a class="headerlink" href="#topics" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>~/commands (input topic) [std_msgs::msg::Float64MultiArray]</dt><dd><p>Target joint commands</p>
+</dd>
+</dl>
+</section>
+<section id="parameters">
+<h4>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h4>
+<p>This controller uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters.</p>
+<blockquote>
+<div><div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-Zm9yd2FyZF9jb21tYW5kX2NvbnRyb2xsZXI=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-Zm9yd2FyZF9jb21tYW5kX2NvbnRyb2xsZXI=" name="Zm9yd2FyZF9jb21tYW5kX2NvbnRyb2xsZXI=" role="tab" tabindex="0">forward_command_controller</button><button aria-controls="panel-0-bXVsdGlfaW50ZXJmYWNlX2ZvcndhcmRfY29tbWFuZF9jb250cm9sbGVy" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-bXVsdGlfaW50ZXJmYWNlX2ZvcndhcmRfY29tbWFuZF9jb250cm9sbGVy" name="bXVsdGlfaW50ZXJmYWNlX2ZvcndhcmRfY29tbWFuZF9jb250cm9sbGVy" role="tab" tabindex="-1">multi_interface_forward_command_controller</button></div><div aria-labelledby="tab-0-Zm9yd2FyZF9jb21tYW5kX2NvbnRyb2xsZXI=" class="sphinx-tabs-panel group-tab" id="panel-0-Zm9yd2FyZF9jb21tYW5kX2NvbnRyb2xsZXI=" name="Zm9yd2FyZF9jb21tYW5kX2NvbnRyb2xsZXI=" role="tabpanel" tabindex="0"><dl>
+<dt>joints (string_array)</dt><dd><p>Name of the joints to control</p>
+<p>Read only: True</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>parameter is not empty</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>interface_name (string)</dt><dd><p>Name of the interface of the joint</p>
+<p>Read only: True</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>parameter is not empty</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</div><div aria-labelledby="tab-0-bXVsdGlfaW50ZXJmYWNlX2ZvcndhcmRfY29tbWFuZF9jb250cm9sbGVy" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-bXVsdGlfaW50ZXJmYWNlX2ZvcndhcmRfY29tbWFuZF9jb250cm9sbGVy" name="bXVsdGlfaW50ZXJmYWNlX2ZvcndhcmRfY29tbWFuZF9jb250cm9sbGVy" role="tabpanel" tabindex="0"><dl>
+<dt>joint (string)</dt><dd><p>Name of the joint to control</p>
+<p>Read only: True</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>parameter is not empty</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>interface_names (string_array)</dt><dd><p>Names of the interfaces per joint to claim</p>
+<p>Read only: True</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>parameter is not empty</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</div></div>
+</div></blockquote>
+</section>
+</section>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../admittance_controller/doc/userdoc.html" class="btn btn-neutral float-left" title="Admittance Controller" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../joint_trajectory_controller/doc/userdoc.html" class="btn btn-neutral float-right" title="joint_trajectory_controller" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: lyrical
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Stable Releases</dt>
+        <dd><a href="userdoc.html">Lyrical</a></dd><br>
+        <dd><a href="../../../../../kilted/doc/ros2_controllers/forward_command_controller/doc/userdoc.html">Kilted (latest)</a></dd><br>
+        <dd><a href="../../../../../jazzy/doc/ros2_controllers/forward_command_controller/doc/userdoc.html">Jazzy</a></dd><br>
+        
+        <dd><a href="../../../../../humble/doc/ros2_controllers/forward_command_controller/doc/userdoc.html">Humble</a></dd><br>
+        
+        
+    </dl>
+    <dl>
+      <dt>End-of-Life</dt>
+        <dd><a href="../../../../../iron/doc/ros2_controllers/forward_command_controller/doc/userdoc.html">Iron</a></dd><br>
+        <dd><a href="../../../../../galactic/doc/ros2_controllers/forward_command_controller/doc/userdoc.html">Galactic</a></dd><br>
+        <dd><a href="../../../../../foxy/doc/ros2_controllers/forward_command_controller/doc/userdoc.html">Foxy</a></dd><br>
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="../../../../../rolling/doc/ros2_controllers/forward_command_controller/doc/userdoc.html">Rolling</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

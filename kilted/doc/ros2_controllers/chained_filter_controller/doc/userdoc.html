@@ -103,7 +103,7 @@
       <li class="breadcrumb-item active">Chained Filter Controller</li>
       <li class="wy-breadcrumbs-aside">
               <!-- User defined GitHub URL -->
-              <a href="https://github.com/ros-controls/ros2_controllers/blob/master/chained_filter_controller/doc/userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/ros-controls/ros2_controllers/blob/kilted/chained_filter_controller/doc/userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -118,7 +118,7 @@
 <p>This controller wraps around <code class="docutils literal notranslate"><span class="pre">filter_chain</span></code> library from the <a class="reference external" href="https://index.ros.org/p/filters/#humble">filters</a> package. It allows to chain multiple filters together, where the output of one filter is the input of the next one. The controller can be used to apply a sequence of filters to a single interface, the same filter chain to multiple interfaces, or different filter chains to different interfaces.</p>
 <section id="parameters">
 <h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h2>
-<p>This controller uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters. The parameter <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/master/chained_filter_controller/src/chained_filter_parameters.yaml">definition file located in the src folder</a> contains descriptions for all the parameters used by the controller.</p>
+<p>This controller uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters. The parameter <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/kilted/chained_filter_controller/src/chained_filter_parameters.yaml">definition file located in the src folder</a> contains descriptions for all the parameters used by the controller.</p>
 <p>Full list of parameters:</p>
 <dl>
 <dt>input_interfaces (string_array)</dt><dd><p>Name of the input state interface</p>
@@ -146,7 +146,7 @@
 <dt>&lt;input_interfaces&gt;.filter_chain</dt><dd><p>Instead of a single configuration, a distinct configuration can be provided for each input interface. The key is the name of the input interface, and the value is a map of parameters that defines a filter chain, containing filterN as key. The fields for each filter are: type: The filter plugin to be loaded name: Actual name semantically describing the filter, e.g., low_pass_filter params: And underlying map of parameters needed for a specific filter, refer to the specific filter documentation.</p>
 </dd>
 </dl>
-<p>An example parameter file for this controller can be found in <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/master/chained_filter_controller/test/config/test_chained_filter.yaml">the test directory</a> for a single interface:</p>
+<p>An example parameter file for this controller can be found in <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/kilted/chained_filter_controller/test/config/test_chained_filter.yaml">the test directory</a> for a single interface:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test_chained_filter</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">filter_chain</span><span class="p">:</span>
@@ -159,7 +159,7 @@
 <span class="w">    </span><span class="nt">output_interfaces</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;wheel_left/filtered_position&quot;</span><span class="p p-Indicator">]</span>
 </pre></div>
 </div>
-<p>or for <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/master/chained_filter_controller/test/config/test_multiple_chained_filter.yaml">multiple interfaces</a>:</p>
+<p>or for <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/kilted/chained_filter_controller/test/config/test_multiple_chained_filter.yaml">multiple interfaces</a>:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test_chained_filter_multiple_interfaces</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">filter_chain</span><span class="p">:</span>
@@ -237,6 +237,7 @@
   <div class="rst-other-versions">
     <dl>
       <dt>Stable Releases</dt>
+        <dd><a href="../../../../../lyrical/doc/ros2_controllers/chained_filter_controller/doc/userdoc.html">Lyrical</a></dd><br>
         <dd><a href="userdoc.html">Kilted (latest)</a></dd><br>
         <dd><a href="../../../../../jazzy/doc/ros2_controllers/chained_filter_controller/doc/userdoc.html">Jazzy</a></dd><br>
         

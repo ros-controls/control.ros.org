@@ -32,6 +32,5 @@ var searchData=
   ['joints_5f_29',['joints_',['../classign__ros2__control_1_1IgnitionSystemPrivate.html#a2c05547c0e89e47a98f99db217e34c68',1,'ign_ros2_control::IgnitionSystemPrivate']]],
   ['jointsoftlimitshandle_30',['JointSoftLimitsHandle',['../classjoint__limits__interface_1_1JointSoftLimitsHandle.html',1,'joint_limits_interface']]],
   ['jointstatebroadcaster_31',['JointStateBroadcaster',['../classjoint__state__broadcaster_1_1JointStateBroadcaster.html',1,'joint_state_broadcaster']]],
-  ['jointstatetopicsystem_32',['JointStateTopicSystem',['../classjoint__state__topic__hardware__interface_1_1JointStateTopicSystem.html',1,'joint_state_topic_hardware_interface']]],
-  ['jointtrajectorycontroller_33',['JointTrajectoryController',['../classjoint__trajectory__controller_1_1JointTrajectoryController.html',1,'joint_trajectory_controller']]]
+  ['jointtrajectorycontroller_32',['JointTrajectoryController',['../classjoint__trajectory__controller_1_1JointTrajectoryController.html',1,'joint_trajectory_controller']]]
 ];
