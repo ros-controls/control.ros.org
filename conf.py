@@ -354,12 +354,9 @@ def smv_rewrite_configs(app, config):
     if app.config.smv_current_version != "":
         branch_distro = {
             base_branch: "rolling",
-<<<<<<< HEAD
-=======
             "lyrical": "rolling",
             "kilted": "kilted",
             "jazzy": "jazzy",
->>>>>>> 4a92ecf (Add lyrical to multiversion build (#649))
             "iron": "iron",
             "humble": "humble",
             "foxy": "foxy",
@@ -368,12 +365,9 @@ def smv_rewrite_configs(app, config):
         # this map is used to match branches of control.ros.org to REPOS_FILE_BRANCH macro
         subrepo_branch = {
             base_branch: "master",
-<<<<<<< HEAD
-=======
             "lyrical": "master",
             "kilted": "kilted",
             "jazzy": "jazzy",
->>>>>>> 4a92ecf (Add lyrical to multiversion build (#649))
             "iron": "iron",
             "humble": "humble",
             "foxy": "foxy",

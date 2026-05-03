@@ -65,12 +65,7 @@ branch_version = {
     "iron": "iron",
     "jazzy": "jazzy",
     "kilted": "kilted",
-<<<<<<< HEAD
-    "rolling": "rolling"
-=======
-    "lyrical": "rolling",
-    base_branch: "rolling"  # PRs are tested on rolling
->>>>>>> 4a92ecf (Add lyrical to multiversion build (#649))
+    "lyrical": "rolling"
 }
 
 # the subrepos which are cloned into the branches and, optionally, their corresponding PR for checkout
@@ -201,20 +196,6 @@ repos = {
         },
         "pr": None
     },
-<<<<<<< HEAD
-=======
-    "topic_based_hardware_interfaces": {
-        "url": "https://github.com/ros-controls/topic_based_hardware_interfaces",
-        "branch_version": {
-            "iron": "main",
-            "jazzy": "main",
-            "kilted": "main",
-            "lyrical": "main",
-            "rolling": "main"
-        },
-        "pr": None
-    },
->>>>>>> 4a92ecf (Add lyrical to multiversion build (#649))
     ".github": {
         "url": "https://github.com/ros-controls/.github",
         "branch_version": {
