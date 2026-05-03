@@ -30,9 +30,9 @@ copyright = "{}, {}".format(time.strftime("%Y"), author)
 
 # Adjust those to change ros distribution
 # you might also need to white list branch (see smv_branch_whitelist)
-ros_distro = "rolling"
-distro_title = "Rolling"
-distro_title_full = "Rolling Ridley"
+ros_distro = "lyrical"
+distro_title = "Lyrical"
+distro_title_full = "Lyrical Luth"
 repos_file_branch = "master" # sets macro REPOS_FILE_BRANCH (will be overridden with multiversion)
 
 # The version info for the project you're documenting, acts as replacement for
