@@ -64,14 +64,9 @@ branch_version = {
     "humble": "humble",
     "iron": "iron",
     "jazzy": "jazzy",
-<<<<<<< HEAD
     base_branch: "kilted",  # PRs are tested on kilted
-    "rolling": "rolling"
-=======
-    "kilted": "kilted",
     "lyrical": "rolling",
-    base_branch: "rolling"  # PRs are tested on rolling
->>>>>>> 4a92ecf (Add lyrical to multiversion build (#649))
+    "rolling": "rolling"
 }
 
 # the subrepos which are cloned into the branches and, optionally, their corresponding PR for checkout
