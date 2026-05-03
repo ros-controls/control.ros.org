@@ -358,12 +358,8 @@ def smv_rewrite_configs(app, config):
     if app.config.smv_current_version != "":
         # this map is used to match branches of control.ros.org to ROS distros, e.g., DISTRO macro
         branch_distro = {
-<<<<<<< HEAD
             base_branch: "jazzy",
-=======
-            base_branch: "rolling",
             "lyrical": "rolling",
->>>>>>> 4a92ecf (Add lyrical to multiversion build (#649))
             "kilted": "kilted",
             "jazzy": "jazzy",
             "iron": "iron",
@@ -373,14 +369,9 @@ def smv_rewrite_configs(app, config):
         }
         # this map is used to match branches of control.ros.org to REPOS_FILE_BRANCH macro
         subrepo_branch = {
-<<<<<<< HEAD
             base_branch: "jazzy",
-            "kilted": "master",
-=======
-            base_branch: "master",
             "lyrical": "master",
-            "kilted": "kilted",
->>>>>>> 4a92ecf (Add lyrical to multiversion build (#649))
+            "kilted": "master",
             "jazzy": "jazzy",
             "iron": "iron",
             "humble": "humble",
