@@ -221,13 +221,13 @@ repos = {
         "pr": None
     },
     "mujoco_ros2_control": {
-        "url": "https://github.com/ros-controls/mujoco_ros2_control.git",
+        "url": "https://github.com/pal-robotics-forks/mujoco_ros2_control.git",
         "branch_version": {
-            "humble": "main",
-            "jazzy": "main",
-            "kilted": "main",
-            "lyrical": "main",
-            "rolling": "main"
+            "humble": "rst_documentation",
+            "jazzy": "rst_documentation",
+            "kilted": "rst_documentation",
+            "lyrical": "rst_documentation",
+            "rolling": "rst_documentation"
         },
         "pr": None
     }
