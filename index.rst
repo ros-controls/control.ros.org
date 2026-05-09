@@ -10,12 +10,8 @@ Welcome to the ros2_control documentation - Humble!
    doc/ros2_control/doc/index.rst
    doc/ros2_controllers/doc/controllers_index.rst
    doc/ros2_control_demos/doc/index.rst
-<<<<<<< HEAD
    doc/ros2_control/ros2controlcli/doc/userdoc.rst
-=======
    doc/mujoco_ros2_control/doc/index.rst
-   doc/utilities.rst
->>>>>>> c47cc40 (Add mujoco ros2 control RST doc (#654))
    doc/simulators/simulators.rst
    doc/release_notes/release_notes.rst
    doc/migration/migration.rst
