@@ -1,0 +1,552 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MuJoCo ROS 2 Control Plugins &mdash; ROS2_Control: Rolling May 2026 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/reviewer_stats.css?v=068b34ac" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=d85a351e" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//rolling/doc/mujoco_ros2_control/mujoco_ros2_control_plugins/doc/plugins.html" />
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=7748e526"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+      <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html">ros2_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utilities.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes/release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../migration/migration.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_list/api_list.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../governance/governance.html">Project Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../statistics.html">Documentation Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation_downloads.html">Documentation Downloads</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ROS2_Control: Rolling</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">MuJoCo ROS 2 Control Plugins</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/ros-controls/control.ros.org/blob/rolling//doc/mujoco_ros2_control/mujoco_ros2_control_plugins/doc/plugins.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for a development version.
+    For the latest released version, please have a look at <a href="../../../../../kilted/doc/mujoco_ros2_control/mujoco_ros2_control_plugins/doc/plugins.html">Kilted</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="mujoco-ros-2-control-plugins">
+<h1>MuJoCo ROS 2 Control Plugins<a class="headerlink" href="#mujoco-ros-2-control-plugins" title="Link to this heading"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control_plugins</span></code> package provides a plugin interface for extending the
+functionality of <code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control</span></code>.
+This separation allows for modular, optional features without adding complexity to the core package.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This interface provides flexibility for accessing information from the MuJoCo model and data.
+Users are responsible for handling that data correctly and avoiding changes to critical information.</p>
+</div>
+<section id="available-plugins">
+<h2>Available Plugins<a class="headerlink" href="#available-plugins" title="Link to this heading"></a></h2>
+<section id="heartbeatpublisherplugin">
+<h3>HeartbeatPublisherPlugin<a class="headerlink" href="#heartbeatpublisherplugin" title="Link to this heading"></a></h3>
+<p>A simple demonstration plugin that publishes a heartbeat message every second to the
+<code class="docutils literal notranslate"><span class="pre">/mujoco_heartbeat</span></code> topic.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 75%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>Topic</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mujoco_heartbeat</span></code> (<code class="docutils literal notranslate"><span class="pre">std_msgs/String</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Rate</strong></p></td>
+<td><p>1 Hz</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Message format</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;MuJoCo</span> <span class="pre">ROS2</span> <span class="pre">Control</span> <span class="pre">Heartbeat</span> <span class="pre">#N</span> <span class="pre">|</span> <span class="pre">Simulation</span> <span class="pre">time:</span> <span class="pre">Xs&quot;</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example: monitoring the heartbeat</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Terminal 1: launch your mujoco_ros2_control simulation</span>
+ros2<span class="w"> </span>launch<span class="w"> </span>mujoco_ros2_control_demos<span class="w"> </span>01_basic_robot.launch.py
+
+<span class="c1"># Terminal 2: echo the heartbeat messages</span>
+ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/mujoco_heartbeat
+</pre></div>
+</div>
+</section>
+<section id="externalwrenchplugin">
+<h3>ExternalWrenchPlugin<a class="headerlink" href="#externalwrenchplugin" title="Link to this heading"></a></h3>
+<p>Applies one or more external wrenches (force + torque) to named MuJoCo bodies for configurable
+durations via a ROS 2 service.
+Multiple wrenches can be submitted in a single call and each expires independently.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 75%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>Service</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">~/apply_wrench</span></code> (<code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control_msgs/srv/ApplyExternalWrench</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Topic</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">~/wrench_markers</span></code> (<code class="docutils literal notranslate"><span class="pre">visualization_msgs/msg/MarkerArray</span></code>)</p></td>
+</tr>
+</tbody>
+</table>
+<section id="service-request">
+<h4>Service Request<a class="headerlink" href="#service-request" title="Link to this heading"></a></h4>
+<p>The request contains a single <code class="docutils literal notranslate"><span class="pre">wrenches</span></code> field of type
+<code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control_msgs/ExternalWrenchArray</span></code>, which holds an array of <code class="docutils literal notranslate"><span class="pre">ExternalWrench</span></code>
+messages.
+All wrenches in the array are validated atomically — if any body name is unknown the entire
+request is rejected and nothing is applied.</p>
+<p>Each <code class="docutils literal notranslate"><span class="pre">ExternalWrench</span></code> in the array has:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 30%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">wrench.header.frame_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">string</span></code></p></td>
+<td><p>MuJoCo body name (must match the MJCF <code class="docutils literal notranslate"><span class="pre">&lt;body</span> <span class="pre">name=&quot;...&quot;&gt;</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">wrench.wrench.force</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">geometry_msgs/Vector3</span></code></p></td>
+<td><p>Linear force [N] expressed in the <strong>body (link) frame</strong>. Rotates with the body every
+simulation step.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">wrench.wrench.torque</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">geometry_msgs/Vector3</span></code></p></td>
+<td><p>Angular moment [N·m] expressed in the <strong>body (link) frame</strong>. Rotates with the body every
+simulation step.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">application_point</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">geometry_msgs/Point</span></code></p></td>
+<td><p>Force application point in the <strong>body (link) frame</strong> (relative to body frame origin,
+metres). Zero → apply at the body frame origin.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">duration</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">builtin_interfaces/Duration</span></code></p></td>
+<td><p>How long the wrench remains active. Zero → single simulation step.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ramp_down_duration</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">builtin_interfaces/Duration</span></code></p></td>
+<td><p>Duration over which the wrench linearly ramps from full magnitude to zero at the end of
+<code class="docutils literal notranslate"><span class="pre">duration</span></code>. Zero → no ramp-down.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="service-response">
+<h4>Service Response<a class="headerlink" href="#service-response" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">success</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code> if any body name was not found in the model</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">message</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">string</span></code></p></td>
+<td><p>Human-readable status or error description</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The service call <strong>blocks</strong> until the longest <code class="docutils literal notranslate"><span class="pre">duration</span></code> in the array has elapsed, then
+returns the response.
+For long-duration wrenches, call the service from a separate terminal or use an async client.</p>
+</div>
+<p><strong>Example: apply a 10 N push along X for 2 seconds at a 10 cm offset, with a 0.5 s ramp-down</strong></p>
+<p>This applies a constant force of 10 N for 1.5 seconds and then decays linearly over the next
+0.5 seconds.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/external_wrench/apply_wrench<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>mujoco_ros2_control_msgs/srv/ApplyExternalWrench<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;{</span>
+<span class="s2">    wrenches: {</span>
+<span class="s2">      external_wrenches: [</span>
+<span class="s2">        {</span>
+<span class="s2">          wrench: {</span>
+<span class="s2">            header: {frame_id: &#39;base_link&#39;},</span>
+<span class="s2">            wrench: {</span>
+<span class="s2">              force:  {x: 10.0, y: 0.0, z: 0.0},</span>
+<span class="s2">              torque: {x:  0.0, y: 0.0, z: 0.0}</span>
+<span class="s2">            }</span>
+<span class="s2">          },</span>
+<span class="s2">          application_point: {x: 0.1, y: 0.0, z: 0.0},</span>
+<span class="s2">          duration: {sec: 2, nanosec: 0},</span>
+<span class="s2">          ramp_down_duration: {sec: 0, nanosec: 500000000}</span>
+<span class="s2">        }</span>
+<span class="s2">      ]</span>
+<span class="s2">    }</span>
+<span class="s2">  }&quot;</span>
+</pre></div>
+</div>
+<p><strong>Example: apply two simultaneous wrenches in a single call</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/mujoco_ros2_control/my_plugin/apply_wrench<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>mujoco_ros2_control_msgs/srv/ApplyExternalWrench<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;{</span>
+<span class="s2">    wrenches: {</span>
+<span class="s2">      external_wrenches: [</span>
+<span class="s2">        {</span>
+<span class="s2">          wrench: {header: {frame_id: &#39;link_a&#39;}, wrench: {force: {x: 5.0, y: 0.0, z: 0.0}}},</span>
+<span class="s2">          duration: {sec: 1, nanosec: 0}</span>
+<span class="s2">        },</span>
+<span class="s2">        {</span>
+<span class="s2">          wrench: {header: {frame_id: &#39;link_b&#39;}, wrench: {force: {x: 0.0, y: -3.0, z: 0.0}}},</span>
+<span class="s2">          duration: {sec: 1, nanosec: 0}</span>
+<span class="s2">        }</span>
+<span class="s2">      ]</span>
+<span class="s2">    }</span>
+<span class="s2">  }&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="visualization">
+<h4>Visualization<a class="headerlink" href="#visualization" title="Link to this heading"></a></h4>
+<p>While wrenches are active, arrow markers are published to <code class="docutils literal notranslate"><span class="pre">~/wrench_markers</span></code> for display in RViz:</p>
+<ul class="simple">
+<li><p><strong>Red arrow</strong> (<code class="docutils literal notranslate"><span class="pre">external_wrench/force</span></code> namespace) — force vector, originating at the
+application point (body frame)</p></li>
+<li><p><strong>Cyan arrow</strong> (<code class="docutils literal notranslate"><span class="pre">external_wrench/torque</span></code> namespace) — torque vector, originating at the
+application point (body frame)</p></li>
+</ul>
+<p>Each marker uses the body’s TF frame as <code class="docutils literal notranslate"><span class="pre">header.frame_id</span></code>, so RViz correctly follows the body
+as it moves.
+Add a <code class="docutils literal notranslate"><span class="pre">MarkerArray</span></code> display in RViz pointed at the topic and ensure the body’s TF frames are
+being broadcast.</p>
+</section>
+<section id="parameters">
+<h4>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">force_arrow_scale</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">double</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.01</span></code></p></td>
+<td><p>Arrow length per unit force [m/N]. A 100 N force → 1 m arrow.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">torque_arrow_scale</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">double</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.1</span></code></p></td>
+<td><p>Arrow length per unit torque [m/(N·m)]. A 10 N·m torque → 1 m arrow.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example configuration</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">/**</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">mujoco_plugins</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">external_wrench</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;mujoco_ros2_control_plugins/ExternalWrenchPlugin&quot;</span>
+<span class="w">        </span><span class="nt">force_arrow_scale</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span><span class="w">      </span><span class="c1"># 100 N  → 1 m arrow</span>
+<span class="w">        </span><span class="nt">torque_arrow_scale</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span><span class="w">      </span><span class="c1"># 10 N·m → 1 m arrow</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>Plugins are loaded from ROS 2 parameters under <code class="docutils literal notranslate"><span class="pre">mujoco_plugins</span></code>.
+Each plugin entry requires:</p>
+<ul class="simple">
+<li><p>A unique key (e.g. <code class="docutils literal notranslate"><span class="pre">heart_beat_plugin</span></code>)</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">type</span></code> field with the pluginlib class name</p></li>
+</ul>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">/**</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">mujoco_plugins</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">heart_beat_plugin</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;mujoco_ros2_control_plugins/HeartbeatPublisherPlugin&quot;</span>
+<span class="w">        </span><span class="nt">update_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+</pre></div>
+</div>
+<p>Pass this file to the <code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control</span></code> node via <code class="docutils literal notranslate"><span class="pre">ParameterFile(...)</span></code> in your launch file.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this repository, <code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control_demos/launch/01_basic_robot.launch.py</span></code> already loads
+<code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control_demos/config/mujoco_ros2_control_plugins.yaml</span></code>.</p>
+</div>
+</section>
+<section id="creating-your-own-plugin">
+<h2>Creating Your Own Plugin<a class="headerlink" href="#creating-your-own-plugin" title="Link to this heading"></a></h2>
+<section id="create-the-plugin-header">
+<h3>1. Create the Plugin Header<a class="headerlink" href="#create-the-plugin-header" title="Link to this heading"></a></h3>
+<p>Create a header that inherits from <code class="docutils literal notranslate"><span class="pre">MuJoCoROS2ControlPluginBase</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;mujoco_ros2_control_plugins/mujoco_ros2_control_plugins_base.hpp&quot;</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">my_namespace</span>
+<span class="p">{</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyCustomPlugin</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">mujoco_ros2_control_plugins</span><span class="o">::</span><span class="n">MuJoCoROS2ControlPluginBase</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Node</span><span class="o">::</span><span class="n">SharedPtr</span><span class="w"> </span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">mjModel</span><span class="o">*</span><span class="w"> </span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">mjData</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">mjModel</span><span class="o">*</span><span class="w"> </span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">mjData</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">cleanup</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+
+<span class="k">private</span><span class="o">:</span>
+<span class="w">  </span><span class="c1">// Your member variables</span>
+<span class="p">};</span>
+
+<span class="p">}</span><span class="w">  </span><span class="c1">// namespace my_namespace</span>
+</pre></div>
+</div>
+</section>
+<section id="implement-the-plugin-methods">
+<h3>2. Implement the Plugin Methods<a class="headerlink" href="#implement-the-plugin-methods" title="Link to this heading"></a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;my_custom_plugin.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;pluginlib/class_list_macros.hpp&gt;</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">my_namespace</span>
+<span class="p">{</span>
+
+<span class="kt">bool</span><span class="w"> </span><span class="nf">MyCustomPlugin::init</span><span class="p">(</span>
+<span class="w">  </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Node</span><span class="o">::</span><span class="n">SharedPtr</span><span class="w"> </span><span class="n">node</span><span class="p">,</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">mjModel</span><span class="o">*</span><span class="w"> </span><span class="n">model</span><span class="p">,</span>
+<span class="w">  </span><span class="n">mjData</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="c1">// Initialize your plugin</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">MyCustomPlugin::update</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">mjModel</span><span class="o">*</span><span class="w"> </span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">mjData</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="c1">// Called every control loop iteration</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">MyCustomPlugin::cleanup</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="c1">// Clean up resources</span>
+<span class="p">}</span>
+
+<span class="p">}</span><span class="w">  </span><span class="c1">// namespace my_namespace</span>
+
+<span class="n">PLUGINLIB_EXPORT_CLASS</span><span class="p">(</span>
+<span class="w">  </span><span class="n">my_namespace</span><span class="o">::</span><span class="n">MyCustomPlugin</span><span class="p">,</span>
+<span class="w">  </span><span class="n">mujoco_ros2_control_plugins</span><span class="o">::</span><span class="n">MuJoCoROS2ControlPluginBase</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="create-the-plugin-xml-descriptor">
+<h3>3. Create the Plugin XML Descriptor<a class="headerlink" href="#create-the-plugin-xml-descriptor" title="Link to this heading"></a></h3>
+<p>Create <code class="docutils literal notranslate"><span class="pre">my_plugins.xml</span></code>:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;library</span><span class="w"> </span><span class="na">path=</span><span class="s">&quot;my_plugin_library&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;class</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;my_namespace/MyCustomPlugin&quot;</span>
+<span class="w">         </span><span class="na">type=</span><span class="s">&quot;my_namespace::MyCustomPlugin&quot;</span>
+<span class="w">         </span><span class="na">base_class_type=</span><span class="s">&quot;mujoco_ros2_control_plugins::MuJoCoROS2ControlPluginBase&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;description&gt;</span>
+<span class="w">      </span>Description<span class="w"> </span>of<span class="w"> </span>what<span class="w"> </span>your<span class="w"> </span>plugin<span class="w"> </span>does.
+<span class="w">    </span><span class="nt">&lt;/description&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/class&gt;</span>
+<span class="nt">&lt;/library&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="update-cmakelists-txt">
+<h3>4. Update CMakeLists.txt<a class="headerlink" href="#update-cmakelists-txt" title="Link to this heading"></a></h3>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">find_package</span><span class="p">(</span><span class="s">mujoco_ros2_control_plugins</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+
+<span class="nb">add_library</span><span class="p">(</span><span class="s">my_plugin_library</span><span class="w"> </span><span class="s">SHARED</span>
+<span class="w">  </span><span class="s">src/my_custom_plugin.cpp</span>
+<span class="p">)</span>
+
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">my_plugin_library</span>
+<span class="w">  </span><span class="o">${</span><span class="nv">mujoco_ros2_control_plugins_TARGETS</span><span class="o">}</span>
+<span class="w">  </span><span class="c"># ... other dependencies</span>
+<span class="p">)</span>
+
+<span class="nb">pluginlib_export_plugin_description_file</span><span class="p">(</span>
+<span class="w">  </span><span class="s">mujoco_ros2_control_plugins</span>
+<span class="w">  </span><span class="s">my_plugins.xml</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="plugin-lifecycle">
+<h2>Plugin Lifecycle<a class="headerlink" href="#plugin-lifecycle" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>Initialization</strong> (<code class="docutils literal notranslate"><span class="pre">init</span></code>): Called once when the plugin is loaded. Use this to read
+parameters and set up publishers, subscribers, and services.</p></li>
+<li><p><strong>Update</strong> (<code class="docutils literal notranslate"><span class="pre">update</span></code>): Called every simulation step at the <strong>end of the</strong> <code class="docutils literal notranslate"><span class="pre">read</span></code> <strong>loop</strong>,
+before the controller update and <code class="docutils literal notranslate"><span class="pre">write</span></code> loops. Changes to <code class="docutils literal notranslate"><span class="pre">mjData</span></code> here are visible to
+controllers and affect the next simulation step. This runs in a real-time thread — avoid
+blocking operations.</p></li>
+<li><p><strong>Cleanup</strong> (<code class="docutils literal notranslate"><span class="pre">cleanup</span></code>): Called when shutting down. Release any resources acquired in
+<code class="docutils literal notranslate"><span class="pre">init</span></code>.</p></li>
+</ol>
+</section>
+<section id="building">
+<h2>Building<a class="headerlink" href="#building" title="Link to this heading"></a></h2>
+<p>This package is part of the <code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control</span></code> workspace:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>colcon<span class="w"> </span>build<span class="w"> </span>--packages-select<span class="w"> </span>mujoco_ros2_control_plugins
+</pre></div>
+</div>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: rolling
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Stable Releases</dt>
+        <dd><a href="../../../../../kilted/doc/mujoco_ros2_control/mujoco_ros2_control_plugins/doc/plugins.html">Kilted (latest)</a></dd><br>
+        <dd><a href="../../../../../jazzy/doc/mujoco_ros2_control/mujoco_ros2_control_plugins/doc/plugins.html">Jazzy</a></dd><br>
+        
+        <dd><a href="../../../../../humble/doc/mujoco_ros2_control/mujoco_ros2_control_plugins/doc/plugins.html">Humble</a></dd><br>
+        
+        
+    </dl>
+    <dl>
+      <dt>End-of-Life</dt>
+        <dd><a href="../../../../../iron/index.html">Iron</a></dd><br>
+        <dd><a href="../../../../../galactic/index.html">Galactic</a></dd><br>
+        <dd><a href="../../../../../foxy/index.html">Foxy</a></dd><br>
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="plugins.html">Rolling</a></dd>
+      <dd><a href="../../../../../lyrical/doc/mujoco_ros2_control/mujoco_ros2_control_plugins/doc/plugins.html">Lyrical</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

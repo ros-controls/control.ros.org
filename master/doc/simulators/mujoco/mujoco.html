@@ -64,28 +64,11 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">MuJoCo</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#mujoco-ros2-control-simulation">MuJoCo ros2_control Simulation</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#urdf-model-conversion">URDF Model Conversion</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#hardware-interface-setup">Hardware Interface Setup</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="#plugin">Plugin</a></li>
-<li class="toctree-l6"><a class="reference internal" href="#joints">Joints</a></li>
-<li class="toctree-l6"><a class="reference internal" href="#grippers-and-mimic-joints">Grippers and Mimic Joints</a></li>
-<li class="toctree-l6"><a class="reference internal" href="#sensors">Sensors</a></li>
-<li class="toctree-l6"><a class="reference internal" href="#cameras">Cameras</a></li>
-<li class="toctree-l6"><a class="reference internal" href="#lidar">Lidar</a></li>
-</ul>
-</li>
-<li class="toctree-l5"><a class="reference internal" href="#simulation-topics-and-services">Simulation - Topics and Services</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="#topics">Topics</a></li>
-<li class="toctree-l6"><a class="reference internal" href="#services">Services</a></li>
-</ul>
-</li>
-<li class="toctree-l5"><a class="reference internal" href="#debugging">Debugging</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="#pausing-the-simulation">Pausing the Simulation</a></li>
-<li class="toctree-l6"><a class="reference internal" href="#single-stepping-via-the-keyboard">Single-Stepping via the Keyboard</a></li>
-<li class="toctree-l6"><a class="reference internal" href="#single-stepping-via-ros-2-service">Single-Stepping via ROS 2 Service</a></li>
-</ul>
-</li>
+<li class="toctree-l5"><a class="reference internal" href="#hardware-interface-setup">Hardware Interface Setup</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#simulation-topics-and-services">Simulation Topics and Services</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#test-robot-system">Test Robot System</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#development">Development</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#further-documentation">Further Documentation</a></li>
 </ul>
 </li>
 </ul>
@@ -156,451 +139,38 @@ Because the app is not bundled as a library, we compile it directly from a local
 <section id="urdf-model-conversion">
 <h3>URDF Model Conversion<a class="headerlink" href="#urdf-model-conversion" title="Link to this heading"></a></h3>
 <p>MuJoCo does not support the full feature set of xacro/URDFs in the ROS 2 ecosystem.
-As such, users are required to convert any existing robot description files to an MJCF format.
-This includes adding actuators, sensors, and cameras as needed to the MJCF XML.</p>
-<p>This conversion can be done either offline or at run time.
-We have built a <em>highly experimental</em> tool to automate URDF conversion.
-For more information refer to the <a class="reference external" href="https://github.com/ros-controls/mujoco_ros2_control/blob/main/mujoco_ros2_control/docs/TOOLS.md">documentation</a>.</p>
+Users are required to convert any existing robot description files to an MJCF format.
+We provide a <em>highly experimental</em> tool to automate URDF conversion — refer to the <a class="reference internal" href="#docs/tools.rst"><span class="xref myst">URDF to MJCF conversion documentation</span></a> for details.</p>
 </section>
 <section id="hardware-interface-setup">
 <h3>Hardware Interface Setup<a class="headerlink" href="#hardware-interface-setup" title="Link to this heading"></a></h3>
-<section id="plugin">
-<h4>Plugin<a class="headerlink" href="#plugin" title="Link to this heading"></a></h4>
-<p>This application is shipped as a ros2_control hardware interface, and can be configured as such.
-Just specify the plugin and point to a valid MJCF on launch:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;MujocoSystem&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;hardware&gt;</span>
-<span class="w">      </span><span class="nt">&lt;plugin&gt;</span>mujoco_ros2_control/MujocoSystemInterface<span class="nt">&lt;/plugin&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mujoco_model&quot;</span><span class="nt">&gt;</span>$(find<span class="w"> </span>my_description)/description/scene.xml<span class="nt">&lt;/param&gt;</span>
-
-<span class="w">      </span><span class="cm">&lt;!--</span>
-<span class="cm">       Optional parameter to load the PIDs that can be used with the actuators loaded with the MuJoCo model.</span>
-<span class="cm">       The velocity actuator supports position mode with the PID gains, and the rest of the actuation models</span>
-<span class="cm">       support both position and velocity mode provided the corresponding PID gains. The gains should be in ROS</span>
-<span class="cm">       parameters format to be loaded by the control_toolbox::PidROS class.</span>
-<span class="cm">        --&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;pids_config_file&quot;</span><span class="nt">&gt;</span>$(find<span class="w"> </span>my_description)/config/pids.yaml<span class="nt">&lt;/param&gt;</span>
-
-<span class="w">      </span><span class="cm">&lt;!--</span>
-<span class="cm">       Optional parameter to override the speed scaling parameters from the Simulate App window</span>
-<span class="cm">       and just attempt to run at whatever the desired rate is here. This allows users to run the simulation</span>
-<span class="cm">       faster than real time. For example, at 500% speed as set here. If this param is omitted or set to</span>
-<span class="cm">       a value &lt;0, then the simulation will run using the slowdown requested from the App.</span>
-<span class="cm">      --&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;sim_speed_factor&quot;</span><span class="nt">&gt;</span>5.0<span class="nt">&lt;/param&gt;</span>
-
-<span class="w">      </span><span class="cm">&lt;!--</span>
-<span class="cm">        Optional parameter to use a particular keyframe already present in the parsed MJCF configuration.</span>
-<span class="cm">        If the key frame is present, it applies it to the MuJoCo state. If not, it continues with the default one.</span>
-<span class="cm">        This parameter will have no affect, if the `override_start_position_file` parameter is also set.</span>
-<span class="cm">        The simulation will instead use the frame from the parsed file.</span>
-<span class="cm">      --&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;initial_keyframe&quot;</span><span class="nt">&gt;</span>optional_frame<span class="nt">&lt;/param&gt;</span>
-
-<span class="w">      </span><span class="cm">&lt;!--</span>
-<span class="cm">        Optional parameter to use the keyframe from a provided file as the starting configuration. This is mutually exclusive with</span>
-<span class="cm">        the initial_value that can be used for state interfaces. This is intended to provide an alternative method to load an entire</span>
-<span class="cm">        MuJoCo model state from a configuration that was saved by clicking &#39;Copy state&#39; in the simulate window, and pasted into a</span>
-<span class="cm">        config file. Expected use cases are to work on a specific part of an application that involves the environment being in a</span>
-<span class="cm">        very specific starting configuration. If this parameter is an empty string, it will be ignored.</span>
-<span class="cm">      --&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;override_start_position_file&quot;</span><span class="nt">&gt;</span>$(find<span class="w"> </span>my_description)/config/start_positions.xml<span class="nt">&lt;/param&gt;</span>
-
-<span class="w">      </span><span class="cm">&lt;!--</span>
-<span class="cm">        Optional parameter to choose a topic name from which it can subscribe and get the MJCF contents</span>
-<span class="cm">        to load the model. This is only used, when the mujoco_model parameter is not set.</span>
-<span class="cm">        By default, this parameter is initialized to /mujoco_robot_description</span>
-<span class="cm">      --&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mujoco_model_topic&quot;</span><span class="nt">&gt;</span>/mujoco_robot_description<span class="nt">&lt;/param&gt;</span>
-
-<span class="w">      </span><span class="cm">&lt;!--</span>
-<span class="cm">        Optional parameter to update the simulated camera&#39;s color and depth image publish rates. If no</span>
-<span class="cm">        parameter is set then all cameras will publish at 5 hz. Note that all cameras in the sim currently</span>
-<span class="cm">        publish at the same intervals.</span>
-<span class="cm">      --&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_publish_rate&quot;</span><span class="nt">&gt;</span>6.0<span class="nt">&lt;/param&gt;</span>
-
-<span class="w">      </span><span class="cm">&lt;!--</span>
-<span class="cm">        Optional parameter to update the simulated lidar sensor&#39;s scan message publish rates.</span>
-<span class="cm">        All lidar sensors in the simulation will be configured to publish these scan messages at the same rate.</span>
-<span class="cm">      --&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;lidar_publish_rate&quot;</span><span class="nt">&gt;</span>10.0<span class="nt">&lt;/param&gt;</span>
-
-<span class="w">      </span><span class="cm">&lt;!--</span>
-<span class="cm">        The parameter headless can be used to choose whether to launch the MuJoCo simulator in headless mode or not.</span>
-<span class="cm">        By default, it is set to false</span>
-<span class="cm">      --&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;headless&quot;</span><span class="nt">&gt;</span>false<span class="nt">&lt;/param&gt;</span>
-
-<span class="w">      </span><span class="cm">&lt;!--</span>
-<span class="cm">        The optional parameters to choose the name of the floating base joint and the topic name to publish the</span>
-<span class="cm">        odometry of the robot. The provided joint needs to be a valid MuJoCo free joint.</span>
-<span class="cm">      --&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;odom_free_joint_name&quot;</span><span class="nt">&gt;</span>floating_base_joint<span class="nt">&lt;/param&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;odom_topic&quot;</span><span class="nt">&gt;</span>/simulator/floating_base_state<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;/hardware&gt;</span>
+<p>The MuJoCo hardware interface is shipped as a <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> plugin. Specify it in your URDF and point to a valid MJCF:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;MujocoSystem&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;hardware&gt;</span>
+<span class="w">    </span><span class="nt">&lt;plugin&gt;</span>mujoco_ros2_control/MujocoSystemInterface<span class="nt">&lt;/plugin&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mujoco_model&quot;</span><span class="nt">&gt;</span>$(find<span class="w"> </span>my_description)/description/scene.xml<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/hardware&gt;</span>
 <span class="w">  </span>...
 </pre></div>
 </div>
-<p>Due to compatibility issues, we use a <a class="reference external" href="https://github.com/ros-controls/mujoco_ros2_control/blob/main/mujoco_ros2_control/src/mujoco_ros2_control_node.cpp">slightly modified ROS 2 control node</a>.
-It is the same executable and parameters as the upstream, but requires updating the launchfile:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">control_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
-        <span class="c1"># Specify the control node from this package!</span>
-        <span class="n">package</span><span class="o">=</span><span class="s2">&quot;mujoco_ros2_control&quot;</span><span class="p">,</span>
-        <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;ros2_control_node&quot;</span><span class="p">,</span>
-        <span class="n">output</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span>
-        <span class="n">parameters</span><span class="o">=</span><span class="p">[</span>
-            <span class="p">{</span><span class="s2">&quot;use_sim_time&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
-            <span class="n">controller_parameters</span><span class="p">,</span>
-        <span class="p">],</span>
-    <span class="p">)</span>
+<p>A custom <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> node is required due to compatibility requirements:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">control_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
+    <span class="n">package</span><span class="o">=</span><span class="s2">&quot;mujoco_ros2_control&quot;</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;ros2_control_node&quot;</span><span class="p">,</span>
+    <span class="n">output</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;use_sim_time&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+        <span class="n">controller_parameters</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span>
 </pre></div>
 </div>
-<blockquote>
-<div><p>[!NOTE]
-We can remove the the ROS 2 control node after the next ros2_control upstream release,
-as the simulation requires <a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2963">this PR</a> to run.</p>
-</div></blockquote>
-</section>
-<section id="joints">
-<h4>Joints<a class="headerlink" href="#joints" title="Link to this heading"></a></h4>
-<p>Joints in the ros2_control interface are mapped to actuators defined in the MJCF, either directly or as transmission interfaces.
-The system supports different joint control modes based on the actuator type and available command interfaces.</p>
-<p>We rely on MuJoCo’s PD-level ctrl input for direct position, velocity, or effort control.
-For velocity, motor, or custom actuators, a position or velocity PID is created if specified using ROS parameters to enable accurate control.
-Incompatible actuator-interface combinations trigger an error.</p>
-<p>Refer to MuJoCo’s <a class="reference external" href="https://mujoco.readthedocs.io/en/stable/computation/index.html#geactuation">actuation model</a> for more information.</p>
-<p>Of note, only one type of MuJoCo actuator per-joint can be controllable at a time, and the type CANNOT be switched during runtime (i.e., switching from position to motor actuator is not supported).
-However, the active command interface can be switched dynamically, allowing control to shift between position, velocity, or effort as supported by the actuator type.
-Users are required to manually adjust actuator types and command interfaces to ensure that they are compatible.</p>
-<p>For example a position controlled joint on the MuJoCo</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">&lt;actuator&gt;</span>
-<span class="w">    </span><span class="nt">&lt;position</span><span class="w"> </span><span class="na">joint=</span><span class="s">&quot;joint1&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint1&quot;</span><span class="w"> </span><span class="na">kp=</span><span class="s">&quot;25000&quot;</span><span class="w"> </span><span class="na">dampratio=</span><span class="s">&quot;1.0&quot;</span><span class="w"> </span><span class="na">ctrlrange=</span><span class="s">&quot;0.0 2.0&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;/actuator&gt;</span>
-</pre></div>
-</div>
-<p>Could map to the following hardware interface:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint1&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="cm">&lt;!-- Initial values for state interfaces can be specified, but default to 0 if they are not. --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;initial_value&quot;</span><span class="nt">&gt;</span>0.0<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;/state_interface&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;effort&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
-</pre></div>
-</div>
-<p><strong>Supported modes between MuJoCo actuators and ros2_control command interfaces:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th rowspan="2" style="border:none;"></th>
-      <th style="border:none;"></th>
-      <th colspan="3" style="text-align:center;">MuJoCo Actuators</th>
-    </tr>
-    <tr>
-      <th style="border:none;"></th>
-      <th>position</th>
-      <th>velocity</th>
-      <th>motor, general, etc </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th rowspan="3" style="text-align:center;">ros2 control<br>command<br>interfaces</th>
-      <th>position</th>
-      <td style="background:#c6efce;">Native support</td>
-      <td style="background:#ffeb9c;">Supported using PIDs</td>
-      <td style="background:#ffeb9c;">Supported using PIDs</td>
-    </tr>
-    <tr>
-      <th>velocity</th>
-      <td style="background:#ffc7ce;">Not supported</td>
-      <td style="background:#c6efce;">Native support</td>
-      <td style="background:#ffeb9c;">Supported using PIDs</td>
-    </tr>
-    <tr>
-      <th>effort</th>
-      <td style="background:#ffc7ce;">Not supported</td>
-      <td style="background:#ffc7ce;">Not supported</td>
-      <td style="background:#c6efce;">Native support</td>
-    </tr>
-  </tbody>
-</table>
-<blockquote>
-<div><p>[!NOTE]
-The <code class="docutils literal notranslate"><span class="pre">torque</span></code> and <code class="docutils literal notranslate"><span class="pre">force</span></code> command/state interfaces are semantically equivalent to <code class="docutils literal notranslate"><span class="pre">effort</span></code>, and map to the same underlying data in the sim.</p>
-</div></blockquote>
-</section>
-<section id="grippers-and-mimic-joints">
-<h4>Grippers and Mimic Joints<a class="headerlink" href="#grippers-and-mimic-joints" title="Link to this heading"></a></h4>
-<p>Many robot grippers include mimic joints, where control of a single actuator affects the state of many joints.
-There are many possible ways to handle this on the MuJoCo side of things, we recommend research and experimentation, or referring to existing models in the wild.</p>
-<p>In the current implementation drivers <em>require</em> a motor type actuator for joint control and state information.
-In particular, tendons and other “non-standard” joint types in an MJCF are not directly controllable through the drivers.
-If mimic joints are required (for instance, parallel jaw mechanisms), we recommend combining tendon actutors with an equality constraint.</p>
-<p>For example, from the test robot:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">&lt;actuator&gt;</span>
-<span class="w">    </span><span class="nt">&lt;position</span><span class="w"> </span><span class="na">tendon=</span><span class="s">&quot;split&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gripper_left_finger_joint&quot;</span><span class="w"> </span><span class="na">kp=</span><span class="s">&quot;1000&quot;</span><span class="w"> </span><span class="na">dampratio=</span><span class="s">&quot;3.0&quot;</span><span class="w"> </span><span class="na">ctrlrange=</span><span class="s">&quot;-0.09 0.005&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;/actuator&gt;</span>
-<span class="w">  </span><span class="nt">&lt;tendon&gt;</span>
-<span class="w">    </span><span class="nt">&lt;fixed</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;split&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">joint=</span><span class="s">&quot;gripper_left_finger_joint&quot;</span><span class="w"> </span><span class="na">coef=</span><span class="s">&quot;0.5&quot;</span><span class="nt">/&gt;</span>
-<span class="w">      </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">joint=</span><span class="s">&quot;gripper_right_finger_joint&quot;</span><span class="w"> </span><span class="na">coef=</span><span class="s">&quot;-0.5&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;/fixed&gt;</span>
-<span class="w">  </span><span class="nt">&lt;/tendon&gt;</span>
-<span class="w">  </span><span class="nt">&lt;equality&gt;</span>
-<span class="w">    </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">joint1=</span><span class="s">&quot;gripper_left_finger_joint&quot;</span><span class="w"> </span><span class="na">joint2=</span><span class="s">&quot;gripper_right_finger_joint&quot;</span><span class="w"> </span><span class="na">polycoef=</span><span class="s">&quot;0 -1 0 0 0&quot;</span><span class="w"> </span><span class="na">solimp=</span><span class="s">&quot;0.95 0.99 0.001&quot;</span><span class="w"> </span><span class="na">solref=</span><span class="s">&quot;0.005 1&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;/equality&gt;</span>
-</pre></div>
-</div>
-<p>Note that the tendon name <em>matches</em> the controllable joint in the ros2_control configuration.
-This way, the drivers will only provide control and state information from that single joint, but the underlying simulation will ensure that the right finger’s position matches the left’s.</p>
-</section>
-<section id="sensors">
-<h4>Sensors<a class="headerlink" href="#sensors" title="Link to this heading"></a></h4>
-<p>The hardware interfaces supports force-torque sensors (FTS) and inertial measurement units (IMUs).
-MuJoCo does not support modeling complete FTS and IMUs out of the box, so we combine supported MJCF constructs to map to a ros2_control sensor.
-The types and other parameters can be specified in the ros2_control xacro, as noted below.</p>
-<p>For FTS, we model the <code class="docutils literal notranslate"><span class="pre">force</span></code> and <code class="docutils literal notranslate"><span class="pre">torque</span></code> sensors individually in the MJFC.
-For a sensor named <code class="docutils literal notranslate"><span class="pre">fts_sensor</span></code>, we suffix each entry accordingly as <code class="docutils literal notranslate"><span class="pre">fts_sensor_force</span></code> and <code class="docutils literal notranslate"><span class="pre">fts_sensor_torque</span></code>.
-For example, in the MJCF,</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">&lt;sensor&gt;</span>
-<span class="w">    </span><span class="nt">&lt;force</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;fts_sensor_force&quot;</span><span class="w"> </span><span class="na">site=</span><span class="s">&quot;ft_frame&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;torque</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;fts_sensor_torque&quot;</span><span class="w"> </span><span class="na">site=</span><span class="s">&quot;ft_frame&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;/sensor&gt;</span>
-</pre></div>
-</div>
-<p>In the corresponding ros2_control xacro, this becomes a single sensor:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;fts_sensor&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mujoco_type&quot;</span><span class="nt">&gt;</span>fts<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="cm">&lt;!-- There is no requirement for the mujoco_sensor_name to match the ros2_control sensor name --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mujoco_sensor_name&quot;</span><span class="nt">&gt;</span>fts_sensor<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="cm">&lt;!-- Default value of force_mjcf_suffix is &#39;_force&#39; --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;force_mjcf_suffix&quot;</span><span class="nt">&gt;</span>_force<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="cm">&lt;!-- Default value of torque_mjcf_suffix is &#39;_torque&#39; --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;torque_mjcf_suffix&quot;</span><span class="nt">&gt;</span>_torque<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;force.x&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;force.y&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;force.z&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;torque.x&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;torque.y&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;torque.z&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;/sensor&gt;</span>
-</pre></div>
-</div>
-<p>Similarly, for an IMU, we simulate a <code class="docutils literal notranslate"><span class="pre">framequat</span></code>, <code class="docutils literal notranslate"><span class="pre">gyro</span></code>, and <code class="docutils literal notranslate"><span class="pre">accelerometer</span></code> as a single IMU.</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">&lt;sensor&gt;</span>
-<span class="w">      </span><span class="nt">&lt;framequat</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;imu_sensor_quat&quot;</span><span class="w"> </span><span class="na">objtype=</span><span class="s">&quot;site&quot;</span><span class="w"> </span><span class="na">objname=</span><span class="s">&quot;imu_sensor&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
-<span class="w">      </span><span class="nt">&lt;gyro</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;imu_sensor_gyro&quot;</span><span class="w"> </span><span class="na">site=</span><span class="s">&quot;imu_sensor&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
-<span class="w">      </span><span class="nt">&lt;accelerometer</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;imu_sensor_accel&quot;</span><span class="w"> </span><span class="na">site=</span><span class="s">&quot;imu_sensor&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;/sensor&gt;</span>
-</pre></div>
-</div>
-<p>Which then map to the corresponding ros2_control sensor:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;imu_sensor&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mujoco_type&quot;</span><span class="nt">&gt;</span>imu<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="cm">&lt;!-- There is no requirement for the mujoco_sensor_name to match the ros2_control sensor name --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mujoco_sensor_name&quot;</span><span class="nt">&gt;</span>imu_sensor<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="cm">&lt;!-- Default value of orientation_mjcf_suffix is &#39;_quat&#39; --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;orientation_mjcf_suffix&quot;</span><span class="nt">&gt;</span>_quat<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="cm">&lt;!-- Default value of angular_velocity_mjcf_suffix is &#39;_gyro&#39; --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;angular_velocity_mjcf_suffix&quot;</span><span class="nt">&gt;</span>_gyro<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="cm">&lt;!-- Default value of linear_acceleration_mjcf_suffix is &#39;_accel&#39; --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;linear_acceleration_mjcf_suffix&quot;</span><span class="nt">&gt;</span>_accel<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;orientation.x&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;orientation.y&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;orientation.z&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;orientation.w&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;angular_velocity.x&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;angular_velocity.y&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;angular_velocity.z&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;linear_acceleration.x&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;linear_acceleration.y&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;linear_acceleration.z&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;/sensor&gt;</span>
-</pre></div>
-</div>
-<p>These sensor state interfaces can then be used out of the box with the standard broadcasters.</p>
-</section>
-<section id="cameras">
-<h4>Cameras<a class="headerlink" href="#cameras" title="Link to this heading"></a></h4>
-<p>Any <code class="docutils literal notranslate"><span class="pre">camera</span></code> included in the MJCF will automatically have its RGB-D images and info published to ROS topics.
-Currently all images are published at a fixed 5hz rate.</p>
-<p>Cameras must include a string <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;</span></code>, which sets defaults for the frame and topic names.
-By default, the ROS 2 wrapper assumes the camera is attached to a frame named <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;_frame</span></code>.
-Additionally camera_info, color, and depth images will be published to topics called <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;/camera_info</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;/color</span></code>, and <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;/depth</span></code>, respectively.
-Also note that MuJuCo’s conventions for cameras are different than ROS’s, and which must be accounted for.
-Refer to the documentation for more information.</p>
-<p>For example,</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;camera</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;wrist_mounted_camera&quot;</span><span class="w"> </span><span class="na">fovy=</span><span class="s">&quot;58&quot;</span><span class="w"> </span><span class="na">mode=</span><span class="s">&quot;fixed&quot;</span><span class="w"> </span><span class="na">resolution=</span><span class="s">&quot;640 480&quot;</span><span class="w"> </span><span class="na">pos=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="na">quat=</span><span class="s">&quot;0 0 0 1&quot;</span><span class="nt">/&gt;</span>
-</pre></div>
-</div>
-<p>Will publish the following topics:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>info<span class="w"> </span>/wrist_mounted_camera/camera_info
-Type:<span class="w"> </span>sensor_msgs/msg/CameraInfo
-$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>info<span class="w"> </span>/wrist_mounted_camera/color
-Type:<span class="w"> </span>sensor_msgs/msg/Image
-$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>info<span class="w"> </span>/wrist_mounted_camera/depth
-Type:<span class="w"> </span>sensor_msgs/msg/Image
-</pre></div>
-</div>
-<p>The frame and topic names are also configurable from the ros2_control xacro.
-Default parameters can be overridden with:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="cm">&lt;!-- For cameras, the sensor name _must_ match the camera name in the MJCF --&gt;</span>
-<span class="w">  </span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;wrist_mounted_camera&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;frame_name&quot;</span><span class="nt">&gt;</span>wrist_mounted_camera_mujoco_frame<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;info_topic&quot;</span><span class="nt">&gt;</span>/wrist_mounted_camera/color/camera_info<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;image_topic&quot;</span><span class="nt">&gt;</span>/wrist_mounted_camera/color/image_raw<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;depth_topic&quot;</span><span class="nt">&gt;</span>/wrist_mounted_camera/aligned_depth_to_color/image_raw<span class="nt">&lt;/param&gt;</span>
-<span class="w">  </span><span class="nt">&lt;/sensor&gt;</span>
-</pre></div>
-</div>
-</section>
-<section id="lidar">
-<h4>Lidar<a class="headerlink" href="#lidar" title="Link to this heading"></a></h4>
-<p>MuJoCo does not include native support for lidar sensors.
-However, this package offers a ROS 2-like lidar implementation by wrapping sets of <a class="reference external" href="https://mujoco.readthedocs.io/en/stable/XMLreference.html#sensor-rangefinder">rangefinders</a> together.</p>
-<p>MuJoCo rangefinders measure the distance to the nearest surface along the positive <code class="docutils literal notranslate"><span class="pre">Z</span></code> axis of the sensor site.
-The ROS 2 lidar wrapper uses the standard defined in <a class="reference external" href="https://github.com/ros2/common_interfaces/blob/rolling/sensor_msgs/msg/LaserScan.msg#L10">LaserScan</a> messages.
-In particular, the first rangefinder’s <code class="docutils literal notranslate"><span class="pre">Z</span></code> axis (e.g. <code class="docutils literal notranslate"><span class="pre">rf-00</span></code>) must align with the ROS 2 lidar sensor’s positive <code class="docutils literal notranslate"><span class="pre">X</span></code> axis.</p>
-<p>In the MJCF, use the <code class="docutils literal notranslate"><span class="pre">replicate</span></code> tag along with a <code class="docutils literal notranslate"><span class="pre">-</span></code> separator to add N sites to attach sensors to.
-For example, the following will add 12 sites named <code class="docutils literal notranslate"><span class="pre">rf-00</span></code> to <code class="docutils literal notranslate"><span class="pre">rf-11</span></code> each at a 0.025 radian offset from each other:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">&lt;replicate</span><span class="w"> </span><span class="na">count=</span><span class="s">&quot;12&quot;</span><span class="w"> </span><span class="na">sep=</span><span class="s">&quot;-&quot;</span><span class="w"> </span><span class="na">offset=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="na">euler=</span><span class="s">&quot;0 0.025 0&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;site</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;rf&quot;</span><span class="w"> </span><span class="na">size=</span><span class="s">&quot;0.01&quot;</span><span class="w"> </span><span class="na">pos=</span><span class="s">&quot;0.0 0.0 0.0&quot;</span><span class="w"> </span><span class="na">quat=</span><span class="s">&quot;0.0 0.0 0.0 1.0&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;/replicate&gt;</span>
-</pre></div>
-</div>
-<p>Then a set of rangefinders can be attached to each site with:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">&lt;sensor&gt;</span>
-<span class="w">    </span><span class="cm">&lt;!-- We require a sensor name be provided --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;rangefinder</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;lidar&quot;</span><span class="w"> </span><span class="na">site=</span><span class="s">&quot;rf&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;/sensor&gt;</span>
-</pre></div>
-</div>
-<p>The lidar sensor is then configurable through ROS 2 control xacro with:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="cm">&lt;!-- Lidar sensors are matched to a set of rangefinder sensors in the MJCF, which should be --&gt;</span>
-<span class="w">    </span><span class="cm">&lt;!-- generated with the &quot;&lt;lidar&gt;&quot; inputs in the conversion script. The consists of N rangefinders --&gt;</span>
-<span class="w">    </span><span class="cm">&lt;!-- and will generally be of the form &quot;&lt;sensor_name&gt;-01&quot;. These parameters should line up with --&gt;</span>
-<span class="w">    </span><span class="cm">&lt;!-- those documented in the laserscan message. --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;lidar&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;frame_name&quot;</span><span class="nt">&gt;</span>lidar_sensor_frame<span class="nt">&lt;/param&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;angle_increment&quot;</span><span class="nt">&gt;</span>0.025<span class="nt">&lt;/param&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;min_angle&quot;</span><span class="nt">&gt;</span>-0.3<span class="nt">&lt;/param&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;max_angle&quot;</span><span class="nt">&gt;</span>0.3<span class="nt">&lt;/param&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;range_min&quot;</span><span class="nt">&gt;</span>0.05<span class="nt">&lt;/param&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;range_max&quot;</span><span class="nt">&gt;</span>10<span class="nt">&lt;/param&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;laserscan_topic&quot;</span><span class="nt">&gt;</span>/scan<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;/sensor&gt;</span>
-</pre></div>
-</div>
-</section>
+<p>For the full plugin parameter reference, joint control modes, gripper/mimic joint setup, sensors (FTS, IMU), cameras, and lidar configuration, see the <a class="reference internal" href="#docs/hardware_interface.rst"><span class="xref myst">hardware interface documentation</span></a>.</p>
 </section>
 <section id="simulation-topics-and-services">
-<h3>Simulation - Topics and Services<a class="headerlink" href="#simulation-topics-and-services" title="Link to this heading"></a></h3>
-<section id="topics">
-<h4>Topics<a class="headerlink" href="#topics" title="Link to this heading"></a></h4>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">/mujoco_actuators_states</span></code> (<code class="docutils literal notranslate"><span class="pre">sensor_msgs/msg/JointState</span></code>): Provides information on all internal MuJoCo joints,
-regardless of whether their interfaces are exposed via <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">/clock</span></code> (<code class="docutils literal notranslate"><span class="pre">rosgraph_msgs/msg/Clock</span></code>): Contains the internal physics clock tracked by each MuJoCo simulation step.</p></li>
-</ul>
-</section>
-<section id="services">
-<h4>Services<a class="headerlink" href="#services" title="Link to this heading"></a></h4>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">~/set_pause</span></code> (<code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control_msgs/srv/SetPause</span></code>): Pauses or resumes the simulation.</p>
-<ul class="simple">
-<li><p>Set <code class="docutils literal notranslate"><span class="pre">paused</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code> to pause, or <code class="docutils literal notranslate"><span class="pre">false</span></code> to resume.</p></li>
-<li><p>Returns immediately — no blocking. Returns <code class="docutils literal notranslate"><span class="pre">success</span> <span class="pre">=</span> <span class="pre">true</span></code> even if the simulation is already in the requested state.</p></li>
-<li><p>When resuming, the physics loop automatically re-syncs its wall-clock reference so no catch-up steps are executed.</p></li>
-</ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pause the simulation</span>
-ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/set_pause<span class="w"> </span>mujoco_ros2_control_msgs/srv/SetPause<span class="w"> </span><span class="s2">&quot;{paused: true}&quot;</span>
-
-<span class="c1"># Resume the simulation</span>
-ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/set_pause<span class="w"> </span>mujoco_ros2_control_msgs/srv/SetPause<span class="w"> </span><span class="s2">&quot;{paused: false}&quot;</span>
-</pre></div>
-</div>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">~/reset_world</span></code> (<code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control_msgs/srv/ResetWorld</span></code>): Resets the simulation state.</p>
-<ul class="simple">
-<li><p>If the optional <code class="docutils literal notranslate"><span class="pre">keyframe</span></code> string field is empty, the simulation is restored to the state captured at startup (initial joint positions, velocities, and control values).</p></li>
-<li><p>If a <code class="docutils literal notranslate"><span class="pre">keyframe</span></code> name is provided, that named keyframe from the MJCF is applied instead.</p></li>
-<li><p>Returns <code class="docutils literal notranslate"><span class="pre">success</span></code> and a human-readable <code class="docutils literal notranslate"><span class="pre">message</span></code>.</p></li>
-</ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reset to startup state</span>
-ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/reset_world<span class="w"> </span>mujoco_ros2_control_msgs/srv/ResetWorld<span class="w"> </span><span class="s2">&quot;{}&quot;</span>
-
-<span class="c1"># Reset to a named MJCF keyframe</span>
-ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/reset_world<span class="w"> </span>mujoco_ros2_control_msgs/srv/ResetWorld<span class="w"> </span><span class="s2">&quot;{keyframe: &#39;home&#39;}&quot;</span>
-</pre></div>
-</div>
-<blockquote>
-<div><p>[!IMPORTANT]
-If controllers are active during the service call, the robot may reset to the initial state and then immediately
-snap back to its previous commanded position. To avoid this, it is recommended to deactivate any active joint
-controllers before calling this service.</p>
-</div></blockquote>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">~/step_simulation</span></code> (<code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control_msgs/srv/StepSimulation</span></code>): Advances the paused simulation by an exact
-number of physics steps and blocks until all steps have completed.</p>
-<ul class="simple">
-<li><p>The <code class="docutils literal notranslate"><span class="pre">steps</span></code> field (<code class="docutils literal notranslate"><span class="pre">uint32</span></code>) specifies how many physics steps to execute. Must be ≥ 1.</p></li>
-<li><p>The call returns only after all requested steps are finished (or a timeout/divergence is detected).</p></li>
-<li><p>Returns <code class="docutils literal notranslate"><span class="pre">success</span></code> and a human-readable <code class="docutils literal notranslate"><span class="pre">message</span></code>.</p></li>
-<li><p><strong>The simulation must be paused</strong> before calling this service. If <code class="docutils literal notranslate"><span class="pre">sim_-&gt;run</span></code> is true the call returns immediately with <code class="docutils literal notranslate"><span class="pre">success</span> <span class="pre">=</span> <span class="pre">false</span></code>.</p></li>
-<li><p>Timeout: whichever is larger — 30 s, or 10 ms × <code class="docutils literal notranslate"><span class="pre">steps</span></code>.</p></li>
-</ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step the simulation forward by 100 physics steps</span>
-ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/step_simulation<span class="w"> </span>mujoco_ros2_control_msgs/srv/StepSimulation<span class="w"> </span><span class="s2">&quot;{steps: 100}&quot;</span>
-</pre></div>
-</div>
-</li>
-</ul>
-</section>
-</section>
-<section id="debugging">
-<h3>Debugging<a class="headerlink" href="#debugging" title="Link to this heading"></a></h3>
-<p>The simulator provides several mechanisms for pausing execution and advancing it in a controlled, step-by-step fashion.
-This is useful for inspecting robot state, verifying controller output, or reproducing intermittent issues.</p>
-<section id="pausing-the-simulation">
-<h4>Pausing the Simulation<a class="headerlink" href="#pausing-the-simulation" title="Link to this heading"></a></h4>
-<p>Click the <strong>Pause</strong> button in the MuJoCo Simulate window (or press <strong>Space</strong>) to pause the physics loop.
-When paused, the simulation clock stops advancing and no physics steps are executed until explicitly requested.</p>
-</section>
-<section id="single-stepping-via-the-keyboard">
-<h4>Single-Stepping via the Keyboard<a class="headerlink" href="#single-stepping-via-the-keyboard" title="Link to this heading"></a></h4>
-<p>While the simulation window is focused and the simulation is <strong>paused</strong>, press the <strong>right arrow key</strong> (<code class="docutils literal notranslate"><span class="pre">→</span></code>) to
-advance the simulation by exactly one physics step. Holding the key down will advance the simulation continuously
-one step at a time, allowing slow, frame-by-frame inspection of the robot’s motion.</p>
-<p>The status overlay in the top-right corner of the simulation window shows the current state
-(<code class="docutils literal notranslate"><span class="pre">Running</span></code> / <code class="docutils literal notranslate"><span class="pre">Paused</span></code>) and the total number of physics steps executed.</p>
-</section>
-<section id="single-stepping-via-ros-2-service">
-<h4>Single-Stepping via ROS 2 Service<a class="headerlink" href="#single-stepping-via-ros-2-service" title="Link to this heading"></a></h4>
-<p>The <code class="docutils literal notranslate"><span class="pre">~/step_simulation</span></code> service allows programmatic step-by-step control from the command line or
-from test/debug scripts. This is particularly useful for automated testing scenarios where a
-reproducible sequence of physics steps is needed.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pause the simulation first (from the UI or via another mechanism), then:</span>
-
-<span class="c1"># Advance by a single physics step</span>
-ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/step_simulation<span class="w"> </span>mujoco_ros2_control_msgs/srv/StepSimulation<span class="w"> </span><span class="s2">&quot;{steps: 1}&quot;</span>
-
-<span class="c1"># Advance by 500 steps (blocks until complete)</span>
-ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/step_simulation<span class="w"> </span>mujoco_ros2_control_msgs/srv/StepSimulation<span class="w"> </span><span class="s2">&quot;{steps: 500}&quot;</span>
-</pre></div>
-</div>
-<p>The service call <strong>blocks</strong> until all requested steps have been executed, the simulation diverges, or a
-timeout is reached. This makes it safe to pipeline service calls sequentially without additional
-synchronisation (e.g. send a command → step N times → read state → repeat).</p>
-<blockquote>
-<div><p>[!NOTE]
-<code class="docutils literal notranslate"><span class="pre">~/step_simulation</span></code> requires the simulation to be <strong>paused</strong>. Calling it while the simulation is running
-returns <code class="docutils literal notranslate"><span class="pre">success:</span> <span class="pre">false</span></code> immediately without executing any steps.</p>
-</div></blockquote>
-</section>
+<h3>Simulation Topics and Services<a class="headerlink" href="#simulation-topics-and-services" title="Link to this heading"></a></h3>
+<p>The simulator exposes ROS 2 topics and services for interacting with the simulation at runtime (pause, reset, step-by-step control, etc.).
+See the <a class="reference internal" href="#docs/hardware_interface.rst#simulation-topics-and-services"><span class="xref myst">simulation topics and services documentation</span></a> for details.</p>
 </section>
 <section id="test-robot-system">
 <h3>Test Robot System<a class="headerlink" href="#test-robot-system" title="Link to this heading"></a></h3>
@@ -609,7 +179,31 @@ We generally recommend looking there for examples and recommended workflows.</p>
 </section>
 <section id="development">
 <h3>Development<a class="headerlink" href="#development" title="Link to this heading"></a></h3>
-<p>More information is provided in the developers guide document (see <code class="docutils literal notranslate"><span class="pre">docs/DEVELOPMENT.md</span></code> in the mujoco_ros2_control repository).</p>
+<p>More information is provided in the <a class="reference internal" href="#../doc/development.rst"><span class="xref myst">developers guide</span></a>.</p>
+</section>
+<section id="further-documentation">
+<h3>Further Documentation<a class="headerlink" href="#further-documentation" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Document</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#docs/hardware_interface.rst"><span class="xref myst">Hardware Interface</span></a></p></td>
+<td><p>Plugin params, joints, sensors, cameras, lidar, topics, services, debugging</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#docs/tools.rst"><span class="xref myst">URDF to MJCF Conversion</span></a></p></td>
+<td><p>Conversion tool usage and MJCF schema reference</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#docs/modeling_tips.rst"><span class="xref myst">Modeling Tips</span></a></p></td>
+<td><p>Tips for modeling complex geometries in MuJoCo</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#../doc/development.rst"><span class="xref myst">Developers Guide</span></a></p></td>
+<td><p>Development workflows (Docker, pixi)</p></td>
+</tr>
+</tbody>
+</table>
 </section>
 </section>
 </section>

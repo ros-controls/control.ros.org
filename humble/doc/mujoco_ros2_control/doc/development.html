@@ -1,0 +1,243 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Developers Guide &mdash; ROS2_Control: Humble May 2026 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/reviewer_stats.css?v=068b34ac" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=d85a351e" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//humble/doc/mujoco_ros2_control/doc/development.html" />
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=7748e526"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_control/doc/index.html">ros2_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_control/ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes/release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration/migration.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_list/api_list.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../governance/governance.html">Project Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statistics.html">Documentation Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation_downloads.html">Documentation Downloads</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ROS2_Control: Humble</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Developers Guide</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/ros-controls/control.ros.org/blob/humble//doc/mujoco_ros2_control/doc/development.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for an older, but still supported, version of ROS 2.
+    For information on the latest version, please have a look at <a href="../../../../kilted/doc/mujoco_ros2_control/doc/development.html">Kilted</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="developers-guide">
+<h1>Developers Guide<a class="headerlink" href="#developers-guide" title="Link to this heading"></a></h1>
+<p>This package can be built “normally” in a colcon workspace on any compatible system.
+However, this package includes two self-contained workflows that enable developers to work in a completely isolated system environment.
+This ensures consistency with the supported workflows, and obviates the need to install any specific ROS, apt, or pip dependencies locally.</p>
+<section id="pixi-development-workflow">
+<h2>Pixi Development Workflow<a class="headerlink" href="#pixi-development-workflow" title="Link to this heading"></a></h2>
+<p>A <a class="reference external" href="https://pixi.sh/latest/installation/">pixi</a> and <a class="reference external" href="https://robostack.github.io">robostack</a> workflow is also provided.
+The workflow uses the <a class="reference external" href="https://prefix-dev.github.io/pixi-build-backends/backends/pixi-build-ros/">pixi-build-ros</a> backend, and installs
+all dependencies (including ROS) in an isolated virtual environment.
+The workflow is currently only compatible with Jazzy.</p>
+<p>To run, ensure pixi is installed.
+Then from the repo root:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install the environment</span>
+pixi<span class="w"> </span>install<span class="w"> </span>--frozen
+
+<span class="c1"># Setup the build environment</span>
+pixi<span class="w"> </span>run<span class="w"> </span>setup-colcon
+
+<span class="c1"># Build the package</span>
+pixi<span class="w"> </span>run<span class="w"> </span>build
+
+<span class="c1"># Run tests</span>
+pixi<span class="w"> </span>run<span class="w"> </span><span class="nb">test</span>
+</pre></div>
+</div>
+<p>pixi also provides an interactive shell that sources the installed package environment.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Launch an interactive shell environment and run things as usual</span>
+pixi<span class="w"> </span>shell
+
+<span class="c1"># Build things as normal</span>
+colcon<span class="w"> </span>build
+
+<span class="c1"># And source and launch the test application</span>
+<span class="nb">source</span><span class="w"> </span>install/setup.bash
+ros2<span class="w"> </span>launch<span class="w"> </span>mujoco_ros2_control_demos<span class="w"> </span>demo.launch.py
+</pre></div>
+</div>
+<p>For more information on pixi and ROS refer to the documentation or this excellent
+<a class="reference external" href="https://jafarabdi.github.io/blog/2025/ros2-pixi-dev/">blog post</a>.</p>
+</section>
+<section id="docker-development-workflow">
+<h2>Docker Development Workflow<a class="headerlink" href="#docker-development-workflow" title="Link to this heading"></a></h2>
+<p>This project includes a <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> and <code class="docutils literal notranslate"><span class="pre">docker/Dockerfile</span></code> for development and testing in an isolated environment.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You may need to give docker access to xhost with <code class="docutils literal notranslate"><span class="pre">xhost</span> <span class="pre">+local:docker</span></code> to ensure the container has access to the host UI.</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>compose<span class="w"> </span>build
+</pre></div>
+</div>
+<p>The service can be started with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Start the service in one shell (or start detached)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>up
+
+<span class="c1"># Connect to it in another</span>
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>dev<span class="w"> </span>bash
+</pre></div>
+</div>
+<p>This will launch a container with the source code mounted in a colcon workspace.
+From there the source can be modified, built, tested, or otherwise used as normal.
+For example, launch the included test scene with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Evaluate using the included mujoco simulate application</span>
+/opt/ros/<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>/opt/mujoco_vendor/bin/simulate<span class="w"> </span><span class="si">${</span><span class="nv">ROS_WS</span><span class="si">}</span>/src/mujoco_ros2_control/mujoco_ros2_control_demos/demo_resources/scene.xml
+
+<span class="c1"># Or launch the test ROS control interface</span>
+ros2<span class="w"> </span>launch<span class="w"> </span>mujoco_ros2_control_demos<span class="w"> </span>demo.launch.py
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Rendering contexts in containers can be tricky.</p>
+</div>
+<p>Users may need to tweak the compose file to support their specific host OS or GPUs.
+For more information refer to the comments in the compose file.</p>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: humble
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Stable Releases</dt>
+        <dd><a href="../../../../kilted/doc/mujoco_ros2_control/doc/development.html">Kilted (latest)</a></dd><br>
+        <dd><a href="../../../../jazzy/doc/mujoco_ros2_control/doc/development.html">Jazzy</a></dd><br>
+        
+        <dd><a href="development.html">Humble</a></dd><br>
+        
+        
+    </dl>
+    <dl>
+      <dt>End-of-Life</dt>
+        <dd><a href="../../../../iron/index.html">Iron</a></dd><br>
+        <dd><a href="../../../../galactic/index.html">Galactic</a></dd><br>
+        <dd><a href="../../../../foxy/index.html">Foxy</a></dd><br>
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="../../../../rolling/doc/mujoco_ros2_control/doc/development.html">Rolling</a></dd>
+      <dd><a href="../../../../lyrical/doc/mujoco_ros2_control/doc/development.html">Lyrical</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

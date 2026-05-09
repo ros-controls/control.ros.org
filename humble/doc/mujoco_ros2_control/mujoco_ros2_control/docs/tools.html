@@ -1,0 +1,480 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>URDF to MJCF Conversion &mdash; ROS2_Control: Humble May 2026 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/reviewer_stats.css?v=068b34ac" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=d85a351e" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//humble/doc/mujoco_ros2_control/mujoco_ros2_control/docs/tools.html" />
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=7748e526"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+      <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html">ros2_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes/release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../migration/migration.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_list/api_list.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../governance/governance.html">Project Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../statistics.html">Documentation Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation_downloads.html">Documentation Downloads</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ROS2_Control: Humble</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">URDF to MJCF Conversion</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/ros-controls/control.ros.org/blob/humble//doc/mujoco_ros2_control/mujoco_ros2_control/docs/tools.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for an older, but still supported, version of ROS 2.
+    For information on the latest version, please have a look at <a href="../../../../../kilted/doc/mujoco_ros2_control/mujoco_ros2_control/docs/tools.html">Kilted</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="urdf-to-mjcf-conversion">
+<h1>URDF to MJCF Conversion<a class="headerlink" href="#urdf-to-mjcf-conversion" title="Link to this heading"></a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This tool is hacky and <em>highly</em> experimental!
+Expect things to be broken.</p>
+</div>
+<p>As MuJoCo does not ingest URDFs, we have written a helper tool for converting URDF to MJCF to assist with converting a robot description to an MJCF.
+This can either be done offline or at runtime; refer to
+<a class="reference external" href="https://github.com/ros-controls/mujoco_ros2_control/blob/main/mujoco_ros2_control_demos/launch/02_mjcf_generation.launch.py">demo 2</a>
+for an example.</p>
+<p>As noted in the warning above, but reiterating here, these tools are highly experimental!
+They are intended to be used for assistance and getting started, but do not expect things to work for all possible inputs, nor to work immediately out of the box.</p>
+<p>Additional cleanup, documentation, and tips and tricks are a work in progress.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>The current tool that is available is <code class="docutils literal notranslate"><span class="pre">make_mjcf_from_robot_description</span></code>, which is runnable with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>mujoco_ros2_control<span class="w"> </span>make_mjcf_from_robot_description.py
+</pre></div>
+</div>
+<p>(or)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>mujoco_ros2_control<span class="w"> </span>robot_description_to_mjcf.sh
+</pre></div>
+</div>
+<p>When <code class="docutils literal notranslate"><span class="pre">robot_description_to_mjcf.sh</span></code> is first executed, it creates a Python virtual environment at <code class="docutils literal notranslate"><span class="pre">$ROS_HOME/ros2_control</span></code> and installs all necessary dependencies.
+Once set up, the script sources the environment and runs <code class="docutils literal notranslate"><span class="pre">make_mjcf_from_robot_description.py</span></code>.
+On subsequent runs, it reuses the existing virtual environment.</p>
+<p>By default, the tool will pull a URDF from the <code class="docutils literal notranslate"><span class="pre">/robot_description</span></code> topic.
+However, this is configurable at execution time.
+A complete list of options is available from the argument parser:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ros2<span class="w"> </span>run<span class="w"> </span>mujoco_ros2_control<span class="w"> </span>make_mjcf_from_robot_description.py<span class="w"> </span>-h
+usage:<span class="w"> </span>make_mjcf_from_robot_description.py<span class="w"> </span><span class="o">[</span>-h<span class="o">]</span><span class="w"> </span><span class="o">[</span>-u<span class="w"> </span>URDF<span class="o">]</span><span class="w"> </span><span class="o">[</span>-r<span class="w"> </span>ROBOT_DESCRIPTION<span class="o">]</span><span class="w"> </span><span class="o">[</span>-m<span class="w"> </span>MUJOCO_INPUTS<span class="o">]</span><span class="w"> </span><span class="o">[</span>-o<span class="w"> </span>OUTPUT<span class="o">]</span><span class="w"> </span><span class="o">[</span>-p<span class="w"> </span>PUBLISH_TOPIC<span class="o">]</span><span class="w"> </span><span class="o">[</span>-c<span class="o">]</span><span class="w"> </span><span class="o">[</span>-s<span class="o">]</span><span class="w"> </span><span class="o">[</span>-f<span class="o">]</span>
+<span class="w">                                           </span><span class="o">[</span>--fuse<span class="w"> </span><span class="p">|</span><span class="w"> </span>--no-fuse<span class="o">]</span><span class="w"> </span><span class="o">[</span>-a<span class="w"> </span>ASSET_DIR<span class="o">]</span><span class="w"> </span><span class="o">[</span>--scene<span class="w"> </span>SCENE<span class="o">]</span>
+
+Convert<span class="w"> </span>a<span class="w"> </span>full<span class="w"> </span>URDF<span class="w"> </span>to<span class="w"> </span>MJCF<span class="w"> </span><span class="k">for</span><span class="w"> </span>use<span class="w"> </span><span class="k">in</span><span class="w"> </span>MuJoCo
+
+options:
+<span class="w">  </span>-h,<span class="w"> </span>--help<span class="w">            </span>show<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span><span class="nb">exit</span>
+<span class="w">  </span>-u<span class="w"> </span>URDF,<span class="w"> </span>--urdf<span class="w"> </span>URDF<span class="w">  </span>Optionally<span class="w"> </span>pass<span class="w"> </span>an<span class="w"> </span>existing<span class="w"> </span>URDF<span class="w"> </span>file<span class="w"> </span><span class="o">(</span>default:<span class="w"> </span>None<span class="o">)</span>
+<span class="w">  </span>-r<span class="w"> </span>ROBOT_DESCRIPTION,<span class="w"> </span>--robot_description<span class="w"> </span>ROBOT_DESCRIPTION
+<span class="w">                        </span>Optionally<span class="w"> </span>pass<span class="w"> </span>the<span class="w"> </span>robot<span class="w"> </span>description<span class="w"> </span>string<span class="w"> </span><span class="o">(</span>default:<span class="w"> </span>None<span class="o">)</span>
+<span class="w">  </span>-m<span class="w"> </span>MUJOCO_INPUTS,<span class="w"> </span>--mujoco_inputs<span class="w"> </span>MUJOCO_INPUTS
+<span class="w">                        </span>Optionally<span class="w"> </span>specify<span class="w"> </span>a<span class="w"> </span>defaults<span class="w"> </span>xml<span class="w"> </span><span class="k">for</span><span class="w"> </span>default<span class="w"> </span>settings,<span class="w"> </span>actuators,<span class="w"> </span>options,<span class="w"> </span>and<span class="w"> </span>additional<span class="w"> </span>sensors<span class="w"> </span><span class="o">(</span>default:<span class="w"> </span>None<span class="o">)</span>
+<span class="w">  </span>-o<span class="w"> </span>OUTPUT,<span class="w"> </span>--output<span class="w"> </span>OUTPUT
+<span class="w">                        </span>Generated<span class="w"> </span>output<span class="w"> </span>path<span class="w"> </span><span class="o">(</span>default:<span class="w"> </span>mjcf_data<span class="o">)</span>
+<span class="w">  </span>-p<span class="w"> </span>PUBLISH_TOPIC,<span class="w"> </span>--publish_topic<span class="w"> </span>PUBLISH_TOPIC
+<span class="w">                        </span>Optionally<span class="w"> </span>specify<span class="w"> </span>the<span class="w"> </span>topic<span class="w"> </span>to<span class="w"> </span>publish<span class="w"> </span>the<span class="w"> </span>MuJoCo<span class="w"> </span>model<span class="w"> </span><span class="o">(</span>default:<span class="w"> </span>None<span class="o">)</span>
+<span class="w">  </span>-c,<span class="w"> </span>--convert_stl_to_obj
+<span class="w">                        </span>If<span class="w"> </span>we<span class="w"> </span>should<span class="w"> </span>convert<span class="w"> </span>.stls<span class="w"> </span>to<span class="w"> </span>.objs<span class="w"> </span><span class="o">(</span>default:<span class="w"> </span>False<span class="o">)</span>
+<span class="w">  </span>-s,<span class="w"> </span>--save_only<span class="w">       </span>Save<span class="w"> </span>files<span class="w"> </span>permanently<span class="w"> </span>on<span class="w"> </span>disk<span class="p">;</span><span class="w"> </span>without<span class="w"> </span>this<span class="w"> </span>flag,<span class="w"> </span>files<span class="w"> </span>go<span class="w"> </span>to<span class="w"> </span>a<span class="w"> </span>temporary<span class="w"> </span>directory<span class="w"> </span><span class="o">(</span>default:<span class="w"> </span>False<span class="o">)</span>
+<span class="w">  </span>-f,<span class="w"> </span>--add_free_joint<span class="w">  </span>Adds<span class="w"> </span>a<span class="w"> </span>free<span class="w"> </span>joint<span class="w"> </span>before<span class="w"> </span>the<span class="w"> </span>root<span class="w"> </span>link<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>robot<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>urdf<span class="w"> </span>before<span class="w"> </span>conversion<span class="w"> </span><span class="o">(</span>default:<span class="w"> </span>False<span class="o">)</span>
+<span class="w">  </span>--fuse,<span class="w"> </span>--no-fuse<span class="w">     </span>Allows<span class="w"> </span>MuJoCo<span class="w"> </span>to<span class="w"> </span>merge<span class="w"> </span>static<span class="w"> </span>bodies.<span class="w"> </span>Use<span class="w"> </span>--no-fuse<span class="w"> </span>to<span class="w"> </span>prevent<span class="w"> </span>merging.<span class="w"> </span><span class="o">(</span>default:<span class="w"> </span>True<span class="o">)</span>
+<span class="w">  </span>-a<span class="w"> </span>ASSET_DIR,<span class="w"> </span>--asset_dir<span class="w"> </span>ASSET_DIR
+<span class="w">                        </span>Optionally<span class="w"> </span>pass<span class="w"> </span>an<span class="w"> </span>existing<span class="w"> </span>folder<span class="w"> </span>with<span class="w"> </span>pre-generated<span class="w"> </span>OBJ<span class="w"> </span>meshes.<span class="w"> </span><span class="o">(</span>default:<span class="w"> </span>None<span class="o">)</span>
+<span class="w">  </span>--scene<span class="w"> </span>SCENE<span class="w">         </span>Optionally<span class="w"> </span>pass<span class="w"> </span>an<span class="w"> </span>existing<span class="w"> </span>xml<span class="w"> </span><span class="k">for</span><span class="w"> </span>the<span class="w"> </span>scene<span class="w"> </span><span class="o">(</span>default:<span class="w"> </span>None<span class="o">)</span>
+</pre></div>
+</div>
+<p>A sample URDF and inputs file are provided in
+<a class="reference external" href="https://github.com/ros-controls/mujoco_ros2_control/blob/main/mujoco_ros2_control_demos/demo_resources/robot/test_robot.urdf">test_robot.urdf</a>
+and
+<a class="reference external" href="https://github.com/ros-controls/mujoco_ros2_control/blob/main/mujoco_ros2_control_demos/demo_resources/mjcf_generation/test_inputs.xml">test_inputs.xml</a>.</p>
+<p>To convert the URDF, run the following from the repo root:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dependencies are installed on the fly, if needed</span>
+ros2<span class="w"> </span>run<span class="w"> </span>mujoco_ros2_control<span class="w"> </span>robot_description_to_mjcf.sh<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--save_only<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-u<span class="w"> </span>mujoco_ros2_control_demos/demo_resources/robot/test_robot.urdf<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-m<span class="w"> </span>mujoco_ros2_control_demos/demo_resources/mjcf_generation/test_inputs.xml<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-o<span class="w"> </span>/tmp/output/
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">/tmp/output/</span></code> directory will contain all necessary assets and MJCF files that can be copied into the relevant locations in a config package.
+They can also be adjusted as needed after the fact.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>mujoco_vendor<span class="w"> </span>simulate<span class="w"> </span>/tmp/output/mujoco_description_formatted.xml
+</pre></div>
+</div>
+<p>Of note, the test robot has a good chunk of supported functionality, and we recommend using it as a guide.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">make_mjcf_from_robot_description.py</span></code> script requires <code class="docutils literal notranslate"><span class="pre">trimesh</span></code>, <code class="docutils literal notranslate"><span class="pre">mujoco</span></code>, <code class="docutils literal notranslate"><span class="pre">coacd</span></code>, and <code class="docutils literal notranslate"><span class="pre">obj2mjcf</span></code>.
+These must either be installed system-wide or available within a virtual environment that is sourced before running the command.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This page focuses on generating MJCFs for robots.
+Please see additional documentation on <a class="reference internal" href="modeling_tips.html"><span class="doc">modeling and generating MJCFs for objects</span></a>.</p>
+</div>
+</section>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This has some heavy non-ROS dependencies that could probably be cleaned up:</p>
+</div>
+<ul class="simple">
+<li><p>MuJoCo Python API</p></li>
+<li><p>trimesh — Python library for loading and using triangular meshes.</p></li>
+<li><p>obj2mjcf — A tool for converting Wavefront OBJ files to multiple MuJoCo meshes grouped by material.</p></li>
+<li><p>xml.dom (not sure if this is already available)</p></li>
+</ul>
+<section id="rough-outline-of-the-automated-conversion-process">
+<h3>Rough outline of the automated conversion process<a class="headerlink" href="#rough-outline-of-the-automated-conversion-process" title="Link to this heading"></a></h3>
+<ul>
+<li><p>Reads a robot description URDF.</p></li>
+<li><p>Adds in mujoco tag that provides necessary info for conversion.</p></li>
+<li><p>Replaces package names from <code class="docutils literal notranslate"><span class="pre">package://</span></code> to absolute filepaths.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Duplicate mesh files will have an <code class="docutils literal notranslate"><span class="pre">_N</span></code> appended to them to avoid conflicts in the output <code class="docutils literal notranslate"><span class="pre">assets</span></code> folder.
+For instance, if running multiple types of UR robots in one sim, there will be multiple <code class="docutils literal notranslate"><span class="pre">shoulder.dae</span></code> files.</p>
+</div>
+</li>
+<li><p>Reads absolute filepaths of all meshes and converts either <code class="docutils literal notranslate"><span class="pre">.dae</span></code> or <code class="docutils literal notranslate"><span class="pre">.stl</span></code> to <code class="docutils literal notranslate"><span class="pre">.obj</span></code> using trimesh.</p>
+<ul class="simple">
+<li><p>Puts all meshes into an <code class="docutils literal notranslate"><span class="pre">assets/</span></code> folder under <code class="docutils literal notranslate"><span class="pre">mjcf_data/</span></code> relative to current working dir.</p></li>
+<li><p>Modifies filepaths again in URDF to point to the <code class="docutils literal notranslate"><span class="pre">assets/</span></code> folder.</p></li>
+<li><p>Decomposes large meshes into multiple components to ensure convex hulls.</p></li>
+</ul>
+</li>
+<li><p>Publishes the new formatted robot description XML file that can be used for conversion.</p></li>
+<li><p>Converts the new robot description URDF file.</p></li>
+<li><p>Runs the MuJoCo conversion tool to get the MJCF version.</p></li>
+<li><p>Copies in a default <code class="docutils literal notranslate"><span class="pre">scene.xml</span></code> file which gives better camera and scene info.</p></li>
+<li><p>Adds remaining sites, items, and any other custom inputs.</p></li>
+</ul>
+</section>
+</section>
+<section id="embedding-mujoco-inputs-inside-urdf">
+<h2>Embedding MuJoCo Inputs inside URDF<a class="headerlink" href="#embedding-mujoco-inputs-inside-urdf" title="Link to this heading"></a></h2>
+<p>You can embed MuJoCo-specific information directly inside a URDF (typically inside a xacro)
+so the URDF → MJCF conversion script can pick it up and inject the corresponding tags into
+the generated MJCF. See
+<a class="reference external" href="https://github.com/ros-controls/mujoco_ros2_control/blob/main/mujoco_ros2_control_demos/demo_resources/robot/test_robot.urdf">test_robot.urdf</a>
+for a complete example.</p>
+<section id="top-level-container">
+<h3>Top-level container<a class="headerlink" href="#top-level-container" title="Link to this heading"></a></h3>
+<p>Use a <code class="docutils literal notranslate"><span class="pre">&lt;mujoco_inputs&gt;</span></code> element inside your xacro/URDF. The converter looks for this element
+and copies or processes its children into the MJCF.</p>
+<section id="main-sub-elements">
+<h4>Main sub-elements<a class="headerlink" href="#main-sub-elements" title="Link to this heading"></a></h4>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">raw_inputs</span></code></dt><dd><p>Arbitrary MJCF XML fragments that will get copied verbatim into the generated MJCF.
+Use this for elements that don’t require conversion (for example <code class="docutils literal notranslate"><span class="pre">option</span></code>, <code class="docutils literal notranslate"><span class="pre">default</span></code>,
+<code class="docutils literal notranslate"><span class="pre">actuator</span></code>, <code class="docutils literal notranslate"><span class="pre">tendon</span></code>, <code class="docutils literal notranslate"><span class="pre">equality</span></code>, simple <code class="docutils literal notranslate"><span class="pre">sensor</span></code> definitions, etc.).
+See <code class="docutils literal notranslate"><span class="pre">test_robot.urdf</span></code>.</p>
+<p>Can also exclude contacts between bodies using the
+<a class="reference external" href="https://mujoco.readthedocs.io/en/stable/XMLreference.html#contact-exclude">contact/exclude tag</a>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">processed_inputs</span></code></dt><dd><p>Convenience tags that the converter understands and processes into valid MJCF entries.
+Use these when the converter must transform or generate MJCF elements (for example,
+cameras, lidar rangefinders, mesh decomposition hints, or targeted modifications).
+Common processed tags (supported by the demo converter):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">decompose_mesh</span></code> (attributes: <code class="docutils literal notranslate"><span class="pre">mesh_name</span></code>, <code class="docutils literal notranslate"><span class="pre">threshold</span></code>) — requests mesh decomposition
+when running the <code class="docutils literal notranslate"><span class="pre">obj2mjcf</span></code>/decompose step; useful when large meshes must be split for more
+robust collision hull generation. Particularly useful for gripper fingers and anything a robot
+will interact with, like object handles.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">camera</span></code> (attributes: <code class="docutils literal notranslate"><span class="pre">site</span></code>, <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">fovy</span></code>, <code class="docutils literal notranslate"><span class="pre">mode</span></code>, <code class="docutils literal notranslate"><span class="pre">resolution</span></code>) — instructs
+the converter to add a camera in the MJCF attached to the given URDF site (frame). The
+converter will fill position/quaternion from the URDF link pose. <code class="docutils literal notranslate"><span class="pre">resolution</span></code> is two integers
+separated by a space (e.g. <code class="docutils literal notranslate"><span class="pre">640</span> <span class="pre">480</span></code>). The <code class="docutils literal notranslate"><span class="pre">name</span></code> must match the <code class="docutils literal notranslate"><span class="pre">sensor</span></code> name declared
+in the <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> block if you plan to publish images to ROS topics.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lidar</span></code> (attributes: <code class="docutils literal notranslate"><span class="pre">ref_site</span></code>, <code class="docutils literal notranslate"><span class="pre">sensor_name</span></code>, <code class="docutils literal notranslate"><span class="pre">min_angle</span></code>, <code class="docutils literal notranslate"><span class="pre">max_angle</span></code>,
+<code class="docutils literal notranslate"><span class="pre">angle_increment</span></code>) — generates a set of MJCF <code class="docutils literal notranslate"><span class="pre">rangefinder</span></code> sensors placed around
+<code class="docutils literal notranslate"><span class="pre">ref_site</span></code>. The converter rotates rangefinders about the replicate frame’s Y axis between
+<code class="docutils literal notranslate"><span class="pre">min_angle</span></code> and <code class="docutils literal notranslate"><span class="pre">max_angle</span></code> at the step size <code class="docutils literal notranslate"><span class="pre">angle_increment</span></code>. The generated
+rangefinders will be named by the <code class="docutils literal notranslate"><span class="pre">sensor_name</span></code> base (e.g. <code class="docutils literal notranslate"><span class="pre">rf-01</span></code>, <code class="docutils literal notranslate"><span class="pre">rf-02</span></code>, …); ROS-facing
+<code class="docutils literal notranslate"><span class="pre">sensor</span></code> entries in the <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> section should use the same base name.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">modify_element</span></code> (attributes: <code class="docutils literal notranslate"><span class="pre">type</span></code>, <code class="docutils literal notranslate"><span class="pre">name</span></code>, …any MJCF attributes…) — finds the
+generated MJCF element by <code class="docutils literal notranslate"><span class="pre">type</span></code> (for example <code class="docutils literal notranslate"><span class="pre">joint</span></code> or <code class="docutils literal notranslate"><span class="pre">body</span></code>) and <code class="docutils literal notranslate"><span class="pre">name</span></code> and sets or
+overwrites the provided attributes. Useful to tweak physics properties like <code class="docutils literal notranslate"><span class="pre">frictionloss</span></code>,
+<code class="docutils literal notranslate"><span class="pre">stiffness</span></code>, <code class="docutils literal notranslate"><span class="pre">damping</span></code>, <code class="docutils literal notranslate"><span class="pre">gravcomp</span></code>, etc.</p></li>
+</ul>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">scene</span></code></dt><dd><p>Scene-level MJCF fragments such as <code class="docutils literal notranslate"><span class="pre">asset</span></code>, <code class="docutils literal notranslate"><span class="pre">worldbody</span></code>, <code class="docutils literal notranslate"><span class="pre">visual</span></code>, and small scene
+parameters. If present the converter will merge/insert it into the MJCF scene (camera lighting,
+ground textures, skybox definitions, etc.). A <code class="docutils literal notranslate"><span class="pre">scene.xml</span></code> can also be passed to the script using
+the <code class="docutils literal notranslate"><span class="pre">--scene</span></code> argument to generate the model including the scene configuration.</p>
+<p>Gravity can also be changed in the MuJoCo <code class="docutils literal notranslate"><span class="pre">scene</span></code>. For example:</p>
+<p>Earth gravity:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;option</span><span class="w"> </span><span class="na">gravity=</span><span class="s">&quot;0 0 -9.81&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;flag</span><span class="w"> </span><span class="na">contact=</span><span class="s">&quot;enable&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/option&gt;</span>
+</pre></div>
+</div>
+<p>Lunar gravity (one-sixth Earth gravity):</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;option</span><span class="w"> </span><span class="na">gravity=</span><span class="s">&quot;0 0 -1.63&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;flag</span><span class="w"> </span><span class="na">contact=</span><span class="s">&quot;enable&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/option&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Changing the simulated gravity does not affect gravity compensation in the <code class="docutils literal notranslate"><span class="pre">processed_inputs</span></code> described above.</p>
+</div>
+</dd>
+</dl>
+</section>
+</section>
+<section id="sensor-and-ros-mapping">
+<h3>Sensor and ROS mapping<a class="headerlink" href="#sensor-and-ros-mapping" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Define ROS-facing sensors inside the <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> tag (or anywhere in the URDF that your
+robot description consumers expect). For cameras, the <code class="docutils literal notranslate"><span class="pre">sensor</span></code> name in the URDF must match the
+<code class="docutils literal notranslate"><span class="pre">camera</span></code> <code class="docutils literal notranslate"><span class="pre">name</span></code> placed in <code class="docutils literal notranslate"><span class="pre">processed_inputs</span></code> so the plugin can map the MJCF camera to a
+ROS topic (see <code class="docutils literal notranslate"><span class="pre">test_robot.urdf</span></code>).</p></li>
+<li><p>Lidar: the converter produces multiple MJCF <code class="docutils literal notranslate"><span class="pre">rangefinder</span></code> sensors. The URDF <code class="docutils literal notranslate"><span class="pre">sensor</span></code> for
+the lidar should provide <code class="docutils literal notranslate"><span class="pre">angle_increment</span></code>, <code class="docutils literal notranslate"><span class="pre">min_angle</span></code>, <code class="docutils literal notranslate"><span class="pre">max_angle</span></code>, <code class="docutils literal notranslate"><span class="pre">range_min</span></code>,
+<code class="docutils literal notranslate"><span class="pre">range_max</span></code>, and <code class="docutils literal notranslate"><span class="pre">laserscan_topic</span></code> parameters. The hardware interface will combine the set of
+generated rangefinders into a single ROS <code class="docutils literal notranslate"><span class="pre">LaserScan</span></code> message.</p></li>
+</ul>
+</section>
+<section id="practical-tips-and-conventions">
+<h3>Practical tips and conventions<a class="headerlink" href="#practical-tips-and-conventions" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Use URDF/xacro frames (links) as reference <code class="docutils literal notranslate"><span class="pre">site</span></code> locations for cameras and sensors; the
+converter will read the link pose and attach MJCF objects accordingly.</p></li>
+<li><p>Keep <code class="docutils literal notranslate"><span class="pre">raw_inputs</span></code> minimal and prefer <code class="docutils literal notranslate"><span class="pre">processed_inputs</span></code> for things that need conversion or
+generation (meshes, cameras, rangefinders) — processed inputs document intent and are easier to
+maintain than dropping raw MJCF fragments into the URDF.</p></li>
+<li><p>When matching sensors: make sure MJCF sensor names and URDF <code class="docutils literal notranslate"><span class="pre">sensor</span></code> names align — this is
+how runtime mapping and topics are resolved.</p></li>
+</ul>
+<p>Where to look:</p>
+<ul class="simple">
+<li><p>Example usage in repo: <a class="reference external" href="https://github.com/ros-controls/mujoco_ros2_control/blob/main/mujoco_ros2_control_demos/demo_resources/robot/test_robot.urdf">test_robot.urdf</a>.</p></li>
+<li><p>The conversion inputs file used by the demo: <a class="reference external" href="https://github.com/ros-controls/mujoco_ros2_control/blob/main/mujoco_ros2_control_demos/demo_resources/mjcf_generation/test_inputs.xml">test_inputs.xml</a>.</p></li>
+</ul>
+</section>
+<section id="minimal-example-camera-lidar">
+<h3>Minimal example (camera + lidar)<a class="headerlink" href="#minimal-example-camera-lidar" title="Link to this heading"></a></h3>
+<p>Insert the following snippet inside a xacro/URDF where you want to describe MuJoCo inputs. It
+demonstrates a small <code class="docutils literal notranslate"><span class="pre">mujoco_inputs</span></code> block plus the matching <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> sensor entries that
+map MJCF sensors to ROS topics.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- MuJoCo inputs embedded in URDF/xacro --&gt;</span>
+<span class="nt">&lt;mujoco_inputs&gt;</span>
+<span class="w">  </span><span class="nt">&lt;raw_inputs&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- simple actuator copied verbatim into MJCF --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;actuator&gt;</span>
+<span class="w">      </span><span class="nt">&lt;position</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint1&quot;</span><span class="w"> </span><span class="na">joint=</span><span class="s">&quot;joint1&quot;</span><span class="w"> </span><span class="na">kp=</span><span class="s">&quot;1000&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/actuator&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/raw_inputs&gt;</span>
+
+<span class="w">  </span><span class="nt">&lt;processed_inputs&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- add a camera attached to the URDF frame &#39;camera_frame&#39; --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;camera</span><span class="w"> </span><span class="na">site=</span><span class="s">&quot;camera_frame&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera&quot;</span><span class="w"> </span><span class="na">fovy=</span><span class="s">&quot;58&quot;</span><span class="w"> </span><span class="na">mode=</span><span class="s">&quot;fixed&quot;</span><span class="w"> </span><span class="na">resolution=</span><span class="s">&quot;640 480&quot;</span><span class="nt">/&gt;</span>
+
+<span class="w">    </span><span class="cm">&lt;!-- generate a set of rangefinders attached to &#39;lidar_frame&#39; --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;lidar</span><span class="w"> </span><span class="na">ref_site=</span><span class="s">&quot;lidar_frame&quot;</span><span class="w"> </span><span class="na">sensor_name=</span><span class="s">&quot;rf&quot;</span><span class="w"> </span><span class="na">min_angle=</span><span class="s">&quot;-0.3&quot;</span><span class="w"> </span><span class="na">max_angle=</span><span class="s">&quot;0.3&quot;</span><span class="w"> </span><span class="na">angle_increment=</span><span class="s">&quot;0.025&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/processed_inputs&gt;</span>
+<span class="nt">&lt;/mujoco_inputs&gt;</span>
+
+<span class="cm">&lt;!-- ROS-facing sensor mappings (example inside ros2_control or globally) --&gt;</span>
+<span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;MujocoSystem&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="cm">&lt;!-- camera sensor: name must match processed_inputs camera &#39;name&#39; --&gt;</span>
+<span class="w">  </span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;frame_name&quot;</span><span class="nt">&gt;</span>camera_color_mujoco_frame<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;image_topic&quot;</span><span class="nt">&gt;</span>/camera/color/image_raw<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;info_topic&quot;</span><span class="nt">&gt;</span>/camera/color/camera_info<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/sensor&gt;</span>
+
+<span class="w">  </span><span class="cm">&lt;!-- lidar sensor: base name must match processed_inputs &#39;sensor_name&#39; --&gt;</span>
+<span class="w">  </span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;lidar&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;frame_name&quot;</span><span class="nt">&gt;</span>lidar_frame<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;angle_increment&quot;</span><span class="nt">&gt;</span>0.025<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;min_angle&quot;</span><span class="nt">&gt;</span>-0.3<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;max_angle&quot;</span><span class="nt">&gt;</span>0.3<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;range_min&quot;</span><span class="nt">&gt;</span>0.05<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;range_max&quot;</span><span class="nt">&gt;</span>10.0<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;laserscan_topic&quot;</span><span class="nt">&gt;</span>/scan<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/sensor&gt;</span>
+<span class="nt">&lt;/ros2_control&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="processed-inputs-attribute-reference">
+<span id="threshold-attribute"></span><h3>Processed inputs attribute reference<a class="headerlink" href="#processed-inputs-attribute-reference" title="Link to this heading"></a></h3>
+<p>The following lists the supported <code class="docutils literal notranslate"><span class="pre">processed_inputs</span></code> tags and their attributes. These are the
+attributes the demo converter recognizes; converters may extend this list.</p>
+<p><code class="docutils literal notranslate"><span class="pre">decompose_mesh</span></code></p>
+<ul class="simple">
+<li><p>Required: <code class="docutils literal notranslate"><span class="pre">mesh_name</span></code> (string)</p></li>
+<li><p>Optional: <code class="docutils literal notranslate"><span class="pre">threshold</span></code> (float) — convex decomposition threshold; smaller values produce finer
+decomposition. Example: <code class="docutils literal notranslate"><span class="pre">&lt;decompose_mesh</span> <span class="pre">mesh_name=&quot;shoulder_link&quot;</span> <span class="pre">threshold=&quot;0.05&quot;/&gt;</span></code>.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">camera</span></code></p>
+<ul class="simple">
+<li><p>Required: <code class="docutils literal notranslate"><span class="pre">site</span></code> (string) — URDF link/frame name to attach the camera to.</p></li>
+<li><p>Required: <code class="docutils literal notranslate"><span class="pre">name</span></code> (string) — camera name in MJCF; must match URDF <code class="docutils literal notranslate"><span class="pre">sensor</span></code> name used for ROS mapping.</p></li>
+<li><p>Optional: <code class="docutils literal notranslate"><span class="pre">fovy</span></code> (int/float) — vertical field of view in degrees (example: <code class="docutils literal notranslate"><span class="pre">58</span></code>).</p></li>
+<li><p>Optional: <code class="docutils literal notranslate"><span class="pre">mode</span></code> (string) — MJCF camera mode (commonly <code class="docutils literal notranslate"><span class="pre">fixed</span></code>).</p></li>
+<li><p>Optional: <code class="docutils literal notranslate"><span class="pre">resolution</span></code> (string) — two integers <code class="docutils literal notranslate"><span class="pre">&quot;&lt;width&gt;</span> <span class="pre">&lt;height&gt;&quot;</span></code> (example: <code class="docutils literal notranslate"><span class="pre">640</span> <span class="pre">480</span></code>).</p></li>
+<li><p>Optional: any other args supported by the MJCF <a class="reference external" href="https://mujoco.readthedocs.io/en/stable/XMLreference.html#body-camera">camera tag</a>.</p></li>
+<li><p>Notes: Converter fills transform (position + quaternion) from the URDF link pose.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">lidar</span></code></p>
+<ul class="simple">
+<li><p>Required: <code class="docutils literal notranslate"><span class="pre">ref_site</span></code> (string) — URDF frame used as reference for placing rangefinders.</p></li>
+<li><p>Required: <code class="docutils literal notranslate"><span class="pre">sensor_name</span></code> (string) — base name for generated MJCF rangefinders (e.g. <code class="docutils literal notranslate"><span class="pre">rf</span></code> will
+produce <code class="docutils literal notranslate"><span class="pre">rf-01</span></code>, <code class="docutils literal notranslate"><span class="pre">rf-02</span></code>, …). URDF <code class="docutils literal notranslate"><span class="pre">sensor</span></code> entries and ROS mapping should reference the same base name.</p></li>
+<li><p>Required: <code class="docutils literal notranslate"><span class="pre">min_angle</span></code> (float) — start angle in radians.</p></li>
+<li><p>Required: <code class="docutils literal notranslate"><span class="pre">max_angle</span></code> (float) — end angle in radians.</p></li>
+<li><p>Required: <code class="docutils literal notranslate"><span class="pre">angle_increment</span></code> (float) — angular step between generated rangefinders.</p></li>
+<li><p>Notes: The converter creates multiple MJCF <code class="docutils literal notranslate"><span class="pre">rangefinder</span></code> sensors across the angle range; the hardware interface merges them into a single ROS <code class="docutils literal notranslate"><span class="pre">LaserScan</span></code>.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">modify_element</span></code></p>
+<ul class="simple">
+<li><p>Required: <code class="docutils literal notranslate"><span class="pre">type</span></code> (string) — MJCF element type to target (e.g. <code class="docutils literal notranslate"><span class="pre">joint</span></code>, <code class="docutils literal notranslate"><span class="pre">body</span></code>).</p></li>
+<li><p>Required: <code class="docutils literal notranslate"><span class="pre">name</span></code> (string) — name attribute of the MJCF element to modify.</p></li>
+<li><p>Additional attributes: any MJCF attributes you want to set or overwrite (for example <code class="docutils literal notranslate"><span class="pre">frictionloss</span></code>, <code class="docutils literal notranslate"><span class="pre">damping</span></code>, <code class="docutils literal notranslate"><span class="pre">gravcomp</span></code>, <code class="docutils literal notranslate"><span class="pre">solimp</span></code>, <code class="docutils literal notranslate"><span class="pre">solref</span></code>, …).</p></li>
+<li><p>Example: <code class="docutils literal notranslate"><span class="pre">&lt;modify_element</span> <span class="pre">type=&quot;joint&quot;</span> <span class="pre">name=&quot;joint1&quot;</span> <span class="pre">frictionloss=&quot;1.0&quot;</span> <span class="pre">damping=&quot;2.0&quot;/&gt;</span></code>.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: humble
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Stable Releases</dt>
+        <dd><a href="../../../../../kilted/doc/mujoco_ros2_control/mujoco_ros2_control/docs/tools.html">Kilted (latest)</a></dd><br>
+        <dd><a href="../../../../../jazzy/doc/mujoco_ros2_control/mujoco_ros2_control/docs/tools.html">Jazzy</a></dd><br>
+        
+        <dd><a href="tools.html">Humble</a></dd><br>
+        
+        
+    </dl>
+    <dl>
+      <dt>End-of-Life</dt>
+        <dd><a href="../../../../../iron/index.html">Iron</a></dd><br>
+        <dd><a href="../../../../../galactic/index.html">Galactic</a></dd><br>
+        <dd><a href="../../../../../foxy/index.html">Foxy</a></dd><br>
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="../../../../../rolling/doc/mujoco_ros2_control/mujoco_ros2_control/docs/tools.html">Rolling</a></dd>
+      <dd><a href="../../../../../lyrical/doc/mujoco_ros2_control/mujoco_ros2_control/docs/tools.html">Lyrical</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
