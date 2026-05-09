@@ -11,9 +11,7 @@ Hosted by ros-controls
    :titlesonly:
 
    Gazebo <../gz_ros2_control/doc/index.rst>
-<<<<<<< HEAD
-   MuJoCo <mujoco/mujoco.rst>
-
+   MuJoCo <../mujoco_ros2_control/doc/index.rst>
 
 End-Of-Life
 ---------------------------------------------
@@ -22,10 +20,6 @@ End-Of-Life
    :titlesonly:
 
    Gazebo Classic <../gazebo_ros2_control/doc/index.rst>
-=======
-   MuJoCo <../mujoco_ros2_control/doc/index.rst>
-   topic-based <../topic_based_hardware_interfaces/doc/index.rst>
->>>>>>> c47cc40 (Add mujoco ros2 control RST doc (#654))
 
 Community
 ---------------------------------------------
