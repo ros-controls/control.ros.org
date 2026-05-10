@@ -11,7 +11,7 @@ Hosted by ros-controls
    :titlesonly:
 
    Gazebo <../gz_ros2_control/doc/index.rst>
-   MuJoCo <mujoco/mujoco.rst>
+   MuJoCo <../mujoco_ros2_control/doc/index.rst>
    topic-based <../topic_based_hardware_interfaces/doc/index.rst>
 
 Community

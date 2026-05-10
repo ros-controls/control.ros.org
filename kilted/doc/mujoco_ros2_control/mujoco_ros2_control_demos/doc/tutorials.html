@@ -27,7 +27,9 @@
       <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../../search.html" /> 
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="MuJoCo ROS 2 Control Plugins" href="../../mujoco_ros2_control_plugins/doc/plugins.html" />
+    <link rel="prev" title="Tips for Modeling Complex Geometries" href="../../mujoco_ros2_control/docs/modeling_tips.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -50,11 +52,40 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html">ros2_control</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/index.html">mujoco_ros2_control</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#quick-start">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#add-ros2-control-tag-to-a-urdf">Add ros2_control tag to a URDF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#urdf-to-mjcf-conversion">URDF to MJCF Conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#mujoco-ros2-control-demos">mujoco_ros2_control_demos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#support-matrix">Support Matrix</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/index.html#further-documentation">Further Documentation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../mujoco_ros2_control/docs/hardware_interface.html">Hardware Interface Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../mujoco_ros2_control/docs/hardware_interface.html#simulation-topics-and-services">Simulation Topics and Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../mujoco_ros2_control/docs/hardware_interface.html#debugging">Debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../mujoco_ros2_control/docs/tools.html">URDF to MJCF Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../mujoco_ros2_control/docs/modeling_tips.html">Modeling Tips</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Tutorials</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tutorial-1-basic-robot">Tutorial 1: Basic Robot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tutorial-2-mjcf-generation-at-runtime">Tutorial 2: MJCF Generation at Runtime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tutorial-3-pid-control">Tutorial 3: PID Control</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tutorial-4-transmissions">Tutorial 4: Transmissions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#combined-demo">Combined Demo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#controlling-the-robot">Controlling the Robot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#package-structure">Package Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../mujoco_ros2_control_plugins/doc/plugins.html">Plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../doc/development.html">Developers Guide</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../../utilities.html">Utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../simulators/simulators.html">Simulator Integrations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../release_notes/release_notes.html">Release Notes</a></li>
@@ -83,6 +114,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../doc/index.html">mujoco_ros2_control</a></li>
       <li class="breadcrumb-item active">Demos and Tutorials</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/ros-controls/control.ros.org/blob/kilted//doc/mujoco_ros2_control/mujoco_ros2_control_demos/doc/tutorials.rst" class="fa fa-github"> Edit on GitHub</a>
@@ -212,7 +244,10 @@ ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../mujoco_ros2_control/docs/modeling_tips.html" class="btn btn-neutral float-left" title="Tips for Modeling Complex Geometries" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../mujoco_ros2_control_plugins/doc/plugins.html" class="btn btn-neutral float-right" title="MuJoCo ROS 2 Control Plugins" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
