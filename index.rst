@@ -10,7 +10,6 @@ Welcome to the ros2_control documentation - Jazzy!
    doc/ros2_control/doc/index.rst
    doc/ros2_controllers/doc/controllers_index.rst
    doc/ros2_control_demos/doc/index.rst
-   doc/mujoco_ros2_control/doc/index.rst
    doc/utilities.rst
    doc/simulators/simulators.rst
    doc/release_notes/release_notes.rst
