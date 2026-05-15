@@ -80,7 +80,8 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">joint_trajectory_controller Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -131,6 +132,11 @@ tl::expected&lt; void, std::string &gt;&#160;</td><td class="memItemRight" valig
 <tr class="memitem:a7100d1f2541cc803cad36fc77d31bfb0" id="r_a7100d1f2541cc803cad36fc77d31bfb0"><td class="memItemLeft" align="right" valign="top"><a id="a7100d1f2541cc803cad36fc77d31bfb0" name="a7100d1f2541cc803cad36fc77d31bfb0"></a>
 tl::expected&lt; void, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>state_interface_type_combinations</b> (rclcpp::Parameter const &amp;parameter)</td></tr>
 <tr class="separator:a7100d1f2541cc803cad36fc77d31bfb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a52a6105fbdfd43ab3e5dc80c5a255561" id="r_a52a6105fbdfd43ab3e5dc80c5a255561"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__trajectory__controller.html#a52a6105fbdfd43ab3e5dc80c5a255561">interface_has_values</a></td></tr>
+<tr class="separator:a52a6105fbdfd43ab3e5dc80c5a255561"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Adolfo Rodriguez Tsouroukdissian </dd></dl>
@@ -371,6 +377,31 @@ template&lt;class T &gt; </div>
   </dd>
 </dl>
 
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a52a6105fbdfd43ab3e5dc80c5a255561" name="a52a6105fbdfd43ab3e5dc80c5a255561"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52a6105fbdfd43ab3e5dc80c5a255561">&#9670;&#160;</a></span>interface_has_values</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto joint_trajectory_controller::interface_has_values</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= [](<span class="keyword">const</span> <span class="keyword">auto</span> &amp; joint_interface) -&gt; <span class="keywordtype">bool</span></div>
+<div class="line">{</div>
+<div class="line">  <span class="keywordflow">return</span> std::find_if(</div>
+<div class="line">           joint_interface.begin(), joint_interface.end(),</div>
+<div class="line">           [](<span class="keyword">const</span> <span class="keyword">auto</span> &amp; interface)</div>
+<div class="line">           {</div>
+<div class="line">             auto interface_op = interface.get().get_optional();</div>
+<div class="line">             return !interface_op.has_value() || !std::isfinite(interface_op.value());</div>
+<div class="line">           }) == joint_interface.end();</div>
+<div class="line">}</div>
+</div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
