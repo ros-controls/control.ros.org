@@ -317,8 +317,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>publish_state</b> (co
 <tr class="memitem:ae9b85ee56fafbe111d28e67972180b0f" id="r_ae9b85ee56fafbe111d28e67972180b0f"><td class="memItemLeft" align="right" valign="top"><a id="ae9b85ee56fafbe111d28e67972180b0f" name="ae9b85ee56fafbe111d28e67972180b0f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>read_state_from_state_interfaces</b> (JointTrajectoryPoint &amp;state)</td></tr>
 <tr class="separator:ae9b85ee56fafbe111d28e67972180b0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4100b0450ad7c09a6f0a7d35e5fc36d7" id="r_a4100b0450ad7c09a6f0a7d35e5fc36d7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classjoint__trajectory__controller_1_1JointTrajectoryController.html#a4100b0450ad7c09a6f0a7d35e5fc36d7">read_state_from_command_interfaces</a> (JointTrajectoryPoint &amp;state)</td></tr>
-<tr class="separator:a4100b0450ad7c09a6f0a7d35e5fc36d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8911459d4bdbe15ae50d6f2e3810e169" id="r_a8911459d4bdbe15ae50d6f2e3810e169"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classjoint__trajectory__controller_1_1JointTrajectoryController.html#a8911459d4bdbe15ae50d6f2e3810e169">update_state_from_command_interfaces</a> (JointTrajectoryPoint &amp;state)</td></tr>
+<tr class="separator:a8911459d4bdbe15ae50d6f2e3810e169"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7bef1912950e6f396b4ef2c65549c1d" id="r_af7bef1912950e6f396b4ef2c65549c1d"><td class="memItemLeft" align="right" valign="top"><a id="af7bef1912950e6f396b4ef2c65549c1d" name="af7bef1912950e6f396b4ef2c65549c1d"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>read_commands_from_command_interfaces</b> (JointTrajectoryPoint &amp;commands)</td></tr>
 <tr class="separator:af7bef1912950e6f396b4ef2c65549c1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -635,39 +635,6 @@ pal_statistics::RegistrationsRAII&#160;</td><td class="memItemRight" valign="bot
 
 </div>
 </div>
-<a id="a4100b0450ad7c09a6f0a7d35e5fc36d7" name="a4100b0450ad7c09a6f0a7d35e5fc36d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4100b0450ad7c09a6f0a7d35e5fc36d7">&#9670;&#160;</a></span>read_state_from_command_interfaces()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool joint_trajectory_controller::JointTrajectoryController::read_state_from_command_interfaces </td>
-          <td>(</td>
-          <td class="paramtype">JointTrajectoryPoint &amp;&#160;</td>
-          <td class="paramname"><em>state</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Assign values from the command interfaces as state. This is only possible if command AND state interfaces exist for the same type, therefore needs check for both. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">state</td><td>to be filled with values from command interfaces. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if all interfaces exists and contain non-NaN values, false otherwise. </dd></dl>
-
-</div>
-</div>
 <a id="a4e961d8e09864b24325cc3def4b92d49" name="a4e961d8e09864b24325cc3def4b92d49"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4e961d8e09864b24325cc3def4b92d49">&#9670;&#160;</a></span>set_success_trajectory_point()</h2>
 
@@ -771,6 +738,38 @@ pal_statistics::RegistrationsRAII&#160;</td><td class="memItemRight" valign="bot
 <dl class="section return"><dt>Returns</dt><dd>return_type::OK if update is successfully, otherwise return_type::ERROR. </dd></dl>
 
 <p>Implements <a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#afe7486e7bfe1ae91618f4ce59cd9e621">controller_interface::ControllerInterfaceBase</a>.</p>
+
+</div>
+</div>
+<a id="a8911459d4bdbe15ae50d6f2e3810e169" name="a8911459d4bdbe15ae50d6f2e3810e169"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8911459d4bdbe15ae50d6f2e3810e169">&#9670;&#160;</a></span>update_state_from_command_interfaces()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void joint_trajectory_controller::JointTrajectoryController::update_state_from_command_interfaces </td>
+          <td>(</td>
+          <td class="paramtype">JointTrajectoryPoint &amp;&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Assign values from the command interfaces as state. state values (e.g. velocity, acceleration, or effort) which do not have command interfaces will NOT be updated. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">state</td><td>to be filled with values from command interfaces. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

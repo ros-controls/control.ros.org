@@ -232,7 +232,7 @@
 <dt>allow_integration_in_goal_trajectories (bool)</dt><dd><p>Allow integration in goal trajectories to accept goals without position or velocity specified</p>
 <p>Default:  false</p>
 </dd>
-<dt>set_last_command_interface_value_as_state_on_activation (bool)</dt><dd><p>When set to true, the last command interface value is used as both the current state and the last commanded state upon activation. When set to false, the current state is used for both.</p>
+<dt>set_last_command_interface_value_as_state_on_activation (bool)</dt><dd><p>When set to true, the last command interface value is used as both the current state and the last commanded state upon activation. If an interface (e.g. velocity) is available only as state and not command, the state is used. Use this to prevent sagging/jumps on activation when using soft or compliant hardware. When set to false, the current state is used for both.</p>
 <p>Default:  true</p>
 </dd>
 <dt>action_monitor_rate (double)</dt><dd><p>Rate to monitor status changes when the controller is executing action (<code class="docutils literal notranslate"><span class="pre">control_msgs::action::FollowJointTrajectory</span></code>)</p>

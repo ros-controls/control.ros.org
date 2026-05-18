@@ -139,7 +139,7 @@
 
   <section id="joint-state-broadcaster">
 <span id="joint-state-broadcaster-userdoc"></span><h1>joint_state_broadcaster<a class="headerlink" href="#joint-state-broadcaster" title="Link to this heading"></a></h1>
-<p>The broadcaster reads all state interfaces and reports them on <code class="docutils literal notranslate"><span class="pre">/joint_states</span></code> and <code class="docutils literal notranslate"><span class="pre">/dynamic_joint_states</span></code>.</p>
+<p>The broadcaster reads all state interfaces and reports them on <code class="docutils literal notranslate"><span class="pre">/joint_states</span></code>.</p>
 <section id="commands">
 <h2>Commands<a class="headerlink" href="#commands" title="Link to this heading"></a></h2>
 <p>Broadcasters are not real controllers, and therefore take no commands.</p>
@@ -159,30 +159,12 @@ If none of the requested interface are not defined, the controller returns error
 and <code class="docutils literal notranslate"><span class="pre">effort</span></code> — for joints that provide them. If a joint does not expose a given
 movement interface, that field is omitted/left empty for that joint in the message.</p>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">/dynamic_joint_states</span></code> (<code class="docutils literal notranslate"><span class="pre">control_msgs/msg/DynamicJointState</span></code>):</p>
-<p>Publishes <strong>all available state interfaces</strong> for each joint. This includes the
-movement interfaces (position/velocity/effort) <em>and</em> any additional or custom
-interfaces provided by the hardware (e.g., temperature, voltage, torque sensor
-readings, calibration flags).</p>
-<p>The message maps <code class="docutils literal notranslate"><span class="pre">joint_names</span></code> to per-joint interface name lists and values.
-Example payload:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">joint_names</span><span class="p">:</span> <span class="p">[</span><span class="n">joint1</span><span class="p">,</span> <span class="n">joint2</span><span class="p">]</span>
-<span class="n">interface_values</span><span class="p">:</span>
-  <span class="o">-</span> <span class="n">interface_names</span><span class="p">:</span> <span class="p">[</span><span class="n">position</span><span class="p">,</span> <span class="n">velocity</span><span class="p">,</span> <span class="n">effort</span><span class="p">]</span>
-    <span class="n">values</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.5708</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">]</span>
-  <span class="o">-</span> <span class="n">interface_names</span><span class="p">:</span> <span class="p">[</span><span class="n">position</span><span class="p">,</span> <span class="n">temperature</span><span class="p">]</span>
-    <span class="n">values</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.7854</span><span class="p">,</span> <span class="mf">42.1</span><span class="p">]</span>
-</pre></div>
-</div>
-<p>Use this topic if you need <em>every</em> reported interface, not just movement.</p>
-</li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">use_local_topics</span></code> is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, both topics are published in the
-controller’s namespace (e.g., <code class="docutils literal notranslate"><span class="pre">/my_state_broadcaster/joint_states</span></code> and
-<code class="docutils literal notranslate"><span class="pre">/my_state_broadcaster/dynamic_joint_states</span></code>). If <code class="docutils literal notranslate"><span class="pre">false</span></code> (default),
-they are published at the root (e.g., <code class="docutils literal notranslate"><span class="pre">/joint_states</span></code>).</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">use_local_topics</span></code> is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, the topic is published in the
+controller’s namespace (e.g., <code class="docutils literal notranslate"><span class="pre">/my_state_broadcaster/joint_states</span></code>). If <code class="docutils literal notranslate"><span class="pre">false</span></code> (default),
+it is published at the root (e.g., <code class="docutils literal notranslate"><span class="pre">/joint_states</span></code>).</p>
 </div>
 </section>
 <section id="parameters">
@@ -191,7 +173,7 @@ they are published at the root (e.g., <code class="docutils literal notranslate"
 <section id="list-of-parameters">
 <h3>List of parameters<a class="headerlink" href="#list-of-parameters" title="Link to this heading"></a></h3>
 <dl>
-<dt>use_local_topics (bool)</dt><dd><p>Defining if <code class="docutils literal notranslate"><span class="pre">joint_states</span></code> and <code class="docutils literal notranslate"><span class="pre">dynamic_joint_states</span></code> messages should be published into local namespace, e.g., <code class="docutils literal notranslate"><span class="pre">/my_state_broadcaster/joint_states</span></code>.</p>
+<dt>use_local_topics (bool)</dt><dd><p>Defining if <code class="docutils literal notranslate"><span class="pre">joint_states</span></code> message should be published into local namespace, e.g., <code class="docutils literal notranslate"><span class="pre">/my_state_broadcaster/joint_states</span></code>.</p>
 <p>Read only: True</p>
 <p>Default:  false</p>
 </dd>
@@ -199,7 +181,7 @@ they are published at the root (e.g., <code class="docutils literal notranslate"
 <p>Read only: True</p>
 <p>Default:  {}</p>
 </dd>
-<dt>extra_joints (string_array)</dt><dd><p>Names of extra joints to be added to <code class="docutils literal notranslate"><span class="pre">joint_states</span></code> and <code class="docutils literal notranslate"><span class="pre">dynamic_joint_states</span></code> with state set to 0.</p>
+<dt>extra_joints (string_array)</dt><dd><p>Names of extra joints to be added to <code class="docutils literal notranslate"><span class="pre">joint_states</span></code> with state set to 0.</p>
 <p>Read only: True</p>
 <p>Default:  {}</p>
 </dd>
@@ -266,10 +248,6 @@ mapping value differs from the standard interface name.</p>
 <p>Read only: True</p>
 <p>Default:  “base_link”</p>
 </dd>
-<dt>publish_dynamic_joint_states (bool)</dt><dd><p>[Deprecated] Whether to publish dynamic joint states. This parameter is deprecated and will be removed in future releases.</p>
-<p>Read only: True</p>
-<p>Default:  false</p>
-</dd>
 </dl>
 </section>
 <section id="an-example-parameter-file">
@@ -284,7 +262,6 @@ mapping value differs from the standard interface name.</p>
 <span class="w">      </span><span class="nt">effort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">effort</span>
 <span class="w">      </span><span class="nt">position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
 <span class="w">      </span><span class="nt">velocity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">velocity</span>
-<span class="w">    </span><span class="nt">publish_dynamic_joint_states</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">    </span><span class="nt">use_local_topics</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">    </span><span class="nt">use_urdf_to_filter</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </pre></div>
