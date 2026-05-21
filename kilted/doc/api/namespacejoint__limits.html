@@ -447,9 +447,9 @@ Sai Kishor Kothakota </dd></dl>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>: We use the previous command position to compute the limits here because using the actual position would be too conservative, usually there is a couple of cycles of delay between the command sent to the robot and the robot actually showing that in the state. That effectively limits the velocity with which the joint can be moved which is much lower than the actual velocity limit.</dd>
+<dl class="section note"><dt>Note</dt><dd>: We prefer the previous command position over actual position because using the actual position would be too conservative — there is typically a couple of cycles of delay between the command and the robot state. Fall back to actual position when no previous command exists (e.g., first position command after operating in another mode). Skip velocity-constrained narrowing entirely when neither reference is available.</dd>
 <dd>
-: We use the previous command position to compute the limits here because using the actual position would be too conservative, usually there is a couple of cycles of delay between the command sent to the robot and the robot actually showing that in the state. That effectively limits the velocity with which the joint can be moved which is much lower than the actual velocity limit.</dd></dl>
+: We prefer the previous command position over actual position because using the actual position would be too conservative — there is typically a couple of cycles of delay between the command and the robot state. Fall back to actual position when no previous command exists (e.g., first position command after operating in another mode). Skip velocity-constrained narrowing entirely when neither reference is available.</dd></dl>
 
 </div>
 </div>
