@@ -264,6 +264,7 @@ We prefer this way of doing so as filtering introduces delay (which makes it dif
 <p>Default:  0.0</p>
 </dd>
 <dt>kinematics.wheels_radius (double)</dt><dd><p>Wheel’s radius.</p>
+<p>Read only: True</p>
 <p>Default:  0.0</p>
 <p>Constraints:</p>
 <blockquote>
@@ -273,28 +274,238 @@ We prefer this way of doing so as filtering introduces delay (which makes it dif
 </div></blockquote>
 </dd>
 <dt>kinematics.sum_of_robot_center_projection_on_X_Y_axis (double)</dt><dd><p>Wheels geometric param used in mecanum wheels’ IK. lx and ly represent the distance from the robot’s center to the wheels projected on the x and y axis with origin at robots center respectively, sum_of_robot_center_projection_on_X_Y_axis = lx+ly</p>
+<p>Read only: True</p>
 <p>Default:  0.0</p>
 </dd>
 <dt>tf_frame_prefix_enable (bool)</dt><dd><p>Enables or disables appending <code class="docutils literal notranslate"><span class="pre">tf_frame_prefix</span></code> to tf frame id’s. See its parameter description for more information.</p>
 <p>Default:  true</p>
 </dd>
 <dt>tf_frame_prefix (string)</dt><dd><p>(optional) Prefix to be appended to the tf frames, will be added to odom_frame_id and base_frame_id before publishing. If the parameter is empty, controller’s namespace will be used.</p>
+<p>Read only: True</p>
 <p>Default:  “”</p>
 </dd>
 <dt>base_frame_id (string)</dt><dd><p>Base frame_id set to value of base_frame_id.</p>
+<p>Read only: True</p>
 <p>Default:  “base_link”</p>
 </dd>
 <dt>odom_frame_id (string)</dt><dd><p>Odometry frame_id set to value of odom_frame_id.</p>
+<p>Read only: True</p>
 <p>Default:  “odom”</p>
 </dd>
 <dt>enable_odom_tf (bool)</dt><dd><p>Publishing to tf is enabled or disabled?</p>
 <p>Default:  true</p>
 </dd>
 <dt>twist_covariance_diagonal (double_array)</dt><dd><p>Diagonal values of twist covariance matrix.</p>
+<p>Read only: True</p>
 <p>Default:  {0.1, 0.1, 0.1, 0.1, 0.1, 0.1}</p>
 </dd>
 <dt>pose_covariance_diagonal (double_array)</dt><dd><p>Diagonal values of pose covariance matrix.</p>
+<p>Read only: True</p>
 <p>Default:  {0.1, 0.1, 0.1, 0.1, 0.1, 0.1}</p>
+</dd>
+<dt>linear.x.max_velocity (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Custom validator: control_filters::gt_eq_or_nan: 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>linear.x.min_velocity (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Custom validator: control_filters::lt_eq_or_nan: 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>linear.x.max_acceleration (double)</dt><dd><p>Maximum acceleration in forward direction.</p>
+<p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Custom validator: control_filters::gt_eq_or_nan: 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>linear.x.max_deceleration (double)</dt><dd><p>Maximum deceleration in forward direction.</p>
+<p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Custom validator: control_filters::lt_eq_or_nan: 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>linear.x.max_acceleration_reverse (double)</dt><dd><p>Maximum acceleration in reverse direction. If not set, -max_acceleration will be used.</p>
+<p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Custom validator: control_filters::lt_eq_or_nan: 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>linear.x.max_deceleration_reverse (double)</dt><dd><p>Maximum deceleration in reverse direction. If not set, -max_deceleration will be used.</p>
+<p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Custom validator: control_filters::gt_eq_or_nan: 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>linear.x.max_jerk (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Custom validator: control_filters::gt_eq_or_nan: 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>linear.x.min_jerk (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Custom validator: control_filters::lt_eq_or_nan: 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>linear.y.max_velocity (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Custom validator: control_filters::gt_eq_or_nan: 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>linear.y.min_velocity (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Custom validator: control_filters::lt_eq_or_nan: 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>linear.y.max_acceleration (double)</dt><dd><p>Maximum acceleration in forward direction.</p>
+<p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Custom validator: control_filters::gt_eq_or_nan: 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>linear.y.max_deceleration (double)</dt><dd><p>Maximum deceleration in forward direction.</p>
+<p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Custom validator: control_filters::lt_eq_or_nan: 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>linear.y.max_acceleration_reverse (double)</dt><dd><p>Maximum acceleration in reverse direction. If not set, -max_acceleration will be used.</p>
+<p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Custom validator: control_filters::lt_eq_or_nan: 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>linear.y.max_deceleration_reverse (double)</dt><dd><p>Maximum deceleration in reverse direction. If not set, -max_deceleration will be used.</p>
+<p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Custom validator: control_filters::gt_eq_or_nan: 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>linear.y.max_jerk (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Custom validator: control_filters::gt_eq_or_nan: 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>linear.y.min_jerk (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Custom validator: control_filters::lt_eq_or_nan: 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>angular.z.max_velocity (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Custom validator: control_filters::gt_eq_or_nan: 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>angular.z.min_velocity (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Custom validator: control_filters::lt_eq_or_nan: 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>angular.z.max_acceleration (double)</dt><dd><p>Maximum acceleration in positive direction.</p>
+<p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Custom validator: control_filters::gt_eq_or_nan: 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>angular.z.max_deceleration (double)</dt><dd><p>Maximum deceleration in positive direction.</p>
+<p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Custom validator: control_filters::lt_eq_or_nan: 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>angular.z.max_acceleration_reverse (double)</dt><dd><p>Maximum acceleration in negative direction. If not set, -max_acceleration will be used.</p>
+<p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Custom validator: control_filters::lt_eq_or_nan: 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>angular.z.max_deceleration_reverse (double)</dt><dd><p>Maximum deceleration in negative direction. If not set, -max_deceleration will be used.</p>
+<p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Custom validator: control_filters::gt_eq_or_nan: 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>angular.z.max_jerk (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Custom validator: control_filters::gt_eq_or_nan: 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>angular.z.min_jerk (double)</dt><dd><p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Custom validator: control_filters::lt_eq_or_nan: 0.0</p></li>
+</ul>
+</div></blockquote>
 </dd>
 </dl>
 <p>An example parameter file for this controller can be found in <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/kilted/mecanum_drive_controller/test/mecanum_drive_controller_params.yaml">the test directory</a>:</p>
@@ -339,6 +550,44 @@ We prefer this way of doing so as filtering introduces delay (which makes it dif
 <span class="w">      </span><span class="nt">enable_odom_tf</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">      </span><span class="nt">pose_covariance_diagonal</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">]</span>
 <span class="w">      </span><span class="nt">twist_covariance_diagonal</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">]</span>
+
+<span class="w">  </span><span class="nt">test_mecanum_drive_controller_with_limits</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">reference_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.9</span>
+
+<span class="w">      </span><span class="nt">front_left_wheel_command_joint_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;front_left_wheel_joint&quot;</span>
+<span class="w">      </span><span class="nt">front_right_wheel_command_joint_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;front_right_wheel_joint&quot;</span>
+<span class="w">      </span><span class="nt">rear_right_wheel_command_joint_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;back_right_wheel_joint&quot;</span>
+<span class="w">      </span><span class="nt">rear_left_wheel_command_joint_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;back_left_wheel_joint&quot;</span>
+
+<span class="w">      </span><span class="nt">kinematics</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">base_frame_offset</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> x</span><span class="p">:</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="nt"> y</span><span class="p">:</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="nt"> theta</span><span class="p">:</span><span class="w"> </span><span class="nv">0.0</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">        </span><span class="nt">wheels_radius</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
+<span class="w">        </span><span class="nt">sum_of_robot_center_projection_on_X_Y_axis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+
+<span class="w">      </span><span class="nt">base_frame_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;base_link&quot;</span>
+<span class="w">      </span><span class="nt">odom_frame_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;odom&quot;</span>
+<span class="w">      </span><span class="nt">enable_odom_tf</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">twist_covariance_diagonal</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">7.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">14.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">21.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">28.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">35.0</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">pose_covariance_diagonal</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">6.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">12.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">18.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">24.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">30.0</span><span class="p p-Indicator">]</span>
+
+<span class="w">      </span><span class="nt">linear</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">x</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">max_acceleration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span>
+<span class="w">          </span><span class="nt">max_deceleration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-4.0</span>
+<span class="w">          </span><span class="nt">max_acceleration_reverse</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-8.0</span>
+<span class="w">          </span><span class="nt">max_deceleration_reverse</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0</span>
+<span class="w">        </span><span class="nt">y</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">max_acceleration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span>
+<span class="w">          </span><span class="nt">max_deceleration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-4.0</span>
+<span class="w">          </span><span class="nt">max_acceleration_reverse</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-8.0</span>
+<span class="w">          </span><span class="nt">max_deceleration_reverse</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0</span>
+<span class="w">      </span><span class="nt">angular</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">z</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">max_acceleration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span>
+<span class="w">          </span><span class="nt">max_deceleration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-4.0</span>
+<span class="w">          </span><span class="nt">max_acceleration_reverse</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-8.0</span>
+<span class="w">          </span><span class="nt">max_deceleration_reverse</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0</span>
 </pre></div>
 </div>
 </section>
