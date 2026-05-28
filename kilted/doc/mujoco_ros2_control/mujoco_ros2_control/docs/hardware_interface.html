@@ -78,7 +78,10 @@
 <li class="toctree-l7"><a class="reference internal" href="#imu">IMU</a></li>
 </ul>
 </li>
-<li class="toctree-l6"><a class="reference internal" href="#cameras">Cameras</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#cameras">Cameras</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="#headless-rendering">Headless Rendering</a></li>
+</ul>
+</li>
 <li class="toctree-l6"><a class="reference internal" href="#lidar">Lidar</a></li>
 </ul>
 </li>
@@ -406,6 +409,21 @@ Type:<span class="w"> </span>sensor_msgs/msg/Image
 <p class="admonition-title">Note</p>
 <p>MuJoCo’s camera coordinate conventions differ from ROS. Refer to the MuJoCo documentation for details.</p>
 </div>
+<section id="headless-rendering">
+<h3>Headless Rendering<a class="headerlink" href="#headless-rendering" title="Link to this heading"></a></h3>
+<p>Camera rendering is supported in headless environments (without a display).
+The system automatically detects whether a display is available:</p>
+<ul class="simple">
+<li><p>With display: Uses GLFW for OpenGL context creation (default behavior)</p></li>
+<li><p>Without display: Falls back to EGL for GPU-accelerated headless rendering</p></li>
+</ul>
+<p>This allows camera topics to be published even when running in headless mode (e.g., on a server, in Docker containers, or in CI environments).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>EGL requires proper GPU drivers and EGL libraries to be installed (e.g., libegl1-mesa on Ubuntu).
+If both GLFW and EGL fail to initialize, camera publishing will be disabled with a warning.</p>
+</div>
+</section>
 </section>
 <section id="lidar">
 <h2>Lidar<a class="headerlink" href="#lidar" title="Link to this heading"></a></h2>
