@@ -153,6 +153,9 @@ mjModel *&#160;</td><td class="memItemRight" valign="bottom"><b>model</b> ()</td
 std::recursive_mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>mutex</b> () const</td></tr>
 <tr class="memdesc:a1c6f5e107069a9e8fca0b7fee31c6370"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accessor for the mutex which locks access to the data and model. <br /></td></tr>
 <tr class="separator:a1c6f5e107069a9e8fca0b7fee31c6370"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad45c62c62d4936a31635a707c6d12e6a" id="r_ad45c62c62d4936a31635a707c6d12e6a"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control_1_1MujocoSimulation.html#ad45c62c62d4936a31635a707c6d12e6a">step_count</a> () const</td></tr>
+<tr class="memdesc:ad45c62c62d4936a31635a707c6d12e6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of steps takein by the physics simulation.  <br /></td></tr>
+<tr class="separator:ad45c62c62d4936a31635a707c6d12e6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>ROS 2-based container for the mujoco Simulate application. </p>
@@ -410,6 +413,34 @@ std::recursive_mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><b
 <p>Reset simulation state (qpos/qvel/ctrl/sensors/forces) to the captured initial state. </p>
 <dl class="section note"><dt>Note</dt><dd>Caller must hold the sim mutex. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>This method assumes sim_mutex_ is already held by the caller</dd></dl>
+
+</div>
+</div>
+<a id="ad45c62c62d4936a31635a707c6d12e6a" name="ad45c62c62d4936a31635a707c6d12e6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad45c62c62d4936a31635a707c6d12e6a">&#9670;&#160;</a></span>step_count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t mujoco_ros2_control::MujocoSimulation::step_count </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the number of steps takein by the physics simulation. </p>
+<p>Equivalent to the step counter that is shown in the simulate UI. </p>
 
 </div>
 </div>
