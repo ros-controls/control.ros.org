@@ -25,7 +25,7 @@ def stich_text_file(source_dir, output_file):
 
 if __name__ == '__main__':
     parser= argparse.ArgumentParser()
-    parser.add_argument("--source", required= True, help = "Directory contaning built .txt files")
+    parser.add_argument("--source", required= True, help = "Directory containing built .txt files")
     parser.add_argument("--output", required= True, help = "Path to llms-full.txt")
     args = parser.parse_args()
 
