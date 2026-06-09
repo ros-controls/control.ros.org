@@ -193,8 +193,8 @@ linkcheck_ignore = [
 
     # Bot protection blocks the linkchecker
     r'https://cppreference.com',
-    
-    # These files live in upstream repositories with broken links. 
+
+    # These files live in upstream repositories with broken links.
     # Ignoring here so they don't block the control.ros.org deployment.
     r'https://control\.ros\.org/master/.*',
     r'https://github\.com/ros-controls/control_msgs/blob/motion_primitives/.*'
