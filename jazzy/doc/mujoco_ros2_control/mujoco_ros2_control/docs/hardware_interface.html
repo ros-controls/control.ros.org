@@ -78,10 +78,6 @@
 <li class="toctree-l7"><a class="reference internal" href="#imu">IMU</a></li>
 </ul>
 </li>
-<li class="toctree-l6"><a class="reference internal" href="#cameras">Cameras</a><ul>
-<li class="toctree-l7"><a class="reference internal" href="#headless-rendering">Headless Rendering</a></li>
-</ul>
-</li>
 <li class="toctree-l6"><a class="reference internal" href="#lidar">Lidar</a></li>
 </ul>
 </li>
@@ -194,10 +190,6 @@ Specify it in your URDF and point to a valid MJCF on launch:</p>
 <span class="w">    </span><span class="cm">&lt;!-- Optional: topic from which the MJCF XML is read when mujoco_model is not set.</span>
 <span class="cm">         Defaults to /mujoco_robot_description. --&gt;</span>
 <span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mujoco_model_topic&quot;</span><span class="nt">&gt;</span>/mujoco_robot_description<span class="nt">&lt;/param&gt;</span>
-
-<span class="w">    </span><span class="cm">&lt;!-- Optional: camera RGB-D image publish rate in Hz (all cameras share one rate).</span>
-<span class="cm">         Defaults to 5 Hz. --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera_publish_rate&quot;</span><span class="nt">&gt;</span>6.0<span class="nt">&lt;/param&gt;</span>
 
 <span class="w">    </span><span class="cm">&lt;!-- Optional: lidar LaserScan publish rate in Hz (all lidar sensors share one rate). --&gt;</span>
 <span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;lidar_publish_rate&quot;</span><span class="nt">&gt;</span>10.0<span class="nt">&lt;/param&gt;</span>
@@ -381,56 +373,10 @@ MuJoCo does not model complete FTS and IMUs natively, so we combine supported MJ
 </pre></div>
 </div>
 <p>These sensor state interfaces work out of the box with the standard ROS 2 broadcasters.</p>
-</section>
-</section>
-<section id="cameras">
-<h2>Cameras<a class="headerlink" href="#cameras" title="Link to this heading"></a></h2>
-<p>Any <code class="docutils literal notranslate"><span class="pre">camera</span></code> included in the MJCF will automatically have its RGB-D images and camera info published to ROS topics.</p>
-<p>The camera <code class="docutils literal notranslate"><span class="pre">name</span></code> attribute sets the defaults for the frame and topic names:</p>
-<ul class="simple">
-<li><p>Frame: <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;_frame</span></code></p></li>
-<li><p>Topics: <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;/camera_info</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;/color</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;/depth</span></code></p></li>
-</ul>
-<p>For example:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;camera</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;wrist_mounted_camera&quot;</span><span class="w"> </span><span class="na">fovy=</span><span class="s">&quot;58&quot;</span><span class="w"> </span><span class="na">mode=</span><span class="s">&quot;fixed&quot;</span><span class="w"> </span><span class="na">resolution=</span><span class="s">&quot;640 480&quot;</span><span class="w"> </span><span class="na">pos=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="na">quat=</span><span class="s">&quot;0 0 0 1&quot;</span><span class="nt">/&gt;</span>
-</pre></div>
-</div>
-<p>Publishes the following topics:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>info<span class="w"> </span>/wrist_mounted_camera/camera_info
-Type:<span class="w"> </span>sensor_msgs/msg/CameraInfo
-$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>info<span class="w"> </span>/wrist_mounted_camera/color
-Type:<span class="w"> </span>sensor_msgs/msg/Image
-$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>info<span class="w"> </span>/wrist_mounted_camera/depth
-Type:<span class="w"> </span>sensor_msgs/msg/Image
-</pre></div>
-</div>
-<p>Frame and topic names can be overridden via <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> xacro:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- The sensor name must match the camera name in the MJCF --&gt;</span>
-<span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;wrist_mounted_camera&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;frame_name&quot;</span><span class="nt">&gt;</span>wrist_mounted_camera_mujoco_frame<span class="nt">&lt;/param&gt;</span>
-<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;info_topic&quot;</span><span class="nt">&gt;</span>/wrist_mounted_camera/color/camera_info<span class="nt">&lt;/param&gt;</span>
-<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;image_topic&quot;</span><span class="nt">&gt;</span>/wrist_mounted_camera/color/image_raw<span class="nt">&lt;/param&gt;</span>
-<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;depth_topic&quot;</span><span class="nt">&gt;</span>/wrist_mounted_camera/aligned_depth_to_color/image_raw<span class="nt">&lt;/param&gt;</span>
-<span class="nt">&lt;/sensor&gt;</span>
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>MuJoCo’s camera coordinate conventions differ from ROS. Refer to the MuJoCo documentation for details.</p>
-</div>
-<section id="headless-rendering">
-<h3>Headless Rendering<a class="headerlink" href="#headless-rendering" title="Link to this heading"></a></h3>
-<p>Camera rendering is supported in headless environments (without a display).
-The system automatically detects whether a display is available:</p>
-<ul class="simple">
-<li><p>With display: Uses GLFW for OpenGL context creation (default behavior)</p></li>
-<li><p>Without display: Falls back to EGL for GPU-accelerated headless rendering</p></li>
-</ul>
-<p>This allows camera topics to be published even when running in headless mode (e.g., on a server, in Docker containers, or in CI environments).</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>EGL requires proper GPU drivers and EGL libraries to be installed (e.g., libegl1-mesa on Ubuntu).
-If both GLFW and EGL fail to initialize, camera publishing will be disabled with a warning.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Cameras are no longer supported in the base interface, they are now provided as a <code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control_plugin</span></code>.
+Refer to the <a class="reference internal" href="../../mujoco_ros2_control_plugins/doc/plugins.html#camera-plugin"><span class="std std-ref">CameraPlugin</span></a> for more information.</p>
 </div>
 </section>
 </section>

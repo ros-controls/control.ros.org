@@ -78,6 +78,10 @@
 <li class="toctree-l5 current"><a class="current reference internal" href="#">Plugins</a><ul>
 <li class="toctree-l6"><a class="reference internal" href="#available-plugins">Available Plugins</a><ul>
 <li class="toctree-l7"><a class="reference internal" href="#heartbeatpublisherplugin">HeartbeatPublisherPlugin</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#cameraplugin">CameraPlugin</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="#headless-rendering">Headless Rendering</a></li>
+</ul>
+</li>
 <li class="toctree-l7"><a class="reference internal" href="#externalwrenchplugin">ExternalWrenchPlugin</a><ul>
 <li class="toctree-l8"><a class="reference internal" href="#service-request">Service Request</a></li>
 <li class="toctree-l8"><a class="reference internal" href="#service-response">Service Response</a></li>
@@ -200,6 +204,62 @@ ros2<span class="w"> </span>launch<span class="w"> </span>mujoco_ros2_control_de
 ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/mujoco_heartbeat
 </pre></div>
 </div>
+</section>
+<section id="cameraplugin">
+<span id="camera-plugin"></span><h3>CameraPlugin<a class="headerlink" href="#cameraplugin" title="Link to this heading"></a></h3>
+<p>Using the camera plugin will ensure that any <code class="docutils literal notranslate"><span class="pre">camera</span></code> included in the MJCF will automatically have its RGB-D images and camera info published to ROS topics.</p>
+<p>The camera <code class="docutils literal notranslate"><span class="pre">name</span></code> attribute sets the defaults for the frame and topic names:</p>
+<ul class="simple">
+<li><p>Frame: <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;_frame</span></code></p></li>
+<li><p>Topics: <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;/camera_info</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;/color</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;/depth</span></code></p></li>
+</ul>
+<p>For example, in an MJCF:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;camera</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera&quot;</span><span class="w"> </span><span class="na">fovy=</span><span class="s">&quot;58&quot;</span><span class="w"> </span><span class="na">mode=</span><span class="s">&quot;fixed&quot;</span><span class="w"> </span><span class="na">resolution=</span><span class="s">&quot;640 480&quot;</span><span class="w"> </span><span class="na">pos=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="na">quat=</span><span class="s">&quot;0 0 0 1&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>Then including the plugin will publish the following topics:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>info<span class="w"> </span>/camera/camera_info
+Type:<span class="w"> </span>sensor_msgs/msg/CameraInfo
+$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>info<span class="w"> </span>/camera/color
+Type:<span class="w"> </span>sensor_msgs/msg/Image
+$<span class="w"> </span>ros2<span class="w"> </span>topic<span class="w"> </span>info<span class="w"> </span>/camera/depth
+Type:<span class="w"> </span>sensor_msgs/msg/Image
+</pre></div>
+</div>
+<p>Frame and topic names can be overridden using the yaml configuration.
+Note that any number of cameras can be configured in the plugin configuration.</p>
+<p><strong>Example configuration</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">mujoco_camera_plugin</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;mujoco_ros2_control_plugins/CameraPlugin&quot;</span>
+<span class="w">  </span><span class="c1"># Note all cameras are published at the same rate</span>
+<span class="w">  </span><span class="nt">camera_publish_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0</span>
+<span class="w">  </span><span class="nt">camera</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">frame_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">camera_color_optical_frame</span>
+<span class="w">    </span><span class="nt">info_topic</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/camera_topic/color/camera_info</span>
+<span class="w">    </span><span class="nt">image_topic</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/camera_topic/color/image_raw</span>
+<span class="w">    </span><span class="nt">depth_topic</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/camera_topic/aligned_depth_to_color/image_raw</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>MuJoCo’s camera coordinate conventions differ from ROS.
+Refer to the MuJoCo documentation for details.</p>
+</div>
+<section id="headless-rendering">
+<h4>Headless Rendering<a class="headerlink" href="#headless-rendering" title="Link to this heading"></a></h4>
+<p>Camera rendering is supported in headless environments (without a display).
+The system automatically detects whether a display is available:</p>
+<ul class="simple">
+<li><p>With display: Uses GLFW for OpenGL context creation (default behavior)</p></li>
+<li><p>Without display: Falls back to EGL for GPU-accelerated headless rendering</p></li>
+</ul>
+<p>This allows camera topics to be published even when running in headless mode (e.g., on a server, in Docker containers, or in CI environments).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>EGL requires proper GPU drivers and EGL libraries to be installed (e.g., libegl1-mesa on Ubuntu).
+If both GLFW and EGL fail to initialize, camera publishing will be disabled with a warning.</p>
+</div>
+</section>
 </section>
 <section id="externalwrenchplugin">
 <h3>ExternalWrenchPlugin<a class="headerlink" href="#externalwrenchplugin" title="Link to this heading"></a></h3>

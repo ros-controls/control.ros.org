@@ -77,7 +77,7 @@ var searchData=
   ['getsoftjointlimits_74',['getsoftjointlimits',['../namespacejoint__limits.html#aab5823d51fe2a7c4f8980db0762fe9e4',1,'joint_limits::getSoftJointLimits()'],['../namespacejoint__limits__interface.html#a35e2e6ed69cf9f9952a51684e19be646',1,'joint_limits_interface::getSoftJointLimits()']]],
   ['getsystemtime_75',['getSystemTime',['../classrealtime__tools_1_1RealtimeClock.html#a47fc1c946dc4a81e70c22c1b0ac24834',1,'realtime_tools::RealtimeClock']]],
   ['geturdf_76',['getURDF',['../classgz__ros2__control_1_1GazeboSimROS2ControlPluginPrivate.html#a8e3cd5e510eb1369d603592aac43ccad',1,'gz_ros2_control::GazeboSimROS2ControlPluginPrivate']]],
-  ['glfwinitfn_77',['GlfwInitFn',['../classmujoco__ros2__control_1_1MujocoCameras.html#ae28bf23fd3c098f60d83ccad27c4de85',1,'mujoco_ros2_control::MujocoCameras']]],
+  ['glfwinitfn_77',['GlfwInitFn',['../classmujoco__ros2__control__plugins_1_1CameraPlugin.html#a5b0a3d9246e6ed58b4f45ea9707dfc08',1,'mujoco_ros2_control_plugins::CameraPlugin']]],
   ['goal_5fstate_5ftolerance_78',['goal_state_tolerance',['../structjoint__trajectory__controller_1_1SegmentTolerances.html#a19a6448780b5bd1caa06f2b717a4ee8b',1,'joint_trajectory_controller::SegmentTolerances']]],
   ['goal_5ftime_5ftolerance_79',['goal_time_tolerance',['../structjoint__trajectory__controller_1_1SegmentTolerances.html#ae887dc9e130600f92664a40516c1d94f',1,'joint_trajectory_controller::SegmentTolerances']]],
   ['gpio_5fmock_5fcommands_5f_80',['gpio_mock_commands_',['../classmock__components_1_1GenericSystem.html#abf862830f5caf481e76222b315c77aa2',1,'mock_components::GenericSystem']]],
