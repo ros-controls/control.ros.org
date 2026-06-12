@@ -95,12 +95,7 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmujoco__ros2__control_1_1InterfaceData.html">InterfaceData</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmujoco__ros2__control_1_1LidarData.html">LidarData</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmujoco__ros2__control_1_1MuJoCoActuatorData.html">MuJoCoActuatorData</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control_1_1MujocoLidar.html">MujocoLidar</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wraps MuJoCo rangefinder sensors for publishing ROS 2 LaserScan messages.  <a href="classmujoco__ros2__control_1_1MujocoLidar.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control_1_1MujocoSimulation.html">MujocoSimulation</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ROS 2-based container for the mujoco Simulate application.  <a href="classmujoco__ros2__control_1_1MujocoSimulation.html#details">More...</a><br /></td></tr>
@@ -134,10 +129,6 @@ Functions</h2></td></tr>
 std::optional&lt; <a class="el" href="structhardware__interface_1_1ComponentInfo.html">hardware_interface::ComponentInfo</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>get_sensor_from_info</b> (const <a class="el" href="structhardware__interface_1_1HardwareInfo.html">hardware_interface::HardwareInfo</a> &amp;hardware_info, const std::string &amp;name)</td></tr>
 <tr class="memdesc:a588d9d609b4d8eefd0c8f4f1c664a47f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sensor's component info for the provided sensor name, if it exists. <br /></td></tr>
 <tr class="separator:a588d9d609b4d8eefd0c8f4f1c664a47f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23e4477e12083adfb8f59e41c990c559" id="r_a23e4477e12083adfb8f59e41c990c559"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::string, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemujoco__ros2__control.html#a23e4477e12083adfb8f59e41c990c559">parse_lidar_name</a> (const std::string &amp;sensor_name)</td></tr>
-<tr class="separator:a23e4477e12083adfb8f59e41c990c559"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af55f22321f64b921a0c93475983a039e" id="r_af55f22321f64b921a0c93475983a039e"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="structmujoco__ros2__control_1_1LidarData.html">LidarData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemujoco__ros2__control.html#af55f22321f64b921a0c93475983a039e">get_lidar_data</a> (const <a class="el" href="structhardware__interface_1_1HardwareInfo.html">hardware_interface::HardwareInfo</a> &amp;hardware_info, const std::string &amp;name)</td></tr>
-<tr class="separator:af55f22321f64b921a0c93475983a039e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b7780b72b66017733cf9f23a3cd5658" id="r_a1b7780b72b66017733cf9f23a3cd5658"><td class="memTemplParams" colspan="2"><a id="a1b7780b72b66017733cf9f23a3cd5658" name="a1b7780b72b66017733cf9f23a3cd5658"></a>
 template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a1b7780b72b66017733cf9f23a3cd5658"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>add_items</b> (std::vector&lt; T &gt; &amp;vector, const std::vector&lt; T &gt; &amp;items)</td></tr>
@@ -314,54 +305,6 @@ template&lt;typename T &gt; </td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The corresponding actuator name if found, otherwise returns the joint name. </dd></dl>
-
-</div>
-</div>
-<a id="af55f22321f64b921a0c93475983a039e" name="af55f22321f64b921a0c93475983a039e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af55f22321f64b921a0c93475983a039e">&#9670;&#160;</a></span>get_lidar_data()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::optional&lt; <a class="el" href="structmujoco__ros2__control_1_1LidarData.html">LidarData</a> &gt; mujoco_ros2_control::get_lidar_data </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structhardware__interface_1_1HardwareInfo.html">hardware_interface::HardwareInfo</a> &amp;&#160;</td>
-          <td class="paramname"><em>hardware_info</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>name</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Construct a <a class="el" href="structmujoco__ros2__control_1_1LidarData.html">LidarData</a> object given a string sensor name and hardware_info object to parse. </p>
-
-</div>
-</div>
-<a id="a23e4477e12083adfb8f59e41c990c559" name="a23e4477e12083adfb8f59e41c990c559"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a23e4477e12083adfb8f59e41c990c559">&#9670;&#160;</a></span>parse_lidar_name()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::pair&lt; std::string, int &gt; mujoco_ros2_control::parse_lidar_name </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>sensor_name</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Given a sensor in the form &lt;sensor_name&gt;-id, returns the name and id if possible. Otherwise, return "" and -1 to indicate failure. </p>
 
 </div>
 </div>

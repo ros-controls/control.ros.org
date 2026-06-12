@@ -78,7 +78,6 @@
 <li class="toctree-l7"><a class="reference internal" href="#imu">IMU</a></li>
 </ul>
 </li>
-<li class="toctree-l6"><a class="reference internal" href="#lidar">Lidar</a></li>
 </ul>
 </li>
 <li class="toctree-l5"><a class="reference internal" href="#simulation-topics-and-services">Simulation Topics and Services</a><ul>
@@ -190,9 +189,6 @@ Specify it in your URDF and point to a valid MJCF on launch:</p>
 <span class="w">    </span><span class="cm">&lt;!-- Optional: topic from which the MJCF XML is read when mujoco_model is not set.</span>
 <span class="cm">         Defaults to /mujoco_robot_description. --&gt;</span>
 <span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mujoco_model_topic&quot;</span><span class="nt">&gt;</span>/mujoco_robot_description<span class="nt">&lt;/param&gt;</span>
-
-<span class="w">    </span><span class="cm">&lt;!-- Optional: lidar LaserScan publish rate in Hz (all lidar sensors share one rate). --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;lidar_publish_rate&quot;</span><span class="nt">&gt;</span>10.0<span class="nt">&lt;/param&gt;</span>
 
 <span class="w">    </span><span class="cm">&lt;!-- Optional: run the simulator without a GUI window. Defaults to false. --&gt;</span>
 <span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;headless&quot;</span><span class="nt">&gt;</span>false<span class="nt">&lt;/param&gt;</span>
@@ -375,43 +371,10 @@ MuJoCo does not model complete FTS and IMUs natively, so we combine supported MJ
 <p>These sensor state interfaces work out of the box with the standard ROS 2 broadcasters.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Cameras are no longer supported in the base interface, they are now provided as a <code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control_plugin</span></code>.
-Refer to the <a class="reference internal" href="../../mujoco_ros2_control_plugins/doc/plugins.html#camera-plugin"><span class="std std-ref">CameraPlugin</span></a> for more information.</p>
+<p>Cameras and lidar sensors are no longer supported in the base interface, they are now provided as <code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control_plugins</span></code>.
+Refer to the <a class="reference internal" href="../../mujoco_ros2_control_plugins/doc/plugins.html#camera-plugin"><span class="std std-ref">CameraPlugin</span></a> and <a class="reference internal" href="../../mujoco_ros2_control_plugins/doc/plugins.html#lidar-plugin"><span class="std std-ref">RangefinderLidarPlugin</span></a> for more information.</p>
 </div>
 </section>
-</section>
-<section id="lidar">
-<h2>Lidar<a class="headerlink" href="#lidar" title="Link to this heading"></a></h2>
-<p>MuJoCo does not include native lidar support.
-This package implements a ROS 2-like lidar by wrapping sets of
-<a class="reference external" href="https://mujoco.readthedocs.io/en/stable/XMLreference.html#sensor-rangefinder">rangefinders</a> together.</p>
-<p>MuJoCo rangefinders measure the distance to the nearest surface along the positive <code class="docutils literal notranslate"><span class="pre">Z</span></code> axis of the sensor site.
-The first rangefinder’s <code class="docutils literal notranslate"><span class="pre">Z</span></code> axis (e.g. <code class="docutils literal notranslate"><span class="pre">rf-00</span></code>) must align with the ROS 2 lidar sensor’s positive <code class="docutils literal notranslate"><span class="pre">X</span></code> axis,
-consistent with the <a class="reference external" href="https://github.com/ros2/common_interfaces/blob/rolling/sensor_msgs/msg/LaserScan.msg#L10">LaserScan</a> convention.</p>
-<p>Use the <code class="docutils literal notranslate"><span class="pre">replicate</span></code> tag to add N sites at regular angular offsets:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;replicate</span><span class="w"> </span><span class="na">count=</span><span class="s">&quot;12&quot;</span><span class="w"> </span><span class="na">sep=</span><span class="s">&quot;-&quot;</span><span class="w"> </span><span class="na">offset=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="na">euler=</span><span class="s">&quot;0 0.025 0&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;site</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;rf&quot;</span><span class="w"> </span><span class="na">size=</span><span class="s">&quot;0.01&quot;</span><span class="w"> </span><span class="na">pos=</span><span class="s">&quot;0.0 0.0 0.0&quot;</span><span class="w"> </span><span class="na">quat=</span><span class="s">&quot;0.0 0.0 0.0 1.0&quot;</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;/replicate&gt;</span>
-</pre></div>
-</div>
-<p>Attach rangefinder sensors to each site:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;sensor&gt;</span>
-<span class="w">  </span><span class="nt">&lt;rangefinder</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;lidar&quot;</span><span class="w"> </span><span class="na">site=</span><span class="s">&quot;rf&quot;</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;/sensor&gt;</span>
-</pre></div>
-</div>
-<p>Configure the lidar through <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> xacro:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;lidar&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;frame_name&quot;</span><span class="nt">&gt;</span>lidar_sensor_frame<span class="nt">&lt;/param&gt;</span>
-<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;angle_increment&quot;</span><span class="nt">&gt;</span>0.025<span class="nt">&lt;/param&gt;</span>
-<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;min_angle&quot;</span><span class="nt">&gt;</span>-0.3<span class="nt">&lt;/param&gt;</span>
-<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;max_angle&quot;</span><span class="nt">&gt;</span>0.3<span class="nt">&lt;/param&gt;</span>
-<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;range_min&quot;</span><span class="nt">&gt;</span>0.05<span class="nt">&lt;/param&gt;</span>
-<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;range_max&quot;</span><span class="nt">&gt;</span>10<span class="nt">&lt;/param&gt;</span>
-<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;laserscan_topic&quot;</span><span class="nt">&gt;</span>/scan<span class="nt">&lt;/param&gt;</span>
-<span class="nt">&lt;/sensor&gt;</span>
-</pre></div>
-</div>
 </section>
 </section>
 <section id="simulation-topics-and-services">
