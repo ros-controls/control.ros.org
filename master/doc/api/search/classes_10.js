@@ -33,7 +33,6 @@ var searchData=
   ['steeringhandle_30',['SteeringHandle',['../structtricycle__controller_1_1TricycleController_1_1SteeringHandle.html',1,'tricycle_controller::TricycleController']]],
   ['steeringkinematics_31',['SteeringKinematics',['../classsteering__kinematics_1_1SteeringKinematics.html',1,'steering_kinematics']]],
   ['steeringlimiter_32',['SteeringLimiter',['../classtricycle__controller_1_1SteeringLimiter.html',1,'tricycle_controller']]],
-  ['steeringodometry_33',['SteeringOdometry',['../classsteering__odometry_1_1SteeringOdometry.html',1,'steering_odometry']]],
-  ['switchcontrollersverb_34',['SwitchControllersVerb',['../classros2controlcli_1_1verb_1_1switch__controllers_1_1SwitchControllersVerb.html',1,'ros2controlcli::verb::switch_controllers']]],
-  ['systeminterface_35',['SystemInterface',['../classhardware__interface_1_1SystemInterface.html',1,'hardware_interface']]]
+  ['switchcontrollersverb_33',['SwitchControllersVerb',['../classros2controlcli_1_1verb_1_1switch__controllers_1_1SwitchControllersVerb.html',1,'ros2controlcli::verb::switch_controllers']]],
+  ['systeminterface_34',['SystemInterface',['../classhardware__interface_1_1SystemInterface.html',1,'hardware_interface']]]
 ];
