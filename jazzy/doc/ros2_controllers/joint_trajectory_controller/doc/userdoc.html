@@ -259,7 +259,7 @@ A yaml file for using it could be:</p>
 <section id="preemption-policy">
 <h3>Preemption policy <a class="footnote-reference brackets" href="#f1" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a><a class="headerlink" href="#preemption-policy" title="Link to this heading"></a></h3>
 <p>Only one action goal can be active at any moment, or none if the topic interface is used. Path and goal tolerances are checked only for the trajectory segments of the active goal.</p>
-<p>When an active action goal is preempted by another command coming from the action interface, the goal is canceled and the client is notified. The trajectory is replaced in a defined way, see <a class="reference internal" href="trajectory.html#joint-trajectory-controller-trajectory-replacement"><span class="std std-ref">trajectory replacement</span></a>.</p>
+<p>When an active action goal is preempted by another command coming from the action interface, the goal is aborted and the client is notified. The trajectory is replaced in a defined way, see <a class="reference internal" href="trajectory.html#joint-trajectory-controller-trajectory-replacement"><span class="std std-ref">trajectory replacement</span></a>.</p>
 <p>Sending an empty trajectory message from the topic interface (not the action interface) will override the current action goal and not abort the action.</p>
 </section>
 <section id="description-of-controller-s-interfaces">
