@@ -12,7 +12,7 @@ jobs:
   build-deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         fetch-depth: 0
     - uses: actions/setup-python@v6
@@ -50,7 +50,7 @@ jobs:
     - name: Build Rolling PDF
       run: make pdf-rolling
     - name: clone gh-pages branch
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
       if: ${{ success() && github.event_name != 'pull_request' && !env.ACT }}
       with:
         ref: gh-pages
