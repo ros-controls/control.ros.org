@@ -134,21 +134,24 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (rclcpp::Nod
 <tr class="memdesc:a043c28f7e938dc1392cce553f11b35bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleanup the plugin.  <br /></td></tr>
 <tr class="separator:a043c28f7e938dc1392cce553f11b35bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a215840152355d3beadc4748a83a166fc" id="r_a215840152355d3beadc4748a83a166fc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control__plugins_1_1CameraPlugin.html#a215840152355d3beadc4748a83a166fc">trigger_update</a> ()</td></tr>
-<tr class="memdesc:a215840152355d3beadc4748a83a166fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manually force the cameras to publish their updates.  <br /></td></tr>
+<tr class="memdesc:a215840152355d3beadc4748a83a166fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Synchronously run a single render/publish cycle in the calling thread.  <br /></td></tr>
 <tr class="separator:a215840152355d3beadc4748a83a166fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a404e0529d10bedeb6f2b4f8d313790d8" id="r_a404e0529d10bedeb6f2b4f8d313790d8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control__plugins_1_1CameraPlugin.html#a404e0529d10bedeb6f2b4f8d313790d8">is_rendering_available</a> () const</td></tr>
+<tr class="memdesc:a404e0529d10bedeb6f2b4f8d313790d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether the rendering thread has successfully initialized its GL context.  <br /></td></tr>
+<tr class="separator:a404e0529d10bedeb6f2b4f8d313790d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Plugin that publishes the mujoco camera data to ROS 2 topics. </p>
-<p>Camera topics can be named in the ROS 2 controls plugins YAML config file and loaded as node parameters. If any of the parameters are not specified default topic names will be assigned. A user can provide topic names for multiple cameras as long as cameras are not named the same. Name collision is resolved by last name in the yaml file.</p>
+<p>Camera topics can be named in the ROS 2 controls plugins YAML config file and loaded as node parameters. If any of the parameters are not specified, default topic names will be assigned. A user can provide topic names for multiple cameras as long as cameras are not named the same. Name collision is resolved by last name in the yaml file.</p>
 <h2><a class="anchor" id="autotoc_md0"></a>
 Plugin Parameters Structure (and default topics)</h2>
 <p>mujoco_camera_plugin: type: "mujoco_ros2_control_plugins/CameraPlugin" </p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 All cameras will publish data at the same rate</h1>
-<p>camera_publish_rate: 6.0 &lt;camera_name&gt;: frame_name: "" info_topic: &lt;camera_name&gt;/camera_info image_topic: &lt;camera_name&gt;/color depth_topic: &lt;camera_name&gt;/depth</p>
+<p>camera_publish_rate: 6.0 &lt;camera_name&gt;: policy: &lt;policy&gt; # "disabled", "polled", or "streaming" frame_name: "" info_topic: &lt;camera_name&gt;/camera_info image_topic: &lt;camera_name&gt;/color depth_topic: &lt;camera_name&gt;/depth trigger_service_name: &lt;camera_name&gt;/trigger # only used for polling camera policy</p>
 <h2><a class="anchor" id="autotoc_md2"></a>
 Implementation notes</h2>
-<p>If the camera name, in the parameters, does not match any of the mujoco cameras the data will not be published to ROS topics. If no cameras parameters are given (but mujoco_camera_plugin and its type are declared) the default topics and frame are used automatically </p>
+<p>If the camera name, in the parameters, does not match any of the mujoco cameras the data will not be published to ROS topics. If no camera parameters are given, but the mujoco_camera_plugin and its policy are declared, the default policy (streaming), topics, and frame are used automatically. </p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a5b0a3d9246e6ed58b4f45ea9707dfc08" name="a5b0a3d9246e6ed58b4f45ea9707dfc08"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5b0a3d9246e6ed58b4f45ea9707dfc08">&#9670;&#160;</a></span>GlfwInitFn</h2>
@@ -251,6 +254,34 @@ Implementation notes</h2>
 
 </div>
 </div>
+<a id="a404e0529d10bedeb6f2b4f8d313790d8" name="a404e0529d10bedeb6f2b4f8d313790d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a404e0529d10bedeb6f2b4f8d313790d8">&#9670;&#160;</a></span>is_rendering_available()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool mujoco_ros2_control_plugins::CameraPlugin::is_rendering_available </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Whether the rendering thread has successfully initialized its GL context. </p>
+<p>Primarily useful for tests that need to wait for the asynchronous rendering thread to come up before forcing a render. </p>
+
+</div>
+</div>
 <a id="a215840152355d3beadc4748a83a166fc" name="a215840152355d3beadc4748a83a166fc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a215840152355d3beadc4748a83a166fc">&#9670;&#160;</a></span>trigger_update()</h2>
 
@@ -266,8 +297,8 @@ Implementation notes</h2>
       </table>
 </div><div class="memdoc">
 
-<p>Manually force the cameras to publish their updates. </p>
-<p>This is included for test purposes only, as the plumbing to manually force a data sync in WIP. </p>
+<p>Synchronously run a single render/publish cycle in the calling thread. </p>
+<p>This mirrors what the rendering thread does on each pass: streaming cameras are always selected, and polled cameras are selected only if their trigger service has been called since the last cycle. It is intended for tests, where it lets the camera selection logic be exercised deterministically without relying on the asynchronous rendering thread or a live GL context. </p>
 
 </div>
 </div>
