@@ -113,62 +113,62 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacejoint__limits.html">joint_limits</a></div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>{</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="foldopen" id="foldopen00033" data-start="{" data-end="}">
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="namespacejoint__limits.html#ae4ec546f55c4b897a491589567b0bee9">   33</a></span><span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="namespacejoint__limits.html#ae4ec546f55c4b897a491589567b0bee9">getJointLimits</a>(urdf::JointConstSharedPtr urdf_joint, <a class="code hl_struct" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> &amp; limits)</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>{</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  <span class="keywordflow">if</span> (!urdf_joint || !urdf_joint-&gt;limits)</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  {</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  }</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  limits.has_position_limits =</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    urdf_joint-&gt;type == urdf::Joint::REVOLUTE || urdf_joint-&gt;type == urdf::Joint::PRISMATIC;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="keywordflow">if</span> (limits.has_position_limits)</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  {</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    limits.min_position = urdf_joint-&gt;limits-&gt;lower;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    limits.max_position = urdf_joint-&gt;limits-&gt;upper;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  }</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  <span class="keywordflow">if</span> (!limits.has_position_limits &amp;&amp; urdf_joint-&gt;type == urdf::Joint::CONTINUOUS)</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  {</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    limits.angle_wraparound = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  }</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  limits.has_velocity_limits = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  limits.max_velocity = std::abs(urdf_joint-&gt;limits-&gt;velocity);</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  limits.has_acceleration_limits = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  limits.has_effort_limits = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  limits.max_effort = std::abs(urdf_joint-&gt;limits-&gt;effort);</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>}</div>
+<div class="foldopen" id="foldopen00034" data-start="{" data-end="}">
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="namespacejoint__limits.html#ae4ec546f55c4b897a491589567b0bee9">   34</a></span><span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="namespacejoint__limits.html#ae4ec546f55c4b897a491589567b0bee9">getJointLimits</a>(urdf::JointConstSharedPtr urdf_joint, <a class="code hl_struct" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> &amp; limits)</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>{</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <span class="keywordflow">if</span> (!urdf_joint || !urdf_joint-&gt;limits)</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  {</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  }</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  limits.has_position_limits =</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    urdf_joint-&gt;type == urdf::Joint::REVOLUTE || urdf_joint-&gt;type == urdf::Joint::PRISMATIC;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <span class="keywordflow">if</span> (limits.has_position_limits)</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    limits.min_position = urdf_joint-&gt;limits-&gt;lower;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    limits.max_position = urdf_joint-&gt;limits-&gt;upper;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  }</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  <span class="keywordflow">if</span> (!limits.has_position_limits &amp;&amp; urdf_joint-&gt;type == urdf::Joint::CONTINUOUS)</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  {</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    limits.angle_wraparound = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  }</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  limits.has_velocity_limits = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  limits.max_velocity = std::abs(urdf_joint-&gt;limits-&gt;velocity);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  limits.has_acceleration_limits = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  limits.has_effort_limits = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  limits.max_effort = std::abs(urdf_joint-&gt;limits-&gt;effort);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>}</div>
 </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="foldopen" id="foldopen00070" data-start="{" data-end="}">
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="namespacejoint__limits.html#aab5823d51fe2a7c4f8980db0762fe9e4">   70</a></span><span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="namespacejoint__limits.html#aab5823d51fe2a7c4f8980db0762fe9e4">getSoftJointLimits</a>(urdf::JointConstSharedPtr urdf_joint, <a class="code hl_struct" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a> &amp; soft_limits)</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>{</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  <span class="keywordflow">if</span> (!urdf_joint || !urdf_joint-&gt;safety)</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  {</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  }</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  soft_limits.min_position = urdf_joint-&gt;safety-&gt;soft_lower_limit;</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  soft_limits.max_position = urdf_joint-&gt;safety-&gt;soft_upper_limit;</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  soft_limits.k_position = urdf_joint-&gt;safety-&gt;k_position;</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  soft_limits.k_velocity = urdf_joint-&gt;safety-&gt;k_velocity;</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>}</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="foldopen" id="foldopen00072" data-start="{" data-end="}">
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="namespacejoint__limits.html#aab5823d51fe2a7c4f8980db0762fe9e4">   72</a></span><span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="namespacejoint__limits.html#aab5823d51fe2a7c4f8980db0762fe9e4">getSoftJointLimits</a>(urdf::JointConstSharedPtr urdf_joint, <a class="code hl_struct" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a> &amp; soft_limits)</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>{</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  <span class="keywordflow">if</span> (!urdf_joint || !urdf_joint-&gt;safety)</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  {</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  }</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  soft_limits.min_position = urdf_joint-&gt;safety-&gt;soft_lower_limit;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  soft_limits.max_position = urdf_joint-&gt;safety-&gt;soft_upper_limit;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  soft_limits.k_position = urdf_joint-&gt;safety-&gt;k_position;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  soft_limits.k_velocity = urdf_joint-&gt;safety-&gt;k_velocity;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>}</div>
 </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>}  <span class="comment">// namespace joint_limits</span></div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="preprocessor">#endif  </span><span class="comment">// JOINT_LIMITS__JOINT_LIMITS_URDF_HPP_</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>}  <span class="comment">// namespace joint_limits</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="preprocessor">#endif  </span><span class="comment">// JOINT_LIMITS__JOINT_LIMITS_URDF_HPP_</span></div>
 <div class="ttc" id="anamespacejoint__limits_html"><div class="ttname"><a href="namespacejoint__limits.html">joint_limits</a></div><div class="ttdef"><b>Definition</b> data_structures.hpp:39</div></div>
-<div class="ttc" id="anamespacejoint__limits_html_aab5823d51fe2a7c4f8980db0762fe9e4"><div class="ttname"><a href="namespacejoint__limits.html#aab5823d51fe2a7c4f8980db0762fe9e4">joint_limits::getSoftJointLimits</a></div><div class="ttdeci">bool getSoftJointLimits(urdf::JointConstSharedPtr urdf_joint, SoftJointLimits &amp;soft_limits)</div><div class="ttdoc">Populate a SoftJointLimits instance from URDF joint data.</div><div class="ttdef"><b>Definition</b> joint_limits_urdf.hpp:70</div></div>
-<div class="ttc" id="anamespacejoint__limits_html_ae4ec546f55c4b897a491589567b0bee9"><div class="ttname"><a href="namespacejoint__limits.html#ae4ec546f55c4b897a491589567b0bee9">joint_limits::getJointLimits</a></div><div class="ttdeci">bool getJointLimits(urdf::JointConstSharedPtr urdf_joint, JointLimits &amp;limits)</div><div class="ttdoc">Populate a JointLimits instance from URDF joint data.</div><div class="ttdef"><b>Definition</b> joint_limits_urdf.hpp:33</div></div>
-<div class="ttc" id="astructjoint__limits_1_1JointLimits_html"><div class="ttname"><a href="structjoint__limits_1_1JointLimits.html">joint_limits::JointLimits</a></div><div class="ttdef"><b>Definition</b> joint_limits.hpp:35</div></div>
-<div class="ttc" id="astructjoint__limits_1_1SoftJointLimits_html"><div class="ttname"><a href="structjoint__limits_1_1SoftJointLimits.html">joint_limits::SoftJointLimits</a></div><div class="ttdef"><b>Definition</b> joint_limits.hpp:130</div></div>
+<div class="ttc" id="anamespacejoint__limits_html_aab5823d51fe2a7c4f8980db0762fe9e4"><div class="ttname"><a href="namespacejoint__limits.html#aab5823d51fe2a7c4f8980db0762fe9e4">joint_limits::getSoftJointLimits</a></div><div class="ttdeci">bool getSoftJointLimits(urdf::JointConstSharedPtr urdf_joint, SoftJointLimits &amp;soft_limits)</div><div class="ttdoc">Populate a SoftJointLimits instance from URDF joint data.</div><div class="ttdef"><b>Definition</b> joint_limits_urdf.hpp:72</div></div>
+<div class="ttc" id="anamespacejoint__limits_html_ae4ec546f55c4b897a491589567b0bee9"><div class="ttname"><a href="namespacejoint__limits.html#ae4ec546f55c4b897a491589567b0bee9">joint_limits::getJointLimits</a></div><div class="ttdeci">bool getJointLimits(urdf::JointConstSharedPtr urdf_joint, JointLimits &amp;limits)</div><div class="ttdoc">Populate a JointLimits instance from URDF joint data.</div><div class="ttdef"><b>Definition</b> joint_limits_urdf.hpp:34</div></div>
+<div class="ttc" id="astructjoint__limits_1_1JointLimits_html"><div class="ttname"><a href="structjoint__limits_1_1JointLimits.html">joint_limits::JointLimits</a></div><div class="ttdoc">Store joint limits values from YAML definition or URDF &lt;limits&gt; tag.</div><div class="ttdef"><b>Definition</b> joint_limits.hpp:36</div></div>
+<div class="ttc" id="astructjoint__limits_1_1SoftJointLimits_html"><div class="ttname"><a href="structjoint__limits_1_1SoftJointLimits.html">joint_limits::SoftJointLimits</a></div><div class="ttdoc">Store soft joint limits values from the URDF &lt;safety_controller&gt; tag.</div><div class="ttdef"><b>Definition</b> joint_limits.hpp:130</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
