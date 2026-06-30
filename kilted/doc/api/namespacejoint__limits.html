@@ -93,63 +93,75 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classjoint__limits_1_1JointLimiterInterface.html">JointLimiterInterface</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Store joint limits values from YAML definition or URDF <code>&lt;limits&gt;</code> tag.  <a href="structjoint__limits_1_1JointLimits.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classjoint__limits_1_1JointSaturationLimiter.html">JointSaturationLimiter</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Limit joints' position, velocity and acceleration by clamping to their allowed ranges.  <a href="classjoint__limits_1_1JointSaturationLimiter.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classjoint__limits_1_1JointSoftLimiter.html">JointSoftLimiter</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Store soft joint limits values from the URDF <code>&lt;safety_controller&gt;</code> tag.  <a href="structjoint__limits_1_1SoftJointLimits.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:af5a7d47139b792f4f5c9fb833dfc9030" id="r_af5a7d47139b792f4f5c9fb833dfc9030"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#af5a7d47139b792f4f5c9fb833dfc9030">update_prev_command</a> (const <a class="el" href="structjoint__limits_1_1JointControlInterfacesData.html">JointControlInterfacesData</a> &amp;desired, <a class="el" href="structjoint__limits_1_1JointControlInterfacesData.html">JointControlInterfacesData</a> &amp;prev_command)</td></tr>
-<tr class="memdesc:af5a7d47139b792f4f5c9fb833dfc9030"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the previous command with the desired command.  <br /></td></tr>
+<tr class="memdesc:af5a7d47139b792f4f5c9fb833dfc9030"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the previous command with the desired command.  <br /></td></tr>
 <tr class="separator:af5a7d47139b792f4f5c9fb833dfc9030"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83bcea6e06e5e2566832224b252da84e" id="r_a83bcea6e06e5e2566832224b252da84e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#a83bcea6e06e5e2566832224b252da84e">is_limited</a> (double value, double min, double max)</td></tr>
-<tr class="memdesc:a83bcea6e06e5e2566832224b252da84e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a value is limited by the given limits.  <br /></td></tr>
+<tr class="memdesc:a83bcea6e06e5e2566832224b252da84e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a value is limited by the given limits.  <br /></td></tr>
 <tr class="separator:a83bcea6e06e5e2566832224b252da84e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a476b4f8a889f0669fc74236f3a26b057" id="r_a476b4f8a889f0669fc74236f3a26b057"><td class="memItemLeft" align="right" valign="top">PositionLimits&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#a476b4f8a889f0669fc74236f3a26b057">compute_position_limits</a> (const std::string &amp;joint_name, const <a class="el" href="structjoint__limits_1_1JointLimits.html">joint_limits::JointLimits</a> &amp;limits, const std::optional&lt; double &gt; &amp;act_vel, const std::optional&lt; double &gt; &amp;act_pos, const std::optional&lt; double &gt; &amp;prev_command_pos, double dt)</td></tr>
-<tr class="memdesc:a476b4f8a889f0669fc74236f3a26b057"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the position limits based on the velocity and acceleration limits.  <br /></td></tr>
+<tr class="memdesc:a476b4f8a889f0669fc74236f3a26b057"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the position limits based on the velocity and acceleration limits.  <br /></td></tr>
 <tr class="separator:a476b4f8a889f0669fc74236f3a26b057"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a640dbfbd7b525e448cbcc5d2ef98d029" id="r_a640dbfbd7b525e448cbcc5d2ef98d029"><td class="memItemLeft" align="right" valign="top">VelocityLimits&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#a640dbfbd7b525e448cbcc5d2ef98d029">compute_velocity_limits</a> (const std::string &amp;joint_name, const <a class="el" href="structjoint__limits_1_1JointLimits.html">joint_limits::JointLimits</a> &amp;limits, const double &amp;desired_vel, const std::optional&lt; double &gt; &amp;act_pos, const std::optional&lt; double &gt; &amp;prev_command_vel, double dt)</td></tr>
-<tr class="memdesc:a640dbfbd7b525e448cbcc5d2ef98d029"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the velocity limits based on the position and acceleration limits.  <br /></td></tr>
+<tr class="memdesc:a640dbfbd7b525e448cbcc5d2ef98d029"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the velocity limits based on the position and acceleration limits.  <br /></td></tr>
 <tr class="separator:a640dbfbd7b525e448cbcc5d2ef98d029"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b69bddef11a8a0a505983c4042f1bf3" id="r_a7b69bddef11a8a0a505983c4042f1bf3"><td class="memItemLeft" align="right" valign="top">EffortLimits&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#a7b69bddef11a8a0a505983c4042f1bf3">compute_effort_limits</a> (const <a class="el" href="structjoint__limits_1_1JointLimits.html">joint_limits::JointLimits</a> &amp;limits, const std::optional&lt; double &gt; &amp;act_pos, const std::optional&lt; double &gt; &amp;act_vel, double)</td></tr>
-<tr class="memdesc:a7b69bddef11a8a0a505983c4042f1bf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the effort limits based on the position and velocity limits.  <br /></td></tr>
+<tr class="memdesc:a7b69bddef11a8a0a505983c4042f1bf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the effort limits based on the position and velocity limits.  <br /></td></tr>
 <tr class="separator:a7b69bddef11a8a0a505983c4042f1bf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98b4c6764c6bbb0c607ea4ff749bbf76" id="r_a98b4c6764c6bbb0c607ea4ff749bbf76"><td class="memItemLeft" align="right" valign="top">AccelerationLimits&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#a98b4c6764c6bbb0c607ea4ff749bbf76">compute_acceleration_limits</a> (const <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> &amp;limits, double desired_acceleration, std::optional&lt; double &gt; actual_velocity)</td></tr>
-<tr class="memdesc:a98b4c6764c6bbb0c607ea4ff749bbf76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the acceleration limits based on the change in velocity and acceleration and deceleration limits.  <br /></td></tr>
+<tr class="memdesc:a98b4c6764c6bbb0c607ea4ff749bbf76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the acceleration limits based on the change in velocity and acceleration and deceleration limits.  <br /></td></tr>
 <tr class="separator:a98b4c6764c6bbb0c607ea4ff749bbf76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad419e94052abe78773d49127ed62c0b" id="r_aad419e94052abe78773d49127ed62c0b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#aad419e94052abe78773d49127ed62c0b">declare_parameters</a> (const std::string &amp;joint_name, const rclcpp::node_interfaces::NodeParametersInterface::SharedPtr &amp;param_itf, const rclcpp::node_interfaces::NodeLoggingInterface::SharedPtr &amp;logging_itf)</td></tr>
+<tr class="memdesc:aad419e94052abe78773d49127ed62c0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Declare <a class="el" href="structjoint__limits_1_1JointLimits.html" title="Store joint limits values from YAML definition or URDF &lt;limits&gt; tag.">JointLimits</a> and <a class="el" href="structjoint__limits_1_1SoftJointLimits.html" title="Store soft joint limits values from the URDF &lt;safety_controller&gt; tag.">SoftJointLimits</a> parameters for joint with <code>joint_name</code> using node parameters interface <code>param_itf</code>.  <br /></td></tr>
 <tr class="separator:aad419e94052abe78773d49127ed62c0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81b9a4c8dca9261f88683cd819ffb708" id="r_a81b9a4c8dca9261f88683cd819ffb708"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#a81b9a4c8dca9261f88683cd819ffb708">declare_parameters</a> (const std::string &amp;joint_name, const rclcpp::Node::SharedPtr &amp;node)</td></tr>
+<tr class="memdesc:a81b9a4c8dca9261f88683cd819ffb708"><td class="mdescLeft">&#160;</td><td class="mdescRight">Declare <a class="el" href="structjoint__limits_1_1JointLimits.html" title="Store joint limits values from YAML definition or URDF &lt;limits&gt; tag.">JointLimits</a> and <a class="el" href="structjoint__limits_1_1SoftJointLimits.html" title="Store soft joint limits values from the URDF &lt;safety_controller&gt; tag.">SoftJointLimits</a> parameters for joint with <code>joint_name</code> for the <code>node</code> object.  <br /></td></tr>
 <tr class="separator:a81b9a4c8dca9261f88683cd819ffb708"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab31d158d0788638143da34ae33f1f34" id="r_aab31d158d0788638143da34ae33f1f34"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#aab31d158d0788638143da34ae33f1f34">declare_parameters</a> (const std::string &amp;joint_name, const rclcpp_lifecycle::LifecycleNode::SharedPtr &amp;lifecycle_node)</td></tr>
+<tr class="memdesc:aab31d158d0788638143da34ae33f1f34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Declare <a class="el" href="structjoint__limits_1_1JointLimits.html" title="Store joint limits values from YAML definition or URDF &lt;limits&gt; tag.">JointLimits</a> and <a class="el" href="structjoint__limits_1_1SoftJointLimits.html" title="Store soft joint limits values from the URDF &lt;safety_controller&gt; tag.">SoftJointLimits</a> parameters for joint with joint_name for the lifecycle_node object.  <br /></td></tr>
 <tr class="separator:aab31d158d0788638143da34ae33f1f34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aadd63bd759c0d5a61bac4a1b71df17f6" id="r_aadd63bd759c0d5a61bac4a1b71df17f6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#aadd63bd759c0d5a61bac4a1b71df17f6">get_joint_limits</a> (const std::string &amp;joint_name, const rclcpp::node_interfaces::NodeParametersInterface::SharedPtr &amp;param_itf, const rclcpp::node_interfaces::NodeLoggingInterface::SharedPtr &amp;logging_itf, <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> &amp;limits)</td></tr>
-<tr class="memdesc:aadd63bd759c0d5a61bac4a1b71df17f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Populate a <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> instance from the node parameters.  <br /></td></tr>
+<tr class="memdesc:aadd63bd759c0d5a61bac4a1b71df17f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Populate a <a class="el" href="structjoint__limits_1_1JointLimits.html" title="Store joint limits values from YAML definition or URDF &lt;limits&gt; tag.">JointLimits</a> instance from the node parameters.  <br /></td></tr>
 <tr class="separator:aadd63bd759c0d5a61bac4a1b71df17f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c906fda05a4af588941a95248a3c171" id="r_a0c906fda05a4af588941a95248a3c171"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#a0c906fda05a4af588941a95248a3c171">get_joint_limits</a> (const std::string &amp;joint_name, const rclcpp::Node::SharedPtr &amp;node, <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> &amp;limits)</td></tr>
+<tr class="memdesc:a0c906fda05a4af588941a95248a3c171"><td class="mdescLeft">&#160;</td><td class="mdescRight">Populate a <a class="el" href="structjoint__limits_1_1JointLimits.html" title="Store joint limits values from YAML definition or URDF &lt;limits&gt; tag.">JointLimits</a> instance from the node parameters.  <br /></td></tr>
 <tr class="separator:a0c906fda05a4af588941a95248a3c171"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9efd6c7e78cfe5e801aa7b41178931b3" id="r_a9efd6c7e78cfe5e801aa7b41178931b3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#a9efd6c7e78cfe5e801aa7b41178931b3">get_joint_limits</a> (const std::string &amp;joint_name, const rclcpp_lifecycle::LifecycleNode::SharedPtr &amp;lifecycle_node, <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> &amp;limits)</td></tr>
+<tr class="memdesc:a9efd6c7e78cfe5e801aa7b41178931b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Populate a <a class="el" href="structjoint__limits_1_1JointLimits.html" title="Store joint limits values from YAML definition or URDF &lt;limits&gt; tag.">JointLimits</a> instance from the node parameters.  <br /></td></tr>
 <tr class="separator:a9efd6c7e78cfe5e801aa7b41178931b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1788b02ceb11d400f8fa35fb2a1a421b" id="r_a1788b02ceb11d400f8fa35fb2a1a421b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#a1788b02ceb11d400f8fa35fb2a1a421b">check_for_limits_update</a> (const std::string &amp;joint_name, const std::vector&lt; rclcpp::Parameter &gt; &amp;parameters, const rclcpp::node_interfaces::NodeLoggingInterface::SharedPtr &amp;logging_itf, <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> &amp;updated_limits)</td></tr>
+<tr class="memdesc:a1788b02ceb11d400f8fa35fb2a1a421b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if any of updated parameters are related to <a class="el" href="structjoint__limits_1_1JointLimits.html" title="Store joint limits values from YAML definition or URDF &lt;limits&gt; tag.">JointLimits</a>.  <br /></td></tr>
 <tr class="separator:a1788b02ceb11d400f8fa35fb2a1a421b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35aa9cb09663ccc5388b64506321bfb2" id="r_a35aa9cb09663ccc5388b64506321bfb2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#a35aa9cb09663ccc5388b64506321bfb2">get_joint_limits</a> (const std::string &amp;joint_name, const rclcpp::node_interfaces::NodeParametersInterface::SharedPtr &amp;param_itf, const rclcpp::node_interfaces::NodeLoggingInterface::SharedPtr &amp;logging_itf, <a class="el" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a> &amp;soft_limits)</td></tr>
-<tr class="memdesc:a35aa9cb09663ccc5388b64506321bfb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Populate a <a class="el" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a> instance from the ROS parameter server.  <br /></td></tr>
+<tr class="memdesc:a35aa9cb09663ccc5388b64506321bfb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Populate a <a class="el" href="structjoint__limits_1_1SoftJointLimits.html" title="Store soft joint limits values from the URDF &lt;safety_controller&gt; tag.">SoftJointLimits</a> instance from the ROS parameter server.  <br /></td></tr>
 <tr class="separator:a35aa9cb09663ccc5388b64506321bfb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f2bc1a3dc978f86b0dc6f4074d29d95" id="r_a9f2bc1a3dc978f86b0dc6f4074d29d95"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#a9f2bc1a3dc978f86b0dc6f4074d29d95">get_joint_limits</a> (const std::string &amp;joint_name, const rclcpp::Node::SharedPtr &amp;node, <a class="el" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a> &amp;soft_limits)</td></tr>
+<tr class="memdesc:a9f2bc1a3dc978f86b0dc6f4074d29d95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Populate a <a class="el" href="structjoint__limits_1_1SoftJointLimits.html" title="Store soft joint limits values from the URDF &lt;safety_controller&gt; tag.">SoftJointLimits</a> instance from the node parameters.  <br /></td></tr>
 <tr class="separator:a9f2bc1a3dc978f86b0dc6f4074d29d95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7a570c8077ec84667ed2950938fbc14" id="r_ab7a570c8077ec84667ed2950938fbc14"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#ab7a570c8077ec84667ed2950938fbc14">get_joint_limits</a> (const std::string &amp;joint_name, const rclcpp_lifecycle::LifecycleNode::SharedPtr &amp;lifecycle_node, <a class="el" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a> &amp;soft_limits)</td></tr>
+<tr class="memdesc:ab7a570c8077ec84667ed2950938fbc14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Populate a <a class="el" href="structjoint__limits_1_1SoftJointLimits.html" title="Store soft joint limits values from the URDF &lt;safety_controller&gt; tag.">SoftJointLimits</a> instance from the node parameters.  <br /></td></tr>
 <tr class="separator:ab7a570c8077ec84667ed2950938fbc14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad516ee22428c86c26ee00cb5b9d888ac" id="r_ad516ee22428c86c26ee00cb5b9d888ac"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#ad516ee22428c86c26ee00cb5b9d888ac">check_for_limits_update</a> (const std::string &amp;joint_name, const std::vector&lt; rclcpp::Parameter &gt; &amp;parameters, const rclcpp::node_interfaces::NodeLoggingInterface::SharedPtr &amp;logging_itf, <a class="el" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a> &amp;updated_limits)</td></tr>
+<tr class="memdesc:ad516ee22428c86c26ee00cb5b9d888ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if any of updated parameters are related to <a class="el" href="structjoint__limits_1_1SoftJointLimits.html" title="Store soft joint limits values from the URDF &lt;safety_controller&gt; tag.">SoftJointLimits</a>.  <br /></td></tr>
 <tr class="separator:ad516ee22428c86c26ee00cb5b9d888ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4ec546f55c4b897a491589567b0bee9" id="r_ae4ec546f55c4b897a491589567b0bee9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#ae4ec546f55c4b897a491589567b0bee9">getJointLimits</a> (urdf::JointConstSharedPtr urdf_joint, <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> &amp;limits)</td></tr>
-<tr class="memdesc:ae4ec546f55c4b897a491589567b0bee9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Populate a <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> instance from URDF joint data.  <br /></td></tr>
+<tr class="memdesc:ae4ec546f55c4b897a491589567b0bee9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Populate a <a class="el" href="structjoint__limits_1_1JointLimits.html" title="Store joint limits values from YAML definition or URDF &lt;limits&gt; tag.">JointLimits</a> instance from URDF joint data.  <br /></td></tr>
 <tr class="separator:ae4ec546f55c4b897a491589567b0bee9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab5823d51fe2a7c4f8980db0762fe9e4" id="r_aab5823d51fe2a7c4f8980db0762fe9e4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#aab5823d51fe2a7c4f8980db0762fe9e4">getSoftJointLimits</a> (urdf::JointConstSharedPtr urdf_joint, <a class="el" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a> &amp;soft_limits)</td></tr>
-<tr class="memdesc:aab5823d51fe2a7c4f8980db0762fe9e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Populate a <a class="el" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a> instance from URDF joint data.  <br /></td></tr>
+<tr class="memdesc:aab5823d51fe2a7c4f8980db0762fe9e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Populate a <a class="el" href="structjoint__limits_1_1SoftJointLimits.html" title="Store soft joint limits values from the URDF &lt;safety_controller&gt; tag.">SoftJointLimits</a> instance from URDF joint data.  <br /></td></tr>
 <tr class="separator:aab5823d51fe2a7c4f8980db0762fe9e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -160,6 +172,10 @@ Adolfo Rodriguez Tsouroukdissian</dd>
 Adrià Roig Moreno</dd>
 <dd>
 Dr. Denis Stogl</dd>
+<dd>
+Dr. Denis Stogl</dd>
+<dd>
+Adrià Roig Moreno</dd>
 <dd>
 Sai Kishor Kothakota </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
@@ -208,14 +224,15 @@ Sai Kishor Kothakota </dd></dl>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Check if any of updated parameters are related to <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a>.</p>
-<p>This method is intended to be used in the parameters update callback. It is recommended that it's result is temporarily stored and synchronized with the <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> structure in the main loop.</p>
+
+<p>Check if any of updated parameters are related to <a class="el" href="structjoint__limits_1_1JointLimits.html" title="Store joint limits values from YAML definition or URDF &lt;limits&gt; tag.">JointLimits</a>. </p>
+<p>This method is intended to be used in the parameters update callback. It is recommended that its result is temporarily stored and synchronized with the <a class="el" href="structjoint__limits_1_1JointLimits.html" title="Store joint limits values from YAML definition or URDF &lt;limits&gt; tag.">JointLimits</a> structure in the main loop.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">joint_name</td><td>Name of the joint whose limits should be checked. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">parameters</td><td>List of the parameters that should be checked if they belong to this structure and that are used for updating the internal values. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">logging_itf</td><td>node logging interface to provide log errors. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">updated_limits</td><td>structure with updated <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a>. It is recommended that the currently used limits are stored into this structure before calling this method. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">updated_limits</td><td>structure with updated <a class="el" href="structjoint__limits_1_1JointLimits.html" title="Store joint limits values from YAML definition or URDF &lt;limits&gt; tag.">JointLimits</a>. It is recommended that the currently used limits are stored into this structure before calling this method. </td></tr>
   </table>
   </dd>
 </dl>
@@ -267,14 +284,15 @@ Sai Kishor Kothakota </dd></dl>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Check if any of updated parameters are related to <a class="el" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a>.</p>
-<p>This method is intended to be used in the parameters update callback. It is recommended that it's result is temporarily stored and synchronized with the <a class="el" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a> structure in the main loop.</p>
+
+<p>Check if any of updated parameters are related to <a class="el" href="structjoint__limits_1_1SoftJointLimits.html" title="Store soft joint limits values from the URDF &lt;safety_controller&gt; tag.">SoftJointLimits</a>. </p>
+<p>This method is intended to be used in the parameters update callback. It is recommended that its result is temporarily stored and synchronized with the <a class="el" href="structjoint__limits_1_1SoftJointLimits.html" title="Store soft joint limits values from the URDF &lt;safety_controller&gt; tag.">SoftJointLimits</a> structure in the main loop.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">joint_name</td><td>Name of the joint whose limits should be checked. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">parameters</td><td>List of the parameters that should be checked if they belong to this structure and that are used for updating the internal values. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">logging_itf</td><td>node logging interface to provide log errors. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">updated_limits</td><td>structure with updated <a class="el" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a>. It is recommended that the currently used limits are stored into this structure before calling this method. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">updated_limits</td><td>structure with updated <a class="el" href="structjoint__limits_1_1SoftJointLimits.html" title="Store soft joint limits values from the URDF &lt;safety_controller&gt; tag.">SoftJointLimits</a>. It is recommended that the currently used limits are stored into this structure before calling this method. </td></tr>
   </table>
   </dd>
 </dl>
@@ -313,7 +331,7 @@ Sai Kishor Kothakota </dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p>Computes the acceleration limits based on the change in velocity and acceleration and deceleration limits. </p>
+<p>Compute the acceleration limits based on the change in velocity and acceleration and deceleration limits. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">limits</td><td>The joint limits. </td></tr>
@@ -364,7 +382,7 @@ Sai Kishor Kothakota </dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p>Computes the effort limits based on the position and velocity limits. </p>
+<p>Compute the effort limits based on the position and velocity limits. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">limits</td><td>The joint limits. </td></tr>
@@ -428,7 +446,7 @@ Sai Kishor Kothakota </dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p>Computes the position limits based on the velocity and acceleration limits. </p>
+<p>Compute the position limits based on the velocity and acceleration limits. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">joint_name</td><td>The name of the joint. </td></tr>
@@ -503,7 +521,7 @@ Sai Kishor Kothakota </dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p>Computes the velocity limits based on the position and acceleration limits. </p>
+<p>Compute the velocity limits based on the position and acceleration limits. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">joint_name</td><td>The name of the joint. </td></tr>
@@ -551,7 +569,9 @@ Sai Kishor Kothakota </dd></dl>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Declare <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> and <a class="el" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a> parameters for joint with <code>joint_name</code> for the <code>node</code> object. This is a convenience function. For parameters structure see the underlying <code>declare_parameters</code> function.</p>
+
+<p>Declare <a class="el" href="structjoint__limits_1_1JointLimits.html" title="Store joint limits values from YAML definition or URDF &lt;limits&gt; tag.">JointLimits</a> and <a class="el" href="structjoint__limits_1_1SoftJointLimits.html" title="Store soft joint limits values from the URDF &lt;safety_controller&gt; tag.">SoftJointLimits</a> parameters for joint with <code>joint_name</code> for the <code>node</code> object. </p>
+<p>This is a convenience function. For parameters structure see the underlying <code>declare_parameters</code> function.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">joint_name</td><td>name of the joint for which parameters will be declared. </td></tr>
@@ -602,7 +622,8 @@ Sai Kishor Kothakota </dd></dl>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Declare <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> and <a class="el" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a> parameters for joint with <code>joint_name</code> using node parameters interface <code>param_itf</code>.</p>
+
+<p>Declare <a class="el" href="structjoint__limits_1_1JointLimits.html" title="Store joint limits values from YAML definition or URDF &lt;limits&gt; tag.">JointLimits</a> and <a class="el" href="structjoint__limits_1_1SoftJointLimits.html" title="Store soft joint limits values from the URDF &lt;safety_controller&gt; tag.">SoftJointLimits</a> parameters for joint with <code>joint_name</code> using node parameters interface <code>param_itf</code>. </p>
 <p>The following parameter structure is declared with base name <code>joint_limits.joint_name</code>: </p><div class="fragment"><div class="line">has_position_limits: <span class="keywordtype">bool</span></div>
 <div class="line">min_position: <span class="keywordtype">double</span></div>
 <div class="line">max_position: <span class="keywordtype">double</span></div>
@@ -667,7 +688,9 @@ Sai Kishor Kothakota </dd></dl>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Declare <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> and <a class="el" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a> parameters for joint with joint_name for the lifecycle_node object. This is a convenience function. For parameters structure see the underlying <code>declare_parameters</code> function.</p>
+
+<p>Declare <a class="el" href="structjoint__limits_1_1JointLimits.html" title="Store joint limits values from YAML definition or URDF &lt;limits&gt; tag.">JointLimits</a> and <a class="el" href="structjoint__limits_1_1SoftJointLimits.html" title="Store soft joint limits values from the URDF &lt;safety_controller&gt; tag.">SoftJointLimits</a> parameters for joint with joint_name for the lifecycle_node object. </p>
+<p>This is a convenience function. For parameters structure see the underlying <code>declare_parameters</code> function.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">joint_name</td><td>name of the joint for which parameters will be declared. </td></tr>
@@ -718,7 +741,9 @@ Sai Kishor Kothakota </dd></dl>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Populate a <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> instance from the node parameters. This is a convenience function. For parameters structure see the underlying <code>get_joint_limits</code> function.</p>
+
+<p>Populate a <a class="el" href="structjoint__limits_1_1JointLimits.html" title="Store joint limits values from YAML definition or URDF &lt;limits&gt; tag.">JointLimits</a> instance from the node parameters. </p>
+<p>This is a convenience function. For parameters structure see the underlying <code>get_joint_limits</code> function.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">joint_name</td><td>Name of joint whose limits are to be fetched. </td></tr>
@@ -770,7 +795,9 @@ Sai Kishor Kothakota </dd></dl>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Populate a <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> instance from the node parameters. This is a convenience function. For parameters structure see the underlying <code>get_joint_limits</code> function.</p>
+
+<p>Populate a <a class="el" href="structjoint__limits_1_1SoftJointLimits.html" title="Store soft joint limits values from the URDF &lt;safety_controller&gt; tag.">SoftJointLimits</a> instance from the node parameters. </p>
+<p>This is a convenience function. For parameters structure see the underlying <code>get_joint_limits</code> function.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">joint_name</td><td>Name of joint whose limits are to be fetched. </td></tr>
@@ -829,7 +856,7 @@ Sai Kishor Kothakota </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>Populate a <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> instance from the node parameters. </p>
+<p>Populate a <a class="el" href="structjoint__limits_1_1JointLimits.html" title="Store joint limits values from YAML definition or URDF &lt;limits&gt; tag.">JointLimits</a> instance from the node parameters. </p>
 <p>It is assumed that parameter structure is the following: </p><div class="fragment"><div class="line">has_position_limits: <span class="keywordtype">bool</span></div>
 <div class="line">min_position: <span class="keywordtype">double</span></div>
 <div class="line">max_position: <span class="keywordtype">double</span></div>
@@ -926,7 +953,7 @@ Sai Kishor Kothakota </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>Populate a <a class="el" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a> instance from the ROS parameter server. </p>
+<p>Populate a <a class="el" href="structjoint__limits_1_1SoftJointLimits.html" title="Store soft joint limits values from the URDF &lt;safety_controller&gt; tag.">SoftJointLimits</a> instance from the ROS parameter server. </p>
 <p>It is assumed that the parameter structure is the following: </p><div class="fragment"><div class="line">has_soft_limits: <span class="keywordtype">bool</span></div>
 <div class="line">k_position: <span class="keywordtype">double</span></div>
 <div class="line">k_velocity: <span class="keywordtype">double</span></div>
@@ -949,7 +976,7 @@ Sai Kishor Kothakota </dd></dl>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>True if a complete soft limits specification is found (ie. if all <code>k_position</code>, <code>k_velocity</code>, <code>soft_lower_limit</code> and <code>soft_upper_limit</code> exist in <code>joint_limits/joint_name</code> namespace), false otherwise. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True if a complete soft limits specification is found (i.e., if all <code>k_position</code>, <code>k_velocity</code>, <code>soft_lower_limit</code> and <code>soft_upper_limit</code> exist in <code>joint_limits/joint_name</code> namespace), false otherwise. </dd></dl>
 
 </div>
 </div>
@@ -992,7 +1019,9 @@ Sai Kishor Kothakota </dd></dl>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Populate a <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> instance from the node parameters. This is a convenience function. For parameters structure see the underlying <code>get_joint_limits</code> function.</p>
+
+<p>Populate a <a class="el" href="structjoint__limits_1_1JointLimits.html" title="Store joint limits values from YAML definition or URDF &lt;limits&gt; tag.">JointLimits</a> instance from the node parameters. </p>
+<p>This is a convenience function. For parameters structure see the underlying <code>get_joint_limits</code> function.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">joint_name</td><td>Name of joint whose limits are to be fetched. </td></tr>
@@ -1044,7 +1073,9 @@ Sai Kishor Kothakota </dd></dl>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Populate a <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> instance from the node parameters. This is a convenience function. For parameters structure see the underlying <code>get_joint_limits</code> function.</p>
+
+<p>Populate a <a class="el" href="structjoint__limits_1_1SoftJointLimits.html" title="Store soft joint limits values from the URDF &lt;safety_controller&gt; tag.">SoftJointLimits</a> instance from the node parameters. </p>
+<p>This is a convenience function. For parameters structure see the underlying <code>get_joint_limits</code> function.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">joint_name</td><td>Name of joint whose limits are to be fetched. </td></tr>
@@ -1091,15 +1122,15 @@ Sai Kishor Kothakota </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>Populate a <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> instance from URDF joint data. </p>
+<p>Populate a <a class="el" href="structjoint__limits_1_1JointLimits.html" title="Store joint limits values from YAML definition or URDF &lt;limits&gt; tag.">JointLimits</a> instance from URDF joint data. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">urdf_joint</td><td>URDF joint. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">limits</td><td>Where URDF joint limit data gets written into. Limits in <em>urdf_joint</em> will overwrite existing values. Values in <em>limits</em> not present in <em>urdf_joint</em> remain unchanged. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">limits</td><td>Where URDF joint limit data gets written into. Limits in <code>urdf_joint</code> will overwrite existing values. Values in <code>limits</code> not present in <code>urdf_joint</code> remain unchanged. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>True if <em>urdf_joint</em> has a valid limits specification, false otherwise. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True if <code>urdf_joint</code> has a valid limits specification, false otherwise. </dd></dl>
 
 </div>
 </div>
@@ -1137,7 +1168,7 @@ Sai Kishor Kothakota </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>Populate a <a class="el" href="structjoint__limits_1_1SoftJointLimits.html">SoftJointLimits</a> instance from URDF joint data. </p>
+<p>Populate a <a class="el" href="structjoint__limits_1_1SoftJointLimits.html" title="Store soft joint limits values from the URDF &lt;safety_controller&gt; tag.">SoftJointLimits</a> instance from URDF joint data. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">urdf_joint</td><td>URDF joint. </td></tr>
@@ -1145,7 +1176,7 @@ Sai Kishor Kothakota </dd></dl>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>True if <em>urdf_joint</em> has a valid soft limits specification, false otherwise. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True if <code>urdf_joint</code> has a valid soft limits specification, false otherwise. </dd></dl>
 
 </div>
 </div>
@@ -1181,7 +1212,7 @@ Sai Kishor Kothakota </dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p>Checks if a value is limited by the given limits. </p>
+<p>Check if a value is limited by the given limits. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">value</td><td>The value to check. </td></tr>
@@ -1220,7 +1251,7 @@ Sai Kishor Kothakota </dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p>Updates the previous command with the desired command. </p>
+<p>Update the previous command with the desired command. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">prev_command</td><td>The previous command to update. </td></tr>

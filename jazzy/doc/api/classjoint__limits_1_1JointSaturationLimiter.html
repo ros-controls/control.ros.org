@@ -89,13 +89,16 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Limit joints' position, velocity and acceleration by clamping to their allowed ranges.  
+ <a href="classjoint__limits_1_1JointSaturationLimiter.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="joint__saturation__limiter_8hpp_source.html">joint_saturation_limiter.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for joint_limits::JointSaturationLimiter&lt; JointLimitsStateDataType &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classjoint__limits_1_1JointSaturationLimiter__inherit__graph.png" border="0" usemap="#ajoint__limits_1_1JointSaturationLimiter_3_01JointLimitsStateDataType_01_4_inherit__map" alt="Inheritance graph"/></div>
 <map name="ajoint__limits_1_1JointSaturationLimiter_3_01JointLimitsStateDataType_01_4_inherit__map" id="ajoint__limits_1_1JointSaturationLimiter_3_01JointLimitsStateDataType_01_4_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,108,268,148"/>
+<area shape="rect" title="Limit joints&#39; position, velocity and acceleration by clamping to their allowed ranges." alt="" coords="5,108,268,148"/>
 <area shape="rect" href="classjoint__limits_1_1JointLimiterInterface.html" title=" " alt="" coords="22,5,251,60"/>
 <area shape="poly" title=" " alt="" coords="139,74,139,108,134,108,134,74"/>
 </map>
@@ -105,7 +108,7 @@ Collaboration diagram for joint_limits::JointSaturationLimiter&lt; JointLimitsSt
 <div class="dyncontent">
 <div class="center"><img src="classjoint__limits_1_1JointSaturationLimiter__coll__graph.png" border="0" usemap="#ajoint__limits_1_1JointSaturationLimiter_3_01JointLimitsStateDataType_01_4_coll__map" alt="Collaboration graph"/></div>
 <map name="ajoint__limits_1_1JointSaturationLimiter_3_01JointLimitsStateDataType_01_4_coll__map" id="ajoint__limits_1_1JointSaturationLimiter_3_01JointLimitsStateDataType_01_4_coll__map">
-<area shape="rect" title=" " alt="" coords="5,108,268,148"/>
+<area shape="rect" title="Limit joints&#39; position, velocity and acceleration by clamping to their allowed ranges." alt="" coords="5,108,268,148"/>
 <area shape="rect" href="classjoint__limits_1_1JointLimiterInterface.html" title=" " alt="" coords="22,5,251,60"/>
 <area shape="poly" title=" " alt="" coords="139,74,139,108,134,108,134,74"/>
 </map>
@@ -122,22 +125,22 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~JointSaturationLi
 <tr class="memdesc:a5c7da8b5d3c53bb8ef0b5923de0c5798"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br /></td></tr>
 <tr class="separator:a5c7da8b5d3c53bb8ef0b5923de0c5798"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81f2ad5d5ca2159a75a6b3dd03a5688f" id="r_a81f2ad5d5ca2159a75a6b3dd03a5688f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classjoint__limits_1_1JointSaturationLimiter.html#a81f2ad5d5ca2159a75a6b3dd03a5688f">on_init</a> () override</td></tr>
-<tr class="memdesc:a81f2ad5d5ca2159a75a6b3dd03a5688f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method is realized by an implementation.  <br /></td></tr>
+<tr class="memdesc:a81f2ad5d5ca2159a75a6b3dd03a5688f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the limiter's internal states and libraries.  <br /></td></tr>
 <tr class="separator:a81f2ad5d5ca2159a75a6b3dd03a5688f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd3d97e6981f18015b5a0eed94ee75b7" id="r_afd3d97e6981f18015b5a0eed94ee75b7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classjoint__limits_1_1JointSaturationLimiter.html#afd3d97e6981f18015b5a0eed94ee75b7">on_configure</a> (const JointLimitsStateDataType &amp;current_joint_states) override</td></tr>
-<tr class="memdesc:afd3d97e6981f18015b5a0eed94ee75b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method is realized by an implementation.  <br /></td></tr>
+<tr class="memdesc:afd3d97e6981f18015b5a0eed94ee75b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure the limiter's internal states and libraries.  <br /></td></tr>
 <tr class="separator:afd3d97e6981f18015b5a0eed94ee75b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ab41eab4900b8e49adcc19c0d452f47" id="r_a5ab41eab4900b8e49adcc19c0d452f47"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classjoint__limits_1_1JointSaturationLimiter.html#a5ab41eab4900b8e49adcc19c0d452f47">on_enforce</a> (const JointLimitsStateDataType &amp;current_joint_states, JointLimitsStateDataType &amp;desired_joint_states, const rclcpp::Duration &amp;dt) override</td></tr>
-<tr class="memdesc:a5ab41eab4900b8e49adcc19c0d452f47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enforce joint limits to desired position, velocity and acceleration using clamping. Class implements this method accepting following data types:  <br /></td></tr>
+<tr class="memdesc:a5ab41eab4900b8e49adcc19c0d452f47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enforce joint limits to desired position, velocity and acceleration using clamping.  <br /></td></tr>
 <tr class="separator:a5ab41eab4900b8e49adcc19c0d452f47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae59afb40e79815d33eaf65758935b230" id="r_ae59afb40e79815d33eaf65758935b230"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classjoint__limits_1_1JointSaturationLimiter.html#ae59afb40e79815d33eaf65758935b230">reset_internals</a> () override</td></tr>
 <tr class="memdesc:ae59afb40e79815d33eaf65758935b230"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset internal states of the limiter.  <br /></td></tr>
 <tr class="separator:ae59afb40e79815d33eaf65758935b230"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc227128710390ed8a2d3534ee4d138c" id="r_abc227128710390ed8a2d3534ee4d138c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classjoint__limits_1_1JointSaturationLimiter.html#abc227128710390ed8a2d3534ee4d138c">on_init</a> ()</td></tr>
-<tr class="memdesc:abc227128710390ed8a2d3534ee4d138c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method is realized by an implementation.  <br /></td></tr>
+<tr class="memdesc:abc227128710390ed8a2d3534ee4d138c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the limiter's internal states and libraries.  <br /></td></tr>
 <tr class="separator:abc227128710390ed8a2d3534ee4d138c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc227128710390ed8a2d3534ee4d138c" id="r_abc227128710390ed8a2d3534ee4d138c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classjoint__limits_1_1JointSaturationLimiter.html#abc227128710390ed8a2d3534ee4d138c">on_init</a> ()</td></tr>
-<tr class="memdesc:abc227128710390ed8a2d3534ee4d138c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method is realized by an implementation.  <br /></td></tr>
+<tr class="memdesc:abc227128710390ed8a2d3534ee4d138c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the limiter's internal states and libraries.  <br /></td></tr>
 <tr class="separator:abc227128710390ed8a2d3534ee4d138c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe6680ffd328094d067e524f514abaf0" id="r_abe6680ffd328094d067e524f514abaf0"><td class="memItemLeft" align="right" valign="top"><a id="abe6680ffd328094d067e524f514abaf0" name="abe6680ffd328094d067e524f514abaf0"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>on_enforce</b> (const <a class="el" href="structjoint__limits_1_1JointControlInterfacesData.html">JointControlInterfacesData</a> &amp;actual, <a class="el" href="structjoint__limits_1_1JointControlInterfacesData.html">JointControlInterfacesData</a> &amp;desired, const rclcpp::Duration &amp;dt)</td></tr>
@@ -147,13 +150,17 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>on_enforce</b> (const
 <tr class="separator:aaac3f5a0f79e9638fdc5dc36254a0732"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classjoint__limits_1_1JointLimiterInterface"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classjoint__limits_1_1JointLimiterInterface')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classjoint__limits_1_1JointLimiterInterface.html">joint_limits::JointLimiterInterface&lt; JointLimitsStateDataType &gt;</a></td></tr>
 <tr class="memitem:a458cef2b4c13a016d530a4e67c717b58 inherit pub_methods_classjoint__limits_1_1JointLimiterInterface" id="r_a458cef2b4c13a016d530a4e67c717b58"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classjoint__limits_1_1JointLimiterInterface.html#a458cef2b4c13a016d530a4e67c717b58">init</a> (const std::vector&lt; std::string &gt; &amp;joint_names, const rclcpp::node_interfaces::NodeParametersInterface::SharedPtr &amp;param_itf, const rclcpp::node_interfaces::NodeLoggingInterface::SharedPtr &amp;logging_itf, const std::string &amp;robot_description_topic=&quot;/robot_description&quot;)</td></tr>
-<tr class="memdesc:a458cef2b4c13a016d530a4e67c717b58 inherit pub_methods_classjoint__limits_1_1JointLimiterInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialization of every JointLimiter.  <br /></td></tr>
+<tr class="memdesc:a458cef2b4c13a016d530a4e67c717b58 inherit pub_methods_classjoint__limits_1_1JointLimiterInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize every JointLimiter.  <br /></td></tr>
 <tr class="separator:a458cef2b4c13a016d530a4e67c717b58 inherit pub_methods_classjoint__limits_1_1JointLimiterInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca8647ee7b3c5829a28d991773533fe6 inherit pub_methods_classjoint__limits_1_1JointLimiterInterface" id="r_aca8647ee7b3c5829a28d991773533fe6"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classjoint__limits_1_1JointLimiterInterface.html#aca8647ee7b3c5829a28d991773533fe6">init</a> (const std::vector&lt; std::string &gt; &amp;joint_names, const std::vector&lt; <a class="el" href="structjoint__limits_1_1JointLimits.html">joint_limits::JointLimits</a> &gt; &amp;joint_limits, const std::vector&lt; <a class="el" href="structjoint__limits_1_1SoftJointLimits.html">joint_limits::SoftJointLimits</a> &gt; &amp;soft_joint_limits, const rclcpp::node_interfaces::NodeParametersInterface::SharedPtr &amp;param_itf, const rclcpp::node_interfaces::NodeLoggingInterface::SharedPtr &amp;logging_itf)</td></tr>
+<tr class="memitem:aca8647ee7b3c5829a28d991773533fe6 inherit pub_methods_classjoint__limits_1_1JointLimiterInterface" id="r_aca8647ee7b3c5829a28d991773533fe6"><td class="memItemLeft" align="right" valign="top">
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (const std::vector&lt; std::string &gt; &amp;joint_names, const std::vector&lt; <a class="el" href="structjoint__limits_1_1JointLimits.html">joint_limits::JointLimits</a> &gt; &amp;joint_limits, const std::vector&lt; <a class="el" href="structjoint__limits_1_1SoftJointLimits.html">joint_limits::SoftJointLimits</a> &gt; &amp;soft_joint_limits, const rclcpp::node_interfaces::NodeParametersInterface::SharedPtr &amp;param_itf, const rclcpp::node_interfaces::NodeLoggingInterface::SharedPtr &amp;logging_itf)</td></tr>
+<tr class="memdesc:aca8647ee7b3c5829a28d991773533fe6 inherit pub_methods_classjoint__limits_1_1JointLimiterInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize joints from directly provided names and limits. <br /></td></tr>
 <tr class="separator:aca8647ee7b3c5829a28d991773533fe6 inherit pub_methods_classjoint__limits_1_1JointLimiterInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab20f236a18d3ded32e45f9a1c8b6eed0 inherit pub_methods_classjoint__limits_1_1JointLimiterInterface" id="r_ab20f236a18d3ded32e45f9a1c8b6eed0"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classjoint__limits_1_1JointLimiterInterface.html#ab20f236a18d3ded32e45f9a1c8b6eed0">init</a> (const std::vector&lt; std::string &gt; &amp;joint_names, const rclcpp::Node::SharedPtr &amp;node, const std::string &amp;robot_description_topic=&quot;/robot_description&quot;)</td></tr>
+<tr class="memdesc:ab20f236a18d3ded32e45f9a1c8b6eed0 inherit pub_methods_classjoint__limits_1_1JointLimiterInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize joints using a Node pointer.  <br /></td></tr>
 <tr class="separator:ab20f236a18d3ded32e45f9a1c8b6eed0 inherit pub_methods_classjoint__limits_1_1JointLimiterInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6ad68686b59ed9927acef1236b08ddb inherit pub_methods_classjoint__limits_1_1JointLimiterInterface" id="r_aa6ad68686b59ed9927acef1236b08ddb"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classjoint__limits_1_1JointLimiterInterface.html#aa6ad68686b59ed9927acef1236b08ddb">init</a> (const std::vector&lt; std::string &gt; &amp;joint_names, const rclcpp_lifecycle::LifecycleNode::SharedPtr &amp;lifecycle_node, const std::string &amp;robot_description_topic=&quot;/robot_description&quot;)</td></tr>
+<tr class="memdesc:aa6ad68686b59ed9927acef1236b08ddb inherit pub_methods_classjoint__limits_1_1JointLimiterInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize joints using a LifecycleNode pointer.  <br /></td></tr>
 <tr class="separator:aa6ad68686b59ed9927acef1236b08ddb inherit pub_methods_classjoint__limits_1_1JointLimiterInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4bfcaade2d804db4283af523526ca280 inherit pub_methods_classjoint__limits_1_1JointLimiterInterface" id="r_a4bfcaade2d804db4283af523526ca280"><td class="memItemLeft" align="right" valign="top">
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>configure</b> (const JointLimitsStateDataType &amp;current_joint_states)</td></tr>
@@ -205,7 +212,8 @@ Additional Inherited Members</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename JointLimitsStateDataType&gt;<br />
-class joint_limits::JointSaturationLimiter&lt; JointLimitsStateDataType &gt;</div><p>Joint Saturation Limiter limits joints' position, velocity and acceleration by clamping values to its minimal and maximal allowed values. Since the position, velocity and accelerations are variables in physical relation, it might be that some values are limited lower then specified limit. For example, if a joint is close to its position limit, velocity and acceleration will be reduced accordingly. </p>
+class joint_limits::JointSaturationLimiter&lt; JointLimitsStateDataType &gt;</div><p>Limit joints' position, velocity and acceleration by clamping to their allowed ranges. </p>
+<p>Since the position, velocity and accelerations are variables in physical relation, it might be that some values are limited lower than specified limit. For example, if a joint is close to its position limit, velocity and acceleration will be reduced accordingly. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="afd3d97e6981f18015b5a0eed94ee75b7" name="afd3d97e6981f18015b5a0eed94ee75b7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afd3d97e6981f18015b5a0eed94ee75b7">&#9670;&#160;</a></span>on_configure()</h2>
@@ -233,7 +241,7 @@ template&lt;typename JointLimitsStateDataType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Method is realized by an implementation. </p>
+<p>Configure the limiter's internal states and libraries. </p>
 <p>Implementation-specific configuration of limiter's internal states and libraries. </p><dl class="section return"><dt>Returns</dt><dd>true if initialization was successful, otherwise false. </dd></dl>
 
 <p>Implements <a class="el" href="classjoint__limits_1_1JointLimiterInterface.html#a823be9252ffbc87a05a31b12d77a5832">joint_limits::JointLimiterInterface&lt; JointLimitsStateDataType &gt;</a>.</p>
@@ -282,11 +290,11 @@ template&lt;typename JointLimitsStateDataType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Enforce joint limits to desired position, velocity and acceleration using clamping. Class implements this method accepting following data types: </p>
-<ul>
+<p>Enforce joint limits to desired position, velocity and acceleration using clamping. </p>
+<p>Class implements this method accepting following data types:</p><ul>
 <li>trajectory_msgs::msg::JointTrajectoryPoint: limiting position, velocity and acceleration;</li>
 </ul>
-<p>Implementation of saturation approach for joints with position, velocity or acceleration limits and values. First, position limits are checked to adjust desired velocity accordingly, then velocity and finally acceleration. The method support partial existence of limits, e.g., missing position limits for continuous joins.</p>
+<p>Implementation of saturation approach for joints with position, velocity or acceleration limits and values. First, position limits are checked to adjust desired velocity accordingly, then velocity and finally acceleration. The method supports partial existence of limits, e.g., missing position limits for continuous joints.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">current_joint_states</td><td>current joint states a robot is in. </td></tr>
@@ -330,7 +338,7 @@ template&lt;typename JointLimitsStateDataType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Method is realized by an implementation. </p>
+<p>Initialize the limiter's internal states and libraries. </p>
 <p>Implementation-specific initialization of limiter's internal states and libraries. </p><dl class="section return"><dt>Returns</dt><dd>true if initialization was successful, otherwise false. </dd></dl>
 
 <p>Implements <a class="el" href="classjoint__limits_1_1JointLimiterInterface.html#a0b9e6da58ef52d8ed431ecac680821ba">joint_limits::JointLimiterInterface&lt; JointLimitsStateDataType &gt;</a>.</p>
@@ -362,7 +370,7 @@ template&lt;typename JointLimitsStateDataType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Method is realized by an implementation. </p>
+<p>Initialize the limiter's internal states and libraries. </p>
 <p>Implementation-specific initialization of limiter's internal states and libraries. </p><dl class="section return"><dt>Returns</dt><dd>true if initialization was successful, otherwise false. </dd></dl>
 
 <p>Implements <a class="el" href="classjoint__limits_1_1JointLimiterInterface.html#a0b9e6da58ef52d8ed431ecac680821ba">joint_limits::JointLimiterInterface&lt; JointLimitsStateDataType &gt;</a>.</p>
@@ -396,7 +404,7 @@ template&lt;typename JointLimitsStateDataType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Method is realized by an implementation. </p>
+<p>Initialize the limiter's internal states and libraries. </p>
 <p>Implementation-specific initialization of limiter's internal states and libraries. </p><dl class="section return"><dt>Returns</dt><dd>true if initialization was successful, otherwise false. </dd></dl>
 
 <p>Implements <a class="el" href="classjoint__limits_1_1JointLimiterInterface.html#a0b9e6da58ef52d8ed431ecac680821ba">joint_limits::JointLimiterInterface&lt; JointLimitsStateDataType &gt;</a>.</p>

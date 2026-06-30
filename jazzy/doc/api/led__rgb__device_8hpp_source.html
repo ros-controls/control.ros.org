@@ -118,42 +118,41 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classsemantic__components_1_1LedRgbDevice.html">   26</a></span><span class="keyword">class </span><a class="code hl_class" href="classsemantic__components_1_1LedRgbDevice.html">LedRgbDevice</a> : <span class="keyword">public</span> <a class="code hl_class" href="classsemantic__components_1_1SemanticComponentCommandInterface.html">SemanticComponentCommandInterface</a>&lt;std_msgs::msg::ColorRGBA&gt;</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>{</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">public</span>:</div>
-<div class="foldopen" id="foldopen00039" data-start="{" data-end="}">
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classsemantic__components_1_1LedRgbDevice.html#a38d47a7e06a5bd26aed0f697af39a832">   39</a></span>  <span class="keyword">explicit</span> <a class="code hl_function" href="classsemantic__components_1_1LedRgbDevice.html#a38d47a7e06a5bd26aed0f697af39a832">LedRgbDevice</a>(</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keyword">const</span> std::string &amp; name, <span class="keyword">const</span> std::string &amp; interface_r, <span class="keyword">const</span> std::string &amp; interface_g,</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keyword">const</span> std::string &amp; interface_b)</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  : <a class="code hl_class" href="classsemantic__components_1_1SemanticComponentCommandInterface.html">SemanticComponentCommandInterface</a>(</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>      name, {{name + <span class="stringliteral">&quot;/&quot;</span> + interface_r}, {name + <span class="stringliteral">&quot;/&quot;</span> + interface_g}, {name + <span class="stringliteral">&quot;/&quot;</span> + interface_b}})</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  {</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  }</div>
+<div class="foldopen" id="foldopen00040" data-start="{" data-end="}">
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classsemantic__components_1_1LedRgbDevice.html#a38d47a7e06a5bd26aed0f697af39a832">   40</a></span>  <span class="keyword">explicit</span> <a class="code hl_function" href="classsemantic__components_1_1LedRgbDevice.html#a38d47a7e06a5bd26aed0f697af39a832">LedRgbDevice</a>(</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keyword">const</span> std::string &amp; name, <span class="keyword">const</span> std::string &amp; interface_r, <span class="keyword">const</span> std::string &amp; interface_g,</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keyword">const</span> std::string &amp; interface_b)</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  : <a class="code hl_class" href="classsemantic__components_1_1SemanticComponentCommandInterface.html">SemanticComponentCommandInterface</a>(</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>      name, {{name + <span class="stringliteral">&quot;/&quot;</span> + interface_r}, {name + <span class="stringliteral">&quot;/&quot;</span> + interface_g}, {name + <span class="stringliteral">&quot;/&quot;</span> + interface_b}})</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  }</div>
 </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="foldopen" id="foldopen00059" data-start="{" data-end="}">
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="classsemantic__components_1_1LedRgbDevice.html#a0e9aec5db12e35ad6df352317f92a05e">   59</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classsemantic__components_1_1LedRgbDevice.html#a0e9aec5db12e35ad6df352317f92a05e">set_values_from_message</a>(<span class="keyword">const</span> std_msgs::msg::ColorRGBA &amp; message)<span class="keyword"> override</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="keyword">  </span>{</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordflow">if</span> (</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>      message.r &lt; 0 || message.r &gt; 1 || message.g &lt; 0 || message.g &gt; 1 || message.b &lt; 0 ||</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>      message.b &gt; 1)</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    {</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    }</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordtype">bool</span> all_set = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    all_set &amp;= command_interfaces_[0].get().set_value(<span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(message.r));</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    all_set &amp;= command_interfaces_[1].get().set_value(<span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(message.g));</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    all_set &amp;= command_interfaces_[2].get().set_value(<span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(message.b));</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordflow">return</span> all_set;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  }</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="foldopen" id="foldopen00060" data-start="{" data-end="}">
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="classsemantic__components_1_1LedRgbDevice.html#a0e9aec5db12e35ad6df352317f92a05e">   60</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classsemantic__components_1_1LedRgbDevice.html#a0e9aec5db12e35ad6df352317f92a05e">set_values_from_message</a>(<span class="keyword">const</span> std_msgs::msg::ColorRGBA &amp; message)<span class="keyword"> override</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="keyword">  </span>{</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordflow">if</span> (</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>      message.r &lt; 0 || message.r &gt; 1 || message.g &lt; 0 || message.g &gt; 1 || message.b &lt; 0 ||</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>      message.b &gt; 1)</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    {</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    }</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordtype">bool</span> all_set = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    all_set &amp;= command_interfaces_[0].get().set_value(<span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(message.r));</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    all_set &amp;= command_interfaces_[1].get().set_value(<span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(message.g));</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    all_set &amp;= command_interfaces_[2].get().set_value(<span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(message.b));</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keywordflow">return</span> all_set;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  }</div>
 </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>};</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>};</div>
 </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>}  <span class="comment">// namespace semantic_components</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="preprocessor">#endif  </span><span class="comment">// SEMANTIC_COMPONENTS__LED_RGB_DEVICE_HPP_</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>}  <span class="comment">// namespace semantic_components</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="preprocessor">#endif  </span><span class="comment">// SEMANTIC_COMPONENTS__LED_RGB_DEVICE_HPP_</span></div>
 <div class="ttc" id="aclasssemantic__components_1_1LedRgbDevice_html"><div class="ttname"><a href="classsemantic__components_1_1LedRgbDevice.html">semantic_components::LedRgbDevice</a></div><div class="ttdef"><b>Definition</b> led_rgb_device.hpp:27</div></div>
-<div class="ttc" id="aclasssemantic__components_1_1LedRgbDevice_html_a0e9aec5db12e35ad6df352317f92a05e"><div class="ttname"><a href="classsemantic__components_1_1LedRgbDevice.html#a0e9aec5db12e35ad6df352317f92a05e">semantic_components::LedRgbDevice::set_values_from_message</a></div><div class="ttdeci">bool set_values_from_message(const std_msgs::msg::ColorRGBA &amp;message) override</div><div class="ttdoc">Set LED states from ColorRGBA message.</div><div class="ttdef"><b>Definition</b> led_rgb_device.hpp:59</div></div>
-<div class="ttc" id="aclasssemantic__components_1_1LedRgbDevice_html_a38d47a7e06a5bd26aed0f697af39a832"><div class="ttname"><a href="classsemantic__components_1_1LedRgbDevice.html#a38d47a7e06a5bd26aed0f697af39a832">semantic_components::LedRgbDevice::LedRgbDevice</a></div><div class="ttdeci">LedRgbDevice(const std::string &amp;name, const std::string &amp;interface_r, const std::string &amp;interface_g, const std::string &amp;interface_b)</div><div class="ttdef"><b>Definition</b> led_rgb_device.hpp:39</div></div>
+<div class="ttc" id="aclasssemantic__components_1_1LedRgbDevice_html_a0e9aec5db12e35ad6df352317f92a05e"><div class="ttname"><a href="classsemantic__components_1_1LedRgbDevice.html#a0e9aec5db12e35ad6df352317f92a05e">semantic_components::LedRgbDevice::set_values_from_message</a></div><div class="ttdeci">bool set_values_from_message(const std_msgs::msg::ColorRGBA &amp;message) override</div><div class="ttdoc">Set LED states from ColorRGBA message.</div><div class="ttdef"><b>Definition</b> led_rgb_device.hpp:60</div></div>
+<div class="ttc" id="aclasssemantic__components_1_1LedRgbDevice_html_a38d47a7e06a5bd26aed0f697af39a832"><div class="ttname"><a href="classsemantic__components_1_1LedRgbDevice.html#a38d47a7e06a5bd26aed0f697af39a832">semantic_components::LedRgbDevice::LedRgbDevice</a></div><div class="ttdeci">LedRgbDevice(const std::string &amp;name, const std::string &amp;interface_r, const std::string &amp;interface_g, const std::string &amp;interface_b)</div><div class="ttdoc">Constructor for an LED RGB device with interface names set based on device name.</div><div class="ttdef"><b>Definition</b> led_rgb_device.hpp:40</div></div>
 <div class="ttc" id="aclasssemantic__components_1_1SemanticComponentCommandInterface_html"><div class="ttname"><a href="classsemantic__components_1_1SemanticComponentCommandInterface.html">semantic_components::SemanticComponentCommandInterface</a></div><div class="ttdef"><b>Definition</b> semantic_component_command_interface.hpp:28</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
