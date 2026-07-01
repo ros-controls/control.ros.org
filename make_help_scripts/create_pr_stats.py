@@ -801,11 +801,7 @@ branches = {
   "onnxruntime_vendor": "main"
 }
 
-<<<<<<< HEAD
-maintainers = ["bmagyar", "destogl", "christophfroehlich"]
-=======
 maintainers = ["bmagyar", "destogl", "christophfroehlich", "saikishor", "MarqRazz"]
->>>>>>> 90ed131 (Add MarqRazz to maintainer statistics section (#676))
 blacklist = ["dependabot[bot]", "mergify[bot]"]
 
 # Get the current date and time
