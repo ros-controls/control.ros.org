@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Release Notes: Kilted Kaiju to Lyrical Luth &mdash; ROS2_Control: Rolling Jun 2026 documentation</title>
+  <title>Release Notes: Kilted Kaiju to Lyrical Luth &mdash; ROS2_Control: Rolling Jul 2026 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -19,7 +19,7 @@
     <link rel="canonical" href="https://control.ros.org/rolling//rolling/doc/ros2_controllers/doc/release_notes.html" />
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=78f8ee49"></script>
+      <script src="../../../_static/documentation_options.js?v=b1674ec1"></script>
       <script src="../../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -183,6 +183,11 @@
 don’t contain velocity / acceleration information, but the trajectory does. This way, the segment
 up to the first waypoint will use the same interpolation as the rest of the trajectory. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2043">#2043</a>)</p></li>
 <li><p>Added decelerate-to-stop functionality when a trajectory is canceled or preempted. Instead of immediately holding position, the controller can now smoothly decelerate each joint to a stop using the per-joint <code class="docutils literal notranslate"><span class="pre">max_deceleration_on_cancel</span></code> parameter. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2163">#2163</a>)</p></li>
+<li><p>Added trajectory deferral support via the <code class="docutils literal notranslate"><span class="pre">allow_trajectory_replacement</span></code> parameter. When enabled,
+a trajectory with a future <code class="docutils literal notranslate"><span class="pre">header.stamp</span></code> is deferred: the currently active trajectory
+continues executing until the start time arrives, then the new trajectory is executed.
+This is a partial port of the ROS 1 trajectory replacement behavior.
+(<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2401">#2401</a>)</p></li>
 </ul>
 </section>
 <section id="pid-controller">

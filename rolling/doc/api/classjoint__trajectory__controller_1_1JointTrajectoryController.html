@@ -297,6 +297,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>fill_partial_goal</b>
 <tr class="memitem:a7bfb1c09586d704c9fdc11b97063edb4" id="r_a7bfb1c09586d704c9fdc11b97063edb4"><td class="memItemLeft" align="right" valign="top"><a id="a7bfb1c09586d704c9fdc11b97063edb4" name="a7bfb1c09586d704c9fdc11b97063edb4"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>sort_to_local_joint_order</b> (std::shared_ptr&lt; trajectory_msgs::msg::JointTrajectory &gt; trajectory_msg) const</td></tr>
 <tr class="separator:a7bfb1c09586d704c9fdc11b97063edb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4812990736b1b18f30c10cfbd2c233eb" id="r_a4812990736b1b18f30c10cfbd2c233eb"><td class="memItemLeft" align="right" valign="top"><a id="a4812990736b1b18f30c10cfbd2c233eb" name="a4812990736b1b18f30c10cfbd2c233eb"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_internal_hold</b> (const std::shared_ptr&lt; trajectory_msgs::msg::JointTrajectory &gt; &amp;msg) const</td></tr>
+<tr class="separator:a4812990736b1b18f30c10cfbd2c233eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa04dba707e51406394c5eff1b2afec24" id="r_aa04dba707e51406394c5eff1b2afec24"><td class="memItemLeft" align="right" valign="top"><a id="aa04dba707e51406394c5eff1b2afec24" name="aa04dba707e51406394c5eff1b2afec24"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>validate_trajectory_msg</b> (const trajectory_msgs::msg::JointTrajectory &amp;trajectory) const</td></tr>
 <tr class="separator:aa04dba707e51406394c5eff1b2afec24"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -486,6 +489,18 @@ std::shared_ptr&lt; <a class="el" href="classjoint__trajectory__controller_1_1Tr
 <tr class="memitem:a6e41bf5e73faf3b62050094b96e5ed08" id="r_a6e41bf5e73faf3b62050094b96e5ed08"><td class="memItemLeft" align="right" valign="top"><a id="a6e41bf5e73faf3b62050094b96e5ed08" name="a6e41bf5e73faf3b62050094b96e5ed08"></a>
 <a class="el" href="classrealtime__tools_1_1RealtimeBuffer.html">realtime_tools::RealtimeBuffer</a>&lt; std::shared_ptr&lt; trajectory_msgs::msg::JointTrajectory &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>new_trajectory_msg_</b></td></tr>
 <tr class="separator:a6e41bf5e73faf3b62050094b96e5ed08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95dad1687dce0f18ad3d0c9e5ab2cb7f" id="r_a95dad1687dce0f18ad3d0c9e5ab2cb7f"><td class="memItemLeft" align="right" valign="top"><a id="a95dad1687dce0f18ad3d0c9e5ab2cb7f" name="a95dad1687dce0f18ad3d0c9e5ab2cb7f"></a>
+std::shared_ptr&lt; trajectory_msgs::msg::JointTrajectory &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>pending_traj_msg_</b> = nullptr</td></tr>
+<tr class="separator:a95dad1687dce0f18ad3d0c9e5ab2cb7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c7a33810b8893ccb945c261a5be952b" id="r_a1c7a33810b8893ccb945c261a5be952b"><td class="memItemLeft" align="right" valign="top"><a id="a1c7a33810b8893ccb945c261a5be952b" name="a1c7a33810b8893ccb945c261a5be952b"></a>
+rclcpp::Time&#160;</td><td class="memItemRight" valign="bottom"><b>pending_start_</b></td></tr>
+<tr class="separator:a1c7a33810b8893ccb945c261a5be952b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff3ffb72020255d2bccc1b1ec6745e67" id="r_aff3ffb72020255d2bccc1b1ec6745e67"><td class="memItemLeft" align="right" valign="top"><a id="aff3ffb72020255d2bccc1b1ec6745e67" name="aff3ffb72020255d2bccc1b1ec6745e67"></a>
+std::atomic&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>rt_clear_pending_</b> {false}</td></tr>
+<tr class="separator:aff3ffb72020255d2bccc1b1ec6745e67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f3f3c7d0f4a32b8701d46aca2d4bc71" id="r_a4f3f3c7d0f4a32b8701d46aca2d4bc71"><td class="memItemLeft" align="right" valign="top"><a id="a4f3f3c7d0f4a32b8701d46aca2d4bc71" name="a4f3f3c7d0f4a32b8701d46aca2d4bc71"></a>
+std::atomic&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>rt_active_goal_deferred_</b> {false}</td></tr>
+<tr class="separator:a4f3f3c7d0f4a32b8701d46aca2d4bc71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc44fb00758b2c7fe1ac3b0506f49a45" id="r_acc44fb00758b2c7fe1ac3b0506f49a45"><td class="memItemLeft" align="right" valign="top"><a id="acc44fb00758b2c7fe1ac3b0506f49a45" name="acc44fb00758b2c7fe1ac3b0506f49a45"></a>
 std::shared_ptr&lt; trajectory_msgs::msg::JointTrajectory &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>hold_position_msg_ptr_</b> = nullptr</td></tr>
 <tr class="separator:acc44fb00758b2c7fe1ac3b0506f49a45"><td class="memSeparator" colspan="2">&#160;</td></tr>

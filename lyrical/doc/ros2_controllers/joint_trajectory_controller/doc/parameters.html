@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Details about parameters &mdash; ROS2_Control: Rolling Jun 2026 documentation</title>
+  <title>Details about parameters &mdash; ROS2_Control: Rolling Jul 2026 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
@@ -19,7 +19,7 @@
     <link rel="canonical" href="https://control.ros.org/rolling//rolling/doc/ros2_controllers/joint_trajectory_controller/doc/parameters.html" />
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=78f8ee49"></script>
+      <script src="../../../../_static/documentation_options.js?v=b1674ec1"></script>
       <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -233,6 +233,11 @@
 <dt>allow_integration_in_goal_trajectories (bool)</dt><dd><p>Allow integration in goal trajectories to accept goals without position or velocity specified</p>
 <p>Default:  false</p>
 </dd>
+<dt>allow_trajectory_replacement (bool)</dt><dd><p>Port of the ROS 1 ‘update existing trajectory’ behavior.</p>
+<p>If true (default), a trajectory whose <code class="docutils literal notranslate"><span class="pre">header.stamp</span></code> lies in the future is deferred: the active trajectory keeps executing until that start time, then the new one is installed.</p>
+<p>If false, every incoming trajectory replaces the active one immediately (legacy behavior).</p>
+<p>Default:  true</p>
+</dd>
 <dt>set_last_command_interface_value_as_state_on_activation (bool)</dt><dd><p>When set to true, the last command interface value is used as both the current state and the last commanded state upon activation. If an interface (e.g. velocity) is available only as state and not command, the state is used. Use this to prevent sagging/jumps on activation when using soft or compliant hardware. When set to false, the current state is used for both.</p>
 <p>Default:  true</p>
 </dd>
@@ -366,6 +371,7 @@ position <span class="math notranslate nohighlight">\(s\)</span> from the state 
 <span class="w">    </span><span class="nt">allow_integration_in_goal_trajectories</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">    </span><span class="nt">allow_nonzero_velocity_at_trajectory_end</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">    </span><span class="nt">allow_partial_joints_goal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">allow_trajectory_replacement</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">cmd_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
 <span class="w">    </span><span class="nt">command_interfaces</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{}&#39;</span>
 <span class="w">    </span><span class="nt">command_joints</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{}&#39;</span>

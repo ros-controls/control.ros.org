@@ -119,7 +119,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:a640dbfbd7b525e448cbcc5d2ef98d029"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the velocity limits based on the position and acceleration limits.  <br /></td></tr>
 <tr class="separator:a640dbfbd7b525e448cbcc5d2ef98d029"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b69bddef11a8a0a505983c4042f1bf3" id="r_a7b69bddef11a8a0a505983c4042f1bf3"><td class="memItemLeft" align="right" valign="top">EffortLimits&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#a7b69bddef11a8a0a505983c4042f1bf3">compute_effort_limits</a> (const <a class="el" href="structjoint__limits_1_1JointLimits.html">joint_limits::JointLimits</a> &amp;limits, const std::optional&lt; double &gt; &amp;act_pos, const std::optional&lt; double &gt; &amp;act_vel, double)</td></tr>
-<tr class="memdesc:a7b69bddef11a8a0a505983c4042f1bf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the effort limits based on the position and velocity limits.  <br /></td></tr>
+<tr class="memdesc:a7b69bddef11a8a0a505983c4042f1bf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the effort limits based on the position and velocity limits.  <br /></td></tr>
 <tr class="separator:a7b69bddef11a8a0a505983c4042f1bf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98b4c6764c6bbb0c607ea4ff749bbf76" id="r_a98b4c6764c6bbb0c607ea4ff749bbf76"><td class="memItemLeft" align="right" valign="top">AccelerationLimits&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__limits.html#a98b4c6764c6bbb0c607ea4ff749bbf76">compute_acceleration_limits</a> (const <a class="el" href="structjoint__limits_1_1JointLimits.html">JointLimits</a> &amp;limits, double desired_acceleration, std::optional&lt; double &gt; actual_velocity)</td></tr>
 <tr class="memdesc:a98b4c6764c6bbb0c607ea4ff749bbf76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the acceleration limits based on the change in velocity and acceleration and deceleration limits.  <br /></td></tr>
@@ -382,17 +382,18 @@ Sai Kishor Kothakota </dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p>Compute the effort limits based on the position and velocity limits. </p>
+<p>Computes the effort limits based on the position and velocity limits. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">limits</td><td>The joint limits. </td></tr>
     <tr><td class="paramname">act_pos</td><td>The actual position of the joint. </td></tr>
     <tr><td class="paramname">act_vel</td><td>The actual velocity of the joint. </td></tr>
-    <tr><td class="paramname">dt</td><td>The time step. </td></tr>
+    <tr><td class="paramname">dt</td><td>The time step (currently unused). </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The effort limits, first is the lower limit and second is the upper limit. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The effort limits: lower_limit is the minimum allowed effort, upper_limit is the maximum. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>When the effort limits are disabled, this method returns [-inf, inf]. </dd></dl>
 
 </div>
 </div>
@@ -533,6 +534,7 @@ Sai Kishor Kothakota </dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The velocity limits, first is the lower limit and second is the upper limit. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>When the velocity limits are disabled, this method returns [-inf, inf]. </dd></dl>
 
 </div>
 </div>
