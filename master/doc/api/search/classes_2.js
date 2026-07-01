@@ -24,5 +24,7 @@ var searchData=
   ['controllerspec_21',['ControllerSpec',['../structcontroller__manager_1_1ControllerSpec.html',1,'controller_manager']]],
   ['controllertable_22',['ControllerTable',['../classrqt__controller__manager_1_1controller__manager_1_1ControllerTable.html',1,'rqt_controller_manager::controller_manager']]],
   ['controllerupdatestats_23',['ControllerUpdateStats',['../structcontroller__interface_1_1ControllerUpdateStats.html',1,'controller_interface']]],
-  ['controllerupdatestatus_24',['ControllerUpdateStatus',['../structcontroller__interface_1_1ControllerUpdateStatus.html',1,'controller_interface']]]
+  ['controllerupdatestatus_24',['ControllerUpdateStatus',['../structcontroller__interface_1_1ControllerUpdateStatus.html',1,'controller_interface']]],
+  ['controlloopstate_25',['ControlLoopState',['../structcontroller__manager_1_1ControlLoopState.html',1,'controller_manager']]],
+  ['controllooptimingconfig_26',['ControlLoopTimingConfig',['../structcontroller__manager_1_1ControlLoopTimingConfig.html',1,'controller_manager']]]
 ];
