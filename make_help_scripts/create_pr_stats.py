@@ -801,7 +801,7 @@ branches = {
   "onnxruntime_vendor": "main"
 }
 
-maintainers = ["bmagyar", "destogl", "christophfroehlich", "saikishor"]
+maintainers = ["bmagyar", "destogl", "christophfroehlich", "saikishor", "MarqRazz"]
 blacklist = ["dependabot[bot]", "mergify[bot]"]
 
 # Get the current date and time
