@@ -7,7 +7,7 @@ jobs:
   check-links:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         fetch-depth: 0
     - uses: actions/setup-python@v6
@@ -29,7 +29,7 @@ jobs:
     - name: Install doxygen and graphviz
       run: sudo apt-get install -y doxygen graphviz
     - name: Restore stats
-      uses: actions/cache/restore@v5
+      uses: actions/cache/restore@v6
       with:
         key: reviewer-stats-${{ github.run_id }}
         restore-keys: |
