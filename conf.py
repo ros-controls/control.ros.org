@@ -188,10 +188,7 @@ linkcheck_ignore = [
     r'https://gazebosim.org/home',
     r'https://blogs.oracle.com/linux/post/task-priority',
     r'https://www.blender.org/',
-    r'https://en\.cppreference\.com/.*',
-    r'https://cppreference.com',
-    r'https://control\.ros\.org/master/.*',
-    r'https://github\.com/ros-controls/control_msgs/blob/motion_primitives/.*'
+    r'https://en\.cppreference\.com/.*'
 ]
 
 # -- Options for HTMLHelp output ---------------------------------------------
