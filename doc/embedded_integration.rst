@@ -1,10 +1,9 @@
 Embedded Integration
 ====================
 
-This section collects resources and documentation about integrating
-ros2_control with embedded systems and microcontrollers.
+This section collects resources and documentation about integrating ros2_control with embedded systems and microcontrollers.
 
 .. toctree::
    :titlesonly:
 
-   Zephyr Zenoh Integration <zephyr-zenoh-integration/doc/index>
+   Zenbedded: Zenoh-based integration for Zephyr-supported hardware platforms <zephyr-zenoh-integration/doc/index>
