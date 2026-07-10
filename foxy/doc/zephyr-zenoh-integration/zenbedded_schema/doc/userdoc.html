@@ -1,0 +1,278 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>zenbedded_schema &mdash; ROS2_Control: Foxy Jul 2026 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/reviewer_stats.css?v=068b34ac" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=d85a351e" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//foxy/doc/zephyr-zenoh-integration/zenbedded_schema/doc/userdoc.html" />
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=b1674ec1"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+      <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html#architecture">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html#hardware-components">Hardware Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html#core-functionalities">Core functionalities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../differences_to_ros1/differences_to_ros1.html">Differences to ros_control (ROS1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../differences_to_ros1/differences_to_ros1.html#migration-guide-to-ros2-control">Migration Guide to ros2_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Pull Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html#rules-for-the-repositories-and-process-of-merging-pull-requests">Rules for the repositories and process of merging pull requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html#writing-documentation">Writing documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html#repository-structure-and-ci-configuration">Repository structure and CI configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../project_ideas.html">Project Ideas for GSoC 2022</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ROS2_Control: Foxy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">zenbedded_schema</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ros-controls/zephyr-zenoh-integration/blob/foxy/zenbedded_schema/doc/userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for a version of ROS 2 that has reached its EOL (end-of-life), and is no longer officially supported.
+    If you want up-to-date information, please have a look at <a href="../../../../../kilted/doc/zephyr-zenoh-integration/zenbedded_schema/doc/userdoc.html">Kilted</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="zenbedded-schema">
+<span id="zenbedded-schema-userdoc"></span><h1>zenbedded_schema<a class="headerlink" href="#zenbedded-schema" title="Link to this heading"></a></h1>
+<p>YAML-driven schema parser and C/C++ header generator for packed binary
+interface descriptions. builds with <code class="docutils literal notranslate"><span class="pre">colcon</span></code> or
+standalone <code class="docutils literal notranslate"><span class="pre">CMake</span></code>.</p>
+<p>The schema is the single source of truth for the wire format shared between
+the ROS 2 host and the Zephyr firmware.</p>
+<section id="schema-yaml-format">
+<h2>Schema YAML format<a class="headerlink" href="#schema-yaml-format" title="Link to this heading"></a></h2>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">state_interfaces</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">&lt;component_name&gt;</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">&lt;field_name&gt;</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;type&gt;</span>
+<span class="nt">command_interfaces</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">&lt;component_name&gt;</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">&lt;field_name&gt;</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;type&gt;</span>
+</pre></div>
+</div>
+<p>Supported field types: <code class="docutils literal notranslate"><span class="pre">float32</span></code>, <code class="docutils literal notranslate"><span class="pre">float64</span></code> / <code class="docutils literal notranslate"><span class="pre">double</span></code>, <code class="docutils literal notranslate"><span class="pre">int32</span></code>,
+<code class="docutils literal notranslate"><span class="pre">uint64</span></code>, <code class="docutils literal notranslate"><span class="pre">int16</span></code>, <code class="docutils literal notranslate"><span class="pre">uint8</span></code>.</p>
+</section>
+<section id="generated-output">
+<h2>Generated output<a class="headerlink" href="#generated-output" title="Link to this heading"></a></h2>
+<p>For the following schema:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">state_interfaces</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">motor_arm</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">float32</span>
+<span class="w">  </span><span class="nt">pendulum_axis</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">float32</span>
+<span class="nt">command_interfaces</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">motor_arm</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">float32</span>
+</pre></div>
+</div>
+<p>The generator produces:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define ZENBEDDED_STATE_BYTE_SIZE 8</span>
+<span class="cp">#define ZENBEDDED_COMMAND_BYTE_SIZE 4</span>
+
+<span class="cp">#pragma pack(push, 1)</span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">motor_arm_position</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">pendulum_axis_position</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="n">zenbedded_state_t</span><span class="p">;</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">motor_arm_position</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="n">zenbedded_command_t</span><span class="p">;</span>
+<span class="cp">#pragma pack(pop)</span>
+</pre></div>
+</div>
+</section>
+<section id="cli-usage">
+<h2>CLI usage<a class="headerlink" href="#cli-usage" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># colcon</span>
+colcon<span class="w"> </span>build<span class="w"> </span>--packages-select<span class="w"> </span>zenbedded_schema
+<span class="nb">source</span><span class="w"> </span>install/setup.bash
+generate_header<span class="w"> </span>--yaml<span class="w"> </span>interface_schema.yaml<span class="w"> </span>--output<span class="w"> </span>interface_data.h
+
+<span class="c1"># standalone</span>
+cmake<span class="w"> </span>-S<span class="w"> </span>.<span class="w"> </span>-B<span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>cmake<span class="w"> </span>--build<span class="w"> </span>build
+./build/generate_header<span class="w"> </span>--yaml<span class="w"> </span>interface_schema.yaml<span class="w"> </span>--output<span class="w"> </span>interface_data.h
+</pre></div>
+</div>
+</section>
+<section id="cmake-integration">
+<h2>CMake integration<a class="headerlink" href="#cmake-integration" title="Link to this heading"></a></h2>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">find_package</span><span class="p">(</span><span class="s">zenbedded_schema</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+
+<span class="nb">zenbedded_generate_header</span><span class="p">(</span>
+<span class="w">  </span><span class="s">YAML</span><span class="w">  </span><span class="s">interface_schema.yaml</span>
+<span class="w">  </span><span class="s">OUTPUT</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_BINARY_DIR</span><span class="o">}</span><span class="s">/interface_data.h</span>
+<span class="w">  </span><span class="s">TARGET</span><span class="w"> </span><span class="s">generate_interface_data</span>
+<span class="p">)</span>
+
+<span class="nb">add_dependencies</span><span class="p">(</span><span class="s">my_target</span><span class="w"> </span><span class="o">${</span><span class="nv">generate_interface_data</span><span class="o">}</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="api">
+<h2>API<a class="headerlink" href="#api" title="Link to this heading"></a></h2>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="nn">zenbedded</span>
+<span class="p">{</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">InterfaceSchema</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="n">InterfaceSchema</span><span class="w"> </span><span class="n">from_yaml</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">yaml_text</span><span class="p">);</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="n">InterfaceSchema</span><span class="w"> </span><span class="nf">from_yaml_file</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">file_path</span><span class="p">);</span>
+
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">valid</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">error</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="nf">state_buffer_size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="nf">command_buffer_size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="nf">total_state_interfaces</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="nf">total_command_interfaces</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">write_c_header</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">output_path</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="nf">read_state_field</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">field_index</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="nf">read_command_field</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">field_index</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">write_command_field</span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">field_index</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="nf">field_byte_size</span><span class="p">(</span><span class="n">FieldType</span><span class="w"> </span><span class="n">type</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: foxy
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Stable Releases</dt>
+        <dd><a href="../../../../../kilted/doc/zephyr-zenoh-integration/zenbedded_schema/doc/userdoc.html">Kilted (latest)</a></dd><br>
+        <dd><a href="../../../../../jazzy/doc/zephyr-zenoh-integration/zenbedded_schema/doc/userdoc.html">Jazzy</a></dd><br>
+        
+        <dd><a href="../../../../../humble/doc/zephyr-zenoh-integration/zenbedded_schema/doc/userdoc.html">Humble</a></dd><br>
+        
+        
+    </dl>
+    <dl>
+      <dt>End-of-Life</dt>
+        <dd><a href="../../../../../iron/doc/zephyr-zenoh-integration/zenbedded_schema/doc/userdoc.html">Iron</a></dd><br>
+        <dd><a href="../../../../../galactic/doc/zephyr-zenoh-integration/zenbedded_schema/doc/userdoc.html">Galactic</a></dd><br>
+        <dd><a href="userdoc.html">Foxy</a></dd><br>
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="../../../../../rolling/doc/zephyr-zenoh-integration/zenbedded_schema/doc/userdoc.html">Rolling</a></dd>
+      <dd><a href="../../../../../lyrical/doc/zephyr-zenoh-integration/zenbedded_schema/doc/userdoc.html">Lyrical</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

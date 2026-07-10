@@ -1,0 +1,204 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Architecture &mdash; ROS2_Control: Kilted Jul 2026 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/reviewer_stats.css?v=068b34ac" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=d85a351e" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//kilted/doc/zephyr-zenoh-integration/doc/architecture.html" />
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=b1674ec1"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_control/doc/index.html">ros2_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../utilities.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes/release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration/migration.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_list/api_list.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../governance/governance.html">Project Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statistics.html">Documentation Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation_downloads.html">Documentation Downloads</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ROS2_Control: Kilted</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Architecture</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ros-controls/zephyr-zenoh-integration/blob/kilted/doc/architecture.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+
+  <section id="architecture">
+<span id="id1"></span><h1>Architecture<a class="headerlink" href="#architecture" title="Link to this heading"></a></h1>
+<p>The integration provides two architecture variants.</p>
+<section id="no-cdr-architecture">
+<h2>No-CDR architecture<a class="headerlink" href="#no-cdr-architecture" title="Link to this heading"></a></h2>
+<a class="reference internal image-reference" href="../../../_images/nocdr_architecture.png"><img alt="No-CDR architecture — uses zenbedded_schema, zenbedded_hardware_interface, and zenbedded_rcl with zero-copy packed binary over Zenoh" class="align-center" src="../../../_images/nocdr_architecture.png" style="width: 300px;" /></a>
+<p>No intermediate serialization. <code class="docutils literal notranslate"><span class="pre">zenbedded_schema</span></code> defines the wire format,
+<code class="docutils literal notranslate"><span class="pre">zenbedded_hardware_interface</span></code> runs on the host, <code class="docutils literal notranslate"><span class="pre">zenbedded_rcl</span></code> runs on
+the MCU — all sharing the same packed struct layout.</p>
+</section>
+<section id="cdr-architecture">
+<h2>CDR architecture<a class="headerlink" href="#cdr-architecture" title="Link to this heading"></a></h2>
+<a class="reference internal image-reference" href="../../../_images/cdr_architecture.png"><img alt="CDR architecture — uses topic_based_hardware_interface and zenbedded_transport with CDR serialization over Zenoh" class="align-center" src="../../../_images/cdr_architecture.png" style="width: 300px;" /></a>
+<p>Uses standard CDR serialization. <code class="docutils literal notranslate"><span class="pre">topic_based_hardware_interface</span></code> on the host
+communicates with <code class="docutils literal notranslate"><span class="pre">zenbedded_transport</span></code> on the MCU over Zenoh topics.</p>
+</section>
+<section id="package-responsibilities">
+<h2>Package responsibilities<a class="headerlink" href="#package-responsibilities" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>zenbedded_hardware_interface <strong>[stable]</strong></dt><dd><p>A <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> <code class="docutils literal notranslate"><span class="pre">SystemInterface</span></code> that connects to remote MCUs over
+Zenoh. It reads sensor state from a Zenoh subscriber and writes joint
+commands to a Zenoh publisher. Configuration (endpoint, topics, interface
+schema) is done via ROS 2 parameters. Uses <code class="docutils literal notranslate"><span class="pre">realtime_tools::RealtimeBuffer</span></code>
+for lock-free state access.</p>
+</dd>
+<dt>zenbedded_schema <strong>[stable]</strong></dt><dd><p>A YAML-driven schema parser and C/C++ header generator that produces packed
+binary struct descriptions. Both the hardware interface (host-side) and the
+firmware (MCU-side) use the same schema to ensure wire-format compatibility.
+Has no ROS dependencies – builds standalone or with <code class="docutils literal notranslate"><span class="pre">colcon</span></code>.</p>
+</dd>
+<dt>zenbedded_transport <strong>[WIP]</strong></dt><dd><p>Zephyr module infrastructure intended for shared transport logic between
+the MCU and the ROS 2 host. Currently provides the module scaffolding
+(<code class="docutils literal notranslate"><span class="pre">Kconfig</span></code>, <code class="docutils literal notranslate"><span class="pre">west.yml</span></code>, Zephyr build integration) with empty serialization
+and transport stubs. Planned contents: MicroCDR-based serialization headers,
+shared message definitions, and Zenoh resource key mapping.</p>
+</dd>
+<dt>zenbedded_rcl <strong>[WIP]</strong></dt><dd><p>An embedded client library for Zephyr RTOS that provides a high-level,
+ROS-like API for hardware components running on the MCU. The
+<code class="docutils literal notranslate"><span class="pre">HardwareComponent</span></code> base class (lifecycle-managed sensor/actuator) is
+implemented and ready for use. <code class="docutils literal notranslate"><span class="pre">ComponentManager</span></code> is planned but not yet
+implemented. Communicates directly with the host over Zenoh without any
+intermediate agent.</p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: kilted
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Stable Releases</dt>
+        <dd><a href="architecture.html">Kilted (latest)</a></dd><br>
+        <dd><a href="../../../../jazzy/doc/zephyr-zenoh-integration/doc/architecture.html">Jazzy</a></dd><br>
+        
+        <dd><a href="../../../../humble/doc/zephyr-zenoh-integration/doc/architecture.html">Humble</a></dd><br>
+        
+        
+    </dl>
+    <dl>
+      <dt>End-of-Life</dt>
+        <dd><a href="../../../../iron/doc/zephyr-zenoh-integration/doc/architecture.html">Iron</a></dd><br>
+        <dd><a href="../../../../galactic/doc/zephyr-zenoh-integration/doc/architecture.html">Galactic</a></dd><br>
+        <dd><a href="../../../../foxy/doc/zephyr-zenoh-integration/doc/architecture.html">Foxy</a></dd><br>
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="../../../../rolling/doc/zephyr-zenoh-integration/doc/architecture.html">Rolling</a></dd>
+      <dd><a href="../../../../lyrical/doc/zephyr-zenoh-integration/doc/architecture.html">Lyrical</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

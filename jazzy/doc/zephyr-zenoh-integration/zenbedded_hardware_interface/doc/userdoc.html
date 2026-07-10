@@ -1,0 +1,281 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>zenbedded_hardware_interface &mdash; ROS2_Control: Jazzy Jul 2026 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/reviewer_stats.css?v=068b34ac" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=d85a351e" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//jazzy/doc/zephyr-zenoh-integration/zenbedded_hardware_interface/doc/userdoc.html" />
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=b1674ec1"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+      <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html">ros2_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utilities.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes/release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../migration/migration.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_list/api_list.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../governance/governance.html">Project Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../statistics.html">Documentation Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation_downloads.html">Documentation Downloads</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ROS2_Control: Jazzy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">zenbedded_hardware_interface</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ros-controls/zephyr-zenoh-integration/blob/jazzy/zenbedded_hardware_interface/doc/userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for an older, but still supported, version of ROS 2.
+    For information on the latest version, please have a look at <a href="../../../../../kilted/doc/zephyr-zenoh-integration/zenbedded_hardware_interface/doc/userdoc.html">Kilted</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="zenbedded-hardware-interface">
+<span id="zenbedded-hardware-interface-userdoc"></span><h1>zenbedded_hardware_interface<a class="headerlink" href="#zenbedded-hardware-interface" title="Link to this heading"></a></h1>
+<p>A <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> <code class="docutils literal notranslate"><span class="pre">SystemInterface</span></code> implementation that communicates with microcontrollers via Zenoh.
+Reads sensor state from a Zenoh subscriber and writes joint commands to a Zenoh publisher.</p>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Agent-less communication – no ROS 2 bridge process required on the MCU</p></li>
+<li><p>Lock-free state buffer using <code class="docutils literal notranslate"><span class="pre">realtime_tools::RealtimeBuffer</span></code></p></li>
+<li><p>YAML-driven interface schema (via <code class="docutils literal notranslate"><span class="pre">zenbedded_schema</span></code>) for wire-format
+compatibility between host and firmware</p></li>
+<li><p>Configurable Zenoh endpoint, mode (client/peer), and topic keys</p></li>
+<li><p>Interfaces declared dynamically from the schema YAML</p></li>
+</ul>
+</section>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h2>
+<p>The following parameters are read from the <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> URDF <code class="docutils literal notranslate"><span class="pre">&lt;param&gt;</span></code>
+tags:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">zenoh_endpoint</span></code></p></td>
+<td><p>string</p></td>
+<td><p>yes</p></td>
+<td><p>–</p></td>
+<td><p>Zenoh endpoint (e.g. <code class="docutils literal notranslate"><span class="pre">tcp/127.0.0.1:7447</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">state_topic</span></code></p></td>
+<td><p>string</p></td>
+<td><p>yes</p></td>
+<td><p>–</p></td>
+<td><p>Zenoh key expression for MCU state publications</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">command_topic</span></code></p></td>
+<td><p>string</p></td>
+<td><p>yes</p></td>
+<td><p>–</p></td>
+<td><p>Zenoh key expression for host command publications</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">schema_path</span></code></p></td>
+<td><p>string</p></td>
+<td><p>yes</p></td>
+<td><p>–</p></td>
+<td><p>Path to the interface schema YAML file</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">zenoh_mode</span></code></p></td>
+<td><p>string</p></td>
+<td><p>no</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;client&quot;</span></code></p></td>
+<td><p>Zenoh session mode (<code class="docutils literal notranslate"><span class="pre">&quot;client&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;peer&quot;</span></code>)</p></td>
+</tr>
+</tbody>
+</table>
+<p>Example URDF snippet:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ZenbeddedSystem&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;hardware&gt;</span>
+<span class="w">    </span><span class="nt">&lt;plugin&gt;</span>zenbedded::ZenbeddedHardware<span class="nt">&lt;/plugin&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;zenoh_endpoint&quot;</span><span class="nt">&gt;</span>tcp/192.168.1.100:7447<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;zenoh_mode&quot;</span><span class="nt">&gt;</span>client<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;state_topic&quot;</span><span class="nt">&gt;</span>rt/robot/state<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;command_topic&quot;</span><span class="nt">&gt;</span>rt/robot/command<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;schema_path&quot;</span><span class="nt">&gt;</span>$(find<span class="w"> </span>zenbedded_hardware_interface)/config/interface_schema.yaml<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/hardware&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;motor_arm&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;pendulum_axis&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
+<span class="nt">&lt;/ros2_control&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="example-schema-config-interface-schema-yaml">
+<h2>Example schema (<code class="docutils literal notranslate"><span class="pre">config/interface_schema.yaml</span></code>)<a class="headerlink" href="#example-schema-config-interface-schema-yaml" title="Link to this heading"></a></h2>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">state_interfaces</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">motor_arm</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">float32</span>
+<span class="w">  </span><span class="nt">pendulum_axis</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">float32</span>
+<span class="nt">command_interfaces</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">motor_arm</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">float32</span>
+</pre></div>
+</div>
+<p>This generates the following packed C struct via <code class="docutils literal notranslate"><span class="pre">zenbedded_schema</span></code>:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">motor_arm_position</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">pendulum_axis_position</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="n">zenbedded_state_t</span><span class="p">;</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">motor_arm_position</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="n">zenbedded_command_t</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="lock-free-state-access">
+<h2>Lock-free state access<a class="headerlink" href="#lock-free-state-access" title="Link to this heading"></a></h2>
+<p>State updates from the Zenoh callback are written into a
+<code class="docutils literal notranslate"><span class="pre">realtime_tools::RealtimeBuffer&lt;std::vector&lt;uint8_t&gt;&gt;</span></code>, allowing the
+real-time control loop to read the latest state snapshot without
+blocking on the network callback.</p>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: jazzy
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Stable Releases</dt>
+        <dd><a href="../../../../../kilted/doc/zephyr-zenoh-integration/zenbedded_hardware_interface/doc/userdoc.html">Kilted (latest)</a></dd><br>
+        <dd><a href="userdoc.html">Jazzy</a></dd><br>
+        
+        <dd><a href="../../../../../humble/doc/zephyr-zenoh-integration/zenbedded_hardware_interface/doc/userdoc.html">Humble</a></dd><br>
+        
+        
+    </dl>
+    <dl>
+      <dt>End-of-Life</dt>
+        <dd><a href="../../../../../iron/doc/zephyr-zenoh-integration/zenbedded_hardware_interface/doc/userdoc.html">Iron</a></dd><br>
+        <dd><a href="../../../../../galactic/doc/zephyr-zenoh-integration/zenbedded_hardware_interface/doc/userdoc.html">Galactic</a></dd><br>
+        <dd><a href="../../../../../foxy/doc/zephyr-zenoh-integration/zenbedded_hardware_interface/doc/userdoc.html">Foxy</a></dd><br>
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="../../../../../rolling/doc/zephyr-zenoh-integration/zenbedded_hardware_interface/doc/userdoc.html">Rolling</a></dd>
+      <dd><a href="../../../../../lyrical/doc/zephyr-zenoh-integration/zenbedded_hardware_interface/doc/userdoc.html">Lyrical</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
