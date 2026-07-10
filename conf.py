@@ -181,12 +181,14 @@ github_url = "https://github.com/ros-controls/control.ros.org"
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#filtering
 linkcheck_anchors_ignore_for_url = [
     'https://github.com/',
-    'https://index.ros.org/'
+    'https://index.ros.org/',
+    'https://docs.ros.org/'
     ]
 linkcheck_ignore = [
     r'https://gazebosim.org/home',
     r'https://blogs.oracle.com/linux/post/task-priority',
-    r'https://www.blender.org/'
+    r'https://www.blender.org/',
+    r'https://en\.cppreference\.com/.*'
 ]
 
 # -- Options for HTMLHelp output ---------------------------------------------
