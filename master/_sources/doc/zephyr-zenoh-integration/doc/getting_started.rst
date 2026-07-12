@@ -52,7 +52,7 @@ You can test it with the included test suite:
    source ~/zephyr_zenoh_ws/install/setup.bash
    colcon test --packages-select zenbedded_hardware_interface
 
-For integration with a real MCU, the ``zenbedded_hardware_interface`` must be instantiated in a ``ros2_control`` URDF with the required parameters. 
+For integration with a real MCU, the ``zenbedded_hardware_interface`` must be instantiated in a ``ros2_control`` URDF with the required parameters.
 See the :ref:`zenbedded_hardware_interface_userdoc` for parameter details.
 
 
