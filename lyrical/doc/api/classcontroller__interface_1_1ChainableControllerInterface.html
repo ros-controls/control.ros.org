@@ -148,7 +148,7 @@ Collaboration diagram for controller_interface::ChainableControllerInterface:</d
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a7cc9715499c50020997f4d4f10f67d14" id="r_a7cc9715499c50020997f4d4f10f67d14"><td class="memItemLeft" align="right" valign="top">return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#a7cc9715499c50020997f4d4f10f67d14">update</a> (const rclcpp::Time &amp;time, const rclcpp::Duration &amp;period) final</td></tr>
-<tr class="memdesc:a7cc9715499c50020997f4d4f10f67d14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Control step. Updates command interfaces from reference inputs and current states. <b>The method called in the (real-time) control loop.</b>  <br /></td></tr>
+<tr class="memdesc:a7cc9715499c50020997f4d4f10f67d14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Control step. Updates command interfaces from reference inputs and current states.  <br /></td></tr>
 <tr class="separator:a7cc9715499c50020997f4d4f10f67d14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca75cbab7693e216194b7c41aa12739d" id="r_aca75cbab7693e216194b7c41aa12739d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#aca75cbab7693e216194b7c41aa12739d">is_chainable</a> () const final</td></tr>
 <tr class="memdesc:aca75cbab7693e216194b7c41aa12739d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get information if a controller is chainable.  <br /></td></tr>
@@ -191,7 +191,7 @@ return_type&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (cons
 <tr class="memdesc:a12f198ac6c521b018ebf10698c96a314 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extending interface with initialization method which is individual for each controller.  <br /></td></tr>
 <tr class="separator:a12f198ac6c521b018ebf10698c96a314 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab03f647dc1343ea159624dec8c250af inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase" id="r_aab03f647dc1343ea159624dec8c250af"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcontroller__interface_1_1ControllerUpdateStatus.html">ControllerUpdateStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#aab03f647dc1343ea159624dec8c250af">trigger_update</a> (const rclcpp::Time &amp;time, const rclcpp::Duration &amp;period)</td></tr>
-<tr class="memdesc:aab03f647dc1343ea159624dec8c250af inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trigger update method. This method is used by the controller_manager to trigger the update method of the controller. The method is used to trigger the update method of the controller synchronously or asynchronously, based on the controller configuration. <b>The method called in the (real-time) control loop.</b>  <br /></td></tr>
+<tr class="memdesc:aab03f647dc1343ea159624dec8c250af inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trigger update method. This method is used by the controller_manager to trigger the update method of the controller. The method is used to trigger the update method of the controller synchronously or asynchronously, based on the controller configuration.  <br /></td></tr>
 <tr class="separator:aab03f647dc1343ea159624dec8c250af inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03633f8fc5280c1894c29688ab4971c5 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase" id="r_a03633f8fc5280c1894c29688ab4971c5"><td class="memItemLeft" align="right" valign="top">
 std::shared_ptr&lt; rclcpp_lifecycle::LifecycleNode &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>get_node</b> ()</td></tr>
@@ -656,7 +656,8 @@ pal_statistics::RegistrationsRAII&#160;</td><td class="memItemRight" valign="bot
 </table>
 </div><div class="memdoc">
 
-<p>Control step. Updates command interfaces from reference inputs and current states. <b>The method called in the (real-time) control loop.</b> </p>
+<p>Control step. Updates command interfaces from reference inputs and current states. </p>
+<dl class="section note"><dt>Note</dt><dd>This method needs to be real-time safe and thread-safe to be called in the control loop.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">time</td><td>The time at the start of this control loop iteration </td></tr>
@@ -705,6 +706,7 @@ pal_statistics::RegistrationsRAII&#160;</td><td class="memItemRight" valign="bot
 </div><div class="memdoc">
 
 <p>Execute calculations of the controller and update command interfaces. </p>
+<dl class="section note"><dt>Note</dt><dd>This method needs to be real-time safe and thread-safe to be called in the control loop.</dd></dl>
 <p>Update method for chainable controllers. In this method is valid to assume that \reference_interfaces_ hold the values for calculation of the commands in the current control step. This means that this method is called after \update_reference_from_subscribers if controller is not in chained mode.</p>
 <dl class="section return"><dt>Returns</dt><dd>return_type::OK if calculation and writing of interface is successfully, otherwise return_type::ERROR. </dd></dl>
 
@@ -747,6 +749,7 @@ pal_statistics::RegistrationsRAII&#160;</td><td class="memItemRight" valign="bot
 </div><div class="memdoc">
 
 <p>Update reference from input topics when not in chained mode. </p>
+<dl class="section note"><dt>Note</dt><dd>This method needs to be real-time safe and thread-safe to be called in the control loop.</dd></dl>
 <p>Each chainable controller implements this method to update reference from subscribers when not in chained mode.</p>
 <dl class="section return"><dt>Returns</dt><dd>return_type::OK if update is successfully, otherwise return_type::ERROR. </dd></dl>
 

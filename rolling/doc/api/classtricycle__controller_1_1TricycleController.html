@@ -143,7 +143,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a5f7cfc4ba2ad04175ec01b34e77d2e2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get configuration for controller's required state interfaces.  <br /></td></tr>
 <tr class="separator:a5f7cfc4ba2ad04175ec01b34e77d2e2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adea072f933f6b464856299ec77d76586" id="r_adea072f933f6b464856299ec77d76586"><td class="memItemLeft" align="right" valign="top">controller_interface::return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtricycle__controller_1_1TricycleController.html#adea072f933f6b464856299ec77d76586">update</a> (const rclcpp::Time &amp;time, const rclcpp::Duration &amp;period) override</td></tr>
-<tr class="memdesc:adea072f933f6b464856299ec77d76586"><td class="mdescLeft">&#160;</td><td class="mdescRight">Control step update. Command interfaces are updated based on on reference inputs and current states. <b>The method called in the (real-time) control loop.</b>  <br /></td></tr>
+<tr class="memdesc:adea072f933f6b464856299ec77d76586"><td class="mdescLeft">&#160;</td><td class="mdescRight">Control step update. Command interfaces are updated based on on reference inputs and current states.  <br /></td></tr>
 <tr class="separator:adea072f933f6b464856299ec77d76586"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbd02c166fe80f9db05553b99598eeef" id="r_adbd02c166fe80f9db05553b99598eeef"><td class="memItemLeft" align="right" valign="top">CallbackReturn&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtricycle__controller_1_1TricycleController.html#adbd02c166fe80f9db05553b99598eeef">on_init</a> () override</td></tr>
 <tr class="memdesc:adbd02c166fe80f9db05553b99598eeef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extending interface with initialization method which is individual for each controller.  <br /></td></tr>
@@ -199,7 +199,7 @@ return_type&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (cons
 <tr class="memdesc:a9e7ab0f474471aaa0e931ea8fe840bcc inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Custom configure method to read additional parameters for controller-nodes.  <br /></td></tr>
 <tr class="separator:a9e7ab0f474471aaa0e931ea8fe840bcc inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab03f647dc1343ea159624dec8c250af inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase" id="r_aab03f647dc1343ea159624dec8c250af"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcontroller__interface_1_1ControllerUpdateStatus.html">ControllerUpdateStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#aab03f647dc1343ea159624dec8c250af">trigger_update</a> (const rclcpp::Time &amp;time, const rclcpp::Duration &amp;period)</td></tr>
-<tr class="memdesc:aab03f647dc1343ea159624dec8c250af inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trigger update method. This method is used by the controller_manager to trigger the update method of the controller. The method is used to trigger the update method of the controller synchronously or asynchronously, based on the controller configuration. <b>The method called in the (real-time) control loop.</b>  <br /></td></tr>
+<tr class="memdesc:aab03f647dc1343ea159624dec8c250af inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trigger update method. This method is used by the controller_manager to trigger the update method of the controller. The method is used to trigger the update method of the controller synchronously or asynchronously, based on the controller configuration.  <br /></td></tr>
 <tr class="separator:aab03f647dc1343ea159624dec8c250af inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03633f8fc5280c1894c29688ab4971c5 inherit pub_methods_classcontroller__interface_1_1ControllerInterfaceBase" id="r_a03633f8fc5280c1894c29688ab4971c5"><td class="memItemLeft" align="right" valign="top">
 std::shared_ptr&lt; rclcpp_lifecycle::LifecycleNode &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>get_node</b> ()</td></tr>
@@ -480,7 +480,8 @@ pal_statistics::RegistrationsRAII&#160;</td><td class="memItemRight" valign="bot
 </table>
 </div><div class="memdoc">
 
-<p>Control step update. Command interfaces are updated based on on reference inputs and current states. <b>The method called in the (real-time) control loop.</b> </p>
+<p>Control step update. Command interfaces are updated based on on reference inputs and current states. </p>
+<dl class="section note"><dt>Note</dt><dd>This method needs to be real-time safe and thread-safe to be called in the control loop.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">time</td><td>The time at the start of this control loop iteration </td></tr>
