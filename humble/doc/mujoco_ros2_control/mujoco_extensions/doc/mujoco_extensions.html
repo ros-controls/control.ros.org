@@ -1,0 +1,339 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Custom MuJoCo Extensions &mdash; ROS2_Control: Humble Jul 2026 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/reviewer_stats.css?v=068b34ac" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=d85a351e" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//humble/doc/mujoco_ros2_control/mujoco_extensions/doc/mujoco_extensions.html" />
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=b1674ec1"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+      <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Developers Guide" href="../../doc/development.html" />
+    <link rel="prev" title="MuJoCo ROS 2 Control Plugins" href="../../mujoco_ros2_control_plugins/doc/plugins.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html">ros2_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../simulators/simulators.html">Simulator Integrations</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../simulators/simulators.html#hosted-by-ros-controls">Hosted by ros-controls</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../../gz_ros2_control/doc/index.html">Gazebo</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../doc/index.html">MuJoCo</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../doc/index.html#installation">Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../doc/index.html#quick-start">Quick Start</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../doc/index.html#add-ros2-control-tag-to-a-urdf">Add ros2_control tag to a URDF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../doc/index.html#urdf-to-mjcf-conversion">URDF to MJCF Conversion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../doc/index.html#mujoco-ros2-control-demos">mujoco_ros2_control_demos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../doc/index.html#support-matrix">Support Matrix</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../../doc/index.html#further-documentation">Further Documentation</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="../../mujoco_ros2_control/docs/hardware_interface.html">Hardware Interface Configuration</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../mujoco_ros2_control/docs/hardware_interface.html#simulation-topics-and-services">Simulation Topics and Services</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../mujoco_ros2_control/docs/hardware_interface.html#debugging">Debugging</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../mujoco_ros2_control/docs/tools.html">URDF to MJCF Conversion</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../mujoco_ros2_control/docs/modeling_tips.html">Modeling Tips</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../mujoco_ros2_control_demos/doc/tutorials.html">Tutorials</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../mujoco_ros2_control_plugins/doc/plugins.html">Plugins</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="#">MuJoCo Extensions</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#adding-extensions">Adding Extensions</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="#cmakelists-txt">CMakeLists.txt</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#using-with-simulate">Using with <code class="docutils literal notranslate"><span class="pre">simulate</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="#supported-extensions">Supported Extensions</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="#d-lidar-mujoco-plugin-lidar">3D Lidar (<code class="docutils literal notranslate"><span class="pre">mujoco.plugin.lidar</span></code>)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../../doc/development.html">Developers Guide</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../simulators/simulators.html#end-of-life">End-Of-Life</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../simulators/simulators.html#community">Community</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes/release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../migration/migration.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_list/api_list.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../governance/governance.html">Project Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../statistics.html">Documentation Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation_downloads.html">Documentation Downloads</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ROS2_Control: Humble</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../simulators/simulators.html">Simulator Integrations</a></li>
+          <li class="breadcrumb-item"><a href="../../doc/index.html">mujoco_ros2_control</a></li>
+      <li class="breadcrumb-item active">Custom MuJoCo Extensions</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/ros-controls/control.ros.org/blob/humble//doc/mujoco_ros2_control/mujoco_extensions/doc/mujoco_extensions.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for an older, but still supported, version of ROS 2.
+    For information on the latest version, please have a look at <a href="../../../../../kilted/doc/mujoco_ros2_control/mujoco_extensions/doc/mujoco_extensions.html">Kilted</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="custom-mujoco-extensions">
+<span id="id1"></span><h1>Custom MuJoCo Extensions<a class="headerlink" href="#custom-mujoco-extensions" title="Link to this heading"></a></h1>
+<p>MuJoCo includes support for <a class="reference external" href="https://mujoco.readthedocs.io/en/stable/programming/extension.html">custom extensions</a> that can be loaded directly into the application at runtime.
+This gives developers the ability to interact with the simulation at a very low level, and to connect custom applications that work directly with the <code class="docutils literal notranslate"><span class="pre">Simulate</span></code> application.
+To build custom extensions, follow the guide in the upstream documentation.</p>
+<section id="adding-extensions">
+<h2>Adding Extensions<a class="headerlink" href="#adding-extensions" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control</span></code> automatically discovers and loads MuJoCo plugin libraries at runtime using two mechanisms:</p>
+<ol class="arabic simple">
+<li><p><strong>Vendor plugins</strong>: Any <code class="docutils literal notranslate"><span class="pre">.so</span></code> files in the <code class="docutils literal notranslate"><span class="pre">mujoco_plugin/</span></code> directory next to the <code class="docutils literal notranslate"><span class="pre">ros2_control_node</span></code> executable (these come from <code class="docutils literal notranslate"><span class="pre">mujoco_vendor</span></code>).</p></li>
+<li><p><strong>Ament resource index</strong>: Any ROS 2 package that registers itself as a <code class="docutils literal notranslate"><span class="pre">mujoco_plugins</span></code> resource provider.</p></li>
+</ol>
+<p>To add a new MuJoCo plugin to the system, create a standard ament package that builds a shared library and register it with the ament resource index.
+The <code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control</span></code> node will find and load it automatically at startup.</p>
+<section id="cmakelists-txt">
+<h3>CMakeLists.txt<a class="headerlink" href="#cmakelists-txt" title="Link to this heading"></a></h3>
+<p>A minimal <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> for a MuJoCo plugin package:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.22</span><span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span><span class="s">my_mujoco_plugin</span><span class="p">)</span>
+
+<span class="nb">find_package</span><span class="p">(</span><span class="s">ament_cmake</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">mujoco_vendor</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+
+<span class="nb">add_library</span><span class="p">(</span><span class="s">my_plugin</span><span class="w"> </span><span class="s">SHARED</span><span class="w"> </span><span class="s">src/my_plugin.cpp</span><span class="w"> </span><span class="s">src/register.cpp</span><span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">my_plugin</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">mujoco::mujoco</span><span class="p">)</span>
+
+<span class="c"># Install the plugin .so into a known location</span>
+<span class="nb">install</span><span class="p">(</span><span class="s">TARGETS</span><span class="w"> </span><span class="s">my_plugin</span>
+<span class="w">  </span><span class="s">LIBRARY</span><span class="w"> </span><span class="s">DESTINATION</span><span class="w"> </span><span class="s">lib/</span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span><span class="s">/mujoco_plugin</span>
+<span class="p">)</span>
+
+<span class="c"># Register with the ament resource index so mujoco_ros2_control discovers it</span>
+<span class="nb">ament_index_register_resource</span><span class="p">(</span><span class="s">mujoco_plugins</span>
+<span class="w">  </span><span class="s">CONTENT</span><span class="w"> </span><span class="s2">&quot;lib/${PROJECT_NAME}/mujoco_plugin&quot;</span><span class="p">)</span>
+
+<span class="nb">ament_export_dependencies</span><span class="p">(</span><span class="s">mujoco_vendor</span><span class="p">)</span>
+<span class="nb">ament_package</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="using-with-simulate">
+<h3>Using with <code class="docutils literal notranslate"><span class="pre">simulate</span></code><a class="headerlink" href="#using-with-simulate" title="Link to this heading"></a></h3>
+<p>The standalone <code class="docutils literal notranslate"><span class="pre">simulate</span></code> application only loads plugins from the <code class="docutils literal notranslate"><span class="pre">mujoco_plugin/</span></code> directory next to its own binary.
+Users can attempt to install the plugin to that directory by adding a best-effort copy to <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">find_program</span><span class="p">(</span><span class="s">mujoco_SIMULATE</span><span class="w"> </span><span class="s">NAMES</span><span class="w"> </span><span class="s">simulate</span><span class="w"> </span><span class="s">mujoco-simulate</span><span class="p">)</span>
+<span class="nb">if</span><span class="p">(</span><span class="s">mujoco_SIMULATE</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">cmake_path</span><span class="p">(</span><span class="s">SET</span><span class="w"> </span><span class="s">mujoco_BIN_PATH</span><span class="w"> </span><span class="s">NORMALIZE</span><span class="w"> </span><span class="o">${</span><span class="nv">mujoco_SIMULATE</span><span class="o">}</span><span class="s">/..</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">install</span><span class="p">(</span><span class="s">CODE</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="s2">    execute_process(</span>
+<span class="s2">      COMMAND cp -f \&quot;</span><span class="s">\${CMAKE_INSTALL_PREFIX}/lib/${PROJECT_NAME}/mujoco_plugin/libmy_plugin.so\&quot;</span>
+<span class="w">                    </span><span class="s">\&quot;${mujoco_BIN_PATH}/mujoco_plugin/\&quot;</span>
+<span class="w">      </span><span class="s">RESULT_VARIABLE</span><span class="w"> </span><span class="s">_err</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">if</span><span class="p">(</span><span class="s">_err</span><span class="p">)</span>
+<span class="w">      </span><span class="nb">message</span><span class="p">(</span><span class="s">WARNING</span><span class="w"> </span><span class="s">\&quot;Could</span><span class="w"> </span><span class="s">not</span><span class="w"> </span><span class="s">install</span><span class="w"> </span><span class="s">plugin</span><span class="w"> </span><span class="s">next</span><span class="w"> </span><span class="s">to</span><span class="w"> </span><span class="s">simulate!</span><span class="w"> </span><span class="s">Manually</span><span class="w"> </span><span class="s">copy</span><span class="w"> </span><span class="s">it</span><span class="w"> </span><span class="s">to</span><span class="w"> </span><span class="o">${</span><span class="nv">mujoco_BIN_PATH</span><span class="o">}</span><span class="s">/mujoco_plugin/\</span><span class="s2">&quot;)</span>
+<span class="s2">    endif()</span>
+<span class="s2">  &quot;</span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>If the copy fails due to permissions, the warning message will include the exact <code class="docutils literal notranslate"><span class="pre">cp</span></code> command to run manually (e.g., with <code class="docutils literal notranslate"><span class="pre">sudo</span></code>).</p>
+</section>
+</section>
+<section id="supported-extensions">
+<h2>Supported Extensions<a class="headerlink" href="#supported-extensions" title="Link to this heading"></a></h2>
+<section id="d-lidar-mujoco-plugin-lidar">
+<h3>3D Lidar (<code class="docutils literal notranslate"><span class="pre">mujoco.plugin.lidar</span></code>)<a class="headerlink" href="#d-lidar-mujoco-plugin-lidar" title="Link to this heading"></a></h3>
+<p>This sensor uses ray casting to simulate lidar.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">lidar</span></code> sensor is associated with a site and finds the nearest collision points from the site along a set of vectors.
+The vectors are determined by the size and field of view parameters.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">resolution</span></code>: Horizontal and vertical ray count (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;360</span> <span class="pre">1&quot;</span></code> for a 2D scanner, <code class="docutils literal notranslate"><span class="pre">&quot;24</span> <span class="pre">10&quot;</span></code> for 3D).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">azimuth_range</span></code>: Min and max horizontal angles in radians (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;-3.14159</span> <span class="pre">3.14159&quot;</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">elevation_range</span></code>: Min and max vertical angles in radians. For 2D sensors, a single value is sufficient (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;0.0&quot;</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_range</span></code>: Maximum detection distance in meters.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">min_range</span></code>: Minimum detection distance in meters (optional, defaults to 0).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">update_rate</span></code>: Sensor update frequency in Hz (optional, defaults to every timestep).</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Setting an <code class="docutils literal notranslate"><span class="pre">update_rate</span></code> can drastically save time when calling <code class="docutils literal notranslate"><span class="pre">mj_step</span></code>.</p></li>
+<li><p>This may be removed in future versions after the <a class="reference external" href="https://mujoco.readthedocs.io/en/stable/modeling.html#sensors">interval attribute</a> is available for sensors.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>Note that rays that hit nothing or fall outside the min/max range return <code class="docutils literal notranslate"><span class="pre">-1</span></code>.</p>
+<p>Example MJCF for a 2D lidar sensor:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;extension&gt;</span>
+<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">plugin=</span><span class="s">&quot;mujoco.plugin.lidar&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;instance</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;2d_lidar&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;resolution&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;24 1&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;azimuth_range&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;-0.3 0.3&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;elevation_range&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;0.0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;max_range&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;10.0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;min_range&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;0.0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;update_rate&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;10.0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/instance&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/plugin&gt;</span>
+<span class="nt">&lt;/extension&gt;</span>
+
+<span class="nt">&lt;sensor&gt;</span>
+<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;2d_lidar&quot;</span><span class="w"> </span><span class="na">instance=</span><span class="s">&quot;2d_lidar&quot;</span><span class="w"> </span><span class="na">objtype=</span><span class="s">&quot;site&quot;</span><span class="w"> </span><span class="na">objname=</span><span class="s">&quot;lidar_sensor_frame&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/sensor&gt;</span>
+</pre></div>
+</div>
+<p>For a 3D lidar, increase the vertical resolution and specify an elevation range.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;extension&gt;</span>
+<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">plugin=</span><span class="s">&quot;mujoco.plugin.lidar&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;instance</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;3d_lidar&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;resolution&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;24 50&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;azimuth_range&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;-0.3 0.3&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;elevation_range&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;-1.0 1.0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;max_range&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;10.0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;min_range&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;0.0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;update_rate&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;1.0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/instance&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/plugin&gt;</span>
+<span class="nt">&lt;/extension&gt;</span>
+
+<span class="nt">&lt;sensor&gt;</span>
+<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;3d_lidar&quot;</span><span class="w"> </span><span class="na">instance=</span><span class="s">&quot;3d_lidar&quot;</span><span class="w"> </span><span class="na">objtype=</span><span class="s">&quot;site&quot;</span><span class="w"> </span><span class="na">objname=</span><span class="s">&quot;3d_lidar_sensor_frame&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/sensor&gt;</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../mujoco_ros2_control_plugins/doc/plugins.html" class="btn btn-neutral float-left" title="MuJoCo ROS 2 Control Plugins" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../doc/development.html" class="btn btn-neutral float-right" title="Developers Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: humble
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Stable Releases</dt>
+        <dd><a href="../../../../../kilted/doc/mujoco_ros2_control/mujoco_extensions/doc/mujoco_extensions.html">Kilted (latest)</a></dd><br>
+        <dd><a href="../../../../../jazzy/doc/mujoco_ros2_control/mujoco_extensions/doc/mujoco_extensions.html">Jazzy</a></dd><br>
+        
+        <dd><a href="mujoco_extensions.html">Humble</a></dd><br>
+        
+        
+    </dl>
+    <dl>
+      <dt>End-of-Life</dt>
+        <dd><a href="../../../../../iron/index.html">Iron</a></dd><br>
+        <dd><a href="../../../../../galactic/index.html">Galactic</a></dd><br>
+        <dd><a href="../../../../../foxy/index.html">Foxy</a></dd><br>
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="../../../../../rolling/doc/mujoco_ros2_control/mujoco_extensions/doc/mujoco_extensions.html">Rolling</a></dd>
+      <dd><a href="../../../../../lyrical/doc/mujoco_ros2_control/mujoco_extensions/doc/mujoco_extensions.html">Lyrical</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
