@@ -82,6 +82,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classmujoco__ros2__control_1_1MujocoSimulation-members.html">List of all members</a>  </div>
@@ -94,6 +95,12 @@ $(function() {
 
 <p><code>#include &lt;<a class="el" href="mujoco__simulation_8hpp_source.html">mujoco_simulation.hpp</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmujoco__ros2__control_1_1MujocoSimulation_1_1ControlState.html">ControlState</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Small snapshot of the state the hardware interface needs every control cycle.  <a href="structmujoco__ros2__control_1_1MujocoSimulation_1_1ControlState.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:a1f9576375d33b1e0b6fb3ec7db8048e2" id="r_a1f9576375d33b1e0b6fb3ec7db8048e2"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a1f9576375d33b1e0b6fb3ec7db8048e2">ResetCallback</a> = std::function&lt; void(bool fill_initial_state)&gt;</td></tr>
@@ -146,8 +153,14 @@ mjModel *&#160;</td><td class="memItemRight" valign="bottom"><b>model</b> ()</td
 <tr class="memitem:a530c2dd34e96228885e342d13ef860e5" id="r_a530c2dd34e96228885e342d13ef860e5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a530c2dd34e96228885e342d13ef860e5">copy_physics_data</a> (mjData *&amp;destination)</td></tr>
 <tr class="memdesc:a530c2dd34e96228885e342d13ef860e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies <code>mj_data_</code> into the provided container in a thread safe way.  <br /></td></tr>
 <tr class="separator:a530c2dd34e96228885e342d13ef860e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d670dd995a22c7887e5828483f2e119" id="r_a3d670dd995a22c7887e5828483f2e119"><td class="memItemLeft" align="right" valign="top">mjData *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a3d670dd995a22c7887e5828483f2e119">acquire_data_snapshot</a> ()</td></tr>
+<tr class="memdesc:a3d670dd995a22c7887e5828483f2e119"><td class="mdescLeft">&#160;</td><td class="mdescRight">Borrows the latest completed post-step snapshot of <code>mj_data_</code> (producer-pays copying).  <br /></td></tr>
+<tr class="separator:a3d670dd995a22c7887e5828483f2e119"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6986b64e22e40f7a83e5a96d0aedbb20" id="r_a6986b64e22e40f7a83e5a96d0aedbb20"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a6986b64e22e40f7a83e5a96d0aedbb20">copy_control_state</a> (<a class="el" href="structmujoco__ros2__control_1_1MujocoSimulation_1_1ControlState.html">ControlState</a> &amp;destination)</td></tr>
+<tr class="memdesc:a6986b64e22e40f7a83e5a96d0aedbb20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the latest per-step control state into the provided container.  <br /></td></tr>
+<tr class="separator:a6986b64e22e40f7a83e5a96d0aedbb20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21cd0cde74e91d319ff011ecfe26683f" id="r_a21cd0cde74e91d319ff011ecfe26683f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a21cd0cde74e91d319ff011ecfe26683f">apply_control_data</a> (mjData *control_data)</td></tr>
-<tr class="memdesc:a21cd0cde74e91d319ff011ecfe26683f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies control fields from <code>control_data</code> into the sim data in a thread safe way.  <br /></td></tr>
+<tr class="memdesc:a21cd0cde74e91d319ff011ecfe26683f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stages control fields from <code>control_data</code> for the physics loop in a thread safe way.  <br /></td></tr>
 <tr class="separator:a21cd0cde74e91d319ff011ecfe26683f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c6f5e107069a9e8fca0b7fee31c6370" id="r_a1c6f5e107069a9e8fca0b7fee31c6370"><td class="memItemLeft" align="right" valign="top"><a id="a1c6f5e107069a9e8fca0b7fee31c6370" name="a1c6f5e107069a9e8fca0b7fee31c6370"></a>
 std::recursive_mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>mutex</b> () const</td></tr>
@@ -162,9 +175,10 @@ std::recursive_mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><b
 <p>This class wraps the MuJoCo simulation and Simulate application, while providing necessary hooks to the ros2_control system interface to enable interaction with the sim using "normal" ROS 2 constructs.</p>
 <p>This class is responsible for mujoco model and data, along with threads for the main physics and rendering loops. It also provides several ROS interfaces for interacting with the underlying simulation - including publishing simulated time to /clock, as well as services for pausing, stepping, and resetting the simulation.</p>
 <p>Importantly, the physics loop is intended to run at whatever speed (relative realtime) is requested by the user. It is important to not interrupt the loop with locking calls that interact with either the physics sim data, <code>mj_data_</code>, or the model, <code>mj_model_</code>. Instead, consumers of this class are provided with functions to read all sim data and provide control inputs from their own mjData containers.</p>
-<p>The three functions relevant to interacting with the physics sim's mjData are:</p>
-<p><code>copy_physics_data(...)</code> will lock the sim and do a full copy of the existing <code>mj_data_</code> into the provided container, which can be used as the caller requires.</p>
-<p><code>apply_control_data(...)</code> will copy control inputs from the provided mjData into the physics loop. Specifically, it copies <code>ctrl</code>, <code>qfrc_applied</code>, and <code>xfrc_applied</code>. <code>ctrl</code> and <code>qfrc_applied</code> are copied directly into their corresponding buffers in <code>mj_data_</code>. However Cartesian forces from <code>xfrc_applied</code> competes with inputs from the Simulate's drag function, and so is resolved separately.</p>
+<p>The functions relevant to interacting with the physics sim's mjData are:</p>
+<p><code>copy_physics_data(...)</code> will lock the sim and do a full copy of the existing <code>mj_data_</code> into the provided container, which can be used as the caller requires. Because the physics loop can hold the sim mutex for a large fraction of a display refresh while it batches steps, this can block the caller and should not be used from latency-sensitive threads.</p>
+<p><code><a class="el" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a3d670dd995a22c7887e5828483f2e119" title="Borrows the latest completed post-step snapshot of mj_data_ (producer-pays copying).">acquire_data_snapshot()</a></code> instead borrows the most recent completed post-step snapshot of <code>mj_data_</code>, produced by the physics loop into a separate buffer. Acquiring is a pointer swap under a mutex that is never held for longer than a swap, so the caller performs no scene-sized copy and never waits on physics stepping or refresh. The returned data may lag <code>mj_data_</code> by a few timesteps. This is what the hardware interface uses in <code>write()</code>.</p>
+<p><code>apply_control_data(...)</code> will copy control inputs from the provided mjData into staging buffers that the physics loop applies to <code>mj_data_</code> immediately before each step. Specifically, it stages <code>ctrl</code>, <code>qfrc_applied</code>, and <code>xfrc_applied</code>. Cartesian forces from <code>xfrc_applied</code> compete with inputs from Simulate's drag function, so they are resolved separately. This only takes the control staging mutex and never blocks on physics stepping.</p>
 <p><code>overwrite_physics_data(...)</code> will completely replace the data for the sim. Should be used with extreme caution.</p>
 <p>Thread safety is still somewhat messy, as callers are provided with a simulation mutex that locks the model and data while the actual mujoco engine moves the sim forward. Callers need to be wary of locking that mutex external to this class, as it can have significant consequences on the simulation's speed. </p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
@@ -192,6 +206,27 @@ std::recursive_mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><b
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a3d670dd995a22c7887e5828483f2e119" name="a3d670dd995a22c7887e5828483f2e119"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d670dd995a22c7887e5828483f2e119">&#9670;&#160;</a></span>acquire_data_snapshot()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mjData * mujoco_ros2_control::MujocoSimulation::acquire_data_snapshot </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Borrows the latest completed post-step snapshot of <code>mj_data_</code> (producer-pays copying). </p>
+<p>The physics loop fills snapshot buffers on its own thread; this call only swaps pointers to take ownership of the most recent completed one, so the caller never performs a scene-sized copy and never waits for a stepping batch,or in-process refresh. If no new snapshot has completed since the last call, the same buffer is returned again. Also requests a fresh snapshot for the next call.</p>
+<p>Ownership contract: there is a single borrower slot. The returned buffer remains valid and is never touched by the physics loop until the next <code><a class="el" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a3d670dd995a22c7887e5828483f2e119" title="Borrows the latest completed post-step snapshot of mj_data_ (producer-pays copying).">acquire_data_snapshot()</a></code> call, at which point the previous buffer is recycled back to the producer. The borrower may freely write to the buffer (e.g., plugins composing control inputs); all such writes are discarded when the buffer is recycled and refilled. Only one consumer may use this API — concurrent callers would swap each other's buffer out from underneath them. Cold-path consumers that need their own copy should use <code>copy_physics_data</code> instead. </p>
+
+</div>
+</div>
 <a id="a21cd0cde74e91d319ff011ecfe26683f" name="a21cd0cde74e91d319ff011ecfe26683f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a21cd0cde74e91d319ff011ecfe26683f">&#9670;&#160;</a></span>apply_control_data()</h2>
 
@@ -208,8 +243,8 @@ std::recursive_mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><b
       </table>
 </div><div class="memdoc">
 
-<p>Copies control fields from <code>control_data</code> into the sim data in a thread safe way. </p>
-<p>Specifically, copies <code>control_data-&gt;ctrl</code> and <code>control_data-&gt;qfrc_applied</code> into <code>mj_data_</code> to update the hw control inputs for the next iteration of the physics loop. <code>control_data-&gt;xfrc_applied</code> is copied into <code>xfrc_plugin_desired_</code> to avoid conflicts from the simulate app. </p>
+<p>Stages control fields from <code>control_data</code> for the physics loop in a thread safe way. </p>
+<p>Specifically, copies <code>control_data-&gt;ctrl</code> and <code>control_data-&gt;qfrc_applied</code> into staging buffers which the physics loop copies into <code>mj_data_</code> immediately before each step. <code>control_data-&gt;xfrc_applied</code> is copied into <code>xfrc_plugin_desired_</code> to avoid conflicts from the simulate app. This does not lock the sim mutex and never waits on stepping. </p>
 
 </div>
 </div>
@@ -254,6 +289,27 @@ std::recursive_mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><b
 
 </div>
 </div>
+<a id="a6986b64e22e40f7a83e5a96d0aedbb20" name="a6986b64e22e40f7a83e5a96d0aedbb20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6986b64e22e40f7a83e5a96d0aedbb20">&#9670;&#160;</a></span>copy_control_state()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mujoco_ros2_control::MujocoSimulation::copy_control_state </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmujoco__ros2__control_1_1MujocoSimulation_1_1ControlState.html">ControlState</a> &amp;&#160;</td>
+          <td class="paramname"><em>destination</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Copies the latest per-step control state into the provided container. </p>
+<p>The copy is under a dedicated mutex and is significantly faster than physics stepping or full-mjData copies. This is what the hardware interface uses in <code>read()</code> and <code>write()</code>. </p>
+
+</div>
+</div>
 <a id="a530c2dd34e96228885e342d13ef860e5" name="a530c2dd34e96228885e342d13ef860e5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a530c2dd34e96228885e342d13ef860e5">&#9670;&#160;</a></span>copy_physics_data()</h2>
 
@@ -271,7 +327,7 @@ std::recursive_mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><b
 </div><div class="memdoc">
 
 <p>Copies <code>mj_data_</code> into the provided container in a thread safe way. </p>
-<p>This locks the sim mutex and will pause the physics loop, so should be used sparingly. </p><dl class="section note"><dt>Note</dt><dd>: If the destination is null it will be created. </dd></dl>
+<p>This locks the sim mutex and will pause the physics loop, so should be used sparingly. Latency-sensitive callers should use <code>acquire_data_snapshot</code> or <code>copy_control_state</code> instead. </p><dl class="section note"><dt>Note</dt><dd>: If the destination is null it will be created. </dd></dl>
 
 </div>
 </div>

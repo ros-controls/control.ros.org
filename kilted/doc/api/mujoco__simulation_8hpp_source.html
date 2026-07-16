@@ -118,196 +118,260 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacemujoco__ros2__control.html">mujoco_ros2_control</a></div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>{</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="foldopen" id="foldopen00086" data-start="{" data-end="};">
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="classmujoco__ros2__control_1_1MujocoSimulation.html">   86</a></span><span class="keyword">class </span><a class="code hl_class" href="classmujoco__ros2__control_1_1MujocoSimulation.html">MujocoSimulation</a></div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>{</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a1f9576375d33b1e0b6fb3ec7db8048e2">   99</a></span>  <span class="keyword">using </span><a class="code hl_typedef" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a1f9576375d33b1e0b6fb3ec7db8048e2">ResetCallback</a> = std::function&lt;void(<span class="keywordtype">bool</span> fill_initial_state)&gt;;</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a9535b618c2466f765d84228baa97aa41">  104</a></span>  <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a9535b618c2466f765d84228baa97aa41">MujocoSimulation</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  <a class="code hl_class" href="classmujoco__ros2__control_1_1MujocoSimulation.html">~MujocoSimulation</a>();</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#afdf18c28acef8235222d164f7df31904">initialize</a>(rclcpp::Node::SharedPtr node, <span class="keyword">const</span> std::string&amp; model_path, <span class="keyword">const</span> std::string&amp; mujoco_model_topic,</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                  <span class="keywordtype">double</span> sim_speed_factor, <span class="keywordtype">bool</span> headless);</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a68f8175f19fb2890fa64b13dbbf785ee">apply_keyframe</a>(<span class="keyword">const</span> std::string&amp; keyframe_name);</div>
+<div class="foldopen" id="foldopen00094" data-start="{" data-end="};">
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="classmujoco__ros2__control_1_1MujocoSimulation.html">   94</a></span><span class="keyword">class </span><a class="code hl_class" href="classmujoco__ros2__control_1_1MujocoSimulation.html">MujocoSimulation</a></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>{</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a1f9576375d33b1e0b6fb3ec7db8048e2">  107</a></span>  <span class="keyword">using </span><a class="code hl_typedef" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a1f9576375d33b1e0b6fb3ec7db8048e2">ResetCallback</a> = std::function&lt;void(<span class="keywordtype">bool</span> fill_initial_state)&gt;;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a9535b618c2466f765d84228baa97aa41">  112</a></span>  <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a9535b618c2466f765d84228baa97aa41">MujocoSimulation</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>  <a class="code hl_class" href="classmujoco__ros2__control_1_1MujocoSimulation.html">~MujocoSimulation</a>();</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#afdf18c28acef8235222d164f7df31904">initialize</a>(rclcpp::Node::SharedPtr node, <span class="keyword">const</span> std::string&amp; model_path, <span class="keyword">const</span> std::string&amp; mujoco_model_topic,</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                  <span class="keywordtype">double</span> sim_speed_factor, <span class="keywordtype">bool</span> headless);</div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a0ed9f1c07a91776d2ec49a2829d4b05e">capture_initial_state</a>();</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a68f8175f19fb2890fa64b13dbbf785ee">apply_keyframe</a>(<span class="keyword">const</span> std::string&amp; keyframe_name);</div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#af0307d7df1675321ac94e72a0fcf6b6c">set_reset_callback</a>(<a class="code hl_typedef" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a1f9576375d33b1e0b6fb3ec7db8048e2">ResetCallback</a> callback);</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a1cd9e4fc6e3986162f67045314891e6c">start_physics_thread</a>();</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a66c9d0154d8468503ea6293a873a1d6e">shutdown</a>();</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
-<div class="foldopen" id="foldopen00151" data-start="{" data-end="}">
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno"><a class="line" href="classmujoco__ros2__control_1_1MujocoSimulation.html#aab720c2985e5e474b47014af4aea932b">  151</a></span>  mjModel* <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#aab720c2985e5e474b47014af4aea932b">model</a>()</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>  {</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    <span class="keywordflow">return</span> mj_model_;</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>  }</div>
-</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a0ed9f1c07a91776d2ec49a2829d4b05e">capture_initial_state</a>();</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#af0307d7df1675321ac94e72a0fcf6b6c">set_reset_callback</a>(<a class="code hl_typedef" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a1f9576375d33b1e0b6fb3ec7db8048e2">ResetCallback</a> callback);</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a1cd9e4fc6e3986162f67045314891e6c">start_physics_thread</a>();</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a66c9d0154d8468503ea6293a873a1d6e">shutdown</a>();</div>
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
-<div class="foldopen" id="foldopen00163" data-start="{" data-end="}">
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno"><a class="line" href="classmujoco__ros2__control_1_1MujocoSimulation.html#aaf4b131af2b06a84290570f7065257b7">  163</a></span>  mjData* <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#aaf4b131af2b06a84290570f7065257b7">data</a>()</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  {</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    <span class="keywordflow">return</span> mj_data_;</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>  }</div>
+<div class="foldopen" id="foldopen00159" data-start="{" data-end="}">
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno"><a class="line" href="classmujoco__ros2__control_1_1MujocoSimulation.html#aab720c2985e5e474b47014af4aea932b">  159</a></span>  mjModel* <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#aab720c2985e5e474b47014af4aea932b">model</a>()</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  {</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    <span class="keywordflow">return</span> mj_model_;</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>  }</div>
 </div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a14ea07246e3eb5e7da387120a31a0ce8">reset_world_state</a>(<span class="keywordtype">bool</span> fill_initial_state);</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a850dcc448e5a8aa494e6b79fd6554637">copy_physics_model</a>(mjModel*&amp; destination);</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#ade8c567d6d5ce9c868ec0873d8bffac9">overwrite_physics_data</a>(mjData* source);</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a530c2dd34e96228885e342d13ef860e5">copy_physics_data</a>(mjData*&amp; destination);</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
+<div class="foldopen" id="foldopen00171" data-start="{" data-end="}">
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno"><a class="line" href="classmujoco__ros2__control_1_1MujocoSimulation.html#aaf4b131af2b06a84290570f7065257b7">  171</a></span>  mjData* <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#aaf4b131af2b06a84290570f7065257b7">data</a>()</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>  {</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    <span class="keywordflow">return</span> mj_data_;</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>  }</div>
+</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span> </div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a14ea07246e3eb5e7da387120a31a0ce8">reset_world_state</a>(<span class="keywordtype">bool</span> fill_initial_state);</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a850dcc448e5a8aa494e6b79fd6554637">copy_physics_model</a>(mjModel*&amp; destination);</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#ade8c567d6d5ce9c868ec0873d8bffac9">overwrite_physics_data</a>(mjData* source);</div>
 <div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span> </div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a21cd0cde74e91d319ff011ecfe26683f">apply_control_data</a>(mjData* control_data);</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span> </div>
-<div class="foldopen" id="foldopen00209" data-start="{" data-end="}">
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno"><a class="line" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a1c6f5e107069a9e8fca0b7fee31c6370">  209</a></span>  std::recursive_mutex&amp; <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a1c6f5e107069a9e8fca0b7fee31c6370">mutex</a>()<span class="keyword"> const</span></div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="keyword">  </span>{</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    RCLCPP_WARN_EXPRESSION(logger_, sim_mutex_ == <span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Sim recursive mutex is still nullptr&quot;</span>);</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    <span class="keywordflow">return</span> *sim_mutex_;</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>  }</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a530c2dd34e96228885e342d13ef860e5">copy_physics_data</a>(mjData*&amp; destination);</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>  mjData* <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a3d670dd995a22c7887e5828483f2e119">acquire_data_snapshot</a>();</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span> </div>
+<div class="foldopen" id="foldopen00232" data-start="{" data-end="};">
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno"><a class="line" href="structmujoco__ros2__control_1_1MujocoSimulation_1_1ControlState.html">  232</a></span>  <span class="keyword">struct </span><a class="code hl_struct" href="structmujoco__ros2__control_1_1MujocoSimulation_1_1ControlState.html">ControlState</a></div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>  {</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    mjtNum time{ 0.0 };</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    std::vector&lt;mjtNum&gt; qpos;</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    std::vector&lt;mjtNum&gt; qvel;</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    std::vector&lt;mjtNum&gt; act;</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    std::vector&lt;mjtNum&gt; qfrc_actuator;</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    std::vector&lt;mjtNum&gt; sensordata;</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>    std::vector&lt;mjtNum&gt; ctrl;</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>  };</div>
 </div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span> </div>
-<div class="foldopen" id="foldopen00220" data-start="{" data-end="}">
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno"><a class="line" href="classmujoco__ros2__control_1_1MujocoSimulation.html#ad45c62c62d4936a31635a707c6d12e6a">  220</a></span>  uint64_t <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#ad45c62c62d4936a31635a707c6d12e6a">step_count</a>()<span class="keyword"> const</span></div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span><span class="keyword">  </span>{</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    <span class="keywordflow">return</span> step_count_.load();</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>  }</div>
-</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span> </div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>  <span class="keywordtype">void</span> handle_xfrc_applied();</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span> </div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>  <span class="keywordtype">void</span> physics_loop();</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span> </div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>  <span class="keywordtype">void</span> publish_clock();</div>
 <div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span> </div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>  <span class="keywordtype">void</span> update_sim_display();</div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span> </div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>  <span class="comment">// Service callbacks</span></div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>  <span class="keywordtype">void</span> reset_world_callback(<span class="keyword">const</span> std::shared_ptr&lt;mujoco_ros2_control_msgs::srv::ResetWorld::Request&gt; request,</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>                            std::shared_ptr&lt;mujoco_ros2_control_msgs::srv::ResetWorld::Response&gt; response);</div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>  <span class="keywordtype">void</span> set_pause_callback(<span class="keyword">const</span> std::shared_ptr&lt;mujoco_ros2_control_msgs::srv::SetPause::Request&gt; request,</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>                          std::shared_ptr&lt;mujoco_ros2_control_msgs::srv::SetPause::Response&gt; response);</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>  <span class="keywordtype">void</span> step_simulation_callback(<span class="keyword">const</span> std::shared_ptr&lt;mujoco_ros2_control_msgs::srv::StepSimulation::Request&gt; request,</div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>                                std::shared_ptr&lt;mujoco_ros2_control_msgs::srv::StepSimulation::Response&gt; response);</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span> </div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>  rclcpp::Logger get_logger()<span class="keyword"> const</span></div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span><span class="keyword">  </span>{</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    <span class="keywordflow">return</span> logger_;</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>  }</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span> </div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>  <span class="comment">// Logger</span></div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>  rclcpp::Logger logger_ = rclcpp::get_logger(<span class="stringliteral">&quot;MujocoSimulation&quot;</span>);</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span> </div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>  <span class="comment">// ROS node (owned by the HW interface, used here for services and clock publisher).</span></div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>  rclcpp::Node::SharedPtr node_;</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span> </div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>  <span class="comment">// System information</span></div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>  std::string model_path_;</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>  std::string mujoco_model_topic_;</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span> </div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>  <span class="comment">// MuJoCo data pointers, these are the primary containers used by the physics simulation.</span></div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>  <span class="comment">// It is generally not recommended to interact with them directly.</span></div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>  mjModel* mj_model_{ <span class="keyword">nullptr</span> };</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span> </div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>  <span class="comment">// Primary data container for the physics loop. We do not recommend interacting with this</span></div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>  <span class="comment">// directly unless you are sure of what you are doing.</span></div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>  mjData* mj_data_{ <span class="keyword">nullptr</span> };</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span> </div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>  <span class="comment">// Buffers to track actively applied Cartesian forces from both the plugins and the Simulate /</span></div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>  <span class="comment">// viewer-only drag forces.</span></div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>  std::vector&lt;mjtNum&gt; xfrc_plugin_desired_;  <span class="comment">// Tracks forces from plugins</span></div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>  std::vector&lt;mjtNum&gt; xfrc_viewer_capture_;  <span class="comment">// Tracks forces from the viewer</span></div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>  std::vector&lt;mjtNum&gt; xfrc_last_written_;    <span class="comment">// tracks the last value written to xfrc_applied</span></div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span> </div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>  <span class="comment">// For rendering</span></div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>  mjvCamera cam_;</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>  mjvOption opt_;</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>  mjvPerturb pert_;</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span> </div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>  <span class="comment">// Speed scaling parameter. if set to &gt;0 then we ignore the value set in the simulate app and instead</span></div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>  <span class="comment">// attempt to loop at whatever this is set to. If this is &lt;0, then we use the value from the app.</span></div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>  <span class="keywordtype">double</span> sim_speed_factor_{ -1.0 };</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span> </div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>  <span class="comment">// True when running without a display (no GLFW window)</span></div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>  <span class="keywordtype">bool</span> headless_{ <span class="keyword">false</span> };</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span> </div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>  <span class="comment">// Primary simulate object</span></div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>  std::unique_ptr&lt;mujoco::Simulate&gt; sim_;</div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span> </div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>  <span class="comment">// Threads for rendering physics and the UI simulation</span></div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>  std::thread physics_thread_;</div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>  std::thread ui_thread_;</div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span> </div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>  <span class="comment">// Primary clock publisher for the world</span></div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>  std::shared_ptr&lt;rclcpp::Publisher&lt;rosgraph_msgs::msg::Clock&gt;&gt; clock_publisher_;</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>  <a class="code hl_class" href="classrealtime__tools_1_1RealtimePublisher.html">realtime_tools::RealtimePublisher&lt;rosgraph_msgs::msg::Clock&gt;::SharedPtr</a> clock_realtime_publisher_;</div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span> </div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>  <span class="comment">// Mutex used inside simulate.h for protecting model/data, we keep a reference</span></div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>  <span class="comment">// here to protect access to shared data.</span></div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>  <span class="comment">// TODO: It would be far better to put all relevant data into a single container with accessors</span></div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>  <span class="comment">//       in a common location rather than passing around the raw pointer to the mutex, but it would</span></div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>  <span class="comment">//       require more work to pull it out of simulate.h.</span></div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>  std::recursive_mutex* sim_mutex_{ <span class="keyword">nullptr</span> };</div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span> </div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>  <span class="comment">// Reset world service</span></div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>  rclcpp::CallbackGroup::SharedPtr reset_world_cb_group_;</div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>  rclcpp::Service&lt;mujoco_ros2_control_msgs::srv::ResetWorld&gt;::SharedPtr reset_world_service_;</div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span> </div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>  <span class="comment">// Set pause service</span></div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>  rclcpp::CallbackGroup::SharedPtr set_pause_cb_group_;</div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>  rclcpp::Service&lt;mujoco_ros2_control_msgs::srv::SetPause&gt;::SharedPtr set_pause_service_;</div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span> </div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>  <span class="comment">// Step simulation service</span></div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>  rclcpp::CallbackGroup::SharedPtr step_simulation_cb_group_;</div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>  rclcpp::Service&lt;mujoco_ros2_control_msgs::srv::StepSimulation&gt;::SharedPtr step_simulation_service_;</div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span> </div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>  <span class="comment">// Pending steps to execute while paused, and synchronization for blocking callers</span></div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>  std::atomic&lt;uint32_t&gt; pending_steps_{ 0 };</div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>  std::atomic&lt;bool&gt; step_diverged_{ <span class="keyword">false</span> };</div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>  std::atomic&lt;bool&gt; steps_interrupted_{ <span class="keyword">false</span> };</div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>  std::atomic&lt;bool&gt; keyboard_step_requested_{ <span class="keyword">false</span> };</div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>  std::atomic&lt;uint64_t&gt; step_count_{ 0 };</div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>  std::mutex steps_cv_mutex_;</div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>  std::condition_variable steps_cv_;</div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span> </div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>  <span class="comment">// Storage for initial state (used for reset_world)</span></div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>  std::vector&lt;mjtNum&gt; initial_qpos_;</div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>  std::vector&lt;mjtNum&gt; initial_qvel_;</div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>  std::vector&lt;mjtNum&gt; initial_ctrl_;</div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span> </div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>  <span class="comment">// Callback into the HW interface to perform component-side reset bookkeeping.</span></div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>  <a class="code hl_typedef" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a1f9576375d33b1e0b6fb3ec7db8048e2">ResetCallback</a> reset_callback_;</div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>};</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a6986b64e22e40f7a83e5a96d0aedbb20">copy_control_state</a>(<a class="code hl_struct" href="structmujoco__ros2__control_1_1MujocoSimulation_1_1ControlState.html">ControlState</a>&amp; destination);</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span> </div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a21cd0cde74e91d319ff011ecfe26683f">apply_control_data</a>(mjData* control_data);</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span> </div>
+<div class="foldopen" id="foldopen00265" data-start="{" data-end="}">
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno"><a class="line" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a1c6f5e107069a9e8fca0b7fee31c6370">  265</a></span>  std::recursive_mutex&amp; <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a1c6f5e107069a9e8fca0b7fee31c6370">mutex</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span><span class="keyword">  </span>{</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    RCLCPP_WARN_EXPRESSION(logger_, sim_mutex_ == <span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Sim recursive mutex is still nullptr&quot;</span>);</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    <span class="keywordflow">return</span> *sim_mutex_;</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>  }</div>
 </div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span> </div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>}  <span class="comment">// namespace mujoco_ros2_control</span></div>
-<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html">mujoco_ros2_control::MujocoSimulation</a></div><div class="ttdoc">ROS 2-based container for the mujoco Simulate application.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.hpp:87</div></div>
-<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_a0ed9f1c07a91776d2ec49a2829d4b05e"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#a0ed9f1c07a91776d2ec49a2829d4b05e">mujoco_ros2_control::MujocoSimulation::capture_initial_state</a></div><div class="ttdeci">void capture_initial_state()</div><div class="ttdoc">Can be called by consumers of this class to store the current state as the &quot;initial&quot; state.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.cpp:714</div></div>
-<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_a14ea07246e3eb5e7da387120a31a0ce8"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#a14ea07246e3eb5e7da387120a31a0ce8">mujoco_ros2_control::MujocoSimulation::reset_world_state</a></div><div class="ttdeci">void reset_world_state(bool fill_initial_state)</div><div class="ttdoc">Reset simulation state (qpos/qvel/ctrl/sensors/forces) to the captured initial state.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.cpp:783</div></div>
-<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_a1c6f5e107069a9e8fca0b7fee31c6370"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#a1c6f5e107069a9e8fca0b7fee31c6370">mujoco_ros2_control::MujocoSimulation::mutex</a></div><div class="ttdeci">std::recursive_mutex &amp; mutex() const</div><div class="ttdoc">Accessor for the mutex which locks access to the data and model.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.hpp:209</div></div>
-<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_a1cd9e4fc6e3986162f67045314891e6c"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#a1cd9e4fc6e3986162f67045314891e6c">mujoco_ros2_control::MujocoSimulation::start_physics_thread</a></div><div class="ttdeci">void start_physics_thread()</div><div class="ttdoc">Start the physics thread. Must be called after load_model().</div><div class="ttdef"><b>Definition</b> mujoco_simulation.cpp:727</div></div>
-<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_a1f9576375d33b1e0b6fb3ec7db8048e2"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#a1f9576375d33b1e0b6fb3ec7db8048e2">mujoco_ros2_control::MujocoSimulation::ResetCallback</a></div><div class="ttdeci">std::function&lt; void(bool fill_initial_state)&gt; ResetCallback</div><div class="ttdoc">Callback invoked when the simulation's state must be reset.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.hpp:99</div></div>
-<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_a21cd0cde74e91d319ff011ecfe26683f"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#a21cd0cde74e91d319ff011ecfe26683f">mujoco_ros2_control::MujocoSimulation::apply_control_data</a></div><div class="ttdeci">void apply_control_data(mjData *control_data)</div><div class="ttdoc">Copies control fields from control_data into the sim data in a thread safe way.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.cpp:983</div></div>
-<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_a530c2dd34e96228885e342d13ef860e5"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#a530c2dd34e96228885e342d13ef860e5">mujoco_ros2_control::MujocoSimulation::copy_physics_data</a></div><div class="ttdeci">void copy_physics_data(mjData *&amp;destination)</div><div class="ttdoc">Copies mj_data_ into the provided container in a thread safe way.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.cpp:972</div></div>
-<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_a66c9d0154d8468503ea6293a873a1d6e"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#a66c9d0154d8468503ea6293a873a1d6e">mujoco_ros2_control::MujocoSimulation::shutdown</a></div><div class="ttdeci">void shutdown()</div><div class="ttdoc">Stop the physics and UI threads if they are running.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.cpp:764</div></div>
-<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_a68f8175f19fb2890fa64b13dbbf785ee"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#a68f8175f19fb2890fa64b13dbbf785ee">mujoco_ros2_control::MujocoSimulation::apply_keyframe</a></div><div class="ttdeci">bool apply_keyframe(const std::string &amp;keyframe_name)</div><div class="ttdoc">Apply a keyframe to the simulation by name.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.cpp:696</div></div>
-<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_a850dcc448e5a8aa494e6b79fd6554637"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#a850dcc448e5a8aa494e6b79fd6554637">mujoco_ros2_control::MujocoSimulation::copy_physics_model</a></div><div class="ttdeci">void copy_physics_model(mjModel *&amp;destination)</div><div class="ttdoc">Copies mj_model_ into the provided container in a thread safe way.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.cpp:960</div></div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span> </div>
+<div class="foldopen" id="foldopen00276" data-start="{" data-end="}">
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno"><a class="line" href="classmujoco__ros2__control_1_1MujocoSimulation.html#ad45c62c62d4936a31635a707c6d12e6a">  276</a></span>  uint64_t <a class="code hl_function" href="classmujoco__ros2__control_1_1MujocoSimulation.html#ad45c62c62d4936a31635a707c6d12e6a">step_count</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span><span class="keyword">  </span>{</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>    <span class="keywordflow">return</span> step_count_.load();</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>  }</div>
+</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span> </div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>  <span class="keywordtype">void</span> apply_staged_control_inputs();</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span> </div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>  <span class="keywordtype">void</span> publish_control_state();</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span> </div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>  <span class="keywordtype">void</span> refresh_data_snapshot();</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span> </div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>  <span class="keywordtype">void</span> physics_loop();</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span> </div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>  <span class="keywordtype">void</span> publish_clock();</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span> </div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>  <span class="keywordtype">void</span> update_sim_display();</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span> </div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>  <span class="comment">// Service callbacks</span></div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>  <span class="keywordtype">void</span> reset_world_callback(<span class="keyword">const</span> std::shared_ptr&lt;mujoco_ros2_control_msgs::srv::ResetWorld::Request&gt; request,</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>                            std::shared_ptr&lt;mujoco_ros2_control_msgs::srv::ResetWorld::Response&gt; response);</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>  <span class="keywordtype">void</span> set_pause_callback(<span class="keyword">const</span> std::shared_ptr&lt;mujoco_ros2_control_msgs::srv::SetPause::Request&gt; request,</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>                          std::shared_ptr&lt;mujoco_ros2_control_msgs::srv::SetPause::Response&gt; response);</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>  <span class="keywordtype">void</span> step_simulation_callback(<span class="keyword">const</span> std::shared_ptr&lt;mujoco_ros2_control_msgs::srv::StepSimulation::Request&gt; request,</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>                                std::shared_ptr&lt;mujoco_ros2_control_msgs::srv::StepSimulation::Response&gt; response);</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span> </div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>  rclcpp::Logger get_logger()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span><span class="keyword">  </span>{</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>    <span class="keywordflow">return</span> logger_;</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>  }</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span> </div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>  <span class="comment">// Logger</span></div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>  rclcpp::Logger logger_ = rclcpp::get_logger(<span class="stringliteral">&quot;MujocoSimulation&quot;</span>);</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span> </div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>  <span class="comment">// ROS node (owned by the HW interface, used here for services and clock publisher).</span></div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>  rclcpp::Node::SharedPtr node_;</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span> </div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>  <span class="comment">// System information</span></div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>  std::string model_path_;</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>  std::string mujoco_model_topic_;</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span> </div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>  <span class="comment">// MuJoCo data pointers, these are the primary containers used by the physics simulation.</span></div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>  <span class="comment">// It is generally not recommended to interact with them directly.</span></div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>  mjModel* mj_model_{ <span class="keyword">nullptr</span> };</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span> </div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>  <span class="comment">// Primary data container for the physics loop. We do not recommend interacting with this</span></div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>  <span class="comment">// directly unless you are sure of what you are doing.</span></div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>  mjData* mj_data_{ <span class="keyword">nullptr</span> };</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span> </div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>  <span class="comment">// Double-buffered snapshot of mj_data_: the physics loop pays for all scene-sized copies,</span></div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>  <span class="comment">// the consumer borrows the result via acquire_data_snapshot() and performs no copy at all.</span></div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>  <span class="comment">// The producer (any writer holding the sim mutex) fills snapshot_write_ outside any shared</span></div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>  <span class="comment">// lock and raises snapshot_ready_; the consumer, when the flag is up, swaps the two pointers</span></div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>  <span class="comment">// under data_exchange_mutex_ and reads snapshot_read_ in place.</span></div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>  mjData* snapshot_write_{ <span class="keyword">nullptr</span> };</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>  mjData* snapshot_read_{ <span class="keyword">nullptr</span> };</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>  <span class="keywordtype">bool</span> snapshot_ready_{ <span class="keyword">false</span> };</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span> </div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>  <span class="comment">// Control inputs staged by apply_control_data, applied to mj_data_ before each step.</span></div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>  std::vector&lt;mjtNum&gt; ctrl_staged_;</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>  std::vector&lt;mjtNum&gt; qfrc_applied_staged_;</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span> </div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>  <span class="comment">// False until apply_control_data is first called (and cleared on reset), so that initial /</span></div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>  <span class="comment">// reset ctrl values in mj_data_ are not clobbered by stale staging buffers.</span></div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>  <span class="keywordtype">bool</span> control_inputs_staged_{ <span class="keyword">false</span> };</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span> </div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>  <span class="comment">// Buffers to track actively applied Cartesian forces from both the plugins and the Simulate /</span></div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>  <span class="comment">// viewer-only drag forces.</span></div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>  std::vector&lt;mjtNum&gt; xfrc_plugin_desired_;  <span class="comment">// Tracks forces from plugins</span></div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>  std::vector&lt;mjtNum&gt; xfrc_viewer_capture_;  <span class="comment">// Tracks forces from the viewer</span></div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>  std::vector&lt;mjtNum&gt; xfrc_last_written_;    <span class="comment">// tracks the last value written to xfrc_applied</span></div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span> </div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>  <span class="comment">// Guards only the snapshot pointer swap and snapshot_ready_ flag.</span></div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>  <span class="comment">// Lock order: sim_mutex_ (if needed) is always taken before this one.</span></div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>  std::mutex data_exchange_mutex_;</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span> </div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>  <span class="comment">// Set by acquire_data_snapshot when a consumer takes the snapshot; the physics loop only</span></div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>  <span class="comment">// runs the expensive full refresh when this is set, so refresh bandwidth tracks consumer</span></div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>  <span class="comment">// demand instead of the batch rate. Starts true so the first refresh happens.</span></div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>  std::atomic&lt;bool&gt; snapshot_refresh_requested_{ <span class="keyword">true</span> };</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span> </div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>  <span class="comment">// Guards the staged control inputs (ctrl_staged_, qfrc_applied_staged_, xfrc_plugin_desired_,</span></div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>  <span class="comment">// control_inputs_staged_). Separate from data_exchange_mutex_ so that staging commands in</span></div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>  <span class="comment">// write() and applying them before each physics step never queue behind a full mjData copy.</span></div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>  <span class="comment">// Critical sections are all small buffer copies.</span></div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>  <span class="comment">// Lock order: sim_mutex_ (if needed) before this one; never held with data_exchange_mutex_.</span></div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>  std::mutex control_staging_mutex_;</div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span> </div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>  <span class="comment">// Per-step control state served by copy_control_state. Guarded by its own mutex, separate</span></div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>  <span class="comment">// from data_exchange_mutex_, so the reduced control-state copies never queue behind a full</span></div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>  <span class="comment">// mjData snapshot copy.</span></div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>  <span class="comment">// Lock order: sim_mutex_ (if needed) before this one; never held with data_exchange_mutex_.</span></div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>  ControlState control_state_;</div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>  std::mutex control_state_mutex_;</div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span> </div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>  <span class="comment">// For rendering</span></div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>  mjvCamera cam_;</div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>  mjvOption opt_;</div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>  mjvPerturb pert_;</div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span> </div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>  <span class="comment">// Speed scaling parameter. if set to &gt;0 then we ignore the value set in the simulate app and instead</span></div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>  <span class="comment">// attempt to loop at whatever this is set to. If this is &lt;0, then we use the value from the app.</span></div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>  <span class="keywordtype">double</span> sim_speed_factor_{ -1.0 };</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span> </div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>  <span class="comment">// True when running without a display (no GLFW window)</span></div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>  <span class="keywordtype">bool</span> headless_{ <span class="keyword">false</span> };</div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span> </div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>  <span class="comment">// Primary simulate object</span></div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>  std::unique_ptr&lt;mujoco::Simulate&gt; sim_;</div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span> </div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>  <span class="comment">// Threads for rendering physics and the UI simulation</span></div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>  std::thread physics_thread_;</div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>  std::thread ui_thread_;</div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span> </div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>  <span class="comment">// Primary clock publisher for the world</span></div>
+<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>  std::shared_ptr&lt;rclcpp::Publisher&lt;rosgraph_msgs::msg::Clock&gt;&gt; clock_publisher_;</div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>  <a class="code hl_class" href="classrealtime__tools_1_1RealtimePublisher.html">realtime_tools::RealtimePublisher&lt;rosgraph_msgs::msg::Clock&gt;::SharedPtr</a> clock_realtime_publisher_;</div>
+<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span> </div>
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>  <span class="comment">// Mutex used inside simulate.h for protecting model/data, we keep a reference</span></div>
+<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>  <span class="comment">// here to protect access to shared data.</span></div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>  <span class="comment">// TODO: It would be far better to put all relevant data into a single container with accessors</span></div>
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>  <span class="comment">//       in a common location rather than passing around the raw pointer to the mutex, but it would</span></div>
+<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>  <span class="comment">//       require more work to pull it out of simulate.h.</span></div>
+<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>  std::recursive_mutex* sim_mutex_{ <span class="keyword">nullptr</span> };</div>
+<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span> </div>
+<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span>  <span class="comment">// Reset world service</span></div>
+<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>  rclcpp::CallbackGroup::SharedPtr reset_world_cb_group_;</div>
+<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>  rclcpp::Service&lt;mujoco_ros2_control_msgs::srv::ResetWorld&gt;::SharedPtr reset_world_service_;</div>
+<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span> </div>
+<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>  <span class="comment">// Set pause service</span></div>
+<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>  rclcpp::CallbackGroup::SharedPtr set_pause_cb_group_;</div>
+<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>  rclcpp::Service&lt;mujoco_ros2_control_msgs::srv::SetPause&gt;::SharedPtr set_pause_service_;</div>
+<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span> </div>
+<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>  <span class="comment">// Step simulation service</span></div>
+<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>  rclcpp::CallbackGroup::SharedPtr step_simulation_cb_group_;</div>
+<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span>  rclcpp::Service&lt;mujoco_ros2_control_msgs::srv::StepSimulation&gt;::SharedPtr step_simulation_service_;</div>
+<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span> </div>
+<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span>  <span class="comment">// Pending steps to execute while paused, and synchronization for blocking callers</span></div>
+<div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span>  std::atomic&lt;uint32_t&gt; pending_steps_{ 0 };</div>
+<div class="line"><a id="l00442" name="l00442"></a><span class="lineno">  442</span>  std::atomic&lt;bool&gt; step_diverged_{ <span class="keyword">false</span> };</div>
+<div class="line"><a id="l00443" name="l00443"></a><span class="lineno">  443</span>  std::atomic&lt;bool&gt; steps_interrupted_{ <span class="keyword">false</span> };</div>
+<div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span>  std::atomic&lt;bool&gt; keyboard_step_requested_{ <span class="keyword">false</span> };</div>
+<div class="line"><a id="l00445" name="l00445"></a><span class="lineno">  445</span>  std::atomic&lt;uint64_t&gt; step_count_{ 0 };</div>
+<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>  std::mutex steps_cv_mutex_;</div>
+<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>  std::condition_variable steps_cv_;</div>
+<div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span> </div>
+<div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span>  <span class="comment">// Storage for initial state (used for reset_world)</span></div>
+<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span>  std::vector&lt;mjtNum&gt; initial_qpos_;</div>
+<div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span>  std::vector&lt;mjtNum&gt; initial_qvel_;</div>
+<div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span>  std::vector&lt;mjtNum&gt; initial_ctrl_;</div>
+<div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span> </div>
+<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>  <span class="comment">// Callback into the HW interface to perform component-side reset bookkeeping.</span></div>
+<div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span>  <a class="code hl_typedef" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a1f9576375d33b1e0b6fb3ec7db8048e2">ResetCallback</a> reset_callback_;</div>
+<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span>};</div>
+</div>
+<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span> </div>
+<div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span>}  <span class="comment">// namespace mujoco_ros2_control</span></div>
+<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html">mujoco_ros2_control::MujocoSimulation</a></div><div class="ttdoc">ROS 2-based container for the mujoco Simulate application.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.hpp:95</div></div>
+<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_a0ed9f1c07a91776d2ec49a2829d4b05e"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#a0ed9f1c07a91776d2ec49a2829d4b05e">mujoco_ros2_control::MujocoSimulation::capture_initial_state</a></div><div class="ttdeci">void capture_initial_state()</div><div class="ttdoc">Can be called by consumers of this class to store the current state as the &quot;initial&quot; state.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.cpp:747</div></div>
+<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_a14ea07246e3eb5e7da387120a31a0ce8"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#a14ea07246e3eb5e7da387120a31a0ce8">mujoco_ros2_control::MujocoSimulation::reset_world_state</a></div><div class="ttdeci">void reset_world_state(bool fill_initial_state)</div><div class="ttdoc">Reset simulation state (qpos/qvel/ctrl/sensors/forces) to the captured initial state.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.cpp:816</div></div>
+<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_a1c6f5e107069a9e8fca0b7fee31c6370"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#a1c6f5e107069a9e8fca0b7fee31c6370">mujoco_ros2_control::MujocoSimulation::mutex</a></div><div class="ttdeci">std::recursive_mutex &amp; mutex() const</div><div class="ttdoc">Accessor for the mutex which locks access to the data and model.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.hpp:265</div></div>
+<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_a1cd9e4fc6e3986162f67045314891e6c"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#a1cd9e4fc6e3986162f67045314891e6c">mujoco_ros2_control::MujocoSimulation::start_physics_thread</a></div><div class="ttdeci">void start_physics_thread()</div><div class="ttdoc">Start the physics thread. Must be called after load_model().</div><div class="ttdef"><b>Definition</b> mujoco_simulation.cpp:760</div></div>
+<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_a1f9576375d33b1e0b6fb3ec7db8048e2"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#a1f9576375d33b1e0b6fb3ec7db8048e2">mujoco_ros2_control::MujocoSimulation::ResetCallback</a></div><div class="ttdeci">std::function&lt; void(bool fill_initial_state)&gt; ResetCallback</div><div class="ttdoc">Callback invoked when the simulation's state must be reset.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.hpp:107</div></div>
+<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_a21cd0cde74e91d319ff011ecfe26683f"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#a21cd0cde74e91d319ff011ecfe26683f">mujoco_ros2_control::MujocoSimulation::apply_control_data</a></div><div class="ttdeci">void apply_control_data(mjData *control_data)</div><div class="ttdoc">Stages control fields from control_data for the physics loop in a thread safe way.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.cpp:1053</div></div>
+<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_a3d670dd995a22c7887e5828483f2e119"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#a3d670dd995a22c7887e5828483f2e119">mujoco_ros2_control::MujocoSimulation::acquire_data_snapshot</a></div><div class="ttdeci">mjData * acquire_data_snapshot()</div><div class="ttdoc">Borrows the latest completed post-step snapshot of mj_data_ (producer-pays copying).</div><div class="ttdef"><b>Definition</b> mujoco_simulation.cpp:1033</div></div>
+<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_a530c2dd34e96228885e342d13ef860e5"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#a530c2dd34e96228885e342d13ef860e5">mujoco_ros2_control::MujocoSimulation::copy_physics_data</a></div><div class="ttdeci">void copy_physics_data(mjData *&amp;destination)</div><div class="ttdoc">Copies mj_data_ into the provided container in a thread safe way.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.cpp:1018</div></div>
+<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_a66c9d0154d8468503ea6293a873a1d6e"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#a66c9d0154d8468503ea6293a873a1d6e">mujoco_ros2_control::MujocoSimulation::shutdown</a></div><div class="ttdeci">void shutdown()</div><div class="ttdoc">Stop the physics and UI threads if they are running.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.cpp:797</div></div>
+<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_a68f8175f19fb2890fa64b13dbbf785ee"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#a68f8175f19fb2890fa64b13dbbf785ee">mujoco_ros2_control::MujocoSimulation::apply_keyframe</a></div><div class="ttdeci">bool apply_keyframe(const std::string &amp;keyframe_name)</div><div class="ttdoc">Apply a keyframe to the simulation by name.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.cpp:729</div></div>
+<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_a6986b64e22e40f7a83e5a96d0aedbb20"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#a6986b64e22e40f7a83e5a96d0aedbb20">mujoco_ros2_control::MujocoSimulation::copy_control_state</a></div><div class="ttdeci">void copy_control_state(ControlState &amp;destination)</div><div class="ttdoc">Copies the latest per-step control state into the provided container.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.cpp:1091</div></div>
+<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_a850dcc448e5a8aa494e6b79fd6554637"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#a850dcc448e5a8aa494e6b79fd6554637">mujoco_ros2_control::MujocoSimulation::copy_physics_model</a></div><div class="ttdeci">void copy_physics_model(mjModel *&amp;destination)</div><div class="ttdoc">Copies mj_model_ into the provided container in a thread safe way.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.cpp:1004</div></div>
 <div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_a9535b618c2466f765d84228baa97aa41"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#a9535b618c2466f765d84228baa97aa41">mujoco_ros2_control::MujocoSimulation::MujocoSimulation</a></div><div class="ttdeci">MujocoSimulation()=default</div><div class="ttdoc">Construct a new Mujoco Simulation object. This is a no-op until initialization.</div></div>
-<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_aab720c2985e5e474b47014af4aea932b"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#aab720c2985e5e474b47014af4aea932b">mujoco_ros2_control::MujocoSimulation::model</a></div><div class="ttdeci">mjModel * model()</div><div class="ttdoc">Accessor for the mujoco model.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.hpp:151</div></div>
-<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_aaf4b131af2b06a84290570f7065257b7"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#aaf4b131af2b06a84290570f7065257b7">mujoco_ros2_control::MujocoSimulation::data</a></div><div class="ttdeci">mjData * data()</div><div class="ttdoc">Accessor for the raw mujoco simulation data.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.hpp:163</div></div>
-<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_ad45c62c62d4936a31635a707c6d12e6a"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#ad45c62c62d4936a31635a707c6d12e6a">mujoco_ros2_control::MujocoSimulation::step_count</a></div><div class="ttdeci">uint64_t step_count() const</div><div class="ttdoc">Returns the number of steps takein by the physics simulation.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.hpp:220</div></div>
-<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_ade8c567d6d5ce9c868ec0873d8bffac9"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#ade8c567d6d5ce9c868ec0873d8bffac9">mujoco_ros2_control::MujocoSimulation::overwrite_physics_data</a></div><div class="ttdeci">void overwrite_physics_data(mjData *source)</div><div class="ttdoc">Copies the provided mjData into mj_data_ in a thread safe way.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.cpp:966</div></div>
-<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_af0307d7df1675321ac94e72a0fcf6b6c"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#af0307d7df1675321ac94e72a0fcf6b6c">mujoco_ros2_control::MujocoSimulation::set_reset_callback</a></div><div class="ttdeci">void set_reset_callback(ResetCallback callback)</div><div class="ttdoc">Register a callback function to be called on reset_world_state.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.cpp:722</div></div>
-<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_afdf18c28acef8235222d164f7df31904"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#afdf18c28acef8235222d164f7df31904">mujoco_ros2_control::MujocoSimulation::initialize</a></div><div class="ttdeci">bool initialize(rclcpp::Node::SharedPtr node, const std::string &amp;model_path, const std::string &amp;mujoco_model_topic, double sim_speed_factor, bool headless)</div><div class="ttdoc">Construct the Simulate application and start the UI thread (if not headless).</div><div class="ttdef"><b>Definition</b> mujoco_simulation.cpp:510</div></div>
+<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_aab720c2985e5e474b47014af4aea932b"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#aab720c2985e5e474b47014af4aea932b">mujoco_ros2_control::MujocoSimulation::model</a></div><div class="ttdeci">mjModel * model()</div><div class="ttdoc">Accessor for the mujoco model.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.hpp:159</div></div>
+<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_aaf4b131af2b06a84290570f7065257b7"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#aaf4b131af2b06a84290570f7065257b7">mujoco_ros2_control::MujocoSimulation::data</a></div><div class="ttdeci">mjData * data()</div><div class="ttdoc">Accessor for the raw mujoco simulation data.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.hpp:171</div></div>
+<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_ad45c62c62d4936a31635a707c6d12e6a"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#ad45c62c62d4936a31635a707c6d12e6a">mujoco_ros2_control::MujocoSimulation::step_count</a></div><div class="ttdeci">uint64_t step_count() const</div><div class="ttdoc">Returns the number of steps takein by the physics simulation.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.hpp:276</div></div>
+<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_ade8c567d6d5ce9c868ec0873d8bffac9"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#ade8c567d6d5ce9c868ec0873d8bffac9">mujoco_ros2_control::MujocoSimulation::overwrite_physics_data</a></div><div class="ttdeci">void overwrite_physics_data(mjData *source)</div><div class="ttdoc">Copies the provided mjData into mj_data_ in a thread safe way.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.cpp:1010</div></div>
+<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_af0307d7df1675321ac94e72a0fcf6b6c"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#af0307d7df1675321ac94e72a0fcf6b6c">mujoco_ros2_control::MujocoSimulation::set_reset_callback</a></div><div class="ttdeci">void set_reset_callback(ResetCallback callback)</div><div class="ttdoc">Register a callback function to be called on reset_world_state.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.cpp:755</div></div>
+<div class="ttc" id="aclassmujoco__ros2__control_1_1MujocoSimulation_html_afdf18c28acef8235222d164f7df31904"><div class="ttname"><a href="classmujoco__ros2__control_1_1MujocoSimulation.html#afdf18c28acef8235222d164f7df31904">mujoco_ros2_control::MujocoSimulation::initialize</a></div><div class="ttdeci">bool initialize(rclcpp::Node::SharedPtr node, const std::string &amp;model_path, const std::string &amp;mujoco_model_topic, double sim_speed_factor, bool headless)</div><div class="ttdoc">Construct the Simulate application and start the UI thread (if not headless).</div><div class="ttdef"><b>Definition</b> mujoco_simulation.cpp:528</div></div>
 <div class="ttc" id="aclassrealtime__tools_1_1RealtimePublisher_html"><div class="ttname"><a href="classrealtime__tools_1_1RealtimePublisher.html">realtime_tools::RealtimePublisher</a></div><div class="ttdef"><b>Definition</b> realtime_publisher.hpp:55</div></div>
 <div class="ttc" id="anamespacemujoco__ros2__control_html"><div class="ttname"><a href="namespacemujoco__ros2__control.html">mujoco_ros2_control</a></div><div class="ttdef"><b>Definition</b> data.hpp:31</div></div>
+<div class="ttc" id="astructmujoco__ros2__control_1_1MujocoSimulation_1_1ControlState_html"><div class="ttname"><a href="structmujoco__ros2__control_1_1MujocoSimulation_1_1ControlState.html">mujoco_ros2_control::MujocoSimulation::ControlState</a></div><div class="ttdoc">Small snapshot of the state the hardware interface needs every control cycle.</div><div class="ttdef"><b>Definition</b> mujoco_simulation.hpp:233</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -27,5 +27,6 @@ var searchData=
   ['controllerupdatestats_24',['ControllerUpdateStats',['../structcontroller__interface_1_1ControllerUpdateStats.html',1,'controller_interface']]],
   ['controllerupdatestatus_25',['ControllerUpdateStatus',['../structcontroller__interface_1_1ControllerUpdateStatus.html',1,'controller_interface']]],
   ['controlloopstate_26',['ControlLoopState',['../structcontroller__manager_1_1ControlLoopState.html',1,'controller_manager']]],
-  ['controllooptimingconfig_27',['ControlLoopTimingConfig',['../structcontroller__manager_1_1ControlLoopTimingConfig.html',1,'controller_manager']]]
+  ['controllooptimingconfig_27',['ControlLoopTimingConfig',['../structcontroller__manager_1_1ControlLoopTimingConfig.html',1,'controller_manager']]],
+  ['controlstate_28',['ControlState',['../structmujoco__ros2__control_1_1MujocoSimulation_1_1ControlState.html',1,'mujoco_ros2_control::MujocoSimulation']]]
 ];

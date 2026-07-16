@@ -244,6 +244,12 @@ It is recommended to test the fallback strategy in simulation before deploying i
 <dt>update_rate (int)</dt><dd><p>The frequency of controller manager’s real-time update loop. This loop reads states from hardware, updates controllers and writes commands to hardware.</p>
 <p>Read only: True</p>
 <p>Default:  100</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than 0</p></li>
+</ul>
+</div></blockquote>
 </dd>
 <dt>enforce_command_limits (bool)</dt><dd><p>If true, the controller manager will enforce command limits defined in the robot description. If false, no limits will be enforced. If true, when the command is outside the limits, the command is clamped to be within the limits depending on the type of configured joint limits defined in the robot description. If the command is within the limits, the command is passed through without any changes.</p>
 <p>Read only: True</p>
