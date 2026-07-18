@@ -222,6 +222,15 @@ The vectors are determined by the size and field of view parameters.</p>
 </ul>
 </div></blockquote>
 </li>
+<li><p><code class="docutils literal notranslate"><span class="pre">async</span></code>: Whether or not to do raycasting synchronously or in a background thread.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>For high density sensors, background processing will help avoid blocking <code class="docutils literal notranslate"><span class="pre">mj_step</span></code> for long periods.</p></li>
+<li><p>Async processing requires a copy of the entirety of <code class="docutils literal notranslate"><span class="pre">mjData</span></code>, so consumers should decide if the tradeoff is worth it.</p></li>
+<li><p>We recommend using the profiler in the simulate application to evaluate the timing differences.</p></li>
+</ul>
+</div></blockquote>
+</li>
 </ul>
 <p>Note that rays that hit nothing or fall outside the min/max range return <code class="docutils literal notranslate"><span class="pre">-1</span></code>.</p>
 <p>Example MJCF for a 2D lidar sensor:</p>
@@ -234,6 +243,7 @@ The vectors are determined by the size and field of view parameters.</p>
 <span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;max_range&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;10.0&quot;</span><span class="nt">/&gt;</span>
 <span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;min_range&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;0.0&quot;</span><span class="nt">/&gt;</span>
 <span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;update_rate&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;10.0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;async&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/instance&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/plugin&gt;</span>
 <span class="nt">&lt;/extension&gt;</span>
@@ -253,6 +263,7 @@ The vectors are determined by the size and field of view parameters.</p>
 <span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;max_range&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;10.0&quot;</span><span class="nt">/&gt;</span>
 <span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;min_range&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;0.0&quot;</span><span class="nt">/&gt;</span>
 <span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;update_rate&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;1.0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;async&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/instance&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/plugin&gt;</span>
 <span class="nt">&lt;/extension&gt;</span>

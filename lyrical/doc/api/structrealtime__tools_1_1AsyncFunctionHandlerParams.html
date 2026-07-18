@@ -143,6 +143,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>wait_until_initial_tr
 <tr class="memitem:aad5e660ba68b6ce4122ac846867e1dc2" id="r_aad5e660ba68b6ce4122ac846867e1dc2"><td class="memItemLeft" align="right" valign="top"><a id="aad5e660ba68b6ce4122ac846867e1dc2" name="aad5e660ba68b6ce4122ac846867e1dc2"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>print_warnings</b> = true</td></tr>
 <tr class="separator:aad5e660ba68b6ce4122ac846867e1dc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8ebf14612eccfe6fa7d39634ca25672" id="r_ae8ebf14612eccfe6fa7d39634ca25672"><td class="memItemLeft" align="right" valign="top"><a id="ae8ebf14612eccfe6fa7d39634ca25672" name="ae8ebf14612eccfe6fa7d39634ca25672"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>thread_name</b> = &quot;&quot;</td></tr>
+<tr class="separator:ae8ebf14612eccfe6fa7d39634ca25672"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="structrealtime__tools_1_1AsyncFunctionHandlerParams.html" title="The AsyncFunctionHandlerParams struct is used to configure the AsyncFunctionHandler....">AsyncFunctionHandlerParams</a> struct is used to configure the <a class="el" href="classrealtime__tools_1_1AsyncFunctionHandler.html" title="Class to handle asynchronous function calls. AsyncFunctionHandler is a class that allows the user to ...">AsyncFunctionHandler</a>. If the type is SYNCHRONIZED, the async worker thread will be synchronized with the main thread, as the main thread will be triggering the async callback method. If the type is DETACHED, the async worker thread will be detached from the main thread and will have its own execution cycle. </p>
@@ -157,6 +160,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>print_warnings</b> = 
     <tr><td class="paramname">trigger_predicate</td><td>Predicate function to check if the async callback method should be triggered or not. If not set, the async callback method will be triggered every time. </td></tr>
     <tr><td class="paramname">wait_until_initial_trigger</td><td>Whether to wait until the initial trigger predicate is true before starting the async callback method. If true, the async callback method will not be called until the trigger predicate returns true for the first time. Very useful when the type is DETACHED. </td></tr>
     <tr><td class="paramname">print_warnings</td><td>Whether to print warnings when the async callback method is not triggered due to any reason. </td></tr>
+    <tr><td class="paramname">thread_name</td><td>The custom name for the async thread. Defaults to the component name. Will be truncated to 15 characters. </td></tr>
   </table>
   </dd>
 </dl>
@@ -204,7 +208,8 @@ template&lt;typename NodeT &gt; </div>
 <li>scheduling_policy (string): Scheduling policy for the async worker thread. Can be either "synchronized" or "detached". Default is "synchronized".</li>
 <li>execution_rate (int): Execution rate of the async worker thread in Hz.</li>
 <li>wait_until_initial_trigger (bool): Whether to wait until the initial trigger predicate is true before starting the async callback method. Default is true.</li>
-<li>print_warnings (bool): Whether to print warnings when the async callback method is not triggered due to any reason. Default is true. <dl class="params"><dt>Parameters</dt><dd>
+<li>print_warnings (bool): Whether to print warnings when the async callback method is not triggered due to any reason. Default is true.</li>
+<li>thread_name (string): Name applied to the async thread. Defaults to component name. Truncated to 15 chars. <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">node</td><td>The node that is used to get the parameters. </td></tr>
     <tr><td class="paramname">prefix</td><td>Parameter prefix to use when accessing node parameters. </td></tr>

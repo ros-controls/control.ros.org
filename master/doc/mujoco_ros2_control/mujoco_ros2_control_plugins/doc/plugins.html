@@ -91,6 +91,10 @@
 <li class="toctree-l8"><a class="reference internal" href="#parameters">Parameters</a></li>
 </ul>
 </li>
+<li class="toctree-l7"><a class="reference internal" href="#mujoco-3d-lidar">MuJoCo 3D Lidar</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="#id1">Parameters</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l6"><a class="reference internal" href="#usage">Usage</a></li>
@@ -167,7 +171,7 @@
 
 
   <section id="mujoco-ros-2-control-plugins">
-<h1>MuJoCo ROS 2 Control Plugins<a class="headerlink" href="#mujoco-ros-2-control-plugins" title="Link to this heading"></a></h1>
+<span id="mujoco-ros2-control-plugins"></span><h1>MuJoCo ROS 2 Control Plugins<a class="headerlink" href="#mujoco-ros-2-control-plugins" title="Link to this heading"></a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control_plugins</span></code> package provides a plugin interface for extending the
 functionality of <code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control</span></code>.
 This separation allows for modular, optional features without adding complexity to the core package.</p>
@@ -471,6 +475,62 @@ being broadcast.</p>
 <span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;mujoco_ros2_control_plugins/ExternalWrenchPlugin&quot;</span>
 <span class="w">        </span><span class="nt">force_arrow_scale</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span><span class="w">      </span><span class="c1"># 100 N  → 1 m arrow</span>
 <span class="w">        </span><span class="nt">torque_arrow_scale</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span><span class="w">      </span><span class="c1"># 10 N·m → 1 m arrow</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="mujoco-3d-lidar">
+<span id="mujoco-3d-lidar-plugin"></span><h3>MuJoCo 3D Lidar<a class="headerlink" href="#mujoco-3d-lidar" title="Link to this heading"></a></h3>
+<p>MuJoCo does not include native lidar support.
+This package implements lidar through a custom MuJoCo sensor extension in <code class="docutils literal notranslate"><span class="pre">mujoco_extensions`</span> <span class="pre">(``mujoco.plugin.lidar</span></code>) that uses
+<a class="reference external" href="https://mujoco.readthedocs.io/en/stable/APIreference/APIfunctions.html#mj-multiray">mj_multiRay</a> to cast rays each simulation step.
+Refer to the extension package for more information about the computation.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Mujoco3dLidarPlugin</span></code> wraps the underlying sensor to convert the raw data to relevant messages and publish them to ROS topics.
+Specicially, the data for 2D (single-row) and 3D (multi-row) will be published as
+<a class="reference external" href="https://github.com/ros2/common_interfaces/blob/rolling/sensor_msgs/msg/LaserScan.msg">LaserScan</a> or
+<a class="reference external" href="https://github.com/ros2/common_interfaces/blob/rolling/sensor_msgs/msg/PointCloud2.msg">PointCloud2</a> messages respectively.</p>
+<p>When using the <code class="docutils literal notranslate"><span class="pre">Mujoco3dLidarPlugin</span></code>, every <code class="docutils literal notranslate"><span class="pre">mujoco.plugin.lidar</span></code> sensor will have its data published.</p>
+<section id="id1">
+<h4>Parameters<a class="headerlink" href="#id1" title="Link to this heading"></a></h4>
+<p>Each sensor is individually configurable by name in the plugin’s yaml.
+The available parameters are:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;sensor_name&gt;.frame_name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">string</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;sensor_site_name&gt;</span></code></p></td>
+<td><p>The frame name of the sensor in the URDF. Defaults to the site name from the MJCF.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;sensor_name&gt;.topic</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">string</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/scan</span></code> or <code class="docutils literal notranslate"><span class="pre">/points</span></code></p></td>
+<td><p>Topic name to publish messages. Defaults to <code class="docutils literal notranslate"><span class="pre">/scan</span></code> for 2D sensors and <code class="docutils literal notranslate"><span class="pre">/points</span></code> for 3D sensors.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">/**</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">mujoco_3d_lidar_plugin</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;mujoco_ros2_control_plugins/Mujoco3dLidarPlugin&quot;</span>
+<span class="w">        </span><span class="nt">2d_lidar</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">frame_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;lidar_sensor_frame&quot;</span>
+<span class="w">          </span><span class="nt">topic</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/lidar_scan_2d&quot;</span>
+<span class="w">        </span><span class="nt">3d_lidar</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">frame_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3d_lidar_sensor_frame&quot;</span>
+<span class="w">          </span><span class="nt">topic</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/lidar_points_3d&quot;</span>
 </pre></div>
 </div>
 </section>

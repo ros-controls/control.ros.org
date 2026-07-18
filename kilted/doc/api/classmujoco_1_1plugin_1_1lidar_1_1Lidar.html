@@ -88,6 +88,11 @@ $(function() {
   <div class="headertitle"><div class="title">mujoco::plugin::lidar::Lidar Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><a class="el" href="classmujoco_1_1plugin_1_1lidar_1_1Lidar.html" title="Lidar sensor implementation based on mj_multiRay.">Lidar</a> sensor implementation based on <code>mj_multiRay</code>.  
+ <a href="classmujoco_1_1plugin_1_1lidar_1_1Lidar.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="3dlidar_8h_source.html">3dlidar.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -113,7 +118,15 @@ static <a class="el" href="classmujoco_1_1plugin_1_1lidar_1_1Lidar.html">Lidar</
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>RegisterPlugin</b> ()</td></tr>
 <tr class="separator:af045ae5630dd1cfb700899653f3ade8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="classmujoco_1_1plugin_1_1lidar_1_1Lidar.html" title="Lidar sensor implementation based on mj_multiRay.">Lidar</a> sensor implementation based on <code>mj_multiRay</code>. </p>
+<p>The sensor supports synchronous and asynchronous operations, as lidar computations can get quite heavy with many rays. In either mode, raycasting computations are done at the requested <code>update_period_</code>.</p>
+<ul>
+<li><b>Synchronous</b>: the computation blocks <code>mj_step</code> and updates the sensor's data immediately.</li>
+<li><b>Asynchronous</b>: a copy of mjData is taken and a background thread handles the expensive raycasting, then writes results to the sensor's data block on the next update. This means readings may be 1 update rate timestep behind reality, or possibly longer if the computation cannot complete in one cycle. The included timestamp contains the simulation time the data was copied from, so consumers can check how delayed sensor readings are. Note that copying mjData is expensive, so it is up to consumers of this plugin to decide if the timing tradeoff is worth it.</li>
+</ul>
+<p>We recommend users try the simulate app's profiler function to weigh the benefits and time costs of both modes. </p>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>mujoco_ros2_control/mujoco_extensions/mujoco_3d_lidar/include/mujoco_3d_lidar/<a class="el" href="3dlidar_8h_source.html">3dlidar.h</a></li>
 <li>mujoco_ros2_control/mujoco_extensions/mujoco_3d_lidar/src/<b>3dlidar.cpp</b></li>
 </ul>
