@@ -65,7 +65,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../../doc/index.html#installation">Installation</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../doc/index.html#quick-start">Quick Start</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../doc/index.html#add-ros2-control-tag-to-a-urdf">Add ros2_control tag to a URDF</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../doc/index.html#urdf-to-mjcf-conversion">URDF to MJCF Conversion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../doc/index.html#urdf-to-mjcf-conversion-tool">URDF to MJCF Conversion Tool</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../doc/index.html#mujoco-ros2-control-demos">mujoco_ros2_control_demos</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../doc/index.html#support-matrix">Support Matrix</a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="../../doc/index.html#further-documentation">Further Documentation</a><ul class="current">
@@ -82,21 +82,21 @@
 <li class="toctree-l8"><a class="reference internal" href="#headless-rendering">Headless Rendering</a></li>
 </ul>
 </li>
-<li class="toctree-l7"><a class="reference internal" href="#rangefinderlidarplugin">RangefinderLidarPlugin</a></li>
 <li class="toctree-l7"><a class="reference internal" href="#externalwrenchplugin">ExternalWrenchPlugin</a><ul>
 <li class="toctree-l8"><a class="reference internal" href="#service-request">Service Request</a></li>
 <li class="toctree-l8"><a class="reference internal" href="#service-response">Service Response</a></li>
-<li class="toctree-l8"><a class="reference internal" href="#visualization">Visualization</a></li>
-<li class="toctree-l8"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l8"><a class="reference internal" href="#externalwrench-visualization">ExternalWrench Visualization</a></li>
+<li class="toctree-l8"><a class="reference internal" href="#externalwrench-parameters">ExternalWrench Parameters</a></li>
 </ul>
 </li>
-<li class="toctree-l7"><a class="reference internal" href="#mujoco-3d-lidar">MuJoCo 3D Lidar</a><ul>
-<li class="toctree-l8"><a class="reference internal" href="#id1">Parameters</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#rangefinderlidarplugin">RangefinderLidarPlugin</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#mujoco-3d-lidar-plugin">MuJoCo 3D Lidar Plugin</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="#d-lidar-parameters">3D Lidar Parameters</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l6"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#d-lidar-usage">3D Lidar Usage</a></li>
 <li class="toctree-l6"><a class="reference internal" href="#creating-your-own-plugin">Creating Your Own Plugin</a><ul>
 <li class="toctree-l7"><a class="reference internal" href="#create-the-plugin-header">1. Create the Plugin Header</a></li>
 <li class="toctree-l7"><a class="reference internal" href="#implement-the-plugin-methods">2. Implement the Plugin Methods</a></li>
@@ -161,7 +161,7 @@
 
 
   <section id="mujoco-ros-2-control-plugins">
-<span id="mujoco-ros2-control-plugins"></span><h1>MuJoCo ROS 2 Control Plugins<a class="headerlink" href="#mujoco-ros-2-control-plugins" title="Link to this heading"></a></h1>
+<h1>MuJoCo ROS 2 Control Plugins<a class="headerlink" href="#mujoco-ros-2-control-plugins" title="Link to this heading"></a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control_plugins</span></code> package provides a plugin interface for extending the
 functionality of <code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control</span></code>.
 This separation allows for modular, optional features without adding complexity to the core package.</p>
@@ -257,15 +257,6 @@ The system automatically detects whether a display is available:</p>
 If both GLFW and EGL fail to initialize, camera publishing will be disabled with a warning.</p>
 </div>
 </section>
-</section>
-<section id="rangefinderlidarplugin">
-<span id="lidar-plugin"></span><h3>RangefinderLidarPlugin<a class="headerlink" href="#rangefinderlidarplugin" title="Link to this heading"></a></h3>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>This plugin is included to support legacy implementations of rangefinder based lidar sensors.
-We do not recommend using this, and instead would direct users to the 3d lidar plugin for improved
-features and performance.</p>
-</div>
 </section>
 <section id="externalwrenchplugin">
 <h3>ExternalWrenchPlugin<a class="headerlink" href="#externalwrenchplugin" title="Link to this heading"></a></h3>
@@ -414,8 +405,8 @@ For long-duration wrenches, call the service from a separate terminal or use an 
 </pre></div>
 </div>
 </section>
-<section id="visualization">
-<h4>Visualization<a class="headerlink" href="#visualization" title="Link to this heading"></a></h4>
+<section id="externalwrench-visualization">
+<h4>ExternalWrench Visualization<a class="headerlink" href="#externalwrench-visualization" title="Link to this heading"></a></h4>
 <p>While wrenches are active, arrow markers are published to <code class="docutils literal notranslate"><span class="pre">~/wrench_markers</span></code> for display in RViz:</p>
 <ul class="simple">
 <li><p><strong>Red arrow</strong> (<code class="docutils literal notranslate"><span class="pre">external_wrench/force</span></code> namespace) — force vector, originating at the
@@ -428,8 +419,8 @@ as it moves.
 Add a <code class="docutils literal notranslate"><span class="pre">MarkerArray</span></code> display in RViz pointed at the topic and ensure the body’s TF frames are
 being broadcast.</p>
 </section>
-<section id="parameters">
-<h4>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h4>
+<section id="externalwrench-parameters">
+<h4>ExternalWrench Parameters<a class="headerlink" href="#externalwrench-parameters" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 25%" />
@@ -469,8 +460,17 @@ being broadcast.</p>
 </div>
 </section>
 </section>
-<section id="mujoco-3d-lidar">
-<span id="mujoco-3d-lidar-plugin"></span><h3>MuJoCo 3D Lidar<a class="headerlink" href="#mujoco-3d-lidar" title="Link to this heading"></a></h3>
+<section id="rangefinderlidarplugin">
+<h3>RangefinderLidarPlugin<a class="headerlink" href="#rangefinderlidarplugin" title="Link to this heading"></a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This plugin is included to support legacy implementations of rangefinder based lidar sensors.
+We do not recommend using this, and instead would direct users to the 3d lidar plugin for improved
+features and performance.</p>
+</div>
+</section>
+<section id="mujoco-3d-lidar-plugin">
+<h3>MuJoCo 3D Lidar Plugin<a class="headerlink" href="#mujoco-3d-lidar-plugin" title="Link to this heading"></a></h3>
 <p>MuJoCo does not include native lidar support.
 This package implements lidar through a custom MuJoCo sensor extension in <code class="docutils literal notranslate"><span class="pre">mujoco_extensions`</span> <span class="pre">(``mujoco.plugin.lidar</span></code>) that uses
 <a class="reference external" href="https://mujoco.readthedocs.io/en/stable/APIreference/APIfunctions.html#mj-multiray">mj_multiRay</a> to cast rays each simulation step.
@@ -480,8 +480,8 @@ Specicially, the data for 2D (single-row) and 3D (multi-row) will be published a
 <a class="reference external" href="https://github.com/ros2/common_interfaces/blob/rolling/sensor_msgs/msg/LaserScan.msg">LaserScan</a> or
 <a class="reference external" href="https://github.com/ros2/common_interfaces/blob/rolling/sensor_msgs/msg/PointCloud2.msg">PointCloud2</a> messages respectively.</p>
 <p>When using the <code class="docutils literal notranslate"><span class="pre">Mujoco3dLidarPlugin</span></code>, every <code class="docutils literal notranslate"><span class="pre">mujoco.plugin.lidar</span></code> sensor will have its data published.</p>
-<section id="id1">
-<h4>Parameters<a class="headerlink" href="#id1" title="Link to this heading"></a></h4>
+<section id="d-lidar-parameters">
+<h4>3D Lidar Parameters<a class="headerlink" href="#d-lidar-parameters" title="Link to this heading"></a></h4>
 <p>Each sensor is individually configurable by name in the plugin’s yaml.
 The available parameters are:</p>
 <table class="docutils align-default">
@@ -526,8 +526,8 @@ The available parameters are:</p>
 </section>
 </section>
 </section>
-<section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<section id="d-lidar-usage">
+<h2>3D Lidar Usage<a class="headerlink" href="#d-lidar-usage" title="Link to this heading"></a></h2>
 <p>Plugins are loaded from ROS 2 parameters under <code class="docutils literal notranslate"><span class="pre">mujoco_plugins</span></code>.
 Each plugin entry requires:</p>
 <ul class="simple">
