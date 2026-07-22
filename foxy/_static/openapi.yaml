@@ -1,0 +1,59 @@
+openapi: 3.1.0
+info:
+  title: ROS 2 Control Documentation API
+  description: >
+    Provides AI agents and LLMs access to the ros-controls documentation. Use this API to fetch detailed technical guides, configuration parameters, and architectural explanations for ROS 2 control systems.
+  version: 1.0.0
+servers:
+  - url: https://control.ros.org
+paths:
+  /{version}/doc/{repo}/{module}/doc/{page}.html:
+    get:
+      operationId: fetchDocumentationPage
+      summary: Fetch a specific documentation page.
+      description: >
+        Retrieves the full HTML content of a specific ROS 2 control documentation page. Trigger this function when a user asks a technical question about configuring controllers or hardware interfaces, and you need to read the official documentation to provide an accurate, non-hallucinated answer.
+      parameters:
+        - name: version
+          in: path
+          required: true
+          description: >
+            The specific ROS 2 distribution version. If the user does not specify a version, default to 'rolling'.
+          schema:
+            type: string
+            enum:
+              - rolling
+              - lyrical
+              - kilted
+              - jazzy
+              - humble
+        - name: repo
+          in: path
+          required: true
+          description: >
+            The ros-controls repository that hosts the module. Controllers and broadcasters such as 'diff_drive_controller' and 'joint_state_broadcaster' live under 'ros2_controllers'; core modules such as 'hardware_interface' and 'controller_manager' live under 'ros2_control'.
+          schema:
+            type: string
+        - name: module
+          in: path
+          required: true
+          description: >
+            The ros-control module being queried, nested under {repo}. Examples include 'hardware_interface', 'controller_manager', 'diff_drive_controller', or 'joint_state_broadcaster'.
+          schema:
+            type: string
+        - name: page
+          in: path
+          required: true
+          description: >
+            The specific documentation page name without the file extension. For root module information, this is usually 'index' or 'userdoc'.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The raw HTML content of the requested documentation page.
+          content:
+            text/html:
+              schema:
+                type: string
+        '404':
+          description: Page not found. The AI should try a different module or page name.
