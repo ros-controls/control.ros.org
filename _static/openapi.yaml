@@ -7,7 +7,7 @@ info:
 servers:
   - url: https://control.ros.org
 paths:
-  /{version}/doc/{module}/doc/{page}.html:
+  /{version}/doc/{repo}/{module}/doc/{page}.html:
     get:
       operationId: fetchDocumentationPage
       summary: Fetch a specific documentation page.
@@ -26,11 +26,18 @@ paths:
               - jazzy
               - humble
               - kilted
+        - name: repo
+          in: path
+          required: true
+          description: >
+            The ros-controls repository that hosts the module. Controllers and broadcasters such as 'diff_drive_controller' and 'joint_state_broadcaster' live under 'ros2_controllers'; core modules such as 'hardware_interface' and 'controller_manager' live under 'ros2_control'.
+          schema:
+            type: string
         - name: module
           in: path
           required: true
           description: >
-            The ros-control module being queried. Examples include 'hardware_interface', 'controller_manager', 'diff_drive_controller', or 'joint_state_broadcaster'.
+            The ros-control module being queried, nested under {repo}. Examples include 'hardware_interface', 'controller_manager', 'diff_drive_controller', or 'joint_state_broadcaster'.
           schema:
             type: string
         - name: page
