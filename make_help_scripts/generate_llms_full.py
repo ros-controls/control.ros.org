@@ -6,7 +6,8 @@ def stitch_text_file(source_dir, output_file):
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
     with open(output_file, 'w', encoding = 'utf-8') as outfile:
         outfile.write("# ROS 2 Control Full Documentation\n\n")
-        for root, _, files in os.walk(source_dir):
+        for root, dirs, files in os.walk(source_dir):
+            dirs.sort()
             for file in sorted(files):
                 if file.endswith('.txt'):
                     file_path = os.path.join(root, file)
