@@ -379,7 +379,7 @@ Refer to the <span class="xref std std-ref">CameraPlugin</span> and <span class=
 </section>
 </section>
 <section id="simulation-topics-and-services">
-<h1>Simulation Topics and Services<a class="headerlink" href="#simulation-topics-and-services" title="Link to this heading"></a></h1>
+<span id="id1"></span><h1>Simulation Topics and Services<a class="headerlink" href="#simulation-topics-and-services" title="Link to this heading"></a></h1>
 <section id="topics">
 <h2>Topics<a class="headerlink" href="#topics" title="Link to this heading"></a></h2>
 <dl class="simple">
@@ -435,6 +435,63 @@ snap back to its previous commanded position. Deactivate any active joint contro
 </ul>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step the simulation forward by 100 physics steps</span>
 ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/step_simulation<span class="w"> </span>mujoco_ros2_control_msgs/srv/StepSimulation<span class="w"> </span><span class="s2">&quot;{steps: 100}&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">~/set_free_joint_state</span></code> (<code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control_msgs/srv/SetFreeJointState</span></code>)</dt><dd><p>Directly sets the pose and velocity of one or more MuJoCo free-joint objects (e.g. manipulable
+props) in a single call, each identified by the name of the body its free joint drives. Useful
+for teleporting or resetting object poses.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">free_joints</span></code> (<code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control_msgs/FreeJointState[]</span></code>): list of free-joint
+bodies to set. Each entry has:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> (<code class="docutils literal notranslate"><span class="pre">string</span></code>): name of the MuJoCo body driven by the target free joint.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pose</span></code> (<code class="docutils literal notranslate"><span class="pre">geometry_msgs/PoseStamped</span></code>): desired pose. An unset <code class="docutils literal notranslate"><span class="pre">orientation</span></code>
+defaults to identity. <code class="docutils literal notranslate"><span class="pre">pose.header.frame_id</span></code> selects the reference frame: empty
+(default) means the world frame; set to the name of another MuJoCo body to compose
+<code class="docutils literal notranslate"><span class="pre">pose.pose</span></code> onto that body’s current world pose, letting you place an object relative
+to a link instead of computing its world pose yourself. <code class="docutils literal notranslate"><span class="pre">pose.header.stamp</span></code> is not
+used.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">twist</span></code> (<code class="docutils literal notranslate"><span class="pre">geometry_msgs/TwistStamped</span></code>): desired velocity. Left at its default
+(all-zero), the object comes to rest at the new pose. <code class="docutils literal notranslate"><span class="pre">twist.header.frame_id</span></code> selects
+the reference frame the same way as <code class="docutils literal notranslate"><span class="pre">pose.header.frame_id</span></code>, but <strong>independently</strong>: if
+set, <code class="docutils literal notranslate"><span class="pre">twist.twist</span></code> is rotated into the world frame using that body’s current world
+orientation (the reference body’s own velocity is not added). <code class="docutils literal notranslate"><span class="pre">twist.header.stamp</span></code> is
+not used.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pose</span></code> and <code class="docutils literal notranslate"><span class="pre">twist</span></code> are resolved <strong>independently</strong> – they may reference different
+bodies, or one may be world-frame while the other is relative.</p></li>
+<li><p>Application is <strong>atomic across the whole list</strong>: every entry is validated (body exists, is
+driven by a free joint, and any <code class="docutils literal notranslate"><span class="pre">pose</span></code>/<code class="docutils literal notranslate"><span class="pre">twist</span></code> <code class="docutils literal notranslate"><span class="pre">frame_id</span></code> names a known body) before
+anything is written. Returns <code class="docutils literal notranslate"><span class="pre">success</span> <span class="pre">=</span> <span class="pre">false</span></code> (with no data modified for <em>any</em> entry) if
+a single entry is invalid; <code class="docutils literal notranslate"><span class="pre">message</span></code> identifies the offending entry by index and body
+name.</p></li>
+<li><p>If the same body name appears more than once in the list, entries are applied in order, so
+the last one wins.</p></li>
+<li><p>To <em>observe</em> the current state of every free-joint object, see the <code class="docutils literal notranslate"><span class="pre">FreeJointPlugin</span></code> in
+<code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control_plugins</span></code> (published on its <code class="docutils literal notranslate"><span class="pre">free_joint_states</span></code> topic).</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Teleport &quot;box_1&quot; to (x=0, y=0, z=1) with identity orientation, at rest</span>
+ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/set_free_joint_state<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>mujoco_ros2_control_msgs/srv/SetFreeJointState<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;{free_joints: [{name: &#39;box_1&#39;, pose: {pose: {position: {x: 0.0, y: 0.0, z: 1.0}}}}]}&quot;</span>
+
+<span class="c1"># Place &quot;box_1&quot; 10 cm above the &quot;gripper_link&quot; body, in that link&#39;s frame, while giving</span>
+<span class="c1"># it a world-frame velocity</span>
+ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/set_free_joint_state<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>mujoco_ros2_control_msgs/srv/SetFreeJointState<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;{free_joints: [{name: &#39;box_1&#39;,</span>
+<span class="s2">                   pose: {header: {frame_id: &#39;gripper_link&#39;}, pose: {position: {z: 0.1}}},</span>
+<span class="s2">                   twist: {twist: {linear: {x: 0.2}}}}]}&quot;</span>
+
+<span class="c1"># Teleport both &quot;box_1&quot; and &quot;box_2&quot; in a single, atomic call</span>
+ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/set_free_joint_state<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>mujoco_ros2_control_msgs/srv/SetFreeJointState<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;{free_joints: [</span>
+<span class="s2">    {name: &#39;box_1&#39;, pose: {pose: {position: {x: 0.0, y: 0.0, z: 1.0}}}},</span>
+<span class="s2">    {name: &#39;box_2&#39;, pose: {pose: {position: {x: 1.0, y: 0.0, z: 1.0}}}}</span>
+<span class="s2">  ]}&quot;</span>
 </pre></div>
 </div>
 </dd>

@@ -148,7 +148,7 @@ Plugin Parameters Structure (and default topics)</h2>
 <p>mujoco_camera_plugin: type: "mujoco_ros2_control_plugins/CameraPlugin" </p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 All cameras will publish data at the same rate</h1>
-<p>camera_publish_rate: 6.0 &lt;camera_name&gt;: policy: &lt;policy&gt; # "disabled", "polled", or "streaming" frame_name: "" info_topic: &lt;camera_name&gt;/camera_info image_topic: &lt;camera_name&gt;/color depth_topic: &lt;camera_name&gt;/depth trigger_service_name: &lt;camera_name&gt;/trigger # only used for polling camera policy</p>
+<p>camera_publish_rate: 6.0 &lt;camera_name&gt;: policy: &lt;policy&gt; # "disabled", "polled", or "streaming" frame_name: &lt;camera_name&gt;_frame info_topic: &lt;camera_name&gt;/camera_info image_topic: &lt;camera_name&gt;/color depth_topic: &lt;camera_name&gt;/depth trigger_service_name: &lt;camera_name&gt;/trigger # only used for polling camera policy</p>
 <h2><a class="anchor" id="autotoc_md2"></a>
 Implementation notes</h2>
 <p>If the camera name, in the parameters, does not match any of the mujoco cameras the data will not be published to ROS topics. If no camera parameters are given, but the mujoco_camera_plugin and its policy are declared, the default policy (streaming), topics, and frame are used automatically. </p>

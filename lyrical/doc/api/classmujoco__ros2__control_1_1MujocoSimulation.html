@@ -144,6 +144,9 @@ mjModel *&#160;</td><td class="memItemRight" valign="bottom"><b>model</b> ()</td
 <tr class="memitem:a14ea07246e3eb5e7da387120a31a0ce8" id="r_a14ea07246e3eb5e7da387120a31a0ce8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a14ea07246e3eb5e7da387120a31a0ce8">reset_world_state</a> (bool fill_initial_state)</td></tr>
 <tr class="memdesc:a14ea07246e3eb5e7da387120a31a0ce8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset simulation state (qpos/qvel/ctrl/sensors/forces) to the captured initial state.  <br /></td></tr>
 <tr class="separator:a14ea07246e3eb5e7da387120a31a0ce8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01895aa4d4a8af2671ba50a3ebdd80f2" id="r_a01895aa4d4a8af2671ba50a3ebdd80f2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a01895aa4d4a8af2671ba50a3ebdd80f2">set_free_joint_states</a> (const std::vector&lt; mujoco_ros2_control_msgs::msg::FreeJointState &gt; &amp;free_joints, std::string &amp;error_message)</td></tr>
+<tr class="memdesc:a01895aa4d4a8af2671ba50a3ebdd80f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the pose and velocity of one or more free-joint objects, identified by body name.  <br /></td></tr>
+<tr class="separator:a01895aa4d4a8af2671ba50a3ebdd80f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a850dcc448e5a8aa494e6b79fd6554637" id="r_a850dcc448e5a8aa494e6b79fd6554637"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a850dcc448e5a8aa494e6b79fd6554637">copy_physics_model</a> (mjModel *&amp;destination)</td></tr>
 <tr class="memdesc:a850dcc448e5a8aa494e6b79fd6554637"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies <code>mj_model_</code> into the provided container in a thread safe way.  <br /></td></tr>
 <tr class="separator:a850dcc448e5a8aa494e6b79fd6554637"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -469,6 +472,44 @@ std::recursive_mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><b
 <p>Reset simulation state (qpos/qvel/ctrl/sensors/forces) to the captured initial state. </p>
 <dl class="section note"><dt>Note</dt><dd>Caller must hold the sim mutex. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>This method assumes sim_mutex_ is already held by the caller</dd></dl>
+
+</div>
+</div>
+<a id="a01895aa4d4a8af2671ba50a3ebdd80f2" name="a01895aa4d4a8af2671ba50a3ebdd80f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01895aa4d4a8af2671ba50a3ebdd80f2">&#9670;&#160;</a></span>set_free_joint_states()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool mujoco_ros2_control::MujocoSimulation::set_free_joint_states </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; mujoco_ros2_control_msgs::msg::FreeJointState &gt; &amp;&#160;</td>
+          <td class="paramname"><em>free_joints</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>error_message</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the pose and velocity of one or more free-joint objects, identified by body name. </p>
+<p>Applied atomically: every entry is resolved before anything is written, so a single invalid entry leaves the sim state unchanged. Duplicate body names are applied in order, so the last one wins. See <code>FreeJointState.msg</code> for per-entry fields.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">error_message</td><td>Set to a human-readable description (identifying the offending entry) if this returns false. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if every entry was applied; false otherwise, with no data modified. </dd></dl>
 
 </div>
 </div>
