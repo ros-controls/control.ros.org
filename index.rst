@@ -9,6 +9,7 @@ Welcome to the ros2_control documentation!
    doc/getting_started/getting_started.rst
    doc/ros2_control/doc/index.rst
    doc/ros2_controllers/doc/controllers_index.rst
+   doc/embedded_integration.rst
    doc/ros2_control_demos/doc/index.rst
    doc/utilities.rst
    doc/simulators/simulators.rst

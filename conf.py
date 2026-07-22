@@ -143,6 +143,8 @@ html_js_files = [
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
 
+html_extra_path = ['_static/llms.txt', '_static/openapi.yaml']
+
 # These paths are either relative to html_static_path
 # or fully qualified paths (eg. https://...)
 html_css_files = [
@@ -181,12 +183,14 @@ github_url = "https://github.com/ros-controls/control.ros.org"
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#filtering
 linkcheck_anchors_ignore_for_url = [
     'https://github.com/',
-    'https://index.ros.org/'
+    'https://index.ros.org/',
+    'https://docs.ros.org/'
     ]
 linkcheck_ignore = [
     r'https://gazebosim.org/home',
     r'https://blogs.oracle.com/linux/post/task-priority',
-    r'https://www.blender.org/'
+    r'https://www.blender.org/',
+    r'https://en\.cppreference\.com/.*'
 ]
 
 # -- Options for HTMLHelp output ---------------------------------------------
