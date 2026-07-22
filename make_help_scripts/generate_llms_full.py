@@ -3,7 +3,9 @@ import argparse
 
 def stitch_text_file(source_dir, output_file):
     print(f"Stitching text files from {source_dir} into {output_file}...")
-    os.makedirs(os.path.dirname(output_file), exist_ok=True)
+    output_dir = os.path.dirname(output_file)
+    if output_dir:
+        os.makedirs(output_dir, exist_ok=True)
     with open(output_file, 'w', encoding = 'utf-8') as outfile:
         outfile.write("# ROS 2 Control Full Documentation\n\n")
         for root, dirs, files in os.walk(source_dir):
