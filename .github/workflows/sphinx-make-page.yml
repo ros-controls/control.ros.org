@@ -47,6 +47,12 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         make multiversion-with-api
+    - name: Build plain text for AI
+      continue-on-error: true
+      run: sphinx-build -b text . _build/text/
+    - name: Generate llms-full.txt
+      continue-on-error: true
+      run: python make_help_scripts/generate_llms_full.py --source _build/text/ --output _build/html/llms-full.txt
     - name: Build Rolling PDF
       run: make pdf-rolling
     - name: clone gh-pages branch
