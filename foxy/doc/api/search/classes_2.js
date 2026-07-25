@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['commandinterface_0',['commandinterface',['../structCommandInterface.html',1,'CommandInterface'],['../classhardware__interface_1_1CommandInterface.html',1,'hardware_interface::CommandInterface']]],
+  ['commandinterface_0',['CommandInterface',['../classhardware__interface_1_1CommandInterface.html',1,'hardware_interface']]],
   ['commands_1',['Commands',['../structgripper__action__controller_1_1GripperActionController_1_1Commands.html',1,'gripper_action_controller::GripperActionController']]],
   ['componentdescriptor_2',['ComponentDescriptor',['../structzenbedded_1_1ComponentDescriptor.html',1,'zenbedded']]],
   ['componentinfo_3',['ComponentInfo',['../structhardware__interface_1_1ComponentInfo.html',1,'hardware_interface']]],

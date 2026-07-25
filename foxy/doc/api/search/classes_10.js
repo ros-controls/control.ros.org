@@ -14,7 +14,7 @@ var searchData=
   ['sinusoid_11',['Sinusoid',['../classcontrol__toolbox_1_1Sinusoid.html',1,'control_toolbox']]],
   ['softjointlimits_12',['SoftJointLimits',['../structjoint__limits__interface_1_1SoftJointLimits.html',1,'joint_limits_interface']]],
   ['speedlimiter_13',['SpeedLimiter',['../classdiff__drive__controller_1_1SpeedLimiter.html',1,'diff_drive_controller']]],
-  ['stateinterface_14',['stateinterface',['../classhardware__interface_1_1StateInterface.html',1,'hardware_interface::StateInterface'],['../structStateInterface.html',1,'StateInterface']]],
+  ['stateinterface_14',['StateInterface',['../classhardware__interface_1_1StateInterface.html',1,'hardware_interface']]],
   ['statetolerances_15',['StateTolerances',['../structjoint__trajectory__controller_1_1StateTolerances.html',1,'joint_trajectory_controller']]],
   ['steeringhandle_16',['SteeringHandle',['../structtricycle__controller_1_1TricycleController_1_1SteeringHandle.html',1,'tricycle_controller::TricycleController']]],
   ['steeringlimiter_17',['SteeringLimiter',['../classtricycle__controller_1_1SteeringLimiter.html',1,'tricycle_controller']]],

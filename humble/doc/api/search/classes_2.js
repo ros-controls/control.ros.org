@@ -4,7 +4,7 @@ var searchData=
   ['cameraplugin_1',['CameraPlugin',['../classmujoco__ros2__control__plugins_1_1CameraPlugin.html',1,'mujoco_ros2_control_plugins']]],
   ['carlikebotsystemhardware_2',['CarlikeBotSystemHardware',['../classros2__control__demo__example__11_1_1CarlikeBotSystemHardware.html',1,'ros2_control_demo_example_11']]],
   ['chainablecontrollerinterface_3',['ChainableControllerInterface',['../classcontroller__interface_1_1ChainableControllerInterface.html',1,'controller_interface']]],
-  ['commandinterface_4',['commandinterface',['../structCommandInterface.html',1,'CommandInterface'],['../classhardware__interface_1_1CommandInterface.html',1,'hardware_interface::CommandInterface']]],
+  ['commandinterface_4',['CommandInterface',['../classhardware__interface_1_1CommandInterface.html',1,'hardware_interface']]],
   ['commands_5',['Commands',['../structgripper__action__controller_1_1GripperActionController_1_1Commands.html',1,'gripper_action_controller::GripperActionController']]],
   ['componentdescriptor_6',['ComponentDescriptor',['../structzenbedded_1_1ComponentDescriptor.html',1,'zenbedded']]],
   ['componentinfo_7',['ComponentInfo',['../structhardware__interface_1_1ComponentInfo.html',1,'hardware_interface']]],

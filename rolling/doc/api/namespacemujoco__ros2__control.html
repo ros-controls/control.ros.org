@@ -144,9 +144,9 @@ template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a12a245e6da9e2c4154323e7450c79978" id="r_a12a245e6da9e2c4154323e7450c79978"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemujoco__ros2__control.html#a12a245e6da9e2c4154323e7450c79978">get_actuator_id</a> (const std::string &amp;actuator_name, const mjModel *mj_model)</td></tr>
 <tr class="memdesc:a12a245e6da9e2c4154323e7450c79978"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the MuJoCo actuator ID based on a name. First this method looks for a joint that matches the passed name, and finds the actuator attached to it. If this doesn't exist, it will then look for the actuator with the passed name.  <br /></td></tr>
 <tr class="separator:a12a245e6da9e2c4154323e7450c79978"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a968ff38c47a0f4b302321a0847f811d1" id="r_a968ff38c47a0f4b302321a0847f811d1"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemujoco__ros2__control.html#a968ff38c47a0f4b302321a0847f811d1">get_joint_actuator_name</a> (const std::string &amp;joint_name, const <a class="el" href="structhardware__interface_1_1HardwareInfo.html">hardware_interface::HardwareInfo</a> &amp;hardware_info, const mjModel *mj_model)</td></tr>
-<tr class="memdesc:a968ff38c47a0f4b302321a0847f811d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the corresponding actuator name for a given joint name using transmissions.  <br /></td></tr>
-<tr class="separator:a968ff38c47a0f4b302321a0847f811d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f11f1f3aca03c2f71898114e2bbe4e9" id="r_a0f11f1f3aca03c2f71898114e2bbe4e9"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemujoco__ros2__control.html#a0f11f1f3aca03c2f71898114e2bbe4e9">get_joint_actuator_names</a> (const std::string &amp;joint_name, const <a class="el" href="structhardware__interface_1_1HardwareInfo.html">hardware_interface::HardwareInfo</a> &amp;hardware_info, const mjModel *mj_model)</td></tr>
+<tr class="memdesc:a0f11f1f3aca03c2f71898114e2bbe4e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the corresponding actuator names for a given joint name used in the transmissions.  <br /></td></tr>
+<tr class="separator:a0f11f1f3aca03c2f71898114e2bbe4e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab58cf928f1b82cc66cf5b7dc3ccc9c1a" id="r_ab58cf928f1b82cc66cf5b7dc3ccc9c1a"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemujoco__ros2__control.html#ab58cf928f1b82cc66cf5b7dc3ccc9c1a">get_interfaces_in_order</a> (const std::vector&lt; std::string &gt; &amp;available_interfaces, const std::vector&lt; std::string &gt; &amp;desired_order)</td></tr>
 <tr class="memdesc:ab58cf928f1b82cc66cf5b7dc3ccc9c1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Orders available interfaces based on a desired order.  <br /></td></tr>
 <tr class="separator:ab58cf928f1b82cc66cf5b7dc3ccc9c1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -347,14 +347,14 @@ template&lt;typename T &gt; </td></tr>
 
 </div>
 </div>
-<a id="a968ff38c47a0f4b302321a0847f811d1" name="a968ff38c47a0f4b302321a0847f811d1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a968ff38c47a0f4b302321a0847f811d1">&#9670;&#160;</a></span>get_joint_actuator_name()</h2>
+<a id="a0f11f1f3aca03c2f71898114e2bbe4e9" name="a0f11f1f3aca03c2f71898114e2bbe4e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f11f1f3aca03c2f71898114e2bbe4e9">&#9670;&#160;</a></span>get_joint_actuator_names()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string mujoco_ros2_control::get_joint_actuator_name </td>
+          <td class="memname">std::vector&lt; std::string &gt; mujoco_ros2_control::get_joint_actuator_names </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>joint_name</em>, </td>
@@ -379,7 +379,7 @@ template&lt;typename T &gt; </td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get the corresponding actuator name for a given joint name using transmissions. </p>
+<p>Get the corresponding actuator names for a given joint name used in the transmissions. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">joint_name</td><td>The name of the joint. </td></tr>
@@ -388,7 +388,7 @@ template&lt;typename T &gt; </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The corresponding actuator name if found, otherwise returns the joint name. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The corresponding actuator names if found, otherwise returns the joint name. </dd></dl>
 
 </div>
 </div>

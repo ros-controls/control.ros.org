@@ -28,7 +28,7 @@ var searchData=
   ['softjointlimits_25',['SoftJointLimits',['../structjoint__limits_1_1SoftJointLimits.html',1,'joint_limits']]],
   ['speedlimiter_26',['SpeedLimiter',['../classdiff__drive__controller_1_1SpeedLimiter.html',1,'diff_drive_controller']]],
   ['stalled_5frobustness_5ft_27',['stalled_robustness_t',['../structrealtime__tools_1_1detail_1_1stalled__robustness__t.html',1,'realtime_tools::detail']]],
-  ['stateinterface_28',['stateinterface',['../structStateInterface.html',1,'StateInterface'],['../classhardware__interface_1_1StateInterface.html',1,'hardware_interface::StateInterface']]],
+  ['stateinterface_28',['StateInterface',['../classhardware__interface_1_1StateInterface.html',1,'hardware_interface']]],
   ['stateinterfacesbroadcaster_29',['StateInterfacesBroadcaster',['../classstate__interfaces__broadcaster_1_1StateInterfacesBroadcaster.html',1,'state_interfaces_broadcaster']]],
   ['statetolerances_30',['StateTolerances',['../structjoint__trajectory__controller_1_1StateTolerances.html',1,'joint_trajectory_controller']]],
   ['steeringcontrollerslibrary_31',['SteeringControllersLibrary',['../classsteering__controllers__library_1_1SteeringControllersLibrary.html',1,'steering_controllers_library']]],

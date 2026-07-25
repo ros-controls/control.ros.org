@@ -14,5 +14,6 @@ var searchData=
   ['forwardcontrollersbase_11',['ForwardControllersBase',['../classforward__command__controller_1_1ForwardControllersBase.html',1,'forward_command_controller']]],
   ['fourbarlinkagetransmission_12',['FourBarLinkageTransmission',['../classtransmission__interface_1_1FourBarLinkageTransmission.html',1,'transmission_interface']]],
   ['fourbarlinkagetransmissionloader_13',['FourBarLinkageTransmissionLoader',['../classtransmission__interface_1_1FourBarLinkageTransmissionLoader.html',1,'transmission_interface']]],
-  ['ftsensordata_14',['FTSensorData',['../structmujoco__ros2__control_1_1FTSensorData.html',1,'mujoco_ros2_control']]]
+  ['freejointstatepublisherplugin_14',['FreeJointStatePublisherPlugin',['../classmujoco__ros2__control__plugins_1_1FreeJointStatePublisherPlugin.html',1,'mujoco_ros2_control_plugins']]],
+  ['ftsensordata_15',['FTSensorData',['../structmujoco__ros2__control_1_1FTSensorData.html',1,'mujoco_ros2_control']]]
 ];

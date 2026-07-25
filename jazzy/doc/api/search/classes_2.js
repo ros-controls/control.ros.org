@@ -7,7 +7,7 @@ var searchData=
   ['chainedfilter_4',['ChainedFilter',['../classchained__filter__controller_1_1ChainedFilter.html',1,'chained_filter_controller']]],
   ['cleanupcontrollerverb_5',['CleanupControllerVerb',['../classros2controlcli_1_1verb_1_1cleanup__controller_1_1CleanupControllerVerb.html',1,'ros2controlcli::verb::cleanup_controller']]],
   ['cmtopicsystem_6',['CMTopicSystem',['../classcm__topic__hardware__component_1_1CMTopicSystem.html',1,'cm_topic_hardware_component']]],
-  ['commandinterface_7',['commandinterface',['../structCommandInterface.html',1,'CommandInterface'],['../classhardware__interface_1_1CommandInterface.html',1,'hardware_interface::CommandInterface']]],
+  ['commandinterface_7',['CommandInterface',['../classhardware__interface_1_1CommandInterface.html',1,'hardware_interface']]],
   ['commands_8',['commands',['../structgripper__action__controller_1_1GripperActionController_1_1Commands.html',1,'gripper_action_controller::GripperActionController&lt; HardwareInterface &gt;::Commands'],['../structparallel__gripper__action__controller_1_1GripperActionController_1_1Commands.html',1,'parallel_gripper_action_controller::GripperActionController::Commands']]],
   ['componentdescriptor_9',['ComponentDescriptor',['../structzenbedded_1_1ComponentDescriptor.html',1,'zenbedded']]],
   ['componentinfo_10',['ComponentInfo',['../structhardware__interface_1_1ComponentInfo.html',1,'hardware_interface']]],
