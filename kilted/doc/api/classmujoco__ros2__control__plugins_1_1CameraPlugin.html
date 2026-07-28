@@ -124,8 +124,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afbe60ffaffac7b506eca062bc0e6c774" id="r_afbe60ffaffac7b506eca062bc0e6c774"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control__plugins_1_1CameraPlugin.html#afbe60ffaffac7b506eca062bc0e6c774">init</a> (rclcpp::Node::SharedPtr node, const mjModel *model, mjData *data) override</td></tr>
 <tr class="memdesc:afbe60ffaffac7b506eca062bc0e6c774"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the plugin.  <br /></td></tr>
 <tr class="separator:afbe60ffaffac7b506eca062bc0e6c774"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1bb941ea45898590ee67c5394879b797" id="r_a1bb941ea45898590ee67c5394879b797"><td class="memItemLeft" align="right" valign="top"><a id="a1bb941ea45898590ee67c5394879b797" name="a1bb941ea45898590ee67c5394879b797"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (rclcpp::Node::SharedPtr node, const mjModel *model, mjData *data, <a class="el" href="classmujoco__ros2__control__plugins_1_1CameraPlugin.html#a5b0a3d9246e6ed58b4f45ea9707dfc08">GlfwInitFn</a> glfw_init_fn)</td></tr>
+<tr class="memitem:a1bb941ea45898590ee67c5394879b797" id="r_a1bb941ea45898590ee67c5394879b797"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control__plugins_1_1CameraPlugin.html#a1bb941ea45898590ee67c5394879b797">init</a> (rclcpp::Node::SharedPtr node, const mjModel *model, mjData *data, <a class="el" href="classmujoco__ros2__control__plugins_1_1CameraPlugin.html#a5b0a3d9246e6ed58b4f45ea9707dfc08">GlfwInitFn</a> glfw_init_fn)</td></tr>
+<tr class="memdesc:a1bb941ea45898590ee67c5394879b797"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload of <a class="el" href="classmujoco__ros2__control__plugins_1_1CameraPlugin.html#afbe60ffaffac7b506eca062bc0e6c774" title="Initialize the plugin.">init()</a> that takes an injectable GLFW initializer.  <br /></td></tr>
 <tr class="separator:a1bb941ea45898590ee67c5394879b797"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33734c2bc16e5ad77ca26192bc77e0b1" id="r_a33734c2bc16e5ad77ca26192bc77e0b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control__plugins_1_1CameraPlugin.html#a33734c2bc16e5ad77ca26192bc77e0b1">update</a> (const mjModel *model, mjData *data) override</td></tr>
 <tr class="memdesc:a33734c2bc16e5ad77ca26192bc77e0b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the plugin (called every simulation step)  <br /></td></tr>
@@ -199,7 +199,7 @@ Implementation notes</h2>
 </div>
 </div>
 <a id="afbe60ffaffac7b506eca062bc0e6c774" name="afbe60ffaffac7b506eca062bc0e6c774"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afbe60ffaffac7b506eca062bc0e6c774">&#9670;&#160;</a></span>init()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#afbe60ffaffac7b506eca062bc0e6c774">&#9670;&#160;</a></span>init() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -251,6 +251,55 @@ Implementation notes</h2>
 <dl class="section note"><dt>Note</dt><dd>This method will be called once when the plugin is loaded. It can be used to read parameters, set up publishers/subscribers, etc. The node will be a child of the main <a class="el" href="namespacemujoco__ros2__control.html">mujoco_ros2_control</a> node, so parameters should be namespaced accordingly. </dd></dl>
 
 <p>Implements <a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#ad0e4e7f4b115c008fc3875c1627223e3">mujoco_ros2_control_plugins::MuJoCoROS2ControlPluginBase</a>.</p>
+
+</div>
+</div>
+<a id="a1bb941ea45898590ee67c5394879b797" name="a1bb941ea45898590ee67c5394879b797"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bb941ea45898590ee67c5394879b797">&#9670;&#160;</a></span>init() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool mujoco_ros2_control_plugins::CameraPlugin::init </td>
+          <td>(</td>
+          <td class="paramtype">rclcpp::Node::SharedPtr&#160;</td>
+          <td class="paramname"><em>node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const mjModel *&#160;</td>
+          <td class="paramname"><em>model</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">mjData *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classmujoco__ros2__control__plugins_1_1CameraPlugin.html#a5b0a3d9246e6ed58b4f45ea9707dfc08">GlfwInitFn</a>&#160;</td>
+          <td class="paramname"><em>glfw_init_fn</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Overload of <a class="el" href="classmujoco__ros2__control__plugins_1_1CameraPlugin.html#afbe60ffaffac7b506eca062bc0e6c774" title="Initialize the plugin.">init()</a> that takes an injectable GLFW initializer. </p>
+<p>Exists so tests can substitute a fake <code>glfw_init_fn</code> (e.g. one that always fails) to exercise the EGL fallback / rendering-disabled paths without requiring a real display or GL context. The public <a class="el" href="classmujoco__ros2__control__plugins_1_1CameraPlugin.html#afbe60ffaffac7b506eca062bc0e6c774" title="Initialize the plugin.">init()</a> override simply forwards to this overload using the real <code>glfwInit</code>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">glfw_init_fn</td><td>Function used to attempt GLFW initialization; same signature as <code>glfwInit</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

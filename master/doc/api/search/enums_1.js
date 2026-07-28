@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mimicattribute_0',['MimicAttribute',['../namespacehardware__interface.html#a1d0af6c20253fb8fd24cb0ba98daec58',1,'hardware_interface']]]
+  ['camerapolicy_0',['CameraPolicy',['../namespacemujoco__ros2__control__plugins.html#ae9a15513abfeebb8284dcf55e397cbe3',1,'mujoco_ros2_control_plugins']]]
 ];

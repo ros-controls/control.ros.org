@@ -87,11 +87,16 @@ $(function() {
   <div class="headertitle"><div class="title">mujoco_ros2_control_plugins::CameraData Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Per-camera bookkeeping: configuration, buffers, and ROS publishers/service for one MuJoCo camera.  
+ <a href="structmujoco__ros2__control__plugins_1_1CameraData.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="camera__plugin_8hpp_source.html">camera_plugin.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a7733528f166decd375dbbf05471587ca" id="r_a7733528f166decd375dbbf05471587ca"><td class="memItemLeft" align="right" valign="top"><a id="a7733528f166decd375dbbf05471587ca" name="a7733528f166decd375dbbf05471587ca"></a>
-CameraPolicy&#160;</td><td class="memItemRight" valign="bottom"><b>policy</b> = CameraPolicy::STREAMING</td></tr>
+<a class="el" href="namespacemujoco__ros2__control__plugins.html#ae9a15513abfeebb8284dcf55e397cbe3">CameraPolicy</a>&#160;</td><td class="memItemRight" valign="bottom"><b>policy</b> = CameraPolicy::STREAMING</td></tr>
 <tr class="separator:a7733528f166decd375dbbf05471587ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5d03d64ad8cd6d62d7d57ecdc71ad57" id="r_ad5d03d64ad8cd6d62d7d57ecdc71ad57"><td class="memItemLeft" align="right" valign="top"><a id="ad5d03d64ad8cd6d62d7d57ecdc71ad57" name="ad5d03d64ad8cd6d62d7d57ecdc71ad57"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>poll_requested</b> { false }</td></tr>
@@ -157,7 +162,10 @@ rclcpp::Publisher&lt; sensor_msgs::msg::CameraInfo &gt;::SharedPtr&#160;</td><td
 rclcpp::Service&lt; std_srvs::srv::Trigger &gt;::SharedPtr&#160;</td><td class="memItemRight" valign="bottom"><b>trigger_service</b></td></tr>
 <tr class="separator:acda370134384af153c14f601a35acec4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this struct was generated from the following file:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Per-camera bookkeeping: configuration, buffers, and ROS publishers/service for one MuJoCo camera. </p>
+<p>One instance exists per camera registered by CameraPlugin::register_cameras(). Buffers and messages are reused across renders to avoid reallocating on every publish. </p>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>mujoco_ros2_control/mujoco_ros2_control_plugins/src/<a class="el" href="camera__plugin_8hpp_source.html">camera_plugin.hpp</a></li>
 </ul>
 </div><!-- contents -->
