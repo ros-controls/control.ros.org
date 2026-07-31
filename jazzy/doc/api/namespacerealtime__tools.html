@@ -182,6 +182,8 @@ Functions</h2></td></tr>
 <tr class="separator:a3878498c007db817e787b85444e1dcff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15ae652648a1d328568d087dc3b149a0" id="r_a15ae652648a1d328568d087dc3b149a0"><td class="memItemLeft" align="right" valign="top">std::pair&lt; bool, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerealtime__tools.html#a15ae652648a1d328568d087dc3b149a0">set_current_thread_affinity</a> (const std::vector&lt; int &gt; &amp;cores)</td></tr>
 <tr class="separator:a15ae652648a1d328568d087dc3b149a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a041c662ab8b0f67fb433915990b9afa0" id="r_a041c662ab8b0f67fb433915990b9afa0"><td class="memItemLeft" align="right" valign="top">std::pair&lt; bool, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerealtime__tools.html#a041c662ab8b0f67fb433915990b9afa0">set_current_thread_name</a> (const std::string &amp;name)</td></tr>
+<tr class="separator:a041c662ab8b0f67fb433915990b9afa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6dbb8d573d0a93ab87b6c11c88c0ef5" id="r_ac6dbb8d573d0a93ab87b6c11c88c0ef5"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerealtime__tools.html#ac6dbb8d573d0a93ab87b6c11c88c0ef5">get_number_of_available_processors</a> ()</td></tr>
 <tr class="separator:ac6dbb8d573d0a93ab87b6c11c88c0ef5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -407,6 +409,31 @@ template&lt;class DataType , std::size_t Capacity = 0&gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">core</td><td>the cpu number of the core. If a negative number is passed, the affinity is reset to the default. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a pair of a boolean indicating whether the operation succeeded or not and a message describing the result of the operation </dd></dl>
+
+</div>
+</div>
+<a id="a041c662ab8b0f67fb433915990b9afa0" name="a041c662ab8b0f67fb433915990b9afa0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a041c662ab8b0f67fb433915990b9afa0">&#9670;&#160;</a></span>set_current_thread_name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt; bool, std::string &gt; realtime_tools::set_current_thread_name </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Configure the current thread name. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td>The name for the thread. On Linux, it will be automatically truncated to 15 characters. </td></tr>
   </table>
   </dd>
 </dl>
