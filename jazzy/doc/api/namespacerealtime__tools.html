@@ -168,6 +168,8 @@ Functions</h2></td></tr>
 <tr class="separator:ad4cb60d6a9fea8090ae1fd793a2c4222"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab31927b72af5e4dbe9fa40d31d9ede98" id="r_ab31927b72af5e4dbe9fa40d31d9ede98"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerealtime__tools.html#ab31927b72af5e4dbe9fa40d31d9ede98">configure_sched_fifo</a> (int priority)</td></tr>
 <tr class="separator:ab31927b72af5e4dbe9fa40d31d9ede98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a872ad039b23e971491c0de8e1a6ef6de" id="r_a872ad039b23e971491c0de8e1a6ef6de"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerealtime__tools.html#a872ad039b23e971491c0de8e1a6ef6de">configure_sched_rr</a> (int priority)</td></tr>
+<tr class="separator:a872ad039b23e971491c0de8e1a6ef6de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6e8b5ed308b76258690bc84b6ccb003" id="r_ab6e8b5ed308b76258690bc84b6ccb003"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerealtime__tools.html#ab6e8b5ed308b76258690bc84b6ccb003">lock_memory</a> (std::string &amp;message)</td></tr>
 <tr class="separator:ab6e8b5ed308b76258690bc84b6ccb003"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeae92aead96ba3906e1a10282395ebaf" id="r_aeae92aead96ba3906e1a10282395ebaf"><td class="memItemLeft" align="right" valign="top">std::pair&lt; bool, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerealtime__tools.html#aeae92aead96ba3906e1a10282395ebaf">lock_memory</a> ()</td></tr>
@@ -272,6 +274,31 @@ template&lt;class DataType , std::size_t Capacity = 0&gt; </div>
 <p>Configure SCHED_FIFO thread priority for the thread that calls this function </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">priority</td><td>the priority of this thread from 0-99 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if configuring scheduler succeeded </dd></dl>
+
+</div>
+</div>
+<a id="a872ad039b23e971491c0de8e1a6ef6de" name="a872ad039b23e971491c0de8e1a6ef6de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a872ad039b23e971491c0de8e1a6ef6de">&#9670;&#160;</a></span>configure_sched_rr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool realtime_tools::configure_sched_rr </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>priority</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Configure SCHED_RR thread priority for the thread that calls this function. SCHED_RR threads of the same priority are time-sliced (round-robin) Useful on PREEMPT_RT kernels with multiple RT-priority threads. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">priority</td><td>scheduling priority (platform-dependent; on Linux typically 1-99) </td></tr>
   </table>
   </dd>
 </dl>
