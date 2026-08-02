@@ -55,22 +55,10 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">ros2_control</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#api-documentation">API Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#concepts">Concepts</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../controller_manager/doc/userdoc.html">Controller Manager</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../controller_manager/doc/controller_chaining.html">Controller Chaining / Cascade Control</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../hardware_interface/doc/joints_userdoc.html">Joint Kinematics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../hardware_interface/doc/joint_limiting.html">Joint Limiting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../hardware_interface/doc/hardware_components_userdoc.html">Hardware Components</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../hardware_interface/doc/mock_components_userdoc.html">Mock Components</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#guidelines-and-best-practices">Guidelines and Best Practices</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="debugging.html">Debugging the Controller Manager and Plugins</a></li>
-<li class="toctree-l3"><a class="reference internal" href="introspection.html">Introspection of the ros2_control setup</a></li>
-<li class="toctree-l3"><a class="reference internal" href="introspection.html#data-visualization">Data Visualization</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../controller_manager/doc/userdoc.html">Controller manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hardware_interface/doc/hardware_components_userdoc.html">Hardware Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guidelines_and_best_practices.html">Guidelines and Best Practices</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
@@ -129,44 +117,45 @@
   <section id="ros2-control">
 <span id="ros2-control-framework"></span><h1>ros2_control<a class="headerlink" href="#ros2-control" title="Link to this heading"></a></h1>
 <p>This is the documentation of the ros2_control framework core.</p>
-<p><a class="reference external" href="https://github.com/ros-controls/ros2_control">GitHub Repository</a></p>
-<section id="api-documentation">
-<h2>API Documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
-<p>API documentation is parsed by doxygen and can be found <a class="reference external" href="../../api/index.html">here</a></p>
-</section>
-<section id="concepts">
-<h2>Concepts<a class="headerlink" href="#concepts" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../controller_manager/doc/userdoc.html">Controller Manager</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../controller_manager/doc/running_controllers_asynchronously.html">Asynchronous Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controller_manager/doc/userdoc.html">Controller manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Concepts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../controller_manager/doc/controller_chaining.html">Controller Chaining / Cascade Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hardware_interface/doc/joints_userdoc.html">Joint Kinematics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hardware_interface/doc/joint_limiting.html">Joint Limiting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controller_manager/doc/async_updates.html">Support for Asynchronous Updates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../controller_manager/doc/running_controllers_asynchronously.html">Asynchronous Controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hardware_interface/doc/asynchronous_components.html">Asynchronous Hardware Components</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../controller_manager/doc/controller_chaining.html">Controller Chaining / Cascade Control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hardware_interface/doc/joints_userdoc.html">Joint Kinematics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hardware_interface/doc/joint_limiting.html">Joint Limiting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controller_manager/doc/clocks.html">Different Clocks used by Controller Manager</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../hardware_interface/doc/hardware_components_userdoc.html">Hardware Components</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../hardware_interface/doc/hardware_interface_types_userdoc.html">Hardware Interface Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../hardware_interface/doc/writing_new_hardware_component.html">Writing a Hardware Component</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../hardware_interface/doc/different_update_rates_userdoc.html">Different Update Rates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../hardware_interface/doc/asynchronous_components.html">Asynchronous Execution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../hardware_interface/doc/semantic_components.html">Semantic Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hardware_interface/doc/mock_components_userdoc.html">Mock Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hardware_interface/doc/lifecycle_of_a_hardware_component.html">Lifecycle of a Hardware Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hardware_interface/doc/handling_errors_during_read_write.html">Handling of Errors During read() and write() Calls</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../hardware_interface/doc/mock_components_userdoc.html">Mock Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guidelines_and_best_practices.html">Guidelines and Best Practices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html">Debugging the Controller Manager and Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introspection.html">Introspection of the ros2_control setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introspection.html#data-visualization">Data Visualization</a></li>
+</ul>
+</li>
 </ul>
 </div>
-</section>
-<section id="guidelines-and-best-practices">
-<h2>Guidelines and Best Practices<a class="headerlink" href="#guidelines-and-best-practices" title="Link to this heading"></a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="debugging.html">Debugging the Controller Manager and Plugins</a></li>
-<li class="toctree-l1"><a class="reference internal" href="introspection.html">Introspection of the ros2_control setup</a></li>
-<li class="toctree-l1"><a class="reference internal" href="introspection.html#data-visualization">Data Visualization</a></li>
+<p>See also:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/ros-controls/ros2_control">GitHub Repository</a></p></li>
+<li><p><a class="reference external" href="../../api/index.html">API Documentation</a></p></li>
 </ul>
-</div>
-</section>
 </section>
 
 

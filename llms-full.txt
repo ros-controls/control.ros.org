@@ -101,7 +101,7 @@ General discussions
 
 ======================================================================
 
-Built on 2026-08-01 at 07:08 GMT
+Built on 2026-08-02 at 06:29 GMT
 
 
 
@@ -5922,6 +5922,59 @@ This workshop was brought to you by
 
 
 ==================================================
+source page: doc/ros2_control/controller_manager/doc/async_updates.txt
+==================================================
+
+Support for Asynchronous Updates
+********************************
+
+* Asynchronous Controllers
+
+* Asynchronous Hardware Components
+
+
+
+==================================================
+source page: doc/ros2_control/controller_manager/doc/clocks.txt
+==================================================
+
+Different Clocks used by Controller Manager
+*******************************************
+
+The controller manager internally uses the following two different
+clocks for a non-simulation setup:
+
+* "RCL_ROS_TIME": This clock is used mostly in the non-realtime loops.
+
+* "RCL_STEADY_TIME": This clock is used mostly in the realtime loops
+  for the "read", "update", and "write" loops. However, when the
+  controller manager is used in a simulation environment, the
+  "RCL_ROS_TIME" clock is used for triggering the "read", "update",
+  and "write" loops.
+
+The "time" argument in the "read" and "write" methods of the hardware
+components is of type "RCL_STEADY_TIME", as most of the hardware
+expects the time to be monotonic and not affected by the system time
+changes. However, the "time" argument in the "update" method of the
+controller is of type "RCL_ROS_TIME" as the controller is the one that
+interacts with other nodes or topics to receive the commands or
+publish the state. This "time" argument can be used by the controllers
+to validate the received commands or to publish the state at the
+correct timestamp. The "period" argument in the "read", "update" and
+"write" methods is calculated using the trigger clock of type
+"RCL_STEADY_TIME" so it is always monotonic.
+
+The reason behind using different clocks is to avoid the issues
+related to the effect of system time changes in the realtime loops.
+The "ros2_control_node" now also detects the overruns caused by the
+system time changes and longer execution times of the controllers and
+hardware components. The controller manager will print a warning
+message if the controller or hardware component misses the update
+cycle due to the system time changes or longer execution times.
+
+
+
+==================================================
 source page: doc/ros2_control/controller_manager/doc/controller_chaining.txt
 ==================================================
 
@@ -6328,78 +6381,12 @@ framework. It manages lifecycle of controllers, access to the hardware
 interfaces and offers services to the ROS-world.
 
 
-Determinism
-===========
-
-For best performance when controlling hardware you want the controller
-manager to have as little jitter as possible in the main control loop.
-
-Independent of the kernel installed, the main thread of Controller
-Manager attempts to configure "SCHED_FIFO" with a priority of "50".
-Read more about the scheduling policies for example here.
-
-For real-time tasks, a priority range of 0 to 99 is expected, with
-higher numbers indicating higher priority. By default, users do not
-have permission to set such high priorities. To give the user such
-permissions, add a group named realtime and add the user controlling
-your robot to this group:
-
-   $ sudo addgroup realtime
-   $ sudo usermod -a -G realtime $(whoami)
-
-Afterwards, add the following limits to the realtime group in
-"/etc/security/limits.conf":
-
-   @realtime soft rtprio 99
-   @realtime soft priority 99
-   @realtime soft memlock unlimited
-   @realtime hard rtprio 99
-   @realtime hard priority 99
-   @realtime hard memlock unlimited
-
-The limits will be applied after you log out and in again.
-
-You can run ros2_control with real-time requirements also from a
-docker container. Pass the following capability options to allow the
-container to set the thread priority and lock memory, e.g.,
-
-   $ docker run -it \
-       --cap-add=sys_nice \
-       --ulimit rtprio=99 \
-       --ulimit memlock=-1 \
-       --rm --net host <IMAGE>
-
-For more information, see the Docker engine documentation about
-resource_constraints and linux capabilities.
-
-The normal linux kernel is optimized for computational throughput and
-therefore is not well suited for hardware control. Alternatives to the
-standard kernel include
-
-* Real-time Ubuntu on Ubuntu
-
-* linux-raspi-realtime on Ubuntu on Raspberry Pi: "sudo apt install
-  linux-raspi-realtime"
-
-* linux-image-rt-amd64 or linux-image-rt-arm64 on Debian for 64-bit
-  PCs
-
-* lowlatency kernel ("sudo apt install linux-lowlatency") on any
-  Ubuntu
-
-Though installing a realtime-kernel will definitely get the best
-results when it comes to low jitter, using a lowlatency kernel can
-improve things a lot with being really easy to install.
-
-Note:
-
-  Avoid using the get_lifecycle_state() method in the real-time
-  control loop of the controllers and the hardware components as it is
-  not real-time safe.
+ROS Interface
+=============
 
 
 Publishers
-==========
+----------
 
 ~/activity [controller_manager_msgs::msg::ControllerManagerActivity]
    A topic that is published every time there is a change of state of
@@ -6412,7 +6399,7 @@ Publishers
 
 
 Subscribers
-===========
+-----------
 
 robot_description [std_msgs::msg::String]
    String with the URDF xml, e.g., from "robot_state_publisher".
@@ -6421,7 +6408,7 @@ robot_description [std_msgs::msg::String]
 
 
 Parameters
-==========
+----------
 
 <controller_name>.type
    Name of a plugin exported using "pluginlib" for a controller. This
@@ -6912,8 +6899,173 @@ overruns.print_warnings (bool)
        update_rate: 100.0
 
 
-Handling Multiple Controller Managers
-=====================================
+Determinism
+===========
+
+For best performance when controlling hardware you want the controller
+manager to have as little jitter as possible in the main control loop.
+
+Independent of the kernel installed, the main thread of Controller
+Manager attempts to configure "SCHED_FIFO" with a priority of "50".
+Read more about the scheduling policies for example here.
+
+For real-time tasks, a priority range of 0 to 99 is expected, with
+higher numbers indicating higher priority. By default, users do not
+have permission to set such high priorities. To give the user such
+permissions, add a group named realtime and add the user controlling
+your robot to this group:
+
+   $ sudo addgroup realtime
+   $ sudo usermod -a -G realtime $(whoami)
+
+Afterwards, add the following limits to the realtime group in
+"/etc/security/limits.conf":
+
+   @realtime soft rtprio 99
+   @realtime soft priority 99
+   @realtime soft memlock unlimited
+   @realtime hard rtprio 99
+   @realtime hard priority 99
+   @realtime hard memlock unlimited
+
+The limits will be applied after you log out and in again.
+
+You can run ros2_control with real-time requirements also from a
+docker container. Pass the following capability options to allow the
+container to set the thread priority and lock memory, e.g.,
+
+   $ docker run -it \
+       --cap-add=sys_nice \
+       --ulimit rtprio=99 \
+       --ulimit memlock=-1 \
+       --rm --net host <IMAGE>
+
+For more information, see the Docker engine documentation about
+resource_constraints and linux capabilities.
+
+The normal linux kernel is optimized for computational throughput and
+therefore is not well suited for hardware control. Alternatives to the
+standard kernel include
+
+* Real-time Ubuntu on Ubuntu
+
+* linux-raspi-realtime on Ubuntu on Raspberry Pi: "sudo apt install
+  linux-raspi-realtime"
+
+* linux-image-rt-amd64 or linux-image-rt-arm64 on Debian for 64-bit
+  PCs
+
+* lowlatency kernel ("sudo apt install linux-lowlatency") on any
+  Ubuntu
+
+Though installing a realtime-kernel will definitely get the best
+results when it comes to low jitter, using a lowlatency kernel can
+improve things a lot with being really easy to install.
+
+Note:
+
+  Avoid using the get_lifecycle_state() method in the real-time
+  control loop of the controllers and the hardware components as it is
+  not real-time safe.
+
+
+Factors that affect Determinism
+-------------------------------
+
+When run under the conditions determined in the above section, the
+determinism is assured up to the limitations of the hardware and the
+real-time kernel. However, there are some situations that can affect
+determinism:
+
+* When a controller fails to activate in the realtime loop, the
+  controller_manager will call the methods
+  "prepare_command_mode_switch" and "perform_command_mode_switch" to
+  stop the started interfaces. These calls can cause jitter in the
+  main control loop.
+
+* If a controller does not complete a successful update cycle in the
+  realtime loop (for example, returns "return_type::ERROR"), the
+  controller manager will deactivate that controller (or) the entire
+  controller chain it is part of. It will then invoke
+  "prepare_command_mode_switch" and "perform_command_mode_switch" to
+  stop the interfaces used by the affected controller(s). These
+  actions can introduce jitter into the main control loop.
+
+
+Launching controller_manager
+============================
+
+
+Using ros2_control_node
+-----------------------
+
+The controller_manager can be launched with the ros2_control_node
+executable. The following example shows how to launch the
+controller_manager with the ros2_control_node executable:
+
+   control_node = Node(
+       package="controller_manager",
+       executable="ros2_control_node",
+       parameters=[robot_controllers],
+       output="both",
+   )
+
+The ros2_control_node executable uses the following parameters from
+the "controller_manager" node:
+
+lock_memory (optional; bool; default: false for a non-realtime kernel,
+true for a realtime kernel)
+   Locks the memory of the "controller_manager" node at startup to
+   physical RAM in order to avoid page faults and to prevent the node
+   from being swapped out to disk. Find more information about the
+   setup for memory locking in the following link: How to set ulimit
+   values The following command can be used to set the memory locking
+   limit temporarily: "ulimit -l unlimited".
+
+cpu_affinity (optional; int (or) int_array;)
+   Sets the CPU affinity of the "controller_manager" node to the
+   specified CPU core. If it is an integer, the node's affinity will
+   be set to the specified CPU core. If it is an array of integers,
+   the node's affinity will be set to the specified set of CPU cores.
+
+thread_priority (optional; int; default: 50)
+   Sets the thread priority of the "controller_manager" node to the
+   specified value. The value must be between 0 and 99.
+
+use_sim_time (optional; bool; default: false)
+   Enables the use of simulation time in the "controller_manager"
+   node.
+
+overruns.manage (optional; bool; default: true)
+   Enables or disables the handling of overruns in the real-time loop
+   of the "controller_manager" node. If set to true, the controller
+   manager will detect overruns caused by system time changes or
+   longer execution times of the controllers and hardware components.
+   If an overrun is detected, the controller manager will print a
+   warning message to the console. When used with "use_sim_time" set
+   to true, this parameter is ignored and the overrun handling is
+   disabled.
+
+hardware_synchronization.expect_blocking_read_write (optional; bool;
+default: false)
+   If true, the controller manager will not sleep actively. Use this,
+   when there is a hardware interface running that will block during
+   its read or write operation until receiving new data from the
+   hardware.
+
+hardware_synchronization.minimum_cycle_time (optional; double;
+default: 0.0001)
+   The minimum sleep time in seconds for the control node's real-time
+   loop. This is used to prevent the control node from running too
+   fast, which can cause high CPU usage if the hardware doesn't block
+   in read / write. This is only used when
+   "expect_blocking_read_write" is set to true. If the cycle is
+   shorter than this, it will sleep for this period and print a
+   warning.
+
+
+Handling Multiple Controller Managers (single/multiple)
+-------------------------------------------------------
 
 When dealing with multiple controller managers, you have two options
 for managing different robot descriptions:
@@ -6958,7 +7110,39 @@ for managing different robot descriptions:
    )
 
 
-Helper scripts
+Using the Controller Manager in a Process
+-----------------------------------------
+
+The "ControllerManager" may also be instantiated in a process as a
+class, but proper care must be taken when doing so. The reason for
+this is because the "ControllerManager" class inherits from
+"rclcpp::Node".
+
+If there is more than one Node in the process, global node name remap
+rules can forcibly change the "ControllerManager's" node name as well,
+leading to duplicate node names. This occurs whether the Nodes are
+siblings or exist in a hierarchy.
+
+[image]
+
+The workaround for this is to specify another node name remap rule in
+the "NodeOptions" passed to the "ControllerManager" node (causing it
+to ignore the global rule), or ensure that any remap rules are
+targeted to specific nodes.
+
+[image]
+
+   auto options = controller_manager::get_cm_node_options();
+   options.arguments({
+     "--ros-args",
+     "--remap", "_target_node_name:__node:=dst_node_name",
+     "--log-level", "info"});
+
+   auto cm = std::make_shared<controller_manager::ControllerManager>(
+     executor, "_target_node_name", "some_optional_namespace", options);
+
+
+Helper Scripts
 ==============
 
 There are two scripts to interact with controller manager from launch
@@ -6976,9 +7160,7 @@ files:
 ---------
 
    $ ros2 run controller_manager spawner -h
-   usage: spawner [-h] [-c CONTROLLER_MANAGER] [-p PARAM_FILE] [--load-only] [--inactive] [-u] [--controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT] [--switch-timeout SWITCH_TIMEOUT]
-              [--service-call-timeout SERVICE_CALL_TIMEOUT] [--activate-as-group] [--switch-asap | --no-switch-asap] [--controller-ros-args CONTROLLER_ROS_ARGS]
-              controller_names [controller_names ...]
+   usage: spawner [-h] [-c CONTROLLER_MANAGER] [-p PARAM_FILE] [--load-only] [--inactive] [-u] [--controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT] [--switch-timeout SWITCH_TIMEOUT] [--service-call-timeout SERVICE_CALL_TIMEOUT] [--activate-as-group] [--switch-asap | --no-switch-asap] [--controller-ros-args CONTROLLER_ROS_ARGS] controller_names [controller_names ...]
 
    positional arguments:
      controller_names      List of controllers
@@ -7059,8 +7241,7 @@ remapping topics, the following command can be used:
    Usage: spawner [global_options] --controller <name> [controller_options] --controller <name> ...
 
    Global Options:
-   usage: spawner [-c CONTROLLER_MANAGER] [--controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT] [--switch-timeout SWITCH_TIMEOUT] [--service-call-timeout SERVICE_CALL_TIMEOUT] [--activate-as-group]
-                 [--switch-asap | --no-switch-asap] [-u] [-h]
+   usage: spawner [-c CONTROLLER_MANAGER] [--controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT] [--switch-timeout SWITCH_TIMEOUT] [--service-call-timeout SERVICE_CALL_TIMEOUT] [--activate-as-group] [--switch-asap | --no-switch-asap] [-u] [-h]
 
    options:
      -c CONTROLLER_MANAGER, --controller-manager CONTROLLER_MANAGER
@@ -7181,9 +7362,7 @@ absolute namespace. See the following examples on the config files:
 ------------------
 
    $ ros2 run controller_manager hardware_spawner -h
-   usage: hardware_spawner [-h] [-c CONTROLLER_MANAGER] [--controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT]
-                           (--activate | --configure)
-                           hardware_component_names [hardware_component_names ...]
+   usage: hardware_spawner [-h] [-c CONTROLLER_MANAGER] [--controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT] (--activate | --configure) hardware_component_names [hardware_component_names ...]
 
    positional arguments:
      hardware_component_names
@@ -7197,6 +7376,21 @@ absolute namespace. See the following examples on the config files:
                            Time to wait for the controller manager
      --activate            Activates the given components. Note: Components are by default configured before activated.
      --configure           Configures the given components.
+
+
+Color Output Handling
+---------------------
+
+The helper scripts ("spawner" and "hardware_spawner") now use an
+environment-aware "bcolors" class. The color output automatically
+adapts to the environment:
+
+* "RCUTILS_COLORIZED_OUTPUT=0" -> disables color output
+
+* "RCUTILS_COLORIZED_OUTPUT=1" -> forces color output
+
+* Unset -> automatically detects TTY and enables color only in
+  interactive terminals
 
 
 rqt_controller_manager
@@ -7220,108 +7414,8 @@ plugin:
   menu with options for lifecycle management.
 
 
-Using the Controller Manager in a Process
-=========================================
-
-The "ControllerManager" may also be instantiated in a process as a
-class, but proper care must be taken when doing so. The reason for
-this is because the "ControllerManager" class inherits from
-"rclcpp::Node".
-
-If there is more than one Node in the process, global node name remap
-rules can forcibly change the "ControllerManager's" node name as well,
-leading to duplicate node names. This occurs whether the Nodes are
-siblings or exist in a hierarchy.
-
-[image]
-
-The workaround for this is to specify another node name remap rule in
-the "NodeOptions" passed to the "ControllerManager" node (causing it
-to ignore the global rule), or ensure that any remap rules are
-targeted to specific nodes.
-
-[image]
-
-   auto options = controller_manager::get_cm_node_options();
-     options.arguments({
-       "--ros-args",
-       "--remap", "_target_node_name:__node:=dst_node_name",
-       "--log-level", "info"});
-
-     auto cm = std::make_shared<controller_manager::ControllerManager>(
-       executor, "_target_node_name", "some_optional_namespace", options);
-
-
-Launching controller_manager with ros2_control_node
-===================================================
-
-The controller_manager can be launched with the ros2_control_node
-executable. The following example shows how to launch the
-controller_manager with the ros2_control_node executable:
-
-   control_node = Node(
-       package="controller_manager",
-       executable="ros2_control_node",
-       parameters=[robot_controllers],
-       output="both",
-   )
-
-The ros2_control_node executable uses the following parameters from
-the "controller_manager" node:
-
-lock_memory (optional; bool; default: false for a non-realtime kernel,
-true for a realtime kernel)
-   Locks the memory of the "controller_manager" node at startup to
-   physical RAM in order to avoid page faults and to prevent the node
-   from being swapped out to disk. Find more information about the
-   setup for memory locking in the following link : How to set ulimit
-   values The following command can be used to set the memory locking
-   limit temporarily : "ulimit -l unlimited".
-
-cpu_affinity (optional; int (or) int_array;)
-   Sets the CPU affinity of the "controller_manager" node to the
-   specified CPU core. If it is an integer, the node's affinity will
-   be set to the specified CPU core. If it is an array of integers,
-   the node's affinity will be set to the specified set of CPU cores.
-
-thread_priority (optional; int; default: 50)
-   Sets the thread priority of the "controller_manager" node to the
-   specified value. The value must be between 0 and 99.
-
-use_sim_time (optional; bool; default: false)
-   Enables the use of simulation time in the "controller_manager"
-   node.
-
-overruns.manage (optional; bool; default: true)
-   Enables or disables the handling of overruns in the real-time loop
-   of the "controller_manager" node. If set to true, the controller
-   manager will detect overruns caused by system time changes or
-   longer execution times of the controllers and hardware components.
-   If an overrun is detected, the controller manager will print a
-   warning message to the console. When used with "use_sim_time" set
-   to true, this parameter is ignored and the overrun handling is
-   disabled.
-
-hardware_synchronization.expect_blocking_read_write (optional; bool;
-default: false)
-   If true, the controller manager will not sleep actively. Use this,
-   when there is a hardware interface running that will block during
-   its read or write operation until receiving new data from the
-   hardware.
-
-hardware_synchronization.minimum_cycle_time (optional; double;
-default: 0.0001)
-   The minimum sleep time in seconds for the control node's real-time
-   loop. This is used to prevent the control node from running too
-   fast, which can cause high CPU usage if the hardware doesn't block
-   in read / write. This is only used when
-   "expect_blocking_read_write" is set to true. If the cycle is
-   shorter than this, it will sleep for this period and print a
-   warning.
-
-
-Concepts
-========
+Operations
+==========
 
 
 Restarting all controllers
@@ -7352,96 +7446,27 @@ the entire controller chain it is part of, then the controller manager
 will try to start any available fallback controllers.
 
 
-Factors that affect Determinism
--------------------------------
 
-When run under the conditions determined in the above section, the
-determinism is assured up to the limitations of the hardware and the
-real-time kernel. However, there are some situations that can affect
-determinism:
+==================================================
+source page: doc/ros2_control/doc/concepts.txt
+==================================================
 
-* When a controller fails to activate in the realtime loop, the
-  controller_manager will call the methods
-  "prepare_command_mode_switch" and "perform_command_mode_switch" to
-  stop the started interfaces. These calls can cause jitter in the
-  main control loop.
+Concepts
+********
 
-* If a controller does not complete a successful update cycle in the
-  realtime loop (for example, returns "return_type::ERROR"), the
-  controller manager will deactivate that controller (or) the entire
-  controller chain it is part of. It will then invoke
-  "prepare_command_mode_switch" and "perform_command_mode_switch" to
-  stop the interfaces used by the affected controller(s). These
-  actions can introduce jitter into the main control loop.
+* Controller Chaining / Cascade Control
 
+* Joint Kinematics
 
-Support for Asynchronous Updates
---------------------------------
+* Joint Limiting
 
-* Asynchronous Controllers
+* Support for Asynchronous Updates
 
-For details on running controllers asynchronously, see Running
-Controllers Asynchronously.
+  * Asynchronous Controllers
 
+  * Asynchronous Hardware Components
 
-Monitoring and Tuning
-=====================
-
-ros2_control "controller_interface" has a "ControllerUpdateStats"
-structure which can be used to monitor the controller update rate and
-the missed update cycles. The data is published to the "/diagnostics"
-and also "/controller_manager/introspection_data/*" topics. This can
-be used to fine tune the controller update rate.
-
-
-Different Clocks used by Controller Manager
--------------------------------------------
-
-The controller manager internally uses the following two different
-clocks for a non-simulation setup:
-
-* "RCL_ROS_TIME": This clock is used mostly in the non-realtime loops.
-
-* "RCL_STEADY_TIME": This clock is used mostly in the realtime loops
-  for the "read", "update", and "write" loops. However, when the
-  controller manager is used in a simulation environment, the
-  "RCL_ROS_TIME" clock is used for triggering the "read", "update",
-  and "write" loops.
-
-The "time" argument in the "read" and "write" methods of the hardware
-components is of type "RCL_STEADY_TIME", as most of the hardware
-expects the time to be monotonic and not affected by the system time
-changes. However, the "time" argument in the "update" method of the
-controller is of type "RCL_ROS_TIME" as the controller is the one that
-interacts with other nodes or topics to receive the commands or
-publish the state. This "time" argument can be used by the controllers
-to validate the received commands or to publish the state at the
-correct timestamp. The "period" argument in the "read", "update" and
-"write" methods is calculated using the trigger clock of type
-"RCL_STEADY_TIME" so it is always monotonic.
-
-The reason behind using different clocks is to avoid the issues
-related to the affect of system time changes in the realtime loops.
-The "ros2_control_node" now also detects the overruns caused by the
-system time changes and longer execution times of the controllers and
-hardware components. The controller manager will print a warning
-message if the controller or hardware component misses the update
-cycle due to the system time changes or longer execution times.
-
-
-Color Output Handling
----------------------
-
-The helper scripts ("spawner" and "hardware_spawner") now use an
-environment-aware "bcolors" class. The color output automatically
-adapts to the environment:
-
-* "RCUTILS_COLORIZED_OUTPUT=0" -> disables color output
-
-* "RCUTILS_COLORIZED_OUTPUT=1" -> forces color output
-
-* Unset -> automatically detects TTY and enables color only in
-  interactive terminals
+* Different Clocks used by Controller Manager
 
 
 
@@ -7584,6 +7609,21 @@ References
 
 
 ==================================================
+source page: doc/ros2_control/doc/guidelines_and_best_practices.txt
+==================================================
+
+Guidelines and Best Practices
+*****************************
+
+* Debugging the Controller Manager and Plugins
+
+* Introspection of the ros2_control setup
+
+* Data Visualization
+
+
+
+==================================================
 source page: doc/ros2_control/doc/index.txt
 ==================================================
 
@@ -7592,27 +7632,23 @@ ros2_control
 
 This is the documentation of the ros2_control framework core.
 
-GitHub Repository
+* Controller manager
 
+* Concepts
 
-API Documentation
-=================
+  * Controller Chaining / Cascade Control
 
-API documentation is parsed by doxygen and can be found here
+  * Joint Kinematics
 
+  * Joint Limiting
 
-Concepts
-========
+  * Support for Asynchronous Updates
 
-* Controller Manager
+    * Asynchronous Controllers
 
-  * Asynchronous Controllers
+    * Asynchronous Hardware Components
 
-* Controller Chaining / Cascade Control
-
-* Joint Kinematics
-
-* Joint Limiting
+  * Different Clocks used by Controller Manager
 
 * Hardware Components
 
@@ -7626,17 +7662,25 @@ Concepts
 
   * Semantic Components
 
-* Mock Components
+  * Mock Components
 
+  * Lifecycle of a Hardware Component
 
-Guidelines and Best Practices
-=============================
+  * Handling of Errors During read() and write() Calls
 
-* Debugging the Controller Manager and Plugins
+* Guidelines and Best Practices
 
-* Introspection of the ros2_control setup
+  * Debugging the Controller Manager and Plugins
 
-* Data Visualization
+  * Introspection of the ros2_control setup
+
+  * Data Visualization
+
+See also:
+
+* GitHub Repository
+
+* API Documentation
 
 
 
@@ -7693,7 +7737,8 @@ Along with the above introspection data, the "controller_manager" also
 publishes the statistics of the execution time and periodicity of the
 read and write cycles of the hardware components and the update cycle
 of the controllers. This is done by registering the statistics of
-these variables and publishing them on the "~/statistics" topic.
+these variables and publishing them on the "~/statistics" topic, a
+summary is also published to the "/diagnostics" topic.
 
 All the registered variables are published over 3 topics:
 "~/statistics/full", "~/statistics/names", and "~/statistics/values".
@@ -8373,6 +8418,27 @@ Note:
 
 
 ==================================================
+source page: doc/ros2_control/hardware_interface/doc/handling_errors_during_read_write.txt
+==================================================
+
+Handling of Errors During read() and write() Calls
+**************************************************
+
+If "hardware_interface::return_type::ERROR" is returned from "read()"
+or "write()" methods of a hardware_interface class,
+"on_error(previous_state)" method will be called to handle any error
+that happened.
+
+Error handling follows the node lifecycle. If successful
+"CallbackReturn::SUCCESS" is returned and hardware is again in
+"UNCONFIGURED" state, if any "ERROR" or "FAILURE" happens the hardware
+ends in "FINALIZED" state and can not be recovered. The only option is
+to reload the complete plugin, but there is currently no service for
+this in the Controller Manager.
+
+
+
+==================================================
 source page: doc/ros2_control/hardware_interface/doc/hardware_components_userdoc.txt
 ==================================================
 
@@ -8384,10 +8450,6 @@ ros2_control framework. There are three types of hardware Actuator,
 Sensor and System. For details on each type check Hardware Components
 description.
 
-
-Guidelines and Best Practices
-=============================
-
 * Hardware Interface Types
 
 * Writing a Hardware Component
@@ -8398,74 +8460,11 @@ Guidelines and Best Practices
 
 * Semantic Components
 
+* Mock Components
 
-Lifecycle of a Hardware Component
----------------------------------
+* Lifecycle of a Hardware Component
 
-Methods return values have type "rclcpp_lifecycle::node_interfaces::L
-ifecycleNodeInterface::CallbackReturn" with the following meaning:
-
-* "CallbackReturn::SUCCESS" method execution was successful.
-
-* "CallbackReturn::FAILURE" method execution has failed and the
-  lifecycle transition is unsuccessful.
-
-* "CallbackReturn::ERROR" critical error has happened that should be
-  managed in "on_error" method.
-
-The hardware transitions to the following state after each method:
-
-* **UNCONFIGURED** ("on_init", "on_cleanup"):
-
-  Hardware is only initialized, but communication is not started and
-  no interfaces are imported into "ResourceManager".
-
-* **INACTIVE** ("on_configure", "on_deactivate"):
-
-  Communication with the hardware is established and hardware
-  component is configured. States can be read, but command interfaces
-  (System and Actuator only) are not available.
-
-  As of now, it is left to the hardware component implementation to
-  continue using the command received from the "CommandInterfaces" or
-  to skip them completely.
-
-  Note:
-
-    We plan to implement safety-critical interfaces, see this PR in
-    the roadmap. But currently, all command interfaces are available
-    and will be written, see this issue describing the situation.
-
-* **FINALIZED** ("on_shutdown"):
-
-  Hardware interface is ready for unloading/destruction. Allocated
-  memory is cleaned up.
-
-* **ACTIVE** ("on_activate"):
-
-  States can be read.
-
-  System and Actuator only:
-
-     Power circuits of hardware are active and hardware can be moved,
-     e.g., brakes are disengaged. Command interfaces are available and
-     the commands should be sent to the hardware
-
-
-Handling of errors that happen during read() and write() calls
---------------------------------------------------------------
-
-If "hardware_interface::return_type::ERROR" is returned from "read()"
-or "write()" methods of a hardware_interface class,
-"on_error(previous_state)" method will be called to handle any error
-that happened.
-
-Error handling follows the node lifecycle. If successful
-"CallbackReturn::SUCCESS" is returned and hardware is again in
-"UNCONFIGURED"  state, if any "ERROR" or "FAILURE" happens the
-hardware ends in "FINALIZED" state and can not be recovered. The only
-option is to reload the complete plugin, but there is currently no
-service for this in the Controller Manager.
+* Handling of Errors During read() and write() Calls
 
 
 
@@ -9071,6 +9070,64 @@ gz_ros2_control:
    * closed-loop kinematics are not directly supported yet, but can be
      implemented by using a "DetachableJoint" via custom plugins.
      Follow this issue for updates on this topic.
+
+
+
+==================================================
+source page: doc/ros2_control/hardware_interface/doc/lifecycle_of_a_hardware_component.txt
+==================================================
+
+Lifecycle of a Hardware Component
+*********************************
+
+Methods return values have type "rclcpp_lifecycle::node_interfaces::L
+ifecycleNodeInterface::CallbackReturn" with the following meaning:
+
+* "CallbackReturn::SUCCESS" method execution was successful.
+
+* "CallbackReturn::FAILURE" method execution has failed and the
+  lifecycle transition is unsuccessful.
+
+* "CallbackReturn::ERROR" critical error has happened that should be
+  managed in "on_error" method.
+
+The hardware transitions to the following state after each method:
+
+* **UNCONFIGURED** ("on_init", "on_cleanup"):
+
+  Hardware is only initialized, but communication is not started and
+  no interfaces are imported into "ResourceManager".
+
+* **INACTIVE** ("on_configure", "on_deactivate"):
+
+  Communication with the hardware is established and hardware
+  component is configured. States can be read, but command interfaces
+  (System and Actuator only) are not available.
+
+  As of now, it is left to the hardware component implementation to
+  continue using the command received from the "CommandInterfaces" or
+  to skip them completely.
+
+  Note:
+
+    We plan to implement safety-critical interfaces, see this PR in
+    the roadmap. But currently, all command interfaces are available
+    and will be written, see this issue describing the situation.
+
+* **FINALIZED** ("on_shutdown"):
+
+  Hardware interface is ready for unloading/destruction. Allocated
+  memory is cleaned up.
+
+* **ACTIVE** ("on_activate"):
+
+  States can be read.
+
+  System and Actuator only:
+
+     Power circuits of hardware are active and hardware can be moved,
+     e.g., brakes are disengaged. Command interfaces are available and
+     the commands should be sent to the hardware
 
 
 
@@ -9765,8 +9822,7 @@ list_controllers
 ================
 
    $ ros2 control list_controllers -h
-   usage: ros2 control list_controllers [-h] [--spin-time SPIN_TIME] [-s] [--claimed-interfaces] [--required-state-interfaces] [--required-command-interfaces] [--chained-interfaces] [--exported-interfaces] [--verbose] [-c CONTROLLER_MANAGER] [--include-hidden-nodes]
-                                    [--ros-args ...]
+   usage: ros2 control list_controllers [-h] [--spin-time SPIN_TIME] [-s] [--claimed-interfaces] [--required-state-interfaces] [--required-command-interfaces] [--chained-interfaces] [--exported-interfaces] [--verbose] [-c CONTROLLER_MANAGER] [--include-hidden-nodes] [--ros-args ...]
 
    Output the list of loaded controllers, their type and status
 
@@ -10007,8 +10063,7 @@ switch_controllers
 ==================
 
    $ ros2 control switch_controllers -h
-   usage: ros2 control switch_controllers [-h] [--spin-time SPIN_TIME] [-s] [--deactivate [DEACTIVATE ...]] [--activate [ACTIVATE ...]] [--strict] [--activate-asap] [--switch-timeout SWITCH_TIMEOUT]
-                                         [-c CONTROLLER_MANAGER] [--include-hidden-nodes] [--ros-args ...]
+   usage: ros2 control switch_controllers [-h] [--spin-time SPIN_TIME] [-s] [--deactivate [DEACTIVATE ...]] [--activate [ACTIVATE ...]] [--strict] [--activate-asap] [--switch-timeout SWITCH_TIMEOUT] [-c CONTROLLER_MANAGER] [--include-hidden-nodes] [--ros-args ...]
 
    Switch controllers in a controller manager
 

@@ -365,175 +365,180 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>  <span class="keyword">auto</span> R_ref = admittance_state.ref_trans_base_ft.rotation();</div>
 <div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>  <span class="keyword">auto</span> R_desired = desired_trans_base_ft.rotation();</div>
 <div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>  <span class="keyword">auto</span> R = R_desired * R_ref.transpose();</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>  <span class="keyword">auto</span> angle_axis = Eigen::AngleAxisd(R);</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>  X.block&lt;3, 1&gt;(3, 0) = angle_axis.angle() * angle_axis.axis();</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span> </div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>  <span class="comment">// get admittance relative velocity</span></div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>  <span class="keyword">auto</span> X_dot = Eigen::Matrix&lt;double, 6, 1&gt;(admittance_state.admittance_velocity.data());</div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span> </div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>  <span class="comment">// external force expressed in the base frame</span></div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>  <span class="keyword">auto</span> F_base = admittance_state.wrench_base;</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span> </div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>  <span class="comment">// zero out any forces in the control frame</span></div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>  Eigen::Matrix&lt;double, 6, 1&gt; F_control;</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>  F_control.block&lt;3, 1&gt;(0, 0) = rot_base_control.transpose() * F_base.block&lt;3, 1&gt;(0, 0);</div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>  F_control.block&lt;3, 1&gt;(3, 0) = rot_base_control.transpose() * F_base.block&lt;3, 1&gt;(3, 0);</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>  F_control = F_control.cwiseProduct(admittance_state.selected_axes);</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>  F_base.block&lt;3, 1&gt;(0, 0) = rot_base_control * F_control.block&lt;3, 1&gt;(0, 0);</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>  F_base.block&lt;3, 1&gt;(3, 0) = rot_base_control * F_control.block&lt;3, 1&gt;(3, 0);</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span> </div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>  <span class="comment">// Compute admittance control law in the base frame: F = M*x_ddot + D*x_dot + K*x</span></div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>  Eigen::Matrix&lt;double, 6, 1&gt; X_ddot =</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    admittance_state.mass_inv.cwiseProduct(F_base - D * X_dot - K * X);</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>  <span class="keywordtype">bool</span> success = kinematics_-&gt;convert_cartesian_deltas_to_joint_deltas(</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>    admittance_state.current_joint_pos, X_ddot, admittance_state.ft_sensor_frame,</div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>    admittance_state.joint_acc);</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span> </div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>  <span class="comment">// add damping if cartesian velocity falls below threshold</span></div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>  <span class="keywordflow">for</span> (int64_t i = 0; i &lt; admittance_state.joint_acc.size(); ++i)</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>  {</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>    admittance_state.joint_acc[i] -=</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>      parameters_.admittance.joint_damping * admittance_state.joint_vel[i];</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>  }</div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span> </div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>  <span class="comment">// integrate motion in joint space</span></div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>  admittance_state.joint_vel += (admittance_state.joint_acc) * dt;</div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>  admittance_state.joint_pos += admittance_state.joint_vel * dt;</div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span> </div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>  <span class="comment">// calculate admittance velocity corresponding to joint velocity (&quot;base_link&quot; frame)</span></div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>  success &amp;= kinematics_-&gt;convert_joint_deltas_to_cartesian_deltas(</div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>    admittance_state.current_joint_pos, admittance_state.joint_vel,</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    admittance_state.ft_sensor_frame, admittance_state.admittance_velocity);</div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>  success &amp;= kinematics_-&gt;convert_joint_deltas_to_cartesian_deltas(</div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    admittance_state.current_joint_pos, admittance_state.joint_acc,</div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>    admittance_state.ft_sensor_frame, admittance_state.admittance_acceleration);</div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span> </div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>  <span class="keywordflow">return</span> success;</div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>}</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span> </div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>  admittance_state.admittance_position.setIdentity();</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>  admittance_state.admittance_position.translation() = X.head&lt;3&gt;();</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>  admittance_state.admittance_position.linear() = R;</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span> </div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>  <span class="keyword">auto</span> angle_axis = Eigen::AngleAxisd(R);</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>  X.block&lt;3, 1&gt;(3, 0) = angle_axis.angle() * angle_axis.axis();</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span> </div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>  <span class="comment">// get admittance relative velocity</span></div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>  <span class="keyword">auto</span> X_dot = Eigen::Matrix&lt;double, 6, 1&gt;(admittance_state.admittance_velocity.data());</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span> </div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>  <span class="comment">// external force expressed in the base frame</span></div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>  <span class="keyword">auto</span> F_base = admittance_state.wrench_base;</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span> </div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>  <span class="comment">// zero out any forces in the control frame</span></div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>  Eigen::Matrix&lt;double, 6, 1&gt; F_control;</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>  F_control.block&lt;3, 1&gt;(0, 0) = rot_base_control.transpose() * F_base.block&lt;3, 1&gt;(0, 0);</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>  F_control.block&lt;3, 1&gt;(3, 0) = rot_base_control.transpose() * F_base.block&lt;3, 1&gt;(3, 0);</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>  F_control = F_control.cwiseProduct(admittance_state.selected_axes);</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>  F_base.block&lt;3, 1&gt;(0, 0) = rot_base_control * F_control.block&lt;3, 1&gt;(0, 0);</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>  F_base.block&lt;3, 1&gt;(3, 0) = rot_base_control * F_control.block&lt;3, 1&gt;(3, 0);</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span> </div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>  <span class="comment">// Compute admittance control law in the base frame: F = M*x_ddot + D*x_dot + K*x</span></div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>  Eigen::Matrix&lt;double, 6, 1&gt; X_ddot =</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    admittance_state.mass_inv.cwiseProduct(F_base - D * X_dot - K * X);</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>  <span class="keywordtype">bool</span> success = kinematics_-&gt;convert_cartesian_deltas_to_joint_deltas(</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    admittance_state.current_joint_pos, X_ddot, admittance_state.ft_sensor_frame,</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>    admittance_state.joint_acc);</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span> </div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>  <span class="comment">// add damping if cartesian velocity falls below threshold</span></div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>  <span class="keywordflow">for</span> (int64_t i = 0; i &lt; admittance_state.joint_acc.size(); ++i)</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>  {</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    admittance_state.joint_acc[i] -=</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>      parameters_.admittance.joint_damping * admittance_state.joint_vel[i];</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>  }</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span> </div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>  <span class="comment">// integrate motion in joint space</span></div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>  admittance_state.joint_vel += (admittance_state.joint_acc) * dt;</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>  admittance_state.joint_pos += admittance_state.joint_vel * dt;</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span> </div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>  <span class="comment">// calculate admittance velocity corresponding to joint velocity (&quot;base_link&quot; frame)</span></div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>  success &amp;= kinematics_-&gt;convert_joint_deltas_to_cartesian_deltas(</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>    admittance_state.current_joint_pos, admittance_state.joint_vel,</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>    admittance_state.ft_sensor_frame, admittance_state.admittance_velocity);</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>  success &amp;= kinematics_-&gt;convert_joint_deltas_to_cartesian_deltas(</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>    admittance_state.current_joint_pos, admittance_state.joint_acc,</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>    admittance_state.ft_sensor_frame, admittance_state.admittance_acceleration);</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span> </div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>  <span class="keywordflow">return</span> success;</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>}</div>
 </div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span> </div>
-<div class="foldopen" id="foldopen00314" data-start="{" data-end="}">
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno"><a class="line" href="classadmittance__controller_1_1AdmittanceRule.html#aca1d0adc1b75e8157ae5188bb351544b">  314</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classadmittance__controller_1_1AdmittanceRule.html#aca1d0adc1b75e8157ae5188bb351544b">AdmittanceRule::process_wrench_measurements</a>(</div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>  <span class="keyword">const</span> geometry_msgs::msg::Wrench &amp; measured_wrench,</div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>  <span class="keyword">const</span> Eigen::Matrix&lt;double, 3, 3&gt; &amp; sensor_world_rot,</div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>  <span class="keyword">const</span> Eigen::Matrix&lt;double, 3, 3&gt; &amp; cog_world_rot)</div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>{</div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>  Eigen::Matrix&lt;double, 3, 2, Eigen::ColMajor&gt; new_wrench;</div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>  new_wrench(0, 0) = measured_wrench.force.x;</div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>  new_wrench(1, 0) = measured_wrench.force.y;</div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>  new_wrench(2, 0) = measured_wrench.force.z;</div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>  new_wrench(0, 1) = measured_wrench.torque.x;</div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>  new_wrench(1, 1) = measured_wrench.torque.y;</div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>  new_wrench(2, 1) = measured_wrench.torque.z;</div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span> </div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>  <span class="comment">// transform to world frame</span></div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>  Eigen::Matrix&lt;double, 3, 2&gt; new_wrench_base = sensor_world_rot * new_wrench;</div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span> </div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>  <span class="comment">// apply gravity compensation</span></div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>  new_wrench_base(2, 0) -= end_effector_weight_[2];</div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>  new_wrench_base.block&lt;3, 1&gt;(0, 1) -= (cog_world_rot * cog_pos_).cross(end_effector_weight_);</div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span> </div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>  <span class="comment">// apply smoothing filter</span></div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>  <span class="keywordflow">for</span> (Eigen::Index i = 0; i &lt; 6; ++i)</div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>  {</div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>    wrench_world_(i) = filters::exponentialSmoothing(</div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>      new_wrench_base(i), wrench_world_(i), parameters_.ft_sensor.filter_coefficient);</div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>  }</div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>}</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span> </div>
+<div class="foldopen" id="foldopen00319" data-start="{" data-end="}">
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno"><a class="line" href="classadmittance__controller_1_1AdmittanceRule.html#aca1d0adc1b75e8157ae5188bb351544b">  319</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classadmittance__controller_1_1AdmittanceRule.html#aca1d0adc1b75e8157ae5188bb351544b">AdmittanceRule::process_wrench_measurements</a>(</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>  <span class="keyword">const</span> geometry_msgs::msg::Wrench &amp; measured_wrench,</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>  <span class="keyword">const</span> Eigen::Matrix&lt;double, 3, 3&gt; &amp; sensor_world_rot,</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>  <span class="keyword">const</span> Eigen::Matrix&lt;double, 3, 3&gt; &amp; cog_world_rot)</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>{</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>  Eigen::Matrix&lt;double, 3, 2, Eigen::ColMajor&gt; new_wrench;</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>  new_wrench(0, 0) = measured_wrench.force.x;</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>  new_wrench(1, 0) = measured_wrench.force.y;</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>  new_wrench(2, 0) = measured_wrench.force.z;</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>  new_wrench(0, 1) = measured_wrench.torque.x;</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>  new_wrench(1, 1) = measured_wrench.torque.y;</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>  new_wrench(2, 1) = measured_wrench.torque.z;</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span> </div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>  <span class="comment">// transform to world frame</span></div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>  Eigen::Matrix&lt;double, 3, 2&gt; new_wrench_base = sensor_world_rot * new_wrench;</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span> </div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>  <span class="comment">// apply gravity compensation</span></div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>  new_wrench_base(2, 0) -= end_effector_weight_[2];</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>  new_wrench_base.block&lt;3, 1&gt;(0, 1) -= (cog_world_rot * cog_pos_).cross(end_effector_weight_);</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span> </div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>  <span class="comment">// apply smoothing filter</span></div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>  <span class="keywordflow">for</span> (Eigen::Index i = 0; i &lt; 6; ++i)</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>  {</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>    wrench_world_(i) = filters::exponentialSmoothing(</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>      new_wrench_base(i), wrench_world_(i), parameters_.ft_sensor.filter_coefficient);</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>  }</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>}</div>
 </div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span> </div>
-<div class="foldopen" id="foldopen00342" data-start="{" data-end="}">
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno"><a class="line" href="classadmittance__controller_1_1AdmittanceRule.html#ab5119625ad28f6314ddf968628002913">  342</a></span><span class="keyword">const</span> control_msgs::msg::AdmittanceControllerState &amp; <a class="code hl_function" href="classadmittance__controller_1_1AdmittanceRule.html#ab5119625ad28f6314ddf968628002913">AdmittanceRule::get_controller_state</a>()</div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>{</div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>  <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; NUM_CARTESIAN_DOF; ++i)</div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>  {</div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>    <span class="keyword">auto</span> idx = <span class="keyword">static_cast&lt;</span>Eigen::Index<span class="keyword">&gt;</span>(i);</div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>    state_message_.stiffness.data[i] = admittance_state_.stiffness[idx];</div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>    state_message_.damping.data[i] = admittance_state_.damping[idx];</div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>    state_message_.selected_axes.data[i] = <span class="keyword">static_cast&lt;</span><span class="keywordtype">bool</span><span class="keyword">&gt;</span>(admittance_state_.selected_axes[idx]);</div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>    state_message_.mass.data[i] = admittance_state_.mass[idx];</div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>  }</div>
-<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span> </div>
-<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>  <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; parameters_.joints.size(); ++i)</div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>  {</div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>    <span class="keyword">auto</span> idx = <span class="keyword">static_cast&lt;</span>Eigen::Index<span class="keyword">&gt;</span>(i);</div>
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>    state_message_.joint_state.name[i] = parameters_.joints[i];</div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>    state_message_.joint_state.position[i] = admittance_state_.joint_pos[idx];</div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>    state_message_.joint_state.velocity[i] = admittance_state_.joint_vel[idx];</div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>    state_message_.joint_state.effort[i] = admittance_state_.joint_acc[idx];</div>
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>  }</div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span> </div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>  state_message_.wrench_base.wrench.force.x = admittance_state_.wrench_base[0];</div>
-<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>  state_message_.wrench_base.wrench.force.y = admittance_state_.wrench_base[1];</div>
-<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>  state_message_.wrench_base.wrench.force.z = admittance_state_.wrench_base[2];</div>
-<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>  state_message_.wrench_base.wrench.torque.x = admittance_state_.wrench_base[3];</div>
-<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>  state_message_.wrench_base.wrench.torque.y = admittance_state_.wrench_base[4];</div>
-<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>  state_message_.wrench_base.wrench.torque.z = admittance_state_.wrench_base[5];</div>
-<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span> </div>
-<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>  state_message_.admittance_velocity.twist.linear.x = admittance_state_.admittance_velocity[0];</div>
-<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>  state_message_.admittance_velocity.twist.linear.y = admittance_state_.admittance_velocity[1];</div>
-<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>  state_message_.admittance_velocity.twist.linear.z = admittance_state_.admittance_velocity[2];</div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>  state_message_.admittance_velocity.twist.angular.x = admittance_state_.admittance_velocity[3];</div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>  state_message_.admittance_velocity.twist.angular.y = admittance_state_.admittance_velocity[4];</div>
-<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>  state_message_.admittance_velocity.twist.angular.z = admittance_state_.admittance_velocity[5];</div>
-<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span> </div>
-<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>  state_message_.admittance_acceleration.twist.linear.x =</div>
-<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>    admittance_state_.admittance_acceleration[0];</div>
-<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>  state_message_.admittance_acceleration.twist.linear.y =</div>
-<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>    admittance_state_.admittance_acceleration[1];</div>
-<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>  state_message_.admittance_acceleration.twist.linear.z =</div>
-<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>    admittance_state_.admittance_acceleration[2];</div>
-<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>  state_message_.admittance_acceleration.twist.angular.x =</div>
-<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>    admittance_state_.admittance_acceleration[3];</div>
-<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>  state_message_.admittance_acceleration.twist.angular.y =</div>
-<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>    admittance_state_.admittance_acceleration[4];</div>
-<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>  state_message_.admittance_acceleration.twist.angular.z =</div>
-<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>    admittance_state_.admittance_acceleration[5];</div>
-<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span> </div>
-<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>  state_message_.admittance_position = tf2::eigenToTransform(admittance_state_.admittance_position);</div>
-<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>  state_message_.admittance_position.header.frame_id = parameters_.kinematics.base;</div>
-<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>  state_message_.admittance_position.child_frame_id = <span class="stringliteral">&quot;admittance_offset&quot;</span>;</div>
-<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span> </div>
-<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>  state_message_.ref_trans_base_ft = tf2::eigenToTransform(admittance_state_.ref_trans_base_ft);</div>
-<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>  state_message_.ref_trans_base_ft.header.frame_id = parameters_.kinematics.base;</div>
-<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>  state_message_.ref_trans_base_ft.child_frame_id = parameters_.ft_sensor.frame.id;</div>
-<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span> </div>
-<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>  Eigen::Quaterniond quat(admittance_state_.rot_base_control);</div>
-<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>  state_message_.rot_base_control.w = quat.w();</div>
-<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>  state_message_.rot_base_control.x = quat.x();</div>
-<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>  state_message_.rot_base_control.y = quat.y();</div>
-<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>  state_message_.rot_base_control.z = quat.z();</div>
-<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span> </div>
-<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>  state_message_.ft_sensor_frame.data =</div>
-<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>    admittance_state_.ft_sensor_frame;  <span class="comment">// TODO(anyone) remove dynamic allocation here</span></div>
-<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span> </div>
-<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>  <span class="keywordflow">return</span> state_message_;</div>
-<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>}</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span> </div>
+<div class="foldopen" id="foldopen00347" data-start="{" data-end="}">
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno"><a class="line" href="classadmittance__controller_1_1AdmittanceRule.html#ab5119625ad28f6314ddf968628002913">  347</a></span><span class="keyword">const</span> control_msgs::msg::AdmittanceControllerState &amp; <a class="code hl_function" href="classadmittance__controller_1_1AdmittanceRule.html#ab5119625ad28f6314ddf968628002913">AdmittanceRule::get_controller_state</a>()</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>{</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>  <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; NUM_CARTESIAN_DOF; ++i)</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>  {</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>    <span class="keyword">auto</span> idx = <span class="keyword">static_cast&lt;</span>Eigen::Index<span class="keyword">&gt;</span>(i);</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>    state_message_.stiffness.data[i] = admittance_state_.stiffness[idx];</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>    state_message_.damping.data[i] = admittance_state_.damping[idx];</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>    state_message_.selected_axes.data[i] = <span class="keyword">static_cast&lt;</span><span class="keywordtype">bool</span><span class="keyword">&gt;</span>(admittance_state_.selected_axes[idx]);</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>    state_message_.mass.data[i] = admittance_state_.mass[idx];</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>  }</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span> </div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>  <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; parameters_.joints.size(); ++i)</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>  {</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>    <span class="keyword">auto</span> idx = <span class="keyword">static_cast&lt;</span>Eigen::Index<span class="keyword">&gt;</span>(i);</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>    state_message_.joint_state.name[i] = parameters_.joints[i];</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>    state_message_.joint_state.position[i] = admittance_state_.joint_pos[idx];</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>    state_message_.joint_state.velocity[i] = admittance_state_.joint_vel[idx];</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>    state_message_.joint_state.effort[i] = admittance_state_.joint_acc[idx];</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>  }</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span> </div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>  state_message_.wrench_base.wrench.force.x = admittance_state_.wrench_base[0];</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>  state_message_.wrench_base.wrench.force.y = admittance_state_.wrench_base[1];</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>  state_message_.wrench_base.wrench.force.z = admittance_state_.wrench_base[2];</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>  state_message_.wrench_base.wrench.torque.x = admittance_state_.wrench_base[3];</div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>  state_message_.wrench_base.wrench.torque.y = admittance_state_.wrench_base[4];</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>  state_message_.wrench_base.wrench.torque.z = admittance_state_.wrench_base[5];</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span> </div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>  state_message_.admittance_velocity.twist.linear.x = admittance_state_.admittance_velocity[0];</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>  state_message_.admittance_velocity.twist.linear.y = admittance_state_.admittance_velocity[1];</div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>  state_message_.admittance_velocity.twist.linear.z = admittance_state_.admittance_velocity[2];</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>  state_message_.admittance_velocity.twist.angular.x = admittance_state_.admittance_velocity[3];</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>  state_message_.admittance_velocity.twist.angular.y = admittance_state_.admittance_velocity[4];</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>  state_message_.admittance_velocity.twist.angular.z = admittance_state_.admittance_velocity[5];</div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span> </div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>  state_message_.admittance_acceleration.twist.linear.x =</div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>    admittance_state_.admittance_acceleration[0];</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>  state_message_.admittance_acceleration.twist.linear.y =</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>    admittance_state_.admittance_acceleration[1];</div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>  state_message_.admittance_acceleration.twist.linear.z =</div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>    admittance_state_.admittance_acceleration[2];</div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>  state_message_.admittance_acceleration.twist.angular.x =</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>    admittance_state_.admittance_acceleration[3];</div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>  state_message_.admittance_acceleration.twist.angular.y =</div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>    admittance_state_.admittance_acceleration[4];</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>  state_message_.admittance_acceleration.twist.angular.z =</div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>    admittance_state_.admittance_acceleration[5];</div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span> </div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>  state_message_.admittance_position = tf2::eigenToTransform(admittance_state_.admittance_position);</div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>  state_message_.admittance_position.header.frame_id = parameters_.kinematics.base;</div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>  state_message_.admittance_position.child_frame_id = <span class="stringliteral">&quot;admittance_offset&quot;</span>;</div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span> </div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>  state_message_.ref_trans_base_ft = tf2::eigenToTransform(admittance_state_.ref_trans_base_ft);</div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>  state_message_.ref_trans_base_ft.header.frame_id = parameters_.kinematics.base;</div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>  state_message_.ref_trans_base_ft.child_frame_id = parameters_.ft_sensor.frame.id;</div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span> </div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>  Eigen::Quaterniond quat(admittance_state_.rot_base_control);</div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>  state_message_.rot_base_control.w = quat.w();</div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>  state_message_.rot_base_control.x = quat.x();</div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>  state_message_.rot_base_control.y = quat.y();</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>  state_message_.rot_base_control.z = quat.z();</div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span> </div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>  state_message_.ft_sensor_frame.data =</div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>    admittance_state_.ft_sensor_frame;  <span class="comment">// TODO(anyone) remove dynamic allocation here</span></div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span> </div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>  <span class="keywordflow">return</span> state_message_;</div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>}</div>
 </div>
-<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span> </div>
-<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T1, <span class="keyword">typename</span> T2&gt;</div>
-<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span><span class="keywordtype">void</span> AdmittanceRule::vec_to_eigen(<span class="keyword">const</span> std::vector&lt;T1&gt; &amp; data, T2 &amp; matrix)</div>
-<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>{</div>
-<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span> col = 0; col &lt; matrix.cols(); col++)</div>
-<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>  {</div>
-<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> row = 0; row &lt; matrix.rows(); row++)</div>
-<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>    {</div>
-<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>      matrix(row, col) = data[<span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(row + col * matrix.rows())];</div>
-<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>    }</div>
-<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>  }</div>
-<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>}</div>
-<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span> </div>
-<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>}  <span class="comment">// namespace admittance_controller</span></div>
-<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span> </div>
-<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span><span class="preprocessor">#endif  </span><span class="comment">// ADMITTANCE_CONTROLLER__ADMITTANCE_RULE_IMPL_HPP_</span></div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span> </div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T1, <span class="keyword">typename</span> T2&gt;</div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span><span class="keywordtype">void</span> AdmittanceRule::vec_to_eigen(<span class="keyword">const</span> std::vector&lt;T1&gt; &amp; data, T2 &amp; matrix)</div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>{</div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span> col = 0; col &lt; matrix.cols(); col++)</div>
+<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>  {</div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> row = 0; row &lt; matrix.rows(); row++)</div>
+<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>    {</div>
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>      matrix(row, col) = data[<span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(row + col * matrix.rows())];</div>
+<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>    }</div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>  }</div>
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>}</div>
+<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span> </div>
+<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>}  <span class="comment">// namespace admittance_controller</span></div>
+<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span> </div>
+<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span><span class="preprocessor">#endif  </span><span class="comment">// ADMITTANCE_CONTROLLER__ADMITTANCE_RULE_IMPL_HPP_</span></div>
 <div class="ttc" id="aclassadmittance__controller_1_1AdmittanceRule_html_a266d37746bbeb75c8864524993f05cae"><div class="ttname"><a href="classadmittance__controller_1_1AdmittanceRule.html#a266d37746bbeb75c8864524993f05cae">admittance_controller::AdmittanceRule::calculate_admittance_rule</a></div><div class="ttdeci">bool calculate_admittance_rule(AdmittanceState &amp;admittance_state, double dt)</div><div class="ttdef"><b>Definition</b> admittance_rule_impl.hpp:228</div></div>
 <div class="ttc" id="aclassadmittance__controller_1_1AdmittanceRule_html_a34a0c422f832bb2fe87fdd3d09150f8b"><div class="ttname"><a href="classadmittance__controller_1_1AdmittanceRule.html#a34a0c422f832bb2fe87fdd3d09150f8b">admittance_controller::AdmittanceRule::get_all_transforms</a></div><div class="ttdeci">bool get_all_transforms(const trajectory_msgs::msg::JointTrajectoryPoint &amp;current_joint_state, const trajectory_msgs::msg::JointTrajectoryPoint &amp;reference_joint_state)</div><div class="ttdef"><b>Definition</b> admittance_rule_impl.hpp:142</div></div>
 <div class="ttc" id="aclassadmittance__controller_1_1AdmittanceRule_html_a6e928ad0f827696c4f71ee6ec9078725"><div class="ttname"><a href="classadmittance__controller_1_1AdmittanceRule.html#a6e928ad0f827696c4f71ee6ec9078725">admittance_controller::AdmittanceRule::reset</a></div><div class="ttdeci">controller_interface::return_type reset(const size_t num_joints)</div><div class="ttdoc">Reset all values back to default.</div><div class="ttdef"><b>Definition</b> admittance_rule_impl.hpp:84</div></div>
 <div class="ttc" id="aclassadmittance__controller_1_1AdmittanceRule_html_a8e4c8ca39e9a302f0e5c7a925668cd50"><div class="ttname"><a href="classadmittance__controller_1_1AdmittanceRule.html#a8e4c8ca39e9a302f0e5c7a925668cd50">admittance_controller::AdmittanceRule::apply_parameters_update</a></div><div class="ttdeci">void apply_parameters_update()</div><div class="ttdef"><b>Definition</b> admittance_rule_impl.hpp:119</div></div>
-<div class="ttc" id="aclassadmittance__controller_1_1AdmittanceRule_html_ab5119625ad28f6314ddf968628002913"><div class="ttname"><a href="classadmittance__controller_1_1AdmittanceRule.html#ab5119625ad28f6314ddf968628002913">admittance_controller::AdmittanceRule::get_controller_state</a></div><div class="ttdeci">const control_msgs::msg::AdmittanceControllerState &amp; get_controller_state()</div><div class="ttdef"><b>Definition</b> admittance_rule_impl.hpp:342</div></div>
+<div class="ttc" id="aclassadmittance__controller_1_1AdmittanceRule_html_ab5119625ad28f6314ddf968628002913"><div class="ttname"><a href="classadmittance__controller_1_1AdmittanceRule.html#ab5119625ad28f6314ddf968628002913">admittance_controller::AdmittanceRule::get_controller_state</a></div><div class="ttdeci">const control_msgs::msg::AdmittanceControllerState &amp; get_controller_state()</div><div class="ttdef"><b>Definition</b> admittance_rule_impl.hpp:347</div></div>
 <div class="ttc" id="aclassadmittance__controller_1_1AdmittanceRule_html_ab83ece6952d13f63dc31a71c9cce0485"><div class="ttname"><a href="classadmittance__controller_1_1AdmittanceRule.html#ab83ece6952d13f63dc31a71c9cce0485">admittance_controller::AdmittanceRule::configure</a></div><div class="ttdeci">controller_interface::return_type configure(const std::shared_ptr&lt; rclcpp_lifecycle::LifecycleNode &gt; &amp;node, const size_t num_joint)</div><div class="ttdoc">Configure admittance rule memory using number of joints.</div><div class="ttdef"><b>Definition</b> admittance_rule_impl.hpp:35</div></div>
 <div class="ttc" id="aclassadmittance__controller_1_1AdmittanceRule_html_aba5690896489acac09b6bdcb85a981eb"><div class="ttname"><a href="classadmittance__controller_1_1AdmittanceRule.html#aba5690896489acac09b6bdcb85a981eb">admittance_controller::AdmittanceRule::update</a></div><div class="ttdeci">controller_interface::return_type update(const trajectory_msgs::msg::JointTrajectoryPoint &amp;current_joint_state, const geometry_msgs::msg::Wrench &amp;measured_wrench, const trajectory_msgs::msg::JointTrajectoryPoint &amp;reference_joint_state, const rclcpp::Duration &amp;period, trajectory_msgs::msg::JointTrajectoryPoint &amp;desired_joint_states)</div><div class="ttdef"><b>Definition</b> admittance_rule_impl.hpp:170</div></div>
-<div class="ttc" id="aclassadmittance__controller_1_1AdmittanceRule_html_aca1d0adc1b75e8157ae5188bb351544b"><div class="ttname"><a href="classadmittance__controller_1_1AdmittanceRule.html#aca1d0adc1b75e8157ae5188bb351544b">admittance_controller::AdmittanceRule::process_wrench_measurements</a></div><div class="ttdeci">void process_wrench_measurements(const geometry_msgs::msg::Wrench &amp;measured_wrench, const Eigen::Matrix&lt; double, 3, 3 &gt; &amp;sensor_world_rot, const Eigen::Matrix&lt; double, 3, 3 &gt; &amp;cog_world_rot)</div><div class="ttdef"><b>Definition</b> admittance_rule_impl.hpp:314</div></div>
+<div class="ttc" id="aclassadmittance__controller_1_1AdmittanceRule_html_aca1d0adc1b75e8157ae5188bb351544b"><div class="ttname"><a href="classadmittance__controller_1_1AdmittanceRule.html#aca1d0adc1b75e8157ae5188bb351544b">admittance_controller::AdmittanceRule::process_wrench_measurements</a></div><div class="ttdeci">void process_wrench_measurements(const geometry_msgs::msg::Wrench &amp;measured_wrench, const Eigen::Matrix&lt; double, 3, 3 &gt; &amp;sensor_world_rot, const Eigen::Matrix&lt; double, 3, 3 &gt; &amp;cog_world_rot)</div><div class="ttdef"><b>Definition</b> admittance_rule_impl.hpp:319</div></div>
 <div class="ttc" id="anamespaceadmittance__controller_html"><div class="ttname"><a href="namespaceadmittance__controller.html">admittance_controller</a></div><div class="ttdef"><b>Definition</b> admittance_controller.hpp:48</div></div>
 <div class="ttc" id="astructadmittance__controller_1_1AdmittanceState_html"><div class="ttname"><a href="structadmittance__controller_1_1AdmittanceState.html">admittance_controller::AdmittanceState</a></div><div class="ttdef"><b>Definition</b> admittance_rule.hpp:64</div></div>
 <div class="ttc" id="astructadmittance__controller_1_1AdmittanceTransforms_html"><div class="ttname"><a href="structadmittance__controller_1_1AdmittanceTransforms.html">admittance_controller::AdmittanceTransforms</a></div><div class="ttdef"><b>Definition</b> admittance_rule.hpp:44</div></div>

@@ -1,0 +1,229 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lifecycle of a Hardware Component &mdash; ROS2_Control: Rolling Aug 2026 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/reviewer_stats.css?v=068b34ac" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=d85a351e" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//rolling/doc/ros2_control/hardware_interface/doc/lifecycle_of_a_hardware_component.html" />
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=2dd01451"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+      <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Handling of Errors During read() and write() Calls" href="handling_errors_during_read_write.html" />
+    <link rel="prev" title="Mock Components" href="mock_components_userdoc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/index.html">ros2_control</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../controller_manager/doc/userdoc.html">Controller manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/concepts.html">Concepts</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="hardware_components_userdoc.html">Hardware Components</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="hardware_interface_types_userdoc.html">Hardware Interface Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="writing_new_hardware_component.html">Writing a Hardware Component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="different_update_rates_userdoc.html">Different Update Rates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asynchronous_components.html">Asynchronous Execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="semantic_components.html">Semantic Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mock_components_userdoc.html">Mock Components</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Lifecycle of a Hardware Component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="handling_errors_during_read_write.html">Handling of Errors During read() and write() Calls</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/guidelines_and_best_practices.html">Guidelines and Best Practices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utilities.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes/release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../migration/migration.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_list/api_list.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../governance/governance.html">Project Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../statistics.html">Documentation Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation_downloads.html">Documentation Downloads</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ROS2_Control: Rolling</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../doc/index.html">ros2_control</a></li>
+          <li class="breadcrumb-item"><a href="hardware_components_userdoc.html">Hardware Components</a></li>
+      <li class="breadcrumb-item active">Lifecycle of a Hardware Component</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ros-controls/ros2_control/blob/master/hardware_interface/doc/lifecycle_of_a_hardware_component.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for a development version.
+    For the latest released version, please have a look at <a href="../../../../../kilted/index.html">Kilted</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="lifecycle-of-a-hardware-component">
+<h1>Lifecycle of a Hardware Component<a class="headerlink" href="#lifecycle-of-a-hardware-component" title="Link to this heading"></a></h1>
+<p>Methods return values have type
+<code class="docutils literal notranslate"><span class="pre">rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn</span></code> with the following
+meaning:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CallbackReturn::SUCCESS</span></code> method execution was successful.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CallbackReturn::FAILURE</span></code> method execution has failed and the lifecycle transition is unsuccessful.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CallbackReturn::ERROR</span></code> critical error has happened that should be managed in
+<code class="docutils literal notranslate"><span class="pre">on_error</span></code> method.</p></li>
+</ul>
+<p>The hardware transitions to the following state after each method:</p>
+<ul>
+<li><p><strong>UNCONFIGURED</strong> (<code class="docutils literal notranslate"><span class="pre">on_init</span></code>, <code class="docutils literal notranslate"><span class="pre">on_cleanup</span></code>):</p>
+<p>Hardware is only initialized, but communication is not started and no interfaces are imported into <code class="docutils literal notranslate"><span class="pre">ResourceManager</span></code>.</p>
+</li>
+<li><p><strong>INACTIVE</strong> (<code class="docutils literal notranslate"><span class="pre">on_configure</span></code>, <code class="docutils literal notranslate"><span class="pre">on_deactivate</span></code>):</p>
+<p>Communication with the hardware is established and hardware component is configured.
+States can be read, but command interfaces (System and Actuator only) are not available.</p>
+<p>As of now, it is left to the hardware component implementation to continue using the command received from the <code class="docutils literal notranslate"><span class="pre">CommandInterfaces</span></code> or to skip them completely.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We plan to implement safety-critical interfaces, see this <a class="reference external" href="https://github.com/ros-controls/roadmap/pull/51/files">PR in the roadmap</a>. But currently, all command interfaces are available and will be written, see this <a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/931">issue</a> describing the situation.</p>
+</div>
+</li>
+<li><p><strong>FINALIZED</strong> (<code class="docutils literal notranslate"><span class="pre">on_shutdown</span></code>):</p>
+<p>Hardware interface is ready for unloading/destruction.
+Allocated memory is cleaned up.</p>
+</li>
+<li><p><strong>ACTIVE</strong> (<code class="docutils literal notranslate"><span class="pre">on_activate</span></code>):</p>
+<p>States can be read.</p>
+<p>System and Actuator only:</p>
+<blockquote>
+<div><p>Power circuits of hardware are active and hardware can be moved, e.g., brakes are disengaged.
+Command interfaces are available and the commands should be sent to the hardware</p>
+</div></blockquote>
+</li>
+</ul>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mock_components_userdoc.html" class="btn btn-neutral float-left" title="Mock Components" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="handling_errors_during_read_write.html" class="btn btn-neutral float-right" title="Handling of Errors During read() and write() Calls" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: lyrical
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Stable Releases</dt>
+        <dd><a href="../../../../../kilted/index.html">Kilted (latest)</a></dd><br>
+        <dd><a href="../../../../../jazzy/index.html">Jazzy</a></dd><br>
+        
+        <dd><a href="../../../../../humble/index.html">Humble</a></dd><br>
+        
+        
+    </dl>
+    <dl>
+      <dt>End-of-Life</dt>
+        <dd><a href="../../../../../iron/index.html">Iron</a></dd><br>
+        <dd><a href="../../../../../galactic/index.html">Galactic</a></dd><br>
+        <dd><a href="../../../../../foxy/index.html">Foxy</a></dd><br>
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="../../../../../rolling/doc/ros2_control/hardware_interface/doc/lifecycle_of_a_hardware_component.html">Rolling</a></dd>
+      <dd><a href="lifecycle_of_a_hardware_component.html">Lyrical</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
