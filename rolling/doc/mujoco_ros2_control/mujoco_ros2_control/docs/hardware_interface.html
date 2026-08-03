@@ -77,6 +77,7 @@
 <li class="toctree-l6"><a class="reference internal" href="#sensors">Sensors</a><ul>
 <li class="toctree-l7"><a class="reference internal" href="#force-torque-sensors">Force-Torque Sensors</a></li>
 <li class="toctree-l7"><a class="reference internal" href="#imu">IMU</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#magnetometer">Magnetometer</a></li>
 </ul>
 </li>
 </ul>
@@ -309,7 +310,7 @@ The drivers expose control and state for that single joint, while the simulation
 </section>
 <section id="sensors">
 <h2>Sensors<a class="headerlink" href="#sensors" title="Link to this heading"></a></h2>
-<p>The hardware interface supports force-torque sensors (FTS) and inertial measurement units (IMUs).
+<p>The hardware interface supports force-torque sensors (FTS), inertial measurement units (IMUs), pose sensors, and magnetometers.
 MuJoCo does not model complete FTS and IMUs natively, so we combine supported MJCF sensor constructs to map to a single <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> sensor.</p>
 <section id="force-torque-sensors">
 <h3>Force-Torque Sensors<a class="headerlink" href="#force-torque-sensors" title="Link to this heading"></a></h3>
@@ -371,6 +372,26 @@ MuJoCo does not model complete FTS and IMUs natively, so we combine supported MJ
 </pre></div>
 </div>
 <p>These sensor state interfaces work out of the box with the standard ROS 2 broadcasters.</p>
+</section>
+<section id="magnetometer">
+<h3>Magnetometer<a class="headerlink" href="#magnetometer" title="Link to this heading"></a></h3>
+<p>Model a MuJoCo <code class="docutils literal notranslate"><span class="pre">magnetometer</span></code> sensor in the MJCF:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;sensor&gt;</span>
+<span class="w">  </span><span class="nt">&lt;magnetometer</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;magnetometer_sensor&quot;</span><span class="w"> </span><span class="na">site=</span><span class="s">&quot;imu_sensor&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/sensor&gt;</span>
+</pre></div>
+</div>
+<p>Map it to the corresponding <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> sensor:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;magnetometer_sensor&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mujoco_type&quot;</span><span class="nt">&gt;</span>magnetometer<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="cm">&lt;!-- mujoco_sensor_name does not need to match the ros2_control sensor name --&gt;</span>
+<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mujoco_sensor_name&quot;</span><span class="nt">&gt;</span>magnetometer_sensor<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;magnetic_field.x&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;magnetic_field.y&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;magnetic_field.z&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/sensor&gt;</span>
+</pre></div>
+</div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Cameras and lidar sensors are no longer supported in the base interface, they are now provided as <code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control_plugins</span></code>.
