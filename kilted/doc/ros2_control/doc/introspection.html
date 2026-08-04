@@ -55,9 +55,10 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">ros2_control</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="index.html#api-documentation">API Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#concepts">Concepts</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="index.html#guidelines-and-best-practices">Guidelines and Best Practices</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../controller_manager/doc/userdoc.html">Controller manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hardware_interface/doc/hardware_components_userdoc.html">Hardware Components</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="guidelines_and_best_practices.html">Guidelines and Best Practices</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="debugging.html">Debugging the Controller Manager and Plugins</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Introspection of the ros2_control setup</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#how-to-introspect-internal-variables-of-controllers-and-hardware-components">How to introspect internal variables of controllers and hardware components</a><ul>
@@ -103,6 +104,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">ros2_control</a></li>
+          <li class="breadcrumb-item"><a href="guidelines_and_best_practices.html">Guidelines and Best Practices</a></li>
       <li class="breadcrumb-item active">Introspection of the ros2_control setup</li>
       <li class="wy-breadcrumbs-aside">
               <!-- User defined GitHub URL -->
@@ -131,7 +133,7 @@ The state of the all the registered entities are published at the end of every <
 <p class="admonition-title">Note</p>
 <p>If you have a high frequency of data, it is recommended to use the <code class="docutils literal notranslate"><span class="pre">~/introspection_data/names</span></code> and <code class="docutils literal notranslate"><span class="pre">~/introspection_data/values</span></code> topic. So, that the data transferred and stored is minimized.</p>
 </div>
-<p>Along with the above introspection data, the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> also publishes the statistics of the execution time and periodicity of the read and write cycles of the hardware components and the update cycle of the controllers. This is done by registering the statistics of these variables and publishing them on the <code class="docutils literal notranslate"><span class="pre">~/statistics</span></code> topic.</p>
+<p id="monitoring-and-tuning">Along with the above introspection data, the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> also publishes the statistics of the execution time and periodicity of the read and write cycles of the hardware components and the update cycle of the controllers. This is done by registering the statistics of these variables and publishing them on the <code class="docutils literal notranslate"><span class="pre">~/statistics</span></code> topic, a summary is also published to the <code class="docutils literal notranslate"><span class="pre">/diagnostics</span></code> topic.</p>
 <p>All the registered variables are published over 3 topics: <code class="docutils literal notranslate"><span class="pre">~/statistics/full</span></code>, <code class="docutils literal notranslate"><span class="pre">~/statistics/names</span></code>, and <code class="docutils literal notranslate"><span class="pre">~/statistics/values</span></code>.
 - The <code class="docutils literal notranslate"><span class="pre">~/statistics/full</span></code> topic publishes the full introspection data along with names and values in a single message. This can be useful to track or view variables and information from command line.
 - The <code class="docutils literal notranslate"><span class="pre">~/statistics/names</span></code> topic publishes the names of the registered variables. This topic contains the names of the variables registered. This is only published every time a a variables is registered and unregistered.

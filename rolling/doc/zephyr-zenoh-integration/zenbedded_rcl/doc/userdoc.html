@@ -62,7 +62,11 @@
 <li class="toctree-l4"><a class="reference internal" href="../../zenbedded_hardware_interface/doc/userdoc.html">Hardware Interface</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../zenbedded_schema/doc/userdoc.html">Schema</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../zenbedded_transport/doc/userdoc.html">Transport</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">Firmware Client Library</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Firmware Client Library</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#features">Features</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#setup">Setup</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../doc/index.html#guides-and-examples">Guides and Examples</a></li>
@@ -125,10 +129,36 @@
 
   <section id="zenbedded-rcl">
 <span id="zenbedded-rcl-userdoc"></span><h1>zenbedded_rcl<a class="headerlink" href="#zenbedded-rcl" title="Link to this heading"></a></h1>
+<p>The embedded client library for Zephyr RTOS that provides a high-level API for ROS 2 communication.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This package is <strong>work in progress</strong>.</p>
 </div>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Agent-less</strong>: Communicates directly with ROS 2 via Zenoh, with no bridge
+process running on the MCU.</p></li>
+<li><p><strong>Double-buffered</strong>: Lock-free state/command buffers with ABA-prevention
+versioning, safe for the control thread.</p></li>
+<li><p><strong>ROS-like API</strong>: <code class="docutils literal notranslate"><span class="pre">state()</span></code> / <code class="docutils literal notranslate"><span class="pre">command()</span></code> accessors plus <code class="docutils literal notranslate"><span class="pre">sync()</span></code> to
+publish and consume buffers; an optional control thread is started via
+<code class="docutils literal notranslate"><span class="pre">start_thread(control_freq)</span></code>.</p></li>
+<li><p><strong>Optimized</strong>: Designed for a low memory footprint and real-time execution
+within the Zephyr thread model.</p></li>
+</ul>
+</section>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">zenbedded_rcl</span></code> is a Zephyr module; build it as part of a demo application
+in a west workspace that also provides <code class="docutils literal notranslate"><span class="pre">zenoh-pico</span></code> (e.g. the Docker
+development environment mounts <code class="docutils literal notranslate"><span class="pre">demos/</span></code> into a ready-made workspace):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>demos/inverted_pendulum
+west<span class="w"> </span>build<span class="w"> </span>-p<span class="w"> </span>always<span class="w"> </span>-b<span class="w"> </span>esp32s3_devkitc/esp32s3/procpu<span class="w"> </span><span class="c1">#your appropriate board</span>
+west<span class="w"> </span>flash<span class="w"> </span>--esp-device<span class="w"> </span>/dev/ttyUSB0
+</pre></div>
+</div>
+</section>
 </section>
 
 

@@ -5,8 +5,8 @@
 zenbedded_schema
 ================
 
-YAML-driven schema parser and C/C++ header generator for packed binary
-interface descriptions. builds with ``colcon`` or
+YAML-driven schema parser and C header generator for packed binary
+interface descriptions. Builds with ``colcon`` or
 standalone ``CMake``.
 
 The schema is the single source of truth for the wire format shared between

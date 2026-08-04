@@ -1,0 +1,492 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Battery State Broadcaster &mdash; ROS2_Control: Rolling Aug 2026 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/reviewer_stats.css?v=068b34ac" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=d85a351e" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//rolling/doc/ros2_controllers/battery_state_broadcaster/doc/userdoc.html" />
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=2dd01451"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+      <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Chained Filter Controller" href="../../chained_filter_controller/doc/userdoc.html" />
+    <link rel="prev" title="Magnetometer Broadcaster" href="../../magnetometer_broadcaster/doc/userdoc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html">ros2_control</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/controllers_index.html">ros2_controllers</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#guidelines-and-best-practices">Guidelines and Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#controllers-for-wheeled-mobile-robots">Controllers for Wheeled Mobile Robots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#controllers-for-manipulators-and-other-robots">Controllers for Manipulators and Other Robots</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/controllers_index.html#broadcasters">Broadcasters</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../force_torque_sensor_broadcaster/doc/userdoc.html">Force Torque Sensor Broadcaster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../force_torque_sensor_broadcaster/doc/userdoc.html#wrench-transformer-node">Wrench Transformer Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../imu_sensor_broadcaster/doc/userdoc.html">IMU Sensor Broadcaster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../joint_state_broadcaster/doc/userdoc.html">Joint State Broadcaster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../range_sensor_broadcaster/doc/userdoc.html">Range Sensor Broadcaster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pose_broadcaster/doc/userdoc.html">Pose Broadcaster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../gps_sensor_broadcaster/doc/userdoc.html">GPS Sensor Broadcaster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../state_interfaces_broadcaster/doc/userdoc.html">State Interfaces Broadcaster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../magnetometer_broadcaster/doc/userdoc.html">Magnetometer Broadcaster</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Battery State Broadcaster</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#interfaces">Interfaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#published-topics">Published Topics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#list-of-parameters">List of parameters</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#example-parameter-file">Example Parameter File</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#migration-for-ipa320-ros-battery-monitoring-users">Migration for <code class="docutils literal notranslate"><span class="pre">ipa320/ros_battery_monitoring</span></code> users</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#filters">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#common-controller-parameters">Common Controller Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../embedded_integration.html">Embedded Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utilities.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes/release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../migration/migration.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_list/api_list.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../governance/governance.html">Project Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../statistics.html">Documentation Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation_downloads.html">Documentation Downloads</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ROS2_Control: Rolling</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../doc/controllers_index.html">ros2_controllers</a></li>
+      <li class="breadcrumb-item active">Battery State Broadcaster</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ros-controls/ros2_controllers/blob/master/battery_state_broadcaster/doc/userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for a development version.
+    For the latest released version, please have a look at <a href="../../../../../kilted/doc/ros2_controllers/battery_state_broadcaster/doc/userdoc.html">Kilted</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="battery-state-broadcaster">
+<span id="battery-state-broadcaster-userdoc"></span><h1>Battery State Broadcaster<a class="headerlink" href="#battery-state-broadcaster" title="Link to this heading"></a></h1>
+<p>The <em>Battery State Broadcaster</em> publishes battery status information as <code class="docutils literal notranslate"><span class="pre">sensor_msgs/msg/BatteryState</span></code> messages.</p>
+<p>It reads battery-related state interfaces from one or more batteries and exposes them in a standard ROS 2 message format. This allows easy integration with monitoring tools, logging systems, and higher-level decision-making nodes.</p>
+<section id="interfaces">
+<h2>Interfaces<a class="headerlink" href="#interfaces" title="Link to this heading"></a></h2>
+<p>The broadcaster can read the following state interfaces from each configured battery:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">battery_voltage</span></code> <em>(mandatory)</em> (double)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">battery_temperature</span></code> <em>(optional)</em> (double)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">battery_current</span></code> <em>(optional)</em> (double)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">battery_charge</span></code> <em>(optional)</em> (double)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">battery_percentage</span></code> <em>(optional)</em> (double)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">battery_power_supply_status</span></code> <em>(optional)</em> (double)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">battery_power_supply_health</span></code> <em>(optional)</em> (double)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">battery_present</span></code> <em>(optional)</em> (bool)</p></li>
+</ul>
+</section>
+<section id="published-topics">
+<h2>Published Topics<a class="headerlink" href="#published-topics" title="Link to this heading"></a></h2>
+<p>The broadcaster publishes two topics:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">~/raw_battery_states</span></code> (<code class="docutils literal notranslate"><span class="pre">control_msgs/msg/BatteryStateArray</span></code>)
+Publishes <strong>per-battery state messages</strong>, containing the raw values for each configured battery.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~/battery_state</span></code> (<code class="docutils literal notranslate"><span class="pre">sensor_msgs/msg/BatteryState</span></code>)
+Publishes a <strong>single aggregated battery message</strong> representing the combined status across all batteries.</p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">battery_state</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">raw_battery_states</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">header.frame_id</span></code></p></td>
+<td><p>Empty</p></td>
+<td><p>Battery name</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">voltage</span></code></p></td>
+<td><p>Mean across all batteries</p></td>
+<td><p>From battery’s <code class="docutils literal notranslate"><span class="pre">battery_voltage</span></code> interface <em>(mandatory)</em> (NaN if unmeasured)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">temperature</span></code></p></td>
+<td><p>Mean across batteries reporting temperature</p></td>
+<td><p>From battery’s <code class="docutils literal notranslate"><span class="pre">battery_temperature</span></code> interface if enabled, otherwise nan.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">current</span></code></p></td>
+<td><p>Mean across batteries reporting current</p></td>
+<td><p>From battery’s <code class="docutils literal notranslate"><span class="pre">battery_current</span></code> interface if enabled, otherwise nan.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">charge</span></code></p></td>
+<td><p>Sum across batteries reporting charge</p></td>
+<td><p>From battery’s <code class="docutils literal notranslate"><span class="pre">battery_charge</span></code> interface if enabled, otherwise nan.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">capacity</span></code></p></td>
+<td><p>Sum across all batteries</p></td>
+<td><p>From battery’s <code class="docutils literal notranslate"><span class="pre">capacity</span></code> parameter if provided, otherwise nan.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">design_capacity</span></code></p></td>
+<td><p>Sum across all batteries</p></td>
+<td><p>From battery’s <code class="docutils literal notranslate"><span class="pre">design_capacity</span></code> parameter if provided, otherwise nan.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">percentage</span></code></p></td>
+<td><p>Mean across batteries reporting/calculating percentage</p></td>
+<td><p>From battery’s <code class="docutils literal notranslate"><span class="pre">battery_percentage</span></code> interface if enabled, otherwise calculated from battery’s <code class="docutils literal notranslate"><span class="pre">minimum_voltage</span></code> and <code class="docutils literal notranslate"><span class="pre">maximum_voltage</span></code> parameters.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">power_supply_status</span></code></p></td>
+<td><p>Highest reported enum value</p></td>
+<td><p>From battery’s <code class="docutils literal notranslate"><span class="pre">battery_power_supply_status</span></code> interface if enabled, otherwise 0 (unknown).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">power_supply_health</span></code></p></td>
+<td><p>Highest reported enum value</p></td>
+<td><p>From battery’s <code class="docutils literal notranslate"><span class="pre">battery_power_supply_health</span></code> interface if enabled, otherwise 0 (unknown).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">power_supply_technology</span></code></p></td>
+<td><p>Reported as-is if same across all batteries, otherwise set to <em>Unknown</em></p></td>
+<td><p>From battery’s <code class="docutils literal notranslate"><span class="pre">power_supply_technology</span></code> parameter if provided, otherwise 0 (unknown).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">present</span></code></p></td>
+<td><p>True</p></td>
+<td><p>From battery’s <code class="docutils literal notranslate"><span class="pre">battery_present</span></code> interface if enabled, otherwise true if the battery voltage value is valid (not NaN and not 0.0).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cell_voltage</span></code></p></td>
+<td><p>Empty</p></td>
+<td><p>Empty</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cell_temperature</span></code></p></td>
+<td><p>Empty</p></td>
+<td><p>Empty</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">location</span></code></p></td>
+<td><p>All battery locations appended</p></td>
+<td><p>From battery’s <code class="docutils literal notranslate"><span class="pre">location</span></code> parameter if provided, otherwise empty.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">serial_number</span></code></p></td>
+<td><p>All battery serial numbers appended</p></td>
+<td><p>From battery’s <code class="docutils literal notranslate"><span class="pre">serial_number</span></code> parameter if provided, otherwise empty.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h2>
+<p>This controller uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to manage parameters.
+The parameter <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/master/battery_state_broadcaster/src/battery_state_broadcaster_parameters.yaml">definition file</a> contains the full list and descriptions.</p>
+<section id="list-of-parameters">
+<h3>List of parameters<a class="headerlink" href="#list-of-parameters" title="Link to this heading"></a></h3>
+<dl>
+<dt>batteries (string_array)</dt><dd><p>List of batteries from which battery state interfaces will be read.</p>
+<p>Read only: True</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>contains no duplicates</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>sensor_name (string)</dt><dd><p>[DEPRECATED] Sensor name of the battery. If provided, the ‘voltage’ state interface of this sensor will be used to populate the voltage field in the BatteryState message. If this parameter is used, the batteries and interfaces parameters are ignored.</p>
+<p>Read only: True</p>
+<p>Default:  “”</p>
+</dd>
+<dt>design_capacity (double)</dt><dd><p>[DEPRECATED] Design capacity of the battery [Ah] for the sensor_name mode (If unmeasured NaN).</p>
+<p>Read only: True</p>
+<p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+<dt>power_supply_technology (int)</dt><dd><p>[DEPRECATED] Battery chemistry type as an enum for the sensor_name mode (see <a class="reference external" href="https://github.com/ros2/common_interfaces/blob/rolling/sensor_msgs/msg/BatteryState.msg">https://github.com/ros2/common_interfaces/blob/rolling/sensor_msgs/msg/BatteryState.msg</a>). If unmeasured, the technology is set to unknown.</p>
+<p>Read only: True</p>
+<p>Default:  0</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>parameter must be within bounds [0, 8]</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>interfaces.&lt;batteries&gt;.battery_temperature (bool)</dt><dd><p>Whether to read battery temperature [°C] from this battery’s state interface (If unmeasured NaN).</p>
+<p>Read only: True</p>
+<p>Default:  false</p>
+</dd>
+<dt>interfaces.&lt;batteries&gt;.battery_current (bool)</dt><dd><p>Whether to read battery current [A] from this battery’s state interface (If unmeasured NaN).</p>
+<p>Read only: True</p>
+<p>Default:  false</p>
+</dd>
+<dt>interfaces.&lt;batteries&gt;.battery_charge (bool)</dt><dd><p>Whether to read battery charge [Ah] from this battery’s state interface (If unmeasured NaN).</p>
+<p>Read only: True</p>
+<p>Default:  false</p>
+</dd>
+<dt>interfaces.&lt;batteries&gt;.battery_percentage (bool)</dt><dd><p>Whether to read charge level [%] (0.0 to 100.0) from this battery’s state interface. If unmeasured, linear percentage is calculated using the minimum_voltage and maximum_voltage parameters (if provided), otherwise NaN.</p>
+<p>Read only: True</p>
+<p>Default:  false</p>
+</dd>
+<dt>interfaces.&lt;batteries&gt;.battery_power_supply_status (bool)</dt><dd><p>Whether to read power supply status (e.g., Charging, Full, see <a class="reference external" href="https://github.com/ros2/common_interfaces/blob/rolling/sensor_msgs/msg/BatteryState.msg">https://github.com/ros2/common_interfaces/blob/rolling/sensor_msgs/msg/BatteryState.msg</a>) from this battery’s state interface. If unmeasured, status is set to unknown.</p>
+<p>Read only: True</p>
+<p>Default:  false</p>
+</dd>
+<dt>interfaces.&lt;batteries&gt;.battery_power_supply_health (bool)</dt><dd><p>Whether to read power supply health (e.g., Good, Overheat, see <a class="reference external" href="https://github.com/ros2/common_interfaces/blob/rolling/sensor_msgs/msg/BatteryState.msg">https://github.com/ros2/common_interfaces/blob/rolling/sensor_msgs/msg/BatteryState.msg</a>) from this battery’s state interface. If unmeasured, health is set to unknown.</p>
+<p>Read only: True</p>
+<p>Default:  false</p>
+</dd>
+<dt>interfaces.&lt;batteries&gt;.battery_present (bool)</dt><dd><p>Whether to read battery presence status (true if battery is present) from this battery’s state interface. If unmeasured, the presence will be inferred from the battery voltage value (true if voltage is not NaN and not 0.0, otherwise false).</p>
+<p>Read only: True</p>
+<p>Default:  false</p>
+</dd>
+<dt>&lt;batteries&gt;.minimum_voltage (double)</dt><dd><p>Minimum battery voltage (used to calculate percentage).</p>
+<p>Read only: True</p>
+<p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+<dt>&lt;batteries&gt;.maximum_voltage (double)</dt><dd><p>Maximum battery voltage (used to calculate percentage).</p>
+<p>Read only: True</p>
+<p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+<dt>&lt;batteries&gt;.capacity (double)</dt><dd><p>Last known full battery capacity [Ah] (If unmeasured NaN).</p>
+<p>Read only: True</p>
+<p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+<dt>&lt;batteries&gt;.design_capacity (double)</dt><dd><p>Design capacity of the battery [Ah] (If unmeasured NaN).</p>
+<p>Read only: True</p>
+<p>Default:  std::numeric_limits&lt;double&gt;::quiet_NaN()</p>
+</dd>
+<dt>&lt;batteries&gt;.power_supply_technology (int)</dt><dd><p>Battery chemistry type as an enum (see <a class="reference external" href="https://github.com/ros2/common_interfaces/blob/rolling/sensor_msgs/msg/BatteryState.msg">https://github.com/ros2/common_interfaces/blob/rolling/sensor_msgs/msg/BatteryState.msg</a>). If unmeasured, the technology is set to unknown.</p>
+<p>Read only: True</p>
+<p>Default:  0</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>parameter must be within bounds [0, 8]</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>&lt;batteries&gt;.location (string)</dt><dd><p>Physical location of the battery (e.g., slot number or plug label).</p>
+<p>Read only: True</p>
+<p>Default:  “”</p>
+</dd>
+<dt>&lt;batteries&gt;.serial_number (string)</dt><dd><p>Serial number of the battery.</p>
+<p>Read only: True</p>
+<p>Default:  “”</p>
+</dd>
+</dl>
+</section>
+<section id="example-parameter-file">
+<h3>Example Parameter File<a class="headerlink" href="#example-parameter-file" title="Link to this heading"></a></h3>
+<p>An example parameter file for this controller is available in the <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/master/battery_state_broadcaster/test/battery_state_broadcaster_params.yaml">test directory</a>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test_battery_state_broadcaster</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">batteries</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;battery0&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;battery1&quot;</span>
+<span class="w">    </span><span class="nt">interfaces</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">battery0</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">battery_temperature</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">battery_current</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">        </span><span class="nt">battery_charge</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">battery_percentage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">        </span><span class="nt">battery_power_supply_status</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">battery_power_supply_health</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">battery_present</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">      </span><span class="nt">battery1</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">battery_temperature</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">battery_current</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">battery_charge</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">battery_percentage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">battery_power_supply_status</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">battery_power_supply_health</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">battery_present</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">battery0</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">minimum_voltage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">      </span><span class="nt">maximum_voltage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0</span>
+<span class="w">      </span><span class="nt">capacity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">12000.0</span>
+<span class="w">      </span><span class="nt">design_capacity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">13000.0</span>
+<span class="w">      </span><span class="nt">power_supply_technology</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="w">      </span><span class="nt">location</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;slot0&quot;</span>
+<span class="w">      </span><span class="nt">serial_number</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;serial_device_0&quot;</span>
+<span class="w">    </span><span class="nt">battery1</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">minimum_voltage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">      </span><span class="nt">maximum_voltage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15.0</span>
+<span class="w">      </span><span class="nt">capacity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">17000.0</span>
+<span class="w">      </span><span class="nt">design_capacity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">18000.0</span>
+<span class="w">      </span><span class="nt">power_supply_technology</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="w">      </span><span class="nt">location</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;slot1&quot;</span>
+<span class="w">      </span><span class="nt">serial_number</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;serial_device_1&quot;</span>
+
+<span class="c1"># [deprecated] do not use for new configurations</span>
+<span class="nt">test_battery_state_broadcaster_legacy</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">batteries</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;battery_state&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">battery_state</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">design_capacity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100.0</span>
+<span class="w">          </span><span class="nt">power_supply_technology</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="migration-for-ipa320-ros-battery-monitoring-users">
+<h2>Migration for <code class="docutils literal notranslate"><span class="pre">ipa320/ros_battery_monitoring</span></code> users<a class="headerlink" href="#migration-for-ipa320-ros-battery-monitoring-users" title="Link to this heading"></a></h2>
+<p>If you were previously using the <code class="docutils literal notranslate"><span class="pre">battery_state_broadcaster</span></code> from the <code class="docutils literal notranslate"><span class="pre">ipa320/ros_battery_monitoring</span> <span class="pre">package</span></code>, you can switch directly to this package. The configuration style using <code class="docutils literal notranslate"><span class="pre">sensor_name</span></code> is still supported for backward compatibility, but it may be removed in a future release.</p>
+<p>To adapt your setup to the new <code class="docutils literal notranslate"><span class="pre">battery_state_broadcaster</span></code> configuration:</p>
+<ol class="arabic simple">
+<li><p>Update your hardware interface name from <code class="docutils literal notranslate"><span class="pre">voltage</span></code> → <code class="docutils literal notranslate"><span class="pre">battery_voltage</span></code>.</p></li>
+<li><p>Convert your controller parameters from</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">battery_state_broadcaster</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">sensor_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;battery_state&quot;</span>
+<span class="w">    </span><span class="nt">design_capacity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100.0</span>
+<span class="w">    </span><span class="c1"># https://github.com/ros2/common_interfaces/blob/rolling/sensor_msgs/msg/BatteryState.msg</span>
+<span class="w">    </span><span class="nt">power_supply_technology</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+</pre></div>
+</div>
+<p>to:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">battery_state_broadcaster</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">batteries</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;battery_state&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">battery_state</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">design_capacity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100.0</span>
+<span class="w">      </span><span class="nt">power_supply_technology</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Notes</strong>:</p>
+<ul class="simple">
+<li><p>Parameters must provide <strong>either</strong> sensor_name <strong>or</strong> batteries.</p></li>
+<li><p>If both are empty → the broadcaster will fail to configure.</p></li>
+<li><p>If both are set → the broadcaster will throw an error.</p></li>
+</ul>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../magnetometer_broadcaster/doc/userdoc.html" class="btn btn-neutral float-left" title="Magnetometer Broadcaster" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../chained_filter_controller/doc/userdoc.html" class="btn btn-neutral float-right" title="Chained Filter Controller" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: rolling
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Stable Releases</dt>
+        <dd><a href="../../../../../kilted/doc/ros2_controllers/battery_state_broadcaster/doc/userdoc.html">Kilted (latest)</a></dd><br>
+        <dd><a href="../../../../../jazzy/doc/ros2_controllers/battery_state_broadcaster/doc/userdoc.html">Jazzy</a></dd><br>
+        
+        <dd><a href="../../../../../humble/index.html">Humble</a></dd><br>
+        
+        
+    </dl>
+    <dl>
+      <dt>End-of-Life</dt>
+        <dd><a href="../../../../../iron/index.html">Iron</a></dd><br>
+        <dd><a href="../../../../../galactic/index.html">Galactic</a></dd><br>
+        <dd><a href="../../../../../foxy/index.html">Foxy</a></dd><br>
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="userdoc.html">Rolling</a></dd>
+      <dd><a href="../../../../../lyrical/doc/ros2_controllers/battery_state_broadcaster/doc/userdoc.html">Lyrical</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

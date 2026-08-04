@@ -49,16 +49,18 @@ zenbedded_schema **[stable]**
     Has no ROS dependencies -- builds standalone or with ``colcon``.
 
 zenbedded_transport **[WIP]**
-    Zephyr module infrastructure intended for shared transport logic between
-    the MCU and the ROS 2 host. Currently provides the module scaffolding
-    (``Kconfig``, ``west.yml``, Zephyr build integration) with empty serialization
-    and transport stubs. Planned contents: MicroCDR-based serialization headers,
-    shared message definitions, and Zenoh resource key mapping.
+    Zephyr module infrastructure for shared transport logic between the MCU
+    and the ROS 2 host. Implements MicroCDR-style ``JointState`` and
+    ``JointCommand`` serialization (the ``zcdr_*`` API in ``serialization.h``).
+    A ``zenoh_transport`` wrapper, shared ``.msg`` definitions, and ROS
+    name-to-Zenoh resource key mapping are planned.
 
 zenbedded_rcl **[WIP]**
     An embedded client library for Zephyr RTOS that provides a high-level,
     ROS-like API for hardware components running on the MCU. The
-    ``HardwareComponent`` base class (lifecycle-managed sensor/actuator) is
-    implemented and ready for use. ``ComponentManager`` is planned but not yet
-    implemented. Communicates directly with the host over Zenoh without any
-    intermediate agent.
+    ``ZenbeddedClient`` (double-buffered state/command buffers with
+    ABA-prevention versioning, Zenoh publish/subscribe, optional control
+    thread) is implemented and ready for use. A ``HardwareComponent`` base
+    class (lifecycle-managed sensor/actuator) and ``ComponentManager`` are
+    planned but not yet implemented. Communicates directly with the host over
+    Zenoh without any intermediate agent.

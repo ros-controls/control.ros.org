@@ -105,10 +105,42 @@
 
   <section id="zenbedded-transport">
 <span id="zenbedded-transport-userdoc"></span><h1>zenbedded_transport<a class="headerlink" href="#zenbedded-transport" title="Link to this heading"></a></h1>
+<p>Shared MicroCDR wire-format serialization for <code class="docutils literal notranslate"><span class="pre">JointState</span></code> / <code class="docutils literal notranslate"><span class="pre">JointCommand</span></code>
+payloads, so the ROS 2 host can unpack MCU publications directly (e.g. via
+<code class="docutils literal notranslate"><span class="pre">topic_based_hardware_interface</span></code>).</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This package is <strong>work in progress</strong>.</p>
 </div>
+<section id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Link to this heading"></a></h2>
+<p>Implemented:</p>
+<ul class="simple">
+<li><p><strong>Serialization</strong>: MicroCDR-style <code class="docutils literal notranslate"><span class="pre">JointState</span></code> and <code class="docutils literal notranslate"><span class="pre">JointCommand</span></code>
+serialization via the <code class="docutils literal notranslate"><span class="pre">zcdr_*</span></code> API in <code class="docutils literal notranslate"><span class="pre">serialization.h</span></code>, shared by the
+C (Zephyr) and C++ (ROS 2) builds.</p></li>
+</ul>
+<p>Planned:</p>
+<ul class="simple">
+<li><p><strong>IDL Definitions</strong>: Shared <code class="docutils literal notranslate"><span class="pre">.msg</span></code> files defining the control interface.</p></li>
+<li><p><strong>Type Mapping</strong>: Logic that maps ROS 2 interface names to Zenoh resource
+keys.</p></li>
+<li><p><strong>Zenoh transport</strong>: A <code class="docutils literal notranslate"><span class="pre">zenoh_transport</span></code> wrapper around the Zenoh session.</p></li>
+</ul>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">zcdr_*</span></code> API in <code class="docutils literal notranslate"><span class="pre">serialization.h</span></code> covers the CDR payload lifecycle:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">zcdr_init_joint_state</span></code> / <code class="docutils literal notranslate"><span class="pre">zcdr_init_joint_command</span></code> lay out the static
+CDR buffer and precompute the field offsets.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zcdr_serialize_joint_state</span></code> / <code class="docutils literal notranslate"><span class="pre">zcdr_serialize_joint_command</span></code> fill the
+buffer with a <code class="docutils literal notranslate"><span class="pre">JointState</span></code> / <code class="docutils literal notranslate"><span class="pre">JointCommand</span></code> payload.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zcdr_deserialize_joint_state</span></code> / <code class="docutils literal notranslate"><span class="pre">zcdr_deserialize_joint_command</span></code> unpack
+a CDR buffer back into primitive arrays.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">demos/zenbedded_test_node</span></code> exercises the full serialize/publish path.</p>
+</section>
 </section>
 
 

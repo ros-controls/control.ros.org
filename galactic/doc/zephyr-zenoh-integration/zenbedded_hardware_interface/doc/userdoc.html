@@ -110,6 +110,18 @@
 <span id="zenbedded-hardware-interface-userdoc"></span><h1>zenbedded_hardware_interface<a class="headerlink" href="#zenbedded-hardware-interface" title="Link to this heading"></a></h1>
 <p>A <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> <code class="docutils literal notranslate"><span class="pre">SystemInterface</span></code> implementation that communicates with microcontrollers via Zenoh.
 Reads sensor state from a Zenoh subscriber and writes joint commands to a Zenoh publisher.</p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading"></a></h2>
+<p>Build the workspace from source with <code class="docutils literal notranslate"><span class="pre">colcon</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/zephyr_zenoh_ws/src
+<span class="nb">cd</span><span class="w"> </span>~/zephyr_zenoh_ws/src
+git<span class="w"> </span>clone<span class="w"> </span>git@github.com:ros-controls/zephyr-zenoh-integration.git
+<span class="nb">cd</span><span class="w"> </span>~/zephyr_zenoh_ws
+rosdep<span class="w"> </span>install<span class="w"> </span>--from-paths<span class="w"> </span>src<span class="w"> </span>--ignore-src<span class="w"> </span>-r<span class="w"> </span>-y
+colcon<span class="w"> </span>build
+</pre></div>
+</div>
+</section>
 <section id="features">
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
 <ul class="simple">

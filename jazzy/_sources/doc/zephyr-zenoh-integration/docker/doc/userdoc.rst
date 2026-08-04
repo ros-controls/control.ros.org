@@ -14,7 +14,7 @@ Usage
 .. code:: bash
 
    docker compose up -d
-   docker exec -it zephyr-zenoh-dev bash
+   docker compose exec -it dev-env bash
 
 
 Includes

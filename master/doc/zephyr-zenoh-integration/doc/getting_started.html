@@ -154,12 +154,18 @@ colcon<span class="w"> </span>build
 </section>
 <section id="build-and-flash-a-demo-firmware">
 <h2>2. Build and flash a demo firmware<a class="headerlink" href="#build-and-flash-a-demo-firmware" title="Link to this heading"></a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/zephyr_zenoh_ws/src/zephyr-zenoh-integration/demos/inverted_pendulum
-west<span class="w"> </span>init<span class="w"> </span>-l<span class="w"> </span>.
-west<span class="w"> </span>update
+<p>The easiest route is the Docker development environment, which provides a
+ready-made west workspace with the modules and <code class="docutils literal notranslate"><span class="pre">zenoh-pico</span></code> preloaded (see
+the <a class="reference internal" href="../docker/doc/userdoc.html#docker-userdoc"><span class="std std-ref">Docker</span></a>):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/zephyr_ws/demos/inverted_pendulum
 west<span class="w"> </span>build<span class="w"> </span>-p<span class="w"> </span>always<span class="w"> </span>-b<span class="w"> </span>esp32s3_devkitc/esp32s3/procpu
 west<span class="w"> </span>flash<span class="w"> </span>--esp-device<span class="w"> </span>/dev/ttyUSB0
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A standalone host west workspace is not supported yet – the repository has
+no root <code class="docutils literal notranslate"><span class="pre">west.yml</span></code> to initialize from.</p>
 </div>
 </section>
 <section id="run-the-hardware-interface-ros-2-host">

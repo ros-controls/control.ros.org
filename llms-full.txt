@@ -101,7 +101,7 @@ General discussions
 
 ======================================================================
 
-Built on 2026-08-03 at 07:04 GMT
+Built on 2026-08-04 at 06:25 GMT
 
 
 
@@ -3443,7 +3443,7 @@ Warning:
 
   Cameras and lidar sensors are no longer supported in the base
   interface, they are now provided as "mujoco_ros2_control_plugins".
-  Refer to the *CameraPlugin* and *RangefinderLidarPlugin* for more
+  Refer to the CameraPlugin and RangefinderLidarPlugin for more
   information.
 
 
@@ -15852,6 +15852,396 @@ hardware_interface/hardware_interface_type_values.hpp.
 
 
 ==================================================
+source page: doc/ros2_controllers/battery_state_broadcaster/doc/userdoc.txt
+==================================================
+
+Battery State Broadcaster
+*************************
+
+The *Battery State Broadcaster* publishes battery status information
+as "sensor_msgs/msg/BatteryState" messages.
+
+It reads battery-related state interfaces from one or more batteries
+and exposes them in a standard ROS 2 message format. This allows easy
+integration with monitoring tools, logging systems, and higher-level
+decision-making nodes.
+
+
+Interfaces
+==========
+
+The broadcaster can read the following state interfaces from each
+configured battery:
+
+* "battery_voltage" *(mandatory)* (double)
+
+* "battery_temperature" *(optional)* (double)
+
+* "battery_current" *(optional)* (double)
+
+* "battery_charge" *(optional)* (double)
+
+* "battery_percentage" *(optional)* (double)
+
+* "battery_power_supply_status" *(optional)* (double)
+
+* "battery_power_supply_health" *(optional)* (double)
+
+* "battery_present" *(optional)* (bool)
+
+
+Published Topics
+================
+
+The broadcaster publishes two topics:
+
+* "~/raw_battery_states" ("control_msgs/msg/BatteryStateArray")
+  Publishes **per-battery state messages**, containing the raw values
+  for each configured battery.
+
+* "~/battery_state" ("sensor_msgs/msg/BatteryState") Publishes a
+  **single aggregated battery message** representing the combined
+  status across all batteries.
+
++-----------------------------------+-----------------------------------+-----------------------------------+
+| Field                             | "battery_state"                   | "raw_battery_states"              |
+|===================================|===================================|===================================|
+| "header.frame_id"                 | Empty                             | Battery name                      |
++-----------------------------------+-----------------------------------+-----------------------------------+
+| "voltage"                         | Mean across all batteries         | From battery's "battery_voltage"  |
+|                                   |                                   | interface *(mandatory)* (NaN if   |
+|                                   |                                   | unmeasured)                       |
++-----------------------------------+-----------------------------------+-----------------------------------+
+| "temperature"                     | Mean across batteries reporting   | From battery's                    |
+|                                   | temperature                       | "battery_temperature" interface   |
+|                                   |                                   | if enabled, otherwise nan.        |
++-----------------------------------+-----------------------------------+-----------------------------------+
+| "current"                         | Mean across batteries reporting   | From battery's "battery_current"  |
+|                                   | current                           | interface if enabled, otherwise   |
+|                                   |                                   | nan.                              |
++-----------------------------------+-----------------------------------+-----------------------------------+
+| "charge"                          | Sum across batteries reporting    | From battery's "battery_charge"   |
+|                                   | charge                            | interface if enabled, otherwise   |
+|                                   |                                   | nan.                              |
++-----------------------------------+-----------------------------------+-----------------------------------+
+| "capacity"                        | Sum across all batteries          | From battery's "capacity"         |
+|                                   |                                   | parameter if provided, otherwise  |
+|                                   |                                   | nan.                              |
++-----------------------------------+-----------------------------------+-----------------------------------+
+| "design_capacity"                 | Sum across all batteries          | From battery's "design_capacity"  |
+|                                   |                                   | parameter if provided, otherwise  |
+|                                   |                                   | nan.                              |
++-----------------------------------+-----------------------------------+-----------------------------------+
+| "percentage"                      | Mean across batteries             | From battery's                    |
+|                                   | reporting/calculating percentage  | "battery_percentage" interface if |
+|                                   |                                   | enabled, otherwise calculated     |
+|                                   |                                   | from battery's "minimum_voltage"  |
+|                                   |                                   | and "maximum_voltage" parameters. |
++-----------------------------------+-----------------------------------+-----------------------------------+
+| "power_supply_status"             | Highest reported enum value       | From battery's                    |
+|                                   |                                   | "battery_power_supply_status"     |
+|                                   |                                   | interface if enabled, otherwise 0 |
+|                                   |                                   | (unknown).                        |
++-----------------------------------+-----------------------------------+-----------------------------------+
+| "power_supply_health"             | Highest reported enum value       | From battery's                    |
+|                                   |                                   | "battery_power_supply_health"     |
+|                                   |                                   | interface if enabled, otherwise 0 |
+|                                   |                                   | (unknown).                        |
++-----------------------------------+-----------------------------------+-----------------------------------+
+| "power_supply_technology"         | Reported as-is if same across all | From battery's                    |
+|                                   | batteries, otherwise set to       | "power_supply_technology"         |
+|                                   | *Unknown*                         | parameter if provided, otherwise  |
+|                                   |                                   | 0 (unknown).                      |
++-----------------------------------+-----------------------------------+-----------------------------------+
+| "present"                         | True                              | From battery's "battery_present"  |
+|                                   |                                   | interface if enabled, otherwise   |
+|                                   |                                   | true if the battery voltage value |
+|                                   |                                   | is valid (not NaN and not 0.0).   |
++-----------------------------------+-----------------------------------+-----------------------------------+
+| "cell_voltage"                    | Empty                             | Empty                             |
++-----------------------------------+-----------------------------------+-----------------------------------+
+| "cell_temperature"                | Empty                             | Empty                             |
++-----------------------------------+-----------------------------------+-----------------------------------+
+| "location"                        | All battery locations appended    | From battery's "location"         |
+|                                   |                                   | parameter if provided, otherwise  |
+|                                   |                                   | empty.                            |
++-----------------------------------+-----------------------------------+-----------------------------------+
+| "serial_number"                   | All battery serial numbers        | From battery's "serial_number"    |
+|                                   | appended                          | parameter if provided, otherwise  |
+|                                   |                                   | empty.                            |
++-----------------------------------+-----------------------------------+-----------------------------------+
+
+
+Parameters
+==========
+
+This controller uses the generate_parameter_library to manage
+parameters. The parameter definition file contains the full list and
+descriptions.
+
+
+List of parameters
+------------------
+
+batteries (string_array)
+   List of batteries from which battery state interfaces will be read.
+
+   Read only: True
+
+   Constraints:
+
+      * contains no duplicates
+
+sensor_name (string)
+   [DEPRECATED] Sensor name of the battery. If provided, the 'voltage'
+   state interface of this sensor will be used to populate the voltage
+   field in the BatteryState message. If this parameter is used, the
+   batteries and interfaces parameters are ignored.
+
+   Read only: True
+
+   Default:  ""
+
+design_capacity (double)
+   [DEPRECATED] Design capacity of the battery [Ah] for the
+   sensor_name mode (If unmeasured NaN).
+
+   Read only: True
+
+   Default:  std::numeric_limits<double>::quiet_NaN()
+
+power_supply_technology (int)
+   [DEPRECATED] Battery chemistry type as an enum for the sensor_name
+   mode (see https://github.com/ros2/common_interfaces/blob/rolling/s
+   ensor_msgs/msg/BatteryState.msg). If unmeasured, the technology is
+   set to unknown.
+
+   Read only: True
+
+   Default:  0
+
+   Constraints:
+
+      * parameter must be within bounds [0, 8]
+
+interfaces.<batteries>.battery_temperature (bool)
+   Whether to read battery temperature [°C] from this battery's state
+   interface (If unmeasured NaN).
+
+   Read only: True
+
+   Default:  false
+
+interfaces.<batteries>.battery_current (bool)
+   Whether to read battery current [A] from this battery's state
+   interface (If unmeasured NaN).
+
+   Read only: True
+
+   Default:  false
+
+interfaces.<batteries>.battery_charge (bool)
+   Whether to read battery charge [Ah] from this battery's state
+   interface (If unmeasured NaN).
+
+   Read only: True
+
+   Default:  false
+
+interfaces.<batteries>.battery_percentage (bool)
+   Whether to read charge level [%] (0.0 to 100.0) from this battery's
+   state interface. If unmeasured, linear percentage is calculated
+   using the minimum_voltage and maximum_voltage parameters (if
+   provided), otherwise NaN.
+
+   Read only: True
+
+   Default:  false
+
+interfaces.<batteries>.battery_power_supply_status (bool)
+   Whether to read power supply status (e.g., Charging, Full, see htt
+   ps://github.com/ros2/common_interfaces/blob/rolling/sensor_msgs/ms
+   g/BatteryState.msg) from this battery's state interface. If
+   unmeasured, status is set to unknown.
+
+   Read only: True
+
+   Default:  false
+
+interfaces.<batteries>.battery_power_supply_health (bool)
+   Whether to read power supply health (e.g., Good, Overheat, see htt
+   ps://github.com/ros2/common_interfaces/blob/rolling/sensor_msgs/ms
+   g/BatteryState.msg) from this battery's state interface. If
+   unmeasured, health is set to unknown.
+
+   Read only: True
+
+   Default:  false
+
+interfaces.<batteries>.battery_present (bool)
+   Whether to read battery presence status (true if battery is
+   present) from this battery's state interface. If unmeasured, the
+   presence will be inferred from the battery voltage value (true if
+   voltage is not NaN and not 0.0, otherwise false).
+
+   Read only: True
+
+   Default:  false
+
+<batteries>.minimum_voltage (double)
+   Minimum battery voltage (used to calculate percentage).
+
+   Read only: True
+
+   Default:  std::numeric_limits<double>::quiet_NaN()
+
+<batteries>.maximum_voltage (double)
+   Maximum battery voltage (used to calculate percentage).
+
+   Read only: True
+
+   Default:  std::numeric_limits<double>::quiet_NaN()
+
+<batteries>.capacity (double)
+   Last known full battery capacity [Ah] (If unmeasured NaN).
+
+   Read only: True
+
+   Default:  std::numeric_limits<double>::quiet_NaN()
+
+<batteries>.design_capacity (double)
+   Design capacity of the battery [Ah] (If unmeasured NaN).
+
+   Read only: True
+
+   Default:  std::numeric_limits<double>::quiet_NaN()
+
+<batteries>.power_supply_technology (int)
+   Battery chemistry type as an enum (see https://github.com/ros2/com
+   mon_interfaces/blob/rolling/sensor_msgs/msg/BatteryState.msg). If
+   unmeasured, the technology is set to unknown.
+
+   Read only: True
+
+   Default:  0
+
+   Constraints:
+
+      * parameter must be within bounds [0, 8]
+
+<batteries>.location (string)
+   Physical location of the battery (e.g., slot number or plug label).
+
+   Read only: True
+
+   Default:  ""
+
+<batteries>.serial_number (string)
+   Serial number of the battery.
+
+   Read only: True
+
+   Default:  ""
+
+
+Example Parameter File
+----------------------
+
+An example parameter file for this controller is available in the test
+directory:
+
+   test_battery_state_broadcaster:
+     ros__parameters:
+       batteries:
+         - "battery0"
+         - "battery1"
+       interfaces:
+         battery0:
+           battery_temperature: true
+           battery_current: false
+           battery_charge: true
+           battery_percentage: false
+           battery_power_supply_status: true
+           battery_power_supply_health: true
+           battery_present: false
+         battery1:
+           battery_temperature: true
+           battery_current: true
+           battery_charge: true
+           battery_percentage: true
+           battery_power_supply_status: true
+           battery_power_supply_health: true
+           battery_present: false
+       battery0:
+         minimum_voltage: 0.0
+         maximum_voltage: 10.0
+         capacity: 12000.0
+         design_capacity: 13000.0
+         power_supply_technology: 3
+         location: "slot0"
+         serial_number: "serial_device_0"
+       battery1:
+         minimum_voltage: 0.0
+         maximum_voltage: 15.0
+         capacity: 17000.0
+         design_capacity: 18000.0
+         power_supply_technology: 3
+         location: "slot1"
+         serial_number: "serial_device_1"
+
+   # [deprecated] do not use for new configurations
+   test_battery_state_broadcaster_legacy:
+         ros__parameters:
+           batteries: ["battery_state"]
+           battery_state:
+             design_capacity: 100.0
+             power_supply_technology: 2
+
+
+Migration for "ipa320/ros_battery_monitoring" users
+===================================================
+
+If you were previously using the "battery_state_broadcaster" from the
+"ipa320/ros_battery_monitoring package", you can switch directly to
+this package. The configuration style using "sensor_name" is still
+supported for backward compatibility, but it may be removed in a
+future release.
+
+To adapt your setup to the new "battery_state_broadcaster"
+configuration:
+
+1. Update your hardware interface name from "voltage" →
+   "battery_voltage".
+
+2. Convert your controller parameters from
+
+      battery_state_broadcaster:
+        ros__parameters:
+          sensor_name: "battery_state"
+          design_capacity: 100.0
+          # https://github.com/ros2/common_interfaces/blob/rolling/sensor_msgs/msg/BatteryState.msg
+          power_supply_technology: 2
+
+   to:
+
+      battery_state_broadcaster:
+        ros__parameters:
+          batteries: ["battery_state"]
+          battery_state:
+            design_capacity: 100.0
+            power_supply_technology: 2
+
+**Notes**:
+
+* Parameters must provide **either** sensor_name **or** batteries.
+
+* If both are empty → the broadcaster will fail to configure.
+
+* If both are set → the broadcaster will throw an error.
+
+
+
+==================================================
 source page: doc/ros2_controllers/bicycle_steering_controller/doc/userdoc.txt
 ==================================================
 
@@ -16582,6 +16972,8 @@ controllers above.
 
 * Magnetometer Broadcaster
 
+* Battery State Broadcaster
+
 
 Filters
 =======
@@ -17213,6 +17605,12 @@ Release Notes: Kilted Kaiju to Lyrical Luth
 
 This list summarizes important changes between Kilted Kaiju (previous)
 and Lyrical Luth (current) releases.
+
+
+battery_state_broadcaster
+=========================
+
+* 🚀 The battery_state_broadcaster was added 🎉 (#1888).
 
 
 state_interfaces_broadcaster
@@ -22513,6 +22911,21 @@ The zenbedded Zephyr modules will communicate to
 "ros2_control" balances the pendulum.
 
 
+rcl_cpp_test
+============
+
+A C++ demo that exercises the "zenbedded_rcl" client together with the
+Zephyr network stack and Zenoh publish/subscribe.
+
+
+zenbedded_test_node
+===================
+
+Validates CDR "JointState" / "JointCommand" payload extraction using
+the "zenbedded_transport" serialization helpers. Buildable for
+"native_sim" and "esp32s3_devkitc/esp32s3/procpu"; run via "twister".
+
+
 
 ==================================================
 source page: doc/zephyr-zenoh-integration/doc/architecture.txt
@@ -22566,20 +22979,23 @@ zenbedded_schema **[stable]**
    -- builds standalone or with "colcon".
 
 zenbedded_transport **[WIP]**
-   Zephyr module infrastructure intended for shared transport logic
-   between the MCU and the ROS 2 host. Currently provides the module
-   scaffolding ("Kconfig", "west.yml", Zephyr build integration) with
-   empty serialization and transport stubs. Planned contents:
-   MicroCDR-based serialization headers, shared message definitions,
-   and Zenoh resource key mapping.
+   Zephyr module infrastructure for shared transport logic between the
+   MCU and the ROS 2 host. Implements MicroCDR-style "JointState" and
+   "JointCommand" serialization (the "zcdr_*" API in
+   "serialization.h"). A "zenoh_transport" wrapper, shared ".msg"
+   definitions, and ROS name-to-Zenoh resource key mapping are
+   planned.
 
 zenbedded_rcl **[WIP]**
    An embedded client library for Zephyr RTOS that provides a high-
    level, ROS-like API for hardware components running on the MCU. The
-   "HardwareComponent" base class (lifecycle-managed sensor/actuator)
-   is implemented and ready for use. "ComponentManager" is planned but
-   not yet implemented. Communicates directly with the host over Zenoh
-   without any intermediate agent.
+   "ZenbeddedClient" (double-buffered state/command buffers with ABA-
+   prevention versioning, Zenoh publish/subscribe, optional control
+   thread) is implemented and ready for use. A "HardwareComponent"
+   base class (lifecycle-managed sensor/actuator) and
+   "ComponentManager" are planned but not yet implemented.
+   Communicates directly with the host over Zenoh without any
+   intermediate agent.
 
 
 
@@ -22618,11 +23034,18 @@ Prerequisites
 2. Build and flash a demo firmware
 ==================================
 
-   cd ~/zephyr_zenoh_ws/src/zephyr-zenoh-integration/demos/inverted_pendulum
-   west init -l .
-   west update
+The easiest route is the Docker development environment, which
+provides a ready-made west workspace with the modules and "zenoh-pico"
+preloaded (see the Docker):
+
+   cd /zephyr_ws/demos/inverted_pendulum
    west build -p always -b esp32s3_devkitc/esp32s3/procpu
    west flash --esp-device /dev/ttyUSB0
+
+Note:
+
+  A standalone host west workspace is not supported yet -- the
+  repository has no root "west.yml" to initialize from.
 
 
 3. Run the hardware interface (ROS 2 host)
@@ -22706,7 +23129,7 @@ Usage
 =====
 
    docker compose up -d
-   docker exec -it zephyr-zenoh-dev bash
+   docker compose exec -it dev-env bash
 
 
 Includes
@@ -22761,6 +23184,19 @@ zenbedded_hardware_interface
 A "ros2_control" "SystemInterface" implementation that communicates
 with microcontrollers via Zenoh. Reads sensor state from a Zenoh
 subscriber and writes joint commands to a Zenoh publisher.
+
+
+Setup
+=====
+
+Build the workspace from source with "colcon":
+
+   mkdir -p ~/zephyr_zenoh_ws/src
+   cd ~/zephyr_zenoh_ws/src
+   git clone git@github.com:ros-controls/zephyr-zenoh-integration.git
+   cd ~/zephyr_zenoh_ws
+   rosdep install --from-paths src --ignore-src -r -y
+   colcon build
 
 
 Features
@@ -22871,9 +23307,42 @@ source page: doc/zephyr-zenoh-integration/zenbedded_rcl/doc/userdoc.txt
 zenbedded_rcl
 *************
 
+The embedded client library for Zephyr RTOS that provides a high-level
+API for ROS 2 communication.
+
 Warning:
 
   This package is **work in progress**.
+
+
+Features
+========
+
+* **Agent-less**: Communicates directly with ROS 2 via Zenoh, with no
+  bridge process running on the MCU.
+
+* **Double-buffered**: Lock-free state/command buffers with ABA-
+  prevention versioning, safe for the control thread.
+
+* **ROS-like API**: "state()" / "command()" accessors plus "sync()" to
+  publish and consume buffers; an optional control thread is started
+  via "start_thread(control_freq)".
+
+* **Optimized**: Designed for a low memory footprint and real-time
+  execution within the Zephyr thread model.
+
+
+Setup
+=====
+
+"zenbedded_rcl" is a Zephyr module; build it as part of a demo
+application in a west workspace that also provides "zenoh-pico" (e.g.
+the Docker development environment mounts "demos/" into a ready-made
+workspace):
+
+   cd demos/inverted_pendulum
+   west build -p always -b esp32s3_devkitc/esp32s3/procpu #your appropriate board
+   west flash --esp-device /dev/ttyUSB0
 
 
 
@@ -22884,8 +23353,8 @@ source page: doc/zephyr-zenoh-integration/zenbedded_schema/doc/userdoc.txt
 zenbedded_schema
 ****************
 
-YAML-driven schema parser and C/C++ header generator for packed binary
-interface descriptions. builds with "colcon" or standalone "CMake".
+YAML-driven schema parser and C header generator for packed binary
+interface descriptions. Builds with "colcon" or standalone "CMake".
 
 The schema is the single source of truth for the wire format shared
 between the ROS 2 host and the Zephyr firmware.
@@ -23003,8 +23472,51 @@ source page: doc/zephyr-zenoh-integration/zenbedded_transport/doc/userdoc.txt
 zenbedded_transport
 *******************
 
+Shared MicroCDR wire-format serialization for "JointState" /
+"JointCommand" payloads, so the ROS 2 host can unpack MCU publications
+directly (e.g. via "topic_based_hardware_interface").
+
 Warning:
 
   This package is **work in progress**.
+
+
+Contents
+========
+
+Implemented:
+
+* **Serialization**: MicroCDR-style "JointState" and "JointCommand"
+  serialization via the "zcdr_*" API in "serialization.h", shared by
+  the C (Zephyr) and C++ (ROS 2) builds.
+
+Planned:
+
+* **IDL Definitions**: Shared ".msg" files defining the control
+  interface.
+
+* **Type Mapping**: Logic that maps ROS 2 interface names to Zenoh
+  resource keys.
+
+* **Zenoh transport**: A "zenoh_transport" wrapper around the Zenoh
+  session.
+
+
+Usage
+=====
+
+The "zcdr_*" API in "serialization.h" covers the CDR payload
+lifecycle:
+
+* "zcdr_init_joint_state" / "zcdr_init_joint_command" lay out the
+  static CDR buffer and precompute the field offsets.
+
+* "zcdr_serialize_joint_state" / "zcdr_serialize_joint_command" fill
+  the buffer with a "JointState" / "JointCommand" payload.
+
+* "zcdr_deserialize_joint_state" / "zcdr_deserialize_joint_command"
+  unpack a CDR buffer back into primitive arrays.
+
+"demos/zenbedded_test_node" exercises the full serialize/publish path.
 
 

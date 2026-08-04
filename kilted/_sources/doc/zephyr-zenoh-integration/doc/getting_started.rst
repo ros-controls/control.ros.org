@@ -32,13 +32,20 @@ Prerequisites
 2. Build and flash a demo firmware
 ----------------------------------
 
+The easiest route is the Docker development environment, which provides a
+ready-made west workspace with the modules and ``zenoh-pico`` preloaded (see
+the :ref:`docker_userdoc`):
+
 .. code:: bash
 
-   cd ~/zephyr_zenoh_ws/src/zephyr-zenoh-integration/demos/inverted_pendulum
-   west init -l .
-   west update
+   cd /zephyr_ws/demos/inverted_pendulum
    west build -p always -b esp32s3_devkitc/esp32s3/procpu
    west flash --esp-device /dev/ttyUSB0
+
+.. note::
+
+   A standalone host west workspace is not supported yet -- the repository has
+   no root ``west.yml`` to initialize from.
 
 
 3. Run the hardware interface (ROS 2 host)

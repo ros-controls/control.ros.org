@@ -126,18 +126,20 @@ binary struct descriptions. Both the hardware interface (host-side) and the
 firmware (MCU-side) use the same schema to ensure wire-format compatibility.
 Has no ROS dependencies – builds standalone or with <code class="docutils literal notranslate"><span class="pre">colcon</span></code>.</p>
 </dd>
-<dt>zenbedded_transport <strong>[WIP]</strong></dt><dd><p>Zephyr module infrastructure intended for shared transport logic between
-the MCU and the ROS 2 host. Currently provides the module scaffolding
-(<code class="docutils literal notranslate"><span class="pre">Kconfig</span></code>, <code class="docutils literal notranslate"><span class="pre">west.yml</span></code>, Zephyr build integration) with empty serialization
-and transport stubs. Planned contents: MicroCDR-based serialization headers,
-shared message definitions, and Zenoh resource key mapping.</p>
+<dt>zenbedded_transport <strong>[WIP]</strong></dt><dd><p>Zephyr module infrastructure for shared transport logic between the MCU
+and the ROS 2 host. Implements MicroCDR-style <code class="docutils literal notranslate"><span class="pre">JointState</span></code> and
+<code class="docutils literal notranslate"><span class="pre">JointCommand</span></code> serialization (the <code class="docutils literal notranslate"><span class="pre">zcdr_*</span></code> API in <code class="docutils literal notranslate"><span class="pre">serialization.h</span></code>).
+A <code class="docutils literal notranslate"><span class="pre">zenoh_transport</span></code> wrapper, shared <code class="docutils literal notranslate"><span class="pre">.msg</span></code> definitions, and ROS
+name-to-Zenoh resource key mapping are planned.</p>
 </dd>
 <dt>zenbedded_rcl <strong>[WIP]</strong></dt><dd><p>An embedded client library for Zephyr RTOS that provides a high-level,
 ROS-like API for hardware components running on the MCU. The
-<code class="docutils literal notranslate"><span class="pre">HardwareComponent</span></code> base class (lifecycle-managed sensor/actuator) is
-implemented and ready for use. <code class="docutils literal notranslate"><span class="pre">ComponentManager</span></code> is planned but not yet
-implemented. Communicates directly with the host over Zenoh without any
-intermediate agent.</p>
+<code class="docutils literal notranslate"><span class="pre">ZenbeddedClient</span></code> (double-buffered state/command buffers with
+ABA-prevention versioning, Zenoh publish/subscribe, optional control
+thread) is implemented and ready for use. A <code class="docutils literal notranslate"><span class="pre">HardwareComponent</span></code> base
+class (lifecycle-managed sensor/actuator) and <code class="docutils literal notranslate"><span class="pre">ComponentManager</span></code> are
+planned but not yet implemented. Communicates directly with the host over
+Zenoh without any intermediate agent.</p>
 </dd>
 </dl>
 </section>

@@ -28,7 +28,7 @@
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="Running Controllers Asynchronously" href="running_controllers_asynchronously.html" />
+    <link rel="next" title="Concepts" href="../../doc/concepts.html" />
     <link rel="prev" title="ros2_control" href="../../doc/index.html" /> 
 </head>
 
@@ -55,49 +55,42 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../doc/index.html">ros2_control</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#api-documentation">API Documentation</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../../doc/index.html#concepts">Concepts</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Controller Manager</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#determinism">Determinism</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Controller manager</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ros-interface">ROS Interface</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#publishers">Publishers</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#subscribers">Subscribers</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#handling-multiple-controller-managers">Handling Multiple Controller Managers</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#helper-scripts">Helper scripts</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#spawner"><code class="docutils literal notranslate"><span class="pre">spawner</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="#unspawner"><code class="docutils literal notranslate"><span class="pre">unspawner</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="#hardware-spawner"><code class="docutils literal notranslate"><span class="pre">hardware_spawner</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#rqt-controller-manager">rqt_controller_manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#determinism">Determinism</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#factors-that-affect-determinism">Factors that affect Determinism</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#launching-controller-manager">Launching controller_manager</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#using-ros2-control-node">Using ros2_control_node</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#handling-multiple-controller-managers-single-multiple">Handling Multiple Controller Managers (single/multiple)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#using-the-controller-manager-in-a-process">Using the Controller Manager in a Process</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#launching-controller-manager-with-ros2-control-node">Launching controller_manager with ros2_control_node</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#concepts">Concepts</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#restarting-all-controllers">Restarting all controllers</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#restarting-hardware">Restarting hardware</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#hardware-and-controller-errors">Hardware and Controller Errors</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#factors-that-affect-determinism">Factors that affect Determinism</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#support-for-asynchronous-updates">Support for Asynchronous Updates</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="running_controllers_asynchronously.html">Asynchronous Controllers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#helper-scripts">Helper Scripts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#spawner"><code class="docutils literal notranslate"><span class="pre">spawner</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#unspawner"><code class="docutils literal notranslate"><span class="pre">unspawner</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hardware-spawner"><code class="docutils literal notranslate"><span class="pre">hardware_spawner</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#color-output-handling">Color Output Handling</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#rqt-controller-manager">rqt_controller_manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#operations">Operations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#restarting-all-controllers">Restarting all controllers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#restarting-hardware">Restarting hardware</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hardware-and-controller-errors">Hardware and Controller Errors</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#monitoring-and-tuning">Monitoring and Tuning</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#different-clocks-used-by-controller-manager">Different Clocks used by Controller Manager</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#color-output-handling">Color Output Handling</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="controller_chaining.html">Controller Chaining / Cascade Control</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../hardware_interface/doc/joints_userdoc.html">Joint Kinematics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../hardware_interface/doc/joint_limiting.html">Joint Limiting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../hardware_interface/doc/hardware_components_userdoc.html">Hardware Components</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../hardware_interface/doc/mock_components_userdoc.html">Mock Components</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../doc/index.html#guidelines-and-best-practices">Guidelines and Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/concepts.html">Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../hardware_interface/doc/hardware_components_userdoc.html">Hardware Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/guidelines_and_best_practices.html">Guidelines and Best Practices</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
@@ -148,54 +141,10 @@
 <span id="controller-manager-userdoc"></span><h1>Controller Manager<a class="headerlink" href="#controller-manager" title="Link to this heading"></a></h1>
 <p>Controller Manager is the main component in the ros2_control framework.
 It manages lifecycle of controllers, access to the hardware interfaces and offers services to the ROS-world.</p>
-<section id="determinism">
-<h2>Determinism<a class="headerlink" href="#determinism" title="Link to this heading"></a></h2>
-<p>For best performance when controlling hardware you want the controller manager to have as little jitter as possible in the main control loop.</p>
-<p>Independent of the kernel installed, the main thread of Controller Manager attempts to
-configure <code class="docutils literal notranslate"><span class="pre">SCHED_FIFO</span></code> with a priority of <code class="docutils literal notranslate"><span class="pre">50</span></code>. Read more about the scheduling policies
-<a class="reference external" href="https://blogs.oracle.com/linux/post/task-priority">for example here</a>.</p>
-<p>For real-time tasks, a priority range of 0 to 99 is expected, with higher numbers indicating higher priority. By default, users do not have permission to set such high priorities.
-To give the user such permissions, add a group named realtime and add the user controlling your robot to this group:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>addgroup<span class="w"> </span>realtime
-<span class="gp">$ </span>sudo<span class="w"> </span>usermod<span class="w"> </span>-a<span class="w"> </span>-G<span class="w"> </span>realtime<span class="w"> </span><span class="k">$(</span>whoami<span class="k">)</span>
-</pre></div>
-</div>
-<p>Afterwards, add the following limits to the realtime group in <code class="docutils literal notranslate"><span class="pre">/etc/security/limits.conf</span></code>:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">@realtime soft rtprio 99</span>
-<span class="go">@realtime soft priority 99</span>
-<span class="go">@realtime soft memlock unlimited</span>
-<span class="go">@realtime hard rtprio 99</span>
-<span class="go">@realtime hard priority 99</span>
-<span class="go">@realtime hard memlock unlimited</span>
-</pre></div>
-</div>
-<p>The limits will be applied after you log out and in again.</p>
-<p>You can run ros2_control with real-time requirements also from a docker container. Pass the following capability options to allow the container to set the thread priority and lock memory, e.g.,</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--cap-add<span class="o">=</span>sys_nice<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--ulimit<span class="w"> </span><span class="nv">rtprio</span><span class="o">=</span><span class="m">99</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--ulimit<span class="w"> </span><span class="nv">memlock</span><span class="o">=</span>-1<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--rm<span class="w"> </span>--net<span class="w"> </span>host<span class="w"> </span>&lt;IMAGE&gt;
-</pre></div>
-</div>
-<p>For more information, see the Docker engine documentation about <a class="reference external" href="https://docs.docker.com/engine/containers/resource_constraints/#configure-the-real-time-scheduler">resource_constraints</a> and <a class="reference external" href="https://docs.docker.com/engine/containers/run/#runtime-privilege-and-linux-capabilities">linux capabilities</a>.</p>
-<p>The normal linux kernel is optimized for computational throughput and therefore is not well suited for hardware control.
-Alternatives to the standard kernel include</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://ubuntu.com/real-time">Real-time Ubuntu</a> on Ubuntu</p></li>
-<li><p><a class="reference external" href="https://packages.ubuntu.com/resolute/linux-raspi-realtime">linux-raspi-realtime</a> on Ubuntu on Raspberry Pi: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">linux-raspi-realtime</span></code></p></li>
-<li><p><a class="reference external" href="https://packages.debian.org/search?searchon=names&amp;keywords=linux-image-rt-amd64">linux-image-rt-amd64</a> or <a class="reference external" href="https://packages.debian.org/search?suite=default&amp;section=all&amp;arch=any&amp;searchon=names&amp;keywords=linux-image-rt-arm64">linux-image-rt-arm64</a> on Debian for 64-bit PCs</p></li>
-<li><p><a class="reference external" href="https://ubuntu.com/blog/industrial-embedded-systems">lowlatency kernel</a> (<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">linux-lowlatency</span></code>) on any Ubuntu</p></li>
-</ul>
-<p>Though installing a realtime-kernel will definitely get the best results when it comes to low
-jitter, using a lowlatency kernel can improve things a lot with being really easy to install.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Avoid using the get_lifecycle_state() method in the real-time control loop of the controllers and the hardware components as it is not real-time safe.</p>
-</div>
-</section>
+<section id="ros-interface">
+<h2>ROS Interface<a class="headerlink" href="#ros-interface" title="Link to this heading"></a></h2>
 <section id="publishers">
-<h2>Publishers<a class="headerlink" href="#publishers" title="Link to this heading"></a></h2>
+<h3>Publishers<a class="headerlink" href="#publishers" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>~/activity [controller_manager_msgs::msg::ControllerManagerActivity]</dt><dd><p>A topic that is published every time there is a change of state of the controllers or hardware components managed by the controller manager.
 The message contains the list of the controllers and the hardware components that are managed by the controller manager along with their lifecycle states.
@@ -204,7 +153,7 @@ The topic is published using the “transient local” quality of service, so su
 </dl>
 </section>
 <section id="subscribers">
-<h2>Subscribers<a class="headerlink" href="#subscribers" title="Link to this heading"></a></h2>
+<h3>Subscribers<a class="headerlink" href="#subscribers" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>robot_description [std_msgs::msg::String]</dt><dd><p>String with the URDF xml, e.g., from <code class="docutils literal notranslate"><span class="pre">robot_state_publisher</span></code>.
 Reloading of the URDF is not supported yet.
@@ -213,7 +162,7 @@ All joints defined in the <code class="docutils literal notranslate"><span class
 </dl>
 </section>
 <section id="parameters">
-<h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h2>
+<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>&lt;controller_name&gt;.type</dt><dd><p>Name of a plugin exported using <code class="docutils literal notranslate"><span class="pre">pluginlib</span></code> for a controller.
 This is a class from which controller’s instance with name “<code class="docutils literal notranslate"><span class="pre">controller_name</span></code>” is created.</p>
@@ -554,8 +503,108 @@ The full structure of the map is given in the following example:</p>
 </pre></div>
 </div>
 </section>
-<section id="handling-multiple-controller-managers">
-<h2>Handling Multiple Controller Managers<a class="headerlink" href="#handling-multiple-controller-managers" title="Link to this heading"></a></h2>
+</section>
+<section id="determinism">
+<h2>Determinism<a class="headerlink" href="#determinism" title="Link to this heading"></a></h2>
+<p>For best performance when controlling hardware you want the controller manager to have as little jitter as possible in the main control loop.</p>
+<p>Independent of the kernel installed, the main thread of Controller Manager attempts to
+configure <code class="docutils literal notranslate"><span class="pre">SCHED_FIFO</span></code> with a priority of <code class="docutils literal notranslate"><span class="pre">50</span></code>. Read more about the scheduling policies
+<a class="reference external" href="https://blogs.oracle.com/linux/post/task-priority">for example here</a>.</p>
+<p>For real-time tasks, a priority range of 0 to 99 is expected, with higher numbers indicating higher priority. By default, users do not have permission to set such high priorities.
+To give the user such permissions, add a group named realtime and add the user controlling your robot to this group:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>addgroup<span class="w"> </span>realtime
+<span class="gp">$ </span>sudo<span class="w"> </span>usermod<span class="w"> </span>-a<span class="w"> </span>-G<span class="w"> </span>realtime<span class="w"> </span><span class="k">$(</span>whoami<span class="k">)</span>
+</pre></div>
+</div>
+<p>Afterwards, add the following limits to the realtime group in <code class="docutils literal notranslate"><span class="pre">/etc/security/limits.conf</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">@realtime soft rtprio 99</span>
+<span class="go">@realtime soft priority 99</span>
+<span class="go">@realtime soft memlock unlimited</span>
+<span class="go">@realtime hard rtprio 99</span>
+<span class="go">@realtime hard priority 99</span>
+<span class="go">@realtime hard memlock unlimited</span>
+</pre></div>
+</div>
+<p>The limits will be applied after you log out and in again.</p>
+<p>You can run ros2_control with real-time requirements also from a docker container. Pass the following capability options to allow the container to set the thread priority and lock memory, e.g.,</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--cap-add<span class="o">=</span>sys_nice<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--ulimit<span class="w"> </span><span class="nv">rtprio</span><span class="o">=</span><span class="m">99</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--ulimit<span class="w"> </span><span class="nv">memlock</span><span class="o">=</span>-1<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--rm<span class="w"> </span>--net<span class="w"> </span>host<span class="w"> </span>&lt;IMAGE&gt;
+</pre></div>
+</div>
+<p>For more information, see the Docker engine documentation about <a class="reference external" href="https://docs.docker.com/engine/containers/resource_constraints/#configure-the-real-time-scheduler">resource_constraints</a> and <a class="reference external" href="https://docs.docker.com/engine/containers/run/#runtime-privilege-and-linux-capabilities">linux capabilities</a>.</p>
+<p>The normal linux kernel is optimized for computational throughput and therefore is not well suited for hardware control.
+Alternatives to the standard kernel include</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://ubuntu.com/real-time">Real-time Ubuntu</a> on Ubuntu</p></li>
+<li><p><a class="reference external" href="https://packages.ubuntu.com/resolute/linux-raspi-realtime">linux-raspi-realtime</a> on Ubuntu on Raspberry Pi: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">linux-raspi-realtime</span></code></p></li>
+<li><p><a class="reference external" href="https://packages.debian.org/search?searchon=names&amp;keywords=linux-image-rt-amd64">linux-image-rt-amd64</a> or <a class="reference external" href="https://packages.debian.org/search?suite=default&amp;section=all&amp;arch=any&amp;searchon=names&amp;keywords=linux-image-rt-arm64">linux-image-rt-arm64</a> on Debian for 64-bit PCs</p></li>
+<li><p><a class="reference external" href="https://ubuntu.com/blog/industrial-embedded-systems">lowlatency kernel</a> (<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">linux-lowlatency</span></code>) on any Ubuntu</p></li>
+</ul>
+<p>Though installing a realtime-kernel will definitely get the best results when it comes to low
+jitter, using a lowlatency kernel can improve things a lot with being really easy to install.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Avoid using the get_lifecycle_state() method in the real-time control loop of the controllers and the hardware components as it is not real-time safe.</p>
+</div>
+<section id="factors-that-affect-determinism">
+<h3>Factors that affect Determinism<a class="headerlink" href="#factors-that-affect-determinism" title="Link to this heading"></a></h3>
+<p>When run under the conditions determined in the above section, the determinism is assured up to the limitations of the hardware and the real-time kernel. However, there are some situations that can affect determinism:</p>
+<ul class="simple">
+<li><p>When a controller fails to activate in the realtime loop, the controller_manager will call the methods <code class="docutils literal notranslate"><span class="pre">prepare_command_mode_switch</span></code> and <code class="docutils literal notranslate"><span class="pre">perform_command_mode_switch</span></code> to stop the started interfaces. These calls can cause jitter in the main control loop.</p></li>
+<li><p>If a controller does not complete a successful update cycle in the realtime loop (for example, returns <code class="docutils literal notranslate"><span class="pre">return_type::ERROR</span></code>), the controller manager will deactivate that controller (or) the entire controller chain it is part of. It will then invoke <code class="docutils literal notranslate"><span class="pre">prepare_command_mode_switch</span></code> and <code class="docutils literal notranslate"><span class="pre">perform_command_mode_switch</span></code> to stop the interfaces used by the affected controller(s). These actions can introduce jitter into the main control loop.</p></li>
+</ul>
+</section>
+</section>
+<section id="launching-controller-manager">
+<h2>Launching controller_manager<a class="headerlink" href="#launching-controller-manager" title="Link to this heading"></a></h2>
+<section id="using-ros2-control-node">
+<h3>Using ros2_control_node<a class="headerlink" href="#using-ros2-control-node" title="Link to this heading"></a></h3>
+<p>The controller_manager can be launched with the ros2_control_node executable. The following example shows how to launch the controller_manager with the ros2_control_node executable:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">control_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
+    <span class="n">package</span><span class="o">=</span><span class="s2">&quot;controller_manager&quot;</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;ros2_control_node&quot;</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">robot_controllers</span><span class="p">],</span>
+    <span class="n">output</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The ros2_control_node executable uses the following parameters from the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> node:</p>
+<dl class="simple">
+<dt>lock_memory (optional; bool; default: false for a non-realtime kernel, true for a realtime kernel)</dt><dd><p>Locks the memory of the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> node at startup to physical RAM in order to avoid page faults
+and to prevent the node from being swapped out to disk.
+Find more information about the setup for memory locking in the following link: <a class="reference external" href="https://access.redhat.com/solutions/61334">How to set ulimit values</a>
+The following command can be used to set the memory locking limit temporarily: <code class="docutils literal notranslate"><span class="pre">ulimit</span> <span class="pre">-l</span> <span class="pre">unlimited</span></code>.</p>
+</dd>
+<dt>cpu_affinity (optional; int (or) int_array;)</dt><dd><p>Sets the CPU affinity of the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> node to the specified CPU core.
+If it is an integer, the node’s affinity will be set to the specified CPU core.
+If it is an array of integers, the node’s affinity will be set to the specified set of CPU cores.</p>
+</dd>
+<dt>thread_priority (optional; int; default: 50)</dt><dd><p>Sets the thread priority of the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> node to the specified value. The value must be between 0 and 99.</p>
+</dd>
+<dt>use_sim_time (optional; bool; default: false)</dt><dd><p>Enables the use of simulation time in the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> node.</p>
+</dd>
+<dt>overruns.manage (optional; bool; default: true)</dt><dd><p>Enables or disables the handling of overruns in the real-time loop of the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> node.
+If set to true, the controller manager will detect overruns caused by system time changes or longer execution times of the controllers and hardware components.
+If an overrun is detected, the controller manager will print a warning message to the console.
+When used with <code class="docutils literal notranslate"><span class="pre">use_sim_time</span></code> set to true, this parameter is ignored and the overrun handling is disabled.</p>
+</dd>
+<dt>hardware_synchronization.expect_blocking_read_write (optional; bool; default: false)</dt><dd><p>If true, the controller manager will not sleep actively. Use this, when there is a hardware
+interface running that will block during its read or write operation until receiving new data
+from the hardware.</p>
+</dd>
+<dt>hardware_synchronization.minimum_cycle_time (optional; double; default: 0.0001)</dt><dd><p>The minimum sleep time in seconds for the control node’s real-time loop. This is used to
+prevent the control node from running too fast, which can cause high CPU
+usage if the hardware doesn’t block in read / write. This is only used when
+<code class="docutils literal notranslate"><span class="pre">expect_blocking_read_write</span></code> is set to true.
+If the cycle is shorter than this, it will sleep for this period and print a warning.</p>
+</dd>
+</dl>
+</section>
+<section id="handling-multiple-controller-managers-single-multiple">
+<h3>Handling Multiple Controller Managers (single/multiple)<a class="headerlink" href="#handling-multiple-controller-managers-single-multiple" title="Link to this heading"></a></h3>
 <p>When dealing with multiple controller managers, you have two options for managing different robot descriptions:</p>
 <ol class="arabic simple">
 <li><p><strong>Using Namespaces:</strong> You can place both the <code class="docutils literal notranslate"><span class="pre">robot_state_publisher</span></code> and the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> nodes into the same namespace.</p></li>
@@ -596,8 +645,29 @@ The full structure of the map is given in the following example:</p>
 </pre></div>
 </div>
 </section>
+<section id="using-the-controller-manager-in-a-process">
+<h3>Using the Controller Manager in a Process<a class="headerlink" href="#using-the-controller-manager-in-a-process" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">ControllerManager</span></code> may also be instantiated in a process as a class, but proper care must be taken when doing so.
+The reason for this is because the <code class="docutils literal notranslate"><span class="pre">ControllerManager</span></code> class inherits from <code class="docutils literal notranslate"><span class="pre">rclcpp::Node</span></code>.</p>
+<p>If there is more than one Node in the process, global node name remap rules can forcibly change the <code class="docutils literal notranslate"><span class="pre">ControllerManager's</span></code> node name as well, leading to duplicate node names.
+This occurs whether the Nodes are siblings or exist in a hierarchy.</p>
+<img alt="../../../../_images/global_general_remap.png" src="../../../../_images/global_general_remap.png" />
+<p>The workaround for this is to specify another node name remap rule in the <code class="docutils literal notranslate"><span class="pre">NodeOptions</span></code> passed to the <code class="docutils literal notranslate"><span class="pre">ControllerManager</span></code> node (causing it to ignore the global rule), or ensure that any remap rules are targeted to specific nodes.</p>
+<img alt="../../../../_images/global_specific_remap.png" src="../../../../_images/global_specific_remap.png" />
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller_manager</span><span class="o">::</span><span class="n">get_cm_node_options</span><span class="p">();</span>
+<span class="n">options</span><span class="p">.</span><span class="n">arguments</span><span class="p">({</span>
+<span class="w">  </span><span class="s">&quot;--ros-args&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s">&quot;--remap&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;_target_node_name:__node:=dst_node_name&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s">&quot;--log-level&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;info&quot;</span><span class="p">});</span>
+
+<span class="k">auto</span><span class="w"> </span><span class="n">cm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">controller_manager</span><span class="o">::</span><span class="n">ControllerManager</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">  </span><span class="n">executor</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;_target_node_name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;some_optional_namespace&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">options</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+</section>
 <section id="helper-scripts">
-<h2>Helper scripts<a class="headerlink" href="#helper-scripts" title="Link to this heading"></a></h2>
+<h2>Helper Scripts<a class="headerlink" href="#helper-scripts" title="Link to this heading"></a></h2>
 <p>There are two scripts to interact with controller manager from launch files:</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -609,9 +679,7 @@ The full structure of the map is given in the following example:</p>
 <section id="spawner">
 <h3><code class="docutils literal notranslate"><span class="pre">spawner</span></code><a class="headerlink" href="#spawner" title="Link to this heading"></a></h3>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>run<span class="w"> </span>controller_manager<span class="w"> </span>spawner<span class="w"> </span>-h
-<span class="go">usage: spawner [-h] [-c CONTROLLER_MANAGER] [-p PARAM_FILE] [--load-only] [--inactive] [-u] [--controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT] [--switch-timeout SWITCH_TIMEOUT]</span>
-<span class="go">           [--service-call-timeout SERVICE_CALL_TIMEOUT] [--activate-as-group] [--switch-asap | --no-switch-asap] [--controller-ros-args CONTROLLER_ROS_ARGS]</span>
-<span class="go">           controller_names [controller_names ...]</span>
+<span class="go">usage: spawner [-h] [-c CONTROLLER_MANAGER] [-p PARAM_FILE] [--load-only] [--inactive] [-u] [--controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT] [--switch-timeout SWITCH_TIMEOUT] [--service-call-timeout SERVICE_CALL_TIMEOUT] [--activate-as-group] [--switch-asap | --no-switch-asap] [--controller-ros-args CONTROLLER_ROS_ARGS] controller_names [controller_names ...]</span>
 
 <span class="go">positional arguments:</span>
 <span class="go">  controller_names      List of controllers</span>
@@ -689,8 +757,7 @@ The full structure of the map is given in the following example:</p>
 <span class="go">Usage: spawner [global_options] --controller &lt;name&gt; [controller_options] --controller &lt;name&gt; ...</span>
 
 <span class="go">Global Options:</span>
-<span class="go">usage: spawner [-c CONTROLLER_MANAGER] [--controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT] [--switch-timeout SWITCH_TIMEOUT] [--service-call-timeout SERVICE_CALL_TIMEOUT] [--activate-as-group]</span>
-<span class="go">              [--switch-asap | --no-switch-asap] [-u] [-h]</span>
+<span class="go">usage: spawner [-c CONTROLLER_MANAGER] [--controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT] [--switch-timeout SWITCH_TIMEOUT] [--service-call-timeout SERVICE_CALL_TIMEOUT] [--activate-as-group] [--switch-asap | --no-switch-asap] [-u] [-h]</span>
 
 <span class="go">options:</span>
 <span class="go">  -c CONTROLLER_MANAGER, --controller-manager CONTROLLER_MANAGER</span>
@@ -814,9 +881,7 @@ The full structure of the map is given in the following example:</p>
 <section id="hardware-spawner">
 <h3><code class="docutils literal notranslate"><span class="pre">hardware_spawner</span></code><a class="headerlink" href="#hardware-spawner" title="Link to this heading"></a></h3>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>run<span class="w"> </span>controller_manager<span class="w"> </span>hardware_spawner<span class="w"> </span>-h
-<span class="go">usage: hardware_spawner [-h] [-c CONTROLLER_MANAGER] [--controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT]</span>
-<span class="go">                        (--activate | --configure)</span>
-<span class="go">                        hardware_component_names [hardware_component_names ...]</span>
+<span class="go">usage: hardware_spawner [-h] [-c CONTROLLER_MANAGER] [--controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT] (--activate | --configure) hardware_component_names [hardware_component_names ...]</span>
 
 <span class="go">positional arguments:</span>
 <span class="go">  hardware_component_names</span>
@@ -833,6 +898,17 @@ The full structure of the map is given in the following example:</p>
 </pre></div>
 </div>
 </section>
+<section id="color-output-handling">
+<h3>Color Output Handling<a class="headerlink" href="#color-output-handling" title="Link to this heading"></a></h3>
+<p>The helper scripts (<code class="docutils literal notranslate"><span class="pre">spawner</span></code> and <code class="docutils literal notranslate"><span class="pre">hardware_spawner</span></code>) now use an environment-aware <code class="docutils literal notranslate"><span class="pre">bcolors</span></code> class.
+The color output automatically adapts to the environment:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">RCUTILS_COLORIZED_OUTPUT=0</span></code> -&gt; disables color output</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RCUTILS_COLORIZED_OUTPUT=1</span></code> -&gt; forces color output</p></li>
+<li><p>Unset -&gt; automatically detects TTY and enables color only in interactive
+terminals</p></li>
+</ul>
+</section>
 </section>
 <section id="rqt-controller-manager">
 <h2>rqt_controller_manager<a class="headerlink" href="#rqt-controller-manager" title="Link to this heading"></a></h2>
@@ -847,71 +923,8 @@ The full structure of the map is given in the following example:</p>
 <li><p>Right-click on a controller or hardware component to show a context menu with options for lifecycle management.</p></li>
 </ul>
 </section>
-<section id="using-the-controller-manager-in-a-process">
-<h2>Using the Controller Manager in a Process<a class="headerlink" href="#using-the-controller-manager-in-a-process" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">ControllerManager</span></code> may also be instantiated in a process as a class, but proper care must be taken when doing so.
-The reason for this is because the <code class="docutils literal notranslate"><span class="pre">ControllerManager</span></code> class inherits from <code class="docutils literal notranslate"><span class="pre">rclcpp::Node</span></code>.</p>
-<p>If there is more than one Node in the process, global node name remap rules can forcibly change the <code class="docutils literal notranslate"><span class="pre">ControllerManager's</span></code> node name as well, leading to duplicate node names.
-This occurs whether the Nodes are siblings or exist in a hierarchy.</p>
-<img alt="../../../../_images/global_general_remap.png" src="../../../../_images/global_general_remap.png" />
-<p>The workaround for this is to specify another node name remap rule in the <code class="docutils literal notranslate"><span class="pre">NodeOptions</span></code> passed to the <code class="docutils literal notranslate"><span class="pre">ControllerManager</span></code> node (causing it to ignore the global rule), or ensure that any remap rules are targeted to specific nodes.</p>
-<img alt="../../../../_images/global_specific_remap.png" src="../../../../_images/global_specific_remap.png" />
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller_manager</span><span class="o">::</span><span class="n">get_cm_node_options</span><span class="p">();</span>
-<span class="w">  </span><span class="n">options</span><span class="p">.</span><span class="n">arguments</span><span class="p">({</span>
-<span class="w">    </span><span class="s">&quot;--ros-args&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s">&quot;--remap&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;_target_node_name:__node:=dst_node_name&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s">&quot;--log-level&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;info&quot;</span><span class="p">});</span>
-
-<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">cm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">controller_manager</span><span class="o">::</span><span class="n">ControllerManager</span><span class="o">&gt;</span><span class="p">(</span>
-<span class="w">    </span><span class="n">executor</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;_target_node_name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;some_optional_namespace&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">options</span><span class="p">);</span>
-</pre></div>
-</div>
-</section>
-<section id="launching-controller-manager-with-ros2-control-node">
-<h2>Launching controller_manager with ros2_control_node<a class="headerlink" href="#launching-controller-manager-with-ros2-control-node" title="Link to this heading"></a></h2>
-<p>The controller_manager can be launched with the ros2_control_node executable. The following example shows how to launch the controller_manager with the ros2_control_node executable:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">control_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
-    <span class="n">package</span><span class="o">=</span><span class="s2">&quot;controller_manager&quot;</span><span class="p">,</span>
-    <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;ros2_control_node&quot;</span><span class="p">,</span>
-    <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">robot_controllers</span><span class="p">],</span>
-    <span class="n">output</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<p>The ros2_control_node executable uses the following parameters from the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> node:</p>
-<dl class="simple">
-<dt>lock_memory (optional; bool; default: false for a non-realtime kernel, true for a realtime kernel)</dt><dd><p>Locks the memory of the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> node at startup to physical RAM in order to avoid page faults
-and to prevent the node from being swapped out to disk.
-Find more information about the setup for memory locking in the following link : <a class="reference external" href="https://access.redhat.com/solutions/61334">How to set ulimit values</a>
-The following command can be used to set the memory locking limit temporarily : <code class="docutils literal notranslate"><span class="pre">ulimit</span> <span class="pre">-l</span> <span class="pre">unlimited</span></code>.</p>
-</dd>
-<dt>cpu_affinity (optional; int (or) int_array;)</dt><dd><p>Sets the CPU affinity of the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> node to the specified CPU core.
-If it is an integer, the node’s affinity will be set to the specified CPU core.
-If it is an array of integers, the node’s affinity will be set to the specified set of CPU cores.</p>
-</dd>
-<dt>thread_priority (optional; int; default: 50)</dt><dd><p>Sets the thread priority of the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> node to the specified value. The value must be between 0 and 99.</p>
-</dd>
-<dt>use_sim_time (optional; bool; default: false)</dt><dd><p>Enables the use of simulation time in the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> node.</p>
-</dd>
-<dt>overruns.manage (optional; bool; default: true)</dt><dd><p>Enables or disables the handling of overruns in the real-time loop of the <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> node.
-If set to true, the controller manager will detect overruns caused by system time changes or longer execution times of the controllers and hardware components.
-If an overrun is detected, the controller manager will print a warning message to the console.
-When used with <code class="docutils literal notranslate"><span class="pre">use_sim_time</span></code> set to true, this parameter is ignored and the overrun handling is disabled.</p>
-</dd>
-<dt>hardware_synchronization.expect_blocking_read_write (optional; bool; default: false)</dt><dd><p>If true, the controller manager will not sleep actively. Use this, when there is a hardware
-interface running that will block during its read or write operation until receiving new data
-from the hardware.</p>
-</dd>
-<dt>hardware_synchronization.minimum_cycle_time (optional; double; default: 0.0001)</dt><dd><p>The minimum sleep time in seconds for the control node’s real-time loop. This is used to
-prevent the control node from running too fast, which can cause high CPU
-usage if the hardware doesn’t block in read / write. This is only used when
-<code class="docutils literal notranslate"><span class="pre">expect_blocking_read_write</span></code> is set to true.
-If the cycle is shorter than this, it will sleep for this period and print a warning.</p>
-</dd>
-</dl>
-</section>
-<section id="concepts">
-<h2>Concepts<a class="headerlink" href="#concepts" title="Link to this heading"></a></h2>
+<section id="operations">
+<h2>Operations<a class="headerlink" href="#operations" title="Link to this heading"></a></h2>
 <section id="restarting-all-controllers">
 <h3>Restarting all controllers<a class="headerlink" href="#restarting-all-controllers" title="Link to this heading"></a></h3>
 <p>The simplest way to restart all controllers is by using <code class="docutils literal notranslate"><span class="pre">switch_controllers</span></code> services or CLI and adding all controllers to <code class="docutils literal notranslate"><span class="pre">start</span></code> and <code class="docutils literal notranslate"><span class="pre">stop</span></code> lists.
@@ -926,49 +939,6 @@ Note that not all controllers have to be restarted, e.g., broadcasters.</p>
 <p>If the hardware during it’s <code class="docutils literal notranslate"><span class="pre">read</span></code> or <code class="docutils literal notranslate"><span class="pre">write</span></code> method returns <code class="docutils literal notranslate"><span class="pre">return_type::ERROR</span></code>, the controller manager will stop all controllers that are using the hardware’s command and state interfaces.
 Likewise, if a controller returns <code class="docutils literal notranslate"><span class="pre">return_type::ERROR</span></code> from its <code class="docutils literal notranslate"><span class="pre">update</span></code> method, the controller manager will deactivate the respective controller (or) the entire controller chain it is part of, then the controller manager will try to start any available fallback controllers.</p>
 </section>
-<section id="factors-that-affect-determinism">
-<h3>Factors that affect Determinism<a class="headerlink" href="#factors-that-affect-determinism" title="Link to this heading"></a></h3>
-<p>When run under the conditions determined in the above section, the determinism is assured up to the limitations of the hardware and the real-time kernel. However, there are some situations that can affect determinism:</p>
-<ul class="simple">
-<li><p>When a controller fails to activate in the realtime loop, the controller_manager will call the methods <code class="docutils literal notranslate"><span class="pre">prepare_command_mode_switch</span></code> and <code class="docutils literal notranslate"><span class="pre">perform_command_mode_switch</span></code> to stop the started interfaces. These calls can cause jitter in the main control loop.</p></li>
-<li><p>If a controller does not complete a successful update cycle in the realtime loop (for example, returns <code class="docutils literal notranslate"><span class="pre">return_type::ERROR</span></code>), the controller manager will deactivate that controller (or) the entire controller chain it is part of. It will then invoke <code class="docutils literal notranslate"><span class="pre">prepare_command_mode_switch</span></code> and <code class="docutils literal notranslate"><span class="pre">perform_command_mode_switch</span></code> to stop the interfaces used by the affected controller(s). These actions can introduce jitter into the main control loop.</p></li>
-</ul>
-</section>
-<section id="support-for-asynchronous-updates">
-<h3>Support for Asynchronous Updates<a class="headerlink" href="#support-for-asynchronous-updates" title="Link to this heading"></a></h3>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="running_controllers_asynchronously.html">Asynchronous Controllers</a></li>
-</ul>
-</div>
-<p>For details on running controllers asynchronously, see <a class="reference internal" href="running_controllers_asynchronously.html#running-controllers-asynchronously"><span class="std std-ref">Running Controllers Asynchronously</span></a>.</p>
-</section>
-</section>
-<section id="monitoring-and-tuning">
-<h2>Monitoring and Tuning<a class="headerlink" href="#monitoring-and-tuning" title="Link to this heading"></a></h2>
-<p>ros2_control <code class="docutils literal notranslate"><span class="pre">controller_interface</span></code> has a <code class="docutils literal notranslate"><span class="pre">ControllerUpdateStats</span></code> structure which can be used to monitor the controller update rate and the missed update cycles. The data is published to the <code class="docutils literal notranslate"><span class="pre">/diagnostics</span></code> and also <code class="docutils literal notranslate"><span class="pre">/controller_manager/introspection_data/*</span></code> topics. This can be used to fine tune the controller update rate.</p>
-<section id="different-clocks-used-by-controller-manager">
-<h3>Different Clocks used by Controller Manager<a class="headerlink" href="#different-clocks-used-by-controller-manager" title="Link to this heading"></a></h3>
-<p>The controller manager internally uses the following two different clocks for a non-simulation setup:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">RCL_ROS_TIME</span></code>: This clock is used mostly in the non-realtime loops.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">RCL_STEADY_TIME</span></code>: This clock is used mostly in the realtime loops for the <code class="docutils literal notranslate"><span class="pre">read</span></code>, <code class="docutils literal notranslate"><span class="pre">update</span></code>, and <code class="docutils literal notranslate"><span class="pre">write</span></code> loops. However, when the controller manager is used in a simulation environment, the <code class="docutils literal notranslate"><span class="pre">RCL_ROS_TIME</span></code> clock is used for triggering the <code class="docutils literal notranslate"><span class="pre">read</span></code>, <code class="docutils literal notranslate"><span class="pre">update</span></code>, and <code class="docutils literal notranslate"><span class="pre">write</span></code> loops.</p></li>
-</ul>
-<p>The <code class="docutils literal notranslate"><span class="pre">time</span></code> argument in the <code class="docutils literal notranslate"><span class="pre">read</span></code> and <code class="docutils literal notranslate"><span class="pre">write</span></code> methods of the hardware components is of type <code class="docutils literal notranslate"><span class="pre">RCL_STEADY_TIME</span></code>, as most of the hardware expects the time to be monotonic and not affected by the system time changes. However, the <code class="docutils literal notranslate"><span class="pre">time</span></code> argument in the <code class="docutils literal notranslate"><span class="pre">update</span></code> method of the controller is of type <code class="docutils literal notranslate"><span class="pre">RCL_ROS_TIME</span></code> as the controller is the one that interacts with other nodes or topics to receive the commands or publish the state. This <code class="docutils literal notranslate"><span class="pre">time</span></code> argument can be used by the controllers to validate the received commands or to publish the state at the correct timestamp.
-The <code class="docutils literal notranslate"><span class="pre">period</span></code> argument in the <code class="docutils literal notranslate"><span class="pre">read</span></code>, <code class="docutils literal notranslate"><span class="pre">update</span></code> and <code class="docutils literal notranslate"><span class="pre">write</span></code> methods is calculated using the trigger clock of type <code class="docutils literal notranslate"><span class="pre">RCL_STEADY_TIME</span></code> so it is always monotonic.</p>
-<p>The reason behind using different clocks is to avoid the issues related to the affect of system time changes in the realtime loops. The <code class="docutils literal notranslate"><span class="pre">ros2_control_node</span></code> now also detects the overruns caused by the system time changes and longer execution times of the controllers and hardware components. The controller manager will print a warning message if the controller or hardware component misses the update cycle due to the system time changes or longer execution times.</p>
-</section>
-<section id="color-output-handling">
-<h3>Color Output Handling<a class="headerlink" href="#color-output-handling" title="Link to this heading"></a></h3>
-<p>The helper scripts (<code class="docutils literal notranslate"><span class="pre">spawner</span></code> and <code class="docutils literal notranslate"><span class="pre">hardware_spawner</span></code>) now use an environment-aware <code class="docutils literal notranslate"><span class="pre">bcolors</span></code> class.
-The color output automatically adapts to the environment:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">RCUTILS_COLORIZED_OUTPUT=0</span></code> -&gt; disables color output</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">RCUTILS_COLORIZED_OUTPUT=1</span></code> -&gt; forces color output</p></li>
-<li><p>Unset -&gt; automatically detects TTY and enables color only in interactive
-terminals</p></li>
-</ul>
-</section>
 </section>
 </section>
 
@@ -978,7 +948,7 @@ terminals</p></li>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../../doc/index.html" class="btn btn-neutral float-left" title="ros2_control" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="running_controllers_asynchronously.html" class="btn btn-neutral float-right" title="Running Controllers Asynchronously" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../../doc/concepts.html" class="btn btn-neutral float-right" title="Concepts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

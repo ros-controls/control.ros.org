@@ -13,3 +13,16 @@ inverted_pendulum
 -----------------
 
 The zenbedded Zephyr modules will communicate to ``zenbedded_hardware_interface`` via Zenoh, where a controller from ``ros2_control`` balances the pendulum.
+
+rcl_cpp_test
+------------
+
+A C++ demo that exercises the ``zenbedded_rcl`` client together with the
+Zephyr network stack and Zenoh publish/subscribe.
+
+zenbedded_test_node
+-------------------
+
+Validates CDR ``JointState`` / ``JointCommand`` payload extraction using the
+``zenbedded_transport`` serialization helpers. Buildable for ``native_sim``
+and ``esp32s3_devkitc/esp32s3/procpu``; run via ``twister``.

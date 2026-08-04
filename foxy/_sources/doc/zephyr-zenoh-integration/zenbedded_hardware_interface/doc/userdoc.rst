@@ -9,6 +9,21 @@ A ``ros2_control`` ``SystemInterface`` implementation that communicates with mic
 Reads sensor state from a Zenoh subscriber and writes joint commands to a Zenoh publisher.
 
 
+Setup
+-----
+
+Build the workspace from source with ``colcon``:
+
+.. code:: bash
+
+   mkdir -p ~/zephyr_zenoh_ws/src
+   cd ~/zephyr_zenoh_ws/src
+   git clone git@github.com:ros-controls/zephyr-zenoh-integration.git
+   cd ~/zephyr_zenoh_ws
+   rosdep install --from-paths src --ignore-src -r -y
+   colcon build
+
+
 Features
 --------
 
