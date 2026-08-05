@@ -428,10 +428,17 @@ ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> 
 </pre></div>
 </div>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">~/reset_world</span></code> (<code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control_msgs/srv/ResetWorld</span></code>)</dt><dd><p>Resets the simulation state.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">~/reset_world</span></code> (<code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control_msgs/srv/ResetWorld</span></code>)</dt><dd><p>Resets the simulation state, optionally applying per-joint state overrides on top of the restored state.</p>
 <ul class="simple">
 <li><p>If the optional <code class="docutils literal notranslate"><span class="pre">keyframe</span></code> string field is empty, the simulation is restored to the state captured at startup (initial joint positions, velocities, and control values).</p></li>
 <li><p>If a <code class="docutils literal notranslate"><span class="pre">keyframe</span></code> name is provided, that named keyframe from the MJCF is applied instead.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">state_overrides</span></code> (<code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control_msgs/SimulationState</span></code>): optional overrides for single-DOF
+(hinge/slide) and free joint names, keyed by MuJoCo joint name.</p></li>
+<li><p>For single-DOF joint states: <code class="docutils literal notranslate"><span class="pre">position</span></code> and <code class="docutils literal notranslate"><span class="pre">velocity</span></code> must each be empty or the same length as <code class="docutils literal notranslate"><span class="pre">name</span></code>; an empty array leaves that field at its reset value.
+<code class="docutils literal notranslate"><span class="pre">effort</span></code> is not supported and must be empty.</p></li>
+<li><p>For free joint states, entries behave exactly like the <code class="docutils literal notranslate"><span class="pre">~/set_free_joint_state</span></code> service (see below).
+However, except that any <code class="docutils literal notranslate"><span class="pre">pose</span></code>/<code class="docutils literal notranslate"><span class="pre">twist</span></code> <code class="docutils literal notranslate"><span class="pre">frame_id</span></code> is resolved against body poses <em>after</em> the reset is applied.
+As such, an object can be placed relative to where another body ends up, not where it was before the reset.</p></li>
 <li><p>Returns <code class="docutils literal notranslate"><span class="pre">success</span></code> and a human-readable <code class="docutils literal notranslate"><span class="pre">message</span></code>.</p></li>
 </ul>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reset to startup state</span>
@@ -439,12 +446,26 @@ ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> 
 
 <span class="c1"># Reset to a named MJCF keyframe</span>
 ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/reset_world<span class="w"> </span>mujoco_ros2_control_msgs/srv/ResetWorld<span class="w"> </span><span class="s2">&quot;{keyframe: &#39;home&#39;}&quot;</span>
+
+<span class="c1"># Reset to a keyframe, but with the cabinet door open and &quot;box_1&quot; placed on the table</span>
+ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/reset_world<span class="w"> </span>mujoco_ros2_control_msgs/srv/ResetWorld<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;{keyframe: &#39;home&#39;,</span>
+<span class="s2">    state_overrides: {</span>
+<span class="s2">      joint_states: {name: [&#39;door_hinge&#39;], position: [1.57]},</span>
+<span class="s2">      free_joint_states: [</span>
+<span class="s2">        {name: &#39;box_1&#39;, pose: {header: {frame_id: &#39;table&#39;}, pose: {position: {z: 0.4}}}}</span>
+<span class="s2">      ]</span>
+<span class="s2">    }</span>
+<span class="s2">  }&quot;</span>
 </pre></div>
 </div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>If controllers are active during the service call, the robot may reset to the initial state and then immediately
-snap back to its previous commanded position. Deactivate any active joint controllers before calling this service.</p>
+snap back to its previous commanded position. Deactivate any active joint controllers before calling this service.
+This applies equally to <code class="docutils literal notranslate"><span class="pre">overrides.joint_states</span></code> targeting controlled joints: the hardware interface re-syncs
+its command interfaces to the overridden positions as part of the reset, but an active controller may still
+command the joints elsewhere on its next update.</p>
 </div>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">~/step_simulation</span></code> (<code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control_msgs/srv/StepSimulation</span></code>)</dt><dd><p>Advances the paused simulation by an exact number of physics steps and blocks until all steps have completed.</p>

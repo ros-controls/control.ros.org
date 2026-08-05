@@ -230,6 +230,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a03114d3a92ff1aeba535723a621a5de8" id="r_a03114d3a92ff1aeba535723a621a5de8"><td class="memItemLeft" align="right" valign="top">std::vector&lt; hardware_interface::StateInterface::SharedPtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classchained__filter__controller_1_1ChainedFilter.html#a03114d3a92ff1aeba535723a621a5de8">on_export_state_interfaces_list</a> () override</td></tr>
 <tr class="memdesc:a03114d3a92ff1aeba535723a621a5de8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual method implemented by chainable controllers to export read-only interfaces.  <br /></td></tr>
 <tr class="separator:a03114d3a92ff1aeba535723a621a5de8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6ca233637c3220a35dfc0abd31d80aa" id="r_af6ca233637c3220a35dfc0abd31d80aa"><td class="memItemLeft" align="right" valign="top">std::vector&lt; hardware_interface::CommandInterface::SharedPtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classchained__filter__controller_1_1ChainedFilter.html#af6ca233637c3220a35dfc0abd31d80aa">on_export_reference_interfaces_list</a> () override</td></tr>
+<tr class="memdesc:af6ca233637c3220a35dfc0abd31d80aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual method that each chainable controller should implement to export its read/write chainable interfaces.  <br /></td></tr>
+<tr class="separator:af6ca233637c3220a35dfc0abd31d80aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e427bcbe48448f42851a12f78531bce" id="r_a3e427bcbe48448f42851a12f78531bce"><td class="memItemLeft" align="right" valign="top">controller_interface::return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classchained__filter__controller_1_1ChainedFilter.html#a3e427bcbe48448f42851a12f78531bce">update_reference_from_subscribers</a> (const rclcpp::Time &amp;time, const rclcpp::Duration &amp;period) override</td></tr>
 <tr class="memdesc:a3e427bcbe48448f42851a12f78531bce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update reference from input topics when not in chained mode.  <br /></td></tr>
 <tr class="separator:a3e427bcbe48448f42851a12f78531bce"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -240,9 +243,6 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a427fc28e518153be4a5e2d1b37cab953 inherit pro_methods_classcontroller__interface_1_1ChainableControllerInterface" id="r_a427fc28e518153be4a5e2d1b37cab953"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="classhardware__interface_1_1CommandInterface.html">hardware_interface::CommandInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#a427fc28e518153be4a5e2d1b37cab953">on_export_reference_interfaces</a> ()</td></tr>
 <tr class="memdesc:a427fc28e518153be4a5e2d1b37cab953 inherit pro_methods_classcontroller__interface_1_1ChainableControllerInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual method implemented by chainable controllers to export read/write interfaces.  <br /></td></tr>
 <tr class="separator:a427fc28e518153be4a5e2d1b37cab953 inherit pro_methods_classcontroller__interface_1_1ChainableControllerInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab6fb5f0cb024391b1deb93f594d49cb inherit pro_methods_classcontroller__interface_1_1ChainableControllerInterface" id="r_aab6fb5f0cb024391b1deb93f594d49cb"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; hardware_interface::CommandInterface::SharedPtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#aab6fb5f0cb024391b1deb93f594d49cb">on_export_reference_interfaces_list</a> ()</td></tr>
-<tr class="memdesc:aab6fb5f0cb024391b1deb93f594d49cb inherit pro_methods_classcontroller__interface_1_1ChainableControllerInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual method that each chainable controller should implement to export its read/write chainable interfaces.  <br /></td></tr>
-<tr class="separator:aab6fb5f0cb024391b1deb93f594d49cb inherit pro_methods_classcontroller__interface_1_1ChainableControllerInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4817c40f074ea6e127c83e6137752e14 inherit pro_methods_classcontroller__interface_1_1ChainableControllerInterface" id="r_a4817c40f074ea6e127c83e6137752e14"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#a4817c40f074ea6e127c83e6137752e14">on_set_chained_mode</a> (bool chained_mode)</td></tr>
 <tr class="memdesc:a4817c40f074ea6e127c83e6137752e14 inherit pro_methods_classcontroller__interface_1_1ChainableControllerInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual method that each chainable controller should implement to switch chained mode.  <br /></td></tr>
 <tr class="separator:a4817c40f074ea6e127c83e6137752e14 inherit pro_methods_classcontroller__interface_1_1ChainableControllerInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -325,6 +325,37 @@ pal_statistics::RegistrationsRAII&#160;</td><td class="memItemRight" valign="bot
 <dl class="section return"><dt>Returns</dt><dd>configuration of command interfaces. </dd></dl>
 
 <p>Implements <a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a04d5266fe0945d54b5ee5fb360213830">controller_interface::ControllerInterfaceBase</a>.</p>
+
+</div>
+</div>
+<a id="af6ca233637c3220a35dfc0abd31d80aa" name="af6ca233637c3220a35dfc0abd31d80aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6ca233637c3220a35dfc0abd31d80aa">&#9670;&#160;</a></span>on_export_reference_interfaces_list()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; hardware_interface::CommandInterface::SharedPtr &gt; chained_filter_controller::ChainedFilter::on_export_reference_interfaces_list </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Virtual method that each chainable controller should implement to export its read/write chainable interfaces. </p>
+<p>Each chainable controller implements this methods where all input (command) interfaces are exported. The method has the same meaning as <code>on_export_command_interfaces</code> method from <a class="el" href="classhardware__interface_1_1SystemInterface.html" title="Virtual Class to implement when integrating a complex system into ros2_control.">hardware_interface::SystemInterface</a> or <a class="el" href="classhardware__interface_1_1ActuatorInterface.html" title="Virtual Class to implement when integrating a 1 DoF actuator into ros2_control.">hardware_interface::ActuatorInterface</a>.</p>
+<dl class="section return"><dt>Returns</dt><dd>list of CommandInterfaces that other controller can use as their outputs. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classcontroller__interface_1_1ChainableControllerInterface.html#aab6fb5f0cb024391b1deb93f594d49cb">controller_interface::ChainableControllerInterface</a>.</p>
 
 </div>
 </div>

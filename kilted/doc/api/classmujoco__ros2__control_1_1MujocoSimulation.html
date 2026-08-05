@@ -141,9 +141,9 @@ mjModel *&#160;</td><td class="memItemRight" valign="bottom"><b>model</b> ()</td
 <tr class="memitem:aaf4b131af2b06a84290570f7065257b7" id="r_aaf4b131af2b06a84290570f7065257b7"><td class="memItemLeft" align="right" valign="top">mjData *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control_1_1MujocoSimulation.html#aaf4b131af2b06a84290570f7065257b7">data</a> ()</td></tr>
 <tr class="memdesc:aaf4b131af2b06a84290570f7065257b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accessor for the raw mujoco simulation data.  <br /></td></tr>
 <tr class="separator:aaf4b131af2b06a84290570f7065257b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14ea07246e3eb5e7da387120a31a0ce8" id="r_a14ea07246e3eb5e7da387120a31a0ce8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a14ea07246e3eb5e7da387120a31a0ce8">reset_world_state</a> (bool fill_initial_state)</td></tr>
-<tr class="memdesc:a14ea07246e3eb5e7da387120a31a0ce8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset simulation state (qpos/qvel/ctrl/sensors/forces) to the captured initial state.  <br /></td></tr>
-<tr class="separator:a14ea07246e3eb5e7da387120a31a0ce8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bf9700e262875dec7cf44cac98fffa0" id="r_a7bf9700e262875dec7cf44cac98fffa0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a7bf9700e262875dec7cf44cac98fffa0">reset_world_state</a> (bool fill_initial_state, const mujoco_ros2_control_msgs::msg::SimulationState &amp;state_overrides)</td></tr>
+<tr class="memdesc:a7bf9700e262875dec7cf44cac98fffa0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset simulation state (qpos/qvel/ctrl/sensors/forces) to the captured initial state, optionally applying joint state overrides on top of the restored state.  <br /></td></tr>
+<tr class="separator:a7bf9700e262875dec7cf44cac98fffa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01895aa4d4a8af2671ba50a3ebdd80f2" id="r_a01895aa4d4a8af2671ba50a3ebdd80f2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a01895aa4d4a8af2671ba50a3ebdd80f2">set_free_joint_states</a> (const std::vector&lt; mujoco_ros2_control_msgs::msg::FreeJointState &gt; &amp;free_joints, std::string &amp;error_message)</td></tr>
 <tr class="memdesc:a01895aa4d4a8af2671ba50a3ebdd80f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the pose and velocity of one or more free-joint objects, identified by body name.  <br /></td></tr>
 <tr class="separator:a01895aa4d4a8af2671ba50a3ebdd80f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -453,8 +453,8 @@ std::recursive_mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><b
 
 </div>
 </div>
-<a id="a14ea07246e3eb5e7da387120a31a0ce8" name="a14ea07246e3eb5e7da387120a31a0ce8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a14ea07246e3eb5e7da387120a31a0ce8">&#9670;&#160;</a></span>reset_world_state()</h2>
+<a id="a7bf9700e262875dec7cf44cac98fffa0" name="a7bf9700e262875dec7cf44cac98fffa0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bf9700e262875dec7cf44cac98fffa0">&#9670;&#160;</a></span>reset_world_state()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -463,13 +463,24 @@ std::recursive_mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><b
           <td class="memname">void mujoco_ros2_control::MujocoSimulation::reset_world_state </td>
           <td>(</td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>fill_initial_state</em></td><td>)</td>
+          <td class="paramname"><em>fill_initial_state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const mujoco_ros2_control_msgs::msg::SimulationState &amp;&#160;</td>
+          <td class="paramname"><em>state_overrides</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Reset simulation state (qpos/qvel/ctrl/sensors/forces) to the captured initial state. </p>
+<p>Reset simulation state (qpos/qvel/ctrl/sensors/forces) to the captured initial state, optionally applying joint state overrides on top of the restored state. </p>
+<p>Overrides are assumed to have been validated by the caller, so they cannot fail here (see <code>validate_joint_state_overrides</code> / <code>validate_free_joint_states</code>).</p>
 <dl class="section note"><dt>Note</dt><dd>Caller must hold the sim mutex. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>This method assumes sim_mutex_ is already held by the caller</dd></dl>
 
@@ -502,7 +513,7 @@ std::recursive_mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><b
 </div><div class="memdoc">
 
 <p>Sets the pose and velocity of one or more free-joint objects, identified by body name. </p>
-<p>Applied atomically: every entry is resolved before anything is written, so a single invalid entry leaves the sim state unchanged. Duplicate body names are applied in order, so the last one wins. See <code>FreeJointState.msg</code> for per-entry fields.</p>
+<p>Applied atomically: every entry is validated before anything is written, so a single invalid entry leaves the sim state unchanged. Duplicate body names are applied in order, so the last one wins. See <code>FreeJointState.msg</code> for per-entry fields.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">error_message</td><td>Set to a human-readable description (identifying the offending entry) if this returns false. </td></tr>
