@@ -133,14 +133,14 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><p>Plugin that applies one or more external wrenches (force + torque) to named MuJoCo bodies for configurable durations. </p>
 <p>Exposes the ROS 2 service ~/apply_wrench of type mujoco_ros2_control_msgs/srv/ApplyExternalWrench.</p>
 <p>The service accepts an array of ExternalWrench messages so that multiple wrenches can be submitted atomically in a single call. All wrenches are validated before any are applied: if any body name is unknown the entire request is rejected.</p>
-<h2><a class="anchor" id="autotoc_md3"></a>
+<h2><a class="anchor" id="autotoc_md4"></a>
 Each ExternalWrench fields</h2>
 <p>wrench.header.frame_id - Name of the MuJoCo body (must match MJCF body name) wrench.wrench.force - Linear force [N] expressed in the <b>body (link) frame</b> wrench.wrench.torque - Angular moment [N·m] expressed in the <b>body (link) frame</b> application_point - Point of force application in the <b>body (link) frame</b> (relative to the link frame origin, metres). A zero vector applies at the link frame origin. duration - How long the wrench remains active. A zero duration applies it for one simulation step. ramp_down_duration - Optional linear ramp-down window at the end of duration.</p>
-<h2><a class="anchor" id="autotoc_md4"></a>
+<h2><a class="anchor" id="autotoc_md5"></a>
 Service response fields</h2>
 <p>success - false if any body name was not found in the model. message - human-readable status / error description.</p>
 <p>Multiple concurrent wrenches on different (or the same) bodies are supported. Each wrench is independent and expires at its own end-time.</p>
-<h2><a class="anchor" id="autotoc_md5"></a>
+<h2><a class="anchor" id="autotoc_md6"></a>
 Implementation notes</h2>
 <p>Forces are written into data-&gt;xfrc_applied (Cartesian 6D force/torque per body, world frame, applied at the body's inertial CoM xipos). MuJoCo reads this array during mj_step and both applies the force AND renders it as an arrow in the native viewer when "Perturb forces" is enabled.</p>
 <p>The service input is expressed in the body's local frame at an arbitrary application point. The plugin converts this to the world-frame wrench at xipos using the standard wrench-transport formula:</p>
@@ -305,7 +305,9 @@ Implementation notes</h2>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>This method will be called at the end of the <a class="el" href="namespacemujoco__ros2__control.html">mujoco_ros2_control</a> read loop, before the update loop of controllers and the write loop. This means that changes to the data here will be visible to controllers and will affect the next simulation step. </dd>
 <dd>
-This method will be called in a real-time thread, so it should avoid blocking operations and should be efficient. </dd></dl>
+This method will be called in a real-time thread, so it should avoid blocking operations and should be efficient. </dd>
+<dd>
+data-&gt;qvel is NaN-filled before every plugin's <a class="el" href="classmujoco__ros2__control__plugins_1_1ExternalWrenchPlugin.html#af7b72546aee77861b16dd739f8c11dc7" title="Update the plugin (called every simulation step)">update()</a> runs this cycle. Write a finite value into any entry to request a hard velocity override on that DOF &ndash; it bypasses the normal mass/contact dynamics for that DOF this step, overwriting mj_data_-&gt;qvel directly right before the next mj_step. Leave an entry NaN to keep its normal physics-driven value untouched. This is the only channel a plugin has to influence qvel: unlike ctrl/qfrc_applied/xfrc_applied, data-&gt;qvel here cannot be read for the body's actual velocity, since it is not restored to a real value until after every plugin's <a class="el" href="classmujoco__ros2__control__plugins_1_1ExternalWrenchPlugin.html#af7b72546aee77861b16dd739f8c11dc7" title="Update the plugin (called every simulation step)">update()</a> has run this cycle. </dd></dl>
 
 <p>Implements <a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a02a4b975dc578f84137eb8eede18dc81">mujoco_ros2_control_plugins::MuJoCoROS2ControlPluginBase</a>.</p>
 

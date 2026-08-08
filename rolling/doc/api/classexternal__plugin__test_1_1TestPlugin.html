@@ -250,7 +250,9 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>This method will be called at the end of the <a class="el" href="namespacemujoco__ros2__control.html">mujoco_ros2_control</a> read loop, before the update loop of controllers and the write loop. This means that changes to the data here will be visible to controllers and will affect the next simulation step. </dd>
 <dd>
-This method will be called in a real-time thread, so it should avoid blocking operations and should be efficient. </dd></dl>
+This method will be called in a real-time thread, so it should avoid blocking operations and should be efficient. </dd>
+<dd>
+data-&gt;qvel is NaN-filled before every plugin's <a class="el" href="classexternal__plugin__test_1_1TestPlugin.html#a62668444cbe93e06e76bd920e30369ee" title="Update the plugin (called every simulation step)">update()</a> runs this cycle. Write a finite value into any entry to request a hard velocity override on that DOF &ndash; it bypasses the normal mass/contact dynamics for that DOF this step, overwriting mj_data_-&gt;qvel directly right before the next mj_step. Leave an entry NaN to keep its normal physics-driven value untouched. This is the only channel a plugin has to influence qvel: unlike ctrl/qfrc_applied/xfrc_applied, data-&gt;qvel here cannot be read for the body's actual velocity, since it is not restored to a real value until after every plugin's <a class="el" href="classexternal__plugin__test_1_1TestPlugin.html#a62668444cbe93e06e76bd920e30369ee" title="Update the plugin (called every simulation step)">update()</a> has run this cycle. </dd></dl>
 
 <p>Implements <a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a02a4b975dc578f84137eb8eede18dc81">mujoco_ros2_control_plugins::MuJoCoROS2ControlPluginBase</a>.</p>
 

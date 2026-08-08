@@ -258,9 +258,8 @@ Also, you should see changing states in the terminal where launch file is starte
 <span class="o">[</span>ros2_control_node-1<span class="o">]</span><span class="w">   </span><span class="m">0</span>.50<span class="w"> </span><span class="k">for</span><span class="w"> </span>joint<span class="w"> </span><span class="s1">&#39;joint2&#39;</span>
 </pre></div>
 </div>
-<p>If you echo the <code class="docutils literal notranslate"><span class="pre">/joint_states</span></code> or <code class="docutils literal notranslate"><span class="pre">/dynamic_joint_states</span></code> topics you should now get similar values, namely the simulated states of the robot</p>
+<p>If you echo the <code class="docutils literal notranslate"><span class="pre">/joint_states</span></code> topic you should now get similar values, namely the simulated states of the robot</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/joint_states
-ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/dynamic_joint_states
 </pre></div>
 </div>
 <p>This clearly shows that the controller chaining is functional, as the commands sent to the <code class="docutils literal notranslate"><span class="pre">forward_position_controller</span></code> are passed through properly and then it is reflected in the hardware interfaces of the <em>RRBot</em>.</p>

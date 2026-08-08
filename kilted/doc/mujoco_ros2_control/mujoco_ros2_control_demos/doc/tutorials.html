@@ -79,6 +79,7 @@
 <li class="toctree-l6"><a class="reference internal" href="#tutorial-2-mjcf-generation-at-runtime">Tutorial 2: MJCF Generation at Runtime</a></li>
 <li class="toctree-l6"><a class="reference internal" href="#tutorial-3-pid-control">Tutorial 3: PID Control</a></li>
 <li class="toctree-l6"><a class="reference internal" href="#tutorial-4-transmissions">Tutorial 4: Transmissions</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#tutorial-5-base-velocity-plugin">Tutorial 5: Base Velocity Plugin</a></li>
 <li class="toctree-l6"><a class="reference internal" href="#combined-demo">Combined Demo</a></li>
 <li class="toctree-l6"><a class="reference internal" href="#controlling-the-robot">Controlling the Robot</a></li>
 <li class="toctree-l6"><a class="reference internal" href="#package-structure">Package Structure</a></li>
@@ -196,6 +197,44 @@ parameters, including <code class="docutils literal notranslate"><span class="pr
 <p><strong>Key concepts:</strong> <code class="docutils literal notranslate"><span class="pre">DifferentialTransmission</span></code> interface, mechanical reduction, actuator-to-joint mapping.</p>
 <p><strong>Resources:</strong> <code class="docutils literal notranslate"><span class="pre">demo_resources/robot/test_robot.urdf</span></code> with <code class="docutils literal notranslate"><span class="pre">use_transmissions:=true</span></code></p>
 </section>
+<section id="tutorial-5-base-velocity-plugin">
+<h2>Tutorial 5: Base Velocity Plugin<a class="headerlink" href="#tutorial-5-base-velocity-plugin" title="Link to this heading"></a></h2>
+<p>Demonstrates driving a mobile/floating-base robot with <code class="docutils literal notranslate"><span class="pre">BaseVelocityPlugin</span></code>: a free-floating,
+wheeled chassis (MJCF <code class="docutils literal notranslate"><span class="pre">&lt;freejoint&gt;</span></code>) carrying a 1-DOF arm, driven from a <code class="docutils literal notranslate"><span class="pre">cmd_vel</span></code> topic via a
+hard velocity override applied directly to the chassis’s free-joint <code class="docutils literal notranslate"><span class="pre">qvel</span></code> every cycle. The
+wheels and ground have zero friction, which is now largely cosmetic – propulsion no longer goes
+through wheel-ground contact at all, so it does not depend on friction either way.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Because the override is kinematic, it outranks the contact solver: the wall in the scene will
+<strong>not</strong> stop the base – it will push through or climb it rather than being stopped by contact,
+since the commanded velocity is reasserted every cycle regardless of collisions. This is the
+trade-off for exact, disturbance-immune velocity tracking; see the <code class="docutils literal notranslate"><span class="pre">BaseVelocityPlugin</span></code>
+documentation for details.</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>mujoco_ros2_control_demos<span class="w"> </span>05_base_velocity_plugin.launch.py
+
+<span class="c1"># In another terminal, drive the base:</span>
+ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/cmd_vel<span class="w"> </span>geometry_msgs/msg/Twist<span class="w"> </span><span class="s2">&quot;{linear: {x: 0.5}, angular: {z: 0.2}}&quot;</span><span class="w"> </span>--rate<span class="w"> </span><span class="m">10</span>
+</pre></div>
+</div>
+<p><strong>Disturbance immunity</strong>: swinging the mounted arm creates a reaction force/torque on the base
+through the joint, unrelated to ground friction, since it acts directly between the two bodies.
+Because <code class="docutils literal notranslate"><span class="pre">BaseVelocityPlugin</span></code> overrides the base’s driven DOFs directly rather than servoing
+against them, this reaction has <em>no</em> effect on the base’s velocity at all – not approximately,
+exactly none – so with no <code class="docutils literal notranslate"><span class="pre">cmd_vel</span></code> active the base stays exactly in place while the arm moves.
+The arm’s joint is range-limited to a back-and-forth sweep rather than a continuous spin:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/arm_position_controller/commands<span class="w"> </span>std_msgs/msg/Float64MultiArray<span class="w"> </span><span class="s2">&quot;data: [0.7]&quot;</span>
+ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/arm_position_controller/commands<span class="w"> </span>std_msgs/msg/Float64MultiArray<span class="w"> </span><span class="s2">&quot;data: [-0.7]&quot;</span>
+</pre></div>
+</div>
+<p><strong>Key concepts:</strong> <code class="docutils literal notranslate"><span class="pre">BaseVelocityPlugin</span></code> free-joint velocity override, driving a MJCF
+<code class="docutils literal notranslate"><span class="pre">&lt;freejoint&gt;</span></code> body, immunity to reaction forces from a moving mounted joint, floating-base
+odometry (<code class="docutils literal notranslate"><span class="pre">odom_free_joint_name</span></code>).</p>
+<p><strong>Resources:</strong> <code class="docutils literal notranslate"><span class="pre">demo_resources/scenes/scene_mobile_base.xml</span></code>, <code class="docutils literal notranslate"><span class="pre">demo_resources/mobile_base/mobile_base.xml</span></code>,
+<code class="docutils literal notranslate"><span class="pre">demo_resources/mobile_base/mobile_base.urdf</span></code>, <code class="docutils literal notranslate"><span class="pre">config/mujoco_ros2_control_plugins_base_velocity.yaml</span></code></p>
+<p>See <a class="reference internal" href="../../mujoco_ros2_control_plugins/doc/plugins.html"><span class="doc">MuJoCo ROS 2 Control Plugins</span></a> for the full list of <code class="docutils literal notranslate"><span class="pre">BaseVelocityPlugin</span></code> parameters.</p>
+</section>
 <section id="combined-demo">
 <h2>Combined Demo<a class="headerlink" href="#combined-demo" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">demo.launch.py</span></code> file combines multiple features and is retained for backwards compatibility and
@@ -225,14 +264,17 @@ ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</
 <h2>Package Structure<a class="headerlink" href="#package-structure" title="Link to this heading"></a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>mujoco_ros2_control_demos/
 ├── launch/
-│   ├── 01_basic_robot.launch.py      # Tutorial 1
-│   ├── 02_mjcf_generation.launch.py  # Tutorial 2
-│   ├── 03_pid_control.launch.py      # Tutorial 3
-│   ├── 04_transmissions.launch.py    # Tutorial 4
-│   └── demo.launch.py               # Combined demo
+│   ├── 01_basic_robot.launch.py         # Tutorial 1
+│   ├── 02_mjcf_generation.launch.py     # Tutorial 2
+│   ├── 03_pid_control.launch.py         # Tutorial 3
+│   ├── 04_transmissions.launch.py       # Tutorial 4
+│   ├── 05_base_velocity_plugin.launch.py # Tutorial 5
+│   └── demo.launch.py                  # Combined demo
 ├── config/
-│   ├── controllers.yaml             # Controller configuration
-│   └── mujoco_pid.yaml              # PID gains (Tutorial 3)
+│   ├── controllers.yaml                        # Controller configuration
+│   ├── mujoco_pid.yaml                         # PID gains (Tutorial 3)
+│   ├── controllers_base_velocity.yaml          # joint_state_broadcaster + arm_position_controller (Tutorial 5)
+│   └── mujoco_ros2_control_plugins_base_velocity.yaml  # BaseVelocityPlugin config (Tutorial 5)
 └── demo_resources/
     ├── robot/
     │   ├── test_robot.urdf          # Shared URDF description
@@ -240,11 +282,15 @@ ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</
     ├── scenes/
     │   ├── scene.xml                # Basic scene (Tutorial 1, 4)
     │   ├── scene_pid.xml            # PID scene (Tutorial 3)
-    │   └── scene_info.xml           # Scene generation info
+    │   ├── scene_info.xml           # Scene generation info
+    │   └── scene_mobile_base.xml    # Mobile base + wall obstacle (Tutorial 5)
     ├── mjcf_generation/
     │   └── test_inputs.xml          # MJCF conversion inputs (Tutorial 2)
-    └── pid_control/
-        └── test_robot_pid.xml       # Robot with motor actuators
+    ├── pid_control/
+    │   └── test_robot_pid.xml       # Robot with motor actuators
+    └── mobile_base/
+        ├── mobile_base.xml          # MJCF chassis with freejoint (Tutorial 5)
+        └── mobile_base.urdf         # Minimal URDF, no ros2_control joints (Tutorial 5)
 </pre></div>
 </div>
 </section>

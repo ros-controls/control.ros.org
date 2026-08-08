@@ -11,13 +11,14 @@ var searchData=
   ['setcontrollerstateverb_8',['SetControllerStateVerb',['../classros2controlcli_1_1verb_1_1set__controller__state_1_1SetControllerStateVerb.html',1,'ros2controlcli::verb::set_controller_state']]],
   ['simpletransmission_9',['SimpleTransmission',['../classtransmission__interface_1_1SimpleTransmission.html',1,'transmission_interface']]],
   ['sinesweep_10',['SineSweep',['../classcontrol__toolbox_1_1SineSweep.html',1,'control_toolbox']]],
-  ['sinusoid_11',['Sinusoid',['../classcontrol__toolbox_1_1Sinusoid.html',1,'control_toolbox']]],
-  ['softjointlimits_12',['SoftJointLimits',['../structjoint__limits__interface_1_1SoftJointLimits.html',1,'joint_limits_interface']]],
-  ['speedlimiter_13',['SpeedLimiter',['../classdiff__drive__controller_1_1SpeedLimiter.html',1,'diff_drive_controller']]],
-  ['stalled_5frobustness_5ft_14',['stalled_robustness_t',['../structrealtime__tools_1_1detail_1_1stalled__robustness__t.html',1,'realtime_tools::detail']]],
-  ['stateinterface_15',['StateInterface',['../classhardware__interface_1_1StateInterface.html',1,'hardware_interface']]],
-  ['statetolerances_16',['StateTolerances',['../structjoint__trajectory__controller_1_1StateTolerances.html',1,'joint_trajectory_controller']]],
-  ['switchcontrollersverb_17',['SwitchControllersVerb',['../classros2controlcli_1_1verb_1_1switch__controllers_1_1SwitchControllersVerb.html',1,'ros2controlcli::verb::switch_controllers']]],
-  ['system_18',['System',['../classhardware__interface_1_1System.html',1,'hardware_interface']]],
-  ['systeminterface_19',['SystemInterface',['../classhardware__interface_1_1SystemInterface.html',1,'hardware_interface']]]
+  ['sinewavecontroller_11',['SineWaveController',['../classsine__wave__controller_1_1SineWaveController.html',1,'sine_wave_controller']]],
+  ['sinusoid_12',['Sinusoid',['../classcontrol__toolbox_1_1Sinusoid.html',1,'control_toolbox']]],
+  ['softjointlimits_13',['SoftJointLimits',['../structjoint__limits__interface_1_1SoftJointLimits.html',1,'joint_limits_interface']]],
+  ['speedlimiter_14',['SpeedLimiter',['../classdiff__drive__controller_1_1SpeedLimiter.html',1,'diff_drive_controller']]],
+  ['stalled_5frobustness_5ft_15',['stalled_robustness_t',['../structrealtime__tools_1_1detail_1_1stalled__robustness__t.html',1,'realtime_tools::detail']]],
+  ['stateinterface_16',['StateInterface',['../classhardware__interface_1_1StateInterface.html',1,'hardware_interface']]],
+  ['statetolerances_17',['StateTolerances',['../structjoint__trajectory__controller_1_1StateTolerances.html',1,'joint_trajectory_controller']]],
+  ['switchcontrollersverb_18',['SwitchControllersVerb',['../classros2controlcli_1_1verb_1_1switch__controllers_1_1SwitchControllersVerb.html',1,'ros2controlcli::verb::switch_controllers']]],
+  ['system_19',['System',['../classhardware__interface_1_1System.html',1,'hardware_interface']]],
+  ['systeminterface_20',['SystemInterface',['../classhardware__interface_1_1SystemInterface.html',1,'hardware_interface']]]
 ];
