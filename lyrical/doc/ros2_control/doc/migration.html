@@ -240,6 +240,13 @@ It is recommended to use the <code class="docutils literal notranslate"><span cl
 </section>
 <section id="controller-manager">
 <h2>controller_manager<a class="headerlink" href="#controller-manager" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">configure_controller</span></code> now performs a single-step lifecycle transition and
+only accepts controllers in the <code class="docutils literal notranslate"><span class="pre">unconfigured</span></code> state (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/3196">#3196</a>). Previously an
+<code class="docutils literal notranslate"><span class="pre">inactive</span></code> controller was implicitly cleaned up and then reconfigured. To
+reconfigure an <code class="docutils literal notranslate"><span class="pre">inactive</span></code> controller, call <code class="docutils literal notranslate"><span class="pre">cleanup_controller</span></code> first and
+then <code class="docutils literal notranslate"><span class="pre">configure_controller</span></code>.</p></li>
+</ul>
 </section>
 <section id="hardware-interface">
 <h2>hardware_interface<a class="headerlink" href="#hardware-interface" title="Link to this heading"></a></h2>

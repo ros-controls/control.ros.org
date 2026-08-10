@@ -101,7 +101,7 @@ General discussions
 
 ======================================================================
 
-Built on 2026-08-09 at 05:52 GMT
+Built on 2026-08-10 at 06:03 GMT
 
 
 
@@ -7439,7 +7439,7 @@ files:
 ---------
 
    $ ros2 run controller_manager spawner -h
-   usage: spawner [-h] [-c CONTROLLER_MANAGER] [-p PARAM_FILE] [--load-only] [--inactive] [-u] [--controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT] [--switch-timeout SWITCH_TIMEOUT] [--service-call-timeout SERVICE_CALL_TIMEOUT] [--activate-as-group] [--switch-asap | --no-switch-asap] [--controller-ros-args CONTROLLER_ROS_ARGS] controller_names [controller_names ...]
+   usage: spawner [-h] [-c CONTROLLER_MANAGER] [-p PARAM_FILE] [--load-only] [--inactive] [--reconfigure] [-u] [--controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT] [--switch-timeout SWITCH_TIMEOUT] [--service-call-timeout SERVICE_CALL_TIMEOUT] [--activate-as-group] [--switch-asap | --no-switch-asap] [--controller-ros-args CONTROLLER_ROS_ARGS] controller_names [controller_names ...]
 
    positional arguments:
      controller_names      List of controllers
@@ -7452,6 +7452,7 @@ files:
                            Controller param file to be loaded into controller node before configure. Pass multiple times to load different files for different controllers or to override the parameters of the same controller.
      --load-only           Only load the controller and leave unconfigured.
      --inactive            Load and configure the controller, however do not activate them
+     --reconfigure         Cleanup and configure the controller again
      -u, --unload-on-kill  Wait until this application is interrupted (SIGINT or SIGTERM) and deactivate/unload controllers
      --controller-manager-timeout CONTROLLER_MANAGER_TIMEOUT
                            Time to wait for the controller manager service to be available
@@ -7538,7 +7539,7 @@ remapping topics, the following command can be used:
      -h, --help            Show help
 
    Controller Options:
-   usage: spawner [-p PARAM_FILE] [--load-only] [--inactive] [--controller-ros-args CONTROLLER_ROS_ARGS] controller_name
+   usage: spawner [-p PARAM_FILE] [--load-only] [--inactive] [--reconfigure] [--controller-ros-args CONTROLLER_ROS_ARGS] controller_name
 
    positional arguments:
      controller_name       Name of the controller
@@ -7548,6 +7549,7 @@ remapping topics, the following command can be used:
                            Parameter files to load for the controller
      --load-only           Load the controller but do not configure/activate it
      --inactive            Configure the controller but do not switch it
+     --reconfigure         Cleanup and configure the controller again
      --controller-ros-args CONTROLLER_ROS_ARGS
                            ROS arguments to pass to the controller
 
@@ -8272,6 +8274,12 @@ ChainableControllerInterface
 controller_manager
 ==================
 
+* "configure_controller" now performs a single-step lifecycle
+  transition and only accepts controllers in the "unconfigured" state
+  (#3196). Previously an "inactive" controller was implicitly cleaned
+  up and then reconfigured. To reconfigure an "inactive" controller,
+  call "cleanup_controller" first and then "configure_controller".
+
 
 hardware_interface
 ==================
@@ -8397,6 +8405,14 @@ controller_manager
 * The "spawner" now forwards all the parameter files parsed to the
   spawner node to the spawned controllers. This would support
   "allow_substs" approach. (#3136)
+
+* "configure_controller" no longer implicitly cleans up an "inactive"
+  controller before configuring; it now strictly requires the
+  "unconfigured" state and returns an error otherwise. (#3196)
+
+* The "spawner" skips configuring an already configured controller.
+  Use the new "--reconfigure" argument to cleanup and configure it
+  again. (#3196)
 
 
 hardware_interface
