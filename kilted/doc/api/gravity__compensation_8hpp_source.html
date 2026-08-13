@@ -184,38 +184,40 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00094" data-start="{" data-end="}">
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="classcontrol__filters_1_1GravityCompensation.html#a3fc3ca2d71495268f014f23046638595">   94</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classcontrol__filters_1_1GravityCompensation.html#a3fc3ca2d71495268f014f23046638595">GravityCompensation&lt;T&gt;::configure</a>()</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>{</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  clock_ = std::make_shared&lt;rclcpp::Clock&gt;(RCL_ROS_TIME);</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  p_tf_Buffer_.reset(<span class="keyword">new</span> tf2_ros::Buffer(clock_));</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  p_tf_Listener_.reset(<span class="keyword">new</span> tf2_ros::TransformListener(*p_tf_Buffer_.get(), <span class="keyword">true</span>));</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  logger_.reset(</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keyword">new</span> rclcpp::Logger(this-&gt;logging_interface_-&gt;get_logger().get_child(this-&gt;filter_name_)));</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  <span class="comment">// Initialize the parameter_listener once</span></div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  <span class="keywordflow">if</span> (!parameter_handler_)</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  {</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keywordflow">try</span></div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    {</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>      parameter_handler_ = std::make_shared&lt;gravity_compensation_filter::ParamListener&gt;(</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        this-&gt;params_interface_, this-&gt;param_prefix_);</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    }</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keywordflow">catch</span> (std::exception &amp; ex)</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    {</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>      RCLCPP_ERROR((*logger_), <span class="stringliteral">&quot;GravityCompensation filter cannot be configured: %s&quot;</span>, ex.what());</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>      parameter_handler_.reset();</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>      <span class="keywordflow">throw</span>;</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    }</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  }</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  parameters_ = parameter_handler_-&gt;get_params();</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  compute_internal_params();</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>}</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  logger_.reset(</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keyword">new</span> rclcpp::Logger(this-&gt;logging_interface_-&gt;get_logger().get_child(this-&gt;filter_name_)));</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  <span class="comment">// Parse and validate parameters before creating the TF listener. Constructing the listener spawns</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  <span class="comment">// a background executor thread; if a required parameter is missing the ParamListener throws, and</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  <span class="comment">// tearing that thread down mid-unwind can deadlock (flaky configure hang).</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  <span class="keywordflow">if</span> (!parameter_handler_)</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  {</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keywordflow">try</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    {</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>      parameter_handler_ = std::make_shared&lt;gravity_compensation_filter::ParamListener&gt;(</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        this-&gt;params_interface_, this-&gt;param_prefix_);</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    }</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keywordflow">catch</span> (std::exception &amp; ex)</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    {</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>      RCLCPP_ERROR((*logger_), <span class="stringliteral">&quot;GravityCompensation filter cannot be configured: %s&quot;</span>, ex.what());</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>      parameter_handler_.reset();</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>      <span class="keywordflow">throw</span>;</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    }</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  }</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  parameters_ = parameter_handler_-&gt;get_params();</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  compute_internal_params();</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  clock_ = std::make_shared&lt;rclcpp::Clock&gt;(RCL_ROS_TIME);</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>  p_tf_Buffer_.reset(<span class="keyword">new</span> tf2_ros::Buffer(clock_));</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>  p_tf_Listener_.reset(<span class="keyword">new</span> tf2_ros::TransformListener(*p_tf_Buffer_.get(), <span class="keyword">true</span>));</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>}</div>
 </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>}  <span class="comment">// namespace control_filters</span></div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="preprocessor">#endif  </span><span class="comment">// CONTROL_FILTERS__GRAVITY_COMPENSATION_HPP_</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>}  <span class="comment">// namespace control_filters</span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="preprocessor">#endif  </span><span class="comment">// CONTROL_FILTERS__GRAVITY_COMPENSATION_HPP_</span></div>
 <div class="ttc" id="aclasscontrol__filters_1_1GravityCompensation_html"><div class="ttname"><a href="classcontrol__filters_1_1GravityCompensation.html">control_filters::GravityCompensation</a></div><div class="ttdef"><b>Definition</b> gravity_compensation.hpp:35</div></div>
 <div class="ttc" id="aclasscontrol__filters_1_1GravityCompensation_html_a3fc3ca2d71495268f014f23046638595"><div class="ttname"><a href="classcontrol__filters_1_1GravityCompensation.html#a3fc3ca2d71495268f014f23046638595">control_filters::GravityCompensation::configure</a></div><div class="ttdeci">bool configure() override</div><div class="ttdoc">Configure filter parameters</div><div class="ttdef"><b>Definition</b> gravity_compensation.hpp:94</div></div>
 <div class="ttc" id="aclasscontrol__filters_1_1GravityCompensation_html_ac20adb933c4dcc7f7f8e51f14cebe75e"><div class="ttname"><a href="classcontrol__filters_1_1GravityCompensation.html#ac20adb933c4dcc7f7f8e51f14cebe75e">control_filters::GravityCompensation::update</a></div><div class="ttdeci">bool update(const T &amp;data_in, T &amp;data_out) override</div><div class="ttdoc">Update the filter and return the data separately.</div></div>
