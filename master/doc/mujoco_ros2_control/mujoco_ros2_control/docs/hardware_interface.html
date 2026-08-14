@@ -258,6 +258,7 @@ However, the active command interface can be switched dynamically, allowing cont
 <tr class="row-odd"><th class="head stub"><p>Command Interface</p></th>
 <th class="head"><p>MuJoCo <code class="docutils literal notranslate"><span class="pre">position</span></code></p></th>
 <th class="head"><p>MuJoCo <code class="docutils literal notranslate"><span class="pre">velocity</span></code></p></th>
+<th class="head"><p>MuJoCo <code class="docutils literal notranslate"><span class="pre">intvelocity</span></code></p></th>
 <th class="head"><p>MuJoCo <code class="docutils literal notranslate"><span class="pre">motor</span></code>, <code class="docutils literal notranslate"><span class="pre">general</span></code>, etc.</p></th>
 </tr>
 </thead>
@@ -266,19 +267,25 @@ However, the active command interface can be switched dynamically, allowing cont
 <td><p>Native support</p></td>
 <td><p>Supported using PIDs</p></td>
 <td><p>Supported using PIDs</p></td>
+<td><p>Supported using PIDs</p></td>
 </tr>
 <tr class="row-odd"><th class="stub"><p><strong>velocity</strong></p></th>
 <td><p>Not supported</p></td>
+<td><p>Native support</p></td>
 <td><p>Native support</p></td>
 <td><p>Supported using PIDs</p></td>
 </tr>
 <tr class="row-even"><th class="stub"><p><strong>effort</strong></p></th>
 <td><p>Not supported</p></td>
 <td><p>Not supported</p></td>
+<td><p>Not supported</p></td>
 <td><p>Native support</p></td>
 </tr>
 </tbody>
 </table>
+<p>MuJoCo’s <code class="docutils literal notranslate"><span class="pre">intvelocity</span></code> actuator integrates its <code class="docutils literal notranslate"><span class="pre">ctrl</span></code> input into an internal position setpoint. The input itself has
+velocity semantics, so it maps natively to a ros2_control <code class="docutils literal notranslate"><span class="pre">velocity</span></code> command interface without changing the actuator’s
+integrated-velocity dynamics.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">torque</span></code> and <code class="docutils literal notranslate"><span class="pre">force</span></code> command/state interfaces are semantically equivalent to <code class="docutils literal notranslate"><span class="pre">effort</span></code> and map to the same underlying data in the sim.</p>
