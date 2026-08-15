@@ -26,3 +26,8 @@ zenbedded_test_node
 Validates CDR ``JointState`` / ``JointCommand`` payload extraction using the
 ``zenbedded_transport`` serialization helpers. Buildable for ``native_sim``
 and ``esp32s3_devkitc/esp32s3/procpu``; run via ``twister``.
+
+zenoh_e2e
+-------------------
+
+Checks using ``native_sim`` build if the minimal firmware connection to Zenoh is working. Buildable for ``native_sim``; run via ``twister``.
