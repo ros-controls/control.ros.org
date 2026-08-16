@@ -101,7 +101,7 @@ General discussions
 
 ======================================================================
 
-Built on 2026-08-15 at 05:48 GMT
+Built on 2026-08-16 at 05:46 GMT
 
 
 
@@ -17960,12 +17960,19 @@ joint_trajectory_controller
   controller can now smoothly decelerate each joint to a stop using
   the per-joint "max_deceleration_on_cancel" parameter. (#2163)
 
-* Added trajectory deferral support via the
-  "allow_trajectory_replacement" parameter. When enabled, a trajectory
-  with a future "header.stamp" is deferred: the currently active
-  trajectory continues executing until the start time arrives, then
-  the new trajectory is executed. This is a partial port of the ROS 1
-  trajectory replacement behavior. (#2401)
+* Fixed the final segment of every trajectory being cut short: the
+  next-cycle lookahead sample advanced the shared segment search
+  cursor to the end, so the following cycle jumped the reference to
+  the last waypoint and succeeded the goal early. Independent of
+  "allow_trajectory_replacement". (#2419)
+
+* Ported the ROS 1 trajectory-replacement behavior via the
+  "allow_trajectory_replacement"  parameter. A trajectory arriving
+  while another is executing is spliced into the active one instead of
+  discarding it: the old path is followed up to the new start time, a
+  velocity-continuous bridge is sampled at the handoff, and joints
+  omitted from a partial goal continue and finish their original
+  motion. (#2419)
 
 
 pid_controller
@@ -19370,6 +19377,16 @@ allow_partial_joints_goal (bool)
 
    Default:  false
 
+allow_trajectory_replacement (bool)
+   When a new trajectory arrives while one is still executing, blend
+   with the old one instead of hard-replacing it: joints not commanded
+   by the new trajectory keep following the old trajectory (instead of
+   holding at the current position), and the transition uses the
+   existing bridge so it stays smooth even under speed scaling. Set to
+   false to keep the legacy behavior.
+
+   Default:  true
+
 interpolate_from_desired_state (bool)
    Interpolate from the current desired state when receiving a new
    trajectory.
@@ -19400,18 +19417,6 @@ allow_integration_in_goal_trajectories (bool)
    position or velocity specified
 
    Default:  false
-
-allow_trajectory_replacement (bool)
-   Port of the ROS 1 'update existing trajectory' behavior.
-
-   If true (default), a trajectory whose "header.stamp" lies in the
-   future is deferred: the active trajectory keeps executing until
-   that start time, then the new one is installed.
-
-   If false, every incoming trajectory replaces the active one
-   immediately (legacy behavior).
-
-   Default:  true
 
 set_last_command_interface_value_as_state_on_activation (bool)
    When set to true, the last command interface value is used as both
@@ -19975,38 +19980,24 @@ where zero time (the default) means "start now".
 
 Note:
 
-  Partial support for this functionality has been ported to ROS 2 via
-  the "allow_trajectory_replacement" parameter (see #84). When
-  enabled, a trajectory arriving with a future "header.stamp" is
-  deferred. The controller continues executing the active trajectory
-  until the requested start time is reached, at which point the new
-  trajectory is handled, and the execution begins.The current ROS 2
-  implementation differs from the legacy behavior described below in
-  the following ways:
+  This behavior is implemented in ROS 2 via the
+  "allow_trajectory_replacement" parameter (default "true"). When
+  enabled, a newly arriving trajectory is spliced into the active one
+  exactly as described below, rather than discarding it.
+  "speed_scaling" continues to govern how fast the trajectory is
+  executed, while the header timestamp still selects *when* the
+  handoff occurs: it is honoured as a wall-clock instant whatever the
+  scaling factor. The handoff anchor is sampled from the active
+  trajectory at that instant, so the transition is velocity-continuous
+  and free of position jumps.
 
-  * The controller does not splice or stitch the current and new
-    trajectories together. At the handoff time, the new trajectory
-    fully replaces the old one.
+Warning:
 
-  * Omitted joints in a partial goal are filled with their current
-    position at the handoff time (hold-in-place), rather than
-    continuing to follow the old trajectory.
-
-  * Only a single deferred trajectory is stored. A newer deferred
-    trajectory overwrites any previously deferred one.
-
-  * When a new action goal is accepted, the currently active goal is
-    immediately aborted instead of continuing to emit feedback until
-    the handoff time.
-
-  * While a deferred action goal is waiting for its start time, it
-    does not publish action feedback and is not evaluated for path
-    tolerances.
-
-  * The handoff trigger uses the controller's clock time. If the
-    controller is running with a "speed_scaling" other than 1.0, the
-    handoff may occur out of sync with the active trajectory's
-    execution state.
+  One difference from ROS 1 remains: because ROS 2 uses a single
+  monolithic trajectory, joints omitted from a partial goal are re-
+  sampled onto the new trajectory's time grid. With sparse new
+  waypoints, this re-interpolation may deviate slightly from the
+  omitted joint's original path.
 
 The arrival of a new trajectory command does not necessarily mean that
 the controller will completely discard the currently running

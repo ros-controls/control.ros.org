@@ -224,6 +224,9 @@
 <dt>allow_partial_joints_goal (bool)</dt><dd><p>Allow joint goals defining trajectory for only some joints.</p>
 <p>Default:  false</p>
 </dd>
+<dt>allow_trajectory_replacement (bool)</dt><dd><p>When a new trajectory arrives while one is still executing, blend with the old one instead of hard-replacing it: joints not commanded by the new trajectory keep following the old trajectory (instead of holding at the current position), and the transition uses the existing bridge so it stays smooth even under speed scaling. Set to false to keep the legacy behavior.</p>
+<p>Default:  true</p>
+</dd>
 <dt>interpolate_from_desired_state (bool)</dt><dd><p>Interpolate from the current desired state when receiving a new trajectory.</p>
 <p>The controller ignores the states provided by hardware interface but using last commands as states for starting the trajectory interpolation.</p>
 <p>This is useful if hardware states are not following commands, i.e., an offset between those (typical for hydraulic manipulators). Furthermore, it is necessary if you have a reference trajectory that you send over multiple messages (e.g. for MPC-style trajectory planning).</p>
@@ -233,11 +236,6 @@
 </dd>
 <dt>allow_integration_in_goal_trajectories (bool)</dt><dd><p>Allow integration in goal trajectories to accept goals without position or velocity specified</p>
 <p>Default:  false</p>
-</dd>
-<dt>allow_trajectory_replacement (bool)</dt><dd><p>Port of the ROS 1 ‘update existing trajectory’ behavior.</p>
-<p>If true (default), a trajectory whose <code class="docutils literal notranslate"><span class="pre">header.stamp</span></code> lies in the future is deferred: the active trajectory keeps executing until that start time, then the new one is installed.</p>
-<p>If false, every incoming trajectory replaces the active one immediately (legacy behavior).</p>
-<p>Default:  true</p>
 </dd>
 <dt>set_last_command_interface_value_as_state_on_activation (bool)</dt><dd><p>When set to true, the last command interface value is used as both the current state and the last commanded state upon activation. If an interface (e.g. velocity) is available only as state and not command, the state is used. Use this to prevent sagging/jumps on activation when using soft or compliant hardware. When set to false, the current state is used for both.</p>
 <p>Default:  true</p>
