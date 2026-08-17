@@ -8,7 +8,7 @@ ROSCon 2026 Workshop
     :align: center
 
 Scaling ros2_control: From Async Hardware Drivers to RL Inference Engines
-------------------------------------------------------------------------
+-------------------------------------------------------------------------
 
 This hands-on workshop breaks the synchronicity barrier. You will learn to architect Asynchronous Hardware Interfaces that prevent I/O bottlenecks and deploy RL Policy Models (via ONNX/Torch) as non-blocking controllers. We move beyond basic tutorials to tackle production-grade challenges: thread-safe data exchange, managing inference jitter, synchronizing drivers and controllers to the robot controllers, and maintaining real-time stability.
 
