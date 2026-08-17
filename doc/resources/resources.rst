@@ -12,6 +12,28 @@ Any files submitted to the documentation should be "licensed" by stating your na
 Presentations
 ---------------
 
+2026 ROSCon Workshop: Scaling ros2_control: From Async Hardware Drivers to RL Inference Engines
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+
+.. toctree::
+   :hidden:
+
+   roscon2026_workshop.rst
+
+Summary:
+  This hands-on workshop breaks the synchronicity barrier. You will learn to architect Asynchronous Hardware Interfaces that prevent I/O bottlenecks and deploy RL Policy Models (via ONNX/Torch) as non-blocking controllers. We move beyond basic tutorials to tackle production-grade challenges: thread-safe data exchange, managing inference jitter, synchronizing drivers and controllers to the robot controllers, and maintaining real-time stability.
+
+  This workshop shows how to integrate ros2_control into your production systems as well as to deploy RL policies on to hardware.
+
+:doc:`Workshop page <roscon2026_workshop>`
+
+  Authors:
+    - Dr. Bence Magyar (Locus Robotics)
+    - Sai Kishor Kothakota (PAL Robotics)
+    - Christoph Fröhlich (AIT Austrian Institute of Technology GmbH)
+    - Dr. Denis Stogl (b»robotized)
+    - Marq Rasmussen (Locus Robotics)
+
 2025-10 ROSCon 2025
 ,,,,,,,,,,,,,,,,,,,
 
