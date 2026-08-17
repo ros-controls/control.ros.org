@@ -32,7 +32,7 @@ Summary:
     - Sai Kishor Kothakota (PAL Robotics)
     - Christoph Fröhlich (AIT Austrian Institute of Technology GmbH)
     - Dr. Denis Stogl (b»robotized)
-    - Marq Rasmussen (Locus Robotics)
+    - Marq Rasmussen (KUKA Robotics)
 
 2025-10 ROSCon 2025
 ,,,,,,,,,,,,,,,,,,,

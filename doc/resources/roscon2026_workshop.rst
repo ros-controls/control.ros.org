@@ -43,4 +43,4 @@ This workshop was brought to you by
 * Sai Kishor Kothakota, Robotics Engineer, `PAL Robotics <https://pal-robotics.com>`_
 * Christoph Fröhlich, `AIT Austrian Institute of Technology GmbH <https://www.ait.ac.at>`_
 * Dr.-Ing. Denis Stogl, `b>>robotized <https://en.b-robotized.com/>`_
-* Marq Rasmussen, `Locus Robotics <https://locusrobotics.com>`_
+* Marq Rasmussen, `KUKA Robotics <https://www.kuka.com>`_
