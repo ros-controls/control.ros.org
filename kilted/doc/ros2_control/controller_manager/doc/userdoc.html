@@ -79,6 +79,11 @@
 <li class="toctree-l4"><a class="reference internal" href="#color-output-handling">Color Output Handling</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#utility-scripts">Utility scripts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#programmatic-controller-lifecycle-recommended">Programmatic controller lifecycle (recommended)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#launch-utils">launch_utils</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#rqt-controller-manager">rqt_controller_manager</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#operations">Operations</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#restarting-all-controllers">Restarting all controllers</a></li>
@@ -907,6 +912,189 @@ The color output automatically adapts to the environment:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">RCUTILS_COLORIZED_OUTPUT=1</span></code> -&gt; forces color output</p></li>
 <li><p>Unset -&gt; automatically detects TTY and enables color only in interactive
 terminals</p></li>
+</ul>
+</section>
+</section>
+<section id="utility-scripts">
+<h2>Utility scripts<a class="headerlink" href="#utility-scripts" title="Link to this heading"></a></h2>
+<p>In addition to the <code class="docutils literal notranslate"><span class="pre">spawner</span></code>, <code class="docutils literal notranslate"><span class="pre">unspawner</span></code>, and <code class="docutils literal notranslate"><span class="pre">hardware_spawner</span></code> helper scripts, the controller_manager package provides utility modules for programmatic interaction with the controller manager.</p>
+<section id="programmatic-controller-lifecycle-recommended">
+<h3>Programmatic controller lifecycle (recommended)<a class="headerlink" href="#programmatic-controller-lifecycle-recommended" title="Link to this heading"></a></h3>
+<p>Prefer the high-level service wrapper functions in
+<code class="docutils literal notranslate"><span class="pre">controller_manager.controller_manager_services</span></code> for lifecycle scripts
+(e.g. <code class="docutils literal notranslate"><span class="pre">load_controller</span></code>, <code class="docutils literal notranslate"><span class="pre">configure_controller</span></code>, <code class="docutils literal notranslate"><span class="pre">switch_controllers</span></code>, <code class="docutils literal notranslate"><span class="pre">cleanup_controller</span></code>, <code class="docutils literal notranslate"><span class="pre">unload_controller</span></code>)
+instead of exposing internal service-client singletons.</p>
+<p><strong>Example lifecycle script:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rclpy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">controller_manager.controller_manager_services</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+  <span class="n">load_controller</span><span class="p">,</span> <span class="n">configure_controller</span><span class="p">,</span> <span class="n">switch_controllers</span><span class="p">,</span> <span class="n">cleanup_controller</span><span class="p">,</span> <span class="n">unload_controller</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">controller_manager_msgs.srv</span><span class="w"> </span><span class="kn">import</span> <span class="n">SwitchController</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+  <span class="n">rclpy</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+  <span class="n">node</span> <span class="o">=</span> <span class="n">rclpy</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="s1">'controller_ops'</span><span class="p">)</span>
+  <span class="n">cm_name</span> <span class="o">=</span> <span class="s1">'controller_manager'</span>
+  <span class="k">try</span><span class="p">:</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">load_controller</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">cm_name</span><span class="p">,</span> <span class="s1">'my_controller'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">resp</span><span class="p">,</span> <span class="s1">'success'</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+      <span class="n">node</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Controller loaded"</span><span class="p">)</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">configure_controller</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">cm_name</span><span class="p">,</span> <span class="s1">'my_controller'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">resp</span><span class="p">,</span> <span class="s1">'ok'</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">resp</span><span class="p">,</span> <span class="s1">'success'</span><span class="p">,</span> <span class="kc">False</span><span class="p">)):</span>
+      <span class="n">node</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Controller configured"</span><span class="p">)</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">switch_controllers</span><span class="p">(</span>
+      <span class="n">node</span><span class="p">,</span> <span class="n">cm_name</span><span class="p">,</span> <span class="n">deactivate_controllers</span><span class="o">=</span><span class="p">[],</span> <span class="n">activate_controllers</span><span class="o">=</span><span class="p">[</span><span class="s1">'my_controller'</span><span class="p">],</span>
+      <span class="n">strictness</span><span class="o">=</span><span class="n">SwitchController</span><span class="o">.</span><span class="n">Request</span><span class="o">.</span><span class="n">STRICT</span><span class="p">,</span> <span class="n">activate_asap</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">0.0</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">resp</span><span class="p">,</span> <span class="s1">'ok'</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+      <span class="n">node</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'Controller activated'</span><span class="p">)</span>
+  <span class="k">finally</span><span class="p">:</span>
+    <span class="n">switch_controllers</span><span class="p">(</span>
+      <span class="n">node</span><span class="p">,</span> <span class="n">cm_name</span><span class="p">,</span> <span class="n">deactivate_controllers</span><span class="o">=</span><span class="p">[</span><span class="s1">'my_controller'</span><span class="p">],</span> <span class="n">activate_controllers</span><span class="o">=</span><span class="p">[],</span>
+      <span class="n">strictness</span><span class="o">=</span><span class="n">SwitchController</span><span class="o">.</span><span class="n">Request</span><span class="o">.</span><span class="n">STRICT</span><span class="p">,</span> <span class="n">activate_asap</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">0.0</span>
+    <span class="p">)</span>
+    <span class="n">cleanup_controller</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">cm_name</span><span class="p">,</span> <span class="s1">'my_controller'</span><span class="p">)</span>
+    <span class="n">unload_controller</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">cm_name</span><span class="p">,</span> <span class="s1">'my_controller'</span><span class="p">)</span>
+    <span class="n">node</span><span class="o">.</span><span class="n">destroy_node</span><span class="p">()</span>
+    <span class="n">rclpy</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+  <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Notes:</p>
+<ul class="simple">
+<li><p>Import path: controller_manager.controller_manager_services (matches repository layout).</p></li>
+<li><p>Response fields differ between services; examples use getattr to handle <code class="docutils literal notranslate"><span class="pre">success</span></code> vs <code class="docutils literal notranslate"><span class="pre">ok</span></code>.</p></li>
+</ul>
+</section>
+<section id="launch-utils">
+<h3>launch_utils<a class="headerlink" href="#launch-utils" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">launch_utils</span></code> module provides helper functions to generate launch descriptions for loading controllers. These functions simplify launch file creation by reducing boilerplate code.</p>
+<p><strong>generate_controllers_spawner_launch_description()</strong></p>
+<p>Generates a launch description that automatically loads and activates controllers using the spawner utility.</p>
+<p><strong>Function Signature:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">generate_controllers_spawner_launch_description</span><span class="p">(</span>
+  <span class="n">controller_names</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+  <span class="n">controller_params_files</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+  <span class="n">extra_spawner_args</span><span class="o">=</span><span class="p">[]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LaunchDescription</span>
+</pre></div>
+</div>
+<p><strong>Python Usage Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">controller_manager.launch_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_controllers_spawner_launch_description</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">launch</span><span class="w"> </span><span class="kn">import</span> <span class="n">LaunchDescription</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">launch.substitutions</span><span class="w"> </span><span class="kn">import</span> <span class="n">PathSubstitution</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">launch_ros.substitutions</span><span class="w"> </span><span class="kn">import</span> <span class="n">FindPackageShare</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_launch_description</span><span class="p">():</span>
+  <span class="n">config_dir</span> <span class="o">=</span> <span class="n">PathSubstitution</span><span class="p">(</span><span class="n">FindPackageShare</span><span class="p">(</span><span class="s1">'my_robot_bringup'</span><span class="p">))</span> <span class="o">/</span> <span class="s1">'config'</span>
+  <span class="c1"># Example 1: Load with controller parameters already in controller_manager</span>
+  <span class="n">spawner</span> <span class="o">=</span> <span class="n">generate_controllers_spawner_launch_description</span><span class="p">(</span>
+    <span class="p">[</span><span class="s1">'joint_state_broadcaster'</span><span class="p">]</span>
+  <span class="p">)</span>
+  <span class="c1"># Example 2: Load with parameter file and extra arguments</span>
+  <span class="n">spawner</span> <span class="o">=</span> <span class="n">generate_controllers_spawner_launch_description</span><span class="p">(</span>
+    <span class="p">[</span><span class="s1">'joint_trajectory_controller'</span><span class="p">],</span>
+    <span class="n">controller_params_files</span><span class="o">=</span><span class="p">[</span><span class="n">config_dir</span> <span class="o">/</span> <span class="s1">'controllers.yaml'</span><span class="p">],</span>
+    <span class="n">extra_spawner_args</span><span class="o">=</span><span class="p">[</span><span class="s1">'--load-only'</span><span class="p">]</span>
+  <span class="p">)</span>
+  <span class="k">return</span> <span class="n">spawner</span>
+</pre></div>
+</div>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">controller_names</span></code> (list[str]): Names of controllers to load. Example: <code class="docutils literal notranslate"><span class="pre">['joint_state_broadcaster',</span> <span class="pre">'joint_trajectory_controller']</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">controller_params_files</span></code> (list, optional): Paths to YAML parameter files for controllers. Each item can be a plain string path or a Launch substitution (e.g., <code class="docutils literal notranslate"><span class="pre">PathJoinSubstitution([...])</span></code>). Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">extra_spawner_args</span></code> (list[str], optional): Additional arguments to pass to spawner (e.g., <code class="docutils literal notranslate"><span class="pre">['--load-only',</span> <span class="pre">'--inactive']</span></code>). Defaults to <code class="docutils literal notranslate"><span class="pre">[]</span></code></p></li>
+</ul>
+<p><strong>Return Value:</strong></p>
+<p>Returns a <code class="docutils literal notranslate"><span class="pre">LaunchDescription</span></code> containing:</p>
+<ul class="simple">
+<li><p>Launch argument for <code class="docutils literal notranslate"><span class="pre">controller_manager_name</span></code> (default: “controller_manager”) - allows overriding the controller manager node name</p></li>
+<li><p>Launch argument for <code class="docutils literal notranslate"><span class="pre">unload_on_kill</span></code> (default: “false”) - waits for interrupt signal to unload controllers</p></li>
+<li><p>Spawner node that loads and activates the specified controllers</p></li>
+</ul>
+<p><strong>Complete Launch File Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">launch</span><span class="w"> </span><span class="kn">import</span> <span class="n">LaunchDescription</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">launch_ros.actions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Node</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">controller_manager.launch_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_controllers_spawner_launch_description</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">launch.substitutions</span><span class="w"> </span><span class="kn">import</span> <span class="n">PathSubstitution</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">launch_ros.substitutions</span><span class="w"> </span><span class="kn">import</span> <span class="n">FindPackageShare</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_launch_description</span><span class="p">():</span>
+  <span class="c1"># Get configuration paths</span>
+  <span class="n">config_dir</span> <span class="o">=</span> <span class="n">PathSubstitution</span><span class="p">(</span><span class="n">FindPackageShare</span><span class="p">(</span><span class="s1">'my_robot_bringup'</span><span class="p">))</span> <span class="o">/</span> <span class="s1">'config'</span>
+  <span class="c1"># Create controller manager node</span>
+  <span class="n">control_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
+    <span class="n">package</span><span class="o">=</span><span class="s1">'controller_manager'</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="s1">'ros2_control_node'</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">config_dir</span> <span class="o">/</span> <span class="s1">'ros2_controllers.yaml'</span><span class="p">],</span>
+    <span class="n">output</span><span class="o">=</span><span class="s1">'both'</span><span class="p">,</span>
+  <span class="p">)</span>
+  <span class="c1"># Create spawner for multiple controllers</span>
+  <span class="n">controllers_spawner</span> <span class="o">=</span> <span class="n">generate_controllers_spawner_launch_description</span><span class="p">(</span>
+    <span class="p">[</span><span class="s1">'joint_state_broadcaster'</span><span class="p">,</span> <span class="s1">'joint_trajectory_controller'</span><span class="p">],</span>
+    <span class="n">controller_params_files</span><span class="o">=</span><span class="p">[</span><span class="n">config_dir</span> <span class="o">/</span> <span class="s1">'controllers.yaml'</span><span class="p">],</span>
+  <span class="p">)</span>
+  <span class="k">return</span> <span class="n">LaunchDescription</span><span class="p">([</span>
+    <span class="n">control_node</span><span class="p">,</span>
+    <span class="n">controllers_spawner</span><span class="p">,</span>
+  <span class="p">])</span>
+</pre></div>
+</div>
+<p><strong>Launching:</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>launch<span class="w"> </span>my_robot_bringup<span class="w"> </span>my_robot.launch.py
+<span class="go">[controller_manager-1] [INFO] [ros2_control_node]: Loaded controller 'joint_state_broadcaster'</span>
+<span class="go">[spawner-1] [INFO] [spawner]: Configured and activated 'joint_state_broadcaster'</span>
+<span class="go">[spawner-1] [INFO] [spawner]: Configured and activated 'joint_trajectory_controller'</span>
+</pre></div>
+</div>
+<p><strong>generate_controllers_spawner_launch_description_from_dict()</strong></p>
+<p>Provides an alternative way to specify controllers using a dictionary format, allowing different parameter files per controller.</p>
+<p><strong>Function Signature:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">generate_controllers_spawner_launch_description_from_dict</span><span class="p">(</span>
+  <span class="n">controller_info_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+  <span class="n">extra_spawner_args</span><span class="o">=</span><span class="p">[]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LaunchDescription</span>
+</pre></div>
+</div>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">controller_info_dict</span></code> (dict[str, str | list[str] | None]): Dictionary with controller names as keys and parameter file path(s) as values.
+Each value may be a <code class="docutils literal notranslate"><span class="pre">str</span></code> (single YAML), <code class="docutils literal notranslate"><span class="pre">list[str]</span></code> (multiple YAMLs applied in order), <code class="docutils literal notranslate"><span class="pre">[]</span></code> (no parameter file), or <code class="docutils literal notranslate"><span class="pre">None</span></code> if no parameter file is needed</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">extra_spawner_args</span></code> (list[str], optional): Additional arguments to pass to spawner. Defaults to <code class="docutils literal notranslate"><span class="pre">[]</span></code></p></li>
+</ul>
+<p><strong>Python Usage Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">controller_manager.launch_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_controllers_spawner_launch_description_from_dict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">launch</span><span class="w"> </span><span class="kn">import</span> <span class="n">LaunchDescription</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">launch.substitutions</span><span class="w"> </span><span class="kn">import</span> <span class="n">PathSubstitution</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">launch_ros.substitutions</span><span class="w"> </span><span class="kn">import</span> <span class="n">FindPackageShare</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_launch_description</span><span class="p">():</span>
+  <span class="n">config_dir</span> <span class="o">=</span> <span class="n">PathSubstitution</span><span class="p">(</span><span class="n">FindPackageShare</span><span class="p">(</span><span class="s1">'my_robot_bringup'</span><span class="p">))</span> <span class="o">/</span> <span class="s1">'config'</span>
+  <span class="c1"># Define controllers with per-controller configurations</span>
+  <span class="n">controller_info_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'joint_state_broadcaster'</span><span class="p">:</span> <span class="n">config_dir</span> <span class="o">/</span> <span class="s1">'common_params.yaml'</span><span class="p">,</span>
+    <span class="s1">'position_trajectory_controller'</span><span class="p">:</span> <span class="p">[</span>
+      <span class="n">config_dir</span> <span class="o">/</span> <span class="s1">'common_params.yaml'</span><span class="p">,</span>
+      <span class="n">config_dir</span> <span class="o">/</span> <span class="s1">'position_controller.yaml'</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s1">'velocity_trajectory_controller'</span><span class="p">:</span> <span class="n">config_dir</span> <span class="o">/</span> <span class="s1">'velocity_controller.yaml'</span><span class="p">,</span>
+  <span class="p">}</span>
+  <span class="n">spawner</span> <span class="o">=</span> <span class="n">generate_controllers_spawner_launch_description_from_dict</span><span class="p">(</span>
+    <span class="n">controller_info_dict</span><span class="p">,</span>
+    <span class="n">extra_spawner_args</span><span class="o">=</span><span class="p">[</span><span class="s1">'--load-only'</span><span class="p">]</span>
+  <span class="p">)</span>
+  <span class="k">return</span> <span class="n">LaunchDescription</span><span class="p">([</span><span class="n">spawner</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><strong>Use Cases:</strong></p>
+<ul class="simple">
+<li><p>Define different parameter files for different controllers</p></li>
+<li><p>Apply common parameter files across multiple controllers</p></li>
+<li><p>Override controller parameters with multiple YAML files</p></li>
+<li><p>Simplify complex launch file configurations</p></li>
 </ul>
 </section>
 </section>
