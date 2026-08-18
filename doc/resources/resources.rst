@@ -80,8 +80,6 @@ Summary:
 
   You will get a practical overview of concepts like controller chaining - used for cascade control and real-time state estimators; and asynchronous and “side-load” controllers that enable you to run complex calculations without jitter in your control loops. We expect your active involvement!
 
-:doc:`Workshop page <roscon2024_workshop>`
-
   Authors:
     - Dr. Denis Stogl (Stogl Robotics Consulting)
     - Dr. Bence Magyar (Locus Robotics)
@@ -94,8 +92,6 @@ Summary:
   If you already know that the ros2_control framework acts as a Kernel for ROS 2 robotics systems, you are using it but struggling with application complexity, then this workshop is for you. The workshop covers the use of ros2_control in products from various industries and shows solutions for all the little issues when running 24/7.
 
   You will get a practical overview of concepts like controller chaining, hardware modularization, multi-robot architectures and debugging of complex systems. On top of showcasing these functionalities, we expect your involvement in the discussion by bringing your complex application and discussing existing and potentially missing tooling in ros2_control.
-
-:doc:`Workshop page <roscon2023_workshop>`
 
   Authors:
     - Dr. Bence Magyar (Locus Robotics)
