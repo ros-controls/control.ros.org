@@ -11,6 +11,127 @@ Any files submitted to the documentation should be "licensed" by stating your na
 Presentations
 ---------------
 
+<<<<<<< HEAD
+=======
+2026 ROSCon Workshop: Scaling ros2_control: From Async Hardware Drivers to RL Inference Engines
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+
+.. toctree::
+   :hidden:
+
+   roscon2026_workshop.rst
+
+Summary:
+  This hands-on workshop breaks the synchronicity barrier. You will learn to architect Asynchronous Hardware Interfaces that prevent I/O bottlenecks and deploy RL Policy Models (via ONNX/Torch) as non-blocking controllers. We move beyond basic tutorials to tackle production-grade challenges: thread-safe data exchange, managing inference jitter, synchronizing drivers and controllers to the robot controllers, and maintaining real-time stability.
+
+  This workshop shows how to integrate ros2_control into your production systems as well as to deploy RL policies on to hardware.
+
+:doc:`Workshop page <roscon2026_workshop>`
+
+  Authors:
+    - Dr. Bence Magyar (Locus Robotics)
+    - Sai Kishor Kothakota (PAL Robotics)
+    - Christoph Fröhlich (AIT Austrian Institute of Technology GmbH)
+    - Dr. Denis Stogl (b»robotized)
+    - Marq Rasmussen (KUKA Robotics)
+
+2025-10 ROSCon 2025
+,,,,,,,,,,,,,,,,,,,
+
+.. toctree::
+   :hidden:
+
+:download:`Presentation: ros-controls project update <presentations/2025-10_ROSCon2025_talk_ ros-controls_project_update.pdf>`
+
+  Summary:
+    From last year’s ROSCon there were many changes and updates to ros2_control. The number of maintainers has doubled, ros-controls is now an OSRA project and some of the long awaited features have been merged! From 2025, after many months of intensive development and a few bugs later, you can enjoy fully fledged async components, support for variants, access to URDF from every component, integrated joint limiters on the hardware layer that controllers can also use. Of course, many details more, like a dedicated repository with shared CMake definitions and pre-defined CI actions. Join the talk and save some time in the future!
+
+`Recording <https://vimeo.com/1136205235>`__
+
+  *Presenter: Dr. Denis Stogl*
+
+  Authors:
+    - Dr. Bence Magyar (Locus Robotics)
+    - Dr. Denis Stogl (b»robotized)
+
+
+2025-09-26 ROSCon UK Workshop: Writing Custom Robot Drivers and Control Workshop at ROSCon 2025 Singapore
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+
+.. toctree::
+   :hidden:
+
+   roscon2025_workshop.rst
+
+:doc:`Workshop page <roscon2025_workshop>`
+
+  Authors:
+    - Christoph Fröhlich (Austrian Institute Of Technology)
+    - Sai Kishor Kothakota (PAL Robotics)
+    - Dr. Bence Magyar (Locus Robotics)
+    - Marq Rasmussen (Locus Robotics)
+    - Dr. Denis Stogl (b»robotized)
+
+2024-10 ROSCon 2024
+,,,,,,,,,,,,,,,,,,,
+
+.. toctree::
+   :hidden:
+
+:download:`Presentation: Something big is coming in ros2_control with ROS 2 Jazzy! <presentations/2024-10_Something_big_is_coming_in_ros2_control_with_ROS_2_Jazzy.pdf>`
+
+  Summary:
+    We know you love ros2_control, but… Have you ever wanted to control your robot with data that is not a C++ double value? Annoyed with maintaining data storage in robot drivers? This is solved in ROS 2 Jazzy! Now the framework manages storage for you and even allows you to pass strings to your robot! Plus…there is more! Do you have a fancy AI-based controller or something with inverse dynamics that runs slower than your hardware expects? No problem! If you are keen to learn more about these and other features, you have to be at this presentation!
+
+`Recording <https://vimeo.com/1024972003>`__
+
+  *Presenter: Dr. Bence Magyar*
+
+  Authors:
+    - Dr. Bence Magyar (Locus Robotics)
+    - Dr. Denis Stogl (Stogl Robotics Consulting)
+
+2024-10-21 ROSCon Workshop: Fun with Controllers
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+
+.. toctree::
+   :hidden:
+
+   roscon2024_workshop.rst
+
+Summary:
+  If you already know that the ros2_control framework acts as a Kernel for ROS 2 robotics systems you are using but need help with application complexity, then this workshop is for you. The workshop covers the use of ros2_control controllers in products from various industries and shows solutions for all the little issues when running 24/7.
+
+  You will get a practical overview of concepts like controller chaining - used for cascade control and real-time state estimators; and asynchronous and “side-load” controllers that enable you to run complex calculations without jitter in your control loops. We expect your active involvement!
+
+:doc:`Workshop page <roscon2024_workshop>`
+
+  Authors:
+    - Dr. Denis Stogl (Stogl Robotics Consulting)
+    - Dr. Bence Magyar (Locus Robotics)
+
+
+2023-10-18 ROSCon Workshop: ros2_control on Steroids
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+
+.. toctree::
+   :hidden:
+
+   roscon2023_workshop.rst
+
+Summary:
+  If you already know that the ros2_control framework acts as a Kernel for ROS 2 robotics systems, you are using it but struggling with application complexity, then this workshop is for you. The workshop covers the use of ros2_control in products from various industries and shows solutions for all the little issues when running 24/7.
+
+  You will get a practical overview of concepts like controller chaining, hardware modularization, multi-robot architectures and debugging of complex systems. On top of showcasing these functionalities, we expect your involvement in the discussion by bringing your complex application and discussing existing and potentially missing tooling in ros2_control.
+
+:doc:`Workshop page <roscon2023_workshop>`
+
+  Authors:
+    - Dr. Bence Magyar (Locus Robotics)
+    - Dr. Denis Stogl (Stogl Robotics Consulting)
+
+
+>>>>>>> 027e3cf (Add roscon 2026 workshop page (#696))
 2023-09-19 ROSCon Spain Talk: Introduction to ros2_control
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 :download:`Presentation: Introduction to ros2_control <presentations/ROSCon_Spain_2023_introduction_to_ros2_control.pdf>`
