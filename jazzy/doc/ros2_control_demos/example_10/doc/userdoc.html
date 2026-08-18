@@ -194,7 +194,7 @@ forward_position_controller<span class="w"> </span>forward_command_controller/Fo
 <span class="w">  </span>stamp:
 <span class="w">    </span>sec:<span class="w"> </span><span class="m">1730670203</span>
 <span class="w">    </span>nanosec:<span class="w"> </span><span class="m">875008879</span>
-<span class="w">  </span>frame_id:<span class="w"> </span><span class="s1">&#39;&#39;</span>
+<span class="w">  </span>frame_id:<span class="w"> </span><span class="s1">''</span>
 joint_names:
 -<span class="w"> </span>joint1
 -<span class="w"> </span>joint2
@@ -233,7 +233,7 @@ interface_values:
 <span class="w">  </span>stamp:
 <span class="w">    </span>sec:<span class="w"> </span><span class="m">1731875120</span>
 <span class="w">    </span>nanosec:<span class="w"> </span><span class="m">2015630</span>
-<span class="w">  </span>frame_id:<span class="w"> </span><span class="s1">&#39;&#39;</span>
+<span class="w">  </span>frame_id:<span class="w"> </span><span class="s1">''</span>
 interface_groups:
 -<span class="w"> </span>flange_analog_IOs
 -<span class="w"> </span>flange_vacuum
@@ -255,17 +255,17 @@ interface_values:
 </div>
 </li>
 <li><p>Now you can send commands to the <em>gpio_controller</em> using ROS 2 CLI interface. You can set a single interface or all at once in one message:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/gpio_controller/commands<span class="w"> </span>control_msgs/msg/DynamicInterfaceGroupValues<span class="w"> </span><span class="s2">&quot;{interface_groups: [flange_analog_IOs], interface_values: [{interface_names: [analog_output1], values: [0.5]}]}&quot;</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/gpio_controller/commands<span class="w"> </span>control_msgs/msg/DynamicInterfaceGroupValues<span class="w"> </span><span class="s2">"{interface_groups: [flange_analog_IOs], interface_values: [{interface_names: [analog_output1], values: [0.5]}]}"</span>
 
-ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/gpio_controller/commands<span class="w"> </span>control_msgs/msg/DynamicInterfaceGroupValues<span class="w"> </span><span class="s2">&quot;{interface_groups: [flange_vacuum], interface_values: [{interface_names: [vacuum], values: [0.27]}]}&quot;</span>
+ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/gpio_controller/commands<span class="w"> </span>control_msgs/msg/DynamicInterfaceGroupValues<span class="w"> </span><span class="s2">"{interface_groups: [flange_vacuum], interface_values: [{interface_names: [vacuum], values: [0.27]}]}"</span>
 
-ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/gpio_controller/commands<span class="w"> </span>control_msgs/msg/DynamicInterfaceGroupValues<span class="w"> </span><span class="s2">&quot;{interface_groups: [flange_vacuum, flange_analog_IOs], interface_values: [{interface_names: [vacuum], values: [0.27]}, {interface_names: [analog_output1], values: [0.5]} ]}&quot;</span>
+ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/gpio_controller/commands<span class="w"> </span>control_msgs/msg/DynamicInterfaceGroupValues<span class="w"> </span><span class="s2">"{interface_groups: [flange_vacuum, flange_analog_IOs], interface_values: [{interface_names: [vacuum], values: [0.27]}, {interface_names: [analog_output1], values: [0.5]} ]}"</span>
 </pre></div>
 </div>
 <p>You should see a change in the <code class="docutils literal notranslate"><span class="pre">/gpio_controller/gpio_states</span></code> topic and a different output in the terminal where launch file is started, e.g.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>ros2_control_node-1<span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">1721765648</span>.271058850<span class="o">]</span><span class="w"> </span><span class="o">[</span>controller_manager.resource_manager.hardware_component.system.RRBot<span class="o">]</span>:<span class="w"> </span>Writing<span class="w"> </span>commands:
-<span class="o">[</span>ros2_control_node-1<span class="o">]</span><span class="w">   </span><span class="m">0</span>.50<span class="w"> </span><span class="k">for</span><span class="w"> </span>GPIO<span class="w"> </span>output<span class="w"> </span><span class="s1">&#39;0&#39;</span>
-<span class="o">[</span>ros2_control_node-1<span class="o">]</span><span class="w">   </span><span class="m">0</span>.70<span class="w"> </span><span class="k">for</span><span class="w"> </span>GPIO<span class="w"> </span>output<span class="w"> </span><span class="s1">&#39;1&#39;</span>
+<span class="o">[</span>ros2_control_node-1<span class="o">]</span><span class="w">   </span><span class="m">0</span>.50<span class="w"> </span><span class="k">for</span><span class="w"> </span>GPIO<span class="w"> </span>output<span class="w"> </span><span class="s1">'0'</span>
+<span class="o">[</span>ros2_control_node-1<span class="o">]</span><span class="w">   </span><span class="m">0</span>.70<span class="w"> </span><span class="k">for</span><span class="w"> </span>GPIO<span class="w"> </span>output<span class="w"> </span><span class="s1">'1'</span>
 </pre></div>
 </div>
 </li>
@@ -328,7 +328,7 @@ an additional parameter</p>
 <span class="w">  </span>stamp:
 <span class="w">    </span>sec:<span class="w"> </span><span class="m">1731875298</span>
 <span class="w">    </span>nanosec:<span class="w"> </span><span class="m">783713170</span>
-<span class="w">  </span>frame_id:<span class="w"> </span><span class="s1">&#39;&#39;</span>
+<span class="w">  </span>frame_id:<span class="w"> </span><span class="s1">''</span>
 interface_groups:
 -<span class="w"> </span>flange_analog_IOs
 -<span class="w"> </span>flange_vacuum
@@ -349,10 +349,10 @@ interface_values:
 </pre></div>
 </div>
 <p>This is, because for the vacuum interface an initial value of <code class="docutils literal notranslate"><span class="pre">1.0</span></code> is set in the URDF file.</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gpio</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;flange_vacuum&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;vacuum&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;vacuum&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;initial_value&quot;</span><span class="nt">&gt;</span>1.0<span class="nt">&lt;/param&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gpio</span><span class="w"> </span><span class="na">name=</span><span class="s">"flange_vacuum"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"vacuum"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"vacuum"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"initial_value"</span><span class="nt">&gt;</span>1.0<span class="nt">&lt;/param&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/state_interface&gt;</span>
 <span class="nt">&lt;/gpio&gt;</span>
 </pre></div>

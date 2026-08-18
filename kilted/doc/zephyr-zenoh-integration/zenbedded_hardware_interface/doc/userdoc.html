@@ -170,21 +170,21 @@ tags:</p>
 </tbody>
 </table>
 <p>Example URDF snippet:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ZenbeddedSystem&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">"ZenbeddedSystem"</span><span class="w"> </span><span class="na">type=</span><span class="s">"system"</span><span class="nt">&gt;</span>
 <span class="w">  </span><span class="nt">&lt;hardware&gt;</span>
 <span class="w">    </span><span class="nt">&lt;plugin&gt;</span>zenbedded::ZenbeddedHardware<span class="nt">&lt;/plugin&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;zenoh_endpoint&quot;</span><span class="nt">&gt;</span>tcp/192.168.1.100:7447<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;zenoh_mode&quot;</span><span class="nt">&gt;</span>client<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;state_topic&quot;</span><span class="nt">&gt;</span>rt/robot/state<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;command_topic&quot;</span><span class="nt">&gt;</span>rt/robot/command<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;schema_path&quot;</span><span class="nt">&gt;</span>$(find<span class="w"> </span>zenbedded_hardware_interface)/config/interface_schema.yaml<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"zenoh_endpoint"</span><span class="nt">&gt;</span>tcp/192.168.1.100:7447<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"zenoh_mode"</span><span class="nt">&gt;</span>client<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"state_topic"</span><span class="nt">&gt;</span>rt/robot/state<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"command_topic"</span><span class="nt">&gt;</span>rt/robot/command<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"schema_path"</span><span class="nt">&gt;</span>$(find<span class="w"> </span>zenbedded_hardware_interface)/config/interface_schema.yaml<span class="nt">&lt;/param&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/hardware&gt;</span>
-<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;motor_arm&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"motor_arm"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
-<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;pendulum_axis&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"pendulum_axis"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
 <span class="nt">&lt;/ros2_control&gt;</span>
 </pre></div>

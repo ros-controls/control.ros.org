@@ -136,19 +136,19 @@
 <ul>
 <li><p>globally for all interfaces of all hardware components via the <code class="docutils literal notranslate"><span class="pre">ros2_control_node</span></code> parameter <code class="docutils literal notranslate"><span class="pre">enforce_command_limits</span></code>, for details see <a class="reference internal" href="../../controller_manager/doc/userdoc.html#parameters"><span class="std std-ref">here</span></a>.</p></li>
 <li><p>for all interfaces of a joint</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint1&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"joint1"</span><span class="nt">&gt;</span>
 <span class="w">  </span>...
-<span class="w">  </span><span class="nt">&lt;limits</span><span class="w"> </span><span class="na">enable=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;limits</span><span class="w"> </span><span class="na">enable=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
 <span class="w">  </span>...
 <span class="nt">&lt;/joint&gt;</span>
 </pre></div>
 </div>
 </li>
 <li><p>for a single interface of a joint</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint1&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"joint1"</span><span class="nt">&gt;</span>
 <span class="w">  </span>...
-<span class="w">  </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;limits</span><span class="w"> </span><span class="na">enable=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;limits</span><span class="w"> </span><span class="na">enable=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/command_interface&gt;</span>
 <span class="w">  </span>...
 <span class="nt">&lt;/joint&gt;</span>
@@ -158,13 +158,13 @@
 </ul>
 <p>If joint limits are active for a specific interface, the controller_manger will print a similar message on startup:</p>
 <blockquote>
-<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[controller_manager]: Using JointLimiter for joint &#39;joint1&#39; in hardware &#39;RRBot&#39; : &#39;  has position limits: true [-1, 1]
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[controller_manager]: Using JointLimiter for joint 'joint1' in hardware 'RRBot' : '  has position limits: true [-1, 1]
 [ros2_control_node-1]   has velocity limits: true [1]
 [ros2_control_node-1]   has acceleration limits: false [nan]
 [ros2_control_node-1]   has deceleration limits: false [nan]
 [ros2_control_node-1]   has jerk limits: false [nan]
 [ros2_control_node-1]   has effort limits: true [100]
-[ros2_control_node-1]   angle wraparound: true&#39;
+[ros2_control_node-1]   angle wraparound: true'
 </pre></div>
 </div>
 </div></blockquote>

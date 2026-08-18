@@ -163,42 +163,42 @@
 <h2>Plugin<a class="headerlink" href="#plugin" title="Link to this heading"></a></h2>
 <p>The MuJoCo hardware interface is shipped as a <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> plugin.
 Specify it in your URDF and point to a valid MJCF on launch:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;MujocoSystem&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">"MujocoSystem"</span><span class="w"> </span><span class="na">type=</span><span class="s">"system"</span><span class="nt">&gt;</span>
 <span class="w">  </span><span class="nt">&lt;hardware&gt;</span>
 <span class="w">    </span><span class="nt">&lt;plugin&gt;</span>mujoco_ros2_control/MujocoSystemInterface<span class="nt">&lt;/plugin&gt;</span>
 
 <span class="w">    </span><span class="cm">&lt;!-- Path to the MuJoCo scene XML --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mujoco_model&quot;</span><span class="nt">&gt;</span>$(find<span class="w"> </span>my_description)/description/scene.xml<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"mujoco_model"</span><span class="nt">&gt;</span>$(find<span class="w"> </span>my_description)/description/scene.xml<span class="nt">&lt;/param&gt;</span>
 
 <span class="w">    </span><span class="cm">&lt;!-- Optional: load PID gains from a ROS parameters YAML file.</span>
 <span class="cm">         Enables position/velocity PID control for velocity, motor, and custom actuators. --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;pids_config_file&quot;</span><span class="nt">&gt;</span>$(find<span class="w"> </span>my_description)/config/pids.yaml<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"pids_config_file"</span><span class="nt">&gt;</span>$(find<span class="w"> </span>my_description)/config/pids.yaml<span class="nt">&lt;/param&gt;</span>
 
 <span class="w">    </span><span class="cm">&lt;!-- Optional: override the Simulate App speed scaling.</span>
 <span class="cm">         Allows running faster than real time (e.g. 5.0 = 500%). Omit or set &lt;0</span>
 <span class="cm">         to use the rate requested from the App window. --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;sim_speed_factor&quot;</span><span class="nt">&gt;</span>5.0<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"sim_speed_factor"</span><span class="nt">&gt;</span>5.0<span class="nt">&lt;/param&gt;</span>
 
 <span class="w">    </span><span class="cm">&lt;!-- Optional: apply a named keyframe from the MJCF as the initial state.</span>
 <span class="cm">         Has no effect if override_start_position_file is also set. --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;initial_keyframe&quot;</span><span class="nt">&gt;</span>optional_frame<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"initial_keyframe"</span><span class="nt">&gt;</span>optional_frame<span class="nt">&lt;/param&gt;</span>
 
 <span class="w">    </span><span class="cm">&lt;!-- Optional: load the full MuJoCo model state from a file saved via</span>
-<span class="cm">         &#39;Copy state&#39; in the Simulate window. Mutually exclusive with initial_value</span>
+<span class="cm">         'Copy state' in the Simulate window. Mutually exclusive with initial_value</span>
 <span class="cm">         on state interfaces. Ignored if the string is empty. --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;override_start_position_file&quot;</span><span class="nt">&gt;</span>$(find<span class="w"> </span>my_description)/config/start_positions.xml<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"override_start_position_file"</span><span class="nt">&gt;</span>$(find<span class="w"> </span>my_description)/config/start_positions.xml<span class="nt">&lt;/param&gt;</span>
 
 <span class="w">    </span><span class="cm">&lt;!-- Optional: topic from which the MJCF XML is read when mujoco_model is not set.</span>
 <span class="cm">         Defaults to /mujoco_robot_description. --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mujoco_model_topic&quot;</span><span class="nt">&gt;</span>/mujoco_robot_description<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"mujoco_model_topic"</span><span class="nt">&gt;</span>/mujoco_robot_description<span class="nt">&lt;/param&gt;</span>
 
 <span class="w">    </span><span class="cm">&lt;!-- Optional: run the simulator without a GUI window. Defaults to false. --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;headless&quot;</span><span class="nt">&gt;</span>false<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"headless"</span><span class="nt">&gt;</span>false<span class="nt">&lt;/param&gt;</span>
 
 <span class="w">    </span><span class="cm">&lt;!-- Optional: name of a MuJoCo free joint whose odometry is published as a</span>
 <span class="cm">         nav_msgs/Odometry message. --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;odom_free_joint_name&quot;</span><span class="nt">&gt;</span>floating_base_joint<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;odom_topic&quot;</span><span class="nt">&gt;</span>/simulator/floating_base_state<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"odom_free_joint_name"</span><span class="nt">&gt;</span>floating_base_joint<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"odom_topic"</span><span class="nt">&gt;</span>/simulator/floating_base_state<span class="nt">&lt;/param&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/hardware&gt;</span>
 ...
 </pre></div>
@@ -207,11 +207,11 @@ Specify it in your URDF and point to a valid MJCF on launch:</p>
 It is the same executable and accepts the same parameters as the upstream node:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">control_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
     <span class="c1"># Use the node from this package</span>
-    <span class="n">package</span><span class="o">=</span><span class="s2">&quot;mujoco_ros2_control&quot;</span><span class="p">,</span>
-    <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;ros2_control_node&quot;</span><span class="p">,</span>
-    <span class="n">output</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span>
+    <span class="n">package</span><span class="o">=</span><span class="s2">"mujoco_ros2_control"</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="s2">"ros2_control_node"</span><span class="p">,</span>
+    <span class="n">output</span><span class="o">=</span><span class="s2">"both"</span><span class="p">,</span>
     <span class="n">parameters</span><span class="o">=</span><span class="p">[</span>
-        <span class="p">{</span><span class="s2">&quot;use_sim_time&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">"use_sim_time"</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
         <span class="n">controller_parameters</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">)</span>
@@ -235,19 +235,19 @@ Incompatible actuator-interface combinations trigger an error at startup.</p>
 However, the active command interface can be switched dynamically, allowing control to shift between position, velocity, or effort as supported by the actuator type.</p>
 <p>For example, a position-controlled joint in MJCF:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;actuator&gt;</span>
-<span class="w">  </span><span class="nt">&lt;position</span><span class="w"> </span><span class="na">joint=</span><span class="s">&quot;joint1&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint1&quot;</span><span class="w"> </span><span class="na">kp=</span><span class="s">&quot;25000&quot;</span><span class="w"> </span><span class="na">dampratio=</span><span class="s">&quot;1.0&quot;</span><span class="w"> </span><span class="na">ctrlrange=</span><span class="s">&quot;0.0 2.0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;position</span><span class="w"> </span><span class="na">joint=</span><span class="s">"joint1"</span><span class="w"> </span><span class="na">name=</span><span class="s">"joint1"</span><span class="w"> </span><span class="na">kp=</span><span class="s">"25000"</span><span class="w"> </span><span class="na">dampratio=</span><span class="s">"1.0"</span><span class="w"> </span><span class="na">ctrlrange=</span><span class="s">"0.0 2.0"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/actuator&gt;</span>
 </pre></div>
 </div>
 <p>Maps to the following <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> hardware interface:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint1&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"joint1"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="cm">&lt;!-- Initial values for state interfaces default to 0 if not specified --&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;initial_value&quot;</span><span class="nt">&gt;</span>0.0<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"initial_value"</span><span class="nt">&gt;</span>0.0<span class="nt">&lt;/param&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/state_interface&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;effort&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"velocity"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"effort"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/joint&gt;</span>
 </pre></div>
 </div>
@@ -298,16 +298,16 @@ Tendons and other non-standard joint types in an MJCF are not directly controlla
 <p>For parallel jaw mechanisms and similar mimic joints, we recommend combining tendon actuators with an equality constraint.
 For example, from the test robot:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;actuator&gt;</span>
-<span class="w">  </span><span class="nt">&lt;position</span><span class="w"> </span><span class="na">tendon=</span><span class="s">&quot;split&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gripper_left_finger_joint&quot;</span><span class="w"> </span><span class="na">kp=</span><span class="s">&quot;1000&quot;</span><span class="w"> </span><span class="na">dampratio=</span><span class="s">&quot;3.0&quot;</span><span class="w"> </span><span class="na">ctrlrange=</span><span class="s">&quot;-0.09 0.005&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;position</span><span class="w"> </span><span class="na">tendon=</span><span class="s">"split"</span><span class="w"> </span><span class="na">name=</span><span class="s">"gripper_left_finger_joint"</span><span class="w"> </span><span class="na">kp=</span><span class="s">"1000"</span><span class="w"> </span><span class="na">dampratio=</span><span class="s">"3.0"</span><span class="w"> </span><span class="na">ctrlrange=</span><span class="s">"-0.09 0.005"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/actuator&gt;</span>
 <span class="nt">&lt;tendon&gt;</span>
-<span class="w">  </span><span class="nt">&lt;fixed</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;split&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">joint=</span><span class="s">&quot;gripper_left_finger_joint&quot;</span><span class="w"> </span><span class="na">coef=</span><span class="s">&quot;0.5&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">joint=</span><span class="s">&quot;gripper_right_finger_joint&quot;</span><span class="w"> </span><span class="na">coef=</span><span class="s">&quot;-0.5&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;fixed</span><span class="w"> </span><span class="na">name=</span><span class="s">"split"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">joint=</span><span class="s">"gripper_left_finger_joint"</span><span class="w"> </span><span class="na">coef=</span><span class="s">"0.5"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">joint=</span><span class="s">"gripper_right_finger_joint"</span><span class="w"> </span><span class="na">coef=</span><span class="s">"-0.5"</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/fixed&gt;</span>
 <span class="nt">&lt;/tendon&gt;</span>
 <span class="nt">&lt;equality&gt;</span>
-<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">joint1=</span><span class="s">&quot;gripper_left_finger_joint&quot;</span><span class="w"> </span><span class="na">joint2=</span><span class="s">&quot;gripper_right_finger_joint&quot;</span><span class="w"> </span><span class="na">polycoef=</span><span class="s">&quot;0 -1 0 0 0&quot;</span><span class="w"> </span><span class="na">solimp=</span><span class="s">&quot;0.95 0.99 0.001&quot;</span><span class="w"> </span><span class="na">solref=</span><span class="s">&quot;0.005 1&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">joint1=</span><span class="s">"gripper_left_finger_joint"</span><span class="w"> </span><span class="na">joint2=</span><span class="s">"gripper_right_finger_joint"</span><span class="w"> </span><span class="na">polycoef=</span><span class="s">"0 -1 0 0 0"</span><span class="w"> </span><span class="na">solimp=</span><span class="s">"0.95 0.99 0.001"</span><span class="w"> </span><span class="na">solref=</span><span class="s">"0.005 1"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/equality&gt;</span>
 </pre></div>
 </div>
@@ -322,25 +322,25 @@ MuJoCo does not model complete FTS and IMUs natively, so we combine supported MJ
 <h3>Force-Torque Sensors<a class="headerlink" href="#force-torque-sensors" title="Link to this heading"></a></h3>
 <p>Model <code class="docutils literal notranslate"><span class="pre">force</span></code> and <code class="docutils literal notranslate"><span class="pre">torque</span></code> sensors separately in the MJCF, suffixed with <code class="docutils literal notranslate"><span class="pre">_force</span></code> and <code class="docutils literal notranslate"><span class="pre">_torque</span></code>:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;sensor&gt;</span>
-<span class="w">  </span><span class="nt">&lt;force</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;fts_sensor_force&quot;</span><span class="w"> </span><span class="na">site=</span><span class="s">&quot;ft_frame&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;torque</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;fts_sensor_torque&quot;</span><span class="w"> </span><span class="na">site=</span><span class="s">&quot;ft_frame&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;force</span><span class="w"> </span><span class="na">name=</span><span class="s">"fts_sensor_force"</span><span class="w"> </span><span class="na">site=</span><span class="s">"ft_frame"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;torque</span><span class="w"> </span><span class="na">name=</span><span class="s">"fts_sensor_torque"</span><span class="w"> </span><span class="na">site=</span><span class="s">"ft_frame"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/sensor&gt;</span>
 </pre></div>
 </div>
 <p>Map them to a single <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> sensor:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;fts_sensor&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mujoco_type&quot;</span><span class="nt">&gt;</span>fts<span class="nt">&lt;/param&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">"fts_sensor"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"mujoco_type"</span><span class="nt">&gt;</span>fts<span class="nt">&lt;/param&gt;</span>
 <span class="w">  </span><span class="cm">&lt;!-- mujoco_sensor_name does not need to match the ros2_control sensor name --&gt;</span>
-<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mujoco_sensor_name&quot;</span><span class="nt">&gt;</span>fts_sensor<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"mujoco_sensor_name"</span><span class="nt">&gt;</span>fts_sensor<span class="nt">&lt;/param&gt;</span>
 <span class="w">  </span><span class="cm">&lt;!-- Defaults: _force and _torque --&gt;</span>
-<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;force_mjcf_suffix&quot;</span><span class="nt">&gt;</span>_force<span class="nt">&lt;/param&gt;</span>
-<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;torque_mjcf_suffix&quot;</span><span class="nt">&gt;</span>_torque<span class="nt">&lt;/param&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;force.x&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;force.y&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;force.z&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;torque.x&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;torque.y&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;torque.z&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"force_mjcf_suffix"</span><span class="nt">&gt;</span>_force<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"torque_mjcf_suffix"</span><span class="nt">&gt;</span>_torque<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"force.x"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"force.y"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"force.z"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"torque.x"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"torque.y"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"torque.z"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/sensor&gt;</span>
 </pre></div>
 </div>
@@ -349,31 +349,31 @@ MuJoCo does not model complete FTS and IMUs natively, so we combine supported MJ
 <h3>IMU<a class="headerlink" href="#imu" title="Link to this heading"></a></h3>
 <p>Simulate a <code class="docutils literal notranslate"><span class="pre">framequat</span></code>, <code class="docutils literal notranslate"><span class="pre">gyro</span></code>, and <code class="docutils literal notranslate"><span class="pre">accelerometer</span></code> as a single IMU:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;sensor&gt;</span>
-<span class="w">  </span><span class="nt">&lt;framequat</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;imu_sensor_quat&quot;</span><span class="w"> </span><span class="na">objtype=</span><span class="s">&quot;site&quot;</span><span class="w"> </span><span class="na">objname=</span><span class="s">&quot;imu_sensor&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;gyro</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;imu_sensor_gyro&quot;</span><span class="w"> </span><span class="na">site=</span><span class="s">&quot;imu_sensor&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;accelerometer</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;imu_sensor_accel&quot;</span><span class="w"> </span><span class="na">site=</span><span class="s">&quot;imu_sensor&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;framequat</span><span class="w"> </span><span class="na">name=</span><span class="s">"imu_sensor_quat"</span><span class="w"> </span><span class="na">objtype=</span><span class="s">"site"</span><span class="w"> </span><span class="na">objname=</span><span class="s">"imu_sensor"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;gyro</span><span class="w"> </span><span class="na">name=</span><span class="s">"imu_sensor_gyro"</span><span class="w"> </span><span class="na">site=</span><span class="s">"imu_sensor"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;accelerometer</span><span class="w"> </span><span class="na">name=</span><span class="s">"imu_sensor_accel"</span><span class="w"> </span><span class="na">site=</span><span class="s">"imu_sensor"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/sensor&gt;</span>
 </pre></div>
 </div>
 <p>Map to the corresponding <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> sensor:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;imu_sensor&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mujoco_type&quot;</span><span class="nt">&gt;</span>imu<span class="nt">&lt;/param&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">"imu_sensor"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"mujoco_type"</span><span class="nt">&gt;</span>imu<span class="nt">&lt;/param&gt;</span>
 <span class="w">  </span><span class="cm">&lt;!-- mujoco_sensor_name does not need to match the ros2_control sensor name --&gt;</span>
-<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mujoco_sensor_name&quot;</span><span class="nt">&gt;</span>imu_sensor<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"mujoco_sensor_name"</span><span class="nt">&gt;</span>imu_sensor<span class="nt">&lt;/param&gt;</span>
 <span class="w">  </span><span class="cm">&lt;!-- Defaults: _quat, _gyro, _accel --&gt;</span>
-<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;orientation_mjcf_suffix&quot;</span><span class="nt">&gt;</span>_quat<span class="nt">&lt;/param&gt;</span>
-<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;angular_velocity_mjcf_suffix&quot;</span><span class="nt">&gt;</span>_gyro<span class="nt">&lt;/param&gt;</span>
-<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;linear_acceleration_mjcf_suffix&quot;</span><span class="nt">&gt;</span>_accel<span class="nt">&lt;/param&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;orientation.x&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;orientation.y&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;orientation.z&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;orientation.w&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;angular_velocity.x&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;angular_velocity.y&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;angular_velocity.z&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;linear_acceleration.x&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;linear_acceleration.y&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;linear_acceleration.z&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"orientation_mjcf_suffix"</span><span class="nt">&gt;</span>_quat<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"angular_velocity_mjcf_suffix"</span><span class="nt">&gt;</span>_gyro<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"linear_acceleration_mjcf_suffix"</span><span class="nt">&gt;</span>_accel<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"orientation.x"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"orientation.y"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"orientation.z"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"orientation.w"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"angular_velocity.x"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"angular_velocity.y"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"angular_velocity.z"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"linear_acceleration.x"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"linear_acceleration.y"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"linear_acceleration.z"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/sensor&gt;</span>
 </pre></div>
 </div>
@@ -383,18 +383,18 @@ MuJoCo does not model complete FTS and IMUs natively, so we combine supported MJ
 <h3>Magnetometer<a class="headerlink" href="#magnetometer" title="Link to this heading"></a></h3>
 <p>Model a MuJoCo <code class="docutils literal notranslate"><span class="pre">magnetometer</span></code> sensor in the MJCF:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;sensor&gt;</span>
-<span class="w">  </span><span class="nt">&lt;magnetometer</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;magnetometer_sensor&quot;</span><span class="w"> </span><span class="na">site=</span><span class="s">&quot;imu_sensor&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;magnetometer</span><span class="w"> </span><span class="na">name=</span><span class="s">"magnetometer_sensor"</span><span class="w"> </span><span class="na">site=</span><span class="s">"imu_sensor"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/sensor&gt;</span>
 </pre></div>
 </div>
 <p>Map it to the corresponding <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> sensor:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;magnetometer_sensor&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mujoco_type&quot;</span><span class="nt">&gt;</span>magnetometer<span class="nt">&lt;/param&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">"magnetometer_sensor"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"mujoco_type"</span><span class="nt">&gt;</span>magnetometer<span class="nt">&lt;/param&gt;</span>
 <span class="w">  </span><span class="cm">&lt;!-- mujoco_sensor_name does not need to match the ros2_control sensor name --&gt;</span>
-<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mujoco_sensor_name&quot;</span><span class="nt">&gt;</span>magnetometer_sensor<span class="nt">&lt;/param&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;magnetic_field.x&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;magnetic_field.y&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;magnetic_field.z&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"mujoco_sensor_name"</span><span class="nt">&gt;</span>magnetometer_sensor<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"magnetic_field.x"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"magnetic_field.y"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"magnetic_field.z"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/sensor&gt;</span>
 </pre></div>
 </div>
@@ -427,10 +427,10 @@ Refer to the <a class="reference internal" href="../../mujoco_ros2_control_plugi
 <li><p>When resuming, the physics loop automatically re-syncs its wall-clock reference so no catch-up steps are executed.</p></li>
 </ul>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pause the simulation</span>
-ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/set_pause<span class="w"> </span>mujoco_ros2_control_msgs/srv/SetPause<span class="w"> </span><span class="s2">&quot;{paused: true}&quot;</span>
+ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/set_pause<span class="w"> </span>mujoco_ros2_control_msgs/srv/SetPause<span class="w"> </span><span class="s2">"{paused: true}"</span>
 
 <span class="c1"># Resume the simulation</span>
-ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/set_pause<span class="w"> </span>mujoco_ros2_control_msgs/srv/SetPause<span class="w"> </span><span class="s2">&quot;{paused: false}&quot;</span>
+ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/set_pause<span class="w"> </span>mujoco_ros2_control_msgs/srv/SetPause<span class="w"> </span><span class="s2">"{paused: false}"</span>
 </pre></div>
 </div>
 </dd>
@@ -460,21 +460,21 @@ usually actuated, so writing one has to re-sync the hardware interface’s comma
 That reconciliation only happens as part of a reset, which is why the capability lives here.</p>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reset to startup state</span>
-ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/reset_world<span class="w"> </span>mujoco_ros2_control_msgs/srv/ResetWorld<span class="w"> </span><span class="s2">&quot;{}&quot;</span>
+ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/reset_world<span class="w"> </span>mujoco_ros2_control_msgs/srv/ResetWorld<span class="w"> </span><span class="s2">"{}"</span>
 
 <span class="c1"># Reset to a named MJCF keyframe</span>
-ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/reset_world<span class="w"> </span>mujoco_ros2_control_msgs/srv/ResetWorld<span class="w"> </span><span class="s2">&quot;{keyframe: &#39;home&#39;}&quot;</span>
+ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/reset_world<span class="w"> </span>mujoco_ros2_control_msgs/srv/ResetWorld<span class="w"> </span><span class="s2">"{keyframe: 'home'}"</span>
 
-<span class="c1"># Reset to a keyframe, but with the cabinet door open and &quot;box_1&quot; placed on the table</span>
+<span class="c1"># Reset to a keyframe, but with the cabinet door open and "box_1" placed on the table</span>
 ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/reset_world<span class="w"> </span>mujoco_ros2_control_msgs/srv/ResetWorld<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="s2">&quot;{keyframe: &#39;home&#39;,</span>
+<span class="w">  </span><span class="s2">"{keyframe: 'home',</span>
 <span class="s2">    state_overrides: {</span>
-<span class="s2">      joint_states: {name: [&#39;door_hinge&#39;], position: [1.57]},</span>
+<span class="s2">      joint_states: {name: ['door_hinge'], position: [1.57]},</span>
 <span class="s2">      free_joints: [</span>
-<span class="s2">        {name: &#39;box_1&#39;, pose: {header: {frame_id: &#39;table&#39;}, pose: {position: {z: 0.4}}}}</span>
+<span class="s2">        {name: 'box_1', pose: {header: {frame_id: 'table'}, pose: {position: {z: 0.4}}}}</span>
 <span class="s2">      ]</span>
 <span class="s2">    }</span>
-<span class="s2">  }&quot;</span>
+<span class="s2">  }"</span>
 </pre></div>
 </div>
 <div class="admonition important">
@@ -495,7 +495,7 @@ command the joints elsewhere on its next update.</p>
 <li><p>Timeout: whichever is larger — 30 s, or 10 ms × <code class="docutils literal notranslate"><span class="pre">steps</span></code>.</p></li>
 </ul>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step the simulation forward by 100 physics steps</span>
-ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/step_simulation<span class="w"> </span>mujoco_ros2_control_msgs/srv/StepSimulation<span class="w"> </span><span class="s2">&quot;{steps: 100}&quot;</span>
+ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/step_simulation<span class="w"> </span>mujoco_ros2_control_msgs/srv/StepSimulation<span class="w"> </span><span class="s2">"{steps: 100}"</span>
 </pre></div>
 </div>
 </dd>
@@ -533,26 +533,26 @@ the last one wins.</p></li>
 <li><p>To <em>observe</em> the current state of every free-joint object, see the <code class="docutils literal notranslate"><span class="pre">FreeJointPlugin</span></code> in
 <code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control_plugins</span></code> (published on its <code class="docutils literal notranslate"><span class="pre">free_joint_states</span></code> topic).</p></li>
 </ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Teleport &quot;box_1&quot; to (x=0, y=0, z=1) with identity orientation, at rest</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Teleport "box_1" to (x=0, y=0, z=1) with identity orientation, at rest</span>
 ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/set_free_joint_state<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>mujoco_ros2_control_msgs/srv/SetFreeJointState<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="s2">&quot;{free_joints: [{name: &#39;box_1&#39;, pose: {pose: {position: {x: 0.0, y: 0.0, z: 1.0}}}}]}&quot;</span>
+<span class="w">  </span><span class="s2">"{free_joints: [{name: 'box_1', pose: {pose: {position: {x: 0.0, y: 0.0, z: 1.0}}}}]}"</span>
 
-<span class="c1"># Place &quot;box_1&quot; 10 cm above the &quot;gripper_link&quot; body, in that link&#39;s frame, while giving</span>
+<span class="c1"># Place "box_1" 10 cm above the "gripper_link" body, in that link's frame, while giving</span>
 <span class="c1"># it a world-frame velocity</span>
 ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/set_free_joint_state<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>mujoco_ros2_control_msgs/srv/SetFreeJointState<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="s2">&quot;{free_joints: [{name: &#39;box_1&#39;,</span>
-<span class="s2">                   pose: {header: {frame_id: &#39;gripper_link&#39;}, pose: {position: {z: 0.1}}},</span>
-<span class="s2">                   twist: {twist: {linear: {x: 0.2}}}}]}&quot;</span>
+<span class="w">  </span><span class="s2">"{free_joints: [{name: 'box_1',</span>
+<span class="s2">                   pose: {header: {frame_id: 'gripper_link'}, pose: {position: {z: 0.1}}},</span>
+<span class="s2">                   twist: {twist: {linear: {x: 0.2}}}}]}"</span>
 
-<span class="c1"># Teleport both &quot;box_1&quot; and &quot;box_2&quot; in a single, atomic call</span>
+<span class="c1"># Teleport both "box_1" and "box_2" in a single, atomic call</span>
 ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/set_free_joint_state<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>mujoco_ros2_control_msgs/srv/SetFreeJointState<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="s2">&quot;{free_joints: [</span>
-<span class="s2">    {name: &#39;box_1&#39;, pose: {pose: {position: {x: 0.0, y: 0.0, z: 1.0}}}},</span>
-<span class="s2">    {name: &#39;box_2&#39;, pose: {pose: {position: {x: 1.0, y: 0.0, z: 1.0}}}}</span>
-<span class="s2">  ]}&quot;</span>
+<span class="w">  </span><span class="s2">"{free_joints: [</span>
+<span class="s2">    {name: 'box_1', pose: {pose: {position: {x: 0.0, y: 0.0, z: 1.0}}}},</span>
+<span class="s2">    {name: 'box_2', pose: {pose: {position: {x: 1.0, y: 0.0, z: 1.0}}}}</span>
+<span class="s2">  ]}"</span>
 </pre></div>
 </div>
 </dd>
@@ -583,10 +583,10 @@ This is particularly useful for automated testing scenarios where a reproducible
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pause the simulation first (from the UI or via the set_pause service), then:</span>
 
 <span class="c1"># Advance by a single physics step</span>
-ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/step_simulation<span class="w"> </span>mujoco_ros2_control_msgs/srv/StepSimulation<span class="w"> </span><span class="s2">&quot;{steps: 1}&quot;</span>
+ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/step_simulation<span class="w"> </span>mujoco_ros2_control_msgs/srv/StepSimulation<span class="w"> </span><span class="s2">"{steps: 1}"</span>
 
 <span class="c1"># Advance by 500 steps (blocks until complete)</span>
-ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/step_simulation<span class="w"> </span>mujoco_ros2_control_msgs/srv/StepSimulation<span class="w"> </span><span class="s2">&quot;{steps: 500}&quot;</span>
+ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ros2_control_node/step_simulation<span class="w"> </span>mujoco_ros2_control_msgs/srv/StepSimulation<span class="w"> </span><span class="s2">"{steps: 500}"</span>
 </pre></div>
 </div>
 <p>The service call blocks until all requested steps have been executed, the simulation diverges, or a timeout is reached.

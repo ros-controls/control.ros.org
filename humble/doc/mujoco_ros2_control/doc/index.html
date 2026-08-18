@@ -191,29 +191,29 @@ ros2<span class="w"> </span>launch<span class="w"> </span>mujoco_ros2_control_de
 <h2>Add ros2_control tag to a URDF<a class="headerlink" href="#add-ros2-control-tag-to-a-urdf" title="Link to this heading"></a></h2>
 <p>To use <em>ros2_control</em> with your robot in MuJoCo, add a <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code> tag to your URDF
 pointing to the <code class="docutils literal notranslate"><span class="pre">MujocoSystemInterface</span></code> plugin and your MJCF scene file:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;MujocoSystem&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">"MujocoSystem"</span><span class="w"> </span><span class="na">type=</span><span class="s">"system"</span><span class="nt">&gt;</span>
 <span class="w">  </span><span class="nt">&lt;hardware&gt;</span>
 <span class="w">    </span><span class="nt">&lt;plugin&gt;</span>mujoco_ros2_control/MujocoSystemInterface<span class="nt">&lt;/plugin&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mujoco_model&quot;</span><span class="nt">&gt;</span>$(find<span class="w"> </span>my_description)/description/scene.xml<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"mujoco_model"</span><span class="nt">&gt;</span>$(find<span class="w"> </span>my_description)/description/scene.xml<span class="nt">&lt;/param&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/hardware&gt;</span>
-<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint1&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;initial_value&quot;</span><span class="nt">&gt;</span>0.0<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"joint1"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"initial_value"</span><span class="nt">&gt;</span>0.0<span class="nt">&lt;/param&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/state_interface&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;effort&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"velocity"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"effort"</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
 <span class="nt">&lt;/ros2_control&gt;</span>
 </pre></div>
 </div>
 <p>Due to compatibility requirements, a slightly modified <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> node from this package must be used:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">control_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
-    <span class="n">package</span><span class="o">=</span><span class="s2">&quot;mujoco_ros2_control&quot;</span><span class="p">,</span>
-    <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;ros2_control_node&quot;</span><span class="p">,</span>
-    <span class="n">output</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span>
+    <span class="n">package</span><span class="o">=</span><span class="s2">"mujoco_ros2_control"</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="s2">"ros2_control_node"</span><span class="p">,</span>
+    <span class="n">output</span><span class="o">=</span><span class="s2">"both"</span><span class="p">,</span>
     <span class="n">parameters</span><span class="o">=</span><span class="p">[</span>
-        <span class="p">{</span><span class="s2">&quot;use_sim_time&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">"use_sim_time"</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
         <span class="n">controller_parameters</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">)</span>

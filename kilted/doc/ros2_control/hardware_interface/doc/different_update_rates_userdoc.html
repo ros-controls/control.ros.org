@@ -128,70 +128,70 @@ This is useful when you have a hardware component that needs to run at a higher 
 <p>The following examples show how to use the different hardware interface types with different update frequencies in a <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> URDF.
 They can be combined together within the different hardware component types (system, actuator, sensor) (<a class="reference internal" href="../../../getting_started/getting_started.html#overview-hardware-components"><span class="std std-ref">see detailed documentation</span></a>) as follows</p>
 <p>For a RRBot with Multimodal gripper and external sensor running at different rates:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;RRBotSystemMutipleGPIOs&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="w"> </span><span class="na">rw_rate=</span><span class="s">&quot;500&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">"RRBotSystemMutipleGPIOs"</span><span class="w"> </span><span class="na">type=</span><span class="s">"system"</span><span class="w"> </span><span class="na">rw_rate=</span><span class="s">"500"</span><span class="nt">&gt;</span>
 <span class="w">  </span><span class="nt">&lt;hardware&gt;</span>
 <span class="w">    </span><span class="nt">&lt;plugin&gt;</span>ros2_control_demo_hardware/RRBotSystemPositionOnlyHardware<span class="nt">&lt;/plugin&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;example_param_hw_start_duration_sec&quot;</span><span class="nt">&gt;</span>2.0<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;example_param_hw_stop_duration_sec&quot;</span><span class="nt">&gt;</span>3.0<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;example_param_hw_slowdown&quot;</span><span class="nt">&gt;</span>2.0<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"example_param_hw_start_duration_sec"</span><span class="nt">&gt;</span>2.0<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"example_param_hw_stop_duration_sec"</span><span class="nt">&gt;</span>3.0<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"example_param_hw_slowdown"</span><span class="nt">&gt;</span>2.0<span class="nt">&lt;/param&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/hardware&gt;</span>
-<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint1&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;min&quot;</span><span class="nt">&gt;</span>-1<span class="nt">&lt;/param&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;max&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"joint1"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"min"</span><span class="nt">&gt;</span>-1<span class="nt">&lt;/param&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"max"</span><span class="nt">&gt;</span>1<span class="nt">&lt;/param&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/command_interface&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
-<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint2&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;min&quot;</span><span class="nt">&gt;</span>-1<span class="nt">&lt;/param&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;max&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"joint2"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"min"</span><span class="nt">&gt;</span>-1<span class="nt">&lt;/param&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"max"</span><span class="nt">&gt;</span>1<span class="nt">&lt;/param&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/command_interface&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
-<span class="w">  </span><span class="nt">&lt;gpio</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;flange_digital_IOs&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;digital_output1&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;digital_output1&quot;</span><span class="nt">/&gt;</span><span class="w">    </span><span class="cm">&lt;!-- Needed to know current state of the output --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;digital_output2&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;digital_output2&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;digital_input1&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;digital_input2&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;gpio</span><span class="w"> </span><span class="na">name=</span><span class="s">"flange_digital_IOs"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"digital_output1"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"digital_output1"</span><span class="nt">/&gt;</span><span class="w">    </span><span class="cm">&lt;!-- Needed to know current state of the output --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"digital_output2"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"digital_output2"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"digital_input1"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"digital_input2"</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/gpio&gt;</span>
 <span class="nt">&lt;/ros2_control&gt;</span>
-<span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;MultimodalGripper&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;actuator&quot;</span><span class="w"> </span><span class="na">rw_rate=</span><span class="s">&quot;200&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">"MultimodalGripper"</span><span class="w"> </span><span class="na">type=</span><span class="s">"actuator"</span><span class="w"> </span><span class="na">rw_rate=</span><span class="s">"200"</span><span class="nt">&gt;</span>
 <span class="w">  </span><span class="nt">&lt;hardware&gt;</span>
 <span class="w">    </span><span class="nt">&lt;plugin&gt;</span>ros2_control_demo_hardware/MultimodalGripper<span class="nt">&lt;/plugin&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/hardware&gt;</span>
-<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;parallel_fingers&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;min&quot;</span><span class="nt">&gt;</span>0<span class="nt">&lt;/param&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;max&quot;</span><span class="nt">&gt;</span>100<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"parallel_fingers"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"min"</span><span class="nt">&gt;</span>0<span class="nt">&lt;/param&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"max"</span><span class="nt">&gt;</span>100<span class="nt">&lt;/param&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/command_interface&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
-<span class="w">  </span><span class="nt">&lt;gpio</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;suction&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;suction&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;suction&quot;</span><span class="nt">/&gt;</span><span class="w">    </span><span class="cm">&lt;!-- Needed to know current state of the output --&gt;</span>
+<span class="w">  </span><span class="nt">&lt;gpio</span><span class="w"> </span><span class="na">name=</span><span class="s">"suction"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"suction"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"suction"</span><span class="nt">/&gt;</span><span class="w">    </span><span class="cm">&lt;!-- Needed to know current state of the output --&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/gpio&gt;</span>
 <span class="nt">&lt;/ros2_control&gt;</span>
-<span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;RRBotForceTorqueSensor2D&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;sensor&quot;</span><span class="w"> </span><span class="na">rw_rate=</span><span class="s">&quot;250&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">"RRBotForceTorqueSensor2D"</span><span class="w"> </span><span class="na">type=</span><span class="s">"sensor"</span><span class="w"> </span><span class="na">rw_rate=</span><span class="s">"250"</span><span class="nt">&gt;</span>
 <span class="w">  </span><span class="nt">&lt;hardware&gt;</span>
 <span class="w">    </span><span class="nt">&lt;plugin&gt;</span>ros2_control_demo_hardware/ForceTorqueSensor2DHardware<span class="nt">&lt;/plugin&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;example_param_read_for_sec&quot;</span><span class="nt">&gt;</span>0.43<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"example_param_read_for_sec"</span><span class="nt">&gt;</span>0.43<span class="nt">&lt;/param&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/hardware&gt;</span>
-<span class="w">  </span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;tcp_fts_sensor&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;fx&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;tz&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;frame_id&quot;</span><span class="nt">&gt;</span>kuka_tcp<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;fx_range&quot;</span><span class="nt">&gt;</span>100<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;tz_range&quot;</span><span class="nt">&gt;</span>100<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">"tcp_fts_sensor"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"fx"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"tz"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"frame_id"</span><span class="nt">&gt;</span>kuka_tcp<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"fx_range"</span><span class="nt">&gt;</span>100<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"tz_range"</span><span class="nt">&gt;</span>100<span class="nt">&lt;/param&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/sensor&gt;</span>
-<span class="w">  </span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;temp_feedback&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;temperature&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">"temp_feedback"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"temperature"</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/sensor&gt;</span>
-<span class="w">  </span><span class="nt">&lt;gpio</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;calibration&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;calibration_matrix_nr&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;calibration_matrix_nr&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;gpio</span><span class="w"> </span><span class="na">name=</span><span class="s">"calibration"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"calibration_matrix_nr"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"calibration_matrix_nr"</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/gpio&gt;</span>
 <span class="nt">&lt;/ros2_control&gt;</span>
 </pre></div>

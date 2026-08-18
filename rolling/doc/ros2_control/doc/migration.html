@@ -150,7 +150,7 @@
 <span class="p">{</span>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">StateInterface</span><span class="o">&gt;</span><span class="w"> </span><span class="n">state_interfaces</span><span class="p">;</span>
 <span class="w">  </span><span class="n">state_interfaces</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">get_node</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get_name</span><span class="p">())</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;/my_state&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;position&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">my_state_value_</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">get_node</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get_name</span><span class="p">())</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">"/my_state"</span><span class="p">,</span><span class="w"> </span><span class="s">"position"</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">my_state_value_</span><span class="p">);</span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">state_interfaces</span><span class="p">;</span>
 <span class="p">}</span>
 
@@ -160,7 +160,7 @@
 <span class="p">{</span>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">StateInterface</span><span class="o">::</span><span class="n">SharedPtr</span><span class="o">&gt;</span><span class="w"> </span><span class="n">state_interfaces</span><span class="p">;</span>
 <span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">state_interface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">StateInterface</span><span class="o">&gt;</span><span class="p">(</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">get_node</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get_name</span><span class="p">())</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;/my_state&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;position&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">get_node</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get_name</span><span class="p">())</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">"/my_state"</span><span class="p">,</span><span class="w"> </span><span class="s">"position"</span><span class="p">);</span>
 <span class="w">  </span><span class="n">state_interface</span><span class="o">-&gt;</span><span class="n">set_value</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;::</span><span class="n">quiet_NaN</span><span class="p">());</span>
 <span class="w">  </span><span class="n">state_interfaces</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">state_interface</span><span class="p">);</span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">state_interfaces</span><span class="p">;</span>
@@ -184,7 +184,7 @@
 <span class="w">  </span><span class="n">reference_interfaces_</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;::</span><span class="n">quiet_NaN</span><span class="p">());</span>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">CommandInterface</span><span class="o">&gt;</span><span class="w"> </span><span class="n">reference_interfaces</span><span class="p">;</span>
 <span class="w">  </span><span class="n">reference_interfaces</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">get_node</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get_name</span><span class="p">())</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;/my_ref&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;velocity&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">reference_interfaces_</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">get_node</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get_name</span><span class="p">())</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">"/my_ref"</span><span class="p">,</span><span class="w"> </span><span class="s">"velocity"</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">reference_interfaces_</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">reference_interfaces</span><span class="p">;</span>
 <span class="p">}</span>
 
@@ -194,7 +194,7 @@
 <span class="p">{</span>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">CommandInterface</span><span class="o">::</span><span class="n">SharedPtr</span><span class="o">&gt;</span><span class="w"> </span><span class="n">reference_interfaces</span><span class="p">;</span>
 <span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">cmd_interface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">CommandInterface</span><span class="o">&gt;</span><span class="p">(</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">get_node</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get_name</span><span class="p">())</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;/my_ref&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;velocity&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">get_node</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get_name</span><span class="p">())</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">"/my_ref"</span><span class="p">,</span><span class="w"> </span><span class="s">"velocity"</span><span class="p">);</span>
 <span class="w">  </span><span class="n">cmd_interface</span><span class="o">-&gt;</span><span class="n">set_value</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;::</span><span class="n">quiet_NaN</span><span class="p">());</span>
 <span class="w">  </span><span class="n">reference_interfaces</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">cmd_interface</span><span class="p">);</span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">reference_interfaces</span><span class="p">;</span>
@@ -208,29 +208,29 @@
 So, any remapping done at the controller manager level will not be visible to the controllers anymore.
 It is recommended to use the <code class="docutils literal notranslate"><span class="pre">--controller-ros-args</span></code> option of the spawner to pass ros arguments to controllers.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">control_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
-    <span class="n">package</span><span class="o">=</span><span class="s2">&quot;controller_manager&quot;</span><span class="p">,</span>
-    <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;ros2_control_node&quot;</span><span class="p">,</span>
+    <span class="n">package</span><span class="o">=</span><span class="s2">"controller_manager"</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="s2">"ros2_control_node"</span><span class="p">,</span>
     <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">robot_controllers</span><span class="p">],</span>
-    <span class="n">remappings</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;/diffbot_base_controller/cmd_vel&quot;</span><span class="p">,</span> <span class="s2">&quot;/cmd_vel&quot;</span><span class="p">)],</span>
-    <span class="n">output</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span>
+    <span class="n">remappings</span><span class="o">=</span><span class="p">[(</span><span class="s2">"/diffbot_base_controller/cmd_vel"</span><span class="p">,</span> <span class="s2">"/cmd_vel"</span><span class="p">)],</span>
+    <span class="n">output</span><span class="o">=</span><span class="s2">"both"</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p>to</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">control_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
-    <span class="n">package</span><span class="o">=</span><span class="s2">&quot;controller_manager&quot;</span><span class="p">,</span>
-    <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;ros2_control_node&quot;</span><span class="p">,</span>
+    <span class="n">package</span><span class="o">=</span><span class="s2">"controller_manager"</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="s2">"ros2_control_node"</span><span class="p">,</span>
     <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">robot_controllers</span><span class="p">],</span>
-    <span class="n">output</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span>
+    <span class="n">output</span><span class="o">=</span><span class="s2">"both"</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">spawner_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
-    <span class="n">package</span><span class="o">=</span><span class="s2">&quot;controller_manager&quot;</span><span class="p">,</span>
-    <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;spawner&quot;</span><span class="p">,</span>
+    <span class="n">package</span><span class="o">=</span><span class="s2">"controller_manager"</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="s2">"spawner"</span><span class="p">,</span>
     <span class="n">arguments</span><span class="o">=</span><span class="p">[</span>
-        <span class="s2">&quot;diffbot_base_controller&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;--controller-ros-args&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;--remap&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;/diffbot_base_controller/cmd_vel:=/cmd_vel&quot;</span><span class="p">,</span>
+        <span class="s2">"diffbot_base_controller"</span><span class="p">,</span>
+        <span class="s2">"--controller-ros-args"</span><span class="p">,</span>
+        <span class="s2">"--remap"</span><span class="p">,</span>
+        <span class="s2">"/diffbot_base_controller/cmd_vel:=/cmd_vel"</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">)</span>
 </pre></div>

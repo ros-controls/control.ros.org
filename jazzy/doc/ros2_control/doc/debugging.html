@@ -154,18 +154,18 @@ Ensure you start your debugger from a terminal where you have sourced your works
 </ul>
 <p>Example launch file entry:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Obtain the controller config file for the ros2 control node</span>
-<span class="n">controller_config_file</span> <span class="o">=</span> <span class="n">get_package_file</span><span class="p">(</span><span class="s2">&quot;&lt;package name&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;config/controllers.yaml&quot;</span><span class="p">)</span>
+<span class="n">controller_config_file</span> <span class="o">=</span> <span class="n">get_package_file</span><span class="p">(</span><span class="s2">"&lt;package name&gt;"</span><span class="p">,</span> <span class="s2">"config/controllers.yaml"</span><span class="p">)</span>
 
 <span class="n">controller_manager</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
-    <span class="n">package</span><span class="o">=</span><span class="s2">&quot;controller_manager&quot;</span><span class="p">,</span>
-    <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;ros2_control_node&quot;</span><span class="p">,</span>
+    <span class="n">package</span><span class="o">=</span><span class="s2">"controller_manager"</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="s2">"ros2_control_node"</span><span class="p">,</span>
     <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">controller_config_file</span><span class="p">],</span>
-    <span class="n">output</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span>
+    <span class="n">output</span><span class="o">=</span><span class="s2">"both"</span><span class="p">,</span>
     <span class="n">emulate_tty</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">remappings</span><span class="o">=</span><span class="p">[</span>
-        <span class="p">(</span><span class="s2">&quot;~/robot_description&quot;</span><span class="p">,</span> <span class="s2">&quot;/robot_description&quot;</span><span class="p">)</span>
+        <span class="p">(</span><span class="s2">"~/robot_description"</span><span class="p">,</span> <span class="s2">"/robot_description"</span><span class="p">)</span>
     <span class="p">],</span>
-    <span class="n">prefix</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;xterm -e gdb -ex run --args&#39;</span><span class="p">]</span>  <span class="c1"># or prefix=[&#39;gdbserver localhost:3000&#39;]</span>
+    <span class="n">prefix</span><span class="o">=</span><span class="p">[</span><span class="s1">'xterm -e gdb -ex run --args'</span><span class="p">]</span>  <span class="c1"># or prefix=['gdbserver localhost:3000']</span>
 <span class="p">)</span>
 
 <span class="n">ld</span><span class="o">.</span><span class="n">add_action</span><span class="p">(</span><span class="n">controller_manager</span><span class="p">)</span>

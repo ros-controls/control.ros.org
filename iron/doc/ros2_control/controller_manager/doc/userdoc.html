@@ -174,10 +174,10 @@ The full structure of the map is given in the following example:</p>
 </dl>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">hardware_components_initial_state</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">unconfigured</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;arm1&quot;</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;arm2&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"arm1"</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"arm2"</span>
 <span class="w">  </span><span class="nt">inactive</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;base3&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"base3"</span>
 </pre></div>
 </div>
 <dl class="simple">
@@ -346,12 +346,12 @@ This occurs whether the Nodes are siblings or exist in a hierarchy.</p>
 <img alt="../../../../_images/global_specific_remap.png" src="../../../../_images/global_specific_remap.png" />
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller_manager</span><span class="o">::</span><span class="n">get_cm_node_options</span><span class="p">();</span>
 <span class="w">  </span><span class="n">options</span><span class="p">.</span><span class="n">arguments</span><span class="p">({</span>
-<span class="w">    </span><span class="s">&quot;--ros-args&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s">&quot;--remap&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;_target_node_name:__node:=dst_node_name&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s">&quot;--log-level&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;info&quot;</span><span class="p">});</span>
+<span class="w">    </span><span class="s">"--ros-args"</span><span class="p">,</span>
+<span class="w">    </span><span class="s">"--remap"</span><span class="p">,</span><span class="w"> </span><span class="s">"_target_node_name:__node:=dst_node_name"</span><span class="p">,</span>
+<span class="w">    </span><span class="s">"--log-level"</span><span class="p">,</span><span class="w"> </span><span class="s">"info"</span><span class="p">});</span>
 
 <span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">cm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">controller_manager</span><span class="o">::</span><span class="n">ControllerManager</span><span class="o">&gt;</span><span class="p">(</span>
-<span class="w">    </span><span class="n">executor</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;_target_node_name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;some_optional_namespace&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">options</span><span class="p">);</span>
+<span class="w">    </span><span class="n">executor</span><span class="p">,</span><span class="w"> </span><span class="s">"_target_node_name"</span><span class="p">,</span><span class="w"> </span><span class="s">"some_optional_namespace"</span><span class="p">,</span><span class="w"> </span><span class="n">options</span><span class="p">);</span>
 </pre></div>
 </div>
 </section>

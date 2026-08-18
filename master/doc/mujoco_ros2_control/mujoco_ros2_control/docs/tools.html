@@ -337,14 +337,14 @@ ground textures, skybox definitions, etc.). A <code class="docutils literal notr
 the <code class="docutils literal notranslate"><span class="pre">--scene</span></code> argument to generate the model including the scene configuration.</p>
 <p>Gravity can also be changed in the MuJoCo <code class="docutils literal notranslate"><span class="pre">scene</span></code>. For example:</p>
 <p>Earth gravity:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;option</span><span class="w"> </span><span class="na">gravity=</span><span class="s">&quot;0 0 -9.81&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;flag</span><span class="w"> </span><span class="na">contact=</span><span class="s">&quot;enable&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;option</span><span class="w"> </span><span class="na">gravity=</span><span class="s">"0 0 -9.81"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;flag</span><span class="w"> </span><span class="na">contact=</span><span class="s">"enable"</span><span class="w"> </span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/option&gt;</span>
 </pre></div>
 </div>
 <p>Lunar gravity (one-sixth Earth gravity):</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;option</span><span class="w"> </span><span class="na">gravity=</span><span class="s">&quot;0 0 -1.63&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;flag</span><span class="w"> </span><span class="na">contact=</span><span class="s">&quot;enable&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;option</span><span class="w"> </span><span class="na">gravity=</span><span class="s">"0 0 -1.63"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;flag</span><span class="w"> </span><span class="na">contact=</span><span class="s">"enable"</span><span class="w"> </span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/option&gt;</span>
 </pre></div>
 </div>
@@ -396,37 +396,37 @@ map MJCF sensors to ROS topics.</p>
 <span class="w">  </span><span class="nt">&lt;raw_inputs&gt;</span>
 <span class="w">    </span><span class="cm">&lt;!-- simple actuator copied verbatim into MJCF --&gt;</span>
 <span class="w">    </span><span class="nt">&lt;actuator&gt;</span>
-<span class="w">      </span><span class="nt">&lt;position</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint1&quot;</span><span class="w"> </span><span class="na">joint=</span><span class="s">&quot;joint1&quot;</span><span class="w"> </span><span class="na">kp=</span><span class="s">&quot;1000&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;position</span><span class="w"> </span><span class="na">name=</span><span class="s">"joint1"</span><span class="w"> </span><span class="na">joint=</span><span class="s">"joint1"</span><span class="w"> </span><span class="na">kp=</span><span class="s">"1000"</span><span class="nt">/&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/actuator&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/raw_inputs&gt;</span>
 
 <span class="w">  </span><span class="nt">&lt;processed_inputs&gt;</span>
-<span class="w">    </span><span class="cm">&lt;!-- add a camera attached to the URDF frame &#39;camera_frame&#39; --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;camera</span><span class="w"> </span><span class="na">site=</span><span class="s">&quot;camera_frame&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera&quot;</span><span class="w"> </span><span class="na">fovy=</span><span class="s">&quot;58&quot;</span><span class="w"> </span><span class="na">mode=</span><span class="s">&quot;fixed&quot;</span><span class="w"> </span><span class="na">resolution=</span><span class="s">&quot;640 480&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- add a camera attached to the URDF frame 'camera_frame' --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;camera</span><span class="w"> </span><span class="na">site=</span><span class="s">"camera_frame"</span><span class="w"> </span><span class="na">name=</span><span class="s">"camera"</span><span class="w"> </span><span class="na">fovy=</span><span class="s">"58"</span><span class="w"> </span><span class="na">mode=</span><span class="s">"fixed"</span><span class="w"> </span><span class="na">resolution=</span><span class="s">"640 480"</span><span class="nt">/&gt;</span>
 
-<span class="w">    </span><span class="cm">&lt;!-- generate a set of rangefinders attached to &#39;lidar_frame&#39; --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;lidar</span><span class="w"> </span><span class="na">ref_site=</span><span class="s">&quot;lidar_frame&quot;</span><span class="w"> </span><span class="na">sensor_name=</span><span class="s">&quot;rf&quot;</span><span class="w"> </span><span class="na">min_angle=</span><span class="s">&quot;-0.3&quot;</span><span class="w"> </span><span class="na">max_angle=</span><span class="s">&quot;0.3&quot;</span><span class="w"> </span><span class="na">angle_increment=</span><span class="s">&quot;0.025&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- generate a set of rangefinders attached to 'lidar_frame' --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;lidar</span><span class="w"> </span><span class="na">ref_site=</span><span class="s">"lidar_frame"</span><span class="w"> </span><span class="na">sensor_name=</span><span class="s">"rf"</span><span class="w"> </span><span class="na">min_angle=</span><span class="s">"-0.3"</span><span class="w"> </span><span class="na">max_angle=</span><span class="s">"0.3"</span><span class="w"> </span><span class="na">angle_increment=</span><span class="s">"0.025"</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/processed_inputs&gt;</span>
 <span class="nt">&lt;/mujoco_inputs&gt;</span>
 
 <span class="cm">&lt;!-- ROS-facing sensor mappings (example inside ros2_control or globally) --&gt;</span>
-<span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;MujocoSystem&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="cm">&lt;!-- camera sensor: name must match processed_inputs camera &#39;name&#39; --&gt;</span>
-<span class="w">  </span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;frame_name&quot;</span><span class="nt">&gt;</span>camera_color_mujoco_frame<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;image_topic&quot;</span><span class="nt">&gt;</span>/camera/color/image_raw<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;info_topic&quot;</span><span class="nt">&gt;</span>/camera/color/camera_info<span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">"MujocoSystem"</span><span class="w"> </span><span class="na">type=</span><span class="s">"system"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="cm">&lt;!-- camera sensor: name must match processed_inputs camera 'name' --&gt;</span>
+<span class="w">  </span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">"camera"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"frame_name"</span><span class="nt">&gt;</span>camera_color_mujoco_frame<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"image_topic"</span><span class="nt">&gt;</span>/camera/color/image_raw<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"info_topic"</span><span class="nt">&gt;</span>/camera/color/camera_info<span class="nt">&lt;/param&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/sensor&gt;</span>
 
-<span class="w">  </span><span class="cm">&lt;!-- lidar sensor: base name must match processed_inputs &#39;sensor_name&#39; --&gt;</span>
-<span class="w">  </span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;lidar&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;frame_name&quot;</span><span class="nt">&gt;</span>lidar_frame<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;angle_increment&quot;</span><span class="nt">&gt;</span>0.025<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;min_angle&quot;</span><span class="nt">&gt;</span>-0.3<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;max_angle&quot;</span><span class="nt">&gt;</span>0.3<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;range_min&quot;</span><span class="nt">&gt;</span>0.05<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;range_max&quot;</span><span class="nt">&gt;</span>10.0<span class="nt">&lt;/param&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;laserscan_topic&quot;</span><span class="nt">&gt;</span>/scan<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="cm">&lt;!-- lidar sensor: base name must match processed_inputs 'sensor_name' --&gt;</span>
+<span class="w">  </span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">"lidar"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"frame_name"</span><span class="nt">&gt;</span>lidar_frame<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"angle_increment"</span><span class="nt">&gt;</span>0.025<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"min_angle"</span><span class="nt">&gt;</span>-0.3<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"max_angle"</span><span class="nt">&gt;</span>0.3<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"range_min"</span><span class="nt">&gt;</span>0.05<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"range_max"</span><span class="nt">&gt;</span>10.0<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"laserscan_topic"</span><span class="nt">&gt;</span>/scan<span class="nt">&lt;/param&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/sensor&gt;</span>
 <span class="nt">&lt;/ros2_control&gt;</span>
 </pre></div>

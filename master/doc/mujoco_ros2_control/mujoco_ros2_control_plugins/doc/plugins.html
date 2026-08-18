@@ -231,7 +231,7 @@ ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</
 <li><p>Topics: <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;/camera_info</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;/color</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;/depth</span></code></p></li>
 </ul>
 <p>For example, in an MJCF:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;camera</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;camera&quot;</span><span class="w"> </span><span class="na">fovy=</span><span class="s">&quot;58&quot;</span><span class="w"> </span><span class="na">mode=</span><span class="s">&quot;fixed&quot;</span><span class="w"> </span><span class="na">resolution=</span><span class="s">&quot;640 480&quot;</span><span class="w"> </span><span class="na">pos=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="na">quat=</span><span class="s">&quot;0 0 0 1&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;camera</span><span class="w"> </span><span class="na">name=</span><span class="s">"camera"</span><span class="w"> </span><span class="na">fovy=</span><span class="s">"58"</span><span class="w"> </span><span class="na">mode=</span><span class="s">"fixed"</span><span class="w"> </span><span class="na">resolution=</span><span class="s">"640 480"</span><span class="w"> </span><span class="na">pos=</span><span class="s">"0 0 0"</span><span class="w"> </span><span class="na">quat=</span><span class="s">"0 0 0 1"</span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
 <p>Then including the plugin will publish the following topics:</p>
@@ -247,7 +247,7 @@ Type:<span class="w"> </span>sensor_msgs/msg/Image
 Note that any number of cameras can be configured in the plugin configuration.</p>
 <p><strong>Example configuration</strong></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">mujoco_camera_plugin</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;mujoco_ros2_control_plugins/CameraPlugin&quot;</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">"mujoco_ros2_control_plugins/CameraPlugin"</span>
 <span class="w">  </span><span class="c1"># Note all cameras are published at the same rate</span>
 <span class="w">  </span><span class="nt">camera_publish_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0</span>
 <span class="w">  </span><span class="nt">camera</span><span class="p">:</span>
@@ -385,12 +385,12 @@ For long-duration wrenches, call the service from a separate terminal or use an 
 0.5 seconds.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/external_wrench/apply_wrench<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>mujoco_ros2_control_msgs/srv/ApplyExternalWrench<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="s2">&quot;{</span>
+<span class="w">  </span><span class="s2">"{</span>
 <span class="s2">    wrenches: {</span>
 <span class="s2">      external_wrenches: [</span>
 <span class="s2">        {</span>
 <span class="s2">          wrench: {</span>
-<span class="s2">            header: {frame_id: &#39;base_link&#39;},</span>
+<span class="s2">            header: {frame_id: 'base_link'},</span>
 <span class="s2">            wrench: {</span>
 <span class="s2">              force:  {x: 10.0, y: 0.0, z: 0.0},</span>
 <span class="s2">              torque: {x:  0.0, y: 0.0, z: 0.0}</span>
@@ -402,26 +402,26 @@ For long-duration wrenches, call the service from a separate terminal or use an 
 <span class="s2">        }</span>
 <span class="s2">      ]</span>
 <span class="s2">    }</span>
-<span class="s2">  }&quot;</span>
+<span class="s2">  }"</span>
 </pre></div>
 </div>
 <p><strong>Example: apply two simultaneous wrenches in a single call</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/mujoco_ros2_control/my_plugin/apply_wrench<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>mujoco_ros2_control_msgs/srv/ApplyExternalWrench<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="s2">&quot;{</span>
+<span class="w">  </span><span class="s2">"{</span>
 <span class="s2">    wrenches: {</span>
 <span class="s2">      external_wrenches: [</span>
 <span class="s2">        {</span>
-<span class="s2">          wrench: {header: {frame_id: &#39;link_a&#39;}, wrench: {force: {x: 5.0, y: 0.0, z: 0.0}}},</span>
+<span class="s2">          wrench: {header: {frame_id: 'link_a'}, wrench: {force: {x: 5.0, y: 0.0, z: 0.0}}},</span>
 <span class="s2">          duration: {sec: 1, nanosec: 0}</span>
 <span class="s2">        },</span>
 <span class="s2">        {</span>
-<span class="s2">          wrench: {header: {frame_id: &#39;link_b&#39;}, wrench: {force: {x: 0.0, y: -3.0, z: 0.0}}},</span>
+<span class="s2">          wrench: {header: {frame_id: 'link_b'}, wrench: {force: {x: 0.0, y: -3.0, z: 0.0}}},</span>
 <span class="s2">          duration: {sec: 1, nanosec: 0}</span>
 <span class="s2">        }</span>
 <span class="s2">      ]</span>
 <span class="s2">    }</span>
-<span class="s2">  }&quot;</span>
+<span class="s2">  }"</span>
 </pre></div>
 </div>
 </section>
@@ -473,7 +473,7 @@ being broadcast.</p>
 <span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">mujoco_plugins</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">external_wrench</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;mujoco_ros2_control_plugins/ExternalWrenchPlugin&quot;</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">"mujoco_ros2_control_plugins/ExternalWrenchPlugin"</span>
 <span class="w">        </span><span class="nt">force_arrow_scale</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span><span class="w">      </span><span class="c1"># 100 N  → 1 m arrow</span>
 <span class="w">        </span><span class="nt">torque_arrow_scale</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span><span class="w">      </span><span class="c1"># 10 N·m → 1 m arrow</span>
 </pre></div>
@@ -520,11 +520,9 @@ set)</p></td>
 direction) and rotated into the world frame using the body’s current orientation, since a free
 joint’s linear <code class="docutils literal notranslate"><span class="pre">qvel</span></code> is expressed in the world frame. The commanded yaw-rate is clamped to
 <code class="docutils literal notranslate"><span class="pre">max_yaw_rate</span></code> and used as-is, since a free joint’s rotational <code class="docutils literal notranslate"><span class="pre">qvel</span></code> is already expressed in
-the body-local frame. The result is written directly into <code class="docutils literal notranslate"><span class="pre">data-&gt;qvel</span></code> during <code class="docutils literal notranslate"><span class="pre">update()</span></code>:
-the core NaN-fills <code class="docutils literal notranslate"><span class="pre">qvel</span></code> before every plugin’s <code class="docutils literal notranslate"><span class="pre">update()</span></code> runs, so writing a finite value
-into an entry requests a hard velocity override there, applied by the core simulation as a direct
-<code class="docutils literal notranslate"><span class="pre">qvel</span></code> write immediately before the next physics step (see “Creating Your Own Plugin” below for
-the full mechanism, which is not available through <code class="docutils literal notranslate"><span class="pre">xfrc_applied</span></code> alone).</p>
+the body-local frame. The result is written directly into <code class="docutils literal notranslate"><span class="pre">data-&gt;qvel</span></code> during <code class="docutils literal notranslate"><span class="pre">pre_step()</span></code>,
+which runs on the physics thread immediately before every <code class="docutils literal notranslate"><span class="pre">mj_step</span></code>, which will happen per physics
+step!</p>
 <p>A command that hasn’t been refreshed within <code class="docutils literal notranslate"><span class="pre">cmd_timeout</span></code> seconds is treated as zero (safety
 stop) rather than left to coast on the last commanded velocity.</p>
 </section>
@@ -597,14 +595,14 @@ sub-node’s namespace the way topics/services do. This mirrors the pattern used
 <span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">mujoco_plugins</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">base_velocity_plugin</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;mujoco_ros2_control_plugins/BaseVelocityPlugin&quot;</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">"mujoco_ros2_control_plugins/BaseVelocityPlugin"</span>
 <span class="w">        </span><span class="nt">body</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">base_link</span>
 <span class="w">        </span><span class="nt">cmd_vel_topic</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/cmd_vel</span>
 </pre></div>
 </div>
 <p><strong>Example: teleop from the command line</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/cmd_vel<span class="w"> </span>geometry_msgs/msg/Twist<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="s2">&quot;{linear: {x: 0.5}, angular: {z: 0.2}}&quot;</span><span class="w"> </span>--rate<span class="w"> </span><span class="m">10</span>
+<span class="w">  </span><span class="s2">"{linear: {x: 0.5}, angular: {z: 0.2}}"</span><span class="w"> </span>--rate<span class="w"> </span><span class="m">10</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -694,10 +692,10 @@ An unknown or non-free-joint name here fails plugin initialization.</p></td>
 <span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">mujoco_plugins</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">free_joint_state_publisher</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;mujoco_ros2_control_plugins/FreeJointStatePublisherPlugin&quot;</span>
-<span class="w">        </span><span class="nt">frame_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w">              </span><span class="c1"># world frame; set to a body name to publish relative poses</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">"mujoco_ros2_control_plugins/FreeJointStatePublisherPlugin"</span>
+<span class="w">        </span><span class="nt">frame_id</span><span class="p">:</span><span class="w"> </span><span class="s">""</span><span class="w">              </span><span class="c1"># world frame; set to a body name to publish relative poses</span>
 <span class="w">        </span><span class="nt">body_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w">            </span><span class="c1"># empty = all free-joint bodies</span>
-<span class="w">        </span><span class="nt">topic</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;free_joint_states&quot;</span>
+<span class="w">        </span><span class="nt">topic</span><span class="p">:</span><span class="w"> </span><span class="s">"free_joint_states"</span>
 <span class="w">        </span><span class="nt">publish_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50.0</span>
 </pre></div>
 </div>
@@ -761,13 +759,13 @@ The available parameters are:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">/**</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">mujoco_3d_lidar_plugin</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;mujoco_ros2_control_plugins/Mujoco3dLidarPlugin&quot;</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">"mujoco_ros2_control_plugins/Mujoco3dLidarPlugin"</span>
 <span class="w">        </span><span class="nt">2d_lidar</span><span class="p">:</span>
-<span class="w">          </span><span class="nt">frame_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;lidar_sensor_frame&quot;</span>
-<span class="w">          </span><span class="nt">topic</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/lidar_scan_2d&quot;</span>
+<span class="w">          </span><span class="nt">frame_name</span><span class="p">:</span><span class="w"> </span><span class="s">"lidar_sensor_frame"</span>
+<span class="w">          </span><span class="nt">topic</span><span class="p">:</span><span class="w"> </span><span class="s">"/lidar_scan_2d"</span>
 <span class="w">        </span><span class="nt">3d_lidar</span><span class="p">:</span>
-<span class="w">          </span><span class="nt">frame_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3d_lidar_sensor_frame&quot;</span>
-<span class="w">          </span><span class="nt">topic</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/lidar_points_3d&quot;</span>
+<span class="w">          </span><span class="nt">frame_name</span><span class="p">:</span><span class="w"> </span><span class="s">"3d_lidar_sensor_frame"</span>
+<span class="w">          </span><span class="nt">topic</span><span class="p">:</span><span class="w"> </span><span class="s">"/lidar_points_3d"</span>
 </pre></div>
 </div>
 </section>
@@ -785,7 +783,7 @@ Each plugin entry requires:</p>
 <span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">mujoco_plugins</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">heart_beat_plugin</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;mujoco_ros2_control_plugins/HeartbeatPublisherPlugin&quot;</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">"mujoco_ros2_control_plugins/HeartbeatPublisherPlugin"</span>
 <span class="w">        </span><span class="nt">update_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
 </pre></div>
 </div>
@@ -801,7 +799,7 @@ Each plugin entry requires:</p>
 <section id="create-the-plugin-header">
 <h3>1. Create the Plugin Header<a class="headerlink" href="#create-the-plugin-header" title="Link to this heading"></a></h3>
 <p>Create a header that inherits from <code class="docutils literal notranslate"><span class="pre">MuJoCoROS2ControlPluginBase</span></code>:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;mujoco_ros2_control_plugins/mujoco_ros2_control_plugins_base.hpp&quot;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"mujoco_ros2_control_plugins/mujoco_ros2_control_plugins_base.hpp"</span>
 
 <span class="k">namespace</span><span class="w"> </span><span class="nn">my_namespace</span>
 <span class="p">{</span>
@@ -810,7 +808,12 @@ Each plugin entry requires:</p>
 <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
 <span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Node</span><span class="o">::</span><span class="n">SharedPtr</span><span class="w"> </span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">mjModel</span><span class="o">*</span><span class="w"> </span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">mjData</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Override whichever of these you need -- both have a no-op default, see</span>
+<span class="w">  </span><span class="c1">// "Plugin Lifecycle" below for how they differ.</span>
 <span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">mjModel</span><span class="o">*</span><span class="w"> </span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">mjData</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">pre_step</span><span class="p">(</span><span class="n">mjData</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+
 <span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">cleanup</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
 
 <span class="k">private</span><span class="o">:</span>
@@ -823,7 +826,7 @@ Each plugin entry requires:</p>
 </section>
 <section id="implement-the-plugin-methods">
 <h3>2. Implement the Plugin Methods<a class="headerlink" href="#implement-the-plugin-methods" title="Link to this heading"></a></h3>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;my_custom_plugin.hpp&quot;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"my_custom_plugin.hpp"</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;pluginlib/class_list_macros.hpp&gt;</span>
 
 <span class="k">namespace</span><span class="w"> </span><span class="nn">my_namespace</span>
@@ -840,7 +843,12 @@ Each plugin entry requires:</p>
 
 <span class="kt">void</span><span class="w"> </span><span class="nf">MyCustomPlugin::update</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">mjModel</span><span class="o">*</span><span class="w"> </span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">mjData</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="w">  </span><span class="c1">// Called every control loop iteration</span>
+<span class="w">  </span><span class="c1">// Called once per ros2_control write() cycle, on the control thread.</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">MyCustomPlugin::pre_step</span><span class="p">(</span><span class="n">mjData</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="c1">// Called on the physics thread, immediately before every mj_step.</span>
 <span class="p">}</span>
 
 <span class="kt">void</span><span class="w"> </span><span class="nf">MyCustomPlugin::cleanup</span><span class="p">()</span>
@@ -860,10 +868,10 @@ Each plugin entry requires:</p>
 <section id="create-the-plugin-xml-descriptor">
 <h3>3. Create the Plugin XML Descriptor<a class="headerlink" href="#create-the-plugin-xml-descriptor" title="Link to this heading"></a></h3>
 <p>Create <code class="docutils literal notranslate"><span class="pre">my_plugins.xml</span></code>:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;library</span><span class="w"> </span><span class="na">path=</span><span class="s">&quot;my_plugin_library&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;class</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;my_namespace/MyCustomPlugin&quot;</span>
-<span class="w">         </span><span class="na">type=</span><span class="s">&quot;my_namespace::MyCustomPlugin&quot;</span>
-<span class="w">         </span><span class="na">base_class_type=</span><span class="s">&quot;mujoco_ros2_control_plugins::MuJoCoROS2ControlPluginBase&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;library</span><span class="w"> </span><span class="na">path=</span><span class="s">"my_plugin_library"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;class</span><span class="w"> </span><span class="na">name=</span><span class="s">"my_namespace/MyCustomPlugin"</span>
+<span class="w">         </span><span class="na">type=</span><span class="s">"my_namespace::MyCustomPlugin"</span>
+<span class="w">         </span><span class="na">base_class_type=</span><span class="s">"mujoco_ros2_control_plugins::MuJoCoROS2ControlPluginBase"</span><span class="nt">&gt;</span>
 <span class="w">    </span><span class="nt">&lt;description&gt;</span>
 <span class="w">      </span>Description<span class="w"> </span>of<span class="w"> </span>what<span class="w"> </span>your<span class="w"> </span>plugin<span class="w"> </span>does.
 <span class="w">    </span><span class="nt">&lt;/description&gt;</span>
@@ -896,31 +904,27 @@ Each plugin entry requires:</p>
 </section>
 <section id="plugin-lifecycle">
 <h2>Plugin Lifecycle<a class="headerlink" href="#plugin-lifecycle" title="Link to this heading"></a></h2>
-<ol class="arabic">
+<ol class="arabic simple">
 <li><p><strong>Initialization</strong> (<code class="docutils literal notranslate"><span class="pre">init</span></code>): Called once when the plugin is loaded. Use this to read
 parameters and set up publishers, subscribers, and services.</p></li>
-<li><p><strong>Update</strong> (<code class="docutils literal notranslate"><span class="pre">update</span></code>): Called every simulation step at the <strong>end of the</strong> <code class="docutils literal notranslate"><span class="pre">read</span></code> <strong>loop</strong>,
-before the controller update and <code class="docutils literal notranslate"><span class="pre">write</span></code> loops. Changes to <code class="docutils literal notranslate"><span class="pre">mjData</span></code> here are visible to
-controllers and affect the next simulation step. This runs in a real-time thread — avoid
-blocking operations.</p>
-<p><code class="docutils literal notranslate"><span class="pre">data-&gt;qvel</span></code> here has one special property: it is <strong>NaN-filled before every plugin’s</strong>
-<code class="docutils literal notranslate"><span class="pre">update()</span></code> <strong>runs this cycle</strong>. Most plugins never touch it and can ignore this entirely.
-A plugin that needs to <em>dictate</em> a free joint’s velocity exactly (<code class="docutils literal notranslate"><span class="pre">BaseVelocityPlugin</span></code> is
-the example in this package) can write a finite value into any <code class="docutils literal notranslate"><span class="pre">qvel</span></code> entry to request a
-hard velocity override there — the core simulation applies every non-NaN entry as a direct
-<code class="docutils literal notranslate"><span class="pre">qvel</span></code> write immediately before the next <code class="docutils literal notranslate"><span class="pre">mj_step</span></code>, bypassing the normal mass/contact
-dynamics for that DOF. This exists because plugins only ever see a throwaway copy of
-<code class="docutils literal notranslate"><span class="pre">mjData</span></code> — only <code class="docutils literal notranslate"><span class="pre">ctrl</span></code>, <code class="docutils literal notranslate"><span class="pre">qfrc_applied</span></code>, and <code class="docutils literal notranslate"><span class="pre">xfrc_applied</span></code> are otherwise copied back
-into the real simulation state, so this NaN convention is the only way a plugin can
-influence <code class="docutils literal notranslate"><span class="pre">qvel</span></code> at all. Leaving an entry <code class="docutils literal notranslate"><span class="pre">NaN</span></code> keeps its normal physics-driven value;
-because of this, <code class="docutils literal notranslate"><span class="pre">data-&gt;qvel</span></code> cannot be read here for the body’s actual velocity either,
-since it isn’t restored to a real value until after every plugin’s <code class="docutils literal notranslate"><span class="pre">update()</span></code> has run.
-See <code class="docutils literal notranslate"><span class="pre">MuJoCoROS2ControlPluginBase::update()</span></code>’s doc comment in
-<code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control_plugins_base.hpp</span></code> for the authoritative reference.</p>
-</li>
+<li><p><strong>Update</strong> (<code class="docutils literal notranslate"><span class="pre">update</span></code>, optional): Called once per <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> <code class="docutils literal notranslate"><span class="pre">write()</span></code> cycle, on the
+control thread. <code class="docutils literal notranslate"><span class="pre">data</span></code> is a recent snapshot, not the live simulation data. Use this for
+anything that doesn’t need to run on exactly one physics step: publishing sensor data,
+servicing a trigger, etc. Most plugins in this package (<code class="docutils literal notranslate"><span class="pre">CameraPlugin</span></code>, the lidar plugins,
+<code class="docutils literal notranslate"><span class="pre">HeartbeatPublisherPlugin</span></code>, <code class="docutils literal notranslate"><span class="pre">FreeJointStatePublisherPlugin</span></code>) use only this hook.</p></li>
+<li><p><strong>Pre-step</strong> (<code class="docutils literal notranslate"><span class="pre">pre_step</span></code>, optional): Called on the physics thread, immediately before every
+<code class="docutils literal notranslate"><span class="pre">mj_step</span></code> – including multiple times per outer iteration when the loop batches steps to
+catch up. <code class="docutils literal notranslate"><span class="pre">data</span></code> is the live simulation data: read and write it directly, with no separate
+command buffer, so an untouched entry keeps its last value. Use this for anything that must
+hold for exactly one physics step, such as <code class="docutils literal notranslate"><span class="pre">BaseVelocityPlugin</span></code>’s kinematic velocity
+override. Runs with the simulation mutex held, so blocking here stalls the physics loop and
+native viewer too.</p></li>
 <li><p><strong>Cleanup</strong> (<code class="docutils literal notranslate"><span class="pre">cleanup</span></code>): Called when shutting down. Release any resources acquired in
 <code class="docutils literal notranslate"><span class="pre">init</span></code>.</p></li>
 </ol>
+<p>Both hooks default to doing nothing, so implement whichever fits (or both, or neither). See
+<code class="docutils literal notranslate"><span class="pre">MuJoCoROS2ControlPluginBase</span></code>’s class doc comment in <code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control_plugins_base.hpp</span></code>
+for the authoritative reference.</p>
 </section>
 <section id="building">
 <h2>Building<a class="headerlink" href="#building" title="Link to this heading"></a></h2>

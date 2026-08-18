@@ -152,16 +152,16 @@ To achieve different update rates for your hardware component you can use the fo
 <li><p>Add parameters of main control loop update rate and desired update rate for your hardware component</p></li>
 </ol>
 <blockquote>
-<div><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
-<span class="nt">&lt;robot</span><span class="w"> </span><span class="na">xmlns:xacro=</span><span class="s">&quot;http://www.ros.org/wiki/xacro&quot;</span><span class="nt">&gt;</span>
+<div><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<span class="nt">&lt;robot</span><span class="w"> </span><span class="na">xmlns:xacro=</span><span class="s">"http://www.ros.org/wiki/xacro"</span><span class="nt">&gt;</span>
 
-<span class="w">  </span><span class="nt">&lt;xacro:macro</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;system_interface&quot;</span><span class="w"> </span><span class="na">params=</span><span class="s">&quot;name main_loop_update_rate desired_hw_update_rate&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;xacro:macro</span><span class="w"> </span><span class="na">name=</span><span class="s">"system_interface"</span><span class="w"> </span><span class="na">params=</span><span class="s">"name main_loop_update_rate desired_hw_update_rate"</span><span class="nt">&gt;</span>
 
-<span class="w">    </span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${name}&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">"${name}"</span><span class="w"> </span><span class="na">type=</span><span class="s">"system"</span><span class="nt">&gt;</span>
 <span class="w">      </span><span class="nt">&lt;hardware&gt;</span>
 <span class="w">          </span><span class="nt">&lt;plugin&gt;</span>my_system_interface/MySystemHardware<span class="nt">&lt;/plugin&gt;</span>
-<span class="w">          </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;main_loop_update_rate&quot;</span><span class="nt">&gt;</span>${main_loop_update_rate}<span class="nt">&lt;/param&gt;</span>
-<span class="w">          </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;desired_hw_update_rate&quot;</span><span class="nt">&gt;</span>${desired_hw_update_rate}<span class="nt">&lt;/param&gt;</span>
+<span class="w">          </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"main_loop_update_rate"</span><span class="nt">&gt;</span>${main_loop_update_rate}<span class="nt">&lt;/param&gt;</span>
+<span class="w">          </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"desired_hw_update_rate"</span><span class="nt">&gt;</span>${desired_hw_update_rate}<span class="nt">&lt;/param&gt;</span>
 <span class="w">      </span><span class="nt">&lt;/hardware&gt;</span>
 <span class="w">      </span>...
 <span class="w">    </span><span class="nt">&lt;/ros2_control&gt;</span>
@@ -189,8 +189,8 @@ To achieve different update rates for your hardware component you can use the fo
 <span class="w">  </span><span class="p">}</span>
 
 <span class="w">  </span><span class="c1">//   declaration in *.hpp file --&gt; unsigned int main_loop_update_rate_, desired_hw_update_rate_ = 100 ;</span>
-<span class="w">  </span><span class="n">main_loop_update_rate_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stoi</span><span class="p">(</span><span class="n">info_</span><span class="p">.</span><span class="n">hardware_parameters</span><span class="p">[</span><span class="s">&quot;main_loop_update_rate&quot;</span><span class="p">]);</span>
-<span class="w">  </span><span class="n">desired_hw_update_rate_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stoi</span><span class="p">(</span><span class="n">info_</span><span class="p">.</span><span class="n">hardware_parameters</span><span class="p">[</span><span class="s">&quot;desired_hw_update_rate&quot;</span><span class="p">]);</span>
+<span class="w">  </span><span class="n">main_loop_update_rate_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stoi</span><span class="p">(</span><span class="n">info_</span><span class="p">.</span><span class="n">hardware_parameters</span><span class="p">[</span><span class="s">"main_loop_update_rate"</span><span class="p">]);</span>
+<span class="w">  </span><span class="n">desired_hw_update_rate_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stoi</span><span class="p">(</span><span class="n">info_</span><span class="p">.</span><span class="n">hardware_parameters</span><span class="p">[</span><span class="s">"desired_hw_update_rate"</span><span class="p">]);</span>
 
 <span class="w">  </span><span class="p">...</span>
 <span class="p">}</span>

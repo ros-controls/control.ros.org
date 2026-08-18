@@ -182,7 +182,7 @@ The <code class="docutils literal notranslate"><span class="pre">mujoco_ros2_con
 
 <span class="c"># Register with the ament resource index so mujoco_ros2_control discovers it</span>
 <span class="nb">ament_index_register_resource</span><span class="p">(</span><span class="s">mujoco_plugins</span>
-<span class="w">  </span><span class="s">CONTENT</span><span class="w"> </span><span class="s2">&quot;lib/${PROJECT_NAME}/mujoco_plugin&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="s">CONTENT</span><span class="w"> </span><span class="s2">"lib/${PROJECT_NAME}/mujoco_plugin"</span><span class="p">)</span>
 
 <span class="nb">ament_export_dependencies</span><span class="p">(</span><span class="s">mujoco_vendor</span><span class="p">)</span>
 <span class="nb">ament_package</span><span class="p">()</span>
@@ -196,15 +196,15 @@ Users can attempt to install the plugin to that directory by adding a best-effor
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">find_program</span><span class="p">(</span><span class="s">mujoco_SIMULATE</span><span class="w"> </span><span class="s">NAMES</span><span class="w"> </span><span class="s">simulate</span><span class="w"> </span><span class="s">mujoco-simulate</span><span class="p">)</span>
 <span class="nb">if</span><span class="p">(</span><span class="s">mujoco_SIMULATE</span><span class="p">)</span>
 <span class="w">  </span><span class="nb">cmake_path</span><span class="p">(</span><span class="s">SET</span><span class="w"> </span><span class="s">mujoco_BIN_PATH</span><span class="w"> </span><span class="s">NORMALIZE</span><span class="w"> </span><span class="o">${</span><span class="nv">mujoco_SIMULATE</span><span class="o">}</span><span class="s">/..</span><span class="p">)</span>
-<span class="w">  </span><span class="nb">install</span><span class="p">(</span><span class="s">CODE</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nb">install</span><span class="p">(</span><span class="s">CODE</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">    execute_process(</span>
-<span class="s2">      COMMAND cp -f \&quot;</span><span class="s">\${CMAKE_INSTALL_PREFIX}/lib/${PROJECT_NAME}/mujoco_plugin/libmy_plugin.so\&quot;</span>
-<span class="w">                    </span><span class="s">\&quot;${mujoco_BIN_PATH}/mujoco_plugin/\&quot;</span>
+<span class="s2">      COMMAND cp -f \"</span><span class="s">\${CMAKE_INSTALL_PREFIX}/lib/${PROJECT_NAME}/mujoco_plugin/libmy_plugin.so\"</span>
+<span class="w">                    </span><span class="s">\"${mujoco_BIN_PATH}/mujoco_plugin/\"</span>
 <span class="w">      </span><span class="s">RESULT_VARIABLE</span><span class="w"> </span><span class="s">_err</span><span class="p">)</span>
 <span class="w">    </span><span class="nb">if</span><span class="p">(</span><span class="s">_err</span><span class="p">)</span>
-<span class="w">      </span><span class="nb">message</span><span class="p">(</span><span class="s">WARNING</span><span class="w"> </span><span class="s">\&quot;Could</span><span class="w"> </span><span class="s">not</span><span class="w"> </span><span class="s">install</span><span class="w"> </span><span class="s">plugin</span><span class="w"> </span><span class="s">next</span><span class="w"> </span><span class="s">to</span><span class="w"> </span><span class="s">simulate!</span><span class="w"> </span><span class="s">Manually</span><span class="w"> </span><span class="s">copy</span><span class="w"> </span><span class="s">it</span><span class="w"> </span><span class="s">to</span><span class="w"> </span><span class="o">${</span><span class="nv">mujoco_BIN_PATH</span><span class="o">}</span><span class="s">/mujoco_plugin/\</span><span class="s2">&quot;)</span>
+<span class="w">      </span><span class="nb">message</span><span class="p">(</span><span class="s">WARNING</span><span class="w"> </span><span class="s">\"Could</span><span class="w"> </span><span class="s">not</span><span class="w"> </span><span class="s">install</span><span class="w"> </span><span class="s">plugin</span><span class="w"> </span><span class="s">next</span><span class="w"> </span><span class="s">to</span><span class="w"> </span><span class="s">simulate!</span><span class="w"> </span><span class="s">Manually</span><span class="w"> </span><span class="s">copy</span><span class="w"> </span><span class="s">it</span><span class="w"> </span><span class="s">to</span><span class="w"> </span><span class="o">${</span><span class="nv">mujoco_BIN_PATH</span><span class="o">}</span><span class="s">/mujoco_plugin/\</span><span class="s2">")</span>
 <span class="s2">    endif()</span>
-<span class="s2">  &quot;</span><span class="p">)</span>
+<span class="s2">  "</span><span class="p">)</span>
 <span class="nb">endif</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -245,41 +245,41 @@ The vectors are determined by the size and field of view parameters.</p>
 <p>Note that rays that hit nothing or fall outside the min/max range return <code class="docutils literal notranslate"><span class="pre">-1</span></code>.</p>
 <p>Example MJCF for a 2D lidar sensor:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;extension&gt;</span>
-<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">plugin=</span><span class="s">&quot;mujoco.plugin.lidar&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;instance</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;2d_lidar&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;resolution&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;24 1&quot;</span><span class="nt">/&gt;</span>
-<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;azimuth_range&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;-0.3 0.3&quot;</span><span class="nt">/&gt;</span>
-<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;elevation_range&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;0.0&quot;</span><span class="nt">/&gt;</span>
-<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;max_range&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;10.0&quot;</span><span class="nt">/&gt;</span>
-<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;min_range&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;0.0&quot;</span><span class="nt">/&gt;</span>
-<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;update_rate&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;10.0&quot;</span><span class="nt">/&gt;</span>
-<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;async&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">plugin=</span><span class="s">"mujoco.plugin.lidar"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;instance</span><span class="w"> </span><span class="na">name=</span><span class="s">"2d_lidar"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">"resolution"</span><span class="w"> </span><span class="na">value=</span><span class="s">"24 1"</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">"azimuth_range"</span><span class="w"> </span><span class="na">value=</span><span class="s">"-0.3 0.3"</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">"elevation_range"</span><span class="w"> </span><span class="na">value=</span><span class="s">"0.0"</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">"max_range"</span><span class="w"> </span><span class="na">value=</span><span class="s">"10.0"</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">"min_range"</span><span class="w"> </span><span class="na">value=</span><span class="s">"0.0"</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">"update_rate"</span><span class="w"> </span><span class="na">value=</span><span class="s">"10.0"</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">"async"</span><span class="w"> </span><span class="na">value=</span><span class="s">"0"</span><span class="nt">/&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/instance&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/plugin&gt;</span>
 <span class="nt">&lt;/extension&gt;</span>
 
 <span class="nt">&lt;sensor&gt;</span>
-<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;2d_lidar&quot;</span><span class="w"> </span><span class="na">instance=</span><span class="s">&quot;2d_lidar&quot;</span><span class="w"> </span><span class="na">objtype=</span><span class="s">&quot;site&quot;</span><span class="w"> </span><span class="na">objname=</span><span class="s">&quot;lidar_sensor_frame&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">name=</span><span class="s">"2d_lidar"</span><span class="w"> </span><span class="na">instance=</span><span class="s">"2d_lidar"</span><span class="w"> </span><span class="na">objtype=</span><span class="s">"site"</span><span class="w"> </span><span class="na">objname=</span><span class="s">"lidar_sensor_frame"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/sensor&gt;</span>
 </pre></div>
 </div>
 <p>For a 3D lidar, increase the vertical resolution and specify an elevation range.</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;extension&gt;</span>
-<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">plugin=</span><span class="s">&quot;mujoco.plugin.lidar&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;instance</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;3d_lidar&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;resolution&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;24 50&quot;</span><span class="nt">/&gt;</span>
-<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;azimuth_range&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;-0.3 0.3&quot;</span><span class="nt">/&gt;</span>
-<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;elevation_range&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;-1.0 1.0&quot;</span><span class="nt">/&gt;</span>
-<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;max_range&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;10.0&quot;</span><span class="nt">/&gt;</span>
-<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;min_range&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;0.0&quot;</span><span class="nt">/&gt;</span>
-<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;update_rate&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;1.0&quot;</span><span class="nt">/&gt;</span>
-<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;async&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">plugin=</span><span class="s">"mujoco.plugin.lidar"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;instance</span><span class="w"> </span><span class="na">name=</span><span class="s">"3d_lidar"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">"resolution"</span><span class="w"> </span><span class="na">value=</span><span class="s">"24 50"</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">"azimuth_range"</span><span class="w"> </span><span class="na">value=</span><span class="s">"-0.3 0.3"</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">"elevation_range"</span><span class="w"> </span><span class="na">value=</span><span class="s">"-1.0 1.0"</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">"max_range"</span><span class="w"> </span><span class="na">value=</span><span class="s">"10.0"</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">"min_range"</span><span class="w"> </span><span class="na">value=</span><span class="s">"0.0"</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">"update_rate"</span><span class="w"> </span><span class="na">value=</span><span class="s">"1.0"</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;config</span><span class="w"> </span><span class="na">key=</span><span class="s">"async"</span><span class="w"> </span><span class="na">value=</span><span class="s">"0"</span><span class="nt">/&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/instance&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/plugin&gt;</span>
 <span class="nt">&lt;/extension&gt;</span>
 
 <span class="nt">&lt;sensor&gt;</span>
-<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;3d_lidar&quot;</span><span class="w"> </span><span class="na">instance=</span><span class="s">&quot;3d_lidar&quot;</span><span class="w"> </span><span class="na">objtype=</span><span class="s">&quot;site&quot;</span><span class="w"> </span><span class="na">objname=</span><span class="s">&quot;3d_lidar_sensor_frame&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">name=</span><span class="s">"3d_lidar"</span><span class="w"> </span><span class="na">instance=</span><span class="s">"3d_lidar"</span><span class="w"> </span><span class="na">objtype=</span><span class="s">"site"</span><span class="w"> </span><span class="na">objname=</span><span class="s">"3d_lidar_sensor_frame"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/sensor&gt;</span>
 </pre></div>
 </div>

@@ -106,6 +106,9 @@ Public Types</h2></td></tr>
 <tr class="memitem:a1f9576375d33b1e0b6fb3ec7db8048e2" id="r_a1f9576375d33b1e0b6fb3ec7db8048e2"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a1f9576375d33b1e0b6fb3ec7db8048e2">ResetCallback</a> = std::function&lt; void(bool fill_initial_state)&gt;</td></tr>
 <tr class="memdesc:a1f9576375d33b1e0b6fb3ec7db8048e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback invoked when the simulation's state must be reset.  <br /></td></tr>
 <tr class="separator:a1f9576375d33b1e0b6fb3ec7db8048e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb3cc400f7810cdf72b0cecf1c4e53b3" id="r_abb3cc400f7810cdf72b0cecf1c4e53b3"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control_1_1MujocoSimulation.html#abb3cc400f7810cdf72b0cecf1c4e53b3">PreStepCallback</a> = std::function&lt; void(mjData *<a class="el" href="classmujoco__ros2__control_1_1MujocoSimulation.html#aaf4b131af2b06a84290570f7065257b7">data</a>)&gt;</td></tr>
+<tr class="memdesc:abb3cc400f7810cdf72b0cecf1c4e53b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function type the <code>set_pre_step_callback</code> hook.  <br /></td></tr>
+<tr class="separator:abb3cc400f7810cdf72b0cecf1c4e53b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -126,6 +129,9 @@ Public Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>set_reset_callback</b> (<a class="el" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a1f9576375d33b1e0b6fb3ec7db8048e2">ResetCallback</a> callback)</td></tr>
 <tr class="memdesc:af0307d7df1675321ac94e72a0fcf6b6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback function to be called on <code>reset_world_state</code>. <br /></td></tr>
 <tr class="separator:af0307d7df1675321ac94e72a0fcf6b6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a493ee7b6017206d909a087ef1c98e2b0" id="r_a493ee7b6017206d909a087ef1c98e2b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a493ee7b6017206d909a087ef1c98e2b0">set_pre_step_callback</a> (<a class="el" href="classmujoco__ros2__control_1_1MujocoSimulation.html#abb3cc400f7810cdf72b0cecf1c4e53b3">PreStepCallback</a> callback)</td></tr>
+<tr class="memdesc:a493ee7b6017206d909a087ef1c98e2b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register the callback run before every <code>mj_step()</code>.  <br /></td></tr>
+<tr class="separator:a493ee7b6017206d909a087ef1c98e2b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1cd9e4fc6e3986162f67045314891e6c" id="r_a1cd9e4fc6e3986162f67045314891e6c"><td class="memItemLeft" align="right" valign="top"><a id="a1cd9e4fc6e3986162f67045314891e6c" name="a1cd9e4fc6e3986162f67045314891e6c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>start_physics_thread</b> ()</td></tr>
 <tr class="memdesc:a1cd9e4fc6e3986162f67045314891e6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the physics thread. Must be called after load_model(). <br /></td></tr>
@@ -181,10 +187,34 @@ std::recursive_mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><b
 <p>The functions relevant to interacting with the physics sim's mjData are:</p>
 <p><code>copy_physics_data(...)</code> will lock the sim and do a full copy of the existing <code>mj_data_</code> into the provided container, which can be used as the caller requires. Because the physics loop can hold the sim mutex for a large fraction of a display refresh while it batches steps, this can block the caller and should not be used from latency-sensitive threads.</p>
 <p><code><a class="el" href="classmujoco__ros2__control_1_1MujocoSimulation.html#a3d670dd995a22c7887e5828483f2e119" title="Borrows the latest completed post-step snapshot of mj_data_ (producer-pays copying).">acquire_data_snapshot()</a></code> instead borrows the most recent completed post-step snapshot of <code>mj_data_</code>, produced by the physics loop into a separate buffer. Acquiring is a pointer swap under a mutex that is never held for longer than a swap, so the caller performs no scene-sized copy and never waits on physics stepping or refresh. The returned data may lag <code>mj_data_</code> by a few timesteps. This is what the hardware interface uses in <code>write()</code>.</p>
-<p><code>apply_control_data(...)</code> will copy control inputs from the provided mjData into staging buffers that the physics loop applies to <code>mj_data_</code> immediately before each step. Specifically, it stages <code>ctrl</code>, <code>qfrc_applied</code>, and <code>xfrc_applied</code>. Cartesian forces from <code>xfrc_applied</code> compete with inputs from Simulate's drag function, so they are resolved separately. This only takes the control staging mutex and never blocks on physics stepping. It also stages <code>qvel</code>: the system interface NaN-fills <code>qvel</code> before every plugin's <code>update()</code> runs, so any DOF a plugin leaves untouched is NaN here and any DOF it writes a finite value into is a requested hard velocity override (see <code>MuJoCoROS2ControlPluginBase::update()</code>'s doc comment). Non-NaN entries are applied as a direct <code>qvel</code> write, bypassing the normal dynamics for that DOF.</p>
+<p><code>apply_control_data(...)</code> will copy control inputs from the provided mjData into staging buffers that the physics loop applies to <code>mj_data_</code> immediately before each step. Specifically, it stages <code>ctrl</code> and <code>qfrc_applied</code>. Both of these values should come from the interfaces consuming this class. This This only takes the control staging mutex and never blocks on physics stepping.</p>
 <p><code>overwrite_physics_data(...)</code> will completely replace the data for the sim. Should be used with extreme caution.</p>
+<p><code>set_pre_step_callback(...)</code> registers a callback which will be triggered in the Physics Loop. It will be called immediately before <code>mj_step()</code>, providing direct access to <code>mj_data_</code> immediately before progressing the simulation. This gives consumers direct access to access and modify the data immediately before integration. Users should be extremely careful with this callback, as it exposes "god like" powers to the simulation environment and can break, slow down, or otherwise damage the simulation. This should also be used with caution.</p>
 <p>Thread safety is still somewhat messy, as callers are provided with a simulation mutex that locks the model and data while the actual mujoco engine moves the sim forward. Callers need to be wary of locking that mutex external to this class, as it can have significant consequences on the simulation's speed. </p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="abb3cc400f7810cdf72b0cecf1c4e53b3" name="abb3cc400f7810cdf72b0cecf1c4e53b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb3cc400f7810cdf72b0cecf1c4e53b3">&#9670;&#160;</a></span>PreStepCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classmujoco__ros2__control_1_1MujocoSimulation.html#abb3cc400f7810cdf72b0cecf1c4e53b3">mujoco_ros2_control::MujocoSimulation::PreStepCallback</a> =  std::function&lt;void(mjData* <a class="el" href="classmujoco__ros2__control_1_1MujocoSimulation.html#aaf4b131af2b06a84290570f7065257b7">data</a>)&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Callback function type the <code>set_pre_step_callback</code> hook. </p>
+<p>Called before <code>mjStep</code> in the physics loop, use with care.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>The data from the physics simulation, under thread lock. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a1f9576375d33b1e0b6fb3ec7db8048e2" name="a1f9576375d33b1e0b6fb3ec7db8048e2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1f9576375d33b1e0b6fb3ec7db8048e2">&#9670;&#160;</a></span>ResetCallback</h2>
 
@@ -247,7 +277,7 @@ std::recursive_mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><b
 </div><div class="memdoc">
 
 <p>Stages control fields from <code>control_data</code> for the physics loop in a thread safe way. </p>
-<p>Specifically, copies <code>control_data-&gt;ctrl</code> and <code>control_data-&gt;qfrc_applied</code> into staging buffers which the physics loop copies into <code>mj_data_</code> immediately before each step. <code>control_data-&gt;xfrc_applied</code> is copied into <code>xfrc_plugin_desired_</code> to avoid conflicts from the simulate app. <code>control_data-&gt;qvel</code> is copied into <code>qvel_override_staged_</code>; entries that are not NaN are plugin-requested velocity overrides (see <code>MuJoCoROS2ControlPluginBase::update()</code>'s doc comment for the NaN convention this relies on) and are applied as direct <code>qvel</code> writes before the next <code>mj_step</code>. This does not lock the sim mutex and never waits on stepping. </p>
+<p>Specifically, copies <code>control_data-&gt;ctrl</code> and <code>control_data-&gt;qfrc_applied</code> into staging buffers which the physics loop copies into <code>mj_data_</code> immediately before each step. These are the only two fields staged here because both are "held" quantities that persist correctly across a batch of steps. Anything else that requires direct access to simulation data can access it through the <code>set_pre_step_callback</code> functions. </p>
 
 </div>
 </div>
@@ -509,6 +539,27 @@ std::recursive_mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><b
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if every entry was applied; false otherwise, with no data modified. </dd></dl>
+
+</div>
+</div>
+<a id="a493ee7b6017206d909a087ef1c98e2b0" name="a493ee7b6017206d909a087ef1c98e2b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a493ee7b6017206d909a087ef1c98e2b0">&#9670;&#160;</a></span>set_pre_step_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mujoco_ros2_control::MujocoSimulation::set_pre_step_callback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classmujoco__ros2__control_1_1MujocoSimulation.html#abb3cc400f7810cdf72b0cecf1c4e53b3">PreStepCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Register the callback run before every <code>mj_step()</code>. </p>
+<p>See the class documentation for more information. Any function called here will hold the simulation mutex and block the physics loop. Use with care. </p>
 
 </div>
 </div>

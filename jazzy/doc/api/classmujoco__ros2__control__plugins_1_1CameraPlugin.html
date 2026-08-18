@@ -128,7 +128,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a1bb941ea45898590ee67c5394879b797"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload of <a class="el" href="classmujoco__ros2__control__plugins_1_1CameraPlugin.html#afbe60ffaffac7b506eca062bc0e6c774" title="Initialize the plugin.">init()</a> that takes an injectable GLFW initializer.  <br /></td></tr>
 <tr class="separator:a1bb941ea45898590ee67c5394879b797"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33734c2bc16e5ad77ca26192bc77e0b1" id="r_a33734c2bc16e5ad77ca26192bc77e0b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control__plugins_1_1CameraPlugin.html#a33734c2bc16e5ad77ca26192bc77e0b1">update</a> (const mjModel *model, mjData *data) override</td></tr>
-<tr class="memdesc:a33734c2bc16e5ad77ca26192bc77e0b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the plugin (called every simulation step)  <br /></td></tr>
+<tr class="memdesc:a33734c2bc16e5ad77ca26192bc77e0b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called once per control cycle, on the control thread. Default does nothing.  <br /></td></tr>
 <tr class="separator:a33734c2bc16e5ad77ca26192bc77e0b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a043c28f7e938dc1392cce553f11b35bc" id="r_a043c28f7e938dc1392cce553f11b35bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control__plugins_1_1CameraPlugin.html#a043c28f7e938dc1392cce553f11b35bc">cleanup</a> () override</td></tr>
 <tr class="memdesc:a043c28f7e938dc1392cce553f11b35bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleanup the plugin.  <br /></td></tr>
@@ -139,6 +139,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a404e0529d10bedeb6f2b4f8d313790d8" id="r_a404e0529d10bedeb6f2b4f8d313790d8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control__plugins_1_1CameraPlugin.html#a404e0529d10bedeb6f2b4f8d313790d8">is_rendering_available</a> () const</td></tr>
 <tr class="memdesc:a404e0529d10bedeb6f2b4f8d313790d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether the rendering thread has successfully initialized its GL context.  <br /></td></tr>
 <tr class="separator:a404e0529d10bedeb6f2b4f8d313790d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html">mujoco_ros2_control_plugins::MuJoCoROS2ControlPluginBase</a></td></tr>
+<tr class="memitem:a9bb7f98fd27ea1b546bc18fa17427fb5 inherit pub_methods_classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase" id="r_a9bb7f98fd27ea1b546bc18fa17427fb5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a9bb7f98fd27ea1b546bc18fa17427fb5">pre_step</a> (mjData *)</td></tr>
+<tr class="memdesc:a9bb7f98fd27ea1b546bc18fa17427fb5 inherit pub_methods_classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called immediately before every simulation step on the physics thread. Default does nothing.  <br /></td></tr>
+<tr class="separator:a9bb7f98fd27ea1b546bc18fa17427fb5 inherit pub_methods_classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Plugin that publishes the mujoco camera data to ROS 2 topics. </p>
@@ -364,13 +368,13 @@ Implementation notes</h2>
           <td class="memname">void mujoco_ros2_control_plugins::CameraPlugin::update </td>
           <td>(</td>
           <td class="paramtype">const mjModel *&#160;</td>
-          <td class="paramname"><em>model</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">mjData *&#160;</td>
-          <td class="paramname"><em>data</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -385,21 +389,16 @@ Implementation notes</h2>
 </table>
 </div><div class="memdoc">
 
-<p>Update the plugin (called every simulation step) </p>
+<p>Called once per control cycle, on the control thread. Default does nothing. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">model</td><td>Pointer to the MuJoCo model </td></tr>
-    <tr><td class="paramname">data</td><td>Pointer to the MuJoCo data </td></tr>
+    <tr><td class="paramname">data</td><td>Pointer to a recent snapshot (not the live <code>mj_data_</code>) </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>This method will be called at the end of the <a class="el" href="namespacemujoco__ros2__control.html">mujoco_ros2_control</a> read loop, before the update loop of controllers and the write loop. This means that changes to the data here will be visible to controllers and will affect the next simulation step. </dd>
-<dd>
-This method will be called in a real-time thread, so it should avoid blocking operations and should be efficient. </dd>
-<dd>
-data-&gt;qvel is NaN-filled before every plugin's <a class="el" href="classmujoco__ros2__control__plugins_1_1CameraPlugin.html#a33734c2bc16e5ad77ca26192bc77e0b1" title="Update the plugin (called every simulation step)">update()</a> runs this cycle. Write a finite value into any entry to request a hard velocity override on that DOF &ndash; it bypasses the normal mass/contact dynamics for that DOF this step, overwriting mj_data_-&gt;qvel directly right before the next mj_step. Leave an entry NaN to keep its normal physics-driven value untouched. This is the only channel a plugin has to influence qvel: unlike ctrl/qfrc_applied/xfrc_applied, data-&gt;qvel here cannot be read for the body's actual velocity, since it is not restored to a real value until after every plugin's <a class="el" href="classmujoco__ros2__control__plugins_1_1CameraPlugin.html#a33734c2bc16e5ad77ca26192bc77e0b1" title="Update the plugin (called every simulation step)">update()</a> has run this cycle. </dd></dl>
 
-<p>Implements <a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a02a4b975dc578f84137eb8eede18dc81">mujoco_ros2_control_plugins::MuJoCoROS2ControlPluginBase</a>.</p>
+<p>Reimplemented from <a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a52b30b5bfa816f936c8c3873f962c153">mujoco_ros2_control_plugins::MuJoCoROS2ControlPluginBase</a>.</p>
 
 </div>
 </div>

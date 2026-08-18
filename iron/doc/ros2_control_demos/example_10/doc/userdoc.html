@@ -199,13 +199,13 @@ values:
 </div>
 </li>
 <li><p>Now you can send commands to the <em>GPIO Controller</em> using ROS 2 CLI interface:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/gpio_controller/commands<span class="w"> </span>std_msgs/msg/Float64MultiArray<span class="w"> </span><span class="s2">&quot;{data: [0.5,0.7]}&quot;</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/gpio_controller/commands<span class="w"> </span>std_msgs/msg/Float64MultiArray<span class="w"> </span><span class="s2">"{data: [0.5,0.7]}"</span>
 </pre></div>
 </div>
 <p>You should see a change in the <code class="docutils literal notranslate"><span class="pre">/gpio_controller/inputs</span></code> topic and a different output in the terminal where launch file is started, e.g.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>ros2_control_node-1<span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">1721765648</span>.271058850<span class="o">]</span><span class="w"> </span><span class="o">[</span>controller_manager.resource_manager.hardware_component.system.RRBot<span class="o">]</span>:<span class="w"> </span>Writing<span class="w"> </span>commands:
-<span class="o">[</span>ros2_control_node-1<span class="o">]</span><span class="w">   </span><span class="m">0</span>.50<span class="w"> </span><span class="k">for</span><span class="w"> </span>GPIO<span class="w"> </span>output<span class="w"> </span><span class="s1">&#39;0&#39;</span>
-<span class="o">[</span>ros2_control_node-1<span class="o">]</span><span class="w">   </span><span class="m">0</span>.70<span class="w"> </span><span class="k">for</span><span class="w"> </span>GPIO<span class="w"> </span>output<span class="w"> </span><span class="s1">&#39;1&#39;</span>
+<span class="o">[</span>ros2_control_node-1<span class="o">]</span><span class="w">   </span><span class="m">0</span>.50<span class="w"> </span><span class="k">for</span><span class="w"> </span>GPIO<span class="w"> </span>output<span class="w"> </span><span class="s1">'0'</span>
+<span class="o">[</span>ros2_control_node-1<span class="o">]</span><span class="w">   </span><span class="m">0</span>.70<span class="w"> </span><span class="k">for</span><span class="w"> </span>GPIO<span class="w"> </span>output<span class="w"> </span><span class="s1">'1'</span>
 </pre></div>
 </div>
 </li>
@@ -277,16 +277,16 @@ values:
 </pre></div>
 </div>
 <p>This is, because for the vacuum interface an initial value of <code class="docutils literal notranslate"><span class="pre">1.0</span></code> is set in the URDF file.</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gpio</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;flange_vacuum&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;vacuum&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;vacuum&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;initial_value&quot;</span><span class="nt">&gt;</span>1.0<span class="nt">&lt;/param&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gpio</span><span class="w"> </span><span class="na">name=</span><span class="s">"flange_vacuum"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"vacuum"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"vacuum"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"initial_value"</span><span class="nt">&gt;</span>1.0<span class="nt">&lt;/param&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/state_interface&gt;</span>
 <span class="nt">&lt;/gpio&gt;</span>
 </pre></div>
 </div>
 <p>Call again</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/gpio_controller/commands<span class="w"> </span>std_msgs/msg/Float64MultiArray<span class="w"> </span><span class="s2">&quot;{data: [0.5,0.7]}&quot;</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/gpio_controller/commands<span class="w"> </span>std_msgs/msg/Float64MultiArray<span class="w"> </span><span class="s2">"{data: [0.5,0.7]}"</span>
 </pre></div>
 </div>
 <p>and you will see that the GPIO command interfaces will be mirrored to their respective state interfaces.</p>

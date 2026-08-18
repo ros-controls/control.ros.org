@@ -175,7 +175,7 @@ colcon<span class="w"> </span>build
 <span class="nb">cd</span><span class="w"> </span>~/gz_ros2_control_ws/src
 git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ros-controls/gz_ros2_control<span class="w"> </span>-b<span class="w"> </span>humble
 <span class="nb">export</span><span class="w"> </span><span class="nv">GZ_VERSION</span><span class="o">=</span>harmonic
-rosdep<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>--from-paths<span class="w"> </span>.<span class="w"> </span>--ignore-src<span class="w"> </span>--rosdistro<span class="w"> </span><span class="nv">$ROS_DISTRO</span><span class="w"> </span>-y<span class="w"> </span>--skip-keys<span class="o">=</span><span class="s2">&quot;ros_gz_bridge ros_gz_sim&quot;</span>
+rosdep<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>--from-paths<span class="w"> </span>.<span class="w"> </span>--ignore-src<span class="w"> </span>--rosdistro<span class="w"> </span><span class="nv">$ROS_DISTRO</span><span class="w"> </span>-y<span class="w"> </span>--skip-keys<span class="o">=</span><span class="s2">"ros_gz_bridge ros_gz_sim"</span>
 <span class="nb">cd</span><span class="w"> </span>~/gz_ros2_control_ws
 colcon<span class="w"> </span>build
 </pre></div>
@@ -233,20 +233,20 @@ include:</p>
 <li><p>a specific <code class="docutils literal notranslate"><span class="pre">&lt;plugin&gt;</span></code> for our robot</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&lt;joint&gt;</span></code> tag including the robot controllers: commands and states.</p></li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;GazeboSimSystem&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">"GazeboSimSystem"</span><span class="w"> </span><span class="na">type=</span><span class="s">"system"</span><span class="nt">&gt;</span>
 <span class="w">  </span><span class="nt">&lt;hardware&gt;</span>
 <span class="w">    </span><span class="nt">&lt;plugin&gt;</span>gz_ros2_control/GazeboSimSystem<span class="nt">&lt;/plugin&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/hardware&gt;</span>
-<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;slider_to_cart&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;effort&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;min&quot;</span><span class="nt">&gt;</span>-1000<span class="nt">&lt;/param&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;max&quot;</span><span class="nt">&gt;</span>1000<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"slider_to_cart"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"effort"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"min"</span><span class="nt">&gt;</span>-1000<span class="nt">&lt;/param&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"max"</span><span class="nt">&gt;</span>1000<span class="nt">&lt;/param&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/command_interface&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;initial_value&quot;</span><span class="nt">&gt;</span>1.0<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"initial_value"</span><span class="nt">&gt;</span>1.0<span class="nt">&lt;/param&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/state_interface&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;effort&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"velocity"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"effort"</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
 <span class="nt">&lt;/ros2_control&gt;</span>
 </pre></div>
@@ -260,23 +260,23 @@ We should include:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">&lt;mimic&gt;</span></code> tag to the mimicked joint <a class="reference external" href="https://wiki.ros.org/urdf/XML/joint">detailed manual</a> or the <a class="reference external" href="https://sdformat.org/spec/1.11/joint/#axis_mimic">SDF specification</a></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">mimic</span></code> and <code class="docutils literal notranslate"><span class="pre">multiplier</span></code> parameters to joint definition in <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code> tag</p></li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;left_finger_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;prismatic&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;mimic</span><span class="w"> </span><span class="na">joint=</span><span class="s">&quot;right_finger_joint&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;axis</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 1 0&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0.0 0.48 1&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0.0 0.0 3.1415926535&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;base&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;finger_left&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;limit</span><span class="w"> </span><span class="na">effort=</span><span class="s">&quot;1000.0&quot;</span><span class="w"> </span><span class="na">lower=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">upper=</span><span class="s">&quot;0.38&quot;</span><span class="w"> </span><span class="na">velocity=</span><span class="s">&quot;10&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"left_finger_joint"</span><span class="w"> </span><span class="na">type=</span><span class="s">"prismatic"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;mimic</span><span class="w"> </span><span class="na">joint=</span><span class="s">"right_finger_joint"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;axis</span><span class="w"> </span><span class="na">xyz=</span><span class="s">"0 1 0"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">"0.0 0.48 1"</span><span class="w"> </span><span class="na">rpy=</span><span class="s">"0.0 0.0 3.1415926535"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">"base"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">"finger_left"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;limit</span><span class="w"> </span><span class="na">effort=</span><span class="s">"1000.0"</span><span class="w"> </span><span class="na">lower=</span><span class="s">"0"</span><span class="w"> </span><span class="na">upper=</span><span class="s">"0.38"</span><span class="w"> </span><span class="na">velocity=</span><span class="s">"10"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/joint&gt;</span>
 </pre></div>
 </div>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;left_finger_joint&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mimic&quot;</span><span class="nt">&gt;</span>right_finger_joint<span class="nt">&lt;/param&gt;</span>
-<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;multiplier&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/param&gt;</span>
-<span class="w">  </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;effort&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"left_finger_joint"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"mimic"</span><span class="nt">&gt;</span>right_finger_joint<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"multiplier"</span><span class="nt">&gt;</span>1<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"velocity"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"effort"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/joint&gt;</span>
 </pre></div>
 </div>
@@ -285,7 +285,7 @@ We should include:</p>
 <h3>Using force-torque sensors in simulation<a class="headerlink" href="#using-force-torque-sensors-in-simulation" title="Link to this heading"></a></h3>
 <p>To use <code class="docutils literal notranslate"><span class="pre">force-torque</span></code> sensors in <em>gz_ros2_control</em> you should define its parameters in your URDF or SDF (see the <a class="reference external" href="https://sdformat.org/spec/1.12/sensor/#sensor_force_torque">SDF specification</a>)</p>
 <p>An example in SDF is shown here:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;force_torque_sensor&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;force_torque&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">"force_torque_sensor"</span><span class="w"> </span><span class="na">type=</span><span class="s">"force_torque"</span><span class="nt">&gt;</span>
 <span class="w">  </span><span class="nt">&lt;update_rate&gt;</span>10.0<span class="nt">&lt;/update_rate&gt;</span>
 <span class="w">  </span><span class="nt">&lt;always_on&gt;</span>true<span class="nt">&lt;/always_on&gt;</span>
 <span class="w">  </span><span class="nt">&lt;visualize&gt;</span>true<span class="nt">&lt;/visualize&gt;</span>
@@ -294,13 +294,13 @@ We should include:</p>
 </pre></div>
 </div>
 <p>It is important to add this as <code class="docutils literal notranslate"><span class="pre">reference</span></code> sensor in the <code class="docutils literal notranslate"><span class="pre">&lt;gazebo&gt;</span></code> tag in your URDF file where the reference is the joint you will be attaching the force torque sensor to:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo</span><span class="w"> </span><span class="na">reference=</span><span class="s">&quot;attached_joint&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="cm">&lt;!-- If &#39;attached_joint&#39; is of &#39;fixed&#39; type,</span>
-<span class="cm">  setting &#39;preserveFixedJoint&#39; to true will prevent the</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo</span><span class="w"> </span><span class="na">reference=</span><span class="s">"attached_joint"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="cm">&lt;!-- If 'attached_joint' is of 'fixed' type,</span>
+<span class="cm">  setting 'preserveFixedJoint' to true will prevent the</span>
 <span class="cm">  links from being lumped together during the URDF to</span>
 <span class="cm">  SDF conversion. Otherwise, it can be omitted. --&gt;</span>
 <span class="w">  </span><span class="nt">&lt;preserveFixedJoint&gt;</span>true<span class="nt">&lt;/preserveFixedJoint&gt;</span>
-<span class="w">  </span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;force_torque_sensor&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;force_torque&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">"force_torque_sensor"</span><span class="w"> </span><span class="na">type=</span><span class="s">"force_torque"</span><span class="nt">&gt;</span>
 <span class="w">    </span><span class="nt">&lt;update_rate&gt;</span>10.0<span class="nt">&lt;/update_rate&gt;</span>
 <span class="w">    </span><span class="nt">&lt;always_on&gt;</span>true<span class="nt">&lt;/always_on&gt;</span>
 <span class="w">    </span><span class="nt">&lt;visualize&gt;</span>true<span class="nt">&lt;/visualize&gt;</span>
@@ -319,7 +319,7 @@ controller manager. By default the <em>gz_ros2_control</em> plugin is very simpl
 extensible via an additional plugin architecture to allow power users to create their own custom
 robot hardware interfaces between <em>ros2_control</em> and Gazebo.</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo&gt;</span>
-<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;gz_ros2_control-system&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gz_ros2_control::GazeboSimROS2ControlPlugin&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">filename=</span><span class="s">"gz_ros2_control-system"</span><span class="w"> </span><span class="na">name=</span><span class="s">"gz_ros2_control::GazeboSimROS2ControlPlugin"</span><span class="nt">&gt;</span>
 <span class="w">    </span><span class="nt">&lt;robot_param&gt;</span>robot_description<span class="nt">&lt;/robot_param&gt;</span>
 <span class="w">    </span><span class="nt">&lt;robot_param_node&gt;</span>robot_state_publisher<span class="nt">&lt;/robot_param_node&gt;</span>
 <span class="w">    </span><span class="nt">&lt;parameters&gt;</span>$(find<span class="w"> </span>gz_ros2_control_demos)/config/cart_controller.yaml<span class="nt">&lt;/parameters&gt;</span>
@@ -336,7 +336,7 @@ robot hardware interfaces between <em>ros2_control</em> and Gazebo.</p>
 </ul>
 <p>Additionally, one can specify a namespace and remapping rules, which will be forwarded to the controller_manager and loaded controllers. Add the following <code class="docutils literal notranslate"><span class="pre">&lt;ros&gt;</span></code> section:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo&gt;</span>
-<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;gz_ros2_control-system&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gz_ros2_control::GazeboSimROS2ControlPlugin&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">filename=</span><span class="s">"gz_ros2_control-system"</span><span class="w"> </span><span class="na">name=</span><span class="s">"gz_ros2_control::GazeboSimROS2ControlPlugin"</span><span class="nt">&gt;</span>
 <span class="w">    </span>...
 <span class="w">    </span><span class="nt">&lt;ros&gt;</span>
 <span class="w">      </span><span class="nt">&lt;namespace&gt;</span>my_namespace<span class="nt">&lt;/namespace&gt;</span>
@@ -354,14 +354,14 @@ Gazebo and <em>ros2_control</em> for simulating more complex mechanisms (nonline
 <code class="docutils literal notranslate"><span class="pre">hardware_interface::SystemInterface</span></code>.</p>
 <p>The respective GazeboSimSystemInterface is specified in a URDF and is loaded when the
 robot model is loaded. For example, the following XML will load a custom plugin instead:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;GazeboSimSystem&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">"GazeboSimSystem"</span><span class="w"> </span><span class="na">type=</span><span class="s">"system"</span><span class="nt">&gt;</span>
 <span class="w">  </span><span class="nt">&lt;hardware&gt;</span>
 <span class="w">    </span><span class="nt">&lt;plugin&gt;</span>gz_ros2_control_demos/GazeboCustomSimSystem<span class="nt">&lt;/plugin&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/hardware&gt;</span>
 <span class="w">  </span>...
 <span class="nt">&lt;ros2_control&gt;</span>
 <span class="nt">&lt;gazebo&gt;</span>
-<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gz_ros2_control::GazeboSimROS2ControlPlugin&quot;</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgz_ros2_control-system&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">name=</span><span class="s">"gz_ros2_control::GazeboSimROS2ControlPlugin"</span><span class="w"> </span><span class="na">filename=</span><span class="s">"libgz_ros2_control-system"</span><span class="nt">&gt;</span>
 <span class="w">    </span>...
 <span class="w">  </span><span class="nt">&lt;/plugin&gt;</span>
 <span class="nt">&lt;/gazebo&gt;</span>
@@ -379,7 +379,7 @@ velocity command interface by using a configurable low pass filter. Run</p>
 <p>Use the tag <code class="docutils literal notranslate"><span class="pre">&lt;parameters&gt;</span></code> inside <code class="docutils literal notranslate"><span class="pre">&lt;plugin&gt;</span></code> to set the YAML file with the controller configuration
 and use the tag <code class="docutils literal notranslate"><span class="pre">&lt;controller_manager_name&gt;</span></code> to set the controller manager node name.</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo&gt;</span>
-<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;gz_ros2_control-system&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gz_ros2_control::GazeboSimROS2ControlPlugin&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">filename=</span><span class="s">"gz_ros2_control-system"</span><span class="w"> </span><span class="na">name=</span><span class="s">"gz_ros2_control::GazeboSimROS2ControlPlugin"</span><span class="nt">&gt;</span>
 <span class="w">    </span><span class="nt">&lt;parameters&gt;</span>$(find<span class="w"> </span>gz_ros2_control_demos)/config/cart_controller.yaml<span class="nt">&lt;/parameters&gt;</span>
 <span class="w">    </span><span class="nt">&lt;controller_manager_name&gt;</span>controller_manager<span class="nt">&lt;/controller_manager_name&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/plugin&gt;</span>

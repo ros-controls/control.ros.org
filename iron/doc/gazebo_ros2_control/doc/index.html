@@ -207,20 +207,20 @@ include</p>
 <li><p>a specific <code class="docutils literal notranslate"><span class="pre">&lt;plugin&gt;</span></code> for our robot</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&lt;joint&gt;</span></code> tag including the robot controllers: commands and states.</p></li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;GazeboSystem&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">"GazeboSystem"</span><span class="w"> </span><span class="na">type=</span><span class="s">"system"</span><span class="nt">&gt;</span>
 <span class="w">  </span><span class="nt">&lt;hardware&gt;</span>
 <span class="w">    </span><span class="nt">&lt;plugin&gt;</span>gazebo_ros2_control/GazeboSystem<span class="nt">&lt;/plugin&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/hardware&gt;</span>
-<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;slider_to_cart&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;effort&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;min&quot;</span><span class="nt">&gt;</span>-1000<span class="nt">&lt;/param&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;max&quot;</span><span class="nt">&gt;</span>1000<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"slider_to_cart"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"effort"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"min"</span><span class="nt">&gt;</span>-1000<span class="nt">&lt;/param&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"max"</span><span class="nt">&gt;</span>1000<span class="nt">&lt;/param&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/command_interface&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;initial_value&quot;</span><span class="nt">&gt;</span>1.0<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"initial_value"</span><span class="nt">&gt;</span>1.0<span class="nt">&lt;/param&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/state_interface&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;effort&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"velocity"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"effort"</span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
 <span class="nt">&lt;/ros2_control&gt;</span>
 </pre></div>
@@ -234,23 +234,23 @@ We should include:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">&lt;mimic&gt;</span></code> tag to the mimicked joint <a class="reference external" href="https://wiki.ros.org/urdf/XML/joint">detailed manual</a></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">mimic</span></code> and <code class="docutils literal notranslate"><span class="pre">multiplier</span></code> parameters to joint definition in <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code> tag</p></li>
 </ul>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;left_finger_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;prismatic&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;mimic</span><span class="w"> </span><span class="na">joint=</span><span class="s">&quot;right_finger_joint&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;axis</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 1 0&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0.0 0.48 1&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0.0 0.0 3.1415926535&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;base&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;finger_left&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;limit</span><span class="w"> </span><span class="na">effort=</span><span class="s">&quot;1000.0&quot;</span><span class="w"> </span><span class="na">lower=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">upper=</span><span class="s">&quot;0.38&quot;</span><span class="w"> </span><span class="na">velocity=</span><span class="s">&quot;10&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"left_finger_joint"</span><span class="w"> </span><span class="na">type=</span><span class="s">"prismatic"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;mimic</span><span class="w"> </span><span class="na">joint=</span><span class="s">"right_finger_joint"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;axis</span><span class="w"> </span><span class="na">xyz=</span><span class="s">"0 1 0"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">"0.0 0.48 1"</span><span class="w"> </span><span class="na">rpy=</span><span class="s">"0.0 0.0 3.1415926535"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">"base"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">"finger_left"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;limit</span><span class="w"> </span><span class="na">effort=</span><span class="s">"1000.0"</span><span class="w"> </span><span class="na">lower=</span><span class="s">"0"</span><span class="w"> </span><span class="na">upper=</span><span class="s">"0.38"</span><span class="w"> </span><span class="na">velocity=</span><span class="s">"10"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/joint&gt;</span>
 </pre></div>
 </div>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;left_finger_joint&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mimic&quot;</span><span class="nt">&gt;</span>right_finger_joint<span class="nt">&lt;/param&gt;</span>
-<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;multiplier&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/param&gt;</span>
-<span class="w">  </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;effort&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"left_finger_joint"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"mimic"</span><span class="nt">&gt;</span>right_finger_joint<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"multiplier"</span><span class="nt">&gt;</span>1<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"velocity"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"effort"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/joint&gt;</span>
 </pre></div>
 </div>
@@ -268,30 +268,30 @@ within the <code class="docutils literal notranslate"><span class="pre">&lt;ros2
 <p>You cannot have both command interfaces set to position and position_pid for the same joint. The same restriction applies to velocity (and velocity_pid).</p>
 </div>
 <p>To create a system with one joint that can be controlled using both position_pid and velocity_pid, follow this example:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;GazeboSystem&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">"GazeboSystem"</span><span class="w"> </span><span class="na">type=</span><span class="s">"system"</span><span class="nt">&gt;</span>
 <span class="w">   </span><span class="nt">&lt;hardware&gt;</span>
 <span class="w">     </span><span class="nt">&lt;plugin&gt;</span>gazebo_ros2_control/GazeboSystem<span class="nt">&lt;/plugin&gt;</span>
 <span class="w">   </span><span class="nt">&lt;/hardware&gt;</span>
-<span class="w">   </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;slider_to_cart&quot;</span><span class="nt">&gt;</span>
+<span class="w">   </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"slider_to_cart"</span><span class="nt">&gt;</span>
 
-<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;pos_kp&quot;</span><span class="nt">&gt;</span>10<span class="nt">&lt;/param&gt;</span>
-<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;pos_ki&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/param&gt;</span>
-<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;pos_kd&quot;</span><span class="nt">&gt;</span>2<span class="nt">&lt;/param&gt;</span>
-<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;pos_max_integral_error&quot;</span><span class="nt">&gt;</span>10000<span class="nt">&lt;/param&gt;</span>
+<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"pos_kp"</span><span class="nt">&gt;</span>10<span class="nt">&lt;/param&gt;</span>
+<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"pos_ki"</span><span class="nt">&gt;</span>1<span class="nt">&lt;/param&gt;</span>
+<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"pos_kd"</span><span class="nt">&gt;</span>2<span class="nt">&lt;/param&gt;</span>
+<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"pos_max_integral_error"</span><span class="nt">&gt;</span>10000<span class="nt">&lt;/param&gt;</span>
 
-<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;vel_kp&quot;</span><span class="nt">&gt;</span>10<span class="nt">&lt;/param&gt;</span>
-<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;vel_ki&quot;</span><span class="nt">&gt;</span>5<span class="nt">&lt;/param&gt;</span>
-<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;vel_kd&quot;</span><span class="nt">&gt;</span>2<span class="nt">&lt;/param&gt;</span>
-<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;vel_max_integral_error&quot;</span><span class="nt">&gt;</span>10000<span class="nt">&lt;/param&gt;</span>
+<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"vel_kp"</span><span class="nt">&gt;</span>10<span class="nt">&lt;/param&gt;</span>
+<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"vel_ki"</span><span class="nt">&gt;</span>5<span class="nt">&lt;/param&gt;</span>
+<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"vel_kd"</span><span class="nt">&gt;</span>2<span class="nt">&lt;/param&gt;</span>
+<span class="w">     </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"vel_max_integral_error"</span><span class="nt">&gt;</span>10000<span class="nt">&lt;/param&gt;</span>
 
-<span class="w">     </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position_pid&quot;</span><span class="nt">/&gt;</span>
-<span class="w">     </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity_pid&quot;</span><span class="nt">/&gt;</span>
+<span class="w">     </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position_pid"</span><span class="nt">/&gt;</span>
+<span class="w">     </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"velocity_pid"</span><span class="nt">/&gt;</span>
 
-<span class="w">     </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">&gt;</span>
-<span class="w">       </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;initial_value&quot;</span><span class="nt">&gt;</span>1.0<span class="nt">&lt;/param&gt;</span>
+<span class="w">     </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">&gt;</span>
+<span class="w">       </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"initial_value"</span><span class="nt">&gt;</span>1.0<span class="nt">&lt;/param&gt;</span>
 <span class="w">     </span><span class="nt">&lt;/state_interface&gt;</span>
-<span class="w">     </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
-<span class="w">     </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;effort&quot;</span><span class="nt">/&gt;</span>
+<span class="w">     </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"velocity"</span><span class="nt">/&gt;</span>
+<span class="w">     </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"effort"</span><span class="nt">/&gt;</span>
 <span class="w">   </span><span class="nt">&lt;/joint&gt;</span>
 <span class="w"> </span><span class="nt">&lt;/ros2_control&gt;</span>
 </pre></div>
@@ -313,7 +313,7 @@ within the <code class="docutils literal notranslate"><span class="pre">&lt;ros2
 </pre></div>
 </div>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo&gt;</span>
-<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgazebo_ros2_control.so&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gazebo_ros2_control&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">filename=</span><span class="s">"libgazebo_ros2_control.so"</span><span class="w"> </span><span class="na">name=</span><span class="s">"gazebo_ros2_control"</span><span class="nt">&gt;</span>
 <span class="w">    </span>...
 <span class="w">    </span><span class="nt">&lt;ros&gt;</span>
 <span class="w">      </span><span class="nt">&lt;argument&gt;</span>--ros-args<span class="nt">&lt;/argument&gt;</span>
@@ -334,7 +334,7 @@ controller manager. By default the <em>gazebo_ros2_control</em> plugin is very s
 extensible via an additional plugin architecture to allow power users to create their own custom
 robot hardware interfaces between <em>ros2_control</em> and Gazebo Classic.</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo&gt;</span>
-<span class="w">    </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgazebo_ros2_control.so&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gazebo_ros2_control&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">filename=</span><span class="s">"libgazebo_ros2_control.so"</span><span class="w"> </span><span class="na">name=</span><span class="s">"gazebo_ros2_control"</span><span class="nt">&gt;</span>
 <span class="w">      </span><span class="nt">&lt;robot_param&gt;</span>robot_description<span class="nt">&lt;/robot_param&gt;</span>
 <span class="w">      </span><span class="nt">&lt;robot_param_node&gt;</span>robot_state_publisher<span class="nt">&lt;/robot_param_node&gt;</span>
 <span class="w">      </span><span class="nt">&lt;parameters&gt;</span>$(find<span class="w"> </span>gazebo_ros2_control_demos)/config/cart_controller.yaml<span class="nt">&lt;/parameters&gt;</span>
@@ -352,7 +352,7 @@ robot hardware interfaces between <em>ros2_control</em> and Gazebo Classic.</p>
 </ul>
 <p>Additionally, one can specify a namespace and remapping rules, which will be forwarded to the controller_manager and loaded controllers. Add the following <code class="docutils literal notranslate"><span class="pre">&lt;ros&gt;</span></code> section:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo&gt;</span>
-<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgazebo_ros2_control.so&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gazebo_ros2_control&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">filename=</span><span class="s">"libgazebo_ros2_control.so"</span><span class="w"> </span><span class="na">name=</span><span class="s">"gazebo_ros2_control"</span><span class="nt">&gt;</span>
 <span class="w">    </span>...
 <span class="w">    </span><span class="nt">&lt;ros&gt;</span>
 <span class="w">      </span><span class="nt">&lt;namespace&gt;</span>my_namespace<span class="nt">&lt;/namespace&gt;</span>
@@ -379,14 +379,14 @@ robot hardware interfaces between <em>ros2_control</em> and Gazebo Classic.</p>
 <code class="docutils literal notranslate"><span class="pre">hardware_interface::SystemInterface</span></code>. SystemInterface provides API-level access to read and command joint properties.</p>
 <p>The respective GazeboSystemInterface sub-class is specified in a URDF model and is loaded when the
 robot model is loaded. For example, the following XML will load the default plugin:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;GazeboSystem&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">"GazeboSystem"</span><span class="w"> </span><span class="na">type=</span><span class="s">"system"</span><span class="nt">&gt;</span>
 <span class="w">  </span><span class="nt">&lt;hardware&gt;</span>
 <span class="w">    </span><span class="nt">&lt;plugin&gt;</span>gazebo_ros2_control/GazeboSystem<span class="nt">&lt;/plugin&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/hardware&gt;</span>
 <span class="w">  </span>...
 <span class="nt">&lt;ros2_control&gt;</span>
 <span class="nt">&lt;gazebo&gt;</span>
-<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gazebo_ros2_control&quot;</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgazebo_ros2_control.so&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">name=</span><span class="s">"gazebo_ros2_control"</span><span class="w"> </span><span class="na">filename=</span><span class="s">"libgazebo_ros2_control.so"</span><span class="nt">&gt;</span>
 <span class="w">    </span>...
 <span class="w">  </span><span class="nt">&lt;/plugin&gt;</span>
 <span class="nt">&lt;/gazebo&gt;</span>
@@ -397,7 +397,7 @@ robot model is loaded. For example, the following XML will load the default plug
 <h3>Set up controllers<a class="headerlink" href="#set-up-controllers" title="Link to this heading"></a></h3>
 <p>Use the tag <code class="docutils literal notranslate"><span class="pre">&lt;parameters&gt;</span></code> inside <code class="docutils literal notranslate"><span class="pre">&lt;plugin&gt;</span></code> to set the YAML file with the controller configuration.</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo&gt;</span>
-<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gazebo_ros2_control&quot;</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgazebo_ros2_control.so&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">name=</span><span class="s">"gazebo_ros2_control"</span><span class="w"> </span><span class="na">filename=</span><span class="s">"libgazebo_ros2_control.so"</span><span class="nt">&gt;</span>
 <span class="w">    </span><span class="nt">&lt;parameters&gt;</span>$(find<span class="w"> </span>gazebo_ros2_control_demos)/config/cart_controller.yaml<span class="nt">&lt;/parameters&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/plugin&gt;</span>
 <span class="nt">&lt;/gazebo&gt;</span>
