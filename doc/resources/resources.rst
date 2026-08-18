@@ -11,8 +11,6 @@ Any files submitted to the documentation should be "licensed" by stating your na
 Presentations
 ---------------
 
-<<<<<<< HEAD
-=======
 2026 ROSCon Workshop: Scaling ros2_control: From Async Hardware Drivers to RL Inference Engines
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 
@@ -131,7 +129,6 @@ Summary:
     - Dr. Denis Stogl (Stogl Robotics Consulting)
 
 
->>>>>>> 027e3cf (Add roscon 2026 workshop page (#696))
 2023-09-19 ROSCon Spain Talk: Introduction to ros2_control
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 :download:`Presentation: Introduction to ros2_control <presentations/ROSCon_Spain_2023_introduction_to_ros2_control.pdf>`
