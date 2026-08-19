@@ -126,6 +126,9 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>resolve_tolerance_s
 <tr class="separator:af9b0e17f56618c8217dd190a7d2e5948"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af18ab090b979f84aaaceae0497b6fa6d" id="r_af18ab090b979f84aaaceae0497b6fa6d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__trajectory__controller.html#af18ab090b979f84aaaceae0497b6fa6d">wraparound_joint</a> (std::vector&lt; double &gt; &amp;current_position, const std::vector&lt; double &gt; next_position, const std::vector&lt; bool &gt; &amp;joints_angle_wraparound)</td></tr>
 <tr class="separator:af18ab090b979f84aaaceae0497b6fa6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee271dc050334496b499e432ebcc860a" id="r_aee271dc050334496b499e432ebcc860a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacejoint__trajectory__controller.html#aee271dc050334496b499e432ebcc860a">fill_cubic_spline_velocities</a> (trajectory_msgs::msg::JointTrajectory &amp;traj)</td></tr>
+<tr class="memdesc:aee271dc050334496b499e432ebcc860a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill the knot velocities of a global cubic spline (C2) in place.  <br /></td></tr>
+<tr class="separator:aee271dc050334496b499e432ebcc860a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ffeebd0ee81ea783246109dd440c7f4" id="r_a2ffeebd0ee81ea783246109dd440c7f4"><td class="memItemLeft" align="right" valign="top"><a id="a2ffeebd0ee81ea783246109dd440c7f4" name="a2ffeebd0ee81ea783246109dd440c7f4"></a>
 tl::expected&lt; void, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>command_interface_type_combinations</b> (rclcpp::Parameter const &amp;parameter)</td></tr>
 <tr class="separator:a2ffeebd0ee81ea783246109dd440c7f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -197,6 +200,40 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if <code>state_error</code> fulfills <code>state_tolerance</code>. </dd></dl>
 
+</div>
+</div>
+<a id="aee271dc050334496b499e432ebcc860a" name="aee271dc050334496b499e432ebcc860a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee271dc050334496b499e432ebcc860a">&#9670;&#160;</a></span>fill_cubic_spline_velocities()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool joint_trajectory_controller::fill_cubic_spline_velocities </td>
+          <td>(</td>
+          <td class="paramtype">trajectory_msgs::msg::JointTrajectory &amp;&#160;</td>
+          <td class="paramname"><em>traj</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fill the knot velocities of a global cubic spline (C2) in place. </p>
+<p>For each joint independently, solves the knot velocities that make the acceleration continuous across every interior knot &ndash; an O(n) tridiagonal (Thomas) solve over the waypoint positions and their <code>time_from_start</code> &ndash; using rest boundary conditions <code>v[0] = v[n-1] = 0</code>, and writes the result into <code>points[i].velocities</code>. Once velocities are present, the per-segment cubic-Hermite sampling in <a class="el" href="classjoint__trajectory__controller_1_1Trajectory.html#aa0716b15504a759d89a1b49a8cd70d75">Trajectory::sample</a> reproduces the global cubic spline, so a positions-only trajectory is upgraded from linear (C0) to C2.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">traj</td><td><a class="el" href="classjoint__trajectory__controller_1_1Trajectory.html">Trajectory</a> whose points carry positions; velocities are filled. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if velocities were written; false (trajectory left untouched) if it has fewer than two points, inconsistent widths, or non-strictly-increasing timing.</dd></dl>
+<div class="fragment"><div class="line">trajectory_msgs::msg::JointTrajectory msg;  <span class="comment">// positions-only waypoints, with time_from_start</span></div>
+<div class="line"><a class="code hl_function" href="namespacejoint__trajectory__controller.html#aee271dc050334496b499e432ebcc860a">fill_cubic_spline_velocities</a>(msg);          <span class="comment">// msg now has C2 knot velocities</span></div>
+<div class="line"><a class="code hl_class" href="classjoint__trajectory__controller_1_1Trajectory.html">Trajectory</a> traj(time_now, current_point, std::make_shared&lt;...&gt;(msg));</div>
+<div class="line">traj.sample(t, interpolation_methods::DEFAULT_INTERPOLATION, out, start, end);</div>
+<div class="ttc" id="aclassjoint__trajectory__controller_1_1Trajectory_html"><div class="ttname"><a href="classjoint__trajectory__controller_1_1Trajectory.html">joint_trajectory_controller::Trajectory</a></div><div class="ttdef"><b>Definition</b> trajectory.hpp:32</div></div>
+<div class="ttc" id="anamespacejoint__trajectory__controller_html_aee271dc050334496b499e432ebcc860a"><div class="ttname"><a href="namespacejoint__trajectory__controller.html#aee271dc050334496b499e432ebcc860a">joint_trajectory_controller::fill_cubic_spline_velocities</a></div><div class="ttdeci">bool fill_cubic_spline_velocities(trajectory_msgs::msg::JointTrajectory &amp;traj)</div><div class="ttdoc">Fill the knot velocities of a global cubic spline (C2) in place.</div><div class="ttdef"><b>Definition</b> trajectory.cpp:101</div></div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="a14fed94dbb8fdf6951471b6ee5a834df" name="a14fed94dbb8fdf6951471b6ee5a834df"></a>

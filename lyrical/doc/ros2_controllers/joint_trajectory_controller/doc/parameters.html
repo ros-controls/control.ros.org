@@ -260,6 +260,19 @@
 </ul>
 </div></blockquote>
 </dd>
+<dt>positions_upsampling.enable (bool)</dt><dd><p>Upsample positions-only messages on <code class="docutils literal notranslate"><span class="pre">~/joint_trajectory</span></code> into a smooth global C2 cubic spline by synthesizing knot velocities (a global tridiagonal solve with rest boundary conditions <code class="docutils literal notranslate"><span class="pre">v0</span> <span class="pre">=</span> <span class="pre">v_{N-1}</span> <span class="pre">=</span> <span class="pre">0</span></code>). Messages that already carry velocities are passed through unchanged. Has no effect when <code class="docutils literal notranslate"><span class="pre">interpolation_method</span></code> is <code class="docutils literal notranslate"><span class="pre">none</span></code>.</p>
+<p>Read only: True</p>
+<p>Default:  false</p>
+</dd>
+<dt>positions_upsampling.policy_frequency (double)</dt><dd><p>Frequency in Hz at which an AI policy emits action-chunk waypoints. When greater than zero, <code class="docutils literal notranslate"><span class="pre">time_from_start</span> <span class="pre">=</span> <span class="pre">(i</span> <span class="pre">+</span> <span class="pre">1)</span> <span class="pre">/</span> <span class="pre">policy_frequency</span></code> is synthesized for positions-only chunks that arrive without timing. When zero, incoming chunks must already carry strictly-increasing <code class="docutils literal notranslate"><span class="pre">time_from_start</span></code>. Only used when <code class="docutils literal notranslate"><span class="pre">positions_upsampling.enable</span></code> is true.</p>
+<p>Default:  0.0</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than or equal to 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
 <dt>allow_nonzero_velocity_at_trajectory_end (bool)</dt><dd><p>If false, the last velocity point has to be zero or the goal will be rejected</p>
 <p>Default:  false</p>
 </dd>
@@ -398,6 +411,9 @@ position <span class="math notranslate nohighlight">\(s\)</span> from the state 
 <span class="w">    </span><span class="nt">interpolate_from_desired_state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">    </span><span class="nt">interpolation_method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">splines</span>
 <span class="w">    </span><span class="nt">joints</span><span class="p">:</span><span class="w"> </span><span class="s">'{}'</span>
+<span class="w">    </span><span class="nt">positions_upsampling</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">enable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">      </span><span class="nt">policy_frequency</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
 <span class="w">    </span><span class="nt">set_last_command_interface_value_as_state_on_activation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">speed_scaling</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">command_interface</span><span class="p">:</span><span class="w"> </span><span class="s">''</span>

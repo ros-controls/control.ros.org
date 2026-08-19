@@ -193,6 +193,15 @@ I.e., one has to provide position and its derivatives as needed.</p>
 </ul>
 </li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The linear case above is discouraged because positions-only waypoints yield discontinuous
+velocities. Enabling <code class="docutils literal notranslate"><span class="pre">positions_upsampling</span></code> avoids this for positions-only inputs: the controller
+pre-solves the knot velocities of a global cubic spline (<code class="docutils literal notranslate"><span class="pre">fill_cubic_spline_velocities</span></code>) and
+writes them into the trajectory, so the cubic strategy is used instead and the sampled motion is
+continuous in acceleration across the trajectory’s own waypoints. See <a class="reference internal" href="userdoc.html#joint-trajectory-controller-userdoc"><span class="std std-ref">Ingesting
+positions-only action chunks</span></a>.</p>
+</div>
 <p>Trajectories with velocity fields only, velocity and acceleration only, or acceleration fields only can be processed and are accepted, if <code class="docutils literal notranslate"><span class="pre">allow_integration_in_goal_trajectories</span></code> is true. Position (and velocity) is then integrated from velocity (or acceleration, respectively) by Heun’s method.</p>
 <p>Effort trajectories are allowed for controllers that claim the <code class="docutils literal notranslate"><span class="pre">effort</span></code> command interface and they are treated as feed-forward effort that is added to the position feedback. Effort is handled separately from position, velocity and acceleration. We use linear interpolation for effort when the <code class="docutils literal notranslate"><span class="pre">spline</span></code> interpolation method is selected.</p>
 </section>
@@ -203,6 +212,15 @@ I.e., one has to provide position and its derivatives as needed.</p>
 <li><p>Sampled trajectory with linear spline if position is given only:</p></li>
 </ul>
 <img alt="Sampled trajectory with splines if position is given only" src="../../../../_images/spline_position.png" />
+<ul class="simple">
+<li><p>Sampled trajectory with the same positions-only points, with <code class="docutils literal notranslate"><span class="pre">positions_upsampling</span></code> disabled and enabled:</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The linear strategy reports no acceleration, so only the enabled series is drawn in the bottom
+plot. Its step at <code class="docutils literal notranslate"><span class="pre">t=0.5</span></code> is the hand-off from the initial point, which is not part of the solve.</p>
+</div>
+<img alt="Sampled trajectory with positions-only points, with and without positions_upsampling" src="../../../../_images/spline_position_upsampling.png" />
 <ul class="simple">
 <li><p>Sampled trajectory with cubic splines if velocity is given only (no deduction for interpolation method <code class="docutils literal notranslate"><span class="pre">none</span></code>):</p></li>
 </ul>

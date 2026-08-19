@@ -101,7 +101,7 @@ General discussions
 
 ======================================================================
 
-Built on 2026-08-18 at 08:24 GMT
+Built on 2026-08-19 at 05:48 GMT
 
 
 
@@ -18298,6 +18298,13 @@ joint_trajectory_controller
   omitted from a partial goal continue and finish their original
   motion. (#2419)
 
+* Added optional upsampling of positions-only action chunks, behind
+  the new "positions_upsampling.enable" parameter (off by default).
+  When enabled, positions-only messages on "~/joint_trajectory" are
+  upsampled into a smooth global C2 cubic spline by solving the knot
+  velocities, with timing synthesized from
+  "positions_upsampling.policy_frequency" when absent. (#2491)
+
 
 pid_controller
 ==============
@@ -19775,6 +19782,32 @@ interpolation_method (string)
 
       * one of the specified values: ['splines', 'none']
 
+positions_upsampling.enable (bool)
+   Upsample positions-only messages on "~/joint_trajectory" into a
+   smooth global C2 cubic spline by synthesizing knot velocities (a
+   global tridiagonal solve with rest boundary conditions "v0 =
+   v_{N-1} = 0"). Messages that already carry velocities are passed
+   through unchanged. Has no effect when "interpolation_method" is
+   "none".
+
+   Read only: True
+
+   Default:  false
+
+positions_upsampling.policy_frequency (double)
+   Frequency in Hz at which an AI policy emits action-chunk waypoints.
+   When greater than zero, "time_from_start = (i + 1) /
+   policy_frequency" is synthesized for positions-only chunks that
+   arrive without timing. When zero, incoming chunks must already
+   carry strictly-increasing "time_from_start". Only used when
+   "positions_upsampling.enable" is true.
+
+   Default:  0.0
+
+   Constraints:
+
+      * greater than or equal to 0.0
+
 allow_nonzero_velocity_at_trajectory_end (bool)
    If false, the last velocity point has to be zero or the goal will
    be rejected
@@ -19983,6 +20016,9 @@ An example parameter file
        interpolate_from_desired_state: false
        interpolation_method: splines
        joints: '{}'
+       positions_upsampling:
+         enable: false
+         policy_frequency: 0.0
        set_last_command_interface_value_as_state_on_activation: true
        speed_scaling:
          command_interface: ''
@@ -20201,6 +20237,17 @@ depending on the waypoint specification:
 
   * Guarantees continuity at the acceleration level.
 
+Note:
+
+  The linear case above is discouraged because positions-only
+  waypoints yield discontinuous velocities. Enabling
+  "positions_upsampling" avoids this for positions-only inputs: the
+  controller pre-solves the knot velocities of a global cubic spline
+  ("fill_cubic_spline_velocities") and writes them into the
+  trajectory, so the cubic strategy is used instead and the sampled
+  motion is continuous in acceleration across the trajectory's own
+  waypoints. See Ingesting positions-only action chunks.
+
 Trajectories with velocity fields only, velocity and acceleration
 only, or acceleration fields only can be processed and are accepted,
 if "allow_integration_in_goal_trajectories" is true. Position (and
@@ -20225,6 +20272,18 @@ sampled at a rate of 10ms.
 
 [image: Sampled trajectory with splines if position is given
 only][image]
+
+* Sampled trajectory with the same positions-only points, with
+  "positions_upsampling" disabled and enabled:
+
+Note:
+
+  The linear strategy reports no acceleration, so only the enabled
+  series is drawn in the bottom plot. Its step at "t=0.5" is the hand-
+  off from the initial point, which is not part of the solve.
+
+[image: Sampled trajectory with positions-only points, with and
+without positions_upsampling][image]
 
 * Sampled trajectory with cubic splines if velocity is given only (no
   deduction for interpolation method "none"):
@@ -20551,6 +20610,55 @@ this package. A yaml file for using it could be:
             joint1:
               trajectory: 0.05
               goal: 0.03
+
+
+Ingesting positions-only action chunks
+--------------------------------------
+
+Action policies (e.g. diffusion policy, ACT) emit *action chunks*:
+short trajectories of positions-only waypoints with no velocities and
+often no timing. Fed positions-only, the controller interpolates
+linearly (C0), yielding discontinuous velocities at every waypoint
+(see trajectory representation).
+
+When "positions_upsampling.enable" is true, incoming positions-only
+messages on "~/joint_trajectory" are upsampled in place: the knot
+velocities of a global cubic spline (rest boundary conditions, "v0 =
+v_{N-1} = 0") are solved and written into the trajectory, so the
+existing sampler reproduces a motion that is continuous in
+acceleration across the chunk's waypoints (see the plotted
+comparison). Messages that already carry velocities are passed through
+unchanged, so the feature is a strict superset of the default
+behaviour (it is off by default). It has no effect when
+"interpolation_method" is "none".
+
+"positions_upsampling.policy_frequency" (double, Hz) is used to
+synthesize "time_from_start = (i + 1) / policy_frequency" for chunks
+that arrive without timing; when it is "0" the chunks must carry their
+own strictly-increasing "time_from_start". The first waypoint is
+placed one policy step ahead rather than at "0", so the controller
+ramps into the chunk from the current state instead of stepping to it.
+
+      arm_controller:
+        ros__parameters:
+          joints:
+            - joint1
+            - joint2
+          command_interfaces:
+            - position
+          state_interfaces:
+            - position
+          positions_upsampling:
+            enable: true
+            policy_frequency: 30.0
+
+   Note:
+
+     Only the topic interface ("~/joint_trajectory") is upsampled.
+     Each chunk uses rest boundary conditions, so streaming chunks
+     decelerate to a stop at each chunk boundary; cross-chunk C2
+     continuity and "FollowJointTrajectory" action-goal upsampling are
+     future work.
 
 
 Preemption policy [1]

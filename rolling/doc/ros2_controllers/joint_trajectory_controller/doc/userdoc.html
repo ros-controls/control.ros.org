@@ -68,6 +68,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#hardware-interface-types">Hardware interface types</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#other-features">Other features</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#using-joint-trajectory-controller-s">Using Joint Trajectory Controller(s)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#ingesting-positions-only-action-chunks">Ingesting positions-only action chunks</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#preemption-policy">Preemption policy </a></li>
 <li class="toctree-l5"><a class="reference internal" href="#description-of-controller-s-interfaces">Description of controller’s interfaces</a><ul>
 <li class="toctree-l6"><a class="reference internal" href="#references">References</a></li>
@@ -254,6 +255,48 @@ A yaml file for using it could be:</p>
 </pre></div>
 </div>
 </div></blockquote>
+<section id="ingesting-positions-only-action-chunks">
+<h3>Ingesting positions-only action chunks<a class="headerlink" href="#ingesting-positions-only-action-chunks" title="Link to this heading"></a></h3>
+<p>Action policies (e.g. diffusion policy, ACT) emit <em>action chunks</em>: short trajectories of
+positions-only waypoints with no velocities and often no timing. Fed positions-only, the controller
+interpolates linearly (C0), yielding discontinuous velocities at every waypoint (see <a class="reference internal" href="trajectory.html#joint-trajectory-controller-trajectory-representation"><span class="std std-ref">trajectory
+representation</span></a>).</p>
+<p>When <code class="docutils literal notranslate"><span class="pre">positions_upsampling.enable</span></code> is true, incoming positions-only messages on <code class="docutils literal notranslate"><span class="pre">~/joint_trajectory</span></code>
+are upsampled in place: the knot velocities of a global cubic spline (rest boundary conditions,
+<code class="docutils literal notranslate"><span class="pre">v0</span> <span class="pre">=</span> <span class="pre">v_{N-1}</span> <span class="pre">=</span> <span class="pre">0</span></code>) are solved and written into the trajectory, so the existing sampler reproduces a
+motion that is continuous in acceleration across the chunk’s waypoints (see <a class="reference internal" href="trajectory.html#joint-trajectory-controller-trajectory-representation"><span class="std std-ref">the plotted
+comparison</span></a>). Messages that already carry
+velocities are passed through unchanged, so the feature
+is a strict superset of the default behaviour (it is off by default). It has no effect when
+<code class="docutils literal notranslate"><span class="pre">interpolation_method</span></code> is <code class="docutils literal notranslate"><span class="pre">none</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">positions_upsampling.policy_frequency</span></code> (double, Hz) is used to synthesize
+<code class="docutils literal notranslate"><span class="pre">time_from_start</span> <span class="pre">=</span> <span class="pre">(i</span> <span class="pre">+</span> <span class="pre">1)</span> <span class="pre">/</span> <span class="pre">policy_frequency</span></code> for chunks that arrive without timing; when it is
+<code class="docutils literal notranslate"><span class="pre">0</span></code> the chunks must carry their own strictly-increasing <code class="docutils literal notranslate"><span class="pre">time_from_start</span></code>. The first waypoint is
+placed one policy step ahead rather than at <code class="docutils literal notranslate"><span class="pre">0</span></code>, so the controller ramps into the chunk from the
+current state instead of stepping to it.</p>
+<blockquote>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">arm_controller</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">joints</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint1</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint2</span>
+<span class="w">    </span><span class="nt">command_interfaces</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
+<span class="w">    </span><span class="nt">state_interfaces</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
+<span class="w">    </span><span class="nt">positions_upsampling</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">enable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">policy_frequency</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30.0</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only the topic interface (<code class="docutils literal notranslate"><span class="pre">~/joint_trajectory</span></code>) is upsampled. Each chunk uses rest boundary
+conditions, so streaming chunks decelerate to a stop at each chunk boundary; cross-chunk C2
+continuity and <code class="docutils literal notranslate"><span class="pre">FollowJointTrajectory</span></code> action-goal upsampling are future work.</p>
+</div>
+</div></blockquote>
+</section>
 <section id="preemption-policy">
 <h3>Preemption policy <a class="footnote-reference brackets" href="#f1" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a><a class="headerlink" href="#preemption-policy" title="Link to this heading"></a></h3>
 <p>Only one action goal can be active at any moment, or none if the topic interface is used. Path and goal tolerances are checked only for the trajectory segments of the active goal.</p>
