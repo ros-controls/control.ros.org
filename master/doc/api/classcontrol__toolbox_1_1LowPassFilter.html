@@ -102,10 +102,12 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>~LowPassFilter</b> ()</td></tr>
 <tr class="memdesc:a452aa49260c3b4d1401c97d31b2ec30f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor of <a class="el" href="classcontrol__toolbox_1_1LowPassFilter.html" title="A Low-pass filter class.">LowPassFilter</a> class. <br /></td></tr>
 <tr class="separator:a452aa49260c3b4d1401c97d31b2ec30f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef1c58d421935384b9bae624d67e3e1d" id="r_aef1c58d421935384b9bae624d67e3e1d"><td class="memItemLeft" align="right" valign="top"><a id="aef1c58d421935384b9bae624d67e3e1d" name="aef1c58d421935384b9bae624d67e3e1d"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>configure</b> ()</td></tr>
-<tr class="memdesc:aef1c58d421935384b9bae624d67e3e1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure the <a class="el" href="classcontrol__toolbox_1_1LowPassFilter.html" title="A Low-pass filter class.">LowPassFilter</a> (access and process params). <br /></td></tr>
+<tr class="memitem:aef1c58d421935384b9bae624d67e3e1d" id="r_aef1c58d421935384b9bae624d67e3e1d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontrol__toolbox_1_1LowPassFilter.html#aef1c58d421935384b9bae624d67e3e1d">configure</a> ()</td></tr>
+<tr class="memdesc:aef1c58d421935384b9bae624d67e3e1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure the <a class="el" href="classcontrol__toolbox_1_1LowPassFilter.html" title="A Low-pass filter class.">LowPassFilter</a> (access and process params).  <br /></td></tr>
 <tr class="separator:aef1c58d421935384b9bae624d67e3e1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e454cda104f53d6696e491d815bbb0b" id="r_a3e454cda104f53d6696e491d815bbb0b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontrol__toolbox_1_1LowPassFilter.html#a3e454cda104f53d6696e491d815bbb0b">configure</a> (const T &amp;initial_state)</td></tr>
+<tr class="memdesc:a3e454cda104f53d6696e491d815bbb0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure the <a class="el" href="classcontrol__toolbox_1_1LowPassFilter.html" title="A Low-pass filter class.">LowPassFilter</a> and initialize its internal state.  <br /></td></tr>
+<tr class="separator:a3e454cda104f53d6696e491d815bbb0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a350af4646c96467efde61541adc80a31" id="r_a350af4646c96467efde61541adc80a31"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontrol__toolbox_1_1LowPassFilter.html#a350af4646c96467efde61541adc80a31">update</a> (const T &amp;data_in, T &amp;data_out)</td></tr>
 <tr class="memdesc:a350af4646c96467efde61541adc80a31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies one iteration of the IIR filter.  <br /></td></tr>
 <tr class="separator:a350af4646c96467efde61541adc80a31"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -154,6 +156,59 @@ class control_toolbox::LowPassFilter&lt; T &gt;</div><p>A Low-pass filter class.
 Usage</h1>
 <p>For manual instantiation, you should first call <a class="el" href="classcontrol__toolbox_1_1LowPassFilter.html#aef1c58d421935384b9bae624d67e3e1d" title="Configure the LowPassFilter (access and process params).">configure()</a> (in non-realtime) and then call <a class="el" href="classcontrol__toolbox_1_1LowPassFilter.html#a350af4646c96467efde61541adc80a31" title="Applies one iteration of the IIR filter.">update()</a> at every update step. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="aef1c58d421935384b9bae624d67e3e1d" name="aef1c58d421935384b9bae624d67e3e1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef1c58d421935384b9bae624d67e3e1d">&#9670;&#160;</a></span>configure() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classcontrol__toolbox_1_1LowPassFilter.html">control_toolbox::LowPassFilter</a>&lt; T &gt;::configure </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Configure the <a class="el" href="classcontrol__toolbox_1_1LowPassFilter.html" title="A Low-pass filter class.">LowPassFilter</a> (access and process params). </p>
+<p>The internal state is left uninitialized, so that the filter is initialized with the input of the first <a class="el" href="classcontrol__toolbox_1_1LowPassFilter.html#a350af4646c96467efde61541adc80a31" title="Applies one iteration of the IIR filter.">update()</a> call.</p>
+<dl class="section return"><dt>Returns</dt><dd>true </dd></dl>
+
+</div>
+</div>
+<a id="a3e454cda104f53d6696e491d815bbb0b" name="a3e454cda104f53d6696e491d815bbb0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e454cda104f53d6696e491d815bbb0b">&#9670;&#160;</a></span>configure() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classcontrol__toolbox_1_1LowPassFilter.html">control_toolbox::LowPassFilter</a>&lt; T &gt;::configure </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>initial_state</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Configure the <a class="el" href="classcontrol__toolbox_1_1LowPassFilter.html" title="A Low-pass filter class.">LowPassFilter</a> and initialize its internal state. </p>
+<p>In contrast to <a class="el" href="classcontrol__toolbox_1_1LowPassFilter.html#aef1c58d421935384b9bae624d67e3e1d" title="Configure the LowPassFilter (access and process params).">configure()</a>, the filter starts from <code>initial_state</code> instead of from the input of the first <a class="el" href="classcontrol__toolbox_1_1LowPassFilter.html#a350af4646c96467efde61541adc80a31" title="Applies one iteration of the IIR filter.">update()</a> call. The first <a class="el" href="classcontrol__toolbox_1_1LowPassFilter.html#a350af4646c96467efde61541adc80a31" title="Applies one iteration of the IIR filter.">update()</a> therefore returns the stored signal values from <code>initial_state</code>, and the filter converges towards the input from there (metadata, if any, is still taken from the <a class="el" href="classcontrol__toolbox_1_1LowPassFilter.html#a350af4646c96467efde61541adc80a31" title="Applies one iteration of the IIR filter.">update()</a> input).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">initial_state</td><td>Initial state of the filter</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>false if <code>initial_state</code> is not finite, leaving the filter unchanged, true otherwise </dd></dl>
+
+</div>
+</div>
 <a id="a350af4646c96467efde61541adc80a31" name="a350af4646c96467efde61541adc80a31"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a350af4646c96467efde61541adc80a31">&#9670;&#160;</a></span>update()</h2>
 

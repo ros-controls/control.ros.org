@@ -428,7 +428,7 @@
 <section id="unload-controller">
 <h2>unload_controller<a class="headerlink" href="#unload-controller" title="Link to this heading"></a></h2>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>control<span class="w"> </span>unload_controller<span class="w"> </span>-h
-<span class="go">usage: ros2 control unload_controller [-h] [--spin-time SPIN_TIME] [-s] [-c CONTROLLER_MANAGER] [--include-hidden-nodes] [--ros-args ...] controller_name</span>
+<span class="go">usage: ros2 control unload_controller [-h] [--spin-time SPIN_TIME] [-s] [--all-inactive] [-c CONTROLLER_MANAGER] [--include-hidden-nodes] [--ros-args ...] [controller_name]</span>
 
 <span class="go">Unload a controller in a controller manager</span>
 
@@ -440,11 +440,21 @@
 <span class="go">  --spin-time SPIN_TIME</span>
 <span class="go">                        Spin time in seconds to wait for discovery (only applies when not using an already running daemon)</span>
 <span class="go">  -s, --use-sim-time    Enable ROS simulation time</span>
+<span class="go">  --all-inactive        Unload all controllers currently in the 'inactive' state</span>
 <span class="go">  -c CONTROLLER_MANAGER, --controller-manager CONTROLLER_MANAGER</span>
 <span class="go">                        Name of the controller manager ROS node (default: controller_manager)</span>
 <span class="go">  --include-hidden-nodes</span>
 <span class="go">                        Consider hidden nodes as well</span>
 <span class="go">  --ros-args ...        Pass arbitrary arguments to the executable</span>
+</pre></div>
+</div>
+<p>Either <code class="docutils literal notranslate"><span class="pre">controller_name</span></code> or <code class="docutils literal notranslate"><span class="pre">--all-inactive</span></code> must be given, but not both.</p>
+<p>Example unloading a single controller:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>control<span class="w"> </span>unload_controller<span class="w"> </span>test_controller_name
+</pre></div>
+</div>
+<p>Example unloading every currently inactive controller:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>control<span class="w"> </span>unload_controller<span class="w"> </span>--all-inactive
 </pre></div>
 </div>
 </section>
