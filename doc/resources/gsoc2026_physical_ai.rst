@@ -184,4 +184,4 @@ Thanks to the ros2_control maintainers and contributors for reviewing the pull r
 
 CC-BY Vedhas Talnikar
 
-Mentors: Sai Kishor Kothakota (PAL Robotics), Dr. Bence Magyar (Locus Robotics)
+Mentors: Dr. Bence Magyar (Locus Robotics), Sai Kishor Kothakota (PAL Robotics)

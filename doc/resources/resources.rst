@@ -345,8 +345,8 @@ Summary:
     - Vedhas Talnikar
 
   Mentors:
-    - Sai Kishor Kothakota (PAL Robotics)
     - Dr. Bence Magyar (Locus Robotics)
+    - Sai Kishor Kothakota (PAL Robotics)
 
 Diagrams
 ---------
