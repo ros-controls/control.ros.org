@@ -44,9 +44,7 @@ from four pieces:
   current position.
 
 Enabled by ``allow_trajectory_replacement`` (default ``true``); set it to ``false`` for the previous
-hard-replace behaviour. See the
-`joint_trajectory_controller documentation <../ros2_controllers/joint_trajectory_controller/doc/userdoc.html>`_
-for the full parameter description.
+hard-replace behaviour. See the documentation of :ref:`joint_trajectory_controller_userdoc` for the full parameter description.
 
 Positions-only action chunks
 -----------------------------
