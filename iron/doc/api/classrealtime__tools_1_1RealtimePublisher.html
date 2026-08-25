@@ -108,6 +108,10 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>ROSMessageType</b> =
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a26d3303d6b3558419785d6ce9e942d3d" id="r_a26d3303d6b3558419785d6ce9e942d3d"><td class="memTemplParams" colspan="2">template&lt;typename NodeT &gt; </td></tr>
+<tr class="memitem:a26d3303d6b3558419785d6ce9e942d3d"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1RealtimePublisher.html#a26d3303d6b3558419785d6ce9e942d3d">RealtimePublisher</a> (NodeT &amp;&amp;node, const std::string &amp;topic_name, const rclcpp::QoS &amp;qos, const rclcpp::PublisherOptions &amp;options=rclcpp::PublisherOptions())</td></tr>
+<tr class="memdesc:a26d3303d6b3558419785d6ce9e942d3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for the realtime publisher that creates the publisher internally.  <br /></td></tr>
+<tr class="separator:a26d3303d6b3558419785d6ce9e942d3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33c4a234d1ad7eaa8c6e00cd45d24594" id="r_a33c4a234d1ad7eaa8c6e00cd45d24594"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1RealtimePublisher.html#a33c4a234d1ad7eaa8c6e00cd45d24594">RealtimePublisher</a> (PublisherSharedPtr publisher)</td></tr>
 <tr class="memdesc:a33c4a234d1ad7eaa8c6e00cd45d24594"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for the realtime publisher.  <br /></td></tr>
 <tr class="separator:a33c4a234d1ad7eaa8c6e00cd45d24594"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -163,8 +167,72 @@ MessageT&#160;</td><td class="memItemRight" valign="bottom"><b>msg_</b></td></tr
 <tr class="separator:af25936f3c9e27a9d559a23801ffb6eb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a26d3303d6b3558419785d6ce9e942d3d" name="a26d3303d6b3558419785d6ce9e942d3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26d3303d6b3558419785d6ce9e942d3d">&#9670;&#160;</a></span>RealtimePublisher() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class MessageT &gt; </div>
+<div class="memtemplate">
+template&lt;typename NodeT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrealtime__tools_1_1RealtimePublisher.html">realtime_tools::RealtimePublisher</a>&lt; MessageT &gt;::RealtimePublisher </td>
+          <td>(</td>
+          <td class="paramtype">NodeT &amp;&amp;&#160;</td>
+          <td class="paramname"><em>node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>topic_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const rclcpp::QoS &amp;&#160;</td>
+          <td class="paramname"><em>qos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const rclcpp::PublisherOptions &amp;&#160;</td>
+          <td class="paramname"><em>options</em> = <code>rclcpp::PublisherOptions()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor for the realtime publisher that creates the publisher internally. </p>
+<p>Starts a dedicated thread for message publishing. The publishing thread runs the publishingLoop() function to handle message delivery in a non-realtime context.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>the node (or node interface/pointer) to create the publisher for </td></tr>
+    <tr><td class="paramname">topic_name</td><td>the topic name on which we want to publish </td></tr>
+    <tr><td class="paramname">qos</td><td>the QoS settings for the publisher </td></tr>
+    <tr><td class="paramname">options</td><td>the publisher options </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a33c4a234d1ad7eaa8c6e00cd45d24594" name="a33c4a234d1ad7eaa8c6e00cd45d24594"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a33c4a234d1ad7eaa8c6e00cd45d24594">&#9670;&#160;</a></span>RealtimePublisher()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a33c4a234d1ad7eaa8c6e00cd45d24594">&#9670;&#160;</a></span>RealtimePublisher() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
