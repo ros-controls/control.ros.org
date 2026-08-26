@@ -7,5 +7,6 @@ var searchData=
   ['interfaceconfiguration_4',['InterfaceConfiguration',['../structcontroller__interface_1_1InterfaceConfiguration.html',1,'controller_interface']]],
   ['interfacedata_5',['InterfaceData',['../structmujoco__ros2__control_1_1InterfaceData.html',1,'mujoco_ros2_control']]],
   ['interfaceinfo_6',['InterfaceInfo',['../structhardware__interface_1_1InterfaceInfo.html',1,'hardware_interface']]],
-  ['interfaceschema_7',['InterfaceSchema',['../classzenbedded_1_1InterfaceSchema.html',1,'zenbedded']]]
+  ['interfaceschema_7',['InterfaceSchema',['../classzenbedded_1_1InterfaceSchema.html',1,'zenbedded']]],
+  ['invertedpendulumcontroller_8',['InvertedPendulumController',['../classinverted__pendulum__controller_1_1InvertedPendulumController.html',1,'inverted_pendulum_controller']]]
 ];

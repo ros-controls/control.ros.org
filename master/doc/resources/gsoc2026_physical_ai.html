@@ -1,0 +1,397 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GSoC 2026: Physical AI Inference and Trajectory Upscaling &mdash; ROS2_Control: Rolling Aug 2026 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/reviewer_stats.css?v=068b34ac" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=d85a351e" />
+
+  
+    <link rel="shortcut icon" href="../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//rolling/doc/resources/gsoc2026_physical_ai.html" />
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=2dd01451"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Contributing" href="../contributing/contributing.html" />
+    <link rel="prev" title="ROSCon 2023 Workshop" href="roscon2023_workshop.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="roscon2026_workshop.html">ROSCon 2026 Workshop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ros2_control/doc/index.html">ros2_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../embedded_integration.html">Embedded Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utilities.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration/migration.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api_list/api_list.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="resources.html">Resources</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="resources.html#presentations">Presentations</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="resources.html#google-summer-of-code">Google Summer of Code</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="resources.html#physical-ai-inference-and-trajectory-upscaling-for-ros2-control">2026: Physical AI Inference and Trajectory Upscaling for ros2_control</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">GSoC 2026: Physical AI Inference and Trajectory Upscaling</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#trajectory-replacement-with-blending">Trajectory replacement with blending</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#positions-only-action-chunks">Positions-only action chunks</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cartesian-trajectory-controller">Cartesian trajectory controller</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#trying-it-out">Trying it out</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#further-reading">Further reading</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#dissemination">Dissemination</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="resources.html#diagrams">Diagrams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resources.html#images">Images</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../governance/governance.html">Project Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistics.html">Documentation Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation_downloads.html">Documentation Downloads</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ROS2_Control: Rolling</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="resources.html">Resources</a></li>
+      <li class="breadcrumb-item active">GSoC 2026: Physical AI Inference and Trajectory Upscaling</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/ros-controls/control.ros.org/blob/rolling//doc/resources/gsoc2026_physical_ai.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for a development version.
+    For the latest released version, please have a look at <a href="../../../kilted/index.html">Kilted</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="gsoc-2026-physical-ai-inference-and-trajectory-upscaling">
+<span id="gsoc2026-physical-ai"></span><h1>GSoC 2026: Physical AI Inference and Trajectory Upscaling<a class="headerlink" href="#gsoc-2026-physical-ai-inference-and-trajectory-upscaling" title="Link to this heading"></a></h1>
+<p>Learned manipulation policies (VLAs, diffusion policies, ACT) emit joint targets at roughly 20 to
+50 Hz and replan every 50 to 500 ms, while the hardware underneath expects a fresh command on every
+control cycle at 500 Hz to 2 kHz. Forwarding those sparse waypoints as they arrive puts a velocity
+discontinuity and an acceleration spike at every waypoint.</p>
+<p>This Google Summer of Code 2026 project closed that gap in <code class="docutils literal notranslate"><span class="pre">ros2_controllers</span></code>: the
+<code class="docutils literal notranslate"><span class="pre">joint_trajectory_controller</span></code> (JTC) can now merge an incoming trajectory into the one it is
+already executing, reconstruct missing derivatives from positions-only chunks, and a new
+<code class="docutils literal notranslate"><span class="pre">cartesian_trajectory_controller</span></code> accepts end-effector pose chunks.</p>
+<section id="trajectory-replacement-with-blending">
+<h2>Trajectory replacement with blending<a class="headerlink" href="#trajectory-replacement-with-blending" title="Link to this heading"></a></h2>
+<p>When a new trajectory arrives mid-execution, JTC previously discarded the active one. A
+future-stamped message killed the running trajectory the moment it arrived and ramped slowly to its
+first point, and joints the message omitted froze in place.</p>
+<p>The controller now assembles a single merged trajectory at the moment the message arrives, built
+from four pieces:</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../../_images/gsoc2026_blending.png"><img alt="Merged trajectory built from prefix, bridge, new points and suffix" src="../../_images/gsoc2026_blending.png" style="width: 95%;" /></a>
+<figcaption>
+<p><span class="caption-text">The merged message. Prefix, bridge and suffix all come from the old trajectory; only the new
+points are the client’s message.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p><strong>Cursor</strong> is where the robot actually is on the old trajectory. It is the playback position
+rather than wall-clock time, so the merge stays correct when speed scaling is active.</p></li>
+<li><p><strong>Prefix</strong> holds the old waypoints between the cursor and the handoff instant. The robot therefore
+continues along the path it was already following, preserving any obstacle avoidance planned into
+it, instead of cutting straight towards the new trajectory.</p></li>
+<li><p><strong>Bridge</strong> is a single point sampled analytically from the old trajectory’s spline at the handoff.
+Because it comes from the spline rather than from the measured hardware state, the seam carries a
+real velocity and acceleration instead of zeros.</p></li>
+<li><p><strong>New points</strong> are the client’s message, re-timed onto the merged timeline.</p></li>
+<li><p><strong>Suffix</strong> holds old waypoints beyond the end of the new message. Joints that the new message did
+not mention keep following their original motion and finish it, rather than freezing at their
+current position.</p></li>
+</ul>
+<p>Enabled by <code class="docutils literal notranslate"><span class="pre">allow_trajectory_replacement</span></code> (default <code class="docutils literal notranslate"><span class="pre">true</span></code>); set it to <code class="docutils literal notranslate"><span class="pre">false</span></code> for the previous
+hard-replace behaviour. See the documentation of <a class="reference internal" href="../ros2_controllers/joint_trajectory_controller/doc/userdoc.html#joint-trajectory-controller-userdoc"><span class="std std-ref">joint_trajectory_controller</span></a> for the full parameter description.</p>
+</section>
+<section id="positions-only-action-chunks">
+<h2>Positions-only action chunks<a class="headerlink" href="#positions-only-action-chunks" title="Link to this heading"></a></h2>
+<p>JTC selects its interpolation degree from the fields present in the message, so a positions-only
+chunk falls back to linear interpolation: a staircase velocity and an impulse acceleration at every
+knot. With <code class="docutils literal notranslate"><span class="pre">positions_upsampling</span></code> enabled, the controller instead:</p>
+<ul class="simple">
+<li><p>solves the knot velocities that a global cubic spline would have, one tridiagonal system per joint
+in O(n), in the non-real-time subscription callback;</p></li>
+<li><p>writes those velocities into the message, so the existing cubic Hermite sampling reproduces a C2
+trajectory;</p></li>
+<li><p>synthesizes <code class="docutils literal notranslate"><span class="pre">time_from_start</span></code> from a policy frequency when the chunk arrives without timing.</p></li>
+</ul>
+<p>Nothing in the real-time path changes, and messages that already carry velocities pass through
+untouched, so the feature is a strict superset of the previous behaviour.</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 45%" />
+<col style="width: 55%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><figure class="align-default" id="id2">
+<img alt="../../_images/gsoc2026_upsampling.png" src="../../_images/gsoc2026_upsampling.png" />
+<figcaption>
+<p><span class="caption-text">One chunk, with and without upsampling.</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</td>
+<td><figure class="align-default" id="id3">
+<img alt="../../_images/gsoc2026_cross_chunk_continuity.png" src="../../_images/gsoc2026_cross_chunk_continuity.png" />
+<figcaption>
+<p><span class="caption-text">A stream of chunks, with and without cross-chunk continuity.</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Streaming chunks additionally need continuity across the seam between them. Rest boundary conditions
+at both ends of every chunk plan a stop at each seam; clamping the start of each chunk to the last
+commanded velocity removes it, while the chunk still ends at rest so that a policy which stops
+publishing leaves the robot stationary.</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><figure class="align-default" id="id4">
+<img alt="../../_images/gsoc2026_pick_and_place.gif" src="../../_images/gsoc2026_pick_and_place.gif" />
+<figcaption>
+<p><span class="caption-text">A pick-and-place policy running at 5 Hz.</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</td>
+<td><figure class="align-default" id="id5">
+<img alt="../../_images/gsoc2026_pick_and_place_jerk.png" src="../../_images/gsoc2026_pick_and_place_jerk.png" />
+<figcaption>
+<p><span class="caption-text">Jerk on the same motion; peaks drop by roughly a factor of four.</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cartesian-trajectory-controller">
+<h2>Cartesian trajectory controller<a class="headerlink" href="#cartesian-trajectory-controller" title="Link to this heading"></a></h2>
+<p>Interpolating in joint space between two configurations does not move the tool along a straight
+line, and several policy families emit end-effector poses rather than joint angles. The
+<code class="docutils literal notranslate"><span class="pre">cartesian_trajectory_controller</span></code> subclasses JTC and accepts
+<code class="docutils literal notranslate"><span class="pre">trajectory_msgs/MultiDOFJointTrajectory</span></code> on <code class="docutils literal notranslate"><span class="pre">~/cartesian_reference</span></code>. Per message it:</p>
+<ul class="simple">
+<li><p>interpolates the path in Cartesian space, cubic Hermite for translation and SLERP for rotation, so
+the rotation follows the shortest geodesic;</p></li>
+<li><p>resamples that path densely and runs differential inverse kinematics through
+<code class="docutils literal notranslate"><span class="pre">kinematics_interface</span></code> at every sample;</p></li>
+<li><p>hands the resulting ordinary joint trajectory to the base class for execution.</p></li>
+</ul>
+<p>All of the kinematics runs once per message in the non-real-time callback, so the real-time loop
+stays as fast as plain JTC.</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 60%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><figure class="align-default" id="id6">
+<img alt="../../_images/gsoc2026_cartesian_ros_letters.gif" src="../../_images/gsoc2026_cartesian_ros_letters.gif" />
+<figcaption>
+<p><span class="caption-text">The tool centre point tracing a path on a 6-DOF arm.</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</td>
+<td><figure class="align-default" id="id7">
+<img alt="../../_images/gsoc2026_cartesian_tracking.png" src="../../_images/gsoc2026_cartesian_tracking.png" />
+<figcaption>
+<p><span class="caption-text">Commanded path (green) against the executed tool centre point (blue).</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="trying-it-out">
+<h2>Trying it out<a class="headerlink" href="#trying-it-out" title="Link to this heading"></a></h2>
+<p>Both demos run on mock hardware, so they need no robot.</p>
+<p><code class="docutils literal notranslate"><span class="pre">example_19</span></code> streams positions-only chunks from a mock policy to a 2-DOF RRBot:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_19<span class="w"> </span>bridge_demo.launch.py
+
+<span class="c1"># then, with the policy stopped, check C1/C2 continuity and the chunk seams</span>
+ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_19<span class="w"> </span>bridge_demo.launch.py<span class="w"> </span>run_policy:<span class="o">=</span><span class="nb">false</span><span class="w"> </span>gui:<span class="o">=</span><span class="nb">false</span>
+ros2<span class="w"> </span>run<span class="w"> </span>ros2_control_demo_example_19<span class="w"> </span>verify_smoothness.py
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">example_20</span></code> drives a 6-DOF arm through Cartesian patterns:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_20<span class="w"> </span>cartesian_demo.launch.py<span class="w">   </span><span class="c1"># try pattern:=square or line</span>
+
+<span class="c1"># the verifier reports pass/fail for straight-line deviation, orientation</span>
+<span class="c1"># SLERP, multi-pose chunks, Cartesian smoothness and joint-limit violations</span>
+ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_20<span class="w"> </span>cartesian_demo.launch.py<span class="w"> </span>run_policy:<span class="o">=</span><span class="nb">false</span><span class="w"> </span>gui:<span class="o">=</span><span class="nb">false</span>
+ros2<span class="w"> </span>run<span class="w"> </span>ros2_control_demo_example_20<span class="w"> </span>verify_cartesian_tracking.py
+</pre></div>
+</div>
+</section>
+<section id="further-reading">
+<h2>Further reading<a class="headerlink" href="#further-reading" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/vedh1234/gsoc2026-ros2-control">Project work product</a>, with the full report,
+the design alternatives considered, the current limitations of each feature and links to every
+pull request.</p></li>
+<li><p><a class="reference external" href="https://drive.google.com/drive/u/0/folders/1xI1t85kyrz7SPEhrgykc0YREK2ujV5vy">Design documents</a>
+written during the project, including the spline method comparison and the Cartesian control study.</p></li>
+<li><p><a class="reference external" href="https://docs.google.com/document/d/1pwIeKBbK0psOBsYPCz8ptdvFYKlFri0opK-qlxrDw9I/edit?tab=t.0">Spinoff ideas</a>,
+eight follow-on projects written up with requirements and priorities. They range from factoring the
+trajectory upscaling primitives into <code class="docutils literal notranslate"><span class="pre">control_toolbox</span></code> so any controller can reuse them, through
+an IKFast plugin for <code class="docutils literal notranslate"><span class="pre">kinematics_interface</span></code> and a <code class="docutils literal notranslate"><span class="pre">FollowCartesianTrajectory</span></code> action server,
+to tool-frame relative commands and a comparative study of VLA policies running through this
+stack. Each entry states its requirements and a priority, so they can be picked up directly as
+contributions or as future GSoC projects.</p></li>
+</ul>
+</section>
+<section id="dissemination">
+<h2>Dissemination<a class="headerlink" href="#dissemination" title="Link to this heading"></a></h2>
+<p>This work will be presented as part of the ros2_control project update at
+<a class="reference external" href="https://roscon.ros.org/2026/">ROSCon Global 2026</a> in Toronto, 22 to 24 September.
+The talk will cover handling policy inference and jitter inside the control loop.
+<a class="reference external" href="https://physical-ai.ros.org/">ROS Physical AI Special Interest Group</a>, the OSRA group working to
+identify and remove the friction points that slow Physical AI development in ROS, whose proposals
+and code are developed in the open at <a class="reference external" href="https://github.com/ros-physical-ai">ros-physical-ai</a>.
+Both demos above currently run on mock hardware; the next step is running the same motions on real arms.</p>
+</section>
+<section id="acknowledgements">
+<h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Link to this heading"></a></h2>
+<p>This project was carried out during Google Summer of Code 2026 with the ros2_control team.
+Thanks to Sai Kishor Kothakota, Dr. Bence Magyar and Christoph Fröhlich for the guidance and reviews throughout the project.
+Thanks to the ros2_control maintainers and contributors for reviewing the pull requests, and to the Open Source Robotics Foundation for hosting the project.</p>
+<p>CC-BY Vedhas Talnikar</p>
+<p>Mentors: Dr. Bence Magyar (Locus Robotics), Sai Kishor Kothakota (PAL Robotics)</p>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="roscon2023_workshop.html" class="btn btn-neutral float-left" title="ROSCon 2023 Workshop" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../contributing/contributing.html" class="btn btn-neutral float-right" title="Contributing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: rolling
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Stable Releases</dt>
+        <dd><a href="../../../kilted/index.html">Kilted (latest)</a></dd><br>
+        <dd><a href="../../../jazzy/index.html">Jazzy</a></dd><br>
+        
+        <dd><a href="../../../humble/index.html">Humble</a></dd><br>
+        
+        
+    </dl>
+    <dl>
+      <dt>End-of-Life</dt>
+        <dd><a href="../../../iron/index.html">Iron</a></dd><br>
+        <dd><a href="../../../galactic/index.html">Galactic</a></dd><br>
+        <dd><a href="../../../foxy/index.html">Foxy</a></dd><br>
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="gsoc2026_physical_ai.html">Rolling</a></dd>
+      <dd><a href="../../../lyrical/index.html">Lyrical</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

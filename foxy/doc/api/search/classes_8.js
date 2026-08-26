@@ -10,5 +10,6 @@ var searchData=
   ['imusensorbroadcaster_7',['IMUSensorBroadcaster',['../classimu__sensor__broadcaster_1_1IMUSensorBroadcaster.html',1,'imu_sensor_broadcaster']]],
   ['interfaceconfiguration_8',['InterfaceConfiguration',['../structcontroller__interface_1_1InterfaceConfiguration.html',1,'controller_interface']]],
   ['interfaceinfo_9',['InterfaceInfo',['../structhardware__interface_1_1InterfaceInfo.html',1,'hardware_interface']]],
-  ['interfaceschema_10',['InterfaceSchema',['../classzenbedded_1_1InterfaceSchema.html',1,'zenbedded']]]
+  ['interfaceschema_10',['InterfaceSchema',['../classzenbedded_1_1InterfaceSchema.html',1,'zenbedded']]],
+  ['invertedpendulumcontroller_11',['InvertedPendulumController',['../classinverted__pendulum__controller_1_1InvertedPendulumController.html',1,'inverted_pendulum_controller']]]
 ];
