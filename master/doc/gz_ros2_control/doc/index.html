@@ -327,7 +327,10 @@ robot hardware interfaces between <em>ros2_control</em> and Gazebo.</p>
 <p>The following additional parameters can be set via child elements in the URDF/SDF or via ROS parameters in the YAML file above:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">&lt;hold_joints&gt;</span></code>: if set to true (default), it will hold the joints’ position if their interface was not claimed, e.g., the controller hasn’t been activated yet.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&lt;position_proportional_gain&gt;</span></code>: Set the proportional gain. (default: 0.1) This determines the setpoint for a position-controlled joint <code class="docutils literal notranslate"><span class="pre">joint_velocity</span> <span class="pre">=</span> <span class="pre">joint_position_error</span> <span class="pre">*</span> <span class="pre">position_proportional_gain</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;position_proportional_gain&gt;</span></code>: Set the proportional gain used by the position command interface. (default: 0.1) It determines the joint velocity setpoint as
+<code class="docutils literal notranslate"><span class="pre">joint_velocity</span> <span class="pre">=</span> <span class="pre">position_proportional_gain</span> <span class="pre">*</span> <span class="pre">joint_position_error</span> <span class="pre">*</span> <span class="pre">controller_manager_update_rate</span></code>.
+See <a class="reference internal" href="#notes-on-the-command-interface">Notes on the command interface</a> for the resulting closed-loop behavior and for the
+stability bounds on this value.</p></li>
 </ul>
 <p>or via ROS parameters:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">gz_ros_control</span><span class="p">:</span>

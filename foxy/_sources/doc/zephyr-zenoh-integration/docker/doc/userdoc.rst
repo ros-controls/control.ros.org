@@ -24,7 +24,7 @@ The image is based on ``ros:jazzy-ros-base`` and adds:
 
 - ``ros-jazzy-ros2-control``, ``ros-jazzy-ros2-controllers``
 - ``rmw_zenoh_cpp`` (ROS 2 middleware)
-- Zephyr SDK 0.16.8 with ESP32 (``xtensa-espressif_esp32_zephyr-elf``,
+- Zephyr SDK 1.0.1 with ESP32 (``xtensa-espressif_esp32_zephyr-elf``,
   ``xtensa-espressif_esp32s3_zephyr-elf``) and ARM toolchains
 - ``west`` and Zephyr Python dependencies
 - ``zenoh-pico`` (via ``west.yml`` manifest)
@@ -32,7 +32,7 @@ The image is based on ``ros:jazzy-ros-base`` and adds:
 Environment variables set in the container:
 
 - ``ZEPHYR_BASE=/zephyr_ws/zephyr``
-- ``ZEPHYR_SDK_INSTALL_DIR=/zephyr_ws/zephyr-sdk-0.16.8``
+- ``ZEPHYR_SDK_INSTALL_DIR=/zephyr_ws/zephyr-sdk-1.0.1``
 - ``RMW_IMPLEMENTATION=rmw_zenoh_cpp``
 
 
