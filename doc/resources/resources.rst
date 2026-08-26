@@ -322,6 +322,32 @@ Summary:
 
   *Presenter: Dr. Bence Magyar*
 
+Google Summer of Code
+----------------------
+
+2026: Physical AI Inference and Trajectory Upscaling for ros2_control
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+
+.. toctree::
+   :hidden:
+
+   gsoc2026_physical_ai.rst
+
+Summary:
+  Learned manipulation policies emit joint targets far more slowly than hardware needs them, and
+  without the derivatives a trajectory controller expects. This project added trajectory blending
+  and positions-only chunk upsampling to the ``joint_trajectory_controller``, and a new
+  ``cartesian_trajectory_controller`` for end-effector pose chunks.
+
+:doc:`Project page <gsoc2026_physical_ai>`
+
+  Author:
+    - Vedhas Talnikar
+
+  Mentors:
+    - Dr. Bence Magyar (Locus Robotics)
+    - Sai Kishor Kothakota (PAL Robotics)
+
 Diagrams
 ---------
 Folder with diagrams and sources for the images.
