@@ -151,6 +151,6 @@ realtime_tools
    * - Package Name
      - API
      - ROS Index
-   * - control_msgs
+   * - realtime_tools
      - `API <http://docs.ros.org/en/{DISTRO}/p/realtime_tools/>`__
      - `ROS Index <https://index.ros.org/p/realtime_tools/>`__
