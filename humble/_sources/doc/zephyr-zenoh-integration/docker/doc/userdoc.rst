@@ -20,9 +20,9 @@ Usage
 Includes
 --------
 
-The image is based on ``ros:jazzy-ros-base`` and adds:
+The image is based on ``ros:lyrical-ros-base`` and adds:
 
-- ``ros-jazzy-ros2-control``, ``ros-jazzy-ros2-controllers``
+- ``ros-lyrical-ros2-control``, ``ros-lyrical-ros2-controllers``
 - ``rmw_zenoh_cpp`` (ROS 2 middleware)
 - Zephyr SDK 1.0.1 with ESP32 (``xtensa-espressif_esp32_zephyr-elf``,
   ``xtensa-espressif_esp32s3_zephyr-elf``) and ARM toolchains
