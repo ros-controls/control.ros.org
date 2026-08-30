@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['zenbeddedclient_0',['ZenbeddedClient',['../classZenbeddedClient.html',1,'']]],
-  ['zenbeddedhardware_1',['ZenbeddedHardware',['../classzenbedded_1_1ZenbeddedHardware.html',1,'zenbedded']]],
-  ['zenoh_5fecho_5fnode_2',['zenoh_echo_node',['../namespacezenoh__echo__node.html',1,'']]]
+  ['zenbedded_5frihs_5fmapping_5ft_0',['zenbedded_rihs_mapping_t',['../structzenbedded__rihs__mapping__t.html',1,'']]],
+  ['zenbeddedclient_1',['ZenbeddedClient',['../classZenbeddedClient.html',1,'']]],
+  ['zenbeddedhardware_2',['ZenbeddedHardware',['../classzenbedded_1_1ZenbeddedHardware.html',1,'zenbedded']]],
+  ['zenoh_5fecho_5fnode_3',['zenoh_echo_node',['../namespacezenoh__echo__node.html',1,'']]]
 ];

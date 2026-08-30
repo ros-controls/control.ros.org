@@ -110,14 +110,14 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  <span class="keywordtype">void</span> zenbedded_transport_spin(<span class="keywordtype">void</span>);</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#ifdef CONFIG_TIER_1</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#ifdef CONFIG_ZENBEDDED_TIER_1</span></div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <span class="comment">// Opaque handles. The user/RCL cannot see inside these structs.</span></div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="keyword">typedef</span> <span class="keyword">struct </span>zenbedded_pub_s * zenbedded_pub_t;</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <span class="keyword">typedef</span> <span class="keyword">struct </span>zenbedded_sub_s * zenbedded_sub_t;</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  zenbedded_pub_t zenbedded_transport_declare_publisher(</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keyword">const</span> <span class="keywordtype">char</span> * topic_name, <span class="keyword">const</span> <span class="keywordtype">char</span> * type_name, <span class="keyword">const</span> <span class="keywordtype">char</span> * type_hash);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keyword">const</span> <span class="keywordtype">char</span> * topic_name, <span class="keyword">const</span> <span class="keywordtype">char</span> * type_name);</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  <span class="keywordtype">int</span> zenbedded_transport_publish(</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    zenbedded_pub_t pub, <span class="keyword">const</span> uint8_t * payload, <span class="keywordtype">size_t</span> payload_size);</div>
@@ -125,10 +125,10 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <span class="keyword">typedef</span> void (*zenbedded_recv_cb_t)(<span class="keyword">const</span> uint8_t * payload, <span class="keywordtype">size_t</span> size, <span class="keywordtype">void</span> * user_data);</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  zenbedded_sub_t zenbedded_transport_declare_subscriber(</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keyword">const</span> <span class="keywordtype">char</span> * topic_name, <span class="keyword">const</span> <span class="keywordtype">char</span> * type_name, <span class="keyword">const</span> <span class="keywordtype">char</span> * type_hash,</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    zenbedded_recv_cb_t callback, <span class="keywordtype">void</span> * user_data);</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keyword">const</span> <span class="keywordtype">char</span> * topic_name, <span class="keyword">const</span> <span class="keywordtype">char</span> * type_name, zenbedded_recv_cb_t callback,</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordtype">void</span> * user_data);</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="preprocessor">#endif  </span><span class="comment">// CONFIG_TIER_1</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="preprocessor">#endif  </span><span class="comment">// CONFIG_ZENBEDDED_TIER_1</span></div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="preprocessor">#ifdef __cplusplus</span></div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>}</div>
