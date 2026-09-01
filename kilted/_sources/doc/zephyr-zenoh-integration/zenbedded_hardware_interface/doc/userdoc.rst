@@ -29,7 +29,7 @@ Features
 
 - Agent-less communication -- no ROS 2 bridge process required on the MCU
 - Lock-free state buffer using ``realtime_tools::RealtimeBuffer``
-- YAML-driven interface schema (via ``zenbedded_schema``) for wire-format
+- YAML-driven interface schema (via ``zenbedded_transport``) for wire-format
   compatibility between host and firmware
 - Configurable Zenoh endpoint, mode (client/peer), and topic keys
 - Interfaces declared dynamically from the schema YAML
@@ -112,7 +112,7 @@ Example schema (``config/interface_schema.yaml``)
      motor_arm:
        position: float32
 
-This generates the following packed C struct via ``zenbedded_schema``:
+This generates the following packed C struct via ``zenbedded_transport``:
 
 .. code:: c
 

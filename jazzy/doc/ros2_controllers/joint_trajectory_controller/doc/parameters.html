@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Details about parameters &mdash; ROS2_Control: Jazzy Aug 2026 documentation</title>
+  <title>Details about parameters &mdash; ROS2_Control: Jazzy Sep 2026 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
@@ -19,7 +19,7 @@
     <link rel="canonical" href="https://control.ros.org/rolling//jazzy/doc/ros2_controllers/joint_trajectory_controller/doc/parameters.html" />
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=2dd01451"></script>
+      <script src="../../../../_static/documentation_options.js?v=90883b88"></script>
       <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -271,6 +271,15 @@
 <dt>cmd_timeout (double)</dt><dd><p>Timeout after which the input command is considered stale. Timeout is counted from the end of the trajectory (the last point). <code class="docutils literal notranslate"><span class="pre">cmd_timeout</span></code> must be greater than <code class="docutils literal notranslate"><span class="pre">constraints.goal_time</span></code>, otherwise ignored. If zero, timeout is deactivated</p>
 <p>Default:  0.0</p>
 </dd>
+<dt>action_execution_timeout (double)</dt><dd><p>Absolute wall-clock timeout from trajectory start. When exceeded, the goal is aborted with GOAL_TOLERANCE_VIOLATED. If zero, timeout is disabled. This is a controller-level parameter (not per-goal). Distinct from <code class="docutils literal notranslate"><span class="pre">constraints.goal_time</span></code>, a per-goal grace period after the last trajectory point.</p>
+<p>Default:  0.0</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than or equal to 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
 <dt>constraints</dt><dd><p>Default values for tolerances if no explicit values are set in the <code class="docutils literal notranslate"><span class="pre">JointTrajectory</span></code> message. Also contains the <code class="docutils literal notranslate"><span class="pre">decelerate_on_cancel</span></code> option and per-joint <code class="docutils literal notranslate"><span class="pre">max_deceleration_on_cancel</span></code> values for smooth stopping behavior (see <a class="reference internal" href="decelerate_on_cancel.html#joint-trajectory-controller-decelerate-on-cancel"><span class="std std-ref">Decelerate on cancel</span></a>).</p>
 </dd>
 <dt>constraints.stopped_velocity_tolerance (double)</dt><dd><p>Velocity tolerance for at the end of the trajectory that indicates that controlled system is stopped.</p>
@@ -375,6 +384,7 @@ position <span class="math notranslate nohighlight">\(s\)</span> from the state 
 <h2>An example parameter file<a class="headerlink" href="#an-example-parameter-file" title="Link to this heading"></a></h2>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">joint_trajectory_controller</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">action_execution_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
 <span class="w">    </span><span class="nt">action_monitor_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20.0</span>
 <span class="w">    </span><span class="nt">allow_integration_in_goal_trajectories</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">    </span><span class="nt">allow_nonzero_velocity_at_trajectory_end</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>

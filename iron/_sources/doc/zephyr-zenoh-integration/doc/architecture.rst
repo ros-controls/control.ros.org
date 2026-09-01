@@ -13,10 +13,10 @@ No-CDR architecture
 .. image:: images/nocdr_architecture.png
    :width: 300
    :align: center
-   :alt: No-CDR architecture — uses zenbedded_schema, zenbedded_hardware_interface,
+   :alt: No-CDR architecture — uses zenbedded_transport, zenbedded_hardware_interface,
          and zenbedded_rcl with zero-copy packed binary over Zenoh
 
-No intermediate serialization. ``zenbedded_schema`` defines the wire format,
+No intermediate serialization. ``zenbedded_transport`` defines the wire format,
 ``zenbedded_hardware_interface`` runs on the host, ``zenbedded_rcl`` runs on
 the MCU — all sharing the same packed struct layout.
 
@@ -42,7 +42,7 @@ zenbedded_hardware_interface **[stable]**
     schema) is done via ROS 2 parameters. Uses ``realtime_tools::RealtimeBuffer``
     for lock-free state access.
 
-zenbedded_schema **[stable]**
+zenbedded_transport **[stable]**
     A YAML-driven schema parser and C/C++ header generator that produces packed
     binary struct descriptions. Both the hardware interface (host-side) and the
     firmware (MCU-side) use the same schema to ensure wire-format compatibility.

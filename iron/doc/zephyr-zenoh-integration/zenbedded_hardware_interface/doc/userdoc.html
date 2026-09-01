@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>zenbedded_hardware_interface &mdash; ROS2_Control: Iron Aug 2026 documentation</title>
+  <title>zenbedded_hardware_interface &mdash; ROS2_Control: Iron Sep 2026 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
@@ -19,7 +19,7 @@
     <link rel="canonical" href="https://control.ros.org/rolling//iron/doc/zephyr-zenoh-integration/zenbedded_hardware_interface/doc/userdoc.html" />
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=2dd01451"></script>
+      <script src="../../../../_static/documentation_options.js?v=90883b88"></script>
       <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -124,7 +124,7 @@ colcon<span class="w"> </span>build
 <ul class="simple">
 <li><p>Agent-less communication – no ROS 2 bridge process required on the MCU</p></li>
 <li><p>Lock-free state buffer using <code class="docutils literal notranslate"><span class="pre">realtime_tools::RealtimeBuffer</span></code></p></li>
-<li><p>YAML-driven interface schema (via <code class="docutils literal notranslate"><span class="pre">zenbedded_schema</span></code>) for wire-format
+<li><p>YAML-driven interface schema (via <code class="docutils literal notranslate"><span class="pre">zenbedded_transport</span></code>) for wire-format
 compatibility between host and firmware</p></li>
 <li><p>Configurable Zenoh endpoint, mode (client/peer), and topic keys</p></li>
 <li><p>Interfaces declared dynamically from the schema YAML</p></li>
@@ -209,7 +209,7 @@ tags:</p>
 <span class="w">    </span><span class="nt">position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">float32</span>
 </pre></div>
 </div>
-<p>This generates the following packed C struct via <code class="docutils literal notranslate"><span class="pre">zenbedded_schema</span></code>:</p>
+<p>This generates the following packed C struct via <code class="docutils literal notranslate"><span class="pre">zenbedded_transport</span></code>:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">motor_arm_position</span><span class="p">;</span>
 <span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">pendulum_axis_position</span><span class="p">;</span>

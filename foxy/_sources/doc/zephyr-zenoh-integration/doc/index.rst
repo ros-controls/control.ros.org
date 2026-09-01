@@ -17,7 +17,7 @@ Packages
    :titlesonly:
 
    Hardware Interface <../zenbedded_hardware_interface/doc/userdoc.rst>
-   Schema <../zenbedded_schema/doc/userdoc.rst>
+   Schema <../zenbedded_transport/doc/userdoc.rst>
    Transport <../zenbedded_transport/doc/userdoc.rst>
    Firmware Client Library <../zenbedded_rcl/doc/userdoc.rst>
 

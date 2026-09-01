@@ -101,7 +101,7 @@ General discussions
 
 ======================================================================
 
-Built on 2026-08-31 at 05:40 GMT
+Built on 2026-09-01 at 05:40 GMT
 
 
 
@@ -23883,11 +23883,11 @@ The integration provides two architecture variants.
 No-CDR architecture
 ===================
 
-[image: No-CDR architecture — uses zenbedded_schema,
+[image: No-CDR architecture — uses zenbedded_transport,
 zenbedded_hardware_interface, and zenbedded_rcl with zero-copy packed
 binary over Zenoh][image]
 
-No intermediate serialization. "zenbedded_schema" defines the wire
+No intermediate serialization. "zenbedded_transport" defines the wire
 format, "zenbedded_hardware_interface" runs on the host,
 "zenbedded_rcl" runs on the MCU — all sharing the same packed struct
 layout.
@@ -23914,7 +23914,7 @@ zenbedded_hardware_interface **[stable]**
    (endpoint, topics, interface schema) is done via ROS 2 parameters.
    Uses "realtime_tools::RealtimeBuffer" for lock-free state access.
 
-zenbedded_schema **[stable]**
+zenbedded_transport **[stable]**
    A YAML-driven schema parser and C/C++ header generator that
    produces packed binary struct descriptions. Both the hardware
    interface (host-side) and the firmware (MCU-side) use the same
@@ -24150,7 +24150,7 @@ Features
 
 * Lock-free state buffer using "realtime_tools::RealtimeBuffer"
 
-* YAML-driven interface schema (via "zenbedded_schema") for wire-
+* YAML-driven interface schema (via "zenbedded_transport") for wire-
   format compatibility between host and firmware
 
 * Configurable Zenoh endpoint, mode (client/peer), and topic keys
@@ -24221,7 +24221,8 @@ Example schema ("config/interface_schema.yaml")
      motor_arm:
        position: float32
 
-This generates the following packed C struct via "zenbedded_schema":
+This generates the following packed C struct via
+"zenbedded_transport":
 
    typedef struct {
      float motor_arm_position;
@@ -24286,125 +24287,6 @@ workspace):
    cd demos/inverted_pendulum
    west build -p always -b esp32s3_devkitc/esp32s3/procpu #your appropriate board
    west flash --esp-device /dev/ttyUSB0
-
-
-
-==================================================
-source page: doc/zephyr-zenoh-integration/zenbedded_schema/doc/userdoc.txt
-==================================================
-
-zenbedded_schema
-****************
-
-YAML-driven schema parser and C header generator for packed binary
-interface descriptions. Builds with "colcon" or standalone "CMake".
-
-The schema is the single source of truth for the wire format shared
-between the ROS 2 host and the Zephyr firmware.
-
-
-Schema YAML format
-==================
-
-   state_interfaces:
-     <component_name>:
-       <field_name>: <type>
-   command_interfaces:
-     <component_name>:
-       <field_name>: <type>
-
-Supported field types: "float32", "float64" / "double", "int32",
-"uint64", "int16", "uint8".
-
-
-Generated output
-================
-
-For the following schema:
-
-   state_interfaces:
-     motor_arm:
-       position: float32
-     pendulum_axis:
-       position: float32
-   command_interfaces:
-     motor_arm:
-       position: float32
-
-The generator produces:
-
-   #define ZENBEDDED_STATE_BYTE_SIZE 8
-   #define ZENBEDDED_COMMAND_BYTE_SIZE 4
-
-   #pragma pack(push, 1)
-   typedef struct {
-     float motor_arm_position;
-     float pendulum_axis_position;
-   } zenbedded_state_t;
-
-   typedef struct {
-     float motor_arm_position;
-   } zenbedded_command_t;
-   #pragma pack(pop)
-
-
-CLI usage
-=========
-
-   # colcon
-   colcon build --packages-select zenbedded_schema
-   source install/setup.bash
-   generate_header --yaml interface_schema.yaml --output interface_data.h
-
-   # standalone
-   cmake -S . -B build && cmake --build build
-   ./build/generate_header --yaml interface_schema.yaml --output interface_data.h
-
-
-CMake integration
-=================
-
-   find_package(zenbedded_schema REQUIRED)
-
-   zenbedded_generate_header(
-     YAML  interface_schema.yaml
-     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/interface_data.h
-     TARGET generate_interface_data
-   )
-
-   add_dependencies(my_target ${generate_interface_data})
-
-
-API
-===
-
-   namespace zenbedded
-   {
-
-   class InterfaceSchema
-   {
-   public:
-     static InterfaceSchema from_yaml(const std::string & yaml_text);
-     static InterfaceSchema from_yaml_file(const std::string & file_path);
-
-     bool valid() const;
-     std::string error() const;
-
-     size_t state_buffer_size() const;
-     size_t command_buffer_size() const;
-     size_t total_state_interfaces() const;
-     size_t total_command_interfaces() const;
-
-     bool write_c_header(const std::string & output_path) const;
-
-     double read_state_field(const uint8_t * buffer, size_t field_index) const;
-     double read_command_field(const uint8_t * buffer, size_t field_index) const;
-     void write_command_field(uint8_t * buffer, size_t field_index, double value) const;
-
-     static size_t field_byte_size(FieldType type);
-   };
-
-   }
 
 
 
