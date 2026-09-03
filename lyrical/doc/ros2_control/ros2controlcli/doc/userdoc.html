@@ -481,15 +481,16 @@
 <section id="view-controller-chains">
 <h2>view_controller_chains<a class="headerlink" href="#view-controller-chains" title="Link to this heading"></a></h2>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>control<span class="w"> </span>view_controller_chains<span class="w"> </span>-h
-<span class="go">usage: ros2 control view_controller_chains [-h] [--spin-time SPIN_TIME] [-s] [-c CONTROLLER_MANAGER] [--include-hidden-nodes] [--ros-args ...]</span>
+<span class="go">usage: ros2 control view_controller_chains [-h] [--spin-time SPIN_TIME] [-s] [--save] [-c CONTROLLER_MANAGER] [--include-hidden-nodes] [--ros-args ...]</span>
 
-<span class="go">Generates a diagram of the loaded chained controllers into /tmp/controller_diagram.gv.pdf</span>
+<span class="go">Generates a diagram of the loaded chained controllers</span>
 
 <span class="go">options:</span>
 <span class="go">  -h, --help            show this help message and exit</span>
 <span class="go">  --spin-time SPIN_TIME</span>
 <span class="go">                        Spin time in seconds to wait for discovery (only applies when not using an already running daemon)</span>
 <span class="go">  -s, --use-sim-time    Enable ROS simulation time</span>
+<span class="go">  --save                Save the diagram as controller_diagram.pdf in the current directory instead of opening it in a viewer</span>
 <span class="go">  -c CONTROLLER_MANAGER, --controller-manager CONTROLLER_MANAGER</span>
 <span class="go">                        Name of the controller manager ROS node (default: controller_manager)</span>
 <span class="go">  --include-hidden-nodes</span>
@@ -497,6 +498,14 @@
 <span class="go">  --ros-args ...        Pass arbitrary arguments to the executable</span>
 </pre></div>
 </div>
+<p>The diagram is opened in the default PDF viewer. If no viewer is available, for example when
+working over SSH, it is saved as <code class="docutils literal notranslate"><span class="pre">controller_diagram.pdf</span></code> in the current directory instead, which
+can also be requested explicitly with <code class="docutils literal notranslate"><span class="pre">--save</span></code>. The path of the generated file is printed in
+either case.</p>
+<p>Interfaces exchanged between controllers are shown with the name of the exporting controller as
+prefix: an interface labeled <code class="docutils literal notranslate"><span class="pre">(exp</span> <span class="pre">ref)</span></code> is a reference interface a chainable controller exports
+for the preceding controller to write, and one labeled <code class="docutils literal notranslate"><span class="pre">(exp</span> <span class="pre">state)</span></code> is a state interface it
+exports for other controllers to read.</p>
 </section>
 <section id="view-hardware-status">
 <h2>view_hardware_status<a class="headerlink" href="#view-hardware-status" title="Link to this heading"></a></h2>
