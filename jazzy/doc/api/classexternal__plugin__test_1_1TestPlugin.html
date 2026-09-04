@@ -110,12 +110,15 @@ Collaboration diagram for external_plugin_test::TestPlugin:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aaffa048f98263126162fff903be594ef" id="r_aaffa048f98263126162fff903be594ef"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classexternal__plugin__test_1_1TestPlugin.html#aaffa048f98263126162fff903be594ef">init</a> (rclcpp::Node::SharedPtr, const mjModel *, mjData *) override</td></tr>
-<tr class="memdesc:aaffa048f98263126162fff903be594ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the plugin.  <br /></td></tr>
-<tr class="separator:aaffa048f98263126162fff903be594ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1c1336015999c63ac5145331ae79a14" id="r_ae1c1336015999c63ac5145331ae79a14"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classexternal__plugin__test_1_1TestPlugin.html#ae1c1336015999c63ac5145331ae79a14">init</a> (rclcpp::Node::SharedPtr node, const mjModel *, mjData *) override</td></tr>
+<tr class="memdesc:ae1c1336015999c63ac5145331ae79a14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the plugin.  <br /></td></tr>
+<tr class="separator:ae1c1336015999c63ac5145331ae79a14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a62668444cbe93e06e76bd920e30369ee" id="r_a62668444cbe93e06e76bd920e30369ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classexternal__plugin__test_1_1TestPlugin.html#a62668444cbe93e06e76bd920e30369ee">update</a> (const mjModel *, mjData *) override</td></tr>
 <tr class="memdesc:a62668444cbe93e06e76bd920e30369ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called once per control cycle, on the control thread. Default does nothing.  <br /></td></tr>
 <tr class="separator:a62668444cbe93e06e76bd920e30369ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a643c13841224211ddd3ab20f69382fc5" id="r_a643c13841224211ddd3ab20f69382fc5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classexternal__plugin__test_1_1TestPlugin.html#a643c13841224211ddd3ab20f69382fc5">on_reset</a> (mjData *) override</td></tr>
+<tr class="memdesc:a643c13841224211ddd3ab20f69382fc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called after a world reset (ResetWorld service or UI reset). Default does nothing.  <br /></td></tr>
+<tr class="separator:a643c13841224211ddd3ab20f69382fc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d2cd0fd26ea69a8e48d44b8caa9f28f" id="r_a0d2cd0fd26ea69a8e48d44b8caa9f28f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classexternal__plugin__test_1_1TestPlugin.html#a0d2cd0fd26ea69a8e48d44b8caa9f28f">cleanup</a> () override</td></tr>
 <tr class="memdesc:a0d2cd0fd26ea69a8e48d44b8caa9f28f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleanup the plugin.  <br /></td></tr>
 <tr class="separator:a0d2cd0fd26ea69a8e48d44b8caa9f28f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -154,8 +157,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aaffa048f98263126162fff903be594ef" name="aaffa048f98263126162fff903be594ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaffa048f98263126162fff903be594ef">&#9670;&#160;</a></span>init()</h2>
+<a id="ae1c1336015999c63ac5145331ae79a14" name="ae1c1336015999c63ac5145331ae79a14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1c1336015999c63ac5145331ae79a14">&#9670;&#160;</a></span>init()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -207,6 +210,42 @@ Public Member Functions</h2></td></tr>
 <dl class="section note"><dt>Note</dt><dd>This method will be called once when the plugin is loaded. It can be used to read parameters, set up publishers/subscribers, etc. The node will be a child of the main <a class="el" href="namespacemujoco__ros2__control.html">mujoco_ros2_control</a> node, so parameters should be namespaced accordingly. </dd></dl>
 
 <p>Implements <a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#ad0e4e7f4b115c008fc3875c1627223e3">mujoco_ros2_control_plugins::MuJoCoROS2ControlPluginBase</a>.</p>
+
+</div>
+</div>
+<a id="a643c13841224211ddd3ab20f69382fc5" name="a643c13841224211ddd3ab20f69382fc5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a643c13841224211ddd3ab20f69382fc5">&#9670;&#160;</a></span>on_reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void external_plugin_test::TestPlugin::on_reset </td>
+          <td>(</td>
+          <td class="paramtype">mjData *&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Called after a world reset (ResetWorld service or UI reset). Default does nothing. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>Pointer to the live MuJoCo data in its post-reset state. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented from <a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a46b906318d26a654c7a528be5b2c3bc7">mujoco_ros2_control_plugins::MuJoCoROS2ControlPluginBase</a>.</p>
 
 </div>
 </div>

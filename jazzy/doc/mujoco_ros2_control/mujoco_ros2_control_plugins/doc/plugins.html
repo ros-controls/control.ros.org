@@ -809,12 +809,13 @@ Each plugin entry requires:</p>
 <span class="k">public</span><span class="o">:</span>
 <span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Node</span><span class="o">::</span><span class="n">SharedPtr</span><span class="w"> </span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">mjModel</span><span class="o">*</span><span class="w"> </span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">mjData</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
 
-<span class="w">  </span><span class="c1">// Override whichever of these you need -- both have a no-op default, see</span>
+<span class="w">  </span><span class="c1">// Override whichever of these you need -- all have a no-op default, see</span>
 <span class="w">  </span><span class="c1">// "Plugin Lifecycle" below for how they differ.</span>
 <span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">mjModel</span><span class="o">*</span><span class="w"> </span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">mjData</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
 <span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">pre_step</span><span class="p">(</span><span class="n">mjData</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">on_reset</span><span class="p">(</span><span class="n">mjData</span><span class="o">*</span><span class="w"> </span><span class="cm">/*data*/</span><span class="p">)</span>
 
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">cleanup</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="n">cleanup</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
 
 <span class="k">private</span><span class="o">:</span>
 <span class="w">  </span><span class="c1">// Your member variables</span>
@@ -851,12 +852,17 @@ Each plugin entry requires:</p>
 <span class="w">  </span><span class="c1">// Called on the physics thread, immediately before every mj_step.</span>
 <span class="p">}</span>
 
+<span class="kt">void</span><span class="w"> </span><span class="nf">on_reset</span><span class="p">(</span><span class="n">mjData</span><span class="o">*</span><span class="w"> </span><span class="cm">/*data*/</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="c1">// Called after a world reset (ResetWorld service or UI reset).</span>
+<span class="p">}</span>
+
 <span class="kt">void</span><span class="w"> </span><span class="nf">MyCustomPlugin::cleanup</span><span class="p">()</span>
 <span class="p">{</span>
 <span class="w">  </span><span class="c1">// Clean up resources</span>
 <span class="p">}</span>
 
-<span class="p">}</span><span class="w">  </span><span class="c1">// namespace my_namespace</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace my_namespace</span>
 
 <span class="n">PLUGINLIB_EXPORT_CLASS</span><span class="p">(</span>
 <span class="w">  </span><span class="n">my_namespace</span><span class="o">::</span><span class="n">MyCustomPlugin</span><span class="p">,</span>
@@ -919,6 +925,9 @@ command buffer, so an untouched entry keeps its last value. Use this for anythin
 hold for exactly one physics step, such as <code class="docutils literal notranslate"><span class="pre">BaseVelocityPlugin</span></code>’s kinematic velocity
 override. Runs with the simulation mutex held, so blocking here stalls the physics loop and
 native viewer too.</p></li>
+<li><p><strong>On Reset</strong> (<code class="docutils literal notranslate"><span class="pre">on_reset</span></code>, optional): Called when the simulation is “reset”, either from
+the ResetWorld service from the UI. This lets plugins know that the state of the world has
+been reset and they can take appropriate action.</p></li>
 <li><p><strong>Cleanup</strong> (<code class="docutils literal notranslate"><span class="pre">cleanup</span></code>): Called when shutting down. Release any resources acquired in
 <code class="docutils literal notranslate"><span class="pre">init</span></code>.</p></li>
 </ol>

@@ -128,6 +128,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9bb7f98fd27ea1b546bc18fa17427fb5" id="r_a9bb7f98fd27ea1b546bc18fa17427fb5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a9bb7f98fd27ea1b546bc18fa17427fb5">pre_step</a> (mjData *)</td></tr>
 <tr class="memdesc:a9bb7f98fd27ea1b546bc18fa17427fb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called immediately before every simulation step on the physics thread. Default does nothing.  <br /></td></tr>
 <tr class="separator:a9bb7f98fd27ea1b546bc18fa17427fb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46b906318d26a654c7a528be5b2c3bc7" id="r_a46b906318d26a654c7a528be5b2c3bc7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a46b906318d26a654c7a528be5b2c3bc7">on_reset</a> (mjData *)</td></tr>
+<tr class="memdesc:a46b906318d26a654c7a528be5b2c3bc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called after a world reset (ResetWorld service or UI reset). Default does nothing.  <br /></td></tr>
+<tr class="separator:a46b906318d26a654c7a528be5b2c3bc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0dcc3e00f9f0b336d03d4f586f9f8f85" id="r_a0dcc3e00f9f0b336d03d4f586f9f8f85"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a0dcc3e00f9f0b336d03d4f586f9f8f85">cleanup</a> ()=0</td></tr>
 <tr class="memdesc:a0dcc3e00f9f0b336d03d4f586f9f8f85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleanup the plugin.  <br /></td></tr>
 <tr class="separator:a0dcc3e00f9f0b336d03d4f586f9f8f85"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -135,12 +138,13 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base class for MuJoCo ROS 2 control plugins. </p>
 <p>Plugins extend <a class="el" href="namespacemujoco__ros2__control.html">mujoco_ros2_control</a> with custom behavior, e.g. publishing extra topics or applying external forces.</p>
-<p>Two optional hooks are available. Override whichever fits your use case:</p>
+<p>Three optional hooks are available. Override whichever fits your use case:</p>
 <ul>
 <li><code><a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a52b30b5bfa816f936c8c3873f962c153" title="Called once per control cycle, on the control thread. Default does nothing.">update()</a></code> runs on the ros2_control control thread, once per <code>write()</code> cycle. <code>data</code> is a recent snapshot, not the live <code>mj_data_</code>. Use this for anything that doesn't need to run on exactly one physics step, e.g. publishing sensor data or servicing a trigger.</li>
 <li><code><a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a9bb7f98fd27ea1b546bc18fa17427fb5" title="Called immediately before every simulation step on the physics thread. Default does nothing.">pre_step()</a></code> runs on the physics thread, immediately before every <code>mj_step()</code>, with direct access to the live <code>mj_data_</code>. Use this for anything that must hold for exactly one step, e.g. a hard kinematic override. There's no command buffer: an untouched entry keeps its last value, so releasing a command (e.g. an expired force) needs an explicit write. This should be used with caution!</li>
+<li><code><a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a46b906318d26a654c7a528be5b2c3bc7" title="Called after a world reset (ResetWorld service or UI reset). Default does nothing.">on_reset()</a></code> runs immediately after a world reset, with the live <code>mj_data_</code> in its post-reset state. Use this to clear plugin state that refers to the pre-reset world, e.g. a latched command.</li>
 </ul>
-<dl class="section note"><dt>Note</dt><dd>Both hooks must avoid blocking or the control loop or simulation itself will be held up! </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>All hooks must avoid blocking or the control loop or simulation itself will be held up! </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a0dcc3e00f9f0b336d03d4f586f9f8f85" name="a0dcc3e00f9f0b336d03d4f586f9f8f85"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0dcc3e00f9f0b336d03d4f586f9f8f85">&#9670;&#160;</a></span>cleanup()</h2>
@@ -223,7 +227,43 @@ Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>true if initialization was successful </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>This method will be called once when the plugin is loaded. It can be used to read parameters, set up publishers/subscribers, etc. The node will be a child of the main <a class="el" href="namespacemujoco__ros2__control.html">mujoco_ros2_control</a> node, so parameters should be namespaced accordingly. </dd></dl>
 
-<p>Implemented in <a class="el" href="classmujoco__ros2__control__plugins_1_1BaseVelocityPlugin.html#ac390f6308fb463a7bded9a23ad67b9b0">mujoco_ros2_control_plugins::BaseVelocityPlugin</a>, <a class="el" href="classmujoco__ros2__control__plugins_1_1CameraPlugin.html#afbe60ffaffac7b506eca062bc0e6c774">mujoco_ros2_control_plugins::CameraPlugin</a>, <a class="el" href="classmujoco__ros2__control__plugins_1_1ExternalWrenchPlugin.html#a3cd937aa45270e494df75b428ff2ac7c">mujoco_ros2_control_plugins::ExternalWrenchPlugin</a>, <a class="el" href="classmujoco__ros2__control__plugins_1_1FreeJointStatePublisherPlugin.html#abf92b6e20b0457de18376010077a2a34">mujoco_ros2_control_plugins::FreeJointStatePublisherPlugin</a>, <a class="el" href="classmujoco__ros2__control__plugins_1_1HeartbeatPublisherPlugin.html#a7ec2915b2fd9df71d333ab4e03831d1f">mujoco_ros2_control_plugins::HeartbeatPublisherPlugin</a>, <a class="el" href="classmujoco__ros2__control__plugins_1_1Mujoco3dLidarPlugin.html#ad49346ccf6a822c287647e73aa21c064">mujoco_ros2_control_plugins::Mujoco3dLidarPlugin</a>, <a class="el" href="classmujoco__ros2__control__plugins_1_1RangefinderLidarPlugin.html#ae40126e7b5206f2f4615d0d2a861e104">mujoco_ros2_control_plugins::RangefinderLidarPlugin</a>, and <a class="el" href="classexternal__plugin__test_1_1TestPlugin.html#aaffa048f98263126162fff903be594ef">external_plugin_test::TestPlugin</a>.</p>
+<p>Implemented in <a class="el" href="classexternal__plugin__test_1_1TestPlugin.html#ae1c1336015999c63ac5145331ae79a14">external_plugin_test::TestPlugin</a>, <a class="el" href="classmujoco__ros2__control__plugins_1_1BaseVelocityPlugin.html#ac390f6308fb463a7bded9a23ad67b9b0">mujoco_ros2_control_plugins::BaseVelocityPlugin</a>, <a class="el" href="classmujoco__ros2__control__plugins_1_1CameraPlugin.html#afbe60ffaffac7b506eca062bc0e6c774">mujoco_ros2_control_plugins::CameraPlugin</a>, <a class="el" href="classmujoco__ros2__control__plugins_1_1ExternalWrenchPlugin.html#a3cd937aa45270e494df75b428ff2ac7c">mujoco_ros2_control_plugins::ExternalWrenchPlugin</a>, <a class="el" href="classmujoco__ros2__control__plugins_1_1FreeJointStatePublisherPlugin.html#abf92b6e20b0457de18376010077a2a34">mujoco_ros2_control_plugins::FreeJointStatePublisherPlugin</a>, <a class="el" href="classmujoco__ros2__control__plugins_1_1HeartbeatPublisherPlugin.html#a7ec2915b2fd9df71d333ab4e03831d1f">mujoco_ros2_control_plugins::HeartbeatPublisherPlugin</a>, <a class="el" href="classmujoco__ros2__control__plugins_1_1Mujoco3dLidarPlugin.html#ad49346ccf6a822c287647e73aa21c064">mujoco_ros2_control_plugins::Mujoco3dLidarPlugin</a>, and <a class="el" href="classmujoco__ros2__control__plugins_1_1RangefinderLidarPlugin.html#ae40126e7b5206f2f4615d0d2a861e104">mujoco_ros2_control_plugins::RangefinderLidarPlugin</a>.</p>
+
+</div>
+</div>
+<a id="a46b906318d26a654c7a528be5b2c3bc7" name="a46b906318d26a654c7a528be5b2c3bc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46b906318d26a654c7a528be5b2c3bc7">&#9670;&#160;</a></span>on_reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void mujoco_ros2_control_plugins::MuJoCoROS2ControlPluginBase::on_reset </td>
+          <td>(</td>
+          <td class="paramtype">mjData *&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Called after a world reset (ResetWorld service or UI reset). Default does nothing. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>Pointer to the live MuJoCo data in its post-reset state. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented in <a class="el" href="classexternal__plugin__test_1_1TestPlugin.html#a643c13841224211ddd3ab20f69382fc5">external_plugin_test::TestPlugin</a>.</p>
 
 </div>
 </div>
