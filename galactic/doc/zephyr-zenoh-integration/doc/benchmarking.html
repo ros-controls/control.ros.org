@@ -1,0 +1,326 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Benchmarking &mdash; ROS2_Control: Galactic Sep 2026 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/reviewer_stats.css?v=068b34ac" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=d85a351e" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//galactic/doc/zephyr-zenoh-integration/doc/benchmarking.html" />
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=90883b88"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html#architecture">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html#hardware-components">Hardware Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_control/doc/index.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_control/doc/index.html#core-functionalities">Core functionalities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_control/ros2controlcli/doc/userdoc.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../differences_to_ros1/differences_to_ros1.html">Differences to ros_control (ROS1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../differences_to_ros1/differences_to_ros1.html#migration-guide-to-ros2-control">Migration Guide to ros2_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/contributing.html">Pull Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/contributing.html#rules-for-the-repositories-and-process-of-merging-pull-requests">Rules for the repositories and process of merging pull requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/contributing.html#writing-documentation">Writing documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/contributing.html#repository-structure-and-ci-configuration">Repository structure and CI configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../project_ideas.html">Project Ideas for GSoC 2022</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ROS2_Control: Galactic</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Benchmarking</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ros-controls/zephyr-zenoh-integration/blob/galactic/doc/benchmarking.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for a version of ROS 2 that has reached its EOL (end-of-life), and is no longer officially supported.
+    If you want up-to-date information, please have a look at <a href="../../../../kilted/doc/zephyr-zenoh-integration/doc/benchmarking.html">Kilted</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="benchmarking">
+<span id="id1"></span><h1>Benchmarking<a class="headerlink" href="#benchmarking" title="Link to this heading"></a></h1>
+<p>Benchmarks for the Zenbedded transport - Zenoh vs DDS (micro-ROS), Tier 1 vs
+Tier 2, and max control frequency across data sizes.</p>
+<p>Default test setup: ESP32-S3, WiFi, Zenoh client mode, Best Effort QoS,
+ROS 2 Lyrical. All values TBD until measured.</p>
+<p>Data sizes are expressed in float64 values, state to command at a 2:1
+ratio. Tier 2 schemas carry exactly the fields they define.</p>
+<section id="tier-1-vs-micro-ros-zenoh-vs-dds">
+<h2>Tier 1 vs micro-ROS (Zenoh vs DDS)<a class="headerlink" href="#tier-1-vs-micro-ros-zenoh-vs-dds" title="Link to this heading"></a></h2>
+<p>Same CDR messages (<code class="docutils literal notranslate"><span class="pre">JointState</span></code>, <code class="docutils literal notranslate"><span class="pre">JointCommand</span></code>), different wire protocol.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 30%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Metric</p></th>
+<th class="head"><p>micro-ROS (DDS)</p></th>
+<th class="head"><p>zenbedded Tier 1 (Zenoh)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MCU to ROS 2 latency (ms)</p></td>
+<td><p>TBD</p></td>
+<td><p>TBD</p></td>
+</tr>
+<tr class="row-odd"><td><p>ROS 2 to MCU latency (ms)</p></td>
+<td><p>TBD</p></td>
+<td><p>TBD</p></td>
+</tr>
+<tr class="row-even"><td><p>Round-trip latency (ms)</p></td>
+<td><p>TBD</p></td>
+<td><p>TBD</p></td>
+</tr>
+<tr class="row-odd"><td><p>Jitter p99-p50 (us)</p></td>
+<td><p>TBD</p></td>
+<td><p>TBD</p></td>
+</tr>
+<tr class="row-even"><td><p>Max control frequency (Hz)</p></td>
+<td><p>TBD</p></td>
+<td><p>TBD</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tier-1-vs-tier-2-serialization">
+<h2>Tier 1 vs Tier 2 (serialization)<a class="headerlink" href="#tier-1-vs-tier-2-serialization" title="Link to this heading"></a></h2>
+<p>Same user data, different wire cost. Tier 1 sends standard CDR messages;
+Tier 2 sends <code class="docutils literal notranslate"><span class="pre">#pragma</span> <span class="pre">pack(push,</span> <span class="pre">1)</span></code> flat structs for the same values.
+Grid below matches the max frequency table.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>State doubles</p></th>
+<th class="head"><p>Tier 1 payload (bytes)</p></th>
+<th class="head"><p>Tier 2 payload (bytes)</p></th>
+<th class="head"><p>Tier 1 serialize (ns/op)</p></th>
+<th class="head"><p>Tier 2 serialize (ns/op)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>TBD</p></td>
+<td><p>32</p></td>
+<td><p>TBD</p></td>
+<td><p>TBD</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>TBD</p></td>
+<td><p>64</p></td>
+<td><p>TBD</p></td>
+<td><p>TBD</p></td>
+</tr>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>TBD</p></td>
+<td><p>128</p></td>
+<td><p>TBD</p></td>
+<td><p>TBD</p></td>
+</tr>
+<tr class="row-odd"><td><p>32</p></td>
+<td><p>TBD</p></td>
+<td><p>256</p></td>
+<td><p>TBD</p></td>
+<td><p>TBD</p></td>
+</tr>
+<tr class="row-even"><td><p>64</p></td>
+<td><p>TBD</p></td>
+<td><p>512</p></td>
+<td><p>TBD</p></td>
+<td><p>TBD</p></td>
+</tr>
+</tbody>
+</table>
+<p>Both tiers carry the same Zenoh transport framing on top of the payload, so
+the framing cancels out of this comparison.</p>
+</section>
+<section id="max-frequency-vs-data-size">
+<h2>Max frequency vs data size<a class="headerlink" href="#max-frequency-vs-data-size" title="Link to this heading"></a></h2>
+<p>Publish at 50, 100, 200, 500, 1000 Hz for 10 s each. Max freq = highest
+rate with ≥ 99.9 % delivery. 1000+ samples per measurement, 100 warmup.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 21%" />
+<col style="width: 32%" />
+<col style="width: 32%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>State doubles</p></th>
+<th class="head"><p>Command doubles</p></th>
+<th class="head"><p>Tier 1 max freq (Hz)</p></th>
+<th class="head"><p>Tier 2 max freq (Hz)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>2</p></td>
+<td><p>TBD</p></td>
+<td><p>TBD</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>4</p></td>
+<td><p>TBD</p></td>
+<td><p>TBD</p></td>
+</tr>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>8</p></td>
+<td><p>TBD</p></td>
+<td><p>TBD</p></td>
+</tr>
+<tr class="row-odd"><td><p>32</p></td>
+<td><p>16</p></td>
+<td><p>TBD</p></td>
+<td><p>TBD</p></td>
+</tr>
+<tr class="row-even"><td><p>64</p></td>
+<td><p>32</p></td>
+<td><p>TBD</p></td>
+<td><p>TBD</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading"></a></h2>
+<p>Timestamps: <code class="docutils literal notranslate"><span class="pre">k_uptime_get_32()</span></code> on firmware (ms), <code class="docutils literal notranslate"><span class="pre">rclpy.now()</span></code> on host.
+One-way latencies assume synced clocks (NTP/PTP); round-trip needs no sync.
+ESP32-S3 is the primary target; native_sim results are supplementary.</p>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: galactic
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Stable Releases</dt>
+        <dd><a href="../../../../kilted/doc/zephyr-zenoh-integration/doc/benchmarking.html">Kilted (latest)</a></dd><br>
+        <dd><a href="../../../../jazzy/doc/zephyr-zenoh-integration/doc/benchmarking.html">Jazzy</a></dd><br>
+        
+        <dd><a href="../../../../humble/doc/zephyr-zenoh-integration/doc/benchmarking.html">Humble</a></dd><br>
+        
+        
+    </dl>
+    <dl>
+      <dt>End-of-Life</dt>
+        <dd><a href="../../../../iron/doc/zephyr-zenoh-integration/doc/benchmarking.html">Iron</a></dd><br>
+        <dd><a href="benchmarking.html">Galactic</a></dd><br>
+        <dd><a href="../../../../foxy/doc/zephyr-zenoh-integration/doc/benchmarking.html">Foxy</a></dd><br>
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="../../../../rolling/doc/zephyr-zenoh-integration/doc/benchmarking.html">Rolling</a></dd>
+      <dd><a href="../../../../lyrical/doc/zephyr-zenoh-integration/doc/benchmarking.html">Lyrical</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
