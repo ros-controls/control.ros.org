@@ -14,11 +14,12 @@ var searchData=
   ['default_20topics_11',['Plugin Parameters Structure (and default topics)',['../classmujoco__ros2__control__plugins_1_1CameraPlugin.html#autotoc_md1',1,'']]],
   ['define_5fcustom_5fnode_5foptions_12',['define_custom_node_options',['../classcontroller__interface_1_1ControllerInterfaceBase.html#abead5138c0f8538e49318b61aea89553',1,'controller_interface::ControllerInterfaceBase::define_custom_node_options()'],['../classhardware__interface_1_1HardwareComponentInterface.html#a394690b8235a0e4448ee63f800306c6b',1,'hardware_interface::HardwareComponentInterface::define_custom_node_options()']]],
   ['demo_13',['demo',['../namespacedemo.html',1,'']]],
-  ['detached_14',['DETACHED',['../classrealtime__tools_1_1AsyncSchedulingPolicy.html#a78da4ea175eac3fdb9c69c1769eee898ad3de4c4d29d316c91fab6b2e737b5521',1,'realtime_tools::AsyncSchedulingPolicy']]],
-  ['diffbotsystemhardware_15',['diffbotsystemhardware',['../classros2__control__demo__example__2_1_1DiffBotSystemHardware.html',1,'ros2_control_demo_example_2::DiffBotSystemHardware'],['../classros2__control__demo__example__16_1_1DiffBotSystemHardware.html',1,'ros2_control_demo_example_16::DiffBotSystemHardware']]],
-  ['diffdrivecontroller_16',['DiffDriveController',['../classdiff__drive__controller_1_1DiffDriveController.html',1,'diff_drive_controller']]],
-  ['differentialtransmission_17',['differentialtransmission',['../classtransmission__interface_1_1DifferentialTransmission.html#a11b9d8cc136ce2b27bdf8f6e6340e186',1,'transmission_interface::DifferentialTransmission::DifferentialTransmission()'],['../classtransmission__interface_1_1DifferentialTransmission.html',1,'transmission_interface::DifferentialTransmission']]],
-  ['differentialtransmissionloader_18',['DifferentialTransmissionLoader',['../classtransmission__interface_1_1DifferentialTransmissionLoader.html',1,'transmission_interface']]],
-  ['dither_19',['Dither',['../classcontrol__toolbox_1_1Dither.html',1,'control_toolbox']]],
-  ['doubleeditor_20',['DoubleEditor',['../classrqt__joint__trajectory__controller_1_1double__editor_1_1DoubleEditor.html',1,'rqt_joint_trajectory_controller::double_editor']]]
+  ['destroy_14',['destroy',['../classZenbeddedClientBase.html#a2ab188af180f2617ad6462abb270136d',1,'ZenbeddedClientBase']]],
+  ['detached_15',['DETACHED',['../classrealtime__tools_1_1AsyncSchedulingPolicy.html#a78da4ea175eac3fdb9c69c1769eee898ad3de4c4d29d316c91fab6b2e737b5521',1,'realtime_tools::AsyncSchedulingPolicy']]],
+  ['diffbotsystemhardware_16',['diffbotsystemhardware',['../classros2__control__demo__example__2_1_1DiffBotSystemHardware.html',1,'ros2_control_demo_example_2::DiffBotSystemHardware'],['../classros2__control__demo__example__16_1_1DiffBotSystemHardware.html',1,'ros2_control_demo_example_16::DiffBotSystemHardware']]],
+  ['diffdrivecontroller_17',['DiffDriveController',['../classdiff__drive__controller_1_1DiffDriveController.html',1,'diff_drive_controller']]],
+  ['differentialtransmission_18',['differentialtransmission',['../classtransmission__interface_1_1DifferentialTransmission.html#a11b9d8cc136ce2b27bdf8f6e6340e186',1,'transmission_interface::DifferentialTransmission::DifferentialTransmission()'],['../classtransmission__interface_1_1DifferentialTransmission.html',1,'transmission_interface::DifferentialTransmission']]],
+  ['differentialtransmissionloader_19',['DifferentialTransmissionLoader',['../classtransmission__interface_1_1DifferentialTransmissionLoader.html',1,'transmission_interface']]],
+  ['dither_20',['Dither',['../classcontrol__toolbox_1_1Dither.html',1,'control_toolbox']]],
+  ['doubleeditor_21',['DoubleEditor',['../classrqt__joint__trajectory__controller_1_1double__editor_1_1DoubleEditor.html',1,'rqt_joint_trajectory_controller::double_editor']]]
 ];

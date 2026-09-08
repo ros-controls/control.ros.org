@@ -5,8 +5,9 @@ var searchData=
   ['data_5ftype_2',['data_type',['../structhardware__interface_1_1InterfaceInfo.html#a9fca330c1074b1e7d51bf555def4b9ed',1,'hardware_interface::InterfaceInfo']]],
   ['debug_3',['debug',['../classcontrol__toolbox_1_1Sinusoid.html#a42affe7c4e8314d287a229a94e4c7a29',1,'control_toolbox::Sinusoid']]],
   ['deprecated_20list_4',['Deprecated List',['../deprecated.html',1,'']]],
-  ['diffbotsystemhardware_5',['DiffBotSystemHardware',['../classros2__control__demo__hardware_1_1DiffBotSystemHardware.html',1,'ros2_control_demo_hardware']]],
-  ['diffdrivecontroller_6',['DiffDriveController',['../classdiff__drive__controller_1_1DiffDriveController.html',1,'diff_drive_controller']]],
-  ['differentialtransmission_7',['differentialtransmission',['../classtransmission__interface_1_1DifferentialTransmission.html',1,'transmission_interface::DifferentialTransmission'],['../classtransmission__interface_1_1DifferentialTransmission.html#a11b9d8cc136ce2b27bdf8f6e6340e186',1,'transmission_interface::DifferentialTransmission::DifferentialTransmission()']]],
-  ['dither_8',['Dither',['../classcontrol__toolbox_1_1Dither.html',1,'control_toolbox']]]
+  ['destroy_5',['destroy',['../classZenbeddedClientBase.html#a2ab188af180f2617ad6462abb270136d',1,'ZenbeddedClientBase']]],
+  ['diffbotsystemhardware_6',['DiffBotSystemHardware',['../classros2__control__demo__hardware_1_1DiffBotSystemHardware.html',1,'ros2_control_demo_hardware']]],
+  ['diffdrivecontroller_7',['DiffDriveController',['../classdiff__drive__controller_1_1DiffDriveController.html',1,'diff_drive_controller']]],
+  ['differentialtransmission_8',['differentialtransmission',['../classtransmission__interface_1_1DifferentialTransmission.html',1,'transmission_interface::DifferentialTransmission'],['../classtransmission__interface_1_1DifferentialTransmission.html#a11b9d8cc136ce2b27bdf8f6e6340e186',1,'transmission_interface::DifferentialTransmission::DifferentialTransmission()']]],
+  ['dither_9',['Dither',['../classcontrol__toolbox_1_1Dither.html',1,'control_toolbox']]]
 ];
