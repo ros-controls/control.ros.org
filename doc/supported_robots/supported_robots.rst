@@ -53,6 +53,7 @@ Official (supported by robot manufacturer)
 - `TIAGo - Mobile Manipulator <https://github.com/pal-robotics/tiago_simulation/tree/humble-devel>`_
 - `Universal Robots <https://github.com/UniversalRobots/Universal_Robots_ROS2_Driver>`_
 - `xArm <https://github.com/xarm-Developer/xarm_ros2>`_
+- `Duatic DynaArm <https://docs.duatic.com/dynaarm/>`_
 
 Unofficial (from the community)
 --------------------------------
