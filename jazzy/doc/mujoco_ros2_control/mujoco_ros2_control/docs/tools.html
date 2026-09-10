@@ -267,11 +267,34 @@ Please see additional documentation on <a class="reference internal" href="model
 For instance, if running multiple types of UR robots in one sim, there will be multiple <code class="docutils literal notranslate"><span class="pre">shoulder.dae</span></code> files.</p>
 </div>
 </li>
-<li><p>Reads absolute filepaths of all meshes and converts either <code class="docutils literal notranslate"><span class="pre">.dae</span></code> or <code class="docutils literal notranslate"><span class="pre">.stl</span></code> to <code class="docutils literal notranslate"><span class="pre">.obj</span></code> using trimesh.</p>
+<li><p>Reads absolute filepaths of all meshes (from both <code class="docutils literal notranslate"><span class="pre">&lt;visual&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;collision&gt;</span></code> tags) and
+materializes them into an <code class="docutils literal notranslate"><span class="pre">assets/</span></code> folder under <code class="docutils literal notranslate"><span class="pre">mjcf_data/</span></code> relative to the current
+working dir, rewriting the URDF mesh paths to point there.</p></li>
+<li><p>Handles visual and collision geometry independently:</p>
 <ul class="simple">
-<li><p>Puts all meshes into an <code class="docutils literal notranslate"><span class="pre">assets/</span></code> folder under <code class="docutils literal notranslate"><span class="pre">mjcf_data/</span></code> relative to current working dir.</p></li>
-<li><p>Modifies filepaths again in URDF to point to the <code class="docutils literal notranslate"><span class="pre">assets/</span></code> folder.</p></li>
-<li><p>Decomposes large meshes into multiple components to ensure convex hulls.</p></li>
+<li><p><strong>Visual</strong> geometry is used purely for rendering (the <code class="docutils literal notranslate"><span class="pre">visual</span></code> class). Visual meshes are
+plain references - <code class="docutils literal notranslate"><span class="pre">.stl</span></code>/<code class="docutils literal notranslate"><span class="pre">.obj</span></code> are kept as-is and only <code class="docutils literal notranslate"><span class="pre">.dae</span></code> is converted to <code class="docutils literal notranslate"><span class="pre">.obj</span></code>
+(MuJoCo cannot load DAE). They live under <code class="docutils literal notranslate"><span class="pre">assets/visual/</span></code> and are <strong>never decomposed</strong>; their
+color is applied as the geom’s <code class="docutils literal notranslate"><span class="pre">rgba</span></code>.</p></li>
+<li><p><strong>Collision</strong> geometry drives physics (the <code class="docutils literal notranslate"><span class="pre">collision</span></code> class). Collision <em>primitives</em>
+(box/sphere/cylinder/capsule) are used directly. Collision <em>meshes</em> are also used directly
+(as a single whole-mesh collision geom) <strong>unless</strong> their link is named in a <code class="docutils literal notranslate"><span class="pre">decompose_mesh</span></code>
+input, in which case they are convex-decomposed with obj2mjcf (coacd) under
+<code class="docutils literal notranslate"><span class="pre">assets/decomposed/</span></code> at the requested threshold. So decomposition is opt-in per link.</p></li>
+<li><p>When a link defines no <code class="docutils literal notranslate"><span class="pre">&lt;collision&gt;</span></code>, one is synthesized from its <code class="docutils literal notranslate"><span class="pre">&lt;visual&gt;</span></code> so the visual
+mesh is reused as the collision shape. This synthesis happens at the URDF level, so it stays
+correct per link even when MuJoCo fuses fixed-jointed bodies together. A mesh shared by a visual
+and a collision is converted once and reused for both (and, if that link requests decomposition,
+the whole mesh renders while its decomposed pieces collide).</p></li>
+</ul>
+</li>
+<li><p>Handles visual and collision geometry independently:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;visual&gt;</span></code> geometry is used purely for rendering (the <code class="docutils literal notranslate"><span class="pre">visual</span></code> class).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;collision&gt;</span></code> geometry drives physics (the <code class="docutils literal notranslate"><span class="pre">collision</span></code> class). When a link defines no
+<code class="docutils literal notranslate"><span class="pre">&lt;collision&gt;</span></code>, a collision is synthesized from its <code class="docutils literal notranslate"><span class="pre">&lt;visual&gt;</span></code> so the visual mesh is reused
+as the collision shape (the previous behaviour). This synthesis happens at the URDF level, so it
+stays correct per link even when MuJoCo fuses fixed-jointed bodies together.</p></li>
 </ul>
 </li>
 <li><p>Publishes the new formatted robot description XML file that can be used for conversion.</p></li>
