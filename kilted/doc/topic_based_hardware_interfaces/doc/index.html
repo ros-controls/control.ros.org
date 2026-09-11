@@ -73,6 +73,22 @@
 <li class="toctree-l5"><a class="reference internal" href="#modifying-the-urdf-ros2-control-tag-for-new-robots">Modifying the urdf <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> tag for new robots</a></li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="#joint-command-topic-hardware-interface">joint_command_topic_hardware_interface</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#joint-command-topic-based-system">Joint Command Topic Based System</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#ros2-control-urdf-tag">ros2_control urdf tag</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#mimic-joints">Mimic joints</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#topics">Topics</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="#qos">QoS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="#cm-topic-hardware-component">cm_topic_hardware_component</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#ros-subscribers">ROS subscribers</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#ros2-control-section-in-urdf">ros2_control section in URDF</a></li>
@@ -136,10 +152,10 @@
 <section id="parameters">
 <h4>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h4>
 <ul class="simple">
-<li><p>joint_commands_topic: (default: “/robot_joint_command”). Example: <code class="docutils literal notranslate"><span class="pre">&lt;param</span> <span class="pre">name=&quot;joint_commands_topic&quot;&gt;/my_topic_joint_commands&lt;/param&gt;</span></code>.</p></li>
+<li><p>joint_commands_topic: (default: “/robot_joint_commands”). Example: <code class="docutils literal notranslate"><span class="pre">&lt;param</span> <span class="pre">name=&quot;joint_commands_topic&quot;&gt;/my_topic_joint_commands&lt;/param&gt;</span></code>.</p></li>
 <li><p>joint_states_topic: (default: “/robot_joint_states”). Example: <code class="docutils literal notranslate"><span class="pre">&lt;param</span> <span class="pre">name=&quot;joint_states_topic&quot;&gt;/my_topic_joint_states&lt;/param&gt;</span></code>.</p></li>
 <li><p>trigger_joint_command_threshold: (default: 1e-5). Used to avoid spamming the joint command topic when the difference between the current joint state and the joint command is smaller than this value, set to -1 to always send the joint command. Example: <code class="docutils literal notranslate"><span class="pre">&lt;param</span> <span class="pre">name=&quot;trigger_joint_command_threshold&quot;&gt;0.001&lt;/param&gt;</span></code>.</p></li>
-<li><p>sum_wrapped_joint_states: (default: “false”). Used to track the total rotation for joint states the values reported on the <code class="docutils literal notranslate"><span class="pre">joint_commands_topic</span></code> wrap from 2<em>pi to -2</em>pi when rotating in the positive direction. (Isaac Sim only reports joint states from 2<em>pi to -2</em>pi) Example: <code class="docutils literal notranslate"><span class="pre">&lt;param</span> <span class="pre">name=&quot;sum_wrapped_joint_states&quot;&gt;true&lt;/param&gt;</span></code>.</p></li>
+<li><p>sum_wrapped_joint_states: (default: “false”). Used to track the total rotation for joint states the values reported on the <code class="docutils literal notranslate"><span class="pre">joint_states_topic</span></code> wrap from 2<em>pi to -2</em>pi when rotating in the positive direction. (Isaac Sim only reports joint states from 2<em>pi to -2</em>pi) Example: <code class="docutils literal notranslate"><span class="pre">&lt;param</span> <span class="pre">name=&quot;sum_wrapped_joint_states&quot;&gt;true&lt;/param&gt;</span></code>.</p></li>
 </ul>
 </section>
 <section id="per-joint-parameters">
@@ -206,6 +222,82 @@
 <span class="w">        </span><span class="nt">&lt;/ros2_control&gt;</span>
 </pre></div>
 </div>
+</section>
+</section>
+<section id="joint-command-topic-hardware-interface">
+<h2>joint_command_topic_hardware_interface<a class="headerlink" href="#joint-command-topic-hardware-interface" title="Link to this heading"></a></h2>
+<section id="joint-command-topic-based-system">
+<h3>Joint Command Topic Based System<a class="headerlink" href="#joint-command-topic-based-system" title="Link to this heading"></a></h3>
+<p>The Joint Command Topic Based System implements a ros2_control <code class="docutils literal notranslate"><span class="pre">hardware_interface::SystemInterface</span></code> supporting command and state interfaces through the ROS topic communication layer. It publishes commands as <code class="docutils literal notranslate"><span class="pre">control_msgs/JointCommand</span></code> messages, one topic per interface type. Only <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code> and <code class="docutils literal notranslate"><span class="pre">effort</span></code> command interfaces are supported, anything else is ignored with a warning.</p>
+<section id="ros2-control-urdf-tag">
+<h4>ros2_control urdf tag<a class="headerlink" href="#ros2-control-urdf-tag" title="Link to this heading"></a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">joint_command_topic_hardware_interface</span></code> has a few <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> urdf tags to customize its behavior.</p>
+<section id="parameters">
+<h5>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h5>
+<ul class="simple">
+<li><p>joint_commands_topic: (default: “/robot_joint_commands”). Base topic for the joint command topics. Example: <code class="docutils literal notranslate"><span class="pre">&lt;param</span> <span class="pre">name=&quot;joint_commands_topic&quot;&gt;/my_topic_joint_commands&lt;/param&gt;</span></code>.</p></li>
+<li><p>joint_states_topic: (default: “/robot_joint_states”). Example: <code class="docutils literal notranslate"><span class="pre">&lt;param</span> <span class="pre">name=&quot;joint_states_topic&quot;&gt;/my_topic_joint_states&lt;/param&gt;</span></code>.</p></li>
+<li><p>trigger_joint_command_threshold: (default: 1e-5). Used to avoid spamming the joint command topic when the difference between the current joint state and the joint command is smaller than this value, set to -1 to always send the joint command. Example: <code class="docutils literal notranslate"><span class="pre">&lt;param</span> <span class="pre">name=&quot;trigger_joint_command_threshold&quot;&gt;0.001&lt;/param&gt;</span></code>.</p></li>
+<li><p>sum_wrapped_joint_states: (default: “false”). Used to track the total rotation when the position values reported on the <code class="docutils literal notranslate"><span class="pre">joint_states_topic</span></code> wrap from 2<em>pi to -2</em>pi when rotating in the positive direction. (Isaac Sim only reports joint states from 2<em>pi to -2</em>pi) Only <code class="docutils literal notranslate"><span class="pre">position</span></code> states are affected. Example: <code class="docutils literal notranslate"><span class="pre">&lt;param</span> <span class="pre">name=&quot;sum_wrapped_joint_states&quot;&gt;true&lt;/param&gt;</span></code>.</p></li>
+</ul>
+</section>
+<section id="mimic-joints">
+<h5>Mimic joints<a class="headerlink" href="#mimic-joints" title="Link to this heading"></a></h5>
+<p>Often used with parallel grippers. The relation is declared in the URDF, not with <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> params:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"joint2"</span><span class="w"> </span><span class="na">type=</span><span class="s">"revolute"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;mimic</span><span class="w"> </span><span class="na">joint=</span><span class="s">"joint1"</span><span class="w"> </span><span class="na">multiplier=</span><span class="s">"-2"</span><span class="w"> </span><span class="na">offset=</span><span class="s">"0"</span><span class="nt">/&gt;</span>
+<span class="w">    </span>...
+<span class="nt">&lt;/joint&gt;</span>
+</pre></div>
+</div>
+<p>Then mark the joint with <code class="docutils literal notranslate"><span class="pre">mimic=&quot;true&quot;</span></code> and give it state interfaces only. Its states come from the mimicked joint instead of the <code class="docutils literal notranslate"><span class="pre">joint_states_topic</span></code>:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"joint2"</span><span class="w"> </span><span class="na">mimic=</span><span class="s">"true"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"velocity"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/joint&gt;</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">offset</span></code> only applies to <code class="docutils literal notranslate"><span class="pre">position</span></code>. <code class="docutils literal notranslate"><span class="pre">velocity</span></code> and <code class="docutils literal notranslate"><span class="pre">acceleration</span></code> use <code class="docutils literal notranslate"><span class="pre">multiplier</span></code> alone.</p>
+</section>
+</section>
+<section id="example">
+<h4>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h4>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">        </span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">"name"</span><span class="w"> </span><span class="na">type=</span><span class="s">"system"</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;hardware&gt;</span>
+<span class="w">              </span><span class="nt">&lt;plugin&gt;</span>joint_command_topic_hardware_interface/JointCommandTopicSystem<span class="nt">&lt;/plugin&gt;</span>
+<span class="w">              </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"joint_commands_topic"</span><span class="nt">&gt;</span>/topic_based_joint_commands<span class="nt">&lt;/param&gt;</span>
+<span class="w">              </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"joint_states_topic"</span><span class="nt">&gt;</span>/topic_based_joint_states<span class="nt">&lt;/param&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/hardware&gt;</span>
+<span class="w">            </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"joint_1"</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"velocity"</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">&gt;</span>
+<span class="w">                  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"initial_value"</span><span class="nt">&gt;</span>0.0<span class="nt">&lt;/param&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/state_interface&gt;</span>
+<span class="w">                </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"velocity"</span><span class="nt">/&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/joint&gt;</span>
+<span class="w">            </span>...
+<span class="w">        </span><span class="nt">&lt;/ros2_control&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="topics">
+<h4>Topics<a class="headerlink" href="#topics" title="Link to this heading"></a></h4>
+<p>Each <code class="docutils literal notranslate"><span class="pre">write()</span></code> publishes one <code class="docutils literal notranslate"><span class="pre">control_msgs/JointCommand</span></code> per interface type, on topics derived from <code class="docutils literal notranslate"><span class="pre">joint_commands_topic</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;joint_commands_topic&gt;/position</span></code>: joints with a driven <code class="docutils literal notranslate"><span class="pre">position</span></code> command.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;joint_commands_topic&gt;/velocity</span></code>: joints with a driven <code class="docutils literal notranslate"><span class="pre">velocity</span></code> command.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;joint_commands_topic&gt;/effort</span></code>: joints with a driven <code class="docutils literal notranslate"><span class="pre">effort</span></code> command.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">joint_names</span></code> and <code class="docutils literal notranslate"><span class="pre">values</span></code> line up, <code class="docutils literal notranslate"><span class="pre">interface_name</span></code> repeats the interface. With the defaults, a joint with <code class="docutils literal notranslate"><span class="pre">position</span></code> and <code class="docutils literal notranslate"><span class="pre">velocity</span></code> commands publishes to <code class="docutils literal notranslate"><span class="pre">/robot_joint_commands/position</span></code> and <code class="docutils literal notranslate"><span class="pre">/robot_joint_commands/velocity</span></code>.</p>
+<p>Command interfaces that no controller writes to hold <code class="docutils literal notranslate"><span class="pre">NaN</span></code>. Those joints are dropped from the message, and if nothing drives an interface type at all its topic stays quiet. Declaring a command interface is not enough to get traffic on the matching topic.</p>
+<p>Nothing is published while the summed state-command difference stays at or below <code class="docutils literal notranslate"><span class="pre">trigger_joint_command_threshold</span></code>, which is the normal case once a controller has converged. Set it to -1 to publish every cycle.</p>
+<section id="qos">
+<h5>QoS<a class="headerlink" href="#qos" title="Link to this heading"></a></h5>
+<p>Command publishers are reliable with a depth of 1, so don’t count on them to buffer.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">joint_states_topic</span></code> subscription uses <code class="docutils literal notranslate"><span class="pre">SensorDataQoS</span></code> (best effort, depth 5), which any joint state publisher can match.</p>
+</section>
+</section>
 </section>
 </section>
 <section id="cm-topic-hardware-component">

@@ -6,6 +6,11 @@ topic_based_hardware_interfaces
 .. include:: ../joint_state_topic_hardware_interface/README.md
    :parser: myst_parser.sphinx_
 
+joint_command_topic_hardware_interface
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. include:: ../joint_command_topic_hardware_interface/README.md
+   :parser: myst_parser.sphinx_
+
 cm_topic_hardware_component
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The controller_manager topic System implements a ros2_control ``hardware_interface::SystemInterface`` that subscribes
