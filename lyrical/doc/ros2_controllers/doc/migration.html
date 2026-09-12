@@ -68,6 +68,7 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">ros2_controllers</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#joint-state-broadcaster">joint_state_broadcaster</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#effort-controllers">effort_controllers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#joint-trajectory-controller">joint_trajectory_controller</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#position-controllers">position_controllers</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#velocity-controllers">velocity_controllers</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#diff-drive-controller">diff_drive_controller</a></li>
@@ -150,6 +151,17 @@ For publishing non-standard interfaces, consider using alternatives:</p>
 <h2>effort_controllers<a class="headerlink" href="#effort-controllers" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">effort_controllers/JointGroupEffortController</span></code> is deprecated. Use <a class="reference internal" href="../forward_command_controller/doc/userdoc.html#forward-command-controller-userdoc"><span class="std std-ref">forward_command_controller</span></a> instead by adding the <code class="docutils literal notranslate"><span class="pre">interface_name</span></code> parameter and set it to <code class="docutils literal notranslate"><span class="pre">effort</span></code>. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1913">#1913</a>).</p></li>
+</ul>
+</section>
+<section id="joint-trajectory-controller">
+<h2>joint_trajectory_controller<a class="headerlink" href="#joint-trajectory-controller" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The default value of the <code class="docutils literal notranslate"><span class="pre">constraints.goal_time</span></code> parameter changed from <code class="docutils literal notranslate"><span class="pre">0.0</span></code> to <code class="docutils literal notranslate"><span class="pre">10.0</span></code> seconds and its semantics changed.
+Previously <code class="docutils literal notranslate"><span class="pre">goal_time</span></code> of <code class="docutils literal notranslate"><span class="pre">0.0</span></code> meant that the controller would wait a potentially infinite amount of time for the goal to be reached.
+Now, any <strong>negative</strong> <code class="docutils literal notranslate"><span class="pre">goal_time</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">-1.0</span></code>) means the controller will wait indefinitely, while <code class="docutils literal notranslate"><span class="pre">0.0</span></code> disables the grace period so the goal must be reached on time, and positive values set a finite grace period in seconds.
+Configurations that relied on the old default or on <code class="docutils literal notranslate"><span class="pre">goal_time:</span> <span class="pre">0.0</span></code> for an infinite timeout must set <code class="docutils literal notranslate"><span class="pre">constraints.goal_time</span></code> to a negative value (e.g. <code class="docutils literal notranslate"><span class="pre">-1.0</span></code>) explicitly.
+Note that <code class="docutils literal notranslate"><span class="pre">cmd_timeout</span></code> only activates when <code class="docutils literal notranslate"><span class="pre">cmd_timeout</span> <span class="pre">&gt;</span> <span class="pre">constraints.goal_time</span></code>; with the new default timeout feature setups relying on <code class="docutils literal notranslate"><span class="pre">cmd_timeout</span></code> (e.g. to hold position at the end of the trajectory) must set <code class="docutils literal notranslate"><span class="pre">constraints.goal_time</span></code> accordingly.
+The <code class="docutils literal notranslate"><span class="pre">action_execution_timeout</span></code> parameter is removed.</p></li>
 </ul>
 </section>
 <section id="position-controllers">

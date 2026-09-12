@@ -101,7 +101,7 @@ General discussions
 
 ======================================================================
 
-Built on 2026-09-11 at 05:40 GMT
+Built on 2026-09-12 at 05:39 GMT
 
 
 
@@ -3365,11 +3365,13 @@ Force-Torque Sensors
 --------------------
 
 Model "force" and "torque" sensors separately in the MJCF, suffixed
-with "_force" and "_torque":
+with "_force" and "_torque". Each optionally takes a "noise" attribute
+(standard deviation, in N / N*m) to add zero-mean Gaussian noise to
+its readings, see Sensor Noise below:
 
    <sensor>
-     <force name="fts_sensor_force" site="ft_frame"/>
-     <torque name="fts_sensor_torque" site="ft_frame"/>
+     <force name="fts_sensor_force" site="ft_frame" noise="0.0"/>
+     <torque name="fts_sensor_torque" site="ft_frame" noise="0.0"/>
    </sensor>
 
 Map them to a single "ros2_control" sensor:
@@ -3393,12 +3395,14 @@ Map them to a single "ros2_control" sensor:
 IMU
 ---
 
-Simulate a "framequat", "gyro", and "accelerometer" as a single IMU:
+Simulate a "framequat", "gyro", and "accelerometer" as a single IMU.
+Each optionally takes a "noise" attribute (standard deviation) to add
+zero-mean Gaussian noise to its readings, see Sensor Noise below:
 
    <sensor>
-     <framequat name="imu_sensor_quat" objtype="site" objname="imu_sensor"/>
-     <gyro name="imu_sensor_gyro" site="imu_sensor"/>
-     <accelerometer name="imu_sensor_accel" site="imu_sensor"/>
+     <framequat name="imu_sensor_quat" objtype="site" objname="imu_sensor" noise="0.0"/>
+     <gyro name="imu_sensor_gyro" site="imu_sensor" noise="0.0"/>
+     <accelerometer name="imu_sensor_accel" site="imu_sensor" noise="0.0"/>
    </sensor>
 
 Map to the corresponding "ros2_control" sensor:
@@ -3430,10 +3434,12 @@ ROS 2 broadcasters.
 Magnetometer
 ------------
 
-Model a MuJoCo "magnetometer" sensor in the MJCF:
+Model a MuJoCo "magnetometer" sensor in the MJCF. It optionally takes
+a "noise" attribute (standard deviation) to add zero-mean Gaussian
+noise to its readings, see Sensor Noise below:
 
    <sensor>
-     <magnetometer name="magnetometer_sensor" site="imu_sensor"/>
+     <magnetometer name="magnetometer_sensor" site="imu_sensor" noise="0.0"/>
    </sensor>
 
 Map it to the corresponding "ros2_control" sensor:
@@ -3446,6 +3452,54 @@ Map it to the corresponding "ros2_control" sensor:
      <state_interface name="magnetic_field.y"/>
      <state_interface name="magnetic_field.z"/>
    </sensor>
+
+
+Sensor Noise
+------------
+
+Every MJCF sensor element used above ("force", "torque", "framequat",
+"gyro", "accelerometer", "framepos", "magnetometer") accepts MuJoCo's
+native "noise" attribute: the standard deviation, in the sensor's
+native units, of the noise added to its reading. It defaults to "0"
+(no noise). Noise magnitude is entirely driven by the MJCF, e.g.:
+
+   <sensor>
+     <force name="fts_sensor_force" site="ft_frame" noise="0.5"/>
+     <torque name="fts_sensor_torque" site="ft_frame" noise="0.05"/>
+   </sensor>
+
+Note:
+
+  MuJoCo compiles "noise" into "mjModel::sensor_noise" but does not
+  apply it itself ("mj_step" leaves "sensordata" noise-free) — it's
+  normally left for tools like the "simulate" GUI to apply for
+  display. This hardware interface applies it on every "read()", using
+  its own RNG per "ros2_control" sensor (seeded from
+  "std::random_device", so the noise sequence differs between runs;
+  there is no seed parameter).
+
+MJCF has no concept of noise *shape* though — "noise" only ever means
+"standard deviation of zero-mean noise". Choose the shape with the
+"ros2_control" "noise_distribution" parameter, applying to every field
+of that sensor:
+
+   <sensor name="fts_sensor">
+     <param name="mujoco_type">fts</param>
+     <param name="mujoco_sensor_name">fts_sensor</param>
+     <!-- "gaussian" (default) or "uniform" -->
+     <param name="noise_distribution">gaussian</param>
+     ...
+   </sensor>
+
+"uniform" draws from "[-stddev*sqrt(3), stddev*sqrt(3)]", so its
+actual standard deviation still matches the configured MJCF "noise"
+value — switching distributions doesn't change the noise magnitude,
+only its shape (bounded vs. unbounded tails).
+
+For an IMU, the configured "noise" values are also surfaced as the
+diagonal of that field's (previously always-zero) covariance state
+interfaces (e.g. "orientation_covariance.0"), for controllers that
+consume a covariance estimate.
 
 Warning:
 
@@ -4019,6 +4073,27 @@ Rough outline of the automated conversion process
     shared by a visual and a collision is converted once and reused
     for both (and, if that link requests decomposition, the whole mesh
     renders while its decomposed pieces collide).
+
+  * Both kinds of geom get explicit attributes written directly onto
+    them, so visual/collision separation does not depend on a user-
+    supplied "<default class="...">" block:
+
+    * **Visual** geoms ("class="visual"") are render-only: they never
+      collide and keep their own material or "rgba".
+
+    * **Collision** geoms ("class="collision""), i.e. primitives and
+      whole meshes, do the colliding and are tinted with the
+      "bright_orange" material so they are easy to spot in the viewer
+      by toggling their group. The material is added to the "<asset>"
+      automatically when not already defined (an existing definition,
+      e.g. from "mujoco_inputs", is left untouched).
+
+    * **Decomposed collision** pieces ("class="decomposed_collision"")
+      collide like any other collision geom but live in their own
+      viewer group, so the convex decomposition can be toggled
+      independently of the other collisions. They are not tinted: they
+      keep obj2mjcf's per-piece colors so the individual convex hulls
+      stay distinguishable.
 
 * Handles visual and collision geometry independently:
 
@@ -17934,6 +18009,26 @@ effort_controllers
   parameter and set it to "effort". (#1913).
 
 
+joint_trajectory_controller
+===========================
+
+* The default value of the "constraints.goal_time" parameter changed
+  from "0.0" to "10.0" seconds and its semantics changed. Previously
+  "goal_time" of "0.0" meant that the controller would wait a
+  potentially infinite amount of time for the goal to be reached. Now,
+  any **negative** "goal_time" (e.g. "-1.0") means the controller will
+  wait indefinitely, while "0.0" disables the grace period so the goal
+  must be reached on time, and positive values set a finite grace
+  period in seconds. Configurations that relied on the old default or
+  on "goal_time: 0.0" for an infinite timeout must set
+  "constraints.goal_time" to a negative value (e.g. "-1.0")
+  explicitly. Note that "cmd_timeout" only activates when "cmd_timeout
+  > constraints.goal_time"; with the new default timeout feature
+  setups relying on "cmd_timeout" (e.g. to hold position at the end of
+  the trajectory) must set "constraints.goal_time" accordingly. The
+  "action_execution_timeout" parameter is removed.
+
+
 position_controllers
 ====================
 
@@ -18625,7 +18720,11 @@ pid_controller
 * Added parameter "set_current_state_as_first_setpoint" (default:
   true) to set the current state as the first setpoint when the
   controller is activated, helping to avoid large initial errors and
-  sudden jumps in control output.
+  sudden jumps in control output. (#2205).
+
+* Added parameter "reset_commands_at_deactivation" (default: false) to
+  reset the commands to 0.0 when the controller is deactivated.
+  (#2602).
 
 
 steering_controllers_library
@@ -19880,7 +19979,7 @@ or m/s^2) for each joint under "constraints.<joint_name>":
        constraints:
          decelerate_on_cancel: true
          stopped_velocity_tolerance: 0.01
-         goal_time: 0.0
+         goal_time: 10.0
          joint_1:
            max_deceleration_on_cancel: 10.0
          joint_2:
@@ -20149,14 +20248,12 @@ constraints.stopped_velocity_tolerance (double)
 
 constraints.goal_time (double)
    Time tolerance for achieving trajectory goal before or after
-   commanded time. If set to zero, the controller will wait a
-   potentially infinite amount of time.
+   commanded time. Positive values set a finite grace period in
+   seconds. If set to a negative value, the controller will wait a
+   potentially infinite amount of time. If set to zero, no grace
+   period is allowed, the goal must be reached on time.
 
-   Default:  0.0
-
-   Constraints:
-
-      * greater than or equal to 0.0
+   Default:  10.0
 
 constraints.decelerate_on_cancel (bool)
    If true and each joints max_deceleration_on_cancel is greater than
@@ -20311,7 +20408,7 @@ An example parameter file
            max_deceleration_on_cancel: 0.0
            trajectory: 0.0
          decelerate_on_cancel: false
-         goal_time: 0.0
+         goal_time: 10.0
          stopped_velocity_tolerance: 0.01
        gains:
          <joints>:
@@ -20919,7 +21016,7 @@ this package. A yaml file for using it could be:
           interpolate_from_desired_state: true
           constraints:
             stopped_velocity_tolerance: 0.01
-            goal_time: 0.0
+            goal_time: 10.0
             joint1:
               trajectory: 0.05
               goal: 0.03
@@ -22496,6 +22593,14 @@ set_current_state_as_first_setpoint (bool)
 
    Default:  true
 
+reset_commands_at_deactivation (bool)
+   When true, the controller will reset the commands to 0.0 when the
+   controller is deactivated.
+
+   Read only: True
+
+   Default:  false
+
 use_external_measured_states (bool)
    Use external states from a topic instead from state interfaces.
 
@@ -22609,6 +22714,34 @@ folder (standalone):
        reference_and_state_interfaces: ["position"]
 
        set_current_state_as_first_setpoint: true
+
+       gains:
+         joint1: {p: 1.0, i: 2.0, d: 3.0, u_clamp_max: 5.0, u_clamp_min: -5.0}
+
+   test_pid_controller_reset_commands_at_deactivation:
+     ros__parameters:
+       dof_names:
+         - joint1
+
+       command_interface: position
+
+       reference_and_state_interfaces: ["position"]
+
+       reset_commands_at_deactivation: true
+
+       gains:
+         joint1: {p: 1.0, i: 2.0, d: 3.0, u_clamp_max: 5.0, u_clamp_min: -5.0}
+
+   test_pid_controller_do_not_reset_commands_at_deactivation:
+     ros__parameters:
+       dof_names:
+         - joint1
+
+       command_interface: position
+
+       reference_and_state_interfaces: ["position"]
+
+       reset_commands_at_deactivation: false
 
        gains:
          joint1: {p: 1.0, i: 2.0, d: 3.0, u_clamp_max: 5.0, u_clamp_min: -5.0}

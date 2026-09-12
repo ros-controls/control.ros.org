@@ -132,124 +132,127 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classZenbeddedClientBase.html#aacc43dff05db39f1a82ac3ebe88ebaaa">is_control_thread_running</a>();</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classZenbeddedClientBase.html#a42ddf35e45c8568493ab0e0f79f95744">init_base</a>(uint32_t control_freq, <span class="keywordtype">size_t</span> state_payload_size, <span class="keywordtype">size_t</span> cmd_payload_size);</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  uint8_t * <a class="code hl_function" href="classZenbeddedClientBase.html#ad49beb58bdb1dfd714b8dc0f6ed35862">get_state_buffer_slot</a>(<span class="keywordtype">size_t</span> slot_idx);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  [[nodiscard]] uint32_t <a class="code hl_function" href="classZenbeddedClientBase.html#ac2aff2ca26824e5ba26ce8983a3eaaec">accepted_command_count</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  uint8_t * <a class="code hl_function" href="classZenbeddedClientBase.html#a4e1ee89f49cb9fb7d480a0f6049ce22c">prepare_state_write_slot</a>(<span class="keywordtype">int</span> &amp; out_write_idx);</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classZenbeddedClientBase.html#adf90d843790caf428aeee8f09b27d0c1">commit_state_write_slot</a>(<span class="keywordtype">int</span> write_idx);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classZenbeddedClientBase.html#ab01a29f99960c1eb1579dfacb7aaa202">read_latest_command_raw</a>(uint8_t * data, <span class="keywordtype">size_t</span> size);</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classZenbeddedClientBase.html#afb91e45eb9c401d5fd1b15041a512c0a">reset_buffers</a>();</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <span class="keywordtype">bool</span> initialized_ = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="keywordtype">size_t</span> state_payload_size_ = 0;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <span class="keywordtype">size_t</span> cmd_payload_size_ = 0;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classZenbeddedClientBase.html#a42ddf35e45c8568493ab0e0f79f95744">init_base</a>(uint32_t control_freq, <span class="keywordtype">size_t</span> state_payload_size, <span class="keywordtype">size_t</span> cmd_payload_size);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  uint8_t * <a class="code hl_function" href="classZenbeddedClientBase.html#ad49beb58bdb1dfd714b8dc0f6ed35862">get_state_buffer_slot</a>(<span class="keywordtype">size_t</span> slot_idx);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  uint8_t * <a class="code hl_function" href="classZenbeddedClientBase.html#a4e1ee89f49cb9fb7d480a0f6049ce22c">prepare_state_write_slot</a>(<span class="keywordtype">int</span> &amp; out_write_idx);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classZenbeddedClientBase.html#adf90d843790caf428aeee8f09b27d0c1">commit_state_write_slot</a>(<span class="keywordtype">int</span> write_idx);</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classZenbeddedClientBase.html#ab01a29f99960c1eb1579dfacb7aaa202">read_latest_command_raw</a>(uint8_t * data, <span class="keywordtype">size_t</span> size);</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  <a class="code hl_struct" href="structzenbedded__pub__s.html">zenbedded_pub_t</a> pub_{};</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  <a class="code hl_struct" href="structzenbedded__sub__s.html">zenbedded_sub_t</a> sub_{};</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  uint8_t state_buffer_[2][CONFIG_ZENBEDDED_MAX_STATE_BUFFER_SIZE]{};</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  atomic_t state_buffer_active_idx_{};</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  atomic_t state_buffer_version_[2]{};</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  uint8_t cmd_buffer_[2][CONFIG_ZENBEDDED_MAX_CMD_BUFFER_SIZE]{};</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  atomic_t cmd_buffer_active_idx_{};</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  atomic_t cmd_buffer_version_[2]{};</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  uint32_t control_freq_ = 0;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  atomic_t control_thread_running_ = 0;</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  <span class="keywordtype">bool</span> control_thread_started_ = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  k_thread control_thread_{};</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  K_KERNEL_STACK_MEMBER(control_thread_stack_, CONFIG_ZENBEDDED_RCL_THREAD_STACK_SIZE) {};</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> control_thread_fn(<span class="keywordtype">void</span> * arg1, <span class="keywordtype">void</span> * arg2, <span class="keywordtype">void</span> * arg3);</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> on_transport_cmd_cb(<span class="keyword">const</span> uint8_t * payload, <span class="keywordtype">size_t</span> size, <span class="keywordtype">void</span> * user_data);</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  <span class="keywordtype">void</span> write_state_to_buffer(<span class="keyword">const</span> uint8_t * data, <span class="keywordtype">size_t</span> size);</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  <span class="keywordtype">bool</span> read_state_from_buffer(uint8_t * data, <span class="keywordtype">size_t</span> size);</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  <span class="keywordtype">void</span> write_command_to_buffer(<span class="keyword">const</span> uint8_t * data, <span class="keywordtype">size_t</span> size);</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  <span class="keywordtype">bool</span> read_command_from_buffer(uint8_t * data, <span class="keywordtype">size_t</span> size);</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>};</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classZenbeddedClientBase.html#afb91e45eb9c401d5fd1b15041a512c0a">reset_buffers</a>();</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  <span class="keywordtype">bool</span> initialized_ = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  <span class="keywordtype">size_t</span> state_payload_size_ = 0;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  <span class="keywordtype">size_t</span> cmd_payload_size_ = 0;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  <a class="code hl_struct" href="structzenbedded__pub__s.html">zenbedded_pub_t</a> pub_{};</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  <a class="code hl_struct" href="structzenbedded__sub__s.html">zenbedded_sub_t</a> sub_{};</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  uint8_t state_buffer_[2][CONFIG_ZENBEDDED_MAX_STATE_BUFFER_SIZE]{};</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  atomic_t state_buffer_active_idx_{};</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  atomic_t state_buffer_version_[2]{};</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  uint8_t cmd_buffer_[2][CONFIG_ZENBEDDED_MAX_CMD_BUFFER_SIZE]{};</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  atomic_t cmd_buffer_active_idx_{};</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  atomic_t cmd_buffer_version_[2]{};</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  atomic_t cmd_accepted_count_{};</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  uint32_t control_freq_ = 0;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  atomic_t control_thread_running_ = 0;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  <span class="keywordtype">bool</span> control_thread_started_ = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  k_thread control_thread_{};</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  K_KERNEL_STACK_MEMBER(control_thread_stack_, CONFIG_ZENBEDDED_RCL_THREAD_STACK_SIZE) {};</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> control_thread_fn(<span class="keywordtype">void</span> * arg1, <span class="keywordtype">void</span> * arg2, <span class="keywordtype">void</span> * arg3);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> on_transport_cmd_cb(<span class="keyword">const</span> uint8_t * payload, <span class="keywordtype">size_t</span> size, <span class="keywordtype">void</span> * user_data);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  <span class="keywordtype">void</span> write_state_to_buffer(<span class="keyword">const</span> uint8_t * data, <span class="keywordtype">size_t</span> size);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  <span class="keywordtype">bool</span> read_state_from_buffer(uint8_t * data, <span class="keywordtype">size_t</span> size);</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  <span class="keywordtype">void</span> write_command_to_buffer(<span class="keyword">const</span> uint8_t * data, <span class="keywordtype">size_t</span> size);</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  <span class="keywordtype">bool</span> read_command_from_buffer(uint8_t * data, <span class="keywordtype">size_t</span> size);</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>};</div>
 </div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> StateCodec, <span class="keyword">typename</span> CommandCodec&gt;</div>
-<div class="foldopen" id="foldopen00100" data-start="{" data-end="};">
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="classZenbeddedClient.html">  100</a></span><span class="keyword">class </span><a class="code hl_class" href="classZenbeddedClient.html">ZenbeddedClient</a> : <span class="keyword">public</span> <a class="code hl_class" href="classZenbeddedClientBase.html">ZenbeddedClientBase</a></div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>{</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  <span class="keyword">using </span>StateInitParams = <span class="keyword">typename</span> StateCodec::InitParams;</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  <span class="keyword">using </span>CommandInitParams = <span class="keyword">typename</span> CommandCodec::InitParams;</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  <span class="keyword">using </span>StateValue = <span class="keyword">typename</span> StateCodec::Value;</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  <span class="keyword">using </span>CommandValue = <span class="keyword">typename</span> CommandCodec::Value;</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>  <a class="code hl_class" href="classZenbeddedClient.html">ZenbeddedClient</a>()</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>  {</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="keyword">static_assert</span>(<a class="code hl_struct" href="structCheckCodec.html">CheckCodec&lt;StateCodec&gt;::is_valid_state_codec</a>, <span class="stringliteral">&quot;Invalid StateCodec Type!&quot;</span>);</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keyword">static_assert</span>(<a class="code hl_struct" href="structCheckCodec.html">CheckCodec&lt;CommandCodec&gt;::is_valid_command_codec</a>, <span class="stringliteral">&quot;Invalid CommandCodec Type!&quot;</span>);</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  }</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>  <span class="keywordtype">int</span> init(</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    uint32_t control_freq, <span class="keyword">const</span> StateInitParams &amp; state_params = {},</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keyword">const</span> CommandInitParams &amp; cmd_params = {})</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> StateCodec, <span class="keyword">typename</span> CommandCodec&gt;</div>
+<div class="foldopen" id="foldopen00108" data-start="{" data-end="};">
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="classZenbeddedClient.html">  108</a></span><span class="keyword">class </span><a class="code hl_class" href="classZenbeddedClient.html">ZenbeddedClient</a> : <span class="keyword">public</span> <a class="code hl_class" href="classZenbeddedClientBase.html">ZenbeddedClientBase</a></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>{</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  <span class="keyword">using </span>StateInitParams = <span class="keyword">typename</span> StateCodec::InitParams;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  <span class="keyword">using </span>CommandInitParams = <span class="keyword">typename</span> CommandCodec::InitParams;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>  <span class="keyword">using </span>StateValue = <span class="keyword">typename</span> StateCodec::Value;</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>  <span class="keyword">using </span>CommandValue = <span class="keyword">typename</span> CommandCodec::Value;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  <a class="code hl_class" href="classZenbeddedClient.html">ZenbeddedClient</a>()</div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  {</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keywordflow">if</span> (initialized_)</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    {</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>      <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    }</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <a class="code hl_function" href="classZenbeddedClientBase.html#afb91e45eb9c401d5fd1b15041a512c0a">reset_buffers</a>();</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <span class="comment">// Initialize state headers/codecs directly in double-buffer slots</span></div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    StateCodec::init(state_ctx_, state_params, <a class="code hl_function" href="classZenbeddedClientBase.html#ad49beb58bdb1dfd714b8dc0f6ed35862">get_state_buffer_slot</a>(0));</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    StateCodec::init(state_ctx_, state_params, <a class="code hl_function" href="classZenbeddedClientBase.html#ad49beb58bdb1dfd714b8dc0f6ed35862">get_state_buffer_slot</a>(1));</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="keywordtype">size_t</span> st_size = StateCodec::payload_size(state_ctx_);</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="comment">// Determine command payload size using scratchpad space</span></div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    uint8_t cmd_layout_scratch[CONFIG_ZENBEDDED_MAX_CMD_BUFFER_SIZE];</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    CommandCodec::init(cmd_ctx_, cmd_params, cmd_layout_scratch);</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <span class="keywordtype">size_t</span> cmd_size = CommandCodec::payload_size(cmd_ctx_);</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classZenbeddedClientBase.html#a42ddf35e45c8568493ab0e0f79f95744">init_base</a>(control_freq, st_size, cmd_size);</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>  }</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keyword">static_assert</span>(<a class="code hl_struct" href="structCheckCodec.html">CheckCodec&lt;StateCodec&gt;::is_valid_state_codec</a>, <span class="stringliteral">&quot;Invalid StateCodec Type!&quot;</span>);</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keyword">static_assert</span>(<a class="code hl_struct" href="structCheckCodec.html">CheckCodec&lt;CommandCodec&gt;::is_valid_command_codec</a>, <span class="stringliteral">&quot;Invalid CommandCodec Type!&quot;</span>);</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>  }</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>  <span class="keywordtype">int</span> init(</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    uint32_t control_freq, <span class="keyword">const</span> StateInitParams &amp; state_params = {},</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keyword">const</span> CommandInitParams &amp; cmd_params = {})</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  {</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keywordflow">if</span> (initialized_)</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    {</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>      <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    }</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <a class="code hl_function" href="classZenbeddedClientBase.html#afb91e45eb9c401d5fd1b15041a512c0a">reset_buffers</a>();</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <span class="comment">// Initialize state headers/codecs directly in double-buffer slots</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    StateCodec::init(state_ctx_, state_params, <a class="code hl_function" href="classZenbeddedClientBase.html#ad49beb58bdb1dfd714b8dc0f6ed35862">get_state_buffer_slot</a>(0));</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    StateCodec::init(state_ctx_, state_params, <a class="code hl_function" href="classZenbeddedClientBase.html#ad49beb58bdb1dfd714b8dc0f6ed35862">get_state_buffer_slot</a>(1));</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <span class="keywordtype">size_t</span> st_size = StateCodec::payload_size(state_ctx_);</div>
 <div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>  <span class="keywordtype">void</span> write_state(<span class="keyword">const</span> StateValue &amp; value)</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>  {</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <span class="keywordflow">if</span> (!initialized_)</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    {</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>      <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    }</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="keywordtype">int</span> write_idx = 0;</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    uint8_t * buf = <a class="code hl_function" href="classZenbeddedClientBase.html#a4e1ee89f49cb9fb7d480a0f6049ce22c">prepare_state_write_slot</a>(write_idx);</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    StateCodec::write(state_ctx_, value, buf);</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <a class="code hl_function" href="classZenbeddedClientBase.html#adf90d843790caf428aeee8f09b27d0c1">commit_state_write_slot</a>(write_idx);</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>  }</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>  <span class="keywordtype">bool</span> read_command(CommandValue &amp; out)</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>  {</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    <span class="keywordflow">if</span> (!initialized_)</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    {</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    }</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    uint8_t tmp[CONFIG_ZENBEDDED_MAX_CMD_BUFFER_SIZE];</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <span class="keywordflow">if</span> (!<a class="code hl_function" href="classZenbeddedClientBase.html#ab01a29f99960c1eb1579dfacb7aaa202">read_latest_command_raw</a>(tmp, cmd_payload_size_))</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    {</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    }</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    <span class="keywordflow">return</span> CommandCodec::read(cmd_ctx_, tmp, cmd_payload_size_, out);</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>  }</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>  <span class="keyword">typename</span> StateCodec::Ctx state_ctx_{};</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>  <span class="keyword">typename</span> CommandCodec::Ctx cmd_ctx_{};</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>};</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <span class="comment">// Determine command payload size using scratchpad space</span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    uint8_t cmd_layout_scratch[CONFIG_ZENBEDDED_MAX_CMD_BUFFER_SIZE];</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    CommandCodec::init(cmd_ctx_, cmd_params, cmd_layout_scratch);</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <span class="keywordtype">size_t</span> cmd_size = CommandCodec::payload_size(cmd_ctx_);</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classZenbeddedClientBase.html#a42ddf35e45c8568493ab0e0f79f95744">init_base</a>(control_freq, st_size, cmd_size);</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>  }</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>  <span class="keywordtype">void</span> write_state(<span class="keyword">const</span> StateValue &amp; value)</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>  {</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    <span class="keywordflow">if</span> (!initialized_)</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    {</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>      <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    }</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    <span class="keywordtype">int</span> write_idx = 0;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    uint8_t * buf = <a class="code hl_function" href="classZenbeddedClientBase.html#a4e1ee89f49cb9fb7d480a0f6049ce22c">prepare_state_write_slot</a>(write_idx);</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    StateCodec::write(state_ctx_, value, buf);</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    <a class="code hl_function" href="classZenbeddedClientBase.html#adf90d843790caf428aeee8f09b27d0c1">commit_state_write_slot</a>(write_idx);</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>  }</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>  <span class="keywordtype">bool</span> read_command(CommandValue &amp; out)</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>  {</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    <span class="keywordflow">if</span> (!initialized_)</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    {</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    }</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    uint8_t tmp[CONFIG_ZENBEDDED_MAX_CMD_BUFFER_SIZE];</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    <span class="keywordflow">if</span> (!<a class="code hl_function" href="classZenbeddedClientBase.html#ab01a29f99960c1eb1579dfacb7aaa202">read_latest_command_raw</a>(tmp, cmd_payload_size_))</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    {</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    }</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    <span class="keywordflow">return</span> CommandCodec::read(cmd_ctx_, tmp, cmd_payload_size_, out);</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>  }</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>  <span class="keyword">typename</span> StateCodec::Ctx state_ctx_{};</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>  <span class="keyword">typename</span> CommandCodec::Ctx cmd_ctx_{};</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>};</div>
 </div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="preprocessor">#endif  </span><span class="comment">// ZENBEDDED_RCL__ZENBEDDED_CLIENT_HPP_</span></div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="preprocessor">#endif  </span><span class="comment">// ZENBEDDED_RCL__ZENBEDDED_CLIENT_HPP_</span></div>
 <div class="ttc" id="aclassZenbeddedClientBase_html"><div class="ttname"><a href="classZenbeddedClientBase.html">ZenbeddedClientBase</a></div><div class="ttdef"><b>Definition</b> zenbedded_client.hpp:26</div></div>
 <div class="ttc" id="aclassZenbeddedClientBase_html_a2ab188af180f2617ad6462abb270136d"><div class="ttname"><a href="classZenbeddedClientBase.html#a2ab188af180f2617ad6462abb270136d">ZenbeddedClientBase::destroy</a></div><div class="ttdeci">void destroy()</div><div class="ttdoc">Deinitialize the client and underlying transport.</div><div class="ttdef"><b>Definition</b> zenbedded_client.cpp:96</div></div>
 <div class="ttc" id="aclassZenbeddedClientBase_html_a42ddf35e45c8568493ab0e0f79f95744"><div class="ttname"><a href="classZenbeddedClientBase.html#a42ddf35e45c8568493ab0e0f79f95744">ZenbeddedClientBase::init_base</a></div><div class="ttdeci">int init_base(uint32_t control_freq, size_t state_payload_size, size_t cmd_payload_size)</div><div class="ttdoc">Initializes base buffers, transport layer, and background thread.</div><div class="ttdef"><b>Definition</b> zenbedded_client.cpp:30</div></div>
@@ -258,12 +261,13 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassZenbeddedClientBase_html_a5ec036bde0603b2825c1c71555170ed1"><div class="ttname"><a href="classZenbeddedClientBase.html#a5ec036bde0603b2825c1c71555170ed1">ZenbeddedClientBase::stop_thread</a></div><div class="ttdeci">void stop_thread()</div><div class="ttdoc">Stop the control publish thread.</div><div class="ttdef"><b>Definition</b> zenbedded_client.cpp:199</div></div>
 <div class="ttc" id="aclassZenbeddedClientBase_html_aacc43dff05db39f1a82ac3ebe88ebaaa"><div class="ttname"><a href="classZenbeddedClientBase.html#aacc43dff05db39f1a82ac3ebe88ebaaa">ZenbeddedClientBase::is_control_thread_running</a></div><div class="ttdeci">bool is_control_thread_running()</div><div class="ttdoc">Check if publish thread is running.</div><div class="ttdef"><b>Definition</b> zenbedded_client.cpp:256</div></div>
 <div class="ttc" id="aclassZenbeddedClientBase_html_ab01a29f99960c1eb1579dfacb7aaa202"><div class="ttname"><a href="classZenbeddedClientBase.html#ab01a29f99960c1eb1579dfacb7aaa202">ZenbeddedClientBase::read_latest_command_raw</a></div><div class="ttdeci">bool read_latest_command_raw(uint8_t *data, size_t size)</div><div class="ttdoc">Read raw latest command bytes from double buffer.</div><div class="ttdef"><b>Definition</b> zenbedded_client.cpp:131</div></div>
+<div class="ttc" id="aclassZenbeddedClientBase_html_ac2aff2ca26824e5ba26ce8983a3eaaec"><div class="ttname"><a href="classZenbeddedClientBase.html#ac2aff2ca26824e5ba26ce8983a3eaaec">ZenbeddedClientBase::accepted_command_count</a></div><div class="ttdeci">uint32_t accepted_command_count() const</div><div class="ttdoc">Monotonic count of command payloads accepted from the transport.</div><div class="ttdef"><b>Definition</b> zenbedded_client.cpp:261</div></div>
 <div class="ttc" id="aclassZenbeddedClientBase_html_ad49beb58bdb1dfd714b8dc0f6ed35862"><div class="ttname"><a href="classZenbeddedClientBase.html#ad49beb58bdb1dfd714b8dc0f6ed35862">ZenbeddedClientBase::get_state_buffer_slot</a></div><div class="ttdeci">uint8_t * get_state_buffer_slot(size_t slot_idx)</div><div class="ttdoc">Direct slot access for state codec template initialization.</div><div class="ttdef"><b>Definition</b> zenbedded_client.cpp:111</div></div>
 <div class="ttc" id="aclassZenbeddedClientBase_html_adf90d843790caf428aeee8f09b27d0c1"><div class="ttname"><a href="classZenbeddedClientBase.html#adf90d843790caf428aeee8f09b27d0c1">ZenbeddedClientBase::commit_state_write_slot</a></div><div class="ttdeci">void commit_state_write_slot(int write_idx)</div><div class="ttdoc">Commit atomic state buffer write and flip active index.</div><div class="ttdef"><b>Definition</b> zenbedded_client.cpp:122</div></div>
 <div class="ttc" id="aclassZenbeddedClientBase_html_ae079bcdbf33ea91b5d56bf32e3cade03"><div class="ttname"><a href="classZenbeddedClientBase.html#ae079bcdbf33ea91b5d56bf32e3cade03">ZenbeddedClientBase::start_thread</a></div><div class="ttdeci">int start_thread(uint32_t control_freq)</div><div class="ttdoc">Start the control publish thread.</div><div class="ttdef"><b>Definition</b> zenbedded_client.cpp:160</div></div>
 <div class="ttc" id="aclassZenbeddedClientBase_html_af12e00515eb97ab6a1b6cd5e091d6647"><div class="ttname"><a href="classZenbeddedClientBase.html#af12e00515eb97ab6a1b6cd5e091d6647">ZenbeddedClientBase::zenoh_publish_state</a></div><div class="ttdeci">int zenoh_publish_state()</div><div class="ttdoc">Publish current state buffer over Zenoh transport.</div><div class="ttdef"><b>Definition</b> zenbedded_client.cpp:139</div></div>
-<div class="ttc" id="aclassZenbeddedClientBase_html_afb91e45eb9c401d5fd1b15041a512c0a"><div class="ttname"><a href="classZenbeddedClientBase.html#afb91e45eb9c401d5fd1b15041a512c0a">ZenbeddedClientBase::reset_buffers</a></div><div class="ttdeci">void reset_buffers()</div><div class="ttdoc">Reset atomic buffer states and versions.</div><div class="ttdef"><b>Definition</b> zenbedded_client.cpp:261</div></div>
-<div class="ttc" id="aclassZenbeddedClient_html"><div class="ttname"><a href="classZenbeddedClient.html">ZenbeddedClient</a></div><div class="ttdef"><b>Definition</b> zenbedded_client.hpp:101</div></div>
+<div class="ttc" id="aclassZenbeddedClientBase_html_afb91e45eb9c401d5fd1b15041a512c0a"><div class="ttname"><a href="classZenbeddedClientBase.html#afb91e45eb9c401d5fd1b15041a512c0a">ZenbeddedClientBase::reset_buffers</a></div><div class="ttdeci">void reset_buffers()</div><div class="ttdoc">Reset atomic buffer states and versions.</div><div class="ttdef"><b>Definition</b> zenbedded_client.cpp:266</div></div>
+<div class="ttc" id="aclassZenbeddedClient_html"><div class="ttname"><a href="classZenbeddedClient.html">ZenbeddedClient</a></div><div class="ttdef"><b>Definition</b> zenbedded_client.hpp:109</div></div>
 <div class="ttc" id="astructCheckCodec_html"><div class="ttname"><a href="structCheckCodec.html">CheckCodec</a></div><div class="ttdef"><b>Definition</b> codecs.hpp:59</div></div>
 <div class="ttc" id="astructzenbedded__pub__s_html"><div class="ttname"><a href="structzenbedded__pub__s.html">zenbedded_pub_s</a></div><div class="ttdef"><b>Definition</b> zenoh_transport.c:41</div></div>
 <div class="ttc" id="astructzenbedded__sub__s_html"><div class="ttname"><a href="structzenbedded__sub__s.html">zenbedded_sub_s</a></div><div class="ttdef"><b>Definition</b> zenoh_transport.c:53</div></div>

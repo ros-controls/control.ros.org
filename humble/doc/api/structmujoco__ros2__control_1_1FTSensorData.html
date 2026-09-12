@@ -87,14 +87,18 @@ $(function() {
   <div class="headertitle"><div class="title">mujoco_ros2_control::FTSensorData Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="data_8hpp_source.html">data.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for mujoco_ros2_control::FTSensorData:</div>
 <div class="dyncontent">
 <div class="center"><img src="structmujoco__ros2__control_1_1FTSensorData__coll__graph.png" border="0" usemap="#amujoco__ros2__control_1_1FTSensorData_coll__map" alt="Collaboration graph"/></div>
 <map name="amujoco__ros2__control_1_1FTSensorData_coll__map" id="amujoco__ros2__control_1_1FTSensorData_coll__map">
-<area shape="rect" title=" " alt="" coords="5,137,163,177"/>
+<area shape="rect" title=" " alt="" coords="253,49,411,89"/>
 <area shape="rect" href="structmujoco__ros2__control_1_1SensorData.html" title=" " alt="" coords="5,5,163,60"/>
-<area shape="poly" title=" " alt="" coords="87,74,87,137,81,137,81,74"/>
+<area shape="poly" title=" " alt="" coords="177,43,254,55,253,60,176,49"/>
+<area shape="rect" href="structmujoco__ros2__control_1_1NoiseState.html" title=" " alt="" coords="5,85,163,125"/>
+<area shape="poly" title=" " alt="" coords="176,89,253,77,254,83,177,94"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -109,8 +113,26 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>name</b></td><
 <tr class="memitem:afcea02b131935eee3a87876762b1149d" id="r_afcea02b131935eee3a87876762b1149d"><td class="memItemLeft" align="right" valign="top"><a id="afcea02b131935eee3a87876762b1149d" name="afcea02b131935eee3a87876762b1149d"></a>
 <a class="el" href="structmujoco__ros2__control_1_1SensorData.html">SensorData</a>&lt; Eigen::Vector3d &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>torque</b></td></tr>
 <tr class="separator:afcea02b131935eee3a87876762b1149d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaed2186f89393095d6c41e7a57933d61" id="r_aaed2186f89393095d6c41e7a57933d61"><td class="memItemLeft" align="right" valign="top"><a id="aaed2186f89393095d6c41e7a57933d61" name="aaed2186f89393095d6c41e7a57933d61"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>force_noise_stddev</b> = 0.0</td></tr>
+<tr class="separator:aaed2186f89393095d6c41e7a57933d61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f5f3ed91f47d16d543f4cf08b61b0dd" id="r_a8f5f3ed91f47d16d543f4cf08b61b0dd"><td class="memItemLeft" align="right" valign="top"><a id="a8f5f3ed91f47d16d543f4cf08b61b0dd" name="a8f5f3ed91f47d16d543f4cf08b61b0dd"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>torque_noise_stddev</b> = 0.0</td></tr>
+<tr class="separator:a8f5f3ed91f47d16d543f4cf08b61b0dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fff0a40c4f42194531606ea3f316803" id="r_a5fff0a40c4f42194531606ea3f316803"><td class="memItemLeft" align="right" valign="top"><a id="a5fff0a40c4f42194531606ea3f316803" name="a5fff0a40c4f42194531606ea3f316803"></a>
+<a class="el" href="structmujoco__ros2__control_1_1NoiseState.html">NoiseState</a>&#160;</td><td class="memItemRight" valign="bottom"><b>noise</b></td></tr>
+<tr class="separator:a5fff0a40c4f42194531606ea3f316803"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this struct was generated from the following file:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">force_noise_stddev</td><td>Standard deviation (N) of zero-mean Gaussian noise added to <code>force</code> on read; taken from the underlying MJCF <code>&lt;force&gt;</code> sensor's <code>noise</code> attribute (0 by default, which disables it). </td></tr>
+    <tr><td class="paramname">torque_noise_stddev</td><td>Standard deviation (N*m) of zero-mean Gaussian noise added to <code>torque</code> on read; taken from the underlying MJCF <code>&lt;torque&gt;</code> sensor's <code>noise</code> attribute (0 by default, which disables it). </td></tr>
+    <tr><td class="paramname">noise</td><td>Shape (ros2_control <code>noise_distribution</code> parameter, defaults to Gaussian) and RNG shared by both noise fields above; the RNG is seeded from <code>std::random_device</code> (noise is non-deterministic across runs). </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>mujoco_ros2_control/mujoco_ros2_control/include/mujoco_ros2_control/<a class="el" href="data_8hpp_source.html">data.hpp</a></li>
 </ul>
 </div><!-- contents -->

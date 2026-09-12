@@ -115,6 +115,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_initialized</b> ()
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_control_thread_running</b> ()</td></tr>
 <tr class="memdesc:aacc43dff05db39f1a82ac3ebe88ebaaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if publish thread is running. <br /></td></tr>
 <tr class="separator:aacc43dff05db39f1a82ac3ebe88ebaaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2aff2ca26824e5ba26ce8983a3eaaec" id="r_ac2aff2ca26824e5ba26ce8983a3eaaec"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZenbeddedClientBase.html#ac2aff2ca26824e5ba26ce8983a3eaaec">accepted_command_count</a> () const</td></tr>
+<tr class="memdesc:ac2aff2ca26824e5ba26ce8983a3eaaec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Monotonic count of command payloads accepted from the transport.  <br /></td></tr>
+<tr class="separator:ac2aff2ca26824e5ba26ce8983a3eaaec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -155,6 +158,27 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>state_payload_size_
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>cmd_payload_size_</b> = 0</td></tr>
 <tr class="separator:a645fb3a9f8264e7a7ce952f1490df02f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ac2aff2ca26824e5ba26ce8983a3eaaec" name="ac2aff2ca26824e5ba26ce8983a3eaaec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2aff2ca26824e5ba26ce8983a3eaaec">&#9670;&#160;</a></span>accepted_command_count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t ZenbeddedClientBase::accepted_command_count </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Monotonic count of command payloads accepted from the transport. </p>
+<p>read_command() cannot report whether a command is new: it blocks until the double buffer is consistent and the codecs only reject undersized payloads. Callers that must react to a stalled peer compare this counter across control cycles instead. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>zephyr-zenoh-integration/zenbedded_rcl/include/zenbedded_rcl/<a class="el" href="zenbedded__client_8hpp_source.html">zenbedded_client.hpp</a></li>
 <li>zephyr-zenoh-integration/zenbedded_rcl/src/<b>zenbedded_client.cpp</b></li>

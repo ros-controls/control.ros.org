@@ -78,6 +78,7 @@
 <li class="toctree-l7"><a class="reference internal" href="#force-torque-sensors">Force-Torque Sensors</a></li>
 <li class="toctree-l7"><a class="reference internal" href="#imu">IMU</a></li>
 <li class="toctree-l7"><a class="reference internal" href="#magnetometer">Magnetometer</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#sensor-noise">Sensor Noise</a></li>
 </ul>
 </li>
 </ul>
@@ -312,10 +313,12 @@ The drivers expose control and state for that single joint, while the simulation
 MuJoCo does not model complete FTS and IMUs natively, so we combine supported MJCF sensor constructs to map to a single <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> sensor.</p>
 <section id="force-torque-sensors">
 <h3>Force-Torque Sensors<a class="headerlink" href="#force-torque-sensors" title="Link to this heading"></a></h3>
-<p>Model <code class="docutils literal notranslate"><span class="pre">force</span></code> and <code class="docutils literal notranslate"><span class="pre">torque</span></code> sensors separately in the MJCF, suffixed with <code class="docutils literal notranslate"><span class="pre">_force</span></code> and <code class="docutils literal notranslate"><span class="pre">_torque</span></code>:</p>
+<p>Model <code class="docutils literal notranslate"><span class="pre">force</span></code> and <code class="docutils literal notranslate"><span class="pre">torque</span></code> sensors separately in the MJCF, suffixed with <code class="docutils literal notranslate"><span class="pre">_force</span></code> and <code class="docutils literal notranslate"><span class="pre">_torque</span></code>.
+Each optionally takes a <code class="docutils literal notranslate"><span class="pre">noise</span></code> attribute (standard deviation, in N / N*m) to add zero-mean Gaussian noise
+to its readings, see <a class="reference internal" href="#sensor-noise"><span class="std std-ref">Sensor Noise</span></a> below:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;sensor&gt;</span>
-<span class="w">  </span><span class="nt">&lt;force</span><span class="w"> </span><span class="na">name=</span><span class="s">"fts_sensor_force"</span><span class="w"> </span><span class="na">site=</span><span class="s">"ft_frame"</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;torque</span><span class="w"> </span><span class="na">name=</span><span class="s">"fts_sensor_torque"</span><span class="w"> </span><span class="na">site=</span><span class="s">"ft_frame"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;force</span><span class="w"> </span><span class="na">name=</span><span class="s">"fts_sensor_force"</span><span class="w"> </span><span class="na">site=</span><span class="s">"ft_frame"</span><span class="w"> </span><span class="na">noise=</span><span class="s">"0.0"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;torque</span><span class="w"> </span><span class="na">name=</span><span class="s">"fts_sensor_torque"</span><span class="w"> </span><span class="na">site=</span><span class="s">"ft_frame"</span><span class="w"> </span><span class="na">noise=</span><span class="s">"0.0"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/sensor&gt;</span>
 </pre></div>
 </div>
@@ -339,11 +342,13 @@ MuJoCo does not model complete FTS and IMUs natively, so we combine supported MJ
 </section>
 <section id="imu">
 <h3>IMU<a class="headerlink" href="#imu" title="Link to this heading"></a></h3>
-<p>Simulate a <code class="docutils literal notranslate"><span class="pre">framequat</span></code>, <code class="docutils literal notranslate"><span class="pre">gyro</span></code>, and <code class="docutils literal notranslate"><span class="pre">accelerometer</span></code> as a single IMU:</p>
+<p>Simulate a <code class="docutils literal notranslate"><span class="pre">framequat</span></code>, <code class="docutils literal notranslate"><span class="pre">gyro</span></code>, and <code class="docutils literal notranslate"><span class="pre">accelerometer</span></code> as a single IMU. Each optionally takes a <code class="docutils literal notranslate"><span class="pre">noise</span></code>
+attribute (standard deviation) to add zero-mean Gaussian noise to its readings, see
+<a class="reference internal" href="#sensor-noise"><span class="std std-ref">Sensor Noise</span></a> below:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;sensor&gt;</span>
-<span class="w">  </span><span class="nt">&lt;framequat</span><span class="w"> </span><span class="na">name=</span><span class="s">"imu_sensor_quat"</span><span class="w"> </span><span class="na">objtype=</span><span class="s">"site"</span><span class="w"> </span><span class="na">objname=</span><span class="s">"imu_sensor"</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;gyro</span><span class="w"> </span><span class="na">name=</span><span class="s">"imu_sensor_gyro"</span><span class="w"> </span><span class="na">site=</span><span class="s">"imu_sensor"</span><span class="nt">/&gt;</span>
-<span class="w">  </span><span class="nt">&lt;accelerometer</span><span class="w"> </span><span class="na">name=</span><span class="s">"imu_sensor_accel"</span><span class="w"> </span><span class="na">site=</span><span class="s">"imu_sensor"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;framequat</span><span class="w"> </span><span class="na">name=</span><span class="s">"imu_sensor_quat"</span><span class="w"> </span><span class="na">objtype=</span><span class="s">"site"</span><span class="w"> </span><span class="na">objname=</span><span class="s">"imu_sensor"</span><span class="w"> </span><span class="na">noise=</span><span class="s">"0.0"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;gyro</span><span class="w"> </span><span class="na">name=</span><span class="s">"imu_sensor_gyro"</span><span class="w"> </span><span class="na">site=</span><span class="s">"imu_sensor"</span><span class="w"> </span><span class="na">noise=</span><span class="s">"0.0"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;accelerometer</span><span class="w"> </span><span class="na">name=</span><span class="s">"imu_sensor_accel"</span><span class="w"> </span><span class="na">site=</span><span class="s">"imu_sensor"</span><span class="w"> </span><span class="na">noise=</span><span class="s">"0.0"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/sensor&gt;</span>
 </pre></div>
 </div>
@@ -373,9 +378,10 @@ MuJoCo does not model complete FTS and IMUs natively, so we combine supported MJ
 </section>
 <section id="magnetometer">
 <h3>Magnetometer<a class="headerlink" href="#magnetometer" title="Link to this heading"></a></h3>
-<p>Model a MuJoCo <code class="docutils literal notranslate"><span class="pre">magnetometer</span></code> sensor in the MJCF:</p>
+<p>Model a MuJoCo <code class="docutils literal notranslate"><span class="pre">magnetometer</span></code> sensor in the MJCF. It optionally takes a <code class="docutils literal notranslate"><span class="pre">noise</span></code> attribute (standard
+deviation) to add zero-mean Gaussian noise to its readings, see <a class="reference internal" href="#sensor-noise"><span class="std std-ref">Sensor Noise</span></a> below:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;sensor&gt;</span>
-<span class="w">  </span><span class="nt">&lt;magnetometer</span><span class="w"> </span><span class="na">name=</span><span class="s">"magnetometer_sensor"</span><span class="w"> </span><span class="na">site=</span><span class="s">"imu_sensor"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;magnetometer</span><span class="w"> </span><span class="na">name=</span><span class="s">"magnetometer_sensor"</span><span class="w"> </span><span class="na">site=</span><span class="s">"imu_sensor"</span><span class="w"> </span><span class="na">noise=</span><span class="s">"0.0"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/sensor&gt;</span>
 </pre></div>
 </div>
@@ -390,6 +396,45 @@ MuJoCo does not model complete FTS and IMUs natively, so we combine supported MJ
 <span class="nt">&lt;/sensor&gt;</span>
 </pre></div>
 </div>
+</section>
+<section id="sensor-noise">
+<span id="id1"></span><h3>Sensor Noise<a class="headerlink" href="#sensor-noise" title="Link to this heading"></a></h3>
+<p>Every MJCF sensor element used above (<code class="docutils literal notranslate"><span class="pre">force</span></code>, <code class="docutils literal notranslate"><span class="pre">torque</span></code>, <code class="docutils literal notranslate"><span class="pre">framequat</span></code>, <code class="docutils literal notranslate"><span class="pre">gyro</span></code>, <code class="docutils literal notranslate"><span class="pre">accelerometer</span></code>,
+<code class="docutils literal notranslate"><span class="pre">framepos</span></code>, <code class="docutils literal notranslate"><span class="pre">magnetometer</span></code>) accepts MuJoCo’s native <code class="docutils literal notranslate"><span class="pre">noise</span></code> attribute: the standard deviation, in the
+sensor’s native units, of the noise added to its reading. It defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code> (no noise). Noise magnitude is
+entirely driven by the MJCF, e.g.:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;sensor&gt;</span>
+<span class="w">  </span><span class="nt">&lt;force</span><span class="w"> </span><span class="na">name=</span><span class="s">"fts_sensor_force"</span><span class="w"> </span><span class="na">site=</span><span class="s">"ft_frame"</span><span class="w"> </span><span class="na">noise=</span><span class="s">"0.5"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;torque</span><span class="w"> </span><span class="na">name=</span><span class="s">"fts_sensor_torque"</span><span class="w"> </span><span class="na">site=</span><span class="s">"ft_frame"</span><span class="w"> </span><span class="na">noise=</span><span class="s">"0.05"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/sensor&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>MuJoCo compiles <code class="docutils literal notranslate"><span class="pre">noise</span></code> into <code class="docutils literal notranslate"><span class="pre">mjModel::sensor_noise</span></code> but does not apply it itself (<code class="docutils literal notranslate"><span class="pre">mj_step</span></code> leaves
+<code class="docutils literal notranslate"><span class="pre">sensordata</span></code> noise-free) — it’s normally left for tools like the <code class="docutils literal notranslate"><span class="pre">simulate</span></code> GUI to apply for display.
+This hardware interface applies it on every <code class="docutils literal notranslate"><span class="pre">read()</span></code>, using its own RNG per <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> sensor
+(seeded from <code class="docutils literal notranslate"><span class="pre">std::random_device</span></code>, so the noise sequence differs between runs; there is no seed
+parameter).</p>
+</div>
+<p>MJCF has no concept of noise <em>shape</em> though — <code class="docutils literal notranslate"><span class="pre">noise</span></code> only ever means “standard deviation of zero-mean
+noise”. Choose the shape with the <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> <code class="docutils literal notranslate"><span class="pre">noise_distribution</span></code> parameter, applying to every field
+of that sensor:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">"fts_sensor"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"mujoco_type"</span><span class="nt">&gt;</span>fts<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"mujoco_sensor_name"</span><span class="nt">&gt;</span>fts_sensor<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="cm">&lt;!-- "gaussian" (default) or "uniform" --&gt;</span>
+<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"noise_distribution"</span><span class="nt">&gt;</span>gaussian<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span>...
+<span class="nt">&lt;/sensor&gt;</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">uniform</span></code> draws from <code class="docutils literal notranslate"><span class="pre">[-stddev*sqrt(3),</span> <span class="pre">stddev*sqrt(3)]</span></code>, so its actual standard deviation still matches
+the configured MJCF <code class="docutils literal notranslate"><span class="pre">noise</span></code> value — switching distributions doesn’t change the noise magnitude, only its
+shape (bounded vs. unbounded tails).</p>
+<p>For an IMU, the configured <code class="docutils literal notranslate"><span class="pre">noise</span></code> values are also surfaced as the diagonal of that field’s (previously
+always-zero) covariance state interfaces (e.g. <code class="docutils literal notranslate"><span class="pre">orientation_covariance.0</span></code>), for controllers that consume a
+covariance estimate.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Cameras and lidar sensors are no longer supported in the base interface, they are now provided as <code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control_plugins</span></code>.
@@ -399,7 +444,7 @@ Refer to the <a class="reference internal" href="../../mujoco_ros2_control_plugi
 </section>
 </section>
 <section id="simulation-topics-and-services">
-<span id="id1"></span><h1>Simulation Topics and Services<a class="headerlink" href="#simulation-topics-and-services" title="Link to this heading"></a></h1>
+<span id="id2"></span><h1>Simulation Topics and Services<a class="headerlink" href="#simulation-topics-and-services" title="Link to this heading"></a></h1>
 <section id="topics">
 <h2>Topics<a class="headerlink" href="#topics" title="Link to this heading"></a></h2>
 <dl class="simple">

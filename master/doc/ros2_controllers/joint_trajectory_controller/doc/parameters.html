@@ -285,14 +285,8 @@
 <dt>constraints.stopped_velocity_tolerance (double)</dt><dd><p>Velocity tolerance for at the end of the trajectory that indicates that controlled system is stopped.</p>
 <p>Default:  0.01</p>
 </dd>
-<dt>constraints.goal_time (double)</dt><dd><p>Time tolerance for achieving trajectory goal before or after commanded time. If set to zero, the controller will wait a potentially infinite amount of time.</p>
-<p>Default:  0.0</p>
-<p>Constraints:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>greater than or equal to 0.0</p></li>
-</ul>
-</div></blockquote>
+<dt>constraints.goal_time (double)</dt><dd><p>Time tolerance for achieving trajectory goal before or after commanded time. Positive values set a finite grace period in seconds. If set to a negative value, the controller will wait a potentially infinite amount of time. If set to zero, no grace period is allowed, the goal must be reached on time.</p>
+<p>Default:  10.0</p>
 </dd>
 <dt>constraints.decelerate_on_cancel (bool)</dt><dd><p>If true and each joints max_deceleration_on_cancel is greater than 0, decelerate to a stop when the request is canceled or the goal constraints are violated. Requires velocity state interface from all joints in the controller.</p>
 <p>Read only: True</p>
@@ -394,7 +388,7 @@ position <span class="math notranslate nohighlight">\(s\)</span> from the state 
 <span class="w">        </span><span class="nt">max_deceleration_on_cancel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
 <span class="w">        </span><span class="nt">trajectory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
 <span class="w">      </span><span class="nt">decelerate_on_cancel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<span class="w">      </span><span class="nt">goal_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">      </span><span class="nt">goal_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0</span>
 <span class="w">      </span><span class="nt">stopped_velocity_tolerance</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span>
 <span class="w">    </span><span class="nt">gains</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">&lt;joints&gt;</span><span class="p">:</span>

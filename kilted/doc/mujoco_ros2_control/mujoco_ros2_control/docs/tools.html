@@ -277,6 +277,22 @@ mesh is reused as the collision shape. This synthesis happens at the URDF level,
 correct per link even when MuJoCo fuses fixed-jointed bodies together. A mesh shared by a visual
 and a collision is converted once and reused for both (and, if that link requests decomposition,
 the whole mesh renders while its decomposed pieces collide).</p></li>
+<li><p>Both kinds of geom get explicit attributes written directly onto them, so visual/collision
+separation does not depend on a user-supplied <code class="docutils literal notranslate"><span class="pre">&lt;default</span> <span class="pre">class=&quot;...&quot;&gt;</span></code> block:</p>
+<ul>
+<li><p><strong>Visual</strong> geoms (<code class="docutils literal notranslate"><span class="pre">class=&quot;visual&quot;</span></code>) are render-only: they never collide and keep
+their own material or <code class="docutils literal notranslate"><span class="pre">rgba</span></code>.</p></li>
+<li><p><strong>Collision</strong> geoms (<code class="docutils literal notranslate"><span class="pre">class=&quot;collision&quot;</span></code>), i.e. primitives and whole meshes, do the
+colliding and are tinted with the <code class="docutils literal notranslate"><span class="pre">bright_orange</span></code> material so they are easy to spot in
+the viewer by toggling their group. The material is added to the <code class="docutils literal notranslate"><span class="pre">&lt;asset&gt;</span></code> automatically
+when not already defined (an existing definition, e.g. from <code class="docutils literal notranslate"><span class="pre">mujoco_inputs</span></code>, is left
+untouched).</p></li>
+<li><p><strong>Decomposed collision</strong> pieces (<code class="docutils literal notranslate"><span class="pre">class=&quot;decomposed_collision&quot;</span></code>) collide like any other
+collision geom but live in their own viewer group, so the convex decomposition can be
+toggled independently of the other collisions. They are not tinted: they keep obj2mjcf’s
+per-piece colors so the individual convex hulls stay distinguishable.</p></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><p>Handles visual and collision geometry independently:</p>

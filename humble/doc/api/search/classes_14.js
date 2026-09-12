@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['wheelhandle_0',['WheelHandle',['../structdiff__drive__controller_1_1DiffDriveController_1_1WheelHandle.html',1,'diff_drive_controller::DiffDriveController']]],
-  ['wheelparams_1',['WheelParams',['../structtricycle__controller_1_1TricycleController_1_1WheelParams.html',1,'tricycle_controller::TricycleController']]],
-  ['wrenchtransformer_2',['WrenchTransformer',['../classforce__torque__sensor__broadcaster_1_1WrenchTransformer.html',1,'force_torque_sensor_broadcaster']]]
+  ['velocityjointsaturationhandle_0',['VelocityJointSaturationHandle',['../classjoint__limits__interface_1_1VelocityJointSaturationHandle.html',1,'joint_limits_interface']]],
+  ['velocityjointsoftlimitshandle_1',['VelocityJointSoftLimitsHandle',['../classjoint__limits__interface_1_1VelocityJointSoftLimitsHandle.html',1,'joint_limits_interface']]],
+  ['viewcontrollerchainsverb_2',['ViewControllerChainsVerb',['../classros2controlcli_1_1verb_1_1view__controller__chains_1_1ViewControllerChainsVerb.html',1,'ros2controlcli::verb::view_controller_chains']]]
 ];

@@ -87,16 +87,20 @@ $(function() {
   <div class="headertitle"><div class="title">mujoco_ros2_control::SitePoseData Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="data_8hpp_source.html">data.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for mujoco_ros2_control::SitePoseData:</div>
 <div class="dyncontent">
 <div class="center"><img src="structmujoco__ros2__control_1_1SitePoseData__coll__graph.png" border="0" usemap="#amujoco__ros2__control_1_1SitePoseData_coll__map" alt="Collaboration graph"/></div>
 <map name="amujoco__ros2__control_1_1SitePoseData_coll__map" id="amujoco__ros2__control_1_1SitePoseData_coll__map">
-<area shape="rect" title=" " alt="" coords="287,53,444,93"/>
+<area shape="rect" title=" " alt="" coords="287,91,444,131"/>
 <area shape="rect" href="structmujoco__ros2__control_1_1SensorData.html" title=" " alt="" coords="5,5,163,60"/>
-<area shape="poly" title=" " alt="" coords="177,43,287,59,286,64,176,48"/>
+<area shape="poly" title=" " alt="" coords="177,56,294,89,292,94,175,61"/>
 <area shape="rect" href="structmujoco__ros2__control_1_1SensorData.html" title=" " alt="" coords="5,84,163,139"/>
-<area shape="poly" title=" " alt="" coords="176,96,286,81,287,86,177,101"/>
+<area shape="poly" title=" " alt="" coords="176,109,286,109,286,114,176,114"/>
+<area shape="rect" href="structmujoco__ros2__control_1_1NoiseState.html" title=" " alt="" coords="5,163,163,203"/>
+<area shape="poly" title=" " alt="" coords="176,157,286,129,287,134,177,162"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -111,8 +115,26 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>name</b></td><
 <tr class="memitem:a97436c39384448d966745329be3f9515" id="r_a97436c39384448d966745329be3f9515"><td class="memItemLeft" align="right" valign="top"><a id="a97436c39384448d966745329be3f9515" name="a97436c39384448d966745329be3f9515"></a>
 <a class="el" href="structmujoco__ros2__control_1_1SensorData.html">SensorData</a>&lt; Eigen::Quaterniond &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>orientation</b></td></tr>
 <tr class="separator:a97436c39384448d966745329be3f9515"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a375038886e5b0358991a91998bf37c92" id="r_a375038886e5b0358991a91998bf37c92"><td class="memItemLeft" align="right" valign="top"><a id="a375038886e5b0358991a91998bf37c92" name="a375038886e5b0358991a91998bf37c92"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>position_noise_stddev</b> = 0.0</td></tr>
+<tr class="separator:a375038886e5b0358991a91998bf37c92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c44976f608e228ce10102c9c887bfd7" id="r_a2c44976f608e228ce10102c9c887bfd7"><td class="memItemLeft" align="right" valign="top"><a id="a2c44976f608e228ce10102c9c887bfd7" name="a2c44976f608e228ce10102c9c887bfd7"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>orientation_noise_stddev</b> = 0.0</td></tr>
+<tr class="separator:a2c44976f608e228ce10102c9c887bfd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27f2773ea55a98b0cf940356b989ff4b" id="r_a27f2773ea55a98b0cf940356b989ff4b"><td class="memItemLeft" align="right" valign="top"><a id="a27f2773ea55a98b0cf940356b989ff4b" name="a27f2773ea55a98b0cf940356b989ff4b"></a>
+<a class="el" href="structmujoco__ros2__control_1_1NoiseState.html">NoiseState</a>&#160;</td><td class="memItemRight" valign="bottom"><b>noise</b></td></tr>
+<tr class="separator:a27f2773ea55a98b0cf940356b989ff4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this struct was generated from the following file:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position_noise_stddev</td><td>Standard deviation (m) of zero-mean Gaussian noise added to <code>position</code> on read; taken from the underlying MJCF <code>&lt;framepos&gt;</code> sensor's <code>noise</code> attribute (0 by default). </td></tr>
+    <tr><td class="paramname">orientation_noise_stddev</td><td>Standard deviation of zero-mean Gaussian noise added to <code>orientation</code> on read; taken from the underlying MJCF <code>&lt;framequat&gt;</code> sensor's <code>noise</code> attribute (0 by default). </td></tr>
+    <tr><td class="paramname">noise</td><td>Shape (ros2_control <code>noise_distribution</code> parameter, defaults to Gaussian) and RNG shared by both noise fields above; the RNG is seeded from <code>std::random_device</code> (noise is non-deterministic across runs). </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>mujoco_ros2_control/mujoco_ros2_control/include/mujoco_ros2_control/<a class="el" href="data_8hpp_source.html">data.hpp</a></li>
 </ul>
 </div><!-- contents -->

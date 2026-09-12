@@ -111,6 +111,8 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control_1_1MujocoSystemInterface.html">MujocoSystemInterface</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmujoco__ros2__control_1_1NoiseState.html">NoiseState</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control_1_1ROS2ControlGlfwAdapter.html">ROS2ControlGlfwAdapter</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmujoco__ros2__control_1_1SensorData.html">SensorData</a></td></tr>
@@ -133,6 +135,10 @@ Enumerations</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="separator:a20cbb1d8399ce15ed84435b528afee2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8a2c1c0815d2b92ddbe1fc3f17ecbc4" id="r_ab8a2c1c0815d2b92ddbe1fc3f17ecbc4"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemujoco__ros2__control.html#ab8a2c1c0815d2b92ddbe1fc3f17ecbc4">NoiseDistribution</a> { <b>kGaussian</b>
+, <b>kUniform</b>
+ }</td></tr>
+<tr class="separator:ab8a2c1c0815d2b92ddbe1fc3f17ecbc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -143,6 +149,32 @@ Functions</h2></td></tr>
 std::optional&lt; <a class="el" href="structhardware__interface_1_1ComponentInfo.html">hardware_interface::ComponentInfo</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>get_sensor_from_info</b> (const <a class="el" href="structhardware__interface_1_1HardwareInfo.html">hardware_interface::HardwareInfo</a> &amp;hardware_info, const std::string &amp;name)</td></tr>
 <tr class="memdesc:a588d9d609b4d8eefd0c8f4f1c664a47f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sensor's component info for the provided sensor name, if it exists. <br /></td></tr>
 <tr class="separator:a588d9d609b4d8eefd0c8f4f1c664a47f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad50f080352b464078a06942583526e2e" id="r_ad50f080352b464078a06942583526e2e"><td class="memItemLeft" align="right" valign="top"><a id="ad50f080352b464078a06942583526e2e" name="ad50f080352b464078a06942583526e2e"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>get_sensor_parameter_or</b> (const <a class="el" href="structhardware__interface_1_1ComponentInfo.html">hardware_interface::ComponentInfo</a> &amp;sensor, const std::string &amp;key, const std::string &amp;default_value)</td></tr>
+<tr class="memdesc:ad50f080352b464078a06942583526e2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the value of a sensor-level <code>&lt;param&gt;</code> (from the sensor's own ComponentInfo), or a default value if the sensor has no such parameter set. <br /></td></tr>
+<tr class="separator:ad50f080352b464078a06942583526e2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbd2c00ee24fd86b1c29f994d2a60b12" id="r_acbd2c00ee24fd86b1c29f994d2a60b12"><td class="memItemLeft" align="right" valign="top"><a id="acbd2c00ee24fd86b1c29f994d2a60b12" name="acbd2c00ee24fd86b1c29f994d2a60b12"></a>
+<a class="el" href="namespacemujoco__ros2__control.html#ab8a2c1c0815d2b92ddbe1fc3f17ecbc4">NoiseDistribution</a>&#160;</td><td class="memItemRight" valign="bottom"><b>get_noise_distribution</b> (const <a class="el" href="structhardware__interface_1_1ComponentInfo.html">hardware_interface::ComponentInfo</a> &amp;sensor)</td></tr>
+<tr class="memdesc:acbd2c00ee24fd86b1c29f994d2a60b12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the sensor's <code>noise_distribution</code> parameter ("gaussian" (default) or "uniform"). A value that is neither (including a typo) logs a warning and is treated as Gaussian; an absent parameter is treated as Gaussian silently. <br /></td></tr>
+<tr class="separator:acbd2c00ee24fd86b1c29f994d2a60b12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8efdbbacf896fc20290152e91dc1169" id="r_aa8efdbbacf896fc20290152e91dc1169"><td class="memItemLeft" align="right" valign="top"><a id="aa8efdbbacf896fc20290152e91dc1169" name="aa8efdbbacf896fc20290152e91dc1169"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_diagonal_covariance</b> (std::vector&lt; double &gt; &amp;covariance, double stddev)</td></tr>
+<tr class="memdesc:aa8efdbbacf896fc20290152e91dc1169"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a flat, row-major 3x3 covariance's diagonal to <code>stddev * stddev</code>, leaving off-diagonal terms untouched (0 for a freshly-<code>resize()</code>d vector, matching the "independent per-axis noise" assumption). <br /></td></tr>
+<tr class="separator:aa8efdbbacf896fc20290152e91dc1169"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a391a4d6b21fe4ed4a722c6bf0fadeff2" id="r_a391a4d6b21fe4ed4a722c6bf0fadeff2"><td class="memItemLeft" align="right" valign="top"><a id="a391a4d6b21fe4ed4a722c6bf0fadeff2" name="a391a4d6b21fe4ed4a722c6bf0fadeff2"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>add_sensor_noise</b> (Eigen::Vector3d &amp;value, double stddev, <a class="el" href="namespacemujoco__ros2__control.html#ab8a2c1c0815d2b92ddbe1fc3f17ecbc4">NoiseDistribution</a> distribution, std::mt19937 &amp;rng)</td></tr>
+<tr class="memdesc:a391a4d6b21fe4ed4a722c6bf0fadeff2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds zero-mean noise, independently sampled per axis, to a 3D vector in place. No-op if <code>stddev</code> is not positive, so a disabled (default) sensor pays no sampling cost. <br /></td></tr>
+<tr class="separator:a391a4d6b21fe4ed4a722c6bf0fadeff2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7535e5b3f199a9408934ac0e8adeb98c" id="r_a7535e5b3f199a9408934ac0e8adeb98c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemujoco__ros2__control.html#a7535e5b3f199a9408934ac0e8adeb98c">add_sensor_noise</a> (Eigen::Quaterniond &amp;value, double stddev, <a class="el" href="namespacemujoco__ros2__control.html#ab8a2c1c0815d2b92ddbe1fc3f17ecbc4">NoiseDistribution</a> distribution, std::mt19937 &amp;rng)</td></tr>
+<tr class="memdesc:a7535e5b3f199a9408934ac0e8adeb98c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds zero-mean noise to a quaternion's coefficients, then renormalizes.  <br /></td></tr>
+<tr class="separator:a7535e5b3f199a9408934ac0e8adeb98c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab04294f687e9829e81f7ed6780b9fbfa" id="r_ab04294f687e9829e81f7ed6780b9fbfa"><td class="memItemLeft" align="right" valign="top"><a id="ab04294f687e9829e81f7ed6780b9fbfa" name="ab04294f687e9829e81f7ed6780b9fbfa"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>add_sensor_noise</b> (Eigen::Vector3d &amp;value, double stddev, <a class="el" href="structmujoco__ros2__control_1_1NoiseState.html">NoiseState</a> &amp;noise)</td></tr>
+<tr class="memdesc:ab04294f687e9829e81f7ed6780b9fbfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience overloads taking a sensor's bundled <a class="el" href="structmujoco__ros2__control_1_1NoiseState.html">NoiseState</a> instead of a separate distribution/rng pair. <br /></td></tr>
+<tr class="separator:ab04294f687e9829e81f7ed6780b9fbfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c32e750b83e779601faae99a8bbebd9" id="r_a2c32e750b83e779601faae99a8bbebd9"><td class="memItemLeft" align="right" valign="top"><a id="a2c32e750b83e779601faae99a8bbebd9" name="a2c32e750b83e779601faae99a8bbebd9"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>add_sensor_noise</b> (Eigen::Quaterniond &amp;value, double stddev, <a class="el" href="structmujoco__ros2__control_1_1NoiseState.html">NoiseState</a> &amp;noise)</td></tr>
+<tr class="separator:a2c32e750b83e779601faae99a8bbebd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b7780b72b66017733cf9f23a3cd5658" id="r_a1b7780b72b66017733cf9f23a3cd5658"><td class="memTemplParams" colspan="2"><a id="a1b7780b72b66017733cf9f23a3cd5658" name="a1b7780b72b66017733cf9f23a3cd5658"></a>
 template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a1b7780b72b66017733cf9f23a3cd5658"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>add_items</b> (std::vector&lt; T &gt; &amp;vector, const std::vector&lt; T &gt; &amp;items)</td></tr>
@@ -230,7 +262,81 @@ constexpr char&#160;</td><td class="memItemRight" valign="bottom"><b>MUJOCO_TYPE
 
 </div>
 </div>
+<a id="ab8a2c1c0815d2b92ddbe1fc3f17ecbc4" name="ab8a2c1c0815d2b92ddbe1fc3f17ecbc4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8a2c1c0815d2b92ddbe1fc3f17ecbc4">&#9670;&#160;</a></span>NoiseDistribution</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="namespacemujoco__ros2__control.html#ab8a2c1c0815d2b92ddbe1fc3f17ecbc4">mujoco_ros2_control::NoiseDistribution</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Selects the shape of the noise sampled by <code><a class="el" href="namespacemujoco__ros2__control.html#a391a4d6b21fe4ed4a722c6bf0fadeff2" title="Adds zero-mean noise, independently sampled per axis, to a 3D vector in place. No-op if stddev is not...">add_sensor_noise()</a></code>. Chosen per ros2_control sensor via the <code>noise_distribution</code> parameter ("gaussian" (default) or "uniform"); MJCF's <code>noise</code> attribute has no equivalent concept, since MuJoCo only ever means "standard deviation of a zero-mean Gaussian" by it. </p>
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a7535e5b3f199a9408934ac0e8adeb98c" name="a7535e5b3f199a9408934ac0e8adeb98c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7535e5b3f199a9408934ac0e8adeb98c">&#9670;&#160;</a></span>add_sensor_noise()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mujoco_ros2_control::add_sensor_noise </td>
+          <td>(</td>
+          <td class="paramtype">Eigen::Quaterniond &amp;&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>stddev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacemujoco__ros2__control.html#ab8a2c1c0815d2b92ddbe1fc3f17ecbc4">NoiseDistribution</a>&#160;</td>
+          <td class="paramname"><em>distribution</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::mt19937 &amp;&#160;</td>
+          <td class="paramname"><em>rng</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Adds zero-mean noise to a quaternion's coefficients, then renormalizes. </p>
+<p>This is a small-angle approximation of orientation noise: accurate for the small stddev values noise configuration is expected to use, but not a proper noise model on SO(3) for large values. No-op if <code>stddev</code> is not positive. </p>
+
+</div>
+</div>
 <a id="a8928fc0198103c6bca3c7ef1f3d70e4a" name="a8928fc0198103c6bca3c7ef1f3d70e4a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8928fc0198103c6bca3c7ef1f3d70e4a">&#9670;&#160;</a></span>compose_sim_display_text()</h2>
 
