@@ -109,6 +109,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setSucceeded</b> (Res
 <tr class="memitem:a9460c03961f99de3ce26ca87b4e938a6" id="r_a9460c03961f99de3ce26ca87b4e938a6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1RealtimeServerGoalHandle.html#a9460c03961f99de3ce26ca87b4e938a6">setFeedback</a> (FeedbackSharedPtr feedback=nullptr)</td></tr>
 <tr class="memdesc:a9460c03961f99de3ce26ca87b4e938a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set feedback to be published by runNonRealtime().  <br /></td></tr>
 <tr class="separator:a9460c03961f99de3ce26ca87b4e938a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6967c74e54e1f16400f0fc35b835762d" id="r_a6967c74e54e1f16400f0fc35b835762d"><td class="memTemplParams" colspan="2">template&lt;typename FeedbackUpdateCallback &gt; </td></tr>
+<tr class="memitem:a6967c74e54e1f16400f0fc35b835762d"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1RealtimeServerGoalHandle.html#a6967c74e54e1f16400f0fc35b835762d">trySetFeedback</a> (FeedbackUpdateCallback &amp;&amp;update_feedback)</td></tr>
+<tr class="memdesc:a6967c74e54e1f16400f0fc35b835762d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update preallocated feedback to be published by runNonRealtime().  <br /></td></tr>
+<tr class="separator:a6967c74e54e1f16400f0fc35b835762d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18b9b9ba3942f1c7fae2b9bd9e65bdaa" id="r_a18b9b9ba3942f1c7fae2b9bd9e65bdaa"><td class="memItemLeft" align="right" valign="top"><a id="a18b9b9ba3942f1c7fae2b9bd9e65bdaa" name="a18b9b9ba3942f1c7fae2b9bd9e65bdaa"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>execute</b> ()</td></tr>
 <tr class="separator:a18b9b9ba3942f1c7fae2b9bd9e65bdaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -163,7 +167,7 @@ template&lt;class Action &gt; </div>
 <p>The feedback pointer is stored and the non-RT thread will publish it on the next runNonRealtime() call, provided the goal handle is in executing state.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">feedback</td><td>Shared pointer to feedback message. Can be nullptr to clear pending feedback. If a valid pointer is provided, the caller must ensure the feedback object remains valid until runNonRealtime() processes it. Using a preallocated feedback message (stored in preallocated_feedback_) is recommended to avoid dynamic allocations in the real-time thread.</td></tr>
+    <tr><td class="paramname">feedback</td><td>Shared pointer to feedback message. Can be nullptr to clear pending feedback. If a valid pointer is provided, the caller must not modify it while this handle may publish it. Use <a class="el" href="classrealtime__tools_1_1RealtimeServerGoalHandle.html#a6967c74e54e1f16400f0fc35b835762d" title="Update preallocated feedback to be published by runNonRealtime().">trySetFeedback()</a> to safely reuse the handle's preallocated feedback message.</td></tr>
   </table>
   </dd>
 </dl>
@@ -173,7 +177,47 @@ template&lt;class Action &gt; </div>
 Feedback is only published if the goal is currently executing. If feedback is set after the goal transitions out of executing state, it will be discarded.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd>runNonRealtime() for the counterpart that publishes the feedback. </dd>
 <dd>
-preallocated_feedback_ for recommended pre-allocated feedback usage. </dd></dl>
+<a class="el" href="classrealtime__tools_1_1RealtimeServerGoalHandle.html#a6967c74e54e1f16400f0fc35b835762d" title="Update preallocated feedback to be published by runNonRealtime().">trySetFeedback()</a> for safe preallocated feedback reuse. </dd></dl>
+
+</div>
+</div>
+<a id="a6967c74e54e1f16400f0fc35b835762d" name="a6967c74e54e1f16400f0fc35b835762d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6967c74e54e1f16400f0fc35b835762d">&#9670;&#160;</a></span>trySetFeedback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Action &gt; </div>
+<div class="memtemplate">
+template&lt;typename FeedbackUpdateCallback &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classrealtime__tools_1_1RealtimeServerGoalHandle.html">realtime_tools::RealtimeServerGoalHandle</a>&lt; Action &gt;::trySetFeedback </td>
+          <td>(</td>
+          <td class="paramtype">FeedbackUpdateCallback &amp;&amp;&#160;</td>
+          <td class="paramname"><em>update_feedback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update preallocated feedback to be published by runNonRealtime(). </p>
+<p>The callback runs while holding the same mutex used by runNonRealtime(), ensuring that the feedback cannot be modified while it is being published. The lock is acquired without blocking and the callback is not invoked if it cannot be acquired.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">update_feedback</td><td>Callback receiving a mutable reference to the preallocated feedback message. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the feedback was updated, false if the lock could not be acquired. </dd></dl>
 
 </div>
 </div>

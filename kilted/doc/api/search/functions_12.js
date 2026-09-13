@@ -10,5 +10,6 @@ var searchData=
   ['try_5fpublish_7',['try_publish',['../classrealtime__tools_1_1RealtimePublisher.html#a2f8e780273553fa490a22b633ce1c95b',1,'realtime_tools::RealtimePublisher']]],
   ['try_5fset_8',['try_set',['../classrealtime__tools_1_1RealtimeThreadSafeBox.html#af7d47b667d53288b8ba97f823d0bc715',1,'realtime_tools::RealtimeThreadSafeBox::try_set(const T &amp;value)'],['../classrealtime__tools_1_1RealtimeThreadSafeBox.html#a3c9bda73722f24b6538f4756ecf0685c',1,'realtime_tools::RealtimeThreadSafeBox::try_set(const std::function&lt; void(T &amp;)&gt; &amp;func)']]],
   ['trylock_9',['trylock',['../classrealtime__tools_1_1RealtimePublisher.html#a46400f89feee20959656ff807c901bcb',1,'realtime_tools::RealtimePublisher']]],
-  ['trypublish_10',['tryPublish',['../classrealtime__tools_1_1RealtimePublisher.html#a345194a37592e2e1fb0f4ecc77c1ae9c',1,'realtime_tools::RealtimePublisher']]]
+  ['trypublish_10',['tryPublish',['../classrealtime__tools_1_1RealtimePublisher.html#a345194a37592e2e1fb0f4ecc77c1ae9c',1,'realtime_tools::RealtimePublisher']]],
+  ['trysetfeedback_11',['trySetFeedback',['../classrealtime__tools_1_1RealtimeServerGoalHandle.html#a6967c74e54e1f16400f0fc35b835762d',1,'realtime_tools::RealtimeServerGoalHandle']]]
 ];
