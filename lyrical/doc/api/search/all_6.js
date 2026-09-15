@@ -22,5 +22,7 @@ var searchData=
   ['freejointstatepublisherplugin_19',['FreeJointStatePublisherPlugin',['../classmujoco__ros2__control__plugins_1_1FreeJointStatePublisherPlugin.html',1,'mujoco_ros2_control_plugins']]],
   ['ft_5fsensor_5fdata_5f_20',['ft_sensor_data_',['../classgazebo__ros2__control_1_1GazeboSystemPrivate.html#a03351e2b1ca5fce27dd7dc742faaeadc',1,'gazebo_ros2_control::GazeboSystemPrivate']]],
   ['ft_5fsensors_5f_21',['ft_sensors_',['../classgz__ros2__control_1_1GazeboSimSystemPrivate.html#af4d208f2c245afae199b435bac21c2fb',1,'gz_ros2_control::GazeboSimSystemPrivate']]],
-  ['ftsensordata_22',['FTSensorData',['../structmujoco__ros2__control_1_1FTSensorData.html',1,'mujoco_ros2_control']]]
+  ['ftsdata_22',['FtsData',['../structmujoco__ros2__control__plugins_1_1FtsData.html',1,'mujoco_ros2_control_plugins']]],
+  ['ftsensordata_23',['FTSensorData',['../structmujoco__ros2__control_1_1FTSensorData.html',1,'mujoco_ros2_control']]],
+  ['ftsgravcompplugin_24',['FtsGravCompPlugin',['../classmujoco__ros2__control__plugins_1_1FtsGravCompPlugin.html',1,'mujoco_ros2_control_plugins']]]
 ];

@@ -13,5 +13,7 @@ var searchData=
   ['frame_20semantics_10',['Frame semantics',['../classmujoco__ros2__control__plugins_1_1FreeJointStatePublisherPlugin.html#autotoc_md8',1,'']]],
   ['freejointstatepublisherplugin_11',['FreeJointStatePublisherPlugin',['../classmujoco__ros2__control__plugins_1_1FreeJointStatePublisherPlugin.html',1,'mujoco_ros2_control_plugins']]],
   ['ft_5fsensor_5fdata_5f_12',['ft_sensor_data_',['../classgazebo__ros2__control_1_1GazeboSystemPrivate.html#a03351e2b1ca5fce27dd7dc742faaeadc',1,'gazebo_ros2_control::GazeboSystemPrivate']]],
-  ['ftsensordata_13',['FTSensorData',['../structmujoco__ros2__control_1_1FTSensorData.html',1,'mujoco_ros2_control']]]
+  ['ftsdata_13',['FtsData',['../structmujoco__ros2__control__plugins_1_1FtsData.html',1,'mujoco_ros2_control_plugins']]],
+  ['ftsensordata_14',['FTSensorData',['../structmujoco__ros2__control_1_1FTSensorData.html',1,'mujoco_ros2_control']]],
+  ['ftsgravcompplugin_15',['FtsGravCompPlugin',['../classmujoco__ros2__control__plugins_1_1FtsGravCompPlugin.html',1,'mujoco_ros2_control_plugins']]]
 ];

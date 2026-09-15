@@ -100,6 +100,10 @@
 <li class="toctree-l8"><a class="reference internal" href="#freejointstatepublisher-parameters">FreeJointStatePublisher Parameters</a></li>
 </ul>
 </li>
+<li class="toctree-l7"><a class="reference internal" href="#ftsgravcompplugin">FtsGravCompPlugin</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="#ftsgravcompplugin-parameters">FtsGravCompPlugin Parameters</a></li>
+</ul>
+</li>
 <li class="toctree-l7"><a class="reference internal" href="#rangefinderlidarplugin">RangefinderLidarPlugin</a></li>
 <li class="toctree-l7"><a class="reference internal" href="#mujoco-3d-lidar-plugin">MuJoCo 3D Lidar Plugin</a><ul>
 <li class="toctree-l8"><a class="reference internal" href="#d-lidar-parameters">3D Lidar Parameters</a></li>
@@ -692,6 +696,68 @@ An unknown or non-free-joint name here fails plugin initialization.</p></td>
 </div>
 <p><strong>Example: monitoring free-joint bodies</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/mujoco_ros2_control_node/free_joint_state_publisher/free_joint_states
+</pre></div>
+</div>
+</section>
+</section>
+<section id="ftsgravcompplugin">
+<h3>FtsGravCompPlugin<a class="headerlink" href="#ftsgravcompplugin" title="Link to this heading"></a></h3>
+<p>Performs gravity compensation for a force torque sensor based on provided parameters.</p>
+<p>This is intended to mock hardware configurations that have a way to perform gravity compensation on the force torque sensor data based on the weight and center of gravity of your end effector.
+One example of this is with the <a class="reference external" href="https://www.universal-robots.com/manuals/EN/HTML/SW5_22/Content/prod-usr-man/software/PolyScope/content/BasicProgNodes/commandtab_set_payload_en.htm">Universal Robots Set Payload</a> command.</p>
+<section id="ftsgravcompplugin-parameters">
+<h4>FtsGravCompPlugin Parameters<a class="headerlink" href="#ftsgravcompplugin-parameters" title="Link to this heading"></a></h4>
+<p>Note that each force torque sensor lives as a top level parameter underneath the base <cite>mujoco_ros2_control_plugins/FtsGravCompPlugin</cite> plugin.
+That top level parameter should be named the same as what you see in the <cite>mujoco_sensor_name</cite> parameter in the ros2_control tag of your urdf as you might see like <cite>&lt;param name=”mujoco_sensor_name”&gt;{sensor_name}&lt;/param&gt;</cite>.
+If the top level parameter does not correspond to two sensors in the mujoco config named <cite>&lt;sensor_name&gt;_force</cite> and <cite>&lt;sensor_name&gt;_torque</cite>, the plugin will fail to load.</p>
+<p>Each force torque sensor name is treated as a namespace for the remainder of the parameters in the table below.
+See the example configuration below for more details.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 70%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">frame_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">string</span></code></p></td>
+<td><p>Name of the mujoco site that the center of mass is represented in.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CoG.pos</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">double[]</span></code></p></td>
+<td><p>Position in meters w.r.t. the <cite>frame_id</cite> site of the center of gravity.
+This vector should be size 3 representing x, y, and z.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CoG.mass</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">double</span></code></p></td>
+<td><p>Mass to use for gravity compensation in kg.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example configuration</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">/**</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">mujoco_plugins</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">fts_grav_comp_plugin</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">"mujoco_ros2_control_plugins/FtsGravCompPlugin"</span>
+<span class="w">        </span><span class="c1"># name of the sensor to modify. Note that mujoco sensors will look</span>
+<span class="w">        </span><span class="c1"># like 'fts_sensor_force' and 'fts_sensor_torque'</span>
+<span class="w">        </span><span class="nt">fts_sensor</span><span class="p">:</span>
+<span class="w">          </span><span class="c1"># mujoco site the CoG is represented in</span>
+<span class="w">          </span><span class="nt">frame_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ft_sensor_site</span>
+<span class="w">          </span><span class="c1"># specifies the center of gravity w.r.t the 'frame_id' parameter</span>
+<span class="w">          </span><span class="nt">CoG</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">pos</span><span class="p">:</span>
+<span class="w">              </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span><span class="w"> </span><span class="c1"># x in m</span>
+<span class="w">              </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span><span class="w"> </span><span class="c1"># y in m</span>
+<span class="w">              </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span><span class="w"> </span><span class="c1"># z in m</span>
+<span class="w">            </span><span class="nt">mass</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0</span><span class="w"> </span><span class="c1"># mass in kg</span>
 </pre></div>
 </div>
 </section>

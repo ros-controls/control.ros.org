@@ -101,7 +101,7 @@ General discussions
 
 ======================================================================
 
-Built on 2026-09-15 at 05:42 GMT
+Built on 2026-09-15 at 20:01 GMT
 
 
 
@@ -5072,6 +5072,67 @@ FreeJointStatePublisher Parameters
    ros2 topic echo /mujoco_ros2_control_node/free_joint_state_publisher/free_joint_states
 
 
+FtsGravCompPlugin
+-----------------
+
+Performs gravity compensation for a force torque sensor based on
+provided parameters.
+
+This is intended to mock hardware configurations that have a way to
+perform gravity compensation on the force torque sensor data based on
+the weight and center of gravity of your end effector. One example of
+this is with the Universal Robots Set Payload command.
+
+
+FtsGravCompPlugin Parameters
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Note that each force torque sensor lives as a top level parameter
+underneath the base *mujoco_ros2_control_plugins/FtsGravCompPlugin*
+plugin. That top level parameter should be named the same as what you
+see in the *mujoco_sensor_name* parameter in the ros2_control tag of
+your urdf as you might see like *<param
+name="mujoco_sensor_name">{sensor_name}</param>*. If the top level
+parameter does not correspond to two sensors in the mujoco config
+named *<sensor_name>_force* and *<sensor_name>_torque*, the plugin
+will fail to load.
+
+Each force torque sensor name is treated as a namespace for the
+remainder of the parameters in the table below. See the example
+configuration below for more details.
+
++-----------------+-----------------+------------------------------------------------------------------------+
+| Parameter       | Type            | Description                                                            |
+|=================|=================|========================================================================|
+| "frame_id"      | "string"        | Name of the mujoco site that the center of mass is represented in.     |
++-----------------+-----------------+------------------------------------------------------------------------+
+| "CoG.pos"       | "double[]"      | Position in meters w.r.t. the *frame_id* site of the center of         |
+|                 |                 | gravity. This vector should be size 3 representing x, y, and z.        |
++-----------------+-----------------+------------------------------------------------------------------------+
+| "CoG.mass"      | "double"        | Mass to use for gravity compensation in kg.                            |
++-----------------+-----------------+------------------------------------------------------------------------+
+
+**Example configuration**
+
+   /**:
+     ros__parameters:
+       mujoco_plugins:
+         fts_grav_comp_plugin:
+           type: "mujoco_ros2_control_plugins/FtsGravCompPlugin"
+           # name of the sensor to modify. Note that mujoco sensors will look
+           # like 'fts_sensor_force' and 'fts_sensor_torque'
+           fts_sensor:
+             # mujoco site the CoG is represented in
+             frame_id: ft_sensor_site
+             # specifies the center of gravity w.r.t the 'frame_id' parameter
+             CoG:
+               pos:
+                 - 0.1 # x in m
+                 - 0.0 # y in m
+                 - 0.0 # z in m
+               mass: 10.0 # mass in kg
+
+
 RangefinderLidarPlugin
 ----------------------
 
@@ -6637,7 +6698,7 @@ Pull as soon as you can to verify your setup and get the majority of
 the download but also try re-pulling closer to the date to make sure
 you have the latest updates!
 
-   wget https://tinyurl.com/roscontrol2026 -O docker-compose.yaml
+   wget https://tinyurl.com/ros2control2026 -O docker-compose.yaml
    docker compose pull
 
 For optimal copy&paste experience, you can pull the github repository.

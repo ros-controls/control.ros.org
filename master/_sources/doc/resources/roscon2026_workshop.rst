@@ -25,7 +25,7 @@ Pull as soon as you can to verify your setup and get the majority of the downloa
 
 .. code::
 
-  wget https://tinyurl.com/roscontrol2026 -O docker-compose.yaml
+  wget https://tinyurl.com/ros2control2026 -O docker-compose.yaml
   docker compose pull
 
 For optimal copy&paste experience, you can pull the github repository. Some things are not yet finalized but pulling early and often is a good idea.
