@@ -61,6 +61,7 @@ Unofficial (from the community)
 --------------------------------
 - `ABB - EGM interface <https://github.com/PickNikRobotics/abb_ros2>`_
 - `AgileX Piper Arm <https://github.com/renesas-rdk/agilex_piper_ros2_control>`_
+- `Comau - CRCOpen interface <https://github.com/ukaea/CRCOpenROS2Driver>`_
 - `KUKA All Robots (iiQKA-ECI, Sunrise-FRI, KSS-RSI) <https://github.com/kroshu/ros2_kuka_drivers>`_
 - `KUKA IIWA (KUKA Fast Robot Interface (FRI)) <https://github.com/ICube-Robotics/iiwa_ros2>`_
 - `KUKA industrial robots (KUKA Robot Sensor Interface (RSI)) <https://github.com/dignakov/ros2_control_kuka_driver>`_

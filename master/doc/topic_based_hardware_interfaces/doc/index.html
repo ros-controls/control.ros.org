@@ -76,8 +76,8 @@
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#joint-command-topic-hardware-interface">joint_command_topic_hardware_interface</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#joint-command-topic-based-system">Joint Command Topic Based System</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="#ros2-control-urdf-tag">ros2_control urdf tag</a><ul>
-<li class="toctree-l7"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#joint-command-ros2-control-urdf-tag">Joint command ros2_control urdf tag</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="#joint-command-parameters">Joint command parameters</a></li>
 <li class="toctree-l7"><a class="reference internal" href="#mimic-joints">Mimic joints</a></li>
 </ul>
 </li>
@@ -239,11 +239,11 @@
 <section id="joint-command-topic-based-system">
 <h3>Joint Command Topic Based System<a class="headerlink" href="#joint-command-topic-based-system" title="Link to this heading"></a></h3>
 <p>The Joint Command Topic Based System implements a ros2_control <code class="docutils literal notranslate"><span class="pre">hardware_interface::SystemInterface</span></code> supporting command and state interfaces through the ROS topic communication layer. It publishes commands as <code class="docutils literal notranslate"><span class="pre">control_msgs/JointCommand</span></code> messages, one topic per interface type. Only <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code> and <code class="docutils literal notranslate"><span class="pre">effort</span></code> command interfaces are supported, anything else is ignored with a warning.</p>
-<section id="ros2-control-urdf-tag">
-<h4>ros2_control urdf tag<a class="headerlink" href="#ros2-control-urdf-tag" title="Link to this heading"></a></h4>
+<section id="joint-command-ros2-control-urdf-tag">
+<h4>Joint command ros2_control urdf tag<a class="headerlink" href="#joint-command-ros2-control-urdf-tag" title="Link to this heading"></a></h4>
 <p>The <code class="docutils literal notranslate"><span class="pre">joint_command_topic_hardware_interface</span></code> has a few <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> urdf tags to customize its behavior.</p>
-<section id="parameters">
-<h5>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h5>
+<section id="joint-command-parameters">
+<h5>Joint command parameters<a class="headerlink" href="#joint-command-parameters" title="Link to this heading"></a></h5>
 <ul class="simple">
 <li><p>joint_commands_topic: (default: “/robot_joint_commands”). Base topic for the joint command topics. Example: <code class="docutils literal notranslate"><span class="pre">&lt;param</span> <span class="pre">name=&quot;joint_commands_topic&quot;&gt;/my_topic_joint_commands&lt;/param&gt;</span></code>.</p></li>
 <li><p>joint_states_topic: (default: “/robot_joint_states”). Example: <code class="docutils literal notranslate"><span class="pre">&lt;param</span> <span class="pre">name=&quot;joint_states_topic&quot;&gt;/my_topic_joint_states&lt;/param&gt;</span></code>.</p></li>
