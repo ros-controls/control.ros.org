@@ -12,7 +12,19 @@ on:
         type: string
       CONTROL_TOOLBOX_PR:
         type: string
+      CONTROL_MSGS_PR:
+        type: string
       REALTIME_TOOLS_PR:
+        type: string
+      KINEMATICS_INTERFACE_PR:
+        type: string
+      TOPIC_BASED_HARDWARE_INTERFACES_PR:
+        type: string
+      ROS_CONTROLS_GITHUB_PR:
+        type: string
+      MUJOCO_ROS2_CONTROL_PR:
+        type: string
+      ZEPHYR_ZENOH_INTEGRATION_PR:
         type: string
 
 jobs:
@@ -22,7 +34,7 @@ jobs:
     - uses: actions/checkout@v7
       with:
         repository: ros-controls/control.ros.org
-        ref: rolling
+        ref: ${{ job.workflow_sha }}
         fetch-depth: 0
     - uses: actions/setup-python@v7
       with:
@@ -47,5 +59,11 @@ jobs:
         ROS2_CONTROL_DEMOS_PR: ${{ inputs.ROS2_CONTROL_DEMOS_PR }}
         GZ_ROS2_CONTROL_PR: ${{ inputs.GZ_ROS2_CONTROL_PR }}
         CONTROL_TOOLBOX_PR: ${{ inputs.CONTROL_TOOLBOX_PR }}
+        CONTROL_MSGS_PR: ${{ inputs.CONTROL_MSGS_PR }}
         REALTIME_TOOLS_PR: ${{ inputs.REALTIME_TOOLS_PR }}
+        KINEMATICS_INTERFACE_PR: ${{ inputs.KINEMATICS_INTERFACE_PR }}
+        TOPIC_BASED_HARDWARE_INTERFACES_PR: ${{ inputs.TOPIC_BASED_HARDWARE_INTERFACES_PR }}
+        ROS_CONTROLS_GITHUB_PR: ${{ inputs.ROS_CONTROLS_GITHUB_PR }}
+        MUJOCO_ROS2_CONTROL_PR: ${{ inputs.MUJOCO_ROS2_CONTROL_PR }}
+        ZEPHYR_ZENOH_INTEGRATION_PR: ${{ inputs.ZEPHYR_ZENOH_INTEGRATION_PR }}
       run: make html-all-subrepos-with-errors
