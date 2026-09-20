@@ -260,20 +260,23 @@ A yaml file for using it could be:</p>
 <p>Action policies (e.g. diffusion policy, ACT) emit <em>action chunks</em>: short trajectories of
 positions-only waypoints with no velocities and often no timing. Fed positions-only, the controller
 interpolates linearly (C0), yielding discontinuous velocities at every waypoint (see <a class="reference internal" href="trajectory.html#joint-trajectory-controller-trajectory-representation"><span class="std std-ref">trajectory
-representation</span></a>).</p>
-<p>When <code class="docutils literal notranslate"><span class="pre">positions_upsampling.enable</span></code> is true, incoming positions-only messages on <code class="docutils literal notranslate"><span class="pre">~/joint_trajectory</span></code>
-are upsampled in place: the knot velocities of a global cubic spline (rest boundary conditions,
-<code class="docutils literal notranslate"><span class="pre">v0</span> <span class="pre">=</span> <span class="pre">v_{N-1}</span> <span class="pre">=</span> <span class="pre">0</span></code>) are solved and written into the trajectory, so the existing sampler reproduces a
-motion that is continuous in acceleration across the chunk’s waypoints (see <a class="reference internal" href="trajectory.html#joint-trajectory-controller-trajectory-representation"><span class="std std-ref">the plotted
-comparison</span></a>). Messages that already carry
-velocities are passed through unchanged, so the feature
-is a strict superset of the default behaviour (it is off by default). It has no effect when
+representation</span></a> for the plotted comparison).</p>
+<p><code class="docutils literal notranslate"><span class="pre">positions_upsampling.enable</span></code> solves the knot velocities of a global cubic spline for incoming
+positions-only messages on <code class="docutils literal notranslate"><span class="pre">~/joint_trajectory</span></code>, upgrading them from C0 to C2. The state the
+controller last commanded is prepended as an extra waypoint at <code class="docutils literal notranslate"><span class="pre">time_from_start</span> <span class="pre">=</span> <span class="pre">0</span></code>, so the
+segment into the first waypoint is part of the solve and a chunk arriving mid-motion continues it
+rather than braking to a stop. The spline always ends at rest. Messages that already carry
+velocities pass through unchanged; the feature is off by default and has no effect when
 <code class="docutils literal notranslate"><span class="pre">interpolation_method</span></code> is <code class="docutils literal notranslate"><span class="pre">none</span></code>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">positions_upsampling.policy_frequency</span></code> (double, Hz) is used to synthesize
-<code class="docutils literal notranslate"><span class="pre">time_from_start</span> <span class="pre">=</span> <span class="pre">(i</span> <span class="pre">+</span> <span class="pre">1)</span> <span class="pre">/</span> <span class="pre">policy_frequency</span></code> for chunks that arrive without timing; when it is
-<code class="docutils literal notranslate"><span class="pre">0</span></code> the chunks must carry their own strictly-increasing <code class="docutils literal notranslate"><span class="pre">time_from_start</span></code>. The first waypoint is
-placed one policy step ahead rather than at <code class="docutils literal notranslate"><span class="pre">0</span></code>, so the controller ramps into the chunk from the
-current state instead of stepping to it.</p>
+<p>The extra waypoint is only prepended when the message has a zero <code class="docutils literal notranslate"><span class="pre">header.stamp</span></code> and its first
+waypoint sits at <code class="docutils literal notranslate"><span class="pre">time_from_start</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>. Both hold for chunks timed by <code class="docutils literal notranslate"><span class="pre">policy_frequency</span></code>.
+Otherwise the solve falls back to a rest start (<code class="docutils literal notranslate"><span class="pre">v0</span> <span class="pre">=</span> <span class="pre">0</span></code>), and the chunk accelerates from a
+standstill into its first waypoint. The same fallback applies to the very first chunk after
+activation, before the controller has commanded anything.</p>
+<p><code class="docutils literal notranslate"><span class="pre">positions_upsampling.policy_frequency</span></code> (double, Hz) synthesizes
+<code class="docutils literal notranslate"><span class="pre">time_from_start</span> <span class="pre">=</span> <span class="pre">(i</span> <span class="pre">+</span> <span class="pre">1)</span> <span class="pre">/</span> <span class="pre">policy_frequency</span></code> for chunks that arrive without timing, placing the
+first waypoint one policy step ahead. <code class="docutils literal notranslate"><span class="pre">0</span></code> means the chunks must carry their own
+strictly-increasing <code class="docutils literal notranslate"><span class="pre">time_from_start</span></code>.</p>
 <blockquote>
 <div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">arm_controller</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
@@ -291,9 +294,8 @@ current state instead of stepping to it.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Only the topic interface (<code class="docutils literal notranslate"><span class="pre">~/joint_trajectory</span></code>) is upsampled. Each chunk uses rest boundary
-conditions, so streaming chunks decelerate to a stop at each chunk boundary; cross-chunk C2
-continuity and <code class="docutils literal notranslate"><span class="pre">FollowJointTrajectory</span></code> action-goal upsampling are future work.</p>
+<p>Only the topic interface (<code class="docutils literal notranslate"><span class="pre">~/joint_trajectory</span></code>) is upsampled. <code class="docutils literal notranslate"><span class="pre">FollowJointTrajectory</span></code>
+action goals bypass this path and are not upsampled.</p>
 </div>
 </div></blockquote>
 </section>

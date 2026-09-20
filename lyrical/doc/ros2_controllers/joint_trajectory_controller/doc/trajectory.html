@@ -199,7 +199,7 @@ I.e., one has to provide position and its derivatives as needed.</p>
 velocities. Enabling <code class="docutils literal notranslate"><span class="pre">positions_upsampling</span></code> avoids this for positions-only inputs: the controller
 pre-solves the knot velocities of a global cubic spline (<code class="docutils literal notranslate"><span class="pre">fill_cubic_spline_velocities</span></code>) and
 writes them into the trajectory, so the cubic strategy is used instead and the sampled motion is
-continuous in acceleration across the trajectory’s own waypoints. See <a class="reference internal" href="userdoc.html#joint-trajectory-controller-userdoc"><span class="std std-ref">Ingesting
+continuous in acceleration from the last commanded state onwards. See <a class="reference internal" href="userdoc.html#joint-trajectory-controller-userdoc"><span class="std std-ref">Ingesting
 positions-only action chunks</span></a>.</p>
 </div>
 <p>Trajectories with velocity fields only, velocity and acceleration only, or acceleration fields only can be processed and are accepted, if <code class="docutils literal notranslate"><span class="pre">allow_integration_in_goal_trajectories</span></code> is true. Position (and velocity) is then integrated from velocity (or acceleration, respectively) by Heun’s method.</p>
@@ -218,7 +218,8 @@ positions-only action chunks</span></a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The linear strategy reports no acceleration, so only the enabled series is drawn in the bottom
-plot. Its step at <code class="docutils literal notranslate"><span class="pre">t=0.5</span></code> is the hand-off from the initial point, which is not part of the solve.</p>
+plot. The last commanded state joins the solve as a waypoint at <code class="docutils literal notranslate"><span class="pre">t=0</span></code>, so the motion leaves the
+initial point without a step in acceleration.</p>
 </div>
 <img alt="Sampled trajectory with positions-only points, with and without positions_upsampling" src="../../../../_images/spline_position_upsampling.png" />
 <ul class="simple">
@@ -328,6 +329,14 @@ In this case, the first waypoint is discarded and only the second one is realize
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
+<p>Internally, the controller assembles the merged trajectory from four regions, shown in the diagram below.
+<em>Prefix</em> waypoints are the old trajectory between the current playback position (<em>cursor</em>) and the handoff.
+The <em>bridge</em> point is sampled from the old trajectory at the handoff instant, providing velocity continuity into the new trajectory.
+<em>New points</em> are the waypoints from the incoming message.</p>
+<p>If the new trajectory is a partial goal (not all joints are commanded), the controller must reconcile the shared timeline.
+The <em>suffix</em> carries old waypoints that fall after the new trajectory ends and only exists for partial-joint goals:
+commanded joints are held at their final new value with zero velocity, while omitted joints keep their original waypoints so they can finish uninterrupted.</p>
+<img alt="Structure of the merged trajectory message showing prefix, bridge, new points, and suffix regions." src="../../../../_images/trajectory_blending.png" />
 <aside class="footnote-list brackets">
 <aside class="footnote brackets" id="f1" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
