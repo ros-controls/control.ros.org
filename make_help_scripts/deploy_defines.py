@@ -232,7 +232,7 @@ repos = {
         "pr": os.environ.get('MUJOCO_ROS2_CONTROL_PR')
     },
     "zephyr-zenoh-integration": {
-        "url": "https://github.com/ros-controls/zephyr-zenoh-integration",
+        "url": "https://github.com/ros-controls/zenbedded",
         "branch_version": {
             "foxy": "master",
             "galactic": "master",
