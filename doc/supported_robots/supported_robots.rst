@@ -14,10 +14,10 @@ Communication protocols
 
 End-effectors
 --------------
-- `INSPIRE RH56 Hand <https://github.com/renesas-rdk/inspire_rh56_hand_ros2_control>`_
-- `RuiYan RH2 Hand <https://github.com/renesas-rdk/ruiyan_rh2_hand_ros2_control>`_
 - `Schunk SVH 5-finger Hand <https://github.com/SCHUNK-SE-Co-KG/schunk_svh_ros_driver/tree/ros2-humble>`_
 - `TESOLLO Delto Gripper-M <https://github.com/tesollodelto/delto_m_ros2>`__
+- `INSPIRE RH56 Hand <https://github.com/renesas-rdk/inspire_rh56_hand_ros2_control>`_
+- `RuiYan RH2 Hand <https://github.com/renesas-rdk/ruiyan_rh2_hand_ros2_control>`_
 
 Non robot-devices
 ------------------
