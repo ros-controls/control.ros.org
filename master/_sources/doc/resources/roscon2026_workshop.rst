@@ -34,6 +34,11 @@ For optimal copy&paste experience, you can pull the github repository. Some thin
 
   git clone https://github.com/ros-controls/roscon2026_control_workshop
 
+Slides
+------
+
+:download:`Slides for: Scaling ros2_control: From Async Hardware Drivers to RL Inference Engines <presentations/ROSCon2026_Workshop_From-async-hw-drivers-to-RL-inference-engines.pdf>`
+
 People
 ------
 
