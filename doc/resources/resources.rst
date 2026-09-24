@@ -12,6 +12,21 @@ Any files submitted to the documentation should be "licensed" by stating your na
 Presentations
 ---------------
 
+
+2026-09 ROSCon 2026
+,,,,,,,,,,,,,,,,,,,
+
+:download:`Presentation: ros-controls project update 2026 <presentations/ROSCon2026-talk_ros-controls-project-update.pdf>`
+
+  Summary:
+    The ros2_control project update returns for another year, many releases and merged pull requests later. Bence will walk you through what shipped since last ROSCon, what summer projects we ran this year, and where the framework is heading as learned policies move into the stack. Stay tuned, this talk may not entirely stay in its lane!
+
+  *Presenter: Dr. Bence Magyar*
+
+  Authors:
+    - Dr. Bence Magyar (Locus Robotics)
+
+
 2026 ROSCon Workshop: Scaling ros2_control: From Async Hardware Drivers to RL Inference Engines
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 
@@ -19,6 +34,9 @@ Presentations
    :hidden:
 
    roscon2026_workshop.rst
+
+:download:`Presentation: Scaling ros2_control: From Async Hardware Drivers to RL Inference Engines <presentations/ROSCon2026_Workshop_From-async-hw-drivers-to-RL-inference-engines.pdf>`
+
 
 Summary:
   This hands-on workshop breaks the synchronicity barrier. You will learn to architect Asynchronous Hardware Interfaces that prevent I/O bottlenecks and deploy RL Policy Models (via ONNX/Torch) as non-blocking controllers. We move beyond basic tutorials to tackle production-grade challenges: thread-safe data exchange, managing inference jitter, synchronizing drivers and controllers to the robot controllers, and maintaining real-time stability.
