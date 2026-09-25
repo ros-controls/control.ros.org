@@ -166,7 +166,7 @@ repos = {
             "lyrical": "master",
             "rolling": "master"
         },
-        "pr": None
+        "pr": os.environ.get('CONTROL_MSGS_PR')
     },
     "realtime_tools": {
         "url": "https://github.com/ros-controls/realtime_tools",
@@ -194,8 +194,22 @@ repos = {
             "lyrical": "master",
             "rolling": "master"
         },
-        "pr": None
+        "pr": os.environ.get('KINEMATICS_INTERFACE_PR')
     },
+<<<<<<< HEAD
+=======
+    "topic_based_hardware_interfaces": {
+        "url": "https://github.com/ros-controls/topic_based_hardware_interfaces",
+        "branch_version": {
+            "iron": "main",
+            "jazzy": "main",
+            "kilted": "main",
+            "lyrical": "main",
+            "rolling": "main"
+        },
+        "pr": os.environ.get('TOPIC_BASED_HARDWARE_INTERFACES_PR')
+    },
+>>>>>>> 16d9255 (Add more hooks for CI workflows (#728))
     ".github": {
         "url": "https://github.com/ros-controls/.github",
         "branch_version": {
@@ -208,7 +222,7 @@ repos = {
             "lyrical": "master",
             "rolling": "master"
         },
-        "pr": None
+        "pr": os.environ.get('ROS_CONTROLS_GITHUB_PR')
     },
     "mujoco_ros2_control": {
         "url": "https://github.com/ros-controls/mujoco_ros2_control.git",
@@ -219,6 +233,24 @@ repos = {
             "lyrical": "main",
             "rolling": "main"
         },
+<<<<<<< HEAD
         "pr": None
+=======
+        "pr": os.environ.get('MUJOCO_ROS2_CONTROL_PR')
+    },
+    "zephyr-zenoh-integration": {
+        "url": "https://github.com/ros-controls/zephyr-zenoh-integration",
+        "branch_version": {
+            "foxy": "master",
+            "galactic": "master",
+            "humble": "master",
+            "iron": "master",
+            "jazzy": "master",
+            "kilted": "master",
+            "lyrical": "master",
+            "rolling": "master"
+        },
+        "pr": os.environ.get('ZEPHYR_ZENOH_INTEGRATION_PR')
+>>>>>>> 16d9255 (Add more hooks for CI workflows (#728))
     }
 }
