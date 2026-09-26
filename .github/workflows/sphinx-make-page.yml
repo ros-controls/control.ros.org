@@ -47,6 +47,9 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         make multiversion-with-api
+    - name: Generate dynamic llms.txt
+      continue-on-error: true
+      run: python make_help_scripts/generate_llms_txt.py --output _build/html/llms.txt
     - name: Build plain text for AI
       continue-on-error: true
       run: sphinx-build -b text . _build/text/
