@@ -150,88 +150,102 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>}</div>
 </div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
-<div class="foldopen" id="foldopen00090" data-start="{" data-end="}">
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="namespacemujoco__ros2__control.html#aa8efdbbacf896fc20290152e91dc1169">   90</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacemujoco__ros2__control.html#aa8efdbbacf896fc20290152e91dc1169">set_diagonal_covariance</a>(std::vector&lt;double&gt;&amp; covariance, <span class="keywordtype">double</span> stddev)</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>{</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  assert(covariance.size() == 9 &amp;&amp; <span class="stringliteral">&quot;covariance must be a flat 3x3 (9-element) matrix&quot;</span>);</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  covariance[0] = covariance[4] = covariance[8] = stddev * stddev;</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>}</div>
+<div class="foldopen" id="foldopen00092" data-start="{" data-end="}">
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="namespacemujoco__ros2__control.html#a9e3afdf4a8762fb3afa848626ce7c930">   92</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacemujoco__ros2__control.html#a9e3afdf4a8762fb3afa848626ce7c930">log_sensor_components_noise</a>(<span class="keyword">const</span> rclcpp::Logger&amp; logger, <a class="code hl_enumeration" href="namespacemujoco__ros2__control.html#ab8a2c1c0815d2b92ddbe1fc3f17ecbc4">NoiseDistribution</a> distribution,</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                                        std::initializer_list&lt;std::pair&lt;const std::string&amp;, double&gt;&gt; components)</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>{</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  <span class="keyword">const</span> <span class="keywordtype">char</span>* distribution_name = (distribution == NoiseDistribution::kUniform ? <span class="stringliteral">&quot;uniform&quot;</span> : <span class="stringliteral">&quot;gaussian&quot;</span>);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; [component_name, noise_stddev] : components)</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    RCLCPP_INFO(logger, <span class="stringliteral">&quot;Sensor component &#39;%s&#39; is using &#39;%s&#39; noise with stddev: %f&quot;</span>, component_name.c_str(),</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                distribution_name, noise_stddev);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  }</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>}</div>
 </div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="foldopen" id="foldopen00096" data-start="{" data-end="}">
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="namespacemujoco__ros2__control_1_1detail.html">   96</a></span><span class="keyword">namespace </span>detail</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>{</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> N&gt;</div>
-<div class="foldopen" id="foldopen00108" data-start="{" data-end="}">
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="namespacemujoco__ros2__control_1_1detail.html#a6018432326f2824e5a0f48b381ea1a19">  108</a></span><span class="keyword">inline</span> Eigen::Matrix&lt;double, N, 1&gt; <a class="code hl_function" href="namespacemujoco__ros2__control_1_1detail.html#a6018432326f2824e5a0f48b381ea1a19">sample_noise</a>(<span class="keywordtype">double</span> stddev, <a class="code hl_enumeration" href="namespacemujoco__ros2__control.html#ab8a2c1c0815d2b92ddbe1fc3f17ecbc4">NoiseDistribution</a> distribution, std::mt19937&amp; rng)</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>{</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  Eigen::Matrix&lt;double, N, 1&gt; samples;</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  <span class="keywordflow">if</span> (distribution == NoiseDistribution::kUniform)</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  {</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="keyword">const</span> <span class="keywordtype">double</span> bound = stddev * std::sqrt(3.0);</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    std::uniform_real_distribution&lt;double&gt; dist(-bound, bound);</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; N; ++i)</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    {</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>      samples[i] = dist(rng);</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    }</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  }</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>  <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>  {</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    std::normal_distribution&lt;double&gt; dist(0.0, stddev);</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; N; ++i)</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    {</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>      samples[i] = dist(rng);</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    }</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>  }</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  <span class="keywordflow">return</span> samples;</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>}</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="foldopen" id="foldopen00107" data-start="{" data-end="}">
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="namespacemujoco__ros2__control.html#aa8efdbbacf896fc20290152e91dc1169">  107</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacemujoco__ros2__control.html#aa8efdbbacf896fc20290152e91dc1169">set_diagonal_covariance</a>(std::vector&lt;double&gt;&amp; covariance, <span class="keywordtype">double</span> stddev)</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>{</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>  assert(covariance.size() == 9 &amp;&amp; <span class="stringliteral">&quot;covariance must be a flat 3x3 (9-element) matrix&quot;</span>);</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  covariance[0] = covariance[4] = covariance[8] = stddev * stddev;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>}</div>
 </div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>}  <span class="comment">// namespace detail</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="foldopen" id="foldopen00113" data-start="{" data-end="}">
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno"><a class="line" href="namespacemujoco__ros2__control_1_1detail.html">  113</a></span><span class="keyword">namespace </span>detail</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>{</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> N&gt;</div>
+<div class="foldopen" id="foldopen00125" data-start="{" data-end="}">
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno"><a class="line" href="namespacemujoco__ros2__control_1_1detail.html#a6018432326f2824e5a0f48b381ea1a19">  125</a></span><span class="keyword">inline</span> Eigen::Matrix&lt;double, N, 1&gt; <a class="code hl_function" href="namespacemujoco__ros2__control_1_1detail.html#a6018432326f2824e5a0f48b381ea1a19">sample_noise</a>(<span class="keywordtype">double</span> stddev, <a class="code hl_enumeration" href="namespacemujoco__ros2__control.html#ab8a2c1c0815d2b92ddbe1fc3f17ecbc4">NoiseDistribution</a> distribution, std::mt19937&amp; rng)</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>{</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>  Eigen::Matrix&lt;double, N, 1&gt; samples;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  <span class="keywordflow">if</span> (distribution == NoiseDistribution::kUniform)</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>  {</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="keyword">const</span> <span class="keywordtype">double</span> bound = stddev * std::sqrt(3.0);</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    std::uniform_real_distribution&lt;double&gt; dist(-bound, bound);</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; N; ++i)</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    {</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>      samples[i] = dist(rng);</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    }</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>  }</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>  <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>  {</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    std::normal_distribution&lt;double&gt; dist(0.0, stddev);</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; N; ++i)</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    {</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>      samples[i] = dist(rng);</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    }</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>  }</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>  <span class="keywordflow">return</span> samples;</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>}</div>
 </div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
-<div class="foldopen" id="foldopen00137" data-start="{" data-end="}">
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno"><a class="line" href="namespacemujoco__ros2__control.html#a391a4d6b21fe4ed4a722c6bf0fadeff2">  137</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacemujoco__ros2__control.html#a391a4d6b21fe4ed4a722c6bf0fadeff2">add_sensor_noise</a>(Eigen::Vector3d&amp; value, <span class="keywordtype">double</span> stddev, <a class="code hl_enumeration" href="namespacemujoco__ros2__control.html#ab8a2c1c0815d2b92ddbe1fc3f17ecbc4">NoiseDistribution</a> distribution, std::mt19937&amp; rng)</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>{</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>  <span class="keywordflow">if</span> (stddev &lt;= 0.0)</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>  {</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>  }</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>  value += detail::sample_noise&lt;3&gt;(stddev, distribution, rng);</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>}</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>}  <span class="comment">// namespace detail</span></div>
 </div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
-<div class="foldopen" id="foldopen00153" data-start="{" data-end="}">
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="namespacemujoco__ros2__control.html#a7535e5b3f199a9408934ac0e8adeb98c">  153</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacemujoco__ros2__control.html#a391a4d6b21fe4ed4a722c6bf0fadeff2">add_sensor_noise</a>(Eigen::Quaterniond&amp; value, <span class="keywordtype">double</span> stddev, <a class="code hl_enumeration" href="namespacemujoco__ros2__control.html#ab8a2c1c0815d2b92ddbe1fc3f17ecbc4">NoiseDistribution</a> distribution, std::mt19937&amp; rng)</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>{</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>  <span class="keywordflow">if</span> (stddev &lt;= 0.0)</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>  {</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>  }</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>  value.coeffs() += detail::sample_noise&lt;4&gt;(stddev, distribution, rng);</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  value.normalize();</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="foldopen" id="foldopen00154" data-start="{" data-end="}">
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno"><a class="line" href="namespacemujoco__ros2__control.html#a391a4d6b21fe4ed4a722c6bf0fadeff2">  154</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacemujoco__ros2__control.html#a391a4d6b21fe4ed4a722c6bf0fadeff2">add_sensor_noise</a>(Eigen::Vector3d&amp; value, <span class="keywordtype">double</span> stddev, <a class="code hl_enumeration" href="namespacemujoco__ros2__control.html#ab8a2c1c0815d2b92ddbe1fc3f17ecbc4">NoiseDistribution</a> distribution, std::mt19937&amp; rng)</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>{</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>  <span class="keywordflow">if</span> (stddev &lt;= 0.0)</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>  {</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>  }</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  value += detail::sample_noise&lt;3&gt;(stddev, distribution, rng);</div>
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>}</div>
 </div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
-<div class="foldopen" id="foldopen00167" data-start="{" data-end="}">
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno"><a class="line" href="namespacemujoco__ros2__control.html#ab04294f687e9829e81f7ed6780b9fbfa">  167</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacemujoco__ros2__control.html#a391a4d6b21fe4ed4a722c6bf0fadeff2">add_sensor_noise</a>(Eigen::Vector3d&amp; value, <span class="keywordtype">double</span> stddev, <a class="code hl_struct" href="structmujoco__ros2__control_1_1NoiseState.html">NoiseState</a>&amp; noise)</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>{</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>  <a class="code hl_function" href="namespacemujoco__ros2__control.html#a391a4d6b21fe4ed4a722c6bf0fadeff2">add_sensor_noise</a>(value, stddev, noise.distribution, noise.rng);</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>}</div>
+<div class="foldopen" id="foldopen00170" data-start="{" data-end="}">
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno"><a class="line" href="namespacemujoco__ros2__control.html#a7535e5b3f199a9408934ac0e8adeb98c">  170</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacemujoco__ros2__control.html#a391a4d6b21fe4ed4a722c6bf0fadeff2">add_sensor_noise</a>(Eigen::Quaterniond&amp; value, <span class="keywordtype">double</span> stddev, <a class="code hl_enumeration" href="namespacemujoco__ros2__control.html#ab8a2c1c0815d2b92ddbe1fc3f17ecbc4">NoiseDistribution</a> distribution, std::mt19937&amp; rng)</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>{</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>  <span class="keywordflow">if</span> (stddev &lt;= 0.0)</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>  {</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>  }</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>  value.coeffs() += detail::sample_noise&lt;4&gt;(stddev, distribution, rng);</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>  value.normalize();</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>}</div>
 </div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacemujoco__ros2__control.html#a391a4d6b21fe4ed4a722c6bf0fadeff2">add_sensor_noise</a>(Eigen::Quaterniond&amp; value, <span class="keywordtype">double</span> stddev, NoiseState&amp; noise)</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>{</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>  <a class="code hl_function" href="namespacemujoco__ros2__control.html#a391a4d6b21fe4ed4a722c6bf0fadeff2">add_sensor_noise</a>(value, stddev, noise.distribution, noise.rng);</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>}</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>}  <span class="comment">// namespace mujoco_ros2_control</span></div>
-<div class="ttc" id="anamespacemujoco__ros2__control_1_1detail_html_a6018432326f2824e5a0f48b381ea1a19"><div class="ttname"><a href="namespacemujoco__ros2__control_1_1detail.html#a6018432326f2824e5a0f48b381ea1a19">mujoco_ros2_control::detail::sample_noise</a></div><div class="ttdeci">Eigen::Matrix&lt; double, N, 1 &gt; sample_noise(double stddev, NoiseDistribution distribution, std::mt19937 &amp;rng)</div><div class="ttdoc">Fills an N-vector with independent zero-mean noise samples of the given standard deviation and shape,...</div><div class="ttdef"><b>Definition</b> utils.hpp:108</div></div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
+<div class="foldopen" id="foldopen00184" data-start="{" data-end="}">
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno"><a class="line" href="namespacemujoco__ros2__control.html#ab04294f687e9829e81f7ed6780b9fbfa">  184</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacemujoco__ros2__control.html#a391a4d6b21fe4ed4a722c6bf0fadeff2">add_sensor_noise</a>(Eigen::Vector3d&amp; value, <span class="keywordtype">double</span> stddev, <a class="code hl_struct" href="structmujoco__ros2__control_1_1NoiseState.html">NoiseState</a>&amp; noise)</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>{</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>  <a class="code hl_function" href="namespacemujoco__ros2__control.html#a391a4d6b21fe4ed4a722c6bf0fadeff2">add_sensor_noise</a>(value, stddev, noise.distribution, noise.rng);</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>}</div>
+</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacemujoco__ros2__control.html#a391a4d6b21fe4ed4a722c6bf0fadeff2">add_sensor_noise</a>(Eigen::Quaterniond&amp; value, <span class="keywordtype">double</span> stddev, NoiseState&amp; noise)</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>{</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>  <a class="code hl_function" href="namespacemujoco__ros2__control.html#a391a4d6b21fe4ed4a722c6bf0fadeff2">add_sensor_noise</a>(value, stddev, noise.distribution, noise.rng);</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>}</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span> </div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>}  <span class="comment">// namespace mujoco_ros2_control</span></div>
+<div class="ttc" id="anamespacemujoco__ros2__control_1_1detail_html_a6018432326f2824e5a0f48b381ea1a19"><div class="ttname"><a href="namespacemujoco__ros2__control_1_1detail.html#a6018432326f2824e5a0f48b381ea1a19">mujoco_ros2_control::detail::sample_noise</a></div><div class="ttdeci">Eigen::Matrix&lt; double, N, 1 &gt; sample_noise(double stddev, NoiseDistribution distribution, std::mt19937 &amp;rng)</div><div class="ttdoc">Fills an N-vector with independent zero-mean noise samples of the given standard deviation and shape,...</div><div class="ttdef"><b>Definition</b> utils.hpp:125</div></div>
 <div class="ttc" id="anamespacemujoco__ros2__control_html"><div class="ttname"><a href="namespacemujoco__ros2__control.html">mujoco_ros2_control</a></div><div class="ttdef"><b>Definition</b> data.hpp:32</div></div>
-<div class="ttc" id="anamespacemujoco__ros2__control_html_a391a4d6b21fe4ed4a722c6bf0fadeff2"><div class="ttname"><a href="namespacemujoco__ros2__control.html#a391a4d6b21fe4ed4a722c6bf0fadeff2">mujoco_ros2_control::add_sensor_noise</a></div><div class="ttdeci">void add_sensor_noise(Eigen::Vector3d &amp;value, double stddev, NoiseDistribution distribution, std::mt19937 &amp;rng)</div><div class="ttdoc">Adds zero-mean noise, independently sampled per axis, to a 3D vector in place. No-op if stddev is not...</div><div class="ttdef"><b>Definition</b> utils.hpp:137</div></div>
+<div class="ttc" id="anamespacemujoco__ros2__control_html_a391a4d6b21fe4ed4a722c6bf0fadeff2"><div class="ttname"><a href="namespacemujoco__ros2__control.html#a391a4d6b21fe4ed4a722c6bf0fadeff2">mujoco_ros2_control::add_sensor_noise</a></div><div class="ttdeci">void add_sensor_noise(Eigen::Vector3d &amp;value, double stddev, NoiseDistribution distribution, std::mt19937 &amp;rng)</div><div class="ttdoc">Adds zero-mean noise, independently sampled per axis, to a 3D vector in place. No-op if stddev is not...</div><div class="ttdef"><b>Definition</b> utils.hpp:154</div></div>
 <div class="ttc" id="anamespacemujoco__ros2__control_html_a588d9d609b4d8eefd0c8f4f1c664a47f"><div class="ttname"><a href="namespacemujoco__ros2__control.html#a588d9d609b4d8eefd0c8f4f1c664a47f">mujoco_ros2_control::get_sensor_from_info</a></div><div class="ttdeci">std::optional&lt; hardware_interface::ComponentInfo &gt; get_sensor_from_info(const hardware_interface::HardwareInfo &amp;hardware_info, const std::string &amp;name)</div><div class="ttdoc">Returns the sensor's component info for the provided sensor name, if it exists.</div><div class="ttdef"><b>Definition</b> utils.hpp:41</div></div>
-<div class="ttc" id="anamespacemujoco__ros2__control_html_aa8efdbbacf896fc20290152e91dc1169"><div class="ttname"><a href="namespacemujoco__ros2__control.html#aa8efdbbacf896fc20290152e91dc1169">mujoco_ros2_control::set_diagonal_covariance</a></div><div class="ttdeci">void set_diagonal_covariance(std::vector&lt; double &gt; &amp;covariance, double stddev)</div><div class="ttdoc">Sets a flat, row-major 3x3 covariance's diagonal to stddev * stddev, leaving off-diagonal terms untou...</div><div class="ttdef"><b>Definition</b> utils.hpp:90</div></div>
+<div class="ttc" id="anamespacemujoco__ros2__control_html_a9e3afdf4a8762fb3afa848626ce7c930"><div class="ttname"><a href="namespacemujoco__ros2__control.html#a9e3afdf4a8762fb3afa848626ce7c930">mujoco_ros2_control::log_sensor_components_noise</a></div><div class="ttdeci">void log_sensor_components_noise(const rclcpp::Logger &amp;logger, NoiseDistribution distribution, std::initializer_list&lt; std::pair&lt; const std::string &amp;, double &gt; &gt; components)</div><div class="ttdoc">Logs, at INFO level, the noise distribution and standard deviation configured for each of a sensor's ...</div><div class="ttdef"><b>Definition</b> utils.hpp:92</div></div>
+<div class="ttc" id="anamespacemujoco__ros2__control_html_aa8efdbbacf896fc20290152e91dc1169"><div class="ttname"><a href="namespacemujoco__ros2__control.html#aa8efdbbacf896fc20290152e91dc1169">mujoco_ros2_control::set_diagonal_covariance</a></div><div class="ttdeci">void set_diagonal_covariance(std::vector&lt; double &gt; &amp;covariance, double stddev)</div><div class="ttdoc">Sets a flat, row-major 3x3 covariance's diagonal to stddev * stddev, leaving off-diagonal terms untou...</div><div class="ttdef"><b>Definition</b> utils.hpp:107</div></div>
 <div class="ttc" id="anamespacemujoco__ros2__control_html_ab8a2c1c0815d2b92ddbe1fc3f17ecbc4"><div class="ttname"><a href="namespacemujoco__ros2__control.html#ab8a2c1c0815d2b92ddbe1fc3f17ecbc4">mujoco_ros2_control::NoiseDistribution</a></div><div class="ttdeci">NoiseDistribution</div><div class="ttdef"><b>Definition</b> data.hpp:206</div></div>
 <div class="ttc" id="anamespacemujoco__ros2__control_html_acbd2c00ee24fd86b1c29f994d2a60b12"><div class="ttname"><a href="namespacemujoco__ros2__control.html#acbd2c00ee24fd86b1c29f994d2a60b12">mujoco_ros2_control::get_noise_distribution</a></div><div class="ttdeci">NoiseDistribution get_noise_distribution(const hardware_interface::ComponentInfo &amp;sensor)</div><div class="ttdoc">Reads the sensor's noise_distribution parameter (&quot;gaussian&quot; (default) or &quot;uniform&quot;)....</div><div class="ttdef"><b>Definition</b> utils.hpp:73</div></div>
 <div class="ttc" id="anamespacemujoco__ros2__control_html_ad50f080352b464078a06942583526e2e"><div class="ttname"><a href="namespacemujoco__ros2__control.html#ad50f080352b464078a06942583526e2e">mujoco_ros2_control::get_sensor_parameter_or</a></div><div class="ttdeci">std::string get_sensor_parameter_or(const hardware_interface::ComponentInfo &amp;sensor, const std::string &amp;key, const std::string &amp;default_value)</div><div class="ttdoc">Returns the value of a sensor-level &lt;param&gt; (from the sensor's own ComponentInfo),...</div><div class="ttdef"><b>Definition</b> utils.hpp:58</div></div>
