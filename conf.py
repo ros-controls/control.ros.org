@@ -234,9 +234,9 @@ else:
 
 # Add branches you want to whitelist here.
 smv_branch_whitelist = r"^(foxy|galactic|humble|iron|jazzy|kilted|lyrical|"+ base_branch + r")$"
-smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy|galactic|humble|iron|jazzy|kilted).*$"
+smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy|galactic|humble|iron|jazzy|kilted|lyrical).*$"
 smv_remote_whitelist = r"^(origin)$"
-smv_latest_version = "kilted"
+smv_latest_version = "lyrical"
 smv_eol_versions = ["foxy", "galactic", "iron"]
 
 distro_full_names = {
@@ -365,7 +365,7 @@ def smv_rewrite_configs(app, config):
         # this map is used to match branches of control.ros.org to ROS distros, e.g., DISTRO macro
         branch_distro = {
             base_branch: "rolling",
-            "lyrical": "rolling",
+            "lyrical": "lyrical",
             "kilted": "kilted",
             "jazzy": "jazzy",
             "iron": "iron",
