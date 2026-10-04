@@ -166,7 +166,7 @@ repos = {
             "lyrical": "master",
             "rolling": "master"
         },
-        "pr": None
+        "pr": os.environ.get('CONTROL_MSGS_PR')
     },
     "realtime_tools": {
         "url": "https://github.com/ros-controls/realtime_tools",
@@ -194,7 +194,7 @@ repos = {
             "lyrical": "master",
             "rolling": "master"
         },
-        "pr": None
+        "pr": os.environ.get('KINEMATICS_INTERFACE_PR')
     },
     ".github": {
         "url": "https://github.com/ros-controls/.github",
@@ -208,7 +208,7 @@ repos = {
             "lyrical": "master",
             "rolling": "master"
         },
-        "pr": None
+        "pr": os.environ.get('ROS_CONTROLS_GITHUB_PR')
     },
     "mujoco_ros2_control": {
         "url": "https://github.com/ros-controls/mujoco_ros2_control.git",
@@ -219,6 +219,6 @@ repos = {
             "lyrical": "main",
             "rolling": "main"
         },
-        "pr": None
-    }
+        "pr": os.environ.get('MUJOCO_ROS2_CONTROL_PR')
+    },
 }
