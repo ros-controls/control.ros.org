@@ -359,7 +359,7 @@ def smv_rewrite_configs(app, config):
     # When using Sphinx multiversion, there is no way at initial configuration time
     # to determine the distribution we are currently targeting (conf.py is read before
     # external defines are setup, and environment variables aren't passed through to
-    # conf.py).  Instead, hook into the 'config-inited' event which is late enough
+    # conf.py). Instead, hook into the 'config-inited' event which is late enough
     # to rewrite the various configuration items with the current version.
     if app.config.smv_current_version != "":
         # this map is used to match branches of control.ros.org to ROS distros, e.g., DISTRO macro
