@@ -230,5 +230,19 @@ repos = {
             "rolling": "main"
         },
         "pr": None
+    },
+    "zephyr-zenoh-integration": {
+        "url": "https://github.com/ros-controls/zephyr-zenoh-integration",
+        "branch_version": {
+            "foxy": "master",
+            "galactic": "master",
+            "humble": "master",
+            "iron": "master",
+            "jazzy": "master",
+            "kilted": "master",
+            "lyrical": "master",
+            "rolling": "master"
+        },
+        "pr": None
     }
 }
