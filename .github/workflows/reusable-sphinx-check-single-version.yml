@@ -67,3 +67,42 @@ jobs:
         MUJOCO_ROS2_CONTROL_PR: ${{ inputs.MUJOCO_ROS2_CONTROL_PR }}
         ZEPHYR_ZENOH_INTEGRATION_PR: ${{ inputs.ZEPHYR_ZENOH_INTEGRATION_PR }}
       run: make html-all-subrepos-with-errors
+
+    # No PDF is built here on purpose to keep the artifact small, see `make pdf-rolling`
+    - name: Upload HTML artifact
+      uses: actions/upload-artifact@v7
+      id: artifact-upload-step
+      with:
+        name: html-artifacts-${{ github.event.pull_request.number || github.run_id }}
+        path: _build/html
+        retention-days: 30 # default 90
+        compression-level: 9 # maximum compression, default 6
+        if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
+
+    - name: Find HTML artifacts link comment
+      uses: peter-evans/find-comment@v4
+      id: find-comment
+      # Skip if not triggered by a pull request or if the PR comes from a fork
+      # (https://github.com/peter-evans/create-or-update-comment/issues/444)
+      if: github.event_name == 'pull_request' && github.repository == github.event.pull_request.head.repo.full_name
+      with:
+        issue-number: ${{ github.event.pull_request.number }}
+        comment-author: 'github-actions[bot]'
+        body-includes: "HTML artifacts:"
+
+    - name: Create or update HTML artifacts link comment
+      uses: peter-evans/create-or-update-comment@v5
+      # Skip if not triggered by a pull request or if the PR comes from a fork
+      # (https://github.com/peter-evans/create-or-update-comment/issues/444)
+      if: github.event_name == 'pull_request' && github.repository == github.event.pull_request.head.repo.full_name
+      with:
+        comment-id: ${{ steps.find-comment.outputs.comment-id }}
+        issue-number: ${{ github.event.pull_request.number }}
+        body: |
+          HTML artifacts: ${{ steps.artifact-upload-step.outputs.artifact-url }}.
+
+          To view the resulting site:
+          1. Click on the above link to download the artifacts archive
+          2. Extract it
+          3. Open `html-artifacts-${{ github.event.pull_request.number || github.run_id }}/index.html` in your favorite browser
+        edit-mode: replace
