@@ -1,4 +1,4 @@
-:github_url: https://github.com/ros-controls/zephyr-zenoh-integration/blob/{REPOS_FILE_BRANCH}/doc/architecture.rst
+:github_url: https://github.com/ros-controls/zenbedded/blob/{REPOS_FILE_BRANCH}/doc/architecture.rst
 
 .. _architecture:
 

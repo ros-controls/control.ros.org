@@ -1,4 +1,4 @@
-:github_url: https://github.com/ros-controls/zephyr-zenoh-integration/blob/{REPOS_FILE_BRANCH}/zenbedded_hardware_interface/doc/userdoc.rst
+:github_url: https://github.com/ros-controls/zenbedded/blob/{REPOS_FILE_BRANCH}/zenbedded_hardware_interface/doc/userdoc.rst
 
 .. _zenbedded_hardware_interface_userdoc:
 
@@ -18,7 +18,7 @@ Build the workspace from source with ``colcon``:
 
    mkdir -p ~/zephyr_zenoh_ws/src
    cd ~/zephyr_zenoh_ws/src
-   git clone git@github.com:ros-controls/zephyr-zenoh-integration.git
+  git clone git@github.com:ros-controls/zenbedded.git
    cd ~/zephyr_zenoh_ws
    rosdep install --from-paths src --ignore-src -r -y
    colcon build

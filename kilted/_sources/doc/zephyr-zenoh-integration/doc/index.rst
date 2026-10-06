@@ -1,13 +1,13 @@
-:github_url: https://github.com/ros-controls/zephyr-zenoh-integration/blob/{REPOS_FILE_BRANCH}/doc/index.rst
+:github_url: https://github.com/ros-controls/zenbedded/blob/{REPOS_FILE_BRANCH}/doc/index.rst
 
-.. _zephyr_zenoh_integration:
+.. _zenbedded:
 
-Zephyr Zenoh Integration
-========================
+Zenbedded
+=========
 
 Better embedded integration for ROS 2 robots: bringing microcontrollers running `Zephyr RTOS`_ into ``ros2_control`` as first-class participants, with agent-less, low-latency communication over `Zenoh`_.
 
-`Link to GitHub Repository <https://github.com/ros-controls/zephyr-zenoh-integration>`_
+`Link to GitHub Repository <https://github.com/ros-controls/zenbedded>`_
 
 
 Packages

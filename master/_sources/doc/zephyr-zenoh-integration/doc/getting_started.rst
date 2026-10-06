@@ -1,11 +1,11 @@
-:github_url: https://github.com/ros-controls/zephyr-zenoh-integration/blob/{REPOS_FILE_BRANCH}/doc/getting_started.rst
+:github_url: https://github.com/ros-controls/zenbedded/blob/{REPOS_FILE_BRANCH}/doc/getting_started.rst
 
 .. _zephyr_zenoh_getting_started:
 
 Getting Started
 ===============
 
-This guide walks you through setting up the Zephyr Zenoh Integration end-to-end.
+This guide walks you through setting up Zenbedded end-to-end.
 
 
 Prerequisites
@@ -23,7 +23,7 @@ Prerequisites
 
    mkdir -p ~/zephyr_zenoh_ws/src
    cd ~/zephyr_zenoh_ws/src
-   git clone git@github.com:ros-controls/zephyr-zenoh-integration.git
+   git clone git@github.com:ros-controls/zenbedded.git
    cd ~/zephyr_zenoh_ws
    rosdep install --from-paths src --ignore-src -r -y
    colcon build
