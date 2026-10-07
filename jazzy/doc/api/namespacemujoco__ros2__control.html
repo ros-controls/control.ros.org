@@ -142,6 +142,9 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a7eb4d09f9ffa02fa75145cff27a84dab" id="r_a7eb4d09f9ffa02fa75145cff27a84dab"><td class="memItemLeft" align="right" valign="top">std::chrono::microseconds&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemujoco__ros2__control.html#a7eb4d09f9ffa02fa75145cff27a84dab">physics_loop_sleep_duration</a> (double timestep)</td></tr>
+<tr class="memdesc:a7eb4d09f9ffa02fa75145cff27a84dab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Idle sleep used by the physics loop between iterations when not busy-waiting.  <br /></td></tr>
+<tr class="separator:a7eb4d09f9ffa02fa75145cff27a84dab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8928fc0198103c6bca3c7ef1f3d70e4a" id="r_a8928fc0198103c6bca3c7ef1f3d70e4a"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemujoco__ros2__control.html#a8928fc0198103c6bca3c7ef1f3d70e4a">compose_sim_display_text</a> (bool running, uint64_t step_count, double sim_time, double desired_pct, double actual_pct, int ncon)</td></tr>
 <tr class="memdesc:a8928fc0198103c6bca3c7ef1f3d70e4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Composes the title/content text pair for the native-viewer status overlay.  <br /></td></tr>
 <tr class="separator:a8928fc0198103c6bca3c7ef1f3d70e4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -195,6 +198,10 @@ template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ab58cf928f1b82cc66cf5b7dc3ccc9c1a" id="r_ab58cf928f1b82cc66cf5b7dc3ccc9c1a"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemujoco__ros2__control.html#ab58cf928f1b82cc66cf5b7dc3ccc9c1a">get_interfaces_in_order</a> (const std::vector&lt; std::string &gt; &amp;available_interfaces, const std::vector&lt; std::string &gt; &amp;desired_order)</td></tr>
 <tr class="memdesc:ab58cf928f1b82cc66cf5b7dc3ccc9c1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Orders available interfaces based on a desired order.  <br /></td></tr>
 <tr class="separator:ab58cf928f1b82cc66cf5b7dc3ccc9c1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac41b1dee8c9285980a5eb870d8f476be" id="r_ac41b1dee8c9285980a5eb870d8f476be"><td class="memTemplParams" colspan="2"><a id="ac41b1dee8c9285980a5eb870d8f476be" name="ac41b1dee8c9285980a5eb870d8f476be"></a>
+template&lt;typename Fn &gt; </td></tr>
+<tr class="memitem:ac41b1dee8c9285980a5eb870d8f476be"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>for_each_matched_joint_actuator</b> (std::vector&lt; <a class="el" href="structmujoco__ros2__control_1_1URDFJointData.html">URDFJointData</a> &gt; &amp;joints, std::vector&lt; <a class="el" href="structmujoco__ros2__control_1_1MuJoCoActuatorData.html">MuJoCoActuatorData</a> &gt; &amp;actuators, Fn &amp;&amp;fn)</td></tr>
+<tr class="separator:ac41b1dee8c9285980a5eb870d8f476be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -535,6 +542,42 @@ constexpr char&#160;</td><td class="memItemRight" valign="bottom"><b>MUJOCO_TYPE
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The corresponding actuator names if found, otherwise returns the joint name. </dd></dl>
+
+</div>
+</div>
+<a id="a7eb4d09f9ffa02fa75145cff27a84dab" name="a7eb4d09f9ffa02fa75145cff27a84dab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7eb4d09f9ffa02fa75145cff27a84dab">&#9670;&#160;</a></span>physics_loop_sleep_duration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::chrono::microseconds mujoco_ros2_control::physics_loop_sleep_duration </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>timestep</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Idle sleep used by the physics loop between iterations when not busy-waiting. </p>
+<p>Scales with the model timestep so small timesteps aren't starved by a fixed sleep: kIdleSleepFraction (20%) of <code>timestep</code>, capped at 1 ms.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timestep</td><td>MuJoCo model timestep (mjModel::opt.timestep) in seconds. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Sleep duration in microseconds. </dd></dl>
 
 </div>
 </div>

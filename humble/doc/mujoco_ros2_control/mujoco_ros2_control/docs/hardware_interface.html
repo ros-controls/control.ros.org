@@ -228,6 +228,8 @@ the required changes.</p>
 <section id="joints">
 <h2>Joints<a class="headerlink" href="#joints" title="Link to this heading"></a></h2>
 <p>Joints in the <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> interface are mapped to actuators defined in the MJCF, either directly or as transmission interfaces.
+If a joint is listed in a <code class="docutils literal notranslate"><span class="pre">&lt;transmission&gt;</span></code> and also has an MJCF actuator driving a joint of the same name, the transmission is applied to both commands and states.
+For example, a <code class="docutils literal notranslate"><span class="pre">SimpleTransmission</span></code> with <code class="docutils literal notranslate"><span class="pre">mechanical_reduction</span></code> 2.0 drives the actuator to twice the joint command and reports half the actuator position as the joint state.
 The system supports different joint control modes based on the actuator type and available command interfaces.</p>
 <p>MuJoCo’s PD-level <code class="docutils literal notranslate"><span class="pre">ctrl</span></code> input is used for direct position, velocity, or effort control.
 For velocity, motor, or custom actuators, a position or velocity PID is created if specified using ROS parameters.
