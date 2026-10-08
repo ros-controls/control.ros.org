@@ -129,11 +129,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a766072ed786f1323fdce73fdaba1b07e" id="r_a766072ed786f1323fdce73fdaba1b07e"><td class="memItemLeft" align="right" valign="top"><a id="a766072ed786f1323fdce73fdaba1b07e" name="a766072ed786f1323fdce73fdaba1b07e"></a>
 CallbackReturn&#160;</td><td class="memItemRight" valign="bottom"><b>on_init</b> (const <a class="el" href="structhardware__interface_1_1HardwareInfo.html">hardware_interface::HardwareInfo</a> &amp;system_info) override</td></tr>
 <tr class="separator:a766072ed786f1323fdce73fdaba1b07e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac99925403feb5c7dd5ae99b91297fdab" id="r_ac99925403feb5c7dd5ae99b91297fdab"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classhardware__interface_1_1StateInterface.html">hardware_interface::StateInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgazebo__ros2__control_1_1GazeboSystem.html#ac99925403feb5c7dd5ae99b91297fdab">export_state_interfaces</a> () override</td></tr>
-<tr class="memdesc:ac99925403feb5c7dd5ae99b91297fdab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exports all state interfaces for this hardware interface.  <br /></td></tr>
+<tr class="memitem:ac99925403feb5c7dd5ae99b91297fdab" id="r_ac99925403feb5c7dd5ae99b91297fdab"><td class="memItemLeft" align="right" valign="top"><a id="ac99925403feb5c7dd5ae99b91297fdab" name="ac99925403feb5c7dd5ae99b91297fdab"></a>
+std::vector&lt; <a class="el" href="classhardware__interface_1_1StateInterface.html">hardware_interface::StateInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>export_state_interfaces</b> () override</td></tr>
 <tr class="separator:ac99925403feb5c7dd5ae99b91297fdab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4839226a2e037af9d87a0104325873be" id="r_a4839226a2e037af9d87a0104325873be"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classhardware__interface_1_1CommandInterface.html">hardware_interface::CommandInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgazebo__ros2__control_1_1GazeboSystem.html#a4839226a2e037af9d87a0104325873be">export_command_interfaces</a> () override</td></tr>
-<tr class="memdesc:a4839226a2e037af9d87a0104325873be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exports all command interfaces for this hardware interface.  <br /></td></tr>
+<tr class="memitem:a4839226a2e037af9d87a0104325873be" id="r_a4839226a2e037af9d87a0104325873be"><td class="memItemLeft" align="right" valign="top"><a id="a4839226a2e037af9d87a0104325873be" name="a4839226a2e037af9d87a0104325873be"></a>
+std::vector&lt; <a class="el" href="classhardware__interface_1_1CommandInterface.html">hardware_interface::CommandInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>export_command_interfaces</b> () override</td></tr>
 <tr class="separator:a4839226a2e037af9d87a0104325873be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41e86fd725abb396f5a91236b2717956" id="r_a41e86fd725abb396f5a91236b2717956"><td class="memItemLeft" align="right" valign="top"><a id="a41e86fd725abb396f5a91236b2717956" name="a41e86fd725abb396f5a91236b2717956"></a>
 CallbackReturn&#160;</td><td class="memItemRight" valign="bottom"><b>on_activate</b> (const rclcpp_lifecycle::State &amp;previous_state) override</td></tr>
@@ -351,70 +351,6 @@ pal_statistics::RegistrationsRAII&#160;</td><td class="memItemRight" valign="bot
 <tr class="separator:a7d1797cd694e42fed3305e8a11948fa4 inherit pro_attribs_classhardware__interface_1_1HardwareComponentInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a4839226a2e037af9d87a0104325873be" name="a4839226a2e037af9d87a0104325873be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4839226a2e037af9d87a0104325873be">&#9670;&#160;</a></span>export_command_interfaces()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt; <a class="el" href="classhardware__interface_1_1CommandInterface.html">hardware_interface::CommandInterface</a> &gt; gazebo_ros2_control::GazeboSystem::export_command_interfaces </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Exports all command interfaces for this hardware interface. </p>
-<p>Old way of exporting the CommandInterfaces. If a empty vector is returned then the <a class="el" href="classhardware__interface_1_1HardwareComponentInterface.html#a47721ab48c8de81dc9e5f956a2829459">on_export_command_interfaces()</a> method is called. If a vector with CommandInterfaces is returned then the exporting of the CommandInterfaces is only done with this function and the ownership is transferred to the resource manager. The set_command(...), get_command(...), ..., can then not be used.</p>
-<p>Note the ownership over the state interfaces is transferred to the caller.</p>
-<dl class="section return"><dt>Returns</dt><dd>vector of state interfaces </dd></dl>
-
-<p>Reimplemented from <a class="el" href="classhardware__interface_1_1HardwareComponentInterface.html#a73abc684a2c110591a5423cca96d3a7e">hardware_interface::HardwareComponentInterface</a>.</p>
-
-</div>
-</div>
-<a id="ac99925403feb5c7dd5ae99b91297fdab" name="ac99925403feb5c7dd5ae99b91297fdab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac99925403feb5c7dd5ae99b91297fdab">&#9670;&#160;</a></span>export_state_interfaces()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt; <a class="el" href="classhardware__interface_1_1StateInterface.html">hardware_interface::StateInterface</a> &gt; gazebo_ros2_control::GazeboSystem::export_state_interfaces </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Exports all state interfaces for this hardware interface. </p>
-<p>Old way of exporting the StateInterfaces. If a empty vector is returned then the <a class="el" href="classhardware__interface_1_1HardwareComponentInterface.html#aa2d6c45340060f07fd0a2281536a54da">on_export_state_interfaces()</a> method is called. If a vector with StateInterfaces is returned then the exporting of the StateInterfaces is only done with this function and the ownership is transferred to the resource manager. The set_command(...), get_command(...), ..., can then not be used.</p>
-<p>Note the ownership over the state interfaces is transferred to the caller.</p>
-<dl class="section return"><dt>Returns</dt><dd>vector of state interfaces </dd></dl>
-
-<p>Reimplemented from <a class="el" href="classhardware__interface_1_1HardwareComponentInterface.html#aa40f052b7b9f3f05048067f236c4e85f">hardware_interface::HardwareComponentInterface</a>.</p>
-
-</div>
-</div>
 <a id="aebde6b9605bb7edb8da58f25919ea828" name="aebde6b9605bb7edb8da58f25919ea828"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aebde6b9605bb7edb8da58f25919ea828">&#9670;&#160;</a></span>initSim()</h2>
 

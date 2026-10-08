@@ -286,6 +286,13 @@ mesh is reused as the collision shape. This synthesis happens at the URDF level,
 correct per link even when MuJoCo fuses fixed-jointed bodies together. A mesh shared by a visual
 and a collision is converted once and reused for both (and, if that link requests decomposition,
 the whole mesh renders while its decomposed pieces collide).</p></li>
+<li><p>A link named in a <code class="docutils literal notranslate"><span class="pre">replace_collision</span></code> input (default <code class="docutils literal notranslate"><span class="pre">stage=&quot;mjcf&quot;</span></code>) skips all of the
+above: its collision geometry (authored or synthesized) is dropped entirely and never
+converted, and a user-authored MJCF fragment (one or more primitives, optionally grouped under
+nested sub-bodies) is inserted in its place. With <code class="docutils literal notranslate"><span class="pre">stage=&quot;urdf&quot;</span></code> the link’s <code class="docutils literal notranslate"><span class="pre">&lt;collision&gt;</span></code>
+tags are instead swapped for user-authored URDF ones before any of the above runs, so they are
+converted and fused like authored collisions. See the
+<a class="reference internal" href="#threshold-attribute"><span class="std std-ref">replace_collision attribute reference</span></a>.</p></li>
 <li><p>Both kinds of geom get explicit attributes written directly onto them, so visual/collision
 separation does not depend on a user-supplied <code class="docutils literal notranslate"><span class="pre">&lt;default</span> <span class="pre">class=&quot;...&quot;&gt;</span></code> block:</p>
 <ul>
@@ -368,6 +375,13 @@ rangefinders will be named by the <code class="docutils literal notranslate"><sp
 For <code class="docutils literal notranslate"><span class="pre">geom</span></code> type, elements are identified by <code class="docutils literal notranslate"><span class="pre">mesh</span></code> and <code class="docutils literal notranslate"><span class="pre">class</span></code> instead of <code class="docutils literal notranslate"><span class="pre">name</span></code>.
 Useful to tweak physics properties like <code class="docutils literal notranslate"><span class="pre">frictionloss</span></code>, <code class="docutils literal notranslate"><span class="pre">stiffness</span></code>, <code class="docutils literal notranslate"><span class="pre">damping</span></code>,
 <code class="docutils literal notranslate"><span class="pre">gravcomp</span></code>, etc.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">replace_collision</span></code> (attributes: <code class="docutils literal notranslate"><span class="pre">link</span></code>, optional <code class="docutils literal notranslate"><span class="pre">stage</span></code>; children: one or more
+<code class="docutils literal notranslate"><span class="pre">geom</span></code>/<code class="docutils literal notranslate"><span class="pre">body</span></code> elements, or <code class="docutils literal notranslate"><span class="pre">collision</span></code> elements with <code class="docutils literal notranslate"><span class="pre">stage=&quot;urdf&quot;</span></code>)
+— drops <strong>all</strong> of the named link’s collision geometry (authored or synthesized from its
+visual) and replaces it with the given MJCF fragment, copied verbatim into that link’s
+<code class="docutils literal notranslate"><span class="pre">&lt;body&gt;</span></code> (or, with <code class="docutils literal notranslate"><span class="pre">stage=&quot;urdf&quot;</span></code>, with the given URDF collisions before conversion). Useful for swapping an expensive collision mesh for cheap primitives (for
+example capsules), including several primitives, or grouping them under nested named
+sub-bodies. See the <a class="reference internal" href="#threshold-attribute"><span class="std std-ref">replace_collision attribute reference</span></a> below.</p></li>
 </ul>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">scene</span></code></dt><dd><p>Scene-level MJCF fragments such as <code class="docutils literal notranslate"><span class="pre">asset</span></code>, <code class="docutils literal notranslate"><span class="pre">worldbody</span></code>, <code class="docutils literal notranslate"><span class="pre">visual</span></code>, and small scene
@@ -509,6 +523,69 @@ produce <code class="docutils literal notranslate"><span class="pre">rf-01</span
 <li><p>Additional attributes: any MJCF attributes you want to set or overwrite (for example <code class="docutils literal notranslate"><span class="pre">frictionloss</span></code>, <code class="docutils literal notranslate"><span class="pre">damping</span></code>, <code class="docutils literal notranslate"><span class="pre">gravcomp</span></code>, <code class="docutils literal notranslate"><span class="pre">solimp</span></code>, <code class="docutils literal notranslate"><span class="pre">solref</span></code>, …).</p></li>
 <li><p>Example: <code class="docutils literal notranslate"><span class="pre">&lt;modify_element</span> <span class="pre">type=&quot;joint&quot;</span> <span class="pre">name=&quot;joint1&quot;</span> <span class="pre">frictionloss=&quot;1.0&quot;</span> <span class="pre">damping=&quot;2.0&quot;/&gt;</span></code>.</p></li>
 <li><p>Example: <code class="docutils literal notranslate"><span class="pre">&lt;modify_element</span> <span class="pre">type=&quot;geom&quot;</span> <span class="pre">mesh=&quot;link1_mesh&quot;</span> <span class="pre">class=&quot;collision&quot;</span> <span class="pre">friction</span> <span class="pre">=</span> <span class="pre">&quot;0.1</span> <span class="pre">0.005</span> <span class="pre">0.0001&quot;/&gt;</span></code></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">replace_collision</span></code></p>
+<ul>
+<li><p>Required: <code class="docutils literal notranslate"><span class="pre">link</span></code> (string) — the URDF link name whose collision geometry should be replaced.</p></li>
+<li><p>Optional: <code class="docutils literal notranslate"><span class="pre">stage</span></code> (<code class="docutils literal notranslate"><span class="pre">mjcf</span></code> | <code class="docutils literal notranslate"><span class="pre">urdf</span></code>, default <code class="docutils literal notranslate"><span class="pre">mjcf</span></code>) — when the replacement happens:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mjcf</span></code>: after the MJCF is generated. Children are MJCF <code class="docutils literal notranslate"><span class="pre">geom</span></code>/<code class="docutils literal notranslate"><span class="pre">body</span></code> elements (see
+below). A link on a fixed joint that MuJoCo fused into its parent (the default <code class="docutils literal notranslate"><span class="pre">--fuse</span></code>)
+is still supported: the fragment is wrapped in a <code class="docutils literal notranslate"><span class="pre">&lt;body&gt;</span></code> named after the link, placed at
+the fixed-joint pose inside the body that absorbed it, so it stays authored in the link’s own
+frame. Only a root link fused into the world (no free joint) can’t be targeted; use
+<code class="docutils literal notranslate"><span class="pre">--no-fuse</span></code> for that.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">urdf</span></code>: directly in the URDF, before any further processing. Children are one or more URDF
+<code class="docutils literal notranslate"><span class="pre">&lt;collision&gt;</span></code> elements (<code class="docutils literal notranslate"><span class="pre">origin</span></code> + <code class="docutils literal notranslate"><span class="pre">geometry</span></code> with <code class="docutils literal notranslate"><span class="pre">box</span></code>/<code class="docutils literal notranslate"><span class="pre">sphere</span></code>/<code class="docutils literal notranslate"><span class="pre">cylinder</span></code>/
+<code class="docutils literal notranslate"><span class="pre">mesh</span></code>) that replace all of the link’s <code class="docutils literal notranslate"><span class="pre">&lt;collision&gt;</span></code> tags. Meshes are converted like any
+authored collision, and fixed links are fused normally. Only applies with
+<code class="docutils literal notranslate"><span class="pre">--use_collision_tags</span></code>; without it the tag is ignored (a note is printed), since all
+authored collisions are dropped anyway.</p></li>
+</ul>
+<p>A tag never mixes the two: every child must match its <code class="docutils literal notranslate"><span class="pre">stage</span></code>, otherwise conversion fails.
+A link can appear in only one <code class="docutils literal notranslate"><span class="pre">replace_collision</span></code> tag.</p>
+</li>
+<li><p>Required (<code class="docutils literal notranslate"><span class="pre">stage=&quot;mjcf&quot;</span></code>): one or more child <code class="docutils literal notranslate"><span class="pre">geom</span></code> and/or <code class="docutils literal notranslate"><span class="pre">body</span></code> elements, using plain MJCF attribute
+syntax (<code class="docutils literal notranslate"><span class="pre">type</span></code>, <code class="docutils literal notranslate"><span class="pre">size</span></code>, <code class="docutils literal notranslate"><span class="pre">pos</span></code>/<code class="docutils literal notranslate"><span class="pre">quat</span></code>, or <code class="docutils literal notranslate"><span class="pre">fromto</span></code> for capsules/cylinders). A nested
+<code class="docutils literal notranslate"><span class="pre">body</span></code> is a fixed sub-body used to group its own geoms under a name; it is copied verbatim,
+including any <code class="docutils literal notranslate"><span class="pre">joint</span></code> it contains.</p></li>
+<li><p>Every child <code class="docutils literal notranslate"><span class="pre">geom</span></code> (including those inside a nested <code class="docutils literal notranslate"><span class="pre">body</span></code>) is copied into the link’s
+MJCF <code class="docutils literal notranslate"><span class="pre">&lt;body&gt;</span></code> exactly as written; the only attribute the converter injects is
+<code class="docutils literal notranslate"><span class="pre">class=&quot;collision&quot;</span></code>, and only when the <code class="docutils literal notranslate"><span class="pre">geom</span></code> does not already specify a <code class="docutils literal notranslate"><span class="pre">class</span></code>.</p></li>
+<li><p>With <code class="docutils literal notranslate"><span class="pre">stage=&quot;mjcf&quot;</span></code>, all of the link’s original collision geometry (authored
+<code class="docutils literal notranslate"><span class="pre">&lt;collision&gt;</span></code> tags, or one synthesized from its <code class="docutils literal notranslate"><span class="pre">&lt;visual&gt;</span></code>) is dropped and never
+converted, regardless of <code class="docutils literal notranslate"><span class="pre">--use_collision_tags</span></code>.</p></li>
+<li><p>Example — replace a link’s collision with two capsules:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;replace_collision</span><span class="w"> </span><span class="na">link=</span><span class="s">"forearm"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;geom</span><span class="w"> </span><span class="na">type=</span><span class="s">"capsule"</span><span class="w"> </span><span class="na">fromto=</span><span class="s">"0 0 0 0 0 0.3"</span><span class="w"> </span><span class="na">size=</span><span class="s">"0.04"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;geom</span><span class="w"> </span><span class="na">type=</span><span class="s">"capsule"</span><span class="w"> </span><span class="na">fromto=</span><span class="s">"0 0 0.3 0.1 0 0.3"</span><span class="w"> </span><span class="na">size=</span><span class="s">"0.03"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/replace_collision&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Example — group geoms under a named nested sub-body:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;replace_collision</span><span class="w"> </span><span class="na">link=</span><span class="s">"leg_left_1_link"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;geom</span><span class="w"> </span><span class="na">name=</span><span class="s">"left_foot6_collision"</span><span class="w"> </span><span class="na">class=</span><span class="s">"foot_capsule"</span><span class="w"> </span><span class="na">fromto=</span><span class="s">"-0.0985 0.007 0 0.122 0.0065 0"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;body</span><span class="w"> </span><span class="na">name=</span><span class="s">"leg_left_ankle_link"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;geom</span><span class="w"> </span><span class="na">name=</span><span class="s">"leg_left_ankle_collision"</span><span class="w"> </span><span class="na">class=</span><span class="s">"collision"</span><span class="w"> </span><span class="na">size=</span><span class="s">"0.03"</span><span class="w"> </span><span class="na">fromto=</span><span class="s">"-0.04 0 0.03 0.02 0 0.03"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/replace_collision&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Example — replace a link’s collisions at the URDF stage (requires <code class="docutils literal notranslate"><span class="pre">--use_collision_tags</span></code>):</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;replace_collision</span><span class="w"> </span><span class="na">link=</span><span class="s">"forearm"</span><span class="w"> </span><span class="na">stage=</span><span class="s">"urdf"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;collision&gt;</span>
+<span class="w">    </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">"0 0 0.15"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;geometry&gt;&lt;cylinder</span><span class="w"> </span><span class="na">radius=</span><span class="s">"0.04"</span><span class="w"> </span><span class="na">length=</span><span class="s">"0.3"</span><span class="nt">/&gt;&lt;/geometry&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/collision&gt;</span>
+<span class="w">  </span><span class="nt">&lt;collision&gt;</span>
+<span class="w">    </span><span class="nt">&lt;geometry&gt;&lt;mesh</span><span class="w"> </span><span class="na">filename=</span><span class="s">"package://my_robot/meshes/forearm_simple.stl"</span><span class="nt">/&gt;&lt;/geometry&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/collision&gt;</span>
+<span class="nt">&lt;/replace_collision&gt;</span>
+</pre></div>
+</div>
+</li>
 </ul>
 </section>
 </section>
