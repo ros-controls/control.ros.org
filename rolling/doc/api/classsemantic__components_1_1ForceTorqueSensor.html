@@ -331,14 +331,14 @@ std::vector&lt; std::reference_wrapper&lt; <a class="el" href="classhardware__in
 </div><div class="memdoc">
 
 <p>Return Wrench message with forces and torques. </p>
-<p>Constructs and return a wrench message from the current values. The method assumes that the interface names on the construction are in the following order: force X, force Y, force Z, torque X, torque Y, torque Z.</p>
+<p>Updates internal storage from the state interfaces and updates the Wrench message If no state interfaces are available, the message will be filled with old data The method assumes that the interface names on the construction are in the following order: force X, force Y, force Z, torque X, torque Y, torque Z.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">message</td><td>Wrench message from values </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">message</td><td>Wrench message from values, updated from internal storage </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>always returns true </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true when interfaces are available, false otherwise </dd></dl>
 
 </div>
 </div>
