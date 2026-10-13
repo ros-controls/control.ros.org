@@ -88,12 +88,17 @@ $(function() {
   <div class="headertitle"><div class="title">transmission_interface::SimpleTransmission Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Implementation of a simple reducer transmission.  
+ <a href="classtransmission__interface_1_1SimpleTransmission.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="simple__transmission_8hpp_source.html">simple_transmission.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for transmission_interface::SimpleTransmission:</div>
 <div class="dyncontent">
 <div class="center"><img src="classtransmission__interface_1_1SimpleTransmission__inherit__graph.png" border="0" usemap="#atransmission__interface_1_1SimpleTransmission_inherit__map" alt="Inheritance graph"/></div>
 <map name="atransmission__interface_1_1SimpleTransmission_inherit__map" id="atransmission__interface_1_1SimpleTransmission_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,93,176,133"/>
+<area shape="rect" title="Implementation of a simple reducer transmission." alt="" coords="5,93,176,133"/>
 <area shape="rect" href="classtransmission__interface_1_1Transmission.html" title="Abstract base class for representing mechanical transmissions." alt="" coords="5,5,176,45"/>
 <area shape="poly" title=" " alt="" coords="93,59,93,93,88,93,88,59"/>
 </map>
@@ -103,7 +108,7 @@ Collaboration diagram for transmission_interface::SimpleTransmission:</div>
 <div class="dyncontent">
 <div class="center"><img src="classtransmission__interface_1_1SimpleTransmission__coll__graph.png" border="0" usemap="#atransmission__interface_1_1SimpleTransmission_coll__map" alt="Collaboration graph"/></div>
 <map name="atransmission__interface_1_1SimpleTransmission_coll__map" id="atransmission__interface_1_1SimpleTransmission_coll__map">
-<area shape="rect" title=" " alt="" coords="625,128,796,168"/>
+<area shape="rect" title="Implementation of a simple reducer transmission." alt="" coords="625,128,796,168"/>
 <area shape="rect" href="classtransmission__interface_1_1Transmission.html" title="Abstract base class for representing mechanical transmissions." alt="" coords="225,5,396,45"/>
 <area shape="poly" title=" " alt="" coords="410,15,456,16,505,21,555,31,602,47,631,63,657,84,696,126,692,130,654,88,628,68,600,52,554,36,505,26,456,22,410,21"/>
 <area shape="rect" href="classtransmission__interface_1_1JointHandle.html" title=" " alt="" coords="225,177,396,217"/>
@@ -194,7 +199,48 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>jnt_offset_</b></td
 <a class="el" href="classtransmission__interface_1_1ActuatorHandle.html">ActuatorHandle</a>&#160;</td><td class="memItemRight" valign="bottom"><b>actuator_absolute_position_</b> = {&quot;&quot;, &quot;&quot;, nullptr}</td></tr>
 <tr class="separator:a175ac13e72d6610f1183c4dbf5ccbc9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Implementation of a simple reducer transmission. </p>
+<p>This transmission relates <b>one actuator</b> and <b>one joint</b> through a reductor (or amplifier). Timing belts and gears are examples of this transmission type, and are illustrated below.</p><div class="image">
+<img src="simple_transmission.png" alt=""/>
+</div>
+<center> <table class="doxtable">
+<tr>
+<th></th><th><center>Effort</center></th><th><center>Velocity</center></th><th><center>Position</center> </th></tr>
+<tr>
+<td><b> Actuator to joint </b>  </td><td><p class="formulaDsp">
+\[ \tau_j = n \tau_a \]
+</p>
+  </td><td><p class="formulaDsp">
+\[ \dot{x}_j = \dot{x}_a / n \]
+</p>
+  </td><td><p class="formulaDsp">
+\[ x_j = x_a / n + x_{off} \]
+</p>
+   </td></tr>
+<tr>
+<td><b> Joint to actuator </b>  </td><td><p class="formulaDsp">
+\[ \tau_a = \tau_j / n\]
+</p>
+  </td><td><p class="formulaDsp">
+\[ \dot{x}_a = n \dot{x}_j \]
+</p>
+  </td><td><p class="formulaDsp">
+\[ x_a = n (x_j - x_{off}) \]
+</p>
+ </td></tr>
+</table>
+</center><p>where:</p><ul>
+<li>\( x \), \( \dot{x} \) and \( \tau \) are position, velocity and effort variables, respectively.</li>
+<li>Subindices \( _a \) and \( _j \) are used to represent actuator-space and joint-space variables, respectively.</li>
+<li>\( x_{off}\) represents the offset between motor and joint zeros, expressed in joint position coordinates.</li>
+<li>\( n \) is the transmission ratio, and can be computed as the ratio between the output and input pulley radii for the timing belt; or the ratio between output and input teeth for the gear system. The transmission ratio can take any real value <em>except</em> zero. In particular:<ul>
+<li>If its absolute value is greater than one, it's a velocity reducer / effort amplifier, while if its absolute value lies in \( (0, 1) \) it's a velocity amplifier / effort reducer.</li>
+<li>Negative values represent a direction flip, ie. actuator and joint move in opposite directions. For example, in timing belts actuator and joint move in the same direction, while in single-stage gear systems actuator and joint move in opposite directions. </li>
+</ul>
+</li>
+</ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a2d5e7f307e8d6d60f4c2bc59da90e9d7" name="a2d5e7f307e8d6d60f4c2bc59da90e9d7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2d5e7f307e8d6d60f4c2bc59da90e9d7">&#9670;&#160;</a></span>SimpleTransmission()</h2>
 
