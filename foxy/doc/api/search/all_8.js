@@ -30,6 +30,7 @@ var searchData=
   ['interfaceschema_27',['InterfaceSchema',['../classzenbedded_1_1InterfaceSchema.html',1,'zenbedded']]],
   ['interpolate_5fbetween_5fpoints_28',['interpolate_between_points',['../classjoint__trajectory__controller_1_1Trajectory.html#a3477e64e79982032b7b60d503a541040',1,'joint_trajectory_controller::Trajectory']]],
   ['invertedpendulumcontroller_29',['InvertedPendulumController',['../classinverted__pendulum__controller_1_1InvertedPendulumController.html',1,'inverted_pendulum_controller']]],
-  ['is_5fcontrol_5fthread_5frunning_30',['is_control_thread_running',['../classZenbeddedClientBase.html#aacc43dff05db39f1a82ac3ebe88ebaaa',1,'ZenbeddedClientBase']]],
-  ['is_5finitialized_31',['is_initialized',['../classZenbeddedClientBase.html#a53e099cc73dc1f47dede49f50199c15e',1,'ZenbeddedClientBase']]]
+  ['is_5fbalancing_30',['is_balancing',['../classinverted__pendulum__controller_1_1InvertedPendulumController.html#a330f47ed75aba909504b7650e6e2ad24',1,'inverted_pendulum_controller::InvertedPendulumController']]],
+  ['is_5fcontrol_5fthread_5frunning_31',['is_control_thread_running',['../classZenbeddedClientBase.html#aacc43dff05db39f1a82ac3ebe88ebaaa',1,'ZenbeddedClientBase']]],
+  ['is_5finitialized_32',['is_initialized',['../classZenbeddedClientBase.html#a53e099cc73dc1f47dede49f50199c15e',1,'ZenbeddedClientBase']]]
 ];

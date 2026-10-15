@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['position_5fcontrollers_0',['position_controllers',['../namespaceposition__controllers.html',1,'']]]
+  ['lqr_5fsolver_0',['lqr_solver',['../namespacelqr__solver.html',1,'']]]
 ];

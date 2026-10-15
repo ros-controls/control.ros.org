@@ -101,7 +101,7 @@ General discussions
 
 ======================================================================
 
-Built on 2026-10-14 at 05:45 GMT
+Built on 2026-10-15 at 05:43 GMT
 
 
 
@@ -2248,6 +2248,11 @@ child elements:
 
 * "<controller_manager_name>": Set controller manager name (default:
   "controller_manager")
+
+* "<hardware_init_timeout>": Maximum time in seconds to wait for the
+  controller manager to receive the "robot_description" and initialize
+  the hardware. If it expires, the plugin logs an error and the robot
+  is not controlled. (default: "0", wait forever)
 
 The following additional parameters can be set via child elements in
 the URDF/SDF or via ROS parameters in the YAML file above:
@@ -25247,7 +25252,8 @@ Features
 * Agent-less communication -- no ROS 2 bridge process required on the
   MCU
 
-* Lock-free state buffer using "realtime_tools::RealtimeBuffer"
+* Real-time safe state buffer using
+  "realtime_tools::RealtimeThreadSafeBox"
 
 * YAML-driven interface schema (via "zenbedded_transport") for wire-
   format compatibility between host and firmware
@@ -25333,13 +25339,13 @@ This generates the following packed C struct via
    } zenbedded_command_t;
 
 
-Lock-free state access
-======================
+Real-time safe state access
+===========================
 
 State updates from the Zenoh callback are written into a
-"realtime_tools::RealtimeBuffer<std::vector<uint8_t>>", allowing the
-real-time control loop to read the latest state snapshot without
-blocking on the network callback.
+"realtime_tools::RealtimeThreadSafeBox<std::vector<uint8_t>>",
+allowing the real-time control loop to read the latest state snapshot
+without blocking on the network callback.
 
 
 

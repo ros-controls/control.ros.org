@@ -65,7 +65,7 @@
 <li class="toctree-l5"><a class="reference internal" href="#features">Features</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#parameters">Parameters</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#example-schema-config-interface-schema-yaml">Example schema (<code class="docutils literal notranslate"><span class="pre">config/interface_schema.yaml</span></code>)</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#lock-free-state-access">Lock-free state access</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#real-time-safe-state-access">Real-time safe state access</a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="../../zenbedded_transport/doc/userdoc.html">Transport</a></li>
@@ -141,7 +141,7 @@ git<span class="w"> </span>clone<span class="w"> </span>git@github.com:ros-contr
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>Agent-less communication – no ROS 2 bridge process required on the MCU</p></li>
-<li><p>Lock-free state buffer using <code class="docutils literal notranslate"><span class="pre">realtime_tools::RealtimeBuffer</span></code></p></li>
+<li><p>Real-time safe state buffer using <code class="docutils literal notranslate"><span class="pre">realtime_tools::RealtimeThreadSafeBox</span></code></p></li>
 <li><p>YAML-driven interface schema (via <code class="docutils literal notranslate"><span class="pre">zenbedded_transport</span></code>) for wire-format
 compatibility between host and firmware</p></li>
 <li><p>Configurable Zenoh endpoint, mode (client/peer), and topic keys</p></li>
@@ -239,10 +239,10 @@ tags:</p>
 </pre></div>
 </div>
 </section>
-<section id="lock-free-state-access">
-<h2>Lock-free state access<a class="headerlink" href="#lock-free-state-access" title="Link to this heading"></a></h2>
+<section id="real-time-safe-state-access">
+<h2>Real-time safe state access<a class="headerlink" href="#real-time-safe-state-access" title="Link to this heading"></a></h2>
 <p>State updates from the Zenoh callback are written into a
-<code class="docutils literal notranslate"><span class="pre">realtime_tools::RealtimeBuffer&lt;std::vector&lt;uint8_t&gt;&gt;</span></code>, allowing the
+<code class="docutils literal notranslate"><span class="pre">realtime_tools::RealtimeThreadSafeBox&lt;std::vector&lt;uint8_t&gt;&gt;</span></code>, allowing the
 real-time control loop to read the latest state snapshot without
 blocking on the network callback.</p>
 </section>

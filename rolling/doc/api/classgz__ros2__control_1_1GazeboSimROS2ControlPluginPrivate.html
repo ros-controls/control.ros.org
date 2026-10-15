@@ -94,6 +94,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac780d9e2dd9ee89b15f8494129e09b96" id="r_ac780d9e2dd9ee89b15f8494129e09b96"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, sim::Entity &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgz__ros2__control_1_1GazeboSimROS2ControlPluginPrivate.html#ac780d9e2dd9ee89b15f8494129e09b96">GetEnabledJoints</a> (const sim::Entity &amp;_entity, sim::EntityComponentManager &amp;_ecm) const</td></tr>
 <tr class="memdesc:ac780d9e2dd9ee89b15f8494129e09b96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a list of enabled, unique, 1-axis joints of the model. If no joint names are specified in the plugin configuration, all valid 1-axis joints are returned.  <br /></td></tr>
 <tr class="separator:ac780d9e2dd9ee89b15f8494129e09b96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ab1b7c2ea85f825424213620cb44039" id="r_a8ab1b7c2ea85f825424213620cb44039"><td class="memItemLeft" align="right" valign="top"><a id="a8ab1b7c2ea85f825424213620cb44039" name="a8ab1b7c2ea85f825424213620cb44039"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>RemoveControllerManager</b> ()</td></tr>
+<tr class="memdesc:a8ab1b7c2ea85f825424213620cb44039"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop and release the controller manager after a failed initialization, so it can no longer initialize hardware from the executor thread. <br /></td></tr>
+<tr class="separator:a8ab1b7c2ea85f825424213620cb44039"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -121,7 +125,7 @@ std::shared_ptr&lt; <a class="el" href="classcontroller__manager_1_1ControllerMa
 <tr class="memdesc:aa26921278202d592b2e12a12f5520239"><td class="mdescLeft">&#160;</td><td class="mdescRight">Last time the update method was called.  <br /></td></tr>
 <tr class="separator:aa26921278202d592b2e12a12f5520239"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a68447419a029a84e3a111198089bbaaa" id="r_a68447419a029a84e3a111198089bbaaa"><td class="memItemLeft" align="right" valign="top"><a id="a68447419a029a84e3a111198089bbaaa" name="a68447419a029a84e3a111198089bbaaa"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>update_rate</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>update_rate</b> {0}</td></tr>
 <tr class="memdesc:a68447419a029a84e3a111198089bbaaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">controller update rate <br /></td></tr>
 <tr class="separator:a68447419a029a84e3a111198089bbaaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c3b6fd31b0738d8cb6ec385c2d3cf5c" id="r_a4c3b6fd31b0738d8cb6ec385c2d3cf5c"><td class="memItemLeft" align="right" valign="top"><a id="a4c3b6fd31b0738d8cb6ec385c2d3cf5c" name="a4c3b6fd31b0738d8cb6ec385c2d3cf5c"></a>

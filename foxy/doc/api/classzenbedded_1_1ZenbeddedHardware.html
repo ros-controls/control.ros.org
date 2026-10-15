@@ -106,12 +106,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae77a554b3176aa4031ae2d8aa432208d" id="r_ae77a554b3176aa4031ae2d8aa432208d"><td class="memItemLeft" align="right" valign="top"><a id="ae77a554b3176aa4031ae2d8aa432208d" name="ae77a554b3176aa4031ae2d8aa432208d"></a>
 CallbackReturn&#160;</td><td class="memItemRight" valign="bottom"><b>on_init</b> (const hardware_interface::HardwareComponentInterfaceParams &amp;params) override</td></tr>
 <tr class="separator:ae77a554b3176aa4031ae2d8aa432208d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d390e8c8c471ad5de90df67a409b626" id="r_a2d390e8c8c471ad5de90df67a409b626"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classhardware__interface_1_1StateInterface.html">hardware_interface::StateInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzenbedded_1_1ZenbeddedHardware.html#a2d390e8c8c471ad5de90df67a409b626">export_state_interfaces</a> () override</td></tr>
-<tr class="memdesc:a2d390e8c8c471ad5de90df67a409b626"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exports all state interfaces for this system.  <br /></td></tr>
-<tr class="separator:a2d390e8c8c471ad5de90df67a409b626"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab582387f3e15b4f1750e86619a7b43ca" id="r_ab582387f3e15b4f1750e86619a7b43ca"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classhardware__interface_1_1CommandInterface.html">hardware_interface::CommandInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzenbedded_1_1ZenbeddedHardware.html#ab582387f3e15b4f1750e86619a7b43ca">export_command_interfaces</a> () override</td></tr>
-<tr class="memdesc:ab582387f3e15b4f1750e86619a7b43ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exports all command interfaces for this system.  <br /></td></tr>
-<tr class="separator:ab582387f3e15b4f1750e86619a7b43ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b475a228655db43bc8d78ee85fe6282" id="r_a1b475a228655db43bc8d78ee85fe6282"><td class="memItemLeft" align="right" valign="top"><a id="a1b475a228655db43bc8d78ee85fe6282" name="a1b475a228655db43bc8d78ee85fe6282"></a>
+std::vector&lt; hardware_interface::StateInterface::ConstSharedPtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>on_export_state_interfaces</b> () override</td></tr>
+<tr class="separator:a1b475a228655db43bc8d78ee85fe6282"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a594ba1c8e60a0a0ea45654186b2cf3" id="r_a4a594ba1c8e60a0a0ea45654186b2cf3"><td class="memItemLeft" align="right" valign="top"><a id="a4a594ba1c8e60a0a0ea45654186b2cf3" name="a4a594ba1c8e60a0a0ea45654186b2cf3"></a>
+std::vector&lt; hardware_interface::CommandInterface::SharedPtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>on_export_command_interfaces</b> () override</td></tr>
+<tr class="separator:a4a594ba1c8e60a0a0ea45654186b2cf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add339a337656c73b7035bebee7508a5c" id="r_add339a337656c73b7035bebee7508a5c"><td class="memItemLeft" align="right" valign="top"><a id="add339a337656c73b7035bebee7508a5c" name="add339a337656c73b7035bebee7508a5c"></a>
 CallbackReturn&#160;</td><td class="memItemRight" valign="bottom"><b>on_activate</b> (const rclcpp_lifecycle::State &amp;previous_state) override</td></tr>
 <tr class="separator:add339a337656c73b7035bebee7508a5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -128,6 +128,12 @@ hardware_interface::return_type&#160;</td><td class="memItemRight" valign="botto
 <tr class="memitem:a0d1d995e80d81afd543dc3c4e02cc9bd inherit pub_methods_classhardware__interface_1_1SystemInterface" id="r_a0d1d995e80d81afd543dc3c4e02cc9bd"><td class="memItemLeft" align="right" valign="top">virtual return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1SystemInterface.html#a0d1d995e80d81afd543dc3c4e02cc9bd">configure</a> (const <a class="el" href="structhardware__interface_1_1HardwareInfo.html">HardwareInfo</a> &amp;system_info)=0</td></tr>
 <tr class="memdesc:a0d1d995e80d81afd543dc3c4e02cc9bd inherit pub_methods_classhardware__interface_1_1SystemInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration of the system from data parsed from the robot's URDF.  <br /></td></tr>
 <tr class="separator:a0d1d995e80d81afd543dc3c4e02cc9bd inherit pub_methods_classhardware__interface_1_1SystemInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac858b0664d5e62c777b87379337d7ab3 inherit pub_methods_classhardware__interface_1_1SystemInterface" id="r_ac858b0664d5e62c777b87379337d7ab3"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="classhardware__interface_1_1StateInterface.html">StateInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1SystemInterface.html#ac858b0664d5e62c777b87379337d7ab3">export_state_interfaces</a> ()=0</td></tr>
+<tr class="memdesc:ac858b0664d5e62c777b87379337d7ab3 inherit pub_methods_classhardware__interface_1_1SystemInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exports all state interfaces for this system.  <br /></td></tr>
+<tr class="separator:ac858b0664d5e62c777b87379337d7ab3 inherit pub_methods_classhardware__interface_1_1SystemInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac496019af4533070de17a095b950af26 inherit pub_methods_classhardware__interface_1_1SystemInterface" id="r_ac496019af4533070de17a095b950af26"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="classhardware__interface_1_1CommandInterface.html">CommandInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1SystemInterface.html#ac496019af4533070de17a095b950af26">export_command_interfaces</a> ()=0</td></tr>
+<tr class="memdesc:ac496019af4533070de17a095b950af26 inherit pub_methods_classhardware__interface_1_1SystemInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exports all command interfaces for this system.  <br /></td></tr>
+<tr class="separator:ac496019af4533070de17a095b950af26 inherit pub_methods_classhardware__interface_1_1SystemInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b944943314be907806ec3e989e6acd9 inherit pub_methods_classhardware__interface_1_1SystemInterface" id="r_a9b944943314be907806ec3e989e6acd9"><td class="memItemLeft" align="right" valign="top">virtual return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1SystemInterface.html#a9b944943314be907806ec3e989e6acd9">prepare_command_mode_switch</a> (const std::vector&lt; std::string &gt; &amp;, const std::vector&lt; std::string &gt; &amp;)</td></tr>
 <tr class="memdesc:a9b944943314be907806ec3e989e6acd9 inherit pub_methods_classhardware__interface_1_1SystemInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prepare for a new command interface switch.  <br /></td></tr>
 <tr class="separator:a9b944943314be907806ec3e989e6acd9 inherit pub_methods_classhardware__interface_1_1SystemInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -152,71 +158,6 @@ hardware_interface::return_type&#160;</td><td class="memItemRight" valign="botto
 <tr class="memdesc:aff8e30ca00fed5a75720029248abfc4d inherit pub_methods_classhardware__interface_1_1SystemInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write the current command values to the actuator within the system.  <br /></td></tr>
 <tr class="separator:aff8e30ca00fed5a75720029248abfc4d inherit pub_methods_classhardware__interface_1_1SystemInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="ab582387f3e15b4f1750e86619a7b43ca" name="ab582387f3e15b4f1750e86619a7b43ca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab582387f3e15b4f1750e86619a7b43ca">&#9670;&#160;</a></span>export_command_interfaces()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt; <a class="el" href="classhardware__interface_1_1CommandInterface.html">hardware_interface::CommandInterface</a> &gt; zenbedded::ZenbeddedHardware::export_command_interfaces </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Exports all command interfaces for this system. </p>
-<p>The command interfaces have to be created and transferred according to the system info passed in for the configuration.</p>
-<p>Note the ownership over the state interfaces is transferred to the caller.</p>
-<dl class="section return"><dt>Returns</dt><dd>vector of command interfaces </dd></dl>
-
-<p>Implements <a class="el" href="classhardware__interface_1_1SystemInterface.html#ac496019af4533070de17a095b950af26">hardware_interface::SystemInterface</a>.</p>
-
-</div>
-</div>
-<a id="a2d390e8c8c471ad5de90df67a409b626" name="a2d390e8c8c471ad5de90df67a409b626"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2d390e8c8c471ad5de90df67a409b626">&#9670;&#160;</a></span>export_state_interfaces()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt; <a class="el" href="classhardware__interface_1_1StateInterface.html">hardware_interface::StateInterface</a> &gt; zenbedded::ZenbeddedHardware::export_state_interfaces </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Exports all state interfaces for this system. </p>
-<p>The state interfaces have to be created and transferred according to the system info passed in for the configuration.</p>
-<p>Note the ownership over the state interfaces is transferred to the caller.</p>
-<dl class="section return"><dt>Returns</dt><dd>vector of state interfaces </dd></dl>
-
-<p>Implements <a class="el" href="classhardware__interface_1_1SystemInterface.html#ac858b0664d5e62c777b87379337d7ab3">hardware_interface::SystemInterface</a>.</p>
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>zephyr-zenoh-integration/zenbedded_hardware_interface/include/zenbedded_hardware_interface/<a class="el" href="zenbedded__hardware_8hpp_source.html">zenbedded_hardware.hpp</a></li>
 <li>zephyr-zenoh-integration/zenbedded_hardware_interface/src/<b>zenbedded_hardware.cpp</b></li>

@@ -19,5 +19,6 @@ var searchData=
   ['loadstartcontrollerverb_16',['LoadStartControllerVerb',['../classros2controlcli_1_1verb_1_1load__start__controller_1_1LoadStartControllerVerb.html',1,'ros2controlcli::verb::load_start_controller']]],
   ['loanedcommandinterface_17',['LoanedCommandInterface',['../classhardware__interface_1_1LoanedCommandInterface.html',1,'hardware_interface']]],
   ['loanedstateinterface_18',['LoanedStateInterface',['../classhardware__interface_1_1LoanedStateInterface.html',1,'hardware_interface']]],
-  ['lock_19',['lock',['../classrealtime__tools_1_1RealtimePublisher.html#ac9a8f5aa2cc9a0b9bded10f71ec55cfd',1,'realtime_tools::RealtimePublisher']]]
+  ['lock_19',['lock',['../classrealtime__tools_1_1RealtimePublisher.html#ac9a8f5aa2cc9a0b9bded10f71ec55cfd',1,'realtime_tools::RealtimePublisher']]],
+  ['lqr_5fsolver_20',['lqr_solver',['../namespacelqr__solver.html',1,'']]]
 ];

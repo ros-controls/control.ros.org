@@ -28,7 +28,7 @@ Features
 --------
 
 - Agent-less communication -- no ROS 2 bridge process required on the MCU
-- Lock-free state buffer using ``realtime_tools::RealtimeBuffer``
+- Real-time safe state buffer using ``realtime_tools::RealtimeThreadSafeBox``
 - YAML-driven interface schema (via ``zenbedded_transport``) for wire-format
   compatibility between host and firmware
 - Configurable Zenoh endpoint, mode (client/peer), and topic keys
@@ -126,10 +126,10 @@ This generates the following packed C struct via ``zenbedded_transport``:
    } zenbedded_command_t;
 
 
-Lock-free state access
-----------------------
+Real-time safe state access
+-----------------------------
 
 State updates from the Zenoh callback are written into a
-``realtime_tools::RealtimeBuffer<std::vector<uint8_t>>``, allowing the
+``realtime_tools::RealtimeThreadSafeBox<std::vector<uint8_t>>``, allowing the
 real-time control loop to read the latest state snapshot without
 blocking on the network callback.

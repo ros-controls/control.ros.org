@@ -37,5 +37,6 @@ var searchData=
   ['log_5fsensor_5fcomponents_5fnoise_34',['log_sensor_components_noise',['../namespacemujoco__ros2__control.html#a9e3afdf4a8762fb3afa848626ce7c930',1,'mujoco_ros2_control']]],
   ['logger_35',['logger',['../structhardware__interface_1_1HardwareComponentParams.html#a28e3a5e71b5ab85f529f7e8718dd79b1',1,'hardware_interface::HardwareComponentParams::logger'],['../structhardware__interface_1_1ResourceManagerParams.html#a4d7348c2bc346a375b6b6acb691906b9',1,'hardware_interface::ResourceManagerParams::logger']]],
   ['lowpassfilter_36',['lowpassfilter',['../classcontrol__filters_1_1LowPassFilter.html',1,'control_filters::LowPassFilter&lt; T &gt;'],['../classcontrol__toolbox_1_1LowPassFilter.html',1,'control_toolbox::LowPassFilter&lt; T &gt;']]],
-  ['lpf_37',['lpf',['../structjointData.html#a1e44625cf0567e31181ccfb3a843de92',1,'jointData']]]
+  ['lpf_37',['lpf',['../structjointData.html#a1e44625cf0567e31181ccfb3a843de92',1,'jointData']]],
+  ['lqr_5fsolver_38',['lqr_solver',['../namespacelqr__solver.html',1,'']]]
 ];

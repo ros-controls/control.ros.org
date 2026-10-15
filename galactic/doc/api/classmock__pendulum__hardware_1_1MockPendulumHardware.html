@@ -114,12 +114,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3ec19637f8ad311b3079e178385fdfe6" id="r_a3ec19637f8ad311b3079e178385fdfe6"><td class="memItemLeft" align="right" valign="top"><a id="a3ec19637f8ad311b3079e178385fdfe6" name="a3ec19637f8ad311b3079e178385fdfe6"></a>
 CallbackReturn&#160;</td><td class="memItemRight" valign="bottom"><b>on_init</b> (const hardware_interface::HardwareComponentInterfaceParams &amp;params) override</td></tr>
 <tr class="separator:a3ec19637f8ad311b3079e178385fdfe6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70df08eae029519defa2a28b1c519c51" id="r_a70df08eae029519defa2a28b1c519c51"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classhardware__interface_1_1StateInterface.html">hardware_interface::StateInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmock__pendulum__hardware_1_1MockPendulumHardware.html#a70df08eae029519defa2a28b1c519c51">export_state_interfaces</a> () override</td></tr>
-<tr class="memdesc:a70df08eae029519defa2a28b1c519c51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exports all state interfaces for this hardware interface.  <br /></td></tr>
-<tr class="separator:a70df08eae029519defa2a28b1c519c51"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a629d596a93b7dab77210357f35916852" id="r_a629d596a93b7dab77210357f35916852"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classhardware__interface_1_1CommandInterface.html">hardware_interface::CommandInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmock__pendulum__hardware_1_1MockPendulumHardware.html#a629d596a93b7dab77210357f35916852">export_command_interfaces</a> () override</td></tr>
-<tr class="memdesc:a629d596a93b7dab77210357f35916852"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exports all command interfaces for this hardware interface.  <br /></td></tr>
-<tr class="separator:a629d596a93b7dab77210357f35916852"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2008a30fe0745b5ee75d37db8e56b00b" id="r_a2008a30fe0745b5ee75d37db8e56b00b"><td class="memItemLeft" align="right" valign="top"><a id="a2008a30fe0745b5ee75d37db8e56b00b" name="a2008a30fe0745b5ee75d37db8e56b00b"></a>
+std::vector&lt; hardware_interface::StateInterface::ConstSharedPtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>on_export_state_interfaces</b> () override</td></tr>
+<tr class="separator:a2008a30fe0745b5ee75d37db8e56b00b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c84a25d46d32d040c3b60381f6e35e6" id="r_a6c84a25d46d32d040c3b60381f6e35e6"><td class="memItemLeft" align="right" valign="top"><a id="a6c84a25d46d32d040c3b60381f6e35e6" name="a6c84a25d46d32d040c3b60381f6e35e6"></a>
+std::vector&lt; hardware_interface::CommandInterface::SharedPtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>on_export_command_interfaces</b> () override</td></tr>
+<tr class="separator:a6c84a25d46d32d040c3b60381f6e35e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94307fc9ab6531419e350d24588ab144" id="r_a94307fc9ab6531419e350d24588ab144"><td class="memItemLeft" align="right" valign="top"><a id="a94307fc9ab6531419e350d24588ab144" name="a94307fc9ab6531419e350d24588ab144"></a>
 CallbackReturn&#160;</td><td class="memItemRight" valign="bottom"><b>on_activate</b> (const rclcpp_lifecycle::State &amp;previous_state) override</td></tr>
 <tr class="separator:a94307fc9ab6531419e350d24588ab144"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,6 +142,12 @@ hardware_interface::return_type&#160;</td><td class="memItemRight" valign="botto
 <tr class="memitem:a4e92fac1a9d82e418452bf597edd22e0 inherit pub_methods_classhardware__interface_1_1SystemInterface" id="r_a4e92fac1a9d82e418452bf597edd22e0"><td class="memItemLeft" align="right" valign="top">virtual CallbackReturn&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1SystemInterface.html#a4e92fac1a9d82e418452bf597edd22e0">on_init</a> (const <a class="el" href="structhardware__interface_1_1HardwareInfo.html">HardwareInfo</a> &amp;hardware_info)</td></tr>
 <tr class="memdesc:a4e92fac1a9d82e418452bf597edd22e0 inherit pub_methods_classhardware__interface_1_1SystemInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialization of the hardware interface from data parsed from the robot's URDF.  <br /></td></tr>
 <tr class="separator:a4e92fac1a9d82e418452bf597edd22e0 inherit pub_methods_classhardware__interface_1_1SystemInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac858b0664d5e62c777b87379337d7ab3 inherit pub_methods_classhardware__interface_1_1SystemInterface" id="r_ac858b0664d5e62c777b87379337d7ab3"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="classhardware__interface_1_1StateInterface.html">StateInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1SystemInterface.html#ac858b0664d5e62c777b87379337d7ab3">export_state_interfaces</a> ()=0</td></tr>
+<tr class="memdesc:ac858b0664d5e62c777b87379337d7ab3 inherit pub_methods_classhardware__interface_1_1SystemInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exports all state interfaces for this hardware interface.  <br /></td></tr>
+<tr class="separator:ac858b0664d5e62c777b87379337d7ab3 inherit pub_methods_classhardware__interface_1_1SystemInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac496019af4533070de17a095b950af26 inherit pub_methods_classhardware__interface_1_1SystemInterface" id="r_ac496019af4533070de17a095b950af26"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="classhardware__interface_1_1CommandInterface.html">CommandInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1SystemInterface.html#ac496019af4533070de17a095b950af26">export_command_interfaces</a> ()=0</td></tr>
+<tr class="memdesc:ac496019af4533070de17a095b950af26 inherit pub_methods_classhardware__interface_1_1SystemInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exports all command interfaces for this hardware interface.  <br /></td></tr>
+<tr class="separator:ac496019af4533070de17a095b950af26 inherit pub_methods_classhardware__interface_1_1SystemInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b944943314be907806ec3e989e6acd9 inherit pub_methods_classhardware__interface_1_1SystemInterface" id="r_a9b944943314be907806ec3e989e6acd9"><td class="memItemLeft" align="right" valign="top">virtual return_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1SystemInterface.html#a9b944943314be907806ec3e989e6acd9">prepare_command_mode_switch</a> (const std::vector&lt; std::string &gt; &amp;, const std::vector&lt; std::string &gt; &amp;)</td></tr>
 <tr class="memdesc:a9b944943314be907806ec3e989e6acd9 inherit pub_methods_classhardware__interface_1_1SystemInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prepare for a new command interface switch.  <br /></td></tr>
 <tr class="separator:a9b944943314be907806ec3e989e6acd9 inherit pub_methods_classhardware__interface_1_1SystemInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -174,76 +180,10 @@ rclcpp_lifecycle::State&#160;</td><td class="memItemRight" valign="bottom"><b>li
 <tr class="separator:a5ccfcd637715cc0c64c4537fd09e74ee inherit pro_attribs_classhardware__interface_1_1SystemInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>In-process mock hardware that simulates Furuta pendulum dynamics.</p>
-<p>State interfaces: motor_joint/position (rad) motor_joint/velocity (rad/s) pendulum_joint/position (rad) pendulum_joint/velocity (rad/s)</p>
-<p>Command interfaces: motor_joint/acceleration (rad/s^2)</p>
-<p>The commanded acceleration is applied directly to the motor joint. Coupled 2-DOF Lagrangian dynamics determine the pendulum response. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a629d596a93b7dab77210357f35916852" name="a629d596a93b7dab77210357f35916852"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a629d596a93b7dab77210357f35916852">&#9670;&#160;</a></span>export_command_interfaces()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt; <a class="el" href="classhardware__interface_1_1CommandInterface.html">hardware_interface::CommandInterface</a> &gt; mock_pendulum_hardware::MockPendulumHardware::export_command_interfaces </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Exports all command interfaces for this hardware interface. </p>
-<p>The command interfaces have to be created and transferred according to the hardware info passed in for the configuration.</p>
-<p>Note the ownership over the state interfaces is transferred to the caller.</p>
-<dl class="section return"><dt>Returns</dt><dd>vector of command interfaces </dd></dl>
-
-<p>Implements <a class="el" href="classhardware__interface_1_1SystemInterface.html#ac496019af4533070de17a095b950af26">hardware_interface::SystemInterface</a>.</p>
-
-</div>
-</div>
-<a id="a70df08eae029519defa2a28b1c519c51" name="a70df08eae029519defa2a28b1c519c51"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a70df08eae029519defa2a28b1c519c51">&#9670;&#160;</a></span>export_state_interfaces()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt; <a class="el" href="classhardware__interface_1_1StateInterface.html">hardware_interface::StateInterface</a> &gt; mock_pendulum_hardware::MockPendulumHardware::export_state_interfaces </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Exports all state interfaces for this hardware interface. </p>
-<p>The state interfaces have to be created and transferred according to the hardware info passed in for the configuration.</p>
-<p>Note the ownership over the state interfaces is transferred to the caller.</p>
-<dl class="section return"><dt>Returns</dt><dd>vector of state interfaces </dd></dl>
-
-<p>Implements <a class="el" href="classhardware__interface_1_1SystemInterface.html#ac858b0664d5e62c777b87379337d7ab3">hardware_interface::SystemInterface</a>.</p>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<div class="textblock"><p>Mock hardware for a rotary (Furuta) inverted pendulum.</p>
+<p>Angle conventions (chosen to match the controller, NOT the URDF joint zero): q1 (motor_joint) : arm angle, 0 = wherever the operator centred the arm, mechanically limited to +-135 deg by the lid bosses. q2 (pendulum_joint) : 0 = UPRIGHT, +-pi = hanging. Always reported wrapped into [-pi, pi].</p>
+<p>The URDF's <code>arm_to_pendulum</code> zero is the hanging pose; this interface offsets that by pi so the controller sees the usual "error = q2" upright convention. </p>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>zephyr-zenoh-integration/demos/inverted_pendulum/inverted_pendulum_ros/include/mock_pendulum_hardware/<a class="el" href="mock__pendulum__hardware_8hpp_source.html">mock_pendulum_hardware.hpp</a></li>
 <li>zephyr-zenoh-integration/demos/inverted_pendulum/inverted_pendulum_ros/src/<b>mock_pendulum_hardware.cpp</b></li>
 </ul>

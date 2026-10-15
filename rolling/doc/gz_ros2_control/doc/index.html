@@ -323,6 +323,8 @@ robot hardware interfaces between <em>ros2_control</em> and Gazebo.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">&lt;parameters&gt;</span></code>: A YAML file with the configuration of the controllers. This element can be given multiple times to load multiple files.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&lt;controller_manager_name&gt;</span></code>: Set controller manager name (default: <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;hardware_init_timeout&gt;</span></code>: Maximum time in seconds to wait for the controller manager to receive the <code class="docutils literal notranslate"><span class="pre">robot_description</span></code> and initialize the hardware.
+If it expires, the plugin logs an error and the robot is not controlled. (default: <code class="docutils literal notranslate"><span class="pre">0</span></code>, wait forever)</p></li>
 </ul>
 <p>The following additional parameters can be set via child elements in the URDF/SDF or via ROS parameters in the YAML file above:</p>
 <ul class="simple">
