@@ -225,7 +225,7 @@ aliases at them instead of the A4988 nodes.
      - Notes
    * - EN
      - GPIO4
-     - Active low!
+     - Active low
    * - M0
      - GPIO5
      -
