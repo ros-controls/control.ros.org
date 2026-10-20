@@ -126,14 +126,14 @@
 <p>The integration provides two architecture variants.</p>
 <section id="no-cdr-architecture">
 <h2>No-CDR architecture<a class="headerlink" href="#no-cdr-architecture" title="Link to this heading"></a></h2>
-<a class="reference internal image-reference" href="../../../_images/nocdr_architecture.png"><img alt="No-CDR architecture — uses zenbedded_transport, zenbedded_hardware_interface, and zenbedded_rcl with zero-copy packed binary over Zenoh" class="align-center" src="../../../_images/nocdr_architecture.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/nocdr_architecture.png"><img alt="No-CDR architecture — uses zenbedded_transport, zenbedded_hardware_interface, and zenbedded_rcl with zero-copy packed binary over Zenoh" class="align-center" src="../../../_images/nocdr_architecture.png" style="width: 500px;" /></a>
 <p>No intermediate serialization. <code class="docutils literal notranslate"><span class="pre">zenbedded_transport</span></code> defines the wire format,
 <code class="docutils literal notranslate"><span class="pre">zenbedded_hardware_interface</span></code> runs on the host, <code class="docutils literal notranslate"><span class="pre">zenbedded_rcl</span></code> runs on
 the MCU — all sharing the same packed struct layout.</p>
 </section>
 <section id="cdr-architecture">
 <h2>CDR architecture<a class="headerlink" href="#cdr-architecture" title="Link to this heading"></a></h2>
-<a class="reference internal image-reference" href="../../../_images/cdr_architecture.png"><img alt="CDR architecture — uses topic_based_hardware_interface and zenbedded_transport with CDR serialization over Zenoh" class="align-center" src="../../../_images/cdr_architecture.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/cdr_architecture.png"><img alt="CDR architecture — uses topic_based_hardware_interface and zenbedded_transport with CDR serialization over Zenoh" class="align-center" src="../../../_images/cdr_architecture.png" style="width: 200px;" /></a>
 <p>Uses standard CDR serialization. <code class="docutils literal notranslate"><span class="pre">topic_based_hardware_interface</span></code> on the host
 communicates with <code class="docutils literal notranslate"><span class="pre">zenbedded_transport</span></code> on the MCU over Zenoh topics.</p>
 </section>
