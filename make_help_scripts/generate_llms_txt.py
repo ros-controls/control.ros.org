@@ -34,10 +34,10 @@ def main():
         # ros2_control Documentation
 
         > ros2_control is a framework for real-time control of robots using ROS 2. It provides hardware abstraction, a controller manager, and a set of standard controllers for common robot hardware.
-        
+
         ## Tools and APIs
         - [OpenAPI Specification](openapi.yaml): Machine-readable schema for programmatic page fetching.
-        
+
         ## Key Sections
         - [Getting Started](doc/getting_started/getting_started.html)
         - [Controllers](doc/ros2_controllers/doc/controllers_index.html)
@@ -48,13 +48,13 @@ def main():
         - [Supported Robotics](doc/supported_robots/supported_robots.html)
         - [API Reference](doc/api_list/api_list.html)
         """)
-    
+
     # Dynamically fetch EOL distributions from the official source of truth
     eol_distros = get_eol_distros()
-    
+
     # Filter out EOL distros, the base_branch duplicate, and lyrical
     active_distros = [
-        distro for distro in branch_version.keys() 
+        distro for distro in branch_version.keys()
         if distro not in eol_distros and distro != "lyrical"
     ]
 
@@ -66,7 +66,7 @@ def main():
         dynamic_version += f"- [{distro.capitalize()}](https://control.ros.org/{distro}/)\n"
         dynamic_migrations += f"- [{distro.capitalize()} Release Notes](https://control.ros.org/{distro}/doc/release_notes/release_notes.html)\n"
         dynamic_migrations += f"- [{distro.capitalize()} Migration Guide](https://control.ros.org/{distro}/doc/migration/migration.html)\n"
-    
+
     dynamic_migrations += "- [Differences to ROS 1 (ros_control)](doc/migration/differences_to_ros1.html)\n"
 
     final_content = static_header + "\n" + dynamic_version + "\n" + dynamic_migrations
