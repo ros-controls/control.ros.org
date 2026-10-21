@@ -128,18 +128,22 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">const</span> <span class="keywordtype">char</span> * zenbedded_get_rihs_hash(<span class="keyword">const</span> <span class="keywordtype">char</span> * type_name)</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>{</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <span class="keywordtype">size_t</span> ledger_size = <span class="keyword">sizeof</span>(RIHS_LEDGER) / <span class="keyword">sizeof</span>(RIHS_LEDGER[0]);</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; ledger_size; i++)</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  {</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordflow">if</span> (strcmp(RIHS_LEDGER[i].type_name, type_name) == 0)</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    {</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>      <span class="keywordflow">return</span> RIHS_LEDGER[i].rihs_hash;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    }</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  }</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="keywordflow">return</span> <span class="stringliteral">&quot;UNKNOWN_HASH&quot;</span>;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>}</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#endif  </span><span class="comment">// ZENBEDDED_TRANSPORT__RIHS_LEDGER_H_</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <span class="keywordflow">if</span> (type_name == NULL)</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  }</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="keywordtype">size_t</span> ledger_size = <span class="keyword">sizeof</span>(RIHS_LEDGER) / <span class="keyword">sizeof</span>(RIHS_LEDGER[0]);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; ledger_size; i++)</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordflow">if</span> (strcmp(RIHS_LEDGER[i].type_name, type_name) == 0)</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>      <span class="keywordflow">return</span> RIHS_LEDGER[i].rihs_hash;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    }</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  }</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>}</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#endif  </span><span class="comment">// ZENBEDDED_TRANSPORT__RIHS_LEDGER_H_</span></div>
 <div class="ttc" id="astructzenbedded__rihs__mapping__t_html"><div class="ttname"><a href="structzenbedded__rihs__mapping__t.html">zenbedded_rihs_mapping_t</a></div><div class="ttdef"><b>Definition</b> rihs_ledger.h:23</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

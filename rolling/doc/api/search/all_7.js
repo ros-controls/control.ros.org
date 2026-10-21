@@ -125,5 +125,5 @@ var searchData=
   ['gravitycompensation_122',['gravitycompensation',['../classcontrol__filters_1_1GravityCompensation.html',1,'control_filters::GravityCompensation&lt; T &gt;'],['../classcontrol__filters_1_1GravityCompensation.html#adb36ad03b0797052de2deb4b86cbe392',1,'control_filters::GravityCompensation::GravityCompensation()']]],
   ['gripperactioncontroller_123',['GripperActionController',['../classparallel__gripper__action__controller_1_1GripperActionController.html',1,'parallel_gripper_action_controller']]],
   ['group_124',['group',['../structhardware__interface_1_1HardwareInfo.html#a6b88e56e222f5dacb9b343fe1d0802a2',1,'hardware_interface::HardwareInfo::group'],['../structhardware__interface_1_1HardwareComponentInfo.html#a4cf36a1188216aeebdd5723b1832d7fe',1,'hardware_interface::HardwareComponentInfo::group']]],
-  ['gzresourcemanager_125',['GZResourceManager',['../classgz__ros2__control_1_1GZResourceManager.html',1,'gz_ros2_control']]]
+  ['gzresourcemanager_125',['gzresourcemanager',['../classgz__ros2__control_1_1GZResourceManager.html',1,'gz_ros2_control::GZResourceManager'],['../classgz__ros2__control_1_1GZResourceManager.html#afdb64000ba16d34a4f586232dd18084c',1,'gz_ros2_control::GZResourceManager::GZResourceManager()']]]
 ];
