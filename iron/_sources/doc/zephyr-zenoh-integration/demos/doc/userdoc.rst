@@ -14,7 +14,6 @@ inverted_pendulum
 
 The zenbedded Zephyr modules will communicate to ``zenbedded_hardware_interface`` via Zenoh, where a controller from ``ros2_control`` balances the pendulum.
 
-rcl_cpp_test
 ------------
 
 A C++ demo that exercises the ``zenbedded_rcl`` client together with the
