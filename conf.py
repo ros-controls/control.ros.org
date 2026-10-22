@@ -98,8 +98,12 @@ extensions = [
     "sphinx.ext.autosectionlabel",
     'myst_parser',
     'sphinxcontrib.youtube',
-    'sphinxcontrib.cairosvgconverter'
+    'sphinxcontrib.cairosvgconverter',
+    'sphinxcontrib.mermaid'
 ]
+
+# Render ```mermaid code blocks in Markdown files as Mermaid diagrams
+myst_fence_as_directive = ["mermaid"]
 
 # Make sure the target is unique
 autosectionlabel_prefix_document = True
