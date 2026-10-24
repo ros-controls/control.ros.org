@@ -29,7 +29,7 @@
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="Demos" href="../demos/doc/userdoc.html" />
-    <link rel="prev" title="Getting Started" href="getting_started.html" /> 
+    <link rel="prev" title="Supported ROS 2 Distributions" href="supported_distributions.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -62,6 +62,7 @@
 <li class="toctree-l3"><a class="reference internal" href="index.html#packages">Packages</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="index.html#guides-and-examples">Guides and Examples</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l4"><a class="reference internal" href="supported_distributions.html">Supported ROS 2 Distributions</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">Architecture</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#no-cdr-architecture">No-CDR architecture</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#cdr-architecture">CDR architecture</a></li>
@@ -69,6 +70,7 @@
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="../demos/doc/userdoc.html">Demos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tests/zenoh_e2e/userdoc.html">Tests</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../docker/doc/userdoc.html">Docker</a></li>
 <li class="toctree-l4"><a class="reference internal" href="benchmarking.html">Benchmarking</a></li>
 </ul>
@@ -146,16 +148,9 @@ commands to a Zenoh publisher. Configuration (endpoint, topics, interface
 schema) is done via ROS 2 parameters. Uses <code class="docutils literal notranslate"><span class="pre">realtime_tools::RealtimeBuffer</span></code>
 for lock-free state access.</p>
 </dd>
-<dt>zenbedded_transport <strong>[stable]</strong></dt><dd><p>A YAML-driven schema parser and C/C++ header generator that produces packed
-binary struct descriptions. Both the hardware interface (host-side) and the
-firmware (MCU-side) use the same schema to ensure wire-format compatibility.
-Has no ROS dependencies – builds standalone or with <code class="docutils literal notranslate"><span class="pre">colcon</span></code>.</p>
-</dd>
-<dt>zenbedded_transport <strong>[WIP]</strong></dt><dd><p>Zephyr module infrastructure for shared transport logic between the MCU
-and the ROS 2 host. Implements MicroCDR-style <code class="docutils literal notranslate"><span class="pre">JointState</span></code> and
-<code class="docutils literal notranslate"><span class="pre">JointCommand</span></code> serialization (the <code class="docutils literal notranslate"><span class="pre">zcdr_*</span></code> API in <code class="docutils literal notranslate"><span class="pre">serialization.h</span></code>).
-A <code class="docutils literal notranslate"><span class="pre">zenoh_transport</span></code> wrapper, shared <code class="docutils literal notranslate"><span class="pre">.msg</span></code> definitions, and ROS
-name-to-Zenoh resource key mapping are planned.</p>
+<dt>zenbedded_transport</dt><dd><p>A Zephyr module providing the shared wire format between the MCU and the ROS 2 host.
+It implements MicroCDR-style <code class="docutils literal notranslate"><span class="pre">JointState</span></code> and <code class="docutils literal notranslate"><span class="pre">JointCommand</span></code> serialization for Tier 1,
+and includes the schema-coupled payload generator for Tier 2.</p>
 </dd>
 <dt>zenbedded_rcl <strong>[WIP]</strong></dt><dd><p>An embedded client library for Zephyr RTOS that provides a high-level,
 ROS-like API for hardware components running on the MCU. The
@@ -175,7 +170,7 @@ Zenoh without any intermediate agent.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="getting_started.html" class="btn btn-neutral float-left" title="Getting Started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="supported_distributions.html" class="btn btn-neutral float-left" title="Supported ROS 2 Distributions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../demos/doc/userdoc.html" class="btn btn-neutral float-right" title="Demos" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

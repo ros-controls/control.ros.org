@@ -9,24 +9,9 @@ Demos
 
    This package is **work in progress**.
 
-inverted_pendulum
------------------
+The ``demos/`` directory contains runnable applications demonstrating the Zenbedded integration tiers.
 
-The zenbedded Zephyr modules will communicate to ``zenbedded_hardware_interface`` via Zenoh, where a controller from ``ros2_control`` balances the pendulum.
+.. toctree::
+   :titlesonly:
 
-------------
-
-A C++ demo that exercises the ``zenbedded_rcl`` client together with the
-Zephyr network stack and Zenoh publish/subscribe.
-
-zenbedded_test_node
--------------------
-
-Validates CDR ``JointState`` / ``JointCommand`` payload extraction using the
-``zenbedded_transport`` serialization helpers. Buildable for ``native_sim``
-and ``esp32s3_devkitc/esp32s3/procpu``; run via ``twister``.
-
-zenoh_e2e
--------------------
-
-Checks using ``native_sim`` build if the minimal firmware connection to Zenoh is working. Buildable for ``native_sim``; run via ``twister``.
+   Inverted Pendulum <../inverted_pendulum/doc/userdoc.rst>

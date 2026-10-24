@@ -11,7 +11,7 @@ This guide walks you through setting up Zenbedded end-to-end.
 Prerequisites
 -------------
 
-- ROS 2 Jazzy (or later)
+- ROS 2 Lyrical (see :ref:`supported_distributions` for Kilted and Jazzy)
 - A Zephyr-supported board (ESP32-S3 reference target)
 - ``west`` installed and configured
 
@@ -38,9 +38,9 @@ the :ref:`docker_userdoc`):
 
 .. code:: bash
 
-   cd /zephyr_ws/demos/inverted_pendulum
+   cd /zephyr_ws/demos/sine_wave/sine_wave_zephyr
    west build -p always -b esp32s3_devkitc/esp32s3/procpu
-   west flash --esp-device /dev/ttyUSB0
+   west flash
 
 .. note::
 

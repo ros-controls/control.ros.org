@@ -42,18 +42,10 @@ zenbedded_hardware_interface **[stable]**
     schema) is done via ROS 2 parameters. Uses ``realtime_tools::RealtimeBuffer``
     for lock-free state access.
 
-zenbedded_transport **[stable]**
-    A YAML-driven schema parser and C/C++ header generator that produces packed
-    binary struct descriptions. Both the hardware interface (host-side) and the
-    firmware (MCU-side) use the same schema to ensure wire-format compatibility.
-    Has no ROS dependencies -- builds standalone or with ``colcon``.
-
-zenbedded_transport **[WIP]**
-    Zephyr module infrastructure for shared transport logic between the MCU
-    and the ROS 2 host. Implements MicroCDR-style ``JointState`` and
-    ``JointCommand`` serialization (the ``zcdr_*`` API in ``serialization.h``).
-    A ``zenoh_transport`` wrapper, shared ``.msg`` definitions, and ROS
-    name-to-Zenoh resource key mapping are planned.
+zenbedded_transport
+    A Zephyr module providing the shared wire format between the MCU and the ROS 2 host.
+    It implements MicroCDR-style ``JointState`` and ``JointCommand`` serialization for Tier 1,
+    and includes the schema-coupled payload generator for Tier 2.
 
 zenbedded_rcl **[WIP]**
     An embedded client library for Zephyr RTOS that provides a high-level,

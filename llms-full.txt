@@ -101,7 +101,7 @@ General discussions
 
 ======================================================================
 
-Built on 2026-10-23 at 05:43 GMT
+Built on 2026-10-24 at 05:44 GMT
 
 
 
@@ -140,9 +140,15 @@ ros2_control with embedded systems and microcontrollers.
 
   * Getting Started
 
+  * Supported ROS 2 Distributions
+
   * Architecture
 
   * Demos
+
+    * Inverted Pendulum
+
+  * Tests
 
   * Docker
 
@@ -5388,7 +5394,7 @@ Create a header that inherits from "MuJoCoROS2ControlPluginBase":
      // Called on the physics thread, immediately before every mj_step.
    }
 
-   void on_reset(mjData* /*data*/)
+   void MyCustomPlugin::on_reset(mjData* /*data*/)
    {
      // Called after a world reset (ResetWorld service or UI reset).
    }
@@ -24612,33 +24618,10 @@ Warning:
 
   This package is **work in progress**.
 
+The "demos/" directory contains runnable applications demonstrating
+the Zenbedded integration tiers.
 
-inverted_pendulum
-=================
-
-The zenbedded Zephyr modules will communicate to
-"zenbedded_hardware_interface" via Zenoh, where a controller from
-"ros2_control" balances the pendulum.
-
-======================================================================
-
-A C++ demo that exercises the "zenbedded_rcl" client together with the
-Zephyr network stack and Zenoh publish/subscribe.
-
-
-zenbedded_test_node
-===================
-
-Validates CDR "JointState" / "JointCommand" payload extraction using
-the "zenbedded_transport" serialization helpers. Buildable for
-"native_sim" and "esp32s3_devkitc/esp32s3/procpu"; run via "twister".
-
-
-zenoh_e2e
-=========
-
-Checks using "native_sim" build if the minimal firmware connection to
-Zenoh is working. Buildable for "native_sim"; run via "twister".
+* Inverted Pendulum
 
 
 
@@ -24921,20 +24904,11 @@ zenbedded_hardware_interface **[stable]**
    (endpoint, topics, interface schema) is done via ROS 2 parameters.
    Uses "realtime_tools::RealtimeBuffer" for lock-free state access.
 
-zenbedded_transport **[stable]**
-   A YAML-driven schema parser and C/C++ header generator that
-   produces packed binary struct descriptions. Both the hardware
-   interface (host-side) and the firmware (MCU-side) use the same
-   schema to ensure wire-format compatibility. Has no ROS dependencies
-   -- builds standalone or with "colcon".
-
-zenbedded_transport **[WIP]**
-   Zephyr module infrastructure for shared transport logic between the
-   MCU and the ROS 2 host. Implements MicroCDR-style "JointState" and
-   "JointCommand" serialization (the "zcdr_*" API in
-   "serialization.h"). A "zenoh_transport" wrapper, shared ".msg"
-   definitions, and ROS name-to-Zenoh resource key mapping are
-   planned.
+zenbedded_transport
+   A Zephyr module providing the shared wire format between the MCU
+   and the ROS 2 host. It implements MicroCDR-style "JointState" and
+   "JointCommand" serialization for Tier 1, and includes the schema-
+   coupled payload generator for Tier 2.
 
 zenbedded_rcl **[WIP]**
    An embedded client library for Zephyr RTOS that provides a high-
@@ -25058,7 +25032,8 @@ This guide walks you through setting up Zenbedded end-to-end.
 Prerequisites
 =============
 
-* ROS 2 Jazzy (or later)
+* ROS 2 Lyrical (see Supported ROS 2 Distributions for Kilted and
+  Jazzy)
 
 * A Zephyr-supported board (ESP32-S3 reference target)
 
@@ -25083,9 +25058,9 @@ The easiest route is the Docker development environment, which
 provides a ready-made west workspace with the modules and "zenoh-pico"
 preloaded (see the Docker):
 
-   cd /zephyr_ws/demos/inverted_pendulum
+   cd /zephyr_ws/demos/sine_wave/sine_wave_zephyr
    west build -p always -b esp32s3_devkitc/esp32s3/procpu
-   west flash --esp-device /dev/ttyUSB0
+   west flash
 
 Note:
 
@@ -25149,13 +25124,155 @@ Guides and Examples
 
 * Getting Started
 
+* Supported ROS 2 Distributions
+
 * Architecture
 
 * Demos
 
+  * Inverted Pendulum
+
+* Tests
+
 * Docker
 
 * Benchmarking
+
+
+
+==================================================
+source page: doc/zephyr-zenoh-integration/doc/supported_distributions.txt
+==================================================
+
+Supported ROS 2 Distributions
+*****************************
+
+Zenbedded is built from a single "master" branch. Host packages and
+firmware are versioned together, so the ROS 2 distribution only
+affects the host side; the Zephyr side is pinned by the development
+image (Zephyr v4.4.2 and the "zenbedded" zenoh-pico fork).
+
++--------------------+--------------+--------------------------+--------------------------+------------------------+
+| ROS 2 distro       | Branch       | Host (ROS 2)             | Firmware (Zephyr)        | Status                 |
+|====================|==============|==========================|==========================|========================|
+| **Lyrical**        | "master"     | CI: binary build against | CI: "native_sim" run,    | **Supported**          |
+|                    |              | "main" and "testing"     | ESP32-S3 build           |                        |
++--------------------+--------------+--------------------------+--------------------------+------------------------+
+| **Kilted**         | "master"     | Source build only        | Source build only        | **Not validated**      |
++--------------------+--------------+--------------------------+--------------------------+------------------------+
+| **Jazzy**          | "master"     | Source build only        | Source build only        | **Not validated**      |
++--------------------+--------------+--------------------------+--------------------------+------------------------+
+| Humble and older   | --           | Not built                | Not built                | **Unsupported**        |
++--------------------+--------------+--------------------------+--------------------------+------------------------+
+
+
+Support levels
+==============
+
+**Supported**
+   Covered by CI and exercised end-to-end. Regressions are treated as
+   bugs.
+
+**Not validated**
+   Builds from the same sources, but no CI lane exists yet and the
+   combination has not been validated end-to-end. CI coverage for
+   Kilted and Jazzy is planned for after the first release.
+
+**Unsupported**
+   Not built or tested. Pull requests that add support are welcome,
+   but no support is implied.
+
+
+Lyrical
+=======
+
+The validated target.
+
+* Host: binary build against the Lyrical "main" and "testing"
+  repositories, plus the pre-commit job.
+
+* Firmware: twister builds the demos and tests for
+  "esp32s3_devkitc/esp32s3/procpu" and runs the pytest suites on
+  "native_sim/native/64".
+
+* Development image: "ros:lyrical-ros-base" with "ros2_control",
+  "rmw_zenoh_cpp", Zephyr, and zenoh-pico.
+
+Build from source:
+
+   mkdir -p ~/zenbedded_ws/src
+   cd ~/zenbedded_ws/src
+   git clone https://github.com/ros-controls/zenbedded.git
+   cd ~/zenbedded_ws
+   rosdep install --from-paths src --ignore-src -r -y
+   colcon build --packages-select zenbedded_hardware_interface zenbedded_transport
+   source install/setup.bash
+
+
+Kilted
+======
+
+Not validated. The host packages use "ros2_control" interfaces that
+are present in Kilted, so a source build is expected to work; it is
+not covered by CI, and no end-to-end run is part of the test matrix.
+Set "ROS_DISTRO" to the distribution you are building for ("kilted"
+here):
+
+   source /opt/ros/${ROS_DISTRO}/setup.bash
+   mkdir -p ~/zenbedded_ws/src
+   cd ~/zenbedded_ws/src
+   git clone https://github.com/ros-controls/zenbedded.git
+   cd ~/zenbedded_ws
+   rosdep install --from-paths src --ignore-src -r -y
+   colcon build --packages-select zenbedded_hardware_interface zenbedded_transport
+   source install/setup.bash
+
+The Docker development image is Lyrical-based. For Kilted, build the
+host packages natively or derive an image from "ros:kilted-ros-base"
+with the packages listed in Docker.
+
+
+Jazzy
+=====
+
+Not validated, with the same caveats as Kilted: source build expected,
+no CI lane, no end-to-end validation. The firmware side is unaffected.
+
+Follow the Kilted build steps above with "ROS_DISTRO" set to "jazzy".
+
+
+Firmware on any distro
+======================
+
+The Zephyr workspace is independent of the host distribution. Use the
+development container, which pins Zephyr v4.4.2, the Zephyr SDK, and
+the zenoh-pico fork, then build the application:
+
+   cd /zephyr_ws/demos/inverted_pendulum/inverted_pendulum_tier2
+   west build -p always -b esp32s3_devkitc/esp32s3/procpu
+   west flash
+
+See Docker for the workspace layout.
+
+
+Adding a distribution
+=====================
+
+To promote a distribution from *not validated* to *supported*:
+
+1. Add the distribution to the binary build matrix (see
+   ".github/workflows/lyrical-binary-build.yml") and add a pre-commit
+   lane.
+
+2. Add an end-to-end run on the distribution, or document the manual
+   test that was performed.
+
+3. Update the table above and the matrix in "README.md".
+
+4. Add a note here describing any distribution-specific limitation.
+
+Keep the firmware column unchanged unless the Zephyr or zenoh-pico
+pins change.
 
 
 
@@ -25216,6 +25333,20 @@ Volume mounts
 
 Networking uses "host" mode and the container runs privileged (for
 USB-based flashing).
+
+
+
+==================================================
+source page: doc/zephyr-zenoh-integration/tests/zenoh_e2e/userdoc.txt
+==================================================
+
+Zenoh E2E Test
+**************
+
+This test checks a Zenoh connection from firmware to a host router.
+
+The firmware runs on "native_sim". It connects to "rmw_zenohd" on port
+7447.
 
 
 

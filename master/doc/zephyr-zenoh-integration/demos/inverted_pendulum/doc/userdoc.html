@@ -27,7 +27,9 @@
       <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
     <script src="../../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../../../search.html" /> 
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="Zenoh E2E Test" href="../../../tests/zenoh_e2e/userdoc.html" />
+    <link rel="prev" title="Demos" href="../../doc/userdoc.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -50,12 +52,55 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../../../resources/roscon2026_workshop.html">ROSCon 2026 Workshop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../ros2_control/doc/index.html">ros2_control</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../embedded_integration.html">Embedded Integration</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../embedded_integration.html">Embedded Integration</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../doc/index.html">Zenbedded: Zenoh-based integration for Zephyr-supported hardware platforms</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../../doc/index.html#packages">Packages</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../../doc/index.html#guides-and-examples">Guides and Examples</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../../doc/getting_started.html">Getting Started</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../doc/supported_distributions.html">Supported ROS 2 Distributions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../doc/architecture.html">Architecture</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../../doc/userdoc.html">Demos</a><ul class="current">
+<li class="toctree-l5 current"><a class="current reference internal" href="#">Inverted Pendulum</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#setup">Setup</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="#start-the-zenoh-router">1. Start the Zenoh router</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#configure-the-firmware">2. Configure the firmware</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#build-and-flash">3. Build and flash</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#add-your-wi-fi-credentials">4. Add your Wi-Fi credentials</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#check-the-led-status">5. Check the LED status</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="#controller-ros-2">Controller (ROS 2)</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="#build">Build</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#run">Run</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="#connection-guide">Connection Guide</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="#stepper-driver-a4988-1-16-microstepping">Stepper driver (A4988, 1/16 microstepping)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#as5600-encoder-i2c">AS5600 encoder (I2C)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#status-led-ws2812-neopixel">Status LED (WS2812 / NeoPixel)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#wiring-summary">Wiring summary</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#optional-tmc2209-drv-style-driver">Optional: TMC2209 / DRV-style driver</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tests/zenoh_e2e/userdoc.html">Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docker/doc/userdoc.html">Docker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../doc/benchmarking.html">Benchmarking</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../ros2_control_demos/doc/index.html">Demos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../utilities.html">Utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../simulators/simulators.html">Simulator Integrations</a></li>
@@ -85,6 +130,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../embedded_integration.html">Embedded Integration</a></li>
+          <li class="breadcrumb-item"><a href="../../../doc/index.html">Zenbedded</a></li>
+          <li class="breadcrumb-item"><a href="../../doc/userdoc.html">Demos</a></li>
       <li class="breadcrumb-item active">Zenbedded Inverted Pendulum Demo</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/ros-controls/control.ros.org/blob/rolling//doc/zephyr-zenoh-integration/demos/inverted_pendulum/doc/userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
@@ -383,7 +431,10 @@ connected (check the router logs), and verify the AS5600 wiring.</p></li>
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../doc/userdoc.html" class="btn btn-neutral float-left" title="Demos" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../../tests/zenoh_e2e/userdoc.html" class="btn btn-neutral float-right" title="Zenoh E2E Test" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

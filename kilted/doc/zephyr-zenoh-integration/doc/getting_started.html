@@ -28,7 +28,7 @@
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Architecture" href="architecture.html" />
+    <link rel="next" title="Supported ROS 2 Distributions" href="supported_distributions.html" />
     <link rel="prev" title="zenbedded_rcl" href="../zenbedded_rcl/doc/userdoc.html" /> 
 </head>
 
@@ -69,8 +69,10 @@
 <li class="toctree-l5"><a class="reference internal" href="#verify">4. Verify</a></li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="supported_distributions.html">Supported ROS 2 Distributions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="architecture.html">Architecture</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../demos/doc/userdoc.html">Demos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tests/zenoh_e2e/userdoc.html">Tests</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../docker/doc/userdoc.html">Docker</a></li>
 <li class="toctree-l4"><a class="reference internal" href="benchmarking.html">Benchmarking</a></li>
 </ul>
@@ -129,7 +131,7 @@
 <section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>ROS 2 Jazzy (or later)</p></li>
+<li><p>ROS 2 Lyrical (see <a class="reference internal" href="supported_distributions.html#supported-distributions"><span class="std std-ref">Supported ROS 2 Distributions</span></a> for Kilted and Jazzy)</p></li>
 <li><p>A Zephyr-supported board (ESP32-S3 reference target)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">west</span></code> installed and configured</p></li>
 </ul>
@@ -150,9 +152,9 @@ colcon<span class="w"> </span>build
 <p>The easiest route is the Docker development environment, which provides a
 ready-made west workspace with the modules and <code class="docutils literal notranslate"><span class="pre">zenoh-pico</span></code> preloaded (see
 the <a class="reference internal" href="../docker/doc/userdoc.html#docker-userdoc"><span class="std std-ref">Docker</span></a>):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/zephyr_ws/demos/inverted_pendulum
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/zephyr_ws/demos/sine_wave/sine_wave_zephyr
 west<span class="w"> </span>build<span class="w"> </span>-p<span class="w"> </span>always<span class="w"> </span>-b<span class="w"> </span>esp32s3_devkitc/esp32s3/procpu
-west<span class="w"> </span>flash<span class="w"> </span>--esp-device<span class="w"> </span>/dev/ttyUSB0
+west<span class="w"> </span>flash
 </pre></div>
 </div>
 <div class="admonition note">
@@ -190,7 +192,7 @@ zenohc<span class="w"> </span>sub<span class="w"> </span>rt/robot/state
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../zenbedded_rcl/doc/userdoc.html" class="btn btn-neutral float-left" title="zenbedded_rcl" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="architecture.html" class="btn btn-neutral float-right" title="Architecture" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="supported_distributions.html" class="btn btn-neutral float-right" title="Supported ROS 2 Distributions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
