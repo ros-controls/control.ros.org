@@ -101,7 +101,7 @@ General discussions
 
 ======================================================================
 
-Built on 2026-10-27 at 05:46 GMT
+Built on 2026-10-28 at 05:39 GMT
 
 
 
@@ -131,6 +131,8 @@ ros2_control with embedded systems and microcontrollers.
 
 * Zenbedded: Zenoh-based integration for Zephyr-supported hardware
   platforms
+
+  * Common Utilities & Helpers
 
   * Hardware Interface
 
@@ -25112,6 +25114,8 @@ Link to GitHub Repository
 Packages
 ========
 
+* Common Utilities & Helpers
+
 * Hardware Interface
 
 * Transport
@@ -25329,6 +25333,8 @@ Volume mounts
 
 * "zenbedded_rcl" → Zephyr workspace "/zephyr_ws/"
 
+* "zenbedded_common" → Zephyr workspace "/zephyr_ws/"
+
 * "demos/" → Zephyr workspace "/zephyr_ws/"
 
 Networking uses "host" mode and the container runs privileged (for
@@ -25347,6 +25353,105 @@ This test checks a Zenoh connection from firmware to a host router.
 
 The firmware runs on "native_sim". It connects to "rmw_zenohd" on port
 7447.
+
+
+
+==================================================
+source page: doc/zephyr-zenoh-integration/zenbedded_common/doc/userdoc.txt
+==================================================
+
+zenbedded_common
+****************
+
+Common network bringup, USB CDC ECM device stack, and multi-transport
+connectivity utilities for Zenbedded applications.
+
+
+Contents
+========
+
+* **Unified Network Initialization**: Simple "init_network()" call
+  supporting standalone USB CDC ECM, standalone Wi-Fi STA, and
+  resilient dual-transport operation.
+
+* **Native USB Device Stack Next (USBD)**: Zero-copy USB CDC ECM
+  Ethernet emulation with built-in DHCPv4 server leasing an IP to the
+  host PC for plug-and-play operation.
+
+* **Wi-Fi Station Management**: Automated connection via Zephyr
+  credentials storage (NVS), automatic DHCPv4 client startup, and
+  modem power management.
+
+* **Transport Redirection Helper**: Dynamic locator adaptation via
+  "get_usb_peer_locator()" to automatically direct Zenoh traffic over
+  USB when attached, with seamless fallback to Wi-Fi.
+
+
+Transport Architecture & Priority
+=================================
+
+When both transports are enabled ("CONFIG_ZENBEDDED_COMMON_USB_CDC=y"
+and "CONFIG_ZENBEDDED_COMMON_WIFI=y"):
+
+1. **USB CDC ECM Priority**: The USB device controller is initialized
+   and enabled first. If a host cable is connected, the Ethernet
+   carrier comes up within 500 ms and static IP / DHCPv4 server are
+   configured immediately.
+
+2. **Fast Carrier Check**: If the USB cable is disconnected, the
+   driver detects that the carrier is down within 2 seconds and skips
+   waiting, falling back immediately to Wi-Fi.
+
+3. **Wi-Fi Fallback**: Wi-Fi station connects to the stored SSID in
+   NVS, starts DHCPv4 discovery, and acquires an IPv4 address.
+
+4. **Resilience**: "init_network()" succeeds if either transport
+   becomes ready.
+
+
+Kconfig Options
+===============
+
++-------------------------------------+-----------------+----------------------------------------------------+
+| Kconfig Symbol                      | Default         | Description                                        |
+|=====================================|=================|====================================================|
+| "CONFIG_ZENBEDDED_COMMON"           | "y"             | Enable common Zenbedded utilities.                 |
++-------------------------------------+-----------------+----------------------------------------------------+
+| "CONFIG_ZENBEDDED_COMMON_USB_CDC"   | "n"             | Enable USB CDC ECM Ethernet emulation interface.   |
++-------------------------------------+-----------------+----------------------------------------------------+
+| "CONFIG_ZENBEDDED_COMMON_WIFI"      | "n"             | Enable 802.11 Wi-Fi station interface using stored |
+|                                     |                 | credentials.                                       |
++-------------------------------------+-----------------+----------------------------------------------------+
+| "CONFIG_ZENBEDDED_USB_CDC_STATIC_I  | "y"             | Assign deterministic static IP ("192.0.2.2") to    |
+| P"                                  |                 | device USB interface.                              |
++-------------------------------------+-----------------+----------------------------------------------------+
+| "CONFIG_ZENBEDDED_USB_CDC_DHCPV4_S  | "y"             | Run embedded DHCPv4 server to lease "192.0.2.1" to |
+| ERVER"                              |                 | the host PC.                                       |
++-------------------------------------+-----------------+----------------------------------------------------+
+
+
+Usage
+=====
+
+Include the header:
+
+   #include <zenbedded_common/network.hpp>
+
+Bring up network connectivity in "main()":
+
+   if (int err = zenbedded::common::init_network(); err != 0) {
+       LOG_ERR("Network bringup failed: %d", err);
+       return err;
+   }
+
+Inspect readiness and select locator:
+
+   char locator[64];
+   if (zenbedded::common::is_usbd_ready()) {
+       zenbedded::common::get_usb_peer_locator(DEFAULT_LOCATOR, locator, sizeof(locator));
+   } else if (zenbedded::common::is_wifi_ready()) {
+       strncpy(locator, DEFAULT_LOCATOR, sizeof(locator));
+   }
 
 
 

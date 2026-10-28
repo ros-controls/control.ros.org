@@ -43,6 +43,7 @@ Volume mounts
   workspace ``/zephyr_ws/``
 - ``zenbedded_hardware_interface`` → ROS 2 workspace ``/ros2_ws/src/``
 - ``zenbedded_rcl`` → Zephyr workspace ``/zephyr_ws/``
+- ``zenbedded_common`` → Zephyr workspace ``/zephyr_ws/``
 - ``demos/`` → Zephyr workspace ``/zephyr_ws/``
 
 Networking uses ``host`` mode and the container runs privileged

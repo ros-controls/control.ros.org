@@ -16,6 +16,7 @@ Packages
 .. toctree::
    :titlesonly:
 
+   Common Utilities & Helpers <../zenbedded_common/doc/userdoc.rst>
    Hardware Interface <../zenbedded_hardware_interface/doc/userdoc.rst>
    Transport <../zenbedded_transport/doc/userdoc.rst>
    Firmware Client Library <../zenbedded_rcl/doc/userdoc.rst>
