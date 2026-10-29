@@ -13,6 +13,31 @@ Presentations
 ---------------
 
 
+2026-10 OSS Europe 2026
+,,,,,,,,,,,,,,,,,,,,,,,
+
+:download:`Presentation: Zenbedded: Bringing ros2_control Closer to the Embedded World <presentations/OSS 2026 Zenbedded talk final.pdf>`
+
+  Summary:
+    The Robot Operating System (ROS) is the de facto standard open-source middleware for building robot software, providing standardized messaging, tooling, and reusable components. ``ros2_control`` is a hardware-agnostic control framework focusing on the modular composition of control systems for robots, sharing of controllers as well as real-time performance.
+
+    Bringing ``ros2_control`` to embedded systems usually means bolting heavy DDS serialization and a bridge process onto microcontrollers. Zenbedded fixes this. It is a monolithic Zephyr, Zenoh, and ROS 2 framework built specifically for ``ros2_control``. We put the transport, the RTOS client library, and the host-side ``hardware_interface`` plugin into one tight repository.
+
+    On the wire, we use a multi-tier transport that moves along a spectrum. You can choose between fully ROS-observable but slightly slower, or fully binary-encoded and fast, depending on what your control loop actually needs.
+
+    You'll leave with a pattern for running ``ros2_control`` on Zephyr-class hardware and a feel for working with ROS and ``ros2_control``. We'll demo the stack balancing a real inverted pendulum on an ESP32, where latency is the difference between upright and toppled.
+
+  *Presenter: Christoph Fröhlich*
+
+  Authors:
+    - Christoph Fröhlich (AIT Austrian Institute of Technology GmbH)
+    - Eneji Peacemaker Ohieku
+    - Shahazad Abdullah
+    - Kamalkant Thangaraju
+    - Krzysztof Pochwała (Flytronic)
+    - Dr. Bence Magyar (Locus Robotics)
+
+
 2026-09 ROSCon 2026
 ,,,,,,,,,,,,,,,,,,,
 
