@@ -705,6 +705,7 @@ An unknown or non-free-joint name here fails plugin initialization.</p></td>
 <h3>FtsGravCompPlugin<a class="headerlink" href="#ftsgravcompplugin" title="Link to this heading"></a></h3>
 <p>Performs gravity compensation for a force torque sensor based on provided parameters.</p>
 <p>This is intended to mock hardware configurations that have a way to perform gravity compensation on the force torque sensor data based on the weight and center of gravity of your end effector.
+The compensation runs in <code class="docutils literal notranslate"><span class="pre">update_read()</span></code>, so the compensated values are what the <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> force torque sensor state interfaces report.
 One example of this is with the <a class="reference external" href="https://www.universal-robots.com/manuals/EN/HTML/SW5_22/Content/prod-usr-man/software/PolyScope/content/BasicProgNodes/commandtab_set_payload_en.htm">Universal Robots Set Payload</a> command.</p>
 <section id="ftsgravcompplugin-parameters">
 <h4>FtsGravCompPlugin Parameters<a class="headerlink" href="#ftsgravcompplugin-parameters" title="Link to this heading"></a></h4>
@@ -869,7 +870,7 @@ Each plugin entry requires:</p>
 
 <span class="w">  </span><span class="c1">// Override whichever of these you need -- all have a no-op default, see</span>
 <span class="w">  </span><span class="c1">// "Plugin Lifecycle" below for how they differ.</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">mjModel</span><span class="o">*</span><span class="w"> </span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">mjData</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">update_write</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">mjModel</span><span class="o">*</span><span class="w"> </span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">mjData</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
 <span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">pre_step</span><span class="p">(</span><span class="n">mjData</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
 <span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">on_reset</span><span class="p">(</span><span class="n">mjData</span><span class="o">*</span><span class="w"> </span><span class="cm">/*data*/</span><span class="p">)</span>
 
@@ -900,7 +901,7 @@ Each plugin entry requires:</p>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">MyCustomPlugin::update</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">mjModel</span><span class="o">*</span><span class="w"> </span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">mjData</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">)</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">MyCustomPlugin::update_write</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">mjModel</span><span class="o">*</span><span class="w"> </span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">mjData</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">  </span><span class="c1">// Called once per ros2_control write() cycle, on the control thread.</span>
 <span class="p">}</span>
@@ -971,11 +972,22 @@ Each plugin entry requires:</p>
 <ol class="arabic simple">
 <li><p><strong>Initialization</strong> (<code class="docutils literal notranslate"><span class="pre">init</span></code>): Called once when the plugin is loaded. Use this to read
 parameters and set up publishers, subscribers, and services.</p></li>
-<li><p><strong>Update</strong> (<code class="docutils literal notranslate"><span class="pre">update</span></code>, optional): Called once per <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> <code class="docutils literal notranslate"><span class="pre">write()</span></code> cycle, on the
-control thread. <code class="docutils literal notranslate"><span class="pre">data</span></code> is a recent snapshot, not the live simulation data. Use this for
-anything that doesn’t need to run on exactly one physics step: publishing sensor data,
-servicing a trigger, etc. Most plugins in this package (<code class="docutils literal notranslate"><span class="pre">CameraPlugin</span></code>, the lidar plugins,
-<code class="docutils literal notranslate"><span class="pre">HeartbeatPublisherPlugin</span></code>, <code class="docutils literal notranslate"><span class="pre">FreeJointStatePublisherPlugin</span></code>) use only this hook.</p></li>
+<li><p><strong>Update read</strong> (<code class="docutils literal notranslate"><span class="pre">update_read</span></code>, optional): Called once per <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> <code class="docutils literal notranslate"><span class="pre">read()</span></code>
+cycle, on the control thread, before the state is handed to <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code>. <code class="docutils literal notranslate"><span class="pre">data</span></code> holds
+only the latest control state (<code class="docutils literal notranslate"><span class="pre">time</span></code>, <code class="docutils literal notranslate"><span class="pre">qpos</span></code>, <code class="docutils literal notranslate"><span class="pre">qvel</span></code>, <code class="docutils literal notranslate"><span class="pre">act</span></code>, <code class="docutils literal notranslate"><span class="pre">qfrc_actuator</span></code>,
+<code class="docutils literal notranslate"><span class="pre">sensordata</span></code>, <code class="docutils literal notranslate"><span class="pre">ctrl</span></code>), all from the same physics step; derived quantities such as
+<code class="docutils literal notranslate"><span class="pre">site_xpos</span></code> are stale, so call <code class="docutils literal notranslate"><span class="pre">mj_kinematics()</span></code> on <code class="docutils literal notranslate"><span class="pre">data</span></code> if you need them. Plugins run
+in order, each sees the previous one’s changes, and the result is what the state interfaces
+report. <code class="docutils literal notranslate"><span class="pre">FtsGravCompPlugin</span></code> uses this hook.</p></li>
+<li><p><strong>Update write</strong> (<code class="docutils literal notranslate"><span class="pre">update_write</span></code>, optional): Called once per <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> <code class="docutils literal notranslate"><span class="pre">write()</span></code>
+cycle, on the control thread, right before the commands are sent to the simulation, so it can
+read and rewrite <code class="docutils literal notranslate"><span class="pre">ctrl</span></code>/<code class="docutils literal notranslate"><span class="pre">qfrc_applied</span></code>. <code class="docutils literal notranslate"><span class="pre">data</span></code> is a recent snapshot, not the live
+simulation data. Use this for anything that doesn’t need to run on exactly one physics step:
+publishing sensor data, servicing a trigger, etc. Most plugins in this package (<code class="docutils literal notranslate"><span class="pre">CameraPlugin</span></code>, the lidar plugins,
+<code class="docutils literal notranslate"><span class="pre">HeartbeatPublisherPlugin</span></code>, <code class="docutils literal notranslate"><span class="pre">FreeJointStatePublisherPlugin</span></code>) use only this hook.
+<code class="docutils literal notranslate"><span class="pre">update</span></code> is deprecated: it is what <code class="docutils literal notranslate"><span class="pre">update_write</span></code> used to be called, and the default
+<code class="docutils literal notranslate"><span class="pre">update_write</span></code> still forwards to it, so existing plugins keep working. Rename the override
+to <code class="docutils literal notranslate"><span class="pre">update_write</span></code>.</p></li>
 <li><p><strong>Pre-step</strong> (<code class="docutils literal notranslate"><span class="pre">pre_step</span></code>, optional): Called on the physics thread, immediately before every
 <code class="docutils literal notranslate"><span class="pre">mj_step</span></code> – including multiple times per outer iteration when the loop batches steps to
 catch up. <code class="docutils literal notranslate"><span class="pre">data</span></code> is the live simulation data: read and write it directly, with no separate
@@ -989,7 +1001,7 @@ been reset and they can take appropriate action.</p></li>
 <li><p><strong>Cleanup</strong> (<code class="docutils literal notranslate"><span class="pre">cleanup</span></code>): Called when shutting down. Release any resources acquired in
 <code class="docutils literal notranslate"><span class="pre">init</span></code>.</p></li>
 </ol>
-<p>Both hooks default to doing nothing, so implement whichever fits (or both, or neither). See
+<p>All optional hooks default to doing nothing, so implement whichever fits (or both, or neither). See
 <code class="docutils literal notranslate"><span class="pre">MuJoCoROS2ControlPluginBase</span></code>’s class doc comment in <code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control_plugins_base.hpp</span></code>
 for the authoritative reference.</p>
 </section>

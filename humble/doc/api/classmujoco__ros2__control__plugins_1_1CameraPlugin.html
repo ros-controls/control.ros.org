@@ -127,9 +127,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1bb941ea45898590ee67c5394879b797" id="r_a1bb941ea45898590ee67c5394879b797"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control__plugins_1_1CameraPlugin.html#a1bb941ea45898590ee67c5394879b797">init</a> (rclcpp::Node::SharedPtr node, const mjModel *model, mjData *data, <a class="el" href="classmujoco__ros2__control__plugins_1_1CameraPlugin.html#a5b0a3d9246e6ed58b4f45ea9707dfc08">GlfwInitFn</a> glfw_init_fn)</td></tr>
 <tr class="memdesc:a1bb941ea45898590ee67c5394879b797"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload of <a class="el" href="classmujoco__ros2__control__plugins_1_1CameraPlugin.html#afbe60ffaffac7b506eca062bc0e6c774" title="Initialize the plugin.">init()</a> that takes an injectable GLFW initializer.  <br /></td></tr>
 <tr class="separator:a1bb941ea45898590ee67c5394879b797"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33734c2bc16e5ad77ca26192bc77e0b1" id="r_a33734c2bc16e5ad77ca26192bc77e0b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control__plugins_1_1CameraPlugin.html#a33734c2bc16e5ad77ca26192bc77e0b1">update</a> (const mjModel *model, mjData *data) override</td></tr>
-<tr class="memdesc:a33734c2bc16e5ad77ca26192bc77e0b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called once per control cycle, on the control thread. Default does nothing.  <br /></td></tr>
-<tr class="separator:a33734c2bc16e5ad77ca26192bc77e0b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea173c86ed789b665028ac39b29e8ca3" id="r_aea173c86ed789b665028ac39b29e8ca3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control__plugins_1_1CameraPlugin.html#aea173c86ed789b665028ac39b29e8ca3">update_write</a> (const mjModel *model, mjData *data) override</td></tr>
+<tr class="memdesc:aea173c86ed789b665028ac39b29e8ca3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called once per <code>write()</code> cycle, on the control thread, after the hardware interface has staged the controller commands and right before they are sent to the simulation.  <br /></td></tr>
+<tr class="separator:aea173c86ed789b665028ac39b29e8ca3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a043c28f7e938dc1392cce553f11b35bc" id="r_a043c28f7e938dc1392cce553f11b35bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control__plugins_1_1CameraPlugin.html#a043c28f7e938dc1392cce553f11b35bc">cleanup</a> () override</td></tr>
 <tr class="memdesc:a043c28f7e938dc1392cce553f11b35bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleanup the plugin.  <br /></td></tr>
 <tr class="separator:a043c28f7e938dc1392cce553f11b35bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,6 +140,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a404e0529d10bedeb6f2b4f8d313790d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether the rendering thread has successfully initialized its GL context.  <br /></td></tr>
 <tr class="separator:a404e0529d10bedeb6f2b4f8d313790d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html">mujoco_ros2_control_plugins::MuJoCoROS2ControlPluginBase</a></td></tr>
+<tr class="memitem:a1fe1c0dc3c6d67268118a6004046453a inherit pub_methods_classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase" id="r_a1fe1c0dc3c6d67268118a6004046453a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a1fe1c0dc3c6d67268118a6004046453a">update_read</a> (const mjModel *, mjData *)</td></tr>
+<tr class="memdesc:a1fe1c0dc3c6d67268118a6004046453a inherit pub_methods_classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called once per <code>read()</code> cycle, on the control thread, before the state is handed to ros2_control. Default does nothing.  <br /></td></tr>
+<tr class="separator:a1fe1c0dc3c6d67268118a6004046453a inherit pub_methods_classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52b30b5bfa816f936c8c3873f962c153 inherit pub_methods_classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase" id="r_a52b30b5bfa816f936c8c3873f962c153"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a52b30b5bfa816f936c8c3873f962c153">update</a> (const mjModel *, mjData *)</td></tr>
+<tr class="memdesc:a52b30b5bfa816f936c8c3873f962c153 inherit pub_methods_classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <code><a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a6a0e3ccc1ada5ba4cfa0b28bd1c8aa8f" title="Called once per write() cycle, on the control thread, after the hardware interface has staged the con...">update_write()</a></code>. Default does nothing.  <br /></td></tr>
+<tr class="separator:a52b30b5bfa816f936c8c3873f962c153 inherit pub_methods_classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9bb7f98fd27ea1b546bc18fa17427fb5 inherit pub_methods_classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase" id="r_a9bb7f98fd27ea1b546bc18fa17427fb5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a9bb7f98fd27ea1b546bc18fa17427fb5">pre_step</a> (mjData *)</td></tr>
 <tr class="memdesc:a9bb7f98fd27ea1b546bc18fa17427fb5 inherit pub_methods_classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called immediately before every simulation step on the physics thread. Default does nothing.  <br /></td></tr>
 <tr class="separator:a9bb7f98fd27ea1b546bc18fa17427fb5 inherit pub_methods_classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -358,8 +364,8 @@ Implementation notes</h2>
 
 </div>
 </div>
-<a id="a33734c2bc16e5ad77ca26192bc77e0b1" name="a33734c2bc16e5ad77ca26192bc77e0b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a33734c2bc16e5ad77ca26192bc77e0b1">&#9670;&#160;</a></span>update()</h2>
+<a id="aea173c86ed789b665028ac39b29e8ca3" name="aea173c86ed789b665028ac39b29e8ca3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea173c86ed789b665028ac39b29e8ca3">&#9670;&#160;</a></span>update_write()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -368,16 +374,16 @@ Implementation notes</h2>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void mujoco_ros2_control_plugins::CameraPlugin::update </td>
+          <td class="memname">void mujoco_ros2_control_plugins::CameraPlugin::update_write </td>
           <td>(</td>
           <td class="paramtype">const mjModel *&#160;</td>
-          <td class="paramname">, </td>
+          <td class="paramname"><em>model</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">mjData *&#160;</td>
-          <td class="paramname">&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -392,7 +398,8 @@ Implementation notes</h2>
 </table>
 </div><div class="memdoc">
 
-<p>Called once per control cycle, on the control thread. Default does nothing. </p>
+<p>Called once per <code>write()</code> cycle, on the control thread, after the hardware interface has staged the controller commands and right before they are sent to the simulation. </p>
+<p>Plugins run in order and can read and rewrite <code>ctrl</code>/<code>qfrc_applied</code>. The default forwards to the deprecated <code><a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a52b30b5bfa816f936c8c3873f962c153" title="Same as update_write(). Default does nothing.">update()</a></code> so plugins that still override it keep working.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">model</td><td>Pointer to the MuJoCo model </td></tr>
@@ -401,7 +408,7 @@ Implementation notes</h2>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a52b30b5bfa816f936c8c3873f962c153">mujoco_ros2_control_plugins::MuJoCoROS2ControlPluginBase</a>.</p>
+<p>Reimplemented from <a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a6a0e3ccc1ada5ba4cfa0b28bd1c8aa8f">mujoco_ros2_control_plugins::MuJoCoROS2ControlPluginBase</a>.</p>
 
 </div>
 </div>

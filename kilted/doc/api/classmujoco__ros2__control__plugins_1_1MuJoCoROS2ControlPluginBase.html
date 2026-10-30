@@ -124,8 +124,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad0e4e7f4b115c008fc3875c1627223e3" id="r_ad0e4e7f4b115c008fc3875c1627223e3"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#ad0e4e7f4b115c008fc3875c1627223e3">init</a> (rclcpp::Node::SharedPtr node, const mjModel *model, mjData *data)=0</td></tr>
 <tr class="memdesc:ad0e4e7f4b115c008fc3875c1627223e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the plugin.  <br /></td></tr>
 <tr class="separator:ad0e4e7f4b115c008fc3875c1627223e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fe1c0dc3c6d67268118a6004046453a" id="r_a1fe1c0dc3c6d67268118a6004046453a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a1fe1c0dc3c6d67268118a6004046453a">update_read</a> (const mjModel *, mjData *)</td></tr>
+<tr class="memdesc:a1fe1c0dc3c6d67268118a6004046453a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called once per <code>read()</code> cycle, on the control thread, before the state is handed to ros2_control. Default does nothing.  <br /></td></tr>
+<tr class="separator:a1fe1c0dc3c6d67268118a6004046453a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a0e3ccc1ada5ba4cfa0b28bd1c8aa8f" id="r_a6a0e3ccc1ada5ba4cfa0b28bd1c8aa8f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a6a0e3ccc1ada5ba4cfa0b28bd1c8aa8f">update_write</a> (const mjModel *model, mjData *data)</td></tr>
+<tr class="memdesc:a6a0e3ccc1ada5ba4cfa0b28bd1c8aa8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called once per <code>write()</code> cycle, on the control thread, after the hardware interface has staged the controller commands and right before they are sent to the simulation.  <br /></td></tr>
+<tr class="separator:a6a0e3ccc1ada5ba4cfa0b28bd1c8aa8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52b30b5bfa816f936c8c3873f962c153" id="r_a52b30b5bfa816f936c8c3873f962c153"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a52b30b5bfa816f936c8c3873f962c153">update</a> (const mjModel *, mjData *)</td></tr>
-<tr class="memdesc:a52b30b5bfa816f936c8c3873f962c153"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called once per control cycle, on the control thread. Default does nothing.  <br /></td></tr>
+<tr class="memdesc:a52b30b5bfa816f936c8c3873f962c153"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <code><a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a6a0e3ccc1ada5ba4cfa0b28bd1c8aa8f" title="Called once per write() cycle, on the control thread, after the hardware interface has staged the con...">update_write()</a></code>. Default does nothing.  <br /></td></tr>
 <tr class="separator:a52b30b5bfa816f936c8c3873f962c153"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9bb7f98fd27ea1b546bc18fa17427fb5" id="r_a9bb7f98fd27ea1b546bc18fa17427fb5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a9bb7f98fd27ea1b546bc18fa17427fb5">pre_step</a> (mjData *)</td></tr>
 <tr class="memdesc:a9bb7f98fd27ea1b546bc18fa17427fb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called immediately before every simulation step on the physics thread. Default does nothing.  <br /></td></tr>
@@ -140,9 +146,10 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base class for MuJoCo ROS 2 control plugins. </p>
 <p>Plugins extend <a class="el" href="namespacemujoco__ros2__control.html">mujoco_ros2_control</a> with custom behavior, e.g. publishing extra topics or applying external forces.</p>
-<p>Three optional hooks are available. Override whichever fits your use case:</p>
+<p>Four optional hooks are available. Override whichever fits your use case:</p>
 <ul>
-<li><code><a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a52b30b5bfa816f936c8c3873f962c153" title="Called once per control cycle, on the control thread. Default does nothing.">update()</a></code> runs on the ros2_control control thread, once per <code>write()</code> cycle. <code>data</code> is a recent snapshot, not the live <code>mj_data_</code>. Use this for anything that doesn't need to run on exactly one physics step, e.g. publishing sensor data or servicing a trigger.</li>
+<li><code><a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a1fe1c0dc3c6d67268118a6004046453a" title="Called once per read() cycle, on the control thread, before the state is handed to ros2_control....">update_read()</a></code> runs on the ros2_control control thread, once per <code>read()</code> cycle, before the state is handed to ros2_control. <code>data</code> holds only the per-step control state (<code>time</code>, <code>qpos</code>, <code>qvel</code>, <code>act</code>, <code>qfrc_actuator</code>, <code>sensordata</code>, <code>ctrl</code>); everything else is stale. Plugins run in order and each sees the previous one's changes. Use this to post-process states or sensors, e.g. compensating a force/torque sensor.</li>
+<li><code><a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a6a0e3ccc1ada5ba4cfa0b28bd1c8aa8f" title="Called once per write() cycle, on the control thread, after the hardware interface has staged the con...">update_write()</a></code> runs on the ros2_control control thread, once per <code>write()</code> cycle. <code>data</code> is a recent snapshot, not the live <code>mj_data_</code>. Use this for anything that doesn't need to run on exactly one physics step, e.g. publishing sensor data or servicing a trigger.</li>
 <li><code><a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a9bb7f98fd27ea1b546bc18fa17427fb5" title="Called immediately before every simulation step on the physics thread. Default does nothing.">pre_step()</a></code> runs on the physics thread, immediately before every <code>mj_step()</code>, with direct access to the live <code>mj_data_</code>. Use this for anything that must hold for exactly one step, e.g. a hard kinematic override. There's no command buffer: an untouched entry keeps its last value, so releasing a command (e.g. an expired force) needs an explicit write. This should be used with caution!</li>
 <li><code><a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a46b906318d26a654c7a528be5b2c3bc7" title="Called after a world reset (ResetWorld service or UI reset). Default does nothing.">on_reset()</a></code> runs immediately after a world reset, with the live <code>mj_data_</code> in its post-reset state. Use this to clear plugin state that refers to the pre-reset world, e.g. a latched command.</li>
 </ul>
@@ -340,7 +347,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Called once per control cycle, on the control thread. Default does nothing. </p>
+<p>Same as <code><a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a6a0e3ccc1ada5ba4cfa0b28bd1c8aa8f" title="Called once per write() cycle, on the control thread, after the hardware interface has staged the con...">update_write()</a></code>. Default does nothing. </p>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000001">Deprecated:</a></b></dt><dd>Override <code><a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a6a0e3ccc1ada5ba4cfa0b28bd1c8aa8f" title="Called once per write() cycle, on the control thread, after the hardware interface has staged the con...">update_write()</a></code> instead, to keep it distinct from <code><a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a1fe1c0dc3c6d67268118a6004046453a" title="Called once per read() cycle, on the control thread, before the state is handed to ros2_control....">update_read()</a></code>. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">model</td><td>Pointer to the MuJoCo model </td></tr>
@@ -349,7 +357,101 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classexternal__plugin__test_1_1TestPlugin.html#a62668444cbe93e06e76bd920e30369ee">external_plugin_test::TestPlugin</a>, <a class="el" href="classmujoco__ros2__control__plugins_1_1CameraPlugin.html#a33734c2bc16e5ad77ca26192bc77e0b1">mujoco_ros2_control_plugins::CameraPlugin</a>, <a class="el" href="classmujoco__ros2__control__plugins_1_1FreeJointStatePublisherPlugin.html#a3ff5e6482f3c5619b600be8d9300cf80">mujoco_ros2_control_plugins::FreeJointStatePublisherPlugin</a>, <a class="el" href="classmujoco__ros2__control__plugins_1_1FtsGravCompPlugin.html#a78d2eab059031f00eb179e82e6df3fc2">mujoco_ros2_control_plugins::FtsGravCompPlugin</a>, <a class="el" href="classmujoco__ros2__control__plugins_1_1HeartbeatPublisherPlugin.html#ae4a737b4baf7557bc53e828bb6368a83">mujoco_ros2_control_plugins::HeartbeatPublisherPlugin</a>, <a class="el" href="classmujoco__ros2__control__plugins_1_1Mujoco3dLidarPlugin.html#a9e8fa74df3eb3c57a02349c84847de6b">mujoco_ros2_control_plugins::Mujoco3dLidarPlugin</a>, and <a class="el" href="classmujoco__ros2__control__plugins_1_1RangefinderLidarPlugin.html#a08168f8ef616ddca617a0a2cd6c6e499">mujoco_ros2_control_plugins::RangefinderLidarPlugin</a>.</p>
+</div>
+</div>
+<a id="a1fe1c0dc3c6d67268118a6004046453a" name="a1fe1c0dc3c6d67268118a6004046453a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fe1c0dc3c6d67268118a6004046453a">&#9670;&#160;</a></span>update_read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void mujoco_ros2_control_plugins::MuJoCoROS2ControlPluginBase::update_read </td>
+          <td>(</td>
+          <td class="paramtype">const mjModel *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">mjData *&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Called once per <code>read()</code> cycle, on the control thread, before the state is handed to ros2_control. Default does nothing. </p>
+<p>Only the control state fields of <code>data</code> are valid (<code>time</code>, <code>qpos</code>, <code>qvel</code>, <code>act</code>, <code>qfrc_actuator</code>, <code>sensordata</code>, <code>ctrl</code>), all from the same physics step. Derived quantities (e.g. <code>site_xpos</code>) are stale: call <code>mj_kinematics()</code> or similar on <code>data</code> if needed. Changes to the control state fields are what ros2_control reads.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">model</td><td>Pointer to the MuJoCo model </td></tr>
+    <tr><td class="paramname">data</td><td>Scratch data holding the latest control state, modify it in place </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented in <a class="el" href="classexternal__plugin__test_1_1TestPlugin.html#a0a80cd298c6601fdb91b7479135632a5">external_plugin_test::TestPlugin</a>, and <a class="el" href="classmujoco__ros2__control__plugins_1_1FtsGravCompPlugin.html#ac82037cc31a1de2a5c90a6e645fdbe2d">mujoco_ros2_control_plugins::FtsGravCompPlugin</a>.</p>
+
+</div>
+</div>
+<a id="a6a0e3ccc1ada5ba4cfa0b28bd1c8aa8f" name="a6a0e3ccc1ada5ba4cfa0b28bd1c8aa8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a0e3ccc1ada5ba4cfa0b28bd1c8aa8f">&#9670;&#160;</a></span>update_write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void mujoco_ros2_control_plugins::MuJoCoROS2ControlPluginBase::update_write </td>
+          <td>(</td>
+          <td class="paramtype">const mjModel *&#160;</td>
+          <td class="paramname"><em>model</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">mjData *&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Called once per <code>write()</code> cycle, on the control thread, after the hardware interface has staged the controller commands and right before they are sent to the simulation. </p>
+<p>Plugins run in order and can read and rewrite <code>ctrl</code>/<code>qfrc_applied</code>. The default forwards to the deprecated <code><a class="el" href="classmujoco__ros2__control__plugins_1_1MuJoCoROS2ControlPluginBase.html#a52b30b5bfa816f936c8c3873f962c153" title="Same as update_write(). Default does nothing.">update()</a></code> so plugins that still override it keep working.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">model</td><td>Pointer to the MuJoCo model </td></tr>
+    <tr><td class="paramname">data</td><td>Pointer to a recent snapshot (not the live <code>mj_data_</code>) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented in <a class="el" href="classexternal__plugin__test_1_1TestPlugin.html#a8a2a6ec6733450f4705a14739c9e8687">external_plugin_test::TestPlugin</a>, <a class="el" href="classmujoco__ros2__control__plugins_1_1CameraPlugin.html#aea173c86ed789b665028ac39b29e8ca3">mujoco_ros2_control_plugins::CameraPlugin</a>, <a class="el" href="classmujoco__ros2__control__plugins_1_1FreeJointStatePublisherPlugin.html#a0bd61f112ed1887c3f54aaa57ea787f2">mujoco_ros2_control_plugins::FreeJointStatePublisherPlugin</a>, <a class="el" href="classmujoco__ros2__control__plugins_1_1HeartbeatPublisherPlugin.html#a2b081309be2fa18966bcfdc67df2e457">mujoco_ros2_control_plugins::HeartbeatPublisherPlugin</a>, <a class="el" href="classmujoco__ros2__control__plugins_1_1Mujoco3dLidarPlugin.html#a8bd0d2c1a0ded546683f1d1e56edab4c">mujoco_ros2_control_plugins::Mujoco3dLidarPlugin</a>, and <a class="el" href="classmujoco__ros2__control__plugins_1_1RangefinderLidarPlugin.html#a4ac99c66be1d2bf6905d98ad8557818e">mujoco_ros2_control_plugins::RangefinderLidarPlugin</a>.</p>
 
 </div>
 </div>
