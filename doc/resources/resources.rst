@@ -32,7 +32,7 @@ Presentations
   Authors:
     - Christoph Fröhlich (AIT Austrian Institute of Technology GmbH)
     - Eneji Peacemaker Ohieku
-    - Shahazad Abdullah
+    - Shahazad Abdulla
     - Kamalkant Thangaraju
     - Krzysztof Pochwała (Flytronic)
     - Dr. Bence Magyar (Locus Robotics)
