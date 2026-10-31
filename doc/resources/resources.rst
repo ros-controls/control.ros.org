@@ -16,7 +16,7 @@ Presentations
 2026-10 OSS Europe 2026
 ,,,,,,,,,,,,,,,,,,,,,,,
 
-:download:`Presentation: Zenbedded: Bringing ros2_control Closer to the Embedded World <presentations/OSS 2026 Zenbedded talk final.pdf>`
+:download:`Presentation: Zenbedded: Bringing ros2_control Closer to the Embedded World <presentations/2026-10_OSS2026_Zenbedded.pdf>`
 
   Summary:
     The Robot Operating System (ROS) is the de facto standard open-source middleware for building robot software, providing standardized messaging, tooling, and reusable components. ``ros2_control`` is a hardware-agnostic control framework focusing on the modular composition of control systems for robots, sharing of controllers as well as real-time performance.
