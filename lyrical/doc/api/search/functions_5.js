@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['empty_0',['empty',['../classrealtime__tools_1_1LockFreeQueueBase.html#a67407861d134affc0a87aa6488577247',1,'realtime_tools::LockFreeQueueBase']]],
+  ['empty_0',['empty',['../classrealtime__tools_1_1LockFreePooledSPSCQueue.html#a8dc616fc83506d8d066caffeac629590',1,'realtime_tools::LockFreePooledSPSCQueue::empty()'],['../classrealtime__tools_1_1LockFreeQueueBase.html#a67407861d134affc0a87aa6488577247',1,'realtime_tools::LockFreeQueueBase::empty()']]],
   ['enable_5fintrospection_1',['enable_introspection',['../classcontroller__interface_1_1ControllerInterfaceBase.html#a29691d27153c838af41cc62f933f9500',1,'controller_interface::ControllerInterfaceBase::enable_introspection()'],['../classhardware__interface_1_1HardwareComponentInterface.html#ab5705971a232ef083a6f3a5a8049ead4',1,'hardware_interface::HardwareComponentInterface::enable_introspection()']]],
   ['enforce_2',['enforce',['../classjoint__limits_1_1JointLimiterInterface.html#a7c0a0d3d5b0f8e3c4a06c6c286e4d158',1,'joint_limits::JointLimiterInterface']]],
   ['enforce_5fcommand_5flimits_3',['enforce_command_limits',['../classhardware__interface_1_1ResourceManager.html#ac5bfdb9c37bcf88b55750145e05056f7',1,'hardware_interface::ResourceManager::enforce_command_limits()'],['../classhardware__interface_1_1ResourceStorage.html#a7b48625ae187660c47b582d2528a352e',1,'hardware_interface::ResourceStorage::enforce_command_limits()']]],

@@ -10,5 +10,8 @@ var searchData=
   ['interfacedescription_7',['InterfaceDescription',['../structhardware__interface_1_1InterfaceDescription.html',1,'hardware_interface']]],
   ['interfaceinfo_8',['InterfaceInfo',['../structhardware__interface_1_1InterfaceInfo.html',1,'hardware_interface']]],
   ['interfaceschema_9',['InterfaceSchema',['../classzenbedded_1_1InterfaceSchema.html',1,'zenbedded']]],
-  ['invertedpendulumcontroller_10',['InvertedPendulumController',['../classinverted__pendulum__controller_1_1InvertedPendulumController.html',1,'inverted_pendulum_controller']]]
+  ['invertedpendulumcontroller_10',['InvertedPendulumController',['../classinverted__pendulum__controller_1_1InvertedPendulumController.html',1,'inverted_pendulum_controller']]],
+  ['is_5fspsc_5fqueue_11',['is_spsc_queue',['../structrealtime__tools_1_1detail_1_1is__spsc__queue.html',1,'realtime_tools::detail']]],
+  ['is_5fspsc_5fqueue_3c_20boost_3a_3alockfree_3a_3aspsc_5fqueue_3c_20t_20_3e_20_3e_12',['is_spsc_queue&lt; boost::lockfree::spsc_queue&lt; T &gt; &gt;',['../structrealtime__tools_1_1detail_1_1is__spsc__queue_3_01boost_1_1lockfree_1_1spsc__queue_3_01T_01_4_01_4.html',1,'realtime_tools::detail']]],
+  ['is_5fspsc_5fqueue_3c_20boost_3a_3alockfree_3a_3aspsc_5fqueue_3c_20t_2c_20boost_3a_3alockfree_3a_3acapacity_3c_20capacity_20_3e_20_3e_20_3e_13',['is_spsc_queue&lt; boost::lockfree::spsc_queue&lt; T, boost::lockfree::capacity&lt; Capacity &gt; &gt; &gt;',['../structrealtime__tools_1_1detail_1_1is__spsc__queue_3_01boost_1_1lockfree_1_1spsc__queue_3_01T_0060ecca4128d67d2526a6e996f7f82e98.html',1,'realtime_tools::detail']]]
 ];
