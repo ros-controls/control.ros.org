@@ -67,6 +67,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../supported_robots/supported_robots.html">Supported Robots</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Resources</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#presentations">Presentations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#oss-europe-2026">2026-10 OSS Europe 2026</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#roscon-2026">2026-09 ROSCon 2026</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#roscon-workshop-scaling-ros2-control-from-async-hardware-drivers-to-rl-inference-engines">2026 ROSCon Workshop: Scaling ros2_control: From Async Hardware Drivers to RL Inference Engines</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="roscon2026_workshop.html">ROSCon 2026 Workshop</a></li>
@@ -139,6 +140,31 @@ The original authors are named either in the documents or in the list down below
 <p>Any files submitted to the documentation should be “licensed” by stating your name and <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> organization if no company name applicable, e.g., <code class="docutils literal notranslate"><span class="pre">CC-BY</span> <span class="pre">My</span> <span class="pre">Name</span> <span class="pre">(ros2_control/company_name)</span></code>.</p>
 <section id="presentations">
 <h2>Presentations<a class="headerlink" href="#presentations" title="Link to this heading"></a></h2>
+<section id="oss-europe-2026">
+<h3>2026-10 OSS Europe 2026<a class="headerlink" href="#oss-europe-2026" title="Link to this heading"></a></h3>
+<p><a class="reference download internal" download="" href="../../_downloads/3ad4e03af846756f91b8b3f0e5fe0e74/2026-10_OSS2026_Zenbedded.pdf"><code class="xref download docutils literal notranslate"><span class="pre">Presentation:</span> <span class="pre">Zenbedded:</span> <span class="pre">Bringing</span> <span class="pre">ros2_control</span> <span class="pre">Closer</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">Embedded</span> <span class="pre">World</span></code></a></p>
+<blockquote>
+<div><dl>
+<dt>Summary:</dt><dd><p>The Robot Operating System (ROS) is the de facto standard open-source middleware for building robot software, providing standardized messaging, tooling, and reusable components. <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> is a hardware-agnostic control framework focusing on the modular composition of control systems for robots, sharing of controllers as well as real-time performance.</p>
+<p>Bringing <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> to embedded systems usually means bolting heavy DDS serialization and a bridge process onto microcontrollers. Zenbedded fixes this. It is a monolithic Zephyr, Zenoh, and ROS 2 framework built specifically for <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code>. We put the transport, the RTOS client library, and the host-side <code class="docutils literal notranslate"><span class="pre">hardware_interface</span></code> plugin into one tight repository.</p>
+<p>On the wire, we use a multi-tier transport that moves along a spectrum. You can choose between fully ROS-observable but slightly slower, or fully binary-encoded and fast, depending on what your control loop actually needs.</p>
+<p>You’ll leave with a pattern for running <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> on Zephyr-class hardware and a feel for working with ROS and <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code>. We’ll demo the stack balancing a real inverted pendulum on an ESP32, where latency is the difference between upright and toppled.</p>
+</dd>
+</dl>
+<p><em>Presenter: Christoph Fröhlich</em></p>
+<dl class="simple">
+<dt>Authors:</dt><dd><ul class="simple">
+<li><p>Christoph Fröhlich (AIT Austrian Institute of Technology GmbH)</p></li>
+<li><p>Eneji Peacemaker Ohieku</p></li>
+<li><p>Shahazad Abdulla</p></li>
+<li><p>Kamalkant Thangaraju</p></li>
+<li><p>Krzysztof Pochwała (Flytronic)</p></li>
+<li><p>Dr. Bence Magyar (Locus Robotics)</p></li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</section>
 <section id="roscon-2026">
 <h3>2026-09 ROSCon 2026<a class="headerlink" href="#roscon-2026" title="Link to this heading"></a></h3>
 <p><a class="reference download internal" download="" href="../../_downloads/feb3aee68fd0bbaa05a1ddc700375170/ROSCon2026-talk_ros-controls-project-update.pdf"><code class="xref download docutils literal notranslate"><span class="pre">Presentation:</span> <span class="pre">ros-controls</span> <span class="pre">project</span> <span class="pre">update</span> <span class="pre">2026</span></code></a></p>

@@ -1036,7 +1036,9 @@ instead of exposing internal service-client singletons.</p>
 <ul class="simple">
 <li><p>Launch argument for <code class="docutils literal notranslate"><span class="pre">controller_manager_name</span></code> (default: “controller_manager”) - allows overriding the controller manager node name</p></li>
 <li><p>Launch argument for <code class="docutils literal notranslate"><span class="pre">unload_on_kill</span></code> (default: “false”) - waits for interrupt signal to unload controllers</p></li>
-<li><p>Spawner node that loads and activates the specified controllers</p></li>
+<li><p>An action that creates the spawner node once launch arguments have been resolved.
+The <code class="docutils literal notranslate"><span class="pre">--unload-on-kill</span></code> flag is omitted when <code class="docutils literal notranslate"><span class="pre">unload_on_kill</span></code> is false; no empty
+placeholder argument is passed.</p></li>
 </ul>
 <p><strong>Complete Launch File Example:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">launch</span><span class="w"> </span><span class="kn">import</span> <span class="n">LaunchDescription</span>

@@ -101,7 +101,7 @@ General discussions
 
 ======================================================================
 
-Built on 2026-11-01 at 08:17 GMT
+Built on 2026-11-02 at 05:38 GMT
 
 
 
@@ -8547,7 +8547,9 @@ Returns a "LaunchDescription" containing:
 * Launch argument for "unload_on_kill" (default: "false") - waits for
   interrupt signal to unload controllers
 
-* Spawner node that loads and activates the specified controllers
+* An action that creates the spawner node once launch arguments have
+  been resolved. The "--unload-on-kill" flag is omitted when
+  "unload_on_kill" is false; no empty placeholder argument is passed.
 
 **Complete Launch File Example:**
 
@@ -9618,6 +9620,10 @@ hardware_interface
 * Handles now also support "float32", "uint8", "int8", "uint16",
   "int16", "uint32", "int32" data types in addition to double and
   bool. (#2879)
+
+* "CommandInterface::is_limited()" now returns "bool" by value instead
+  of "const bool &", as the limited flag is now atomic to avoid a data
+  race with the introspection sampler. (#3618)
 
 
 ros2controlcli
