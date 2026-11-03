@@ -23,6 +23,7 @@ Non robot-devices
 - `Feetech Servos <https://github.com/JafarAbdi/feetech_ros2_driver>`_
 - `Force Dimension haptic devices <https://github.com/ICube-Robotics/forcedimension_ros2>`_
 - `Hoverboard motors <https://github.com/DataBot-Labs/hoverboard_ros2_control>`_
+- `MJBots Pi3Hat and Moteus <https://github.com/CentroEPiaggio/pi3hat_robotic_systems>`_
 - `NDI measurement systems <https://github.com/ICube-Robotics/ndisys_ros2>`_
 - `ODrive Motor Controller <https://github.com/Factor-Robotics/odrive_ros2_control>`_
 - `ODRI Motor Controller <https://github.com/stack-of-tasks/ros2_hardware_interface_odri>`_
