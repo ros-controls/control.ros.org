@@ -73,7 +73,10 @@
 <li class="toctree-l4 current"><a class="reference internal" href="../../doc/index.html#further-documentation">Further Documentation</a><ul class="current">
 <li class="toctree-l5 current"><a class="current reference internal" href="#">Hardware Interface Configuration</a><ul>
 <li class="toctree-l6"><a class="reference internal" href="#plugin">Plugin</a></li>
-<li class="toctree-l6"><a class="reference internal" href="#joints">Joints</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#joints">Joints</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="#plugin-actuators">Plugin Actuators</a></li>
+</ul>
+</li>
 <li class="toctree-l6"><a class="reference internal" href="#grippers-and-mimic-joints">Grippers and Mimic Joints</a></li>
 <li class="toctree-l6"><a class="reference internal" href="#sensors">Sensors</a><ul>
 <li class="toctree-l7"><a class="reference internal" href="#force-torque-sensors">Force-Torque Sensors</a></li>
@@ -294,6 +297,29 @@ integrated-velocity dynamics.</p>
 <p class="admonition-title">Note</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">torque</span></code> and <code class="docutils literal notranslate"><span class="pre">force</span></code> command/state interfaces are semantically equivalent to <code class="docutils literal notranslate"><span class="pre">effort</span></code> and map to the same underlying data in the sim.</p>
 </div>
+<section id="plugin-actuators">
+<span id="id1"></span><h3>Plugin Actuators<a class="headerlink" href="#plugin-actuators" title="Link to this heading"></a></h3>
+<p>Actuators driven by a <a class="reference external" href="https://mujoco.readthedocs.io/en/stable/programming/extension.html">MuJoCo actuator plugin</a> are detected automatically.
+In these instances, the plugin owns the control loop, so the hardware interface does not apply its own PIDs or infer a control mode from the actuator’s gain and bias parameters.
+Instead, whichever command interface is declared in the <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> joint is written directly to the actuator’s <code class="docutils literal notranslate"><span class="pre">ctrl</span></code> input.
+It is entirely up to the plugin to know what to do with the control input.</p>
+<p>For instance,</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;actuator&gt;</span>
+<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">joint=</span><span class="s">"joint1"</span><span class="w"> </span><span class="na">name=</span><span class="s">"joint1"</span><span class="w"> </span><span class="na">plugin=</span><span class="s">"mujoco.pid"</span><span class="w"> </span><span class="na">instance=</span><span class="s">"joint1_pid"</span><span class="w"> </span><span class="na">actdim=</span><span class="s">"2"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/actuator&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"joint1"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"velocity"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/joint&gt;</span>
+</pre></div>
+</div>
+<p>Note that a MuJoCo actuator has a single <code class="docutils literal notranslate"><span class="pre">ctrl</span></code> input, and there is no mechanism to inform a plugin that a command mode has changed.
+For this reason a joint driven by a plugin actuator must declare exactly one command interface; declaring more fails initialization with an error.
+Users should understand the limitations and handle their own plugin implementations accordingly.</p>
+</section>
 </section>
 <section id="grippers-and-mimic-joints">
 <h2>Grippers and Mimic Joints<a class="headerlink" href="#grippers-and-mimic-joints" title="Link to this heading"></a></h2>
@@ -410,7 +436,7 @@ deviation) to add zero-mean Gaussian noise to its readings, see <a class="refere
 </div>
 </section>
 <section id="sensor-noise">
-<span id="id1"></span><h3>Sensor Noise<a class="headerlink" href="#sensor-noise" title="Link to this heading"></a></h3>
+<span id="id2"></span><h3>Sensor Noise<a class="headerlink" href="#sensor-noise" title="Link to this heading"></a></h3>
 <p>Every MJCF sensor element used above (<code class="docutils literal notranslate"><span class="pre">force</span></code>, <code class="docutils literal notranslate"><span class="pre">torque</span></code>, <code class="docutils literal notranslate"><span class="pre">framequat</span></code>, <code class="docutils literal notranslate"><span class="pre">gyro</span></code>, <code class="docutils literal notranslate"><span class="pre">accelerometer</span></code>,
 <code class="docutils literal notranslate"><span class="pre">framepos</span></code>, <code class="docutils literal notranslate"><span class="pre">magnetometer</span></code>) accepts MuJoCo’s native <code class="docutils literal notranslate"><span class="pre">noise</span></code> attribute: the standard deviation, in the
 sensor’s native units, of the noise added to its reading. It defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code> (no noise). Noise magnitude is
@@ -456,7 +482,7 @@ Refer to the <a class="reference internal" href="../../mujoco_ros2_control_plugi
 </section>
 </section>
 <section id="simulation-topics-and-services">
-<span id="id2"></span><h1>Simulation Topics and Services<a class="headerlink" href="#simulation-topics-and-services" title="Link to this heading"></a></h1>
+<span id="id3"></span><h1>Simulation Topics and Services<a class="headerlink" href="#simulation-topics-and-services" title="Link to this heading"></a></h1>
 <section id="topics">
 <h2>Topics<a class="headerlink" href="#topics" title="Link to this heading"></a></h2>
 <dl class="simple">
