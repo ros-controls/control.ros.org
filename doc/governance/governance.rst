@@ -95,6 +95,22 @@ The ros-controls committers (who are not also part of the ros-controls PMC) cons
      - `NASA JSC Robotics <https://www.nasa.gov/reference/jsc-robotics/>`_
      - `eholum-nasa <https://github.com/eholum-nasa>`_
      - EST (UTC-5)/EDT (UTC-4)
+   * - Eneji Peacemaker Ohieku
+     - Independent
+     - `EnejiOhieku <https://github.com/EnejiOhieku>`_
+     - WAT (UTC+1)
+   * - Kamalkant Thangaraju
+     - Independent
+     - `kamal2730 <https://github.com/kamal2730>`_
+     - IST (UTC+5:30)
+   * - Shahazad Abdulla
+     - Independent
+     - `ShahazadAbdulla <https://github.com/ShahazadAbdulla>`_
+     - IST (UTC+5:30)
+   * - Krzysztof Pochwała
+     - `Flytronic <http://flytronic.pl>`_
+     - `kpochwala <https://github.com/kpochwala>`_
+     - CET (UTC+1)/CEST (UTC+2)
 
 Past ros-controls PMC Constituents
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -151,6 +167,8 @@ The following repositories are managed by the ros-controls PMC:
      - None yet
    * - https://github.com/ros-controls/mujoco_ros2_control
      - Nathan Dunkelberger, Emma Zemler, Michael Tobia, Erik Holum
+   * - https://github.com/ros-controls/zenbedded
+     - Eneji Peacemaker Ohieku, Kamalkant Thangaraju, Shahazad Abdulla, Krzysztof Pochwała
 
 Releases, Versioning, and Public API
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
