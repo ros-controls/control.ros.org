@@ -92,11 +92,13 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:adebd86e4f462bc2384bc08f04b074698" id="r_adebd86e4f462bc2384bc08f04b074698"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrqt__joint__trajectory__controller_1_1utils_1_1ControllerLister.html#adebd86e4f462bc2384bc08f04b074698">__init__</a> (self, namespace=&quot;/controller_manager&quot;)</td></tr>
-<tr class="separator:adebd86e4f462bc2384bc08f04b074698"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8561f7b10f27f463d74dc93b54d3cc98" id="r_a8561f7b10f27f463d74dc93b54d3cc98"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrqt__joint__trajectory__controller_1_1utils_1_1ControllerLister.html#a8561f7b10f27f463d74dc93b54d3cc98">__init__</a> (self, node, namespace=&quot;/controller_manager&quot;)</td></tr>
+<tr class="separator:a8561f7b10f27f463d74dc93b54d3cc98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa35e5be2c3ea1ab2f7f6c1e6aaf2919a" id="r_aa35e5be2c3ea1ab2f7f6c1e6aaf2919a"><td class="memItemLeft" align="right" valign="top"><a id="aa35e5be2c3ea1ab2f7f6c1e6aaf2919a" name="aa35e5be2c3ea1ab2f7f6c1e6aaf2919a"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>__call__</b> (self)</td></tr>
 <tr class="separator:aa35e5be2c3ea1ab2f7f6c1e6aaf2919a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52d4fdf4970a7149e1286b76bb02f763" id="r_a52d4fdf4970a7149e1286b76bb02f763"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrqt__joint__trajectory__controller_1_1utils_1_1ControllerLister.html#a52d4fdf4970a7149e1286b76bb02f763">close</a> (self)</td></tr>
+<tr class="separator:a52d4fdf4970a7149e1286b76bb02f763"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -123,13 +125,13 @@ The output of calling this functor can be used as input to the different
 controller filtering functions available in this module.
 
 Example usage. Get I{running} controllers of type C{bar_base/bar}:
-    &gt;&gt;&gt; list_controllers = ControllerLister('foo_robot/controller_manager')
+    &gt;&gt;&gt; list_controllers = ControllerLister(node, 'foo_robot/controller_manager')
     &gt;&gt;&gt; all_ctrl = list_controllers()
     &gt;&gt;&gt; running_ctrl = filter_by_state(all_ctrl, 'running')
     &gt;&gt;&gt; running_bar_ctrl = filter_by_type(running_ctrl, 'bar_base/bar')
 </pre> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="adebd86e4f462bc2384bc08f04b074698" name="adebd86e4f462bc2384bc08f04b074698"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adebd86e4f462bc2384bc08f04b074698">&#9670;&#160;</a></span>__init__()</h2>
+<a id="a8561f7b10f27f463d74dc93b54d3cc98" name="a8561f7b10f27f463d74dc93b54d3cc98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8561f7b10f27f463d74dc93b54d3cc98">&#9670;&#160;</a></span>__init__()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -144,6 +146,12 @@ Example usage. Get I{running} controllers of type C{bar_base/bar}:
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
           <td class="paramname"><em>namespace</em> = <code>&quot;/controller_manager&quot;</code>&#160;</td>
         </tr>
         <tr>
@@ -153,9 +161,47 @@ Example usage. Get I{running} controllers of type C{bar_base/bar}:
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">@param namespace Namespace of controller manager to monitor.
+<pre class="fragment">Store the injected node and namespace, and create the list_controllers client.
 
+@param node Node used to call the controller manager's list_controllers
+service. This class never spins node itself (see __call__): node may be
+a shared node (e.g. rqt's context.node) that some other executor already
+spins continuously elsewhere, and calling rclpy.spin_until_future_complete()
+or spin_once() on it here would race against that executor.
+@type node rclpy.node.Node
+
+@param namespace Namespace of controller manager to monitor.
 @type namespace str
+</pre> 
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a52d4fdf4970a7149e1286b76bb02f763" name="a52d4fdf4970a7149e1286b76bb02f763"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52d4fdf4970a7149e1286b76bb02f763">&#9670;&#160;</a></span>close()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">rqt_joint_trajectory_controller.utils.ControllerLister.close </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">Destroy the list_controllers client this instance owns on self._node.
+
+Node.create_client() registers the client on self._node and never garbage-
+collects it on its own; the client only stops being registered once
+self._node.destroy_client() is called on it, or self._node itself is
+destroyed. Since self._node may be long-lived and shared (e.g. rqt's
+context.node), callers must call close() once this ControllerLister is no
+longer used -- e.g. before replacing it with a new one, when
+controller-manager selection is cleared, or during plugin shutdown --
+otherwise every replacement leaks one more client onto self._node forever.
+Does not touch self._node itself.
 </pre> 
 </div>
 </div>

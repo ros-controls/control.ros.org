@@ -94,14 +94,16 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a816bf53a0501c77e30a280c27345b672" id="r_a816bf53a0501c77e30a280c27345b672"><td class="memItemLeft" align="right" valign="top"><a id="a816bf53a0501c77e30a280c27345b672" name="a816bf53a0501c77e30a280c27345b672"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>__init__</b> (self, namespace=&quot;/&quot;)</td></tr>
-<tr class="separator:a816bf53a0501c77e30a280c27345b672"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73614d2abca198ea633b25a1622b8e3b" id="r_a73614d2abca198ea633b25a1622b8e3b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrqt__joint__trajectory__controller_1_1utils_1_1ControllerManagerLister.html#a73614d2abca198ea633b25a1622b8e3b">__init__</a> (self, node, namespace=&quot;/&quot;)</td></tr>
+<tr class="separator:a73614d2abca198ea633b25a1622b8e3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8d91e20ad76121fe0eeee0d57a9fcc0" id="r_ae8d91e20ad76121fe0eeee0d57a9fcc0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrqt__joint__trajectory__controller_1_1utils_1_1ControllerManagerLister.html#ae8d91e20ad76121fe0eeee0d57a9fcc0">__call__</a> (self)</td></tr>
 <tr class="separator:ae8d91e20ad76121fe0eeee0d57a9fcc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a533d608d7b9623bdbd99a99ae03b4825" id="r_a533d608d7b9623bdbd99a99ae03b4825"><td class="memItemLeft" align="right" valign="top"><a id="a533d608d7b9623bdbd99a99ae03b4825" name="a533d608d7b9623bdbd99a99ae03b4825"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>_node</b></td></tr>
+<tr class="separator:a533d608d7b9623bdbd99a99ae03b4825"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a436c387c8812cbd6466cc85614fa5cf2" id="r_a436c387c8812cbd6466cc85614fa5cf2"><td class="memItemLeft" align="right" valign="top"><a id="a436c387c8812cbd6466cc85614fa5cf2" name="a436c387c8812cbd6466cc85614fa5cf2"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>_ns</b></td></tr>
 <tr class="separator:a436c387c8812cbd6466cc85614fa5cf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -118,9 +120,50 @@ some optimizations that reduce the number of interactions with the
 ROS master.
 
 Example usage:
-    &gt;&gt;&gt; list_cm = ControllerManagerLister()
+    &gt;&gt;&gt; list_cm = ControllerManagerLister(node)
     &gt;&gt;&gt; print(list_cm())
-</pre> </div><h2 class="groupheader">Member Function Documentation</h2>
+</pre> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a73614d2abca198ea633b25a1622b8e3b" name="a73614d2abca198ea633b25a1622b8e3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73614d2abca198ea633b25a1622b8e3b">&#9670;&#160;</a></span>__init__()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">rqt_joint_trajectory_controller.utils.ControllerManagerLister.__init__ </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>namespace</em> = <code>&quot;/&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">Store the injected node and namespace used to look up controller managers.
+
+@param node Node used to query the ROS graph. Never spun by this class.
+@type node rclpy.node.Node
+@param namespace Namespace where to look for controller managers.
+@type namespace str
+</pre> 
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="ae8d91e20ad76121fe0eeee0d57a9fcc0" name="ae8d91e20ad76121fe0eeee0d57a9fcc0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae8d91e20ad76121fe0eeee0d57a9fcc0">&#9670;&#160;</a></span>__call__()</h2>
 
