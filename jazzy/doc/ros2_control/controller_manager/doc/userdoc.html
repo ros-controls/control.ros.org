@@ -887,6 +887,17 @@ This occurs whether the Nodes are siblings or exist in a hierarchy.</p>
 </pre></div>
 </div>
 </div></blockquote>
+<p>The namespace can also be split across nested keys, with or without the leading slash (<code class="docutils literal notranslate"><span class="pre">/rrbot_1:</span></code> or <code class="docutils literal notranslate"><span class="pre">rrbot_1:</span></code>):</p>
+<blockquote>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">/rrbot_1</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">position_trajectory_controller</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint_trajectory_controller/JointTrajectoryController</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">.....</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Entries are matched against the controller’s fully qualified name with the same rules as <code class="docutils literal notranslate"><span class="pre">rclcpp</span></code>: <code class="docutils literal notranslate"><span class="pre">/*</span></code> matches one namespace token and <code class="docutils literal notranslate"><span class="pre">/**</span></code> any number of them, anywhere in the name (e.g. <code class="docutils literal notranslate"><span class="pre">/*/position_trajectory_controller</span></code> or <code class="docutils literal notranslate"><span class="pre">/rrbot_1/**/position_trajectory_controller</span></code>). When several entries match, they are applied in file order and later files override earlier ones, so the last match wins, as at runtime.</p>
 </section>
 <section id="unspawner">
 <h3><code class="docutils literal notranslate"><span class="pre">unspawner</span></code><a class="headerlink" href="#unspawner" title="Link to this heading"></a></h3>

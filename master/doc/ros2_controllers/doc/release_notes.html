@@ -28,7 +28,7 @@
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Release Notes: Jazzy to Kilted" href="../../control_toolbox/doc/release_notes.html" />
+    <link rel="next" title="Release Notes: Jazzy to Lyrical" href="../../control_toolbox/doc/release_notes.html" />
     <link rel="prev" title="Release Notes: Kilted Kaiju to Lyrical Luth" href="../../ros2_control/doc/release_notes.html" /> 
 </head>
 
@@ -75,6 +75,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#pid-controller">pid_controller</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#steering-controllers-library">steering_controllers_library</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#magnetometer-broadcaster">magnetometer_broadcaster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#position-controllers-velocity-controllers-effort-controllers">position_controllers, velocity_controllers, effort_controllers</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../control_toolbox/doc/release_notes.html">control_toolbox</a></li>
@@ -173,7 +174,7 @@
 <li><p>Make all parameters read-only (the never got re-evaluated after initialization anyways). (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2064">#2064</a>)</p></li>
 <li><p>Added parameter <code class="docutils literal notranslate"><span class="pre">publish_dynamic_joint_states</span></code> to enable/disable publishing of dynamic joint states. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2064">#2064</a>)</p></li>
 <li><p>Removed interfaces with other data types than double for publishing to <code class="docutils literal notranslate"><span class="pre">dynamic_joint_states</span></code>. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2115">#2115</a>)</p></li>
-<li><p>Parameter <code class="docutils literal notranslate"><span class="pre">publish_dynamic_joint_states</span></code> is now deprecated (default changed to <code class="docutils literal notranslate"><span class="pre">false</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dynamic_joint_states</span></code> is not published anymore, and the parameter <code class="docutils literal notranslate"><span class="pre">publish_dynamic_joint_states</span></code> was removed.(<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2187">#2187</a>)</p></li>
 </ul>
 </section>
 <section id="omni-wheel-drive-controller">
@@ -187,6 +188,7 @@
 <section id="joint-trajectory-controller">
 <h2>joint_trajectory_controller<a class="headerlink" href="#joint-trajectory-controller" title="Link to this heading"></a></h2>
 <ul class="simple">
+<li><p>The default of <code class="docutils literal notranslate"><span class="pre">constraints.goal_time</span></code> changed from <code class="docutils literal notranslate"><span class="pre">0.0</span></code> to <code class="docutils literal notranslate"><span class="pre">10.0</span></code> seconds, and its semantics changed: negative values wait indefinitely, <code class="docutils literal notranslate"><span class="pre">0.0</span></code> disables the grace period. The <code class="docutils literal notranslate"><span class="pre">action_execution_timeout</span></code> parameter was removed. See the migration guide. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2592">#2592</a>)</p></li>
 <li><p>When using <code class="docutils literal notranslate"><span class="pre">set_last_command_interface_value_as_state_on_activation</span></code>, it is no longer required to have state and command for the same interface type (e.g. velocity). With this param set, the JTC state and command will be initialized using a command interface value, if available, and will otherwise fallback to the value read from the state interface. This allows you to have position command and position+velocity state, for example, which previously would have been disallowed (with this param set).  (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2294">#2294</a>)</p></li>
 <li><p>Fill in 0 velocities and accelerations into point before trajectories if the state interfaces
 don’t contain velocity / acceleration information, but the trajectory does. This way, the segment
@@ -213,7 +215,13 @@ up to the first waypoint will use the same interpolation as the rest of the traj
 </section>
 <section id="magnetometer-broadcaster">
 <h2>magnetometer_broadcaster<a class="headerlink" href="#magnetometer-broadcaster" title="Link to this heading"></a></h2>
-<p>New package to broadcast <code class="docutils literal notranslate"><span class="pre">sensor_msgs/msg/MagneticField</span></code> from state interfaces defined by the <code class="docutils literal notranslate"><span class="pre">semantic_components::MagneticFieldSensor</span></code>.</p>
+<p>New package to broadcast <code class="docutils literal notranslate"><span class="pre">sensor_msgs/msg/MagneticField</span></code> from state interfaces defined by the <code class="docutils literal notranslate"><span class="pre">semantic_components::MagneticFieldSensor</span></code>. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2214">#2214</a>)</p>
+</section>
+<section id="position-controllers-velocity-controllers-effort-controllers">
+<h2>position_controllers, velocity_controllers, effort_controllers<a class="headerlink" href="#position-controllers-velocity-controllers-effort-controllers" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">JointGroupPositionController</span></code>, <code class="docutils literal notranslate"><span class="pre">JointGroupVelocityController</span></code>, and <code class="docutils literal notranslate"><span class="pre">JointGroupEffortController</span></code> are removed. (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/1913">#1913</a>, <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/2016">#2016</a>)</p></li>
+</ul>
 </section>
 </section>
 
@@ -223,7 +231,7 @@ up to the first waypoint will use the same interpolation as the rest of the traj
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../../ros2_control/doc/release_notes.html" class="btn btn-neutral float-left" title="Release Notes: Kilted Kaiju to Lyrical Luth" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../../control_toolbox/doc/release_notes.html" class="btn btn-neutral float-right" title="Release Notes: Jazzy to Kilted" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../../control_toolbox/doc/release_notes.html" class="btn btn-neutral float-right" title="Release Notes: Jazzy to Lyrical" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -163,9 +163,9 @@ template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ae50c7a8156a601d8efdf4d52ead36ab2" id="r_ae50c7a8156a601d8efdf4d52ead36ab2"><td class="memItemLeft" align="right" valign="top"><a id="ae50c7a8156a601d8efdf4d52ead36ab2" name="ae50c7a8156a601d8efdf4d52ead36ab2"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>update_joint_limiters_data</b> (<a class="el" href="structjoint__limits_1_1JointInterfacesCommandLimiterData.html">joint_limits::JointInterfacesCommandLimiterData</a> &amp;data)</td></tr>
 <tr class="separator:ae50c7a8156a601d8efdf4d52ead36ab2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b48625ae187660c47b582d2528a352e" id="r_a7b48625ae187660c47b582d2528a352e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceStorage.html#a7b48625ae187660c47b582d2528a352e">enforce_command_limits</a> (const std::string &amp;joint_name, const rclcpp::Duration &amp;period)</td></tr>
-<tr class="memdesc:a7b48625ae187660c47b582d2528a352e"><td class="mdescLeft">&#160;</td><td class="mdescRight">enforce the command limits for a specific joint  <br /></td></tr>
-<tr class="separator:a7b48625ae187660c47b582d2528a352e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55e346f298509fe3f6ffcf6fa22d7dc7" id="r_a55e346f298509fe3f6ffcf6fa22d7dc7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhardware__interface_1_1ResourceStorage.html#a55e346f298509fe3f6ffcf6fa22d7dc7">enforce_command_limits</a> (const std::string &amp;joint_name, <a class="el" href="classjoint__limits_1_1JointLimiterInterface.html">joint_limits::JointLimiterInterface</a>&lt; <a class="el" href="structjoint__limits_1_1JointControlInterfacesData.html">joint_limits::JointControlInterfacesData</a> &gt; &amp;limiter, const rclcpp::Duration &amp;period)</td></tr>
+<tr class="memdesc:a55e346f298509fe3f6ffcf6fa22d7dc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">enforce the command limits for a specific joint  <br /></td></tr>
+<tr class="separator:a55e346f298509fe3f6ffcf6fa22d7dc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba2234bc8c07ded4b566dbca411f875e" id="r_aba2234bc8c07ded4b566dbca411f875e"><td class="memItemLeft" align="right" valign="top"><a id="aba2234bc8c07ded4b566dbca411f875e" name="aba2234bc8c07ded4b566dbca411f875e"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>add_state_interface</b> (StateInterface::ConstSharedPtr interface)</td></tr>
 <tr class="separator:aba2234bc8c07ded4b566dbca411f875e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -419,8 +419,8 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>cm_update_rat
 
 </div>
 </div>
-<a id="a7b48625ae187660c47b582d2528a352e" name="a7b48625ae187660c47b582d2528a352e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7b48625ae187660c47b582d2528a352e">&#9670;&#160;</a></span>enforce_command_limits()</h2>
+<a id="a55e346f298509fe3f6ffcf6fa22d7dc7" name="a55e346f298509fe3f6ffcf6fa22d7dc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55e346f298509fe3f6ffcf6fa22d7dc7">&#9670;&#160;</a></span>enforce_command_limits()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -433,6 +433,12 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>cm_update_rat
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>joint_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classjoint__limits_1_1JointLimiterInterface.html">joint_limits::JointLimiterInterface</a>&lt; <a class="el" href="structjoint__limits_1_1JointControlInterfacesData.html">joint_limits::JointControlInterfacesData</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>limiter</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -457,6 +463,7 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>cm_update_rat
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">joint_name</td><td>name of the joint to enforce the command limits </td></tr>
+    <tr><td class="paramname">limiter</td><td>limiter of the joint, passed in by the caller that already iterates over joint_limiters_interface_ so that the hardware map is not scanned again for every joint </td></tr>
     <tr><td class="paramname">period</td><td>time period of the command </td></tr>
   </table>
   </dd>

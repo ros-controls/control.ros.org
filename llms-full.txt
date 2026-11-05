@@ -101,7 +101,7 @@ General discussions
 
 ======================================================================
 
-Built on 2026-11-05 at 05:38 GMT
+Built on 2026-11-05 at 21:57 GMT
 
 
 
@@ -961,11 +961,11 @@ last_smoothed_value;
 source page: doc/control_toolbox/doc/migration.txt
 ==================================================
 
-Migration Guides: Jazzy to Kilted
-*********************************
+Migration Guides: Jazzy to Lyrical
+**********************************
 
 This list summarizes important changes between Jazzy (previous) and
-Kilted (current) releases, where changes to user code might be
+Lyrical (current) releases, where changes to user code might be
 necessary.
 
 
@@ -986,10 +986,10 @@ Pid/PidROS
 source page: doc/control_toolbox/doc/release_notes.txt
 ==================================================
 
-Release Notes: Jazzy to Kilted
-******************************
+Release Notes: Jazzy to Lyrical
+*******************************
 
-This list summarizes the changes between Jazzy (previous) and Kilted
+This list summarizes the changes between Jazzy (previous) and Lyrical
 (current) releases.
 
 
@@ -1002,6 +1002,18 @@ Pid/PidROS
 * Added a constructor argument to "PidROS" to control if the PID state
   publisher is initially active or not. Can be changed during runtime
   by using  "activate_state_publisher" parameter. (#431).
+
+
+Filters
+=======
+
+* Added a templated "control_toolbox::ExponentialFilter" class, which
+  is now used by "control_filters::ExponentialFilter".
+  "filters::exponentialSmoothing()" is now a template, too. (#493).
+
+* Added a "LowPassFilter::configure(initial_state)" overload to start
+  the filter from a given state instead of from the first input.
+  (#657).
 
 
 
@@ -9671,6 +9683,14 @@ controller_manager
   without the leading slash, and match entries (including "/*" and
   "/**" wildcards anywhere in the name) and their precedence the same
   way as "rclcpp". (#3719)
+
+* The "list_hardware_interfaces" and "list_hardware_components"
+  services now scale linearly with the number of interfaces, making
+  them significantly faster on robots with many interfaces. (#3755)
+
+* The real-time fallback path no longer re-queries every controller's
+  command interface configuration once per fallback interface when a
+  controller fails. (#3756)
 
 
 hardware_interface
@@ -18737,9 +18757,8 @@ joint_state_broadcaster
   to "dynamic_joint_states". (#2115). Use a custom controller for
   publishing non-double interfaces.
 
-* Parameter "publish_dynamic_joint_states" is now deprecated (default
-  changed to "false"). (#2107) For publishing non-standard interfaces,
-  consider using alternatives:
+* Parameter "publish_dynamic_joint_states" is removed. (#2107, #2187)
+  For publishing non-standard interfaces, consider using alternatives:
 
   * state_interfaces_broadcaster for broadcasting arbitrary state
     interfaces
@@ -19400,8 +19419,8 @@ joint_state_broadcaster
 * Removed interfaces with other data types than double for publishing
   to "dynamic_joint_states". (#2115)
 
-* Parameter "publish_dynamic_joint_states" is now deprecated (default
-  changed to "false").
+* "dynamic_joint_states" is not published anymore, and the parameter
+  "publish_dynamic_joint_states" was removed.(#2187)
 
 
 omni_wheel_drive_controller
@@ -19418,6 +19437,12 @@ omni_wheel_drive_controller
 
 joint_trajectory_controller
 ===========================
+
+* The default of "constraints.goal_time" changed from "0.0" to "10.0"
+  seconds, and its semantics changed: negative values wait
+  indefinitely, "0.0" disables the grace period. The
+  "action_execution_timeout" parameter was removed. See the migration
+  guide. (#2592)
 
 * When using
   "set_last_command_interface_value_as_state_on_activation", it is no
@@ -19489,6 +19514,14 @@ magnetometer_broadcaster
 
 New package to broadcast "sensor_msgs/msg/MagneticField" from state
 interfaces defined by the "semantic_components::MagneticFieldSensor".
+(#2214)
+
+
+position_controllers, velocity_controllers, effort_controllers
+==============================================================
+
+* "JointGroupPositionController", "JointGroupVelocityController", and
+  "JointGroupEffortController" are removed. (#1913, #2016)
 
 
 
