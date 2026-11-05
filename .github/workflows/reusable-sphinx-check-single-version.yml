@@ -69,12 +69,15 @@ jobs:
       run: make html-all-subrepos-with-errors
 
     # No PDF is built here on purpose to keep the artifact small, see `make pdf-rolling`
+    # _downloads (files linked via :download:, mostly presentation PDFs) is excluded for the same reason
     - name: Upload HTML artifact
       uses: actions/upload-artifact@v7
       id: artifact-upload-step
       with:
         name: html-artifacts-${{ github.event.pull_request.number || github.run_id }}
-        path: _build/html
+        path: |
+          _build/html
+          !_build/html/_downloads
         retention-days: 30 # default 90
         compression-level: 9 # maximum compression, default 6
         if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
