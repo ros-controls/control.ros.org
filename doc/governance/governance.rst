@@ -108,7 +108,7 @@ The ros-controls committers (who are not also part of the ros-controls PMC) cons
      - `ShahazadAbdulla <https://github.com/ShahazadAbdulla>`_
      - IST (UTC+5:30)
    * - Krzysztof Pochwała
-     - `Flytronic <http://flytronic.pl>`_
+     - `kabot <https://kabot.io>`_
      - `kpochwala <https://github.com/kpochwala>`_
      - CET (UTC+1)/CEST (UTC+2)
 
