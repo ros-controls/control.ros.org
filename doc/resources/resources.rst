@@ -424,7 +424,7 @@ Architecture of command and state interfaces:
   .. image:: images/command_and_state_interfaces.png
 
 Lifecycle of hardware interfaces:
-  .. image:: images/hardware_interface_lifecycle.png
+  .. image:: images/hardware_interface_lifecycle.svg
 
 ros2_control integration with MoveIt2
   .. image:: images/ros2_control_robot_integration_with_moveit2.png
