@@ -14,8 +14,6 @@ Communication protocols
 
 End-effectors
 --------------
-- `INSPIRE RH56 Hand <https://github.com/renesas-rdk/inspire_rh56_hand_ros2_control>`_
-- `RuiYan RH2 Hand <https://github.com/renesas-rdk/ruiyan_rh2_hand_ros2_control>`_
 - `Schunk SVH 5-finger Hand <https://github.com/SCHUNK-SE-Co-KG/schunk_svh_ros_driver/tree/ros2-humble>`_
 - `TESOLLO Delto Gripper-M <https://github.com/tesollodelto/delto_m_ros2>`__
 
@@ -25,6 +23,7 @@ Non robot-devices
 - `Feetech Servos <https://github.com/JafarAbdi/feetech_ros2_driver>`_
 - `Force Dimension haptic devices <https://github.com/ICube-Robotics/forcedimension_ros2>`_
 - `Hoverboard motors <https://github.com/DataBot-Labs/hoverboard_ros2_control>`_
+- `MJBots Pi3Hat and Moteus <https://github.com/CentroEPiaggio/pi3hat_robotic_systems>`_
 - `NDI measurement systems <https://github.com/ICube-Robotics/ndisys_ros2>`_
 - `ODrive Motor Controller <https://github.com/Factor-Robotics/odrive_ros2_control>`_
 - `ODRI Motor Controller <https://github.com/stack-of-tasks/ros2_hardware_interface_odri>`_
@@ -60,11 +59,9 @@ Official (supported by robot manufacturer)
 Unofficial (from the community)
 --------------------------------
 - `ABB - EGM interface <https://github.com/PickNikRobotics/abb_ros2>`_
-- `AgileX Piper Arm <https://github.com/renesas-rdk/agilex_piper_ros2_control>`_
 - `Comau - CRCOpen interface <https://github.com/ukaea/CRCOpenROS2Driver>`_
 - `KUKA All Robots (iiQKA-ECI, Sunrise-FRI, KSS-RSI) <https://github.com/kroshu/ros2_kuka_drivers>`_
 - `KUKA IIWA (KUKA Fast Robot Interface (FRI)) <https://github.com/ICube-Robotics/iiwa_ros2>`_
 - `KUKA industrial robots (KUKA Robot Sensor Interface (RSI)) <https://github.com/dignakov/ros2_control_kuka_driver>`_
 - `KUKA LBRs (IIWA 7/14 and Med 7/14 via KUKA Fast Robot Interface (FRI)) <https://github.com/lbr-stack/lbr_fri_ros2_stack>`_
 - `Mitsubishi RV1A <https://github.com/ICube-Robotics/mrv1a_ros2>`_
-- `SO ARM101 <https://github.com/renesas-rdk/so_arm101_ros2_control>`_

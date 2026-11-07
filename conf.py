@@ -98,8 +98,12 @@ extensions = [
     "sphinx.ext.autosectionlabel",
     'myst_parser',
     'sphinxcontrib.youtube',
-    'sphinxcontrib.cairosvgconverter'
+    'sphinxcontrib.cairosvgconverter',
+    'sphinxcontrib.mermaid'
 ]
+
+# Render ```mermaid code blocks in Markdown files as Mermaid diagrams
+myst_fence_as_directive = ["mermaid"]
 
 # Make sure the target is unique
 autosectionlabel_prefix_document = True
@@ -234,9 +238,9 @@ else:
 
 # Add branches you want to whitelist here.
 smv_branch_whitelist = r"^(foxy|galactic|humble|iron|jazzy|kilted|lyrical|"+ base_branch + r")$"
-smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy|galactic|humble|iron|jazzy|kilted).*$"
+smv_released_pattern = r"^refs/(heads|remotes/[^/]+)/(foxy|galactic|humble|iron|jazzy|kilted|lyrical).*$"
 smv_remote_whitelist = r"^(origin)$"
-smv_latest_version = "kilted"
+smv_latest_version = "lyrical"
 smv_eol_versions = ["foxy", "galactic", "iron"]
 
 distro_full_names = {
