@@ -15,3 +15,4 @@ The ``demos/`` directory contains runnable applications demonstrating the Zenbed
    :titlesonly:
 
    Inverted Pendulum <../inverted_pendulum/doc/userdoc.rst>
+   Sine Wave <../sine_wave/doc/userdoc.rst>

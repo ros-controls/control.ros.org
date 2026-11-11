@@ -39,9 +39,9 @@ Find your PC's IP address on the same network the ESP32 will join
 
 .. code-block:: ini
 
-    CONFIG_ZENBEDDED_ZENOH_IP_PORT="<IP>:7447"
+    CONFIG_ZENBEDDED_ZENOH_LOCATOR="127.0.0.1:7447"
 
-For example: ``CONFIG_ZENBEDDED_ZENOH_IP_PORT="192.168.1.50:7447"``
+Replace ``127.0.0.1`` with your host IP reported by ``ip addr`` / ``ipconfig``.
 
 3. Build and flash
 ~~~~~~~~~~~~~~~~~~

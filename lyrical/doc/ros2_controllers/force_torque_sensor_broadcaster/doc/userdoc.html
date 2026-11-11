@@ -149,6 +149,7 @@ passing the specified parameters.</p>
 <p>Full list of parameters:</p>
 <dl>
 <dt>frame_id (string)</dt><dd><p>Sensor’s frame_id in which values are published.</p>
+<p>Read only: True</p>
 <p>Default:  “”</p>
 <p>Constraints:</p>
 <blockquote>
@@ -240,6 +241,15 @@ An example definition is:</p>
 <span class="w">      </span><span class="nt">filter1</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dummy</span>
 <span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">filters/IncrementFilterWrench</span>
+
+<span class="nt">test_force_torque_sensor_broadcaster_bad_chain</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">frame_id</span><span class="p">:</span><span class="w"> </span><span class="s">"fts_sensor_frame"</span>
+<span class="w">    </span><span class="nt">sensor_name</span><span class="p">:</span><span class="w"> </span><span class="s">"fts_sensor"</span>
+<span class="w">    </span><span class="nt">sensor_filter_chain</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">filter1</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">broken</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">filters/ThisWrenchFilterDoesNotExist</span>
 </pre></div>
 </div>
 </section>

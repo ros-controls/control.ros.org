@@ -1,0 +1,458 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zenbedded Sine Wave Demo &mdash; ROS2_Control: Rolling Nov 2026 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/reviewer_stats.css?v=068b34ac" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/custom.css?v=d85a351e" />
+
+  
+    <link rel="shortcut icon" href="../../../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//rolling/doc/zephyr-zenoh-integration/demos/sine_wave/doc/userdoc.html" />
+      <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../../_static/documentation_options.js?v=f246fdea"></script>
+      <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../../_static/copybutton.js?v=f281be69"></script>
+      <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="Zenoh E2E Test" href="../../../tests/zenoh_e2e/userdoc.html" />
+    <link rel="prev" title="Zenbedded Inverted Pendulum Demo" href="../../inverted_pendulum/doc/userdoc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html">
+            
+              <img src="../../../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../resources/roscon2026_workshop.html">ROSCon 2026 Workshop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ros2_control/doc/index.html">ros2_control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ros2_controllers/doc/controllers_index.html">ros2_controllers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../embedded_integration.html">Embedded Integration</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../doc/index.html">Zenbedded: Zenoh-based integration for Zephyr-supported hardware platforms</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../../doc/index.html#packages">Packages</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../../doc/index.html#guides-and-examples">Guides and Examples</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../../doc/getting_started.html">Getting Started</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../doc/supported_distributions.html">Supported ROS 2 Distributions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../doc/architecture.html">Architecture</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../../doc/userdoc.html">Demos</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="../../inverted_pendulum/doc/userdoc.html">Inverted Pendulum</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="#">Sine Wave</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#architecture-variants">Architecture Variants</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#hardware-support">Hardware Support</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#prerequisites-zenoh-router">Prerequisites &amp; Zenoh Router</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#configure-firmware-target-locator">Configure Firmware Target Locator</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#building-and-flashing-firmware">Building and Flashing Firmware</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#wi-fi-configuration-wi-fi-builds-only">Wi-Fi Configuration (Wi-Fi Builds Only)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#running-the-host-controller-visualization">Running the Host Controller &amp; Visualization</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="#tier-1-execution-ros-2-cdr">Tier 1 Execution (ROS 2 CDR)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#tier-2-execution-ros2-control">Tier 2 Execution (ros2_control)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#launch-arguments">Launch Arguments</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#convenience-launch-aliases">Convenience Launch Aliases</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="#manual-testing-cli-inspection">Manual Testing &amp; CLI Inspection</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#host-time-synchronization-chrony-setup">Host Time Synchronization (Chrony Setup)</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="#configure-chrony-on-the-host">Configure Chrony on the Host</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tests/zenoh_e2e/userdoc.html">Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docker/doc/userdoc.html">Docker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../doc/benchmarking.html">Benchmarking</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../utilities.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../release_notes/release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../migration/migration.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api_list/api_list.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../governance/governance.html">Project Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../statistics.html">Documentation Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../documentation_downloads.html">Documentation Downloads</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">ROS2_Control: Rolling</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../embedded_integration.html">Embedded Integration</a></li>
+          <li class="breadcrumb-item"><a href="../../../doc/index.html">Zenbedded</a></li>
+          <li class="breadcrumb-item"><a href="../../doc/userdoc.html">Demos</a></li>
+      <li class="breadcrumb-item active">Zenbedded Sine Wave Demo</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/ros-controls/control.ros.org/blob/rolling//doc/zephyr-zenoh-integration/demos/sine_wave/doc/userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for a development version.
+    For the latest released version, please have a look at <a href="../../../../../../lyrical/doc/zephyr-zenoh-integration/demos/sine_wave/doc/userdoc.html">Lyrical</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="zenbedded-sine-wave-demo">
+<h1>Zenbedded Sine Wave Demo<a class="headerlink" href="#zenbedded-sine-wave-demo" title="Link to this heading"></a></h1>
+<p>A complete end-to-end demo demonstrating both <strong>Tier 1</strong> (native ROS 2 CDR serialization) and <strong>Tier 2</strong> (high-throughput packed numeric schema for <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code>) using Zenbedded on Zephyr RTOS.</p>
+<p>The firmware generates a sinusoidal wave signal (<code class="docutils literal notranslate"><span class="pre">position</span> <span class="pre">=</span> <span class="pre">amplitude</span> <span class="pre">*</span> <span class="pre">sin(2</span> <span class="pre">*</span> <span class="pre">pi</span> <span class="pre">*</span> <span class="pre">f</span> <span class="pre">*</span> <span class="pre">t)</span></code>) and dynamically accepts commands to adjust the wave amplitude in real time.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>┌─────────────────────────────────┐                       ┌──────────────────────────────────────────────┐
+│ ESP32-S3 (Zephyr)               │   Zenoh (tcp/7447)    │ Host PC (ROS 2)                              │
+│                                 │ &lt;───────────────────&gt; │                                              │
+│ - sine_wave_tier1 (ROS 2 CDR)   │  Wi-Fi / USB CDC ECM  │ • rqt_plot / ros2 topic echo                 │
+│ - sine_wave_tier2 (No-CDR POD)  │                       │ • zenbedded_hardware_interface (ros2_control)│
+└─────────────────────────────────┘                       └──────────────────────────────────────────────┘
+</pre></div>
+</div>
+<section id="architecture-variants">
+<h2>Architecture Variants<a class="headerlink" href="#architecture-variants" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Tier 1 (``sine_wave_tier1``)</strong>:
+- Implements standard ROS 2 messages using <code class="docutils literal notranslate"><span class="pre">JointStateCodec</span></code> (<code class="docutils literal notranslate"><span class="pre">sensor_msgs/msg/JointState</span></code>) and <code class="docutils literal notranslate"><span class="pre">JointCommandCodec</span></code> (<code class="docutils literal notranslate"><span class="pre">control_msgs/msg/JointCommand</span></code>).
+- Directly compatible with standard ROS 2 nodes, CLI commands (<code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">topic</span> <span class="pre">echo</span></code>), and <code class="docutils literal notranslate"><span class="pre">rqt_plot</span></code> without requiring a custom hardware interface on the host PC.
+- Paired with the host-side <code class="docutils literal notranslate"><span class="pre">sine_wave_tier1</span></code> C++ commander node (50 Hz).</p></li>
+<li><p><strong>Tier 2 (``sine_wave_tier2``)</strong>:
+- Uses zero-copy packed numeric C structs generated from <code class="docutils literal notranslate"><span class="pre">interface_schema.yaml</span></code>.
+- Interfaces directly with <code class="docutils literal notranslate"><span class="pre">zenbedded_hardware_interface</span></code> for seamless <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> integration.
+- Paired with the host-side <code class="docutils literal notranslate"><span class="pre">sine_wave_tier2</span></code> (<code class="docutils literal notranslate"><span class="pre">SineWaveTier2Controller</span></code>) controller plugin (50 Hz).</p></li>
+</ul>
+</section>
+<section id="hardware-support">
+<h2>Hardware Support<a class="headerlink" href="#hardware-support" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 35%" />
+<col style="width: 35%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Board</p></th>
+<th class="head"><p>Target Qualifier</p></th>
+<th class="head"><p>Supported Transports</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>ESP32-S3 DevKitC</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">esp32s3_devkitc/esp32s3/procpu</span></code></p></td>
+<td><p>USB CDC ECM (<code class="docutils literal notranslate"><span class="pre">-S</span> <span class="pre">cdc-ecm</span></code>), Wi-Fi (<code class="docutils literal notranslate"><span class="pre">-S</span> <span class="pre">wifi</span></code>), or Dual Transport (<code class="docutils literal notranslate"><span class="pre">-S</span> <span class="pre">cdc-ecm</span> <span class="pre">-S</span> <span class="pre">wifi</span></code>)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="prerequisites-zenoh-router">
+<h2>Prerequisites &amp; Zenoh Router<a class="headerlink" href="#prerequisites-zenoh-router" title="Link to this heading"></a></h2>
+<p>Start the Zenoh router on your Host PC:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">RMW_IMPLEMENTATION</span><span class="o">=</span>rmw_zenoh_cpp
+<span class="nb">export</span><span class="w"> </span><span class="nv">ZENOH_CONFIG_OVERRIDE</span><span class="o">=</span><span class="s1">'mode="peer";listen/endpoints=["tcp/0.0.0.0:7447"]'</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">RUST_LOG</span><span class="o">=</span><span class="nv">zenoh</span><span class="o">=</span>debug
+ros2<span class="w"> </span>run<span class="w"> </span>rmw_zenoh_cpp<span class="w"> </span>rmw_zenohd
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Every host terminal that runs ROS 2 commands for this demo (router, launch files,
+<code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">topic</span></code> CLI) needs <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">RMW_IMPLEMENTATION=rmw_zenoh_cpp</span></code>. Add it to your
+<code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> to make it permanent.</p>
+</div>
+</section>
+<section id="configure-firmware-target-locator">
+<h2>Configure Firmware Target Locator<a class="headerlink" href="#configure-firmware-target-locator" title="Link to this heading"></a></h2>
+<p>The firmware defaults to <code class="docutils literal notranslate"><span class="pre">127.0.0.1:7447</span></code> in <code class="docutils literal notranslate"><span class="pre">prj.conf</span></code>.</p>
+<ul class="simple">
+<li><p><strong>USB CDC ECM</strong>: Uses static peer IP <code class="docutils literal notranslate"><span class="pre">192.0.2.1:7447</span></code> automatically when the USB carrier is active.</p></li>
+<li><p><strong>Wi-Fi</strong>: Requires your host PC’s IP address on the local network (find via <code class="docutils literal notranslate"><span class="pre">ip</span> <span class="pre">addr</span></code> on Linux or <code class="docutils literal notranslate"><span class="pre">ipconfig</span></code> on Windows).</p></li>
+</ul>
+<p>To avoid committing personal network IPs to version control, supply the host IP via an <code class="docutils literal notranslate"><span class="pre">extra.conf</span></code> file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">CONFIG_ZENBEDDED_ZENOH_LOCATOR</span><span class="o">=</span><span class="s">"127.0.0.1:7447"</span>
+</pre></div>
+</div>
+<p>And pass <code class="docutils literal notranslate"><span class="pre">--</span> <span class="pre">-DEXTRA_CONF_FILE=extra.conf</span></code> when building. <em>(Alternatively, edit prj.conf directly during local testing)</em>.</p>
+</section>
+<section id="building-and-flashing-firmware">
+<h2>Building and Flashing Firmware<a class="headerlink" href="#building-and-flashing-firmware" title="Link to this heading"></a></h2>
+<p>For ESP32-S3 DevKitC, run these commands from the root of the <code class="docutils literal notranslate"><span class="pre">zenbedded</span></code> repository
+(the demo paths are relative to it):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Option A: Wired USB CDC ECM (Ethernet over USB)</span>
+west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>esp32s3_devkitc/esp32s3/procpu<span class="w"> </span>demos/sine_wave/sine_wave_tier1<span class="w"> </span>-p<span class="w"> </span>always<span class="w"> </span>-S<span class="w"> </span>cdc-ecm
+west<span class="w"> </span>flash
+
+<span class="c1"># Option B: Wireless Wi-Fi</span>
+west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>esp32s3_devkitc/esp32s3/procpu<span class="w"> </span>demos/sine_wave/sine_wave_tier1<span class="w"> </span>-p<span class="w"> </span>always<span class="w"> </span>-S<span class="w"> </span>wifi<span class="w"> </span>--<span class="w"> </span>-DEXTRA_CONF_FILE<span class="o">=</span>extra.conf
+west<span class="w"> </span>flash
+
+<span class="c1"># Option C: Concurrent Dual Transport (USB CDC ECM prioritized + Wi-Fi fallback)</span>
+west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>esp32s3_devkitc/esp32s3/procpu<span class="w"> </span>demos/sine_wave/sine_wave_tier1<span class="w"> </span>-p<span class="w"> </span>always<span class="w"> </span>-S<span class="w"> </span>cdc-ecm<span class="w"> </span>-S<span class="w"> </span>wifi<span class="w"> </span>--<span class="w"> </span>-DEXTRA_CONF_FILE<span class="o">=</span>extra.conf
+west<span class="w"> </span>flash
+</pre></div>
+</div>
+<p>For Tier 2, replace <code class="docutils literal notranslate"><span class="pre">sine_wave_tier1</span></code> with <code class="docutils literal notranslate"><span class="pre">sine_wave_tier2</span></code> in the build commands above.</p>
+</section>
+<section id="wi-fi-configuration-wi-fi-builds-only">
+<h2>Wi-Fi Configuration (Wi-Fi Builds Only)<a class="headerlink" href="#wi-fi-configuration-wi-fi-builds-only" title="Link to this heading"></a></h2>
+<p>Open a serial monitor (e.g., <code class="docutils literal notranslate"><span class="pre">tio</span> <span class="pre">/dev/ttyACM1</span></code>) and add your Wi-Fi credentials:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>wifi cred add -s "&lt;MY_WIFI_SSID&gt;" -k 1 -p "&lt;MY_WIFI_PASSWORD&gt;"
+wifi cred auto_connect
+</pre></div>
+</div>
+<p>Credentials persist in NVS across power cycles.</p>
+</section>
+<section id="running-the-host-controller-visualization">
+<h2>Running the Host Controller &amp; Visualization<a class="headerlink" href="#running-the-host-controller-visualization" title="Link to this heading"></a></h2>
+<p>Build the ROS 2 workspace:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;ros2_ws&gt;
+colcon<span class="w"> </span>build<span class="w"> </span>--packages-select<span class="w"> </span>zenbedded_sine_wave<span class="w"> </span>zenbedded_hardware_interface
+<span class="nb">source</span><span class="w"> </span>install/setup.bash
+</pre></div>
+</div>
+<section id="tier-1-execution-ros-2-cdr">
+<h3>Tier 1 Execution (ROS 2 CDR)<a class="headerlink" href="#tier-1-execution-ros-2-cdr" title="Link to this heading"></a></h3>
+<p>Launch the Tier 1 commander and live visualization:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>zenbedded_sine_wave<span class="w"> </span>sine_wave.launch.py<span class="w"> </span>tier:<span class="o">=</span><span class="m">1</span>
+</pre></div>
+</div>
+<p>This launches:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sine_wave_tier1</span></code> (C++ commander publishing <code class="docutils literal notranslate"><span class="pre">control_msgs/msg/JointCommand</span></code> at 50 Hz).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rqt_plot</span></code> automatically graphing:
+- <code class="docutils literal notranslate"><span class="pre">/zenbedded/sine_wave/state/position[0]</span></code> (firmware sine wave)
+- <code class="docutils literal notranslate"><span class="pre">/zenbedded/sine_wave/cmd/values[0]</span></code> (commanded amplitude)</p></li>
+</ol>
+</section>
+<section id="tier-2-execution-ros2-control">
+<h3>Tier 2 Execution (ros2_control)<a class="headerlink" href="#tier-2-execution-ros2-control" title="Link to this heading"></a></h3>
+<p>Launch the Tier 2 <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> stack and introspection plot:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>zenbedded_sine_wave<span class="w"> </span>sine_wave.launch.py<span class="w"> </span>tier:<span class="o">=</span><span class="m">2</span>
+</pre></div>
+</div>
+<p>This launches:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">robot_state_publisher</span></code> and <code class="docutils literal notranslate"><span class="pre">ros2_control_node</span></code> (with <code class="docutils literal notranslate"><span class="pre">ZenbeddedHardware</span></code> interface).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">joint_state_broadcaster</span></code> and <code class="docutils literal notranslate"><span class="pre">sine_wave_tier2</span></code> (50 Hz controller plugin).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rqt_plot</span></code> targeting exclusively the introspection signals:
+- <code class="docutils literal notranslate"><span class="pre">/controller_manager/introspection_data/values/values[4]</span></code> (<code class="docutils literal notranslate"><span class="pre">state_interface.sine_wave/position</span></code>)
+- <code class="docutils literal notranslate"><span class="pre">/controller_manager/introspection_data/values/values[5]</span></code> (<code class="docutils literal notranslate"><span class="pre">command_interface.sine_wave/amplitude</span></code>)
+<em>(Note: indices 0–3 are reserved by ``pal_statistics`` for async publisher diagnostic counters).</em></p></li>
+</ol>
+</section>
+<section id="launch-arguments">
+<h3>Launch Arguments<a class="headerlink" href="#launch-arguments" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 35%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Argument</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tier</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+<td><p>Architecture tier: <code class="docutils literal notranslate"><span class="pre">'1'</span></code> for ROS 2 CDR topics, <code class="docutils literal notranslate"><span class="pre">'2'</span></code> for <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> hardware interface</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">use_rqt_plot</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td><p>Launch <code class="docutils literal notranslate"><span class="pre">rqt_plot</span></code> GUI (<code class="docutils literal notranslate"><span class="pre">false</span></code> for headless / terminal-only execution)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">introspection_topic</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/controller_manager/introspection_data/values</span></code></p></td>
+<td><p>Base introspection topic for Tier 2 <code class="docutils literal notranslate"><span class="pre">rqt_plot</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="convenience-launch-aliases">
+<h3>Convenience Launch Aliases<a class="headerlink" href="#convenience-launch-aliases" title="Link to this heading"></a></h3>
+<p>You can also use dedicated shorthand launch files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run Tier 1</span>
+ros2<span class="w"> </span>launch<span class="w"> </span>zenbedded_sine_wave<span class="w"> </span>sine_wave_tier1.launch.py
+
+<span class="c1"># Run Tier 2</span>
+ros2<span class="w"> </span>launch<span class="w"> </span>zenbedded_sine_wave<span class="w"> </span>sine_wave_tier2.launch.py
+</pre></div>
+</div>
+</section>
+</section>
+<section id="manual-testing-cli-inspection">
+<h2>Manual Testing &amp; CLI Inspection<a class="headerlink" href="#manual-testing-cli-inspection" title="Link to this heading"></a></h2>
+<p>Echo published state in real-time:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/zenbedded/sine_wave/state
+</pre></div>
+</div>
+<p>Publish a manual amplitude command (Tier 1):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>-1<span class="w"> </span>/zenbedded/sine_wave/cmd<span class="w"> </span>control_msgs/msg/JointCommand<span class="w"> </span><span class="s2">"{header: {frame_id: 'sine_wave'}, joint_names: ['sine_wave'], interface_name: 'amplitude', values: [12.5]}"</span>
+</pre></div>
+</div>
+</section>
+<section id="host-time-synchronization-chrony-setup">
+<h2>Host Time Synchronization (Chrony Setup)<a class="headerlink" href="#host-time-synchronization-chrony-setup" title="Link to this heading"></a></h2>
+<p>In Tier 1, the microcontroller publishes standard <code class="docutils literal notranslate"><span class="pre">sensor_msgs/msg/JointState</span></code> messages
+with timestamps embedded in <code class="docutils literal notranslate"><span class="pre">header.stamp</span></code>. For ROS 2 tools such as <code class="docutils literal notranslate"><span class="pre">rqt_plot</span></code> to
+graph state and command topics simultaneously on the same timeline without a time-axis
+offset, the microcontroller clock must be synchronized with the host Unix epoch clock.</p>
+<p>The firmware uses Zephyr’s SNTP client on boot to extract the host IP address directly
+from the active transport locator (e.g. <code class="docutils literal notranslate"><span class="pre">192.0.2.1</span></code> over USB CDC ECM or the host Wi-Fi IP)
+and updates POSIX <code class="docutils literal notranslate"><span class="pre">CLOCK_REALTIME</span></code>.</p>
+<section id="configure-chrony-on-the-host">
+<h3>Configure Chrony on the Host<a class="headerlink" href="#configure-chrony-on-the-host" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Install Chrony on your host laptop:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>chrony
+</pre></div>
+</div>
+</li>
+<li><p>Allow NTP client requests from the USB CDC subnet and local network by adding the
+following lines to <code class="docutils literal notranslate"><span class="pre">/etc/chrony/chrony.conf</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># Allow NTP queries from USB CDC ECM subnet
+allow 192.0.2.0/24
+
+# Allow queries from local LAN / Wi-Fi subnet
+allow 127.0.0.1
+
+# Serve local time even when disconnected from internet upstream
+local stratum 10
+</pre></div>
+</div>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code> with your Wi-Fi subnet (shown by <code class="docutils literal notranslate"><span class="pre">ip</span> <span class="pre">addr</span></code>) so the ESP32 can
+reach the NTP server.</p>
+</li>
+<li><p>Ensure Chrony runs persistently in the background as a systemd service:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>chrony
+sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>chrony
+</pre></div>
+</div>
+</li>
+<li><p>Verify Chrony is active and serving time:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chronyc<span class="w"> </span>tracking
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../inverted_pendulum/doc/userdoc.html" class="btn btn-neutral float-left" title="Zenbedded Inverted Pendulum Demo" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../../tests/zenoh_e2e/userdoc.html" class="btn btn-neutral float-right" title="Zenoh E2E Test" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: rolling
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Stable Releases</dt>
+        <dd><a href="../../../../../../lyrical/doc/zephyr-zenoh-integration/demos/sine_wave/doc/userdoc.html">Lyrical (latest)</a></dd><br>
+        <dd><a href="../../../../../../kilted/doc/zephyr-zenoh-integration/demos/sine_wave/doc/userdoc.html">Kilted</a></dd><br>
+        <dd><a href="../../../../../../jazzy/doc/zephyr-zenoh-integration/demos/sine_wave/doc/userdoc.html">Jazzy</a></dd><br>
+        
+        <dd><a href="../../../../../../humble/doc/zephyr-zenoh-integration/demos/sine_wave/doc/userdoc.html">Humble</a></dd><br>
+        
+        
+    </dl>
+    <dl>
+      <dt>End-of-Life</dt>
+        <dd><a href="../../../../../../iron/doc/zephyr-zenoh-integration/demos/sine_wave/doc/userdoc.html">Iron</a></dd><br>
+        <dd><a href="../../../../../../galactic/doc/zephyr-zenoh-integration/demos/sine_wave/doc/userdoc.html">Galactic</a></dd><br>
+        <dd><a href="../../../../../../foxy/doc/zephyr-zenoh-integration/demos/sine_wave/doc/userdoc.html">Foxy</a></dd><br>
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="userdoc.html">Rolling</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
