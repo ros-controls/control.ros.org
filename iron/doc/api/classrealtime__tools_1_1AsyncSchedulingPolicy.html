@@ -89,7 +89,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Enum class to define the scheduling policy for the async worker thread. SYNCHRONIZED: The async worker thread will be synchronized with the main thread, as the main thread will be triggering the async callback method. DETACHED: The async worker thread will be detached from the main thread and will have its own execution cycle. UNKNOWN: The scheduling policy is unknown.  
+<p>Enum class to define the scheduling policy for the async worker thread. SYNCHRONIZED: The async worker thread will be synchronized with the main thread, as the main thread will be triggering the async callback method. DETACHED: The async worker thread will be detached from the main thread and will have its own execution cycle. SELF_PACED: The async worker thread will be scheduled by the hardware, by blocking at start of read() until a UDP packet arrives. Then the control cycle is started. UNKNOWN: The scheduling policy is unknown.  
  <a href="classrealtime__tools_1_1AsyncSchedulingPolicy.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="async__function__handler_8hpp_source.html">async_function_handler.hpp</a>&gt;</code></p>
@@ -99,6 +99,7 @@ Public Types</h2></td></tr>
 <tr class="memitem:a78da4ea175eac3fdb9c69c1769eee898" id="r_a78da4ea175eac3fdb9c69c1769eee898"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrealtime__tools_1_1AsyncSchedulingPolicy.html#a78da4ea175eac3fdb9c69c1769eee898">Value</a> : int8_t { <b>UNKNOWN</b> = -1
 , <a class="el" href="classrealtime__tools_1_1AsyncSchedulingPolicy.html#a78da4ea175eac3fdb9c69c1769eee898af8b12ccb4db7301534f06eb8e50bc17b">SYNCHRONIZED</a>
 , <a class="el" href="classrealtime__tools_1_1AsyncSchedulingPolicy.html#a78da4ea175eac3fdb9c69c1769eee898ad3de4c4d29d316c91fab6b2e737b5521">DETACHED</a>
+, <a class="el" href="classrealtime__tools_1_1AsyncSchedulingPolicy.html#a78da4ea175eac3fdb9c69c1769eee898a566de3777ef0695849ea3dbb7ffc9fd2">SELF_PACED</a>
  }</td></tr>
 <tr class="separator:a78da4ea175eac3fdb9c69c1769eee898"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -136,7 +137,7 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>to_string</b> 
 <tr class="separator:a711eca30e7b16a26575a6fe2c070cf9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Enum class to define the scheduling policy for the async worker thread. SYNCHRONIZED: The async worker thread will be synchronized with the main thread, as the main thread will be triggering the async callback method. DETACHED: The async worker thread will be detached from the main thread and will have its own execution cycle. UNKNOWN: The scheduling policy is unknown. </p>
+<div class="textblock"><p>Enum class to define the scheduling policy for the async worker thread. SYNCHRONIZED: The async worker thread will be synchronized with the main thread, as the main thread will be triggering the async callback method. DETACHED: The async worker thread will be detached from the main thread and will have its own execution cycle. SELF_PACED: The async worker thread will be scheduled by the hardware, by blocking at start of read() until a UDP packet arrives. Then the control cycle is started. UNKNOWN: The scheduling policy is unknown. </p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="a78da4ea175eac3fdb9c69c1769eee898" name="a78da4ea175eac3fdb9c69c1769eee898"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a78da4ea175eac3fdb9c69c1769eee898">&#9670;&#160;</a></span>Value</h2>
@@ -153,6 +154,8 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>to_string</b> 
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a78da4ea175eac3fdb9c69c1769eee898af8b12ccb4db7301534f06eb8e50bc17b" name="a78da4ea175eac3fdb9c69c1769eee898af8b12ccb4db7301534f06eb8e50bc17b"></a>SYNCHRONIZED&#160;</td><td class="fielddoc"><p>Unknown scheduling policy. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a78da4ea175eac3fdb9c69c1769eee898ad3de4c4d29d316c91fab6b2e737b5521" name="a78da4ea175eac3fdb9c69c1769eee898ad3de4c4d29d316c91fab6b2e737b5521"></a>DETACHED&#160;</td><td class="fielddoc"><p>Synchronized scheduling policy. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a78da4ea175eac3fdb9c69c1769eee898a566de3777ef0695849ea3dbb7ffc9fd2" name="a78da4ea175eac3fdb9c69c1769eee898a566de3777ef0695849ea3dbb7ffc9fd2"></a>SELF_PACED&#160;</td><td class="fielddoc"><p>Detached scheduling policy. </p>
 </td></tr>
 </table>
 

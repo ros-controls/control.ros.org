@@ -107,147 +107,187 @@
 
   <section id="zenbedded-inverted-pendulum-demo">
 <h1>Zenbedded Inverted Pendulum Demo<a class="headerlink" href="#zenbedded-inverted-pendulum-demo" title="Link to this heading"></a></h1>
-<p>A stepper-driven inverted pendulum. An ESP32 running Zephyr reads an AS5600
-magnetic encoder and drives a stepper motor, while the balancing controller
-runs on a PC as a ROS 2 node. The two talk over <a class="reference external" href="https://zenoh.io/">Zenoh</a>
-via Zenbedded.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>┌──────────────────────┐   Wi-Fi / Zenoh   ┌─────────────────────┐
-│ ESP32 (Zephyr)       │ &lt;───────────────&gt; │ PC                  │
-│ AS5600 + stepper     │     tcp/7447      │ zenohd + ROS 2      │
-└──────────────────────┘                   └─────────────────────┘
+<p>A stepper-driven Furuta (rotary) inverted pendulum balancing system. An ESP32-S3
+running Zephyr RTOS samples an AS5600 magnetic angle encoder and commands a
+stepper motor, while the non-linear energy-shaping swing-up and LQR balancing
+controller runs on the host PC within the <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> framework.</p>
+<section id="architecture">
+<h2>Architecture<a class="headerlink" href="#architecture" title="Link to this heading"></a></h2>
+<p>The demo supports three execution tiers under a unified <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> stack:</p>
+<ul class="simple">
+<li><p><strong>Tier 1 (ROS 2 CDR Topics)</strong>: The ESP32-S3 firmware uses <code class="docutils literal notranslate"><span class="pre">ZenbeddedClient</span></code>
+with <code class="docutils literal notranslate"><span class="pre">JointStateCodec</span></code> and <code class="docutils literal notranslate"><span class="pre">JointCommandCodec</span></code>, communicating over standard
+ROS 2 CDR topics (<code class="docutils literal notranslate"><span class="pre">/zenbedded/inverted_pendulum/state</span></code> and
+<code class="docutils literal notranslate"><span class="pre">/zenbedded/inverted_pendulum/cmd</span></code>). On the host,
+<code class="docutils literal notranslate"><span class="pre">InvertedPendulumTier1Hardware</span></code> relays these topics directly into
+<code class="docutils literal notranslate"><span class="pre">ros2_control</span></code>.</p></li>
+<li><p><strong>Tier 2 (High-Performance Packed Binary)</strong>: The firmware exchanges compact
+binary C-struct payloads governed by <code class="docutils literal notranslate"><span class="pre">interface_schema.yaml</span></code> directly over
+Zenoh. On the host, <code class="docutils literal notranslate"><span class="pre">ZenbeddedHardware</span></code> bridges these binary buffers into
+<code class="docutils literal notranslate"><span class="pre">ros2_control</span></code>.</p></li>
+<li><p><strong>Mock Hardware (In-Process Simulation)</strong>: Simulates coupled 2-DOF Lagrangian
+dynamics with Coulomb friction and motor torque saturation in software,
+enabling development and automated testing without physical hardware.</p></li>
+</ul>
+<p>In all tiers, the exact same controller (<code class="docutils literal notranslate"><span class="pre">inverted_pendulum_controller</span></code>),
+joint state broadcaster, robot state publisher, and RViz 3D visualization run
+identically.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>┌──────────────────────┐   USB CDC-ECM / Wi-Fi   ┌─────────────────────────────┐
+│ ESP32-S3 (Zephyr)    │ &lt;─────────────────────&gt; │ Host PC (ROS 2)             │
+│ • AS5600 Encoder     │         Zenoh           │ • zenohd (tcp/7447)         │
+│ • Stepper (TMC/A4988)│     (Tier 1 or 2)       │ • ros2_control_node         │
+│ • NeoPixel Status LED│                         │ • inverted_pendulum_ctrl    │
+└──────────────────────┘                         │ • robot_state_pub + RViz2   │
+                                                 └─────────────────────────────┘
 </pre></div>
 </div>
-<section id="setup">
-<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading"></a></h2>
-<section id="start-the-zenoh-router">
-<h3>1. Start the Zenoh router<a class="headerlink" href="#start-the-zenoh-router" title="Link to this heading"></a></h3>
-<p>On your PC:</p>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
+<section id="git-lfs-3d-meshes">
+<h3>1. Git LFS 3D Meshes<a class="headerlink" href="#git-lfs-3d-meshes" title="Link to this heading"></a></h3>
+<p>The URDF model uses detailed STL meshes for visual rendering in RViz. Ensure
+binary meshes are pulled:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>lfs<span class="w"> </span>pull
+</pre></div>
+</div>
+<p>Verify that the files in <code class="docutils literal notranslate"><span class="pre">demos/inverted_pendulum/inverted_pendulum_ros/meshes/</span></code>
+are binary STLs (several megabytes each) rather than 132-byte pointer text files.</p>
+</section>
+<section id="zenoh-router">
+<h3>2. Zenoh Router<a class="headerlink" href="#zenoh-router" title="Link to this heading"></a></h3>
+<p>When running ROS 2 with <code class="docutils literal notranslate"><span class="pre">RMW_IMPLEMENTATION=rmw_zenoh_cpp</span></code>, a Zenoh router must
+be running on the network:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zenohd<span class="w"> </span>-l<span class="w"> </span>tcp/0.0.0.0:7447
+</pre></div>
+</div>
+<p>Alternatively:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">ZENOH_CONFIG_OVERRIDE</span><span class="o">=</span><span class="s1">'mode="peer";listen/endpoints=["tcp/0.0.0.0:7447"]'</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">RUST_LOG</span><span class="o">=</span><span class="nv">zenoh</span><span class="o">=</span>debug
 ros2<span class="w"> </span>run<span class="w"> </span>rmw_zenoh_cpp<span class="w"> </span>rmw_zenohd
 </pre></div>
 </div>
-<p>Leave it running.</p>
 </section>
-<section id="configure-the-firmware">
-<h3>2. Configure the firmware<a class="headerlink" href="#configure-the-firmware" title="Link to this heading"></a></h3>
-<p>Find your PC’s IP address on the same network the ESP32 will join
-(<code class="docutils literal notranslate"><span class="pre">ip</span> <span class="pre">addr</span></code> on Linux/macOS, <code class="docutils literal notranslate"><span class="pre">ipconfig</span></code> on Windows). Then set it in
-<code class="docutils literal notranslate"><span class="pre">prj.conf</span></code>:</p>
-<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">CONFIG_ZENBEDDED_ZENOH_LOCATOR</span><span class="o">=</span><span class="s">"127.0.0.1:7447"</span>
+<section id="host-ntp-time-synchronization-chrony">
+<h3>3. Host NTP Time Synchronization (Chrony)<a class="headerlink" href="#host-ntp-time-synchronization-chrony" title="Link to this heading"></a></h3>
+<p>To ensure microsecond-level timestamp synchronization between the host and MCU,
+configure the host Chrony daemon to serve local subnets. In <code class="docutils literal notranslate"><span class="pre">/etc/chrony/chrony.conf</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>allow 192.0.2.0/24
+allow 127.0.0.1
 </pre></div>
 </div>
-<p>Replace <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code> with your host IP reported by <code class="docutils literal notranslate"><span class="pre">ip</span> <span class="pre">addr</span></code> / <code class="docutils literal notranslate"><span class="pre">ipconfig</span></code>.</p>
-</section>
-<section id="build-and-flash">
-<h3>3. Build and flash<a class="headerlink" href="#build-and-flash" title="Link to this heading"></a></h3>
-<p>Build and flash the firmware with west.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>west<span class="w"> </span>build<span class="w"> </span>-p<span class="w"> </span>always<span class="w"> </span>-b<span class="w"> </span>esp32s3_devkitc/esp32s3/procpu<span class="w"> </span>inverted_pendulum_tier2
-west<span class="w"> </span>flash
+<p>Replace <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code> with your Wi-Fi subnet (shown by <code class="docutils literal notranslate"><span class="pre">ip</span> <span class="pre">addr</span></code>) so the ESP32 can
+reach the NTP server.</p>
+<p>Then restart the service:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>chrony
 </pre></div>
 </div>
 </section>
-<section id="add-your-wi-fi-credentials">
-<h3>4. Add your Wi-Fi credentials<a class="headerlink" href="#add-your-wi-fi-credentials" title="Link to this heading"></a></h3>
-<p>Open a serial terminal/monitor on the board’s serial port, and run:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>wifi cred add -s "&lt;SSID&gt;" -k 1 -p &lt;PASSWORD&gt;
+</section>
+<section id="firmware-setup-esp32-s3">
+<h2>Firmware Setup (ESP32-S3)<a class="headerlink" href="#firmware-setup-esp32-s3" title="Link to this heading"></a></h2>
+<p>The firmware supports both USB CDC-ECM (wired Ethernet over USB) and Wi-Fi
+transports via Zephyr snippets.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For Wi-Fi builds, set <code class="docutils literal notranslate"><span class="pre">CONFIG_ZENBEDDED_ZENOH_LOCATOR=&quot;&lt;HOST_IP&gt;:7447&quot;</span></code> in <code class="docutils literal notranslate"><span class="pre">prj.conf</span></code>.</p>
+</div>
+<section id="build-firmware">
+<h3>1. Build Firmware<a class="headerlink" href="#build-firmware" title="Link to this heading"></a></h3>
+<p>Tier 1 (ROS 2 Topics over USB CDC-ECM):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>esp32s3_devkitc/esp32s3/procpu<span class="w"> </span>-p<span class="w"> </span>always<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>demos/inverted_pendulum/inverted_pendulum_tier1<span class="w"> </span>-S<span class="w"> </span>cdc-ecm
 </pre></div>
 </div>
-<p>It is normal to see a FATAL EXCEPTION here.</p>
-<p>Then restart the MCU. Credentials are stored in flash, so you only need to do
-this once (or when your network changes).</p>
-<p>You can keep the serial monitor open to watch the logs.</p>
+<p>Tier 2 (Zenbedded Binary over USB CDC-ECM):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>esp32s3_devkitc/esp32s3/procpu<span class="w"> </span>-p<span class="w"> </span>always<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>demos/inverted_pendulum/inverted_pendulum_tier2<span class="w"> </span>-S<span class="w"> </span>cdc-ecm
+</pre></div>
+</div>
+<p>To enable Wi-Fi, use <code class="docutils literal notranslate"><span class="pre">-S</span> <span class="pre">wifi</span></code> instead. For concurrent dual transport
+(USB CDC-ECM priority with Wi-Fi fallback), pass both snippets:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dual Transport (USB CDC-ECM priority with Wi-Fi fallback)</span>
+west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>esp32s3_devkitc/esp32s3/procpu<span class="w"> </span>-p<span class="w"> </span>always<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>demos/inverted_pendulum/inverted_pendulum_tier2<span class="w"> </span>-S<span class="w"> </span>cdc-ecm<span class="w"> </span>-S<span class="w"> </span>wifi
+</pre></div>
+</div>
 </section>
-<section id="check-the-led-status">
-<h3>5. Check the LED status<a class="headerlink" href="#check-the-led-status" title="Link to this heading"></a></h3>
-<p>If your board has a NeoPixel LED:</p>
+<section id="flash-and-monitor">
+<h3>2. Flash and Monitor<a class="headerlink" href="#flash-and-monitor" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>west<span class="w"> </span>flash
+west<span class="w"> </span>espressif<span class="w"> </span>monitor
+</pre></div>
+</div>
+</section>
+<section id="wi-fi-credentials-if-using-wi-fi">
+<h3>3. Wi-Fi Credentials (if using Wi-Fi)<a class="headerlink" href="#wi-fi-credentials-if-using-wi-fi" title="Link to this heading"></a></h3>
+<p>In the serial console, save network credentials to NVS:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>wifi cred add -s "YourSSID" -k 1 -p "YourPassword"
+</pre></div>
+</div>
+</section>
+<section id="led-status-codes">
+<h3>4. LED Status Codes<a class="headerlink" href="#led-status-codes" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 25%" />
 <col style="width: 75%" />
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>LED</p></th>
+<tr class="row-odd"><th class="head"><p>LED Color</p></th>
 <th class="head"><p>Meaning</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Blue</p></td>
-<td><p>Starting up / connecting</p></td>
+<tr class="row-even"><td><p>Blue (solid)</p></td>
+<td><p>Initialization: peripherals up, acquiring network IP and boot-time
+encoder zero. If the LED stays solid blue, the Zenoh connection never
+completed (see Troubleshooting).</p></td>
 </tr>
-<tr class="row-odd"><td><p>Flashing green</p></td>
-<td><p>Wi-Fi and Zenoh are configured and connected</p></td>
+<tr class="row-odd"><td><p>Flashing Green (toggles every 250 ms)</p></td>
+<td><p>Zenoh session live; publishing state and executing control commands.</p></td>
 </tr>
 </tbody>
 </table>
-<p>The firmware needs the encoder to be connected or reading data to finish setup,
-so you can verify the network side with the logs.</p>
 </section>
 </section>
-<section id="controller-ros-2">
-<h2>Controller (ROS 2)<a class="headerlink" href="#controller-ros-2" title="Link to this heading"></a></h2>
-<section id="build">
-<h3>Build<a class="headerlink" href="#build" title="Link to this heading"></a></h3>
-<p>Clone or symlink these packages into your ROS 2 workspace (<code class="docutils literal notranslate"><span class="pre">ros2_ws/src</span></code>):</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">zenbedded_hardware_interface</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">zenbedded_transport</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">inverted_pendulum_ros</span></code></p></li>
-</ul>
-<p>Then build with symlinks:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/ros2_ws
-mkdir<span class="w"> </span>src<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>ln<span class="w"> </span>-s<span class="w"> </span>/zephyr_ws/demos/inverted_pendulum/inverted_pendulum_ros<span class="w"> </span>src/
-colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install
+<section id="host-bringup-ros-2">
+<h2>Host Bringup (ROS 2)<a class="headerlink" href="#host-bringup-ros-2" title="Link to this heading"></a></h2>
+<section id="build-the-ros-2-workspace">
+<h3>1. Build the ROS 2 Workspace<a class="headerlink" href="#build-the-ros-2-workspace" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/lyrical/setup.bash
+colcon<span class="w"> </span>build<span class="w"> </span>--packages-select<span class="w"> </span>zenbedded_inverted_pendulum<span class="w"> </span>zenbedded_hardware_interface<span class="w"> </span>--symlink-install
 <span class="nb">source</span><span class="w"> </span>install/setup.bash
 </pre></div>
 </div>
 </section>
-<section id="run">
-<h3>Run<a class="headerlink" href="#run" title="Link to this heading"></a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>zenbedded_inverted_pendulum<span class="w"> </span>inverted_pendulum.launch.py
+<section id="launch-stack">
+<h3>2. Launch Stack<a class="headerlink" href="#launch-stack" title="Link to this heading"></a></h3>
+<p>Tier 1 (Topic-Based Hardware Interface + RViz):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>zenbedded_inverted_pendulum<span class="w"> </span>inverted_pendulum.launch.py<span class="w"> </span>tier:<span class="o">=</span><span class="m">1</span>
+</pre></div>
+</div>
+<p>Tier 2 (Zenoh Binary Hardware Interface + RViz):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>zenbedded_inverted_pendulum<span class="w"> </span>inverted_pendulum.launch.py<span class="w"> </span>tier:<span class="o">=</span><span class="m">2</span>
+</pre></div>
+</div>
+<p>In-Process Simulation (Mock Hardware + RViz with Periodic Random Kicks):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Periodic random disturbance kicks enabled by default:</span>
+ros2<span class="w"> </span>launch<span class="w"> </span>zenbedded_inverted_pendulum<span class="w"> </span>inverted_pendulum.launch.py<span class="w"> </span>use_mock_hardware:<span class="o">=</span><span class="nb">true</span>
+
+<span class="c1"># Disable disturbance kicks:</span>
+ros2<span class="w"> </span>launch<span class="w"> </span>zenbedded_inverted_pendulum<span class="w"> </span>inverted_pendulum.launch.py<span class="w"> </span>use_mock_hardware:<span class="o">=</span><span class="nb">true</span><span class="w"> </span>enable_kicking:<span class="o">=</span><span class="nb">false</span>
+</pre></div>
+</div>
+<p>Headless Mode (disable RViz):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>zenbedded_inverted_pendulum<span class="w"> </span>inverted_pendulum.launch.py<span class="w"> </span>tier:<span class="o">=</span><span class="m">2</span><span class="w"> </span>use_rviz:<span class="o">=</span><span class="nb">false</span>
 </pre></div>
 </div>
 </section>
 </section>
-<section id="connection-guide">
-<h2>Connection Guide<a class="headerlink" href="#connection-guide" title="Link to this heading"></a></h2>
-<p>Pins are taken from the devicetree overlay.</p>
-<section id="stepper-driver-a4988-1-16-microstepping">
-<h3>Stepper driver (A4988, 1/16 microstepping)<a class="headerlink" href="#stepper-driver-a4988-1-16-microstepping" title="Link to this heading"></a></h3>
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 20%" />
-<col style="width: 25%" />
-<col style="width: 55%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>Signal</p></th>
-<th class="head"><p>ESP32 GPIO</p></th>
-<th class="head"><p>Notes</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>STEP</p></td>
-<td><p>GPIO3</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>DIR</p></td>
-<td><p>GPIO8</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>EN</p></td>
-<td><p>GPIO13</p></td>
-<td><p>Active low</p></td>
-</tr>
-</tbody>
-</table>
-<p>Microstepping is set to 16 in the overlay. The pins are not controlled by the
-firmware, so tie MS1, MS2 and MS3 high on the A4988 to get 1/16 steps. Connect
-the driver’s logic supply to 3.3V (VDD), and share GND between the driver,
-motor supply and ESP32.</p>
-</section>
-<section id="as5600-encoder-i2c">
-<h3>AS5600 encoder (I2C)<a class="headerlink" href="#as5600-encoder-i2c" title="Link to this heading"></a></h3>
+<section id="hardware-wiring-pinout">
+<h2>Hardware Wiring &amp; Pinout<a class="headerlink" href="#hardware-wiring-pinout" title="Link to this heading"></a></h2>
+<section id="as5600-12-bit-magnetic-encoder-i2c">
+<h3>AS5600 12-Bit Magnetic Encoder (I2C)<a class="headerlink" href="#as5600-12-bit-magnetic-encoder-i2c" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 20%" />
@@ -263,69 +303,27 @@ motor supply and ESP32.</p>
 <tbody>
 <tr class="row-even"><td><p>SDA</p></td>
 <td><p>GPIO1</p></td>
-<td><p>Internal pull-up enabled</p></td>
+<td><p>Internal pull-up enabled, 400 kHz Fast-Mode</p></td>
 </tr>
 <tr class="row-odd"><td><p>SCL</p></td>
 <td><p>GPIO2</p></td>
-<td><p>Internal pull-up enabled</p></td>
+<td><p>Internal pull-up enabled, 400 kHz Fast-Mode</p></td>
+</tr>
+<tr class="row-even"><td><p>VCC</p></td>
+<td><p>3.3V</p></td>
+<td><p>Connect to 3V3 rail</p></td>
+</tr>
+<tr class="row-odd"><td><p>GND</p></td>
+<td><p>GND</p></td>
+<td><p>Common ground</p></td>
 </tr>
 </tbody>
 </table>
-<p>I2C address <code class="docutils literal notranslate"><span class="pre">0x36</span></code>, running at fast mode (400 kHz). Power the AS5600 from 3.3V
-and mount the diametric magnet centered over the chip on the pendulum axis.</p>
 </section>
-<section id="status-led-ws2812-neopixel">
-<h3>Status LED (WS2812 / NeoPixel)<a class="headerlink" href="#status-led-ws2812-neopixel" title="Link to this heading"></a></h3>
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 20%" />
-<col style="width: 25%" />
-<col style="width: 55%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>Signal</p></th>
-<th class="head"><p>ESP32 GPIO</p></th>
-<th class="head"><p>Notes</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>DIN</p></td>
-<td><p>GPIO48</p></td>
-<td><p>Driven via I2S, 1 LED</p></td>
-</tr>
-</tbody>
-</table>
-<p>This is the on-board NeoPixel on many ESP32-S3 dev boards. If your board has
-none, the demo still works; use the serial logs instead.</p>
-</section>
-<section id="wiring-summary">
-<h3>Wiring summary<a class="headerlink" href="#wiring-summary" title="Link to this heading"></a></h3>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ESP32            A4988
-GPIO3   ───────&gt; STEP
-GPIO8   ───────&gt; DIR
-GPIO13  ───────&gt; EN
-3V3     ───────&gt; VDD
-GND     ───────&gt; GND
-
-ESP32            AS5600
-GPIO1   &lt;──────&gt; SDA
-GPIO2   ───────&gt; SCL
-3V3     ───────&gt; VCC
-GND     ───────&gt; GND
-
-ESP32            NeoPixel (optional)
-GPIO48  ───────&gt; DIN   (on-board on many boards)
-</pre></div>
-</div>
-<p>Power the stepper through the A4988’s VMOT/GND pins from a separate motor
-supply, with a bulk capacitor (~100 µF) across them.</p>
-</section>
-<section id="optional-tmc2209-drv-style-driver">
-<h3>Optional: TMC2209 / DRV-style driver<a class="headerlink" href="#optional-tmc2209-drv-style-driver" title="Link to this heading"></a></h3>
-<p>The overlay includes a commented-out configuration for drivers that allow
-microstepping control. To use it, uncomment the <code class="docutils literal notranslate"><span class="pre">tmc2209_driver</span></code> and
-<code class="docutils literal notranslate"><span class="pre">tmc2209_ctrl</span></code> nodes and point the <code class="docutils literal notranslate"><span class="pre">stepper-driver</span></code> and <code class="docutils literal notranslate"><span class="pre">stepper-ctrl</span></code>
-aliases at them instead of the A4988 nodes.</p>
+<section id="stepper-driver-tmc2209">
+<h3>Stepper Driver (TMC2209)<a class="headerlink" href="#stepper-driver-tmc2209" title="Link to this heading"></a></h3>
+<p>The demo wires a TMC2209 driver with GPIO-controlled microstepping pins,
+resolved to 32 microsteps in the overlay (matching <code class="docutils literal notranslate"><span class="pre">micro-step-res</span> <span class="pre">=</span> <span class="pre">&lt;32&gt;</span></code>).</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 20%" />
@@ -341,39 +339,71 @@ aliases at them instead of the A4988 nodes.</p>
 <tbody>
 <tr class="row-even"><td><p>EN</p></td>
 <td><p>GPIO4</p></td>
-<td><p>Active low</p></td>
+<td><p>Enable output (active low)</p></td>
 </tr>
 <tr class="row-odd"><td><p>M0</p></td>
 <td><p>GPIO5</p></td>
-<td></td>
+<td><p>Microstepping select 0</p></td>
 </tr>
 <tr class="row-even"><td><p>M1</p></td>
 <td><p>GPIO6</p></td>
-<td></td>
+<td><p>Microstepping select 1</p></td>
 </tr>
 <tr class="row-odd"><td><p>STEP</p></td>
 <td><p>GPIO7</p></td>
-<td></td>
+<td><p>Step pulse output</p></td>
 </tr>
 <tr class="row-even"><td><p>DIR</p></td>
 <td><p>GPIO8</p></td>
-<td><p>Direction is inverted in the overlay</p></td>
+<td><p>Direction output (inverted in overlay via <code class="docutils literal notranslate"><span class="pre">invert-direction</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>VMOT</p></td>
+<td><p>Motor V+</p></td>
+<td><p>External 12V-24V power with 100 µF capacitor</p></td>
+</tr>
+<tr class="row-even"><td><p>GND</p></td>
+<td><p>GND</p></td>
+<td><p>Common ground with ESP32</p></td>
 </tr>
 </tbody>
 </table>
-<p>Microstepping resolution is set to 32 in this configuration.</p>
+<p>The legacy A4988 mapping (EN = GPIO13, STEP = GPIO3, DIR = GPIO8) remains
+available as a commented-out <code class="docutils literal notranslate"><span class="pre">a4988</span></code> node in the board overlay.</p>
+</section>
+<section id="status-led-ws2812-neopixel">
+<h3>Status LED (WS2812 NeoPixel)<a class="headerlink" href="#status-led-ws2812-neopixel" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 25%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Signal</p></th>
+<th class="head"><p>ESP32 GPIO</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>DIN</p></td>
+<td><p>GPIO48</p></td>
+<td><p>On-board NeoPixel data line on ESP32-S3 DevKitC</p></td>
+</tr>
+</tbody>
+</table>
 </section>
 </section>
 <section id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p><strong>LED stays blue:</strong> the board can’t join Wi-Fi or reach the router. Check the
-SSID/password in the serial logs, and that your PC IP in <code class="docutils literal notranslate"><span class="pre">prj.conf</span></code> is
-correct and port 7447 isn’t blocked by a firewall.</p></li>
-<li><p><strong>No Wi-Fi commands in the shell:</strong> make sure you’re connected to the right
-serial port and the Zephyr Wi-Fi shell is enabled.</p></li>
-<li><p><strong>Controller sees no data:</strong> confirm <code class="docutils literal notranslate"><span class="pre">zenohd</span></code> is running and the board is
-connected (check the router logs), and verify the AS5600 wiring.</p></li>
+<li><p><strong>Robot model is invisible or white in RViz</strong>:
+Ensure Git LFS binary STLs are pulled (<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">lfs</span> <span class="pre">pull</span></code>) and the RobotModel
+display has <code class="docutils literal notranslate"><span class="pre">Durability</span> <span class="pre">Policy</span></code> set to <code class="docutils literal notranslate"><span class="pre">Transient</span> <span class="pre">Local</span></code>.</p></li>
+<li><p><strong>Controller manager hangs waiting for robot_description</strong>:
+When using <code class="docutils literal notranslate"><span class="pre">rmw_zenoh_cpp</span></code>, make sure <code class="docutils literal notranslate"><span class="pre">zenohd</span> <span class="pre">-l</span> <span class="pre">tcp/0.0.0.0:7447</span></code> is running.</p></li>
+<li><p><strong>LED stays Blue on MCU</strong>:
+MCU cannot resolve or connect to the Zenoh router. For USB CDC-ECM, verify
+the host interface (<code class="docutils literal notranslate"><span class="pre">enx...</span></code> or <code class="docutils literal notranslate"><span class="pre">usb0</span></code>) has IP <code class="docutils literal notranslate"><span class="pre">192.0.2.1/24</span></code>.</p></li>
 </ul>
 </section>
 </section>

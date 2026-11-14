@@ -101,7 +101,7 @@ General discussions
 
 ======================================================================
 
-Built on 2026-11-13 at 05:36 GMT
+Built on 2026-11-14 at 05:37 GMT
 
 
 
@@ -5752,6 +5752,15 @@ Release Notes: Kilted Kaiju to Lyrical Luth
 
 This list summarizes important changes between Kilted Kaiju (previous)
 and Lyrical Luth (current) releases.
+
+
+AsyncFunctionHandler
+====================
+
+* Added the "SELF_PACED" scheduling policy. The worker thread does not
+  sleep. The callback (a blocking hardware "read()"), sets the cycle
+  time. If the callback returns in less than 10% of the "exec_rate"
+  period, the handler sleeps for 100 us and prints a warning (#473).
 
 
 LockFreeQueue
@@ -25015,232 +25024,274 @@ source page: doc/zephyr-zenoh-integration/demos/inverted_pendulum/doc/userdoc.tx
 Zenbedded Inverted Pendulum Demo
 ********************************
 
-A stepper-driven inverted pendulum. An ESP32 running Zephyr reads an
-AS5600 magnetic encoder and drives a stepper motor, while the
-balancing controller runs on a PC as a ROS 2 node. The two talk over
-Zenoh via Zenbedded.
-
-   ┌──────────────────────┐   Wi-Fi / Zenoh   ┌─────────────────────┐
-   │ ESP32 (Zephyr)       │ <───────────────> │ PC                  │
-   │ AS5600 + stepper     │     tcp/7447      │ zenohd + ROS 2      │
-   └──────────────────────┘                   └─────────────────────┘
+A stepper-driven Furuta (rotary) inverted pendulum balancing system.
+An ESP32-S3 running Zephyr RTOS samples an AS5600 magnetic angle
+encoder and commands a stepper motor, while the non-linear energy-
+shaping swing-up and LQR balancing controller runs on the host PC
+within the "ros2_control" framework.
 
 
-Setup
-=====
+Architecture
+============
+
+The demo supports three execution tiers under a unified "ros2_control"
+stack:
+
+* **Tier 1 (ROS 2 CDR Topics)**: The ESP32-S3 firmware uses
+  "ZenbeddedClient" with "JointStateCodec" and "JointCommandCodec",
+  communicating over standard ROS 2 CDR topics
+  ("/zenbedded/inverted_pendulum/state" and
+  "/zenbedded/inverted_pendulum/cmd"). On the host,
+  "InvertedPendulumTier1Hardware" relays these topics directly into
+  "ros2_control".
+
+* **Tier 2 (High-Performance Packed Binary)**: The firmware exchanges
+  compact binary C-struct payloads governed by "interface_schema.yaml"
+  directly over Zenoh. On the host, "ZenbeddedHardware" bridges these
+  binary buffers into "ros2_control".
+
+* **Mock Hardware (In-Process Simulation)**: Simulates coupled 2-DOF
+  Lagrangian dynamics with Coulomb friction and motor torque
+  saturation in software, enabling development and automated testing
+  without physical hardware.
+
+In all tiers, the exact same controller
+("inverted_pendulum_controller"), joint state broadcaster, robot state
+publisher, and RViz 3D visualization run identically.
+
+   ┌──────────────────────┐   USB CDC-ECM / Wi-Fi   ┌─────────────────────────────┐
+   │ ESP32-S3 (Zephyr)    │ <─────────────────────> │ Host PC (ROS 2)             │
+   │ • AS5600 Encoder     │         Zenoh           │ • zenohd (tcp/7447)         │
+   │ • Stepper (TMC/A4988)│     (Tier 1 or 2)       │ • ros2_control_node         │
+   │ • NeoPixel Status LED│                         │ • inverted_pendulum_ctrl    │
+   └──────────────────────┘                         │ • robot_state_pub + RViz2   │
+                                                    └─────────────────────────────┘
 
 
-1. Start the Zenoh router
--------------------------
+Prerequisites
+=============
 
-On your PC:
+
+1. Git LFS 3D Meshes
+--------------------
+
+The URDF model uses detailed STL meshes for visual rendering in RViz.
+Ensure binary meshes are pulled:
+
+   git lfs pull
+
+Verify that the files in
+"demos/inverted_pendulum/inverted_pendulum_ros/meshes/" are binary
+STLs (several megabytes each) rather than 132-byte pointer text files.
+
+
+2. Zenoh Router
+---------------
+
+When running ROS 2 with "RMW_IMPLEMENTATION=rmw_zenoh_cpp", a Zenoh
+router must be running on the network:
+
+   zenohd -l tcp/0.0.0.0:7447
+
+Alternatively:
 
    export ZENOH_CONFIG_OVERRIDE='mode="peer";listen/endpoints=["tcp/0.0.0.0:7447"]'
-   export RUST_LOG=zenoh=debug
    ros2 run rmw_zenoh_cpp rmw_zenohd
 
-Leave it running.
+
+3. Host NTP Time Synchronization (Chrony)
+-----------------------------------------
+
+To ensure microsecond-level timestamp synchronization between the host
+and MCU, configure the host Chrony daemon to serve local subnets. In
+"/etc/chrony/chrony.conf":
+
+   allow 192.0.2.0/24
+   allow 127.0.0.1
+
+Replace "127.0.0.1" with your Wi-Fi subnet (shown by "ip addr") so the
+ESP32 can reach the NTP server.
+
+Then restart the service:
+
+   sudo systemctl restart chrony
 
 
-2. Configure the firmware
--------------------------
+Firmware Setup (ESP32-S3)
+=========================
 
-Find your PC's IP address on the same network the ESP32 will join ("ip
-addr" on Linux/macOS, "ipconfig" on Windows). Then set it in
-"prj.conf":
+The firmware supports both USB CDC-ECM (wired Ethernet over USB) and
+Wi-Fi transports via Zephyr snippets.
 
-   CONFIG_ZENBEDDED_ZENOH_LOCATOR="127.0.0.1:7447"
+Note:
 
-Replace "127.0.0.1" with your host IP reported by "ip addr" /
-"ipconfig".
+  For Wi-Fi builds, set
+  "CONFIG_ZENBEDDED_ZENOH_LOCATOR="<HOST_IP>:7447"" in "prj.conf".
 
 
-3. Build and flash
-------------------
+1. Build Firmware
+-----------------
 
-Build and flash the firmware with west.
+Tier 1 (ROS 2 Topics over USB CDC-ECM):
 
-   west build -p always -b esp32s3_devkitc/esp32s3/procpu inverted_pendulum_tier2
+   west build -b esp32s3_devkitc/esp32s3/procpu -p always \
+     demos/inverted_pendulum/inverted_pendulum_tier1 -S cdc-ecm
+
+Tier 2 (Zenbedded Binary over USB CDC-ECM):
+
+   west build -b esp32s3_devkitc/esp32s3/procpu -p always \
+     demos/inverted_pendulum/inverted_pendulum_tier2 -S cdc-ecm
+
+To enable Wi-Fi, use "-S wifi" instead. For concurrent dual transport
+(USB CDC-ECM priority with Wi-Fi fallback), pass both snippets:
+
+   # Dual Transport (USB CDC-ECM priority with Wi-Fi fallback)
+   west build -b esp32s3_devkitc/esp32s3/procpu -p always \
+     demos/inverted_pendulum/inverted_pendulum_tier2 -S cdc-ecm -S wifi
+
+
+2. Flash and Monitor
+--------------------
+
    west flash
+   west espressif monitor
 
 
-4. Add your Wi-Fi credentials
------------------------------
+3. Wi-Fi Credentials (if using Wi-Fi)
+-------------------------------------
 
-Open a serial terminal/monitor on the board's serial port, and run:
+In the serial console, save network credentials to NVS:
 
-   wifi cred add -s "<SSID>" -k 1 -p <PASSWORD>
-
-It is normal to see a FATAL EXCEPTION here.
-
-Then restart the MCU. Credentials are stored in flash, so you only
-need to do this once (or when your network changes).
-
-You can keep the serial monitor open to watch the logs.
+   wifi cred add -s "YourSSID" -k 1 -p "YourPassword"
 
 
-5. Check the LED status
------------------------
-
-If your board has a NeoPixel LED:
+4. LED Status Codes
+-------------------
 
 +---------------------------+-----------------------------------------------------------------------------+
-| LED                       | Meaning                                                                     |
+| LED Color                 | Meaning                                                                     |
 |===========================|=============================================================================|
-| Blue                      | Starting up / connecting                                                    |
+| Blue (solid)              | Initialization: peripherals up, acquiring network IP and boot-time encoder  |
+|                           | zero. If the LED stays solid blue, the Zenoh connection never completed     |
+|                           | (see Troubleshooting).                                                      |
 +---------------------------+-----------------------------------------------------------------------------+
-| Flashing green            | Wi-Fi and Zenoh are configured and connected                                |
+| Flashing Green (toggles   | Zenoh session live; publishing state and executing control commands.        |
+| every 250 ms)             |                                                                             |
 +---------------------------+-----------------------------------------------------------------------------+
 
-The firmware needs the encoder to be connected or reading data to
-finish setup, so you can verify the network side with the logs.
+
+Host Bringup (ROS 2)
+====================
 
 
-Controller (ROS 2)
-==================
+1. Build the ROS 2 Workspace
+----------------------------
 
-
-Build
------
-
-Clone or symlink these packages into your ROS 2 workspace
-("ros2_ws/src"):
-
-* "zenbedded_hardware_interface"
-
-* "zenbedded_transport"
-
-* "inverted_pendulum_ros"
-
-Then build with symlinks:
-
-   cd ~/ros2_ws
-   mkdir src && ln -s /zephyr_ws/demos/inverted_pendulum/inverted_pendulum_ros src/
-   colcon build --symlink-install
+   source /opt/ros/lyrical/setup.bash
+   colcon build --packages-select zenbedded_inverted_pendulum zenbedded_hardware_interface --symlink-install
    source install/setup.bash
 
 
-Run
----
+2. Launch Stack
+---------------
 
-   ros2 launch zenbedded_inverted_pendulum inverted_pendulum.launch.py
+Tier 1 (Topic-Based Hardware Interface + RViz):
 
+   ros2 launch zenbedded_inverted_pendulum inverted_pendulum.launch.py tier:=1
 
-Connection Guide
-================
+Tier 2 (Zenoh Binary Hardware Interface + RViz):
 
-Pins are taken from the devicetree overlay.
+   ros2 launch zenbedded_inverted_pendulum inverted_pendulum.launch.py tier:=2
 
+In-Process Simulation (Mock Hardware + RViz with Periodic Random
+Kicks):
 
-Stepper driver (A4988, 1/16 microstepping)
-------------------------------------------
+   # Periodic random disturbance kicks enabled by default:
+   ros2 launch zenbedded_inverted_pendulum inverted_pendulum.launch.py use_mock_hardware:=true
 
-+----------------------+---------------------------+---------------------------------------------------------+
-| Signal               | ESP32 GPIO                | Notes                                                   |
-|======================|===========================|=========================================================|
-| STEP                 | GPIO3                     |                                                         |
-+----------------------+---------------------------+---------------------------------------------------------+
-| DIR                  | GPIO8                     |                                                         |
-+----------------------+---------------------------+---------------------------------------------------------+
-| EN                   | GPIO13                    | Active low                                              |
-+----------------------+---------------------------+---------------------------------------------------------+
+   # Disable disturbance kicks:
+   ros2 launch zenbedded_inverted_pendulum inverted_pendulum.launch.py use_mock_hardware:=true enable_kicking:=false
 
-Microstepping is set to 16 in the overlay. The pins are not controlled
-by the firmware, so tie MS1, MS2 and MS3 high on the A4988 to get 1/16
-steps. Connect the driver's logic supply to 3.3V (VDD), and share GND
-between the driver, motor supply and ESP32.
+Headless Mode (disable RViz):
+
+   ros2 launch zenbedded_inverted_pendulum inverted_pendulum.launch.py tier:=2 use_rviz:=false
 
 
-AS5600 encoder (I2C)
---------------------
-
-+----------------------+---------------------------+---------------------------------------------------------+
-| Signal               | ESP32 GPIO                | Notes                                                   |
-|======================|===========================|=========================================================|
-| SDA                  | GPIO1                     | Internal pull-up enabled                                |
-+----------------------+---------------------------+---------------------------------------------------------+
-| SCL                  | GPIO2                     | Internal pull-up enabled                                |
-+----------------------+---------------------------+---------------------------------------------------------+
-
-I2C address "0x36", running at fast mode (400 kHz). Power the AS5600
-from 3.3V and mount the diametric magnet centered over the chip on the
-pendulum axis.
+Hardware Wiring & Pinout
+========================
 
 
-Status LED (WS2812 / NeoPixel)
-------------------------------
-
-+----------------------+---------------------------+---------------------------------------------------------+
-| Signal               | ESP32 GPIO                | Notes                                                   |
-|======================|===========================|=========================================================|
-| DIN                  | GPIO48                    | Driven via I2S, 1 LED                                   |
-+----------------------+---------------------------+---------------------------------------------------------+
-
-This is the on-board NeoPixel on many ESP32-S3 dev boards. If your
-board has none, the demo still works; use the serial logs instead.
-
-
-Wiring summary
---------------
-
-   ESP32            A4988
-   GPIO3   ───────> STEP
-   GPIO8   ───────> DIR
-   GPIO13  ───────> EN
-   3V3     ───────> VDD
-   GND     ───────> GND
-
-   ESP32            AS5600
-   GPIO1   <──────> SDA
-   GPIO2   ───────> SCL
-   3V3     ───────> VCC
-   GND     ───────> GND
-
-   ESP32            NeoPixel (optional)
-   GPIO48  ───────> DIN   (on-board on many boards)
-
-Power the stepper through the A4988's VMOT/GND pins from a separate
-motor supply, with a bulk capacitor (~100 µF) across them.
-
-
-Optional: TMC2209 / DRV-style driver
+AS5600 12-Bit Magnetic Encoder (I2C)
 ------------------------------------
 
-The overlay includes a commented-out configuration for drivers that
-allow microstepping control. To use it, uncomment the "tmc2209_driver"
-and "tmc2209_ctrl" nodes and point the "stepper-driver" and "stepper-
-ctrl" aliases at them instead of the A4988 nodes.
++----------------------+---------------------------+---------------------------------------------------------+
+| Signal               | ESP32 GPIO                | Notes                                                   |
+|======================|===========================|=========================================================|
+| SDA                  | GPIO1                     | Internal pull-up enabled, 400 kHz Fast-Mode             |
++----------------------+---------------------------+---------------------------------------------------------+
+| SCL                  | GPIO2                     | Internal pull-up enabled, 400 kHz Fast-Mode             |
++----------------------+---------------------------+---------------------------------------------------------+
+| VCC                  | 3.3V                      | Connect to 3V3 rail                                     |
++----------------------+---------------------------+---------------------------------------------------------+
+| GND                  | GND                       | Common ground                                           |
++----------------------+---------------------------+---------------------------------------------------------+
+
+
+Stepper Driver (TMC2209)
+------------------------
+
+The demo wires a TMC2209 driver with GPIO-controlled microstepping
+pins, resolved to 32 microsteps in the overlay (matching "micro-step-
+res = <32>").
 
 +----------------------+---------------------------+---------------------------------------------------------+
 | Signal               | ESP32 GPIO                | Notes                                                   |
 |======================|===========================|=========================================================|
-| EN                   | GPIO4                     | Active low                                              |
+| EN                   | GPIO4                     | Enable output (active low)                              |
 +----------------------+---------------------------+---------------------------------------------------------+
-| M0                   | GPIO5                     |                                                         |
+| M0                   | GPIO5                     | Microstepping select 0                                  |
 +----------------------+---------------------------+---------------------------------------------------------+
-| M1                   | GPIO6                     |                                                         |
+| M1                   | GPIO6                     | Microstepping select 1                                  |
 +----------------------+---------------------------+---------------------------------------------------------+
-| STEP                 | GPIO7                     |                                                         |
+| STEP                 | GPIO7                     | Step pulse output                                       |
 +----------------------+---------------------------+---------------------------------------------------------+
-| DIR                  | GPIO8                     | Direction is inverted in the overlay                    |
+| DIR                  | GPIO8                     | Direction output (inverted in overlay via "invert-      |
+|                      |                           | direction")                                             |
++----------------------+---------------------------+---------------------------------------------------------+
+| VMOT                 | Motor V+                  | External 12V-24V power with 100 µF capacitor            |
++----------------------+---------------------------+---------------------------------------------------------+
+| GND                  | GND                       | Common ground with ESP32                                |
 +----------------------+---------------------------+---------------------------------------------------------+
 
-Microstepping resolution is set to 32 in this configuration.
+The legacy A4988 mapping (EN = GPIO13, STEP = GPIO3, DIR = GPIO8)
+remains available as a commented-out "a4988" node in the board
+overlay.
+
+
+Status LED (WS2812 NeoPixel)
+----------------------------
+
++----------------------+---------------------------+---------------------------------------------------------+
+| Signal               | ESP32 GPIO                | Notes                                                   |
+|======================|===========================|=========================================================|
+| DIN                  | GPIO48                    | On-board NeoPixel data line on ESP32-S3 DevKitC         |
++----------------------+---------------------------+---------------------------------------------------------+
 
 
 Troubleshooting
 ===============
 
-* **LED stays blue:** the board can't join Wi-Fi or reach the router.
-  Check the SSID/password in the serial logs, and that your PC IP in
-  "prj.conf" is correct and port 7447 isn't blocked by a firewall.
+* **Robot model is invisible or white in RViz**: Ensure Git LFS binary
+  STLs are pulled ("git lfs pull") and the RobotModel display has
+  "Durability Policy" set to "Transient Local".
 
-* **No Wi-Fi commands in the shell:** make sure you're connected to
-  the right serial port and the Zephyr Wi-Fi shell is enabled.
+* **Controller manager hangs waiting for robot_description**: When
+  using "rmw_zenoh_cpp", make sure "zenohd -l tcp/0.0.0.0:7447" is
+  running.
 
-* **Controller sees no data:** confirm "zenohd" is running and the
-  board is connected (check the router logs), and verify the AS5600
-  wiring.
+* **LED stays Blue on MCU**: MCU cannot resolve or connect to the
+  Zenoh router. For USB CDC-ECM, verify the host interface ("enx..."
+  or "usb0") has IP "192.0.2.1/24".
 
 
 

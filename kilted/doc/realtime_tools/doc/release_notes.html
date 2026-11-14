@@ -128,6 +128,7 @@
 <h2>AsyncFunctionHandler<a class="headerlink" href="#asyncfunctionhandler" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>Add DETACHED scheduling policy for Async function handler (<a class="reference external" href="https://github.com/ros-controls/realtime_tools/pull/383">#383</a>).</p></li>
+<li><p>Added the <code class="docutils literal notranslate"><span class="pre">SELF_PACED</span></code> scheduling policy. The worker thread does not sleep. The callback (a blocking hardware <code class="docutils literal notranslate"><span class="pre">read()</span></code>), sets the cycle time. If the callback returns in less than 10% of the <code class="docutils literal notranslate"><span class="pre">exec_rate</span></code> period, the handler sleeps for 100 us and prints a warning (<a class="reference external" href="https://github.com/ros-controls/realtime_tools/pull/473">#473</a>).</p></li>
 </ul>
 </section>
 <section id="realtimebox">

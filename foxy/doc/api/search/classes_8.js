@@ -12,5 +12,6 @@ var searchData=
   ['interfaceconfiguration_9',['InterfaceConfiguration',['../structcontroller__interface_1_1InterfaceConfiguration.html',1,'controller_interface']]],
   ['interfaceinfo_10',['InterfaceInfo',['../structhardware__interface_1_1InterfaceInfo.html',1,'hardware_interface']]],
   ['interfaceschema_11',['InterfaceSchema',['../classzenbedded_1_1InterfaceSchema.html',1,'zenbedded']]],
-  ['invertedpendulumcontroller_12',['InvertedPendulumController',['../classinverted__pendulum__controller_1_1InvertedPendulumController.html',1,'inverted_pendulum_controller']]]
+  ['invertedpendulumcontroller_12',['InvertedPendulumController',['../classinverted__pendulum__controller_1_1InvertedPendulumController.html',1,'inverted_pendulum_controller']]],
+  ['invertedpendulumtier1hardware_13',['InvertedPendulumTier1Hardware',['../classzenbedded__inverted__pendulum_1_1InvertedPendulumTier1Hardware.html',1,'zenbedded_inverted_pendulum']]]
 ];

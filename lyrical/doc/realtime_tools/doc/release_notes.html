@@ -66,6 +66,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../ros2_controllers/doc/release_notes.html">ros2_controllers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../control_toolbox/doc/release_notes.html">control_toolbox</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">realtime_tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#asyncfunctionhandler">AsyncFunctionHandler</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#lockfreequeue">LockFreeQueue</a></li>
 </ul>
 </li>
@@ -113,6 +114,12 @@
   <section id="release-notes-kilted-kaiju-to-lyrical-luth">
 <h1>Release Notes: Kilted Kaiju to Lyrical Luth<a class="headerlink" href="#release-notes-kilted-kaiju-to-lyrical-luth" title="Link to this heading"></a></h1>
 <p>This list summarizes important changes between Kilted Kaiju (previous) and Lyrical Luth (current) releases.</p>
+<section id="asyncfunctionhandler">
+<h2>AsyncFunctionHandler<a class="headerlink" href="#asyncfunctionhandler" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Added the <code class="docutils literal notranslate"><span class="pre">SELF_PACED</span></code> scheduling policy. The worker thread does not sleep. The callback (a blocking hardware <code class="docutils literal notranslate"><span class="pre">read()</span></code>), sets the cycle time. If the callback returns in less than 10% of the <code class="docutils literal notranslate"><span class="pre">exec_rate</span></code> period, the handler sleeps for 100 us and prints a warning (<a class="reference external" href="https://github.com/ros-controls/realtime_tools/pull/473">#473</a>).</p></li>
+</ul>
+</section>
 <section id="lockfreequeue">
 <h2>LockFreeQueue<a class="headerlink" href="#lockfreequeue" title="Link to this heading"></a></h2>
 <ul class="simple">

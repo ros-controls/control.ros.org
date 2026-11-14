@@ -9,5 +9,6 @@ var searchData=
   ['interfacedata_6',['InterfaceData',['../structmujoco__ros2__control_1_1InterfaceData.html',1,'mujoco_ros2_control']]],
   ['interfaceinfo_7',['InterfaceInfo',['../structhardware__interface_1_1InterfaceInfo.html',1,'hardware_interface']]],
   ['interfaceschema_8',['InterfaceSchema',['../classzenbedded_1_1InterfaceSchema.html',1,'zenbedded']]],
-  ['invertedpendulumcontroller_9',['InvertedPendulumController',['../classinverted__pendulum__controller_1_1InvertedPendulumController.html',1,'inverted_pendulum_controller']]]
+  ['invertedpendulumcontroller_9',['InvertedPendulumController',['../classinverted__pendulum__controller_1_1InvertedPendulumController.html',1,'inverted_pendulum_controller']]],
+  ['invertedpendulumtier1hardware_10',['InvertedPendulumTier1Hardware',['../classzenbedded__inverted__pendulum_1_1InvertedPendulumTier1Hardware.html',1,'zenbedded_inverted_pendulum']]]
 ];

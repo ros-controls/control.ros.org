@@ -89,7 +89,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>The <a class="el" href="structrealtime__tools_1_1AsyncFunctionHandlerParams.html" title="The AsyncFunctionHandlerParams struct is used to configure the AsyncFunctionHandler....">AsyncFunctionHandlerParams</a> struct is used to configure the <a class="el" href="classrealtime__tools_1_1AsyncFunctionHandler.html" title="Class to handle asynchronous function calls. AsyncFunctionHandler is a class that allows the user to ...">AsyncFunctionHandler</a>. If the type is SYNCHRONIZED, the async worker thread will be synchronized with the main thread, as the main thread will be triggering the async callback method. If the type is DETACHED, the async worker thread will be detached from the main thread and will have its own execution cycle.  
+<p>The <a class="el" href="structrealtime__tools_1_1AsyncFunctionHandlerParams.html" title="The AsyncFunctionHandlerParams struct is used to configure the AsyncFunctionHandler....">AsyncFunctionHandlerParams</a> struct is used to configure the <a class="el" href="classrealtime__tools_1_1AsyncFunctionHandler.html" title="Class to handle asynchronous function calls. AsyncFunctionHandler is a class that allows the user to ...">AsyncFunctionHandler</a>. If the type is SYNCHRONIZED, the async worker thread will be synchronized with the main thread, as the main thread will be triggering the async callback method. If the type is DETACHED, the async worker thread will be detached from the main thread and will have its own execution cycle. If the type is SELF_PACED, the async worker thread paces itself. The callback must block, for example in a hardware read().  
  <a href="structrealtime__tools_1_1AsyncFunctionHandlerParams.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="async__function__handler_8hpp_source.html">async_function_handler.hpp</a>&gt;</code></p>
@@ -148,17 +148,17 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>thread_name</b
 <tr class="separator:ae8ebf14612eccfe6fa7d39634ca25672"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The <a class="el" href="structrealtime__tools_1_1AsyncFunctionHandlerParams.html" title="The AsyncFunctionHandlerParams struct is used to configure the AsyncFunctionHandler....">AsyncFunctionHandlerParams</a> struct is used to configure the <a class="el" href="classrealtime__tools_1_1AsyncFunctionHandler.html" title="Class to handle asynchronous function calls. AsyncFunctionHandler is a class that allows the user to ...">AsyncFunctionHandler</a>. If the type is SYNCHRONIZED, the async worker thread will be synchronized with the main thread, as the main thread will be triggering the async callback method. If the type is DETACHED, the async worker thread will be detached from the main thread and will have its own execution cycle. </p>
+<div class="textblock"><p>The <a class="el" href="structrealtime__tools_1_1AsyncFunctionHandlerParams.html" title="The AsyncFunctionHandlerParams struct is used to configure the AsyncFunctionHandler....">AsyncFunctionHandlerParams</a> struct is used to configure the <a class="el" href="classrealtime__tools_1_1AsyncFunctionHandler.html" title="Class to handle asynchronous function calls. AsyncFunctionHandler is a class that allows the user to ...">AsyncFunctionHandler</a>. If the type is SYNCHRONIZED, the async worker thread will be synchronized with the main thread, as the main thread will be triggering the async callback method. If the type is DETACHED, the async worker thread will be detached from the main thread and will have its own execution cycle. If the type is SELF_PACED, the async worker thread paces itself. The callback must block, for example in a hardware read(). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">thread_priority</td><td>Priority of the async worker thread. Should be between 0 and 99. </td></tr>
     <tr><td class="paramname">cpu_affinity_cores</td><td>CPU cores to which the async worker thread should be pinned. If empty, the thread will not be pinned to any CPU core. </td></tr>
-    <tr><td class="paramname">scheduling_policy</td><td>Scheduling policy for the async worker thread. Can be either SYNCHRONIZED or DETACHED. </td></tr>
-    <tr><td class="paramname">exec_rate</td><td>Execution rate of the async worker thread in Hz. Only used if the scheduling_policy is DETACHED. Must be a positive integer. </td></tr>
-    <tr><td class="paramname">clock</td><td>Clock to be used for the async worker thread. Only used if the scheduling_policy is DETACHED. </td></tr>
+    <tr><td class="paramname">scheduling_policy</td><td>Scheduling policy for the async worker thread. Can be either SYNCHRONIZED, DETACHED, or SELF_PACED. </td></tr>
+    <tr><td class="paramname">exec_rate</td><td>Execution rate of the async worker thread in Hz. Only used if the scheduling_policy is DETACHED or SELF_PACED. Must be a positive integer. </td></tr>
+    <tr><td class="paramname">clock</td><td>Clock to be used for the async worker thread. Only used if the scheduling_policy is DETACHED or SELF_PACED. </td></tr>
     <tr><td class="paramname">logger</td><td>Logger to be used for the async worker thread. If not set, a default logger will be used. </td></tr>
     <tr><td class="paramname">trigger_predicate</td><td>Predicate function to check if the async callback method should be triggered or not. If not set, the async callback method will be triggered every time. </td></tr>
-    <tr><td class="paramname">wait_until_initial_trigger</td><td>Whether to wait until the initial trigger predicate is true before starting the async callback method. If true, the async callback method will not be called until the trigger predicate returns true for the first time. Very useful when the type is DETACHED. </td></tr>
+    <tr><td class="paramname">wait_until_initial_trigger</td><td>Whether to wait until the initial trigger predicate is true before starting the async callback method. If true, the async callback method will not be called until the trigger predicate returns true for the first time. Very useful when the type is DETACHED or SELF_PACED. </td></tr>
     <tr><td class="paramname">print_warnings</td><td>Whether to print warnings when the async callback method is not triggered due to any reason. </td></tr>
     <tr><td class="paramname">thread_name</td><td>The custom name for the async thread. Defaults to the component name. Will be truncated to 15 characters. </td></tr>
   </table>
@@ -205,7 +205,7 @@ template&lt;typename NodeT &gt; </div>
 <ul>
 <li>thread_priority (int): Priority of the async worker thread. Default is 50.</li>
 <li>cpu_affinity (int[]): CPU cores to which the async worker thread should be pinned. Default is empty, which means the thread will not be pinned to any CPU core.</li>
-<li>scheduling_policy (string): Scheduling policy for the async worker thread. Can be either "synchronized" or "detached". Default is "synchronized".</li>
+<li>scheduling_policy (string): Scheduling policy for the async worker thread. Can be either "synchronized", "detached", or "self_paced". Default is "synchronized".</li>
 <li>execution_rate (int): Execution rate of the async worker thread in Hz.</li>
 <li>wait_until_initial_trigger (bool): Whether to wait until the initial trigger predicate is true before starting the async callback method. Default is true.</li>
 <li>print_warnings (bool): Whether to print warnings when the async callback method is not triggered due to any reason. Default is true.</li>
