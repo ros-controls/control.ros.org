@@ -151,18 +151,18 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">  *\param amplitude Amplitude of white noise output</span></div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">  *\param seed Random seed for white noise</span></div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">  */</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  <span class="keywordtype">bool</span> init(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp; amplitude, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp; seed)</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  <span class="keywordtype">bool</span> init(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp; <a class="code hl_class" href="classcontrol__toolbox_1_1LowPassFilter.html">amplitude</a>, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp; <a class="code hl_class" href="classcontrol__toolbox_1_1LowPassFilter.html">seed</a>)</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  {</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keywordflow">if</span> (amplitude &lt; 0.0)</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keywordflow">if</span> (<a class="code hl_class" href="classcontrol__toolbox_1_1LowPassFilter.html">amplitude</a> &lt; 0.0)</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    {</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>      RCUTILS_LOG_ERROR(<span class="stringliteral">&quot;Dither amplitude not set properly. Amplitude must be &gt;0.&quot;</span>);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>      <a class="code hl_class" href="classcontrol__toolbox_1_1LowPassFilter.html">RCUTILS_LOG_ERROR</a>(<span class="stringliteral">&quot;Dither amplitude not set properly. Amplitude must be &gt;0.&quot;</span>);</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    }</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    amplitude_ = amplitude;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    amplitude_ = <a class="code hl_class" href="classcontrol__toolbox_1_1LowPassFilter.html">amplitude</a>;</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="comment">// seed generator for reproducible sequence of random numbers</span></div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    generator_.seed(<span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">int</span><span class="keyword">&gt;</span>(seed));</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    generator_.seed(<span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">int</span><span class="keyword">&gt;</span>(<a class="code hl_class" href="classcontrol__toolbox_1_1LowPassFilter.html">seed</a>));</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  }</div>
@@ -172,8 +172,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">  */</span></div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  <span class="keyword">static</span> <span class="keywordtype">double</span> generateRandomSeed()</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  {</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    std::random_device rdev{};</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(rdev());</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    std::random_device <a class="code hl_class" href="classcontrol__toolbox_1_1LowPassFilter.html">rdev</a>{};</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(<a class="code hl_class" href="classcontrol__toolbox_1_1LowPassFilter.html">rdev</a>());</div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  }</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="keyword">private</span>:</div>
@@ -189,6 +189,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="preprocessor">#endif  </span><span class="comment">// CONTROL_TOOLBOX__DITHER_HPP_</span></div>
 <div class="ttc" id="aclasscontrol__toolbox_1_1Dither_html"><div class="ttname"><a href="classcontrol__toolbox_1_1Dither.html">control_toolbox::Dither</a></div><div class="ttdoc">Gives white noise at specified amplitude.</div><div class="ttdef"><b>Definition</b> dither.hpp:58</div></div>
 <div class="ttc" id="aclasscontrol__toolbox_1_1Dither_html_a782f59e37dd7ab8219b3e24ddf17ed57"><div class="ttname"><a href="classcontrol__toolbox_1_1Dither.html#a782f59e37dd7ab8219b3e24ddf17ed57">control_toolbox::Dither::update</a></div><div class="ttdeci">double update()</div><div class="ttdoc">Get next Gaussian white noise point. Called in RT loop.</div><div class="ttdef"><b>Definition</b> dither.cpp:45</div></div>
+<div class="ttc" id="aclasscontrol__toolbox_1_1LowPassFilter_html"><div class="ttname"><a href="classcontrol__toolbox_1_1LowPassFilter.html">control_toolbox::LowPassFilter</a></div><div class="ttdoc">A Low-pass filter class.</div><div class="ttdef"><b>Definition</b> low_pass_filter.hpp:78</div></div>
 <div class="ttc" id="anamespacecontrol__toolbox_html"><div class="ttname"><a href="namespacecontrol__toolbox.html">control_toolbox</a></div><div class="ttdef"><b>Definition</b> dither.hpp:46</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
