@@ -101,7 +101,7 @@ General discussions
 
 ======================================================================
 
-Built on 2026-11-16 at 05:39 GMT
+Built on 2026-11-17 at 05:35 GMT
 
 
 
@@ -7095,6 +7095,10 @@ convinced that this would add only unnecessary complexity at this
 stage, although in the long term they *could* provide clearer
 structure and interfaces.
 
+The controller manager updates preceding controllers before their
+following controllers. Controllers without chain relationships keep
+the order in which they were loaded.
+
 
 Motivation, Purpose and Use
 ===========================
@@ -9717,6 +9721,9 @@ controller_manager
 * The real-time fallback path no longer re-queries every controller's
   command interface configuration once per fallback interface when a
   controller fails. (#3756)
+
+* Controllers without chain relationships are now updated in the order
+  they were loaded, instead of an unspecified order. (#3781)
 
 
 hardware_interface
