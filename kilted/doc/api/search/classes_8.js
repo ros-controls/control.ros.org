@@ -5,7 +5,7 @@ var searchData=
   ['imusensorbroadcaster_2',['IMUSensorBroadcaster',['../classimu__sensor__broadcaster_1_1IMUSensorBroadcaster.html',1,'imu_sensor_broadcaster']]],
   ['imusensordata_3',['IMUSensorData',['../structmujoco__ros2__control_1_1IMUSensorData.html',1,'mujoco_ros2_control']]],
   ['initparams_4',['InitParams',['../structRawCodec_1_1InitParams.html',1,'RawCodec']]],
-  ['interfaceconfiguration_5',['InterfaceConfiguration',['../structcontroller__interface_1_1InterfaceConfiguration.html',1,'controller_interface']]],
+  ['interfaceconfiguration_5',['InterfaceConfiguration',['../structcontroller__interface_1_1InterfaceConfiguration.html',1,'controller_interface::InterfaceConfiguration'],['../structdiff__drive__controller_1_1InterfaceConfiguration.html',1,'diff_drive_controller::InterfaceConfiguration'],['../structomni__wheel__drive__controller_1_1InterfaceConfiguration.html',1,'omni_wheel_drive_controller::InterfaceConfiguration'],['../structonnx__policy__controller_1_1InterfaceConfiguration.html',1,'onnx_policy_controller::InterfaceConfiguration'],['../structtricycle__controller_1_1InterfaceConfiguration.html',1,'tricycle_controller::InterfaceConfiguration']]],
   ['interfacedata_6',['InterfaceData',['../structmujoco__ros2__control_1_1InterfaceData.html',1,'mujoco_ros2_control']]],
   ['interfacedescription_7',['InterfaceDescription',['../structhardware__interface_1_1InterfaceDescription.html',1,'hardware_interface']]],
   ['interfaceinfo_8',['InterfaceInfo',['../structhardware__interface_1_1InterfaceInfo.html',1,'hardware_interface']]],

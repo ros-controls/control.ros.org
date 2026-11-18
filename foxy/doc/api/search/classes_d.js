@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['odometry_0',['odometry',['../classdiff__drive__controller_1_1Odometry.html',1,'diff_drive_controller::Odometry'],['../classtricycle__controller_1_1Odometry.html',1,'tricycle_controller::Odometry']]],
-  ['odometryparams_1',['odometryparams',['../structdiff__drive__controller_1_1DiffDriveController_1_1OdometryParams.html',1,'diff_drive_controller::DiffDriveController::OdometryParams'],['../structtricycle__controller_1_1TricycleController_1_1OdometryParams.html',1,'tricycle_controller::TricycleController::OdometryParams']]]
+  ['odometry_0',['Odometry',['../classdiff__drive__controller_1_1Odometry.html',1,'diff_drive_controller::Odometry'],['../classtricycle__controller_1_1Odometry.html',1,'tricycle_controller::Odometry']]],
+  ['odometryparams_1',['OdometryParams',['../structdiff__drive__controller_1_1DiffDriveController_1_1OdometryParams.html',1,'diff_drive_controller::DiffDriveController::OdometryParams'],['../structtricycle__controller_1_1TricycleController_1_1OdometryParams.html',1,'tricycle_controller::TricycleController::OdometryParams']]]
 ];

@@ -14,5 +14,5 @@ var searchData=
   ['loanedstateinterface_11',['LoanedStateInterface',['../classhardware__interface_1_1LoanedStateInterface.html',1,'hardware_interface']]],
   ['lockfreepooledspscqueue_12',['LockFreePooledSPSCQueue',['../classrealtime__tools_1_1LockFreePooledSPSCQueue.html',1,'realtime_tools']]],
   ['lockfreequeuebase_13',['LockFreeQueueBase',['../classrealtime__tools_1_1LockFreeQueueBase.html',1,'realtime_tools']]],
-  ['lowpassfilter_14',['lowpassfilter',['../classcontrol__filters_1_1LowPassFilter.html',1,'control_filters::LowPassFilter&lt; T &gt;'],['../classcontrol__toolbox_1_1LowPassFilter.html',1,'control_toolbox::LowPassFilter&lt; T &gt;']]]
+  ['lowpassfilter_14',['LowPassFilter',['../classcontrol__filters_1_1LowPassFilter.html',1,'control_filters::LowPassFilter&lt; T &gt;'],['../classcontrol__toolbox_1_1LowPassFilter.html',1,'control_toolbox::LowPassFilter&lt; T &gt;']]]
 ];

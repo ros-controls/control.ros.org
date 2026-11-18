@@ -4,7 +4,9 @@ var searchData=
   ['zenbedded_5frihs_5fmapping_5ft_1',['zenbedded_rihs_mapping_t',['../structzenbedded__rihs__mapping__t.html',1,'']]],
   ['zenbedded_5fsub_5fs_2',['zenbedded_sub_s',['../structzenbedded__sub__s.html',1,'']]],
   ['zenbeddedclient_3',['ZenbeddedClient',['../classZenbeddedClient.html',1,'']]],
-  ['zenbeddedclientbase_4',['ZenbeddedClientBase',['../classZenbeddedClientBase.html',1,'']]],
-  ['zenbeddedhardware_5',['ZenbeddedHardware',['../classzenbedded_1_1ZenbeddedHardware.html',1,'zenbedded']]],
-  ['zenoh_5fpublish_5fstate_6',['zenoh_publish_state',['../classZenbeddedClientBase.html#af12e00515eb97ab6a1b6cd5e091d6647',1,'ZenbeddedClientBase']]]
+  ['zenbeddedclient_3c_20jointstatecodec_2c_20jointcommandcodec_20_3e_4',['ZenbeddedClient&lt; JointStateCodec, JointCommandCodec &gt;',['../classZenbeddedClient.html',1,'']]],
+  ['zenbeddedclient_3c_20rawcodec_3c_20zenbedded_5fstate_5ft_20_3e_2c_20rawcodec_3c_20zenbedded_5fcommand_5ft_20_3e_20_3e_5',['ZenbeddedClient&lt; RawCodec&lt; zenbedded_state_t &gt;, RawCodec&lt; zenbedded_command_t &gt; &gt;',['../classZenbeddedClient.html',1,'']]],
+  ['zenbeddedclientbase_6',['ZenbeddedClientBase',['../classZenbeddedClientBase.html',1,'']]],
+  ['zenbeddedhardware_7',['ZenbeddedHardware',['../classzenbedded_1_1ZenbeddedHardware.html',1,'zenbedded']]],
+  ['zenoh_5fpublish_5fstate_8',['zenoh_publish_state',['../classZenbeddedClientBase.html#af12e00515eb97ab6a1b6cd5e091d6647',1,'ZenbeddedClientBase']]]
 ];

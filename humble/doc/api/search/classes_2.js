@@ -14,7 +14,7 @@ var searchData=
   ['controllerinterface_11',['ControllerInterface',['../classcontroller__interface_1_1ControllerInterface.html',1,'controller_interface']]],
   ['controllerinterfacebase_12',['ControllerInterfaceBase',['../classcontroller__interface_1_1ControllerInterfaceBase.html',1,'controller_interface']]],
   ['controllerlister_13',['ControllerLister',['../classrqt__joint__trajectory__controller_1_1utils_1_1ControllerLister.html',1,'rqt_joint_trajectory_controller::utils']]],
-  ['controllermanager_14',['controllermanager',['../classcontroller__manager_1_1ControllerManager.html',1,'controller_manager::ControllerManager'],['../classrqt__controller__manager_1_1controller__manager_1_1ControllerManager.html',1,'rqt_controller_manager.controller_manager.ControllerManager']]],
+  ['controllermanager_14',['ControllerManager',['../classcontroller__manager_1_1ControllerManager.html',1,'controller_manager::ControllerManager'],['../classrqt__controller__manager_1_1controller__manager_1_1ControllerManager.html',1,'rqt_controller_manager.controller_manager.ControllerManager']]],
   ['controllermanagerlister_15',['ControllerManagerLister',['../classrqt__joint__trajectory__controller_1_1utils_1_1ControllerManagerLister.html',1,'rqt_joint_trajectory_controller::utils']]],
   ['controllernamecompleter_16',['ControllerNameCompleter',['../classros2controlcli_1_1api_1_1ControllerNameCompleter.html',1,'ros2controlcli::api']]],
   ['controllerspec_17',['ControllerSpec',['../structcontroller__manager_1_1ControllerSpec.html',1,'controller_manager']]],

@@ -4,7 +4,7 @@ var searchData=
   ['joint_1',['Joint',['../structros2__control__demo__example__11_1_1Joint.html',1,'ros2_control_demo_example_11']]],
   ['joint_5faxis_2',['joint_axis',['../structjointData.html#a78e23a541419d9af3a4d4643a5687d24',1,'jointData']]],
   ['joint_5fcommand_5fto_5factuator_5fcommand_3',['joint_command_to_actuator_command',['../classmujoco__ros2__control_1_1MujocoSystemInterface.html#a47784569a0216b2f9e9d59ad55bf0707',1,'mujoco_ros2_control::MujocoSystemInterface']]],
-  ['joint_5fcommands_5f_4',['joint_commands_',['../classmock__components_1_1GenericSystem.html#a9889bd21f48bb371d1bf175ab68804d8',1,'mock_components::GenericSystem']]],
+  ['joint_5fcommands_5f_4',['joint_commands_',['../classmock__components_1_1GenericSystem.html#a9889bd21f48bb371d1bf175ab68804d8',1,'mock_components::GenericSystem::joint_commands_'],['../classfake__components_1_1GenericSystem.html#a9889bd21f48bb371d1bf175ab68804d8',1,'fake_components::GenericSystem::joint_commands_']]],
   ['joint_5fcontrol_5fmethod_5',['joint_control_method',['../structjointData.html#ae860b0ae882c0f28ee017a4264bc30ab',1,'jointData']]],
   ['joint_5fcontrol_5fmethods_5f_6',['joint_control_methods_',['../classgazebo__ros2__control_1_1GazeboSystemPrivate.html#abb86ca6acd599cd1b73c76f62518a46b',1,'gazebo_ros2_control::GazeboSystemPrivate']]],
   ['joint_5feffort_7',['joint_effort',['../structjointData.html#ad68e146bc1a3bfcd98115aaa63c6ad09',1,'jointData']]],
@@ -39,6 +39,6 @@ var searchData=
   ['joints_5f_36',['joints_',['../classgz__ros2__control_1_1GazeboSimSystemPrivate.html#aba45af696adf958dc3d559e578478930',1,'gz_ros2_control::GazeboSimSystemPrivate::joints_'],['../classgz__ros2__control__demos_1_1GazeboSimSystemPrivate.html#adf733303806bd79b3c9460f13a521a9a',1,'gz_ros2_control_demos::GazeboSimSystemPrivate::joints_']]],
   ['jointsoftlimitshandle_37',['JointSoftLimitsHandle',['../classjoint__limits__interface_1_1JointSoftLimitsHandle.html',1,'joint_limits_interface']]],
   ['jointstatebroadcaster_38',['JointStateBroadcaster',['../classjoint__state__broadcaster_1_1JointStateBroadcaster.html',1,'joint_state_broadcaster']]],
-  ['jointtrajectorycontroller_39',['jointtrajectorycontroller',['../classrqt__joint__trajectory__controller_1_1joint__trajectory__controller_1_1JointTrajectoryController.html',1,'rqt_joint_trajectory_controller.joint_trajectory_controller.JointTrajectoryController'],['../classjoint__trajectory__controller_1_1JointTrajectoryController.html',1,'joint_trajectory_controller::JointTrajectoryController']]],
+  ['jointtrajectorycontroller_39',['JointTrajectoryController',['../classjoint__trajectory__controller_1_1JointTrajectoryController.html',1,'joint_trajectory_controller::JointTrajectoryController'],['../classrqt__joint__trajectory__controller_1_1joint__trajectory__controller_1_1JointTrajectoryController.html',1,'rqt_joint_trajectory_controller.joint_trajectory_controller.JointTrajectoryController']]],
   ['jointvalue_40',['JointValue',['../structros2__control__demo__example__11_1_1JointValue.html',1,'ros2_control_demo_example_11']]]
 ];

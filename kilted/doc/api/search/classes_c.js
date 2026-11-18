@@ -4,7 +4,7 @@ var searchData=
   ['magnetometerbroadcaster_1',['MagnetometerBroadcaster',['../classmagnetometer__broadcaster_1_1MagnetometerBroadcaster.html',1,'magnetometer_broadcaster']]],
   ['magnetometersensordata_2',['MagnetometerSensorData',['../structmujoco__ros2__control_1_1MagnetometerSensorData.html',1,'mujoco_ros2_control']]],
   ['mecanumdrivecontroller_3',['MecanumDriveController',['../classmecanum__drive__controller_1_1MecanumDriveController.html',1,'mecanum_drive_controller']]],
-  ['mimicjoint_4',['mimicjoint',['../structhardware__interface_1_1MimicJoint.html',1,'hardware_interface::MimicJoint'],['../structMimicJoint.html',1,'MimicJoint']]],
+  ['mimicjoint_4',['MimicJoint',['../structhardware__interface_1_1MimicJoint.html',1,'hardware_interface::MimicJoint'],['../structMimicJoint.html',1,'MimicJoint']]],
   ['mockpendulumhardware_5',['MockPendulumHardware',['../classmock__pendulum__hardware_1_1MockPendulumHardware.html',1,'mock_pendulum_hardware']]],
   ['motionprimitivesbasecontroller_6',['MotionPrimitivesBaseController',['../classmotion__primitives__controllers_1_1MotionPrimitivesBaseController.html',1,'motion_primitives_controllers']]],
   ['motionprimitivesforwardcontroller_7',['MotionPrimitivesForwardController',['../classmotion__primitives__controllers_1_1MotionPrimitivesForwardController.html',1,'motion_primitives_controllers']]],
@@ -19,5 +19,7 @@ var searchData=
   ['mujocosysteminterfaceloadingtest_16',['MujocoSystemInterfaceLoadingTest',['../classMujocoSystemInterfaceLoadingTest.html',1,'']]],
   ['mujocosysteminterfacetest_17',['MujocoSystemInterfaceTest',['../classMujocoSystemInterfaceTest.html',1,'']]],
   ['multiinterfaceforwardcommandcontroller_18',['MultiInterfaceForwardCommandController',['../classforward__command__controller_1_1MultiInterfaceForwardCommandController.html',1,'forward_command_controller']]],
-  ['mutex_19',['mutex',['../classrealtime__tools_1_1detail_1_1mutex.html',1,'realtime_tools::detail']]]
+  ['mutex_19',['mutex',['../classrealtime__tools_1_1detail_1_1mutex.html',1,'realtime_tools::detail']]],
+  ['mutex_3c_20detail_3a_3aerror_5fmutex_5ftype_5ft_2c_20detail_3a_3arobust_5frobustness_5ft_20_3e_20',['mutex&lt; detail::error_mutex_type_t, detail::robust_robustness_t &gt;',['../classrealtime__tools_1_1detail_1_1mutex.html',1,'realtime_tools::detail']]],
+  ['mutex_3c_20detail_3a_3arecursive_5fmutex_5ftype_5ft_2c_20detail_3a_3arobust_5frobustness_5ft_20_3e_21',['mutex&lt; detail::recursive_mutex_type_t, detail::robust_robustness_t &gt;',['../classrealtime__tools_1_1detail_1_1mutex.html',1,'realtime_tools::detail']]]
 ];

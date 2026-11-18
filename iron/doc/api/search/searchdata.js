@@ -8,7 +8,7 @@ var indexSectionsWithContent =
   5: "cglpr",
   6: "acnv",
   7: "ds",
-  8: "dilr"
+  8: "acdefilmnprstuw"
 };
 
 var indexSectionNames =

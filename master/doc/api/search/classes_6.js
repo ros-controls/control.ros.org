@@ -8,7 +8,7 @@ var searchData=
   ['gazebosimros2controlpluginprivate_5',['GazeboSimROS2ControlPluginPrivate',['../classgz__ros2__control_1_1GazeboSimROS2ControlPluginPrivate.html',1,'gz_ros2_control']]],
   ['gazebosimsystem_6',['GazeboSimSystem',['../classgz__ros2__control_1_1GazeboSimSystem.html',1,'gz_ros2_control']]],
   ['gazebosimsysteminterface_7',['GazeboSimSystemInterface',['../classgz__ros2__control_1_1GazeboSimSystemInterface.html',1,'gz_ros2_control']]],
-  ['gazebosimsystemprivate_8',['gazebosimsystemprivate',['../classgz__ros2__control_1_1GazeboSimSystemPrivate.html',1,'gz_ros2_control::GazeboSimSystemPrivate'],['../classgz__ros2__control__demos_1_1GazeboSimSystemPrivate.html',1,'gz_ros2_control_demos::GazeboSimSystemPrivate']]],
+  ['gazebosimsystemprivate_8',['GazeboSimSystemPrivate',['../classgz__ros2__control_1_1GazeboSimSystemPrivate.html',1,'gz_ros2_control::GazeboSimSystemPrivate'],['../classgz__ros2__control__demos_1_1GazeboSimSystemPrivate.html',1,'gz_ros2_control_demos::GazeboSimSystemPrivate']]],
   ['gazebosystem_9',['GazeboSystem',['../classgazebo__ros2__control_1_1GazeboSystem.html',1,'gazebo_ros2_control']]],
   ['gazebosysteminterface_10',['GazeboSystemInterface',['../classgazebo__ros2__control_1_1GazeboSystemInterface.html',1,'gazebo_ros2_control']]],
   ['gazebosystemprivate_11',['GazeboSystemPrivate',['../classgazebo__ros2__control_1_1GazeboSystemPrivate.html',1,'gazebo_ros2_control']]],

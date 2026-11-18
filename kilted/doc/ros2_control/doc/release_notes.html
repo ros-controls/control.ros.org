@@ -156,6 +156,7 @@ variable to automatically disable colors in non-TTY and CI environments.</p></li
 <li><p>The controller manager now resolves its clocks once per cycle instead of once per controller in the real-time update loop, reducing the per-controller overhead. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/3754">#3754</a>)</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">list_hardware_interfaces</span></code> and <code class="docutils literal notranslate"><span class="pre">list_hardware_components</span></code> services now scale linearly with the number of interfaces, making them significantly faster on robots with many interfaces. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/3755">#3755</a>)</p></li>
 <li><p>The real-time fallback path no longer re-queries every controller’s command interface configuration once per fallback interface when a controller fails. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/3756">#3756</a>)</p></li>
+<li><p>Controllers without chain relationships are now updated in the order they were loaded, instead of an unspecified order. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/3781">#3781</a>)</p></li>
 </ul>
 </section>
 <section id="hardware-interface">

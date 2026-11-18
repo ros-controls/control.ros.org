@@ -11,5 +11,5 @@ var searchData=
   ['load_5furdf_8',['load_urdf',['../classhardware__interface_1_1ResourceManager.html#a0b2178b1349277b3cce3805ff8ed2003',1,'hardware_interface::ResourceManager']]],
   ['lock_9',['lock',['../classrealtime__tools_1_1RealtimePublisher.html#add366862cb0f6914cf409056b51b4f4d',1,'realtime_tools::RealtimePublisher']]],
   ['lock_5fmemory_10',['lock_memory',['../namespacerealtime__tools.html#ab6e8b5ed308b76258690bc84b6ccb003',1,'realtime_tools::lock_memory(std::string &amp;message)'],['../namespacerealtime__tools.html#aeae92aead96ba3906e1a10282395ebaf',1,'realtime_tools::lock_memory()']]],
-  ['lockfreequeuebase_11',['lockfreequeuebase',['../classrealtime__tools_1_1LockFreeQueueBase.html#a54968b489eba288879ae154327ca9c9d',1,'realtime_tools::LockFreeQueueBase::LockFreeQueueBase()'],['../classrealtime__tools_1_1LockFreeQueueBase.html#ae8821e53acc946d8c508ca66367bd96a',1,'realtime_tools::LockFreeQueueBase::LockFreeQueueBase(std::size_t capacity)']]]
+  ['lockfreequeuebase_11',['LockFreeQueueBase',['../classrealtime__tools_1_1LockFreeQueueBase.html#a54968b489eba288879ae154327ca9c9d',1,'realtime_tools::LockFreeQueueBase::LockFreeQueueBase()'],['../classrealtime__tools_1_1LockFreeQueueBase.html#ae8821e53acc946d8c508ca66367bd96a',1,'realtime_tools::LockFreeQueueBase::LockFreeQueueBase(std::size_t capacity)']]]
 ];
