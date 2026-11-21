@@ -3,7 +3,7 @@ var searchData=
   ['safeenum_0',['SafeEnum',['../classgazebo__ros2__control_1_1SafeEnum.html',1,'gazebo_ros2_control::SafeEnum&lt; ENUM, UNDERLYING &gt;'],['../classgz__ros2__control_1_1SafeEnum.html',1,'gz_ros2_control::SafeEnum&lt; ENUM, UNDERLYING &gt;']]],
   ['safeenum_3c_20enum_20controlmethod_5f_20_3e_1',['SafeEnum&lt; enum ControlMethod_ &gt;',['../classgazebo__ros2__control_1_1SafeEnum.html',1,'gazebo_ros2_control::SafeEnum&lt; enum ControlMethod_ &gt;'],['../classgz__ros2__control_1_1SafeEnum.html',1,'gz_ros2_control::SafeEnum&lt; enum ControlMethod_ &gt;']]],
   ['same_20rate_2',['All cameras will publish data at the same rate',['../classmujoco__ros2__control__plugins_1_1CameraPlugin.html#autotoc_md2',1,'']]],
-  ['sample_3',['sample',['../classjoint__trajectory__controller_1_1Trajectory.html#aa0716b15504a759d89a1b49a8cd70d75',1,'joint_trajectory_controller::Trajectory']]],
+  ['sample_3',['sample',['../classcartesian__trajectory__controller_1_1CartesianTrajectory.html#ada7860721a28d635c83a3296f8d56c0a',1,'cartesian_trajectory_controller::CartesianTrajectory::sample()'],['../classjoint__trajectory__controller_1_1Trajectory.html#aa0716b15504a759d89a1b49a8cd70d75',1,'joint_trajectory_controller::Trajectory::sample()']]],
   ['sample_5fcount_4',['sample_count',['../structros2__control_1_1StatisticData.html#a7eb4fde365186bce59ccdf18072bc16d',1,'ros2_control::StatisticData']]],
   ['sample_5fnoise_5',['sample_noise',['../namespacemujoco__ros2__control_1_1detail.html#a6018432326f2824e5a0f48b381ea1a19',1,'mujoco_ros2_control::detail']]],
   ['scheduling_5fpolicy_6',['scheduling_policy',['../structhardware__interface_1_1HardwareAsyncParams.html#a6ec667f5314935bdbebf2bc640448e42',1,'hardware_interface::HardwareAsyncParams']]],

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['sample_0',['sample',['../classjoint__trajectory__controller_1_1Trajectory.html#aa0716b15504a759d89a1b49a8cd70d75',1,'joint_trajectory_controller::Trajectory']]],
+  ['sample_0',['sample',['../classcartesian__trajectory__controller_1_1CartesianTrajectory.html#ada7860721a28d635c83a3296f8d56c0a',1,'cartesian_trajectory_controller::CartesianTrajectory::sample()'],['../classjoint__trajectory__controller_1_1Trajectory.html#aa0716b15504a759d89a1b49a8cd70d75',1,'joint_trajectory_controller::Trajectory::sample()']]],
   ['sample_5fnoise_1',['sample_noise',['../namespacemujoco__ros2__control_1_1detail.html#a6018432326f2824e5a0f48b381ea1a19',1,'mujoco_ros2_control::detail']]],
   ['sensor_5fcomponents_5fsize_2',['sensor_components_size',['../classhardware__interface_1_1ResourceManager.html#a52b471feb94ef2463c222ae69f25888d',1,'hardware_interface::ResourceManager']]],
   ['set_3',['set',['../classrealtime__tools_1_1RealtimeThreadSafeBox.html#a6464f2a28f43d12bc27b8b2c36568233',1,'realtime_tools::RealtimeThreadSafeBox::set(const T &amp;value)'],['../classrealtime__tools_1_1RealtimeThreadSafeBox.html#a6092bc137fbf1e96ec92cfa10295dd7e',1,'realtime_tools::RealtimeThreadSafeBox::set(F &amp;&amp;func)'],['../classrealtime__tools_1_1RealtimeThreadSafeBox.html#aa7bedf81b34839f6b3b8ba874a020325',1,'realtime_tools::RealtimeThreadSafeBox::set(std::nullptr_t)']]],

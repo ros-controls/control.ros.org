@@ -101,7 +101,7 @@ General discussions
 
 ======================================================================
 
-Built on 2026-11-20 at 05:35 GMT
+Built on 2026-11-21 at 05:38 GMT
 
 
 
@@ -444,18 +444,23 @@ us a pull request, please ensure that:
 1. Limited scope. Your PR should do one thing or one set of things.
    Avoid adding "random fixes" to PRs. Put those on separate PRs.
 
-2. Give your PR a descriptive title. Add a short summary, if required.
+2. Give your PR a descriptive title. Add a *short* summary, if
+   required.
 
-3. Make sure the pipeline is green.
+3. Aim for under 500 lines changed (additions plus deletions, tests
+   included). Avoid over 1000. If it grows past that, try splitting
+   it.
 
-4. New code = new tests. If you are adding new functionality, always
+4. Make sure the pipeline is green.
+
+5. New code = new tests. If you are adding new functionality, always
    make sure to add some tests exercising the code and serving as live
    documentation of your original intention.
 
-5. If a PR is merged all commits will get squashed, a linear commit
+6. If a PR is merged all commits will get squashed, a linear commit
    history is not required.
 
-6. Once a PR got reviewed, please don't do force pushes as this will
+7. Once a PR got reviewed, please don't do force pushes as this will
    break github UI and subsequent reviews will take more time.
 
 **To send us a pull request, please:**
@@ -8288,6 +8293,9 @@ files:
    When launching ``spawner`` with ROS parameter files that use substitutions (for example, launch ``allow_substs=True``),
    the resolved ``--params-file`` path(s) used by the spawner node are automatically forwarded to each controller along
    with any explicit ``--param-file`` arguments passed to the spawner command.
+
+   With ``--unload-on-kill``, the first SIGINT or SIGTERM starts the deactivate/unload sequence and any further
+   SIGINT/SIGTERM is ignored until it finishes, so pressing Ctrl-C repeatedly cannot leave controllers loaded.
 
 Note:
 
@@ -18072,6 +18080,352 @@ traction_wheel_radius (double)
 
 
 ==================================================
+source page: doc/ros2_controllers/cartesian_trajectory_controller/doc/userdoc.txt
+==================================================
+
+cartesian_trajectory_controller
+*******************************
+
+Controller for executing Cartesian motion on a serial manipulator. It
+accepts end-effector poses, interpolates between them in Cartesian
+space, and converts the result into an ordinary joint trajectory using
+inverse kinematics. The joint trajectory is then executed by the
+joint_trajectory_controller, which this controller derives from.
+
+The difference to the joint trajectory controller is where the
+interpolation happens. The joint trajectory controller interpolates
+between waypoints in *joint* space, so the tool center point does not
+travel along a straight line between two poses, it bows off the line
+by an amount that depends on the arm's configuration. This controller
+interpolates in *Cartesian* space and solves the inverse kinematics
+for each interpolated pose, so the tool center point stays on the
+commanded path. That makes it suitable for the linear motions used in
+industrial applications, and for executing end-effector pose targets
+produced by a planner or a policy.
+
+The controller requires an external kinematics plugin. The
+kinematics_interface repository provides the interface and a KDL based
+implementation, which is used by default.
+
+
+How the controller builds a trajectory
+======================================
+
+Each incoming message is converted into a joint trajectory in four
+steps:
+
+1. The current end-effector pose is prepended to the poses in the
+   message, so the motion starts from where the robot currently is.
+
+2. The translation is interpolated with a cubic spline through the
+   resulting waypoints, and the orientation with spherical linear
+   interpolation (SLERP) between consecutive quaternions. Every
+   segment rotates along the shorter arc, whatever the signs of the
+   quaternions.
+
+3. The path is sampled every "resample_dt" seconds, and differential
+   inverse kinematics is run at each sample to obtain the
+   corresponding joint positions.
+
+4. The resulting joint trajectory is handed to the joint trajectory
+   controller, which executes it in the real-time loop.
+
+The conversion runs once per message in the subscription callback, not
+in the control loop, so the real-time path is unchanged from the joint
+trajectory controller.
+
+Warning:
+
+  Joint limits are not checked, see Known limitations.
+
+Note:
+
+  Higher "kinematics.alpha" lags the path more; lower is less stable
+  near singularities.
+
+
+Timing
+------
+
+If the incoming poses carry "time_from_start", that timing is used as
+given, and "max_cartesian_speed" and "max_angular_speed" are not
+applied. This is the usual case when the poses come from a planner or
+from a policy that knows its own output rate. The times have to be
+strictly increasing, otherwise the message is ignored. A first pose at
+"time_from_start = 0", as planners send the start state, is taken to
+be the current pose and skipped.
+
+If the message carries no timing, the controller synthesizes it from
+"max_cartesian_speed" and "max_angular_speed". Each segment is given
+the time it needs to stay within both limits when moving from rest to
+rest, with a floor of "resample_dt" so that coincident poses still
+advance in time. This is exact for a single target reached from rest;
+when the arm is already moving, or the message holds several poses,
+the limits can be exceeded, see Known limitations.
+
+
+Choosing "resample_dt"
+----------------------
+
+"resample_dt" sets how finely the Cartesian path is sampled before the
+inverse kinematics runs. Smaller values follow the commanded path more
+closely and cost more inverse kinematics steps per message. As a
+starting point, keep it below the spacing of the incoming poses,
+otherwise the controller samples the path more coarsely than it was
+given and some of the commanded poses are passed over.
+
+
+Known limitations
+=================
+
+* Only the "~/cartesian_reference" topic is handled; a Cartesian
+  action interface is future work.
+
+* Joint limits are not checked, so a joint clamped by the controller
+  manager makes the end effector leave the path without an error.
+
+* There is no redundancy resolution, singularity detection or inverse
+  kinematics convergence check, so an unreachable pose is not
+  rejected.
+
+* A future "header.stamp" is rejected, since deferred start is not
+  supported yet, see #2760.
+
+* If building the trajectory takes longer than the rest of the current
+  control cycle, the handoff from the previous trajectory lags by the
+  missed cycles, so the arm briefly stalls or steps back.
+
+* The cubic spline can overshoot between waypoints whose segment
+  durations differ a lot, in translation and rotation alike, and a
+  message without timing can then exceed "max_cartesian_speed" and
+  "max_angular_speed".
+
+
+Using the Cartesian Trajectory Controller
+=========================================
+
+The controller expects at least position feedback from the hardware,
+and a robot description that contains the chain between
+"kinematics.base" and "kinematics.tip". "joints" has to list exactly
+the movable joints of that chain, in order from base to tip, so joints
+outside it, such as a gripper, need their own controller.
+Configuration fails if "joints" does not match the chain, and the
+error lists the expected joints.
+
+Because the controller inherits from the joint trajectory controller,
+it takes that controller's parameters as well as its own. The
+"joints", "command_interfaces" and "state_interfaces" parameters are
+used exactly as described in its documentation.
+
+   cartesian_motion:
+     ros__parameters:
+       joints:
+         - joint_1
+         - joint_2
+         - joint_3
+         - joint_4
+         - joint_5
+         - joint_6
+       command_interfaces:
+         - position
+       state_interfaces:
+         - position
+
+       kinematics:
+         plugin_name: kinematics_interface_kdl/KinematicsInterfaceKDL
+         plugin_package: kinematics_interface
+         base: base_link
+         tip: tool0
+
+       max_cartesian_speed: 0.1
+       max_angular_speed: 0.5
+       resample_dt: 0.01
+
+Note:
+
+  The joint-space command inputs of the joint trajectory controller
+  are disabled by this controller. The "~/joint_trajectory" topic and
+  the "~/follow_joint_trajectory" action are not created, so the only
+  way to command motion is the Cartesian reference topic described
+  below.
+
+
+Description of controller's interfaces
+======================================
+
+
+References
+----------
+
+(the controller is not yet implemented as chainable controller)
+
+
+States
+------
+
+The state interfaces are defined with the "joints" and
+"state_interfaces" parameters as follows: "<joint>/<state_interface>".
+The controller reads joint positions to determine where the motion
+starts, so "position" has to be among them.
+
+
+Commands
+--------
+
+The command interfaces are defined with the "joints" and
+"command_interfaces" parameters as follows:
+"<joint>/<command_interface>". The controller produces a joint
+trajectory, so the legal combinations are the same as for the joint
+trajectory controller.
+
+
+Subscriber
+----------
+
+<controller_name>/cartesian_reference
+[trajectory_msgs::msg::MultiDOFJointTrajectory]
+   Topic for commanding the controller.
+
+Each point carries one transform, which is the target pose of
+"kinematics.tip" expressed in "kinematics.base". Only the first
+transform of each point and its "time_from_start" are used;
+"joint_names", velocities and accelerations are ignored. A message may
+hold a single pose or a sequence of them, so both a single target and
+a longer path can be sent the same way. The "header.frame_id" has to
+be either empty or equal to "kinematics.base", otherwise the message
+is ignored.
+
+The trajectory is built from the state at arrival and starts right
+away. A zero or past "header.stamp" is ignored. A future
+"header.stamp" is not supported yet and the message is rejected, see
+#2760.
+
+
+Publishers
+----------
+
+<controller_name>/controller_state
+[control_msgs::msg::JointTrajectoryControllerState]
+   Topic publishing the internal state of the underlying joint
+   trajectory controller, with the update rate of the controller
+   manager.
+
+
+Parameters
+==========
+
+This controller uses the generate_parameter_library to handle its
+parameters. The parameter definition file located in the src folder
+contains descriptions for all the parameters used by the controller.
+The parameters of the joint trajectory controller apply in addition to
+the ones listed here.
+
+kinematics.plugin_name (string)
+   Kinematics interface plugin used for forward kinematics and
+   differential IK.
+
+   Default:  "kinematics_interface_kdl/KinematicsInterfaceKDL"
+
+   Constraints:
+
+      * parameter is not empty
+
+kinematics.plugin_package (string)
+   Package that exports the kinematics interface base class.
+
+   Default:  "kinematics_interface"
+
+   Constraints:
+
+      * parameter is not empty
+
+kinematics.base (string)
+   Root link of the kinematic chain and the frame incoming poses are
+   expressed in.
+
+   Constraints:
+
+      * parameter is not empty
+
+kinematics.tip (string)
+   End-effector link the incoming Cartesian pose refers to.
+
+   Constraints:
+
+      * parameter is not empty
+
+kinematics.alpha (double)
+   Damping used by the kinematics plugin for the damped least-squares
+   inverse.
+
+   Default:  0.01
+
+   Constraints:
+
+      * greater than or equal to 0.0
+
+max_cartesian_speed (double)
+   Translational speed in m/s used to synthesize segment timing when
+   the incoming chunk carries no time_from_start.
+
+   Default:  0.1
+
+   Constraints:
+
+      * greater than 0.0
+
+max_angular_speed (double)
+   Angular speed in rad/s used to synthesize segment timing when the
+   incoming chunk carries no time_from_start.
+
+   Default:  0.5
+
+   Constraints:
+
+      * greater than 0.0
+
+resample_dt (double)
+   Time step in seconds at which the Cartesian path is resampled
+   before differential IK. Smaller values track the Cartesian path
+   more closely at the cost of more IK steps.
+
+   Default:  0.01
+
+   Constraints:
+
+      * greater than 0.0
+
+An example parameter file for this controller can be found in the test
+folder:
+
+   test_cartesian_trajectory_controller:
+     ros__parameters:
+
+       joints:
+         - joint1
+         - joint2
+
+       command_interfaces:
+         - position
+
+       state_interfaces:
+         - position
+         - velocity
+
+       kinematics:
+         plugin_name: kinematics_interface_kdl/KinematicsInterfaceKDL
+         plugin_package: kinematics_interface
+         base: base_link
+         tip: link2
+         alpha: 0.01
+
+       max_cartesian_speed: 0.1
+       max_angular_speed: 0.5
+       resample_dt: 0.01
+
+
+
+==================================================
 source page: doc/ros2_controllers/chained_filter_controller/doc/userdoc.txt
 ==================================================
 
@@ -18696,6 +19050,8 @@ Controllers for Manipulators and Other Robots
 =============================================
 
 * Admittance Controller
+
+* Cartesian Trajectory Controller
 
 * Forward Command Controller
 
@@ -19412,6 +19768,15 @@ state_interfaces_broadcaster
 ============================
 
 * 🚀 The state_interfaces_broadcaster was added 🎉 (#2006).
+
+
+cartesian_trajectory_controller
+===============================
+
+* 🚀 The cartesian_trajectory_controller was added 🎉. It extends the
+  joint_trajectory_controller to follow end-effector pose
+  trajectories, using Cartesian interpolation and differential inverse
+  kinematics (#2664).
 
 
 force_torque_sensor_broadcaster

@@ -722,6 +722,9 @@ This occurs whether the Nodes are siblings or exist in a hierarchy.</p>
 <span class="go">When launching ``spawner`` with ROS parameter files that use substitutions (for example, launch ``allow_substs=True``),</span>
 <span class="go">the resolved ``--params-file`` path(s) used by the spawner node are automatically forwarded to each controller along</span>
 <span class="go">with any explicit ``--param-file`` arguments passed to the spawner command.</span>
+
+<span class="go">With ``--unload-on-kill``, the first SIGINT or SIGTERM starts the deactivate/unload sequence and any further</span>
+<span class="go">SIGINT/SIGTERM is ignored until it finishes, so pressing Ctrl-C repeatedly cannot leave controllers loaded.</span>
 </pre></div>
 </div>
 <div class="admonition note">

@@ -1,0 +1,495 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cartesian_trajectory_controller &mdash; ROS2_Control: Rolling Nov 2026 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/reviewer_stats.css?v=068b34ac" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=d85a351e" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/favicon_ros-controls.ico"/>
+    <link rel="canonical" href="https://control.ros.org/rolling//rolling/doc/ros2_controllers/cartesian_trajectory_controller/doc/userdoc.html" />
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=f246fdea"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+      <script data-domain="control.ros.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="forward_command_controller" href="../../forward_command_controller/doc/userdoc.html" />
+    <link rel="prev" title="Admittance Controller" href="../../admittance_controller/doc/userdoc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/logo_ros-controls.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/roscon2026_workshop.html">ROSCon 2026 Workshop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control/doc/index.html">ros2_control</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/controllers_index.html">ros2_controllers</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#guidelines-and-best-practices">Guidelines and Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#controllers-for-wheeled-mobile-robots">Controllers for Wheeled Mobile Robots</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/controllers_index.html#controllers-for-manipulators-and-other-robots">Controllers for Manipulators and Other Robots</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../admittance_controller/doc/userdoc.html">Admittance Controller</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Cartesian Trajectory Controller</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#how-the-controller-builds-a-trajectory">How the controller builds a trajectory</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#timing">Timing</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#choosing-resample-dt">Choosing <code class="docutils literal notranslate"><span class="pre">resample_dt</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#known-limitations">Known limitations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-the-cartesian-trajectory-controller">Using the Cartesian Trajectory Controller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#description-of-controller-s-interfaces">Description of controller’s interfaces</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#references">References</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#states">States</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#commands">Commands</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#subscriber">Subscriber</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#publishers">Publishers</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../forward_command_controller/doc/userdoc.html">Forward Command Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../gpio_controllers/doc/userdoc.html">Gpio Command Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../joint_trajectory_controller/doc/userdoc.html">Joint Trajectory Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../motion_primitives_controllers/doc/userdoc.html">Motion Primitive Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../parallel_gripper_controller/doc/userdoc.html">Parallel Gripper Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pid_controller/doc/userdoc.html">PID Controller</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#broadcasters">Broadcasters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#filters">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/controllers_index.html#common-controller-parameters">Common Controller Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../embedded_integration.html">Embedded Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ros2_control_demos/doc/index.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utilities.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../simulators/simulators.html">Simulator Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes/release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../migration/migration.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_list/api_list.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_robots/supported_robots.html">Supported Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../governance/governance.html">Project Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/acknowledgements.html">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../statistics.html">Documentation Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation_downloads.html">Documentation Downloads</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ROS2_Control: Rolling</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../doc/controllers_index.html">ros2_controllers</a></li>
+      <li class="breadcrumb-item active">cartesian_trajectory_controller</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/ros-controls/ros2_controllers/blob/master/cartesian_trajectory_controller/doc/userdoc.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<p>
+  <strong>
+    
+    You're reading the documentation for a development version.
+    For the latest released version, please have a look at <a href="../../../../../lyrical/doc/ros2_controllers/cartesian_trajectory_controller/doc/userdoc.html">Lyrical</a>.
+    
+  </strong>
+</p>
+
+
+  <section id="cartesian-trajectory-controller">
+<span id="cartesian-trajectory-controller-userdoc"></span><h1>cartesian_trajectory_controller<a class="headerlink" href="#cartesian-trajectory-controller" title="Link to this heading"></a></h1>
+<p>Controller for executing Cartesian motion on a serial manipulator.
+It accepts end-effector poses, interpolates between them in Cartesian space, and converts the result
+into an ordinary joint trajectory using inverse kinematics.
+The joint trajectory is then executed by the <a class="reference internal" href="../../joint_trajectory_controller/doc/userdoc.html#joint-trajectory-controller-userdoc"><span class="std std-ref">joint_trajectory_controller</span></a>, which this controller derives from.</p>
+<p>The difference to the joint trajectory controller is where the interpolation happens.
+The joint trajectory controller interpolates between waypoints in <em>joint</em> space, so the tool center
+point does not travel along a straight line between two poses, it bows off the line by an amount that
+depends on the arm’s configuration.
+This controller interpolates in <em>Cartesian</em> space and solves the inverse kinematics for each
+interpolated pose, so the tool center point stays on the commanded path.
+That makes it suitable for the linear motions used in industrial applications, and for executing
+end-effector pose targets produced by a planner or a policy.</p>
+<p>The controller requires an external kinematics plugin.
+The <a class="reference external" href="https://github.com/ros-controls/kinematics_interface">kinematics_interface</a> repository
+provides the interface and a KDL based implementation, which is used by default.</p>
+<section id="how-the-controller-builds-a-trajectory">
+<h2>How the controller builds a trajectory<a class="headerlink" href="#how-the-controller-builds-a-trajectory" title="Link to this heading"></a></h2>
+<p>Each incoming message is converted into a joint trajectory in four steps:</p>
+<ol class="arabic simple">
+<li><p>The current end-effector pose is prepended to the poses in the message, so the motion starts from
+where the robot currently is.</p></li>
+<li><p>The translation is interpolated with a cubic spline through the resulting waypoints, and the
+orientation with spherical linear interpolation (SLERP) between consecutive quaternions.
+Every segment rotates along the shorter arc, whatever the signs of the quaternions.</p></li>
+<li><p>The path is sampled every <code class="docutils literal notranslate"><span class="pre">resample_dt</span></code> seconds, and differential inverse kinematics is run at
+each sample to obtain the corresponding joint positions.</p></li>
+<li><p>The resulting joint trajectory is handed to the joint trajectory controller, which executes it in
+the real-time loop.</p></li>
+</ol>
+<p>The conversion runs once per message in the subscription callback, not in the control loop, so the
+real-time path is unchanged from the joint trajectory controller.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Joint limits are not checked, see <a class="reference internal" href="#cartesian-trajectory-controller-limitations"><span class="std std-ref">Known limitations</span></a>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Higher <code class="docutils literal notranslate"><span class="pre">kinematics.alpha</span></code> lags the path more; lower is less stable near singularities.</p>
+</div>
+<section id="timing">
+<h3>Timing<a class="headerlink" href="#timing" title="Link to this heading"></a></h3>
+<p>If the incoming poses carry <code class="docutils literal notranslate"><span class="pre">time_from_start</span></code>, that timing is used as given, and
+<code class="docutils literal notranslate"><span class="pre">max_cartesian_speed</span></code> and <code class="docutils literal notranslate"><span class="pre">max_angular_speed</span></code> are not applied.
+This is the usual case when the poses come from a planner or from a policy that knows its own output
+rate.
+The times have to be strictly increasing, otherwise the message is ignored.
+A first pose at <code class="docutils literal notranslate"><span class="pre">time_from_start</span> <span class="pre">=</span> <span class="pre">0</span></code>, as planners send the start state, is taken to be the current
+pose and skipped.</p>
+<p>If the message carries no timing, the controller synthesizes it from <code class="docutils literal notranslate"><span class="pre">max_cartesian_speed</span></code> and
+<code class="docutils literal notranslate"><span class="pre">max_angular_speed</span></code>.
+Each segment is given the time it needs to stay within both limits when moving from rest to rest,
+with a floor of <code class="docutils literal notranslate"><span class="pre">resample_dt</span></code> so that coincident poses still advance in time.
+This is exact for a single target reached from rest; when the arm is already moving, or the message
+holds several poses, the limits can be exceeded, see
+<a class="reference internal" href="#cartesian-trajectory-controller-limitations"><span class="std std-ref">Known limitations</span></a>.</p>
+</section>
+<section id="choosing-resample-dt">
+<h3>Choosing <code class="docutils literal notranslate"><span class="pre">resample_dt</span></code><a class="headerlink" href="#choosing-resample-dt" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">resample_dt</span></code> sets how finely the Cartesian path is sampled before the inverse kinematics runs.
+Smaller values follow the commanded path more closely and cost more inverse kinematics steps per
+message.
+As a starting point, keep it below the spacing of the incoming poses, otherwise the controller
+samples the path more coarsely than it was given and some of the commanded poses are passed over.</p>
+</section>
+</section>
+<section id="known-limitations">
+<span id="cartesian-trajectory-controller-limitations"></span><h2>Known limitations<a class="headerlink" href="#known-limitations" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Only the <code class="docutils literal notranslate"><span class="pre">~/cartesian_reference</span></code> topic is handled; a Cartesian action interface is future work.</p></li>
+<li><p>Joint limits are not checked, so a joint clamped by the controller manager makes the end effector
+leave the path without an error.</p></li>
+<li><p>There is no redundancy resolution, singularity detection or inverse kinematics convergence check,
+so an unreachable pose is not rejected.</p></li>
+<li><p>A future <code class="docutils literal notranslate"><span class="pre">header.stamp</span></code> is rejected, since deferred start is not supported yet, see
+<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/issues/2760">#2760</a>.</p></li>
+<li><p>If building the trajectory takes longer than the rest of the current control cycle, the handoff
+from the previous trajectory lags by the missed cycles, so the arm briefly stalls or steps back.</p></li>
+<li><p>The cubic spline can overshoot between waypoints whose segment durations differ a lot, in
+translation and rotation alike, and a message without timing can then exceed
+<code class="docutils literal notranslate"><span class="pre">max_cartesian_speed</span></code> and <code class="docutils literal notranslate"><span class="pre">max_angular_speed</span></code>.</p></li>
+</ul>
+</section>
+<section id="using-the-cartesian-trajectory-controller">
+<h2>Using the Cartesian Trajectory Controller<a class="headerlink" href="#using-the-cartesian-trajectory-controller" title="Link to this heading"></a></h2>
+<p>The controller expects at least position feedback from the hardware, and a robot description that
+contains the chain between <code class="docutils literal notranslate"><span class="pre">kinematics.base</span></code> and <code class="docutils literal notranslate"><span class="pre">kinematics.tip</span></code>.
+<code class="docutils literal notranslate"><span class="pre">joints</span></code> has to list exactly the movable joints of that chain, in order from base to tip, so joints
+outside it, such as a gripper, need their own controller.
+Configuration fails if <code class="docutils literal notranslate"><span class="pre">joints</span></code> does not match the chain, and the error lists the expected joints.</p>
+<p>Because the controller inherits from the joint trajectory controller, it takes that controller’s
+parameters as well as its own.
+The <code class="docutils literal notranslate"><span class="pre">joints</span></code>, <code class="docutils literal notranslate"><span class="pre">command_interfaces</span></code> and <code class="docutils literal notranslate"><span class="pre">state_interfaces</span></code> parameters are used exactly as
+described in <a class="reference internal" href="../../joint_trajectory_controller/doc/userdoc.html#joint-trajectory-controller-userdoc"><span class="std std-ref">its documentation</span></a>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">cartesian_motion</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">joints</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint_1</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint_2</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint_3</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint_4</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint_5</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint_6</span>
+<span class="w">    </span><span class="nt">command_interfaces</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
+<span class="w">    </span><span class="nt">state_interfaces</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
+
+<span class="w">    </span><span class="nt">kinematics</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">plugin_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kinematics_interface_kdl/KinematicsInterfaceKDL</span>
+<span class="w">      </span><span class="nt">plugin_package</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kinematics_interface</span>
+<span class="w">      </span><span class="nt">base</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">base_link</span>
+<span class="w">      </span><span class="nt">tip</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tool0</span>
+
+<span class="w">    </span><span class="nt">max_cartesian_speed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span>
+<span class="w">    </span><span class="nt">max_angular_speed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
+<span class="w">    </span><span class="nt">resample_dt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The joint-space command inputs of the joint trajectory controller are disabled by this
+controller.
+The <code class="docutils literal notranslate"><span class="pre">~/joint_trajectory</span></code> topic and the <code class="docutils literal notranslate"><span class="pre">~/follow_joint_trajectory</span></code> action are not created, so
+the only way to command motion is the Cartesian reference topic described below.</p>
+</div>
+</section>
+<section id="description-of-controller-s-interfaces">
+<h2>Description of controller’s interfaces<a class="headerlink" href="#description-of-controller-s-interfaces" title="Link to this heading"></a></h2>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Link to this heading"></a></h3>
+<p>(the controller is not yet implemented as chainable controller)</p>
+</section>
+<section id="states">
+<h3>States<a class="headerlink" href="#states" title="Link to this heading"></a></h3>
+<p>The state interfaces are defined with the <code class="docutils literal notranslate"><span class="pre">joints</span></code> and <code class="docutils literal notranslate"><span class="pre">state_interfaces</span></code> parameters as follows:
+<code class="docutils literal notranslate"><span class="pre">&lt;joint&gt;/&lt;state_interface&gt;</span></code>.
+The controller reads joint positions to determine where the motion starts, so <code class="docutils literal notranslate"><span class="pre">position</span></code> has to be
+among them.</p>
+</section>
+<section id="commands">
+<h3>Commands<a class="headerlink" href="#commands" title="Link to this heading"></a></h3>
+<p>The command interfaces are defined with the <code class="docutils literal notranslate"><span class="pre">joints</span></code> and <code class="docutils literal notranslate"><span class="pre">command_interfaces</span></code> parameters as
+follows: <code class="docutils literal notranslate"><span class="pre">&lt;joint&gt;/&lt;command_interface&gt;</span></code>.
+The controller produces a joint trajectory, so the legal combinations are the same as for the
+<a class="reference internal" href="../../joint_trajectory_controller/doc/userdoc.html#joint-trajectory-controller-userdoc"><span class="std std-ref">joint trajectory controller</span></a>.</p>
+</section>
+<section id="subscriber">
+<h3>Subscriber<a class="headerlink" href="#subscriber" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>&lt;controller_name&gt;/cartesian_reference [trajectory_msgs::msg::MultiDOFJointTrajectory]</dt><dd><p>Topic for commanding the controller.</p>
+</dd>
+</dl>
+<p>Each point carries one transform, which is the target pose of <code class="docutils literal notranslate"><span class="pre">kinematics.tip</span></code> expressed in
+<code class="docutils literal notranslate"><span class="pre">kinematics.base</span></code>.
+Only the first transform of each point and its <code class="docutils literal notranslate"><span class="pre">time_from_start</span></code> are used; <code class="docutils literal notranslate"><span class="pre">joint_names</span></code>,
+velocities and accelerations are ignored.
+A message may hold a single pose or a sequence of them, so both a single target and a longer path
+can be sent the same way.
+The <code class="docutils literal notranslate"><span class="pre">header.frame_id</span></code> has to be either empty or equal to <code class="docutils literal notranslate"><span class="pre">kinematics.base</span></code>, otherwise the message
+is ignored.</p>
+<p>The trajectory is built from the state at arrival and starts right away.
+A zero or past <code class="docutils literal notranslate"><span class="pre">header.stamp</span></code> is ignored.
+A future <code class="docutils literal notranslate"><span class="pre">header.stamp</span></code> is not supported yet and the message is rejected, see
+<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/issues/2760">#2760</a>.</p>
+</section>
+<section id="publishers">
+<h3>Publishers<a class="headerlink" href="#publishers" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>&lt;controller_name&gt;/controller_state [control_msgs::msg::JointTrajectoryControllerState]</dt><dd><p>Topic publishing the internal state of the underlying joint trajectory controller, with the
+update rate of the controller manager.</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h2>
+<p>This controller uses the <a class="reference external" href="https://github.com/PickNikRobotics/generate_parameter_library">generate_parameter_library</a> to handle its parameters.
+The parameter <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/master/cartesian_trajectory_controller/src/cartesian_trajectory_controller_parameters.yaml">definition file located in the src folder</a>
+contains descriptions for all the parameters used by the controller.
+The parameters of the <a class="reference internal" href="../../joint_trajectory_controller/doc/userdoc.html#joint-trajectory-controller-userdoc"><span class="std std-ref">joint trajectory controller</span></a> apply
+in addition to the ones listed here.</p>
+<dl>
+<dt>kinematics.plugin_name (string)</dt><dd><p>Kinematics interface plugin used for forward kinematics and differential IK.</p>
+<p>Default:  “kinematics_interface_kdl/KinematicsInterfaceKDL”</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>parameter is not empty</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>kinematics.plugin_package (string)</dt><dd><p>Package that exports the kinematics interface base class.</p>
+<p>Default:  “kinematics_interface”</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>parameter is not empty</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>kinematics.base (string)</dt><dd><p>Root link of the kinematic chain and the frame incoming poses are expressed in.</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>parameter is not empty</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>kinematics.tip (string)</dt><dd><p>End-effector link the incoming Cartesian pose refers to.</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>parameter is not empty</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>kinematics.alpha (double)</dt><dd><p>Damping used by the kinematics plugin for the damped least-squares inverse.</p>
+<p>Default:  0.01</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than or equal to 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>max_cartesian_speed (double)</dt><dd><p>Translational speed in m/s used to synthesize segment timing when the incoming chunk carries no time_from_start.</p>
+<p>Default:  0.1</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>max_angular_speed (double)</dt><dd><p>Angular speed in rad/s used to synthesize segment timing when the incoming chunk carries no time_from_start.</p>
+<p>Default:  0.5</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>resample_dt (double)</dt><dd><p>Time step in seconds at which the Cartesian path is resampled before differential IK. Smaller values track the Cartesian path more closely at the cost of more IK steps.</p>
+<p>Default:  0.01</p>
+<p>Constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>greater than 0.0</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+<p>An example parameter file for this controller can be found in <a class="reference external" href="https://github.com/ros-controls/ros2_controllers/blob/master/cartesian_trajectory_controller/test/cartesian_trajectory_controller_params.yaml">the test folder</a>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test_cartesian_trajectory_controller</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+
+<span class="w">    </span><span class="nt">joints</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint1</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint2</span>
+
+<span class="w">    </span><span class="nt">command_interfaces</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
+
+<span class="w">    </span><span class="nt">state_interfaces</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">velocity</span>
+
+<span class="w">    </span><span class="nt">kinematics</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">plugin_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kinematics_interface_kdl/KinematicsInterfaceKDL</span>
+<span class="w">      </span><span class="nt">plugin_package</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kinematics_interface</span>
+<span class="w">      </span><span class="nt">base</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">base_link</span>
+<span class="w">      </span><span class="nt">tip</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">link2</span>
+<span class="w">      </span><span class="nt">alpha</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span>
+
+<span class="w">    </span><span class="nt">max_cartesian_speed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span>
+<span class="w">    </span><span class="nt">max_angular_speed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
+<span class="w">    </span><span class="nt">resample_dt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../admittance_controller/doc/userdoc.html" class="btn btn-neutral float-left" title="Admittance Controller" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../forward_command_controller/doc/userdoc.html" class="btn btn-neutral float-right" title="forward_command_controller" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, ros2_control Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: rolling
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Stable Releases</dt>
+        <dd><a href="../../../../../lyrical/doc/ros2_controllers/cartesian_trajectory_controller/doc/userdoc.html">Lyrical (latest)</a></dd><br>
+        <dd><a href="../../../../../kilted/index.html">Kilted</a></dd><br>
+        <dd><a href="../../../../../jazzy/index.html">Jazzy</a></dd><br>
+        
+        <dd><a href="../../../../../humble/index.html">Humble</a></dd><br>
+        
+        
+    </dl>
+    <dl>
+      <dt>End-of-Life</dt>
+        <dd><a href="../../../../../iron/index.html">Iron</a></dd><br>
+        <dd><a href="../../../../../galactic/index.html">Galactic</a></dd><br>
+        <dd><a href="../../../../../foxy/index.html">Foxy</a></dd><br>
+    </dl>
+    <dl>
+      <dt>In Development</dt>
+      <dd><a href="userdoc.html">Rolling</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
