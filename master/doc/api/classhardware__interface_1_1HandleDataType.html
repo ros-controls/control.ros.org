@@ -106,6 +106,8 @@ Public Types</h2></td></tr>
 , <br />
 &#160;&#160;<b>UINT32</b>
 , <b>INT32</b>
+, <b>UINT64</b>
+, <b>INT64</b>
 <br />
  }</td></tr>
 </table><table class="memberdecls">
@@ -131,7 +133,7 @@ constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator!=<
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>to_string</b> () const</td></tr>
 <tr class="memitem:a0187b138d5c24c413f24c1ae6cc1fcd1" id="r_a0187b138d5c24c413f24c1ae6cc1fcd1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0187b138d5c24c413f24c1ae6cc1fcd1">is_castable_to_double</a> () const</td></tr>
 <tr class="memdesc:a0187b138d5c24c413f24c1ae6cc1fcd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the <a class="el" href="classhardware__interface_1_1HandleDataType.html">HandleDataType</a> can be casted to double.  <br /></td></tr>
-<tr class="memitem:ab01e62353018654f337ce52770807389" id="r_ab01e62353018654f337ce52770807389"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab01e62353018654f337ce52770807389">cast_to_double</a> (const <a class="el" href="namespacehardware__interface.html#a43324915c515d348e7a06218acb11ff7">HANDLE_DATATYPE</a> &amp;value) const</td></tr>
+<tr class="memitem:ab01e62353018654f337ce52770807389" id="r_ab01e62353018654f337ce52770807389"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab01e62353018654f337ce52770807389">cast_to_double</a> (const <a class="el" href="namespacehardware__interface.html#adcba7b278f42630331ac4bf72bbbd5d9">HANDLE_DATATYPE</a> &amp;value) const</td></tr>
 <tr class="memdesc:ab01e62353018654f337ce52770807389"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast the given value to double.  <br /></td></tr>
 <tr class="memitem:a0040381fecfc53074d8a9b5aed9e4ab8" id="r_a0040381fecfc53074d8a9b5aed9e4ab8"><td class="memItemLeft" align="right" valign="top"><a id="a0040381fecfc53074d8a9b5aed9e4ab8" name="a0040381fecfc53074d8a9b5aed9e4ab8"></a>
 HandleDataType&#160;</td><td class="memItemRight" valign="bottom"><b>from_string</b> (const std::string &amp;data_type)</td></tr>
@@ -149,7 +151,7 @@ HandleDataType&#160;</td><td class="memItemRight" valign="bottom"><b>from_string
         <tr>
           <td class="memname">double hardware_interface::HandleDataType::cast_to_double </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="namespacehardware__interface.html#a43324915c515d348e7a06218acb11ff7">HANDLE_DATATYPE</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="namespacehardware__interface.html#adcba7b278f42630331ac4bf72bbbd5d9">HANDLE_DATATYPE</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -203,7 +205,9 @@ HandleDataType&#160;</td><td class="memItemRight" valign="bottom"><b>from_string
 
 <p>Check if the <a class="el" href="classhardware__interface_1_1HandleDataType.html">HandleDataType</a> can be casted to double. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if the <a class="el" href="classhardware__interface_1_1HandleDataType.html">HandleDataType</a> can be casted to double, false otherwise. </dd></dl>
-<dl class="section note"><dt>Note</dt><dd>Once we add support for more data types, this function should be updated </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>UINT64 and INT64 are not castable, as a double cannot represent all their values. </dd>
+<dd>
+Once we add support for more data types, this function should be updated </dd></dl>
 
 </div>
 </div>

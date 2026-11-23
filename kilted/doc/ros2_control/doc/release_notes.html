@@ -66,6 +66,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#controller-interface">controller_interface</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#controller-manager">controller_manager</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hardware-interface">hardware_interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#joint-limits">joint_limits</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#ros2controlcli">ros2controlcli</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#transmission-interface">transmission_interface</a></li>
 </ul>
@@ -171,6 +172,12 @@ variable to automatically disable colors in non-TTY and CI environments.</p></li
 <li><p>The lifecycle ID is cached internally in the controller to avoid calls to get_lifecycle_state() in the real-time control loop. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2884">#2884</a>)</p></li>
 <li><p>Handles now also support <code class="docutils literal notranslate"><span class="pre">float32</span></code>, <code class="docutils literal notranslate"><span class="pre">uint8</span></code>, <code class="docutils literal notranslate"><span class="pre">int8</span></code>, <code class="docutils literal notranslate"><span class="pre">uint16</span></code>, <code class="docutils literal notranslate"><span class="pre">int16</span></code>, <code class="docutils literal notranslate"><span class="pre">uint32</span></code>, <code class="docutils literal notranslate"><span class="pre">int32</span></code> data types in addition to double and bool. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/2879">#2879</a>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">on_error()</span></code> of a hardware component is no longer called a second time when it returns <code class="docutils literal notranslate"><span class="pre">FAILURE</span></code> or <code class="docutils literal notranslate"><span class="pre">ERROR</span></code> after a failed <code class="docutils literal notranslate"><span class="pre">read()</span></code>/<code class="docutils literal notranslate"><span class="pre">write()</span></code>. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/3791">#3791</a>)</p></li>
+</ul>
+</section>
+<section id="joint-limits">
+<h2>joint_limits<a class="headerlink" href="#joint-limits" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>When a position command is beyond a soft limit, the <code class="docutils literal notranslate"><span class="pre">JointSoftLimiter</span></code> now moves it back towards the soft limit at no more than <code class="docutils literal notranslate"><span class="pre">max_velocity</span></code> instead of jumping straight to the soft limit in one update, so the hard velocity limit is always respected. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/3798">#3798</a>)</p></li>
 </ul>
 </section>
 <section id="ros2controlcli">

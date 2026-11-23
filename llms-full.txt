@@ -101,7 +101,7 @@ General discussions
 
 ======================================================================
 
-Built on 2026-11-22 at 05:35 GMT
+Built on 2026-11-23 at 05:40 GMT
 
 
 
@@ -9635,6 +9635,13 @@ hardware_interface
   use "set_value(0.0)". The same applies to "set_state" and
   "set_command" of hardware components.
 
+* "HANDLE_DATATYPE" has two new alternatives, "uint64_t" and
+  "int64_t", appended after the existing ones (#3806). This changes
+  the ABI of every type and function that uses it, so hardware
+  components and controllers have to be rebuilt against the new
+  version. Code that visits the variant with an overload for each
+  alternative needs overloads for the two new types.
+
 
 
 ==================================================
@@ -9759,6 +9766,20 @@ hardware_interface
 * "on_error()" of a hardware component is no longer called a second
   time when it returns "FAILURE" or "ERROR" after a failed
   "read()"/"write()". (#3791)
+
+* Handles now also support "uint64" and "int64" data types. They are
+  not castable to double and are therefore not included in the
+  introspection. (#3806)
+
+
+joint_limits
+============
+
+* When a position command is beyond a soft limit, the
+  "JointSoftLimiter" now moves it back towards the soft limit at no
+  more than "max_velocity" instead of jumping straight to the soft
+  limit in one update, so the hard velocity limit is always respected.
+  (#3798)
 
 
 ros2controlcli
@@ -10241,6 +10262,14 @@ their default initial value if not specified:
 * uint32: 4294967295
 
 * int32: 2147483647
+
+* uint64: 18446744073709551615
+
+* int64: 9223372036854775807
+
+"uint64" and "int64" cannot be cast to double, because a double cannot
+represent every 64-bit value exactly. Therefore, interfaces of these
+types are not published by the introspection.
 
 
 Examples

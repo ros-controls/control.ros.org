@@ -350,6 +350,7 @@ variable to automatically disable colors in non-TTY and CI environments.</p></li
 <h2>joint_limits<a class="headerlink" href="#joint-limits" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>Add header to import limits from standard URDF definition (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/1298">#1298</a>)</p></li>
+<li><p>When a position command is beyond a soft limit, the <code class="docutils literal notranslate"><span class="pre">JointSoftLimiter</span></code> now moves it back towards the soft limit at no more than <code class="docutils literal notranslate"><span class="pre">max_velocity</span></code> instead of jumping straight to the soft limit in one update, so the hard velocity limit is always respected. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/3798">#3798</a>)</p></li>
 </ul>
 </section>
 <section id="ros2controlcli">

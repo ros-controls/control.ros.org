@@ -66,6 +66,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#controller-interface">controller_interface</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#controller-manager">controller_manager</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hardware-interface">hardware_interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#joint-limits">joint_limits</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#ros2controlcli">ros2controlcli</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#transmission-interface">transmission_interface</a></li>
 </ul>
@@ -157,6 +158,13 @@ variable to automatically disable colors in non-TTY and CI environments.</p></li
 <li><p><code class="docutils literal notranslate"><span class="pre">CommandInterface::is_limited()</span></code> now returns <code class="docutils literal notranslate"><span class="pre">bool</span></code> by value instead of <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">bool</span> <span class="pre">&amp;</span></code>, as the limited flag is now atomic to avoid a data race with the introspection sampler. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/3618">#3618</a>)</p></li>
 <li><p>The dependency on <code class="docutils literal notranslate"><span class="pre">libstatistics_collector</span></code> is removed, as it is no longer available from ROS 2 Rolling onwards. The <code class="docutils literal notranslate"><span class="pre">StatisticData</span></code> struct is now provided as <code class="docutils literal notranslate"><span class="pre">ros2_control::StatisticData</span></code> in <code class="docutils literal notranslate"><span class="pre">hardware_interface/types/statistic_data.hpp</span></code>. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/3772">#3772</a>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">on_error()</span></code> of a hardware component is no longer called a second time when it returns <code class="docutils literal notranslate"><span class="pre">FAILURE</span></code> or <code class="docutils literal notranslate"><span class="pre">ERROR</span></code> after a failed <code class="docutils literal notranslate"><span class="pre">read()</span></code>/<code class="docutils literal notranslate"><span class="pre">write()</span></code>. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/3791">#3791</a>)</p></li>
+<li><p>Handles now also support <code class="docutils literal notranslate"><span class="pre">uint64</span></code> and <code class="docutils literal notranslate"><span class="pre">int64</span></code> data types. They are not castable to double and are therefore not included in the introspection. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/3806">#3806</a>)</p></li>
+</ul>
+</section>
+<section id="joint-limits">
+<h2>joint_limits<a class="headerlink" href="#joint-limits" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>When a position command is beyond a soft limit, the <code class="docutils literal notranslate"><span class="pre">JointSoftLimiter</span></code> now moves it back towards the soft limit at no more than <code class="docutils literal notranslate"><span class="pre">max_velocity</span></code> instead of jumping straight to the soft limit in one update, so the hard velocity limit is always respected. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/pull/3798">#3798</a>)</p></li>
 </ul>
 </section>
 <section id="ros2controlcli">
