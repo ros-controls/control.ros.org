@@ -83,6 +83,7 @@
 <li class="toctree-l7"><a class="reference internal" href="#imu">IMU</a></li>
 <li class="toctree-l7"><a class="reference internal" href="#magnetometer">Magnetometer</a></li>
 <li class="toctree-l7"><a class="reference internal" href="#sensor-noise">Sensor Noise</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#sensor-update-rate">Sensor update rate</a></li>
 </ul>
 </li>
 </ul>
@@ -473,6 +474,50 @@ shape (bounded vs. unbounded tails).</p>
 <p>For an IMU, the configured <code class="docutils literal notranslate"><span class="pre">noise</span></code> values are also surfaced as the diagonal of that field’s (previously
 always-zero) covariance state interfaces (e.g. <code class="docutils literal notranslate"><span class="pre">orientation_covariance.0</span></code>), for controllers that consume a
 covariance estimate.</p>
+</section>
+<section id="sensor-update-rate">
+<h3>Sensor update rate<a class="headerlink" href="#sensor-update-rate" title="Link to this heading"></a></h3>
+<p>By default every sensor (FTS, IMU, pose, magnetometer) is refreshed on every <code class="docutils literal notranslate"><span class="pre">read()</span></code>, i.e. at the
+controller manager rate. Set the <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> <code class="docutils literal notranslate"><span class="pre">update_rate</span></code> parameter (Hz) to emulate a slower sensor:
+the state interfaces are then only refreshed once per <code class="docutils literal notranslate"><span class="pre">1/update_rate</span></code> seconds of simulation time, and hold
+their last value (noise included) in between.</p>
+<p>This exists because real sensors are often limited by their own sampling rate or communication bandwidth
+(e.g. an IMU or force/torque sensor streaming over a slow bus). When the control loop runs faster than such
+a sensor, the controller keeps seeing the same reading for several cycles. Setting <code class="docutils literal notranslate"><span class="pre">update_rate</span></code> to the
+real sensor’s rate reproduces this in simulation, so controllers are tested against stale data as they would
+be on hardware.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;sensor</span><span class="w"> </span><span class="na">name=</span><span class="s">"imu_sensor"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"mujoco_type"</span><span class="nt">&gt;</span>imu<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="cm">&lt;!-- Refreshed at 20 Hz: with a 200 Hz controller manager the value changes every 10 cycles --&gt;</span>
+<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"update_rate"</span><span class="nt">&gt;</span>20<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span>...
+<span class="nt">&lt;/sensor&gt;</span>
+</pre></div>
+</div>
+<p>Rates that don’t divide the controller manager rate keep their average frequency (e.g. 30 Hz at 200 Hz
+alternates between 6 and 7 cycle holds). A missing, non-numeric or non-positive <code class="docutils literal notranslate"><span class="pre">update_rate</span></code> falls back to
+the MJCF sensor’s <code class="docutils literal notranslate"><span class="pre">interval</span></code> (see below), or to refreshing on every <code class="docutils literal notranslate"><span class="pre">read()</span></code> if that is unset too; invalid
+values also log a warning.</p>
+<p><strong>Relation to the MJCF</strong> <code class="docutils literal notranslate"><span class="pre">interval</span></code> <strong>attribute.</strong> MuJoCo &gt;= 3.12 lets an MJCF sensor declare its own
+sampling period (<code class="docutils literal notranslate"><span class="pre">interval</span></code>, in seconds). When a <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> sensor has no <code class="docutils literal notranslate"><span class="pre">update_rate</span></code>, the largest
+<code class="docutils literal notranslate"><span class="pre">interval</span></code> among its underlying MJCF sensors (e.g. an IMU’s <code class="docutils literal notranslate"><span class="pre">_quat</span></code>/<code class="docutils literal notranslate"><span class="pre">_gyro</span></code>/<code class="docutils literal notranslate"><span class="pre">_accel</span></code>) is used as its
+refresh period, so the rate can be configured in either place:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- MJCF: refreshed every 0.05 s (20 Hz) without any ros2_control parameter --&gt;</span>
+<span class="nt">&lt;magnetometer</span><span class="w"> </span><span class="na">name=</span><span class="s">"magnetometer"</span><span class="w"> </span><span class="na">site=</span><span class="s">"imu_site"</span><span class="w"> </span><span class="na">noise=</span><span class="s">"0.01"</span><span class="w"> </span><span class="na">interval=</span><span class="s">"0.05"</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>An explicit <code class="docutils literal notranslate"><span class="pre">update_rate</span></code> takes precedence over <code class="docutils literal notranslate"><span class="pre">interval</span></code>. <code class="docutils literal notranslate"><span class="pre">update_rate</span></code> is still needed on top of what
+MuJoCo does with <code class="docutils literal notranslate"><span class="pre">interval</span></code> alone because:</p>
+<ul class="simple">
+<li><p>MuJoCo only holds a sensor’s value between intervals if it also has a history buffer (<code class="docutils literal notranslate"><span class="pre">nsample</span></code> &gt; 0);
+<code class="docutils literal notranslate"><span class="pre">interval</span></code> on its own is silently ignored and the value changes on every step.</p></li>
+<li><p>MuJoCo never applies <code class="docutils literal notranslate"><span class="pre">noise</span></code> itself; this interface adds it on <code class="docutils literal notranslate"><span class="pre">read()</span></code>. Only the <code class="docutils literal notranslate"><span class="pre">update_rate</span></code> gate
+holds the noisy value too, otherwise fresh noise would be drawn every control cycle.</p></li>
+</ul>
+<p>What <code class="docutils literal notranslate"><span class="pre">interval</span></code> adds is skipping the sensor’s computation between samples, and a value that is held
+consistently for every consumer of <code class="docutils literal notranslate"><span class="pre">mjData::sensordata</span></code> (plugins, the simulate UI), not only for the
+<code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> state interfaces. If <code class="docutils literal notranslate"><span class="pre">nsample</span></code> is set as well, MuJoCo samples on its own schedule, which
+may be out of phase with this interface’s, adding up to one period of extra latency.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Cameras and lidar sensors are no longer supported in the base interface, they are now provided as <code class="docutils literal notranslate"><span class="pre">mujoco_ros2_control_plugins</span></code>.

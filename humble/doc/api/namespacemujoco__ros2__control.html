@@ -99,6 +99,7 @@ Classes</h2></td></tr>
 <tr class="memitem:MuJoCoActuatorData" id="r_MuJoCoActuatorData"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmujoco__ros2__control_1_1MuJoCoActuatorData.html">MuJoCoActuatorData</a></td></tr>
 <tr class="memitem:URDFJointData" id="r_URDFJointData"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmujoco__ros2__control_1_1URDFJointData.html">URDFJointData</a></td></tr>
 <tr class="memitem:SensorData" id="r_SensorData"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmujoco__ros2__control_1_1SensorData.html">SensorData</a></td></tr>
+<tr class="memitem:SensorUpdateRate" id="r_SensorUpdateRate"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmujoco__ros2__control_1_1SensorUpdateRate.html">SensorUpdateRate</a></td></tr>
 <tr class="memitem:NoiseState" id="r_NoiseState"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmujoco__ros2__control_1_1NoiseState.html">NoiseState</a></td></tr>
 <tr class="memitem:FTSensorData" id="r_FTSensorData"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmujoco__ros2__control_1_1FTSensorData.html">FTSensorData</a></td></tr>
 <tr class="memitem:IMUSensorData" id="r_IMUSensorData"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmujoco__ros2__control_1_1IMUSensorData.html">IMUSensorData</a></td></tr>
@@ -142,6 +143,8 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>get_sensor_par
 <tr class="memitem:acbd2c00ee24fd86b1c29f994d2a60b12" id="r_acbd2c00ee24fd86b1c29f994d2a60b12"><td class="memItemLeft" align="right" valign="top"><a id="acbd2c00ee24fd86b1c29f994d2a60b12" name="acbd2c00ee24fd86b1c29f994d2a60b12"></a>
 <a class="el" href="#ab8a2c1c0815d2b92ddbe1fc3f17ecbc4">NoiseDistribution</a>&#160;</td><td class="memItemRight" valign="bottom"><b>get_noise_distribution</b> (const <a class="el" href="structhardware__interface_1_1ComponentInfo.html">hardware_interface::ComponentInfo</a> &amp;sensor)</td></tr>
 <tr class="memdesc:acbd2c00ee24fd86b1c29f994d2a60b12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the sensor's <span class="tt">noise_distribution</span> parameter ("gaussian" (default) or "uniform"). A value that is neither (including a typo) logs a warning and is treated as Gaussian; an absent parameter is treated as Gaussian silently. <br /></td></tr>
+<tr class="memitem:a93bec0de8d88c1644f607b3ee8ad6921" id="r_a93bec0de8d88c1644f607b3ee8ad6921"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a93bec0de8d88c1644f607b3ee8ad6921">get_sensor_update_period</a> (const <a class="el" href="structhardware__interface_1_1ComponentInfo.html">hardware_interface::ComponentInfo</a> &amp;sensor, double default_period=0.0)</td></tr>
+<tr class="memdesc:a93bec0de8d88c1644f607b3ee8ad6921"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the sensor's <span class="tt">update_rate</span> parameter (Hz) and returns the matching refresh period in seconds.  <br /></td></tr>
 <tr class="memitem:a9e3afdf4a8762fb3afa848626ce7c930" id="r_a9e3afdf4a8762fb3afa848626ce7c930"><td class="memItemLeft" align="right" valign="top"><a id="a9e3afdf4a8762fb3afa848626ce7c930" name="a9e3afdf4a8762fb3afa848626ce7c930"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>log_sensor_components_noise</b> (const rclcpp::Logger &amp;logger, <a class="el" href="#ab8a2c1c0815d2b92ddbe1fc3f17ecbc4">NoiseDistribution</a> distribution, std::initializer_list&lt; std::pair&lt; const std::string &amp;, double &gt; &gt; components)</td></tr>
 <tr class="memdesc:a9e3afdf4a8762fb3afa848626ce7c930"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logs, at INFO level, the noise distribution and standard deviation configured for each of a sensor's noise-bearing components (e.g. an IMU's <span class="tt">orientation</span>, <span class="tt">angular_velocity</span>, and <span class="tt">linear_acceleration</span> fields), identified by their underlying MJCF sensor names. Called once per sensor from register_sensors() so the console output documents every sensor's active noise configuration. <br /></td></tr>
@@ -465,6 +468,44 @@ constexpr char&#160;</td><td class="memItemRight" valign="bottom"><b>MUJOCO_TYPE
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The corresponding actuator names if found, otherwise returns the joint name. </dd></dl>
+
+</div>
+</div>
+<a id="a93bec0de8d88c1644f607b3ee8ad6921" name="a93bec0de8d88c1644f607b3ee8ad6921"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93bec0de8d88c1644f607b3ee8ad6921">&#9670;&#160;</a></span>get_sensor_update_period()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double mujoco_ros2_control::get_sensor_update_period </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structhardware__interface_1_1ComponentInfo.html">hardware_interface::ComponentInfo</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>sensor</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>default_period</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0.0</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reads the sensor's <span class="tt">update_rate</span> parameter (Hz) and returns the matching refresh period in seconds. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sensor</td><td>The ros2_control sensor whose <span class="tt">update_rate</span> parameter is read. </td></tr>
+    <tr><td class="paramname">default_period</td><td>Period (s) returned when <span class="tt">update_rate</span> is absent, or non-numeric/non-positive (which also logs a warning). Typically the MJCF sensor's <span class="tt">interval</span>; 0 means refresh on every read(). </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

@@ -96,11 +96,13 @@ Collaboration diagram for mujoco_ros2_control::FTSensorData:</div>
 <div class="dyncontent">
 <div class="center"><img src="structmujoco__ros2__control_1_1FTSensorData__coll__graph.png" border="0" usemap="#amujoco__ros2__control_1_1FTSensorData_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="amujoco__ros2__control_1_1FTSensorData_coll__map" id="amujoco__ros2__control_1_1FTSensorData_coll__map">
-<area shape="rect" title=" " alt="" coords="260,53,416,98"/>
-<area shape="rect" href="structmujoco__ros2__control_1_1SensorData.html" title=" " alt="" coords="5,6,162,68"/>
-<area shape="poly" title=" " alt="" coords="177,48,262,63,257,65,177,54"/>
-<area shape="rect" href="structmujoco__ros2__control_1_1NoiseState.html" title=" " alt="" coords="5,92,162,136"/>
-<area shape="poly" title=" " alt="" coords="176,97,262,87,257,88,177,103"/>
+<area shape="rect" title=" " alt="" coords="296,91,452,136"/>
+<area shape="rect" href="structmujoco__ros2__control_1_1SensorData.html" title=" " alt="" coords="5,5,162,67"/>
+<area shape="poly" title=" " alt="" coords="177,56,272,80,301,90,296,91,271,85,177,61"/>
+<area shape="rect" href="structmujoco__ros2__control_1_1NoiseState.html" title=" " alt="" coords="5,91,162,136"/>
+<area shape="poly" title=" " alt="" coords="177,111,298,112,293,115,177,116"/>
+<area shape="rect" href="structmujoco__ros2__control_1_1SensorUpdateRate.html" title=" " alt="" coords="5,160,162,205"/>
+<area shape="poly" title=" " alt="" coords="176,163,271,141,296,137,301,136,272,146,178,168"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -118,6 +120,8 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>force_noise_stddev<
 double&#160;</td><td class="memItemRight" valign="bottom"><b>torque_noise_stddev</b> = 0.0</td></tr>
 <tr class="memitem:a5fff0a40c4f42194531606ea3f316803" id="r_a5fff0a40c4f42194531606ea3f316803"><td class="memItemLeft" align="right" valign="top"><a id="a5fff0a40c4f42194531606ea3f316803" name="a5fff0a40c4f42194531606ea3f316803"></a>
 <a class="el" href="structmujoco__ros2__control_1_1NoiseState.html">NoiseState</a>&#160;</td><td class="memItemRight" valign="bottom"><b>noise</b></td></tr>
+<tr class="memitem:aeefdbf0ff042d1effbdd8d77d1ac5979" id="r_aeefdbf0ff042d1effbdd8d77d1ac5979"><td class="memItemLeft" align="right" valign="top"><a id="aeefdbf0ff042d1effbdd8d77d1ac5979" name="aeefdbf0ff042d1effbdd8d77d1ac5979"></a>
+<a class="el" href="structmujoco__ros2__control_1_1SensorUpdateRate.html">SensorUpdateRate</a>&#160;</td><td class="memItemRight" valign="bottom"><b>update_rate</b></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="params"><dt>Parameters</dt><dd>
@@ -125,6 +129,7 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>torque_noise_stddev
     <tr><td class="paramname">force_noise_stddev</td><td>Standard deviation (N) of zero-mean Gaussian noise added to <span class="tt">force</span> on read; taken from the underlying MJCF <span class="tt">&lt;force&gt;</span> sensor's <span class="tt">noise</span> attribute (0 by default, which disables it). </td></tr>
     <tr><td class="paramname">torque_noise_stddev</td><td>Standard deviation (N*m) of zero-mean Gaussian noise added to <span class="tt">torque</span> on read; taken from the underlying MJCF <span class="tt">&lt;torque&gt;</span> sensor's <span class="tt">noise</span> attribute (0 by default, which disables it). </td></tr>
     <tr><td class="paramname">noise</td><td>Shape (ros2_control <span class="tt">noise_distribution</span> parameter, defaults to Gaussian) and RNG shared by both noise fields above; the RNG is seeded from <span class="tt">std::random_device</span> (noise is non-deterministic across runs). </td></tr>
+    <tr><td class="paramname">update_rate</td><td>Refresh-rate gate from the ros2_control <span class="tt">update_rate</span> parameter; see <a class="el" href="structmujoco__ros2__control_1_1SensorUpdateRate.html">SensorUpdateRate</a>. </td></tr>
   </table>
   </dd>
 </dl>

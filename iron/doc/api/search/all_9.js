@@ -51,5 +51,6 @@ var searchData=
   ['is_5fspsc_5fqueue_3c_20boost_3a_3alockfree_3a_3aspsc_5fqueue_3c_20t_2c_20boost_3a_3alockfree_3a_3acapacity_3c_20capacity_20_3e_20_3e_20_3e_48',['is_spsc_queue&lt; boost::lockfree::spsc_queue&lt; T, boost::lockfree::capacity&lt; Capacity &gt; &gt; &gt;',['../structrealtime__tools_1_1detail_1_1is__spsc__queue_3_01boost_1_1lockfree_1_1spsc__queue_3_01T_0060ecca4128d67d2526a6e996f7f82e98.html',1,'realtime_tools::detail']]],
   ['is_5fstopped_49',['is_stopped',['../classrealtime__tools_1_1AsyncFunctionHandler.html#ada1a48bddba7e13894292201fa943c0d',1,'realtime_tools::AsyncFunctionHandler']]],
   ['is_5ftrigger_5fcycle_5fin_5fprogress_50',['is_trigger_cycle_in_progress',['../classrealtime__tools_1_1AsyncFunctionHandler.html#a2bbf1c3b006b37730a18b1831e41f6af',1,'realtime_tools::AsyncFunctionHandler']]],
-  ['is_5furdf_5falready_5floaded_51',['is_urdf_already_loaded',['../classhardware__interface_1_1ResourceManager.html#a5b76be604d59853951423e77bf1ceea8',1,'hardware_interface::ResourceManager']]]
+  ['is_5fupdate_5fdue_51',['is_update_due',['../structmujoco__ros2__control_1_1SensorUpdateRate.html#a58816442b6886c4fb84c75dd842cd367',1,'mujoco_ros2_control::SensorUpdateRate']]],
+  ['is_5furdf_5falready_5floaded_52',['is_urdf_already_loaded',['../classhardware__interface_1_1ResourceManager.html#a5b76be604d59853951423e77bf1ceea8',1,'hardware_interface::ResourceManager']]]
 ];
