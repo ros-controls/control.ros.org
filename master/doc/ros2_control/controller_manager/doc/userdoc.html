@@ -607,7 +607,10 @@ When used with <code class="docutils literal notranslate"><span class="pre">use_
 </dd>
 <dt>hardware_synchronization.expect_blocking_read_write (optional; bool; default: false)</dt><dd><p>If true, the controller manager will not sleep actively. Use this, when there is a hardware
 interface running that will block during its read or write operation until receiving new data
-from the hardware.</p>
+from the hardware.
+If a cycle didn’t block while no hardware component is <code class="docutils literal notranslate"><span class="pre">active</span></code> (e.g., all failed to
+configure, or are <code class="docutils literal notranslate"><span class="pre">inactive</span></code> and block only in <code class="docutils literal notranslate"><span class="pre">write</span></code>, which isn’t called then), the loop
+falls back to sleeping periodically at <code class="docutils literal notranslate"><span class="pre">update_rate</span></code> without warning.</p>
 </dd>
 <dt>hardware_synchronization.minimum_cycle_time (optional; double; default: 0.0001)</dt><dd><p>The minimum sleep time in seconds for the control node’s real-time loop. This is used to
 prevent the control node from running too fast, which can cause high CPU

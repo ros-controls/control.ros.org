@@ -101,7 +101,7 @@ General discussions
 
 ======================================================================
 
-Built on 2026-11-25 at 05:38 GMT
+Built on 2026-11-26 at 05:39 GMT
 
 
 
@@ -8216,7 +8216,10 @@ default: false)
    If true, the controller manager will not sleep actively. Use this,
    when there is a hardware interface running that will block during
    its read or write operation until receiving new data from the
-   hardware.
+   hardware. If a cycle didn't block while no hardware component is
+   "active" (e.g., all failed to configure, or are "inactive" and
+   block only in "write", which isn't called then), the loop falls
+   back to sleeping periodically at "update_rate" without warning.
 
 hardware_synchronization.minimum_cycle_time (optional; double;
 default: 0.0001)
@@ -9804,6 +9807,11 @@ controller_manager
 * Controllers without chain relationships are now updated in the order
   they were loaded, instead of an unspecified order. (#3781)
 
+* With "hardware_synchronization.expect_blocking_read_write", the
+  control loop now sleeps periodically at "update_rate" without
+  warning when a cycle didn't block while no hardware component is
+  "active", instead of spinning at "minimum_cycle_time". (#3825)
+
 
 hardware_interface
 ==================
@@ -9832,6 +9840,9 @@ hardware_interface
 * Handles now also support "uint64" and "int64" data types. They are
   not castable to double and are therefore not included in the
   introspection. (#3806)
+
+* The new real-time safe "ResourceManager::has_active_components()"
+  tells whether any hardware component is "active". (#3825)
 
 
 joint_limits
@@ -9919,6 +9930,16 @@ Note:
   The thread priority is only used when the hardware component is run
   asynchronously. When the hardware component is run asynchronously,
   it uses the FIFO scheduling policy.
+
+Note:
+
+  For asynchronous components, the "read_cycle/periodicity" and
+  "write_cycle/periodicity" statistics and diagnostics are measured
+  from the cycles actually executed by the async thread, not from how
+  often the "controller_manager" triggers the component. If the async
+  "read" + "write" cycle overruns its period, the reported periodicity
+  drops accordingly (e.g. a component with "rw_rate="2000"" that
+  overruns every cycle reports ~1 kHz).
 
 
 Examples
@@ -19286,6 +19307,16 @@ joint_trajectory_controller
   the trajectory) must set "constraints.goal_time" accordingly. The
   "action_execution_timeout" parameter is removed.
 
+* With a position command interface, cancelling a goal now holds, or
+  decelerates to, the last commanded position instead of the last
+  measured one. Anchoring to the measured position stepped the command
+  backward by the following error in a single control period, which
+  reads downstream as a large, unintended deceleration.
+
+* The deceleration ramp on cancel now ignores speed scaling: it starts
+  from the joints' actual velocity and decelerates at
+  "max_deceleration_on_cancel" in wall-clock time.
+
 
 position_controllers
 ====================
@@ -19985,6 +20016,15 @@ joint_trajectory_controller
   upsampled into a smooth global C2 cubic spline by solving the knot
   velocities, with timing synthesized from
   "positions_upsampling.policy_frequency" when absent. (#2491)
+
+* On cancel, controllers with a position command interface now start
+  the hold and the deceleration ramp from the last commanded state
+  instead of the measured one, so the command no longer steps back by
+  the following error, and the deceleration ramp now uses the right
+  joint's state when "command_joints" is a subset of "joints". A non-
+  finite measured position or velocity no longer produces a NaN first
+  segment or hold command. The deceleration ramp ignores speed
+  scaling. (#2587)
 
 
 pid_controller
@@ -21218,8 +21258,9 @@ How it works
 When a trajectory is canceled or preempted and "decelerate_on_cancel"
 is enabled, the controller:
 
-1. Reads the current velocity of each joint from the velocity state
-   interface.
+1. Takes each joint's starting position and velocity from the last
+   command when the controller has a position command interface, and
+   otherwise, as for fault stops, from the measured state.
 
 2. Computes the stopping distance and time for each joint using its
    configured "max_deceleration_on_cancel" value:
@@ -21239,6 +21280,10 @@ is enabled, the controller:
 Each joint decelerates independently based on its own
 "max_deceleration_on_cancel" value, but the trajectory is synchronized
 so all joints finish at the same time (the slowest joint's stop time).
+
+The ramp ignores speed scaling: it starts from the joints' actual
+velocity and decelerates at "max_deceleration_on_cancel" in wall-clock
+time.
 
 
 Requirements

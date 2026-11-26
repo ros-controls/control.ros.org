@@ -163,6 +163,9 @@ Now, any <strong>negative</strong> <code class="docutils literal notranslate"><s
 Configurations that relied on the old default or on <code class="docutils literal notranslate"><span class="pre">goal_time:</span> <span class="pre">0.0</span></code> for an infinite timeout must set <code class="docutils literal notranslate"><span class="pre">constraints.goal_time</span></code> to a negative value (e.g. <code class="docutils literal notranslate"><span class="pre">-1.0</span></code>) explicitly.
 Note that <code class="docutils literal notranslate"><span class="pre">cmd_timeout</span></code> only activates when <code class="docutils literal notranslate"><span class="pre">cmd_timeout</span> <span class="pre">&gt;</span> <span class="pre">constraints.goal_time</span></code>; with the new default timeout feature setups relying on <code class="docutils literal notranslate"><span class="pre">cmd_timeout</span></code> (e.g. to hold position at the end of the trajectory) must set <code class="docutils literal notranslate"><span class="pre">constraints.goal_time</span></code> accordingly.
 The <code class="docutils literal notranslate"><span class="pre">action_execution_timeout</span></code> parameter is removed.</p></li>
+<li><p>With a position command interface, cancelling a goal now holds, or decelerates to, the last commanded position instead of the last measured one.
+Anchoring to the measured position stepped the command backward by the following error in a single control period, which reads downstream as a large, unintended deceleration.</p></li>
+<li><p>The deceleration ramp on cancel now ignores speed scaling: it starts from the joints’ actual velocity and decelerates at <code class="docutils literal notranslate"><span class="pre">max_deceleration_on_cancel</span></code> in wall-clock time.</p></li>
 </ul>
 </section>
 <section id="position-controllers">

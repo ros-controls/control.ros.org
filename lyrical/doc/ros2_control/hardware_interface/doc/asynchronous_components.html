@@ -149,6 +149,14 @@
 <p>The thread priority is only used when the hardware component is run asynchronously.
 When the hardware component is run asynchronously, it uses the FIFO scheduling policy.</p>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For asynchronous components, the <code class="docutils literal notranslate"><span class="pre">read_cycle/periodicity</span></code> and <code class="docutils literal notranslate"><span class="pre">write_cycle/periodicity</span></code> statistics and
+diagnostics are measured from the cycles actually executed by the async thread, not from how often the
+<code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> triggers the component. If the async <code class="docutils literal notranslate"><span class="pre">read</span></code> + <code class="docutils literal notranslate"><span class="pre">write</span></code> cycle overruns its period,
+the reported periodicity drops accordingly (e.g. a component with <code class="docutils literal notranslate"><span class="pre">rw_rate=&quot;2000&quot;</span></code> that overruns every cycle
+reports ~1 kHz).</p>
+</div>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>

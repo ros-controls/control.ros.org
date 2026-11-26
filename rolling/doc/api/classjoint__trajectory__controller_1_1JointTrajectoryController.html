@@ -266,12 +266,18 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>add_new_trajectory_ms
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>validate_trajectory_point_field</b> (size_t joint_names_size, const std::vector&lt; double &gt; &amp;vector_field, const std::string &amp;string_for_vector_field, size_t i, bool allow_empty) const</td></tr>
 <tr class="memitem:a90c4c3828609cbac9421c5c932584e92" id="r_a90c4c3828609cbac9421c5c932584e92"><td class="memItemLeft" align="right" valign="top"><a id="a90c4c3828609cbac9421c5c932584e92" name="a90c4c3828609cbac9421c5c932584e92"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>preempt_active_goal</b> ()</td></tr>
-<tr class="memitem:a59a88c09fadc80dc8d46eb115be22b61" id="r_a59a88c09fadc80dc8d46eb115be22b61"><td class="memItemLeft" align="right" valign="top"><a id="a59a88c09fadc80dc8d46eb115be22b61" name="a59a88c09fadc80dc8d46eb115be22b61"></a>
-std::shared_ptr&lt; trajectory_msgs::msg::JointTrajectory &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>set_hold_position</b> ()</td></tr>
-<tr class="memdesc:a59a88c09fadc80dc8d46eb115be22b61"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the current position with zero velocity and acceleration as new command <br /></td></tr>
-<tr class="memitem:af389af4b9bbbabb21a2fe5b8941e36db" id="r_af389af4b9bbbabb21a2fe5b8941e36db"><td class="memItemLeft" align="right" valign="top"><a id="af389af4b9bbbabb21a2fe5b8941e36db" name="af389af4b9bbbabb21a2fe5b8941e36db"></a>
-std::shared_ptr&lt; trajectory_msgs::msg::JointTrajectory &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>decelerate_to_hold_position</b> ()</td></tr>
-<tr class="memdesc:af389af4b9bbbabb21a2fe5b8941e36db"><td class="mdescLeft">&#160;</td><td class="mdescRight">decelerate at constant rate to a holding position with zero velocity and acceleration as new command <br /></td></tr>
+<tr class="memitem:acda2b318da919874990c4c5a1901b77f" id="r_acda2b318da919874990c4c5a1901b77f"><td class="memItemLeft" align="right" valign="top"><a id="acda2b318da919874990c4c5a1901b77f" name="acda2b318da919874990c4c5a1901b77f"></a>
+const trajectory_msgs::msg::JointTrajectoryPoint &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>select_hold_anchor</b> (bool from_last_command) const</td></tr>
+<tr class="memdesc:acda2b318da919874990c4c5a1901b77f"><td class="mdescLeft">&#160;</td><td class="mdescRight">pick the point a hold or a deceleration ramp should be anchored to <br /></td></tr>
+<tr class="memitem:a504eb8a3a46f0d39cb41ece3e0339275" id="r_a504eb8a3a46f0d39cb41ece3e0339275"><td class="memItemLeft" align="right" valign="top"><a id="a504eb8a3a46f0d39cb41ece3e0339275" name="a504eb8a3a46f0d39cb41ece3e0339275"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>has_finite_positions</b> (const trajectory_msgs::msg::JointTrajectoryPoint &amp;point) const</td></tr>
+<tr class="memitem:a52955db5fc6320fec3f00fb9323810eb" id="r_a52955db5fc6320fec3f00fb9323810eb"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; trajectory_msgs::msg::JointTrajectory &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a52955db5fc6320fec3f00fb9323810eb">set_hold_position</a> (bool from_last_command=false)</td></tr>
+<tr class="memdesc:a52955db5fc6320fec3f00fb9323810eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the current position with zero velocity and acceleration as new command  <br /></td></tr>
+<tr class="memitem:a39835a4edc6cb871ab8c92b0214e72fa" id="r_a39835a4edc6cb871ab8c92b0214e72fa"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; trajectory_msgs::msg::JointTrajectory &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a39835a4edc6cb871ab8c92b0214e72fa">decelerate_to_hold_position</a> (bool from_last_command=false)</td></tr>
+<tr class="memdesc:a39835a4edc6cb871ab8c92b0214e72fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">decelerate at constant rate to a holding position with zero velocity and acceleration as new command  <br /></td></tr>
+<tr class="memitem:af44a29ad87d029c5d74db5f39fdcfca9" id="r_af44a29ad87d029c5d74db5f39fdcfca9"><td class="memItemLeft" align="right" valign="top"><a id="af44a29ad87d029c5d74db5f39fdcfca9" name="af44a29ad87d029c5d74db5f39fdcfca9"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>queue_fault_stop</b> ()</td></tr>
+<tr class="memdesc:af44a29ad87d029c5d74db5f39fdcfca9"><td class="mdescLeft">&#160;</td><td class="mdescRight">queue a hold or a deceleration ramp from the measured state, if one can be built <br /></td></tr>
 <tr class="memitem:a4e961d8e09864b24325cc3def4b92d49" id="r_a4e961d8e09864b24325cc3def4b92d49"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; trajectory_msgs::msg::JointTrajectory &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4e961d8e09864b24325cc3def4b92d49">set_success_trajectory_point</a> ()</td></tr>
 <tr class="memdesc:a4e961d8e09864b24325cc3def4b92d49"><td class="mdescLeft">&#160;</td><td class="mdescRight">set last trajectory point to be repeated at success  <br /></td></tr>
 <tr class="memitem:a1154315ed210aca6cc7701d94a026008" id="r_a1154315ed210aca6cc7701d94a026008"><td class="memItemLeft" align="right" valign="top"><a id="a1154315ed210aca6cc7701d94a026008" name="a1154315ed210aca6cc7701d94a026008"></a>
@@ -409,6 +415,8 @@ rclcpp_action::Server&lt; FollowJTrajAction &gt;::SharedPtr&#160;</td><td class=
 RealtimeGoalHandlePtr&#160;</td><td class="memItemRight" valign="bottom"><b>rt_active_goal_local_</b> {nullptr}</td></tr>
 <tr class="memitem:aee99e750625e12cb300c244da18aa01d" id="r_aee99e750625e12cb300c244da18aa01d"><td class="memItemLeft" align="right" valign="top"><a id="aee99e750625e12cb300c244da18aa01d" name="aee99e750625e12cb300c244da18aa01d"></a>
 std::atomic&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>rt_has_pending_goal_</b> {false}</td></tr>
+<tr class="memitem:a503f6101340a1738070c42b91502c6a7" id="r_a503f6101340a1738070c42b91502c6a7"><td class="memItemLeft" align="right" valign="top"><a id="a503f6101340a1738070c42b91502c6a7" name="a503f6101340a1738070c42b91502c6a7"></a>
+std::atomic&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>rt_cancel_requested_</b> {false}</td></tr>
 <tr class="memitem:ae8898d27b0c65215194dd23514f0e74e" id="r_ae8898d27b0c65215194dd23514f0e74e"><td class="memItemLeft" align="right" valign="top"><a id="ae8898d27b0c65215194dd23514f0e74e" name="ae8898d27b0c65215194dd23514f0e74e"></a>
 rclcpp::TimerBase::SharedPtr&#160;</td><td class="memItemRight" valign="bottom"><b>goal_handle_timer_</b></td></tr>
 <tr class="memitem:afc565609be5b940ce3ae5a494a11c8e1" id="r_afc565609be5b940ce3ae5a494a11c8e1"><td class="memItemLeft" align="right" valign="top"><a id="afc565609be5b940ce3ae5a494a11c8e1" name="afc565609be5b940ce3ae5a494a11c8e1"></a>
@@ -508,6 +516,39 @@ pal_statistics::RegistrationsRAII&#160;</td><td class="memItemRight" valign="bot
 
 </div>
 </div>
+<a id="a39835a4edc6cb871ab8c92b0214e72fa" name="a39835a4edc6cb871ab8c92b0214e72fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39835a4edc6cb871ab8c92b0214e72fa">&#9670;&#160;</a></span>decelerate_to_hold_position()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt; trajectory_msgs::msg::JointTrajectory &gt; joint_trajectory_controller::JointTrajectoryController::decelerate_to_hold_position </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>from_last_command</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>decelerate at constant rate to a holding position with zero velocity and acceleration as new command </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">from_last_command</td><td>hold at the last command instead of the measured state; false on fault paths </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ab23a6500557c20b03f8a1a8f94c26a22" name="ab23a6500557c20b03f8a1a8f94c26a22"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab23a6500557c20b03f8a1a8f94c26a22">&#9670;&#160;</a></span>on_init()</h2>
 
@@ -535,6 +576,39 @@ pal_statistics::RegistrationsRAII&#160;</td><td class="memItemRight" valign="bot
 <p>initialize the URDF model and update the joint angles wraparound vector</p>
 
 <p>Implements <a class="el" href="classcontroller__interface_1_1ControllerInterfaceBase.html#a12f198ac6c521b018ebf10698c96a314">controller_interface::ControllerInterfaceBase</a>.</p>
+
+</div>
+</div>
+<a id="a52955db5fc6320fec3f00fb9323810eb" name="a52955db5fc6320fec3f00fb9323810eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52955db5fc6320fec3f00fb9323810eb">&#9670;&#160;</a></span>set_hold_position()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt; trajectory_msgs::msg::JointTrajectory &gt; joint_trajectory_controller::JointTrajectoryController::set_hold_position </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>from_last_command</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>set the current position with zero velocity and acceleration as new command </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">from_last_command</td><td>hold at the last command instead of the measured state; false on fault paths </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

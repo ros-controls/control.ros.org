@@ -156,6 +156,8 @@ controller_interface::ControllerInterfaceBaseSharedPtr&#160;</td><td class="memI
 <tr class="memdesc:acb3f8ac5ae15ad5f2e94844968bd3ace"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write values from command interfaces.  <br /></td></tr>
 <tr class="memitem:ad6dd4d15e3164c1d3a33c0ceaa57c0bb" id="r_ad6dd4d15e3164c1d3a33c0ceaa57c0bb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad6dd4d15e3164c1d3a33c0ceaa57c0bb">is_resource_manager_initialized</a> () const</td></tr>
 <tr class="memdesc:ad6dd4d15e3164c1d3a33c0ceaa57c0bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deterministic (real-time safe) callback group, e.g., update function.  <br /></td></tr>
+<tr class="memitem:ada19b1edad963ca58e77dbb5751b1d61" id="r_ada19b1edad963ca58e77dbb5751b1d61"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ada19b1edad963ca58e77dbb5751b1d61">has_active_hardware_components</a> () const</td></tr>
+<tr class="memdesc:ada19b1edad963ca58e77dbb5751b1d61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the cached lifecycle state of any hardware component is ACTIVE.  <br /></td></tr>
 <tr class="memitem:a6e52d7a474caec7ec1cbc2f65708c69b" id="r_a6e52d7a474caec7ec1cbc2f65708c69b"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6e52d7a474caec7ec1cbc2f65708c69b">get_update_rate</a> () const</td></tr>
 <tr class="memdesc:a6e52d7a474caec7ec1cbc2f65708c69b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update rate of the main control loop in the controller manager.  <br /></td></tr>
 <tr class="memitem:a9e72a6708b267db304d74ecb465715d7" id="r_a9e72a6708b267db304d74ecb465715d7"><td class="memItemLeft" align="right" valign="top">rclcpp::Clock::SharedPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9e72a6708b267db304d74ecb465715d7">get_trigger_clock</a> () const</td></tr>
@@ -367,6 +369,34 @@ std::unique_ptr&lt; <a class="el" href="classhardware__interface_1_1ResourceMana
 <p>Update rate of the main control loop in the controller manager. </p>
 <p>Update rate of the main control loop in the controller manager. The method is used for per-controller update rate support.</p>
 <dl class="section return"><dt>Returns</dt><dd>update rate of the controller manager. </dd></dl>
+
+</div>
+</div>
+<a id="ada19b1edad963ca58e77dbb5751b1d61" name="ada19b1edad963ca58e77dbb5751b1d61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada19b1edad963ca58e77dbb5751b1d61">&#9670;&#160;</a></span>has_active_hardware_components()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool controller_manager::ControllerManager::has_active_hardware_components </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if the cached lifecycle state of any hardware component is ACTIVE. </p>
+<p>Real-time safe. Used by the control loop to decide whether a cycle that didn't block is worth a warning. A true result is no proof that any component paces the loop. </p><dl class="section return"><dt>Returns</dt><dd>true if at least one hardware component is ACTIVE, or, conservatively, if the components are currently locked in the ResourceManager; false otherwise. </dd></dl>
 
 </div>
 </div>

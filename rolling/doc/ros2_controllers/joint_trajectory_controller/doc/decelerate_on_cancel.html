@@ -162,7 +162,7 @@ This can cause problems for hardware that is moving at high velocity, as the abr
 <h2>How it works<a class="headerlink" href="#how-it-works" title="Link to this heading"></a></h2>
 <p>When a trajectory is canceled or preempted and <code class="docutils literal notranslate"><span class="pre">decelerate_on_cancel</span></code> is enabled, the controller:</p>
 <ol class="arabic">
-<li><p>Reads the current velocity of each joint from the velocity state interface.</p></li>
+<li><p>Takes each joint’s starting position and velocity from the last command when the controller has a position command interface, and otherwise, as for fault stops, from the measured state.</p></li>
 <li><p>Computes the stopping distance and time for each joint using its configured <code class="docutils literal notranslate"><span class="pre">max_deceleration_on_cancel</span></code> value:</p>
 <div class="math notranslate nohighlight">
 \[t_{stop} = \frac{|v|}{a_{max}}\]</div>
@@ -174,6 +174,7 @@ This can cause problems for hardware that is moving at high velocity, as the abr
 <li><p>Appends a final hold-position point at the computed stop position.</p></li>
 </ol>
 <p>Each joint decelerates independently based on its own <code class="docutils literal notranslate"><span class="pre">max_deceleration_on_cancel</span></code> value, but the trajectory is synchronized so all joints finish at the same time (the slowest joint’s stop time).</p>
+<p>The ramp ignores speed scaling: it starts from the joints’ actual velocity and decelerates at <code class="docutils literal notranslate"><span class="pre">max_deceleration_on_cancel</span></code> in wall-clock time.</p>
 </section>
 <section id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
