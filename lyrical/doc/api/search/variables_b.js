@@ -8,5 +8,6 @@ var searchData=
   ['node_5f_5',['node_',['../classgz__ros2__control_1_1GazeboSimROS2ControlPluginPrivate.html#aa301f69e607ef17def88969496a8905c',1,'gz_ros2_control::GazeboSimROS2ControlPluginPrivate']]],
   ['node_5fnamespace_6',['node_namespace',['../structhardware__interface_1_1HardwareComponentParams.html#a0dbaa4dcaca8d33f56ea99213e65d217',1,'hardware_interface::HardwareComponentParams::node_namespace'],['../structhardware__interface_1_1ResourceManagerParams.html#a4bb7c268182de902ce62e344cab165eb',1,'hardware_interface::ResourceManagerParams::node_namespace']]],
   ['node_5foptions_5fargs_7',['node_options_args',['../structhardware__interface_1_1ControllerInfo.html#abc3d20ccc9068b9653a6ee85e500ec00',1,'hardware_interface::ControllerInfo']]],
-  ['ns_8',['ns',['../structgz__ros2__control_1_1detail_1_1PluginConfig.html#a2a40c2d10ac75b700587c0855ee28aa3',1,'gz_ros2_control::detail::PluginConfig']]]
+  ['ns_8',['ns',['../structgz__ros2__control_1_1detail_1_1PluginConfig.html#a2a40c2d10ac75b700587c0855ee28aa3',1,'gz_ros2_control::detail::PluginConfig']]],
+  ['num_5fbuckets_9',['NUM_BUCKETS',['../classros2__control_1_1TimeWindowStatistics.html#a8656a4c5d7a0dc510c9844005ef3a580',1,'ros2_control::TimeWindowStatistics']]]
 ];

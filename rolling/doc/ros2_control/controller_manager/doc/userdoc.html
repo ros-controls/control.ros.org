@@ -268,6 +268,30 @@ The full structure of the map is given in the following example:</p>
 <p>Read only: True</p>
 <p>Default:  true</p>
 </dd>
+<dt>diagnostics.controller_manager.window_duration</dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">periodicity</span></code> and <code class="docutils literal notranslate"><span class="pre">execution_time</span></code> statistics accumulate since startup (or since activation, for controllers and hardware components) and are never reset, so a single slow cycle, for example while the system is still bringing up other processes, can keep the diagnostic in <code class="docutils literal notranslate"><span class="pre">WARN</span></code> or <code class="docutils literal notranslate"><span class="pre">ERROR</span></code> for the rest of the run, even though the loop has been steady since. A window, set per entity with this parameter, <code class="docutils literal notranslate"><span class="pre">diagnostics.controllers.window_duration</span></code> and <code class="docutils literal notranslate"><span class="pre">diagnostics.hardware_components.window_duration</span></code>, judges the recent cycles instead, while the since-startup values keep showing the worst case.
+The window advances in steps of a tenth of its duration, so it covers between 90 % and 100 % of <code class="docutils literal notranslate"><span class="pre">window_duration</span></code>. It ends at the latest cycle, not at the current time: if the cycles stop, the recent statistics keep showing the last window, like the since-startup ones.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">diagnostics</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">controller_manager</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">window_duration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0</span>
+<span class="w">  </span><span class="nt">controllers</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">window_duration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0</span>
+<span class="w">  </span><span class="nt">hardware_components</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">window_duration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0</span>
+</pre></div>
+</div>
+</dd>
+<dt>diagnostics.controller_manager.window_duration (double)</dt><dd><p>Duration in seconds of the most recent window over which the controller manager’s periodicity diagnostic level is judged. When positive, the diagnostic also reports periodicity.recent.* (average, standard_deviation, min, max, sample_count) over that window and compares those, rather than the statistics accumulated since startup, against the periodicity thresholds. The since-startup statistics are still reported unchanged. A zero or negative value (default) keeps judging the since-startup statistics.</p>
+<p>Read only: True</p>
+<p>Default:  -1.0</p>
+</dd>
+<dt>diagnostics.controllers.window_duration (double)</dt><dd><p>Duration in seconds of the most recent window over which the periodicity and execution time diagnostic levels of each controller are judged. When positive, the diagnostic also reports &lt;controller&gt;.periodicity.recent and &lt;controller&gt;.execution_time.recent over that window and compares those, rather than the statistics accumulated since the controller’s activation, against the periodicity and execution time thresholds. The since-activation statistics are still reported unchanged. A zero or negative value (default) keeps judging the since-activation statistics.</p>
+<p>Read only: True</p>
+<p>Default:  -1.0</p>
+</dd>
+<dt>diagnostics.hardware_components.window_duration (double)</dt><dd><p>Duration in seconds of the most recent window over which the read/write periodicity and execution time diagnostic levels of each hardware component are judged. When positive, the diagnostic also reports &lt;component&gt;.&lt;read|write&gt;_cycle.periodicity.recent and &lt;component&gt;.&lt;read|write&gt;_cycle.execution_time.recent over that window and compares those, rather than the statistics accumulated since the component’s activation, against the periodicity and execution time thresholds. The since-activation statistics are still reported unchanged. A zero or negative value (default) keeps judging the since-activation statistics.</p>
+<p>Read only: True</p>
+<p>Default:  -1.0</p>
+</dd>
 <dt>diagnostics.threshold.controller_manager.periodicity.mean_error.warn (double)</dt><dd><p>The warning threshold for the mean error of the controller manager’s periodicity in Hz. If the mean error exceeds this threshold, a warning diagnostic will be published.</p>
 <p>Default:  5.0</p>
 <p>Constraints:</p>
@@ -468,6 +492,12 @@ The full structure of the map is given in the following example:</p>
 <span class="w">      </span><span class="nt">switch_controller</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">strictness</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">strict</span>
 <span class="w">    </span><span class="nt">diagnostics</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">controller_manager</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">window_duration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-1.0</span>
+<span class="w">      </span><span class="nt">controllers</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">window_duration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-1.0</span>
+<span class="w">      </span><span class="nt">hardware_components</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">window_duration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-1.0</span>
 <span class="w">      </span><span class="nt">threshold</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">controller_manager</span><span class="p">:</span>
 <span class="w">          </span><span class="nt">periodicity</span><span class="p">:</span>

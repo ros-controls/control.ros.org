@@ -8,5 +8,6 @@ var searchData=
   ['define_5fcustom_5fnode_5foptions_5',['define_custom_node_options',['../classcontroller__interface_1_1ControllerInterfaceBase.html#abead5138c0f8538e49318b61aea89553',1,'controller_interface::ControllerInterfaceBase::define_custom_node_options()'],['../classhardware__interface_1_1HardwareComponentInterface.html#a394690b8235a0e4448ee63f800306c6b',1,'hardware_interface::HardwareComponentInterface::define_custom_node_options()']]],
   ['destroy_6',['destroy',['../classZenbeddedClientBase.html#a2ab188af180f2617ad6462abb270136d',1,'ZenbeddedClientBase']]],
   ['differentialtransmission_7',['DifferentialTransmission',['../classtransmission__interface_1_1DifferentialTransmission.html#a11b9d8cc136ce2b27bdf8f6e6340e186',1,'transmission_interface::DifferentialTransmission']]],
-  ['drive_5fforward_8',['drive_forward',['../classtest__motions_1_1DriveForward.html#ad8f606788277d8d3adf89fd4a9e6b5ab',1,'test_motions::DriveForward']]]
+  ['discard_8',['discard',['../classros2__control_1_1CompletedExecutionRecord.html#ad7fa34d6f128c931b0f0c5370a75e9f0',1,'ros2_control::CompletedExecutionRecord']]],
+  ['drive_5fforward_9',['drive_forward',['../classtest__motions_1_1DriveForward.html#ad8f606788277d8d3adf89fd4a9e6b5ab',1,'test_motions::DriveForward']]]
 ];

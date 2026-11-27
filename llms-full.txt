@@ -101,7 +101,7 @@ General discussions
 
 ======================================================================
 
-Built on 2026-11-26 at 05:39 GMT
+Built on 2026-11-27 at 05:36 GMT
 
 
 
@@ -7722,6 +7722,77 @@ defaults.deactivate_controllers_on_hardware_self_deactivate (bool)
 
    Default:  true
 
+diagnostics.controller_manager.window_duration
+   The "periodicity" and "execution_time" statistics accumulate since
+   startup (or since activation, for controllers and hardware
+   components) and are never reset, so a single slow cycle, for
+   example while the system is still bringing up other processes, can
+   keep the diagnostic in "WARN" or "ERROR" for the rest of the run,
+   even though the loop has been steady since. A window, set per
+   entity with this parameter,
+   "diagnostics.controllers.window_duration" and
+   "diagnostics.hardware_components.window_duration", judges the
+   recent cycles instead, while the since-startup values keep showing
+   the worst case. The window advances in steps of a tenth of its
+   duration, so it covers between 90 % and 100 % of "window_duration".
+   It ends at the latest cycle, not at the current time: if the cycles
+   stop, the recent statistics keep showing the last window, like the
+   since-startup ones.
+
+      diagnostics:
+        controller_manager:
+          window_duration: 5.0
+        controllers:
+          window_duration: 5.0
+        hardware_components:
+          window_duration: 5.0
+
+diagnostics.controller_manager.window_duration (double)
+   Duration in seconds of the most recent window over which the
+   controller manager's periodicity diagnostic level is judged. When
+   positive, the diagnostic also reports periodicity.recent.*
+   (average, standard_deviation, min, max, sample_count) over that
+   window and compares those, rather than the statistics accumulated
+   since startup, against the periodicity thresholds. The since-
+   startup statistics are still reported unchanged. A zero or negative
+   value (default) keeps judging the since-startup statistics.
+
+   Read only: True
+
+   Default:  -1.0
+
+diagnostics.controllers.window_duration (double)
+   Duration in seconds of the most recent window over which the
+   periodicity and execution time diagnostic levels of each controller
+   are judged. When positive, the diagnostic also reports
+   <controller>.periodicity.recent and
+   <controller>.execution_time.recent over that window and compares
+   those, rather than the statistics accumulated since the
+   controller's activation, against the periodicity and execution time
+   thresholds. The since-activation statistics are still reported
+   unchanged. A zero or negative value (default) keeps judging the
+   since-activation statistics.
+
+   Read only: True
+
+   Default:  -1.0
+
+diagnostics.hardware_components.window_duration (double)
+   Duration in seconds of the most recent window over which the
+   read/write periodicity and execution time diagnostic levels of each
+   hardware component are judged. When positive, the diagnostic also
+   reports <component>.<read|write>_cycle.periodicity.recent and
+   <component>.<read|write>_cycle.execution_time.recent over that
+   window and compares those, rather than the statistics accumulated
+   since the component's activation, against the periodicity and
+   execution time thresholds. The since-activation statistics are
+   still reported unchanged. A zero or negative value (default) keeps
+   judging the since-activation statistics.
+
+   Read only: True
+
+   Default:  -1.0
+
 diagnostics.threshold.controller_manager.periodicity.mean_error.warn
 (double)
    The warning threshold for the mean error of the controller
@@ -8016,6 +8087,12 @@ overruns.print_warnings (bool)
          switch_controller:
            strictness: strict
        diagnostics:
+         controller_manager:
+           window_duration: -1.0
+         controllers:
+           window_duration: -1.0
+         hardware_components:
+           window_duration: -1.0
          threshold:
            controller_manager:
              periodicity:
@@ -9756,6 +9833,18 @@ controller_manager
   environment variable to automatically disable colors in non-TTY and
   CI environments.
 
+* New parameters "diagnostics.controller_manager.window_duration",
+  "diagnostics.controllers.window_duration" and
+  "diagnostics.hardware_components.window_duration" make the
+  periodicity diagnostics (and the execution time diagnostics of the
+  controllers and hardware components) judge the last
+  "window_duration" seconds instead of all cycles since startup, so a
+  single slow cycle at bring-up no longer holds the diagnostic in
+  "WARN" or "ERROR" for the rest of the run. The since-startup
+  statistics are still reported, and the recent ones are added as
+  "periodicity.recent" and "execution_time.recent". The default "-1.0"
+  keeps the previous behavior. (#3749)
+
 * The default strictness for "switch_controller" is changed to
   "strict". (#2742)
 
@@ -9843,6 +9932,21 @@ hardware_interface
 
 * The new real-time safe "ResourceManager::has_active_components()"
   tells whether any hardware component is "active". (#3825)
+
+* A "TimeWindowStatistics" type is added next to
+  "MovingAverageStatistics": average, minimum, maximum and standard
+  deviation over the samples of the last "window_duration" seconds, in
+  constant memory independent of the sample rate. The hardware
+  components collect their read/write periodicity and execution time
+  in it too, exposed as
+  "HardwareComponentStatisticsData::recent_periodicity" and
+  "HardwareComponentStatisticsData::recent_execution_time" and enabled
+  through "ResourceManagerParams::hardware_components_statistics_wind
+  ow_duration". The read and write execution times of asynchronous
+  components are now recorded once per completed read or write,
+  instead of being repeated on every cycle while the async thread is
+  busy or stalled (e.g. with the "detached" scheduling policy).
+  (#3749)
 
 
 joint_limits

@@ -121,27 +121,33 @@ $(function() {
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    last_update_cycle_time = std::make_shared&lt;rclcpp::Time&gt;(0, 0, RCL_CLOCK_UNINITIALIZED);</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    execution_time_statistics = std::make_shared&lt;MovingAverageStatistics&gt;();</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    periodicity_statistics = std::make_shared&lt;MovingAverageStatistics&gt;();</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  }</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  <a class="code hl_struct" href="structhardware__interface_1_1ControllerInfo.html">hardware_interface::ControllerInfo</a> info;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  controller_interface::ControllerInterfaceBaseSharedPtr c;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  std::shared_ptr&lt;rclcpp::Time&gt; last_update_cycle_time;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  std::vector&lt;std::string&gt; controllers_chain_group = {};</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  std::shared_ptr&lt;MovingAverageStatistics&gt; execution_time_statistics;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  std::shared_ptr&lt;MovingAverageStatistics&gt; periodicity_statistics;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>};</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <a class="code hl_variable" href="structcontroller__manager_1_1ControllerSpec.html#a179ba3e8e1abeb14dd0df3fb4ee4a35d">recent_periodicity_statistics</a> = std::make_shared&lt;ros2_control::TimeWindowStatistics&gt;();</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <a class="code hl_variable" href="structcontroller__manager_1_1ControllerSpec.html#a06d404452526b4252f2febd1599c784c">recent_execution_time_statistics</a> = std::make_shared&lt;ros2_control::TimeWindowStatistics&gt;();</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  }</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  <a class="code hl_struct" href="structhardware__interface_1_1ControllerInfo.html">hardware_interface::ControllerInfo</a> info;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  controller_interface::ControllerInterfaceBaseSharedPtr c;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  std::shared_ptr&lt;rclcpp::Time&gt; last_update_cycle_time;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  std::vector&lt;std::string&gt; controllers_chain_group = {};</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  std::shared_ptr&lt;MovingAverageStatistics&gt; execution_time_statistics;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  std::shared_ptr&lt;MovingAverageStatistics&gt; periodicity_statistics;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="structcontroller__manager_1_1ControllerSpec.html#a179ba3e8e1abeb14dd0df3fb4ee4a35d">   59</a></span>  std::shared_ptr&lt;ros2_control::TimeWindowStatistics&gt; <a class="code hl_variable" href="structcontroller__manager_1_1ControllerSpec.html#a179ba3e8e1abeb14dd0df3fb4ee4a35d">recent_periodicity_statistics</a>;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="structcontroller__manager_1_1ControllerSpec.html#a06d404452526b4252f2febd1599c784c">   62</a></span>  std::shared_ptr&lt;ros2_control::TimeWindowStatistics&gt; <a class="code hl_variable" href="structcontroller__manager_1_1ControllerSpec.html#a06d404452526b4252f2febd1599c784c">recent_execution_time_statistics</a>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>};</div>
 </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="foldopen" id="foldopen00057" data-start="{" data-end="};">
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="structcontroller__manager_1_1ControllerChainSpec.html">   57</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structcontroller__manager_1_1ControllerChainSpec.html">ControllerChainSpec</a></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>{</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  std::vector&lt;std::string&gt; following_controllers;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  std::vector&lt;std::string&gt; preceding_controllers;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>};</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="foldopen" id="foldopen00065" data-start="{" data-end="};">
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="structcontroller__manager_1_1ControllerChainSpec.html">   65</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structcontroller__manager_1_1ControllerChainSpec.html">ControllerChainSpec</a></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>{</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  std::vector&lt;std::string&gt; following_controllers;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  std::vector&lt;std::string&gt; preceding_controllers;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>};</div>
 </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>}  <span class="comment">// namespace controller_manager</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="preprocessor">#endif  </span><span class="comment">// CONTROLLER_MANAGER__CONTROLLER_SPEC_HPP_</span></div>
-<div class="ttc" id="astructcontroller__manager_1_1ControllerChainSpec_html"><div class="ttname"><a href="structcontroller__manager_1_1ControllerChainSpec.html">controller_manager::ControllerChainSpec</a></div><div class="ttdef"><b>Definition</b> controller_spec.hpp:58</div></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>}  <span class="comment">// namespace controller_manager</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="preprocessor">#endif  </span><span class="comment">// CONTROLLER_MANAGER__CONTROLLER_SPEC_HPP_</span></div>
+<div class="ttc" id="astructcontroller__manager_1_1ControllerChainSpec_html"><div class="ttname"><a href="structcontroller__manager_1_1ControllerChainSpec.html">controller_manager::ControllerChainSpec</a></div><div class="ttdef"><b>Definition</b> controller_spec.hpp:66</div></div>
+<div class="ttc" id="astructcontroller__manager_1_1ControllerSpec_html_a06d404452526b4252f2febd1599c784c"><div class="ttname"><a href="structcontroller__manager_1_1ControllerSpec.html#a06d404452526b4252f2febd1599c784c">controller_manager::ControllerSpec::recent_execution_time_statistics</a></div><div class="ttdeci">std::shared_ptr&lt; ros2_control::TimeWindowStatistics &gt; recent_execution_time_statistics</div><div class="ttdef"><b>Definition</b> controller_spec.hpp:62</div></div>
+<div class="ttc" id="astructcontroller__manager_1_1ControllerSpec_html_a179ba3e8e1abeb14dd0df3fb4ee4a35d"><div class="ttname"><a href="structcontroller__manager_1_1ControllerSpec.html#a179ba3e8e1abeb14dd0df3fb4ee4a35d">controller_manager::ControllerSpec::recent_periodicity_statistics</a></div><div class="ttdeci">std::shared_ptr&lt; ros2_control::TimeWindowStatistics &gt; recent_periodicity_statistics</div><div class="ttdef"><b>Definition</b> controller_spec.hpp:59</div></div>
 <div class="ttc" id="astructhardware__interface_1_1ControllerInfo_html"><div class="ttname"><a href="structhardware__interface_1_1ControllerInfo.html">hardware_interface::ControllerInfo</a></div><div class="ttdoc">Controller Information.</div><div class="ttdef"><b>Definition</b> controller_info.hpp:28</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
