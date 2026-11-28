@@ -149,6 +149,7 @@
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">synchronized</span></code> (default): The thread will run synchronized with the main controller_manager thread. The controller_manager is responsible for triggering the read and write calls of the hardware component.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">detached</span></code>: The thread will run independently of the main controller_manager thread. The hardware component will manage its own timing for triggering the read and write calls.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self_paced</span></code>: The thread will run independently of the main controller_manager thread. The blocking <code class="docutils literal notranslate"><span class="pre">read()</span></code> of the hardware component sets the timing, e.g., a <code class="docutils literal notranslate"><span class="pre">read()</span></code> that waits for the next message from the robot.</p></li>
 </ul>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">print_warnings</span></code>: (optional) If set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, a warning will be printed if the thread is not able to meet its timing requirements. Default is <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>

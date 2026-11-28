@@ -101,7 +101,7 @@ General discussions
 
 ======================================================================
 
-Built on 2026-11-27 at 05:36 GMT
+Built on 2026-11-28 at 05:35 GMT
 
 
 
@@ -9922,6 +9922,11 @@ hardware_interface
   struct is now provided as "ros2_control::StatisticData" in
   "hardware_interface/types/statistic_data.hpp". (#3772)
 
+* Mock hardware ("mock_components/GenericSystem") supports the
+  "self_paced" scheduling policy of async components. Its "read()"
+  waits one period of "rw_rate", the same as a real hardware with a
+  blocking "read()".
+
 * "on_error()" of a hardware component is no longer called a second
   time when it returns "FAILURE" or "ERROR" after a failed
   "read()"/"write()". (#3791)
@@ -10024,6 +10029,11 @@ component:
   * "detached": The thread will run independently of the main
     controller_manager thread. The hardware component will manage its
     own timing for triggering the read and write calls.
+
+  * "self_paced": The thread will run independently of the main
+    controller_manager thread. The blocking "read()" of the hardware
+    component sets the timing, e.g., a "read()" that waits for the
+    next message from the robot.
 
 * "print_warnings": (optional) If set to "true", a warning will be
   printed if the thread is not able to meet its timing requirements.
@@ -11016,6 +11026,10 @@ Features:
 
    * fake gpio interfaces for setting sensor data from an external
      node (combined with a forward controller)
+
+   * async operation (see asynchronous components). With the
+     "self_paced" scheduling policy, "read()" waits one period of
+     "rw_rate", the same as a real hardware with a blocking "read()".
 
 
 Parameters
